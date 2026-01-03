@@ -183,17 +183,38 @@ export const WithPrefixAndSuffix: Story = {
   },
 };
 
-// Floating Label（Material Design 风格）
+// Floating Label
 export const FloatingLabel: Story = {
-  render: () => {
+  args: {
+    size: "md",
+    state: "default",
+    disabled: false,
+    readOnly: false,
+    variant: "floating",
+  },
+  render: (args) => {
     const [value, setValue] = useState("");
+    const hasValue = !!value;
+    const placeholder = args.variant === "floating" ? "" : "请输入";
     return (
       <div style={{ width: "320px" }}>
-        <LoongArkInputRoot variant="floating" hasValue={!!value}>
+        <LoongArkInputRoot
+          size={args.size}
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+          hasValue={hasValue}
+        >
           <LoongArkInputLabel>邮箱地址</LoongArkInputLabel>
           <LoongArkInputControl
+            size={args.size}
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
             value={value}
             onChange={(e) => setValue(e.target.value)}
+            placeholder={placeholder}
           />
         </LoongArkInputRoot>
       </div>

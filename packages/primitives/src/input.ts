@@ -266,6 +266,15 @@ ${wrapperSelector}[data-disabled='true'] {
   opacity: 0.85;
 }
 
+${wrapperSelector}[data-disabled='true'] ${labelSelector} {
+  color: ${tokens.disabled.text};
+}
+
+${wrapperSelector}[data-variant='floating'][data-disabled='true'] ${labelSelector} {
+  background: transparent;
+  color: ${tokens.disabled.text};
+}
+
 ${wrapperSelector} input,
 ${wrapperSelector} textarea {
   flex: 1;
@@ -324,7 +333,7 @@ ${wrapperSelector} ${labelSelector} {
 ${wrapperSelector}[data-variant='floating'] {
   position: relative;
   align-items: center;
-  --lk-input-floating-translate: calc(-100% - ${tokens.paddingY.md});
+  --lk-input-floating-translate: calc(-100% - ${tokens.paddingY.md}/2 - ${tokens.gap});
   --lk-input-floating-scale: calc(${tokens.fontSize.sm} / ${tokens.fontSize.md});
 }
 
@@ -359,12 +368,12 @@ ${wrapperSelector}[data-variant='floating'][data-size='lg'] ${labelSelector} {
 }
 
 ${wrapperSelector}[data-variant='floating'][data-size='sm'] {
-  --lk-input-floating-translate: calc(-100% - ${tokens.paddingY.sm});
+  --lk-input-floating-translate: calc(-100% - ${tokens.paddingY.sm}/2 - ${tokens.gap});
   --lk-input-floating-scale: calc(${tokens.fontSize.sm} / ${tokens.fontSize.sm});
 }
 
 ${wrapperSelector}[data-variant='floating'][data-size='lg'] {
-  --lk-input-floating-translate: calc(-100% - ${tokens.paddingY.lg});
+  --lk-input-floating-translate: calc(-100% - ${tokens.paddingY.lg}/2 - ${tokens.gap});
   --lk-input-floating-scale: calc(${tokens.fontSize.sm} / ${tokens.fontSize.lg});
 }
 
