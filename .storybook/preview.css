@@ -1,0 +1,26 @@
+@layer storybook {
+  .loongark-story-surface {
+    min-height: 100vh;
+    width: 100%;
+    padding: var(--lk-space-layout-gutter, 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--lk-space-component-md, 16px);
+    box-sizing: border-box;
+  }
+
+  .loongark-story-surface.light {
+    background: var(--lk-color-neutral-50, #f5f6fa);
+  }
+
+  .loongark-story-surface.dark {
+    background: var(--lk-color-neutral-900, #121212);
+  }
+
+  .loongark-story-surface.high-contrast {
+    background: #000;
+    color: #fff;
+  }
+}

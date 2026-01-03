@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["@playwright/test"],
+    "module": "CommonJS"
+  },
+  "include": ["tests/**/*.ts", "examples/shared/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

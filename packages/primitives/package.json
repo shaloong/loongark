@@ -1,0 +1,14 @@
+{
+  "name": "@loongark/primitives",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@loongark/theme": "workspace:*",
+    "@loongark/tokens": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  }
+}

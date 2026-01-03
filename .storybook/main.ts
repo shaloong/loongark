@@ -1,0 +1,43 @@
+import type { StorybookConfig } from "@storybook/react-vite";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const workspaceAlias: Record<string, string> = {
+  "@loongark/tokens": resolve(__dirname, "../packages/tokens/src"),
+  "@loongark/theme": resolve(__dirname, "../packages/theme/src"),
+  "@loongark/primitives": resolve(__dirname, "../packages/primitives/src"),
+  "@loongark/kit": resolve(__dirname, "../packages/kit/src"),
+  "@loongark/react": resolve(__dirname, "../packages/react/src"),
+  "@loongark/vue": resolve(__dirname, "../packages/vue/src"),
+  "@loongark/svelte": resolve(__dirname, "../packages/svelte/src"),
+  "@loongark/solid": resolve(__dirname, "../packages/solid/src"),
+  "@examples": resolve(__dirname, "../examples"),
+};
+
+const config: StorybookConfig = {
+  stories: ["../stories/**/*.stories.@(ts|tsx|mdx)"],
+  addons: ["@storybook/addon-docs"],
+  framework: {
+    name: "@storybook/react-vite",
+    options: {},
+  },
+  core: {
+    disableTelemetry: true,
+  },
+  docs: {
+    autodocs: true,
+  },
+  async viteFinal(config) {
+    config.resolve = config.resolve ?? {};
+    config.resolve.alias = {
+      ...(config.resolve.alias ?? {}),
+      ...workspaceAlias,
+    };
+    config.resolve.extensions = [".ts", ".tsx", ".js", ".jsx", ".json"];
+    return config;
+  },
+};
+
+export default config;

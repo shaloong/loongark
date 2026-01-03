@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "jsx": "react-jsx",
+    "composite": true,
+    "typeRoots": ["../../types", "../../node_modules/@types"],
+    "moduleResolution": "bundler"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../kit" },
+    { "path": "../theme" },
+    { "path": "../primitives" }
+  ]
+}

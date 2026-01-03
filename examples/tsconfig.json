@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "lib": ["ES2020", "DOM"],
+    "types": []
+  },
+  "include": ["./**/*"],
+  "exclude": ["../node_modules", "../dist"],
+  "references": [
+    { "path": "../packages/tokens" },
+    { "path": "../packages/theme" },
+    { "path": "../packages/primitives" },
+    { "path": "../packages/kit" },
+    { "path": "../packages/react" },
+    { "path": "../packages/vue" },
+    { "path": "../packages/svelte" },
+    { "path": "../packages/solid" }
+  ]
+}

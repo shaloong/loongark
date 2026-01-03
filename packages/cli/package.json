@@ -1,0 +1,18 @@
+{
+  "name": "@loongark/cli",
+  "version": "0.1.0",
+  "bin": {
+    "loongark": "dist/index.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "@loongark/tokens": "workspace:*",
+    "@loongark/theme": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  }
+}

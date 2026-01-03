@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {},
+  "files": [],
+  "references": [
+    { "path": "packages/tokens" },
+    { "path": "packages/theme" },
+    { "path": "packages/primitives" },
+    { "path": "packages/kit" },
+    { "path": "packages/vue" },
+    { "path": "packages/react" },
+    { "path": "packages/svelte" },
+    { "path": "packages/solid" },
+    { "path": "packages/cli" },
+    { "path": "examples" },
+    { "path": "stories" }
+  ]
+}

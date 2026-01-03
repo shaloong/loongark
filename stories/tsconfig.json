@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "rootDir": "..",
+    "noImplicitAny": false
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "../examples/**/*.ts",
+    "../examples/**/*.tsx"
+  ],
+  "references": [
+    { "path": "../packages/react" },
+    { "path": "../packages/vue" },
+    { "path": "../packages/solid" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "composite": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../kit" },
+    { "path": "../theme" },
+    { "path": "../primitives" }
+  ]
+}
