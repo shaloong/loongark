@@ -6,7 +6,8 @@
 </script>
 
 <Switch.Thumb
-  data-lk-switch-thumb=""
+  data-scope="switch"
+  data-part="thumb"
   data-size={size}
   {...$$restProps}
 />

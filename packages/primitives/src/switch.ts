@@ -21,12 +21,10 @@ interface SwitchDesignTokens {
     bgChecked: string;
     border: string;
     borderHover: string;
-    shadow: string;
   };
   thumb: {
     size: Record<SwitchSize, string>;
     bg: string;
-    shadow: string;
   };
   focus: {
     outline: string;
@@ -80,7 +78,6 @@ const extractSwitchTokens = (theme: LoongArkTheme): SwitchDesignTokens => {
       bgChecked: toStringToken(brand.primary, "#006EFF"),
       border: toStringToken(neutral["300"], "#B3B4BD"),
       borderHover: toStringToken(neutral["500"], "#3A3A3C"),
-      shadow: "inset 0 1px 1px rgba(0,0,0,0.08)",
     },
     thumb: {
       size: {
@@ -89,7 +86,6 @@ const extractSwitchTokens = (theme: LoongArkTheme): SwitchDesignTokens => {
         lg: "18px",
       },
       bg: toStringToken(neutral["50"], "#F5F6FA"),
-      shadow: "0 1px 2px rgba(0,0,0,0.16)",
     },
     focus: {
       outline: toStringToken(brand.primary, "#006EFF"),
@@ -109,10 +105,11 @@ const extractSwitchTokens = (theme: LoongArkTheme): SwitchDesignTokens => {
 
 const buildSwitchStyles = (theme: LoongArkTheme): string => {
   const tokens = extractSwitchTokens(theme);
-  const root = `[data-lk-switch]`;
-  const control = `[data-lk-switch-control]`;
-  const thumb = `[data-lk-switch-thumb]`;
-  const label = `[data-lk-switch-label]`;
+  const scope = `[data-scope="switch"]`;
+  const root = `${scope}[data-part="root"]`;
+  const control = `${scope}[data-part="control"]`;
+  const thumb = `${scope}[data-part="thumb"]`;
+  const label = `${scope}[data-part="label"]`;
 
   const controlSizing = (size: SwitchSize) => `
 ${control}[data-size='${size}'] {
@@ -132,6 +129,14 @@ ${control}[data-size='${size}'][data-state='checked'] ${thumb} {
 `;
 
   return `
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-lk-motion="force"]) * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 ${root} {
   display: inline-flex;
   align-items: center;
@@ -153,7 +158,6 @@ ${control} {
   background: ${tokens.track.bg};
   border: 1px solid ${tokens.track.border};
   border-radius: ${tokens.track.radius};
-  box-shadow: ${tokens.track.shadow};
   transition:
     background ${tokens.motion.duration} ${tokens.motion.easing},
     border-color ${tokens.motion.duration} ${tokens.motion.easing};
@@ -169,9 +173,6 @@ ${control}:focus-visible {
   border-color: ${tokens.focus.outline};
 }
 
-${control}[data-state='checked']:hover {
-  border-color: ${tokens.track.borderHover};
-}
 
 ${root}[data-disabled='true'] ${control},
 ${control}[data-disabled='true'] {
@@ -185,7 +186,6 @@ ${thumb} {
   position: relative;
   border-radius: ${tokens.track.radius};
   background: ${tokens.thumb.bg};
-  box-shadow: ${tokens.thumb.shadow};
   transition: transform ${tokens.motion.duration} ${tokens.motion.easing};
 }
 
@@ -196,7 +196,6 @@ ${control}[data-state='checked'] ${thumb} {
 ${root}[data-disabled='true'] ${thumb},
 ${control}[data-disabled='true'] ${thumb} {
   background: ${tokens.disabled.thumb};
-  box-shadow: none;
 }
 
 ${control}[data-state='checked'][data-disabled='true'] {

@@ -43,10 +43,12 @@ export const LoongArkButton = defineComponent({
         {
           ...attrs,
           type: props.type,
-          disabled: props.disabled,
-          "aria-disabled": props.disabled || props.loading ? "true" : undefined,
+          disabled: props.disabled || props.loading,
+          "aria-disabled":
+            props.disabled || props.loading ? "true" : undefined,
           "aria-busy": props.loading ? "true" : undefined,
-          "data-lk-button": "",
+          "data-scope": "button",
+          "data-part": "root",
           "data-variant": props.variant,
           "data-size": props.size,
           "data-block": truthy(props.block),

@@ -3,7 +3,8 @@
 </script>
 
 <Dialog.Backdrop
-  data-lk-dialog-overlay=""
+  data-scope="dialog"
+  data-part="backdrop"
   data-blur="true"
   {...$$restProps}
 >

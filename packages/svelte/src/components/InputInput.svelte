@@ -3,6 +3,7 @@
   import type { InputPrimitiveProps } from "@loongark/primitives";
 
   export let size: NonNullable<InputPrimitiveProps["size"]> = "md";
+  export let state: NonNullable<InputPrimitiveProps["state"]> = "default";
   export let multiline: boolean = false;
   export let type: string = "text";
   export let placeholder: string | undefined = undefined;
@@ -15,8 +16,10 @@
 
 {#if multiline}
   <ark.textarea
-    data-lk-input=""
+    data-scope="input"
+    data-part="control"
     data-size={size}
+    data-state={state !== "default" ? state : undefined}
     data-multiline="true"
     {placeholder}
     {disabled}
@@ -28,8 +31,10 @@
   />
 {:else}
   <ark.input
-    data-lk-input=""
+    data-scope="input"
+    data-part="control"
     data-size={size}
+    data-state={state !== "default" ? state : undefined}
     {type}
     {placeholder}
     {disabled}

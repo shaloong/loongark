@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Select } from "@ark-ui/svelte/select";
   import type { SelectSize } from "@loongark/primitives";
+  import { createSelectSizeContext } from "./selectContext";
 
   export let size: SelectSize = "md";
 
@@ -32,6 +33,10 @@
   export let skipAnimationOnMount: boolean = false;
   export let unmountOnExit: boolean = false;
   export let value: string[] | undefined = undefined;
+
+  const sizeStore = createSelectSizeContext(size);
+
+  $: sizeStore.set(size);
 </script>
 
 <Select.Root

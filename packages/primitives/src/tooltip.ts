@@ -88,6 +88,14 @@ const buildTooltipStyles = (theme: LoongArkTheme): string => {
   const tokens = extractTooltipTokens(theme);
 
   return `
+  @media (prefers-reduced-motion: reduce) {
+    :root:not([data-lk-motion="force"]) [data-scope="tooltip"] * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   [data-scope="tooltip"][data-part="root"] {
     position: relative;
   }
@@ -235,4 +243,3 @@ const TooltipPrimitive = createPrimitive(tooltipContract, (theme) => {
 registerPrimitive(TooltipPrimitive);
 
 export { TooltipPrimitive };
-

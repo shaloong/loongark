@@ -1,9 +1,33 @@
 import React from "react";
-import type { Preview } from "@storybook/react";
+
+// 轻量本地类型，避免依赖缺失
+type StorybookDecorator = (Story: any, context: any) => React.ReactNode;
 import { LoongArkProvider } from "@loongark/react";
 import "./preview.css";
 
-const preview: Preview = {
+// Storybook Docs: Ark UI 会对元素 focus 赋值，部分运行时会把 focus 标为只读，这里用 getter/setter 兜底，允许赋值但默认回退原生 focus。
+if (typeof HTMLElement !== "undefined") {
+  try {
+    const baseFocus = HTMLElement.prototype.focus;
+    Object.defineProperty(HTMLElement.prototype, "focus", {
+      configurable: true,
+      get() {
+        return (this as any).__lk_focus_override__ ?? baseFocus;
+      },
+      set(value) {
+        (this as any).__lk_focus_override__ = value;
+      },
+    });
+  } catch (err) {
+    console.warn("[LoongArk] focus patch skipped", err);
+  }
+}
+
+const preview: {
+  parameters: Record<string, unknown>;
+  globalTypes: Record<string, unknown>;
+  decorators: StorybookDecorator[];
+} = {
   globalTypes: {
     mode: {
       name: "模式",

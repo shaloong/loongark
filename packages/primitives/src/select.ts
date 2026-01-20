@@ -5,7 +5,11 @@
 
 import { type LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
-import { createPrimitive, type PrimitiveContract, registerPrimitive } from "./core";
+import {
+  createPrimitive,
+  type PrimitiveContract,
+  registerPrimitive,
+} from "./core";
 import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
@@ -140,6 +144,14 @@ const buildSelectStyles = (theme: LoongArkTheme): string => {
     @keyframes slideUpAndFade {
       from { opacity: 1; transform: translateY(0); }
       to { opacity: 0; transform: translateY(-2px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root:not([data-lk-motion="force"]) [data-scope="select"] * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
 
     /* Select Root */
@@ -369,15 +381,11 @@ const selectContract: PrimitiveContract<SelectPrimitiveProps> = {
   },
 };
 
-const SelectPrimitive = createPrimitive(
-  selectContract,
-  (theme) => {
-    const css = buildSelectStyles(theme);
-    mountPrimitiveStyles(`select-${theme.mode}`, css);
-  }
-);
+const SelectPrimitive = createPrimitive(selectContract, (theme) => {
+  const css = buildSelectStyles(theme);
+  mountPrimitiveStyles(`select-${theme.mode}`, css);
+});
 
 registerPrimitive(SelectPrimitive);
 
 export { SelectPrimitive };
-

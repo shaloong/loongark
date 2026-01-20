@@ -15,6 +15,10 @@
 <ark.button
   {type}
   disabled={isInteractiveDisabled}
+  aria-disabled={isInteractiveDisabled || undefined}
+  aria-busy={loading || undefined}
+  data-scope="button"
+  data-part="root"
   data-variant={variant}
   data-size={size}
   data-block={block || undefined}

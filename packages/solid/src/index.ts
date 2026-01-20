@@ -1,4 +1,4 @@
-import { createContext, useContext, createMemo } from "solid-js";
+import { createContext, useContext, createMemo, createEffect } from "solid-js";
 import type { ParentComponent } from "solid-js";
 import { createLoongArkTheme, LoongArkTheme } from "@loongark/theme";
 import { bootstrapKit } from "@loongark/kit";
@@ -21,9 +21,13 @@ export const LoongArkProvider: ParentComponent<LoongArkProviderProps> = (
       brand: props.brand,
       accent: props.accent,
     });
+    return instance;
+  });
+
+  createEffect(() => {
+    const instance = theme();
     bootstrapKit(instance);
     instance.mount();
-    return instance;
   });
 
   return ThemeContext.Provider({
@@ -138,3 +142,11 @@ export {
   LoongArkPopoverDescription,
   LoongArkPopoverCloseTrigger,
 } from "./components/popover";
+export {
+  LoongArkTooltipRoot,
+  LoongArkTooltipTrigger,
+  LoongArkTooltipPositioner,
+  LoongArkTooltipContent,
+  LoongArkTooltipArrow,
+  LoongArkTooltipArrowTip,
+} from "./components/tooltip";

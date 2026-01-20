@@ -1,3 +1,5 @@
 import type { SvelteComponent } from "svelte";
 
-export default class InputHelperText extends SvelteComponent<{}> {}
+export default class InputHelperText extends SvelteComponent<{
+  variant?: "default" | "error" | "success";
+}> {}

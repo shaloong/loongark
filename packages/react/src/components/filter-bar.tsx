@@ -15,7 +15,8 @@ export const LoongArkFilterBar = forwardRef<
     <ark.div
       {...rest}
       ref={ref}
-      data-lk-filter-bar=""
+      data-scope="filter-bar"
+      data-part="root"
       data-dense={dense ? "true" : undefined}
       data-align={align === "center" ? "center" : undefined}
     />
@@ -32,7 +33,7 @@ export const LoongArkFilterBarSearch = forwardRef<
   HTMLDivElement,
   LoongArkFilterSectionProps
 >(({ children, ...rest }, ref) => (
-  <ark.div {...rest} ref={ref} data-lk-filter-bar-search="">
+  <ark.div {...rest} ref={ref} data-scope="filter-bar" data-part="search">
     {children}
   </ark.div>
 ));
@@ -43,7 +44,7 @@ export const LoongArkFilterBarFilters = forwardRef<
   HTMLDivElement,
   LoongArkFilterSectionProps
 >(({ children, ...rest }, ref) => (
-  <ark.div {...rest} ref={ref} data-lk-filter-bar-filters="">
+  <ark.div {...rest} ref={ref} data-scope="filter-bar" data-part="filters">
     {children}
   </ark.div>
 ));
@@ -54,7 +55,7 @@ export const LoongArkFilterBarActions = forwardRef<
   HTMLDivElement,
   LoongArkFilterSectionProps
 >(({ children, ...rest }, ref) => (
-  <ark.div {...rest} ref={ref} data-lk-filter-bar-actions="">
+  <ark.div {...rest} ref={ref} data-scope="filter-bar" data-part="actions">
     {children}
   </ark.div>
 ));
@@ -70,7 +71,8 @@ export const LoongArkFilterDivider = forwardRef<
     ref={ref}
     role="presentation"
     aria-hidden="true"
-    data-lk-filter-divider=""
+    data-scope="filter-bar"
+    data-part="divider"
   />
 ));
 
@@ -90,7 +92,8 @@ export const LoongArkFilterChip = forwardRef<
     {...rest}
     ref={ref}
     type={type}
-    data-lk-filter-chip=""
+    data-scope="filter-bar"
+    data-part="chip"
     data-active={active ? "true" : undefined}
     aria-pressed={active ? "true" : "false"}
   />

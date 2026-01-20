@@ -59,16 +59,16 @@
 | **Toast**           | ❌          | ❌     | ❌   | ❌     | ❌      | ❌  | P1  | 轻提示，高优先级                  |
 | Toggle Group        | ❌          | ❌     | ❌   | ❌     | ❌      | ❌  | P2  | 切换按钮组                     |
 | Toggle              | ❌          | ❌     | ❌   | ❌     | ❌      | ❌  | P2  | 切换按钮                      |
-| **Tooltip**         | ❌          | ❌     | ❌   | ❌     | ❌      | ❌  | P1  | 工具提示，高优先级                 |
+| **Tooltip**         | ✅          | ✅     | ✅   | ✅     | ✅      | ✅  | P1  | 工具提示，高优先级                 |
 | Tour                | ❌          | ❌     | ❌   | ❌     | ❌      | ❌  | P4  | 引导游览，低优先级                 |
 | Tree View           | ❌          | ❌     | ❌   | ❌     | ❌      | ❌  | P3  | 树形视图                      |
 
 ## 统计摘要
 
-- **已完成**: 9/48 (18.75%)
-  - Button, Dialog, Input, Switch, Pin Input, Checkbox, Radio Group, Select (全框架)
-- **进行中**: 0/48 (0%)
-- **未开始**: 40/48 (83.3%)
+- **已完成**: 10/48 (20.83%)
+  - Button, Dialog, Input, Switch, Pin Input, Checkbox, Radio Group, Select, Tooltip (全框架)
+- **进行中**: 1/48 (2.08%)
+- **未开始**: 37/48 (77.08%)
 
 ## 优先级说明
 

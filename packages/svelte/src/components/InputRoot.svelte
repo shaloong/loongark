@@ -15,7 +15,8 @@
 <Field.Root
   {disabled}
   {readOnly}
-  data-lk-input-wrapper=""
+  data-scope="input"
+  data-part="root"
   data-size={size}
   data-state={state !== "default" ? state : undefined}
   data-disabled={disabled || undefined}

@@ -35,6 +35,11 @@ const meta = {
       control: { type: "inline-radio" },
       options: ["default", "floating"],
     },
+    inputType: {
+      control: { type: "inline-radio" },
+      options: ["text", "password", "email", "number", "search", "tel", "url"],
+      description: "输入框类型",
+    },
     hasValue: {
       table: { disable: true },
     },
@@ -48,19 +53,29 @@ const meta = {
     disabled: false,
     readOnly: false,
     variant: "default",
+    inputType: "text",
   },
 } satisfies Meta<typeof LoongArkInputRoot>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const inputContainerStyle = { width: "360px" };
+const inputStackStyle = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "16px",
+  width: "360px",
+};
+
 // 交互式演示
 export const Playground: Story = {
   render: (args) => {
     const [value, setValue] = useState("");
     const isFloating = args.variant === "floating";
+    const inputType = args.inputType ?? "text";
     return (
-      <div style={{ width: "320px" }}>
+      <div style={inputContainerStyle}>
         <LoongArkInputRoot
           size={args.size}
           state={args.state}
@@ -75,6 +90,7 @@ export const Playground: Story = {
             state={args.state}
             disabled={args.disabled}
             readOnly={args.readOnly}
+            type={inputType}
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder={isFloating ? "" : "请输入用户名"}
@@ -95,18 +111,28 @@ export const Playground: Story = {
   },
 };
 
-// 基础输入框
+// 基础输入框（控制项生效）
 export const Basic: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState("");
     return (
-      <div style={{ width: "320px" }}>
-        <LoongArkInputRoot>
+      <div style={inputContainerStyle}>
+        <LoongArkInputRoot
+          size={args.size}
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
           <LoongArkInputLabel>用户名</LoongArkInputLabel>
           <LoongArkInputControl
+            size={args.size}
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder="请输入用户名"
+            placeholder={args.variant === "floating" ? "" : "请输入用户名"}
           />
         </LoongArkInputRoot>
       </div>
@@ -116,17 +142,27 @@ export const Basic: Story = {
 
 // 带 Prefix 的输入框
 export const WithPrefix: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState("");
     return (
-      <div style={{ width: "320px" }}>
-        <LoongArkInputRoot>
+      <div style={inputContainerStyle}>
+        <LoongArkInputRoot
+          size={args.size}
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
           <LoongArkInputLabel>搜索</LoongArkInputLabel>
           <LoongArkInputPrefix>🔍</LoongArkInputPrefix>
           <LoongArkInputControl
+            size={args.size}
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder="搜索内容"
+            placeholder={args.variant === "floating" ? "" : "搜索内容"}
           />
         </LoongArkInputRoot>
       </div>
@@ -136,16 +172,26 @@ export const WithPrefix: Story = {
 
 // 带 Suffix 的输入框
 export const WithSuffix: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState("");
     return (
-      <div style={{ width: "320px" }}>
-        <LoongArkInputRoot>
+      <div style={inputContainerStyle}>
+        <LoongArkInputRoot
+          size={args.size}
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
           <LoongArkInputLabel>邮箱</LoongArkInputLabel>
           <LoongArkInputControl
+            size={args.size}
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder="your@email.com"
+            placeholder={args.variant === "floating" ? "" : "your@email.com"}
           />
           {value && (
             <LoongArkInputSuffix action="clear" onClick={() => setValue("")}>
@@ -163,18 +209,28 @@ export const WithSuffix: Story = {
 
 // 带 Prefix 和 Suffix
 export const WithPrefixAndSuffix: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState("");
     return (
-      <div style={{ width: "320px" }}>
-        <LoongArkInputRoot>
+      <div style={inputContainerStyle}>
+        <LoongArkInputRoot
+          size={args.size}
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
           <LoongArkInputLabel>金额</LoongArkInputLabel>
           <LoongArkInputPrefix>￥</LoongArkInputPrefix>
           <LoongArkInputControl
+            size={args.size}
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
             type="number"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder="0.00"
+            placeholder={args.variant === "floating" ? "" : "0.00"}
           />
           <LoongArkInputSuffix>CNY</LoongArkInputSuffix>
         </LoongArkInputRoot>
@@ -186,10 +242,6 @@ export const WithPrefixAndSuffix: Story = {
 // Floating Label
 export const FloatingLabel: Story = {
   args: {
-    size: "md",
-    state: "default",
-    disabled: false,
-    readOnly: false,
     variant: "floating",
   },
   render: (args) => {
@@ -197,7 +249,7 @@ export const FloatingLabel: Story = {
     const hasValue = !!value;
     const placeholder = args.variant === "floating" ? "" : "请输入";
     return (
-      <div style={{ width: "320px" }}>
+      <div style={inputContainerStyle}>
         <LoongArkInputRoot
           size={args.size}
           state={args.state}
@@ -224,19 +276,33 @@ export const FloatingLabel: Story = {
 
 // 验证状态
 export const Invalid: Story = {
-  render: () => {
+  args: {
+    state: "invalid",
+    inputType: "text",
+  },
+  render: (args) => {
     const [value, setValue] = useState("");
     return (
-      <div style={{ width: "320px" }}>
-        <LoongArkInputRoot state="invalid">
-          <LoongArkInputLabel>密码</LoongArkInputLabel>
+      <div style={inputContainerStyle}>
+        <LoongArkInputRoot
+          size={args.size}
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
+          <LoongArkInputLabel>用户名</LoongArkInputLabel>
           <LoongArkInputControl
-            type="password"
+            size={args.size}
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
+            type={args.inputType ?? "text"}
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
           <LoongArkInputHelperText variant="error">
-            密码至少需要 8 个字符
+            用户名格式不正确
           </LoongArkInputHelperText>
         </LoongArkInputRoot>
       </div>
@@ -246,12 +312,27 @@ export const Invalid: Story = {
 
 // 成功状态
 export const Success: Story = {
-  render: () => {
+  args: {
+    state: "success",
+    readOnly: true,
+  },
+  render: (args) => {
     return (
-      <div style={{ width: "320px" }}>
-        <LoongArkInputRoot state="success">
+      <div style={inputContainerStyle}>
+        <LoongArkInputRoot
+          size={args.size}
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
           <LoongArkInputLabel>用户名</LoongArkInputLabel>
-          <LoongArkInputControl value="loongark" readOnly />
+          <LoongArkInputControl
+            size={args.size}
+            state={args.state}
+            readOnly
+            value="loongark"
+          />
           <LoongArkInputHelperText variant="success">
             用户名可用
           </LoongArkInputHelperText>
@@ -263,12 +344,27 @@ export const Success: Story = {
 
 // 禁用状态
 export const Disabled: Story = {
-  render: () => {
+  args: {
+    disabled: true,
+  },
+  render: (args) => {
     return (
-      <div style={{ width: "320px" }}>
-        <LoongArkInputRoot disabled>
+      <div style={inputContainerStyle}>
+        <LoongArkInputRoot
+          size={args.size}
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
           <LoongArkInputLabel>用户名</LoongArkInputLabel>
-          <LoongArkInputControl disabled placeholder="禁用状态" />
+          <LoongArkInputControl
+            size={args.size}
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
+            placeholder="禁用状态"
+          />
         </LoongArkInputRoot>
       </div>
     );
@@ -277,12 +373,27 @@ export const Disabled: Story = {
 
 // 只读状态
 export const ReadOnly: Story = {
-  render: () => {
+  args: {
+    readOnly: true,
+  },
+  render: (args) => {
     return (
-      <div style={{ width: "320px" }}>
-        <LoongArkInputRoot readOnly>
+      <div style={inputContainerStyle}>
+        <LoongArkInputRoot
+          size={args.size}
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
           <LoongArkInputLabel>ID</LoongArkInputLabel>
-          <LoongArkInputControl readOnly value="lk-2024-001" />
+          <LoongArkInputControl
+            size={args.size}
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
+            value="lk-2024-001"
+          />
         </LoongArkInputRoot>
       </div>
     );
@@ -291,29 +402,58 @@ export const ReadOnly: Story = {
 
 // 尺寸对比
 export const Sizes: Story = {
-  render: () => {
+  render: (args) => {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
-          width: "320px",
-        }}
-      >
-        <LoongArkInputRoot size="sm">
+      <div style={inputStackStyle}>
+        <LoongArkInputRoot
+          size="sm"
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
           <LoongArkInputLabel>小尺寸 (sm)</LoongArkInputLabel>
-          <LoongArkInputControl placeholder="Small input" />
+          <LoongArkInputControl
+            size="sm"
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
+            placeholder="Small input"
+          />
         </LoongArkInputRoot>
 
-        <LoongArkInputRoot size="md">
+        <LoongArkInputRoot
+          size="md"
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
           <LoongArkInputLabel>中尺寸 (md)</LoongArkInputLabel>
-          <LoongArkInputControl placeholder="Medium input" />
+          <LoongArkInputControl
+            size="md"
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
+            placeholder="Medium input"
+          />
         </LoongArkInputRoot>
 
-        <LoongArkInputRoot size="lg">
+        <LoongArkInputRoot
+          size="lg"
+          state={args.state}
+          disabled={args.disabled}
+          readOnly={args.readOnly}
+          variant={args.variant}
+        >
           <LoongArkInputLabel>大尺寸 (lg)</LoongArkInputLabel>
-          <LoongArkInputControl placeholder="Large input" />
+          <LoongArkInputControl
+            size="lg"
+            state={args.state}
+            disabled={args.disabled}
+            readOnly={args.readOnly}
+            placeholder="Large input"
+          />
         </LoongArkInputRoot>
       </div>
     );

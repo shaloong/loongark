@@ -56,7 +56,10 @@ export const LoongArkPopoverPositioner = defineComponent({
 
 export const LoongArkPopoverContent = defineComponent({
   name: "LoongArkPopoverContent",
-  setup(_, { slots, attrs }) {
+  props: {
+    showArrow: { type: Boolean, default: false },
+  },
+  setup(props, { slots, attrs }) {
     return () =>
       h(
         ArkPopover.Content,
@@ -64,6 +67,7 @@ export const LoongArkPopoverContent = defineComponent({
           ...attrs,
           "data-scope": "popover",
           "data-part": "content",
+          "data-arrow": props.showArrow ? "true" : undefined,
         },
         slots
       );

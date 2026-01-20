@@ -126,7 +126,10 @@ const extractDialogTokens = (theme: LoongArkTheme): DialogDesignTokens => {
       border: toStringToken(neutral["100"], "#E5E6EB"),
       overlay: hexToOverlay(overlayBase, 0.65),
     },
-    shadow: toStringToken((theme.tokens as any).shadow?.xl, "0 20px 60px rgba(0, 0, 0, 0.18)"),
+    shadow: toStringToken(
+      (theme.tokens as any).shadow?.xl,
+      "0 20px 60px rgba(0, 0, 0, 0.18)"
+    ),
     motion: {
       durationIn: toStringToken(duration.base, "200ms"),
       durationOut: toStringToken(duration.fast, "120ms"),
@@ -137,12 +140,13 @@ const extractDialogTokens = (theme: LoongArkTheme): DialogDesignTokens => {
 
 const buildDialogStyles = (theme: LoongArkTheme): string => {
   const tokens = extractDialogTokens(theme);
-  const overlaySelector = `[data-lk-dialog-overlay]`;
-  const contentSelector = `[data-lk-dialog-content]`;
-  const titleSelector = `[data-lk-dialog-title]`;
-  const descriptionSelector = `[data-lk-dialog-description]`;
-  const footerSelector = `[data-lk-dialog-footer]`;
-  const closeSelector = `[data-lk-dialog-close]`;
+  const scopeSelector = `[data-scope="dialog"]`;
+  const overlaySelector = `${scopeSelector}[data-part="backdrop"]`;
+  const contentSelector = `${scopeSelector}[data-part="content"]`;
+  const titleSelector = `${scopeSelector}[data-part="title"]`;
+  const descriptionSelector = `${scopeSelector}[data-part="description"]`;
+  const footerSelector = `${scopeSelector}[data-part="footer"]`;
+  const closeSelector = `${scopeSelector}[data-part="close-trigger"]`;
   const motionScaleSelector = `${contentSelector}:not([data-motion]), ${contentSelector}[data-motion='scale']`;
   const motionSlideSelector = `${contentSelector}[data-motion='slide']`;
 
@@ -216,6 +220,14 @@ ${overlaySelector} {
   backdrop-filter: blur(0px);
   z-index: 1000;
   opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-lk-motion="force"]) [data-scope="dialog"] * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 ${overlaySelector}[data-blur='true'] {
@@ -329,8 +341,8 @@ ${closeSelector}:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  ${overlaySelector}[data-state],
-  ${contentSelector}[data-state] {
+  :root:not([data-lk-motion="force"]) ${overlaySelector}[data-state],
+  :root:not([data-lk-motion="force"]) ${contentSelector}[data-state] {
     animation-duration: 0.01ms;
     animation-iteration-count: 1;
   }

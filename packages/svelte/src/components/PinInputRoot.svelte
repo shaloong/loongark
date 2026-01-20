@@ -25,7 +25,8 @@
   {mask}
   {otp}
   {placeholder}
-  data-lk-pin-input=""
+  data-scope="pin-input"
+  data-part="root"
   data-size={size}
   data-state={state !== "default" ? state : undefined}
   data-disabled={disabled || undefined}

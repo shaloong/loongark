@@ -54,10 +54,17 @@ const theme = createLoongArkTheme({
   mode: "light",
   brand: "shaloong",
   accent: "#006EFF",
+  // 动效偏好：auto 遵循系统，force 强制启用动画（当前默认 force）
+  motionPreference: "force",
 });
 
 theme.mount();
 ```
+
+### 动效偏好（prefers-reduced-motion 覆盖）
+
+- `motionPreference: "force" | "auto"`，默认 `force`，会在 `document.documentElement` 写入 `data-lk-motion="force"` 并跳过 `@media (prefers-reduced-motion: reduce)` 的降级。
+- 预览/生产保持一致：除非显式改成 `auto`，否则动画始终开启，不受系统设置关闭。
 
 ## 跨框架集成指引
 
@@ -104,6 +111,7 @@ theme.mount();
 ## 通用视觉与交互规范
 
 ### 尺寸与圆角
+
 - 组件统一使用 Tokens 的圆角：`radius.sm / radius.md / radius.lg`，默认映射：
   - `sm`：小尺寸，如标签/小按钮/小表单控件
   - `md`：默认尺寸（推荐默认使用）
@@ -111,6 +119,7 @@ theme.mount();
 - 若需要 Pill/全圆角（如 Switch、Tag），优先使用 `radius.pill`。
 
 ### 交互状态（默认/悬停/聚焦/禁用）
+
 - 描边/填充：统一使用 `color.neutral.border` → `color.neutral.borderHover` → 选中/聚焦使用品牌主色 `color.brand.primary`；成功/警告使用 `color.brand.accent` / `color.brand.warning`。
 - 悬停（Hover）：
   - 背景：`color.neutral.surfaceRaised` 或在控件背景上提高 4-8% 亮度。
@@ -125,18 +134,22 @@ theme.mount();
   - 背景：`color.neutral.100`；文字：`color.neutral.300`；边框：`color.neutral.200`；整体透明度 ≤ 0.85，禁用态不应出现强对比描边或动画。
 
 ### 阴影与描边
+
 - 默认阴影：表层/卡片/下拉菜单建议使用 `shadow` token（如 `0 8px 40px rgba(0,0,0,0.08)`）；轻量弹层可使用更小尺寸阴影，不要硬编码。
 - 外描边（Focus Ring）：优先使用品牌色 `color.brand.primary`（或 `accent` 作为柔和外环），避免多层高对比阴影。
 
 ### 图标与指示
+
 - 选中状态的指示符（勾/多选框/选项选中标记）默认应隐藏，只有在 `checked/indeterminate` 时显示；尺寸建议控制在容器的 40%-60%，描边宽度保持轻量（如 1.2-1.6）。
 - 图标颜色应跟随文本/前景色 `currentColor`，避免硬编码色值。
 
 ### 对比度与可访问性
+
 - 任意文本与背景对比度 ≥ 4.5:1；对比度不足时优先提升前景/背景亮度，避免仅依赖描边或阴影。
 - 悬停/选中/禁用态仍需满足可访问性，禁用态不应出现高饱和度描边。
 
 ### 参考最佳实践
+
 - 参考优秀 UI 库（Ant Design、shadcn/ui）与系统（Apple Human Interface、JetBrains IDE）的一致性：
   - 状态颜色递进：默认 → 悬停 → 选中/激活 → 禁用，尽量保持同一色系的明度/饱和度变化。
   - 圆角与间距随尺寸递进，避免同一尺寸的不同组件出现截然不同的圆角。

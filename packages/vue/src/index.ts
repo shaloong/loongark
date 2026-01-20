@@ -104,3 +104,11 @@ export {
   LoongArkPopoverDescription,
   LoongArkPopoverCloseTrigger,
 } from "./components/popover";
+export {
+  LoongArkTooltipRoot,
+  LoongArkTooltipTrigger,
+  LoongArkTooltipPositioner,
+  LoongArkTooltipContent,
+  LoongArkTooltipArrow,
+  LoongArkTooltipArrowTip,
+} from "./components/tooltip";

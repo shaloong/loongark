@@ -7,7 +7,9 @@
 </script>
 
 <Switch.Control
-  data-lk-switch-control=""
+  {disabled}
+  data-scope="switch"
+  data-part="control"
   data-size={size}
   data-disabled={disabled || undefined}
   {...$$restProps}

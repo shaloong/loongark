@@ -54,6 +54,14 @@ declare module "vue" {
   ): Component<Props>;
 
   export function ref<T>(value: T): { value: T };
+  export function toRef<T extends object, K extends keyof T>(
+    object: T,
+    key: K
+  ): { value: T[K] };
+
+  export function provide<T>(key: string | symbol, value: T): void;
+  export function inject<T>(key: string | symbol): T | undefined;
+  export function inject<T>(key: string | symbol, defaultValue: T): T;
 
   export type VueSlots = {
     [key: string]: VueChild | VueChild[] | ((...args: any[]) => VueChild);

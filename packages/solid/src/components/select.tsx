@@ -3,7 +3,13 @@
  * 基于 Ark UI Select 的下拉选择器
  */
 
-import { type Component, type JSX, mergeProps } from "solid-js";
+import {
+  type Component,
+  type JSX,
+  mergeProps,
+  createContext,
+  useContext,
+} from "solid-js";
 import {
   Select as ArkSelect,
   type SelectRootProps as ArkSelectRootProps,
@@ -25,6 +31,8 @@ import {
 } from "@ark-ui/solid/select";
 import type { SelectSize } from "@loongark/primitives";
 
+const SelectContext = createContext<{ size: SelectSize }>({ size: "md" });
+
 /**
  * Select Root Props
  */
@@ -44,14 +52,16 @@ export const LoongArkSelectRoot: Component<LoongArkSelectRootProps> = (
   const merged = mergeProps({ size: "md" as SelectSize }, props);
 
   return (
-    <ArkSelect.Root
-      {...(props as any)}
-      data-scope="select"
-      data-part="root"
-      data-size={merged.size}
-    >
-      {props.children}
-    </ArkSelect.Root>
+    <SelectContext.Provider value={{ size: merged.size }}>
+      <ArkSelect.Root
+        {...(props as any)}
+        data-scope="select"
+        data-part="root"
+        data-size={merged.size}
+      >
+        {props.children}
+      </ArkSelect.Root>
+    </SelectContext.Provider>
   );
 };
 
@@ -156,8 +166,14 @@ export const LoongArkSelectPositioner: Component<
 export const LoongArkSelectContent: Component<
   ArkSelectContentProps & { children?: JSX.Element }
 > = (props) => {
+  const { size } = useContext(SelectContext);
   return (
-    <ArkSelect.Content {...props} data-scope="select" data-part="content">
+    <ArkSelect.Content
+      {...props}
+      data-scope="select"
+      data-part="content"
+      data-size={size}
+    >
       {props.children}
     </ArkSelect.Content>
   );

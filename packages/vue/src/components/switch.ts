@@ -28,7 +28,9 @@ export const LoongArkSwitchRoot = defineComponent({
         ArkSwitch.Root,
         {
           ...attrs,
-          "data-lk-switch": "",
+          disabled: props.disabled,
+          "data-scope": "switch",
+          "data-part": "root",
           "data-size": props.size,
           "data-disabled": props.disabled ? "true" : undefined,
         },
@@ -47,7 +49,9 @@ export const LoongArkSwitchControl = defineComponent({
     return () =>
       h(ArkSwitch.Control, {
         ...attrs,
-        "data-lk-switch-control": "",
+        disabled: props.disabled,
+        "data-scope": "switch",
+        "data-part": "control",
         "data-size": props.size,
         "data-disabled": props.disabled ? "true" : undefined,
       });
@@ -63,7 +67,8 @@ export const LoongArkSwitchThumb = defineComponent({
     return () =>
       h(ArkSwitch.Thumb, {
         ...attrs,
-        "data-lk-switch-thumb": "",
+        "data-scope": "switch",
+        "data-part": "thumb",
         "data-size": props.size,
       });
   },
@@ -80,7 +85,8 @@ export const LoongArkSwitchLabel = defineComponent({
         ArkSwitch.Label,
         {
           ...attrs,
-          "data-lk-switch-label": "",
+          "data-scope": "switch",
+          "data-part": "label",
           "data-disabled": props.disabled ? "true" : undefined,
         },
         slots.default ? slots.default() : undefined

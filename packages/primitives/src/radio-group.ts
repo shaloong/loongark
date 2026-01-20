@@ -1,6 +1,8 @@
 import { createPrimitive, registerPrimitive } from "./core";
 import { mountPrimitiveStyles } from "./styleSheet";
 import type { LoongArkTheme } from "@loongark/theme";
+import { TokenTree } from "@loongark/tokens";
+import { asTokenTree, toStringToken } from "./tokenUtils";
 
 // Radio Group 尺寸类型
 export type RadioGroupSize = "sm" | "md" | "lg";
@@ -41,10 +43,17 @@ const radioGroupContract = {
 const radioGroupPrimitive = createPrimitive(
   radioGroupContract,
   (theme: LoongArkTheme) => {
-    const color = theme.tokens.color as any;
-    const space = theme.tokens.space as any;
-    const radius = theme.tokens.radius as any;
-    const shadow = (theme.tokens as any).shadow || {};
+    const color = theme.tokens.color as TokenTree;
+    const brand = asTokenTree(color.brand);
+    const neutral = asTokenTree(color.neutral);
+
+    const space = theme.tokens.space as TokenTree;
+    const componentSpace = asTokenTree(space.component);
+
+    const radius = theme.tokens.radius as TokenTree;
+    const radiusTokens = asTokenTree(radius);
+
+    const shadow = asTokenTree(theme.tokens.shadow);
 
     // Radio Group Control 基础样式
     const controlBaseStyles = `
@@ -54,8 +63,8 @@ const radioGroupPrimitive = createPrimitive(
       flex-shrink: 0;
       box-sizing: border-box;
       border-radius: 50%;
-      border: 1px solid ${color.neutral?.border || "#d1d5db"};
-      background-color: ${color.white || "#ffffff"};
+      border: 1px solid ${toStringToken(neutral.border, "#d1d5db")};
+      background-color: ${toStringToken(color.white, "#ffffff")};
       cursor: pointer;
       transition: all 0.2s ease-in-out;
       position: relative;
@@ -102,25 +111,25 @@ const radioGroupPrimitive = createPrimitive(
     };
 
     const controlCheckedStyles = `
-      border-color: ${color.brand?.primary || "#3b82f6"};
-      background-color: ${color.brand?.primary || "#3b82f6"};
+      border-color: ${toStringToken(brand.primary, "#3b82f6")};
+      background-color: ${toStringToken(brand.primary, "#3b82f6")};
     `;
 
     const controlFocusStyles = `
       outline: none;
-      border-color: ${color.brand?.primary || "#3b82f6"};
+      border-color: ${toStringToken(brand.primary, "#3b82f6")};
     `;
 
     const controlHoverStyles = `
-      border-color: ${color.neutral?.borderHover || "#9ca3af"};
-      background-color: ${color.neutral?.bgHover || "#f9fafb"};
+      border-color: ${toStringToken(neutral.borderHover, "#9ca3af")};
+      background-color: ${toStringToken(neutral.bgHover, "#f9fafb")};
     `;
 
     const controlDisabledStyles = `
       cursor: not-allowed;
       opacity: 0.6;
-      background: ${color.neutral?.bg || "#f3f4f6"};
-      border-color: ${color.neutral?.border || "#e5e7eb"};
+      background: ${toStringToken(neutral.bg, "#f3f4f6")};
+      border-color: ${toStringToken(neutral.border, "#e5e7eb")};
       box-shadow: none;
     `;
 
@@ -140,7 +149,7 @@ const radioGroupPrimitive = createPrimitive(
 
     // Radio Group Text 样式
     const textBaseStyles = `
-      color: ${color.neutral?.text || "#111827"};
+      color: ${toStringToken(neutral.text, "#111827")};
       cursor: pointer;
       user-select: none;
       font-weight: 500;
@@ -255,8 +264,14 @@ const radioGroupPrimitive = createPrimitive(
       }
 
       [data-scope="radio-group"][data-part="item-control"][data-state="checked"]:hover {
-        background-color: ${color.brand?.secondary || color.brand?.primary || "#0056cc"};
-        border-color: ${color.brand?.secondary || color.brand?.primary || "#0056cc"};
+        background-color: ${toStringToken(
+          brand.secondary,
+          toStringToken(brand.primary, "#0056cc")
+        )};
+        border-color: ${toStringToken(
+          brand.secondary,
+          toStringToken(brand.primary, "#0056cc")
+        )};
       }
 
       [data-scope="radio-group"][data-part="item-control"][data-state="checked"]::after {

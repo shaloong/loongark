@@ -8,12 +8,14 @@
 </script>
 
 <Dialog.Positioner
-  data-lk-dialog-positioner=""
+  data-scope="dialog"
+  data-part="positioner"
   data-placement={placement}
   {...$$restProps}
 >
   <Dialog.Content
-    data-lk-dialog-content=""
+    data-scope="dialog"
+    data-part="content"
     data-size={size}
     data-motion={motion}
   >

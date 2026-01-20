@@ -14,12 +14,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const pinContainerStyle = { width: "360px" };
+const pinStackStyle = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "24px",
+  width: "360px",
+};
+
 // 基础 6 位验证码
 export const Basic: Story = {
   render: () => {
     const [value, setValue] = useState<string[]>([]);
     return (
-      <div style={{ width: "400px" }}>
+      <div style={pinContainerStyle}>
         <LoongArkPinInput.Root
           value={value}
           onValueChange={(details) => setValue(details.value)}
@@ -46,7 +54,7 @@ export const Numeric: Story = {
   render: () => {
     const [value, setValue] = useState<string[]>([]);
     return (
-      <div style={{ width: "400px" }}>
+      <div style={pinContainerStyle}>
         <LoongArkPinInput.Root
           value={value}
           onValueChange={(details) => setValue(details.value)}
@@ -71,7 +79,7 @@ export const Masked: Story = {
   render: () => {
     const [value, setValue] = useState<string[]>([]);
     return (
-      <div style={{ width: "400px" }}>
+      <div style={pinContainerStyle}>
         <LoongArkPinInput.Root
           value={value}
           onValueChange={(details) => setValue(details.value)}
@@ -96,7 +104,7 @@ export const Alphabetic: Story = {
   render: () => {
     const [value, setValue] = useState<string[]>([]);
     return (
-      <div style={{ width: "400px" }}>
+      <div style={pinContainerStyle}>
         <LoongArkPinInput.Root
           value={value}
           onValueChange={(details) => setValue(details.value)}
@@ -127,14 +135,7 @@ export const Sizes: Story = {
     const [valueLg, setValueLg] = useState<string[]>([]);
 
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "24px",
-          width: "400px",
-        }}
-      >
+      <div style={pinStackStyle}>
         <LoongArkPinInput.Root
           value={valueSm}
           onValueChange={(details) => setValueSm(details.value)}

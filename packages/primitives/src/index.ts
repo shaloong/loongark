@@ -1,5 +1,6 @@
 export * from "./core";
 export { mountPrimitiveStyles } from "./styleSheet";
+export { asTokenTree, toStringToken, toNumberToken } from "./tokenUtils";
 export * from "./button";
 export * from "./input";
 export * from "./dialog";

@@ -2,18 +2,7 @@ import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import type { KitComponentRegistration } from "../index";
 import { mountKitStyles } from "../styleSheet";
-
-const asTokenTree = (value: unknown): TokenTree => (value ?? {}) as TokenTree;
-
-const toStringToken = (value: unknown, fallback = ""): string => {
-  if (typeof value === "string") {
-    return value;
-  }
-  if (typeof value === "number") {
-    return `${value}`;
-  }
-  return fallback;
-};
+import { asTokenTree, toStringToken } from "@loongark/primitives";
 
 interface FilterBarDesignTokens {
   fontFamily: string;
@@ -165,13 +154,15 @@ const extractFilterBarTokens = (
 
 const buildFilterBarStyles = (theme: LoongArkTheme): string => {
   const tokens = extractFilterBarTokens(theme);
-  const root = `[data-lk-filter-bar]`;
+  const scope = `[data-scope="filter-bar"]`;
+  const root = `${scope}[data-part="root"]`;
   const dense = `${root}[data-dense='true']`;
-  const search = `[data-lk-filter-bar-search]`;
-  const filters = `[data-lk-filter-bar-filters]`;
-  const actions = `[data-lk-filter-bar-actions]`;
-  const divider = `${root} [data-lk-filter-divider]`;
-  const chip = `[data-lk-filter-chip]`;
+  const search = `${scope}[data-part="search"]`;
+  const filters = `${scope}[data-part="filters"]`;
+  const actions = `${scope}[data-part="actions"]`;
+  const divider = `${scope}[data-part="divider"]`;
+  const chip = `${scope}[data-part="chip"]`;
+  const chipBadge = `${chip} [data-part="chip-badge"]`;
   const elevated = `${root}[data-elevated='true']`;
 
   return `
@@ -286,7 +277,7 @@ ${chip}:focus-visible {
   box-shadow: 0 0 0 1px ${tokens.surface}, 0 0 0 4px ${tokens.accent};
 }
 
-${chip} [data-lk-filter-chip-badge] {
+${chipBadge} {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -299,7 +290,7 @@ ${chip} [data-lk-filter-chip-badge] {
   color: ${tokens.chipBadgeText};
 }
 
-${chip}[data-active='true'] [data-lk-filter-chip-badge] {
+${chip}[data-active='true'] ${chipBadge} {
   background: ${tokens.chipBadgeActiveBackground};
   color: ${tokens.chipBadgeActiveText};
 }

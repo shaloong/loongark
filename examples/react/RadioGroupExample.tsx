@@ -39,7 +39,7 @@ export const RadioGroupExample: React.FC<RadioGroupExampleProps> = ({
         orientation={orientation}
         disabled={disabled}
         value={value}
-        onValueChange={(details) => setValue(details.value)}
+        onValueChange={(details: { value: string }) => setValue(details.value)}
       >
         <LoongArkRadioGroupLabel
           style={{ marginBottom: "12px", fontWeight: 500 }}

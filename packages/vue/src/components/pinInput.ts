@@ -66,7 +66,8 @@ export const LoongArkPinInputRoot = defineComponent({
           autoFocus: props.autoFocus,
           selectOnFocus: props.selectOnFocus,
           blurOnComplete: props.blurOnComplete,
-          "data-lk-pin-input": "",
+          "data-scope": "pin-input",
+          "data-part": "root",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
           "data-disabled": props.disabled ? "true" : undefined,
@@ -87,7 +88,8 @@ export const LoongArkPinInputControl = defineComponent({
         ArkPinInput.Control,
         {
           ...attrs,
-          "data-lk-pin-input-control": "",
+          "data-scope": "pin-input",
+          "data-part": "control",
           "data-size": props.size,
         },
         slots.default ? slots.default() : undefined
@@ -111,7 +113,8 @@ export const LoongArkPinInputInput = defineComponent({
       h(ArkPinInput.Input, {
         ...attrs,
         index: props.index,
-        "data-lk-pin-input-input": "",
+        "data-scope": "pin-input",
+        "data-part": "input",
         "data-size": props.size,
         "data-state": props.state !== "default" ? props.state : undefined,
       });
@@ -126,7 +129,8 @@ export const LoongArkPinInputLabel = defineComponent({
         ArkPinInput.Label,
         {
           ...attrs,
-          "data-lk-pin-input-label": "",
+          "data-scope": "pin-input",
+          "data-part": "label",
         },
         slots.default ? slots.default() : undefined
       );

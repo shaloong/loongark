@@ -24,7 +24,8 @@ export const LoongArkDialogOverlay = forwardRef<
     {
       ...rest,
       ref,
-      "data-lk-dialog-overlay": "",
+      "data-scope": "dialog",
+      "data-part": "backdrop",
       "data-blur": blur ? "true" : undefined,
     },
     children
@@ -59,7 +60,8 @@ export const LoongArkDialogContent = forwardRef<
       {
         ...rest,
         ref,
-        "data-lk-dialog-content": "",
+        "data-scope": "dialog",
+        "data-part": "content",
         "data-size": size,
         "data-motion": motion,
         "data-placement": placement,
@@ -82,7 +84,8 @@ export const LoongArkDialogTitle = ({
     ArkDialog.Title,
     {
       ...rest,
-      "data-lk-dialog-title": "",
+      "data-scope": "dialog",
+      "data-part": "title",
     },
     children
   );
@@ -98,7 +101,8 @@ export const LoongArkDialogDescription = ({
     ArkDialog.Description,
     {
       ...rest,
-      "data-lk-dialog-description": "",
+      "data-scope": "dialog",
+      "data-part": "description",
     },
     children
   );
@@ -114,7 +118,8 @@ export const LoongArkDialogFooter = ({
     ark.footer,
     {
       ...rest,
-      "data-lk-dialog-footer": "",
+      "data-scope": "dialog",
+      "data-part": "footer",
     },
     children
   );
@@ -155,7 +160,9 @@ export const LoongArkDialogCloseTrigger = ({
     {
       ...rest,
       ...(asChild ? { asChild } : {}),
-      ...(decorate ? { "data-lk-dialog-close": "" } : {}),
+      ...(decorate
+        ? { "data-scope": "dialog", "data-part": "close-trigger" }
+        : {}),
     },
     decorate ? children ?? defaultCloseIcon : children ?? null
   );

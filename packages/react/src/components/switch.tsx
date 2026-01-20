@@ -25,8 +25,10 @@ export const LoongArkSwitchRoot = forwardRef<
     {
       ...rest,
       onCheckedChange,
+      disabled,
       ref,
-      "data-lk-switch": "",
+      "data-scope": "switch",
+      "data-part": "root",
       "data-size": size,
       "data-disabled": disabled ? "true" : undefined,
     },
@@ -42,8 +44,10 @@ export const LoongArkSwitchControl = forwardRef<
 >(({ size = "md", disabled = false, ...rest }, ref) =>
   createElement(ArkSwitch.Control, {
     ...rest,
+    disabled,
     ref,
-    "data-lk-switch-control": "",
+    "data-scope": "switch",
+    "data-part": "control",
     "data-size": size,
     "data-disabled": disabled ? "true" : undefined,
   })
@@ -58,7 +62,8 @@ export const LoongArkSwitchThumb = forwardRef<
   createElement(ArkSwitch.Thumb, {
     ...rest,
     ref,
-    "data-lk-switch-thumb": "",
+    "data-scope": "switch",
+    "data-part": "thumb",
     "data-size": size,
   })
 );
@@ -78,7 +83,8 @@ export const LoongArkSwitchLabel = ({
     ArkSwitch.Label,
     {
       ...rest,
-      "data-lk-switch-label": "",
+      "data-scope": "switch",
+      "data-part": "label",
       "data-disabled": disabled ? "true" : undefined,
     },
     children

@@ -98,6 +98,11 @@ export const baseTokens: TokenRegistry = {
   },
 };
 
+/**
+ * 导出 baseTokens 作为默认降级值供组件使用
+ */
+export const DEFAULT_TOKENS = baseTokens;
+
 export type TokenOverrides = Partial<TokenRegistry>;
 
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>

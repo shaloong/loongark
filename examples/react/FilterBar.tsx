@@ -61,7 +61,7 @@ export const FilterBarExample = () => {
             >
               {chip.label}
               {typeof chip.badge === "number" ? (
-                <ark.span data-lk-filter-chip-badge>{chip.badge}</ark.span>
+                <ark.span data-part="chip-badge">{chip.badge}</ark.span>
               ) : null}
             </LoongArkFilterChip>
           ))}

@@ -62,7 +62,7 @@
 ### ArkUI 接入计划（Sprint 2 内）
 
 1. 在 React/Vue/Svelte 包内新增 ArkUI 依赖（例如 `@ark-ui/react`），保证构建链路可直接消费 ArkUI 官方组件。
-2. 以 Button/Input/Dialog 为起点，实现 `LoongArkButton` 等包装层：内部渲染 ArkUI 组件，但自动注入 `data-lk-*` 属性、variant/size/状态映射与必要的可访问性 props。
+2. 以 Button/Input/Dialog 为起点，实现 `LoongArkButton` 等包装层：内部渲染 ArkUI 组件，但自动注入 `data-scope/data-part` 属性、variant/size/状态映射与必要的可访问性 props。
 3. 把包装组件注册到 `@loongark/kit`，并在 examples/Storybook 中给出“ArkUI 原件 + LoongArk 皮肤”的示例，方便视觉/无障碍基线复用。
 4. 将经验沉淀到文档（props 映射表、ArkUI 版本约束、如何扩展更多组件），避免跨端实现发散。
 
@@ -78,7 +78,7 @@
 #### PRI-101 · Button Primitive（已落地）
 
 - 入口：`packages/primitives/src/button.ts`，在 `bootstrapKit()` 时自动注册并注入样式。
-- 使用 `data-lk-button` 标记任意 ArkUI Button 外壳，可搭配以下属性：
+- 使用 `data-scope="button" data-part="root"` 标记任意 ArkUI Button 外壳，可搭配以下属性：
   - `data-variant="solid|outline|ghost"`（默认 `solid`）
   - `data-size="sm|md|lg"`（默认 `md`）
   - `data-block="true"`（拉伸为 100% 宽度）
@@ -91,7 +91,8 @@
 ```tsx
 // React / Vue / Svelte 模板一致，只需数据绑定即可
 <button
-  data-lk-button
+  data-scope="button"
+  data-part="root"
   data-variant="outline"
   data-size="sm"
   data-block={isFullWidth}
@@ -102,14 +103,14 @@
 </button>
 ```
 
-> 注意：`bootstrapKit(theme)` 已在 React Provider / Vue 插件 / Svelte store 内部调用，业务侧只需确保按钮元素带上 `data-lk-button` 及所需属性。更多状态（如 danger、link）可在下一个迭代基于该 primitive 扩展。
+> 注意：`bootstrapKit(theme)` 已在 React Provider / Vue 插件 / Svelte store 内部调用，业务侧只需确保按钮元素带上 `data-scope="button" data-part="root"` 及所需属性。更多状态（如 danger、link）可在下一个迭代基于该 primitive 扩展。
 
 #### PRI-102 · Input Primitive（已落地）
 
 - 入口：`packages/primitives/src/input.ts`，提供输入框/textarea 以及 prefix/suffix/辅助文本组合场景。
 - 属性 API：
-  - `data-lk-input`（直接用于 `<input>` / `<textarea>`）
-  - `data-lk-input-wrapper` + `data-lk-input-prefix|suffix` + `data-lk-input-helper` 组合可实现带图标和状态文案的复合输入。
+  - `data-scope="input" data-part="control"`（直接用于 `<input>` / `<textarea>`）
+  - `data-scope="input" data-part="root"` + `data-scope="input" data-part="prefix|suffix"` + `data-scope="input" data-part="helper-text"` 组合可实现带图标和状态文案的复合输入。
   - 受控属性：`data-size="sm|md|lg"`、`data-state="default|invalid|success"`、`data-disabled="true"`、`data-multiline="true"`。
 - 状态：hover/focus/invalid/success/disabled/readonly 已内置；wrapper 支持 `:focus-within` 自适应高亮，不需要额外脚本。
 - 视觉策略：参考 shadcn/ui 与 Supabase 表单的留白节奏，结合 Apple Design 的高对比 focus ring，全部来自 tokens（Border、Surface、Brand Accent）。
@@ -119,14 +120,14 @@
 ```tsx
 <label>
   <span className="text-sm text-muted">邮箱</span>
-  <div data-lk-input-wrapper data-size="md">
-    <span data-lk-input-prefix>@</span>
-    <input data-lk-input type="email" placeholder="you@example.com" required />
-    <button type="button" data-lk-input-suffix data-action="button">
+  <div data-scope="input" data-part="root" data-size="md">
+    <span data-scope="input" data-part="prefix">@</span>
+    <input data-scope="input" data-part="control" type="email" placeholder="you@example.com" required />
+    <button type="button" data-scope="input" data-part="suffix" data-action="clear">
       清除
     </button>
   </div>
-  <span data-lk-input-helper data-variant="error">
+  <span data-scope="input" data-part="helper-text" data-variant="error">
     请输入有效邮箱地址
   </span>
 </label>
@@ -136,36 +137,42 @@
 
 - 入口：`packages/primitives/src/dialog.ts`，覆盖 overlay、content、title/description/footer、close button 的样式与动画。
 - 属性 API：
-  - `data-lk-dialog-overlay`，可选 `data-blur="true"`、`data-state="open|closed"`。
-  - `data-lk-dialog-content` 支持 `data-size="sm|md|lg"`、`data-placement="center|top"`、`data-motion="scale|slide"`。
-  - `data-lk-dialog-title` / `data-lk-dialog-description` / `data-lk-dialog-footer` / `data-lk-dialog-close`。
+  - `data-scope="dialog" data-part="backdrop"`，可选 `data-blur="true"`、`data-state="open|closed"`。
+  - `data-scope="dialog" data-part="content"` 支持 `data-size="sm|md|lg"`、`data-placement="center|top"`、`data-motion="scale|slide"`。
+  - `data-scope="dialog" data-part="title|description|footer|close-trigger"`。
 - 动效：提供 `scale` 与 `slide` 两套 keyframe，`prefers-reduced-motion` 自动降级；Overlay 使用基于 tokens 的 scrim + blur。
 - 视觉：取材 Apple Design 的玻璃感层级与 Supabase Dashboard 的对比度，阴影/圆角/留白全部交由 tokens 控制，可直接接入 ArkUI Dialog。
 
 推荐结构：
 
 ```tsx
-<div data-lk-dialog-overlay data-blur="true" data-state={open ? "open" : "closed"} />
+<div
+  data-scope="dialog"
+  data-part="backdrop"
+  data-blur="true"
+  data-state={open ? "open" : "closed"}
+/>
 <section
   role="dialog"
   aria-modal="true"
-  data-lk-dialog-content
+  data-scope="dialog"
+  data-part="content"
   data-state={open ? "open" : "closed"}
   data-size="md"
 >
-  <button data-lk-dialog-close aria-label="关闭">×</button>
-  <h2 data-lk-dialog-title>邀请成员</h2>
-  <p data-lk-dialog-description>为成员分配角色与权限，邀请邮件将立即发送。</p>
-  <footer data-lk-dialog-footer>
-    <button data-lk-button data-variant="ghost">取消</button>
-    <button data-lk-button data-variant="solid">发送邀请</button>
+  <button data-scope="dialog" data-part="close-trigger" aria-label="关闭">×</button>
+  <h2 data-scope="dialog" data-part="title">邀请成员</h2>
+  <p data-scope="dialog" data-part="description">为成员分配角色与权限，邀请邮件将立即发送。</p>
+  <footer data-scope="dialog" data-part="footer">
+    <button data-scope="button" data-part="root" data-variant="ghost">取消</button>
+    <button data-scope="button" data-part="root" data-variant="solid">发送邀请</button>
   </footer>
 </section>
 ```
 
 ### React/Vue ArkUI 封装进展
 
-- `@loongark/react` 与 `@loongark/vue` 均已引入 Ark UI，对 Button/Input/Dialog 提供 LoongArk 包装：内部渲染 Ark UI 原件或 `ark.*` 工厂节点，同时自动注入 `data-lk-*` 属性以匹配 primitives 的样式与状态。
+- `@loongark/react` 与 `@loongark/vue` 均已引入 Ark UI，对 Button/Input/Dialog 提供 LoongArk 包装：内部渲染 Ark UI 原件或 `ark.*` 工厂节点，同时自动注入 `data-scope/data-part` 属性以匹配 primitives 的样式与状态。
 - Button：`LoongArkButton` 透传原生 `button` 属性，并提供 `variant/size/block/loading` 语义，与 ArkUI 的 `ark.button` 结合，默认 `type="button"`，Loading 时自动设置 `aria-busy/aria-disabled`。
 - Input：通过 Ark UI `Field` 系列组合出 `LoongArkInputRoot/InputControl/TextareaControl/HelperText/Prefix/Suffix` 等粒度组件，可自由拼装 prefix/suffix/辅助文案，同时保持无障碍结构。
 - Dialog：`LoongArkDialog` 集成 Ark UI `Dialog.Root/Trigger/Positioner` 等节点，`Overlay/Content/Title/Description/Footer/CloseTrigger` 封装数据属性与动画开关，可直接接入 Portal/Teleport 场景。
@@ -174,7 +181,7 @@
 ### Svelte/Solid ArkUI 封装进展
 
 - `@loongark/svelte` 现已提供 `button/input/dialog` actions 与 `createThemeStore()`，Svelte/SvelteKit 只需 `use:loongArkButton` 等指令即可把 Ark UI DOM 节点与 tokens 绑定；theme store 默认执行 `createLoongArkTheme`→`bootstrapKit`→`mount`，可在 Storybook/Playwright 中重复利用同一主题实例。
-- `@loongark/solid` 引入 `LoongArkProvider`/`useLoongArkTheme`，并补齐 Button/Input/Dialog 的 Solid 封装：依托 Ark UI Solid primitives 输出 `data-lk-*` 属性与 size/motion/placement props，确保 Solid 与 React/Vue 保持一致的状态语义。
+- `@loongark/solid` 引入 `LoongArkProvider`/`useLoongArkTheme`，并补齐 Button/Input/Dialog 的 Solid 封装：依托 Ark UI Solid primitives 输出 `data-scope/data-part` 属性与 size/motion/placement props，确保 Solid 与 React/Vue 保持一致的状态语义。
 - `examples/` 目录新增 React/Vue/Svelte/Solid 四端示例及共享测试 ID，Storybook (`pnpm storybook`) 直接消费 React 示例，Playwright (`pnpm visual:test`) 通过 `tests/examples.spec.ts` 对 Storybook story 做截图/无障碍断言，形成文档-示例-测试闭环。
 - 示例与测试计划：
   1. 基于新的 Svelte actions 与 Solid 组件，在 `examples/` 目录添加 form 与 dialog 示例（含多状态截图），Storybook stories 以相同 props 表驱动，准备用 `chromatic` 或 `@storybook/test-runner` 生成基线。

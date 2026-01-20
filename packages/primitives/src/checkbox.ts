@@ -1,6 +1,8 @@
 import { createPrimitive, registerPrimitive } from "./core";
 import { mountPrimitiveStyles } from "./styleSheet";
 import type { LoongArkTheme } from "@loongark/theme";
+import { DEFAULT_TOKENS, TokenTree } from "@loongark/tokens";
+import { asTokenTree, toStringToken } from "./tokenUtils";
 
 // Checkbox 尺寸定义
 export type CheckboxSize = "sm" | "md" | "lg";
@@ -35,11 +37,22 @@ const checkboxContract = {
 const checkboxPrimitive = createPrimitive(
   checkboxContract,
   (theme: LoongArkTheme) => {
-    const color = theme.tokens.color as any;
-    const space = theme.tokens.space as any;
-    const radius = theme.tokens.radius as any;
-    const typography = theme.tokens.typography as any;
-    const shadow = (theme.tokens as any).shadow || {};
+    const color = (theme.tokens.color as TokenTree) ?? DEFAULT_TOKENS.color;
+    const brand = asTokenTree(color.brand);
+    const neutral = asTokenTree(color.neutral);
+    const colorError = asTokenTree(color.error ?? {}, "color.error");
+
+    const space = (theme.tokens.space as TokenTree) ?? DEFAULT_TOKENS.space;
+    const componentSpace = asTokenTree(space.component);
+
+    const radius = (theme.tokens.radius as TokenTree) ?? DEFAULT_TOKENS.radius;
+    const radiusTokens = asTokenTree(radius);
+
+    const typography =
+      (theme.tokens.typography as TokenTree) ?? DEFAULT_TOKENS.typography;
+    const fontSize = asTokenTree(typography.fontSize);
+
+    const shadow = asTokenTree(theme.tokens.shadow ?? DEFAULT_TOKENS.shadow);
 
     // Checkbox Control 样式
     const controlBaseStyles = `
@@ -47,43 +60,47 @@ const checkboxPrimitive = createPrimitive(
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      border: 1px solid ${color.neutral?.border || "#d1d5db"};
-      background: ${color.white || "#ffffff"};
-      box-shadow: ${shadow?.xs || "0 1px 2px 0 rgba(0, 0, 0, 0.05)"};
+      border: 1px solid ${toStringToken(neutral.border, "#d1d5db")};
+      background: ${toStringToken(color.white, "#ffffff")};
+      box-shadow: ${toStringToken(
+        shadow.xs,
+        "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+      )};
       transition: all 0.2s ease-in-out;
       cursor: pointer;
       user-select: none;
     `;
 
     const controlCheckedStyles = `
-      background: ${color.brand?.primary || "#3b82f6"};
-      border-color: ${color.brand?.primary || "#3b82f6"};
-      color: ${color.white || "#ffffff"};
+      background: ${toStringToken(brand.primary, "#3b82f6")};
+      border-color: ${toStringToken(brand.primary, "#3b82f6")};
+      color: ${toStringToken(color.white, "#ffffff")};
     `;
 
     const controlHoverStyles = `
-      border-color: ${color.neutral?.borderHover || "#9ca3af"};
-      background: ${color.neutral?.bgHover || "#f9fafb"};
+      border-color: ${toStringToken(neutral.borderHover, "#9ca3af")};
+      background: ${toStringToken(neutral.bgHover, "#f9fafb")};
     `;
 
     const controlFocusStyles = `
       outline: none;
-      border-color: ${color.brand?.primary || "#3b82f6"};
-      box-shadow: 0 0 0 1px ${color.brand?.primary || "#3b82f6"}, 0 0 0 4px ${
-      color.brand?.accent || "rgba(59, 130, 246, 0.15)"
-    };
+      border-color: ${toStringToken(brand.primary, "#3b82f6")};
+      box-shadow: 0 0 0 1px ${toStringToken(
+        brand.primary,
+        "#3b82f6"
+      )}, 0 0 0 4px ${toStringToken(brand.accent, "rgba(59, 130, 246, 0.15)")};
     `;
 
     const controlDisabledStyles = `
       cursor: not-allowed;
       opacity: 0.6;
-      background: ${color.neutral?.bg || "#f3f4f6"};
-      border-color: ${color.neutral?.border || "#e5e7eb"};
+      background: ${toStringToken(neutral.bg, "#f3f4f6")};
+      border-color: ${toStringToken(neutral.border, "#e5e7eb")};
       box-shadow: none;
     `;
 
     const controlInvalidStyles = `
-      border-color: ${color.error?.solid || "#ef4444"};
+      border-color: ${toStringToken(colorError.solid, "#ef4444")};
     `;
 
     // 尺寸样式
@@ -91,17 +108,17 @@ const checkboxPrimitive = createPrimitive(
       sm: `
         width: 16px;
         height: 16px;
-        border-radius: ${radius?.sm || "4px"};
+        border-radius: ${toStringToken(radiusTokens.sm, "4px")};
       `,
       md: `
         width: 20px;
         height: 20px;
-        border-radius: ${radius?.md || "6px"};
+        border-radius: ${toStringToken(radiusTokens.md, "6px")};
       `,
       lg: `
         width: 24px;
         height: 24px;
-        border-radius: ${radius?.md || "6px"};
+        border-radius: ${toStringToken(radiusTokens.md, "6px")};
       `,
     };
 
@@ -109,11 +126,11 @@ const checkboxPrimitive = createPrimitive(
     const labelBaseStyles = `
       cursor: pointer;
       user-select: none;
-      color: ${color.neutral?.text || "#111827"};
-      font-size: ${typography?.fontSize?.md || "14px"};
+      color: ${toStringToken(neutral.text, "#111827")};
+      font-size: ${toStringToken(fontSize.md, "14px")};
       line-height: 1.5;
       font-weight: 500;
-      margin-left: ${space?.component?.sm || "8px"};
+      margin-left: ${toStringToken(componentSpace.sm, "8px")};
     `;
 
     const labelDisabledStyles = `
@@ -189,8 +206,8 @@ const checkboxPrimitive = createPrimitive(
 
       [data-scope="checkbox"][data-part="control"][data-state="checked"]:hover,
       [data-scope="checkbox"][data-part="control"][data-state="indeterminate"]:hover {
-        background: ${color.brand?.solidHover || "#2563eb"};
-        border-color: ${color.brand?.solidHover || "#2563eb"};
+        background: ${toStringToken(brand.solidHover, "#2563eb")};
+        border-color: ${toStringToken(brand.solidHover, "#2563eb")};
       }
 
       [data-scope="checkbox"][data-part="control"]:not([data-disabled]):not([data-state="checked"]):not([data-state="indeterminate"]):hover {

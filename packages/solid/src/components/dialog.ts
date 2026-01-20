@@ -22,7 +22,8 @@ export const LoongArkDialogOverlay: Component<LoongArkDialogOverlayProps> = (
   return ArkDialog.Backdrop({
     ...rest,
     children,
-    "data-lk-dialog-overlay": "",
+    "data-scope": "dialog",
+    "data-part": "backdrop",
     "data-blur": boolAttr(blur),
   });
 };
@@ -49,7 +50,8 @@ export const LoongArkDialogContent: Component<DialogContentProps> = (props) => {
   return ArkDialog.Content({
     ...rest,
     children,
-    "data-lk-dialog-content": "",
+    "data-scope": "dialog",
+    "data-part": "content",
     "data-size": size,
     "data-motion": motion,
     "data-placement": placement,
@@ -67,7 +69,8 @@ export const LoongArkDialogTitle: Component<DialogTextProps> = (props) => {
   return ArkDialog.Title({
     ...rest,
     children,
-    "data-lk-dialog-title": "",
+    "data-scope": "dialog",
+    "data-part": "title",
   });
 };
 
@@ -78,7 +81,8 @@ export const LoongArkDialogDescription: Component<DialogTextProps> = (
   return ArkDialog.Description({
     ...rest,
     children,
-    "data-lk-dialog-description": "",
+    "data-scope": "dialog",
+    "data-part": "description",
   });
 };
 
@@ -87,7 +91,8 @@ export const LoongArkDialogFooter: Component<DialogTextProps> = (props) => {
   return ark.footer({
     ...rest,
     children,
-    "data-lk-dialog-footer": "",
+    "data-scope": "dialog",
+    "data-part": "footer",
   });
 };
 
@@ -98,7 +103,8 @@ export const LoongArkDialogCloseTrigger: Component<DialogTextProps> = (
   return ArkDialog.CloseTrigger({
     ...rest,
     children,
-    "data-lk-dialog-close": "",
+    "data-scope": "dialog",
+    "data-part": "close-trigger",
   });
 };
 

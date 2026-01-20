@@ -3,7 +3,14 @@
  * 基于 Ark UI Select 的下拉选择器
  */
 
-import { defineComponent, h, type PropType } from "vue";
+import {
+  defineComponent,
+  h,
+  provide,
+  inject,
+  toRef,
+  type PropType,
+} from "vue";
 import {
   SelectRoot as ArkSelectRoot,
   SelectLabel as ArkSelectLabel,
@@ -23,6 +30,8 @@ import {
   SelectHiddenSelect as ArkSelectHiddenSelect,
 } from "@ark-ui/vue/select";
 import type { SelectSize } from "@loongark/primitives";
+
+const selectSizeKey = Symbol("loongark-select-size");
 
 /**
  * Select Root 组件
@@ -123,6 +132,7 @@ export const LoongArkSelectRoot = defineComponent({
     },
   },
   setup(props, { slots, attrs }) {
+    provide(selectSizeKey, toRef(props, "size"));
     return () =>
       h(
         ArkSelectRoot,
@@ -283,6 +293,7 @@ export const LoongArkSelectPositioner = defineComponent({
 export const LoongArkSelectContent = defineComponent({
   name: "LoongArkSelectContent",
   setup(_, { slots, attrs }) {
+    const size = inject(selectSizeKey, { value: "md" as SelectSize });
     return () =>
       h(
         ArkSelectContent,
@@ -290,6 +301,7 @@ export const LoongArkSelectContent = defineComponent({
           ...attrs,
           "data-scope": "select",
           "data-part": "content",
+          "data-size": size.value,
         },
         slots
       );

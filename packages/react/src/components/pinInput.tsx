@@ -32,7 +32,14 @@ export const LoongArkPinInputRoot = forwardRef<
   LoongArkPinInputRootProps
 >(
   (
-    { children, size = "md", state = "default", disabled = false, ...rest },
+    {
+      children,
+      size = "md",
+      state = "default",
+      disabled = false,
+      autoCapitalize,
+      ...rest
+    },
     ref
   ) =>
     createElement(
@@ -41,7 +48,10 @@ export const LoongArkPinInputRoot = forwardRef<
         ...rest,
         ref,
         disabled,
-        "data-lk-pin-input": "",
+        // 避免 boolean 透传到 DOM，Ark 内部若使用会自行消费，其余场景忽略
+        autoCapitalize: autoCapitalize ? "characters" : undefined,
+        "data-scope": "pin-input",
+        "data-part": "root",
         "data-size": size,
         "data-state": state !== "default" ? state : undefined,
         "data-disabled": disabled ? "true" : undefined,
@@ -67,7 +77,8 @@ export const LoongArkPinInputControl = forwardRef<
     {
       ...rest,
       ref,
-      "data-lk-pin-input-control": "",
+      "data-scope": "pin-input",
+      "data-part": "control",
       "data-size": size,
     },
     children
@@ -95,8 +106,10 @@ export const LoongArkPinInputInput = forwardRef<
       ...rest,
       ref,
       index,
+      autoCapitalize: autoCapitalize ? "characters" : undefined,
       style: autoCapitalize ? { textTransform: "uppercase" } : undefined,
-      "data-lk-pin-input-input": "",
+      "data-scope": "pin-input",
+      "data-part": "input",
       "data-size": size,
       "data-state": state !== "default" ? state : undefined,
     })
@@ -117,7 +130,8 @@ export const LoongArkPinInputLabel = ({
     PinInput.Label,
     {
       ...rest,
-      "data-lk-pin-input-label": "",
+      "data-scope": "pin-input",
+      "data-part": "label",
     },
     children
   );

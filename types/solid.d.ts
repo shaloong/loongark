@@ -10,8 +10,12 @@ declare module "solid-js" {
   export interface Component<P = {}> {
     (props: P): JSXElement;
   }
-  export function createContext<T>(value?: T): any;
-  export function useContext<T>(context: any): T;
+  export interface Context<T> {
+    Provider: ParentComponent<{ value: T }>;
+  }
+  export function createContext<T>(value?: T): Context<T>;
+  export function useContext<T>(context: Context<T>): T;
+  export function createEffect(fn: () => void | (() => void)): void;
   export function createMemo<T>(factory: () => T): Accessor<T>;
   export function mergeProps<T extends object, U extends object>(
     source: T,

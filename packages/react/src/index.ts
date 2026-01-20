@@ -2,6 +2,7 @@ import {
   createContext,
   useContext,
   useMemo,
+  useEffect,
   createElement,
   ReactNode,
   FC,
@@ -26,10 +27,13 @@ export const LoongArkProvider: FC<LoongArkProviderProps> = ({
 }) => {
   const theme = useMemo(() => {
     const instance = createLoongArkTheme({ mode, brand, accent });
-    bootstrapKit(instance);
-    instance.mount();
     return instance;
   }, [mode, brand, accent]);
+
+  useEffect(() => {
+    bootstrapKit(theme);
+    theme.mount();
+  }, [theme]);
 
   return createElement(ThemeContext.Provider, { value: theme }, children);
 };

@@ -26,7 +26,10 @@ const inputDefaults: Required<
   multiline: false,
 };
 
-const buildControlProps = (dataKey: string, props: BaseInput) => {
+const buildControlProps = (
+  part: "root" | "control",
+  props: BaseInput
+) => {
   const merged = mergeProps(inputDefaults, props);
   const { size, state, disabled, readOnly, multiline, children, ...rest } =
     merged;
@@ -36,7 +39,8 @@ const buildControlProps = (dataKey: string, props: BaseInput) => {
     disabled,
     readonly: readOnly,
     children,
-    [`data-${dataKey}`]: "",
+    "data-scope": "input",
+    "data-part": part,
     "data-size": size,
     "data-state": normalizeState(state),
     "data-multiline": boolAttr(multiline),
@@ -45,15 +49,15 @@ const buildControlProps = (dataKey: string, props: BaseInput) => {
 
 export const LoongArkInputRoot: Component<BaseInput> = (props) =>
   Field.Root({
-    ...buildControlProps("lk-input-wrapper", props),
+    ...buildControlProps("root", props),
     "data-disabled": boolAttr(props.disabled),
   });
 
 export const LoongArkInputControl: Component<BaseInput> = (props) =>
-  Field.Input(buildControlProps("lk-input", props));
+  Field.Input(buildControlProps("control", props));
 
 export const LoongArkTextareaControl: Component<BaseInput> = (props) =>
-  Field.Textarea(buildControlProps("lk-input", { ...props, multiline: true }));
+  Field.Textarea(buildControlProps("control", { ...props, multiline: true }));
 
 interface HelperProps {
   variant?: "default" | "error" | "success";
@@ -66,7 +70,8 @@ export const LoongArkInputHelperText: Component<HelperProps> = (props) => {
   return Field.HelperText({
     ...rest,
     children,
-    "data-lk-input-helper": "",
+    "data-scope": "input",
+    "data-part": "helper-text",
     "data-variant": variant === "default" ? undefined : variant,
   });
 };
@@ -74,7 +79,8 @@ export const LoongArkInputHelperText: Component<HelperProps> = (props) => {
 export const LoongArkInputLabel: Component<{ children?: unknown }> = (props) =>
   Field.Label({
     ...props,
-    "data-lk-input-label": "",
+    "data-scope": "input",
+    "data-part": "label",
   });
 
 interface InputAddonProps {
@@ -83,20 +89,26 @@ interface InputAddonProps {
 }
 
 interface InputSuffixProps extends InputAddonProps {
-  action?: "button" | "text";
+  action?: "clear" | "button" | "none" | "text";
 }
 
 export const LoongArkInputPrefix: Component<InputAddonProps> = (props) =>
   ark.span({
     ...props,
-    "data-lk-input-prefix": "",
+    "data-scope": "input",
+    "data-part": "prefix",
   });
 
 export const LoongArkInputSuffix: Component<InputSuffixProps> = (props) => {
-  const { action = "text", ...rest } = props;
-  return ark.span({
+  const { action = "none", ...rest } = props;
+  const isAction = action === "clear" || action === "button";
+  const Element = isAction ? ark.button : ark.span;
+
+  return Element({
     ...rest,
-    "data-lk-input-suffix": "",
-    "data-action": action === "button" ? "button" : undefined,
+    type: isAction ? "button" : undefined,
+    "data-scope": "input",
+    "data-part": "suffix",
+    "data-action": isAction ? "clear" : undefined,
   });
 };

@@ -24,7 +24,8 @@ export const LoongArkDialogOverlay = defineComponent({
         ArkDialog.Backdrop,
         {
           ...attrs,
-          "data-lk-dialog-overlay": "",
+          "data-scope": "dialog",
+          "data-part": "backdrop",
           "data-blur": boolAttr(props.blur),
         },
         slots.default ? slots.default() : undefined
@@ -64,7 +65,8 @@ export const LoongArkDialogContent = defineComponent({
         ArkDialog.Content,
         {
           ...attrs,
-          "data-lk-dialog-content": "",
+          "data-scope": "dialog",
+          "data-part": "content",
           "data-size": props.size,
           "data-motion": props.motion,
           "data-placement": props.placement,
@@ -83,7 +85,8 @@ export const LoongArkDialogTitle = defineComponent({
         ArkDialog.Title,
         {
           ...attrs,
-          "data-lk-dialog-title": "",
+          "data-scope": "dialog",
+          "data-part": "title",
         },
         slots.default ? slots.default() : undefined
       );
@@ -98,7 +101,8 @@ export const LoongArkDialogDescription = defineComponent({
         ArkDialog.Description,
         {
           ...attrs,
-          "data-lk-dialog-description": "",
+          "data-scope": "dialog",
+          "data-part": "description",
         },
         slots.default ? slots.default() : undefined
       );
@@ -113,7 +117,8 @@ export const LoongArkDialogFooter = defineComponent({
         ark.footer,
         {
           ...attrs,
-          "data-lk-dialog-footer": "",
+          "data-scope": "dialog",
+          "data-part": "footer",
         },
         slots.default ? slots.default() : undefined
       );
@@ -128,7 +133,8 @@ export const LoongArkDialogCloseTrigger = defineComponent({
         ArkDialog.CloseTrigger,
         {
           ...attrs,
-          "data-lk-dialog-close": "",
+          "data-scope": "dialog",
+          "data-part": "close-trigger",
         },
         slots.default ? slots.default() : undefined
       );

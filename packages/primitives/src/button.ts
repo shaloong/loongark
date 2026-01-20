@@ -112,7 +112,7 @@ const extractButtonTokens = (theme: LoongArkTheme): ButtonDesignTokens => {
 
 const buildButtonStyles = (theme: LoongArkTheme): string => {
   const tokens = extractButtonTokens(theme);
-  const selector = `[data-lk-button]`;
+  const selector = `[data-scope="button"][data-part="root"]`;
   const defaultVariantSelector = `${selector}:not([data-variant])`;
   const solidVariantSelector = `${selector}[data-variant='solid']`;
   const outlineSelector = `${selector}[data-variant='outline']`;
@@ -132,6 +132,14 @@ const buildButtonStyles = (theme: LoongArkTheme): string => {
   const disabledGhostSelectors = `${disabledAttrSelector}[data-variant='ghost'], ${ariaDisabledSelector}[data-variant='ghost']`;
 
   return `
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-lk-motion="force"]) * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 ${selector} {
   appearance: none;
   border: 1px solid transparent;

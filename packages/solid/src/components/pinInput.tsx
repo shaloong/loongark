@@ -49,7 +49,8 @@ export const LoongArkPinInputRoot: Component<LoongArkPinInputRootProps> = (
     <PinInput.Root
       {...others}
       disabled={local.disabled}
-      data-lk-pin-input=""
+      data-scope="pin-input"
+      data-part="root"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
       data-disabled={local.disabled ? "true" : undefined}
@@ -73,7 +74,8 @@ export const LoongArkPinInputControl: Component<
   return (
     <PinInput.Control
       {...others}
-      data-lk-pin-input-control=""
+      data-scope="pin-input"
+      data-part="control"
       data-size={local.size}
     >
       {local.children}
@@ -110,7 +112,8 @@ export const LoongArkPinInputInput: Component<LoongArkPinInputInputProps> = (
     <PinInput.Input
       {...others}
       index={local.index}
-      data-lk-pin-input-input=""
+      data-scope="pin-input"
+      data-part="input"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
       data-capitalize={local.autoCapitalize ? "true" : undefined}
@@ -128,7 +131,7 @@ export const LoongArkPinInputLabel: Component<LoongArkPinInputLabelProps> = (
   const [local, others] = splitProps(props, ["children"]);
 
   return (
-    <PinInput.Label {...others} data-lk-pin-input-label="">
+    <PinInput.Label {...others} data-scope="pin-input" data-part="label">
       {local.children}
     </PinInput.Label>
   );

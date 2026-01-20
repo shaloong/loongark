@@ -115,12 +115,21 @@ const extractPinInputTokens = (theme: LoongArkTheme): PinInputDesignTokens => {
 
 const buildPinInputStyles = (theme: LoongArkTheme): string => {
   const tokens = extractPinInputTokens(theme);
-  const rootSelector = `[data-lk-pin-input]`;
-  const controlSelector = `[data-lk-pin-input-control]`;
-  const inputSelector = `[data-lk-pin-input-input]`;
-  const labelSelector = `[data-lk-pin-input-label]`;
+  const scopeSelector = `[data-scope="pin-input"]`;
+  const rootSelector = `${scopeSelector}[data-part="root"]`;
+  const controlSelector = `${scopeSelector}[data-part="control"]`;
+  const inputSelector = `${scopeSelector}[data-part="input"]`;
+  const labelSelector = `${scopeSelector}[data-part="label"]`;
 
   return `
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-lk-motion="force"]) ${rootSelector} * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 ${rootSelector} {
   display: inline-flex;
   flex-direction: column;

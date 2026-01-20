@@ -35,14 +35,15 @@ export const LoongArkInputRoot = forwardRef<
     createElement(
       Field.Root,
       {
-        ...rest,
-        ref,
-        disabled,
-        readOnly,
-        "data-lk-input-wrapper": "",
-        "data-size": size,
-        "data-state": state !== "default" ? state : undefined,
-        "data-disabled": disabled ? "true" : undefined,
+      ...rest,
+      ref,
+      disabled,
+      readOnly,
+      "data-scope": "input",
+      "data-part": "root",
+      "data-size": size,
+      "data-state": state !== "default" ? state : undefined,
+      "data-disabled": disabled ? "true" : undefined,
         "data-multiline": multiline ? "true" : undefined,
         "data-variant": variant === "floating" ? "floating" : undefined,
         "data-has-value":
@@ -79,7 +80,8 @@ export const LoongArkInputControl = forwardRef<
       ref,
       disabled,
       readOnly,
-      "data-lk-input": "",
+      "data-scope": "input",
+      "data-part": "control",
       "data-size": size,
       "data-state": state !== "default" ? state : undefined,
       "data-multiline": multiline ? "true" : undefined,
@@ -113,7 +115,8 @@ export const LoongArkTextareaControl = forwardRef<
       ref,
       disabled,
       readOnly,
-      "data-lk-input": "",
+      "data-scope": "input",
+      "data-part": "control",
       "data-size": size,
       "data-state": state !== "default" ? state : undefined,
       "data-multiline": multiline ? "true" : undefined,
@@ -137,7 +140,8 @@ export const LoongArkInputHelperText = ({
     Field.HelperText,
     {
       ...rest,
-      "data-lk-input-helper": "",
+      "data-scope": "input",
+      "data-part": "helper-text",
       "data-variant": variant === "default" ? undefined : variant,
     },
     children
@@ -156,7 +160,8 @@ export const LoongArkInputLabel = ({
     Field.Label,
     {
       ...rest,
-      "data-lk-input-label": "",
+      "data-scope": "input",
+      "data-part": "label",
     },
     children
   );
@@ -174,13 +179,14 @@ export const LoongArkInputPrefix = ({
     ark.span,
     {
       ...rest,
-      "data-lk-input-prefix": "",
+      "data-scope": "input",
+      "data-part": "prefix",
     },
     children
   );
 
 export interface LoongArkInputSuffixProps extends LoongArkInputAddonProps {
-  action?: "clear" | "none";
+  action?: "clear" | "button" | "none" | "text";
   onClick?: () => void;
 }
 
@@ -189,15 +195,20 @@ export const LoongArkInputSuffix = ({
   action,
   onClick,
   ...rest
-}: LoongArkInputSuffixProps) =>
-  createElement(
-    ark.span,
+}: LoongArkInputSuffixProps) => {
+  const isAction = action === "clear" || action === "button";
+  const Element = isAction ? ark.button : ark.span;
+
+  return createElement(
+    Element,
     {
       ...rest,
       onClick,
-      role: action === "clear" ? "button" : undefined,
-      "data-lk-input-suffix": "",
-      "data-action": action === "clear" ? "clear" : undefined,
+      type: isAction ? "button" : undefined,
+      "data-scope": "input",
+      "data-part": "suffix",
+      "data-action": isAction ? "clear" : undefined,
     },
     children
   );
+};

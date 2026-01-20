@@ -62,17 +62,18 @@ export const LoongArkPopoverPositioner = forwardRef<
 
 export const LoongArkPopoverContent = forwardRef<
   HTMLDivElement,
-  ArkContentProps
->(({ children, ...rest }, ref) => (
-  <ArkPopover.Content
-    {...rest}
-    ref={ref}
-    data-scope="popover"
-    data-part="content"
-  >
-    {children}
-  </ArkPopover.Content>
-));
+  Omit<ArkPopoverContentProps, "asChild"> & { showArrow?: boolean }
+>(({ showArrow, ...props }, ref) => {
+  return (
+    <ArkPopover.Content
+      {...props}
+      ref={ref}
+      data-scope="popover"
+      data-part="content"
+      data-arrow={showArrow ? "true" : undefined}
+    />
+  );
+});
 LoongArkPopoverContent.displayName = "LoongArkPopoverContent";
 
 export const LoongArkPopoverArrow = forwardRef<

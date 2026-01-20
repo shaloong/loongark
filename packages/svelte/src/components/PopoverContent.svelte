@@ -8,12 +8,14 @@
   export let unmountOnExit: PopoverContentProps["unmountOnExit"] = undefined;
   export let positioning: PopoverContentProps["positioning"] = undefined;
   export let id: PopoverContentProps["id"] = undefined;
+  export let showArrow: boolean = false;
 </script>
 
 <Popover.Content
   {...{ asChild, trapFocus, restoreFocus, lazyMount, unmountOnExit, positioning, id }}
   data-scope="popover"
   data-part="content"
+  data-arrow={showArrow ? "true" : undefined}
 >
   <slot />
 </Popover.Content>

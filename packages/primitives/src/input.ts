@@ -119,13 +119,14 @@ const extractInputTokens = (theme: LoongArkTheme): InputDesignTokens => {
 
 const buildInputStyles = (theme: LoongArkTheme): string => {
   const tokens = extractInputTokens(theme);
-  const controlSelector = `[data-lk-input]`;
-  const wrapperSelector = `[data-lk-input-wrapper]`;
+  const scopeSelector = `[data-scope="input"]`;
+  const wrapperSelector = `${scopeSelector}[data-part="root"]`;
+  const controlSelector = `${scopeSelector}[data-part="control"]`;
   const controlInsideWrapperSelector = `${wrapperSelector} ${controlSelector}`;
-  const prefixSelector = `[data-lk-input-prefix]`;
-  const suffixSelector = `[data-lk-input-suffix]`;
-  const labelSelector = `[data-lk-input-label]`;
-  const helperSelector = `[data-lk-input-helper]`;
+  const prefixSelector = `${scopeSelector}[data-part="prefix"]`;
+  const suffixSelector = `${scopeSelector}[data-part="suffix"]`;
+  const labelSelector = `${scopeSelector}[data-part="label"]`;
+  const helperSelector = `${scopeSelector}[data-part="helper-text"]`;
   const invalidSelectors = `${controlSelector}[data-state='invalid'], ${controlSelector}[aria-invalid='true']`;
   const successSelector = `${controlSelector}[data-state='success']`;
   const disabledSelector = `${controlSelector}[disabled], ${controlSelector}[aria-disabled='true']`;
@@ -133,6 +134,14 @@ const buildInputStyles = (theme: LoongArkTheme): string => {
   const stateAttributeSelectors = `${controlSelector}[data-state], ${wrapperSelector}[data-state]`;
 
   return `
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-lk-motion="force"]) * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 ${controlSelector} {
   width: 100%;
   border: 1px solid ${tokens.neutral.border};
@@ -194,7 +203,7 @@ ${readOnlySelector} {
   opacity: 0.85;
 }
 
-textarea[data-lk-input],
+textarea${controlSelector},
 ${controlSelector}[data-multiline='true'] {
   min-height: 120px;
   resize: vertical;
@@ -297,11 +306,19 @@ ${wrapperSelector} textarea::placeholder {
 
 ${prefixSelector},
 ${suffixSelector} {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   color: ${tokens.neutral.placeholder};
   font-size: inherit;
   line-height: ${tokens.lineHeight};
   flex-shrink: 0;
+}
+
+${suffixSelector} {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
 }
 
 ${suffixSelector}[data-action='clear'] {
@@ -330,6 +347,10 @@ ${wrapperSelector} ${labelSelector} {
   margin: 0;
 }
 
+${wrapperSelector}:not([data-variant='floating']) ${labelSelector} {
+  font-size: inherit;
+}
+
 ${wrapperSelector}[data-variant='floating'] {
   position: relative;
   align-items: center;
@@ -353,7 +374,7 @@ ${wrapperSelector}[data-variant='floating'] ${labelSelector} {
   font-size: ${tokens.fontSize.md};
   line-height: ${tokens.lineHeight};
   background: ${tokens.neutral.surface};
-  padding: 0 4px;
+  padding: 0 ${tokens.gap};
   z-index: 1;
 }
 

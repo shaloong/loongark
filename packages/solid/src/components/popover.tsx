@@ -28,8 +28,13 @@ export const LoongArkPopoverPositioner = (props: ArkPopoverPositionerProps) => (
   <ArkPopover.Positioner {...props} data-scope="popover" data-part="positioner" />
 );
 
-export const LoongArkPopoverContent = (props: ArkPopoverContentProps) => (
-  <ArkPopover.Content {...props} data-scope="popover" data-part="content" />
+export const LoongArkPopoverContent = (props: ArkPopoverContentProps & { showArrow?: boolean }) => (
+  <ArkPopover.Content
+    {...props}
+    data-scope="popover"
+    data-part="content"
+    data-arrow={props.showArrow ? "true" : undefined}
+  />
 );
 
 export const LoongArkPopoverArrow = (props: ArkPopoverArrowProps) => (

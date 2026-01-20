@@ -12,7 +12,8 @@
   {disabled}
   {checked}
   {onCheckedChange}
-  data-lk-switch=""
+  data-scope="switch"
+  data-part="root"
   data-size={size}
   data-disabled={disabled || undefined}
   {...$$restProps}

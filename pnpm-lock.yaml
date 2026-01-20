@@ -96,6 +96,12 @@ importers:
       '@loongark/theme':
         specifier: workspace:*
         version: link:../theme
+      react:
+        specifier: '>=18.0.0'
+        version: 19.2.1
+      react-dom:
+        specifier: '>=18.0.0'
+        version: 19.2.1(react@19.2.1)
 
   packages/solid:
     dependencies:
@@ -111,6 +117,9 @@ importers:
       '@loongark/theme':
         specifier: workspace:*
         version: link:../theme
+      solid-js:
+        specifier: '>=1.8.0'
+        version: 1.9.10
 
   packages/svelte:
     dependencies:
@@ -126,6 +135,9 @@ importers:
       '@loongark/theme':
         specifier: workspace:*
         version: link:../theme
+      svelte:
+        specifier: '>=4.0.0'
+        version: 5.45.2
 
   packages/theme:
     dependencies:
@@ -149,6 +161,9 @@ importers:
       '@loongark/theme':
         specifier: workspace:*
         version: link:../theme
+      vue:
+        specifier: '>=3.3.0'
+        version: 3.5.25(typescript@5.9.3)
 
 packages:
 

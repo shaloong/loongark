@@ -89,6 +89,22 @@ export type {
   PopoverCloseTriggerProps,
 } from "./components/popover.d";
 
+// Tooltip
+export { default as LoongArkTooltipRoot } from "./components/TooltipRoot.svelte";
+export { default as LoongArkTooltipTrigger } from "./components/TooltipTrigger.svelte";
+export { default as LoongArkTooltipPositioner } from "./components/TooltipPositioner.svelte";
+export { default as LoongArkTooltipContent } from "./components/TooltipContent.svelte";
+export { default as LoongArkTooltipArrow } from "./components/TooltipArrow.svelte";
+export { default as LoongArkTooltipArrowTip } from "./components/TooltipArrowTip.svelte";
+export type {
+  TooltipRootProps,
+  TooltipTriggerProps,
+  TooltipContentProps,
+  TooltipPositionerProps,
+  TooltipArrowProps,
+  TooltipArrowTipProps,
+} from "./components/tooltip.d";
+
 export interface ThemeStoreOptions {
   mode?: "light" | "dark" | "high-contrast";
   brand?: string;

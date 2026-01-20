@@ -15,6 +15,8 @@ export interface CreateThemeOptions {
   accent?: string;
   overrides?: TokenOverrides;
   targetId?: string;
+  /** 动效偏好：auto 遵循系统，force 强制启用动画 */
+  motionPreference?: "auto" | "force";
 }
 
 export interface LoongArkTheme {
@@ -61,12 +63,14 @@ class ThemeRuntime implements LoongArkTheme {
   public readonly mode: ThemeMode;
   public readonly tokens: TokenRegistry;
   private readonly targetId: string;
+  private readonly motionPreference: "auto" | "force";
 
   constructor(options: CreateThemeOptions = {}) {
     this.mode = options.mode ?? "light";
     const merged = mergeTokens(baseTokens, options.overrides);
     this.tokens = applyBrandOverrides(merged, options.brand, options.accent);
     this.targetId = options.targetId ?? `${STYLE_TAG_PREFIX}-${this.mode}`;
+    this.motionPreference = options.motionPreference ?? "force";
   }
 
   public toCSS(): string {
@@ -78,11 +82,23 @@ class ThemeRuntime implements LoongArkTheme {
   public mount(target?: StyleHost): void {
     const host = target ?? (globalThis.document as Document | undefined);
     if (!host) {
+      if (typeof window !== "undefined") {
+        console.warn(
+          "[LoongArk Theme] Unable to mount theme: Document not available. " +
+            "This may happen during SSR or in non-DOM environments. " +
+            "The theme will be available in JS context but CSS variables won't be injected."
+        );
+      }
       return;
     }
 
     const doc = resolveDocument(host);
     if (!doc) {
+      if (typeof window !== "undefined" && typeof console !== "undefined") {
+        console.error(
+          "[LoongArk Theme] Failed to resolve document for mounting theme"
+        );
+      }
       return;
     }
 
@@ -92,6 +108,15 @@ class ThemeRuntime implements LoongArkTheme {
     const styleEl = existing ?? doc.createElement("style");
     styleEl.id = this.targetId;
     styleEl.textContent = this.toCSS();
+
+    const rootEl = doc.documentElement ?? doc.body;
+    if (rootEl) {
+      if (this.motionPreference === "force") {
+        rootEl.setAttribute("data-lk-motion", "force");
+      } else {
+        rootEl.removeAttribute("data-lk-motion");
+      }
+    }
 
     if (!existing) {
       if (isDocumentHost(host)) {

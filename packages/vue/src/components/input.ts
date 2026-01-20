@@ -43,7 +43,8 @@ export const LoongArkInputRoot = defineComponent({
           ...attrs,
           disabled: props.disabled,
           readonly: props.readOnly,
-          "data-lk-input-wrapper": "",
+          "data-scope": "input",
+          "data-part": "root",
           "data-size": props.size,
           "data-state": normalizeState(props.state),
           "data-disabled": boolAttr(props.disabled),
@@ -69,7 +70,8 @@ export const LoongArkInputControl = defineComponent({
         ...attrs,
         disabled: props.disabled,
         readonly: props.readOnly,
-        "data-lk-input": "",
+        "data-scope": "input",
+        "data-part": "control",
         "data-size": props.size,
         "data-state": normalizeState(props.state),
         "data-multiline": boolAttr(props.multiline),
@@ -92,7 +94,8 @@ export const LoongArkTextareaControl = defineComponent({
         ...attrs,
         disabled: props.disabled,
         readonly: props.readOnly,
-        "data-lk-input": "",
+        "data-scope": "input",
+        "data-part": "control",
         "data-size": props.size,
         "data-state": normalizeState(props.state),
         "data-multiline": boolAttr(props.multiline),
@@ -114,7 +117,8 @@ export const LoongArkInputHelperText = defineComponent({
         Field.HelperText,
         {
           ...attrs,
-          "data-lk-input-helper": "",
+          "data-scope": "input",
+          "data-part": "helper-text",
           "data-variant":
             props.variant === "default" ? undefined : props.variant,
         },
@@ -131,7 +135,8 @@ export const LoongArkInputLabel = defineComponent({
         Field.Label,
         {
           ...attrs,
-          "data-lk-input-label": "",
+          "data-scope": "input",
+          "data-part": "label",
         },
         slots.default ? slots.default() : undefined
       );
@@ -146,7 +151,8 @@ export const LoongArkInputPrefix = defineComponent({
         ark.span,
         {
           ...attrs,
-          "data-lk-input-prefix": "",
+          "data-scope": "input",
+          "data-part": "prefix",
         },
         slots.default ? slots.default() : undefined
       );
@@ -157,18 +163,21 @@ export const LoongArkInputSuffix = defineComponent({
   name: "LoongArkInputSuffix",
   props: {
     action: {
-      type: {} as PropType<"button" | "text">,
-      default: "text" as const,
+      type: {} as PropType<"clear" | "button" | "none" | "text">,
+      default: "none" as const,
     },
   },
   setup(props, { slots, attrs }) {
+    const isAction = () => props.action === "clear" || props.action === "button";
     return () =>
       h(
-        ark.span,
+        isAction() ? ark.button : ark.span,
         {
           ...attrs,
-          "data-lk-input-suffix": "",
-          "data-action": props.action === "button" ? "button" : undefined,
+          type: isAction() ? "button" : undefined,
+          "data-scope": "input",
+          "data-part": "suffix",
+          "data-action": isAction() ? "clear" : undefined,
         },
         slots.default ? slots.default() : undefined
       );

@@ -2,6 +2,8 @@ declare module "@ark-ui/react/radio-group" {
   import type { ReactNode } from "react";
 
   export namespace RadioGroup {
+    type StyleObject = Record<string, string | number>;
+
     interface RootProps {
       children?: ReactNode;
       defaultValue?: string;
@@ -13,6 +15,7 @@ declare module "@ark-ui/react/radio-group" {
       orientation?: "horizontal" | "vertical";
       onValueChange?: (details: { value: string }) => void;
       className?: string;
+      style?: StyleObject;
       id?: string;
       "data-size"?: string;
       "data-orientation"?: string;
@@ -21,6 +24,7 @@ declare module "@ark-ui/react/radio-group" {
     interface LabelProps {
       children?: ReactNode;
       className?: string;
+      style?: StyleObject;
     }
 
     interface ItemProps {
@@ -29,25 +33,30 @@ declare module "@ark-ui/react/radio-group" {
       disabled?: boolean;
       invalid?: boolean;
       className?: string;
+      style?: StyleObject;
     }
 
     interface ItemControlProps {
       children?: ReactNode;
       className?: string;
+      style?: StyleObject;
     }
 
     interface ItemTextProps {
       children?: ReactNode;
       className?: string;
+      style?: StyleObject;
     }
 
     interface IndicatorProps {
       children?: ReactNode;
       className?: string;
+      style?: StyleObject;
     }
 
     interface ItemHiddenInputProps {
       className?: string;
+      style?: StyleObject;
     }
 
     export const Root: React.ForwardRefExoticComponent<

@@ -22,8 +22,10 @@ export const LoongArkSwitchRoot: Component<LoongArkSwitchProps> = (props) => {
   const { size, disabled, children, ...rest } = merged;
   return ArkSwitch.Root({
     ...rest,
+    disabled,
     children,
-    "data-lk-switch": "",
+    "data-scope": "switch",
+    "data-part": "root",
     "data-size": size,
     "data-disabled": boolAttr(disabled),
   });
@@ -36,7 +38,9 @@ export const LoongArkSwitchControl: Component<LoongArkSwitchProps> = (
   const { size, disabled, ...rest } = merged;
   return ArkSwitch.Control({
     ...rest,
-    "data-lk-switch-control": "",
+    disabled,
+    "data-scope": "switch",
+    "data-part": "control",
     "data-size": size,
     "data-disabled": boolAttr(disabled),
   });
@@ -49,7 +53,8 @@ export const LoongArkSwitchThumb: Component<Partial<SwitchPrimitiveProps>> = (
   const { size, ...rest } = merged;
   return ArkSwitch.Thumb({
     ...rest,
-    "data-lk-switch-thumb": "",
+    "data-scope": "switch",
+    "data-part": "thumb",
     "data-size": size,
   });
 };
@@ -64,7 +69,8 @@ export const LoongArkSwitchLabel: Component<{
   return ArkSwitch.Label({
     ...rest,
     children,
-    "data-lk-switch-label": "",
+    "data-scope": "switch",
+    "data-part": "label",
     "data-disabled": boolAttr(disabled),
   });
 };

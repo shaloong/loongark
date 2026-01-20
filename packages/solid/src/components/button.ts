@@ -34,18 +34,20 @@ const buildButtonProps = (props: LoongArkButtonProps) => {
   const merged = mergeProps(buttonDefaults, props);
   const { variant, size, block, loading, disabled, type, children, ...rest } =
     merged;
+  const isInteractiveDisabled = disabled || loading;
 
   return {
     ...rest,
     type,
-    disabled,
+    disabled: isInteractiveDisabled,
     children,
-    "data-lk-button": "",
+    "data-scope": "button",
+    "data-part": "root",
     "data-variant": variant,
     "data-size": size,
     "data-block": boolAttr(block),
     "data-loading": boolAttr(loading),
-    "aria-disabled": disabled || loading ? "true" : undefined,
+    "aria-disabled": isInteractiveDisabled ? "true" : undefined,
     "aria-busy": loading ? "true" : undefined,
   };
 };

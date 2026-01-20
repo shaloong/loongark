@@ -1,58 +1,60 @@
 import { RadioGroup } from "@ark-ui/react/radio-group";
 import { type ReactNode, forwardRef, createElement } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import type { RadioGroupSize, RadioGroupOrientation } from "@loongark/primitives";
 
 // ============ 类型定义 ============
 
-export interface LoongArkRadioGroupRootProps {
+type ArkRadioGroupRootProps = ComponentPropsWithoutRef<typeof RadioGroup.Root>;
+type ArkRadioGroupLabelProps = ComponentPropsWithoutRef<typeof RadioGroup.Label>;
+type ArkRadioGroupItemProps = ComponentPropsWithoutRef<typeof RadioGroup.Item>;
+type ArkRadioGroupItemControlProps = ComponentPropsWithoutRef<
+  typeof RadioGroup.ItemControl
+>;
+type ArkRadioGroupItemTextProps = ComponentPropsWithoutRef<
+  typeof RadioGroup.ItemText
+>;
+type ArkRadioGroupIndicatorProps = ComponentPropsWithoutRef<
+  typeof RadioGroup.Indicator
+>;
+type ArkRadioGroupItemHiddenInputProps = ComponentPropsWithoutRef<
+  typeof RadioGroup.ItemHiddenInput
+>;
+
+export interface LoongArkRadioGroupRootProps
+  extends Omit<ArkRadioGroupRootProps, "asChild"> {
   children?: ReactNode;
   size?: RadioGroupSize;
   orientation?: RadioGroupOrientation;
-  defaultValue?: string;
-  value?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  name?: string;
-  form?: string;
-  onValueChange?: (details: { value: string }) => void;
-  className?: string;
 }
 
-export interface LoongArkRadioGroupLabelProps {
+export interface LoongArkRadioGroupLabelProps
+  extends Omit<ArkRadioGroupLabelProps, "asChild"> {
   children?: ReactNode;
-  className?: string;
-  style?: any;
-  [key: string]: any;
 }
 
-export interface LoongArkRadioGroupItemProps {
+export interface LoongArkRadioGroupItemProps
+  extends Omit<ArkRadioGroupItemProps, "asChild"> {
   children?: ReactNode;
-  value: string;
-  disabled?: boolean;
-  invalid?: boolean;
-  className?: string;
-  key?: string | number;
-  [key: string]: any;
 }
 
-export interface LoongArkRadioGroupItemControlProps {
+export interface LoongArkRadioGroupItemControlProps
+  extends Omit<ArkRadioGroupItemControlProps, "asChild"> {
   children?: ReactNode;
-  className?: string;
 }
 
-export interface LoongArkRadioGroupItemTextProps {
+export interface LoongArkRadioGroupItemTextProps
+  extends Omit<ArkRadioGroupItemTextProps, "asChild"> {
   children?: ReactNode;
-  className?: string;
 }
 
-export interface LoongArkRadioGroupIndicatorProps {
+export interface LoongArkRadioGroupIndicatorProps
+  extends Omit<ArkRadioGroupIndicatorProps, "asChild"> {
   children?: ReactNode;
-  className?: string;
 }
 
-export interface LoongArkRadioGroupItemHiddenInputProps {
-  className?: string;
-}
+export interface LoongArkRadioGroupItemHiddenInputProps
+  extends Omit<ArkRadioGroupItemHiddenInputProps, "asChild"> {}
 
 // ============ 组件实现 ============
 

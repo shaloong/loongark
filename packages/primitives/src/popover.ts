@@ -27,6 +27,7 @@ interface PopoverDesignTokens {
   surfaceRaised: string;
   border: string;
   text: string;
+  textMuted: string;
   motionDuration: string;
   motionEasing: string;
 }
@@ -40,8 +41,8 @@ const extractPopoverTokens = (theme: LoongArkTheme): PopoverDesignTokens => {
   const space = asTokenTree(theme.tokens.space);
   const componentSpace = asTokenTree(space.component);
   const radius = asTokenTree(theme.tokens.radius);
-  const shadow = asTokenTree(theme.tokens.shadow ?? {});
-  const zIndex = asTokenTree(theme.tokens.zIndex ?? {});
+  const shadow = asTokenTree(theme.tokens.shadow);
+  const zIndex = asTokenTree(theme.tokens.zIndex);
 
   const color = theme.tokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
@@ -65,6 +66,7 @@ const extractPopoverTokens = (theme: LoongArkTheme): PopoverDesignTokens => {
     surfaceRaised: toStringToken(neutral["100"], "#E5E6EB"),
     border: toStringToken(neutral["100"], "#E5E6EB"),
     text: toStringToken(neutral["700"], "#232325"),
+    textMuted: toStringToken(neutral["600"], "#2F3033"),
     motionDuration: toStringToken(duration.base, "200ms"),
     motionEasing: toStringToken(easing.standard, "cubic-bezier(0.2, 0, 0, 1)"),
   };
@@ -73,12 +75,24 @@ const extractPopoverTokens = (theme: LoongArkTheme): PopoverDesignTokens => {
 const buildPopoverStyles = (theme: LoongArkTheme): string => {
   const tokens = extractPopoverTokens(theme);
   return `
+  @media (prefers-reduced-motion: reduce) {
+    :root:not([data-lk-motion="force"]) [data-scope="popover"] * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   [data-scope="popover"][data-part="positioner"] {
     z-index: ${tokens.zIndex};
     position: relative;
   }
 
   [data-scope="popover"][data-part="content"] {
+    --arrow-size: ${tokens.arrowSize};
+    --arrow-size-half: calc(var(--arrow-size) / 2);
+    --arrow-background: ${tokens.surface};
+    --arrow-border: ${tokens.border};
     display: flex;
     flex-direction: column;
     gap: ${tokens.gap};
@@ -113,40 +127,60 @@ const buildPopoverStyles = (theme: LoongArkTheme): string => {
     transform: translateY(-2px) scale(0.98);
   }
   
-  [data-scope="popover"][data-part="content"]::before {
+  /* 箭头内容层：仅当显式开启时（data-arrow="true"）渲染 */
+  [data-scope="popover"][data-part="content"][data-arrow="true"]::before {
     content: "";
     position: absolute;
-    width: ${tokens.arrowSize};
-    height: ${tokens.arrowSize};
-    background: ${tokens.surface};
-    border: 1px solid ${tokens.border};
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    background: var(--arrow-background);
     transform: rotate(45deg);
     border-radius: 2px;
     box-sizing: border-box;
     z-index: -1;
     pointer-events: none;
   }
+
+  /* 箭头边框层：仅当显式开启时（data-arrow="true"）渲染 */
+  [data-scope="popover"][data-part="content"][data-arrow="true"]::after {
+    content: "";
+    position: absolute;
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    border: 1px solid var(--arrow-border);
+    border-radius: 2px;
+    z-index: -2;
+    pointer-events: none;
+    background: transparent;
+  }
   
-  [data-scope="popover"][data-part="content"][data-placement^="top"]::before {
-    bottom: calc(${tokens.arrowSize} / -2);
+  /* 定位：使用半尺寸，确保与内容边框对齐 */
+  [data-scope="popover"][data-part="content"][data-placement^="top"]::before,
+  [data-scope="popover"][data-part="content"][data-placement^="top"]::after {
+    bottom: calc(var(--arrow-size-half) * -1);
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
   }
   
-  [data-scope="popover"][data-part="content"][data-placement^="bottom"]::before {
-    top: calc(${tokens.arrowSize} / -2);
+  [data-scope="popover"][data-part="content"][data-placement^="bottom"]::before,
+  [data-scope="popover"][data-part="content"][data-placement^="bottom"]::after {
+    top: calc(var(--arrow-size-half) * -1);
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
   }
   
-  [data-scope="popover"][data-part="content"][data-placement^="left"]::before {
-    right: calc(${tokens.arrowSize} / -2);
+  [data-scope="popover"][data-part="content"][data-placement^="left"]::before,
+  [data-scope="popover"][data-part="content"][data-placement^="left"]::after {
+    right: calc(var(--arrow-size-half) * -1);
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
   }
   
-  [data-scope="popover"][data-part="content"][data-placement^="right"]::before {
-    left: calc(${tokens.arrowSize} / -2);
+  [data-scope="popover"][data-part="content"][data-placement^="right"]::before,
+  [data-scope="popover"][data-part="content"][data-placement^="right"]::after {
+    left: calc(var(--arrow-size-half) * -1);
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
   }
@@ -160,7 +194,7 @@ const buildPopoverStyles = (theme: LoongArkTheme): string => {
   }
 
   [data-scope="popover"][data-part="description"] {
-    color: ${tokens.surfaceRaised};
+    color: ${tokens.textMuted};
   }
 
   [data-scope="popover"][data-part="content"]:focus-visible {
@@ -180,6 +214,7 @@ const popoverContract: PrimitiveContract<PopoverPrimitiveProps> = {
     "radius.md",
     "color.neutral.50",
     "color.neutral.100",
+    "color.neutral.600",
     "color.neutral.700",
     "motion.duration.base",
     "motion.easing.standard",
@@ -199,4 +234,3 @@ const PopoverPrimitive = createPrimitive(popoverContract, (theme) => {
 registerPrimitive(PopoverPrimitive);
 
 export { PopoverPrimitive };
-
