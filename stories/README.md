@@ -15,6 +15,17 @@ Storybook stories 按照以下层级组织：
   - 尺寸：sm、md、lg
   - 状态：默认、loading、disabled
 
+- **Avatar** (`LoongArkAvatar.stories.tsx`)
+
+  - 头像组件
+  - 类型：图片 / fallback
+  - 尺寸：sm、md、lg
+
+- **Checkbox** (`LoongArkCheckbox.stories.tsx`)
+
+  - 复选框组件
+  - 状态：checked、indeterminate、disabled
+
 - **Dialog** (`LoongArkDialog.stories.tsx`)
 
   - 对话框/模态框组件
@@ -29,6 +40,12 @@ Storybook stories 按照以下层级组织：
   - 状态：默认、invalid、success、disabled、readOnly
   - 尺寸：sm、md、lg
 
+- **Menu** (`LoongArkMenu.stories.tsx`)
+
+  - 菜单组件
+  - 类型：普通项、checkbox、radio group
+  - 尺寸：sm、md、lg
+
 - **PinInput** (`LoongArkPinInput.stories.tsx`)
 
   - PIN 码 / 验证码输入组件
@@ -36,10 +53,50 @@ Storybook stories 按照以下层级组织：
   - 功能：遮罩、自动大写、顺序输入
   - 尺寸：sm、md、lg
 
+- **Popover** (`LoongArkPopover.stories.tsx`)
+
+  - 弹出层组件
+  - 支持标题、描述、关闭按钮
+  - 支持箭头展示
+
+- **RadioGroup** (`LoongArkRadioGroup.stories.tsx`)
+
+  - 单选框组组件
+  - 方向：horizontal / vertical
+  - 状态：默认、disabled
+
+- **Select** (`LoongArkSelect.stories.tsx`)
+
+  - 下拉选择器组件
+  - 支持清除、分组、禁用项
+
+- **Slider** (`LoongArkSlider.stories.tsx`)
+
+  - 滑块组件
+  - 支持单值与区间
+  - 尺寸：sm、md、lg
+  - 方向：horizontal / vertical
+
 - **Switch** (`LoongArkSwitch.stories.tsx`)
+
   - 开关组件
   - 尺寸：sm、md、lg
   - 状态：默认、disabled
+
+- **Tabs** (`LoongArkTabs.stories.tsx`)
+
+  - 标签页组件
+  - 支持水平与垂直布局
+
+- **Toast** (`LoongArkToast.stories.tsx`)
+
+  - 轻提示组件
+  - 类型：info / success / warning / error
+
+- **Tooltip** (`LoongArkTooltip.stories.tsx`)
+
+  - 工具提示组件
+  - 支持可交互提示
 
 ### Examples/Complete Demos（完整示例）
 
@@ -184,3 +241,4 @@ export const Default: Story = {
 - **Accent**: default / vibrant / muted
 
 这些控制在 `.storybook/preview.tsx` 中配置。
+
