@@ -1,5 +1,5 @@
 declare module "solid-js" {
-  export type JSXElement = unknown;
+  export type JSXElement = any;
   export type Accessor<T> = () => T;
   export interface ParentProps {
     children?: JSXElement;
@@ -31,15 +31,29 @@ declare module "solid-js" {
 
   export namespace JSX {
     type Element = JSXElement;
+    interface HTMLAttributes<T> {
+      children?: JSXElement;
+      class?: string;
+      className?: string;
+      style?: Record<string, unknown>;
+      [key: string]: any;
+    }
     interface IntrinsicElements {
-      [element: string]: Record<string, unknown>;
+      [element: string]: any;
     }
   }
 }
 
 declare namespace JSX {
+  interface HTMLAttributes<T> {
+    children?: import("solid-js").JSXElement;
+    class?: string;
+    className?: string;
+    style?: Record<string, unknown>;
+    [key: string]: any;
+  }
   interface IntrinsicElements {
-    [element: string]: Record<string, unknown>;
+    [element: string]: any;
   }
 }
 

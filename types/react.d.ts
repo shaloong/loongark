@@ -1,5 +1,10 @@
 declare module "react" {
   export type ReactNode = any;
+  export type Key = string | number;
+
+  export interface Attributes {
+    key?: Key;
+  }
 
   export interface ChangeEvent<T> {
     target: T & { value: string };
@@ -11,13 +16,24 @@ declare module "react" {
     | ((instance: T | null) => void)
     | null;
 
+  export interface RefAttributes<T> extends Attributes {
+    ref?: Ref<T>;
+  }
+
+  export interface HTMLAttributes<T> extends Attributes {
+    children?: ReactNode;
+    className?: string;
+    style?: Record<string, unknown>;
+    [key: string]: any;
+  }
+
   export interface ForwardRefExoticComponent<P> {
-    (props: P & { children?: ReactNode } & { ref?: Ref<any> }): ReactNode;
+    (props: P & { children?: ReactNode } & RefAttributes<any>): ReactNode;
     displayName?: string;
   }
 
   export interface FC<P = {}> {
-    (props: P & { children?: ReactNode }): ReactNode;
+    (props: P & { children?: ReactNode } & RefAttributes<any>): ReactNode;
   }
 
   export interface Context<T> {
@@ -46,12 +62,15 @@ declare module "react" {
   export type ComponentPropsWithoutRef<T> = T extends (
     props: infer P
   ) => ReactNode
-    ? P
+    ? Omit<P, "ref">
     : T extends keyof JSX.IntrinsicElements
       ? JSX.IntrinsicElements[T]
       : any;
 
   export namespace JSX {
+    interface IntrinsicAttributes {
+      key?: Key;
+    }
     interface IntrinsicElements {
       [elemName: string]: any;
     }
@@ -61,6 +80,9 @@ declare module "react" {
 
 declare global {
   namespace JSX {
+    interface IntrinsicAttributes {
+      key?: React.Key;
+    }
     interface IntrinsicElements {
       [elemName: string]: any;
     }
@@ -73,6 +95,9 @@ declare module "react/jsx-runtime" {
   export const jsxs: any;
   export const Fragment: any;
   export namespace JSX {
+    interface IntrinsicAttributes {
+      key?: React.Key;
+    }
     interface IntrinsicElements {
       [elemName: string]: any;
     }

@@ -27,7 +27,9 @@ export const CheckboxExample: React.FC<CheckboxExampleProps> = ({
         size={size}
         disabled={disabled}
         checked={checked}
-        onCheckedChange={(details) => setChecked(details.checked === true)}
+        onCheckedChange={(details: { checked: boolean | "indeterminate" }) =>
+          setChecked(details.checked === true)
+        }
       >
         <LoongArkCheckboxControl size={size}>
           <LoongArkCheckboxIndicator />

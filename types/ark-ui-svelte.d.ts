@@ -4,4 +4,5 @@ declare module "@ark-ui/svelte" {
     span: any;
     footer: any;
   };
+  export function createListCollection<T = any>(options: { items: T[] }): any;
 }

@@ -34,6 +34,27 @@ export { default as LoongArkPinInputInput } from "./components/PinInputInput.sve
 export { default as LoongArkPinInputLabel } from "./components/PinInputLabel.svelte";
 export { default as LoongArkPinInputHiddenInput } from "./components/PinInputHiddenInput.svelte";
 
+// Number Input
+export { default as LoongArkNumberInputRoot } from "./components/NumberInputRoot.svelte";
+export { default as LoongArkNumberInputLabel } from "./components/NumberInputLabel.svelte";
+export { default as LoongArkNumberInputControl } from "./components/NumberInputControl.svelte";
+export { default as LoongArkNumberInputInput } from "./components/NumberInputInput.svelte";
+export { default as LoongArkNumberInputIncrementTrigger } from "./components/NumberInputIncrementTrigger.svelte";
+export { default as LoongArkNumberInputDecrementTrigger } from "./components/NumberInputDecrementTrigger.svelte";
+export { default as LoongArkNumberInputValueText } from "./components/NumberInputValueText.svelte";
+export { default as LoongArkNumberInputScrubber } from "./components/NumberInputScrubber.svelte";
+export type {
+  NumberInputRootProps,
+  NumberInputLabelProps,
+  NumberInputControlProps,
+  NumberInputInputProps,
+  NumberInputIncrementTriggerProps,
+  NumberInputDecrementTriggerProps,
+  NumberInputValueTextProps,
+  NumberInputScrubberProps,
+} from "./components/number-input.d";
+
+
 // Checkbox
 export { default as LoongArkCheckboxRoot } from "./components/CheckboxRoot.svelte";
 export { default as LoongArkCheckboxControl } from "./components/CheckboxControl.svelte";
@@ -214,6 +235,81 @@ export type {
   ToggleGroupRootProps,
   ToggleGroupItemProps,
 } from "./components/toggle-group.d";
+
+// Segment Group
+export { default as LoongArkSegmentGroupRoot } from "./components/SegmentGroupRoot.svelte";
+export { default as LoongArkSegmentGroupItem } from "./components/SegmentGroupItem.svelte";
+export type {
+  SegmentGroupRootProps,
+  SegmentGroupItemProps,
+} from "./components/segment-group.d";
+
+// Pagination
+export { default as LoongArkPaginationRoot } from "./components/PaginationRoot.svelte";
+export { default as LoongArkPaginationList } from "./components/PaginationList.svelte";
+export { default as LoongArkPaginationItem } from "./components/PaginationItem.svelte";
+export { default as LoongArkPaginationPrevTrigger } from "./components/PaginationPrevTrigger.svelte";
+export { default as LoongArkPaginationNextTrigger } from "./components/PaginationNextTrigger.svelte";
+export { default as LoongArkPaginationEllipsis } from "./components/PaginationEllipsis.svelte";
+export type {
+  PaginationRootProps,
+  PaginationItemProps,
+  PaginationPrevTriggerProps,
+  PaginationNextTriggerProps,
+  PaginationEllipsisProps,
+} from "./components/pagination.d";
+
+// Listbox
+export { default as LoongArkListboxRoot } from "./components/ListboxRoot.svelte";
+export { default as LoongArkListboxLabel } from "./components/ListboxLabel.svelte";
+export { default as LoongArkListboxList } from "./components/ListboxList.svelte";
+export { default as LoongArkListboxItemGroup } from "./components/ListboxItemGroup.svelte";
+export { default as LoongArkListboxItemGroupLabel } from "./components/ListboxItemGroupLabel.svelte";
+export { default as LoongArkListboxItem } from "./components/ListboxItem.svelte";
+export { default as LoongArkListboxItemText } from "./components/ListboxItemText.svelte";
+export { default as LoongArkListboxItemIndicator } from "./components/ListboxItemIndicator.svelte";
+export type {
+  ListboxRootProps,
+  ListboxLabelProps,
+  ListboxListProps,
+  ListboxItemGroupProps,
+  ListboxItemGroupLabelProps,
+  ListboxItemProps,
+  ListboxItemTextProps,
+  ListboxItemIndicatorProps,
+} from "./components/listbox.d";
+
+// Combobox
+export { default as LoongArkComboboxRoot } from "./components/ComboboxRoot.svelte";
+export { default as LoongArkComboboxLabel } from "./components/ComboboxLabel.svelte";
+export { default as LoongArkComboboxControl } from "./components/ComboboxControl.svelte";
+export { default as LoongArkComboboxInput } from "./components/ComboboxInput.svelte";
+export { default as LoongArkComboboxTrigger } from "./components/ComboboxTrigger.svelte";
+export { default as LoongArkComboboxClearTrigger } from "./components/ComboboxClearTrigger.svelte";
+export { default as LoongArkComboboxPositioner } from "./components/ComboboxPositioner.svelte";
+export { default as LoongArkComboboxContent } from "./components/ComboboxContent.svelte";
+export { default as LoongArkComboboxList } from "./components/ComboboxList.svelte";
+export { default as LoongArkComboboxItemGroup } from "./components/ComboboxItemGroup.svelte";
+export { default as LoongArkComboboxItemGroupLabel } from "./components/ComboboxItemGroupLabel.svelte";
+export { default as LoongArkComboboxItem } from "./components/ComboboxItem.svelte";
+export { default as LoongArkComboboxItemText } from "./components/ComboboxItemText.svelte";
+export { default as LoongArkComboboxItemIndicator } from "./components/ComboboxItemIndicator.svelte";
+export type {
+  ComboboxRootProps,
+  ComboboxLabelProps,
+  ComboboxControlProps,
+  ComboboxInputProps,
+  ComboboxTriggerProps,
+  ComboboxClearTriggerProps,
+  ComboboxPositionerProps,
+  ComboboxContentProps,
+  ComboboxListProps,
+  ComboboxItemGroupProps,
+  ComboboxItemGroupLabelProps,
+  ComboboxItemProps,
+  ComboboxItemTextProps,
+  ComboboxItemIndicatorProps,
+} from "./components/combobox.d";
 
 // Tabs
 export { default as LoongArkTabsRoot } from "./components/TabsRoot.svelte";

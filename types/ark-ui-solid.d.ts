@@ -4,4 +4,5 @@ declare module "@ark-ui/solid" {
     span: (props: any) => unknown;
     footer: (props: any) => unknown;
   };
+  export function createListCollection<T = any>(options: { items: T[] }): any;
 }

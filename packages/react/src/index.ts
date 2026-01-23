@@ -93,6 +93,16 @@ export {
   type LoongArkPinInputLabelProps,
 } from "./components/pinInput";
 export {
+  LoongArkNumberInputRoot,
+  LoongArkNumberInputLabel,
+  LoongArkNumberInputControl,
+  LoongArkNumberInputInput,
+  LoongArkNumberInputIncrementTrigger,
+  LoongArkNumberInputDecrementTrigger,
+  LoongArkNumberInputValueText,
+  LoongArkNumberInputScrubber,
+} from "./components/number-input";
+export {
   LoongArkCheckboxRoot,
   LoongArkCheckboxControl,
   LoongArkCheckboxLabel,
@@ -244,6 +254,44 @@ export {
   LoongArkToggleGroupItem,
 } from "./components/toggle-group";
 export {
+  LoongArkSegmentGroupRoot,
+  LoongArkSegmentGroupItem,
+} from "./components/segment-group";
+export {
+  LoongArkPaginationRoot,
+  LoongArkPaginationList,
+  LoongArkPaginationItem,
+  LoongArkPaginationPrevTrigger,
+  LoongArkPaginationNextTrigger,
+  LoongArkPaginationEllipsis,
+} from "./components/pagination";
+export {
+  LoongArkListboxRoot,
+  LoongArkListboxLabel,
+  LoongArkListboxList,
+  LoongArkListboxItemGroup,
+  LoongArkListboxItemGroupLabel,
+  LoongArkListboxItem,
+  LoongArkListboxItemText,
+  LoongArkListboxItemIndicator,
+} from "./components/listbox";
+export {
+  LoongArkComboboxRoot,
+  LoongArkComboboxLabel,
+  LoongArkComboboxControl,
+  LoongArkComboboxInput,
+  LoongArkComboboxTrigger,
+  LoongArkComboboxClearTrigger,
+  LoongArkComboboxPositioner,
+  LoongArkComboboxContent,
+  LoongArkComboboxList,
+  LoongArkComboboxItemGroup,
+  LoongArkComboboxItemGroupLabel,
+  LoongArkComboboxItem,
+  LoongArkComboboxItemText,
+  LoongArkComboboxItemIndicator,
+} from "./components/combobox";
+export {
   LoongArkTabsRoot,
   LoongArkTabsList,
   LoongArkTabsTrigger,
@@ -273,5 +321,14 @@ export type {
   ToggleSize,
   ToggleGroupSize,
   ToggleGroupOrientation,
+  SegmentGroupSize,
+  SegmentGroupOrientation,
+  PaginationSize,
+  PaginationOrientation,
+  ListboxSize,
+  ListboxOrientation,
+  ComboboxSize,
+  NumberInputSize,
+  NumberInputState,
   AvatarSize,
 } from "@loongark/primitives";

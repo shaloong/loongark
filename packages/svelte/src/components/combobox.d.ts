@@ -1,0 +1,33 @@
+import type {
+  ComboboxRootProps,
+  ComboboxLabelProps,
+  ComboboxControlProps,
+  ComboboxInputProps,
+  ComboboxTriggerProps,
+  ComboboxClearTriggerProps,
+  ComboboxPositionerProps,
+  ComboboxContentProps,
+  ComboboxListProps,
+  ComboboxItemGroupProps,
+  ComboboxItemGroupLabelProps,
+  ComboboxItemProps,
+  ComboboxItemTextProps,
+  ComboboxItemIndicatorProps,
+} from "@ark-ui/svelte/combobox";
+
+export type {
+  ComboboxRootProps,
+  ComboboxLabelProps,
+  ComboboxControlProps,
+  ComboboxInputProps,
+  ComboboxTriggerProps,
+  ComboboxClearTriggerProps,
+  ComboboxPositionerProps,
+  ComboboxContentProps,
+  ComboboxListProps,
+  ComboboxItemGroupProps,
+  ComboboxItemGroupLabelProps,
+  ComboboxItemProps,
+  ComboboxItemTextProps,
+  ComboboxItemIndicatorProps,
+};

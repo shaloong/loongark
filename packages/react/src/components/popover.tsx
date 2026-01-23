@@ -30,7 +30,7 @@ export const LoongArkPopoverRoot = (props: LoongArkPopoverRootProps) => (
 );
 
 export const LoongArkPopoverTrigger = forwardRef<
-  HTMLElement,
+  HTMLButtonElement,
   ArkTriggerProps
 >(({ asChild = true, children, ...rest }, ref) => (
   <ArkPopover.Trigger

@@ -96,6 +96,7 @@ declare module "@ark-ui/react/menu" {
   }
 
   export interface MenuRadioItemGroupProps {
+    id?: string;
     value?: string;
     defaultValue?: string;
     onValueChange?: (details: { value: string }) => void;

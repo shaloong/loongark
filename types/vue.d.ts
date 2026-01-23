@@ -16,6 +16,8 @@ declare module "vue" {
     | String
     | Number
     | Boolean
+    | Record<string, unknown>
+    | AttrValue[]
     | ((...args: any[]) => any);
   export type Attrs = Record<string, AttrValue>;
   export type Slots = Record<string, SlotRender | undefined>;
@@ -34,10 +36,11 @@ declare module "vue" {
     [Key in keyof Props]-?: {
       type?: PropType<Props[Key]>;
       default?: Props[Key];
+      required?: boolean;
     };
   };
 
-  export type VueChild = Primitive | String | Number | Boolean | VueChild[];
+  export type VueChild = any;
 
   export interface Component<Props = any> {
     (props: Props): VueChild;
@@ -54,6 +57,8 @@ declare module "vue" {
   ): Component<Props>;
 
   export function ref<T>(value: T): { value: T };
+  export type ComputedRef<T> = { value: T };
+  export function computed<T>(getter: () => T): ComputedRef<T>;
   export function toRef<T extends object, K extends keyof T>(
     object: T,
     key: K
