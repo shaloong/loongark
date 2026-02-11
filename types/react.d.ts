@@ -27,6 +27,22 @@ declare module "react" {
     [key: string]: any;
   }
 
+  export interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
+    disabled?: boolean;
+    readOnly?: boolean;
+    placeholder?: string;
+    value?: string | number | readonly string[];
+    defaultValue?: string | number | readonly string[];
+    type?: string;
+    onChange?: (event: ChangeEvent<T>) => void;
+  }
+
+  export interface ButtonHTMLAttributes<T> extends HTMLAttributes<T> {
+    disabled?: boolean;
+    type?: "button" | "submit" | "reset" | string;
+    onClick?: (event: any) => void;
+  }
+
   export interface ForwardRefExoticComponent<P> {
     (props: P & { children?: ReactNode } & RefAttributes<any>): ReactNode;
     displayName?: string;
@@ -76,6 +92,8 @@ declare module "react" {
     }
     interface Element extends ReactNode {}
   }
+
+  export const Fragment: any;
 }
 
 declare global {

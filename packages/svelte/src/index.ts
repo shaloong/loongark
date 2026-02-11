@@ -21,6 +21,14 @@ export { default as LoongArkDialogTitle } from "./components/DialogTitle.svelte"
 export { default as LoongArkDialogDescription } from "./components/DialogDescription.svelte";
 export { default as LoongArkDialogCloseTrigger } from "./components/DialogCloseTrigger.svelte";
 
+// Filter Bar
+export { default as LoongArkFilterBar } from "./components/FilterBar.svelte";
+export { default as LoongArkFilterBarSearch } from "./components/FilterBarSearch.svelte";
+export { default as LoongArkFilterBarFilters } from "./components/FilterBarFilters.svelte";
+export { default as LoongArkFilterBarActions } from "./components/FilterBarActions.svelte";
+export { default as LoongArkFilterDivider } from "./components/FilterDivider.svelte";
+export { default as LoongArkFilterChip } from "./components/FilterChip.svelte";
+
 // Switch
 export { default as LoongArkSwitchRoot } from "./components/SwitchRoot.svelte";
 export { default as LoongArkSwitchControl } from "./components/SwitchControl.svelte";
@@ -53,6 +61,78 @@ export type {
   NumberInputValueTextProps,
   NumberInputScrubberProps,
 } from "./components/number-input.d";
+
+// Password Input
+export { default as LoongArkPasswordInputRoot } from "./components/PasswordInputRoot.svelte";
+export { default as LoongArkPasswordInputLabel } from "./components/PasswordInputLabel.svelte";
+export { default as LoongArkPasswordInputControl } from "./components/PasswordInputControl.svelte";
+export { default as LoongArkPasswordInputInput } from "./components/PasswordInputInput.svelte";
+export { default as LoongArkPasswordInputIndicator } from "./components/PasswordInputIndicator.svelte";
+export { default as LoongArkPasswordInputVisibilityTrigger } from "./components/PasswordInputVisibilityTrigger.svelte";
+export type {
+  PasswordInputRootProps,
+  PasswordInputLabelProps,
+  PasswordInputControlProps,
+  PasswordInputInputProps,
+  PasswordInputIndicatorProps,
+  PasswordInputVisibilityTriggerProps,
+} from "./components/password-input.d";
+
+// Tags Input
+export { default as LoongArkTagsInputRoot } from "./components/TagsInputRoot.svelte";
+export { default as LoongArkTagsInputLabel } from "./components/TagsInputLabel.svelte";
+export { default as LoongArkTagsInputControl } from "./components/TagsInputControl.svelte";
+export { default as LoongArkTagsInputInput } from "./components/TagsInputInput.svelte";
+export { default as LoongArkTagsInputItem } from "./components/TagsInputItem.svelte";
+export { default as LoongArkTagsInputItemPreview } from "./components/TagsInputItemPreview.svelte";
+export { default as LoongArkTagsInputItemText } from "./components/TagsInputItemText.svelte";
+export { default as LoongArkTagsInputItemInput } from "./components/TagsInputItemInput.svelte";
+export { default as LoongArkTagsInputItemDeleteTrigger } from "./components/TagsInputItemDeleteTrigger.svelte";
+export { default as LoongArkTagsInputClearTrigger } from "./components/TagsInputClearTrigger.svelte";
+export { default as LoongArkTagsInputHiddenInput } from "./components/TagsInputHiddenInput.svelte";
+export type {
+  TagsInputRootProps,
+  TagsInputLabelProps,
+  TagsInputControlProps,
+  TagsInputInputProps,
+  TagsInputItemProps,
+  TagsInputItemPreviewProps,
+  TagsInputItemTextProps,
+  TagsInputItemInputProps,
+  TagsInputItemDeleteTriggerProps,
+  TagsInputClearTriggerProps,
+  TagsInputHiddenInputProps,
+} from "./components/tags-input.d";
+
+// File Upload
+export { default as LoongArkFileUploadRoot } from "./components/FileUploadRoot.svelte";
+export { default as LoongArkFileUploadLabel } from "./components/FileUploadLabel.svelte";
+export { default as LoongArkFileUploadDropzone } from "./components/FileUploadDropzone.svelte";
+export { default as LoongArkFileUploadTrigger } from "./components/FileUploadTrigger.svelte";
+export { default as LoongArkFileUploadHiddenInput } from "./components/FileUploadHiddenInput.svelte";
+export { default as LoongArkFileUploadItemGroup } from "./components/FileUploadItemGroup.svelte";
+export { default as LoongArkFileUploadItem } from "./components/FileUploadItem.svelte";
+export { default as LoongArkFileUploadItemPreview } from "./components/FileUploadItemPreview.svelte";
+export { default as LoongArkFileUploadItemPreviewImage } from "./components/FileUploadItemPreviewImage.svelte";
+export { default as LoongArkFileUploadItemName } from "./components/FileUploadItemName.svelte";
+export { default as LoongArkFileUploadItemSizeText } from "./components/FileUploadItemSizeText.svelte";
+export { default as LoongArkFileUploadItemDeleteTrigger } from "./components/FileUploadItemDeleteTrigger.svelte";
+export { default as LoongArkFileUploadClearTrigger } from "./components/FileUploadClearTrigger.svelte";
+export type {
+  FileUploadRootProps,
+  FileUploadLabelProps,
+  FileUploadDropzoneProps,
+  FileUploadTriggerProps,
+  FileUploadHiddenInputProps,
+  FileUploadItemGroupProps,
+  FileUploadItemProps,
+  FileUploadItemPreviewProps,
+  FileUploadItemPreviewImageProps,
+  FileUploadItemNameProps,
+  FileUploadItemSizeTextProps,
+  FileUploadItemDeleteTriggerProps,
+  FileUploadClearTriggerProps,
+} from "./components/file-upload.d";
 
 
 // Checkbox
@@ -244,6 +324,54 @@ export type {
   SegmentGroupItemProps,
 } from "./components/segment-group.d";
 
+// Progress
+export { default as LoongArkProgressRoot } from "./components/ProgressRoot.svelte";
+export { default as LoongArkProgressLabel } from "./components/ProgressLabel.svelte";
+export { default as LoongArkProgressTrack } from "./components/ProgressTrack.svelte";
+export { default as LoongArkProgressRange } from "./components/ProgressRange.svelte";
+export { default as LoongArkProgressValueText } from "./components/ProgressValueText.svelte";
+export { default as LoongArkProgressView } from "./components/ProgressView.svelte";
+export { default as LoongArkProgressCircle } from "./components/ProgressCircle.svelte";
+export { default as LoongArkProgressCircleTrack } from "./components/ProgressCircleTrack.svelte";
+export { default as LoongArkProgressCircleRange } from "./components/ProgressCircleRange.svelte";
+export type {
+  ProgressRootProps,
+  ProgressLabelProps,
+  ProgressTrackProps,
+  ProgressRangeProps,
+  ProgressValueTextProps,
+  ProgressViewProps,
+  ProgressCircleProps,
+  ProgressCircleTrackProps,
+  ProgressCircleRangeProps,
+} from "./components/progress.d";
+
+// Steps
+export { default as LoongArkStepsRoot } from "./components/StepsRoot.svelte";
+export { default as LoongArkStepsList } from "./components/StepsList.svelte";
+export { default as LoongArkStepsItem } from "./components/StepsItem.svelte";
+export { default as LoongArkStepsIndicator } from "./components/StepsIndicator.svelte";
+export { default as LoongArkStepsSeparator } from "./components/StepsSeparator.svelte";
+export { default as LoongArkStepsTrigger } from "./components/StepsTrigger.svelte";
+export { default as LoongArkStepsContent } from "./components/StepsContent.svelte";
+export { default as LoongArkStepsCompletedContent } from "./components/StepsCompletedContent.svelte";
+export { default as LoongArkStepsProgress } from "./components/StepsProgress.svelte";
+export { default as LoongArkStepsNextTrigger } from "./components/StepsNextTrigger.svelte";
+export { default as LoongArkStepsPrevTrigger } from "./components/StepsPrevTrigger.svelte";
+export type {
+  StepsRootProps,
+  StepsListProps,
+  StepsItemProps,
+  StepsIndicatorProps,
+  StepsSeparatorProps,
+  StepsTriggerProps,
+  StepsContentProps,
+  StepsCompletedContentProps,
+  StepsProgressProps,
+  StepsNextTriggerProps,
+  StepsPrevTriggerProps,
+} from "./components/steps.d";
+
 // Pagination
 export { default as LoongArkPaginationRoot } from "./components/PaginationRoot.svelte";
 export { default as LoongArkPaginationList } from "./components/PaginationList.svelte";
@@ -389,6 +517,225 @@ export type {
   ToastType,
   ToastStatus,
 } from "./components/toast.d";
+
+
+// Carousel
+export { default as LoongArkCarouselRoot } from "./components/CarouselRoot.svelte";
+export { default as LoongArkCarouselItemGroup } from "./components/CarouselItemGroup.svelte";
+export { default as LoongArkCarouselItem } from "./components/CarouselItem.svelte";
+export { default as LoongArkCarouselControl } from "./components/CarouselControl.svelte";
+export { default as LoongArkCarouselNextTrigger } from "./components/CarouselNextTrigger.svelte";
+export { default as LoongArkCarouselPrevTrigger } from "./components/CarouselPrevTrigger.svelte";
+export { default as LoongArkCarouselIndicatorGroup } from "./components/CarouselIndicatorGroup.svelte";
+export { default as LoongArkCarouselIndicator } from "./components/CarouselIndicator.svelte";
+export { default as LoongArkCarouselAutoplayTrigger } from "./components/CarouselAutoplayTrigger.svelte";
+export { default as LoongArkCarouselProgressText } from "./components/CarouselProgressText.svelte";
+export { default as LoongArkCarouselAutoplayIndicator } from "./components/CarouselAutoplayIndicator.svelte";
+export type {
+  CarouselRootProps,
+  CarouselItemGroupProps,
+  CarouselItemProps,
+  CarouselControlProps,
+  CarouselNextTriggerProps,
+  CarouselPrevTriggerProps,
+  CarouselIndicatorGroupProps,
+  CarouselIndicatorProps,
+  CarouselAutoplayTriggerProps,
+  CarouselProgressTextProps,
+  CarouselAutoplayIndicatorProps,
+} from "./components/carousel.d";
+
+// Clipboard
+export { default as LoongArkClipboardRoot } from "./components/ClipboardRoot.svelte";
+export { default as LoongArkClipboardLabel } from "./components/ClipboardLabel.svelte";
+export { default as LoongArkClipboardControl } from "./components/ClipboardControl.svelte";
+export { default as LoongArkClipboardInput } from "./components/ClipboardInput.svelte";
+export { default as LoongArkClipboardTrigger } from "./components/ClipboardTrigger.svelte";
+export { default as LoongArkClipboardIndicator } from "./components/ClipboardIndicator.svelte";
+export { default as LoongArkClipboardValueText } from "./components/ClipboardValueText.svelte";
+export type {
+  ClipboardRootProps,
+  ClipboardLabelProps,
+  ClipboardControlProps,
+  ClipboardInputProps,
+  ClipboardTriggerProps,
+  ClipboardIndicatorProps,
+  ClipboardValueTextProps,
+} from "./components/clipboard.d";
+
+// Color Picker
+export { default as LoongArkColorPickerRoot } from "./components/ColorPickerRoot.svelte";
+export { default as LoongArkColorPickerLabel } from "./components/ColorPickerLabel.svelte";
+export { default as LoongArkColorPickerControl } from "./components/ColorPickerControl.svelte";
+export { default as LoongArkColorPickerTrigger } from "./components/ColorPickerTrigger.svelte";
+export { default as LoongArkColorPickerPositioner } from "./components/ColorPickerPositioner.svelte";
+export { default as LoongArkColorPickerContent } from "./components/ColorPickerContent.svelte";
+export { default as LoongArkColorPickerView } from "./components/ColorPickerView.svelte";
+export { default as LoongArkColorPickerArea } from "./components/ColorPickerArea.svelte";
+export { default as LoongArkColorPickerAreaBackground } from "./components/ColorPickerAreaBackground.svelte";
+export { default as LoongArkColorPickerAreaThumb } from "./components/ColorPickerAreaThumb.svelte";
+export { default as LoongArkColorPickerChannelSlider } from "./components/ColorPickerChannelSlider.svelte";
+export { default as LoongArkColorPickerChannelSliderLabel } from "./components/ColorPickerChannelSliderLabel.svelte";
+export { default as LoongArkColorPickerChannelSliderTrack } from "./components/ColorPickerChannelSliderTrack.svelte";
+export { default as LoongArkColorPickerChannelSliderThumb } from "./components/ColorPickerChannelSliderThumb.svelte";
+export { default as LoongArkColorPickerChannelSliderValueText } from "./components/ColorPickerChannelSliderValueText.svelte";
+export { default as LoongArkColorPickerChannelInput } from "./components/ColorPickerChannelInput.svelte";
+export { default as LoongArkColorPickerSwatchGroup } from "./components/ColorPickerSwatchGroup.svelte";
+export { default as LoongArkColorPickerSwatchTrigger } from "./components/ColorPickerSwatchTrigger.svelte";
+export { default as LoongArkColorPickerSwatchIndicator } from "./components/ColorPickerSwatchIndicator.svelte";
+export { default as LoongArkColorPickerSwatch } from "./components/ColorPickerSwatch.svelte";
+export { default as LoongArkColorPickerTransparencyGrid } from "./components/ColorPickerTransparencyGrid.svelte";
+export { default as LoongArkColorPickerValueText } from "./components/ColorPickerValueText.svelte";
+export { default as LoongArkColorPickerValueSwatch } from "./components/ColorPickerValueSwatch.svelte";
+export { default as LoongArkColorPickerEyeDropperTrigger } from "./components/ColorPickerEyeDropperTrigger.svelte";
+export { default as LoongArkColorPickerFormatTrigger } from "./components/ColorPickerFormatTrigger.svelte";
+export { default as LoongArkColorPickerFormatSelect } from "./components/ColorPickerFormatSelect.svelte";
+export { default as LoongArkColorPickerHiddenInput } from "./components/ColorPickerHiddenInput.svelte";
+export type {
+  ColorPickerRootProps,
+  ColorPickerLabelProps,
+  ColorPickerControlProps,
+  ColorPickerTriggerProps,
+  ColorPickerPositionerProps,
+  ColorPickerContentProps,
+  ColorPickerViewProps,
+  ColorPickerAreaProps,
+  ColorPickerAreaBackgroundProps,
+  ColorPickerAreaThumbProps,
+  ColorPickerChannelSliderProps,
+  ColorPickerChannelSliderLabelProps,
+  ColorPickerChannelSliderTrackProps,
+  ColorPickerChannelSliderThumbProps,
+  ColorPickerChannelSliderValueTextProps,
+  ColorPickerChannelInputProps,
+  ColorPickerSwatchGroupProps,
+  ColorPickerSwatchTriggerProps,
+  ColorPickerSwatchIndicatorProps,
+  ColorPickerSwatchProps,
+  ColorPickerTransparencyGridProps,
+  ColorPickerValueTextProps,
+  ColorPickerValueSwatchProps,
+  ColorPickerEyeDropperTriggerProps,
+  ColorPickerFormatTriggerProps,
+  ColorPickerFormatSelectProps,
+  ColorPickerHiddenInputProps,
+} from "./components/color-picker.d";
+
+// Editable
+export { default as LoongArkEditableRoot } from "./components/EditableRoot.svelte";
+export { default as LoongArkEditableLabel } from "./components/EditableLabel.svelte";
+export { default as LoongArkEditableArea } from "./components/EditableArea.svelte";
+export { default as LoongArkEditableControl } from "./components/EditableControl.svelte";
+export { default as LoongArkEditableInput } from "./components/EditableInput.svelte";
+export { default as LoongArkEditablePreview } from "./components/EditablePreview.svelte";
+export { default as LoongArkEditableEditTrigger } from "./components/EditableEditTrigger.svelte";
+export { default as LoongArkEditableSubmitTrigger } from "./components/EditableSubmitTrigger.svelte";
+export { default as LoongArkEditableCancelTrigger } from "./components/EditableCancelTrigger.svelte";
+export type {
+  EditableRootProps,
+  EditableLabelProps,
+  EditableAreaProps,
+  EditableControlProps,
+  EditableInputProps,
+  EditablePreviewProps,
+  EditableEditTriggerProps,
+  EditableSubmitTriggerProps,
+  EditableCancelTriggerProps,
+} from "./components/editable.d";
+
+// Hover Card
+export { default as LoongArkHoverCardRoot } from "./components/HoverCardRoot.svelte";
+export { default as LoongArkHoverCardTrigger } from "./components/HoverCardTrigger.svelte";
+export { default as LoongArkHoverCardPositioner } from "./components/HoverCardPositioner.svelte";
+export { default as LoongArkHoverCardContent } from "./components/HoverCardContent.svelte";
+export { default as LoongArkHoverCardArrow } from "./components/HoverCardArrow.svelte";
+export { default as LoongArkHoverCardArrowTip } from "./components/HoverCardArrowTip.svelte";
+export type {
+  HoverCardRootProps,
+  HoverCardTriggerProps,
+  HoverCardPositionerProps,
+  HoverCardContentProps,
+  HoverCardArrowProps,
+  HoverCardArrowTipProps,
+} from "./components/hover-card.d";
+
+// Scroll Area
+export { default as LoongArkScrollAreaRoot } from "./components/ScrollAreaRoot.svelte";
+export { default as LoongArkScrollAreaViewport } from "./components/ScrollAreaViewport.svelte";
+export { default as LoongArkScrollAreaContent } from "./components/ScrollAreaContent.svelte";
+export { default as LoongArkScrollAreaScrollbar } from "./components/ScrollAreaScrollbar.svelte";
+export { default as LoongArkScrollAreaThumb } from "./components/ScrollAreaThumb.svelte";
+export { default as LoongArkScrollAreaCorner } from "./components/ScrollAreaCorner.svelte";
+export type {
+  ScrollAreaRootProps,
+  ScrollAreaViewportProps,
+  ScrollAreaContentProps,
+  ScrollAreaScrollbarProps,
+  ScrollAreaThumbProps,
+  ScrollAreaCornerProps,
+} from "./components/scroll-area.d";
+
+// Rating Group
+export { default as LoongArkRatingGroupRoot } from "./components/RatingGroupRoot.svelte";
+export { default as LoongArkRatingGroupLabel } from "./components/RatingGroupLabel.svelte";
+export { default as LoongArkRatingGroupControl } from "./components/RatingGroupControl.svelte";
+export { default as LoongArkRatingGroupItem } from "./components/RatingGroupItem.svelte";
+export { default as LoongArkRatingGroupHiddenInput } from "./components/RatingGroupHiddenInput.svelte";
+export type {
+  RatingGroupRootProps,
+  RatingGroupLabelProps,
+  RatingGroupControlProps,
+  RatingGroupItemProps,
+  RatingGroupHiddenInputProps,
+} from "./components/rating-group.d";
+
+// Splitter
+export { default as LoongArkSplitterRoot } from "./components/SplitterRoot.svelte";
+export { default as LoongArkSplitterPanel } from "./components/SplitterPanel.svelte";
+export { default as LoongArkSplitterResizeTrigger } from "./components/SplitterResizeTrigger.svelte";
+export { default as LoongArkSplitterResizeTriggerIndicator } from "./components/SplitterResizeTriggerIndicator.svelte";
+export type {
+  SplitterRootProps,
+  SplitterPanelProps,
+  SplitterResizeTriggerProps,
+  SplitterResizeTriggerIndicatorProps,
+} from "./components/splitter.d";
+
+// Tree View
+export { default as LoongArkTreeViewRoot } from "./components/TreeViewRoot.svelte";
+export { default as LoongArkTreeViewLabel } from "./components/TreeViewLabel.svelte";
+export { default as LoongArkTreeViewTree } from "./components/TreeViewTree.svelte";
+export { default as LoongArkTreeViewItem } from "./components/TreeViewItem.svelte";
+export { default as LoongArkTreeViewItemIndicator } from "./components/TreeViewItemIndicator.svelte";
+export { default as LoongArkTreeViewItemText } from "./components/TreeViewItemText.svelte";
+export { default as LoongArkTreeViewBranch } from "./components/TreeViewBranch.svelte";
+export { default as LoongArkTreeViewBranchContent } from "./components/TreeViewBranchContent.svelte";
+export { default as LoongArkTreeViewBranchControl } from "./components/TreeViewBranchControl.svelte";
+export { default as LoongArkTreeViewBranchTrigger } from "./components/TreeViewBranchTrigger.svelte";
+export { default as LoongArkTreeViewBranchIndicator } from "./components/TreeViewBranchIndicator.svelte";
+export { default as LoongArkTreeViewBranchText } from "./components/TreeViewBranchText.svelte";
+export { default as LoongArkTreeViewBranchIndentGuide } from "./components/TreeViewBranchIndentGuide.svelte";
+export { default as LoongArkTreeViewNodeCheckbox } from "./components/TreeViewNodeCheckbox.svelte";
+export { default as LoongArkTreeViewNodeCheckboxIndicator } from "./components/TreeViewNodeCheckboxIndicator.svelte";
+export { default as LoongArkTreeViewNodeRenameInput } from "./components/TreeViewNodeRenameInput.svelte";
+export type {
+  TreeViewRootProps,
+  TreeViewLabelProps,
+  TreeViewTreeProps,
+  TreeViewItemProps,
+  TreeViewItemIndicatorProps,
+  TreeViewItemTextProps,
+  TreeViewBranchProps,
+  TreeViewBranchContentProps,
+  TreeViewBranchControlProps,
+  TreeViewBranchTriggerProps,
+  TreeViewBranchIndicatorProps,
+  TreeViewBranchTextProps,
+  TreeViewBranchIndentGuideProps,
+  TreeViewNodeCheckboxProps,
+  TreeViewNodeCheckboxIndicatorProps,
+  TreeViewNodeRenameInputProps,
+} from "./components/tree-view.d";
 
 export interface ThemeStoreOptions {
   mode?: "light" | "dark" | "high-contrast";

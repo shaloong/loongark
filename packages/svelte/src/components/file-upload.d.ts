@@ -1,0 +1,31 @@
+import type {
+  FileUploadRootProps,
+  FileUploadLabelProps,
+  FileUploadDropzoneProps,
+  FileUploadTriggerProps,
+  FileUploadHiddenInputProps,
+  FileUploadItemGroupProps,
+  FileUploadItemProps,
+  FileUploadItemPreviewProps,
+  FileUploadItemPreviewImageProps,
+  FileUploadItemNameProps,
+  FileUploadItemSizeTextProps,
+  FileUploadItemDeleteTriggerProps,
+  FileUploadClearTriggerProps,
+} from "@ark-ui/svelte/file-upload";
+
+export type {
+  FileUploadRootProps,
+  FileUploadLabelProps,
+  FileUploadDropzoneProps,
+  FileUploadTriggerProps,
+  FileUploadHiddenInputProps,
+  FileUploadItemGroupProps,
+  FileUploadItemProps,
+  FileUploadItemPreviewProps,
+  FileUploadItemPreviewImageProps,
+  FileUploadItemNameProps,
+  FileUploadItemSizeTextProps,
+  FileUploadItemDeleteTriggerProps,
+  FileUploadClearTriggerProps,
+};

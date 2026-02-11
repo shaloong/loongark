@@ -1,6 +1,6 @@
 # LoongArk 组件覆盖状态
 
-> 更新时间：2026 年 1 月 22 日
+> 更新时间：2026 年 2 月 11 日
 
 ## 图例
 
@@ -23,52 +23,52 @@
 | Accordion           | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 折叠面板                            |
 | Angle Slider        | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 角度选择器，低优先级                |
 | Avatar              | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 头像                                |
-| Carousel            | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P3     | 轮播图                              |
+| Carousel | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 轮播图 |
 | **Checkbox**        | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 复选框，已完成                      |
-| Clipboard           | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P3     | 剪贴板                              |
+| Clipboard | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 剪贴板 |
 | Collapsible         | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 可折叠容器                          |
-| Color Picker        | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P3     | 颜色选择器                          |
+| Color Picker | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 颜色选择器 |
 | Combobox            | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 组合框                              |
 | Date Picker         | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 日期选择器                          |
-| Editable            | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P3     | 可编辑文本                          |
-| File Upload         | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P2     | 文件上传                            |
+| Editable | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 可编辑文本 |
+| File Upload         | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 文件上传                            |
 | Floating Panel      | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 浮动面板                            |
-| Hover Card          | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P3     | 悬浮卡片                            |
+| Hover Card | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 悬浮卡片 |
 | Listbox             | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 列表框                              |
 | Marquee             | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 跑马灯，低优先级                    |
 | **Menu**            | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 菜单，高优先级                      |
 | Number Input        | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 数字输入框                          |
 | Pagination          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 分页                                |
-| Password Input      | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P2     | 密码输入框                          |
+| Password Input      | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 密码输入框                          |
 | **Popover**         | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 弹出框，高优先级                    |
-| Progress - Circular | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P2     | 圆形进度条                          |
-| Progress - Linear   | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P2     | 线性进度条                          |
+| Progress - Circular | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 圆形进度条                          |
+| Progress - Linear   | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 线性进度条                          |
 | QR Code             | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 二维码，低优先级                    |
 | **Radio Group**     | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 单选框组，已完成                    |
-| Rating Group        | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P3     | 评分                                |
-| Scroll Area         | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P3     | 滚动区域                            |
+| Rating Group | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 评分 |
+| Scroll Area | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 滚动区域 |
 | Segment Group       | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 分段控制器                          |
 | **Select**          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 选择器，已完成                      |
 | Signature Pad       | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 签名板，低优先级                    |
 | **Slider**          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 滑块，高优先级                      |
-| Splitter            | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P3     | 分割器                              |
-| Steps               | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P2     | 步骤条                              |
+| Splitter | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 分割器 |
+| Steps               | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 步骤条                              |
 | **Tabs**            | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 标签页，高优先级                    |
-| Tags Input          | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P2     | 标签输入                            |
+| Tags Input          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 标签输入                            |
 | Timer               | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 计时器，低优先级                    |
 | **Toast**           | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 轻提示，高优先级                    |
 | Toggle Group        | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 切换按钮组                          |
 | Toggle              | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 切换按钮                            |
 | **Tooltip**         | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 工具提示，高优先级                  |
 | Tour                | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 引导游览，低优先级                  |
-| Tree View           | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P3     | 树形视图                            |
+| Tree View | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 树形视图 |
 
 ## 统计摘要
 
-- **已完成**: 25/48 (52.1%)
-  - Button, Dialog, Input, Switch, Pin Input, Checkbox, Radio Group, Select, Slider, Tooltip, Tabs, Menu, Popover, Toast, Accordion, Collapsible, Toggle, Toggle Group, Date Picker, Avatar (全框架)
-- **进行中**: 0/48 (0%)
-- **未开始**: 23/48 (47.9%)
+- **已完成**: 40/49 (81.6%)
+  - Button, Dialog, Input, Switch, Pin Input, Checkbox, Radio Group, Select, Slider, Tooltip, Tabs, Menu, Popover, Toast, Accordion, Collapsible, Toggle, Toggle Group, Date Picker, Avatar, Combobox, Pagination, Segment Group, Listbox, Number Input, Progress (Linear/Circular), Password Input, Tags Input, Steps, File Upload (全框架), Carousel, Clipboard, Color Picker, Editable, Hover Card, Scroll Area, Rating Group, Splitter, Tree View
+- **进行中**: 0/49 (0%)
+- **未开始**: 9/49 (18.4%)
 
 ## 优先级说明
 
@@ -80,13 +80,13 @@
 
 ✅ 已完成：Pin Input, Checkbox, Radio Group, Select, Slider, Tabs, Tooltip, Toast, Menu, Popover, Combobox, Pagination, Segment Group, Listbox, Number Input
 
-下一阶段建议转向 P2 组件（File Upload, Password Input, Tags Input, Steps）。
+下一阶段建议转向 P4 组件（Angle Slider, Floating Panel, Marquee, QR Code, Signature Pad, Timer, Tour）。
 
 ### P2 - 中优先级（扩展表单 & 布局）
 
-- File Upload, Password Input, Tags Input, Steps
+✅ 已完成：File Upload, Password Input, Tags Input, Steps, Progress - Linear, Progress - Circular
 
-### P3 - 低优先级（高级功能）
+### P3 - 低优先级（高级功能，已完成）
 
 - Carousel, Color Picker, Editable, Hover Card, Scroll Area
 - Clipboard, Rating Group, Splitter, Tree View

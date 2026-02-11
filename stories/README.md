@@ -33,12 +33,27 @@ Storybook stories 按照以下层级组织：
   - 位置：center、top
   - 动效：scale、slide
 
+- **Filter Bar** (`LoongArkFilterBar.stories.tsx`)
+
+  - Filter bar layout with search, chips, and action slots
+  - Options: dense layout and center alignment
+
+- **File Upload** (`LoongArkFileUpload.stories.tsx`)
+
+  - File upload dropzone with item previews
+  - Supports clear/remove actions and disabled state
+
 - **Input** (`LoongArkInput.stories.tsx`)
 
   - 基础输入框组件
   - 变体：基础、带 Prefix、带 Suffix、Floating Label
   - 状态：默认、invalid、success、disabled、readOnly
   - 尺寸：sm、md、lg
+
+- **Password Input** (`LoongArkPasswordInput.stories.tsx`)
+
+  - Password input with visibility trigger
+  - States: default / invalid / success
 
 - **Menu** (`LoongArkMenu.stories.tsx`)
 
@@ -59,6 +74,11 @@ Storybook stories 按照以下层级组织：
   - 支持标题、描述、关闭按钮
   - 支持箭头展示
 
+- **Progress** (`LoongArkProgress.stories.tsx`)
+
+  - Linear and circular progress variants
+  - Sizes: sm / md / lg
+
 - **RadioGroup** (`LoongArkRadioGroup.stories.tsx`)
 
   - 单选框组组件
@@ -77,6 +97,11 @@ Storybook stories 按照以下层级组织：
   - 尺寸：sm、md、lg
   - 方向：horizontal / vertical
 
+- **Steps** (`LoongArkSteps.stories.tsx`)
+
+  - Stepper navigation with next/prev triggers
+  - Orientation: horizontal / vertical
+
 - **Switch** (`LoongArkSwitch.stories.tsx`)
 
   - 开关组件
@@ -88,6 +113,11 @@ Storybook stories 按照以下层级组织：
   - 标签页组件
   - 支持水平与垂直布局
 
+- **Tags Input** (`LoongArkTagsInput.stories.tsx`)
+
+  - Tag entry with removable chips
+  - States: default / invalid / success
+
 - **Toast** (`LoongArkToast.stories.tsx`)
 
   - 轻提示组件
@@ -97,6 +127,52 @@ Storybook stories 按照以下层级组织：
 
   - 工具提示组件
   - 支持可交互提示
+
+
+- **Carousel** (`LoongArkCarousel.stories.tsx`)
+
+  - Carousel with indicators and autoplay control
+  - Sizes: sm / md / lg
+
+- **Clipboard** (`LoongArkClipboard.stories.tsx`)
+
+  - Copy-to-clipboard input with status feedback
+  - States: default / disabled
+
+- **Color Picker** (`LoongArkColorPicker.stories.tsx`)
+
+  - Color picker with panel and swatches
+  - Sizes: sm / md / lg
+
+- **Editable** (`LoongArkEditable.stories.tsx`)
+
+  - Inline editable text with control triggers
+  - States: default / invalid / success
+
+- **Hover Card** (`LoongArkHoverCard.stories.tsx`)
+
+  - Hover card with rich preview content
+  - Sizes: sm / md / lg
+
+- **Scroll Area** (`LoongArkScrollArea.stories.tsx`)
+
+  - Scrollable region with styled scrollbars
+  - Variants: vertical / both axis
+
+- **Rating Group** (`LoongArkRatingGroup.stories.tsx`)
+
+  - Interactive rating selector
+  - States: default / disabled
+
+- **Splitter** (`LoongArkSplitter.stories.tsx`)
+
+  - Resizable panel layout
+  - Orientation: horizontal / vertical
+
+- **Tree View** (`LoongArkTreeView.stories.tsx`)
+
+  - Nested tree view navigation
+  - Variants: with checkbox / rename
 
 ### Examples/Complete Demos（完整示例）
 

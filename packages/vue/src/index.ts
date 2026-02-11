@@ -46,6 +46,14 @@ export {
   LoongArkDialogCloseTrigger,
 } from "./components/dialog";
 export {
+  LoongArkFilterBar,
+  LoongArkFilterBarSearch,
+  LoongArkFilterBarFilters,
+  LoongArkFilterBarActions,
+  LoongArkFilterDivider,
+  LoongArkFilterChip,
+} from "./components/filter-bar";
+export {
   LoongArkPinInput,
   LoongArkPinInputRoot,
   LoongArkPinInputControl,
@@ -63,6 +71,42 @@ export {
   LoongArkNumberInputValueText,
   LoongArkNumberInputScrubber,
 } from "./components/number-input";
+export {
+  LoongArkPasswordInputRoot,
+  LoongArkPasswordInputLabel,
+  LoongArkPasswordInputControl,
+  LoongArkPasswordInputInput,
+  LoongArkPasswordInputIndicator,
+  LoongArkPasswordInputVisibilityTrigger,
+} from "./components/password-input";
+export {
+  LoongArkTagsInputRoot,
+  LoongArkTagsInputLabel,
+  LoongArkTagsInputControl,
+  LoongArkTagsInputInput,
+  LoongArkTagsInputItem,
+  LoongArkTagsInputItemPreview,
+  LoongArkTagsInputItemText,
+  LoongArkTagsInputItemInput,
+  LoongArkTagsInputItemDeleteTrigger,
+  LoongArkTagsInputClearTrigger,
+  LoongArkTagsInputHiddenInput,
+} from "./components/tags-input";
+export {
+  LoongArkFileUploadRoot,
+  LoongArkFileUploadLabel,
+  LoongArkFileUploadDropzone,
+  LoongArkFileUploadTrigger,
+  LoongArkFileUploadHiddenInput,
+  LoongArkFileUploadItemGroup,
+  LoongArkFileUploadItem,
+  LoongArkFileUploadItemPreview,
+  LoongArkFileUploadItemPreviewImage,
+  LoongArkFileUploadItemName,
+  LoongArkFileUploadItemSizeText,
+  LoongArkFileUploadItemDeleteTrigger,
+  LoongArkFileUploadClearTrigger,
+} from "./components/file-upload";
 export {
   LoongArkSwitch,
   LoongArkSwitchRoot,
@@ -191,6 +235,30 @@ export {
   LoongArkSegmentGroupItem,
 } from "./components/segment-group";
 export {
+  LoongArkProgressRoot,
+  LoongArkProgressLabel,
+  LoongArkProgressTrack,
+  LoongArkProgressRange,
+  LoongArkProgressValueText,
+  LoongArkProgressView,
+  LoongArkProgressCircle,
+  LoongArkProgressCircleTrack,
+  LoongArkProgressCircleRange,
+} from "./components/progress";
+export {
+  LoongArkStepsRoot,
+  LoongArkStepsList,
+  LoongArkStepsItem,
+  LoongArkStepsIndicator,
+  LoongArkStepsSeparator,
+  LoongArkStepsTrigger,
+  LoongArkStepsContent,
+  LoongArkStepsCompletedContent,
+  LoongArkStepsProgress,
+  LoongArkStepsNextTrigger,
+  LoongArkStepsPrevTrigger,
+} from "./components/steps";
+export {
   LoongArkPaginationRoot,
   LoongArkPaginationList,
   LoongArkPaginationItem,
@@ -261,3 +329,113 @@ export {
   LoongArkToastCloseTrigger,
   createToaster,
 } from "./components/toast";
+
+export {
+  LoongArkCarouselRoot,
+  LoongArkCarouselItemGroup,
+  LoongArkCarouselItem,
+  LoongArkCarouselControl,
+  LoongArkCarouselNextTrigger,
+  LoongArkCarouselPrevTrigger,
+  LoongArkCarouselIndicatorGroup,
+  LoongArkCarouselIndicator,
+  LoongArkCarouselAutoplayTrigger,
+  LoongArkCarouselProgressText,
+  LoongArkCarouselAutoplayIndicator,
+} from "./components/carousel";
+export {
+  LoongArkClipboardRoot,
+  LoongArkClipboardLabel,
+  LoongArkClipboardControl,
+  LoongArkClipboardInput,
+  LoongArkClipboardTrigger,
+  LoongArkClipboardIndicator,
+  LoongArkClipboardValueText,
+} from "./components/clipboard";
+export {
+  LoongArkColorPickerRoot,
+  LoongArkColorPickerLabel,
+  LoongArkColorPickerControl,
+  LoongArkColorPickerTrigger,
+  LoongArkColorPickerPositioner,
+  LoongArkColorPickerContent,
+  LoongArkColorPickerView,
+  LoongArkColorPickerArea,
+  LoongArkColorPickerAreaBackground,
+  LoongArkColorPickerAreaThumb,
+  LoongArkColorPickerChannelSlider,
+  LoongArkColorPickerChannelSliderLabel,
+  LoongArkColorPickerChannelSliderTrack,
+  LoongArkColorPickerChannelSliderThumb,
+  LoongArkColorPickerChannelSliderValueText,
+  LoongArkColorPickerChannelInput,
+  LoongArkColorPickerSwatchGroup,
+  LoongArkColorPickerSwatchTrigger,
+  LoongArkColorPickerSwatchIndicator,
+  LoongArkColorPickerSwatch,
+  LoongArkColorPickerTransparencyGrid,
+  LoongArkColorPickerValueText,
+  LoongArkColorPickerValueSwatch,
+  LoongArkColorPickerEyeDropperTrigger,
+  LoongArkColorPickerFormatTrigger,
+  LoongArkColorPickerFormatSelect,
+  LoongArkColorPickerHiddenInput,
+} from "./components/color-picker";
+export {
+  LoongArkEditableRoot,
+  LoongArkEditableLabel,
+  LoongArkEditableArea,
+  LoongArkEditableControl,
+  LoongArkEditableInput,
+  LoongArkEditablePreview,
+  LoongArkEditableEditTrigger,
+  LoongArkEditableSubmitTrigger,
+  LoongArkEditableCancelTrigger,
+} from "./components/editable";
+export {
+  LoongArkHoverCardRoot,
+  LoongArkHoverCardTrigger,
+  LoongArkHoverCardPositioner,
+  LoongArkHoverCardContent,
+  LoongArkHoverCardArrow,
+  LoongArkHoverCardArrowTip,
+} from "./components/hover-card";
+export {
+  LoongArkScrollAreaRoot,
+  LoongArkScrollAreaViewport,
+  LoongArkScrollAreaContent,
+  LoongArkScrollAreaScrollbar,
+  LoongArkScrollAreaThumb,
+  LoongArkScrollAreaCorner,
+} from "./components/scroll-area";
+export {
+  LoongArkRatingGroupRoot,
+  LoongArkRatingGroupLabel,
+  LoongArkRatingGroupControl,
+  LoongArkRatingGroupItem,
+  LoongArkRatingGroupHiddenInput,
+} from "./components/rating-group";
+export {
+  LoongArkSplitterRoot,
+  LoongArkSplitterPanel,
+  LoongArkSplitterResizeTrigger,
+  LoongArkSplitterResizeTriggerIndicator,
+} from "./components/splitter";
+export {
+  LoongArkTreeViewRoot,
+  LoongArkTreeViewLabel,
+  LoongArkTreeViewTree,
+  LoongArkTreeViewItem,
+  LoongArkTreeViewItemIndicator,
+  LoongArkTreeViewItemText,
+  LoongArkTreeViewBranch,
+  LoongArkTreeViewBranchContent,
+  LoongArkTreeViewBranchControl,
+  LoongArkTreeViewBranchTrigger,
+  LoongArkTreeViewBranchIndicator,
+  LoongArkTreeViewBranchText,
+  LoongArkTreeViewBranchIndentGuide,
+  LoongArkTreeViewNodeCheckbox,
+  LoongArkTreeViewNodeCheckboxIndicator,
+  LoongArkTreeViewNodeRenameInput,
+} from "./components/tree-view";

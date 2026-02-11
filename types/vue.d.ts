@@ -16,6 +16,7 @@ declare module "vue" {
     | String
     | Number
     | Boolean
+    | File
     | Record<string, unknown>
     | AttrValue[]
     | ((...args: any[]) => any);
