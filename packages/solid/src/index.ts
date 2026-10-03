@@ -490,3 +490,5 @@ export type { Question, QuestionOption, QuestionnaireOptions, QuestionnaireValue
 export type { DataTableState, DataTableLabels, DataTableSummary, DataRow, DataColumn, DataSort } from "@loongark/kit";
 
 export type { ChartOptions, ChartSeries, ChartLabels } from "@loongark/kit";
+
+export type {AttachmentOptions,MessageOptions,ConversationAction,ConversationActionContext,ConversationActionHandler,ConversationActionLabels,ConversationActionState} from "@loongark/kit";

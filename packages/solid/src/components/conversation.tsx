@@ -1,5 +1,16 @@
-import { splitProps, type JSX } from "solid-js";
 import {
+  splitProps,
+  createSignal,
+  createEffect,
+  onCleanup,
+  type JSX,
+} from "solid-js";
+import {
+  createConversationActionController,
+  normalizeConversationActions,
+  withConversationActionFocus,
+  type ConversationActionState,
+  type ConversationActionHandler,
   attachmentIconPath,
   attachmentView,
   messageStatus,
@@ -7,7 +18,10 @@ import {
   type BubbleOptions,
   type MessageOptions,
 } from "@loongark/kit";
-export type LoongArkAttachmentProps = JSX.HTMLAttributes<HTMLDivElement> &
+export type LoongArkAttachmentProps = Omit<
+  JSX.HTMLAttributes<HTMLDivElement>,
+  "onCancel"
+> &
   AttachmentOptions;
 export type LoongArkBubbleProps = JSX.HTMLAttributes<HTMLDivElement> &
   BubbleOptions;
@@ -26,10 +40,45 @@ export function LoongArkAttachment(props: LoongArkAttachmentProps) {
     "retryLabel",
     "onRemove",
     "onRetry",
+    "onPreview",
+    "onCancel",
+    "previewLabel",
+    "cancelLabel",
+    "actionLabels",
+    "actionKey",
   ]);
-  const view = () => attachmentView(local);
+  let root: HTMLDivElement | undefined;
+  const [state, setState] = createSignal<ConversationActionState>({}),
+    controller = createConversationActionController(setState);
+  onCleanup(() => controller.dispose());
+  createEffect(() => {
+    local.actionKey;
+    controller.reset();
+  });
+  const blocked = () => local.disabled || !!state().pendingId;
+  const run = (
+    id: string,
+    label: string,
+    handler: ConversationActionHandler,
+  ) => {
+    void controller.run(
+      {
+        id,
+        label,
+        disabled: local.disabled,
+        onAction: withConversationActionFocus(root, handler),
+      },
+      local.actionLabels,
+    );
+  };
+  const view = () => attachmentView({ ...local, disabled: blocked() });
   return (
     <div
+      ref={root}
+      role="group"
+      aria-label={"Attachment " + local.name}
+      tabIndex={-1}
+      aria-busy={state().pendingId ? true : undefined}
       data-scope="attachment"
       data-part="root"
       data-status={view().status}
@@ -54,7 +103,7 @@ export function LoongArkAttachment(props: LoongArkAttachmentProps) {
             data-scope="attachment"
             data-part="name"
             href={view().link}
-            download=""
+            download={local.name}
           >
             {local.name}
           </a>
@@ -89,11 +138,50 @@ export function LoongArkAttachment(props: LoongArkAttachmentProps) {
             data-scope="attachment"
             data-part="action"
             type="button"
-            disabled={local.disabled}
+            disabled={blocked()}
             aria-label={view().retry}
-            onClick={local.onRetry}
+            data-action-id="retry"
+            onClick={() => run("retry", view().retry, local.onRetry!)}
           >
-            Retry
+            {local.retryLabel ?? "Retry"}
+          </button>
+        )}
+        {view().status === "ready" && local.onPreview && (
+          <button
+            data-scope="attachment"
+            data-part="action"
+            type="button"
+            disabled={blocked()}
+            aria-label={local.previewLabel ?? "Preview " + local.name}
+            data-action-id="preview"
+            onClick={() =>
+              run(
+                "preview",
+                local.previewLabel ?? "Preview " + local.name,
+                local.onPreview!,
+              )
+            }
+          >
+            {local.previewLabel ?? "Preview"}
+          </button>
+        )}
+        {view().status === "uploading" && local.onCancel && (
+          <button
+            data-scope="attachment"
+            data-part="action"
+            type="button"
+            disabled={blocked()}
+            aria-label={local.cancelLabel ?? "Cancel upload " + local.name}
+            data-action-id="cancel"
+            onClick={() =>
+              run(
+                "cancel",
+                local.cancelLabel ?? "Cancel upload " + local.name,
+                local.onCancel!,
+              )
+            }
+          >
+            {local.cancelLabel ?? "Cancel"}
           </button>
         )}
         {local.onRemove && (
@@ -101,14 +189,25 @@ export function LoongArkAttachment(props: LoongArkAttachmentProps) {
             data-scope="attachment"
             data-part="action"
             type="button"
-            disabled={local.disabled}
+            disabled={blocked()}
             aria-label={view().remove}
-            onClick={local.onRemove}
+            data-action-id="remove"
+            onClick={() => run("remove", view().remove, local.onRemove!)}
           >
-            Remove
+            {local.removeLabel ?? "Remove"}
           </button>
         )}
       </div>
+      {state().message && (
+        <span
+          data-scope="attachment"
+          data-part="action-feedback"
+          data-outcome={state().outcome}
+          role={state().outcome === "error" ? "alert" : "status"}
+        >
+          {state().message}
+        </span>
+      )}
     </div>
   );
 }
@@ -135,10 +234,45 @@ export function LoongArkMessage(props: LoongArkMessageProps) {
     "statusLabel",
     "retryLabel",
     "onRetry",
+    "actions",
+    "disabled",
+    "actionLabels",
+    "actionKey",
     "children",
   ]);
+  let root: HTMLElement | undefined;
+  const [state, setState] = createSignal<ConversationActionState>({}),
+    controller = createConversationActionController(setState);
+  onCleanup(() => controller.dispose());
+  createEffect(() => {
+    local.actionKey;
+    controller.reset();
+  });
+  const available = () => normalizeConversationActions(local.actions),
+    blocked = () => local.disabled || !!state().pendingId;
+  const run = (
+    id: string,
+    label: string,
+    handler: ConversationActionHandler,
+    successLabel?: string,
+    actionDisabled?: boolean,
+  ) => {
+    void controller.run(
+      {
+        id,
+        label,
+        disabled: local.disabled || actionDisabled,
+        onAction: withConversationActionFocus(root, handler),
+        successLabel,
+      },
+      local.actionLabels,
+    );
+  };
   return (
     <article
+      ref={root}
+      tabIndex={-1}
+      aria-busy={state().pendingId ? true : undefined}
       data-scope="message"
       data-part="root"
       data-side={local.side ?? "incoming"}
@@ -176,12 +310,55 @@ export function LoongArkMessage(props: LoongArkMessageProps) {
             data-scope="message"
             data-part="action"
             type="button"
-            onClick={local.onRetry}
+            disabled={blocked()}
+            data-action-id="retry"
+            onClick={() =>
+              run("retry", local.retryLabel ?? "Retry message", local.onRetry!)
+            }
           >
             {local.retryLabel ?? "Retry message"}
           </button>
         )}
       </footer>
+      {!!available().length && (
+        <div
+          data-scope="message"
+          data-part="actions"
+          role="group"
+          aria-label={local.actionLabels?.group ?? "Message actions"}
+        >
+          {available().map((action) => (
+            <button
+              data-scope="message"
+              data-part="action"
+              type="button"
+              disabled={blocked() || action.disabled}
+              data-action-id={action.id}
+              onClick={() =>
+                run(
+                  action.id,
+                  action.label,
+                  action.onAction,
+                  action.successLabel,
+                  action.disabled,
+                )
+              }
+            >
+              {action.label}
+            </button>
+          ))}
+        </div>
+      )}
+      {state().message && (
+        <span
+          data-scope="message"
+          data-part="action-feedback"
+          data-outcome={state().outcome}
+          role={state().outcome === "error" ? "alert" : "status"}
+        >
+          {state().message}
+        </span>
+      )}
     </article>
   );
 }

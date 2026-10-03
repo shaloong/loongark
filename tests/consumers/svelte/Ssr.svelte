@@ -221,3 +221,45 @@
     throw Error("SSR must not toggle series");
   }}
 />
+
+<L.LoongArkMessage
+  author="Async SSR"
+  status="error"
+  onRetry={() => {
+    throw Error("SSR must not retry");
+  }}
+  actions={[
+    {
+      id: "save",
+      label: "Save SSR",
+      onAction: () => {
+        throw Error("SSR must not execute");
+      },
+    },
+    {
+      id: "archive",
+      label: "Archive SSR",
+      disabled: true,
+      onAction: () => {
+        throw Error("SSR must not execute");
+      },
+    },
+  ]}
+/>
+<L.LoongArkAttachment
+  name="SSR actions.txt"
+  onPreview={() => {
+    throw Error("SSR must not preview");
+  }}
+  onRemove={() => {
+    throw Error("SSR must not remove");
+  }}
+/>
+<L.LoongArkAttachment
+  name="SSR upload.zip"
+  status="uploading"
+  progress={42}
+  onCancel={() => {
+    throw Error("SSR must not cancel");
+  }}
+/>

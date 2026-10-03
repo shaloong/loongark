@@ -76,6 +76,18 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${serverProps})));`
         : `console.log(renderToString(h(L.LoongArkDataTable,${serverProps})));`;
+  const conversationProps =
+    "{author:'Async SSR',status:'error',onRetry:()=>{throw Error('SSR must not retry')},actions:[{id:'save',label:'Save SSR',onAction:()=>{throw Error('SSR must not execute')}},{id:'archive',label:'Archive SSR',disabled:true,onAction:()=>{throw Error('SSR must not execute')}}]}";
+  const attachmentProps =
+    "{name:'SSR actions.txt',onPreview:()=>{throw Error('SSR must not preview')},onRemove:()=>{throw Error('SSR must not remove')}}";
+  const uploadingProps =
+    "{name:'SSR upload.zip',status:'uploading',progress:42,onCancel:()=>{throw Error('SSR must not cancel')}}";
+  const conversationScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h('div',{},[h(L.LoongArkMessage,${conversationProps}),h(L.LoongArkAttachment,${attachmentProps}),h(L.LoongArkAttachment,${uploadingProps})])})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>[h(L.LoongArkMessage,${conversationProps}),h(L.LoongArkAttachment,${attachmentProps}),h(L.LoongArkAttachment,${uploadingProps})]));`
+        : `console.log(renderToString(h('div',null,h(L.LoongArkMessage,${conversationProps}),h(L.LoongArkAttachment,${attachmentProps}),h(L.LoongArkAttachment,${uploadingProps}))));`;
   const result = spawnSync(
     process.execPath,
     [
@@ -90,6 +102,7 @@ for (const [framework, script] of [
           nextScript +
           questionnaireScript +
           serverScript +
+          conversationScript +
           "process.exit(0);",
       ),
     ],
@@ -146,6 +159,14 @@ for (const [framework, script] of [
   ])
     assert.match(result.stdout, new RegExp(`data-scope="${scope}"`));
   assert.match(result.stdout, /Conversation SSR/);
+  assert.match(result.stdout, /Save SSR/);
+  assert.match(
+    result.stdout,
+    /<button(?=[^>]*data-action-id="archive")(?=[^>]*disabled)[^>]*>/,
+  );
+  assert.match(result.stdout, /aria-label="Preview SSR actions.txt"/);
+  assert.match(result.stdout, /aria-label="Cancel upload SSR upload.zip"/);
+  assert.doesNotMatch(result.stdout, /data-part="action-feedback"/);
   assert.match(result.stdout, /SSR answer/);
   assert.match(
     result.stdout,

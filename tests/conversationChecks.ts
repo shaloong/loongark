@@ -24,7 +24,7 @@ export async function checkConversation(page: Page, evidenceName?: string) {
     page.getByRole("link", {
       name: "Design-review-notes-with-a-long-filename.pdf",
     }),
-  ).toHaveAttribute("download", "");
+  ).toHaveAttribute("download", "Design-review-notes-with-a-long-filename.pdf");
   await expect(
     page.getByRole("link", { name: "Private-draft.pdf" }),
   ).toHaveCount(0);

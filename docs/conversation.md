@@ -6,7 +6,7 @@ React、Vue、Solid、Svelte 使用相同的五个公开名称。共享类型、
 
 ## API 与职责
 
-- `LoongArkAttachment`：必需 `name`，可选 `size`（字节）、`href`、`status=ready|uploading|error`、`progress`（0–100，未传表示不确定进度）、`disabled`、`onRemove`、`onRetry`。上传与失败状态不显示下载链接；禁用状态禁用下载和操作。`errorLabel` 定义错误说明，`removeLabel/retryLabel` 定义包含文件名的操作可访问名称（可见短标签为 Remove / Retry）。上传、文件移除与重试的数据操作由调用者提供。
+- `LoongArkAttachment`：必需 `name`，可选 `size`（字节）、`href`、`status=ready|uploading|error`、`progress`（0–100，未传表示不确定进度）、`disabled`、`onRemove`、`onRetry`、`onPreview`、`onCancel`。上传与失败状态不显示下载链接；禁用状态禁用下载和操作。`errorLabel` 定义错误说明，`removeLabel/retryLabel/previewLabel/cancelLabel` 同时定义可见与可访问标签；默认短标签为 Remove/Retry/Preview/Cancel，可访问名称包含文件名。上传、文件移除与重试的数据操作由调用者提供。
 - `LoongArkBubble`：内容容器，`side=incoming|outgoing` 控制中性背景。支持长文本与显式换行；无需消息作者或发送状态，适合消息内容与其它回复内容。
 - `LoongArkMessage`：原生 article，必需 `author`，支持 `side`、`dateTime`（机器时间）、`timeLabel`（展示时间）、`status=sent|sending|error`、`statusLabel`、`retryLabel`、`onRetry`。内容可组合 Bubble、Attachment 或其它基础组件。不会自行发送消息，也不解析 HTML/Markdown。
 - `LoongArkMessageScroller`：`label` 命名可聚焦滚动区域，`jumpLabel` 命名回到底部按钮，`onAtBottomChange({atBottom})` 报告跟随状态。初次挂载到最新消息；用户上翻后新消息不强制滚动，前插消息保持当前阅读位置；回到最新后恢复跟随。监听器、MutationObserver 和 ResizeObserver 在卸载时释放。高度可覆盖共享 viewport 的 CSS；默认使用已有控件高度 Token。容器不会接管消息数据、分页或虚拟化。
@@ -35,3 +35,17 @@ Vue 支持 `v-model`（modelValue）；Svelte 支持 `bind:value`；React/Solid 
 受控值被业务拒绝后，真实 radio/checkbox/textarea 会恢复业务值，不只恢复选中样式。Svelte 的 onValueChange 由业务决定是否接受，和其它三端一致；简单双向绑定可以只使用 bind:value，初值可以为 undefined，首次输入也会写回父级。若同时使用 bind:value 与 onValueChange，请在回调里明确写回答案，或省略回调使用自动绑定。这样避免业务拒绝后组件先自行改变 value。
 
 四端 QuestionnaireAdvancedExample 展示工作区分支、答案保留、锁定受控更新、格式与跨题校验、提交和重置；Conditional/ConditionalEmpty Story 对应相同能力。验收见 [问卷高级能力](audits/2026-10-03/questionnaire-advanced-linux/acceptance.json)。隐藏规则不自动清除编辑值；若业务要求删除，应自行更新 value。外部替换问卷结构时页码按可见题集限界；新问卷会话可重新挂载，不自动持久化。
+
+## 消息与附件异步操作
+
+Message 的 `actions` 接受 `{id, label, onAction, disabled?, successLabel?}`；ID 必须非空唯一，`retry` 保留给发送失败重试。`disabled` 禁用整个消息的操作，单项 disabled 保持可见并保留原生禁用语义。菜单式操作可在 children 中组合已有 Menu，当前 actions 为常驻按钮，不增加重复菜单组件。
+
+Attachment 仅在 ready 提供 `onPreview`，uploading 提供 `onCancel`；既有 onRemove 和错误 onRetry 同步支持异步操作。预览内容、删除确认、真实上传与请求协议由业务负责，组件不自行下载文件用于预览，也不推断取消请求。默认下载仍为原生带 download 的链接，建议文件名使用 name；操作进行期间暂时取消下载链接，避免重复处理。
+
+所有操作接收 `{signal: AbortSignal}`，兼容不接收参数的旧回调。返回 Promise 时组件等待其完成；同一个实例只允许一个进行中的操作，aria-busy 和禁用按钮同步，避免重复请求。失败统一显示可重试的 alert；不会把原始异常信息直接暴露给用户。actionLabels.pending/error/group 可本地化反馈与操作组名称，单项 successLabel 提供成功状态。同步异常与异步拒绝采用同一路径。
+
+`actionKey` 标识业务对象版本：变化时中止旧操作并清除反馈，旧完成不能覆盖新对象状态；卸载也中止并清理监听。请求实现必须响应 signal，组件不能撤销业务已经提交的数据。disabled 在操作过程中变化只阻止新操作，已有操作继续；需要取消时由业务取消请求或更新 actionKey。React 在客户端提交阶段更新控制器，StrictMode 重挂产生新实例；其它三端按各自生命周期释放控制器。SSR 不执行操作回调，也不创建 DOM 监听。
+
+操作造成原按钮消失后，焦点恢复到对应的新按钮或当前组件根；用户已移到外部时保留外部焦点。删除整个组件后的业务焦点由调用方负责。四端 ConversationActionsExample 展示真实剪贴板复制、延迟保存与失败、替换消息中止旧保存、下载、Dialog 文本预览、模拟上传进度/取消及删除后的恢复按钮。剪贴板需要安全上下文与浏览器权限；上传是可取消的模拟源，没有真实服务器。Bubble 仍只呈现业务内容；Markdown、评分和消息虚拟化未包含在这批能力中。
+
+迁移说明：显式传入 Attachment removeLabel/retryLabel 时，现在可见文字也使用该标签，与可访问名称一致。需要短按钮文字时请传入短而明确的标签。验收范围与平台限制见 [操作批次记录](audits/2026-10-03/conversation-actions-linux/acceptance.json)。

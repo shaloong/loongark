@@ -53,3 +53,9 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 新增 ChartAdvancedExample 与 Interactive/DisabledControls Story，114 族、289 Story、四端各 789 个公开值入口和 159 个示例。图例支持受控选择/拒绝、禁用及全部隐藏后恢复；序列颜色/虚线身份保持；domain 固定数值轴并保留原始数据说明；showDataTable 提供原生可展开数据表。重绘保留展开和焦点，外部控件焦点不被抢回，卸载释放监听与观察器。API 见 [图表说明](chart.md)。
 
 图表批次验收：四端消费/示例 8 项、159 个示例运行、全量浏览器 67 项、视觉 58 项通过。289 Story 的明暗默认 WCAG、窄屏溢出和有效 transition: all 为 0；60 张场景图已通过联系表复核，36 次四端对比为 0 像素差异。目视发现手机展开表格撑开页面，修复 max-width 并补局部键盘滚动回归后重验。新增 4 张 Linux 基线，原有 54 张 Linux 与 2 张 Windows 基线不变；缩放、刷选及实时流未提供。详见 [独立验收记录](audits/2026-10-03/chart-advanced-linux/acceptance.json)。
+
+## Message / Attachment 操作与视觉一致性（2026-10-03）
+
+新增四端 ConversationActionsExample 与组合 Story；异步互斥、失败反馈、版本替换中止、卸载、预览/取消和焦点恢复共享行为。修复真实下载文件名和 React Dialog 默认关闭图标差异。覆盖仍为114族，累计290 Story、四端各789个公开值入口、163个示例。
+
+四端8项、浏览器69项、视觉62项通过；100张场景图已复核，60次四端对照为0像素差异。新增4张独立Linux基线，原有58张Linux与2张Windows基线文件未改。验收见 [本批记录](audits/2026-10-03/conversation-actions-linux/acceptance.json)，剩余高级能力继续以真实场景验收，见 [范围表](ark-ui-coverage.md#下一批高级能力的边界)。

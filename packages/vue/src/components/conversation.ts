@@ -1,5 +1,18 @@
-import { defineComponent, h, type PropType } from "vue";
 import {
+  defineComponent,
+  h,
+  ref,
+  watch,
+  onBeforeUnmount,
+  type PropType,
+} from "vue";
+import {
+  createConversationActionController,
+  normalizeConversationActions,
+  withConversationActionFocus,
+  type ConversationActionState,
+  type ConversationAction,
+  type ConversationActionHandler,
   attachmentIconPath,
   attachmentView,
   messageStatus,
@@ -11,6 +24,36 @@ const part = (scope: string, name: string) => ({
   "data-scope": scope,
   "data-part": name,
 });
+function useConversationActions(
+  p: Pick<AttachmentOptions, "actionKey" | "actionLabels" | "disabled">,
+) {
+  const state = ref<ConversationActionState>({}),
+    root = ref<HTMLElement>();
+  const controller = createConversationActionController((next) => {
+    state.value = next;
+  });
+  watch(
+    () => p.actionKey,
+    () => controller.reset(),
+    { flush: "sync" },
+  );
+  onBeforeUnmount(() => controller.dispose());
+  return {
+    state,
+    root,
+    blocked: () => p.disabled || !!state.value.pendingId,
+    run: (action: ConversationAction) => {
+      void controller.run(
+        {
+          ...action,
+          disabled: p.disabled || action.disabled,
+          onAction: withConversationActionFocus(root.value, action.onAction),
+        },
+        p.actionLabels,
+      );
+    },
+  };
+}
 export const LoongArkAttachment = defineComponent({
   name: "LoongArkAttachment",
   inheritAttrs: false,
@@ -24,17 +67,29 @@ export const LoongArkAttachment = defineComponent({
     errorLabel: String,
     removeLabel: String,
     retryLabel: String,
-    onRemove: Function as PropType<() => void>,
-    onRetry: Function as PropType<() => void>,
+    onRemove: Function as PropType<ConversationActionHandler>,
+    onRetry: Function as PropType<ConversationActionHandler>,
+    onPreview: Function as PropType<ConversationActionHandler>,
+    onCancel: Function as PropType<ConversationActionHandler>,
+    previewLabel: String,
+    cancelLabel: String,
+    actionKey: [String, Number],
+    actionLabels: Object as PropType<AttachmentOptions["actionLabels"]>,
   },
   setup(p, { attrs }) {
+    const operations = useConversationActions(p);
     return () => {
-      const v = attachmentView(p);
+      const v = attachmentView({ ...p, disabled: operations.blocked() });
       return h(
         "div",
         {
           ...attrs,
           ...part("attachment", "root"),
+          ref: operations.root,
+          role: "group",
+          tabindex: -1,
+          "aria-label": attrs["aria-label"] ?? "Attachment " + p.name,
+          "aria-busy": operations.state.value.pendingId ? true : undefined,
           "data-status": v.status,
           "data-disabled": p.disabled ? "true" : undefined,
         },
@@ -60,7 +115,7 @@ export const LoongArkAttachment = defineComponent({
               {
                 ...part("attachment", "name"),
                 href: v.link,
-                download: v.link ? "" : undefined,
+                download: v.link ? p.name : undefined,
               },
               p.name,
             ),
@@ -87,11 +142,55 @@ export const LoongArkAttachment = defineComponent({
                 {
                   ...part("attachment", "action"),
                   type: "button",
-                  disabled: p.disabled,
+                  disabled: operations.blocked(),
                   "aria-label": v.retry,
-                  onClick: p.onRetry,
+                  "data-action-id": "retry",
+                  onClick: () =>
+                    operations.run({
+                      id: "retry",
+                      label: v.retry,
+                      onAction: p.onRetry!,
+                    }),
                 },
-                "Retry",
+                p.retryLabel ?? "Retry",
+              ),
+            v.status === "ready" &&
+              p.onPreview &&
+              h(
+                "button",
+                {
+                  ...part("attachment", "action"),
+                  type: "button",
+                  disabled: operations.blocked(),
+                  "aria-label": p.previewLabel ?? "Preview " + p.name,
+                  "data-action-id": "preview",
+                  onClick: () =>
+                    operations.run({
+                      id: "preview",
+                      label: p.previewLabel ?? "Preview " + p.name,
+                      onAction: p.onPreview!,
+                    }),
+                },
+                p.previewLabel ?? "Preview",
+              ),
+            v.status === "uploading" &&
+              p.onCancel &&
+              h(
+                "button",
+                {
+                  ...part("attachment", "action"),
+                  type: "button",
+                  disabled: operations.blocked(),
+                  "aria-label": p.cancelLabel ?? "Cancel upload " + p.name,
+                  "data-action-id": "cancel",
+                  onClick: () =>
+                    operations.run({
+                      id: "cancel",
+                      label: p.cancelLabel ?? "Cancel upload " + p.name,
+                      onAction: p.onCancel!,
+                    }),
+                },
+                p.cancelLabel ?? "Cancel",
               ),
             p.onRemove &&
               h(
@@ -99,13 +198,32 @@ export const LoongArkAttachment = defineComponent({
                 {
                   ...part("attachment", "action"),
                   type: "button",
-                  disabled: p.disabled,
+                  disabled: operations.blocked(),
                   "aria-label": v.remove,
-                  onClick: p.onRemove,
+                  "data-action-id": "remove",
+                  onClick: () =>
+                    operations.run({
+                      id: "remove",
+                      label: v.remove,
+                      onAction: p.onRemove!,
+                    }),
                 },
-                "Remove",
+                p.removeLabel ?? "Remove",
               ),
           ]),
+          operations.state.value.message &&
+            h(
+              "span",
+              {
+                ...part("attachment", "action-feedback"),
+                "data-outcome": operations.state.value.outcome,
+                role:
+                  operations.state.value.outcome === "error"
+                    ? "alert"
+                    : "status",
+              },
+              operations.state.value.message,
+            ),
         ],
       );
     };
@@ -139,18 +257,26 @@ export const LoongArkMessage = defineComponent({
     status: String as PropType<MessageOptions["status"]>,
     statusLabel: String,
     retryLabel: String,
-    onRetry: Function as PropType<() => void>,
+    onRetry: Function as PropType<ConversationActionHandler>,
+    actions: Array as PropType<readonly ConversationAction[]>,
+    disabled: Boolean,
+    actionKey: [String, Number],
+    actionLabels: Object as PropType<MessageOptions["actionLabels"]>,
   },
   setup(p, { attrs, slots }) {
+    const operations = useConversationActions(p);
     return () =>
       h(
         "article",
         {
           ...attrs,
           ...part("message", "root"),
+          ref: operations.root,
+          tabindex: -1,
+          "aria-busy": operations.state.value.pendingId ? true : undefined,
           "data-side": p.side ?? "incoming",
           "data-status": p.status ?? "sent",
-          "aria-label": "Message from " + p.author,
+          "aria-label": attrs["aria-label"] ?? "Message from " + p.author,
         },
         [
           h("header", part("message", "meta"), [
@@ -178,11 +304,55 @@ export const LoongArkMessage = defineComponent({
                 {
                   ...part("message", "action"),
                   type: "button",
-                  onClick: p.onRetry,
+                  disabled: operations.blocked(),
+                  "data-action-id": "retry",
+                  onClick: () =>
+                    operations.run({
+                      id: "retry",
+                      label: p.retryLabel ?? "Retry message",
+                      onAction: p.onRetry!,
+                    }),
                 },
                 p.retryLabel ?? "Retry message",
               ),
           ]),
+          normalizeConversationActions(p.actions).length
+            ? h(
+                "div",
+                {
+                  ...part("message", "actions"),
+                  role: "group",
+                  "aria-label": p.actionLabels?.group ?? "Message actions",
+                },
+                normalizeConversationActions(p.actions).map((action) =>
+                  h(
+                    "button",
+                    {
+                      ...part("message", "action"),
+                      key: action.id,
+                      type: "button",
+                      disabled: operations.blocked() || action.disabled,
+                      "data-action-id": action.id,
+                      onClick: () => operations.run(action),
+                    },
+                    action.label,
+                  ),
+                ),
+              )
+            : null,
+          operations.state.value.message &&
+            h(
+              "span",
+              {
+                ...part("message", "action-feedback"),
+                "data-outcome": operations.state.value.outcome,
+                role:
+                  operations.state.value.outcome === "error"
+                    ? "alert"
+                    : "status",
+              },
+              operations.state.value.message,
+            ),
         ],
       );
   },

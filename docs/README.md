@@ -69,3 +69,9 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 新增 ChartAdvancedExample 与 Interactive/DisabledControls Story，114 族、289 Story、四端各 789 个公开值入口和 159 个示例。图例支持受控选择/拒绝、禁用及全部隐藏后恢复；序列颜色/虚线身份保持；domain 固定数值轴并保留原始数据说明；showDataTable 提供原生可展开数据表。重绘保留展开和焦点，外部控件焦点不被抢回，卸载释放监听与观察器。API 见 [图表说明](chart.md)。
 
 图表批次验收：四端消费/示例 8 项、159 个示例运行、全量浏览器 67 项、视觉 58 项通过。289 Story 的明暗默认 WCAG、窄屏溢出和有效 transition: all 为 0；60 张场景图已通过联系表复核，36 次四端对比为 0 像素差异。目视发现手机展开表格撑开页面，修复 max-width 并补局部键盘滚动回归后重验。新增 4 张 Linux 基线，原有 54 张 Linux 与 2 张 Windows 基线不变；缩放、刷选及实时流未提供。详见 [独立验收记录](audits/2026-10-03/chart-advanced-linux/acceptance.json)。
+
+## Message / Attachment 操作批次（2026-10-03）
+
+四端新增异步互斥、失败/成功反馈、actionKey 替换中止、卸载清理、附件预览和上传取消。ConversationActionsExample 实际复制、保存、下载、预览和取消模拟上传；删除后的业务焦点与组件内焦点恢复均有回归。修复 data URL 建议文件名，并统一 Dialog 默认关闭图标；不增加组件别名或依赖。API 和标签迁移见 [会话说明](conversation.md)。
+
+当前为 114 族、290 Story、四端各 789 个公开值入口、163 个示例。本批四端消费/示例 8 项、浏览器 69 项、视觉 62 项通过；290 Story 明暗默认 WCAG、窄屏溢出和有效 transition: all 为 0。100 张场景图经24张联系表及重点原图复核，60次四端对照均为0像素差异；新增4张Linux基线，已有58张Linux及2张Windows基线文件不变。下载和图标问题的修正前证据保留，详见 [验收记录](audits/2026-10-03/conversation-actions-linux/acceptance.json)。真实服务上传、复杂题型、虚拟化和媒体加载锚定等仍有明确边界，见 [高级能力缺口](ark-ui-coverage.md#下一批高级能力的边界)。

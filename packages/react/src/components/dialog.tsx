@@ -131,28 +131,6 @@ export interface LoongArkDialogCloseTriggerProps extends ButtonHTMLAttributes<HT
   asChild?: boolean;
 }
 
-const defaultCloseIcon = createElement(
-  "svg",
-  dataProps({
-    width: 14,
-    height: 14,
-    viewBox: "0 0 14 14",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg",
-    "aria-hidden": "true",
-  }),
-  createElement(
-    "path",
-    dataProps({
-      d: "M4 4l6 6m0-6-6 6",
-      stroke: "currentColor",
-      strokeWidth: 1.5,
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-    }),
-  ),
-);
-
 export const LoongArkDialogCloseTrigger = ({
   children,
   asChild,
@@ -172,7 +150,7 @@ export const LoongArkDialogCloseTrigger = ({
           }
         : {}),
     }),
-    decorate ? (children ?? defaultCloseIcon) : (children ?? null),
+    children ?? null,
   );
 };
 

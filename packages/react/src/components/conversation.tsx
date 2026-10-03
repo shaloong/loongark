@@ -1,12 +1,16 @@
-import { type HTMLAttributes } from "react";
+import { useRef, type HTMLAttributes } from "react";
 import {
+  withConversationActionFocus,
+  normalizeConversationActions,
   attachmentIconPath,
   attachmentView,
   messageStatus,
   type AttachmentOptions,
   type BubbleOptions,
   type MessageOptions,
+  type ConversationActionHandler,
 } from "@loongark/kit";
+import { useConversationActions } from "./conversation-actions";
 export type LoongArkAttachmentProps = HTMLAttributes<HTMLDivElement> &
   AttachmentOptions;
 export type LoongArkBubbleProps = HTMLAttributes<HTMLDivElement> &
@@ -24,15 +28,37 @@ export function LoongArkAttachment({
   retryLabel,
   onRemove,
   onRetry,
+  onPreview,
+  onCancel,
+  previewLabel,
+  cancelLabel,
+  actionLabels,
+  actionKey,
   ...attrs
 }: LoongArkAttachmentProps) {
+  const root = useRef<HTMLDivElement>(null),
+    operations = useConversationActions(actionKey);
+  const blocked = disabled || !!operations.state.pendingId;
+  const run = (id: string, label: string, handler: ConversationActionHandler) =>
+    operations.run(
+      {
+        id,
+        label,
+        disabled,
+        onAction: withConversationActionFocus(
+          root.current ?? undefined,
+          handler,
+        ),
+      },
+      actionLabels,
+    );
   const view = attachmentView({
     name,
     size,
     href,
     status,
     progress,
-    disabled,
+    disabled: blocked,
     errorLabel,
     removeLabel,
     retryLabel,
@@ -41,6 +67,11 @@ export function LoongArkAttachment({
   });
   return (
     <div
+      ref={root}
+      role="group"
+      aria-label={"Attachment " + name}
+      tabIndex={-1}
+      aria-busy={operations.state.pendingId ? true : undefined}
       data-scope="attachment"
       data-part="root"
       data-status={view.status}
@@ -62,7 +93,12 @@ export function LoongArkAttachment({
       </span>
       <div data-scope="attachment" data-part="content">
         {view.link ? (
-          <a data-scope="attachment" data-part="name" href={view.link} download>
+          <a
+            data-scope="attachment"
+            data-part="name"
+            href={view.link}
+            download={name}
+          >
             {name}
           </a>
         ) : (
@@ -96,11 +132,42 @@ export function LoongArkAttachment({
             data-scope="attachment"
             data-part="action"
             type="button"
-            disabled={disabled}
+            disabled={blocked}
             aria-label={view.retry}
-            onClick={onRetry}
+            data-action-id="retry"
+            onClick={() => run("retry", view.retry, onRetry)}
           >
-            Retry
+            {retryLabel ?? "Retry"}
+          </button>
+        )}
+        {view.status === "ready" && onPreview && (
+          <button
+            data-scope="attachment"
+            data-part="action"
+            type="button"
+            disabled={blocked}
+            aria-label={previewLabel ?? "Preview " + name}
+            data-action-id="preview"
+            onClick={() =>
+              run("preview", previewLabel ?? "Preview " + name, onPreview)
+            }
+          >
+            {previewLabel ?? "Preview"}
+          </button>
+        )}
+        {view.status === "uploading" && onCancel && (
+          <button
+            data-scope="attachment"
+            data-part="action"
+            type="button"
+            disabled={blocked}
+            aria-label={cancelLabel ?? "Cancel upload " + name}
+            data-action-id="cancel"
+            onClick={() =>
+              run("cancel", cancelLabel ?? "Cancel upload " + name, onCancel)
+            }
+          >
+            {cancelLabel ?? "Cancel"}
           </button>
         )}
         {onRemove && (
@@ -108,14 +175,25 @@ export function LoongArkAttachment({
             data-scope="attachment"
             data-part="action"
             type="button"
-            disabled={disabled}
+            disabled={blocked}
             aria-label={view.remove}
-            onClick={onRemove}
+            data-action-id="remove"
+            onClick={() => run("remove", view.remove, onRemove)}
           >
-            Remove
+            {removeLabel ?? "Remove"}
           </button>
         )}
       </div>
+      {operations.state.message && (
+        <span
+          data-scope="attachment"
+          data-part="action-feedback"
+          data-outcome={operations.state.outcome}
+          role={operations.state.outcome === "error" ? "alert" : "status"}
+        >
+          {operations.state.message}
+        </span>
+      )}
     </div>
   );
 }
@@ -144,11 +222,42 @@ export function LoongArkMessage({
   statusLabel,
   retryLabel,
   onRetry,
+  actions,
+  disabled,
+  actionLabels,
+  actionKey,
   children,
   ...attrs
 }: LoongArkMessageProps) {
+  const root = useRef<HTMLElement>(null),
+    operations = useConversationActions(actionKey);
+  const available = normalizeConversationActions(actions);
+  const blocked = disabled || !!operations.state.pendingId;
+  const run = (
+    id: string,
+    label: string,
+    handler: ConversationActionHandler,
+    successLabel?: string,
+    actionDisabled?: boolean,
+  ) =>
+    operations.run(
+      {
+        id,
+        label,
+        disabled: disabled || actionDisabled,
+        onAction: withConversationActionFocus(
+          root.current ?? undefined,
+          handler,
+        ),
+        successLabel,
+      },
+      actionLabels,
+    );
   return (
     <article
+      ref={root}
+      tabIndex={-1}
+      aria-busy={operations.state.pendingId ? true : undefined}
       data-scope="message"
       data-part="root"
       data-side={side ?? "incoming"}
@@ -180,12 +289,54 @@ export function LoongArkMessage({
             data-scope="message"
             data-part="action"
             type="button"
-            onClick={onRetry}
+            disabled={blocked}
+            data-action-id="retry"
+            onClick={() => run("retry", retryLabel ?? "Retry message", onRetry)}
           >
             {retryLabel ?? "Retry message"}
           </button>
         )}
       </footer>
+      {!!available.length && (
+        <div
+          data-scope="message"
+          data-part="actions"
+          role="group"
+          aria-label={actionLabels?.group ?? "Message actions"}
+        >
+          {available.map((action) => (
+            <button
+              key={action.id}
+              data-scope="message"
+              data-part="action"
+              type="button"
+              disabled={blocked || action.disabled}
+              data-action-id={action.id}
+              onClick={() =>
+                run(
+                  action.id,
+                  action.label,
+                  action.onAction,
+                  action.successLabel,
+                  action.disabled,
+                )
+              }
+            >
+              {action.label}
+            </button>
+          ))}
+        </div>
+      )}
+      {operations.state.message && (
+        <span
+          data-scope="message"
+          data-part="action-feedback"
+          data-outcome={operations.state.outcome}
+          role={operations.state.outcome === "error" ? "alert" : "status"}
+        >
+          {operations.state.message}
+        </span>
+      )}
     </article>
   );
 }

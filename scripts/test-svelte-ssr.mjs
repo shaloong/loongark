@@ -89,3 +89,12 @@ assert.match(html, /Visible range: 0 to 50/);
 assert.match(html, /<caption>Advanced SSR chart<\/caption>/);
 assert.match(html, /aria-pressed="false"/);
 assert.doesNotMatch(html, /<th scope="col">Hidden SSR series/);
+
+assert.match(html, /Save SSR/);
+assert.match(
+  html,
+  /<button(?=[^>]*data-action-id="archive")(?=[^>]*disabled)[^>]*>/,
+);
+assert.match(html, /aria-label="Preview SSR actions.txt"/);
+assert.match(html, /aria-label="Cancel upload SSR upload.zip"/);
+assert.doesNotMatch(html, /data-part="action-feedback"/);

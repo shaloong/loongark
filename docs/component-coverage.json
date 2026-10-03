@@ -121,11 +121,7 @@
     "TreeView",
     "Typography"
   ],
-  "latestBatch": [
-    "DateInput",
-    "Swap",
-    "Toc"
-  ],
+  "latestBatch": ["DateInput", "Swap", "Toc"],
   "equivalences": {
     "Input OTP": "PinInput",
     "Dropdown Menu": "Menu",
@@ -145,6 +141,7 @@
     "DataTable server state, column visibility/order and request states",
     "Swap lifecycle",
     "Context and collection control hooks",
-    "Chart controlled legend, bounded domain and accessible data table"
+    "Chart controlled legend, bounded domain and accessible data table",
+    "Message and Attachment async actions, preview/cancel and lifecycle"
   ]
 }

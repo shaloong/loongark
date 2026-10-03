@@ -1,6 +1,16 @@
+import type {
+  ConversationActionHandler,
+  ConversationActionLabels,
+  ConversationAction,
+} from "./conversation-actions";
 export const attachmentIconPath =
   "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M8 13h8 M8 17h5";
-export interface AttachmentOptions {
+export interface ConversationActionOptions {
+  /** 换成另一个消息或文件时重置反馈并取消旧动作。 */
+  actionKey?: string | number;
+  actionLabels?: ConversationActionLabels;
+}
+export interface AttachmentOptions extends ConversationActionOptions {
   name: string;
   size?: number;
   href?: string;
@@ -10,20 +20,27 @@ export interface AttachmentOptions {
   errorLabel?: string;
   removeLabel?: string;
   retryLabel?: string;
-  onRemove?: () => void;
-  onRetry?: () => void;
+  onRemove?: ConversationActionHandler;
+  onRetry?: ConversationActionHandler;
+  onPreview?: ConversationActionHandler;
+  onCancel?: ConversationActionHandler;
+  previewLabel?: string;
+  cancelLabel?: string;
 }
 export interface BubbleOptions {
   side?: "incoming" | "outgoing";
 }
-export interface MessageOptions extends BubbleOptions {
+export interface MessageOptions
+  extends BubbleOptions, ConversationActionOptions {
+  actions?: readonly ConversationAction[];
+  disabled?: boolean;
   author: string;
   dateTime?: string;
   timeLabel?: string;
   status?: "sent" | "sending" | "error";
   statusLabel?: string;
   retryLabel?: string;
-  onRetry?: () => void;
+  onRetry?: ConversationActionHandler;
 }
 export function fileSize(bytes?: number) {
   if (bytes === undefined || !Number.isFinite(bytes) || bytes < 0) return "";
@@ -67,7 +84,7 @@ export const conversationCSS = `
 [data-scope=attachment][data-part=progress] { width:100%;height:var(--lk-space-component-sm);accent-color:var(--lk-color-semantic-primary); }
 [data-scope=attachment][data-status=error] { border-color:var(--lk-color-semantic-destructive); }
 :is([data-scope=attachment],[data-scope=message])[data-part=actions] { display:flex;flex-wrap:wrap;align-items:center;gap:var(--lk-space-component-sm); }
-:is([data-scope=attachment],[data-scope=message])[data-part=action]:is(button) { min-height:var(--lk-control-height-md);padding:var(--lk-space-component-xs) var(--lk-space-component-sm);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-sm);background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground);font:inherit;font-size:var(--lk-typography-fontsize-sm);cursor:pointer; }
+:is([data-scope=attachment],[data-scope=message])[data-part=action]:is(button) { min-width:0;max-width:100%;overflow-wrap:anywhere;min-height:var(--lk-control-height-md);padding:var(--lk-space-component-xs) var(--lk-space-component-sm);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-sm);background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground);font:inherit;font-size:var(--lk-typography-fontsize-sm);cursor:pointer; }
 :is([data-scope=attachment],[data-scope=message])[data-part=action]:hover:not(:disabled) { background:var(--lk-color-semantic-accent); }
 [data-scope=attachment][data-disabled=true] { color:var(--lk-color-semantic-mutedforeground); }
 [data-scope=attachment] button:disabled { opacity:.5;cursor:not-allowed; }
@@ -81,4 +98,9 @@ export const conversationCSS = `
 [data-scope=message][data-status=error] [data-part=status] { color:var(--lk-color-semantic-destructive); }
 [data-scope=attachment][data-part=actions]:not(:has(button)) { display:none; }
 @media (max-width:480px) { [data-scope=attachment][data-part=root] { flex-wrap:wrap; } [data-scope=attachment][data-part=actions]:has(button:nth-child(2)) { flex-basis:100%;justify-content:flex-end; } [data-scope=message][data-part=content] { max-width:95%; } }
+:is([data-scope=attachment],[data-scope=message])[data-part=action-feedback] { font-size:var(--lk-typography-fontsize-sm);line-height:var(--lk-typography-lineheight-base);color:var(--lk-color-semantic-mutedforeground);overflow-wrap:anywhere; }
+:is([data-scope=attachment],[data-scope=message])[data-part=action-feedback][data-outcome=error] { color:var(--lk-color-semantic-destructive); }
+[data-scope=attachment][data-part=root]:has([data-part=action-feedback]) { flex-wrap:wrap; }
+[data-scope=attachment][data-part=action-feedback] { flex-basis:100%; }
+[data-scope=message] button:disabled { opacity:.5;cursor:not-allowed; }
 `;
