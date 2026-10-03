@@ -1,7 +1,10 @@
 <script lang="ts">
   import {
+    LoongArkButton,
     LoongArkSegmentGroupRoot,
     LoongArkSegmentGroupItem,
+    LoongArkSegmentGroupItemHiddenInput,
+    LoongArkSegmentGroupItemText,
   } from "@loongark/svelte";
   import type {
     SegmentGroupOrientation,
@@ -18,30 +21,34 @@
     { label: "Settings", value: "settings" },
   ];
 
-  let value: string[] = ["overview"];
-
-  const handleValueChange = (details: { value: string[] }) => {
-    value = details.value;
-  };
+  let value: string | null = "overview";
 </script>
 
-<div style="display: flex; flex-direction: column; gap: 12px;">
+<form style="display: flex; flex-direction: column; gap: 12px;">
   <LoongArkSegmentGroupRoot
+    aria-label="View"
+    name="view"
     {size}
     {orientation}
     {disabled}
-    {value}
-    onValueChange={handleValueChange}
+    bind:value
   >
     {#each options as option}
       <LoongArkSegmentGroupItem value={option.value}>
-        {option.label}
+        <LoongArkSegmentGroupItemHiddenInput /><LoongArkSegmentGroupItemText
+          >{option.label}</LoongArkSegmentGroupItemText
+        >
       </LoongArkSegmentGroupItem>
     {/each}
   </LoongArkSegmentGroupRoot>
   <span
     style="font-size: 14px; color: var(--lk-color-semantic-mutedforeground);"
   >
-    Selected: {value[0] || "None"}
+    Selected: {value || "None"}
   </span>
-</div>
+  <LoongArkButton
+    type="button"
+    variant="outline"
+    onclick={() => (value = "overview")}>Reset view</LoongArkButton
+  >
+</form>

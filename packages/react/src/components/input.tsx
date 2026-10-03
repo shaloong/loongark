@@ -1,5 +1,6 @@
 import type {
   HTMLAttributes,
+  LabelHTMLAttributes,
   InputHTMLAttributes,
   TextareaHTMLAttributes,
   ButtonHTMLAttributes,
@@ -161,7 +162,7 @@ export const LoongArkInputHelperText = ({
     children,
   );
 
-export interface LoongArkInputLabelProps extends HTMLAttributes<HTMLElement> {
+export interface LoongArkInputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   children?: ReactNode;
 }
 

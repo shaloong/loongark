@@ -16,7 +16,7 @@
     "package.json"
   ],
   "dependencies": {
-    "@ark-ui/react": "^5.30.0",
+    "@ark-ui/react": "^5.39.2",
     "@loongark/kit": "workspace:*",
     "@loongark/primitives": "workspace:*",
     "@loongark/theme": "workspace:*"

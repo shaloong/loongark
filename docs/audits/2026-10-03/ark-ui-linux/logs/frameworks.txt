@@ -1,0 +1,105 @@
+
+> loongark@0.0.0 test:frameworks /workspace/loongark
+> node scripts/build-framework-fixtures.mjs && node scripts/build-example-fixtures.mjs && node scripts/run-framework-tests.mjs
+
+react 发布消费构建通过
+vue 发布消费构建通过
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+solid 发布消费构建通过
+svelte 发布消费构建通过
+react: 35 个现有组件示例构建通过
+vue: 32 个现有组件示例构建通过
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+solid: 32 个现有组件示例构建通过
+svelte: 32 个现有组件示例构建通过
+[serve-static] /workspace/loongark/tests/consumer-dist on http://127.0.0.1:6007 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 8 tests using 2 workers
+
+(node:162410) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:162411) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:162410) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:162411) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/framework-consumers.spec.ts:5:7 › vue 发布消费、绑定、主题和浮层 (2.9s)
+  ✓  1 [chromium] › tests/framework-consumers.spec.ts:5:7 › react 发布消费、绑定、主题和浮层 (3.2s)
+  ✓  3 [chromium] › tests/framework-consumers.spec.ts:5:7 › solid 发布消费、绑定、主题和浮层 (2.7s)
+  ✓  4 [chromium] › tests/framework-consumers.spec.ts:5:7 › svelte 发布消费、绑定、主题和浮层 (2.8s)
+  ✘  6 [chromium] › tests/framework-examples.spec.ts:18:7 › vue 全部现有组件示例运行 (9.0s)
+(node:162931) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:162931) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+react: 35 个组件示例已运行
+  ✓  5 [chromium] › tests/framework-examples.spec.ts:18:7 › react 全部现有组件示例运行 (16.9s)
+solid: 32 个组件示例已运行
+  ✓  7 [chromium] › tests/framework-examples.spec.ts:18:7 › solid 全部现有组件示例运行 (17.6s)
+  ✘  8 [chromium] › tests/framework-examples.spec.ts:18:7 › svelte 全部现有组件示例运行 (15.5s)
+
+
+  1) [chromium] › tests/framework-examples.spec.ts:18:7 › vue 全部现有组件示例运行 ───────────────────────────
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator: getByRole('textbox', { name: 'Task name' })
+    Expected: focused
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for getByRole('textbox', { name: 'Task name' })
+
+
+       at arkAdditionsChecks.ts:121
+
+      119 |   const input = page.getByRole("textbox", { name: "Task name" }),
+      120 |     finish = page.getByRole("button", { name: "Finish focus task" });
+    > 121 |   await expect(input).toBeFocused();
+          |                       ^
+      122 |   await input.press("Shift+Tab");
+      123 |   await expect(finish).toBeFocused();
+      124 |   await finish.press("Tab");
+        at checkArkUtilities (/workspace/loongark/tests/arkAdditionsChecks.ts:121:23)
+        at /workspace/loongark/tests/framework-examples.spec.ts:151:43
+
+    Error Context: test-results/framework-examples-vue-全部现有组件示例运行-chromium/error-context.md
+
+  2) [chromium] › tests/framework-examples.spec.ts:18:7 › svelte 全部现有组件示例运行 ────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('tree', { name: 'Project data' })
+    Expected substring: "Updated project"
+    Received string:    "›  { project: \"LoongArk\", enabled: true, components: Array(2), … }  project : \"LoongArk\"enabled : true› components : (2) [ \"ImageCropper\", \"JsonTreeView\" ]  0 : \"ImageCropper\"1 : \"JsonTreeView\"length : 2› metadata : { frameworks: 4, note: null }  frameworks : 4note : nullunsafeText : \"<script>window.__jsonExecuted=true</script>\""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('tree', { name: 'Project data' })
+        9 × locator resolved to <div dir="ltr" role="tree" tabindex="-1" data-part="tree" id="tree:c2:tree" aria-label="Project data" data-scope="json-tree-view" aria-labelledby="tree:c2:label">…</div>
+          - unexpected value "›  { project: "LoongArk", enabled: true, components: Array(2), … }  project : "LoongArk"enabled : true› components : (2) [ "ImageCropper", "JsonTreeView" ]  0 : "ImageCropper"1 : "JsonTreeView"length : 2› metadata : { frameworks: 4, note: null }  frameworks : 4note : nullunsafeText : "<script>window.__jsonExecuted=true</script>""
+
+
+       at arkAdditionsChecks.ts:84
+
+      82 |   await expect(branch).toHaveAttribute("data-state", "closed");
+      83 |   await page.getByRole("button", { name: "Update data" }).click();
+    > 84 |   await expect(tree).toContainText("Updated project");
+         |                      ^
+      85 |   expect(
+      86 |     await page.evaluate(() => Reflect.get(window, "__jsonExecuted")),
+      87 |   ).toBeUndefined();
+        at checkJsonTreeView (/workspace/loongark/tests/arkAdditionsChecks.ts:84:22)
+        at /workspace/loongark/tests/framework-examples.spec.ts:150:43
+
+    Error Context: test-results/framework-examples-svelte-全部现有组件示例运行-chromium/error-context.md
+
+  2 failed
+    [chromium] › tests/framework-examples.spec.ts:18:7 › vue 全部现有组件示例运行 ────────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:18:7 › svelte 全部现有组件示例运行 ─────────────────────────
+  6 passed (39.4s)
+ ELIFECYCLE  Command failed with exit code 1.

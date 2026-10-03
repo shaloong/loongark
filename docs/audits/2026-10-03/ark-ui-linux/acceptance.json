@@ -1,0 +1,181 @@
+{
+  "recordedAt": "2026-10-03T14:10:05.168047+00:00",
+  "branch": "develop",
+  "baseCommit": "a72444814658803efe2b7f9dea7c182a170f15f7",
+  "status": "passed",
+  "phase": "Ark UI 九族组件、高级部件、四端控制与生命周期修正",
+  "environment": {
+    "os": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "installation": "显式更新 Ark 依赖锁文件后以 --frozen-lockfile 安装；新增 Kit JSON 模型直接依赖沿用 Ark 的版本",
+    "ark": {
+      "react": "5.39.2",
+      "vue": "5.39.2",
+      "solid": "5.39.2",
+      "svelte": "5.24.2"
+    },
+    "browser": "system Chromium 151.0.7922.173",
+    "playwright": "1.57.0",
+    "browserExecutable": "/usr/bin/chromium",
+    "browserDeviation": "固定 Chromium 143 下载受网络策略阻止，系统 Chromium 不等同于固定浏览器",
+    "viewports": [
+      375,
+      900,
+      1280
+    ]
+  },
+  "coverage": {
+    "families": 111,
+    "stories": 279,
+    "publicValueExportsPerFramework": 756,
+    "examples": {
+      "react": 35,
+      "vue": 32,
+      "solid": 32,
+      "svelte": 32,
+      "total": 131
+    },
+    "pending": [
+      "DateInput",
+      "Swap",
+      "Toc",
+      "Drawer 原生拖拽/吸附点",
+      "组合组件高级场景"
+    ]
+  },
+  "measurements": {
+    "light": {
+      "stories": 279,
+      "wcagViolations": 0,
+      "metricsFile": "after/light/metrics.json",
+      "screenshots": 390,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0
+    },
+    "dark": {
+      "stories": 279,
+      "wcagViolations": 0,
+      "metricsFile": "after/dark/metrics.json",
+      "screenshots": 390,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0
+    }
+  },
+  "checks": [
+    {
+      "command": "pnpm verify",
+      "status": "passed",
+      "log": "logs/verify.log"
+    },
+    {
+      "command": "pnpm check:contracts",
+      "status": "passed",
+      "log": "logs/contracts.log"
+    },
+    {
+      "command": "pnpm storybook:build",
+      "status": "passed",
+      "log": "logs/storybook.log"
+    },
+    {
+      "command": "pnpm check:coverage",
+      "status": "passed",
+      "log": "logs/coverage.log"
+    },
+    {
+      "command": "pnpm check:publication",
+      "status": "passed",
+      "log": "logs/publication.log"
+    },
+    {
+      "command": "pnpm check:svelte",
+      "status": "passed",
+      "log": "logs/svelte.log"
+    },
+    {
+      "command": "pnpm test:frameworks",
+      "status": "passed",
+      "log": "logs/frameworks.log"
+    },
+    {
+      "command": "node scripts/run-playwright.mjs tests/ark-additions.spec.ts --project=chromium --workers=2",
+      "status": "passed",
+      "log": "logs/ark-e2e.log"
+    },
+    {
+      "command": "pnpm test:e2e --workers=2",
+      "status": "passed",
+      "log": "logs/e2e.log"
+    },
+    {
+      "command": "pnpm visual:test --workers=2",
+      "status": "passed",
+      "log": "logs/visual.log"
+    }
+  ],
+  "manualReview": {
+    "frameworkImages": 64,
+    "storyImages": 16,
+    "reviewedContactSheets": [
+      "crop-dark-1280-parity.jpg",
+      "crop-dark-375-parity.jpg",
+      "crop-light-1280-parity.jpg",
+      "crop-light-375-parity.jpg",
+      "json-dark-1280-parity.jpg",
+      "json-dark-375-parity.jpg",
+      "json-light-1280-parity.jpg",
+      "json-light-375-parity.jpg",
+      "selection-dark-1280-parity.jpg",
+      "selection-dark-375-parity.jpg",
+      "selection-light-1280-parity.jpg",
+      "selection-light-375-parity.jpg",
+      "utilities-dark-1280-parity.jpg",
+      "utilities-dark-375-parity.jpg",
+      "utilities-light-1280-parity.jpg",
+      "utilities-light-375-parity.jpg",
+      "stories-dark-1280.jpg",
+      "stories-dark-375.jpg",
+      "stories-light-1280.jpg",
+      "stories-light-375.jpg",
+      "linux-baselines-reviewed.jpg"
+    ],
+    "originalImages": [
+      "frameworks-screenshots.tar.gz",
+      "review/"
+    ],
+    "findingsFixed": [
+      "裁剪图片顶对齐与手机裁剪框越出图片",
+      "粗白条拖拽手柄与缺失三等分网格",
+      "首页/末页按钮高度 39px 与其他 36px 不一致",
+      "JSON 导航起点及装饰箭头的错误焦点框",
+      "独立 Story 主地标/标题及 iframe 可访问名称"
+    ],
+    "frameworkParity": "尺寸、布局与四端行为一致；精确像素差异见 framework-parity.json，JSON 原生文本分隔符和 Select 箭头有细微渲染差异，未声称完全逐像素一致"
+  },
+  "baseline": {
+    "newLinuxImages": 16,
+    "existingLinuxImages": 14,
+    "windowsImagesUnchanged": 2,
+    "reviewedBeforeInitialization": true,
+    "candidateGenerationLog": "logs/linux-baselines-initialize.log",
+    "candidateGenerationResult": "Playwright missing 模式生成 16 张缺失截图并返回失败；不计为通过",
+    "comparisonRunPassed": true,
+    "comparisonLog": "logs/linux-baselines-comparison.log"
+  },
+  "limits": [
+    "默认 Story 明暗全量 WCAG/窄屏/动效自动检查；人工查看专项 80 张截图及基线，不声称逐张查看全量截图",
+    "暴露原生 Props/Provider/Hook 不代表所有高级场景或回调均已有专项覆盖；原生 Context Hook 与 Collection 异步 Hook仍在后续能力复核中",
+    "未测试全部 peer 版本、Firefox/WebKit、真实手机、屏幕阅读器或所有触摸手势",
+    "Select 表单回归验证客户端真实 FormData；SSR 验证隐藏输入输出，未声称无 JS 提交覆盖完整",
+    "DateInput、Swap、Toc 与原生手势 Drawer 仍待补；组合模型的服务端表格、图表交互、条件问卷与消息操作状态继续开发"
+  ],
+  "changes": {
+    "paletteAndTokensUnchanged": true,
+    "dependenciesAdded": [
+      "@zag-js/json-tree-utils@1.43.3"
+    ],
+    "mainUnchanged": true
+  },
+  "sourceHashes": "source-sha256.json"
+}

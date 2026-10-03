@@ -874,3 +874,7 @@ export { default as LoongArkMessage } from "./components/Message.svelte";
 export {default as LoongArkMessageScroller} from "./components/MessageScroller.svelte";
 
 export {default as LoongArkQuestionnaire} from "./components/Questionnaire.svelte";
+
+export * from "./components/ark-additions";
+
+export * from "./components/ark-advanced";

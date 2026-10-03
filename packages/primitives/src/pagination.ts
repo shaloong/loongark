@@ -117,7 +117,9 @@ const buildPaginationStyles = (theme: LoongArkTheme): string => {
   const prev = `[data-scope="pagination"][data-part="prev-trigger"]`;
   const next = `[data-scope="pagination"][data-part="next-trigger"]`;
   const ellipsis = `[data-scope="pagination"][data-part="ellipsis"]`;
-  const button = `:is(${item}, ${prev}, ${next})`;
+  const first = `[data-scope="pagination"][data-part="first-trigger"]`;
+  const last = `[data-scope="pagination"][data-part="last-trigger"]`;
+  const button = `:is(${item}, ${prev}, ${next}, ${first}, ${last})`;
   const interactiveButton = `${button}:not([disabled]):not([data-disabled='true'])`;
 
   return `

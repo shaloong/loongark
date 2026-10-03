@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import {
   LoongArkSegmentGroupRoot,
   LoongArkSegmentGroupItem,
+  LoongArkSegmentGroupItemHiddenInput,
+  LoongArkSegmentGroupItemText,
 } from "@loongark/react";
 
 const meta: Meta = {
@@ -11,7 +13,7 @@ const meta: Meta = {
     docs: {
       description: {
         component:
-          "LoongArkSegmentGroup provides a segmented control style on top of Ark UI Toggle Group.",
+          "LoongArkSegmentGroup provides a segmented control style with Ark UI Segment Group and native form semantics.",
       },
     },
   },
@@ -31,18 +33,19 @@ const SegmentGroupDemo = ({
   orientation = "horizontal",
 }: SegmentGroupDemoProps) => (
   <LoongArkSegmentGroupRoot
-    defaultValue={["overview"]}
+    defaultValue="overview"
     size={size}
     orientation={orientation}
+    aria-label="View"
   >
     <LoongArkSegmentGroupItem value="overview">
-      Overview
+      <LoongArkSegmentGroupItemHiddenInput/><LoongArkSegmentGroupItemText>Overview</LoongArkSegmentGroupItemText>
     </LoongArkSegmentGroupItem>
     <LoongArkSegmentGroupItem value="activity">
-      Activity
+      <LoongArkSegmentGroupItemHiddenInput/><LoongArkSegmentGroupItemText>Activity</LoongArkSegmentGroupItemText>
     </LoongArkSegmentGroupItem>
     <LoongArkSegmentGroupItem value="settings">
-      Settings
+      <LoongArkSegmentGroupItemHiddenInput/><LoongArkSegmentGroupItemText>Settings</LoongArkSegmentGroupItemText>
     </LoongArkSegmentGroupItem>
   </LoongArkSegmentGroupRoot>
 );

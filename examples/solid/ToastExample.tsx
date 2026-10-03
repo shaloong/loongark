@@ -15,7 +15,7 @@ import {
 type ToastVariant = "info" | "success" | "warning" | "error";
 
 const createToast = (
-  toaster: ReturnType<typeof createToaster>,
+  toaster: ReturnType<typeof createToaster<import("solid-js").JSX.Element>>,
   type: ToastVariant,
   title: string,
 ) => {

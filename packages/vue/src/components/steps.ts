@@ -14,7 +14,7 @@ export interface StepsChangeDetails {
 export const LoongArkStepsRoot = defineComponent({
   name: "LoongArkStepsRoot",
   inheritAttrs: false,
-  emits: ["stepChange", "update:step", "stepComplete"],
+  emits: ["stepChange", "update:step", "stepComplete", "stepInvalid"],
   props: {
     size: {
       type: String as PropType<StepsSize>,

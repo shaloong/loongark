@@ -61,6 +61,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
     await expect(
       page.getByRole("dialog", { name: "Edit profile" }),
     ).toBeVisible();
+    await expect(page.getByRole("button", { name: "Save changes" })).toBeFocused();
     await page.keyboard.press("Escape");
     await expect(
       page.getByRole("dialog", { name: "Edit profile" }),

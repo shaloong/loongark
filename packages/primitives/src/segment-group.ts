@@ -1,6 +1,6 @@
 /**
  * Segment Group primitive styles.
- * Uses Ark UI Toggle Group data attributes with segmented styling.
+ * 保留 Ark SegmentGroup 状态属性，统一单选控件外观。
  */
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
@@ -24,11 +24,6 @@ interface SegmentGroupDesignTokens {
   paddingX: Record<SegmentGroupSize, string>;
   radius: Record<SegmentGroupSize, string>;
   gap: string;
-  brand: {
-    primary: string;
-    accent: string;
-    subtle: string;
-  };
   neutral: {
     surface: string;
     surfaceRaised: string;
@@ -57,7 +52,6 @@ const extractSegmentGroupTokens = (
   const radius = asTokenTree(theme.styleTokens.radius);
 
   const color = theme.styleTokens.color as TokenTree;
-  const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
   const motion = theme.styleTokens.motion as TokenTree;
@@ -89,11 +83,6 @@ const extractSegmentGroupTokens = (
       lg: toStringToken(radius.lg, "16px"),
     },
     gap: toStringToken(componentSpace.xs, "4px"),
-    brand: {
-      primary: toStringToken(brand.primary, "#006EFF"),
-      accent: toStringToken(brand.accent, "#5AC8FA"),
-      subtle: toStringToken(brand.subtle, "#EFF6FF"),
-    },
     neutral: {
       surface: toStringToken(neutral["50"], "#F5F6FA"),
       surfaceRaised: toStringToken(neutral["100"], "#E5E6EB"),
@@ -113,7 +102,7 @@ const buildSegmentGroupStyles = (theme: LoongArkTheme): string => {
   const tokens = extractSegmentGroupTokens(theme);
   const root = `[data-scope="segment-group"][data-part="root"]`;
   const item = `[data-scope="segment-group"][data-part="item"]`;
-  const interactiveItem = `${item}:not([disabled]):not([data-disabled='true'])`;
+  const interactiveItem = `${item}:not([disabled]):not([data-disabled])`;
 
   return `
 
@@ -160,12 +149,13 @@ const buildSegmentGroupStyles = (theme: LoongArkTheme): string => {
     color: ${tokens.neutral.text};
   }
 
-  ${item}[data-state="on"] {
-    background: ${tokens.brand.subtle};
-    color: ${tokens.brand.primary};
+  ${item}[data-state="checked"] {
+    background: var(--lk-color-semantic-background);
+    color: var(--lk-color-semantic-foreground);
+    box-shadow: var(--lk-shadow-sm);
   }
 
-  ${item}[data-disabled="true"],
+  ${item}[data-disabled],
   ${item}[disabled] {
     background: transparent;
     color: ${tokens.neutral.disabled};
@@ -174,10 +164,18 @@ const buildSegmentGroupStyles = (theme: LoongArkTheme): string => {
     box-shadow: none;
   }
 
-  ${item}:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px ${tokens.brand.accent};
+  ${item}:focus-visible, ${item}[data-focus] {
+    outline: var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring);
+    outline-offset: var(--lk-space-component-xs);
   }
+
+  [data-scope="segment-group"][data-part="indicator"] {
+    background: var(--lk-color-semantic-background);
+    border-radius: var(--lk-radius-sm);
+    box-shadow: var(--lk-shadow-sm);
+    z-index: 0;
+  }
+  ${item} { position: relative; z-index: 1; }
 
   ${root}[data-size="sm"] {
     border-radius: ${tokens.radius.sm};
@@ -204,9 +202,6 @@ const buildSegmentGroupStyles = (theme: LoongArkTheme): string => {
 const segmentGroupContract: PrimitiveContract<SegmentGroupPrimitiveProps> = {
   name: "segment-group",
   tokens: [
-    "color.brand.primary",
-    "color.brand.accent",
-    "color.brand.subtle",
     "color.neutral.50",
     "color.neutral.100",
     "color.neutral.300",

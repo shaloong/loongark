@@ -39,6 +39,13 @@ assert.match(
   /<textarea(?=[^>]*data-autosize="true")(?=[^>]*rows="2")[^>]*>/,
 );
 assert.match(html, /Hello from Svelte SSR/);
+assert.match(html,/SSR client fallback/);
+assert.doesNotMatch(html,/Client-only secret/);
+assert.match(html,/SSR JSON/);
+assert.match(html,/data-scope="image-cropper"/);
+assert.match(html,/name="ssr-framework"/);
+assert.match(html,/<mark[^>]*>highlighted<\/mark>/);
+
 assert.match(html, /aria-label="SSR legend"/);
 assert.match(html, /SSR category — SSR series: 1e\+308/);
 assert.match(html.replace(/<[^>]*>/g, ""), /1 rows · 1 selected/);

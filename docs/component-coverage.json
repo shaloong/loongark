@@ -2,7 +2,8 @@
   "updatedAt": "2026-10-03",
   "sources": [
     "https://ui.shadcn.com/docs/components",
-    "https://mui.com/material-ui/all-components/"
+    "https://mui.com/material-ui/all-components/",
+    "https://ark-ui.com/docs/overview/introduction"
   ],
   "families": [
     "Accordion",
@@ -27,6 +28,7 @@
     "Chart",
     "Checkbox",
     "Chip",
+    "ClientOnly",
     "Clipboard",
     "Collapsible",
     "ColorPicker",
@@ -38,6 +40,7 @@
     "Date Picker",
     "Dialog",
     "Direction",
+    "DownloadTrigger",
     "Drawer",
     "Editable",
     "Empty",
@@ -47,12 +50,18 @@
     "Filter Bar",
     "FloatingActionButton",
     "FloatingPanel",
+    "FocusTrap",
+    "Format",
+    "Frame",
     "Grid",
+    "Highlight",
     "HoverCard",
+    "ImageCropper",
     "ImageList",
     "Input",
     "InputGroup",
     "Item",
+    "JsonTreeView",
     "Kbd",
     "Label",
     "Link",
@@ -72,6 +81,7 @@
     "PasswordInput",
     "PinInput",
     "Popover",
+    "Presence",
     "Progress",
     "QRCode",
     "Questionnaire",
@@ -108,7 +118,17 @@
     "TreeView",
     "Typography"
   ],
-  "latestBatch": [],
+  "latestBatch": [
+    "ImageCropper",
+    "JsonTreeView",
+    "ClientOnly",
+    "DownloadTrigger",
+    "FocusTrap",
+    "Format",
+    "Frame",
+    "Highlight",
+    "Presence"
+  ],
   "equivalences": {
     "Input OTP": "PinInput",
     "Dropdown Menu": "Menu",
@@ -119,8 +139,14 @@
     "Divider": "Separator",
     "Modal/Backdrop/Portal": "Dialog and shared overlay parts"
   },
-  "pending": [],
+  "pending": [
+    "DateInput",
+    "Swap",
+    "TOC",
+    "Drawer gesture/snap points"
+  ],
   "latestEnhancements": [
-    "Chart"
+    "Segment Group",
+    "Advanced RootProvider/Context/parts"
   ]
 }

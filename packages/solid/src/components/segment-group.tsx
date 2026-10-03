@@ -1,20 +1,20 @@
 /**
  * Segment Group component - Solid wrapper.
- * Uses Ark UI Toggle Group under the hood.
+ * 使用 Ark UI SegmentGroup，保留单选语义和隐藏表单输入。
  */
 import { type Component, type JSX, mergeProps } from "solid-js";
 import {
-  ToggleGroup as ArkToggleGroup,
-  type ToggleGroupRootProps as ArkToggleGroupRootProps,
-  type ToggleGroupItemProps as ArkToggleGroupItemProps,
-} from "@ark-ui/solid/toggle-group";
+  SegmentGroup as ArkSegmentGroup,
+  type SegmentGroupRootProps as ArkSegmentGroupRootProps,
+  type SegmentGroupItemProps as ArkSegmentGroupItemProps,
+} from "@ark-ui/solid/segment-group";
 import type {
   SegmentGroupOrientation,
   SegmentGroupSize,
 } from "@loongark/primitives";
 
 export interface LoongArkSegmentGroupRootProps extends Omit<
-  ArkToggleGroupRootProps,
+  ArkSegmentGroupRootProps,
   "asChild"
 > {
   size?: SegmentGroupSize;
@@ -34,7 +34,7 @@ export const LoongArkSegmentGroupRoot: Component<
   );
 
   return (
-    <ArkToggleGroup.Root
+    <ArkSegmentGroup.Root
       {...props}
       data-scope="segment-group"
       data-part="root"
@@ -42,16 +42,16 @@ export const LoongArkSegmentGroupRoot: Component<
       data-orientation={merged.orientation}
     >
       {props.children}
-    </ArkToggleGroup.Root>
+    </ArkSegmentGroup.Root>
   );
 };
 
 export const LoongArkSegmentGroupItem: Component<
-  ArkToggleGroupItemProps & { children?: JSX.Element }
+  ArkSegmentGroupItemProps & { children?: JSX.Element }
 > = (props) => {
   return (
-    <ArkToggleGroup.Item {...props} data-scope="segment-group" data-part="item">
+    <ArkSegmentGroup.Item {...props} data-scope="segment-group" data-part="item">
       {props.children}
-    </ArkToggleGroup.Item>
+    </ArkSegmentGroup.Item>
   );
 };

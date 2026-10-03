@@ -40,6 +40,11 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkChart,${chartProps})));`
         : `console.log(renderToString(h(L.LoongArkChart,${chartProps})));`;
+  const arkScript = framework === "Vue"
+    ? `function AdvancedSSR(){const select=L.useSelect({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']});const crop=L.useImageCropper();return ()=>h('div',{},[h(L.LoongArkSelectRootProvider,{value:select.value},()=>h(L.LoongArkSelectHiddenSelect)),h(L.LoongArkImageCropperRootProvider,{value:crop.value},()=>h(L.LoongArkImageCropperViewport)),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1},()=>h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})),h(L.LoongArkClientOnly,{}, {default:()=> 'Client-only secret',fallback:()=> 'SSR client fallback'}),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'})]);}console.log(await renderToString(createSSRApp({setup:AdvancedSSR})));`
+    : framework === "Solid"
+    ? `function AdvancedSSR(){const select=L.useSelect(()=>({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']})),crop=L.useImageCropper();return [h(L.LoongArkSelectRootProvider,{value:select,get children(){return h(L.LoongArkSelectHiddenSelect,{})}}),h(L.LoongArkImageCropperRootProvider,{value:crop,get children(){return h(L.LoongArkImageCropperViewport,{})}}),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1,get children(){return h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})}}),h(L.LoongArkClientOnly,{children:'Client-only secret',fallback:'SSR client fallback'}),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'})];}console.log(renderToString(()=>h(AdvancedSSR,{})));`
+    : `function AdvancedSSR(){const select=L.useSelect({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']}),crop=L.useImageCropper();return h('div',null,h(L.LoongArkSelectRootProvider,{value:select},h(L.LoongArkSelectHiddenSelect)),h(L.LoongArkImageCropperRootProvider,{value:crop},h(L.LoongArkImageCropperViewport)),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1},h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})),h(L.LoongArkClientOnly,{fallback:'SSR client fallback'},'Client-only secret'),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'}));}console.log(renderToString(h(AdvancedSSR)));`;
   const result = spawnSync(
     process.execPath,
     [
@@ -47,7 +52,7 @@ for (const [framework, script] of [
       "-e",
       script.replace(
         "process.exit(0);",
-        tableScript + chartScript + "process.exit(0);",
+        tableScript + chartScript + arkScript + "process.exit(0);",
       ),
     ],
     { encoding: "utf8", timeout: 60000 },
@@ -58,6 +63,13 @@ for (const [framework, script] of [
     `${framework}: ${result.stderr} ${result.error ?? ""}`,
   );
   assert.match(result.stdout, /Hello/);
+  assert.match(result.stdout, /SSR client fallback/);
+  assert.doesNotMatch(result.stdout, /Client-only secret/);
+  assert.match(result.stdout, /SSR JSON/);
+  assert.match(result.stdout, /data-scope="image-cropper"/);
+  assert.match(result.stdout, /name="ssr-framework"/);
+  assert.match(result.stdout, /<mark[^>]*>highlighted<\/mark>/);
+
   assert.match(result.stdout, /aria-label="SSR legend"/);
   assert.match(result.stdout, /SSR category — SSR series: 1e\+308/);
   assert.match(result.stdout.replace(/<[^>]*>/g, ""), /1 rows · 1 selected/);

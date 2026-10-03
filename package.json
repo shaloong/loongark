@@ -27,7 +27,7 @@
     "check:coverage": "node scripts/check-api-parity.mjs && node scripts/check-component-coverage.mjs"
   },
   "devDependencies": {
-    "@ark-ui/react": "^5.30.0",
+    "@ark-ui/react": "^5.39.2",
     "@axe-core/playwright": "^4.11.0",
     "@babel/core": "^7.28.5",
     "@playwright/test": "^1.57.0",

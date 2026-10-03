@@ -1,0 +1,434 @@
+[
+  {
+    "example": "crop",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "5e89583104ffa02eb54622dbcf8f293722af1b13d4a9cc76a11260607721a7df"
+  },
+  {
+    "example": "crop",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "5e89583104ffa02eb54622dbcf8f293722af1b13d4a9cc76a11260607721a7df"
+  },
+  {
+    "example": "crop",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "5e89583104ffa02eb54622dbcf8f293722af1b13d4a9cc76a11260607721a7df"
+  },
+  {
+    "example": "crop",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "da012ebdf761d0dd21cc8e62da883b929041af6a066df24e8703080a37d021ad"
+  },
+  {
+    "example": "crop",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "da012ebdf761d0dd21cc8e62da883b929041af6a066df24e8703080a37d021ad"
+  },
+  {
+    "example": "crop",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "da012ebdf761d0dd21cc8e62da883b929041af6a066df24e8703080a37d021ad"
+  },
+  {
+    "example": "crop",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "5d11eb697f14c023d2b30453ccd5f50c9941cb0a0ffd8eb250605113d99e5799"
+  },
+  {
+    "example": "crop",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "5d11eb697f14c023d2b30453ccd5f50c9941cb0a0ffd8eb250605113d99e5799"
+  },
+  {
+    "example": "crop",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "5d11eb697f14c023d2b30453ccd5f50c9941cb0a0ffd8eb250605113d99e5799"
+  },
+  {
+    "example": "crop",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "1c3f515982a13dfde5cc40e7fdbd19a73018f41e30e83c3acf13c4edf27addfa"
+  },
+  {
+    "example": "crop",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "1c3f515982a13dfde5cc40e7fdbd19a73018f41e30e83c3acf13c4edf27addfa"
+  },
+  {
+    "example": "crop",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "1c3f515982a13dfde5cc40e7fdbd19a73018f41e30e83c3acf13c4edf27addfa"
+  },
+  {
+    "example": "json",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 5966,
+    "sha256": "eac0c8277215d6a0a0bef134649a8ae5902fae4ca0d7240000df7fc5f51b9693"
+  },
+  {
+    "example": "json",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "2f2112be773d4fd9bcce5688cacc3884bfba1a4732ebc01c3ad77cc521f299ab"
+  },
+  {
+    "example": "json",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 6068,
+    "sha256": "9fd9748c72da631eb5187d61ab2bd110ed47362befb5fae3b167ae04677965fa"
+  },
+  {
+    "example": "json",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 3952,
+    "sha256": "1b75d22a16ff9bb37b375c096ecba4b69bb46660909806c7da17c8aef1f444af"
+  },
+  {
+    "example": "json",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "db55a71c0ae757fffda6e18aaf0593553781c74d00e3f66d2e0150b75019596e"
+  },
+  {
+    "example": "json",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 3975,
+    "sha256": "13da9d026a53f34fb2af8a969670ff48402acb145cd7905fbfbfeb383a636d01"
+  },
+  {
+    "example": "json",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 5913,
+    "sha256": "d3adec37cd775a70800fdf422f3d7c2d9bc019dc92d57be14ec653bec1ddd2da"
+  },
+  {
+    "example": "json",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "74bd2f96fcee9ef4694e9a75253f0308e80b0848163cf6a8d63e113d1b98fa9b"
+  },
+  {
+    "example": "json",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 6026,
+    "sha256": "535df9b724a2f4fbbc4034929526ecd1412bb95d9a5b851845c605f81d2194fc"
+  },
+  {
+    "example": "json",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 3930,
+    "sha256": "797ea42cb08f5c31a813935b0518a280decb45f9b39b734b452239a0824867fa"
+  },
+  {
+    "example": "json",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "c5d6f57fc5e4c59d3fe0dca8e0f749405b73f8a703bf74a150efdc7fe6abfd8f"
+  },
+  {
+    "example": "json",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 3947,
+    "sha256": "bf072390bf31b19fce37659b868f592a5883fb2c34f5c9fb704c546e7595d1ab"
+  },
+  {
+    "example": "utilities",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "dfbff572fad5f323b4d76756b40e9cb12dadbde9f82ec98c466d28c09cd58ed9"
+  },
+  {
+    "example": "utilities",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "dfbff572fad5f323b4d76756b40e9cb12dadbde9f82ec98c466d28c09cd58ed9"
+  },
+  {
+    "example": "utilities",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "dfbff572fad5f323b4d76756b40e9cb12dadbde9f82ec98c466d28c09cd58ed9"
+  },
+  {
+    "example": "utilities",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "94035fac11b4f9baccd54210752b3a05d2062f04ae1bd8ad62b454f61fd70c4a"
+  },
+  {
+    "example": "utilities",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "94035fac11b4f9baccd54210752b3a05d2062f04ae1bd8ad62b454f61fd70c4a"
+  },
+  {
+    "example": "utilities",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "94035fac11b4f9baccd54210752b3a05d2062f04ae1bd8ad62b454f61fd70c4a"
+  },
+  {
+    "example": "utilities",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "aa5f46ff895edab1acb4fb9976257855ca1d419fe0b63ece26440b7f25518b00"
+  },
+  {
+    "example": "utilities",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "aa5f46ff895edab1acb4fb9976257855ca1d419fe0b63ece26440b7f25518b00"
+  },
+  {
+    "example": "utilities",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "aa5f46ff895edab1acb4fb9976257855ca1d419fe0b63ece26440b7f25518b00"
+  },
+  {
+    "example": "utilities",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "e0e123629b3f3af27b4868e152a81a8d5db6b7b4afacc51b01a446baa8161fbe"
+  },
+  {
+    "example": "utilities",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "e0e123629b3f3af27b4868e152a81a8d5db6b7b4afacc51b01a446baa8161fbe"
+  },
+  {
+    "example": "utilities",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "e0e123629b3f3af27b4868e152a81a8d5db6b7b4afacc51b01a446baa8161fbe"
+  },
+  {
+    "example": "selection",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 109,
+    "sha256": "12c55aff15d4c80715b6cd1f9feda54659234441837c308a44c9a89bce25e2ea"
+  },
+  {
+    "example": "selection",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "e726a38416c22033411afd195852dcf4d1b62adca1a7933cdc414f3913107beb"
+  },
+  {
+    "example": "selection",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 109,
+    "sha256": "12c55aff15d4c80715b6cd1f9feda54659234441837c308a44c9a89bce25e2ea"
+  },
+  {
+    "example": "selection",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 109,
+    "sha256": "2a86e06748d51b424bd7b9943a4232970c3a4a2003201e89978e27b5146839ab"
+  },
+  {
+    "example": "selection",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "8dc30b986729baf07e4437961dee41d94a9d6a108014ab18cd7da55e47fdef1f"
+  },
+  {
+    "example": "selection",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 109,
+    "sha256": "2a86e06748d51b424bd7b9943a4232970c3a4a2003201e89978e27b5146839ab"
+  },
+  {
+    "example": "selection",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 109,
+    "sha256": "6474092bb35484e5ff6a811e11bf6f3f144144c402d1b242673ba3fdc77e6987"
+  },
+  {
+    "example": "selection",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "d948d1664d9601f1fe43217a16afb23e586ecf0dda4cf382c00914ccac689534"
+  },
+  {
+    "example": "selection",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 109,
+    "sha256": "6474092bb35484e5ff6a811e11bf6f3f144144c402d1b242673ba3fdc77e6987"
+  },
+  {
+    "example": "selection",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "dimensionsEqual": true,
+    "differentPixels": 109,
+    "sha256": "afb2f44a9486104cb343bf0b740c7d78112af68aff8ea20b7eeacaad4ab0c87d"
+  },
+  {
+    "example": "selection",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "sha256": "cb2d1d964f996f6c97d510d153591839a4f7a2ce0dcc7a9d09fa93ba5e841868"
+  },
+  {
+    "example": "selection",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "dimensionsEqual": true,
+    "differentPixels": 109,
+    "sha256": "afb2f44a9486104cb343bf0b740c7d78112af68aff8ea20b7eeacaad4ab0c87d"
+  }
+]

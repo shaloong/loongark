@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import {
+  LoongArkButton,
   LoongArkSegmentGroupRoot,
   LoongArkSegmentGroupItem,
+  LoongArkSegmentGroupItemHiddenInput,
+  LoongArkSegmentGroupItemText,
 } from "@loongark/react";
 import type {
   SegmentGroupOrientation,
@@ -25,22 +28,27 @@ export const SegmentGroupExample: React.FC<SegmentGroupExampleProps> = ({
   orientation = "horizontal",
   disabled = false,
 }) => {
-  const [value, setValue] = useState<string[]>(["overview"]);
+  const [value, setValue] = useState<string | null>("overview");
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+    <form style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       <LoongArkSegmentGroupRoot
+        aria-label="View"
+        name="view"
         size={size}
         orientation={orientation}
         disabled={disabled}
         value={value}
-        onValueChange={(details: { value: string[] }) =>
+        onValueChange={(details: { value: string | null }) =>
           setValue(details.value)
         }
       >
         {options.map((option) => (
           <LoongArkSegmentGroupItem key={option.value} value={option.value}>
-            {option.label}
+            <LoongArkSegmentGroupItemHiddenInput />
+            <LoongArkSegmentGroupItemText>
+              {option.label}
+            </LoongArkSegmentGroupItemText>
           </LoongArkSegmentGroupItem>
         ))}
       </LoongArkSegmentGroupRoot>
@@ -50,8 +58,15 @@ export const SegmentGroupExample: React.FC<SegmentGroupExampleProps> = ({
           color: "var(--lk-color-semantic-mutedforeground)",
         }}
       >
-        Selected: {value[0] || "None"}
+        Selected: {value || "None"}
       </span>
-    </div>
+      <LoongArkButton
+        type="button"
+        variant="outline"
+        onClick={() => setValue("overview")}
+      >
+        Reset view
+      </LoongArkButton>
+    </form>
   );
 };

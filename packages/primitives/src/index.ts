@@ -47,3 +47,5 @@ export * from "./extended";
 import "./data-table";
 
 import "./chart";
+
+import "./ark-additions";

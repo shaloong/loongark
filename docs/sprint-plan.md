@@ -25,3 +25,7 @@
 ## 2026-10-03 Chart 可读性
 
 压力截图确认长分类重叠、大数值轴裁切和三系列辨识不足。共享模型归一化几何坐标、减少并截短分类标签、补紧凑数值和完整提示/描述；专用样式与可换行图例归入 Primitives。四端同步 labels、示例、SSR 与真实交互回归；验收见 [Linux 记录](audits/2026-10-03/chart-linux/acceptance.json)。
+
+## Ark UI 高级能力复核（2026-10-03）
+
+新增 ImageCropper、JsonTreeView 与独立辅助组件，开放既有组件的 Provider/Context 与高级部件。SegmentGroup 统一为 Ark 原生单选语义，Vue 多选表单值同步修正。新增四端裁剪、JSON、辅助组件与高级选择示例。新版 DateInput、Swap、TOC 和手势抽屉仍为待补，不把原目录完整视为高级能力全部验收。详细对照、API 与迁移见 [Ark UI 核对](ark-ui-coverage.md)。

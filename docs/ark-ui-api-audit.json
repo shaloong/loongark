@@ -1,0 +1,6140 @@
+{
+  "react": {
+    "accordion": {
+      "exportedValues": [
+        "AccordionContext",
+        "AccordionItem",
+        "AccordionItemContent",
+        "AccordionItemContext",
+        "AccordionItemIndicator",
+        "AccordionItemTrigger",
+        "AccordionRoot",
+        "AccordionRootProvider",
+        "accordionAnatomy",
+        "useAccordion",
+        "useAccordionContext",
+        "useAccordionItemContext",
+        "Accordion"
+      ],
+      "missingPublicParts": [
+        "Accordion"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAccordionContext",
+        "useAccordionItemContext"
+      ]
+    },
+    "angle-slider": {
+      "exportedValues": [
+        "AngleSliderContext",
+        "AngleSliderControl",
+        "AngleSliderHiddenInput",
+        "AngleSliderLabel",
+        "AngleSliderMarker",
+        "AngleSliderMarkerGroup",
+        "AngleSliderRoot",
+        "AngleSliderRootProvider",
+        "AngleSliderThumb",
+        "AngleSliderValueText",
+        "angleSliderAnatomy",
+        "useAngleSlider",
+        "useAngleSliderContext",
+        "AngleSlider"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAngleSlider",
+        "useAngleSliderContext"
+      ]
+    },
+    "avatar": {
+      "exportedValues": [
+        "AvatarContext",
+        "AvatarFallback",
+        "AvatarImage",
+        "AvatarRoot",
+        "AvatarRootProvider",
+        "avatarAnatomy",
+        "useAvatar",
+        "useAvatarContext",
+        "Avatar"
+      ],
+      "missingPublicParts": [
+        "Avatar"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAvatarContext"
+      ]
+    },
+    "carousel": {
+      "exportedValues": [
+        "CarouselAutoplayIndicator",
+        "CarouselProgressText",
+        "CarouselAutoplayTrigger",
+        "CarouselContext",
+        "CarouselControl",
+        "CarouselIndicator",
+        "CarouselIndicatorGroup",
+        "CarouselItem",
+        "CarouselItemGroup",
+        "CarouselNextTrigger",
+        "CarouselPrevTrigger",
+        "CarouselRoot",
+        "CarouselRootProvider",
+        "carouselAnatomy",
+        "useCarousel",
+        "useCarouselContext",
+        "Carousel"
+      ],
+      "missingPublicParts": [
+        "Carousel"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCarouselContext"
+      ]
+    },
+    "checkbox": {
+      "exportedValues": [
+        "CheckboxContext",
+        "CheckboxControl",
+        "CheckboxGroup",
+        "CheckboxGroupProvider",
+        "CheckboxHiddenInput",
+        "CheckboxIndicator",
+        "CheckboxLabel",
+        "CheckboxRoot",
+        "CheckboxRootProvider",
+        "checkboxAnatomy",
+        "useCheckbox",
+        "useCheckboxContext",
+        "useCheckboxGroup",
+        "useCheckboxGroupContext",
+        "Checkbox"
+      ],
+      "missingPublicParts": [
+        "Checkbox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCheckboxContext",
+        "useCheckboxGroup",
+        "useCheckboxGroupContext"
+      ]
+    },
+    "client-only": {
+      "exportedValues": [
+        "ClientOnly"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "clipboard": {
+      "exportedValues": [
+        "ClipboardContext",
+        "ClipboardControl",
+        "ClipboardIndicator",
+        "ClipboardInput",
+        "ClipboardLabel",
+        "ClipboardRoot",
+        "ClipboardRootProvider",
+        "ClipboardTrigger",
+        "ClipboardValueText",
+        "clipboardAnatomy",
+        "useClipboard",
+        "useClipboardContext",
+        "Clipboard"
+      ],
+      "missingPublicParts": [
+        "Clipboard"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useClipboardContext"
+      ]
+    },
+    "collapsible": {
+      "exportedValues": [
+        "CollapsibleContent",
+        "CollapsibleContext",
+        "CollapsibleIndicator",
+        "CollapsibleRoot",
+        "CollapsibleRootProvider",
+        "CollapsibleTrigger",
+        "collapsibleAnatomy",
+        "useCollapsible",
+        "useCollapsibleContext",
+        "Collapsible"
+      ],
+      "missingPublicParts": [
+        "Collapsible"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCollapsibleContext"
+      ]
+    },
+    "collection": {
+      "exportedValues": [
+        "createGridCollection",
+        "createListCollection",
+        "createFileTreeCollection",
+        "createTreeCollection",
+        "useAsyncList",
+        "useListCollection",
+        "useListSelection"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAsyncList",
+        "useListCollection",
+        "useListSelection"
+      ]
+    },
+    "color-picker": {
+      "exportedValues": [
+        "parseColor",
+        "ColorPickerArea",
+        "ColorPickerAreaBackground",
+        "ColorPickerAreaThumb",
+        "ColorPickerChannelInput",
+        "ColorPickerChannelSlider",
+        "ColorPickerChannelSliderLabel",
+        "ColorPickerChannelSliderThumb",
+        "ColorPickerChannelSliderTrack",
+        "ColorPickerChannelSliderValueText",
+        "ColorPickerContent",
+        "ColorPickerContext",
+        "ColorPickerControl",
+        "ColorPickerEyeDropperTrigger",
+        "ColorPickerFormatSelect",
+        "ColorPickerFormatTrigger",
+        "ColorPickerHiddenInput",
+        "ColorPickerLabel",
+        "ColorPickerPositioner",
+        "ColorPickerRoot",
+        "ColorPickerRootProvider",
+        "ColorPickerSwatch",
+        "ColorPickerSwatchGroup",
+        "ColorPickerSwatchIndicator",
+        "ColorPickerSwatchTrigger",
+        "ColorPickerTransparencyGrid",
+        "ColorPickerTrigger",
+        "ColorPickerValueSwatch",
+        "ColorPickerValueText",
+        "ColorPickerView",
+        "colorPickerAnatomy",
+        "useColorPicker",
+        "useColorPickerContext",
+        "ColorPicker"
+      ],
+      "missingPublicParts": [
+        "ColorPicker"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useColorPickerContext"
+      ]
+    },
+    "combobox": {
+      "exportedValues": [
+        "createListCollection",
+        "useListCollection",
+        "ComboboxClearTrigger",
+        "ComboboxContent",
+        "ComboboxEmpty",
+        "ComboboxContext",
+        "ComboboxControl",
+        "ComboboxInput",
+        "ComboboxItem",
+        "ComboboxItemContext",
+        "ComboboxItemGroup",
+        "ComboboxItemGroupLabel",
+        "ComboboxItemIndicator",
+        "ComboboxItemText",
+        "ComboboxLabel",
+        "ComboboxList",
+        "ComboboxPositioner",
+        "ComboboxRoot",
+        "ComboboxRootProvider",
+        "ComboboxTrigger",
+        "comboboxAnatomy",
+        "useCombobox",
+        "useComboboxContext",
+        "useComboboxItemContext",
+        "Combobox"
+      ],
+      "missingPublicParts": [
+        "Combobox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListCollection",
+        "useComboboxContext",
+        "useComboboxItemContext"
+      ]
+    },
+    "date-input": {
+      "exportedValues": [
+        "useDateInput",
+        "useDateInputContext",
+        "DateInputContext",
+        "DateInputLabel",
+        "DateInputRoot",
+        "DateInputRootProvider",
+        "DateInputSegment",
+        "DateInputSegmentGroup",
+        "DateInputHiddenInput",
+        "DateInputControl",
+        "DateInputSegmentContext",
+        "dateInputAnatomy",
+        "DateInput"
+      ],
+      "missingPublicParts": [
+        "DateInputContext",
+        "DateInputLabel",
+        "DateInputRoot",
+        "DateInputSegment",
+        "DateInputSegmentGroup",
+        "DateInputHiddenInput",
+        "DateInputControl",
+        "DateInputSegmentContext",
+        "DateInput"
+      ],
+      "missingProviders": [
+        "DateInputRootProvider"
+      ],
+      "missingHooks": [
+        "useDateInput",
+        "useDateInputContext"
+      ]
+    },
+    "date-picker": {
+      "exportedValues": [
+        "parseDate",
+        "DatePickerClearTrigger",
+        "DatePickerContent",
+        "DatePickerContext",
+        "DatePickerControl",
+        "DatePickerInput",
+        "DatePickerLabel",
+        "DatePickerMonthSelect",
+        "DatePickerNextTrigger",
+        "DatePickerPositioner",
+        "DatePickerPresetTrigger",
+        "DatePickerPrevTrigger",
+        "DatePickerRangeText",
+        "DatePickerValueText",
+        "DatePickerRoot",
+        "DatePickerRootProvider",
+        "DatePickerTable",
+        "DatePickerTableBody",
+        "DatePickerTableCell",
+        "DatePickerTableCellTrigger",
+        "DatePickerTableHead",
+        "DatePickerTableHeader",
+        "DatePickerWeekNumberHeaderCell",
+        "DatePickerWeekNumberCell",
+        "DatePickerTableRow",
+        "DatePickerTrigger",
+        "DatePickerView",
+        "DatePickerViewControl",
+        "DatePickerViewTrigger",
+        "DatePickerYearSelect",
+        "datePickerAnatomy",
+        "useDatePicker",
+        "useDatePickerContext",
+        "DatePicker"
+      ],
+      "missingPublicParts": [
+        "DatePicker"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDatePickerContext"
+      ]
+    },
+    "dialog": {
+      "exportedValues": [
+        "DialogBackdrop",
+        "DialogCloseTrigger",
+        "DialogContent",
+        "DialogContext",
+        "DialogDescription",
+        "DialogPositioner",
+        "DialogRoot",
+        "DialogRootProvider",
+        "DialogTitle",
+        "DialogTrigger",
+        "dialogAnatomy",
+        "useDialog",
+        "useDialogContext",
+        "Dialog"
+      ],
+      "missingPublicParts": [
+        "DialogBackdrop"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDialogContext"
+      ]
+    },
+    "download-trigger": {
+      "exportedValues": [
+        "DownloadTrigger",
+        "useDownload"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDownload"
+      ]
+    },
+    "drawer": {
+      "exportedValues": [
+        "DrawerBackdrop",
+        "DrawerCloseTrigger",
+        "DrawerContent",
+        "DrawerDescription",
+        "DrawerContext",
+        "DrawerPositioner",
+        "DrawerGrabber",
+        "DrawerGrabberIndicator",
+        "DrawerRoot",
+        "DrawerRootProvider",
+        "DrawerTitle",
+        "DrawerTrigger",
+        "DrawerIndent",
+        "DrawerIndentBackground",
+        "DrawerStack",
+        "DrawerSwipeArea",
+        "drawerAnatomy",
+        "useDrawer",
+        "useDrawerContext",
+        "useDrawerStackContext",
+        "Drawer"
+      ],
+      "missingPublicParts": [
+        "DrawerBackdrop",
+        "DrawerContext",
+        "DrawerGrabber",
+        "DrawerGrabberIndicator",
+        "DrawerIndent",
+        "DrawerIndentBackground",
+        "DrawerStack",
+        "DrawerSwipeArea"
+      ],
+      "missingProviders": [
+        "DrawerRootProvider"
+      ],
+      "missingHooks": [
+        "useDrawer",
+        "useDrawerContext",
+        "useDrawerStackContext"
+      ]
+    },
+    "editable": {
+      "exportedValues": [
+        "EditableArea",
+        "EditableCancelTrigger",
+        "EditableContext",
+        "EditableControl",
+        "EditableEditTrigger",
+        "EditableInput",
+        "EditableLabel",
+        "EditablePreview",
+        "EditableRoot",
+        "EditableRootProvider",
+        "EditableSubmitTrigger",
+        "editableAnatomy",
+        "useEditable",
+        "useEditableContext",
+        "Editable"
+      ],
+      "missingPublicParts": [
+        "Editable"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useEditableContext"
+      ]
+    },
+    "field": {
+      "exportedValues": [
+        "FieldContext",
+        "FieldErrorText",
+        "FieldHelperText",
+        "FieldInput",
+        "FieldItem",
+        "FieldLabel",
+        "FieldRequiredIndicator",
+        "FieldRoot",
+        "FieldRootProvider",
+        "FieldSelect",
+        "FieldTextarea",
+        "fieldAnatomy",
+        "useField",
+        "useFieldContext",
+        "Field"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useField",
+        "useFieldContext"
+      ]
+    },
+    "fieldset": {
+      "exportedValues": [
+        "FieldsetContext",
+        "FieldsetErrorText",
+        "FieldsetHelperText",
+        "FieldsetLegend",
+        "FieldsetRoot",
+        "FieldsetRootProvider",
+        "fieldsetAnatomy",
+        "useFieldset",
+        "useFieldsetContext",
+        "Fieldset"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFieldset",
+        "useFieldsetContext"
+      ]
+    },
+    "file-upload": {
+      "exportedValues": [
+        "FileUploadClearTrigger",
+        "FileUploadContext",
+        "FileUploadDropzone",
+        "FileUploadHiddenInput",
+        "FileUploadItem",
+        "FileUploadItemDeleteTrigger",
+        "FileUploadItemGroup",
+        "FileUploadItemName",
+        "FileUploadItemPreview",
+        "FileUploadItemPreviewImage",
+        "FileUploadItemSizeText",
+        "FileUploadLabel",
+        "FileUploadRoot",
+        "FileUploadRootProvider",
+        "FileUploadTrigger",
+        "fileUploadAnatomy",
+        "useFileUpload",
+        "useFileUploadContext",
+        "FileUpload"
+      ],
+      "missingPublicParts": [
+        "FileUpload"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFileUploadContext"
+      ]
+    },
+    "floating-panel": {
+      "exportedValues": [
+        "FloatingPanelBody",
+        "FloatingPanelCloseTrigger",
+        "FloatingPanelContent",
+        "FloatingPanelContext",
+        "FloatingPanelDragTrigger",
+        "FloatingPanelHeader",
+        "FloatingPanelPositioner",
+        "FloatingPanelResizeTrigger",
+        "FloatingPanelStageTrigger",
+        "FloatingPanelRoot",
+        "FloatingPanelRootProvider",
+        "FloatingPanelTitle",
+        "FloatingPanelTrigger",
+        "FloatingPanelControl",
+        "useFloatingPanel",
+        "useFloatingPanelContext",
+        "floatingPanelAnatomy",
+        "FloatingPanel"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFloatingPanel",
+        "useFloatingPanelContext"
+      ]
+    },
+    "focus-trap": {
+      "exportedValues": [
+        "FocusTrap"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "format": {
+      "exportedValues": [
+        "FormatByte",
+        "FormatNumber",
+        "FormatRelativeTime",
+        "FormatTime",
+        "Format"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "frame": {
+      "exportedValues": [
+        "Frame"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "highlight": {
+      "exportedValues": [
+        "Highlight",
+        "useHighlight"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "hover-card": {
+      "exportedValues": [
+        "HoverCardArrow",
+        "HoverCardArrowTip",
+        "HoverCardContent",
+        "HoverCardContext",
+        "HoverCardPositioner",
+        "HoverCardRoot",
+        "HoverCardRootProvider",
+        "HoverCardTrigger",
+        "hoverCardAnatomy",
+        "useHoverCard",
+        "useHoverCardContext",
+        "HoverCard"
+      ],
+      "missingPublicParts": [
+        "HoverCard"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useHoverCardContext"
+      ]
+    },
+    "image-cropper": {
+      "exportedValues": [
+        "ImageCropperContext",
+        "ImageCropperGrid",
+        "ImageCropperHandle",
+        "ImageCropperImage",
+        "ImageCropperRoot",
+        "ImageCropperRootProvider",
+        "ImageCropperSelection",
+        "ImageCropperViewport",
+        "imageCropperAnatomy",
+        "useImageCropper",
+        "useImageCropperContext",
+        "ImageCropper"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useImageCropperContext"
+      ]
+    },
+    "json-tree-view": {
+      "exportedValues": [
+        "JsonTreeViewRoot",
+        "JsonTreeViewRootProvider",
+        "JsonTreeViewTree",
+        "useJsonTreeView",
+        "JsonTreeView"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "listbox": {
+      "exportedValues": [
+        "createListCollection",
+        "ListboxContent",
+        "ListboxContext",
+        "ListboxEmpty",
+        "ListboxInput",
+        "ListboxItem",
+        "ListboxItemContext",
+        "ListboxItemGroup",
+        "ListboxItemGroupLabel",
+        "ListboxItemIndicator",
+        "ListboxItemText",
+        "ListboxLabel",
+        "ListboxRoot",
+        "ListboxRootProvider",
+        "ListboxValueText",
+        "listboxAnatomy",
+        "useListbox",
+        "useListboxContext",
+        "useListboxItemContext",
+        "Listbox"
+      ],
+      "missingPublicParts": [
+        "ListboxContent",
+        "Listbox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListboxContext",
+        "useListboxItemContext"
+      ]
+    },
+    "marquee": {
+      "exportedValues": [
+        "MarqueeContent",
+        "MarqueeContext",
+        "MarqueeEdge",
+        "MarqueeItem",
+        "MarqueeRoot",
+        "MarqueeRootProvider",
+        "MarqueeViewport",
+        "marqueeAnatomy",
+        "useMarquee",
+        "useMarqueeContext",
+        "Marquee"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useMarquee",
+        "useMarqueeContext"
+      ]
+    },
+    "menu": {
+      "exportedValues": [
+        "MenuArrow",
+        "MenuArrowTip",
+        "MenuCheckboxItem",
+        "MenuContent",
+        "MenuContext",
+        "MenuContextTrigger",
+        "MenuIndicator",
+        "MenuItem",
+        "MenuItemContext",
+        "MenuItemGroup",
+        "MenuItemGroupLabel",
+        "MenuItemIndicator",
+        "MenuItemText",
+        "MenuPositioner",
+        "MenuRadioItem",
+        "MenuRadioItemGroup",
+        "MenuRoot",
+        "MenuRootProvider",
+        "MenuSeparator",
+        "MenuTrigger",
+        "MenuTriggerItem",
+        "menuAnatomy",
+        "useMenu",
+        "useMenuContext",
+        "useMenuItemContext",
+        "Menu"
+      ],
+      "missingPublicParts": [
+        "Menu"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useMenuContext",
+        "useMenuItemContext"
+      ]
+    },
+    "navigation-menu": {
+      "exportedValues": [
+        "NavigationMenuArrow",
+        "NavigationMenuContent",
+        "NavigationMenuContext",
+        "NavigationMenuIndicator",
+        "NavigationMenuItem",
+        "NavigationMenuItemIndicator",
+        "NavigationMenuLink",
+        "NavigationMenuList",
+        "NavigationMenuRoot",
+        "NavigationMenuRootProvider",
+        "NavigationMenuTrigger",
+        "NavigationMenuViewport",
+        "NavigationMenuViewportPositioner",
+        "navigationMenuAnatomy",
+        "useNavigationMenu",
+        "useNavigationMenuContext",
+        "NavigationMenu"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useNavigationMenuContext"
+      ]
+    },
+    "number-input": {
+      "exportedValues": [
+        "NumberInputContext",
+        "NumberInputControl",
+        "NumberInputDecrementTrigger",
+        "NumberInputIncrementTrigger",
+        "NumberInputInput",
+        "NumberInputLabel",
+        "NumberInputRoot",
+        "NumberInputRootProvider",
+        "NumberInputScrubber",
+        "NumberInputValueText",
+        "numberInputAnatomy",
+        "useNumberInput",
+        "useNumberInputContext",
+        "NumberInput"
+      ],
+      "missingPublicParts": [
+        "NumberInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useNumberInputContext"
+      ]
+    },
+    "pagination": {
+      "exportedValues": [
+        "PaginationContext",
+        "PaginationEllipsis",
+        "PaginationFirstTrigger",
+        "PaginationItem",
+        "PaginationLastTrigger",
+        "PaginationNextTrigger",
+        "PaginationPrevTrigger",
+        "PaginationRoot",
+        "PaginationRootProvider",
+        "paginationAnatomy",
+        "usePagination",
+        "usePaginationContext",
+        "Pagination"
+      ],
+      "missingPublicParts": [
+        "Pagination"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePaginationContext"
+      ]
+    },
+    "password-input": {
+      "exportedValues": [
+        "PasswordInputContext",
+        "PasswordInputControl",
+        "PasswordInputIndicator",
+        "PasswordInputInput",
+        "PasswordInputLabel",
+        "PasswordInputRoot",
+        "PasswordInputRootProvider",
+        "PasswordInputVisibilityTrigger",
+        "passwordInputAnatomy",
+        "usePasswordInput",
+        "usePasswordInputContext",
+        "PasswordInput"
+      ],
+      "missingPublicParts": [
+        "PasswordInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePasswordInputContext"
+      ]
+    },
+    "pin-input": {
+      "exportedValues": [
+        "PinInputContext",
+        "PinInputControl",
+        "PinInputHiddenInput",
+        "PinInputInput",
+        "PinInputLabel",
+        "PinInputRoot",
+        "PinInputRootProvider",
+        "pinInputAnatomy",
+        "usePinInput",
+        "usePinInputContext",
+        "PinInput"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePinInputContext"
+      ]
+    },
+    "popover": {
+      "exportedValues": [
+        "PopoverAnchor",
+        "PopoverArrow",
+        "PopoverArrowTip",
+        "PopoverCloseTrigger",
+        "PopoverContent",
+        "PopoverContext",
+        "PopoverDescription",
+        "PopoverIndicator",
+        "PopoverPositioner",
+        "PopoverRoot",
+        "PopoverRootProvider",
+        "PopoverTitle",
+        "PopoverTrigger",
+        "popoverAnatomy",
+        "usePopover",
+        "usePopoverContext",
+        "Popover"
+      ],
+      "missingPublicParts": [
+        "Popover"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePopoverContext"
+      ]
+    },
+    "portal": {
+      "exportedValues": [
+        "Portal"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "presence": {
+      "exportedValues": [
+        "Presence",
+        "usePresence",
+        "PresenceProvider",
+        "usePresenceContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePresenceContext"
+      ]
+    },
+    "progress": {
+      "exportedValues": [
+        "ProgressCircle",
+        "ProgressCircleRange",
+        "ProgressCircleTrack",
+        "ProgressContext",
+        "ProgressLabel",
+        "ProgressRange",
+        "ProgressRoot",
+        "ProgressRootProvider",
+        "ProgressTrack",
+        "ProgressValueText",
+        "ProgressView",
+        "progressAnatomy",
+        "useProgress",
+        "useProgressContext",
+        "Progress"
+      ],
+      "missingPublicParts": [
+        "Progress"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useProgressContext"
+      ]
+    },
+    "qr-code": {
+      "exportedValues": [
+        "QrCodeContext",
+        "QrCodeDownloadTrigger",
+        "QrCodeFrame",
+        "QrCodeOverlay",
+        "QrCodePattern",
+        "QrCodeRoot",
+        "QrCodeRootProvider",
+        "qrCodeAnatomy",
+        "useQrCode",
+        "useQrCodeContext",
+        "QrCode"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useQrCode",
+        "useQrCodeContext"
+      ]
+    },
+    "radio-group": {
+      "exportedValues": [
+        "RadioGroupContext",
+        "RadioGroupIndicator",
+        "RadioGroupItem",
+        "RadioGroupItemContext",
+        "RadioGroupItemControl",
+        "RadioGroupItemHiddenInput",
+        "RadioGroupItemText",
+        "RadioGroupLabel",
+        "RadioGroupRoot",
+        "RadioGroupRootProvider",
+        "radioGroupAnatomy",
+        "useRadioGroup",
+        "useRadioGroupContext",
+        "useRadioGroupItemContext",
+        "RadioGroup"
+      ],
+      "missingPublicParts": [
+        "RadioGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useRadioGroupContext",
+        "useRadioGroupItemContext"
+      ]
+    },
+    "rating-group": {
+      "exportedValues": [
+        "RatingGroupContext",
+        "RatingGroupControl",
+        "RatingGroupHiddenInput",
+        "RatingGroupItem",
+        "RatingGroupItemContext",
+        "RatingGroupLabel",
+        "RatingGroupRoot",
+        "RatingGroupRootProvider",
+        "ratingGroupAnatomy",
+        "useRatingGroup",
+        "useRatingGroupContext",
+        "useRatingGroupItemContext",
+        "RatingGroup"
+      ],
+      "missingPublicParts": [
+        "RatingGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useRatingGroupContext",
+        "useRatingGroupItemContext"
+      ]
+    },
+    "scroll-area": {
+      "exportedValues": [
+        "ScrollAreaContext",
+        "ScrollAreaContent",
+        "ScrollAreaCorner",
+        "ScrollAreaRoot",
+        "ScrollAreaRootProvider",
+        "ScrollAreaScrollbar",
+        "ScrollAreaThumb",
+        "ScrollAreaViewport",
+        "scrollAreaAnatomy",
+        "useScrollArea",
+        "useScrollAreaContext",
+        "ScrollArea"
+      ],
+      "missingPublicParts": [
+        "ScrollArea"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useScrollAreaContext"
+      ]
+    },
+    "segment-group": {
+      "exportedValues": [
+        "SegmentGroupContext",
+        "SegmentGroupIndicator",
+        "SegmentGroupItem",
+        "SegmentGroupItemContext",
+        "SegmentGroupItemControl",
+        "SegmentGroupItemHiddenInput",
+        "SegmentGroupItemText",
+        "SegmentGroupLabel",
+        "SegmentGroupRoot",
+        "SegmentGroupRootProvider",
+        "segmentGroupAnatomy",
+        "useSegmentGroup",
+        "useSegmentGroupContext",
+        "useSegmentGroupItemContext",
+        "SegmentGroup"
+      ],
+      "missingPublicParts": [
+        "SegmentGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSegmentGroupContext",
+        "useSegmentGroupItemContext"
+      ]
+    },
+    "select": {
+      "exportedValues": [
+        "createListCollection",
+        "useListCollection",
+        "SelectClearTrigger",
+        "SelectContent",
+        "SelectContext",
+        "SelectControl",
+        "SelectHiddenSelect",
+        "SelectIndicator",
+        "SelectItem",
+        "SelectItemContext",
+        "SelectItemGroup",
+        "SelectItemGroupLabel",
+        "SelectItemIndicator",
+        "SelectItemText",
+        "SelectLabel",
+        "SelectList",
+        "SelectPositioner",
+        "SelectRoot",
+        "SelectRootProvider",
+        "SelectTrigger",
+        "SelectValueText",
+        "selectAnatomy",
+        "useSelect",
+        "useSelectContext",
+        "useSelectItemContext",
+        "Select"
+      ],
+      "missingPublicParts": [
+        "Select"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListCollection",
+        "useSelectContext",
+        "useSelectItemContext"
+      ]
+    },
+    "signature-pad": {
+      "exportedValues": [
+        "SignaturePadClearTrigger",
+        "SignaturePadContext",
+        "SignaturePadControl",
+        "SignaturePadGuide",
+        "SignaturePadHiddenInput",
+        "SignaturePadLabel",
+        "SignaturePadRoot",
+        "SignaturePadRootProvider",
+        "SignaturePadSegment",
+        "signaturePadAnatomy",
+        "useSignaturePad",
+        "useSignaturePadContext",
+        "SignaturePad"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSignaturePad",
+        "useSignaturePadContext"
+      ]
+    },
+    "slider": {
+      "exportedValues": [
+        "SliderContext",
+        "SliderControl",
+        "SliderDraggingIndicator",
+        "SliderHiddenInput",
+        "SliderLabel",
+        "SliderMarker",
+        "SliderMarkerGroup",
+        "SliderRange",
+        "SliderRoot",
+        "SliderRootProvider",
+        "SliderThumb",
+        "SliderTrack",
+        "SliderValueText",
+        "sliderAnatomy",
+        "useSlider",
+        "useSliderContext",
+        "Slider"
+      ],
+      "missingPublicParts": [
+        "Slider"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSliderContext"
+      ]
+    },
+    "splitter": {
+      "exportedValues": [
+        "createSplitterRegistry",
+        "getSplitterLayout",
+        "SplitterContext",
+        "SplitterPanel",
+        "SplitterResizeTrigger",
+        "SplitterResizeTriggerIndicator",
+        "SplitterRoot",
+        "SplitterRootProvider",
+        "splitterAnatomy",
+        "useSplitter",
+        "useSplitterContext",
+        "Splitter"
+      ],
+      "missingPublicParts": [
+        "Splitter"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSplitterContext"
+      ]
+    },
+    "steps": {
+      "exportedValues": [
+        "StepsCompletedContent",
+        "StepsContent",
+        "StepsContext",
+        "StepsIndicator",
+        "StepsItem",
+        "StepsItemContext",
+        "StepsList",
+        "StepsNextTrigger",
+        "StepsPrevTrigger",
+        "StepsProgress",
+        "StepsRoot",
+        "StepsRootProvider",
+        "StepsSeparator",
+        "StepsTrigger",
+        "stepsAnatomy",
+        "useSteps",
+        "useStepsContext",
+        "useStepsItemContext",
+        "Steps"
+      ],
+      "missingPublicParts": [
+        "Steps"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useStepsContext",
+        "useStepsItemContext"
+      ]
+    },
+    "swap": {
+      "exportedValues": [
+        "Swap",
+        "SwapIndicator",
+        "SwapRoot",
+        "SwapRootProvider",
+        "swapAnatomy",
+        "useSwap",
+        "useSwapContext"
+      ],
+      "missingPublicParts": [
+        "Swap",
+        "SwapIndicator",
+        "SwapRoot"
+      ],
+      "missingProviders": [
+        "SwapRootProvider"
+      ],
+      "missingHooks": [
+        "useSwap",
+        "useSwapContext"
+      ]
+    },
+    "switch": {
+      "exportedValues": [
+        "SwitchContext",
+        "SwitchControl",
+        "SwitchHiddenInput",
+        "SwitchLabel",
+        "SwitchRoot",
+        "SwitchRootProvider",
+        "SwitchThumb",
+        "switchAnatomy",
+        "useSwitch",
+        "useSwitchContext",
+        "Switch"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSwitchContext"
+      ]
+    },
+    "tabs": {
+      "exportedValues": [
+        "TabContent",
+        "TabIndicator",
+        "TabList",
+        "TabTrigger",
+        "TabsContext",
+        "TabsRoot",
+        "TabsRootProvider",
+        "tabsAnatomy",
+        "useTabs",
+        "useTabsContext",
+        "Tabs"
+      ],
+      "missingPublicParts": [
+        "TabContent",
+        "TabIndicator",
+        "TabList",
+        "TabTrigger",
+        "Tabs"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTabsContext"
+      ]
+    },
+    "tags-input": {
+      "exportedValues": [
+        "TagsInputClearTrigger",
+        "TagsInputContext",
+        "TagsInputControl",
+        "TagsInputHiddenInput",
+        "TagsInputInput",
+        "TagsInputItem",
+        "TagsInputItemContext",
+        "TagsInputItemDeleteTrigger",
+        "TagsInputItemInput",
+        "TagsInputItemPreview",
+        "TagsInputItemText",
+        "TagsInputLabel",
+        "TagsInputRoot",
+        "TagsInputRootProvider",
+        "tagsInputAnatomy",
+        "useTagsInput",
+        "useTagsInputContext",
+        "useTagsInputItemContext",
+        "TagsInput"
+      ],
+      "missingPublicParts": [
+        "TagsInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTagsInputContext",
+        "useTagsInputItemContext"
+      ]
+    },
+    "timer": {
+      "exportedValues": [
+        "TimerActionTrigger",
+        "TimerArea",
+        "TimerContext",
+        "TimerControl",
+        "TimerItem",
+        "TimerRoot",
+        "TimerRootProvider",
+        "TimerSeparator",
+        "timerAnatomy",
+        "useTimer",
+        "useTimerContext",
+        "Timer"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTimer",
+        "useTimerContext"
+      ]
+    },
+    "toast": {
+      "exportedValues": [
+        "createToaster",
+        "ToastActionTrigger",
+        "ToastCloseTrigger",
+        "ToastContext",
+        "ToastDescription",
+        "ToastRoot",
+        "ToastTitle",
+        "toastAnatomy",
+        "Toaster",
+        "useToastContext",
+        "Toast"
+      ],
+      "missingPublicParts": [
+        "Toast"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToastContext"
+      ]
+    },
+    "toc": {
+      "exportedValues": [
+        "TocContent",
+        "TocContext",
+        "TocIndicator",
+        "TocItem",
+        "TocLink",
+        "TocList",
+        "TocNav",
+        "TocRoot",
+        "TocRootProvider",
+        "TocTitle",
+        "tocAnatomy",
+        "useToc",
+        "useTocContext",
+        "Toc"
+      ],
+      "missingPublicParts": [
+        "TocContent",
+        "TocContext",
+        "TocIndicator",
+        "TocItem",
+        "TocLink",
+        "TocList",
+        "TocNav",
+        "TocRoot",
+        "TocTitle",
+        "Toc"
+      ],
+      "missingProviders": [
+        "TocRootProvider"
+      ],
+      "missingHooks": [
+        "useToc",
+        "useTocContext"
+      ]
+    },
+    "toggle": {
+      "exportedValues": [
+        "Toggle",
+        "ToggleContext",
+        "ToggleIndicator",
+        "ToggleRoot",
+        "toggleAnatomy",
+        "useToggle",
+        "useToggleContext"
+      ],
+      "missingPublicParts": [
+        "Toggle"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToggle",
+        "useToggleContext"
+      ]
+    },
+    "toggle-group": {
+      "exportedValues": [
+        "ToggleGroupContext",
+        "ToggleGroupItem",
+        "ToggleGroupRoot",
+        "ToggleGroupRootProvider",
+        "toggleGroupAnatomy",
+        "useToggleGroup",
+        "useToggleGroupContext",
+        "ToggleGroup"
+      ],
+      "missingPublicParts": [
+        "ToggleGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToggleGroupContext"
+      ]
+    },
+    "tooltip": {
+      "exportedValues": [
+        "TooltipArrow",
+        "TooltipArrowTip",
+        "TooltipContent",
+        "TooltipContext",
+        "TooltipPositioner",
+        "TooltipRoot",
+        "TooltipRootProvider",
+        "TooltipTrigger",
+        "tooltipAnatomy",
+        "useTooltip",
+        "useTooltipContext",
+        "Tooltip"
+      ],
+      "missingPublicParts": [
+        "Tooltip"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTooltipContext"
+      ]
+    },
+    "tour": {
+      "exportedValues": [
+        "waitForElement",
+        "waitForElementValue",
+        "waitForPromise",
+        "waitForEvent",
+        "TourActionTrigger",
+        "TourActions",
+        "TourArrow",
+        "TourArrowTip",
+        "TourBackdrop",
+        "TourCloseTrigger",
+        "TourContent",
+        "TourContext",
+        "TourControl",
+        "TourDescription",
+        "TourPositioner",
+        "TourProgressText",
+        "TourRoot",
+        "TourSpotlight",
+        "TourTitle",
+        "tourAnatomy",
+        "useTour",
+        "useTourContext",
+        "Tour"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTourContext"
+      ]
+    },
+    "tree-view": {
+      "exportedValues": [
+        "createFileTreeCollection",
+        "createTreeCollection",
+        "TreeViewBranch",
+        "TreeViewBranchContent",
+        "TreeViewBranchControl",
+        "TreeViewBranchIndentGuide",
+        "TreeViewBranchIndicator",
+        "TreeViewBranchText",
+        "TreeViewBranchTrigger",
+        "TreeViewContext",
+        "TreeViewItem",
+        "TreeViewItemIndicator",
+        "TreeViewItemText",
+        "TreeViewLabel",
+        "TreeViewNodeContext",
+        "TreeViewNodeProvider",
+        "TreeViewRoot",
+        "TreeViewRootProvider",
+        "TreeViewTree",
+        "TreeViewNodeCheckbox",
+        "TreeViewNodeCheckboxIndicator",
+        "TreeViewNodeRenameInput",
+        "treeViewAnatomy",
+        "useTreeView",
+        "useTreeViewContext",
+        "useTreeViewNodeContext",
+        "TreeView"
+      ],
+      "missingPublicParts": [
+        "TreeView"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTreeViewContext",
+        "useTreeViewNodeContext"
+      ]
+    }
+  },
+  "vue": {
+    "accordion": {
+      "exportedValues": [
+        "AccordionContext",
+        "AccordionItemContent",
+        "AccordionItemContext",
+        "AccordionItemIndicator",
+        "AccordionItemTrigger",
+        "AccordionItem",
+        "AccordionRootProvider",
+        "AccordionRoot",
+        "useAccordion",
+        "useAccordionContext",
+        "useAccordionItemContext",
+        "accordionAnatomy",
+        "Accordion"
+      ],
+      "missingPublicParts": [
+        "Accordion"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAccordionContext",
+        "useAccordionItemContext"
+      ]
+    },
+    "angle-slider": {
+      "exportedValues": [
+        "AngleSliderContext",
+        "AngleSliderRoot",
+        "angleSliderAnatomy",
+        "AngleSliderControl",
+        "AngleSliderHiddenInput",
+        "AngleSliderLabel",
+        "AngleSliderMarkerGroup",
+        "AngleSliderMarker",
+        "AngleSliderRootProvider",
+        "AngleSliderThumb",
+        "AngleSliderValueText",
+        "useAngleSlider",
+        "useAngleSliderContext",
+        "AngleSlider"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAngleSlider",
+        "useAngleSliderContext"
+      ]
+    },
+    "avatar": {
+      "exportedValues": [
+        "AvatarContext",
+        "AvatarFallback",
+        "AvatarImage",
+        "AvatarRoot",
+        "useAvatarContext",
+        "useAvatar",
+        "AvatarRootProvider",
+        "avatarAnatomy",
+        "Avatar"
+      ],
+      "missingPublicParts": [
+        "Avatar"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAvatarContext"
+      ]
+    },
+    "carousel": {
+      "exportedValues": [
+        "CarouselAutoplayIndicator",
+        "CarouselProgressText",
+        "CarouselAutoplayTrigger",
+        "CarouselContext",
+        "CarouselControl",
+        "CarouselIndicatorGroup",
+        "CarouselIndicator",
+        "CarouselItemGroup",
+        "CarouselItem",
+        "CarouselNextTrigger",
+        "CarouselPrevTrigger",
+        "CarouselRootProvider",
+        "CarouselRoot",
+        "carouselAnatomy",
+        "useCarousel",
+        "useCarouselContext",
+        "Carousel"
+      ],
+      "missingPublicParts": [
+        "Carousel"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCarouselContext"
+      ]
+    },
+    "checkbox": {
+      "exportedValues": [
+        "CheckboxContext",
+        "CheckboxControl",
+        "CheckboxGroup",
+        "CheckboxGroupProvider",
+        "CheckboxHiddenInput",
+        "CheckboxIndicator",
+        "CheckboxLabel",
+        "CheckboxRootProvider",
+        "CheckboxRoot",
+        "useCheckbox",
+        "useCheckboxContext",
+        "useCheckboxGroup",
+        "useCheckboxGroupContext",
+        "checkboxAnatomy",
+        "Checkbox"
+      ],
+      "missingPublicParts": [
+        "Checkbox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCheckboxContext",
+        "useCheckboxGroup",
+        "useCheckboxGroupContext"
+      ]
+    },
+    "client-only": {
+      "exportedValues": [
+        "ClientOnly"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "clipboard": {
+      "exportedValues": [
+        "ClipboardContext",
+        "ClipboardControl",
+        "ClipboardIndicator",
+        "ClipboardInput",
+        "ClipboardLabel",
+        "ClipboardRootProvider",
+        "ClipboardRoot",
+        "ClipboardTrigger",
+        "ClipboardValueText",
+        "useClipboard",
+        "useClipboardContext",
+        "clipboardAnatomy",
+        "Clipboard"
+      ],
+      "missingPublicParts": [
+        "Clipboard"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useClipboardContext"
+      ]
+    },
+    "collapsible": {
+      "exportedValues": [
+        "CollapsibleContent",
+        "CollapsibleContext",
+        "CollapsibleRootProvider",
+        "CollapsibleRoot",
+        "CollapsibleTrigger",
+        "CollapsibleIndicator",
+        "useCollapsible",
+        "useCollapsibleContext",
+        "collapsibleAnatomy",
+        "Collapsible"
+      ],
+      "missingPublicParts": [
+        "Collapsible"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCollapsibleContext"
+      ]
+    },
+    "collection": {
+      "exportedValues": [
+        "createGridCollection",
+        "createListCollection",
+        "createFileTreeCollection",
+        "createTreeCollection",
+        "useAsyncList",
+        "useListCollection",
+        "useListSelection"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAsyncList",
+        "useListCollection",
+        "useListSelection"
+      ]
+    },
+    "color-picker": {
+      "exportedValues": [
+        "parseColor",
+        "ColorPickerAreaBackground",
+        "ColorPickerAreaThumb",
+        "ColorPickerArea",
+        "ColorPickerChannelInput",
+        "ColorPickerChannelSliderLabel",
+        "ColorPickerChannelSliderThumb",
+        "ColorPickerChannelSliderTrack",
+        "ColorPickerChannelSliderValueText",
+        "ColorPickerChannelSlider",
+        "ColorPickerContent",
+        "ColorPickerContext",
+        "ColorPickerControl",
+        "ColorPickerEyeDropperTrigger",
+        "ColorPickerFormatSelect",
+        "ColorPickerFormatTrigger",
+        "ColorPickerHiddenInput",
+        "ColorPickerLabel",
+        "ColorPickerPositioner",
+        "ColorPickerRootProvider",
+        "ColorPickerRoot",
+        "ColorPickerSwatchGroup",
+        "ColorPickerSwatchIndicator",
+        "ColorPickerSwatchTrigger",
+        "ColorPickerSwatch",
+        "ColorPickerTransparencyGrid",
+        "ColorPickerTrigger",
+        "ColorPickerValueSwatch",
+        "ColorPickerValueText",
+        "ColorPickerView",
+        "colorPickerAnatomy",
+        "useColorPicker",
+        "useColorPickerContext",
+        "ColorPicker"
+      ],
+      "missingPublicParts": [
+        "ColorPicker"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useColorPickerContext"
+      ]
+    },
+    "combobox": {
+      "exportedValues": [
+        "createListCollection",
+        "useListCollection",
+        "ComboboxClearTrigger",
+        "ComboboxContent",
+        "ComboboxEmpty",
+        "ComboboxContext",
+        "ComboboxControl",
+        "ComboboxInput",
+        "ComboboxItemContext",
+        "ComboboxItemGroupLabel",
+        "ComboboxItemGroup",
+        "ComboboxItemIndicator",
+        "ComboboxItemText",
+        "ComboboxItem",
+        "ComboboxLabel",
+        "ComboboxList",
+        "ComboboxPositioner",
+        "ComboboxRootProvider",
+        "ComboboxRoot",
+        "ComboboxTrigger",
+        "comboboxAnatomy",
+        "useCombobox",
+        "useComboboxContext",
+        "useComboboxItemContext",
+        "Combobox"
+      ],
+      "missingPublicParts": [
+        "Combobox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListCollection",
+        "useComboboxContext",
+        "useComboboxItemContext"
+      ]
+    },
+    "date-input": {
+      "exportedValues": [
+        "DateInputContext",
+        "DateInputSegmentContext",
+        "DateInputControl",
+        "DateInputHiddenInput",
+        "DateInputLabel",
+        "DateInputRootProvider",
+        "DateInputRoot",
+        "DateInputSegmentGroup",
+        "DateInputSegment",
+        "dateInputAnatomy",
+        "useDateInput",
+        "useDateInputContext",
+        "DateInput"
+      ],
+      "missingPublicParts": [
+        "DateInputContext",
+        "DateInputSegmentContext",
+        "DateInputControl",
+        "DateInputHiddenInput",
+        "DateInputLabel",
+        "DateInputRoot",
+        "DateInputSegmentGroup",
+        "DateInputSegment",
+        "DateInput"
+      ],
+      "missingProviders": [
+        "DateInputRootProvider"
+      ],
+      "missingHooks": [
+        "useDateInput",
+        "useDateInputContext"
+      ]
+    },
+    "date-picker": {
+      "exportedValues": [
+        "parseDate",
+        "DatePickerClearTrigger",
+        "DatePickerContent",
+        "DatePickerContext",
+        "DatePickerControl",
+        "DatePickerInput",
+        "DatePickerLabel",
+        "DatePickerMonthSelect",
+        "DatePickerNextTrigger",
+        "DatePickerPositioner",
+        "DatePickerPresetTrigger",
+        "DatePickerPrevTrigger",
+        "DatePickerRangeText",
+        "DatePickerValueText",
+        "DatePickerRootProvider",
+        "DatePickerRoot",
+        "DatePickerTableBody",
+        "DatePickerTableCellTrigger",
+        "DatePickerTableCell",
+        "DatePickerTableHead",
+        "DatePickerTableHeader",
+        "DatePickerTableRow",
+        "DatePickerTable",
+        "DatePickerTrigger",
+        "DatePickerViewControl",
+        "DatePickerViewTrigger",
+        "DatePickerView",
+        "DatePickerWeekNumberHeaderCell",
+        "DatePickerWeekNumberCell",
+        "DatePickerYearSelect",
+        "datePickerAnatomy",
+        "useDatePicker",
+        "useDatePickerContext",
+        "DatePicker"
+      ],
+      "missingPublicParts": [
+        "DatePicker"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDatePickerContext"
+      ]
+    },
+    "dialog": {
+      "exportedValues": [
+        "DialogBackdrop",
+        "DialogCloseTrigger",
+        "DialogContent",
+        "DialogContext",
+        "DialogDescription",
+        "DialogPositioner",
+        "DialogRootProvider",
+        "DialogRoot",
+        "DialogTitle",
+        "DialogTrigger",
+        "dialogAnatomy",
+        "useDialog",
+        "useDialogContext",
+        "Dialog"
+      ],
+      "missingPublicParts": [
+        "DialogBackdrop"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDialogContext"
+      ]
+    },
+    "download-trigger": {
+      "exportedValues": [
+        "DownloadTrigger",
+        "useDownload"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDownload"
+      ]
+    },
+    "drawer": {
+      "exportedValues": [
+        "DrawerBackdrop",
+        "DrawerCloseTrigger",
+        "DrawerContent",
+        "DrawerDescription",
+        "DrawerContext",
+        "DrawerPositioner",
+        "DrawerGrabber",
+        "DrawerGrabberIndicator",
+        "DrawerIndent",
+        "DrawerIndentBackground",
+        "DrawerRoot",
+        "DrawerRootProvider",
+        "DrawerStack",
+        "DrawerSwipeArea",
+        "DrawerTitle",
+        "DrawerTrigger",
+        "drawerAnatomy",
+        "useDrawer",
+        "useDrawerContext",
+        "useDrawerStackContext",
+        "Drawer"
+      ],
+      "missingPublicParts": [
+        "DrawerBackdrop",
+        "DrawerContext",
+        "DrawerGrabber",
+        "DrawerGrabberIndicator",
+        "DrawerIndent",
+        "DrawerIndentBackground",
+        "DrawerStack",
+        "DrawerSwipeArea"
+      ],
+      "missingProviders": [
+        "DrawerRootProvider"
+      ],
+      "missingHooks": [
+        "useDrawer",
+        "useDrawerContext",
+        "useDrawerStackContext"
+      ]
+    },
+    "editable": {
+      "exportedValues": [
+        "EditableArea",
+        "EditableCancelTrigger",
+        "EditableContext",
+        "EditableControl",
+        "EditableEditTrigger",
+        "EditableInput",
+        "EditableLabel",
+        "EditablePreview",
+        "EditableRootProvider",
+        "EditableRoot",
+        "EditableSubmitTrigger",
+        "editableAnatomy",
+        "useEditable",
+        "useEditableContext",
+        "Editable"
+      ],
+      "missingPublicParts": [
+        "Editable"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useEditableContext"
+      ]
+    },
+    "field": {
+      "exportedValues": [
+        "FieldContext",
+        "FieldErrorText",
+        "FieldHelperText",
+        "FieldInput",
+        "FieldItem",
+        "FieldLabel",
+        "FieldRequiredIndicator",
+        "FieldRootProvider",
+        "FieldRoot",
+        "FieldSelect",
+        "FieldTextarea",
+        "fieldAnatomy",
+        "useField",
+        "useFieldContext",
+        "Field"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useField",
+        "useFieldContext"
+      ]
+    },
+    "fieldset": {
+      "exportedValues": [
+        "FieldsetContext",
+        "FieldsetErrorText",
+        "FieldsetHelperText",
+        "FieldsetLegend",
+        "FieldsetRootProvider",
+        "FieldsetRoot",
+        "fieldsetAnatomy",
+        "useFieldset",
+        "useFieldsetContext",
+        "Fieldset"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFieldset",
+        "useFieldsetContext"
+      ]
+    },
+    "file-upload": {
+      "exportedValues": [
+        "FileUploadClearTrigger",
+        "FileUploadContext",
+        "FileUploadDropzone",
+        "FileUploadHiddenInput",
+        "FileUploadItemDeleteTrigger",
+        "FileUploadItemGroup",
+        "FileUploadItemName",
+        "FileUploadItemPreviewImage",
+        "FileUploadItemPreview",
+        "FileUploadItemSizeText",
+        "FileUploadItem",
+        "FileUploadLabel",
+        "FileUploadRootProvider",
+        "FileUploadRoot",
+        "FileUploadTrigger",
+        "fileUploadAnatomy",
+        "useFileUpload",
+        "useFileUploadContext",
+        "FileUpload"
+      ],
+      "missingPublicParts": [
+        "FileUpload"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFileUploadContext"
+      ]
+    },
+    "floating-panel": {
+      "exportedValues": [
+        "FloatingPanelBody",
+        "FloatingPanelCloseTrigger",
+        "FloatingPanelContent",
+        "FloatingPanelContext",
+        "FloatingPanelDragTrigger",
+        "FloatingPanelHeader",
+        "FloatingPanelPositioner",
+        "FloatingPanelResizeTrigger",
+        "FloatingPanelStageTrigger",
+        "FloatingPanelRoot",
+        "FloatingPanelRootProvider",
+        "FloatingPanelTitle",
+        "FloatingPanelTrigger",
+        "FloatingPanelControl",
+        "useFloatingPanel",
+        "useFloatingPanelContext",
+        "floatingPanelAnatomy",
+        "FloatingPanel"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFloatingPanel",
+        "useFloatingPanelContext"
+      ]
+    },
+    "focus-trap": {
+      "exportedValues": [
+        "FocusTrap"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "format": {
+      "exportedValues": [
+        "FormatByte",
+        "FormatNumber",
+        "FormatRelativeTime",
+        "FormatTime",
+        "Format"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "frame": {
+      "exportedValues": [
+        "Frame"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "highlight": {
+      "exportedValues": [
+        "Highlight",
+        "useHighlight"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "hover-card": {
+      "exportedValues": [
+        "HoverCardArrowTip",
+        "HoverCardArrow",
+        "HoverCardContent",
+        "HoverCardContext",
+        "HoverCardPositioner",
+        "HoverCardRootProvider",
+        "HoverCardRoot",
+        "HoverCardTrigger",
+        "hoverCardAnatomy",
+        "useHoverCard",
+        "useHoverCardContext",
+        "HoverCard"
+      ],
+      "missingPublicParts": [
+        "HoverCard"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useHoverCardContext"
+      ]
+    },
+    "image-cropper": {
+      "exportedValues": [
+        "ImageCropperContext",
+        "ImageCropperGrid",
+        "ImageCropperHandle",
+        "ImageCropperImage",
+        "ImageCropperRoot",
+        "ImageCropperRootProvider",
+        "ImageCropperSelection",
+        "ImageCropperViewport",
+        "useImageCropper",
+        "useImageCropperContext",
+        "imageCropperAnatomy",
+        "ImageCropper"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useImageCropperContext"
+      ]
+    },
+    "json-tree-view": {
+      "exportedValues": [
+        "JsonTreeViewRoot",
+        "JsonTreeViewRootProvider",
+        "JsonTreeViewTree",
+        "useJsonTreeView",
+        "JsonTreeView"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "listbox": {
+      "exportedValues": [
+        "createListCollection",
+        "ListboxContext",
+        "ListboxContent",
+        "ListboxEmpty",
+        "ListboxInput",
+        "ListboxItem",
+        "ListboxItemContext",
+        "ListboxItemGroup",
+        "ListboxItemGroupLabel",
+        "ListboxItemIndicator",
+        "ListboxItemText",
+        "ListboxLabel",
+        "ListboxRoot",
+        "ListboxRootProvider",
+        "ListboxValueText",
+        "listboxAnatomy",
+        "useListbox",
+        "useListboxContext",
+        "useListboxItemContext",
+        "Listbox"
+      ],
+      "missingPublicParts": [
+        "ListboxContent",
+        "Listbox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListboxContext",
+        "useListboxItemContext"
+      ]
+    },
+    "marquee": {
+      "exportedValues": [
+        "MarqueeContent",
+        "MarqueeContext",
+        "MarqueeEdge",
+        "MarqueeItem",
+        "MarqueeRoot",
+        "MarqueeRootProvider",
+        "MarqueeViewport",
+        "marqueeAnatomy",
+        "useMarquee",
+        "useMarqueeContext",
+        "Marquee"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useMarquee",
+        "useMarqueeContext"
+      ]
+    },
+    "menu": {
+      "exportedValues": [
+        "MenuArrowTip",
+        "MenuArrow",
+        "MenuCheckboxItem",
+        "MenuContent",
+        "MenuContextTrigger",
+        "MenuContext",
+        "MenuIndicator",
+        "MenuItemContext",
+        "MenuItemGroupLabel",
+        "MenuItemGroup",
+        "MenuItemIndicator",
+        "MenuItemText",
+        "MenuItem",
+        "MenuPositioner",
+        "MenuRadioItemGroup",
+        "MenuRadioItem",
+        "MenuRootProvider",
+        "MenuRoot",
+        "MenuSeparator",
+        "MenuTriggerItem",
+        "MenuTrigger",
+        "menuAnatomy",
+        "useMenu",
+        "useMenuContext",
+        "useMenuItemContext",
+        "Menu"
+      ],
+      "missingPublicParts": [
+        "Menu"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useMenuContext",
+        "useMenuItemContext"
+      ]
+    },
+    "navigation-menu": {
+      "exportedValues": [
+        "NavigationMenuArrow",
+        "NavigationMenuContent",
+        "NavigationMenuContext",
+        "NavigationMenuIndicator",
+        "NavigationMenuItem",
+        "NavigationMenuItemIndicator",
+        "NavigationMenuLink",
+        "NavigationMenuList",
+        "NavigationMenuRoot",
+        "NavigationMenuRootProvider",
+        "NavigationMenuTrigger",
+        "NavigationMenuViewport",
+        "NavigationMenuViewportPositioner",
+        "navigationMenuAnatomy",
+        "useNavigationMenu",
+        "useNavigationMenuContext",
+        "NavigationMenu"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useNavigationMenuContext"
+      ]
+    },
+    "number-input": {
+      "exportedValues": [
+        "NumberInputContext",
+        "NumberInputControl",
+        "NumberInputDecrementTrigger",
+        "NumberInputIncrementTrigger",
+        "NumberInputInput",
+        "NumberInputLabel",
+        "NumberInputRootProvider",
+        "NumberInputRoot",
+        "NumberInputScrubber",
+        "NumberInputValueText",
+        "numberInputAnatomy",
+        "useNumberInput",
+        "useNumberInputContext",
+        "NumberInput"
+      ],
+      "missingPublicParts": [
+        "NumberInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useNumberInputContext"
+      ]
+    },
+    "pagination": {
+      "exportedValues": [
+        "PaginationContext",
+        "PaginationEllipsis",
+        "PaginationFirstTrigger",
+        "PaginationItem",
+        "PaginationLastTrigger",
+        "PaginationNextTrigger",
+        "PaginationPrevTrigger",
+        "PaginationRootProvider",
+        "PaginationRoot",
+        "paginationAnatomy",
+        "usePagination",
+        "usePaginationContext",
+        "Pagination"
+      ],
+      "missingPublicParts": [
+        "Pagination"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePaginationContext"
+      ]
+    },
+    "password-input": {
+      "exportedValues": [
+        "PasswordInputContext",
+        "PasswordInputControl",
+        "PasswordInputIndicator",
+        "PasswordInputInput",
+        "PasswordInputLabel",
+        "PasswordInputRoot",
+        "PasswordInputRootProvider",
+        "PasswordInputVisibilityTrigger",
+        "passwordInputAnatomy",
+        "usePasswordInput",
+        "usePasswordInputContext",
+        "PasswordInput"
+      ],
+      "missingPublicParts": [
+        "PasswordInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePasswordInputContext"
+      ]
+    },
+    "pin-input": {
+      "exportedValues": [
+        "PinInputContext",
+        "PinInputControl",
+        "PinInputHiddenInput",
+        "PinInputInput",
+        "PinInputLabel",
+        "PinInputRootProvider",
+        "PinInputRoot",
+        "pinInputAnatomy",
+        "usePinInput",
+        "usePinInputContext",
+        "PinInput"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePinInputContext"
+      ]
+    },
+    "popover": {
+      "exportedValues": [
+        "PopoverAnchor",
+        "PopoverArrowTip",
+        "PopoverArrow",
+        "PopoverCloseTrigger",
+        "PopoverContent",
+        "PopoverContext",
+        "PopoverDescription",
+        "PopoverIndicator",
+        "PopoverPositioner",
+        "PopoverRootProvider",
+        "PopoverRoot",
+        "PopoverTitle",
+        "PopoverTrigger",
+        "popoverAnatomy",
+        "usePopover",
+        "usePopoverContext",
+        "Popover"
+      ],
+      "missingPublicParts": [
+        "Popover"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePopoverContext"
+      ]
+    },
+    "presence": {
+      "exportedValues": [
+        "Presence",
+        "usePresence",
+        "PresenceProvider",
+        "usePresenceContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePresenceContext"
+      ]
+    },
+    "progress": {
+      "exportedValues": [
+        "ProgressCircleRange",
+        "ProgressCircleTrack",
+        "ProgressCircle",
+        "ProgressContext",
+        "ProgressLabel",
+        "ProgressRange",
+        "ProgressRootProvider",
+        "ProgressRoot",
+        "ProgressTrack",
+        "ProgressValueText",
+        "ProgressView",
+        "progressAnatomy",
+        "useProgress",
+        "useProgressContext",
+        "Progress"
+      ],
+      "missingPublicParts": [
+        "Progress"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useProgressContext"
+      ]
+    },
+    "qr-code": {
+      "exportedValues": [
+        "QrCodeContext",
+        "QrCodeDownloadTrigger",
+        "QrCodeFrame",
+        "QrCodeOverlay",
+        "QrCodePattern",
+        "QrCodeRootProvider",
+        "QrCodeRoot",
+        "qrCodeAnatomy",
+        "useQrCode",
+        "useQrCodeContext",
+        "QrCode"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useQrCode",
+        "useQrCodeContext"
+      ]
+    },
+    "radio-group": {
+      "exportedValues": [
+        "RadioGroupContext",
+        "RadioGroupIndicator",
+        "RadioGroupItemContext",
+        "RadioGroupItemControl",
+        "RadioGroupItemHiddenInput",
+        "RadioGroupItemText",
+        "RadioGroupItem",
+        "RadioGroupLabel",
+        "RadioGroupRootProvider",
+        "RadioGroupRoot",
+        "radioGroupAnatomy",
+        "useRadioGroup",
+        "useRadioGroupContext",
+        "useRadioGroupItemContext",
+        "RadioGroup"
+      ],
+      "missingPublicParts": [
+        "RadioGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useRadioGroupContext",
+        "useRadioGroupItemContext"
+      ]
+    },
+    "rating-group": {
+      "exportedValues": [
+        "RatingGroupContext",
+        "RatingGroupControl",
+        "RatingGroupHiddenInput",
+        "RatingGroupItemContext",
+        "RatingGroupItem",
+        "RatingGroupLabel",
+        "RatingGroupRootProvider",
+        "RatingGroupRoot",
+        "ratingGroupAnatomy",
+        "useRatingGroup",
+        "useRatingGroupContext",
+        "useRatingGroupItemContext",
+        "RatingGroup"
+      ],
+      "missingPublicParts": [
+        "RatingGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useRatingGroupContext",
+        "useRatingGroupItemContext"
+      ]
+    },
+    "scroll-area": {
+      "exportedValues": [
+        "ScrollAreaContext",
+        "ScrollAreaContent",
+        "ScrollAreaCorner",
+        "ScrollAreaRoot",
+        "ScrollAreaRootProvider",
+        "ScrollAreaScrollbar",
+        "ScrollAreaThumb",
+        "ScrollAreaViewport",
+        "scrollAreaAnatomy",
+        "useScrollArea",
+        "useScrollAreaContext",
+        "ScrollArea"
+      ],
+      "missingPublicParts": [
+        "ScrollArea"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useScrollAreaContext"
+      ]
+    },
+    "segment-group": {
+      "exportedValues": [
+        "SegmentGroupContext",
+        "SegmentGroupIndicator",
+        "SegmentGroupItemContext",
+        "SegmentGroupItemControl",
+        "SegmentGroupItemHiddenInput",
+        "SegmentGroupItemText",
+        "SegmentGroupItem",
+        "SegmentGroupLabel",
+        "SegmentGroupRootProvider",
+        "SegmentGroupRoot",
+        "segmentGroupAnatomy",
+        "useSegmentGroup",
+        "useSegmentGroupContext",
+        "useSegmentGroupItemContext",
+        "SegmentGroup"
+      ],
+      "missingPublicParts": [
+        "SegmentGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSegmentGroupContext",
+        "useSegmentGroupItemContext"
+      ]
+    },
+    "select": {
+      "exportedValues": [
+        "createListCollection",
+        "useListCollection",
+        "SelectClearTrigger",
+        "SelectContent",
+        "SelectContext",
+        "SelectControl",
+        "SelectHiddenSelect",
+        "SelectIndicator",
+        "SelectItemContext",
+        "SelectItemGroupLabel",
+        "SelectItemGroup",
+        "SelectItemIndicator",
+        "SelectItemText",
+        "SelectItem",
+        "SelectLabel",
+        "SelectList",
+        "SelectPositioner",
+        "SelectRootProvider",
+        "SelectRoot",
+        "SelectTrigger",
+        "SelectValueText",
+        "selectAnatomy",
+        "useSelect",
+        "useSelectContext",
+        "useSelectItemContext",
+        "Select"
+      ],
+      "missingPublicParts": [
+        "Select"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListCollection",
+        "useSelectContext",
+        "useSelectItemContext"
+      ]
+    },
+    "signature-pad": {
+      "exportedValues": [
+        "SignaturePadClearTrigger",
+        "SignaturePadContext",
+        "SignaturePadControl",
+        "SignaturePadGuide",
+        "SignaturePadHiddenInput",
+        "SignaturePadLabel",
+        "SignaturePadRootProvider",
+        "SignaturePadRoot",
+        "SignaturePadSegment",
+        "signaturePadAnatomy",
+        "useSignaturePad",
+        "useSignaturePadContext",
+        "SignaturePad"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSignaturePad",
+        "useSignaturePadContext"
+      ]
+    },
+    "slider": {
+      "exportedValues": [
+        "SliderContext",
+        "SliderControl",
+        "SliderDraggingIndicator",
+        "SliderHiddenInput",
+        "SliderLabel",
+        "SliderMarkerGroup",
+        "SliderMarker",
+        "SliderRange",
+        "SliderRootProvider",
+        "SliderRoot",
+        "SliderThumb",
+        "SliderTrack",
+        "SliderValueText",
+        "sliderAnatomy",
+        "useSlider",
+        "useSliderContext",
+        "Slider"
+      ],
+      "missingPublicParts": [
+        "Slider"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSliderContext"
+      ]
+    },
+    "splitter": {
+      "exportedValues": [
+        "getSplitterLayout",
+        "SplitterContext",
+        "SplitterPanel",
+        "SplitterResizeTrigger",
+        "SplitterResizeTriggerIndicator",
+        "SplitterRootProvider",
+        "SplitterRoot",
+        "createSplitterRegistry",
+        "splitterAnatomy",
+        "useSplitter",
+        "useSplitterContext",
+        "Splitter"
+      ],
+      "missingPublicParts": [
+        "Splitter"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSplitterContext"
+      ]
+    },
+    "steps": {
+      "exportedValues": [
+        "StepsCompletedContent",
+        "StepsContent",
+        "StepsContext",
+        "StepsIndicator",
+        "StepsItemContext",
+        "StepsItem",
+        "StepsList",
+        "StepsNextTrigger",
+        "StepsPrevTrigger",
+        "StepsProgress",
+        "StepsRootProvider",
+        "StepsRoot",
+        "StepsSeparator",
+        "StepsTrigger",
+        "stepsAnatomy",
+        "useSteps",
+        "useStepsContext",
+        "useStepsItemContext",
+        "Steps"
+      ],
+      "missingPublicParts": [
+        "Steps"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useStepsContext",
+        "useStepsItemContext"
+      ]
+    },
+    "swap": {
+      "exportedValues": [
+        "SwapRoot",
+        "SwapRootProvider",
+        "SwapIndicator",
+        "useSwap",
+        "useSwapContext",
+        "swapAnatomy",
+        "Swap"
+      ],
+      "missingPublicParts": [
+        "SwapRoot",
+        "SwapIndicator",
+        "Swap"
+      ],
+      "missingProviders": [
+        "SwapRootProvider"
+      ],
+      "missingHooks": [
+        "useSwap",
+        "useSwapContext"
+      ]
+    },
+    "switch": {
+      "exportedValues": [
+        "SwitchContext",
+        "SwitchControl",
+        "SwitchHiddenInput",
+        "SwitchLabel",
+        "SwitchRootProvider",
+        "SwitchRoot",
+        "SwitchThumb",
+        "switchAnatomy",
+        "useSwitch",
+        "useSwitchContext",
+        "Switch"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSwitchContext"
+      ]
+    },
+    "tabs": {
+      "exportedValues": [
+        "TabContent",
+        "TabIndicator",
+        "TabList",
+        "TabTrigger",
+        "TabsContext",
+        "TabsRootProvider",
+        "TabsRoot",
+        "tabsAnatomy",
+        "useTabs",
+        "useTabsContext",
+        "Tabs"
+      ],
+      "missingPublicParts": [
+        "TabContent",
+        "TabIndicator",
+        "TabList",
+        "TabTrigger",
+        "Tabs"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTabsContext"
+      ]
+    },
+    "tags-input": {
+      "exportedValues": [
+        "TagsInputClearTrigger",
+        "TagsInputContext",
+        "TagsInputControl",
+        "TagsInputHiddenInput",
+        "TagsInputInput",
+        "TagsInputItemContext",
+        "TagsInputItemDeleteTrigger",
+        "TagsInputItemInput",
+        "TagsInputItemPreview",
+        "TagsInputItemText",
+        "TagsInputItem",
+        "TagsInputLabel",
+        "TagsInputRootProvider",
+        "TagsInputRoot",
+        "tagsInputAnatomy",
+        "useTagsInput",
+        "useTagsInputContext",
+        "useTagsInputItemContext",
+        "TagsInput"
+      ],
+      "missingPublicParts": [
+        "TagsInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTagsInputContext",
+        "useTagsInputItemContext"
+      ]
+    },
+    "timer": {
+      "exportedValues": [
+        "TimerActionTrigger",
+        "TimerContext",
+        "TimerItem",
+        "TimerArea",
+        "TimerControl",
+        "TimerRootProvider",
+        "TimerRoot",
+        "TimerSeparator",
+        "timerAnatomy",
+        "useTimer",
+        "useTimerContext",
+        "Timer"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTimer",
+        "useTimerContext"
+      ]
+    },
+    "toast": {
+      "exportedValues": [
+        "createToaster",
+        "ToastActionTrigger",
+        "ToastCloseTrigger",
+        "ToastContext",
+        "ToastDescription",
+        "ToastRoot",
+        "ToastTitle",
+        "toastAnatomy",
+        "Toaster",
+        "useToastContext",
+        "Toast"
+      ],
+      "missingPublicParts": [
+        "Toast"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToastContext"
+      ]
+    },
+    "toc": {
+      "exportedValues": [
+        "TocContent",
+        "TocContext",
+        "TocIndicator",
+        "TocItem",
+        "TocLink",
+        "TocList",
+        "TocNav",
+        "TocRoot",
+        "TocRootProvider",
+        "TocTitle",
+        "tocAnatomy",
+        "useToc",
+        "useTocContext",
+        "Toc"
+      ],
+      "missingPublicParts": [
+        "TocContent",
+        "TocContext",
+        "TocIndicator",
+        "TocItem",
+        "TocLink",
+        "TocList",
+        "TocNav",
+        "TocRoot",
+        "TocTitle",
+        "Toc"
+      ],
+      "missingProviders": [
+        "TocRootProvider"
+      ],
+      "missingHooks": [
+        "useToc",
+        "useTocContext"
+      ]
+    },
+    "toggle": {
+      "exportedValues": [
+        "ToggleRoot",
+        "ToggleIndicator",
+        "useToggle",
+        "useToggleContext",
+        "toggleAnatomy",
+        "ToggleContext",
+        "Toggle"
+      ],
+      "missingPublicParts": [
+        "Toggle"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToggle",
+        "useToggleContext"
+      ]
+    },
+    "toggle-group": {
+      "exportedValues": [
+        "ToggleGroupContext",
+        "ToggleGroupItem",
+        "ToggleGroupRootProvider",
+        "ToggleGroupRoot",
+        "toggleGroupAnatomy",
+        "useToggleGroup",
+        "useToggleGroupContext",
+        "ToggleGroup"
+      ],
+      "missingPublicParts": [
+        "ToggleGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToggleGroupContext"
+      ]
+    },
+    "tooltip": {
+      "exportedValues": [
+        "TooltipArrowTip",
+        "TooltipArrow",
+        "TooltipContent",
+        "TooltipContext",
+        "TooltipPositioner",
+        "TooltipRootProvider",
+        "TooltipRoot",
+        "TooltipTrigger",
+        "tooltipAnatomy",
+        "useTooltip",
+        "useTooltipContext",
+        "Tooltip"
+      ],
+      "missingPublicParts": [
+        "Tooltip"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTooltipContext"
+      ]
+    },
+    "tour": {
+      "exportedValues": [
+        "waitForElement",
+        "waitForElementValue",
+        "waitForPromise",
+        "waitForEvent",
+        "TourActionTrigger",
+        "TourActions",
+        "TourArrowTip",
+        "TourArrow",
+        "TourBackdrop",
+        "TourCloseTrigger",
+        "TourContent",
+        "TourContext",
+        "TourControl",
+        "TourDescription",
+        "TourPositioner",
+        "TourProgressText",
+        "TourRoot",
+        "TourSpotlight",
+        "TourTitle",
+        "tourAnatomy",
+        "useTour",
+        "useTourContext",
+        "Tour"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTourContext"
+      ]
+    },
+    "tree-view": {
+      "exportedValues": [
+        "createFileTreeCollection",
+        "createTreeCollection",
+        "TreeViewBranchContent",
+        "TreeViewBranchControl",
+        "TreeViewBranchIndentGuide",
+        "TreeViewBranchIndicator",
+        "TreeViewBranchText",
+        "TreeViewBranchTrigger",
+        "TreeViewBranch",
+        "TreeViewContext",
+        "TreeViewItemIndicator",
+        "TreeViewItemText",
+        "TreeViewItem",
+        "TreeViewLabel",
+        "TreeViewNodeCheckbox",
+        "TreeViewNodeCheckboxIndicator",
+        "TreeViewNodeRenameInput",
+        "TreeViewNodeContext",
+        "TreeViewNodeProvider",
+        "TreeViewRootProvider",
+        "TreeViewRoot",
+        "TreeViewTree",
+        "treeViewAnatomy",
+        "useTreeView",
+        "useTreeViewContext",
+        "useTreeViewNodeContext",
+        "TreeView"
+      ],
+      "missingPublicParts": [
+        "TreeView"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTreeViewContext",
+        "useTreeViewNodeContext"
+      ]
+    }
+  },
+  "solid": {
+    "accordion": {
+      "exportedValues": [
+        "accordionAnatomy",
+        "Accordion",
+        "AccordionContext",
+        "AccordionItem",
+        "AccordionItemContent",
+        "AccordionItemContext",
+        "AccordionItemIndicator",
+        "AccordionItemTrigger",
+        "AccordionRoot",
+        "AccordionRootProvider",
+        "useAccordion",
+        "useAccordionContext",
+        "useAccordionItemContext"
+      ],
+      "missingPublicParts": [
+        "Accordion"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAccordionContext",
+        "useAccordionItemContext"
+      ]
+    },
+    "angle-slider": {
+      "exportedValues": [
+        "angleSliderAnatomy",
+        "AngleSlider",
+        "AngleSliderContext",
+        "AngleSliderControl",
+        "AngleSliderHiddenInput",
+        "AngleSliderLabel",
+        "AngleSliderMarker",
+        "AngleSliderMarkerGroup",
+        "AngleSliderRoot",
+        "AngleSliderRootProvider",
+        "AngleSliderThumb",
+        "AngleSliderValueText",
+        "useAngleSlider",
+        "useAngleSliderContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAngleSlider",
+        "useAngleSliderContext"
+      ]
+    },
+    "avatar": {
+      "exportedValues": [
+        "avatarAnatomy",
+        "Avatar",
+        "AvatarContext",
+        "AvatarFallback",
+        "AvatarImage",
+        "AvatarRoot",
+        "AvatarRootProvider",
+        "useAvatar",
+        "useAvatarContext"
+      ],
+      "missingPublicParts": [
+        "Avatar"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAvatarContext"
+      ]
+    },
+    "carousel": {
+      "exportedValues": [
+        "carouselAnatomy",
+        "Carousel",
+        "CarouselAutoplayIndicator",
+        "CarouselAutoplayTrigger",
+        "CarouselContext",
+        "CarouselControl",
+        "CarouselIndicator",
+        "CarouselIndicatorGroup",
+        "CarouselItem",
+        "CarouselItemGroup",
+        "CarouselNextTrigger",
+        "CarouselPrevTrigger",
+        "CarouselProgressText",
+        "CarouselRoot",
+        "CarouselRootProvider",
+        "useCarousel",
+        "useCarouselContext"
+      ],
+      "missingPublicParts": [
+        "Carousel"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCarouselContext"
+      ]
+    },
+    "checkbox": {
+      "exportedValues": [
+        "checkboxAnatomy",
+        "Checkbox",
+        "CheckboxContext",
+        "CheckboxControl",
+        "CheckboxGroup",
+        "CheckboxGroupProvider",
+        "CheckboxHiddenInput",
+        "CheckboxIndicator",
+        "CheckboxLabel",
+        "CheckboxRoot",
+        "CheckboxRootProvider",
+        "useCheckbox",
+        "useCheckboxContext",
+        "useCheckboxGroup",
+        "useCheckboxGroupContext"
+      ],
+      "missingPublicParts": [
+        "Checkbox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCheckboxContext",
+        "useCheckboxGroup",
+        "useCheckboxGroupContext"
+      ]
+    },
+    "client-only": {
+      "exportedValues": [
+        "ClientOnly"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "clipboard": {
+      "exportedValues": [
+        "clipboardAnatomy",
+        "Clipboard",
+        "ClipboardContext",
+        "ClipboardControl",
+        "ClipboardIndicator",
+        "ClipboardInput",
+        "ClipboardLabel",
+        "ClipboardRoot",
+        "ClipboardRootProvider",
+        "ClipboardTrigger",
+        "ClipboardValueText",
+        "useClipboard",
+        "useClipboardContext"
+      ],
+      "missingPublicParts": [
+        "Clipboard"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useClipboardContext"
+      ]
+    },
+    "collapsible": {
+      "exportedValues": [
+        "collapsibleAnatomy",
+        "Collapsible",
+        "CollapsibleContent",
+        "CollapsibleContext",
+        "CollapsibleIndicator",
+        "CollapsibleRoot",
+        "CollapsibleRootProvider",
+        "CollapsibleTrigger",
+        "useCollapsible",
+        "useCollapsibleContext"
+      ],
+      "missingPublicParts": [
+        "Collapsible"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCollapsibleContext"
+      ]
+    },
+    "collection": {
+      "exportedValues": [
+        "GridCollection",
+        "ListCollection",
+        "TreeCollection",
+        "createListCollection",
+        "createFileTreeCollection",
+        "createTreeCollection",
+        "useListCollection",
+        "createGridCollection",
+        "useAsyncList",
+        "useListSelection"
+      ],
+      "missingPublicParts": [
+        "GridCollection",
+        "ListCollection",
+        "TreeCollection"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListCollection",
+        "useAsyncList",
+        "useListSelection"
+      ]
+    },
+    "color-picker": {
+      "exportedValues": [
+        "Color",
+        "parseColor",
+        "colorPickerAnatomy",
+        "ColorPicker",
+        "ColorPickerArea",
+        "ColorPickerAreaBackground",
+        "ColorPickerAreaThumb",
+        "ColorPickerChannelInput",
+        "ColorPickerChannelSlider",
+        "ColorPickerChannelSliderLabel",
+        "ColorPickerChannelSliderThumb",
+        "ColorPickerChannelSliderTrack",
+        "ColorPickerChannelSliderValueText",
+        "ColorPickerContent",
+        "ColorPickerContext",
+        "ColorPickerControl",
+        "ColorPickerEyeDropperTrigger",
+        "ColorPickerFormatSelect",
+        "ColorPickerFormatTrigger",
+        "ColorPickerHiddenInput",
+        "ColorPickerLabel",
+        "ColorPickerPositioner",
+        "ColorPickerRoot",
+        "ColorPickerRootProvider",
+        "ColorPickerSwatch",
+        "ColorPickerSwatchGroup",
+        "ColorPickerSwatchIndicator",
+        "ColorPickerSwatchTrigger",
+        "ColorPickerTransparencyGrid",
+        "ColorPickerTrigger",
+        "ColorPickerValueSwatch",
+        "ColorPickerValueText",
+        "ColorPickerView",
+        "useColorPicker",
+        "useColorPickerContext"
+      ],
+      "missingPublicParts": [
+        "Color",
+        "ColorPicker"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useColorPickerContext"
+      ]
+    },
+    "combobox": {
+      "exportedValues": [
+        "ListCollection",
+        "createListCollection",
+        "useListCollection",
+        "comboboxAnatomy",
+        "Combobox",
+        "ComboboxClearTrigger",
+        "ComboboxContent",
+        "ComboboxContext",
+        "ComboboxControl",
+        "ComboboxEmpty",
+        "ComboboxInput",
+        "ComboboxItem",
+        "ComboboxItemContext",
+        "ComboboxItemGroup",
+        "ComboboxItemGroupLabel",
+        "ComboboxItemIndicator",
+        "ComboboxItemText",
+        "ComboboxLabel",
+        "ComboboxList",
+        "ComboboxPositioner",
+        "ComboboxRoot",
+        "ComboboxRootProvider",
+        "ComboboxTrigger",
+        "useCombobox",
+        "useComboboxContext",
+        "useComboboxItemContext"
+      ],
+      "missingPublicParts": [
+        "ListCollection",
+        "Combobox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListCollection",
+        "useComboboxContext",
+        "useComboboxItemContext"
+      ]
+    },
+    "date-input": {
+      "exportedValues": [
+        "dateInputAnatomy",
+        "DateInput",
+        "DateInputContext",
+        "DateInputControl",
+        "DateInputHiddenInput",
+        "DateInputLabel",
+        "DateInputRoot",
+        "DateInputRootProvider",
+        "DateInputSegment",
+        "DateInputSegmentContext",
+        "DateInputSegmentGroup",
+        "useDateInput",
+        "useDateInputContext"
+      ],
+      "missingPublicParts": [
+        "DateInput",
+        "DateInputContext",
+        "DateInputControl",
+        "DateInputHiddenInput",
+        "DateInputLabel",
+        "DateInputRoot",
+        "DateInputSegment",
+        "DateInputSegmentContext",
+        "DateInputSegmentGroup"
+      ],
+      "missingProviders": [
+        "DateInputRootProvider"
+      ],
+      "missingHooks": [
+        "useDateInput",
+        "useDateInputContext"
+      ]
+    },
+    "date-picker": {
+      "exportedValues": [
+        "parseDate",
+        "datePickerAnatomy",
+        "DatePicker",
+        "DatePickerClearTrigger",
+        "DatePickerContent",
+        "DatePickerContext",
+        "DatePickerControl",
+        "DatePickerInput",
+        "DatePickerLabel",
+        "DatePickerMonthSelect",
+        "DatePickerNextTrigger",
+        "DatePickerPositioner",
+        "DatePickerPresetTrigger",
+        "DatePickerPrevTrigger",
+        "DatePickerRangeText",
+        "DatePickerRoot",
+        "DatePickerRootProvider",
+        "DatePickerTable",
+        "DatePickerTableBody",
+        "DatePickerTableCell",
+        "DatePickerTableCellTrigger",
+        "DatePickerTableHead",
+        "DatePickerTableHeader",
+        "DatePickerTableRow",
+        "DatePickerTrigger",
+        "DatePickerValueText",
+        "DatePickerView",
+        "DatePickerViewControl",
+        "DatePickerViewTrigger",
+        "DatePickerWeekNumberCell",
+        "DatePickerWeekNumberHeaderCell",
+        "DatePickerYearSelect",
+        "useDatePicker",
+        "useDatePickerContext"
+      ],
+      "missingPublicParts": [
+        "DatePicker"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDatePickerContext"
+      ]
+    },
+    "dialog": {
+      "exportedValues": [
+        "dialogAnatomy",
+        "Dialog",
+        "DialogBackdrop",
+        "DialogCloseTrigger",
+        "DialogContent",
+        "DialogContext",
+        "DialogDescription",
+        "DialogPositioner",
+        "DialogRoot",
+        "DialogRootProvider",
+        "DialogTitle",
+        "DialogTrigger",
+        "useDialog",
+        "useDialogContext"
+      ],
+      "missingPublicParts": [
+        "DialogBackdrop"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDialogContext"
+      ]
+    },
+    "download-trigger": {
+      "exportedValues": [
+        "DownloadTrigger",
+        "useDownload"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDownload"
+      ]
+    },
+    "drawer": {
+      "exportedValues": [
+        "drawerAnatomy",
+        "Drawer",
+        "DrawerBackdrop",
+        "DrawerCloseTrigger",
+        "DrawerContent",
+        "DrawerContext",
+        "DrawerDescription",
+        "DrawerGrabber",
+        "DrawerGrabberIndicator",
+        "DrawerIndent",
+        "DrawerIndentBackground",
+        "DrawerPositioner",
+        "DrawerRoot",
+        "DrawerRootProvider",
+        "DrawerStack",
+        "DrawerSwipeArea",
+        "DrawerTitle",
+        "DrawerTrigger",
+        "useDrawer",
+        "useDrawerContext",
+        "useDrawerStackContext"
+      ],
+      "missingPublicParts": [
+        "DrawerBackdrop",
+        "DrawerContext",
+        "DrawerGrabber",
+        "DrawerGrabberIndicator",
+        "DrawerIndent",
+        "DrawerIndentBackground",
+        "DrawerStack",
+        "DrawerSwipeArea"
+      ],
+      "missingProviders": [
+        "DrawerRootProvider"
+      ],
+      "missingHooks": [
+        "useDrawer",
+        "useDrawerContext",
+        "useDrawerStackContext"
+      ]
+    },
+    "editable": {
+      "exportedValues": [
+        "editableAnatomy",
+        "Editable",
+        "EditableArea",
+        "EditableCancelTrigger",
+        "EditableContext",
+        "EditableControl",
+        "EditableEditTrigger",
+        "EditableInput",
+        "EditableLabel",
+        "EditablePreview",
+        "EditableRoot",
+        "EditableRootProvider",
+        "EditableSubmitTrigger",
+        "useEditable",
+        "useEditableContext"
+      ],
+      "missingPublicParts": [
+        "Editable"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useEditableContext"
+      ]
+    },
+    "field": {
+      "exportedValues": [
+        "fieldAnatomy",
+        "Field",
+        "FieldContext",
+        "FieldErrorText",
+        "FieldHelperText",
+        "FieldInput",
+        "FieldItem",
+        "FieldLabel",
+        "FieldRequiredIndicator",
+        "FieldRoot",
+        "FieldRootProvider",
+        "FieldSelect",
+        "FieldTextarea",
+        "useField",
+        "useFieldContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useField",
+        "useFieldContext"
+      ]
+    },
+    "fieldset": {
+      "exportedValues": [
+        "fieldsetAnatomy",
+        "Fieldset",
+        "FieldsetContext",
+        "FieldsetErrorText",
+        "FieldsetHelperText",
+        "FieldsetLegend",
+        "FieldsetRoot",
+        "FieldsetRootProvider",
+        "useFieldset",
+        "useFieldsetContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFieldset",
+        "useFieldsetContext"
+      ]
+    },
+    "file-upload": {
+      "exportedValues": [
+        "fileUploadAnatomy",
+        "FileUpload",
+        "FileUploadClearTrigger",
+        "FileUploadContext",
+        "FileUploadDropzone",
+        "FileUploadHiddenInput",
+        "FileUploadItem",
+        "FileUploadItemDeleteTrigger",
+        "FileUploadItemGroup",
+        "FileUploadItemName",
+        "FileUploadItemPreview",
+        "FileUploadItemPreviewImage",
+        "FileUploadItemSizeText",
+        "FileUploadLabel",
+        "FileUploadRoot",
+        "FileUploadRootProvider",
+        "FileUploadTrigger",
+        "useFileUpload",
+        "useFileUploadContext"
+      ],
+      "missingPublicParts": [
+        "FileUpload"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFileUploadContext"
+      ]
+    },
+    "floating-panel": {
+      "exportedValues": [
+        "floatingPanelAnatomy",
+        "FloatingPanel",
+        "FloatingPanelBody",
+        "FloatingPanelCloseTrigger",
+        "FloatingPanelContent",
+        "FloatingPanelContext",
+        "FloatingPanelControl",
+        "FloatingPanelDragTrigger",
+        "FloatingPanelHeader",
+        "FloatingPanelPositioner",
+        "FloatingPanelResizeTrigger",
+        "FloatingPanelRoot",
+        "FloatingPanelRootProvider",
+        "FloatingPanelStageTrigger",
+        "FloatingPanelTitle",
+        "FloatingPanelTrigger",
+        "useFloatingPanel",
+        "useFloatingPanelContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFloatingPanel",
+        "useFloatingPanelContext"
+      ]
+    },
+    "focus-trap": {
+      "exportedValues": [
+        "FocusTrap"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "format": {
+      "exportedValues": [
+        "Format",
+        "FormatByte",
+        "FormatNumber",
+        "FormatRelativeTime",
+        "FormatTime"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "frame": {
+      "exportedValues": [
+        "Frame"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "highlight": {
+      "exportedValues": [
+        "Highlight",
+        "useHighlight"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "hover-card": {
+      "exportedValues": [
+        "hoverCardAnatomy",
+        "HoverCard",
+        "HoverCardArrow",
+        "HoverCardArrowTip",
+        "HoverCardContent",
+        "HoverCardContext",
+        "HoverCardPositioner",
+        "HoverCardRoot",
+        "HoverCardRootProvider",
+        "HoverCardTrigger",
+        "useHoverCard",
+        "useHoverCardContext"
+      ],
+      "missingPublicParts": [
+        "HoverCard"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useHoverCardContext"
+      ]
+    },
+    "image-cropper": {
+      "exportedValues": [
+        "imageCropperAnatomy",
+        "ImageCropper",
+        "ImageCropperContext",
+        "ImageCropperGrid",
+        "ImageCropperHandle",
+        "ImageCropperImage",
+        "ImageCropperRoot",
+        "ImageCropperRootProvider",
+        "ImageCropperSelection",
+        "ImageCropperViewport",
+        "useImageCropper",
+        "useImageCropperContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useImageCropperContext"
+      ]
+    },
+    "json-tree-view": {
+      "exportedValues": [
+        "JsonTreeView",
+        "JsonTreeViewRoot",
+        "JsonTreeViewRootProvider",
+        "JsonTreeViewTree",
+        "useJsonTreeView"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "listbox": {
+      "exportedValues": [
+        "ListCollection",
+        "createListCollection",
+        "listboxAnatomy",
+        "Listbox",
+        "ListboxContent",
+        "ListboxContext",
+        "ListboxEmpty",
+        "ListboxInput",
+        "ListboxItem",
+        "ListboxItemContext",
+        "ListboxItemGroup",
+        "ListboxItemGroupLabel",
+        "ListboxItemIndicator",
+        "ListboxItemText",
+        "ListboxLabel",
+        "ListboxRoot",
+        "ListboxRootProvider",
+        "ListboxValueText",
+        "useListbox",
+        "useListboxContext",
+        "useListboxItemContext"
+      ],
+      "missingPublicParts": [
+        "ListCollection",
+        "Listbox",
+        "ListboxContent"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListboxContext",
+        "useListboxItemContext"
+      ]
+    },
+    "marquee": {
+      "exportedValues": [
+        "marqueeAnatomy",
+        "Marquee",
+        "MarqueeContent",
+        "MarqueeContext",
+        "MarqueeEdge",
+        "MarqueeItem",
+        "MarqueeRoot",
+        "MarqueeRootProvider",
+        "MarqueeViewport",
+        "useMarquee",
+        "useMarqueeContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useMarquee",
+        "useMarqueeContext"
+      ]
+    },
+    "menu": {
+      "exportedValues": [
+        "menuAnatomy",
+        "Menu",
+        "MenuArrow",
+        "MenuArrowTip",
+        "MenuCheckboxItem",
+        "MenuContent",
+        "MenuContext",
+        "MenuContextTrigger",
+        "MenuIndicator",
+        "MenuItem",
+        "MenuItemContext",
+        "MenuItemGroup",
+        "MenuItemGroupLabel",
+        "MenuItemIndicator",
+        "MenuItemText",
+        "MenuPositioner",
+        "MenuRadioItem",
+        "MenuRadioItemGroup",
+        "MenuRoot",
+        "MenuRootProvider",
+        "MenuSeparator",
+        "MenuTrigger",
+        "MenuTriggerItem",
+        "useMenu",
+        "useMenuContext",
+        "useMenuItemContext"
+      ],
+      "missingPublicParts": [
+        "Menu"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useMenuContext",
+        "useMenuItemContext"
+      ]
+    },
+    "navigation-menu": {
+      "exportedValues": [
+        "navigationMenuAnatomy",
+        "NavigationMenu",
+        "NavigationMenuArrow",
+        "NavigationMenuContent",
+        "NavigationMenuContext",
+        "NavigationMenuIndicator",
+        "NavigationMenuItem",
+        "NavigationMenuItemIndicator",
+        "NavigationMenuLink",
+        "NavigationMenuList",
+        "NavigationMenuRoot",
+        "NavigationMenuRootProvider",
+        "NavigationMenuTrigger",
+        "NavigationMenuViewport",
+        "NavigationMenuViewportPositioner",
+        "useNavigationMenu",
+        "useNavigationMenuContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useNavigationMenuContext"
+      ]
+    },
+    "number-input": {
+      "exportedValues": [
+        "numberInputAnatomy",
+        "NumberInput",
+        "NumberInputContext",
+        "NumberInputControl",
+        "NumberInputDecrementTrigger",
+        "NumberInputIncrementTrigger",
+        "NumberInputInput",
+        "NumberInputLabel",
+        "NumberInputRoot",
+        "NumberInputRootProvider",
+        "NumberInputScrubber",
+        "NumberInputValueText",
+        "useNumberInput",
+        "useNumberInputContext"
+      ],
+      "missingPublicParts": [
+        "NumberInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useNumberInputContext"
+      ]
+    },
+    "pagination": {
+      "exportedValues": [
+        "paginationAnatomy",
+        "Pagination",
+        "PaginationContext",
+        "PaginationEllipsis",
+        "PaginationFirstTrigger",
+        "PaginationItem",
+        "PaginationLastTrigger",
+        "PaginationNextTrigger",
+        "PaginationPrevTrigger",
+        "PaginationRoot",
+        "PaginationRootProvider",
+        "usePagination",
+        "usePaginationContext"
+      ],
+      "missingPublicParts": [
+        "Pagination"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePaginationContext"
+      ]
+    },
+    "password-input": {
+      "exportedValues": [
+        "passwordInputAnatomy",
+        "PasswordInput",
+        "PasswordInputContext",
+        "PasswordInputControl",
+        "PasswordInputIndicator",
+        "PasswordInputInput",
+        "PasswordInputLabel",
+        "PasswordInputRoot",
+        "PasswordInputRootProvider",
+        "PasswordInputVisibilityTrigger",
+        "usePasswordInput",
+        "usePasswordInputContext"
+      ],
+      "missingPublicParts": [
+        "PasswordInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePasswordInputContext"
+      ]
+    },
+    "pin-input": {
+      "exportedValues": [
+        "pinInputAnatomy",
+        "PinInput",
+        "PinInputContext",
+        "PinInputControl",
+        "PinInputHiddenInput",
+        "PinInputInput",
+        "PinInputLabel",
+        "PinInputRoot",
+        "PinInputRootProvider",
+        "usePinInput",
+        "usePinInputContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePinInputContext"
+      ]
+    },
+    "popover": {
+      "exportedValues": [
+        "popoverAnatomy",
+        "Popover",
+        "PopoverAnchor",
+        "PopoverArrow",
+        "PopoverArrowTip",
+        "PopoverCloseTrigger",
+        "PopoverContent",
+        "PopoverContext",
+        "PopoverDescription",
+        "PopoverIndicator",
+        "PopoverPositioner",
+        "PopoverRoot",
+        "PopoverRootProvider",
+        "PopoverTitle",
+        "PopoverTrigger",
+        "usePopover",
+        "usePopoverContext"
+      ],
+      "missingPublicParts": [
+        "Popover"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePopoverContext"
+      ]
+    },
+    "presence": {
+      "exportedValues": [
+        "usePresence",
+        "Presence",
+        "PresenceProvider",
+        "usePresenceContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePresenceContext"
+      ]
+    },
+    "progress": {
+      "exportedValues": [
+        "progressAnatomy",
+        "Progress",
+        "ProgressCircle",
+        "ProgressCircleRange",
+        "ProgressCircleTrack",
+        "ProgressContext",
+        "ProgressLabel",
+        "ProgressRange",
+        "ProgressRoot",
+        "ProgressRootProvider",
+        "ProgressTrack",
+        "ProgressValueText",
+        "ProgressView",
+        "useProgress",
+        "useProgressContext"
+      ],
+      "missingPublicParts": [
+        "Progress"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useProgressContext"
+      ]
+    },
+    "qr-code": {
+      "exportedValues": [
+        "qrCodeAnatomy",
+        "QrCode",
+        "QrCodeContext",
+        "QrCodeDownloadTrigger",
+        "QrCodeFrame",
+        "QrCodeOverlay",
+        "QrCodePattern",
+        "QrCodeRoot",
+        "QrCodeRootProvider",
+        "useQrCode",
+        "useQrCodeContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useQrCode",
+        "useQrCodeContext"
+      ]
+    },
+    "radio-group": {
+      "exportedValues": [
+        "radioGroupAnatomy",
+        "RadioGroup",
+        "RadioGroupContext",
+        "RadioGroupIndicator",
+        "RadioGroupItem",
+        "RadioGroupItemContext",
+        "RadioGroupItemControl",
+        "RadioGroupItemHiddenInput",
+        "RadioGroupItemText",
+        "RadioGroupLabel",
+        "RadioGroupRoot",
+        "RadioGroupRootProvider",
+        "useRadioGroup",
+        "useRadioGroupContext",
+        "useRadioGroupItemContext"
+      ],
+      "missingPublicParts": [
+        "RadioGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useRadioGroupContext",
+        "useRadioGroupItemContext"
+      ]
+    },
+    "rating-group": {
+      "exportedValues": [
+        "ratingGroupAnatomy",
+        "RatingGroup",
+        "RatingGroupContext",
+        "RatingGroupControl",
+        "RatingGroupHiddenInput",
+        "RatingGroupItem",
+        "RatingGroupItemContext",
+        "RatingGroupLabel",
+        "RatingGroupRoot",
+        "RatingGroupRootProvider",
+        "useRatingGroup",
+        "useRatingGroupContext",
+        "useRatingGroupItemContext"
+      ],
+      "missingPublicParts": [
+        "RatingGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useRatingGroupContext",
+        "useRatingGroupItemContext"
+      ]
+    },
+    "scroll-area": {
+      "exportedValues": [
+        "scrollAreaAnatomy",
+        "ScrollArea",
+        "ScrollAreaContent",
+        "ScrollAreaContext",
+        "ScrollAreaCorner",
+        "ScrollAreaRoot",
+        "ScrollAreaRootProvider",
+        "ScrollAreaScrollbar",
+        "ScrollAreaThumb",
+        "ScrollAreaViewport",
+        "useScrollArea",
+        "useScrollAreaContext"
+      ],
+      "missingPublicParts": [
+        "ScrollArea"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useScrollAreaContext"
+      ]
+    },
+    "segment-group": {
+      "exportedValues": [
+        "segmentGroupAnatomy",
+        "SegmentGroup",
+        "SegmentGroupContext",
+        "SegmentGroupIndicator",
+        "SegmentGroupItem",
+        "SegmentGroupItemContext",
+        "SegmentGroupItemControl",
+        "SegmentGroupItemHiddenInput",
+        "SegmentGroupItemText",
+        "SegmentGroupLabel",
+        "SegmentGroupRoot",
+        "SegmentGroupRootProvider",
+        "useSegmentGroup",
+        "useSegmentGroupContext",
+        "useSegmentGroupItemContext"
+      ],
+      "missingPublicParts": [
+        "SegmentGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSegmentGroupContext",
+        "useSegmentGroupItemContext"
+      ]
+    },
+    "select": {
+      "exportedValues": [
+        "selectAnatomy",
+        "ListCollection",
+        "createListCollection",
+        "useListCollection",
+        "Select",
+        "SelectClearTrigger",
+        "SelectContent",
+        "SelectContext",
+        "SelectControl",
+        "SelectHiddenSelect",
+        "SelectIndicator",
+        "SelectItem",
+        "SelectItemContext",
+        "SelectItemGroup",
+        "SelectItemGroupLabel",
+        "SelectItemIndicator",
+        "SelectItemText",
+        "SelectLabel",
+        "SelectList",
+        "SelectPositioner",
+        "SelectRoot",
+        "SelectRootProvider",
+        "SelectTrigger",
+        "SelectValueText",
+        "useSelect",
+        "useSelectContext",
+        "useSelectItemContext"
+      ],
+      "missingPublicParts": [
+        "ListCollection",
+        "Select"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListCollection",
+        "useSelectContext",
+        "useSelectItemContext"
+      ]
+    },
+    "signature-pad": {
+      "exportedValues": [
+        "signaturePadAnatomy",
+        "SignaturePad",
+        "SignaturePadClearTrigger",
+        "SignaturePadContext",
+        "SignaturePadControl",
+        "SignaturePadGuide",
+        "SignaturePadHiddenInput",
+        "SignaturePadLabel",
+        "SignaturePadRoot",
+        "SignaturePadRootProvider",
+        "SignaturePadSegment",
+        "useSignaturePad",
+        "useSignaturePadContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSignaturePad",
+        "useSignaturePadContext"
+      ]
+    },
+    "slider": {
+      "exportedValues": [
+        "sliderAnatomy",
+        "Slider",
+        "SliderContext",
+        "SliderControl",
+        "SliderDraggingIndicator",
+        "SliderHiddenInput",
+        "SliderLabel",
+        "SliderMarker",
+        "SliderMarkerGroup",
+        "SliderRange",
+        "SliderRoot",
+        "SliderRootProvider",
+        "SliderThumb",
+        "SliderTrack",
+        "SliderValueText",
+        "useSlider",
+        "useSliderContext"
+      ],
+      "missingPublicParts": [
+        "Slider"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSliderContext"
+      ]
+    },
+    "splitter": {
+      "exportedValues": [
+        "getSplitterLayout",
+        "splitterAnatomy",
+        "Splitter",
+        "SplitterContext",
+        "SplitterPanel",
+        "SplitterResizeTrigger",
+        "SplitterResizeTriggerIndicator",
+        "SplitterRoot",
+        "SplitterRootProvider",
+        "createSplitterRegistry",
+        "useSplitter",
+        "useSplitterContext"
+      ],
+      "missingPublicParts": [
+        "Splitter"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSplitterContext"
+      ]
+    },
+    "steps": {
+      "exportedValues": [
+        "stepsAnatomy",
+        "Steps",
+        "StepsCompletedContent",
+        "StepsContent",
+        "StepsContext",
+        "StepsIndicator",
+        "StepsItem",
+        "StepsItemContext",
+        "StepsList",
+        "StepsNextTrigger",
+        "StepsPrevTrigger",
+        "StepsProgress",
+        "StepsRoot",
+        "StepsRootProvider",
+        "StepsSeparator",
+        "StepsTrigger",
+        "useSteps",
+        "useStepsContext",
+        "useStepsItemContext"
+      ],
+      "missingPublicParts": [
+        "Steps"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useStepsContext",
+        "useStepsItemContext"
+      ]
+    },
+    "swap": {
+      "exportedValues": [
+        "Swap",
+        "SwapIndicator",
+        "SwapRoot",
+        "SwapRootProvider",
+        "swapAnatomy",
+        "useSwap",
+        "useSwapContext"
+      ],
+      "missingPublicParts": [
+        "Swap",
+        "SwapIndicator",
+        "SwapRoot"
+      ],
+      "missingProviders": [
+        "SwapRootProvider"
+      ],
+      "missingHooks": [
+        "useSwap",
+        "useSwapContext"
+      ]
+    },
+    "switch": {
+      "exportedValues": [
+        "switchAnatomy",
+        "Switch",
+        "SwitchContext",
+        "SwitchControl",
+        "SwitchHiddenInput",
+        "SwitchLabel",
+        "SwitchRoot",
+        "SwitchRootProvider",
+        "SwitchThumb",
+        "useSwitch",
+        "useSwitchContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSwitchContext"
+      ]
+    },
+    "tabs": {
+      "exportedValues": [
+        "tabsAnatomy",
+        "TabContent",
+        "TabIndicator",
+        "TabList",
+        "TabTrigger",
+        "Tabs",
+        "TabsContext",
+        "TabsRoot",
+        "TabsRootProvider",
+        "useTabs",
+        "useTabsContext"
+      ],
+      "missingPublicParts": [
+        "TabContent",
+        "TabIndicator",
+        "TabList",
+        "TabTrigger",
+        "Tabs"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTabsContext"
+      ]
+    },
+    "tags-input": {
+      "exportedValues": [
+        "tagsInputAnatomy",
+        "TagsInput",
+        "TagsInputClearTrigger",
+        "TagsInputContext",
+        "TagsInputControl",
+        "TagsInputHiddenInput",
+        "TagsInputInput",
+        "TagsInputItem",
+        "TagsInputItemContext",
+        "TagsInputItemDeleteTrigger",
+        "TagsInputItemInput",
+        "TagsInputItemPreview",
+        "TagsInputItemText",
+        "TagsInputLabel",
+        "TagsInputRoot",
+        "TagsInputRootProvider",
+        "useTagsInput",
+        "useTagsInputContext",
+        "useTagsInputItemContext"
+      ],
+      "missingPublicParts": [
+        "TagsInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTagsInputContext",
+        "useTagsInputItemContext"
+      ]
+    },
+    "timer": {
+      "exportedValues": [
+        "timerAnatomy",
+        "Timer",
+        "TimerActionTrigger",
+        "TimerArea",
+        "TimerContext",
+        "TimerControl",
+        "TimerItem",
+        "TimerRoot",
+        "TimerRootProvider",
+        "TimerSeparator",
+        "useTimer",
+        "useTimerContext"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTimer",
+        "useTimerContext"
+      ]
+    },
+    "toast": {
+      "exportedValues": [
+        "toastAnatomy",
+        "Toast",
+        "ToastActionTrigger",
+        "ToastCloseTrigger",
+        "ToastContext",
+        "ToastDescription",
+        "ToastRoot",
+        "ToastTitle",
+        "Toaster",
+        "createToaster",
+        "useToastContext"
+      ],
+      "missingPublicParts": [
+        "Toast"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToastContext"
+      ]
+    },
+    "toc": {
+      "exportedValues": [
+        "tocAnatomy",
+        "Toc",
+        "TocContent",
+        "TocContext",
+        "TocIndicator",
+        "TocItem",
+        "TocLink",
+        "TocList",
+        "TocNav",
+        "TocRoot",
+        "TocRootProvider",
+        "TocTitle",
+        "useToc",
+        "useTocContext"
+      ],
+      "missingPublicParts": [
+        "Toc",
+        "TocContent",
+        "TocContext",
+        "TocIndicator",
+        "TocItem",
+        "TocLink",
+        "TocList",
+        "TocNav",
+        "TocRoot",
+        "TocTitle"
+      ],
+      "missingProviders": [
+        "TocRootProvider"
+      ],
+      "missingHooks": [
+        "useToc",
+        "useTocContext"
+      ]
+    },
+    "toggle": {
+      "exportedValues": [
+        "Toggle",
+        "ToggleContext",
+        "ToggleIndicator",
+        "ToggleRoot",
+        "toggleAnatomy",
+        "useToggle",
+        "useToggleContext"
+      ],
+      "missingPublicParts": [
+        "Toggle"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToggle",
+        "useToggleContext"
+      ]
+    },
+    "toggle-group": {
+      "exportedValues": [
+        "toggleGroupAnatomy",
+        "ToggleGroup",
+        "ToggleGroupContext",
+        "ToggleGroupItem",
+        "ToggleGroupRoot",
+        "ToggleGroupRootProvider",
+        "useToggleGroup",
+        "useToggleGroupContext"
+      ],
+      "missingPublicParts": [
+        "ToggleGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToggleGroupContext"
+      ]
+    },
+    "tooltip": {
+      "exportedValues": [
+        "tooltipAnatomy",
+        "Tooltip",
+        "TooltipArrow",
+        "TooltipArrowTip",
+        "TooltipContent",
+        "TooltipContext",
+        "TooltipPositioner",
+        "TooltipRoot",
+        "TooltipRootProvider",
+        "TooltipTrigger",
+        "useTooltip",
+        "useTooltipContext"
+      ],
+      "missingPublicParts": [
+        "Tooltip"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTooltipContext"
+      ]
+    },
+    "tour": {
+      "exportedValues": [
+        "waitForElement",
+        "waitForElementValue",
+        "waitForPromise",
+        "tourAnatomy",
+        "Tour",
+        "TourActionTrigger",
+        "TourActions",
+        "TourArrow",
+        "TourArrowTip",
+        "TourBackdrop",
+        "TourCloseTrigger",
+        "TourContent",
+        "TourContext",
+        "TourControl",
+        "TourDescription",
+        "TourPositioner",
+        "TourProgressText",
+        "TourRoot",
+        "TourSpotlight",
+        "TourTitle",
+        "useTour",
+        "useTourContext",
+        "waitForEvent"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTourContext"
+      ]
+    },
+    "tree-view": {
+      "exportedValues": [
+        "treeViewAnatomy",
+        "TreeCollection",
+        "createFileTreeCollection",
+        "createTreeCollection",
+        "useTreeView",
+        "TreeView",
+        "TreeViewBranch",
+        "TreeViewBranchContent",
+        "TreeViewBranchControl",
+        "TreeViewBranchIndentGuide",
+        "TreeViewBranchIndicator",
+        "TreeViewBranchText",
+        "TreeViewBranchTrigger",
+        "TreeViewContext",
+        "TreeViewItem",
+        "TreeViewItemIndicator",
+        "TreeViewItemText",
+        "TreeViewLabel",
+        "TreeViewNodeCheckbox",
+        "TreeViewNodeCheckboxIndicator",
+        "TreeViewNodeContext",
+        "TreeViewNodeProvider",
+        "TreeViewNodeRenameInput",
+        "TreeViewRoot",
+        "TreeViewRootProvider",
+        "TreeViewTree",
+        "useTreeViewContext",
+        "useTreeViewNodeContext"
+      ],
+      "missingPublicParts": [
+        "TreeCollection",
+        "TreeView"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTreeViewContext",
+        "useTreeViewNodeContext"
+      ]
+    }
+  },
+  "svelte": {
+    "accordion": {
+      "exportedValues": [
+        "AccordionContext",
+        "AccordionItem",
+        "AccordionItemContent",
+        "AccordionItemContext",
+        "AccordionItemIndicator",
+        "AccordionItemTrigger",
+        "AccordionRoot",
+        "AccordionRootProvider",
+        "accordionAnatomy",
+        "useAccordion",
+        "useAccordionContext",
+        "useAccordionItemContext",
+        "Accordion"
+      ],
+      "missingPublicParts": [
+        "Accordion"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAccordionContext",
+        "useAccordionItemContext"
+      ]
+    },
+    "angle-slider": {
+      "exportedValues": [
+        "AngleSliderContext",
+        "AngleSliderControl",
+        "AngleSliderHiddenInput",
+        "AngleSliderLabel",
+        "AngleSliderMarker",
+        "AngleSliderMarkerGroup",
+        "AngleSliderRoot",
+        "AngleSliderRootProvider",
+        "AngleSliderThumb",
+        "AngleSliderValueText",
+        "angleSliderAnatomy",
+        "useAngleSliderContext",
+        "useAngleSlider",
+        "AngleSlider"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAngleSliderContext",
+        "useAngleSlider"
+      ]
+    },
+    "avatar": {
+      "exportedValues": [
+        "AvatarContext",
+        "AvatarFallback",
+        "AvatarImage",
+        "AvatarRootProvider",
+        "AvatarRoot",
+        "avatarAnatomy",
+        "useAvatarContext",
+        "useAvatar",
+        "Avatar"
+      ],
+      "missingPublicParts": [
+        "Avatar"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAvatarContext"
+      ]
+    },
+    "carousel": {
+      "exportedValues": [
+        "CarouselAutoplayIndicator",
+        "CarouselProgressText",
+        "CarouselAutoplayTrigger",
+        "CarouselContext",
+        "CarouselControl",
+        "CarouselIndicator",
+        "CarouselIndicatorGroup",
+        "CarouselItem",
+        "CarouselItemGroup",
+        "CarouselNextTrigger",
+        "CarouselPrevTrigger",
+        "CarouselRoot",
+        "CarouselRootProvider",
+        "carouselAnatomy",
+        "useCarousel",
+        "useCarouselContext",
+        "Carousel"
+      ],
+      "missingPublicParts": [
+        "Carousel"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCarouselContext"
+      ]
+    },
+    "checkbox": {
+      "exportedValues": [
+        "CheckboxContext",
+        "CheckboxControl",
+        "CheckboxGroup",
+        "CheckboxGroupProvider",
+        "CheckboxHiddenInput",
+        "CheckboxIndicator",
+        "CheckboxLabel",
+        "CheckboxRootProvider",
+        "CheckboxRoot",
+        "checkboxAnatomy",
+        "CheckboxProvider",
+        "useCheckboxContext",
+        "useCheckboxGroupContext",
+        "useCheckboxGroup",
+        "useCheckbox",
+        "Checkbox"
+      ],
+      "missingPublicParts": [
+        "Checkbox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCheckboxContext",
+        "useCheckboxGroupContext",
+        "useCheckboxGroup"
+      ]
+    },
+    "client-only": {
+      "exportedValues": [
+        "ClientOnly"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "clipboard": {
+      "exportedValues": [
+        "ClipboardContext",
+        "ClipboardControl",
+        "ClipboardIndicator",
+        "ClipboardInput",
+        "ClipboardLabel",
+        "ClipboardRootProvider",
+        "ClipboardRoot",
+        "ClipboardTrigger",
+        "ClipboardValueText",
+        "clipboardAnatomy",
+        "ClipboardProvider",
+        "useClipboardContext",
+        "useClipboard",
+        "Clipboard"
+      ],
+      "missingPublicParts": [
+        "Clipboard"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useClipboardContext"
+      ]
+    },
+    "collapsible": {
+      "exportedValues": [
+        "CollapsibleContent",
+        "CollapsibleContext",
+        "CollapsibleIndicator",
+        "CollapsibleRoot",
+        "CollapsibleRootProvider",
+        "CollapsibleTrigger",
+        "collapsibleAnatomy",
+        "useCollapsibleContext",
+        "useCollapsible",
+        "Collapsible"
+      ],
+      "missingPublicParts": [
+        "Collapsible"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useCollapsibleContext"
+      ]
+    },
+    "collection": {
+      "exportedValues": [
+        "createGridCollection",
+        "createListCollection",
+        "createFileTreeCollection",
+        "createTreeCollection",
+        "useAsyncList",
+        "useListCollection",
+        "useListSelection"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useAsyncList",
+        "useListCollection",
+        "useListSelection"
+      ]
+    },
+    "color-picker": {
+      "exportedValues": [
+        "parseColor",
+        "ColorPickerArea",
+        "ColorPickerAreaBackground",
+        "ColorPickerAreaThumb",
+        "ColorPickerChannelInput",
+        "ColorPickerChannelSlider",
+        "ColorPickerChannelSliderLabel",
+        "ColorPickerChannelSliderThumb",
+        "ColorPickerChannelSliderTrack",
+        "ColorPickerChannelSliderValueText",
+        "ColorPickerContext",
+        "ColorPickerContent",
+        "ColorPickerControl",
+        "ColorPickerEyeDropperTrigger",
+        "ColorPickerFormatSelect",
+        "ColorPickerFormatTrigger",
+        "ColorPickerHiddenInput",
+        "ColorPickerLabel",
+        "ColorPickerPositioner",
+        "ColorPickerRoot",
+        "ColorPickerRootProvider",
+        "ColorPickerSwatch",
+        "ColorPickerSwatchGroup",
+        "ColorPickerSwatchIndicator",
+        "ColorPickerSwatchTrigger",
+        "ColorPickerTransparencyGrid",
+        "ColorPickerTrigger",
+        "ColorPickerValueSwatch",
+        "ColorPickerValueText",
+        "ColorPickerView",
+        "colorPickerAnatomy",
+        "ColorPickerProvider",
+        "useColorPickerContext",
+        "ColorPickerChannelPropsProvider",
+        "useColorPickerChannelPropsContext",
+        "ColorPickerSwatchPropsProvider",
+        "useColorPickerSwatchPropsContext",
+        "useColorPicker",
+        "ColorPicker"
+      ],
+      "missingPublicParts": [
+        "ColorPicker"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useColorPickerContext",
+        "useColorPickerChannelPropsContext",
+        "useColorPickerSwatchPropsContext"
+      ]
+    },
+    "combobox": {
+      "exportedValues": [
+        "createListCollection",
+        "useListCollection",
+        "ComboboxClearTrigger",
+        "ComboboxContent",
+        "ComboboxEmpty",
+        "ComboboxContext",
+        "ComboboxControl",
+        "ComboboxInput",
+        "ComboboxItem",
+        "ComboboxItemContext",
+        "ComboboxItemGroup",
+        "ComboboxItemGroupLabel",
+        "ComboboxItemIndicator",
+        "ComboboxItemText",
+        "ComboboxLabel",
+        "ComboboxList",
+        "ComboboxPositioner",
+        "ComboboxRoot",
+        "ComboboxRootProvider",
+        "ComboboxTrigger",
+        "comboboxAnatomy",
+        "useCombobox",
+        "useComboboxContext",
+        "useComboboxItemContext",
+        "Combobox"
+      ],
+      "missingPublicParts": [
+        "Combobox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListCollection",
+        "useComboboxContext",
+        "useComboboxItemContext"
+      ]
+    },
+    "date-input": {
+      "exportedValues": [
+        "DateInputContext",
+        "DateInputSegmentContext",
+        "DateInputControl",
+        "DateInputHiddenInput",
+        "DateInputLabel",
+        "DateInputRoot",
+        "DateInputRootProvider",
+        "DateInputSegment",
+        "DateInputSegmentGroup",
+        "dateInputAnatomy",
+        "useDateInput",
+        "useDateInputContext",
+        "DateInput"
+      ],
+      "missingPublicParts": [
+        "DateInputContext",
+        "DateInputSegmentContext",
+        "DateInputControl",
+        "DateInputHiddenInput",
+        "DateInputLabel",
+        "DateInputRoot",
+        "DateInputSegment",
+        "DateInputSegmentGroup",
+        "DateInput"
+      ],
+      "missingProviders": [
+        "DateInputRootProvider"
+      ],
+      "missingHooks": [
+        "useDateInput",
+        "useDateInputContext"
+      ]
+    },
+    "date-picker": {
+      "exportedValues": [
+        "parseDate",
+        "DatePickerClearTrigger",
+        "DatePickerContent",
+        "DatePickerContext",
+        "DatePickerControl",
+        "DatePickerInput",
+        "DatePickerLabel",
+        "DatePickerMonthSelect",
+        "DatePickerNextTrigger",
+        "DatePickerPositioner",
+        "DatePickerPresetTrigger",
+        "DatePickerPrevTrigger",
+        "DatePickerRangeText",
+        "DatePickerValueText",
+        "DatePickerRoot",
+        "DatePickerRootProvider",
+        "DatePickerTable",
+        "DatePickerTableBody",
+        "DatePickerTableHead",
+        "DatePickerTableRow",
+        "DatePickerTrigger",
+        "DatePickerTableCell",
+        "DatePickerTableCellTrigger",
+        "DatePickerTableHeader",
+        "DatePickerView",
+        "DatePickerViewControl",
+        "DatePickerViewTrigger",
+        "DatePickerWeekNumberCell",
+        "DatePickerWeekNumberHeaderCell",
+        "DatePickerYearSelect",
+        "datePickerAnatomy",
+        "useDatePicker",
+        "useDatePickerContext",
+        "DatePicker"
+      ],
+      "missingPublicParts": [
+        "DatePicker"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDatePickerContext"
+      ]
+    },
+    "dialog": {
+      "exportedValues": [
+        "DialogBackdrop",
+        "DialogCloseTrigger",
+        "DialogContent",
+        "DialogContext",
+        "DialogDescription",
+        "Positioner",
+        "Root",
+        "RootProvider",
+        "Title",
+        "Trigger",
+        "dialogAnatomy",
+        "useDialogContext",
+        "useDialog",
+        "Dialog"
+      ],
+      "missingPublicParts": [
+        "DialogBackdrop",
+        "Positioner",
+        "Root",
+        "Title",
+        "Trigger"
+      ],
+      "missingProviders": [
+        "RootProvider"
+      ],
+      "missingHooks": [
+        "useDialogContext"
+      ]
+    },
+    "download-trigger": {
+      "exportedValues": [
+        "DownloadTrigger",
+        "useDownload"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useDownload"
+      ]
+    },
+    "drawer": {
+      "exportedValues": [
+        "DrawerBackdrop",
+        "DrawerCloseTrigger",
+        "DrawerContent",
+        "DrawerDescription",
+        "DrawerContext",
+        "DrawerPositioner",
+        "DrawerGrabber",
+        "DrawerGrabberIndicator",
+        "DrawerRoot",
+        "DrawerRootProvider",
+        "DrawerTitle",
+        "DrawerTrigger",
+        "DrawerIndent",
+        "DrawerIndentBackground",
+        "DrawerStack",
+        "DrawerSwipeArea",
+        "drawerAnatomy",
+        "useDrawerContext",
+        "useDrawerStackContext",
+        "useDrawer",
+        "Drawer"
+      ],
+      "missingPublicParts": [
+        "DrawerBackdrop",
+        "DrawerContext",
+        "DrawerGrabber",
+        "DrawerGrabberIndicator",
+        "DrawerIndent",
+        "DrawerIndentBackground",
+        "DrawerStack",
+        "DrawerSwipeArea"
+      ],
+      "missingProviders": [
+        "DrawerRootProvider"
+      ],
+      "missingHooks": [
+        "useDrawerContext",
+        "useDrawerStackContext",
+        "useDrawer"
+      ]
+    },
+    "editable": {
+      "exportedValues": [
+        "EditableArea",
+        "EditableCancelTrigger",
+        "EditableContext",
+        "EditableControl",
+        "EditableEditTrigger",
+        "EditableInput",
+        "EditableLabel",
+        "EditablePreview",
+        "EditableRoot",
+        "EditableRootProvider",
+        "EditableSubmitTrigger",
+        "editableAnatomy",
+        "useEditableContext",
+        "useEditable",
+        "Editable"
+      ],
+      "missingPublicParts": [
+        "Editable"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useEditableContext"
+      ]
+    },
+    "factory": {
+      "exportedValues": [
+        "Ark"
+      ],
+      "missingPublicParts": [
+        "Ark"
+      ],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "field": {
+      "exportedValues": [
+        "FieldContext",
+        "FieldErrorText",
+        "FieldHelperText",
+        "FieldInput",
+        "FieldItem",
+        "FieldLabel",
+        "FieldRequiredIndicator",
+        "FieldRootProvider",
+        "FieldRoot",
+        "FieldSelect",
+        "FieldTextarea",
+        "fieldAnatomy",
+        "useFieldContext",
+        "useField",
+        "Field"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFieldContext",
+        "useField"
+      ]
+    },
+    "fieldset": {
+      "exportedValues": [
+        "FieldsetContext",
+        "FieldsetErrorText",
+        "FieldsetHelperText",
+        "FieldsetLegend",
+        "FieldsetRootProvider",
+        "FieldsetRoot",
+        "fieldsetAnatomy",
+        "useFieldsetContext",
+        "useFieldset",
+        "Fieldset"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFieldsetContext",
+        "useFieldset"
+      ]
+    },
+    "file-upload": {
+      "exportedValues": [
+        "FileUploadClearTrigger",
+        "FileUploadContext",
+        "FileUploadDropzone",
+        "FileUploadHiddenInput",
+        "FileUploadItem",
+        "FileUploadItemDeleteTrigger",
+        "FileUploadItemGroup",
+        "FileUploadItemName",
+        "FileUploadItemPreview",
+        "FileUploadItemPreviewImage",
+        "FileUploadItemSizeText",
+        "FileUploadLabel",
+        "FileUploadRoot",
+        "FileUploadRootProvider",
+        "FileUploadTrigger",
+        "fileUploadAnatomy",
+        "useFileUploadContext",
+        "useFileUploadItemPropsContext",
+        "useFileUpload",
+        "FileUpload"
+      ],
+      "missingPublicParts": [
+        "FileUpload"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFileUploadContext",
+        "useFileUploadItemPropsContext"
+      ]
+    },
+    "floating-panel": {
+      "exportedValues": [
+        "FloatingPanelBody",
+        "FloatingPanelCloseTrigger",
+        "FloatingPanelContent",
+        "FloatingPanelContext",
+        "FloatingPanelDragTrigger",
+        "FloatingPanelHeader",
+        "FloatingPanelPositioner",
+        "FloatingPanelResizeTrigger",
+        "FloatingPanelStageTrigger",
+        "FloatingPanelRoot",
+        "FloatingPanelRootProvider",
+        "FloatingPanelTitle",
+        "FloatingPanelTrigger",
+        "FloatingPanelControl",
+        "useFloatingPanel",
+        "useFloatingPanelContext",
+        "floatingPanelAnatomy",
+        "FloatingPanel"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useFloatingPanel",
+        "useFloatingPanelContext"
+      ]
+    },
+    "focus-trap": {
+      "exportedValues": [
+        "FocusTrap"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "format": {
+      "exportedValues": [
+        "FormatByte",
+        "FormatNumber",
+        "FormatRelativeTime",
+        "FormatTime",
+        "Format"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "frame": {
+      "exportedValues": [
+        "Frame"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "highlight": {
+      "exportedValues": [
+        "Highlight",
+        "useHighlight"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "hover-card": {
+      "exportedValues": [
+        "HoverCardArrow",
+        "HoverCardArrowTip",
+        "HoverCardContent",
+        "HoverCardContext",
+        "HoverCardPositioner",
+        "HoverCardRoot",
+        "HoverCardRootProvider",
+        "HoverCardTrigger",
+        "hoverCardAnatomy",
+        "useHoverCard",
+        "useHoverCardContext",
+        "HoverCard"
+      ],
+      "missingPublicParts": [
+        "HoverCard"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useHoverCardContext"
+      ]
+    },
+    "image-cropper": {
+      "exportedValues": [
+        "ImageCropperContext",
+        "ImageCropperGrid",
+        "ImageCropperHandle",
+        "ImageCropperImage",
+        "ImageCropperRoot",
+        "ImageCropperRootProvider",
+        "ImageCropperSelection",
+        "ImageCropperViewport",
+        "imageCropperAnatomy",
+        "useImageCropperContext",
+        "useImageCropper",
+        "ImageCropper"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useImageCropperContext"
+      ]
+    },
+    "json-tree-view": {
+      "exportedValues": [
+        "JsonTreeViewRoot",
+        "JsonTreeViewRootProvider",
+        "JsonTreeViewTree",
+        "useJsonTreeView",
+        "JsonTreeView"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "listbox": {
+      "exportedValues": [
+        "createListCollection",
+        "ListboxContent",
+        "ListboxContext",
+        "ListboxEmpty",
+        "ListboxInput",
+        "ListboxItem",
+        "ListboxItemContext",
+        "ListboxItemGroup",
+        "ListboxItemGroupLabel",
+        "ListboxItemIndicator",
+        "ListboxItemText",
+        "ListboxLabel",
+        "ListboxRoot",
+        "ListboxRootProvider",
+        "ListboxValueText",
+        "listboxAnatomy",
+        "useListbox",
+        "useListboxContext",
+        "useListboxItemContext",
+        "Listbox"
+      ],
+      "missingPublicParts": [
+        "ListboxContent",
+        "Listbox"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListboxContext",
+        "useListboxItemContext"
+      ]
+    },
+    "marquee": {
+      "exportedValues": [
+        "MarqueeContent",
+        "MarqueeContext",
+        "MarqueeEdge",
+        "MarqueeItem",
+        "MarqueeRoot",
+        "MarqueeRootProvider",
+        "MarqueeViewport",
+        "marqueeAnatomy",
+        "useMarquee",
+        "useMarqueeContext",
+        "Marquee"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useMarquee",
+        "useMarqueeContext"
+      ]
+    },
+    "menu": {
+      "exportedValues": [
+        "MenuArrowTip",
+        "MenuArrow",
+        "MenuCheckboxItem",
+        "MenuContent",
+        "MenuContextTrigger",
+        "MenuContext",
+        "MenuIndicator",
+        "MenuItemContext",
+        "MenuItemGroupLabel",
+        "MenuItemGroup",
+        "MenuItemIndicator",
+        "MenuItemText",
+        "MenuItem",
+        "MenuPositioner",
+        "MenuRadioItemGroup",
+        "MenuRadioItem",
+        "MenuRootProvider",
+        "MenuRoot",
+        "MenuSeparator",
+        "MenuTriggerItem",
+        "MenuTrigger",
+        "menuAnatomy",
+        "useMenuContext",
+        "useMenuItemContext",
+        "useMenu",
+        "Menu"
+      ],
+      "missingPublicParts": [
+        "Menu"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useMenuContext",
+        "useMenuItemContext"
+      ]
+    },
+    "navigation-menu": {
+      "exportedValues": [
+        "NavigationMenuArrow",
+        "NavigationMenuContent",
+        "NavigationMenuContext",
+        "NavigationMenuIndicator",
+        "NavigationMenuItem",
+        "NavigationMenuItemIndicator",
+        "NavigationMenuLink",
+        "NavigationMenuList",
+        "NavigationMenuRoot",
+        "NavigationMenuRootProvider",
+        "NavigationMenuTrigger",
+        "NavigationMenuViewport",
+        "NavigationMenuViewportPositioner",
+        "navigationMenuAnatomy",
+        "useNavigationMenu",
+        "useNavigationMenuContext",
+        "NavigationMenu"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useNavigationMenuContext"
+      ]
+    },
+    "number-input": {
+      "exportedValues": [
+        "NumberInputContext",
+        "NumberInputControl",
+        "NumberInputDecrementTrigger",
+        "NumberInputIncrementTrigger",
+        "NumberInputInput",
+        "NumberInputLabel",
+        "NumberInputRoot",
+        "NumberInputRootProvider",
+        "NumberInputScrubber",
+        "NumberInputValueText",
+        "numberInputAnatomy",
+        "NumberInputProvider",
+        "useNumberInputContext",
+        "useNumberInput",
+        "NumberInput"
+      ],
+      "missingPublicParts": [
+        "NumberInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useNumberInputContext"
+      ]
+    },
+    "pagination": {
+      "exportedValues": [
+        "PaginationContext",
+        "PaginationEllipsis",
+        "PaginationFirstTrigger",
+        "PaginationItem",
+        "PaginationLastTrigger",
+        "PaginationNextTrigger",
+        "PaginationPrevTrigger",
+        "PaginationRootProvider",
+        "PaginationRoot",
+        "paginationAnatomy",
+        "usePagination",
+        "usePaginationContext",
+        "Pagination"
+      ],
+      "missingPublicParts": [
+        "Pagination"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePaginationContext"
+      ]
+    },
+    "password-input": {
+      "exportedValues": [
+        "PasswordInputContext",
+        "PasswordInputControl",
+        "PasswordInputIndicator",
+        "PasswordInputInput",
+        "PasswordInputLabel",
+        "PasswordInputRoot",
+        "PasswordInputRootProvider",
+        "PasswordInputVisibilityTrigger",
+        "passwordInputAnatomy",
+        "usePasswordInputContext",
+        "usePasswordInput",
+        "PasswordInput"
+      ],
+      "missingPublicParts": [
+        "PasswordInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePasswordInputContext"
+      ]
+    },
+    "pin-input": {
+      "exportedValues": [
+        "PinInputContext",
+        "PinInputControl",
+        "PinInputHiddenInput",
+        "PinInputInput",
+        "PinInputLabel",
+        "PinInputRoot",
+        "PinInputRootProvider",
+        "pinInputAnatomy",
+        "usePinInputContext",
+        "usePinInput",
+        "PinInput"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePinInputContext"
+      ]
+    },
+    "popover": {
+      "exportedValues": [
+        "PopoverAnchor",
+        "PopoverArrowTip",
+        "PopoverArrow",
+        "PopoverCloseTrigger",
+        "PopoverContent",
+        "PopoverContext",
+        "PopoverDescription",
+        "PopoverIndicator",
+        "PopoverPositioner",
+        "PopoverRootProvider",
+        "PopoverRoot",
+        "PopoverTitle",
+        "PopoverTrigger",
+        "popoverAnatomy",
+        "usePopoverContext",
+        "usePopover",
+        "Popover"
+      ],
+      "missingPublicParts": [
+        "Popover"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePopoverContext"
+      ]
+    },
+    "portal": {
+      "exportedValues": [
+        "Portal"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
+    },
+    "presence": {
+      "exportedValues": [
+        "Presence",
+        "PresenceProvider",
+        "usePresenceContext",
+        "usePresence"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "usePresenceContext"
+      ]
+    },
+    "progress": {
+      "exportedValues": [
+        "ProgressCircleRange",
+        "ProgressCircleTrack",
+        "ProgressCircle",
+        "ProgressContext",
+        "ProgressLabel",
+        "ProgressRange",
+        "ProgressRootProvider",
+        "ProgressRoot",
+        "ProgressTrack",
+        "ProgressValueText",
+        "ProgressView",
+        "progressAnatomy",
+        "useProgressContext",
+        "useProgress",
+        "Progress"
+      ],
+      "missingPublicParts": [
+        "Progress"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useProgressContext"
+      ]
+    },
+    "qr-code": {
+      "exportedValues": [
+        "QrCodeContext",
+        "QrCodeDownloadTrigger",
+        "QrCodeFrame",
+        "QrCodeOverlay",
+        "QrCodePattern",
+        "QrCodeRootProvider",
+        "QrCodeRoot",
+        "qrCodeAnatomy",
+        "useQrCodeContext",
+        "useQrCode",
+        "QrCode"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useQrCodeContext",
+        "useQrCode"
+      ]
+    },
+    "radio-group": {
+      "exportedValues": [
+        "RadioGroupContext",
+        "RadioGroupIndicator",
+        "RadioGroupItemContext",
+        "RadioGroupItemControl",
+        "RadioGroupItemHiddenInput",
+        "RadioGroupItemText",
+        "RadioGroupItem",
+        "RadioGroupLabel",
+        "RadioGroupRootProvider",
+        "RadioGroupRoot",
+        "radioGroupAnatomy",
+        "useRadioGroup",
+        "useRadioGroupContext",
+        "useRadioGroupItemContext",
+        "RadioGroup"
+      ],
+      "missingPublicParts": [
+        "RadioGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useRadioGroupContext",
+        "useRadioGroupItemContext"
+      ]
+    },
+    "rating-group": {
+      "exportedValues": [
+        "RatingGroupContext",
+        "RatingGroupControl",
+        "RatingGroupHiddenInput",
+        "RatingGroupItemContext",
+        "RatingGroupItem",
+        "RatingGroupLabel",
+        "RatingGroupRootProvider",
+        "RatingGroupRoot",
+        "ratingGroupAnatomy",
+        "useRatingGroup",
+        "useRatingGroupContext",
+        "useRatingGroupItemContext",
+        "RatingGroup"
+      ],
+      "missingPublicParts": [
+        "RatingGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useRatingGroupContext",
+        "useRatingGroupItemContext"
+      ]
+    },
+    "scroll-area": {
+      "exportedValues": [
+        "ScrollAreaContent",
+        "ScrollAreaContext",
+        "ScrollAreaCorner",
+        "ScrollAreaRoot",
+        "ScrollAreaRootProvider",
+        "ScrollAreaScrollbar",
+        "ScrollAreaThumb",
+        "ScrollAreaViewport",
+        "scrollAreaAnatomy",
+        "useScrollArea",
+        "useScrollAreaContext",
+        "ScrollArea"
+      ],
+      "missingPublicParts": [
+        "ScrollArea"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useScrollAreaContext"
+      ]
+    },
+    "segment-group": {
+      "exportedValues": [
+        "SegmentGroupContext",
+        "SegmentGroupIndicator",
+        "SegmentGroupItemContext",
+        "SegmentGroupItemControl",
+        "SegmentGroupItemHiddenInput",
+        "SegmentGroupItemText",
+        "SegmentGroupItem",
+        "SegmentGroupLabel",
+        "SegmentGroupRootProvider",
+        "SegmentGroupRoot",
+        "segmentGroupAnatomy",
+        "useSegmentGroup",
+        "useSegmentGroupContext",
+        "useSegmentGroupItemContext",
+        "SegmentGroup"
+      ],
+      "missingPublicParts": [
+        "SegmentGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSegmentGroupContext",
+        "useSegmentGroupItemContext"
+      ]
+    },
+    "select": {
+      "exportedValues": [
+        "createListCollection",
+        "useListCollection",
+        "SelectClearTrigger",
+        "SelectContent",
+        "SelectContext",
+        "SelectControl",
+        "SelectHiddenSelect",
+        "SelectIndicator",
+        "SelectItem",
+        "SelectItemContext",
+        "SelectItemGroup",
+        "SelectItemGroupLabel",
+        "SelectItemIndicator",
+        "SelectItemText",
+        "SelectLabel",
+        "SelectList",
+        "SelectPositioner",
+        "SelectRoot",
+        "SelectRootProvider",
+        "SelectTrigger",
+        "SelectValueText",
+        "selectAnatomy",
+        "useSelect",
+        "useSelectContext",
+        "useSelectItemContext",
+        "Select"
+      ],
+      "missingPublicParts": [
+        "Select"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useListCollection",
+        "useSelectContext",
+        "useSelectItemContext"
+      ]
+    },
+    "signature-pad": {
+      "exportedValues": [
+        "SignaturePadClearTrigger",
+        "SignaturePadContext",
+        "SignaturePadControl",
+        "SignaturePadGuide",
+        "SignaturePadHiddenInput",
+        "SignaturePadLabel",
+        "SignaturePadRoot",
+        "SignaturePadRootProvider",
+        "SignaturePadSegment",
+        "signaturePadAnatomy",
+        "useSignaturePad",
+        "useSignaturePadContext",
+        "SignaturePad"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSignaturePad",
+        "useSignaturePadContext"
+      ]
+    },
+    "slider": {
+      "exportedValues": [
+        "SliderContext",
+        "SliderControl",
+        "SliderDraggingIndicator",
+        "SliderHiddenInput",
+        "SliderLabel",
+        "SliderMarkerGroup",
+        "SliderMarker",
+        "SliderRange",
+        "SliderRootProvider",
+        "SliderRoot",
+        "SliderThumb",
+        "SliderTrack",
+        "SliderValueText",
+        "sliderAnatomy",
+        "useSliderContext",
+        "useSlider",
+        "Slider"
+      ],
+      "missingPublicParts": [
+        "Slider"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSliderContext"
+      ]
+    },
+    "splitter": {
+      "exportedValues": [
+        "getSplitterLayout",
+        "SplitterContext",
+        "SplitterPanel",
+        "SplitterResizeTrigger",
+        "SplitterResizeTriggerIndicator",
+        "SplitterRootProvider",
+        "SplitterRoot",
+        "createSplitterRegistry",
+        "useSplitterContext",
+        "useSplitter",
+        "Splitter"
+      ],
+      "missingPublicParts": [
+        "Splitter"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSplitterContext"
+      ]
+    },
+    "steps": {
+      "exportedValues": [
+        "StepsCompletedContent",
+        "StepsContent",
+        "StepsContext",
+        "StepsIndicator",
+        "StepsItem",
+        "StepsItemContext",
+        "StepsList",
+        "StepsNextTrigger",
+        "StepsPrevTrigger",
+        "StepsProgress",
+        "StepsRoot",
+        "StepsRootProvider",
+        "StepsSeparator",
+        "StepsTrigger",
+        "stepsAnatomy",
+        "useSteps",
+        "useStepsContext",
+        "useStepsItemContext",
+        "Steps"
+      ],
+      "missingPublicParts": [
+        "Steps"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useStepsContext",
+        "useStepsItemContext"
+      ]
+    },
+    "swap": {
+      "exportedValues": [
+        "SwapIndicator",
+        "SwapRoot",
+        "SwapRootProvider",
+        "swapAnatomy",
+        "useSwap",
+        "useSwapContext",
+        "Swap"
+      ],
+      "missingPublicParts": [
+        "SwapIndicator",
+        "SwapRoot",
+        "Swap"
+      ],
+      "missingProviders": [
+        "SwapRootProvider"
+      ],
+      "missingHooks": [
+        "useSwap",
+        "useSwapContext"
+      ]
+    },
+    "switch": {
+      "exportedValues": [
+        "SwitchContext",
+        "SwitchControl",
+        "SwitchHiddenInput",
+        "SwitchLabel",
+        "SwitchRoot",
+        "SwitchRootProvider",
+        "SwitchThumb",
+        "switchAnatomy",
+        "useSwitch",
+        "useSwitchContext",
+        "Switch"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useSwitchContext"
+      ]
+    },
+    "tabs": {
+      "exportedValues": [
+        "TabContent",
+        "TabsContext",
+        "TabIndicator",
+        "TabList",
+        "TabsRootProvider",
+        "TabsRoot",
+        "TabTrigger",
+        "tabsAnatomy",
+        "useTabsContext",
+        "useTabs",
+        "Tabs"
+      ],
+      "missingPublicParts": [
+        "TabContent",
+        "TabIndicator",
+        "TabList",
+        "TabTrigger",
+        "Tabs"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTabsContext"
+      ]
+    },
+    "tags-input": {
+      "exportedValues": [
+        "TagsInputClearTrigger",
+        "TagsInputContext",
+        "TagsInputControl",
+        "TagsInputHiddenInput",
+        "TagsInputInput",
+        "TagsInputItem",
+        "TagsInputItemContext",
+        "TagsInputItemDeleteTrigger",
+        "TagsInputItemInput",
+        "TagsInputItemPreview",
+        "TagsInputItemText",
+        "TagsInputLabel",
+        "TagsInputRoot",
+        "TagsInputRootProvider",
+        "tagsInputAnatomy",
+        "useTagsInput",
+        "useTagsInputContext",
+        "useTagsInputItemContext",
+        "TagsInput"
+      ],
+      "missingPublicParts": [
+        "TagsInput"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTagsInputContext",
+        "useTagsInputItemContext"
+      ]
+    },
+    "timer": {
+      "exportedValues": [
+        "TimerActionTrigger",
+        "TimerArea",
+        "TimerContext",
+        "TimerControl",
+        "TimerItem",
+        "TimerRootProvider",
+        "TimerRoot",
+        "TimerSeparator",
+        "timerAnatomy",
+        "useTimerContext",
+        "useTimer",
+        "Timer"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTimerContext",
+        "useTimer"
+      ]
+    },
+    "toast": {
+      "exportedValues": [
+        "createToaster",
+        "ToastActionTrigger",
+        "ToastCloseTrigger",
+        "ToastContext",
+        "ToastDescription",
+        "ToastRoot",
+        "ToastTitle",
+        "toastAnatomy",
+        "Toaster",
+        "useToastContext",
+        "Toast"
+      ],
+      "missingPublicParts": [
+        "Toast"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToastContext"
+      ]
+    },
+    "toc": {
+      "exportedValues": [
+        "TocContent",
+        "TocContext",
+        "TocIndicator",
+        "TocItem",
+        "TocLink",
+        "TocList",
+        "TocNav",
+        "TocRoot",
+        "TocRootProvider",
+        "TocTitle",
+        "tocAnatomy",
+        "useToc",
+        "useTocContext",
+        "Toc"
+      ],
+      "missingPublicParts": [
+        "TocContent",
+        "TocContext",
+        "TocIndicator",
+        "TocItem",
+        "TocLink",
+        "TocList",
+        "TocNav",
+        "TocRoot",
+        "TocTitle",
+        "Toc"
+      ],
+      "missingProviders": [
+        "TocRootProvider"
+      ],
+      "missingHooks": [
+        "useToc",
+        "useTocContext"
+      ]
+    },
+    "toggle": {
+      "exportedValues": [
+        "ToggleContext",
+        "ToggleIndicator",
+        "ToggleRoot",
+        "toggleAnatomy",
+        "useToggle",
+        "useToggleContext",
+        "Toggle"
+      ],
+      "missingPublicParts": [
+        "Toggle"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToggle",
+        "useToggleContext"
+      ]
+    },
+    "toggle-group": {
+      "exportedValues": [
+        "ToggleGroupContext",
+        "ToggleGroupItem",
+        "ToggleGroupRoot",
+        "ToggleGroupRootProvider",
+        "toggleGroupAnatomy",
+        "useToggleGroup",
+        "useToggleGroupContext",
+        "ToggleGroup"
+      ],
+      "missingPublicParts": [
+        "ToggleGroup"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useToggleGroupContext"
+      ]
+    },
+    "tooltip": {
+      "exportedValues": [
+        "TooltipArrow",
+        "TooltipArrowTip",
+        "TooltipContent",
+        "TooltipContext",
+        "TooltipPositioner",
+        "TooltipRoot",
+        "TooltipRootProvider",
+        "TooltipTrigger",
+        "tooltipAnatomy",
+        "useTooltipContext",
+        "useTooltip",
+        "Tooltip"
+      ],
+      "missingPublicParts": [
+        "Tooltip"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTooltipContext"
+      ]
+    },
+    "tour": {
+      "exportedValues": [
+        "waitForElement",
+        "waitForElementValue",
+        "waitForPromise",
+        "waitForEvent",
+        "TourActionTrigger",
+        "TourActions",
+        "TourArrowTip",
+        "TourArrow",
+        "TourBackdrop",
+        "TourCloseTrigger",
+        "TourContent",
+        "TourContext",
+        "TourControl",
+        "TourDescription",
+        "TourPositioner",
+        "TourProgressText",
+        "TourRoot",
+        "TourSpotlight",
+        "TourTitle",
+        "tourAnatomy",
+        "useTourContext",
+        "useTour",
+        "Tour"
+      ],
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTourContext"
+      ]
+    },
+    "tree-view": {
+      "exportedValues": [
+        "createFileTreeCollection",
+        "createTreeCollection",
+        "TreeViewBranch",
+        "TreeViewBranchContent",
+        "TreeViewBranchControl",
+        "TreeViewBranchIndentGuide",
+        "TreeViewBranchIndicator",
+        "TreeViewBranchText",
+        "TreeViewBranchTrigger",
+        "TreeViewContext",
+        "TreeViewItem",
+        "TreeViewItemIndicator",
+        "TreeViewItemText",
+        "TreeViewLabel",
+        "TreeViewNodeContext",
+        "TreeViewNodeCheckbox",
+        "TreeViewNodeCheckboxIndicator",
+        "TreeViewNodeRenameInput",
+        "TreeViewNodeProvider",
+        "TreeViewRoot",
+        "TreeViewRootProvider",
+        "TreeViewTree",
+        "treeViewAnatomy",
+        "useTreeViewContext",
+        "useTreeViewNodeContext",
+        "useTreeViewNodePropsContext",
+        "useTreeView",
+        "TreeView"
+      ],
+      "missingPublicParts": [
+        "TreeView"
+      ],
+      "missingProviders": [],
+      "missingHooks": [
+        "useTreeViewContext",
+        "useTreeViewNodeContext",
+        "useTreeViewNodePropsContext"
+      ]
+    }
+  }
+}

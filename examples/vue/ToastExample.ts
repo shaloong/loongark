@@ -13,7 +13,7 @@ import {
 type ToastVariant = "info" | "success" | "warning" | "error";
 
 const createToast = (
-  toaster: ReturnType<typeof createToaster>,
+  toaster: ReturnType<typeof createToaster<import("vue").VNodeChild>>,
   type: ToastVariant,
   title: string
 ) => {

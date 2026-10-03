@@ -32,7 +32,7 @@ type ToastVariant = "info" | "success" | "warning" | "error";
 const ToastHost = ({
   toaster,
 }: {
-  toaster: ReturnType<typeof createToaster>;
+  toaster: ReturnType<typeof createToaster<React.ReactNode>>;
 }) => (
   <LoongArkToaster toaster={toaster}>
     {(toast) => (
@@ -59,7 +59,7 @@ const ToastHost = ({
 );
 
 const createToast = (
-  toaster: ReturnType<typeof createToaster>,
+  toaster: ReturnType<typeof createToaster<React.ReactNode>>,
   type: ToastVariant,
   title: string,
 ) => {

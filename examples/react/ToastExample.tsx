@@ -14,7 +14,7 @@ import {
 type ToastVariant = "info" | "success" | "warning" | "error";
 
 const createToast = (
-  toaster: ReturnType<typeof createToaster>,
+  toaster: ReturnType<typeof createToaster<React.ReactNode>>,
   type: ToastVariant,
   title: string,
 ) => {

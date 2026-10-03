@@ -16,7 +16,7 @@
     "package.json"
   ],
   "dependencies": {
-    "@ark-ui/vue": "^5.30.0",
+    "@ark-ui/vue": "^5.39.2",
     "@loongark/kit": "workspace:*",
     "@loongark/primitives": "workspace:*",
     "@loongark/theme": "workspace:*"

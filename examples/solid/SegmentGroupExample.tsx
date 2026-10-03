@@ -2,8 +2,11 @@
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 import {
+  LoongArkButton,
   LoongArkSegmentGroupRoot,
   LoongArkSegmentGroupItem,
+  LoongArkSegmentGroupItemHiddenInput,
+  LoongArkSegmentGroupItemText,
 } from "@loongark/solid";
 import type {
   SegmentGroupOrientation,
@@ -28,22 +31,27 @@ export const SegmentGroupExample: Component<SegmentGroupExampleProps> = (
   const size = () => props.size ?? "md";
   const orientation = () => props.orientation ?? "horizontal";
   const disabled = () => props.disabled ?? false;
-  const [value, setValue] = createSignal<string[]>(["overview"]);
+  const [value, setValue] = createSignal<string | null>("overview");
 
   return (
-    <div style={{ display: "flex", "flex-direction": "column", gap: "12px" }}>
+    <form style={{ display: "flex", "flex-direction": "column", gap: "12px" }}>
       <LoongArkSegmentGroupRoot
+        aria-label="View"
+        name="view"
         size={size()}
         orientation={orientation()}
         disabled={disabled()}
         value={value()}
-        onValueChange={(details: { value: string[] }) =>
+        onValueChange={(details: { value: string | null }) =>
           setValue(details.value)
         }
       >
         {options.map((option) => (
           <LoongArkSegmentGroupItem value={option.value}>
-            {option.label}
+            <LoongArkSegmentGroupItemHiddenInput />
+            <LoongArkSegmentGroupItemText>
+              {option.label}
+            </LoongArkSegmentGroupItemText>
           </LoongArkSegmentGroupItem>
         ))}
       </LoongArkSegmentGroupRoot>
@@ -53,8 +61,15 @@ export const SegmentGroupExample: Component<SegmentGroupExampleProps> = (
           color: "var(--lk-color-semantic-mutedforeground)",
         }}
       >
-        Selected: {value()[0] || "None"}
+        Selected: {value() || "None"}
       </span>
-    </div>
+      <LoongArkButton
+        type="button"
+        variant="outline"
+        onClick={() => setValue("overview")}
+      >
+        Reset view
+      </LoongArkButton>
+    </form>
   );
 };

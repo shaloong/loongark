@@ -2,10 +2,19 @@
 
 更新时间：2026-10-03。按组件族计数，Progress 的线性/圆形属于同一族。
 
-目前 102 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐选择输入、浮动动作、媒体布局以及附件、消息与问卷，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
+目前 111 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐 Ark 裁剪、JSON 与辅助组件，并复核高级部件，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
 
 | 组件族               | React | Vue | Solid | Svelte | 交付来源        |
 | -------------------- | ----- | --- | ----- | ------ | --------------- |
+| ImageCropper | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
+| JsonTreeView | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
+| ClientOnly | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
+| DownloadTrigger | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
+| FocusTrap | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
+| Format | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
+| Frame | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
+| Highlight | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
+| Presence | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
 | Attachment           | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
 | Message              | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
 | Bubble               | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
@@ -128,3 +137,9 @@ DataTable 一致性批次完善受控选择、当前页全选、动态数据和�
 Typography 的 muted 变体现在使用已有语义次要文字颜色，补独立 Story 与四端示例的实际计算颜色回归。
 
 Chart 可读性批次完善紧凑数值轴、分类密度、共享图例、缺失值断线和极值坐标。累计 102 族、266 Story、四端各 620 个公开值入口、115 个框架示例。见 [Chart 说明](chart.md) 和 [Linux 验收](audits/2026-10-03/chart-linux/acceptance.json)。
+
+## Ark UI 高级能力复核（2026-10-03）
+
+新增 ImageCropper、JsonTreeView 与独立辅助组件，开放既有组件的 Provider/Context 与高级部件。SegmentGroup 统一为 Ark 原生单选语义，Vue 多选表单值同步修正。新增四端裁剪、JSON、辅助组件与高级选择示例。新版 DateInput、Swap、TOC 和手势抽屉仍为待补，不把原目录完整视为高级能力全部验收。详细对照、API 与迁移见 [Ark UI 核对](ark-ui-coverage.md)。
+
+本批累计 111 族、279 Story、四端各 756 个公开值入口、131 个框架示例；仍待 DateInput、Swap、TOC 与手势 Drawer。详见 [Ark UI 核对](ark-ui-coverage.md)。

@@ -2,6 +2,9 @@ import type { CollectionItem } from "@ark-ui/vue/collection";
 import type { SelectRootProps as NativeSelectRootProps } from "@ark-ui/vue/select";
 import type { SelectItemProps as NativeSelectItemProps } from "@ark-ui/vue/select";
 import { renderPart } from "../render-part";
+import { syncNativeSelectOptions } from "@loongark/kit";
+import { shallowRef, watchPostEffect, type VNode } from "vue";
+import { useSelectContext } from "@ark-ui/vue/select";
 /**
  * Select 组件 - Vue 实现
  * 基于 Ark UI Select 的下拉选择器
@@ -452,9 +455,21 @@ export const LoongArkSelectItemIndicator = defineComponent({
 export const LoongArkSelectHiddenSelect = defineComponent({
   name: "LoongArkSelectHiddenSelect",
   setup(_, { attrs }) {
+    const select = useSelectContext();
+    const element = shallowRef<HTMLSelectElement | null>(null);
+    const sync = () => {
+      if (element.value) syncNativeSelectOptions(element.value, select.value.value);
+    };
+    const mounted = (node: VNode) => {
+      if (node.el instanceof HTMLSelectElement) element.value = node.el;
+      sync();
+    };
+    watchPostEffect(sync);
     return () =>
       renderPart(ArkSelectHiddenSelect, {
         ...attrs,
+        onVnodeMounted: mounted,
+        onVnodeUpdated: sync,
         "data-scope": "select",
         "data-part": "hidden-select",
       });

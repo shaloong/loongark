@@ -56,4 +56,8 @@
 
 DataTable 后续复核发现选择清理、旧页码、失效排序与受控 checkbox 原生状态不一致，已完成四端修正；选择列、窄屏页脚及 Typography muted 层级也根据真实截图调整。当前累计 102 族、262 Story 和 111 个框架示例，见 [表格说明](data-table.md) 与 [Linux 验收](audits/2026-10-03/data-table-linux/acceptance.json)。
 
-Chart 压力场景进一步确认长分类重叠、数值轴裁切、系列辨识与 SVG 占位问题，已在共享模型/样式修正，四端同步图例、缺失值语义与回归。当前累计 102 族、266 Story 和 115 个框架示例；清单仍无待补组件族。见 [图表说明](chart.md) 与 [Linux 验收](audits/2026-10-03/chart-linux/acceptance.json)。
+Chart 压力场景进一步确认长分类重叠、数值轴裁切、系列辨识与 SVG 占位问题，已在共享模型/样式修正，四端同步图例、缺失值语义与回归。当前累计 102 族、266 Story 和 115 个框架示例；该批次原清单无待补族；后续 Ark 扩展对照见下文。见 [图表说明](chart.md) 与 [Linux 验收](audits/2026-10-03/chart-linux/acceptance.json)。
+
+## Ark UI 高级能力复核（2026-10-03）
+
+新增 ImageCropper、JsonTreeView 与独立辅助组件，开放既有组件的 Provider/Context 与高级部件。SegmentGroup 统一为 Ark 原生单选语义，Vue 多选表单值同步修正。新增四端裁剪、JSON、辅助组件与高级选择示例。新版 DateInput、Swap、TOC 和手势抽屉仍为待补，不把原目录完整视为高级能力全部验收。详细对照、API 与迁移见 [Ark UI 核对](ark-ui-coverage.md)。

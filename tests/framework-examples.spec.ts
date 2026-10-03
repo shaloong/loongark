@@ -1,3 +1,10 @@
+import {
+  checkImageCropper,
+  checkJsonTreeView,
+  checkArkUtilities,
+  checkAdvancedSelection,
+  checkSegmentGroup,
+} from "./arkAdditionsChecks";
 import { auditDirectory } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
@@ -138,6 +145,13 @@ for (const framework of ["react", "vue", "solid", "svelte"])
         });
         await page.setViewportSize({ width: 1280, height: 720 });
       }
+      if (name === "ImageCropperExample")
+        await checkImageCropper(page, framework);
+      if (name === "JsonTreeViewExample") await checkJsonTreeView(page);
+      if (name === "ArkUtilitiesExample") await checkArkUtilities(page);
+      if (name === "AdvancedSelectionExample")
+        await checkAdvancedSelection(page);
+      if (name === "SegmentGroupExample") await checkSegmentGroup(page);
       if (name === "ColorPickerExample") {
         await page
           .locator("[data-scope=color-picker][data-part=trigger]")

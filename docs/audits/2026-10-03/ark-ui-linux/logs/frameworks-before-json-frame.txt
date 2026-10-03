@@ -1,0 +1,169 @@
+
+> loongark@0.0.0 test:frameworks /workspace/loongark
+> node scripts/build-framework-fixtures.mjs && node scripts/build-example-fixtures.mjs && node scripts/run-framework-tests.mjs
+
+react 发布消费构建通过
+vue 发布消费构建通过
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+solid 发布消费构建通过
+svelte 发布消费构建通过
+react: 35 个现有组件示例构建通过
+vue: 32 个现有组件示例构建通过
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+solid: 32 个现有组件示例构建通过
+svelte: 32 个现有组件示例构建通过
+[serve-static] /workspace/loongark/tests/consumer-dist on http://127.0.0.1:6007 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 8 tests using 2 workers
+
+(node:160049) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:160050) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:160049) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:160050) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/framework-consumers.spec.ts:5:7 › react 发布消费、绑定、主题和浮层 (2.9s)
+  ✓  2 [chromium] › tests/framework-consumers.spec.ts:5:7 › vue 发布消费、绑定、主题和浮层 (3.2s)
+  ✓  3 [chromium] › tests/framework-consumers.spec.ts:5:7 › solid 发布消费、绑定、主题和浮层 (2.7s)
+  ✓  4 [chromium] › tests/framework-consumers.spec.ts:5:7 › svelte 发布消费、绑定、主题和浮层 (2.8s)
+  ✘  6 [chromium] › tests/framework-examples.spec.ts:18:7 › vue 全部现有组件示例运行 (8.7s)
+(node:160574) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:160574) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 [chromium] › tests/framework-examples.spec.ts:18:7 › react 全部现有组件示例运行 (15.2s)
+(node:160733) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:160733) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  8 [chromium] › tests/framework-examples.spec.ts:18:7 › svelte 全部现有组件示例运行 (9.1s)
+  ✘  7 [chromium] › tests/framework-examples.spec.ts:18:7 › solid 全部现有组件示例运行 (15.7s)
+
+
+  1) [chromium] › tests/framework-examples.spec.ts:18:7 › react 全部现有组件示例运行 ─────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  getByRole('tree', { name: 'Project data' }).getByText('ImageCropper').last()
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('tree', { name: 'Project data' }).getByText('ImageCropper').last()
+        9 × locator resolved to <span data-type="string" data-kind="preview">"ImageCropper"</span>
+          - unexpected value "hidden"
+
+
+       at arkAdditionsChecks.ts:83
+
+      81 |   await expect(
+      82 |     tree.getByText("ImageCropper", { exact: false }).last(),
+    > 83 |   ).toBeVisible();
+         |     ^
+      84 |   await branch.press("ArrowLeft");
+      85 |   await expect(branch).toHaveAttribute("data-state", "closed");
+      86 |   await page.getByRole("button", { name: "Update data" }).click();
+        at checkJsonTreeView (/workspace/loongark/tests/arkAdditionsChecks.ts:83:5)
+        at /workspace/loongark/tests/framework-examples.spec.ts:150:43
+
+    Error Context: test-results/framework-examples-react-全部现有组件示例运行-chromium/error-context.md
+
+  2) [chromium] › tests/framework-examples.spec.ts:18:7 › vue 全部现有组件示例运行 ───────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('dd').last()
+    Expected substring: "1,250.50"
+    Received string:    "1,250.5"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('dd').last()
+        9 × locator resolved to <dd>1,250.5</dd>
+          - unexpected value "1,250.5"
+
+
+       at arkAdditionsChecks.ts:103
+
+      101 |   await expect(page.locator("mark")).toHaveText("LoongArk");
+      102 |   await expect(page.locator("dd").first()).toContainText("2");
+    > 103 |   await expect(page.locator("dd").last()).toContainText("1,250.50");
+          |                                           ^
+      104 |   const downloadPromise = page.waitForEvent("download");
+      105 |   await page.getByRole("button", { name: "Download notes" }).click();
+      106 |   const download = await downloadPromise;
+        at checkArkUtilities (/workspace/loongark/tests/arkAdditionsChecks.ts:103:43)
+        at /workspace/loongark/tests/framework-examples.spec.ts:151:43
+
+    Error Context: test-results/framework-examples-vue-全部现有组件示例运行-chromium/error-context.md
+
+  3) [chromium] › tests/framework-examples.spec.ts:18:7 › solid 全部现有组件示例运行 ─────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  getByRole('tree', { name: 'Project data' }).getByText('ImageCropper').last()
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('tree', { name: 'Project data' }).getByText('ImageCropper').last()
+        9 × locator resolved to <span data-type="string" data-kind="preview">"ImageCropper"</span>
+          - unexpected value "hidden"
+
+
+       at arkAdditionsChecks.ts:83
+
+      81 |   await expect(
+      82 |     tree.getByText("ImageCropper", { exact: false }).last(),
+    > 83 |   ).toBeVisible();
+         |     ^
+      84 |   await branch.press("ArrowLeft");
+      85 |   await expect(branch).toHaveAttribute("data-state", "closed");
+      86 |   await page.getByRole("button", { name: "Update data" }).click();
+        at checkJsonTreeView (/workspace/loongark/tests/arkAdditionsChecks.ts:83:5)
+        at /workspace/loongark/tests/framework-examples.spec.ts:150:43
+
+    Error Context: test-results/framework-examples-solid-全部现有组件示例运行-chromium/error-context.md
+
+  4) [chromium] › tests/framework-examples.spec.ts:18:7 › svelte 全部现有组件示例运行 ────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('iframe[title="Isolated dark preview"]').contentFrame().getByRole('heading', { name: 'Frame content' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('iframe[title="Isolated dark preview"]').contentFrame().getByRole('heading', { name: 'Frame content' })
+
+
+       at arkAdditionsChecks.ts:135
+
+      133 |   await expect(
+      134 |     frame.getByRole("heading", { name: "Frame content" }),
+    > 135 |   ).toBeVisible();
+          |     ^
+      136 |   await expect(
+      137 |     frame.getByRole("button", { name: "Inside frame" }),
+      138 |   ).toBeVisible();
+        at checkArkUtilities (/workspace/loongark/tests/arkAdditionsChecks.ts:135:5)
+        at /workspace/loongark/tests/framework-examples.spec.ts:151:43
+
+    Error Context: test-results/framework-examples-svelte-全部现有组件示例运行-chromium/error-context.md
+
+  4 failed
+    [chromium] › tests/framework-examples.spec.ts:18:7 › react 全部现有组件示例运行 ──────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:18:7 › vue 全部现有组件示例运行 ────────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:18:7 › solid 全部现有组件示例运行 ──────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:18:7 › svelte 全部现有组件示例运行 ─────────────────────────
+  4 passed (32.7s)
+ ELIFECYCLE  Command failed with exit code 1.
