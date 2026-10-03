@@ -7,6 +7,7 @@ import {
   type DataRow,
   type DataColumn,
   renderChartMarkup,
+  mountChartControls,
   observeChartWidth,
   dataTableLabels,
   dataTableSelection,
@@ -38,26 +39,60 @@ export const LoongArkChart = defineComponent({
     width: Number,
     height: Number,
     labels: Object as PropType<ChartOptions["labels"]>,
+    interactive: Boolean,
+    seriesKeys: Array as PropType<readonly string[]>,
+    defaultSeriesKeys: Array as PropType<readonly string[]>,
+    disabled: Boolean,
+    domain: {
+      type: Object as PropType<readonly [number, number]>,
+      validator: (value: readonly [number, number]) =>
+        Array.isArray(value) && value.length === 2,
+    },
+    showDataTable: Boolean,
   },
-  setup(props) {
-    const element = ref<HTMLElement>();
-    const measuredWidth = ref(0);
+  emits: {
+    seriesKeysChange: (keys: string[]) => Array.isArray(keys),
+    "update:seriesKeys": (keys: string[]) => Array.isArray(keys),
+  },
+  setup(props, { emit }) {
+    const element = ref<HTMLElement>(),
+      measuredWidth = ref(0),
+      internal = ref<readonly string[] | undefined>(
+        props.defaultSeriesKeys ? [...props.defaultSeriesKeys] : undefined,
+      );
+    const options = () => ({
+      ...props,
+      seriesKeys: props.seriesKeys ?? internal.value,
+      defaultSeriesKeys: undefined,
+      width: props.width ?? (measuredWidth.value || undefined),
+    });
     let stop: (() => void) | undefined;
     onMounted(() => {
-      if (element.value)
-        stop = observeChartWidth(element.value, (width) => {
-          measuredWidth.value = width;
-        });
+      if (!element.value) return;
+      const widthStop = observeChartWidth(
+        element.value,
+        (value) => (measuredWidth.value = value),
+      );
+      const controlsStop = mountChartControls(
+        element.value,
+        options,
+        (keys) => {
+          if (props.seriesKeys === undefined) internal.value = keys;
+          emit("seriesKeysChange", keys);
+          emit("update:seriesKeys", keys);
+        },
+      );
+      stop = () => {
+        widthStop();
+        controlsStop();
+      };
     });
     onBeforeUnmount(() => stop?.());
     return () =>
       h("div", {
         ref: element,
         "data-scope": "chart",
-        innerHTML: renderChartMarkup({
-          ...props,
-          width: props.width ?? (measuredWidth.value || undefined),
-        }),
+        innerHTML: renderChartMarkup(options()),
       });
   },
 });

@@ -204,3 +204,20 @@
     throw Error("SSR must not select");
   }}
 />
+
+<LoongArkChart
+  data={[{ name: "Advanced SSR category", value: 75, hidden: 20 }]}
+  series={[
+    { key: "value", label: "Visible SSR series" },
+    { key: "hidden", label: "Hidden SSR series" },
+  ]}
+  seriesKeys={["value"]}
+  labelKey="name"
+  title="Advanced SSR chart"
+  domain={[0, 50]}
+  interactive
+  showDataTable
+  onSeriesKeysChange={() => {
+    throw Error("SSR must not toggle series");
+  }}
+/>

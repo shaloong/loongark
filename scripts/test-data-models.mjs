@@ -235,3 +235,77 @@ assert.throws(
     }),
   /stable row ids/,
 );
+
+// 图例的序列身份、数据表与范围裁切必须保持原始信息和有限几何。
+const { chartSeriesKeys } = await import("../packages/kit/dist/index.js");
+const controlledChart = {
+  data: [
+    { label: "<unsafe>", a: -1e308, b: 20 },
+    { label: "Second", a: 1e308, b: null },
+  ],
+  series: [
+    { key: "a", label: "First" },
+    { key: "b", label: "Second" },
+  ],
+  labelKey: "label",
+  interactive: true,
+  showDataTable: true,
+};
+assert.throws(
+  () =>
+    chartSeriesKeys({
+      ...controlledChart,
+      series: [{ key: "a" }, { key: "a" }],
+    }),
+  /unique/,
+);
+assert.deepEqual(
+  chartSeriesKeys({ ...controlledChart, seriesKeys: ["b", "b", "missing"] }),
+  ["b"],
+);
+const hiddenMarkup = renderChartMarkup({ ...controlledChart, seriesKeys: [] });
+assert.match(hiddenMarkup, /data-part="empty"/);
+assert.equal((hiddenMarkup.match(/aria-pressed="false"/g) ?? []).length, 2);
+assert.doesNotMatch(hiddenMarkup, /<th scope="col">First/);
+const boundedMarkup = renderChartMarkup({
+  ...controlledChart,
+  domain: [0, 50],
+});
+assert.match(boundedMarkup, /Visible range: 0 to 50/);
+assert.match(boundedMarkup, /data-part="plot"/);
+assert.match(boundedMarkup, /-1e\+308/);
+assert.match(boundedMarkup, /&lt;unsafe&gt;/);
+assert.doesNotMatch(boundedMarkup, /<unsafe>|NaN|Infinity/);
+assert.equal((boundedMarkup.match(/data-part="point"/g) ?? []).length, 1);
+for (const domain of [
+  [2, 1],
+  [0, Infinity],
+  [NaN, 1],
+  [1, 1],
+])
+  assert.throws(
+    () => renderChartSVG({ ...controlledChart, domain }),
+    /ascending bounds/,
+  );
+const filteredMarkup = renderChartMarkup({
+  ...controlledChart,
+  seriesKeys: ["b"],
+});
+assert.match(
+  filteredMarkup,
+  /stroke="var\(--lk-color-semantic-mutedforeground\)" stroke-width="2" stroke-dasharray="6 3"/,
+);
+assert.doesNotMatch(filteredMarkup, /<th scope="col">First/);
+
+assert.doesNotMatch(
+  renderChartMarkup({
+    ...controlledChart,
+    interactive: false,
+    seriesKeys: ["b"],
+  }),
+  /<span>First<\/span>/,
+);
+assert.match(
+  renderChartSVG({ ...controlledChart, seriesKeys: [], domain: [0, 50] }),
+  /data-part="empty"[^>]*>No data<\/text>/,
+);

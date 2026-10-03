@@ -1,0 +1,22 @@
+
+> loongark@0.0.0 check:publication /workspace/loongark
+> node scripts/verify-publication.mjs && node scripts/check-public-types.mjs && node scripts/test-ssr.mjs && node scripts/test-svelte-ssr.mjs
+
+发布入口、Svelte 声明与清单文件验证通过
+react: 发布声明无本地类型错误
+vue: 发布声明无本地类型错误
+solid: 发布声明无本地类型错误
+svelte: 发布声明无本地类型错误
+React SSR: Button、Textarea、Container、ChipRemoveTrigger、BottomNavigationItem、TransferList、TimePicker、自动行数通过
+Vue SSR: Button、Textarea、Container、ChipRemoveTrigger、BottomNavigationItem、TransferList、TimePicker、自动行数通过
+Solid SSR: Button、Textarea、Container、ChipRemoveTrigger、BottomNavigationItem、TransferList、TimePicker、自动行数通过
+React、Vue、Solid SSR 与服务端主题样式收集通过
+7:04:36 PM [vite-plugin-svelte] no Svelte config found at /workspace/loongark - using default configuration.
+vite v7.2.6 building ssr environment for production...
+transforming...
+"mount" and "unmount" are imported from external module "svelte" but never used in "packages/svelte/dist/components/Portal.svelte" and "node_modules/.pnpm/@ark-ui+svelte@5.24.2_svelte@5.45.2/node_modules/@ark-ui/svelte/dist/components/portal/portal.svelte".
+✓ 2120 modules transformed.
+rendering chunks...
+tests/consumer-dist/svelte-ssr/index.mjs  1,208.04 kB
+✓ built in 4.60s
+Svelte 发布产物 SSR 通过

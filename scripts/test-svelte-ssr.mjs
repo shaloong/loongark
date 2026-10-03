@@ -83,3 +83,9 @@ assert.match(html, /SSR remote row/);
 assert.match(html, /SSR remote failure/);
 assert.match(html, /aria-busy="true"/);
 assert.match(html.replace(/<[^>]*>/g, ""), /21 rows · 1 selected · 3 \/ 11/);
+
+assert.match(html, /Advanced SSR category — Visible SSR series: 75/);
+assert.match(html, /Visible range: 0 to 50/);
+assert.match(html, /<caption>Advanced SSR chart<\/caption>/);
+assert.match(html, /aria-pressed="false"/);
+assert.doesNotMatch(html, /<th scope="col">Hidden SSR series/);

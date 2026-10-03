@@ -40,6 +40,14 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkChart,${chartProps})));`
         : `console.log(renderToString(h(L.LoongArkChart,${chartProps})));`;
+  const interactiveChartProps =
+    "{data:[{name:'Advanced SSR category',value:75,hidden:20}],series:[{key:'value',label:'Visible SSR series'},{key:'hidden',label:'Hidden SSR series'}],seriesKeys:['value'],labelKey:'name',title:'Advanced SSR chart',domain:[0,50],interactive:true,showDataTable:true,onSeriesKeysChange:()=>{throw Error('SSR must not toggle series')}}";
+  const interactiveChartScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkChart,${interactiveChartProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkChart,${interactiveChartProps})));`
+        : `console.log(renderToString(h(L.LoongArkChart,${interactiveChartProps})));`;
   const arkScript =
     framework === "Vue"
       ? `function AdvancedSSR(){const select=L.useSelect({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']});const crop=L.useImageCropper();return ()=>h('div',{},[h(L.LoongArkSelectRootProvider,{value:select.value},()=>h(L.LoongArkSelectHiddenSelect)),h(L.LoongArkImageCropperRootProvider,{value:crop.value},()=>h(L.LoongArkImageCropperViewport)),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1},()=>h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})),h(L.LoongArkClientOnly,{}, {default:()=> 'Client-only secret',fallback:()=> 'SSR client fallback'}),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'})]);}console.log(await renderToString(createSSRApp({setup:AdvancedSSR})));`
@@ -77,6 +85,7 @@ for (const [framework, script] of [
         "process.exit(0);",
         tableScript +
           chartScript +
+          interactiveChartScript +
           arkScript +
           nextScript +
           questionnaireScript +
@@ -99,6 +108,11 @@ for (const [framework, script] of [
     assert.ok(result.stdout.includes(text));
   assert.equal((result.stdout.match(/id="toc:ssr-outline"/g) ?? []).length, 1);
   assert.match(result.stdout, /id="toc:ssr-outline-nav"/);
+  assert.match(result.stdout, /Advanced SSR category — Visible SSR series: 75/);
+  assert.match(result.stdout, /Visible range: 0 to 50/);
+  assert.match(result.stdout, /<caption>Advanced SSR chart<\/caption>/);
+  assert.match(result.stdout, /aria-pressed="false"/);
+  assert.doesNotMatch(result.stdout, /<th scope="col">Hidden SSR series/);
   assert.match(result.stdout, /SSR remote row/);
   assert.match(result.stdout, /SSR remote failure/);
   assert.match(result.stdout, /aria-busy="true"/);

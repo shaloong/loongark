@@ -64,3 +64,24 @@ export const ExtremeValues: StoryObj = {
     />
   ),
 };
+
+import { ChartAdvancedExample } from "../examples/react/ChartAdvancedExample";
+import { withArkExamplePage } from "./arkStory";
+export const Interactive = {
+  decorators: [withArkExamplePage],
+  render: () => <ChartAdvancedExample />,
+};
+export const DisabledControls = {
+  decorators: [withArkExamplePage],
+  render: () => (
+    <L.LoongArkChart
+      data={rows}
+      series={[{ key: "amount", label: "Revenue" }]}
+      labelKey="name"
+      title="Disabled chart controls"
+      interactive
+      disabled
+      showDataTable
+    />
+  ),
+};

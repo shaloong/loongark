@@ -12,6 +12,7 @@ import {
   setDataSelectionMixed,
   restoreDataSelection,
   renderChartMarkup,
+  mountChartControls,
   observeChartWidth,
   type ChartOptions,
 } from "@loongark/kit";
@@ -19,21 +20,41 @@ import React, { useState, useRef, useEffect } from "react";
 export type LoongArkDataTableProps = DataTableProps;
 export const LoongArkChart = (props: ChartOptions) => {
   const element = useRef<HTMLDivElement>(null);
-  const [measuredWidth, setMeasuredWidth] = useState(0);
+  const [measuredWidth, setMeasuredWidth] = useState(0),
+    [internal, setInternal] = useState<readonly string[] | undefined>(() =>
+      props.defaultSeriesKeys ? [...props.defaultSeriesKeys] : undefined,
+    );
+  const options = {
+    ...props,
+    seriesKeys: props.seriesKeys ?? internal,
+    defaultSeriesKeys: undefined,
+    width: props.width ?? (measuredWidth || undefined),
+  };
+  const latest = useRef(props),
+    resolved = useRef<ChartOptions>(options);
+  latest.current = props;
+  resolved.current = options;
   useEffect(() => {
-    if (element.current)
-      return observeChartWidth(element.current, setMeasuredWidth);
+    if (!element.current) return;
+    const widthStop = observeChartWidth(element.current, setMeasuredWidth);
+    const controlsStop = mountChartControls(
+      element.current,
+      () => resolved.current,
+      (keys) => {
+        if (latest.current.seriesKeys === undefined) setInternal(keys);
+        latest.current.onSeriesKeysChange?.(keys);
+      },
+    );
+    return () => {
+      widthStop();
+      controlsStop();
+    };
   }, []);
   return (
     <div
       ref={element}
       data-scope="chart"
-      dangerouslySetInnerHTML={{
-        __html: renderChartMarkup({
-          ...props,
-          width: props.width ?? (measuredWidth || undefined),
-        }),
-      }}
+      dangerouslySetInnerHTML={{ __html: renderChartMarkup(options) }}
     />
   );
 };

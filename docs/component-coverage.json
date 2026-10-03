@@ -144,6 +144,7 @@
     "Questionnaire conditions, cross-field validation and controlled rejection",
     "DataTable server state, column visibility/order and request states",
     "Swap lifecycle",
-    "Context and collection control hooks"
+    "Context and collection control hooks",
+    "Chart controlled legend, bounded domain and accessible data table"
   ]
 }

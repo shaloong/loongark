@@ -1,3 +1,4 @@
+import { checkChartAdvanced } from "./chartAdvancedChecks";
 import { checkDataTableAdvanced } from "./dataTableAdvancedChecks";
 import { checkQuestionnaireAdvanced } from "./questionnaireAdvancedChecks";
 import {
@@ -56,6 +57,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
 
       if (name === "ChartExample") await checkChart(page, framework);
       if (name === "DataTableExample") await checkDataTable(page, framework);
+      if (name === "ChartAdvancedExample") await checkChartAdvanced(page);
       if (name === "DataTableAdvancedExample")
         await checkDataTableAdvanced(page);
       if (name === "QuestionnaireAdvancedExample")

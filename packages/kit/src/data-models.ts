@@ -138,6 +138,9 @@ export interface ChartSeries {
 export interface ChartLabels {
   empty: string;
   series: string;
+  dataTable: string;
+  category: string;
+  range: (domain: readonly [number, number]) => string;
 }
 export interface ChartOptions {
   data: readonly DataRow[];
@@ -148,6 +151,13 @@ export interface ChartOptions {
   width?: number;
   height?: number;
   labels?: Partial<ChartLabels>;
+  interactive?: boolean;
+  seriesKeys?: readonly string[];
+  defaultSeriesKeys?: readonly string[];
+  onSeriesKeysChange?: (keys: string[]) => void;
+  disabled?: boolean;
+  domain?: readonly [number, number];
+  showDataTable?: boolean;
 }
 const escapeXML = (value: string) =>
   value.replace(
@@ -212,8 +222,57 @@ const chartCategory = (label: string, maxWidth: number) => {
   }
   return text + "…";
 };
+export function chartSeriesKeys(
+  options: Pick<ChartOptions, "series" | "seriesKeys" | "defaultSeriesKeys">,
+) {
+  const keys = options.series.map((series) => series.key);
+  if (keys.some((key) => !key) || new Set(keys).size !== keys.length)
+    throw Error("Chart requires unique non-empty series keys");
+  const selected = options.seriesKeys ?? options.defaultSeriesKeys;
+  return selected === undefined
+    ? keys
+    : keys.filter((key) => selected.includes(key));
+}
+function clipChartSegment(
+  a: { x: number; value: number },
+  b: { x: number; value: number },
+  min: number,
+  max: number,
+) {
+  if ((a.value < min && b.value < min) || (a.value > max && b.value > max))
+    return undefined;
+  const scale = Math.max(
+    Math.abs(a.value),
+    Math.abs(b.value),
+    Math.abs(min),
+    Math.abs(max),
+  );
+  const position = (point: { x: number; value: number }) => {
+    const value = Math.min(max, Math.max(min, point.value));
+    if (value === point.value) return point;
+    const delta = b.value / scale - a.value / scale;
+    const t =
+      delta === 0
+        ? 0
+        : Math.min(1, Math.max(0, (value / scale - a.value / scale) / delta));
+    return { x: a.x * (1 - t) + b.x * t, value };
+  };
+  return [position(a), position(b)] as const;
+}
+
 /** 使用归一化坐标避免有限的大数相减溢出；缺失值形成折线断点。 */
 export const renderChartSVG = (options: ChartOptions): string => {
+  const selectedKeys = new Set(chartSeriesKeys(options));
+  const visibleSeries = options.series.filter((series) =>
+    selectedKeys.has(series.key),
+  );
+  if (
+    options.domain &&
+    (!Number.isFinite(options.domain[0]) ||
+      !Number.isFinite(options.domain[1]) ||
+      options.domain[0] >= options.domain[1])
+  )
+    throw Error("Chart domain requires finite ascending bounds");
   const width = Math.max(
       160,
       Number.isFinite(options.width) ? options.width! : 600,
@@ -229,7 +288,7 @@ export const renderChartSVG = (options: ChartOptions): string => {
     max = 0,
     hasValues = false;
   for (const row of options.data)
-    for (const series of options.series) {
+    for (const series of visibleSeries) {
       const value = chartValue(row[series.key]);
       if (value === undefined) continue;
       hasValues = true;
@@ -237,23 +296,27 @@ export const renderChartSVG = (options: ChartOptions): string => {
       max = Math.max(max, value);
     }
   const title = escapeXML(options.title ?? "Chart");
-  const description = hasValues
+  const dataDescription = hasValues
     ? options.data
         .map(
           (row) =>
-            `${String(row[options.labelKey] ?? "")} — ${options.series.map((series) => `${series.label ?? series.key}: ${chartValue(row[series.key]) ?? options.labels?.empty ?? "No data"}`).join("; ")}`,
+            `${String(row[options.labelKey] ?? "")} — ${visibleSeries.map((series) => `${series.label ?? series.key}: ${chartValue(row[series.key]) ?? options.labels?.empty ?? "No data"}`).join("; ")}`,
         )
         .join(". ")
     : (options.labels?.empty ?? "No data");
+  const description = options.domain
+    ? `${options.labels?.range?.(options.domain) ?? `Visible range: ${options.domain[0]} to ${options.domain[1]}.`} ${dataDescription}`
+    : dataDescription;
   let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${title}" aria-description="${escapeXML(description)}" style="width:100%;height:auto"><title>${title}</title><desc>${escapeXML(description)}</desc>`;
   if (!hasValues) {
-    const empty = escapeXML(description);
+    const empty = escapeXML(options.labels?.empty ?? "No data");
     return (
       svg +
       `<text data-part="empty" x="${width / 2}" y="${height / 2}" text-anchor="middle" fill="var(--lk-color-semantic-mutedforeground)" font-size="var(--lk-typography-fontsize-md)">${empty}</text></svg>`
     );
   }
-  if (min === max) max = 1;
+  if (options.domain) [min, max] = options.domain;
+  else if (min === max) max = 1;
   const scale = Math.max(Math.abs(min), Math.abs(max)),
     low = min / scale,
     high = max / scale,
@@ -275,13 +338,21 @@ export const renderChartSVG = (options: ChartOptions): string => {
     const pos = y(tick.value);
     svg += `<line x1="${left}" y1="${pos}" x2="${width - right}" y2="${pos}" stroke="var(--lk-color-semantic-border)"/><text data-part="value-label" x="${left - 8}" y="${pos + 4}" text-anchor="end" fill="var(--lk-color-semantic-mutedforeground)" font-size="var(--lk-typography-fontsize-xs)">${tick.label}</text>`;
   }
-  options.series.forEach((series, seriesIndex) => {
-    const color = chartColor(series.color, seriesIndex);
+  if (options.domain)
+    svg += `<svg data-part="plot" x="${left}" y="${top}" width="${plotWidth}" height="${height - top - bottom}" viewBox="${left} ${top} ${plotWidth} ${height - top - bottom}" overflow="hidden">`;
+  visibleSeries.forEach((series, seriesIndex) => {
+    const originalIndex = options.series.indexOf(series);
+    const color = chartColor(series.color, originalIndex);
     const points = options.data.map((row, index) => {
       const value = chartValue(row[series.key]);
       return value === undefined
         ? undefined
-        : { x: x(index), y: y(value), value, row };
+        : {
+            x: x(index),
+            y: y(Math.min(max, Math.max(min, value))),
+            value,
+            row,
+          };
     });
     const pointTitle = (point: NonNullable<(typeof points)[number]>) =>
       escapeXML(
@@ -289,15 +360,15 @@ export const renderChartSVG = (options: ChartOptions): string => {
       );
     if (options.type === "bar") {
       const slot = plotWidth / Math.max(1, options.data.length),
-        barWidth = slot / (options.series.length + 1),
-        baseline = y(0);
+        barWidth = slot / (visibleSeries.length + 1),
+        baseline = y(Math.min(max, Math.max(min, 0)));
       for (const point of points)
         if (point) {
-          svg += `<rect data-part="bar" x="${point.x + (seriesIndex - options.series.length / 2) * barWidth}" y="${Math.min(baseline, point.y)}" width="${Math.max(0.1, barWidth - 2)}" height="${Math.abs(baseline - point.y)}" fill="${color}"><title>${pointTitle(point)}</title></rect>`;
+          svg += `<rect data-part="bar" x="${point.x + (seriesIndex - visibleSeries.length / 2) * barWidth}" y="${Math.min(baseline, point.y)}" width="${Math.max(0.1, barWidth - 2)}" height="${Math.abs(baseline - point.y)}" fill="${color}"><title>${pointTitle(point)}</title></rect>`;
         }
     } else {
       let connected = false;
-      const path = points
+      let path = points
         .map((point) => {
           if (!point) {
             connected = false;
@@ -308,13 +379,31 @@ export const renderChartSVG = (options: ChartOptions): string => {
           return `${command} ${point.x} ${point.y}`;
         })
         .join(" ");
-      const dash = ["", "6 3", "2 3"][seriesIndex % 3];
+      if (options.domain) {
+        path = points
+          .flatMap((point, index) => {
+            const previous = points[index - 1];
+            if (!point || !previous) return [];
+            const segment = clipChartSegment(previous, point, min, max);
+            return segment
+              ? [
+                  `M ${segment[0].x} ${y(segment[0].value)} L ${segment[1].x} ${y(segment[1].value)}`,
+                ]
+              : [];
+          })
+          .join(" ");
+      }
+      const dash = ["", "6 3", "2 3"][originalIndex % 3];
       svg += `<path data-part="line" d="${path}" fill="none" stroke="${color}" stroke-width="2" stroke-dasharray="${dash}"/>`;
       for (const point of points)
-        if (point)
+        if (
+          point &&
+          (!options.domain || (point.value >= min && point.value <= max))
+        )
           svg += `<circle data-part="point" cx="${point.x}" cy="${point.y}" r="3" fill="${color}"><title>${pointTitle(point)}</title></circle>`;
     }
   });
+  if (options.domain) svg += "</svg>";
   const longestCategory = options.data.reduce(
     (length, row) =>
       Math.max(length, Array.from(String(row[options.labelKey] ?? "")).length),
@@ -347,22 +436,28 @@ export const renderChartSVG = (options: ChartOptions): string => {
 };
 /** 共享 HTML 图例保留完整序列名称并自然换行，SVG 输出仍可单独消费。 */
 export const renderChartMarkup = (options: ChartOptions): string => {
-  const svg = renderChartSVG(options);
-  if (
-    !options.series.length ||
-    !options.data.some((row) =>
-      options.series.some(
-        (series) => chartValue(row[series.key]) !== undefined,
-      ),
-    )
-  )
-    return svg;
+  const svg = renderChartSVG(options),
+    keys = new Set(chartSeriesKeys(options));
+  const hasValues = options.data.some((row) =>
+    options.series.some((series) => chartValue(row[series.key]) !== undefined),
+  );
   const legend = options.series
     .map((series, index) => {
+      if (!options.interactive && !keys.has(series.key)) return "";
       const color = chartColor(series.color, index),
         dash = options.type === "bar" ? "" : ["", "6 3", "2 3"][index % 3];
-      return `<li data-part="legend-item"><svg aria-hidden="true" viewBox="0 0 24 12"><line x1="1" y1="6" x2="23" y2="6" stroke="${color}" stroke-width="${options.type === "bar" ? 8 : 2}" stroke-dasharray="${dash}"/></svg><span>${escapeXML(series.label ?? series.key)}</span></li>`;
+      const content = `<svg aria-hidden="true" viewBox="0 0 24 12"><line x1="1" y1="6" x2="23" y2="6" stroke="${color}" stroke-width="${options.type === "bar" ? 8 : 2}" stroke-dasharray="${dash}"/></svg><span>${escapeXML(series.label ?? series.key)}</span>`;
+      return `<li data-part="legend-item">${options.interactive ? `<button type="button" data-part="legend-toggle" data-series-key="${escapeXML(series.key)}" aria-pressed="${keys.has(series.key)}"${options.disabled ? " disabled" : ""}>${content}</button>` : content}</li>`;
     })
     .join("");
-  return `${svg}<ul data-part="legend" aria-label="${escapeXML(options.labels?.series ?? "Chart series")}">${legend}</ul>`;
+  const legendMarkup =
+    options.series.length && (hasValues || options.interactive)
+      ? `<ul data-part="legend" aria-label="${escapeXML(options.labels?.series ?? "Chart series")}">${legend}</ul>`
+      : "";
+  const visible = options.series.filter((series) => keys.has(series.key));
+  const title = escapeXML(options.title ?? "Chart");
+  const table = options.showDataTable
+    ? `<details data-part="data-table"><summary>${escapeXML(options.labels?.dataTable ?? "View chart data")}</summary><div data-part="data-region" role="region" aria-label="${title}" tabindex="0"><table><caption>${title}</caption><thead><tr><th scope="col">${escapeXML(options.labels?.category ?? "Category")}</th>${visible.map((series) => `<th scope="col">${escapeXML(series.label ?? series.key)}</th>`).join("")}</tr></thead><tbody>${options.data.map((row) => `<tr><th scope="row">${escapeXML(String(row[options.labelKey] ?? ""))}</th>${visible.map((series) => `<td>${escapeXML(String(chartValue(row[series.key]) ?? options.labels?.empty ?? "No data"))}</td>`).join("")}</tr>`).join("")}</tbody></table></div></details>`
+    : "";
+  return svg + legendMarkup + table;
 };

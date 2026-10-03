@@ -1,0 +1,90 @@
+http://127.0.0.1:6006/iframe.html?id=components-chart--interactive&globals=mode:dark {
+  page: 375,
+  rows: [
+    {
+      selector: '[data-scope=chart]',
+      x: 16,
+      width: 343,
+      scrollWidth: 343,
+      display: 'block',
+      minWidth: '0px',
+      maxWidth: '100%',
+      overflow: 'visible'
+    },
+    {
+      selector: '[data-part=data-table]',
+      x: 16,
+      width: 343,
+      scrollWidth: 341,
+      display: 'block',
+      minWidth: '0px',
+      maxWidth: 'none',
+      overflow: 'visible'
+    },
+    {
+      selector: '[data-part=data-region]',
+      x: 17,
+      width: 341,
+      scrollWidth: 363,
+      display: 'block',
+      minWidth: '0px',
+      maxWidth: '100%',
+      overflow: 'auto'
+    },
+    {
+      selector: '[data-part=data-table] table',
+      x: 17,
+      width: 363.3125,
+      scrollWidth: 363,
+      display: 'table',
+      minWidth: '0px',
+      maxWidth: 'none',
+      overflow: 'visible'
+    }
+  ]
+}
+http://127.0.0.1:6007/examples-react/?example=ChartAdvancedExample&mode=dark {
+  page: 375,
+  rows: [
+    {
+      selector: '[data-scope=chart]',
+      x: 24,
+      width: 327,
+      scrollWidth: 327,
+      display: 'block',
+      minWidth: '0px',
+      maxWidth: '100%',
+      overflow: 'visible'
+    },
+    {
+      selector: '[data-part=data-table]',
+      x: 24,
+      width: 327,
+      scrollWidth: 325,
+      display: 'block',
+      minWidth: '0px',
+      maxWidth: 'none',
+      overflow: 'visible'
+    },
+    {
+      selector: '[data-part=data-region]',
+      x: 25,
+      width: 325,
+      scrollWidth: 363,
+      display: 'block',
+      minWidth: '0px',
+      maxWidth: '100%',
+      overflow: 'auto'
+    },
+    {
+      selector: '[data-part=data-table] table',
+      x: 25,
+      width: 363.3125,
+      scrollWidth: 363,
+      display: 'table',
+      minWidth: '0px',
+      maxWidth: 'none',
+      overflow: 'visible'
+    }
+  ]
+}

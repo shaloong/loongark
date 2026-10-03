@@ -1,17 +1,31 @@
 <script lang="ts">
   import {
     renderChartMarkup,
+    mountChartControls,
     observeChartWidth,
     type ChartOptions,
   } from "@loongark/kit";
   import { onMount } from "svelte";
   let element: HTMLDivElement;
   let measuredWidth = 0;
-  onMount(() =>
-    observeChartWidth(element, (value) => {
-      measuredWidth = value;
-    }),
-  );
+  onMount(() => {
+    const widthStop = observeChartWidth(
+      element,
+      (value) => (measuredWidth = value),
+    );
+    const controlsStop = mountChartControls(
+      element,
+      () => options,
+      (keys) => {
+        if (seriesKeys === undefined) internal = keys;
+        onSeriesKeysChange?.(keys);
+      },
+    );
+    return () => {
+      widthStop();
+      controlsStop();
+    };
+  });
   export let data: ChartOptions["data"];
   export let series: ChartOptions["series"];
   export let labelKey: string;
@@ -20,7 +34,15 @@
   export let width: ChartOptions["width"] = undefined;
   export let height: ChartOptions["height"] = undefined;
   export let labels: ChartOptions["labels"] = undefined;
-  $: svg = renderChartMarkup({
+  export let interactive = false;
+  export let seriesKeys: ChartOptions["seriesKeys"] = undefined;
+  export let defaultSeriesKeys: ChartOptions["defaultSeriesKeys"] = undefined;
+  export let onSeriesKeysChange: ChartOptions["onSeriesKeysChange"] = undefined;
+  export let disabled = false;
+  export let domain: ChartOptions["domain"] = undefined;
+  export let showDataTable = false;
+  let internal = defaultSeriesKeys ? [...defaultSeriesKeys] : undefined;
+  $: options = {
     data,
     series,
     labelKey,
@@ -29,7 +51,14 @@
     width: width ?? (measuredWidth || undefined),
     height,
     labels,
-  });
+    interactive,
+    seriesKeys: seriesKeys ?? internal,
+    defaultSeriesKeys: undefined,
+    disabled,
+    domain,
+    showDataTable,
+  };
+  $: svg = renderChartMarkup(options);
 </script>
 
 <div bind:this={element} data-scope="chart" {...$$restProps}>{@html svg}</div>

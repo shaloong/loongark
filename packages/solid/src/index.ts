@@ -488,3 +488,5 @@ export * from "./components/ark-controls";
 export type { Question, QuestionOption, QuestionnaireOptions, QuestionnaireValue } from "@loongark/kit";
 
 export type { DataTableState, DataTableLabels, DataTableSummary, DataRow, DataColumn, DataSort } from "@loongark/kit";
+
+export type { ChartOptions, ChartSeries, ChartLabels } from "@loongark/kit";
