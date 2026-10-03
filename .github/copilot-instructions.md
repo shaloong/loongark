@@ -15,3 +15,5 @@
 CLI：构建后 node packages/cli/dist/index.js extract --dir dist/tokens --format css,json，再使用 verify --dir dist/tokens 校验。修改 tokens 后应重新提取对应产物。
 
 自动化测试只使用当前实际产物；构建失败应立即停止后续验证，禁止消费陈旧 dist。视觉基线更新前先查看新截图并确认设计变化。
+
+分支约定：日常与云端开发使用 develop，频繁提交；main 只在发布节点从 develop 合并更新。提交使用 Conventional Commits。开始修改前先确认所在分支，完整流程见根目录 AGENTS.md 和 CONTRIBUTING.md。

@@ -1,0 +1,53 @@
+# 开发与发布
+
+## develop 与 main
+
+`develop` 用于日常开发，允许频繁的小步提交和推送；云端任务始终选择该分支。`main` 用于稳定版本，按实际进展不定期更新。
+
+通常流程：
+
+1. 同步 `develop`，在该分支开发、验证并提交。
+2. 将 Conventional Commit 推送到 `origin/develop`。
+3. 发布时从 `develop` 向 `main` 创建 PR，说明最终行为、验证结果和必要的迁移信息。
+4. 完成发布验证后合并 PR，保留提交历史；有正式版本时再按版本号创建标签。
+5. 继续在 `develop` 开发。若紧急修复经明确授权进入 `main`，及时同步回 `develop`。
+
+本次创建 `develop` 后，已验收的整改和组件补齐进入开发主线；`main` 保留原稳定基线，首次发布合并时再更新。
+
+提交格式为 `type(scope): summary`，例如 `feat(image-list): support responsive spans`、`fix(speed-dial): preserve trigger contrast`、`chore(repo): document branch workflow`。常用类型为 feat、fix、docs、refactor、perf、test、build、ci、chore。Git 配置 `push.default=simple`，推送当前分支的同名上游；不强推共享分支。
+
+## 云端环境
+
+使用 Node.js 24（见 [.nvmrc](.nvmrc)）和 pnpm 10.14.0（见 package.json 的 packageManager）。当前构建工具要求 Node.js 至少 22.12.0；云端以 Node.js 24 作为统一开发环境。
+
+```sh
+git clone --branch develop https://github.com/shaloong/loongark.git
+cd loongark
+corepack enable
+corepack prepare pnpm@10.14.0 --activate
+pnpm install --frozen-lockfile
+pnpm exec playwright install --with-deps chromium
+```
+
+已有检出应先确认工作区状态，再切换到 `develop` 并同步；不要自动 reset、清理或覆盖未提交改动。Windows 也使用同一套 pnpm 命令，浏览器系统依赖由所在环境处理。
+
+GitHub 的仓库默认分支设为 `develop`，云端任务创建时仍应明确选中 `develop`。发布目标保持为 `main`。
+
+## 验证顺序
+
+```sh
+pnpm verify
+pnpm check:contracts
+pnpm check:coverage
+pnpm check:publication
+pnpm check:svelte
+pnpm test:frameworks
+pnpm test:e2e
+pnpm visual:test
+```
+
+先构建成功，再验证真实发布产物；不要并行运行多个 Playwright 命令，它们共用测试结果目录。运行 Storybook 开发预览使用 `pnpm storybook`。
+
+当前验收在 Windows/Chromium 完成，仓库中的既有视觉基线带 win32 标记。云端 Linux 首次执行视觉测试需要建立并人工审阅对应平台的基线；不得将缺少基线视为通过，也不得自动覆盖 Windows 基线。修改样式后应查看截图再确认基线变化。
+
+验证记录见 [docs/README.md](docs/README.md) 和 [组件覆盖清单](docs/component-coverage.json)。合入 `main` 不等于发布 npm；正式包发布和版本标签按实际发布任务执行。
