@@ -14,21 +14,23 @@ import {
 } from "@ark-ui/solid/hover-card";
 import type { HoverCardSize } from "@loongark/primitives";
 
-export interface LoongArkHoverCardRootProps
-  extends Omit<ArkHoverCardRootProps, "asChild"> {
+export interface LoongArkHoverCardRootProps extends Omit<
+  ArkHoverCardRootProps,
+  "asChild"
+> {
   size?: HoverCardSize;
   children?: JSX.Element;
 }
 
 export const LoongArkHoverCardRoot: Component<LoongArkHoverCardRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps({ size: "md" as HoverCardSize }, props);
   const [local, others] = splitProps(merged, ["children", "size"]);
 
   return (
     <ArkHoverCard.Root
-      {...(others as any)}
+      {...others}
       data-scope="hover-card"
       data-part="root"
       data-size={local.size}
@@ -38,8 +40,10 @@ export const LoongArkHoverCardRoot: Component<LoongArkHoverCardRootProps> = (
   );
 };
 
-export interface LoongArkHoverCardTriggerProps
-  extends Omit<ArkHoverCardTriggerProps, "asChild"> {
+export interface LoongArkHoverCardTriggerProps extends Omit<
+  ArkHoverCardTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -58,8 +62,10 @@ export const LoongArkHoverCardTrigger: Component<
   );
 };
 
-export interface LoongArkHoverCardPositionerProps
-  extends Omit<ArkHoverCardPositionerProps, "asChild"> {
+export interface LoongArkHoverCardPositionerProps extends Omit<
+  ArkHoverCardPositionerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -78,8 +84,10 @@ export const LoongArkHoverCardPositioner: Component<
   );
 };
 
-export interface LoongArkHoverCardContentProps
-  extends Omit<ArkHoverCardContentProps, "asChild"> {
+export interface LoongArkHoverCardContentProps extends Omit<
+  ArkHoverCardContentProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -98,28 +106,28 @@ export const LoongArkHoverCardContent: Component<
   );
 };
 
-export interface LoongArkHoverCardArrowProps
-  extends Omit<ArkHoverCardArrowProps, "asChild"> {
+export interface LoongArkHoverCardArrowProps extends Omit<
+  ArkHoverCardArrowProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
-export const LoongArkHoverCardArrow: Component<
-  LoongArkHoverCardArrowProps
-> = (props) => {
+export const LoongArkHoverCardArrow: Component<LoongArkHoverCardArrowProps> = (
+  props,
+) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkHoverCard.Arrow
-      {...others}
-      data-scope="hover-card"
-      data-part="arrow"
-    >
+    <ArkHoverCard.Arrow {...others} data-scope="hover-card" data-part="arrow">
       {local.children}
     </ArkHoverCard.Arrow>
   );
 };
 
-export interface LoongArkHoverCardArrowTipProps
-  extends Omit<ArkHoverCardArrowTipProps, "asChild"> {
+export interface LoongArkHoverCardArrowTipProps extends Omit<
+  ArkHoverCardArrowTipProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 

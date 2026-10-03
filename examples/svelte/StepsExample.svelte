@@ -16,39 +16,40 @@
   export let size: StepsSize = "md";
   export let orientation: StepsOrientation = "horizontal";
 
-  let value = 1;
+  let value = 0;
   const steps = [
     { title: "Account", description: "Create your profile" },
     { title: "Workspace", description: "Add team settings" },
     { title: "Review", description: "Confirm and launch" },
   ];
 
-  const handleValueChange = (details: { value: number }) => {
-    value = details.value;
+  const handleValueChange = (details: { step: number }) => {
+    value = details.step;
   };
 </script>
 
 <LoongArkStepsRoot
-  {value}
+  step={value}
   count={steps.length}
   {size}
   {orientation}
-  onValueChange={handleValueChange}
+  onStepChange={handleValueChange}
 >
   <LoongArkStepsList>
     {#each steps as step, index (step.title)}
-      <LoongArkStepsItem value={index + 1}>
+      <LoongArkStepsItem {index}>
         <LoongArkStepsIndicator>{index + 1}</LoongArkStepsIndicator>
         <div>
           <LoongArkStepsTrigger>{step.title}</LoongArkStepsTrigger>
-          <LoongArkStepsContent>{step.description}</LoongArkStepsContent>
+          <span>{step.description}</span>
         </div>
+        {#if index < steps.length - 1}<LoongArkStepsSeparator />{/if}
       </LoongArkStepsItem>
-      {#if index < steps.length - 1}
-        <LoongArkStepsSeparator />
-      {/if}
     {/each}
   </LoongArkStepsList>
+  {#each steps as step, index (step.title)}<LoongArkStepsContent {index}
+      >{step.description}</LoongArkStepsContent
+    >{/each}
   <LoongArkStepsCompletedContent>
     All steps completed.
   </LoongArkStepsCompletedContent>

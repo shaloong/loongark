@@ -20,6 +20,7 @@ import {
   LoongArkColorPickerSwatch,
   LoongArkColorPickerValueText,
   LoongArkColorPickerValueSwatch,
+  parseColor,
 } from "@loongark/vue";
 import type { ColorPickerSize } from "@loongark/primitives";
 
@@ -34,15 +35,18 @@ export const ColorPickerExample = defineComponent({
     },
   },
   setup(props) {
-    const value = ref("#6366F1");
+    const value = ref(parseColor("#006EFF"));
 
     return () =>
       h(
         LoongArkColorPickerRoot,
         {
           size: props.size,
-          value: value.value,
-          onValueChange: (details: { value: string }) => {
+          defaultFormat: "hsla",
+          modelValue: value.value,
+          onValueChange: (details: {
+            value: ReturnType<typeof parseColor>;
+          }) => {
             value.value = details.value;
           },
         },
@@ -62,32 +66,36 @@ export const ColorPickerExample = defineComponent({
             }),
             h(LoongArkColorPickerPositioner, null, {
               default: () =>
-                h(LoongArkColorPickerContent, null, {
-                  default: () =>
-                    h(
-                      "div",
-                      { style: { display: "grid", gap: "12px" } },
-                      [
-                        h(LoongArkColorPickerView, null, {
-                          default: () => [
-                            h(LoongArkColorPickerArea, null, {
-                              default: () => [
-                                h(LoongArkColorPickerAreaBackground),
-                                h(LoongArkColorPickerAreaThumb),
-                              ],
-                            }),
-                            h(
-                              LoongArkColorPickerChannelSlider,
-                              { channel: "h" },
-                              {
+                h(
+                  LoongArkColorPickerContent,
+                  { "aria-label": "Choose brand color" },
+                  {
+                    default: () =>
+                      h("div", { style: { display: "grid", gap: "12px" } }, [
+                        h(
+                          LoongArkColorPickerView,
+                          { format: "hsla" },
+                          {
+                            default: () => [
+                              h(LoongArkColorPickerArea, null, {
                                 default: () => [
-                                  h(LoongArkColorPickerChannelSliderTrack),
-                                  h(LoongArkColorPickerChannelSliderThumb),
+                                  h(LoongArkColorPickerAreaBackground),
+                                  h(LoongArkColorPickerAreaThumb),
                                 ],
-                              }
-                            ),
-                          ],
-                        }),
+                              }),
+                              h(
+                                LoongArkColorPickerChannelSlider,
+                                { channel: "hue" },
+                                {
+                                  default: () => [
+                                    h(LoongArkColorPickerChannelSliderTrack),
+                                    h(LoongArkColorPickerChannelSliderThumb),
+                                  ],
+                                },
+                              ),
+                            ],
+                          },
+                        ),
                         h(LoongArkColorPickerChannelInput, { channel: "hex" }),
                         h(LoongArkColorPickerSwatchGroup, null, {
                           default: () =>
@@ -97,19 +105,25 @@ export const ColorPickerExample = defineComponent({
                                 { value: swatch, key: swatch },
                                 {
                                   default: () => [
-                                    h(LoongArkColorPickerSwatch, { value: swatch }),
-                                    h(LoongArkColorPickerSwatchIndicator),
+                                    h(
+                                      LoongArkColorPickerSwatch,
+                                      { value: swatch },
+                                      {
+                                        default: () =>
+                                          h(LoongArkColorPickerSwatchIndicator),
+                                      },
+                                    ),
                                   ],
-                                }
-                              )
+                                },
+                              ),
                             ),
                         }),
-                      ]
-                    ),
-                }),
+                      ]),
+                  },
+                ),
             }),
           ],
-        }
+        },
       );
   },
 });

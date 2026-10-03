@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 import {
@@ -22,7 +23,7 @@ const options = [
 ];
 
 export const SegmentGroupExample: Component<SegmentGroupExampleProps> = (
-  props
+  props,
 ) => {
   const size = () => props.size ?? "md";
   const orientation = () => props.orientation ?? "horizontal";
@@ -36,7 +37,9 @@ export const SegmentGroupExample: Component<SegmentGroupExampleProps> = (
         orientation={orientation()}
         disabled={disabled()}
         value={value()}
-        onValueChange={(details: { value: string[] }) => setValue(details.value)}
+        onValueChange={(details: { value: string[] }) =>
+          setValue(details.value)
+        }
       >
         {options.map((option) => (
           <LoongArkSegmentGroupItem value={option.value}>
@@ -44,7 +47,12 @@ export const SegmentGroupExample: Component<SegmentGroupExampleProps> = (
           </LoongArkSegmentGroupItem>
         ))}
       </LoongArkSegmentGroupRoot>
-      <span style={{ "font-size": "14px", color: "#666" }}>
+      <span
+        style={{
+          "font-size": "14px",
+          color: "var(--lk-color-semantic-mutedforeground)",
+        }}
+      >
         Selected: {value()[0] || "None"}
       </span>
     </div>

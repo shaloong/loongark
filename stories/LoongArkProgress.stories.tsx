@@ -44,7 +44,7 @@ const ProgressDemo = ({
   if (variant === "circular") {
     return (
       <LoongArkProgressRoot value={value} size={size}>
-        <LoongArkProgressView>
+        <LoongArkProgressView state="loading">
           <LoongArkProgressCircle>
             <LoongArkProgressCircleTrack />
             <LoongArkProgressCircleRange />
@@ -60,6 +60,12 @@ const ProgressDemo = ({
       value={value}
       size={size}
       orientation={orientation}
+      style={{
+        width:
+          orientation === "horizontal"
+            ? "min(320px, calc(100vw - 48px))"
+            : undefined,
+      }}
     >
       <LoongArkProgressLabel>Loading</LoongArkProgressLabel>
       <LoongArkProgressTrack>
@@ -110,6 +116,7 @@ export const Interactive: Story = {
       <div style={{ display: "grid", gap: 16, width: 240 }}>
         <ProgressDemo value={value} />
         <input
+          aria-label="Progress value"
           type="range"
           min={0}
           max={100}

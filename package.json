@@ -7,28 +7,52 @@
   ],
   "scripts": {
     "build": "pnpm -r run build",
-    "lint": "pnpm -r run lint",
+    "lint": "node ./scripts/verify-workspace.mjs",
     "clean": "node ./scripts/clean.mjs",
     "tsc": "pnpm exec tsc -b",
+    "verify": "pnpm run lint && pnpm run tsc && pnpm run build",
     "storybook": "storybook dev -p 6006 --config-dir .storybook --no-open",
     "storybook:build": "storybook build --config-dir .storybook",
-    "test:e2e": "playwright test",
-    "visual:test": "playwright test --project=chromium-visual"
+    "test:e2e": "pnpm storybook:build && node ./scripts/run-playwright.mjs",
+    "visual:test": "pnpm storybook:build && node ./scripts/run-playwright.mjs --project=chromium-visual",
+    "check:contracts": "node scripts/test-theme.mjs && node scripts/check-css-variables.mjs && node scripts/check-api-parity.mjs && node scripts/test-data-models.mjs && node scripts/test-selection-models.mjs && node scripts/test-action-models.mjs",
+    "check:publication": "node scripts/verify-publication.mjs && node scripts/check-public-types.mjs && node scripts/test-ssr.mjs && node scripts/test-svelte-ssr.mjs",
+    "check:svelte": "node node_modules/svelte-check/bin/svelte-check --tsconfig packages/svelte/tsconfig.examples.json",
+    "test:frameworks": "node scripts/build-framework-fixtures.mjs && node scripts/build-example-fixtures.mjs && node scripts/run-framework-tests.mjs",
+    "check:coverage": "node scripts/check-api-parity.mjs && node scripts/check-component-coverage.mjs"
   },
   "devDependencies": {
     "@ark-ui/react": "^5.30.0",
     "@axe-core/playwright": "^4.11.0",
+    "@babel/core": "^7.28.5",
     "@playwright/test": "^1.57.0",
-    "@storybook/addon-docs": "^10.2.0",
-    "@storybook/addon-vitest": "^10.2.0",
-    "@storybook/react": "^10.2.0",
-    "@storybook/react-vite": "^10.2.0",
+    "@storybook/addon-docs": "^10.3.6",
+    "@storybook/addon-vitest": "^10.3.6",
+    "@storybook/react": "10.3.6",
+    "@storybook/react-vite": "^10.3.6",
+    "@sveltejs/vite-plugin-svelte": "^6.2.1",
     "@types/node": "^24.10.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^5.1.1",
+    "babel-preset-solid": "^1.9.15",
+    "prettier": "^3.9.9",
+    "prettier-plugin-svelte": "^4.1.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "storybook": "^10.2.0",
+    "solid-js": "1.9.15",
+    "storybook": "^10.3.6",
+    "svelte": "5.45.2",
+    "svelte-check": "^4.7.6",
     "typescript": "^5.9.3",
-    "vite": "^7.2.6"
+    "vite": "^7.2.6",
+    "vite-plugin-solid": "^2.11.14",
+    "vue": "3.5.25"
+  },
+  "pnpm": {
+    "overrides": {
+      "vue": "3.5.25",
+      "solid-js": "1.9.15"
+    }
   }
 }

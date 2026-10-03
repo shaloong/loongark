@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type ToastType = "info" | "success" | "warning" | "error" | "loading";
@@ -48,23 +47,23 @@ interface ToastDesignTokens {
 }
 
 const extractToastTokens = (theme: LoongArkTheme): ToastDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
-  const shadow = asTokenTree(theme.tokens.shadow);
-  const zIndex = asTokenTree(theme.tokens.zIndex);
+  const radius = asTokenTree(theme.styleTokens.radius);
+  const shadow = asTokenTree(theme.styleTokens.shadow);
+  const zIndex = asTokenTree(theme.styleTokens.zIndex);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
   const brand = asTokenTree(color.brand);
 
@@ -106,13 +105,6 @@ const buildToastStyles = (theme: LoongArkTheme): string => {
   const tokens = extractToastTokens(theme);
 
   return `
-  @media (prefers-reduced-motion: reduce) {
-    :root:not([data-lk-motion="force"]) [data-scope="toast"] * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 
   [data-scope="toast"][data-part="group"] {
     z-index: ${tokens.zIndex};
@@ -172,7 +164,7 @@ const buildToastStyles = (theme: LoongArkTheme): string => {
 
   [data-scope="toast"][data-part="description"] {
     grid-column: 1;
-    color: ${tokens.neutral.textMuted};
+    color: var(--lk-color-semantic-mutedforeground);
   }
 
   [data-scope="toast"][data-part="action-trigger"],
@@ -254,7 +246,7 @@ const toastContract: PrimitiveContract<ToastPrimitiveProps> = {
 
 const ToastPrimitive = createPrimitive(toastContract, (theme) => {
   const css = buildToastStyles(theme);
-  mountPrimitiveStyles(`toast-${theme.mode}`, css);
+  theme.mountStyles(`toast-${theme.mode}`, css);
 });
 
 registerPrimitive(ToastPrimitive);

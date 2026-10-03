@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toStringToken } from "./tokenUtils";
 
 export type SwitchSize = "sm" | "md" | "lg";
@@ -42,13 +41,13 @@ interface SwitchDesignTokens {
 }
 
 const extractSwitchTokens = (theme: LoongArkTheme): SwitchDesignTokens => {
-  const space = theme.tokens.space as TokenTree;
+  const space = theme.styleTokens.space as TokenTree;
   const componentSpace = asTokenTree(space.component);
-  const radius = theme.tokens.radius as TokenTree;
-  const color = theme.tokens.color as TokenTree;
+  const radius = theme.styleTokens.radius as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -129,13 +128,6 @@ ${control}[data-size='${size}'][data-state='checked'] ${thumb} {
 `;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${root} {
   display: inline-flex;
@@ -145,7 +137,7 @@ ${root} {
 
 ${label} {
   cursor: pointer;
-  color: ${tokens.track.borderHover};
+  color: var(--lk-color-semantic-mutedforeground);
   user-select: none;
 }
 
@@ -245,8 +237,8 @@ const switchPrimitive = createPrimitive<SwitchPrimitiveProps>(
   SWITCH_CONTRACT,
   (theme) => {
     const css = buildSwitchStyles(theme);
-    mountPrimitiveStyles(`switch-${theme.mode}`, css);
-  }
+    theme.mountStyles(`switch-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(switchPrimitive);

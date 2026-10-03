@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Editable component - Vue wrapper.
  * Uses Ark UI Editable with data attributes for styling.
@@ -24,7 +25,7 @@ export const LoongArkEditableRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkEditable.Root,
         {
           ...attrs,
@@ -36,7 +37,7 @@ export const LoongArkEditableRoot = defineComponent({
           "data-state": props.state !== "default" ? props.state : undefined,
           "data-disabled": props.disabled ? "true" : undefined,
         },
-        slots
+        slots,
       );
   },
 });
@@ -45,14 +46,14 @@ export const LoongArkEditableLabel = defineComponent({
   name: "LoongArkEditableLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkEditable.Label,
         {
           ...attrs,
           "data-scope": "editable",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -61,14 +62,14 @@ export const LoongArkEditableArea = defineComponent({
   name: "LoongArkEditableArea",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkEditable.Area,
         {
           ...attrs,
           "data-scope": "editable",
           "data-part": "area",
         },
-        slots
+        slots,
       );
   },
 });
@@ -82,15 +83,16 @@ export const LoongArkEditableControl = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkEditable.Control,
         {
           ...attrs,
           "data-scope": "editable",
           "data-part": "control",
-          "data-state": props.state && props.state !== "default" ? props.state : undefined,
+          "data-state":
+            props.state && props.state !== "default" ? props.state : undefined,
         },
-        slots
+        slots,
       );
   },
 });
@@ -104,11 +106,12 @@ export const LoongArkEditableInput = defineComponent({
   },
   setup(props, { attrs }) {
     return () =>
-      h(ArkEditable.Input, {
+      renderPart(ArkEditable.Input, {
         ...attrs,
         "data-scope": "editable",
         "data-part": "input",
-        "data-state": props.state && props.state !== "default" ? props.state : undefined,
+        "data-state":
+          props.state && props.state !== "default" ? props.state : undefined,
       });
   },
 });
@@ -117,14 +120,14 @@ export const LoongArkEditablePreview = defineComponent({
   name: "LoongArkEditablePreview",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkEditable.Preview,
         {
           ...attrs,
           "data-scope": "editable",
           "data-part": "preview",
         },
-        slots
+        slots,
       );
   },
 });
@@ -133,14 +136,14 @@ export const LoongArkEditableEditTrigger = defineComponent({
   name: "LoongArkEditableEditTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkEditable.EditTrigger,
         {
           ...attrs,
           "data-scope": "editable",
           "data-part": "edit-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -149,14 +152,14 @@ export const LoongArkEditableSubmitTrigger = defineComponent({
   name: "LoongArkEditableSubmitTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkEditable.SubmitTrigger,
         {
           ...attrs,
           "data-scope": "editable",
           "data-part": "submit-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -165,14 +168,14 @@ export const LoongArkEditableCancelTrigger = defineComponent({
   name: "LoongArkEditableCancelTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkEditable.CancelTrigger,
         {
           ...attrs,
           "data-scope": "editable",
           "data-part": "cancel-trigger",
         },
-        slots
+        slots,
       );
   },
 });

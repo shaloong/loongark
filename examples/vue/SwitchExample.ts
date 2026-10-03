@@ -1,5 +1,6 @@
-import { defineComponent, h, ref } from "vue";
+import { defineComponent, h, ref, type PropType } from "vue";
 import {
+  LoongArkSwitchHiddenInput,
   LoongArkSwitchRoot,
   LoongArkSwitchControl,
   LoongArkSwitchThumb,
@@ -10,7 +11,7 @@ export const SwitchExample = defineComponent({
   name: "SwitchExample",
   props: {
     size: {
-      type: String,
+      type: String as PropType<"sm" | "md" | "lg">,
       default: "md",
     },
     disabled: {
@@ -27,7 +28,12 @@ export const SwitchExample = defineComponent({
     return () =>
       h(
         LoongArkSwitchRoot,
-        { size: props.size, disabled: props.disabled },
+        {
+          size: props.size,
+          disabled: props.disabled,
+          checked: checked.value,
+          "onUpdate:checked": (val: boolean) => (checked.value = val),
+        },
         {
           default: () => [
             h(
@@ -35,19 +41,17 @@ export const SwitchExample = defineComponent({
               {
                 size: props.size,
                 disabled: props.disabled,
-                checked: checked.value,
-                "onUpdate:checked": (val: boolean) => (checked.value = val),
               },
-              { default: () => h(LoongArkSwitchThumb, { size: props.size }) }
+              { default: () => h(LoongArkSwitchThumb, { size: props.size }) },
             ),
             h(
               LoongArkSwitchLabel,
               { disabled: props.disabled },
-              { default: () => props.label }
+              { default: () => props.label },
             ),
-            h("input", { type: "hidden", value: checked.value ? "on" : "off" }),
+            h(LoongArkSwitchHiddenInput, { name: "notifications" }),
           ],
-        }
+        },
       );
   },
 });

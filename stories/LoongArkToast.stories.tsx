@@ -1,5 +1,5 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkToaster,
   LoongArkToastRoot,
@@ -29,13 +29,21 @@ type Story = StoryObj;
 
 type ToastVariant = "info" | "success" | "warning" | "error";
 
-const ToastHost = ({ toaster }: { toaster: ReturnType<typeof createToaster> }) => (
+const ToastHost = ({
+  toaster,
+}: {
+  toaster: ReturnType<typeof createToaster>;
+}) => (
   <LoongArkToaster toaster={toaster}>
     {(toast) => (
       <LoongArkToastRoot>
-        {toast.title ? <LoongArkToastTitle>{toast.title}</LoongArkToastTitle> : null}
+        {toast.title ? (
+          <LoongArkToastTitle>{toast.title}</LoongArkToastTitle>
+        ) : null}
         {toast.description ? (
-          <LoongArkToastDescription>{toast.description}</LoongArkToastDescription>
+          <LoongArkToastDescription>
+            {toast.description}
+          </LoongArkToastDescription>
         ) : null}
         {toast.action ? (
           <LoongArkToastActionTrigger>
@@ -53,7 +61,7 @@ const ToastHost = ({ toaster }: { toaster: ReturnType<typeof createToaster> }) =
 const createToast = (
   toaster: ReturnType<typeof createToaster>,
   type: ToastVariant,
-  title: string
+  title: string,
 ) => {
   const actionLabel = type === "success" ? "Undo" : "Details";
   toaster[type]({
@@ -68,10 +76,15 @@ const createToast = (
 };
 
 const BasicDemo = () => {
-  const toaster = React.useMemo(() => createToaster({ placement: "bottom-end" }), []);
+  const toaster = React.useMemo(
+    () => createToaster({ placement: "bottom-end" }),
+    [],
+  );
   return (
     <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-      <LoongArkButton onClick={() => createToast(toaster, "info", "Toast created")}>
+      <LoongArkButton
+        onClick={() => createToast(toaster, "info", "Toast created")}
+      >
         Create toast
       </LoongArkButton>
       <ToastHost toaster={toaster} />
@@ -80,19 +93,30 @@ const BasicDemo = () => {
 };
 
 const VariantsDemo = () => {
-  const toaster = React.useMemo(() => createToaster({ placement: "bottom-end" }), []);
+  const toaster = React.useMemo(
+    () => createToaster({ placement: "bottom-end" }),
+    [],
+  );
   return (
     <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-      <LoongArkButton onClick={() => createToast(toaster, "info", "New update available")}>
+      <LoongArkButton
+        onClick={() => createToast(toaster, "info", "New update available")}
+      >
         Info
       </LoongArkButton>
-      <LoongArkButton onClick={() => createToast(toaster, "success", "Saved successfully")}>
+      <LoongArkButton
+        onClick={() => createToast(toaster, "success", "Saved successfully")}
+      >
         Success
       </LoongArkButton>
-      <LoongArkButton onClick={() => createToast(toaster, "warning", "Check your inputs")}>
+      <LoongArkButton
+        onClick={() => createToast(toaster, "warning", "Check your inputs")}
+      >
         Warning
       </LoongArkButton>
-      <LoongArkButton onClick={() => createToast(toaster, "error", "Upload failed")}>
+      <LoongArkButton
+        onClick={() => createToast(toaster, "error", "Upload failed")}
+      >
         Error
       </LoongArkButton>
       <ToastHost toaster={toaster} />

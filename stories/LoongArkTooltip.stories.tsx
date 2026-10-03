@@ -2,7 +2,7 @@
  * Tooltip Story - 展示多状态与交互
  */
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkTooltipRoot,
   LoongArkTooltipTrigger,
@@ -18,7 +18,8 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: "LoongArkTooltip 基于 Ark UI Tooltip，支持 interactive / delay / 方向等 props，样式由 primitives 驱动。",
+        component:
+          "LoongArkTooltip 基于 Ark UI Tooltip，支持 interactive / delay / 方向等 props，样式由 primitives 驱动。",
       },
     },
   },
@@ -48,7 +49,12 @@ export const Basic: Story = {
 
 export const Interactive: Story = {
   render: () => (
-    <LoongArkTooltipRoot interactive closeDelay={150} openDelay={300} closeOnScroll={false}>
+    <LoongArkTooltipRoot
+      interactive
+      closeDelay={150}
+      openDelay={300}
+      closeOnScroll={false}
+    >
       <LoongArkTooltipTrigger>
         <LoongArkButton>悬停可交互</LoongArkButton>
       </LoongArkTooltipTrigger>
@@ -68,4 +74,3 @@ export const Interactive: Story = {
     </LoongArkTooltipRoot>
   ),
 };
-

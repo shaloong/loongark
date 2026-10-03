@@ -1,3 +1,5 @@
+import type { SegmentGroupRootProps } from "@ark-ui/vue/segment-group";
+import { renderPart } from "../render-part";
 /**
  * Segment Group component - Vue wrapper.
  * Uses Ark UI Toggle Group under the hood.
@@ -32,32 +34,39 @@ export const LoongArkSegmentGroupRoot = defineComponent({
     },
     multiple: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     loopFocus: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     rovingFocus: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     deselectable: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     id: {
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<Record<string, unknown>>,
+      type: Object as PropType<SegmentGroupRootProps["ids"]>,
     },
     onValueChange: {
-      type: Function as PropType<(details: SegmentGroupValueChangeDetails) => void>,
+      type: Function as PropType<
+        (details: SegmentGroupValueChangeDetails) => void
+      >,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToggleGroup.Root,
         {
           ...attrs,
@@ -68,7 +77,7 @@ export const LoongArkSegmentGroupRoot = defineComponent({
           "data-size": props.size,
           "data-orientation": props.orientation,
         },
-        slots
+        slots,
       );
   },
 });
@@ -82,11 +91,12 @@ export const LoongArkSegmentGroupItem = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToggleGroup.Item,
         {
           ...attrs,
@@ -95,7 +105,7 @@ export const LoongArkSegmentGroupItem = defineComponent({
           "data-scope": "segment-group",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });

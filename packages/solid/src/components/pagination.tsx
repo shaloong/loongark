@@ -16,27 +16,29 @@ import type {
   PaginationSize,
 } from "@loongark/primitives";
 
-export interface LoongArkPaginationRootProps
-  extends Omit<ArkPaginationRootProps, "asChild"> {
+export interface LoongArkPaginationRootProps extends Omit<
+  ArkPaginationRootProps,
+  "asChild"
+> {
   size?: PaginationSize;
   orientation?: PaginationOrientation;
   children?: JSX.Element;
 }
 
-export const LoongArkPaginationRoot: Component<
-  LoongArkPaginationRootProps
-> = (props) => {
+export const LoongArkPaginationRoot: Component<LoongArkPaginationRootProps> = (
+  props,
+) => {
   const merged = mergeProps(
     {
       size: "md" as PaginationSize,
       orientation: "horizontal" as PaginationOrientation,
     },
-    props
+    props,
   );
 
   return (
     <ArkPagination.Root
-      {...(props as any)}
+      {...props}
       data-scope="pagination"
       data-part="root"
       data-size={merged.size}

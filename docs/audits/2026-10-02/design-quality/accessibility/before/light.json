@@ -1,0 +1,2791 @@
+[
+  {
+    "title": "Components/Accordion",
+    "id": "components-accordion--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Alert",
+    "id": "components-alert--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/AlertDialog",
+    "id": "components-alertdialog--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/AngleSlider",
+    "id": "components-angleslider--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/AspectRatio",
+    "id": "components-aspectratio--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Avatar",
+    "id": "components-avatar--playground",
+    "violations": []
+  },
+  {
+    "title": "Components/Badge",
+    "id": "components-badge--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Breadcrumb",
+    "id": "components-breadcrumb--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Button",
+    "id": "components-button--playground",
+    "violations": []
+  },
+  {
+    "title": "Components/ButtonGroup",
+    "id": "components-buttongroup--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Calendar",
+    "id": "components-calendar--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#c0c0c5",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 1.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 1.81 (foreground color: #c0c0c5, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"range-text\" dir=\"ltr\">October 2026</div>",
+            "target": [
+              "div[data-part=\"range-text\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.81 (foreground color: #c0c0c5, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-10\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Saturday, October 10, 2026\" data-value=\"2026-10-10\" data-view=\"day\" data-weekend=\"\">10</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-10"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-11\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Sunday, October 11, 2026\" data-value=\"2026-10-11\" data-view=\"day\" data-weekend=\"\">11</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-11"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-12\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Monday, October 12, 2026\" data-value=\"2026-10-12\" data-view=\"day\">12</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-12"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-13\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Tuesday, October 13, 2026\" data-value=\"2026-10-13\" data-view=\"day\">13</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-13"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-14\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Wednesday, October 14, 2026\" data-value=\"2026-10-14\" data-view=\"day\">14</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-14"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-15\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Thursday, October 15, 2026\" data-value=\"2026-10-15\" data-view=\"day\">15</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-15"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-16\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Friday, October 16, 2026\" data-value=\"2026-10-16\" data-view=\"day\">16</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-16"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-17\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Saturday, October 17, 2026\" data-value=\"2026-10-17\" data-view=\"day\" data-weekend=\"\">17</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-17"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-18\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Sunday, October 18, 2026\" data-value=\"2026-10-18\" data-view=\"day\" data-weekend=\"\">18</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-18"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-19\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Monday, October 19, 2026\" data-value=\"2026-10-19\" data-view=\"day\">19</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-19"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-20\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Tuesday, October 20, 2026\" data-value=\"2026-10-20\" data-view=\"day\">20</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-20"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-21\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Wednesday, October 21, 2026\" data-value=\"2026-10-21\" data-view=\"day\">21</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-21"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-22\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Thursday, October 22, 2026\" data-value=\"2026-10-22\" data-view=\"day\">22</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-22"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-23\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Friday, October 23, 2026\" data-value=\"2026-10-23\" data-view=\"day\">23</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-23"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-24\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Saturday, October 24, 2026\" data-value=\"2026-10-24\" data-view=\"day\" data-weekend=\"\">24</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-24"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-25\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Sunday, October 25, 2026\" data-value=\"2026-10-25\" data-view=\"day\" data-weekend=\"\">25</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-25"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-26\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Monday, October 26, 2026\" data-value=\"2026-10-26\" data-view=\"day\">26</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-26"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-27\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Tuesday, October 27, 2026\" data-value=\"2026-10-27\" data-view=\"day\">27</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-27"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-28\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Wednesday, October 28, 2026\" data-value=\"2026-10-28\" data-view=\"day\">28</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-28"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-29\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Thursday, October 29, 2026\" data-value=\"2026-10-29\" data-view=\"day\">29</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-29"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-30\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Friday, October 30, 2026\" data-value=\"2026-10-30\" data-view=\"day\">30</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-30"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#9a9a9a",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.81,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"date-picker\" data-part=\"content\" dir=\"ltr\" data-state=\"open\" data-inline=\"\" id=\"datepicker:_r_1_:content\" tabindex=\"-1\" role=\"application\" aria-roledescription=\"datepicker\" aria-label=\"calendar\">",
+                    "target": [
+                      "#datepicker\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"date-picker\" data-part=\"table-cell-trigger\" id=\"datepicker:_r_1_:cell-trigger:2026-10-31\" role=\"button\" dir=\"ltr\" tabindex=\"-1\" aria-label=\"Choose Saturday, October 31, 2026\" data-value=\"2026-10-31\" data-view=\"day\" data-weekend=\"\">31</div>",
+            "target": [
+              "#datepicker\\:_r_1_\\:cell-trigger\\:2026-10-31"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Card",
+    "id": "components-card--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Carousel",
+    "id": "components-carousel--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Chart",
+    "id": "components-chart--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Checkbox",
+    "id": "components-checkbox--playground",
+    "violations": []
+  },
+  {
+    "title": "Components/Clipboard",
+    "id": "components-clipboard--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#c7c7ca",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 1.68,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"clipboard\" data-part=\"indicator\">Copied</div>",
+            "target": [
+              "div[data-part=\"indicator\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#c7c7ca",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 1.68,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"clipboard\" data-part=\"value-text\">https://loongark.dev</span>",
+            "target": [
+              "span[data-part=\"value-text\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Collapsible",
+    "id": "components-collapsible--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/ColorPicker",
+    "id": "components-colorpicker--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#c7c7ca",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 1.68,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<button data-scope=\"color-picker\" data-part=\"trigger\" id=\"color-picker:_r_1_:t...\" dir=\"ltr\" aria-label=\"select color. curren...\" aria-controls=\"color-picker:_r_1_:c...\" aria-labelledby=\"color-picker:_r_1_:l...\" aria-haspopup=\"dialog\" aria-expanded=\"false\" data-state=\"closed\" type=\"button\" style=\"po ...>",
+                    "target": [
+                      "#color-picker\\:_r_1_\\:trigger"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"color-picker\" data-part=\"value-text\" dir=\"ltr\">hsla(214.12, 100%, 50%, 1)</span>",
+            "target": [
+              "span[data-part=\"value-text\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Combobox",
+    "id": "components-combobox--playground",
+    "violations": []
+  },
+  {
+    "title": "Components/Command",
+    "id": "components-command--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#939393",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.07,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"combobox\" data-part=\"content\" dir=\"ltr\" id=\"combobox:_r_1_:content\" role=\"listbox\" tabindex=\"-1\" data-state=\"open\" aria-labelledby=\"combobox:_r_1_:label\" data-placement=\"bottom\" style=\"--layer-index: 0; --nested-layer-count: 0; pointer-events: auto;\">",
+                    "target": [
+                      "#combobox\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.07 (foreground color: #939393, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"combobox\" data-part=\"item-text\" dir=\"ltr\" data-state=\"unchecked\">Alpha</span>",
+            "target": [
+              "#combobox\\:_r_1_\\:option\\:a > span[data-part=\"item-text\"][data-state=\"unchecked\"][data-scope=\"combobox\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #939393, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#939393",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.07,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"combobox\" data-part=\"content\" dir=\"ltr\" id=\"combobox:_r_1_:content\" role=\"listbox\" tabindex=\"-1\" data-state=\"open\" aria-labelledby=\"combobox:_r_1_:label\" data-placement=\"bottom\" style=\"--layer-index: 0; --nested-layer-count: 0; pointer-events: auto;\">",
+                    "target": [
+                      "#combobox\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.07 (foreground color: #939393, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"combobox\" data-part=\"item-text\" dir=\"ltr\" data-state=\"unchecked\">Beta</span>",
+            "target": [
+              "#combobox\\:_r_1_\\:option\\:b > span[data-part=\"item-text\"][data-state=\"unchecked\"][data-scope=\"combobox\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #939393, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#939393",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.07,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"combobox\" data-part=\"content\" dir=\"ltr\" id=\"combobox:_r_1_:content\" role=\"listbox\" tabindex=\"-1\" data-state=\"open\" aria-labelledby=\"combobox:_r_1_:label\" data-placement=\"bottom\" style=\"--layer-index: 0; --nested-layer-count: 0; pointer-events: auto;\">",
+                    "target": [
+                      "#combobox\\:_r_1_\\:content"
+                    ]
+                  },
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.07 (foreground color: #939393, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"combobox\" data-part=\"item-text\" dir=\"ltr\" data-state=\"unchecked\">Gamma</span>",
+            "target": [
+              "#combobox\\:_r_1_\\:option\\:c > span[data-part=\"item-text\"][data-state=\"unchecked\"][data-scope=\"combobox\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #939393, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/ContextMenu",
+    "id": "components-contextmenu--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/DataTable",
+    "id": "components-datatable--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Date Picker",
+    "id": "components-date-picker--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Dialog",
+    "id": "components-dialog--playground",
+    "violations": []
+  },
+  {
+    "title": "Components/Direction",
+    "id": "components-direction--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Drawer",
+    "id": "components-drawer--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Editable",
+    "id": "components-editable--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Empty",
+    "id": "components-empty--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Field",
+    "id": "components-field--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Fieldset",
+    "id": "components-fieldset--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/FileUpload",
+    "id": "components-fileupload--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#c7c7ca",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 1.68,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"file-upload\" data-part=\"dropzone\" dir=\"ltr\" id=\"file:_r_1_:dropzone\" tabindex=\"0\" role=\"button\" aria-label=\"dropzone\" aria-disabled=\"false\">",
+                    "target": [
+                      "#file\\:_r_1_\\:dropzone"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p style=\"margin: 0px;\">Drag files here</p>",
+            "target": [
+              "#file\\:_r_1_\\:dropzone > p"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "id": "nested-interactive",
+        "impact": "serious",
+        "tags": [
+          "cat.keyboard",
+          "wcag2a",
+          "wcag412",
+          "TTv5",
+          "TT6.a",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
+        ],
+        "description": "Ensure interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies",
+        "help": "Interactive controls must not be nested",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/nested-interactive?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "no-focusable-content",
+                "data": null,
+                "relatedNodes": [
+                  {
+                    "html": "<button data-scope=\"file-upload\" data-part=\"trigger\" dir=\"ltr\" id=\"file:_r_1_:trigger\" type=\"button\">Browse</button>",
+                    "target": [
+                      "#file\\:_r_1_\\:trigger"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has focusable descendants"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"file-upload\" data-part=\"dropzone\" dir=\"ltr\" id=\"file:_r_1_:dropzone\" tabindex=\"0\" role=\"button\" aria-label=\"dropzone\" aria-disabled=\"false\">",
+            "target": [
+              "#file\\:_r_1_\\:dropzone"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has focusable descendants"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Filter Bar",
+    "id": "components-filter-bar--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#f9f9f9",
+                  "contrastRatio": 4.26,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<button type=\"button\" data-scope=\"filter-bar\" data-part=\"chip\" aria-pressed=\"false\">Active<span data-part=\"chip-badge\">12</span></button>",
+                    "target": [
+                      "button[data-part=\"chip\"][type=\"button\"]:nth-child(2)"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.26 (foreground color: #767680, background color: #f9f9f9, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button type=\"button\" data-scope=\"filter-bar\" data-part=\"chip\" aria-pressed=\"false\">Active<span data-part=\"chip-badge\">12</span></button>",
+            "target": [
+              "button[data-part=\"chip\"][type=\"button\"]:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.26 (foreground color: #767680, background color: #f9f9f9, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#f2f2f2",
+                  "contrastRatio": 4.01,
+                  "fontSize": "9.0pt (12px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<span data-part=\"chip-badge\">12</span>",
+                    "target": [
+                      "button[data-part=\"chip\"][type=\"button\"]:nth-child(2) > span[data-part=\"chip-badge\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.01 (foreground color: #767680, background color: #f2f2f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-part=\"chip-badge\">12</span>",
+            "target": [
+              "button[data-part=\"chip\"][type=\"button\"]:nth-child(2) > span[data-part=\"chip-badge\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.01 (foreground color: #767680, background color: #f2f2f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#f9f9f9",
+                  "contrastRatio": 4.26,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<button type=\"button\" data-scope=\"filter-bar\" data-part=\"chip\" aria-pressed=\"false\">Pending<span data-part=\"chip-badge\">3</span></button>",
+                    "target": [
+                      "button[data-part=\"chip\"][type=\"button\"]:nth-child(3)"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.26 (foreground color: #767680, background color: #f9f9f9, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button type=\"button\" data-scope=\"filter-bar\" data-part=\"chip\" aria-pressed=\"false\">Pending<span data-part=\"chip-badge\">3</span></button>",
+            "target": [
+              "button[data-part=\"chip\"][type=\"button\"]:nth-child(3)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.26 (foreground color: #767680, background color: #f9f9f9, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#f9f9f9",
+                  "contrastRatio": 4.26,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<button type=\"button\" data-scope=\"filter-bar\" data-part=\"chip\" aria-pressed=\"false\">Closed</button>",
+                    "target": [
+                      "button[data-part=\"chip\"][type=\"button\"]:nth-child(4)"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.26 (foreground color: #767680, background color: #f9f9f9, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button type=\"button\" data-scope=\"filter-bar\" data-part=\"chip\" aria-pressed=\"false\">Closed</button>",
+            "target": [
+              "button[data-part=\"chip\"][type=\"button\"]:nth-child(4)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.26 (foreground color: #767680, background color: #f9f9f9, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/FloatingPanel",
+    "id": "components-floatingpanel--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/HoverCard",
+    "id": "components-hovercard--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Input",
+    "id": "components-input--playground",
+    "violations": []
+  },
+  {
+    "title": "Components/InputGroup",
+    "id": "components-inputgroup--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Item",
+    "id": "components-item--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Kbd",
+    "id": "components-kbd--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Label",
+    "id": "components-label--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Listbox",
+    "id": "components-listbox--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 4.49,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div dir=\"ltr\" id=\"select:_r_1_:content\" role=\"listbox\" data-scope=\"listbox\" data-part=\"list\" data-orientation=\"vertical\" aria-labelledby=\"select:_r_1_:label\" tabindex=\"0\" data-layout=\"list\" style=\"--column-count: 1;\">",
+                    "target": [
+                      "#select\\:_r_1_\\:content"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"listbox\" data-part=\"item-group-label\" id=\"select:_r_1_:optgroup-label:_r_2_\" dir=\"ltr\" role=\"presentation\">China</div>",
+            "target": [
+              "#select\\:_r_1_\\:optgroup-label\\:_r_2_"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 4.49,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div dir=\"ltr\" id=\"select:_r_1_:content\" role=\"listbox\" data-scope=\"listbox\" data-part=\"list\" data-orientation=\"vertical\" aria-labelledby=\"select:_r_1_:label\" tabindex=\"0\" data-layout=\"list\" style=\"--column-count: 1;\">",
+                    "target": [
+                      "#select\\:_r_1_\\:content"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"listbox\" data-part=\"item-group-label\" id=\"select:_r_1_:optgroup-label:_r_3_\" dir=\"ltr\" role=\"presentation\">Japan</div>",
+            "target": [
+              "#select\\:_r_1_\\:optgroup-label\\:_r_3_"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Marquee",
+    "id": "components-marquee--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Menu",
+    "id": "components-menu--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Menubar",
+    "id": "components-menubar--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/NativeSelect",
+    "id": "components-nativeselect--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/NavigationMenu",
+    "id": "components-navigationmenu--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/NumberInput",
+    "id": "components-numberinput--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Pagination",
+    "id": "components-pagination--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/PasswordInput",
+    "id": "components-passwordinput--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#c7c7ca",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 1.68,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"password-input\" data-part=\"control\" data-size=\"md\">",
+                    "target": [
+                      "div[data-part=\"control\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button data-scope=\"password-input\" data-part=\"visibility-trigger\" type=\"button\" tabindex=\"-1\" aria-controls=\"p-input-_r_1_-input\" aria-expanded=\"false\" data-state=\"hidden\" aria-label=\"Show password\">Show</button>",
+            "target": [
+              "button[data-part=\"visibility-trigger\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/PinInput",
+    "id": "components-pininput--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Popover",
+    "id": "components-popover--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Progress",
+    "id": "components-progress--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/QRCode",
+    "id": "components-qrcode--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/RadioGroup",
+    "id": "components-radiogroup--playground",
+    "violations": []
+  },
+  {
+    "title": "Components/RatingGroup",
+    "id": "components-ratinggroup--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/ScrollArea",
+    "id": "components-scrollarea--basic",
+    "violations": [
+      {
+        "id": "scrollable-region-focusable",
+        "impact": "serious",
+        "tags": [
+          "cat.keyboard",
+          "wcag2a",
+          "wcag211",
+          "wcag213",
+          "TTv5",
+          "TT4.a",
+          "EN-301-549",
+          "EN-9.2.1.1",
+          "EN-9.2.1.3",
+          "RGAAv4",
+          "RGAA-7.3.2"
+        ],
+        "description": "Ensure elements that have scrollable content are accessible by keyboard",
+        "help": "Scrollable region must have keyboard access",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/scrollable-region-focusable?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "focusable-content",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element should have focusable content"
+              },
+              {
+                "id": "focusable-element",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element should be focusable"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<div data-scope=\"scroll-area\" data-part=\"viewport\" role=\"presentation\" data-ownedby=\"scroll-area-_r_1_\" id=\"scroll-area-_r_1_:viewport\" data-at-top=\"\" data-overflow-y=\"\" style=\"overflow: auto;\">",
+            "target": [
+              "#scroll-area-_r_1_\\:viewport"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Segment Group",
+    "id": "components-segment-group--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#f2f2f2",
+                  "contrastRatio": 4.01,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"segment-group\" data-part=\"root\" id=\"toggle-group:_r_1_\" dir=\"ltr\" role=\"radiogroup\" tabindex=\"0\" data-orientation=\"horizontal\" data-size=\"md\" style=\"outline: none;\">",
+                    "target": [
+                      "#toggle-group\\:_r_1_"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.01 (foreground color: #767680, background color: #f2f2f2, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button data-scope=\"segment-group\" data-part=\"item\" id=\"toggle-group:_r_1_:activity\" type=\"button\" data-ownedby=\"toggle-group:_r_1_\" tabindex=\"-1\" role=\"radio\" aria-checked=\"false\" data-orientation=\"horizontal\" dir=\"ltr\" data-state=\"off\">Activity</button>",
+            "target": [
+              "#toggle-group\\:_r_1_\\:activity"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.01 (foreground color: #767680, background color: #f2f2f2, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#f2f2f2",
+                  "contrastRatio": 4.01,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"segment-group\" data-part=\"root\" id=\"toggle-group:_r_1_\" dir=\"ltr\" role=\"radiogroup\" tabindex=\"0\" data-orientation=\"horizontal\" data-size=\"md\" style=\"outline: none;\">",
+                    "target": [
+                      "#toggle-group\\:_r_1_"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.01 (foreground color: #767680, background color: #f2f2f2, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button data-scope=\"segment-group\" data-part=\"item\" id=\"toggle-group:_r_1_:settings\" type=\"button\" data-ownedby=\"toggle-group:_r_1_\" tabindex=\"-1\" role=\"radio\" aria-checked=\"false\" data-orientation=\"horizontal\" dir=\"ltr\" data-state=\"off\">Settings</button>",
+            "target": [
+              "#toggle-group\\:_r_1_\\:settings"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.01 (foreground color: #767680, background color: #f2f2f2, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Select",
+    "id": "components-select--playground",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#c7c7ca",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 1.68,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<button id=\"select:_r_1_:trigger\" dir=\"ltr\" type=\"button\" role=\"combobox\" aria-controls=\"select:_r_1_:content\" aria-expanded=\"false\" aria-haspopup=\"listbox\" data-state=\"closed\" aria-invalid=\"false\" aria-required=\"false\" aria-labelledby=\"select:_r_1_:label\" data-scope=\"select\" data-part=\"trigger\" dat ...>",
+                    "target": [
+                      "#select\\:_r_1_\\:trigger"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"select\" data-part=\"value-text\" dir=\"ltr\">请选择...</span>",
+            "target": [
+              "span[data-part=\"value-text\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Separator",
+    "id": "components-separator--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Sheet",
+    "id": "components-sheet--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Sidebar",
+    "id": "components-sidebar--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#f2f2f2",
+                  "contrastRatio": 4.01,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<aside data-scope=\"sidebar\" data-part=\"root\" data-variant=\"default\" data-size=\"md\" data-orientation=\"horizontal\">",
+                    "target": [
+                      "aside"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.01 (foreground color: #767680, background color: #f2f2f2, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<header data-scope=\"sidebar\" data-part=\"header\" data-variant=\"default\" data-size=\"md\" data-orientation=\"horizontal\">Workspace</header>",
+            "target": [
+              "header"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.01 (foreground color: #767680, background color: #f2f2f2, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#f2f2f2",
+                  "contrastRatio": 4.01,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<aside data-scope=\"sidebar\" data-part=\"root\" data-variant=\"default\" data-size=\"md\" data-orientation=\"horizontal\">",
+                    "target": [
+                      "aside"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.01 (foreground color: #767680, background color: #f2f2f2, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<footer data-scope=\"sidebar\" data-part=\"footer\" data-variant=\"default\" data-size=\"md\" data-orientation=\"horizontal\">Settings</footer>",
+            "target": [
+              "footer"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.01 (foreground color: #767680, background color: #f2f2f2, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/SignaturePad",
+    "id": "components-signaturepad--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Skeleton",
+    "id": "components-skeleton--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Slider",
+    "id": "components-slider--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 4.49,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"slider\" data-part=\"value-text\" dir=\"ltr\" data-orientation=\"horizontal\" id=\"slider:_r_1_:value-text\">32</span>",
+            "target": [
+              "#slider\\:_r_1_\\:value-text"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 4.49,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"slider\" data-part=\"marker\" id=\"slider:_r_1_:marker:...\" role=\"presentation\" dir=\"ltr\" data-orientation=\"horizontal\" data-value=\"25\" data-state=\"under-value\" style=\"visibility: visible;...\">",
+            "target": [
+              "#slider\\:_r_1_\\:marker\\:25"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 4.49,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"slider\" data-part=\"marker\" id=\"slider:_r_1_:marker:...\" role=\"presentation\" dir=\"ltr\" data-orientation=\"horizontal\" data-value=\"50\" data-state=\"over-value\" style=\"visibility: visible;...\">",
+            "target": [
+              "#slider\\:_r_1_\\:marker\\:50"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 4.49,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"slider\" data-part=\"marker\" id=\"slider:_r_1_:marker:...\" role=\"presentation\" dir=\"ltr\" data-orientation=\"horizontal\" data-value=\"75\" data-state=\"over-value\" style=\"visibility: visible;...\">",
+            "target": [
+              "#slider\\:_r_1_\\:marker\\:75"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 4.49,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"slider\" data-part=\"marker\" id=\"slider:_r_1_:marker:...\" role=\"presentation\" dir=\"ltr\" data-orientation=\"horizontal\" data-value=\"100\" data-state=\"over-value\" style=\"visibility: visible;...\">",
+            "target": [
+              "#slider\\:_r_1_\\:marker\\:100"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Spinner",
+    "id": "components-spinner--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Splitter",
+    "id": "components-splitter--basic",
+    "violations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "tags": [
+          "cat.name-role-value",
+          "wcag2a",
+          "wcag412",
+          "section508",
+          "section508.22.a",
+          "TTv5",
+          "TT6.a",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "ACT",
+          "RGAAv4",
+          "RGAA-11.9.1"
+        ],
+        "description": "Ensure buttons have discernible text",
+        "help": "Buttons must have discernible text",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "button-has-visible-text",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element does not have inner text that is visible to screen readers"
+              },
+              {
+                "id": "aria-label",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "aria-label attribute does not exist or is empty"
+              },
+              {
+                "id": "aria-labelledby",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+              },
+              {
+                "id": "non-empty-title",
+                "data": {
+                  "messageKey": "noAttr"
+                },
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element has no title attribute"
+              },
+              {
+                "id": "implicit-label",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element does not have an implicit (wrapped) <label>"
+              },
+              {
+                "id": "explicit-label",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element does not have an explicit <label>"
+              },
+              {
+                "id": "presentational-role",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<button data-scope=\"splitter\" data-part=\"resize-trigger\" dir=\"ltr\" id=\"splitter:_r_1_:split...\" role=\"separator\" data-id=\"notes:preview\" data-ownedby=\"splitter:_r_1_\" tabindex=\"0\" aria-valuenow=\"50\" aria-valuemin=\"20\" aria-valuemax=\"80\" data-orientation=\"horizontal\" aria-orientation=\"horizontal\" ari ...>",
+            "target": [
+              "#splitter\\:_r_1_\\:splitter\\:notes\\:preview"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Steps",
+    "id": "components-steps--basic",
+    "violations": [
+      {
+        "id": "aria-required-children",
+        "impact": "critical",
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag131",
+          "EN-301-549",
+          "EN-9.1.3.1",
+          "RGAAv4",
+          "RGAA-9.3.1"
+        ],
+        "description": "Ensure elements with an ARIA role that require child roles contain them",
+        "help": "Certain ARIA roles must contain particular children",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-children?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "aria-required-children",
+                "data": {
+                  "messageKey": "unallowed",
+                  "values": "div[aria-current]"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div data-scope=\"steps\" data-part=\"item\" dir=\"ltr\" aria-current=\"step\" data-orientation=\"horizontal\">",
+                    "target": [
+                      "div[aria-current=\"step\"]"
+                    ]
+                  }
+                ],
+                "impact": "critical",
+                "message": "Element has children which are not allowed: div[aria-current]"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "critical",
+            "html": "<div data-scope=\"steps\" data-part=\"list\" dir=\"ltr\" id=\"steps:_r_1_:list\" role=\"tablist\" aria-owns=\"steps:_r_1_:trigger:0 steps:_r_1_:trigger:1 steps:_r_1_:trigger:2\" aria-orientation=\"horizontal\" data-orientation=\"horizontal\">",
+            "target": [
+              "#steps\\:_r_1_\\:list"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has children which are not allowed: div[aria-current]"
+          }
+        ]
+      },
+      {
+        "id": "aria-valid-attr-value",
+        "impact": "critical",
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag412",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
+        ],
+        "description": "Ensure all ARIA attributes have valid values",
+        "help": "ARIA attributes must conform to valid values",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
+        "nodes": [
+          {
+            "any": [],
+            "all": [
+              {
+                "id": "aria-valid-attr-value",
+                "data": [
+                  "aria-controls=\"steps:_r_1_:content:1\""
+                ],
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Invalid ARIA attribute value: aria-controls=\"steps:_r_1_:content:1\""
+              }
+            ],
+            "none": [],
+            "impact": "critical",
+            "html": "<button data-scope=\"steps\" data-part=\"trigger\" id=\"steps:_r_1_:trigger:1\" role=\"tab\" dir=\"ltr\" tabindex=\"0\" aria-selected=\"true\" aria-controls=\"steps:_r_1_:content:1\" data-state=\"open\" data-orientation=\"horizontal\" data-current=\"\">Workspace</button>",
+            "target": [
+              "#steps\\:_r_1_\\:trigger\\:1"
+            ],
+            "failureSummary": "Fix all of the following:\n  Invalid ARIA attribute value: aria-controls=\"steps:_r_1_:content:1\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Switch",
+    "id": "components-switch--playground",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#767680",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 4.49,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"loongark-story-surface light\">",
+                    "target": [
+                      ".loongark-story-surface"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span data-scope=\"switch\" data-part=\"label\" data-state=\"unchecked\" dir=\"ltr\" id=\"switch:_r_1_:label\" data-testid=\"switch-label\">通知提醒</span>",
+            "target": [
+              "#switch\\:_r_1_\\:label"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.49 (foreground color: #767680, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Table",
+    "id": "components-table--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Tabs",
+    "id": "components-tabs--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/TagsInput",
+    "id": "components-tagsinput--basic",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#c7c7ca",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 1.68,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div id=\"tags-input:_r_1_:control\" data-scope=\"tags-input\" data-part=\"control\" dir=\"ltr\" data-size=\"md\">",
+                    "target": [
+                      "#tags-input\\:_r_1_\\:control"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button data-scope=\"tags-input\" data-part=\"clear-trigger\" dir=\"ltr\" id=\"tags-input:_r_1_:clear-btn\" type=\"button\" aria-label=\"Clear all tags\">Clear</button>",
+            "target": [
+              "#tags-input\\:_r_1_\\:clear-btn"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.68 (foreground color: #c7c7ca, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Components/Timer",
+    "id": "components-timer--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Toast",
+    "id": "components-toast--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Toggle",
+    "id": "components-toggle--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Toggle Group",
+    "id": "components-toggle-group--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Tooltip",
+    "id": "components-tooltip--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Tour",
+    "id": "components-tour--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/TreeView",
+    "id": "components-treeview--basic",
+    "violations": []
+  },
+  {
+    "title": "Components/Typography",
+    "id": "components-typography--basic",
+    "violations": []
+  }
+]

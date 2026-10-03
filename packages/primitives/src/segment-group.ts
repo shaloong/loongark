@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type SegmentGroupSize = "sm" | "md" | "lg";
@@ -45,23 +44,23 @@ interface SegmentGroupDesignTokens {
 }
 
 const extractSegmentGroupTokens = (
-  theme: LoongArkTheme
+  theme: LoongArkTheme,
 ): SegmentGroupDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -114,17 +113,9 @@ const buildSegmentGroupStyles = (theme: LoongArkTheme): string => {
   const tokens = extractSegmentGroupTokens(theme);
   const root = `[data-scope="segment-group"][data-part="root"]`;
   const item = `[data-scope="segment-group"][data-part="item"]`;
-  const interactiveItem =
-    `${item}:not([disabled]):not([data-disabled='true'])`;
+  const interactiveItem = `${item}:not([disabled]):not([data-disabled='true'])`;
 
   return `
-  @media (prefers-reduced-motion: reduce) {
-    :root:not([data-lk-motion="force"]) [data-scope="segment-group"] * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 
   ${root} {
     display: inline-flex;
@@ -145,7 +136,7 @@ const buildSegmentGroupStyles = (theme: LoongArkTheme): string => {
     appearance: none;
     border: none;
     background: transparent;
-    color: ${tokens.neutral.textMuted};
+    color: var(--lk-color-semantic-mutedforeground);
     font-family: ${tokens.fontFamily};
     font-weight: ${tokens.fontWeight};
     font-size: ${tokens.fontSize.md};
@@ -243,13 +234,10 @@ const segmentGroupContract: PrimitiveContract<SegmentGroupPrimitiveProps> = {
   },
 };
 
-const SegmentGroupPrimitive = createPrimitive(
-  segmentGroupContract,
-  (theme) => {
-    const css = buildSegmentGroupStyles(theme);
-    mountPrimitiveStyles(`segment-group-${theme.mode}`, css);
-  }
-);
+const SegmentGroupPrimitive = createPrimitive(segmentGroupContract, (theme) => {
+  const css = buildSegmentGroupStyles(theme);
+  theme.mountStyles(`segment-group-${theme.mode}`, css);
+});
 
 registerPrimitive(SegmentGroupPrimitive);
 

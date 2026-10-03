@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Popover 组件 - Vue 封装
  * 基于 Ark UI Popover，注入 data-scope/data-part，并默认使用 asChild 避免嵌套
@@ -9,14 +10,14 @@ export const LoongArkPopoverRoot = defineComponent({
   name: "LoongArkPopoverRoot",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPopover.Root,
         {
           ...attrs,
           "data-scope": "popover",
           "data-part": "root",
         },
-        slots
+        slots,
       );
   },
 });
@@ -25,7 +26,7 @@ export const LoongArkPopoverTrigger = defineComponent({
   name: "LoongArkPopoverTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPopover.Trigger,
         {
           ...attrs,
@@ -33,7 +34,7 @@ export const LoongArkPopoverTrigger = defineComponent({
           "data-scope": "popover",
           "data-part": "trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -42,14 +43,14 @@ export const LoongArkPopoverPositioner = defineComponent({
   name: "LoongArkPopoverPositioner",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPopover.Positioner,
         {
           ...attrs,
           "data-scope": "popover",
           "data-part": "positioner",
         },
-        slots
+        slots,
       );
   },
 });
@@ -61,7 +62,7 @@ export const LoongArkPopoverContent = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPopover.Content,
         {
           ...attrs,
@@ -69,7 +70,7 @@ export const LoongArkPopoverContent = defineComponent({
           "data-part": "content",
           "data-arrow": props.showArrow ? "true" : undefined,
         },
-        slots
+        slots,
       );
   },
 });
@@ -78,14 +79,14 @@ export const LoongArkPopoverArrow = defineComponent({
   name: "LoongArkPopoverArrow",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPopover.Arrow,
         {
           ...attrs,
           "data-scope": "popover",
           "data-part": "arrow",
         },
-        slots
+        slots,
       );
   },
 });
@@ -94,14 +95,14 @@ export const LoongArkPopoverTitle = defineComponent({
   name: "LoongArkPopoverTitle",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPopover.Title,
         {
           ...attrs,
           "data-scope": "popover",
           "data-part": "title",
         },
-        slots
+        slots,
       );
   },
 });
@@ -110,14 +111,14 @@ export const LoongArkPopoverDescription = defineComponent({
   name: "LoongArkPopoverDescription",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPopover.Description,
         {
           ...attrs,
           "data-scope": "popover",
           "data-part": "description",
         },
-        slots
+        slots,
       );
   },
 });
@@ -126,15 +127,14 @@ export const LoongArkPopoverCloseTrigger = defineComponent({
   name: "LoongArkPopoverCloseTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPopover.CloseTrigger,
         {
           ...attrs,
           "data-scope": "popover",
           "data-part": "close-trigger",
         },
-        slots
+        slots,
       );
   },
 });
-

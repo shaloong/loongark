@@ -33,64 +33,86 @@ type ArkTagsInputHiddenInputProps = ComponentPropsWithoutRef<
   typeof TagsInput.HiddenInput
 >;
 
-export interface LoongArkTagsInputRootProps
-  extends Omit<ArkTagsInputRootProps, "asChild"> {
+export interface LoongArkTagsInputRootProps extends Omit<
+  ArkTagsInputRootProps,
+  "asChild"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputLabelProps
-  extends Omit<ArkTagsInputLabelProps, "asChild"> {
+export interface LoongArkTagsInputLabelProps extends Omit<
+  ArkTagsInputLabelProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputControlProps
-  extends Omit<ArkTagsInputControlProps, "asChild"> {
+export interface LoongArkTagsInputControlProps extends Omit<
+  ArkTagsInputControlProps,
+  "asChild"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   disabled?: boolean;
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputInputProps
-  extends Omit<ArkTagsInputInputProps, "asChild"> {
+export interface LoongArkTagsInputInputProps extends Omit<
+  ArkTagsInputInputProps,
+  "asChild" | "size"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   disabled?: boolean;
   readOnly?: boolean;
 }
 
-export interface LoongArkTagsInputItemProps
-  extends Omit<ArkTagsInputItemProps, "asChild"> {
+export interface LoongArkTagsInputItemProps extends Omit<
+  ArkTagsInputItemProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputItemPreviewProps
-  extends Omit<ArkTagsInputItemPreviewProps, "asChild"> {
+export interface LoongArkTagsInputItemPreviewProps extends Omit<
+  ArkTagsInputItemPreviewProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputItemTextProps
-  extends Omit<ArkTagsInputItemTextProps, "asChild"> {
+export interface LoongArkTagsInputItemTextProps extends Omit<
+  ArkTagsInputItemTextProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputItemInputProps
-  extends Omit<ArkTagsInputItemInputProps, "asChild"> {}
+export interface LoongArkTagsInputItemInputProps extends Omit<
+  ArkTagsInputItemInputProps,
+  "asChild" | "size"
+> {}
 
-export interface LoongArkTagsInputItemDeleteTriggerProps
-  extends Omit<ArkTagsInputItemDeleteTriggerProps, "asChild"> {
+export interface LoongArkTagsInputItemDeleteTriggerProps extends Omit<
+  ArkTagsInputItemDeleteTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputClearTriggerProps
-  extends Omit<ArkTagsInputClearTriggerProps, "asChild"> {
+export interface LoongArkTagsInputClearTriggerProps extends Omit<
+  ArkTagsInputClearTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputHiddenInputProps
-  extends Omit<ArkTagsInputHiddenInputProps, "asChild"> {}
+export interface LoongArkTagsInputHiddenInputProps extends Omit<
+  ArkTagsInputHiddenInputProps,
+  "asChild" | "size"
+> {}
 
 export const LoongArkTagsInputRoot = forwardRef<
   HTMLDivElement,
@@ -105,7 +127,7 @@ export const LoongArkTagsInputRoot = forwardRef<
       readOnly = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <TagsInput.Root
@@ -123,7 +145,7 @@ export const LoongArkTagsInputRoot = forwardRef<
         {children}
       </TagsInput.Root>
     );
-  }
+  },
 );
 
 LoongArkTagsInputRoot.displayName = "LoongArkTagsInputRoot";
@@ -152,7 +174,7 @@ export const LoongArkTagsInputControl = forwardRef<
 >(
   (
     { children, size = "md", state = "default", disabled = false, ...props },
-    ref
+    ref,
   ) => {
     return (
       <TagsInput.Control
@@ -167,7 +189,7 @@ export const LoongArkTagsInputControl = forwardRef<
         {children}
       </TagsInput.Control>
     );
-  }
+  },
 );
 
 LoongArkTagsInputControl.displayName = "LoongArkTagsInputControl";
@@ -184,7 +206,7 @@ export const LoongArkTagsInputInput = forwardRef<
       readOnly = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <TagsInput.Input
@@ -200,7 +222,7 @@ export const LoongArkTagsInputInput = forwardRef<
         data-readonly={readOnly ? "true" : undefined}
       />
     );
-  }
+  },
 );
 
 LoongArkTagsInputInput.displayName = "LoongArkTagsInputInput";

@@ -1,0 +1,22 @@
+
+> loongark@0.0.0 check:publication E:\dev\loongark
+> node scripts/verify-publication.mjs && node scripts/check-public-types.mjs && node scripts/test-ssr.mjs && node scripts/test-svelte-ssr.mjs
+
+发布入口、Svelte 声明与清单文件验证通过
+react: 发布声明无本地类型错误
+vue: 发布声明无本地类型错误
+solid: 发布声明无本地类型错误
+svelte: 发布声明无本地类型错误
+React SSR: Button、Textarea、Container、ChipRemoveTrigger、BottomNavigationItem 通过
+Vue SSR: Button、Textarea、Container、ChipRemoveTrigger、BottomNavigationItem 通过
+Solid SSR: Button、Textarea、Container、ChipRemoveTrigger、BottomNavigationItem 通过
+React、Vue、Solid SSR 与服务端主题样式收集通过
+02:56:48 [vite-plugin-svelte] no Svelte config found at E:/dev/loongark - using default configuration.
+vite v7.2.6 building ssr environment for production...
+transforming...
+"mount", "tick" and "unmount" are imported from external module "svelte" but never used in "node_modules/.pnpm/@ark-ui+svelte@5.15.0_svelte@5.45.2/node_modules/@ark-ui/svelte/dist/components/portal/portal.svelte".
+✓ 1418 modules transformed.
+rendering chunks...
+tests/consumer-dist/svelte-ssr/index.mjs  339.08 kB
+✓ built in 19.91s
+Svelte 发布产物 SSR 通过

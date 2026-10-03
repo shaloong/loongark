@@ -19,8 +19,10 @@ import {
 } from "@ark-ui/solid/steps";
 import type { StepsOrientation, StepsSize } from "@loongark/primitives";
 
-export interface LoongArkStepsRootProps
-  extends Omit<ArkStepsRootProps, "asChild"> {
+export interface LoongArkStepsRootProps extends Omit<
+  ArkStepsRootProps,
+  "asChild"
+> {
   size?: StepsSize;
   orientation?: StepsOrientation;
   children?: JSX.Element;
@@ -29,7 +31,7 @@ export interface LoongArkStepsRootProps
 export const LoongArkStepsRoot: Component<LoongArkStepsRootProps> = (props) => {
   const merged = mergeProps(
     { size: "md" as StepsSize, orientation: "horizontal" as StepsOrientation },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -39,7 +41,7 @@ export const LoongArkStepsRoot: Component<LoongArkStepsRootProps> = (props) => {
 
   return (
     <ArkSteps.Root
-      {...(others as any)}
+      {...others}
       orientation={local.orientation}
       data-scope="steps"
       data-part="root"
@@ -51,8 +53,10 @@ export const LoongArkStepsRoot: Component<LoongArkStepsRootProps> = (props) => {
   );
 };
 
-export interface LoongArkStepsListProps
-  extends Omit<ArkStepsListProps, "asChild"> {
+export interface LoongArkStepsListProps extends Omit<
+  ArkStepsListProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -65,102 +69,105 @@ export const LoongArkStepsList: Component<LoongArkStepsListProps> = (props) => {
   );
 };
 
-export interface LoongArkStepsItemProps
-  extends Omit<ArkStepsItemProps, "asChild"> {
+export interface LoongArkStepsItemProps extends Omit<
+  ArkStepsItemProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkStepsItem: Component<LoongArkStepsItemProps> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkSteps.Item {...others} data-scope="steps" data-part="item">
+    <ArkSteps.Item
+      role="presentation"
+      // Ark preserves undefined overrides; null clears state on this presentational container.
+      aria-current={null as unknown as LoongArkStepsItemProps["aria-current"]}
+      {...others}
+      data-scope="steps"
+      data-part="item"
+    >
       {local.children}
     </ArkSteps.Item>
   );
 };
 
-export interface LoongArkStepsIndicatorProps
-  extends Omit<ArkStepsIndicatorProps, "asChild"> {
+export interface LoongArkStepsIndicatorProps extends Omit<
+  ArkStepsIndicatorProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkStepsIndicator: Component<LoongArkStepsIndicatorProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkSteps.Indicator
-      {...others}
-      data-scope="steps"
-      data-part="indicator"
-    >
+    <ArkSteps.Indicator {...others} data-scope="steps" data-part="indicator">
       {local.children}
     </ArkSteps.Indicator>
   );
 };
 
-export interface LoongArkStepsSeparatorProps
-  extends Omit<ArkStepsSeparatorProps, "asChild"> {
+export interface LoongArkStepsSeparatorProps extends Omit<
+  ArkStepsSeparatorProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkStepsSeparator: Component<LoongArkStepsSeparatorProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkSteps.Separator
-      {...others}
-      data-scope="steps"
-      data-part="separator"
-    >
+    <ArkSteps.Separator {...others} data-scope="steps" data-part="separator">
       {local.children}
     </ArkSteps.Separator>
   );
 };
 
-export interface LoongArkStepsTriggerProps
-  extends Omit<ArkStepsTriggerProps, "asChild"> {
+export interface LoongArkStepsTriggerProps extends Omit<
+  ArkStepsTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkStepsTrigger: Component<LoongArkStepsTriggerProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkSteps.Trigger
-      {...others}
-      data-scope="steps"
-      data-part="trigger"
-    >
+    <ArkSteps.Trigger {...others} data-scope="steps" data-part="trigger">
       {local.children}
     </ArkSteps.Trigger>
   );
 };
 
-export interface LoongArkStepsContentProps
-  extends Omit<ArkStepsContentProps, "asChild"> {
+export interface LoongArkStepsContentProps extends Omit<
+  ArkStepsContentProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkStepsContent: Component<LoongArkStepsContentProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkSteps.Content
-      {...others}
-      data-scope="steps"
-      data-part="content"
-    >
+    <ArkSteps.Content {...others} data-scope="steps" data-part="content">
       {local.children}
     </ArkSteps.Content>
   );
 };
 
-export interface LoongArkStepsCompletedContentProps
-  extends Omit<ArkStepsCompletedContentProps, "asChild"> {
+export interface LoongArkStepsCompletedContentProps extends Omit<
+  ArkStepsCompletedContentProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -179,28 +186,28 @@ export const LoongArkStepsCompletedContent: Component<
   );
 };
 
-export interface LoongArkStepsProgressProps
-  extends Omit<ArkStepsProgressProps, "asChild"> {
+export interface LoongArkStepsProgressProps extends Omit<
+  ArkStepsProgressProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkStepsProgress: Component<LoongArkStepsProgressProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkSteps.Progress
-      {...others}
-      data-scope="steps"
-      data-part="progress"
-    >
+    <ArkSteps.Progress {...others} data-scope="steps" data-part="progress">
       {local.children}
     </ArkSteps.Progress>
   );
 };
 
-export interface LoongArkStepsNextTriggerProps
-  extends Omit<ArkStepsNextTriggerProps, "asChild"> {
+export interface LoongArkStepsNextTriggerProps extends Omit<
+  ArkStepsNextTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -219,8 +226,10 @@ export const LoongArkStepsNextTrigger: Component<
   );
 };
 
-export interface LoongArkStepsPrevTriggerProps
-  extends Omit<ArkStepsPrevTriggerProps, "asChild"> {
+export interface LoongArkStepsPrevTriggerProps extends Omit<
+  ArkStepsPrevTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 

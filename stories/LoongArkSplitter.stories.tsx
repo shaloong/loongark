@@ -37,17 +37,22 @@ const SplitterDemo = ({
 
   return (
     <LoongArkSplitterRoot
+      panels={[
+        { id: "notes", minSize: 20 },
+        { id: "preview", minSize: 20 },
+      ]}
+      defaultSize={[50, 50]}
       size={size}
       orientation={orientation}
       style={{ height }}
     >
-      <LoongArkSplitterPanel minSize={20}>
+      <LoongArkSplitterPanel id="notes">
         <div style={{ padding: 12 }}>Notes</div>
       </LoongArkSplitterPanel>
-      <LoongArkSplitterResizeTrigger disabled={locked}>
+      <LoongArkSplitterResizeTrigger id="notes:preview" disabled={locked}>
         <LoongArkSplitterResizeTriggerIndicator />
       </LoongArkSplitterResizeTrigger>
-      <LoongArkSplitterPanel minSize={20}>
+      <LoongArkSplitterPanel id="preview">
         <div style={{ padding: 12 }}>Preview</div>
       </LoongArkSplitterPanel>
     </LoongArkSplitterRoot>

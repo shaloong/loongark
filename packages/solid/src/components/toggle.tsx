@@ -10,20 +10,22 @@ import {
 } from "@ark-ui/solid/toggle";
 import type { ToggleSize } from "@loongark/primitives";
 
-export interface LoongArkToggleRootProps
-  extends Omit<ArkToggleRootProps, "asChild"> {
+export interface LoongArkToggleRootProps extends Omit<
+  ArkToggleRootProps,
+  "asChild"
+> {
   size?: ToggleSize;
   children?: JSX.Element;
 }
 
 export const LoongArkToggleRoot: Component<LoongArkToggleRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps({ size: "md" as ToggleSize }, props);
 
   return (
     <ArkToggle.Root
-      {...(props as any)}
+      {...props}
       data-scope="toggle"
       data-part="root"
       data-size={merged.size}
@@ -37,11 +39,7 @@ export const LoongArkToggleIndicator: Component<
   ArkToggleIndicatorProps & { children?: JSX.Element }
 > = (props) => {
   return (
-    <ArkToggle.Indicator
-      {...props}
-      data-scope="toggle"
-      data-part="indicator"
-    >
+    <ArkToggle.Indicator {...props} data-scope="toggle" data-part="indicator">
       {props.children}
     </ArkToggle.Indicator>
   );

@@ -1,0 +1,10 @@
+
+> loongark@0.0.0 check:contracts E:\dev\loongark
+> node scripts/test-theme.mjs && node scripts/check-css-variables.mjs && node scripts/check-api-parity.mjs && node scripts/test-data-models.mjs && node scripts/test-selection-models.mjs && node scripts/test-action-models.mjs
+
+明暗、高对比、VI、CSS 变量及 49 个组件 Token 契约验证通过
+共享样式中的 CSS Token 引用全部有效
+四端 615 个公开 LoongArk 导出一致
+表格筛选、排序、分页及图表负值/转义验证通过
+TransferList immutable moves/disabled items, TimePicker midnight/step/locale, Textarea row bounds passed.
+Action/media shared bounds, inherited columns, disabled filtering and unique keys passed.

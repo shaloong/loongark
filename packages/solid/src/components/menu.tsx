@@ -34,7 +34,10 @@ import type { MenuSize } from "@loongark/primitives";
 
 const MenuContext = createContext<{ size: MenuSize }>({ size: "md" });
 
-export interface LoongArkMenuRootProps extends Omit<ArkMenuRootProps, "asChild"> {
+export interface LoongArkMenuRootProps extends Omit<
+  ArkMenuRootProps,
+  "asChild"
+> {
   size?: MenuSize;
   children?: JSX.Element;
 }
@@ -44,7 +47,7 @@ export const LoongArkMenuRoot: Component<LoongArkMenuRootProps> = (props) => {
   return (
     <MenuContext.Provider value={{ size: merged.size }}>
       <ArkMenu.Root
-        {...(props as any)}
+        {...props}
         data-scope="menu"
         data-part="root"
         data-size={merged.size}
@@ -58,7 +61,7 @@ export const LoongArkMenuRoot: Component<LoongArkMenuRootProps> = (props) => {
 export const LoongArkMenuTrigger: Component<
   ArkMenuTriggerProps & { children?: JSX.Element }
 > = (props) => {
-  const merged = mergeProps({ asChild: true }, props);
+  const merged = mergeProps({}, props);
   return (
     <ArkMenu.Trigger {...merged} data-scope="menu" data-part="trigger">
       {props.children}
@@ -69,7 +72,7 @@ export const LoongArkMenuTrigger: Component<
 export const LoongArkMenuContextTrigger: Component<
   ArkMenuContextTriggerProps & { children?: JSX.Element }
 > = (props) => {
-  const merged = mergeProps({ asChild: true }, props);
+  const merged = mergeProps({}, props);
   return (
     <ArkMenu.ContextTrigger
       {...merged}
@@ -109,9 +112,9 @@ export const LoongArkMenuArrow: Component<ArkMenuArrowProps> = (props) => (
   <ArkMenu.Arrow {...props} data-scope="menu" data-part="arrow" />
 );
 
-export const LoongArkMenuArrowTip: Component<ArkMenuArrowTipProps> = (props) => (
-  <ArkMenu.ArrowTip {...props} data-scope="menu" data-part="arrow-tip" />
-);
+export const LoongArkMenuArrowTip: Component<ArkMenuArrowTipProps> = (
+  props,
+) => <ArkMenu.ArrowTip {...props} data-scope="menu" data-part="arrow-tip" />;
 
 export const LoongArkMenuItem: Component<
   ArkMenuItemProps & { children?: JSX.Element }
@@ -124,11 +127,7 @@ export const LoongArkMenuItem: Component<
 export const LoongArkMenuTriggerItem: Component<
   ArkMenuTriggerItemProps & { children?: JSX.Element }
 > = (props) => (
-  <ArkMenu.TriggerItem
-    {...props}
-    data-scope="menu"
-    data-part="trigger-item"
-  >
+  <ArkMenu.TriggerItem {...props} data-scope="menu" data-part="trigger-item">
     {props.children}
   </ArkMenu.TriggerItem>
 );
@@ -152,11 +151,7 @@ export const LoongArkMenuRadioItem: Component<
 export const LoongArkMenuRadioItemGroup: Component<
   ArkMenuRadioItemGroupProps & { children?: JSX.Element }
 > = (props) => (
-  <ArkMenu.RadioItemGroup
-    {...props}
-    data-scope="menu"
-    data-part="item-group"
-  >
+  <ArkMenu.RadioItemGroup {...props} data-scope="menu" data-part="item-group">
     {props.children}
   </ArkMenu.RadioItemGroup>
 );

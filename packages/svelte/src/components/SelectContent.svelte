@@ -5,6 +5,11 @@
   const size = getSelectSize();
 </script>
 
-<Select.Content data-scope="select" data-part="content" data-size={$size}>
+<Select.Content
+  data-scope="select"
+  data-part="content"
+  data-size={$size}
+  {...$$restProps}
+>
   <slot />
 </Select.Content>

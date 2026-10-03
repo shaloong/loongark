@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type RatingGroupSize = "sm" | "md" | "lg";
@@ -26,14 +25,16 @@ interface RatingGroupDesignTokens {
   };
 }
 
-const extractRatingGroupTokens = (theme: LoongArkTheme): RatingGroupDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+const extractRatingGroupTokens = (
+  theme: LoongArkTheme,
+): RatingGroupDesignTokens => {
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
@@ -92,7 +93,7 @@ ${itemSelector} {
   align-items: center;
   justify-content: center;
   font-size: ${tokens.fontSize.md};
-  color: ${tokens.neutral.muted};
+  color: var(--lk-color-semantic-mutedforeground);
   background: none;
   border: none;
   cursor: pointer;
@@ -119,7 +120,7 @@ ${hiddenInputSelector} {
 
 ${disabledSelector} ${itemSelector} {
   cursor: not-allowed;
-  color: ${tokens.neutral.muted};
+  color: var(--lk-color-semantic-mutedforeground);
   opacity: 0.6;
 }
 `;
@@ -149,8 +150,8 @@ const ratingGroupPrimitive = createPrimitive<RatingGroupPrimitiveProps>(
   RATING_GROUP_CONTRACT,
   (theme) => {
     const css = buildRatingGroupStyles(theme);
-    mountPrimitiveStyles(`rating-group-${theme.mode}`, css);
-  }
+    theme.mountStyles(`rating-group-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(ratingGroupPrimitive);

@@ -5,12 +5,19 @@
     "outDir": "dist",
     "composite": true,
     "jsx": "preserve",
-    "jsxImportSource": "solid-js"
+    "jsxImportSource": "solid-js",
+    "typeRoots": ["../../node_modules/@types"]
   },
   "include": ["src"],
   "references": [
-    { "path": "../kit" },
-    { "path": "../theme" },
-    { "path": "../primitives" }
+    {
+      "path": "../kit"
+    },
+    {
+      "path": "../theme"
+    },
+    {
+      "path": "../primitives"
+    }
   ]
 }

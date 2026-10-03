@@ -1,3 +1,5 @@
+import type { CollapsibleRootProps as NativeCollapsibleRootProps } from "@ark-ui/vue/collapsible";
+import { renderPart } from "../render-part";
 /**
  * Collapsible component - Vue wrapper.
  * Based on Ark UI Collapsible.
@@ -19,12 +21,15 @@ export const LoongArkCollapsibleRoot = defineComponent({
     },
     open: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     defaultOpen: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     collapsedHeight: {
       type: Number as PropType<number>,
@@ -36,13 +41,15 @@ export const LoongArkCollapsibleRoot = defineComponent({
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<Record<string, unknown>>,
+      type: Object as PropType<NativeCollapsibleRootProps["ids"]>,
     },
     lazyMount: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     unmountOnExit: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     onOpenChange: {
       type: Function as PropType<
@@ -55,7 +62,7 @@ export const LoongArkCollapsibleRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCollapsible.Root,
         {
           ...attrs,
@@ -64,7 +71,7 @@ export const LoongArkCollapsibleRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -73,14 +80,14 @@ export const LoongArkCollapsibleTrigger = defineComponent({
   name: "LoongArkCollapsibleTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCollapsible.Trigger,
         {
           ...attrs,
           "data-scope": "collapsible",
           "data-part": "trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -89,14 +96,14 @@ export const LoongArkCollapsibleContent = defineComponent({
   name: "LoongArkCollapsibleContent",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCollapsible.Content,
         {
           ...attrs,
           "data-scope": "collapsible",
           "data-part": "content",
         },
-        slots
+        slots,
       );
   },
 });
@@ -105,14 +112,14 @@ export const LoongArkCollapsibleIndicator = defineComponent({
   name: "LoongArkCollapsibleIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCollapsible.Indicator,
         {
           ...attrs,
           "data-scope": "collapsible",
           "data-part": "indicator",
         },
-        slots
+        slots,
       );
   },
 });

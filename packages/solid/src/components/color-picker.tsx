@@ -35,21 +35,23 @@ import {
 } from "@ark-ui/solid/color-picker";
 import type { ColorPickerSize } from "@loongark/primitives";
 
-export interface LoongArkColorPickerRootProps
-  extends Omit<ArkColorPickerRootProps, "asChild"> {
+export interface LoongArkColorPickerRootProps extends Omit<
+  ArkColorPickerRootProps,
+  "asChild"
+> {
   size?: ColorPickerSize;
   children?: JSX.Element;
 }
 
-export const LoongArkColorPickerRoot: Component<LoongArkColorPickerRootProps> = (
-  props
-) => {
+export const LoongArkColorPickerRoot: Component<
+  LoongArkColorPickerRootProps
+> = (props) => {
   const merged = mergeProps({ size: "md" as ColorPickerSize }, props);
   const [local, others] = splitProps(merged, ["children", "size"]);
 
   return (
     <ArkColorPicker.Root
-      {...(others as any)}
+      {...others}
       data-scope="color-picker"
       data-part="root"
       data-size={local.size}
@@ -59,8 +61,10 @@ export const LoongArkColorPickerRoot: Component<LoongArkColorPickerRootProps> = 
   );
 };
 
-export interface LoongArkColorPickerLabelProps
-  extends Omit<ArkColorPickerLabelProps, "asChild"> {
+export interface LoongArkColorPickerLabelProps extends Omit<
+  ArkColorPickerLabelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -79,8 +83,10 @@ export const LoongArkColorPickerLabel: Component<
   );
 };
 
-export interface LoongArkColorPickerControlProps
-  extends Omit<ArkColorPickerControlProps, "asChild"> {
+export interface LoongArkColorPickerControlProps extends Omit<
+  ArkColorPickerControlProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -99,8 +105,10 @@ export const LoongArkColorPickerControl: Component<
   );
 };
 
-export interface LoongArkColorPickerTriggerProps
-  extends Omit<ArkColorPickerTriggerProps, "asChild"> {
+export interface LoongArkColorPickerTriggerProps extends Omit<
+  ArkColorPickerTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -119,8 +127,10 @@ export const LoongArkColorPickerTrigger: Component<
   );
 };
 
-export interface LoongArkColorPickerPositionerProps
-  extends Omit<ArkColorPickerPositionerProps, "asChild"> {
+export interface LoongArkColorPickerPositionerProps extends Omit<
+  ArkColorPickerPositionerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -139,8 +149,10 @@ export const LoongArkColorPickerPositioner: Component<
   );
 };
 
-export interface LoongArkColorPickerContentProps
-  extends Omit<ArkColorPickerContentProps, "asChild"> {
+export interface LoongArkColorPickerContentProps extends Omit<
+  ArkColorPickerContentProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -159,34 +171,34 @@ export const LoongArkColorPickerContent: Component<
   );
 };
 
-export interface LoongArkColorPickerViewProps
-  extends Omit<ArkColorPickerViewProps, "asChild"> {
+export interface LoongArkColorPickerViewProps extends Omit<
+  ArkColorPickerViewProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
-export const LoongArkColorPickerView: Component<LoongArkColorPickerViewProps> = (
-  props
-) => {
+export const LoongArkColorPickerView: Component<
+  LoongArkColorPickerViewProps
+> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkColorPicker.View
-      {...others}
-      data-scope="color-picker"
-      data-part="view"
-    >
+    <ArkColorPicker.View {...others} data-scope="color-picker" data-part="view">
       {local.children}
     </ArkColorPicker.View>
   );
 };
 
-export interface LoongArkColorPickerAreaProps
-  extends Omit<ArkColorPickerAreaProps, "asChild"> {
+export interface LoongArkColorPickerAreaProps extends Omit<
+  ArkColorPickerAreaProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
-export const LoongArkColorPickerArea: Component<LoongArkColorPickerAreaProps> = (
-  props
-) => {
+export const LoongArkColorPickerArea: Component<
+  LoongArkColorPickerAreaProps
+> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.Area {...others} data-scope="color-picker" data-part="area">
@@ -195,8 +207,10 @@ export const LoongArkColorPickerArea: Component<LoongArkColorPickerAreaProps> = 
   );
 };
 
-export interface LoongArkColorPickerAreaBackgroundProps
-  extends Omit<ArkColorPickerAreaBackgroundProps, "asChild"> {
+export interface LoongArkColorPickerAreaBackgroundProps extends Omit<
+  ArkColorPickerAreaBackgroundProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -215,8 +229,10 @@ export const LoongArkColorPickerAreaBackground: Component<
   );
 };
 
-export interface LoongArkColorPickerAreaThumbProps
-  extends Omit<ArkColorPickerAreaThumbProps, "asChild"> {
+export interface LoongArkColorPickerAreaThumbProps extends Omit<
+  ArkColorPickerAreaThumbProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -235,8 +251,10 @@ export const LoongArkColorPickerAreaThumb: Component<
   );
 };
 
-export interface LoongArkColorPickerChannelSliderProps
-  extends Omit<ArkColorPickerChannelSliderProps, "asChild"> {
+export interface LoongArkColorPickerChannelSliderProps extends Omit<
+  ArkColorPickerChannelSliderProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -255,8 +273,10 @@ export const LoongArkColorPickerChannelSlider: Component<
   );
 };
 
-export interface LoongArkColorPickerChannelSliderLabelProps
-  extends Omit<ArkColorPickerChannelSliderLabelProps, "asChild"> {
+export interface LoongArkColorPickerChannelSliderLabelProps extends Omit<
+  ArkColorPickerChannelSliderLabelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -275,8 +295,10 @@ export const LoongArkColorPickerChannelSliderLabel: Component<
   );
 };
 
-export interface LoongArkColorPickerChannelSliderTrackProps
-  extends Omit<ArkColorPickerChannelSliderTrackProps, "asChild"> {
+export interface LoongArkColorPickerChannelSliderTrackProps extends Omit<
+  ArkColorPickerChannelSliderTrackProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -295,8 +317,10 @@ export const LoongArkColorPickerChannelSliderTrack: Component<
   );
 };
 
-export interface LoongArkColorPickerChannelSliderThumbProps
-  extends Omit<ArkColorPickerChannelSliderThumbProps, "asChild"> {
+export interface LoongArkColorPickerChannelSliderThumbProps extends Omit<
+  ArkColorPickerChannelSliderThumbProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -315,8 +339,10 @@ export const LoongArkColorPickerChannelSliderThumb: Component<
   );
 };
 
-export interface LoongArkColorPickerChannelSliderValueTextProps
-  extends Omit<ArkColorPickerChannelSliderValueTextProps, "asChild"> {
+export interface LoongArkColorPickerChannelSliderValueTextProps extends Omit<
+  ArkColorPickerChannelSliderValueTextProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -335,8 +361,10 @@ export const LoongArkColorPickerChannelSliderValueText: Component<
   );
 };
 
-export interface LoongArkColorPickerChannelInputProps
-  extends Omit<ArkColorPickerChannelInputProps, "asChild"> {}
+export interface LoongArkColorPickerChannelInputProps extends Omit<
+  ArkColorPickerChannelInputProps,
+  "asChild"
+> {}
 
 export const LoongArkColorPickerChannelInput: Component<
   LoongArkColorPickerChannelInputProps
@@ -350,8 +378,10 @@ export const LoongArkColorPickerChannelInput: Component<
   );
 };
 
-export interface LoongArkColorPickerSwatchGroupProps
-  extends Omit<ArkColorPickerSwatchGroupProps, "asChild"> {
+export interface LoongArkColorPickerSwatchGroupProps extends Omit<
+  ArkColorPickerSwatchGroupProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -370,8 +400,10 @@ export const LoongArkColorPickerSwatchGroup: Component<
   );
 };
 
-export interface LoongArkColorPickerSwatchTriggerProps
-  extends Omit<ArkColorPickerSwatchTriggerProps, "asChild"> {
+export interface LoongArkColorPickerSwatchTriggerProps extends Omit<
+  ArkColorPickerSwatchTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -390,8 +422,10 @@ export const LoongArkColorPickerSwatchTrigger: Component<
   );
 };
 
-export interface LoongArkColorPickerSwatchIndicatorProps
-  extends Omit<ArkColorPickerSwatchIndicatorProps, "asChild"> {
+export interface LoongArkColorPickerSwatchIndicatorProps extends Omit<
+  ArkColorPickerSwatchIndicatorProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -410,8 +444,10 @@ export const LoongArkColorPickerSwatchIndicator: Component<
   );
 };
 
-export interface LoongArkColorPickerSwatchProps
-  extends Omit<ArkColorPickerSwatchProps, "asChild"> {
+export interface LoongArkColorPickerSwatchProps extends Omit<
+  ArkColorPickerSwatchProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -430,8 +466,10 @@ export const LoongArkColorPickerSwatch: Component<
   );
 };
 
-export interface LoongArkColorPickerTransparencyGridProps
-  extends Omit<ArkColorPickerTransparencyGridProps, "asChild"> {
+export interface LoongArkColorPickerTransparencyGridProps extends Omit<
+  ArkColorPickerTransparencyGridProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -450,8 +488,10 @@ export const LoongArkColorPickerTransparencyGrid: Component<
   );
 };
 
-export interface LoongArkColorPickerValueTextProps
-  extends Omit<ArkColorPickerValueTextProps, "asChild"> {
+export interface LoongArkColorPickerValueTextProps extends Omit<
+  ArkColorPickerValueTextProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -470,8 +510,10 @@ export const LoongArkColorPickerValueText: Component<
   );
 };
 
-export interface LoongArkColorPickerValueSwatchProps
-  extends Omit<ArkColorPickerValueSwatchProps, "asChild"> {
+export interface LoongArkColorPickerValueSwatchProps extends Omit<
+  ArkColorPickerValueSwatchProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -490,8 +532,10 @@ export const LoongArkColorPickerValueSwatch: Component<
   );
 };
 
-export interface LoongArkColorPickerEyeDropperTriggerProps
-  extends Omit<ArkColorPickerEyeDropperTriggerProps, "asChild"> {
+export interface LoongArkColorPickerEyeDropperTriggerProps extends Omit<
+  ArkColorPickerEyeDropperTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -510,8 +554,10 @@ export const LoongArkColorPickerEyeDropperTrigger: Component<
   );
 };
 
-export interface LoongArkColorPickerFormatTriggerProps
-  extends Omit<ArkColorPickerFormatTriggerProps, "asChild"> {
+export interface LoongArkColorPickerFormatTriggerProps extends Omit<
+  ArkColorPickerFormatTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -530,8 +576,10 @@ export const LoongArkColorPickerFormatTrigger: Component<
   );
 };
 
-export interface LoongArkColorPickerFormatSelectProps
-  extends Omit<ArkColorPickerFormatSelectProps, "asChild"> {
+export interface LoongArkColorPickerFormatSelectProps extends Omit<
+  ArkColorPickerFormatSelectProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -550,8 +598,10 @@ export const LoongArkColorPickerFormatSelect: Component<
   );
 };
 
-export interface LoongArkColorPickerHiddenInputProps
-  extends Omit<ArkColorPickerHiddenInputProps, "asChild"> {}
+export interface LoongArkColorPickerHiddenInputProps extends Omit<
+  ArkColorPickerHiddenInputProps,
+  "asChild"
+> {}
 
 export const LoongArkColorPickerHiddenInput: Component<
   LoongArkColorPickerHiddenInputProps

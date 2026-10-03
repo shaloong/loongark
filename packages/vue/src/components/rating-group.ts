@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Rating Group component - Vue wrapper.
  * Uses Ark UI Rating Group with data attributes for styling.
@@ -20,7 +21,7 @@ export const LoongArkRatingGroupRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkRatingGroup.Root,
         {
           ...attrs,
@@ -31,7 +32,7 @@ export const LoongArkRatingGroupRoot = defineComponent({
           "data-size": props.size,
           "data-disabled": props.disabled ? "true" : undefined,
         },
-        slots
+        slots,
       );
   },
 });
@@ -40,14 +41,14 @@ export const LoongArkRatingGroupLabel = defineComponent({
   name: "LoongArkRatingGroupLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkRatingGroup.Label,
         {
           ...attrs,
           "data-scope": "rating-group",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -56,14 +57,14 @@ export const LoongArkRatingGroupControl = defineComponent({
   name: "LoongArkRatingGroupControl",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkRatingGroup.Control,
         {
           ...attrs,
           "data-scope": "rating-group",
           "data-part": "control",
         },
-        slots
+        slots,
       );
   },
 });
@@ -72,14 +73,14 @@ export const LoongArkRatingGroupItem = defineComponent({
   name: "LoongArkRatingGroupItem",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkRatingGroup.Item,
         {
           ...attrs,
           "data-scope": "rating-group",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -88,7 +89,7 @@ export const LoongArkRatingGroupHiddenInput = defineComponent({
   name: "LoongArkRatingGroupHiddenInput",
   setup(_, { attrs }) {
     return () =>
-      h(ArkRatingGroup.HiddenInput, {
+      renderPart(ArkRatingGroup.HiddenInput, {
         ...attrs,
         "data-scope": "rating-group",
         "data-part": "hidden-input",

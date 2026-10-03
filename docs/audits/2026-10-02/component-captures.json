@@ -1,0 +1,1010 @@
+[
+  {
+    "step": 10,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-accordion--basic",
+    "name": "Basic",
+    "title": "Components/Accordion",
+    "importPath": "./stories/LoongArkAccordion.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "10-components-accordion--basic.jpg",
+    "dom": "- button \"Account settings\" [expanded]:\n  - generic: Account settings\n  - generic: \">\"\n- region \"Account settings\":\n  - generic: Update your profile, email, and security settings.\n- button \"Billing\":\n  - generic: Billing\n  - generic: \">\"\n- button \"Integrations\":\n  - generic: Integrations\n  - generic: \">\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 11,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-avatar--playground",
+    "name": "Playground",
+    "title": "Components/Avatar",
+    "importPath": "./stories/LoongArkAvatar.stories.tsx",
+    "componentPath": "./examples/react/AvatarExample.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Playground",
+    "file": "11-components-avatar--playground.jpg",
+    "dom": "- img \"Loong Ark\"\n- generic: LA",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 12,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-button--playground",
+    "name": "Playground",
+    "title": "Components/Button",
+    "importPath": "./stories/LoongArkButton.stories.tsx",
+    "componentPath": "./packages/react/src/index.ts",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Playground",
+    "file": "12-components-button--playground.jpg",
+    "dom": "- button \"发送邀请\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 13,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-carousel--basic",
+    "name": "Basic",
+    "title": "Components/Carousel",
+    "importPath": "./stories/LoongArkCarousel.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "13-components-carousel--basic.jpg",
+    "dom": "- 'heading \"[zag-js > carousel] missing required props: slideCount\" [level=1]'\n- paragraph: \"The component failed to render properly, likely due to a configuration issue in Storybook. Here are some common causes and how you can address them:\"\n- list:\n  - strong: Missing Context/Providers\n  - text: \": You can use decorators to supply specific contexts or providers, which are sometimes necessary for components to render correctly. For detailed instructions on using decorators, please visit the\"\n  - link \"Decorators documentation\":\n    - /url: https://storybook.js.org/docs/writing-stories/decorators\n  - text: .\n  - strong: Misconfigured Webpack or Vite\n  - text: \": Verify that Storybook picks up all necessary settings for loaders, plugins, and other relevant parameters. You can find step-by-step guides for configuring\"\n  - link \"Webpack\":\n    - /url: https://storybook.js.org/docs/builders/webpack\n  - text: or\n  - link \"Vite\":\n    - /url: https://storybook.js.org/docs/builders/vite\n  - text: with Storybook.\n  - strong: Missing Environment Variables\n  - text: \": Your Storybook may require specific environment variables to function as intended. You can set up custom environment variables as outlined in the\"\n  - link \"Environment Variables documentation\":\n    - /url: https://storybook.js.org/docs/configure/environment-variables\n  - text: .\n- code: \"Error: [zag-js > carousel] missing required props: slideCount at dd (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:7401) at Object.props (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:239834) at gt (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:34145) at NAe (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:251285) at http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:251630 at jf (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:47860) at zv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:67243) at qv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:82866) at f1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:116408) at Vm (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:115490)\"",
+    "metrics": {
+      "error": "[zag-js > carousel] missing required props: slideCount",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 14,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-checkbox--playground",
+    "name": "Playground",
+    "title": "Components/Checkbox",
+    "importPath": "./stories/LoongArkCheckbox.stories.tsx",
+    "componentPath": "./examples/react/CheckboxExample.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Playground",
+    "file": "14-components-checkbox--playground.jpg",
+    "dom": "- generic: 同意条款\n- checkbox \"同意条款\"\n- paragraph: \"状态: 未选中\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 15,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-clipboard--basic",
+    "name": "Basic",
+    "title": "Components/Clipboard",
+    "importPath": "./stories/LoongArkClipboard.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "15-components-clipboard--basic.jpg",
+    "dom": "- generic: Share link\n- textbox \"Share link\": https://loongark.dev\n- button \"Copy to clipboard\": Copy\n- generic: Copied\n- generic: https://loongark.dev",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 16,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-collapsible--basic",
+    "name": "Basic",
+    "title": "Components/Collapsible",
+    "importPath": "./stories/LoongArkCollapsible.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "16-components-collapsible--basic.jpg",
+    "dom": "- button \"Release notes >\" [expanded]:\n  - generic: Release notes\n  - generic: \">\"\n- generic: Version 0.6 adds theming hooks, improved focus rings, and new tokens.",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 17,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-colorpicker--basic",
+    "name": "Basic",
+    "title": "Components/ColorPicker",
+    "importPath": "./stories/LoongArkColorPicker.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "17-components-colorpicker--basic.jpg",
+    "dom": "- heading \"e.get(...).toFormat is not a function\" [level=1]\n- paragraph: \"The component failed to render properly, likely due to a configuration issue in Storybook. Here are some common causes and how you can address them:\"\n- list:\n  - strong: Missing Context/Providers\n  - text: \": You can use decorators to supply specific contexts or providers, which are sometimes necessary for components to render correctly. For detailed instructions on using decorators, please visit the\"\n  - link \"Decorators documentation\":\n    - /url: https://storybook.js.org/docs/writing-stories/decorators\n  - text: .\n  - strong: Misconfigured Webpack or Vite\n  - text: \": Verify that Storybook picks up all necessary settings for loaders, plugins, and other relevant parameters. You can find step-by-step guides for configuring\"\n  - link \"Webpack\":\n    - /url: https://storybook.js.org/docs/builders/webpack\n  - text: or\n  - link \"Vite\":\n    - /url: https://storybook.js.org/docs/builders/vite\n  - text: with Storybook.\n  - strong: Missing Environment Variables\n  - text: \": Your Storybook may require specific environment variables to function as intended. You can set up custom environment variables as outlined in the\"\n  - link \"Environment Variables documentation\":\n    - /url: https://storybook.js.org/docs/configure/environment-variables\n  - text: .\n- code: \"TypeError: e.get(...).toFormat is not a function at areaValue (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:110995) at R (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:35709) at xCe (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:98807) at vPe (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:269524) at http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:269938 at jf (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:47860) at zv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:67243) at qv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:82866) at f1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:116408) at Vm (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:115490)\"",
+    "metrics": {
+      "error": "e.get(...).toFormat is not a function",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 18,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-combobox--playground",
+    "name": "Playground",
+    "title": "Components/Combobox",
+    "importPath": "./stories/LoongArkCombobox.stories.tsx",
+    "componentPath": "./examples/react/ComboboxExample.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Playground",
+    "file": "18-components-combobox--playground.jpg",
+    "dom": "- generic: City\n- combobox \"City\"\n- button \"Clear\": x\n- button \"Toggle\": v\n- paragraph: \"Selected: None\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 19,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-date-picker--basic",
+    "name": "Basic",
+    "title": "Components/Date Picker",
+    "importPath": "./stories/LoongArkDatePicker.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "19-components-date-picker--basic.jpg",
+    "dom": "- generic: Pick a date\n- textbox \"Pick a date\":\n  - /placeholder: mm/dd/yyyy\n  - text: 01/12/2026\n- button \"Clear selected dates\": x\n- button \"Close calendar\": Open\n- application \"calendar\":\n  - button \"Switch to previous month\": <\n  - button \"Switch to year view\": January 2026\n  - button \"Switch to next month\": \">\"\n  - combobox \"Select month\":\n    - option \"January\" [selected]\n    - option \"February\"\n    - option \"March\"\n    - option \"April\"\n    - option \"May\"\n    - option \"June\"\n    - option \"July\"\n    - option \"August\"\n    - option \"September\"\n    - option \"October\"\n    - option \"November\"\n    - option \"December\"\n  - combobox \"Select year\":\n    - option \"1900\"\n    - option \"1901\"\n    - option \"1902\"\n    - option \"1903\"\n    - option \"1904\"\n    - option \"1905\"\n    - option \"1906\"\n    - option \"1907\"\n    - option \"1908\"\n    - option \"1909\"\n    - option \"1910\"\n    - option \"1911\"\n    - option \"1912\"\n    - option \"1913\"\n    - option \"1914\"\n    - option \"1915\"\n    - option \"1916\"\n    - option \"1917\"\n    - option \"1918\"\n    - option \"1919\"\n    - option \"1920\"\n    - option \"1921\"\n    - option \"1922\"\n    - option \"1923\"\n    - option \"1924\"\n    - option \"1925\"\n    - option \"1926\"\n    - option \"1927\"\n    - option \"1928\"\n    - option \"1929\"\n    - option \"1930\"\n    - option \"1931\"\n    - option \"1932\"\n    - option \"1933\"\n    - option \"1934\"\n    - option \"1935\"\n    - option \"1936\"\n    - option \"1937\"\n    - option \"1938\"\n    - option \"1939\"\n    - option \"1940\"\n    - option \"1941\"\n    - option \"1942\"\n    - option \"1943\"\n    - option \"1944\"\n    - option \"1945\"\n    - option \"1946\"\n    - option \"1947\"\n    - option \"1948\"\n    - option \"1949\"\n    - option \"1950\"\n    - option \"1951\"\n    - option \"1952\"\n    - option \"1953\"\n    - option \"1954\"\n    - option \"1955\"\n    - option \"1956\"\n    - option \"1957\"\n    - option \"1958\"\n    - option \"1959\"\n    - option \"1960\"\n    - option \"1961\"\n    - option \"1962\"\n    - option \"1963\"\n    - option \"1964\"\n    - option \"1965\"\n    - option \"1966\"\n    - option \"1967\"\n    - option \"1968\"\n    - option \"1969\"\n    - option \"1970\"\n    - option \"1971\"\n    - option \"1972\"\n    - option \"1973\"\n    - option \"1974\"\n    - option \"1975\"\n    - option \"1976\"\n    - option \"1977\"\n    - option \"1978\"\n    - option \"1979\"\n    - option \"1980\"\n    - option \"1981\"\n    - option \"1982\"\n    - option \"1983\"\n    - option \"1984\"\n    - option \"1985\"\n    - option \"1986\"\n    - option \"1987\"\n    - option \"1988\"\n    - option \"1989\"\n    - option \"1990\"\n    - option \"1991\"\n    - option \"1992\"\n    - option \"1993\"\n    - option \"1994\"\n    - option \"1995\"\n    - option \"1996\"\n    - option \"1997\"\n    - option \"1998\"\n    - option \"1999\"\n    - option \"2000\"\n    - option \"2001\"\n    - option \"2002\"\n    - option \"2003\"\n    - option \"2004\"\n    - option \"2005\"\n    - option \"2006\"\n    - option \"2007\"\n    - option \"2008\"\n    - option \"2009\"\n    - option \"2010\"\n    - option \"2011\"\n    - option \"2012\"\n    - option \"2013\"\n    - option \"2014\"\n    - option \"2015\"\n    - option \"2016\"\n    - option \"2017\"\n    - option \"2018\"\n    - option \"2019\"\n    - option \"2020\"\n    - option \"2021\"\n    - option \"2022\"\n    - option \"2023\"\n    - option \"2024\"\n    - option \"2025\"\n    - option \"2026\" [selected]\n    - option \"2027\"\n    - option \"2028\"\n    - option \"2029\"\n    - option \"2030\"\n    - option \"2031\"\n    - option \"2032\"\n    - option \"2033\"\n    - option \"2034\"\n    - option \"2035\"\n    - option \"2036\"\n    - option \"2037\"\n    - option \"2038\"\n    - option \"2039\"\n    - option \"2040\"\n    - option \"2041\"\n    - option \"2042\"\n    - option \"2043\"\n    - option \"2044\"\n    - option \"2045\"\n    - option \"2046\"\n    - option \"2047\"\n    - option \"2048\"\n    - option \"2049\"\n    - option \"2050\"\n    - option \"2051\"\n    - option \"2052\"\n    - option \"2053\"\n    - option \"2054\"\n    - option \"2055\"\n    - option \"2056\"\n    - option \"2057\"\n    - option \"2058\"\n    - option \"2059\"\n    - option \"2060\"\n    - option \"2061\"\n    - option \"2062\"\n    - option \"2063\"\n    - option \"2064\"\n    - option \"2065\"\n    - option \"2066\"\n    - option \"2067\"\n    - option \"2068\"\n    - option \"2069\"\n    - option \"2070\"\n    - option \"2071\"\n    - option \"2072\"\n    - option \"2073\"\n    - option \"2074\"\n    - option \"2075\"\n    - option \"2076\"\n    - option \"2077\"\n    - option \"2078\"\n    - option \"2079\"\n    - option \"2080\"\n    - option \"2081\"\n    - option \"2082\"\n    - option \"2083\"\n    - option \"2084\"\n    - option \"2085\"\n    - option \"2086\"\n    - option \"2087\"\n    - option \"2088\"\n    - option \"2089\"\n    - option \"2090\"\n    - option \"2091\"\n    - option \"2092\"\n    - option \"2093\"\n    - option \"2094\"\n    - option \"2095\"\n    - option \"2096\"\n    - option \"2097\"\n    - option \"2098\"\n    - option \"2099\"\n    - option \"2100\"\n  - grid:\n    - rowgroup:\n      - row:\n        - columnheader: S\n        - columnheader: M\n        - columnheader: T\n        - columnheader: W\n        - columnheader: T\n        - columnheader: F\n        - columnheader: S\n    - rowgroup:\n      - row \"Choose Sunday, December 28, 2025 Choose Monday, December 29, 2025 Choose Tuesday, December 30, 2025 Choose Wednesday, December 31, 2025 Choose Thursday, January 1, 2026 Choose Friday, January 2, 2026 Choose Saturday, January 3, 2026\":\n        - gridcell \"Choose Sunday, December 28, 2025\" [disabled]:\n          - button \"Choose Sunday, December 28, 2025\" [disabled]: \"28\"\n        - gridcell \"Choose Monday, December 29, 2025\" [disabled]:\n          - button \"Choose Monday, December 29, 2025\" [disabled]: \"29\"\n        - gridcell \"Choose Tuesday, December 30, 2025\" [disabled]:\n          - button \"Choose Tuesday, December 30, 2025\" [disabled]: \"30\"\n        - gridcell \"Choose Wednesday, December 31, 2025\" [disabled]:\n          - button \"Choose Wednesday, December 31, 2025\" [disabled]: \"31\"\n        - gridcell \"Choose Thursday, January 1, 2026\":\n          - button \"Choose Thursday, January 1, 2026\": \"1\"\n        - gridcell \"Choose Friday, January 2, 2026\":\n          - button \"Choose Friday, January 2, 2026\": \"2\"\n        - gridcell \"Choose Saturday, January 3, 2026\":\n          - button \"Choose Saturday, January 3, 2026\": \"3\"\n      - row \"Choose Sunday, January 4, 2026 Choose Monday, January 5, 2026 Choose Tuesday, January 6, 2026 Choose Wednesday, January 7, 2026 Choose Thursday, January 8, 2026 Choose Friday, January 9, 2026 Choose Saturday, January 10, 2026\":\n        - gridcell \"Choose Sunday, January 4, 2026\":\n          - button \"Choose Sunday, January 4, 2026\": \"4\"\n        - gridcell \"Choose Monday, January 5, 2026\":\n          - button \"Choose Monday, January 5, 2026\": \"5\"\n        - gridcell \"Choose Tuesday, January 6, 2026\":\n          - button \"Choose Tuesday, January 6, 2026\": \"6\"\n        - gridcell \"Choose Wednesday, January 7, 2026\":\n          - button \"Choose Wednesday, January 7, 2026\": \"7\"\n        - gridcell \"Choose Thursday, January 8, 2026\":\n          - button \"Choose Thursday, January 8, 2026\": \"8\"\n        - gridcell \"Choose Friday, January 9, 2026\":\n          - button \"Choose Friday, January 9, 2026\": \"9\"\n        - gridcell \"Choose Saturday, January 10, 2026\":\n          - button \"Choose Saturday, January 10, 2026\": \"10\"\n      - row \"Choose Sunday, January 11, 2026 Selected date. Monday, January 12, 2026 Choose Tuesday, January 13, 2026 Choose Wednesday, January 14, 2026 Choose Thursday, January 15, 2026 Choose Friday, January 16, 2026 Choose Saturday, January 17, 2026\":\n        - gridcell \"Choose Sunday, January 11, 2026\":\n          - button \"Choose Sunday, January 11, 2026\": \"11\"\n        - gridcell \"Selected date. Monday, January 12, 2026\" [selected]:\n          - button \"Selected date. Monday, January 12, 2026\": \"12\"\n        - gridcell \"Choose Tuesday, January 13, 2026\":\n          - button \"Choose Tuesday, January 13, 2026\": \"13\"\n        - gridcell \"Choose Wednesday, January 14, 2026\":\n          - button \"Choose Wednesday, January 14, 2026\": \"14\"\n        - gridcell \"Choose Thursday, January 15, 2026\":\n          - button \"Choose Thursday, January 15, 2026\": \"15\"\n        - gridcell \"Choose Friday, January 16, 2026\":\n          - button \"Choose Friday, January 16, 2026\": \"16\"\n        - gridcell \"Choose Saturday, January 17, 2026\":\n          - button \"Choose Saturday, January 17, 2026\": \"17\"\n      - row \"Choose Sunday, January 18, 2026 Choose Monday, January 19, 2026 Choose Tuesday, January 20, 2026 Choose Wednesday, January 21, 2026 Choose Thursday, January 22, 2026 Choose Friday, January 23, 2026 Choose Saturday, January 24, 2026\":\n        - gridcell \"Choose Sunday, January 18, 2026\":\n          - button \"Choose Sunday, January 18, 2026\": \"18\"\n        - gridcell \"Choose Monday, January 19, 2026\":\n          - button \"Choose Monday, January 19, 2026\": \"19\"\n        - gridcell \"Choose Tuesday, January 20, 2026\":\n          - button \"Choose Tuesday, January 20, 2026\": \"20\"\n        - gridcell \"Choose Wednesday, January 21, 2026\":\n          - button \"Choose Wednesday, January 21, 2026\": \"21\"\n        - gridcell \"Choose Thursday, January 22, 2026\":\n          - button \"Choose Thursday, January 22, 2026\": \"22\"\n        - gridcell \"Choose Friday, January 23, 2026\":\n          - button \"Choose Friday, January 23, 2026\": \"23\"\n        - gridcell \"Choose Saturday, January 24, 2026\":\n          - button \"Choose Saturday, January 24, 2026\": \"24\"\n      - row \"Choose Sunday, January 25, 2026 Choose Monday, January 26, 2026 Choose Tuesday, January 27, 2026 Choose Wednesday, January 28, 2026 Choose Thursday, January 29, 2026 Choose Friday, January 30, 2026 Choose Saturday, January 31, 2026\":\n        - gridcell \"Choose Sunday, January 25, 2026\":\n          - button \"Choose Sunday, January 25, 2026\": \"25\"\n        - gridcell \"Choose Monday, January 26, 2026\":\n          - button \"Choose Monday, January 26, 2026\": \"26\"\n        - gridcell \"Choose Tuesday, January 27, 2026\":\n          - button \"Choose Tuesday, January 27, 2026\": \"27\"\n        - gridcell \"Choose Wednesday, January 28, 2026\":\n          - button \"Choose Wednesday, January 28, 2026\": \"28\"\n        - gridcell \"Choose Thursday, January 29, 2026\":\n          - button \"Choose Thursday, January 29, 2026\": \"29\"\n        - gridcell \"Choose Friday, January 30, 2026\":\n          - button \"Choose Friday, January 30, 2026\": \"30\"\n        - gridcell \"Choose Saturday, January 31, 2026\":\n          - button \"Choose Saturday, January 31, 2026\": \"31\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1000042,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 20,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-dialog--playground",
+    "name": "Playground",
+    "title": "Components/Dialog",
+    "importPath": "./stories/LoongArkDialog.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Playground",
+    "file": "20-components-dialog--playground.jpg",
+    "dom": "- button \"打开弹窗\"\n- dialog \"邀请成员\":\n  - button \"关闭\":\n  - heading \"邀请成员\" [level=2]\n  - generic: 将会向成员邮箱发送邀请，确认后可在工作区设置中修改权限。\n  - contentinfo:\n    - button \"取消\"\n    - button \"发送邀请\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 21,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-editable--basic",
+    "name": "Basic",
+    "title": "Components/Editable",
+    "importPath": "./stories/LoongArkEditable.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "21-components-editable--basic.jpg",
+    "dom": "- generic: Project name\n- generic \"edit\": LoongArk Design System\n- button \"edit\": Edit\n- button \"submit\": Save\n- button \"cancel\": Cancel",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 22,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-fileupload--basic",
+    "name": "Basic",
+    "title": "Components/FileUpload",
+    "importPath": "./stories/LoongArkFileUpload.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "22-components-fileupload--basic.jpg",
+    "dom": "- generic: Upload files\n- button \"dropzone\":\n  - paragraph: Drag files here\n  - button \"Browse\"\n- list",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 23,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-filter-bar--basic",
+    "name": "Basic",
+    "title": "Components/Filter Bar",
+    "importPath": "./stories/LoongArkFilterBar.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "23-components-filter-bar--basic.jpg",
+    "dom": "- generic: Search\n- textbox \"Search items\"\n- generic: Try filtering by status\n- button \"All\" [pressed]\n- button \"Active 12\":\n  - text: Active\n  - generic: \"12\"\n- button \"Pending 3\":\n  - text: Pending\n  - generic: \"3\"\n- button \"Closed\"\n- button \"Reset\"\n- button \"Apply\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 24,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-hovercard--basic",
+    "name": "Basic",
+    "title": "Components/HoverCard",
+    "importPath": "./stories/LoongArkHoverCard.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "24-components-hovercard--basic.jpg",
+    "dom": "- button \"Hover details\"\n- strong: \"@loongark\"\n- generic: Design-ready UI primitives.",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 25,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-input--playground",
+    "name": "Playground",
+    "title": "Components/Input",
+    "importPath": "./stories/LoongArkInput.stories.tsx",
+    "componentPath": "./packages/react/src/index.ts",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Playground",
+    "file": "25-components-input--playground.jpg",
+    "dom": "- generic: 用户名\n- textbox \"用户名\":\n  - /placeholder: 请输入用户名",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 752,
+      "scrollWidth": 1265,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 26,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-listbox--basic",
+    "name": "Basic",
+    "title": "Components/Listbox",
+    "importPath": "./stories/LoongArkListbox.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "26-components-listbox--basic.jpg",
+    "dom": "- generic: City\n- listbox \"City\":\n  - group \"China\":\n    - text: China\n    - option \"Beijing\" [selected]:\n      - generic: Beijing\n      - generic: Check\n    - option \"Shanghai\":\n      - generic: Shanghai\n      - generic: Check\n    - option \"Guangzhou\":\n      - generic: Guangzhou\n      - generic: Check\n  - group \"Japan\":\n    - text: Japan\n    - option \"Tokyo\":\n      - generic: Tokyo\n      - generic: Check\n    - option \"Osaka\":\n      - generic: Osaka\n      - generic: Check",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 27,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-menu--basic",
+    "name": "Basic",
+    "title": "Components/Menu",
+    "importPath": "./stories/LoongArkMenu.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "27-components-menu--basic.jpg",
+    "dom": "- button \"Open menu\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 28,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-numberinput--basic",
+    "name": "Basic",
+    "title": "Components/NumberInput",
+    "importPath": "./stories/LoongArkNumberInput.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "28-components-numberinput--basic.jpg",
+    "dom": "- generic: Amount\n- spinbutton \"Amount\": \"24\"\n- button \"increment value\": +\n- button \"decrease value\": \"-\"\n- text: Drag to adjust\n- generic: \"Value: 24\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 29,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-pagination--basic",
+    "name": "Basic",
+    "title": "Components/Pagination",
+    "importPath": "./stories/LoongArkPagination.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "29-components-pagination--basic.jpg",
+    "dom": "- navigation \"pagination\":\n  - button \"previous page\" [disabled]: Prev\n  - button \"page undefined\": \"1\"\n  - button \"page undefined\": \"2\"\n  - button \"page undefined\": \"3\"\n  - button \"page undefined\": \"4\"\n  - button \"page undefined\": \"5\"\n  - button \"next page\": Next",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 30,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-passwordinput--basic",
+    "name": "Basic",
+    "title": "Components/PasswordInput",
+    "importPath": "./stories/LoongArkPasswordInput.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "30-components-passwordinput--basic.jpg",
+    "dom": "- generic: Password\n- textbox \"Password\":\n  - /placeholder: Enter your password\n- button \"Show password\": Show",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 31,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-pininput--basic",
+    "name": "Basic",
+    "title": "Components/PinInput",
+    "importPath": "./stories/LoongArkPinInput.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "31-components-pininput--basic.jpg",
+    "dom": "- generic: 6 位验证码\n- textbox \"pin code 1 of 6\":\n  - /placeholder: ○\n- textbox \"pin code 2 of 6\":\n  - /placeholder: ○\n- textbox \"pin code 3 of 6\":\n  - /placeholder: ○\n- textbox \"pin code 4 of 6\":\n  - /placeholder: ○\n- textbox \"pin code 5 of 6\":\n  - /placeholder: ○\n- textbox \"pin code 6 of 6\":\n  - /placeholder: ○\n- textbox",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 752,
+      "scrollWidth": 1265,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 32,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-popover--basic",
+    "name": "Basic",
+    "title": "Components/Popover",
+    "importPath": "./stories/LoongArkPopover.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "32-components-popover--basic.jpg",
+    "dom": "- button \"打开 Popover\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 33,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-progress--basic",
+    "name": "Basic",
+    "title": "Components/Progress",
+    "importPath": "./stories/LoongArkProgress.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "33-components-progress--basic.jpg",
+    "dom": "- generic: Loading\n- progressbar \"48%\"\n- generic: 48%",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 34,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-radiogroup--playground",
+    "name": "Playground",
+    "title": "Components/RadioGroup",
+    "importPath": "./stories/LoongArkRadioGroup.stories.tsx",
+    "componentPath": "./examples/react/RadioGroupExample.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Playground",
+    "file": "34-components-radiogroup--playground.jpg",
+    "dom": "- radiogroup \"请选择一个选项\":\n  - generic: 请选择一个选项\n  - generic: 选项 1\n  - radio \"选项 1\" [checked]\n  - generic: 选项 2\n  - radio \"选项 2\"\n  - generic: 选项 3\n  - radio \"选项 3\"\n- paragraph: \"当前选择: option1\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 35,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-ratinggroup--basic",
+    "name": "Basic",
+    "title": "Components/RatingGroup",
+    "importPath": "./stories/LoongArkRatingGroup.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "35-components-ratinggroup--basic.jpg",
+    "dom": "- heading \"Cannot read properties of undefined (reading 'toString')\" [level=1]\n- paragraph: \"The component failed to render properly, likely due to a configuration issue in Storybook. Here are some common causes and how you can address them:\"\n- list:\n  - strong: Missing Context/Providers\n  - text: \": You can use decorators to supply specific contexts or providers, which are sometimes necessary for components to render correctly. For detailed instructions on using decorators, please visit the\"\n  - link \"Decorators documentation\":\n    - /url: https://storybook.js.org/docs/writing-stories/decorators\n  - text: .\n  - strong: Misconfigured Webpack or Vite\n  - text: \": Verify that Storybook picks up all necessary settings for loaders, plugins, and other relevant parameters. You can find step-by-step guides for configuring\"\n  - link \"Webpack\":\n    - /url: https://storybook.js.org/docs/builders/webpack\n  - text: or\n  - link \"Vite\":\n    - /url: https://storybook.js.org/docs/builders/vite\n  - text: with Storybook.\n  - strong: Missing Environment Variables\n  - text: \": Your Storybook may require specific environment variables to function as intended. You can set up custom environment variables as outlined in the\"\n  - link \"Environment Variables documentation\":\n    - /url: https://storybook.js.org/docs/configure/environment-variables\n  - text: .\n- code: \"TypeError: Cannot read properties of undefined (reading 'toString') at Object.getItemProps (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6738:66028) at http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6738:63670 at jf (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:47860) at zv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:67243) at qv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:82866) at f1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:116408) at Vm (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:115490) at _c (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:115328) at l1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:112168) at A1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:123805)\"",
+    "metrics": {
+      "error": "Cannot read properties of undefined (reading 'toString')",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 36,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-scrollarea--basic",
+    "name": "Basic",
+    "title": "Components/ScrollArea",
+    "importPath": "./stories/LoongArkScrollArea.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "36-components-scrollarea--basic.jpg",
+    "dom": "- generic: Release note 1\n- generic: Release note 2\n- generic: Release note 3\n- generic: Release note 4\n- generic: Release note 5\n- generic: Release note 6\n- generic: Release note 7\n- generic: Release note 8\n- generic: Release note 9\n- generic: Release note 10\n- generic: Release note 11\n- generic: Release note 12",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 37,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-segment-group--basic",
+    "name": "Basic",
+    "title": "Components/Segment Group",
+    "importPath": "./stories/LoongArkSegmentGroup.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "37-components-segment-group--basic.jpg",
+    "dom": "- radiogroup:\n  - radio \"Overview\" [checked]\n  - radio \"Activity\"\n  - radio \"Settings\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 38,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-select--playground",
+    "name": "Playground",
+    "title": "Components/Select",
+    "importPath": "./stories/LoongArkSelect.stories.tsx",
+    "componentPath": "./examples/react/SelectExample.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Playground",
+    "file": "38-components-select--playground.jpg",
+    "dom": "- generic: 选择城市\n- combobox \"选择城市\":\n  - generic: 请选择...\n  - generic: ▼\n- combobox\n- paragraph: \"已选择: 无\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 39,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-slider--basic",
+    "name": "Basic",
+    "title": "Components/Slider",
+    "importPath": "./stories/LoongArkSlider.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "39-components-slider--basic.jpg",
+    "dom": "- generic: Volume\n- generic: \"32\"\n- slider \"Volume\": \"32\"\n- text: 0 25 50 75 100",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 40,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-splitter--basic",
+    "name": "Basic",
+    "title": "Components/Splitter",
+    "importPath": "./stories/LoongArkSplitter.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "40-components-splitter--basic.jpg",
+    "dom": "- 'heading \"[zag-js] missing required props: panels\" [level=1]'\n- paragraph: \"The component failed to render properly, likely due to a configuration issue in Storybook. Here are some common causes and how you can address them:\"\n- list:\n  - strong: Missing Context/Providers\n  - text: \": You can use decorators to supply specific contexts or providers, which are sometimes necessary for components to render correctly. For detailed instructions on using decorators, please visit the\"\n  - link \"Decorators documentation\":\n    - /url: https://storybook.js.org/docs/writing-stories/decorators\n  - text: .\n  - strong: Misconfigured Webpack or Vite\n  - text: \": Verify that Storybook picks up all necessary settings for loaders, plugins, and other relevant parameters. You can find step-by-step guides for configuring\"\n  - link \"Webpack\":\n    - /url: https://storybook.js.org/docs/builders/webpack\n  - text: or\n  - link \"Vite\":\n    - /url: https://storybook.js.org/docs/builders/vite\n  - text: with Storybook.\n  - strong: Missing Environment Variables\n  - text: \": Your Storybook may require specific environment variables to function as intended. You can set up custom environment variables as outlined in the\"\n  - link \"Environment Variables documentation\":\n    - /url: https://storybook.js.org/docs/configure/environment-variables\n  - text: .\n- code: \"Error: [zag-js] missing required props: panels at dd (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:7401) at Object.props (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:195544) at gt (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6731:34145) at QNe (http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6738:130202) at http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6738:130432 at jf (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:47860) at zv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:67243) at qv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:82866) at f1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:116408) at Vm (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:115490)\"",
+    "metrics": {
+      "error": "[zag-js] missing required props: panels",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 41,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-steps--basic",
+    "name": "Basic",
+    "title": "Components/Steps",
+    "importPath": "./stories/LoongArkSteps.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "41-components-steps--basic.jpg",
+    "dom": "- 'heading \"useStepsItemPropsContext returned `undefined`. Seems you forgot to wrap component within <StepsItemPropsProvider />\" [level=1]'\n- paragraph: \"The component failed to render properly, likely due to a configuration issue in Storybook. Here are some common causes and how you can address them:\"\n- list:\n  - strong: Missing Context/Providers\n  - text: \": You can use decorators to supply specific contexts or providers, which are sometimes necessary for components to render correctly. For detailed instructions on using decorators, please visit the\"\n  - link \"Decorators documentation\":\n    - /url: https://storybook.js.org/docs/writing-stories/decorators\n  - text: .\n  - strong: Misconfigured Webpack or Vite\n  - text: \": Verify that Storybook picks up all necessary settings for loaders, plugins, and other relevant parameters. You can find step-by-step guides for configuring\"\n  - link \"Webpack\":\n    - /url: https://storybook.js.org/docs/builders/webpack\n  - text: or\n  - link \"Vite\":\n    - /url: https://storybook.js.org/docs/builders/vite\n  - text: with Storybook.\n  - strong: Missing Environment Variables\n  - text: \": Your Storybook may require specific environment variables to function as intended. You can set up custom environment variables as outlined in the\"\n  - link \"Environment Variables documentation\":\n    - /url: https://storybook.js.org/docs/configure/environment-variables\n  - text: .\n- code: \"ContextError: useStepsItemPropsContext returned `undefined`. Seems you forgot to wrap component within <StepsItemPropsProvider /> at http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6738:137124 at jf (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:47860) at zv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:67243) at qv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:82866) at f1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:116408) at Vm (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:115490) at _c (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:115328) at l1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:112168) at A1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:123805) at MessagePort._t (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:1:1792)\"",
+    "metrics": {
+      "error": "useStepsItemPropsContext returned `undefined`. Seems you forgot to wrap component within <StepsItemPropsProvider />",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 42,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-switch--playground",
+    "name": "Playground",
+    "title": "Components/Switch",
+    "importPath": "./stories/LoongArkSwitch.stories.tsx",
+    "componentPath": "./examples/react/SwitchExample.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Playground",
+    "file": "42-components-switch--playground.jpg",
+    "dom": "- generic: 通知提醒\n- checkbox \"通知提醒\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 43,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-tabs--basic",
+    "name": "Basic",
+    "title": "Components/Tabs",
+    "importPath": "./stories/LoongArkTabs.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "43-components-tabs--basic.jpg",
+    "dom": "- tablist:\n  - tab \"概览\" [selected]\n  - tab \"动态\"\n  - tab \"设置\"\n- tabpanel \"概览\":\n  - generic: 这里展示概要信息。",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 44,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-tagsinput--basic",
+    "name": "Basic",
+    "title": "Components/TagsInput",
+    "importPath": "./stories/LoongArkTagsInput.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "44-components-tagsinput--basic.jpg",
+    "dom": "- generic: Frameworks\n- generic: React\n- button \"Delete tag React\": ×\n- generic: Vue\n- button \"Delete tag Vue\": ×\n- generic: Solid\n- button \"Delete tag Solid\": ×\n- textbox \"Frameworks\":\n  - /placeholder: Add tag\n- button \"Clear all tags\": Clear",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 45,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-toast--basic",
+    "name": "Basic",
+    "title": "Components/Toast",
+    "importPath": "./stories/LoongArkToast.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "45-components-toast--basic.jpg",
+    "dom": "- button \"Create toast\"\n- region \"bottom-end Notifications alt+T\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 46,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-toggle--basic",
+    "name": "Basic",
+    "title": "Components/Toggle",
+    "importPath": "./stories/LoongArkToggle.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "46-components-toggle--basic.jpg",
+    "dom": "- button \"✓ Favorite\" [pressed]:\n  - generic: ✓\n  - text: Favorite",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 47,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-toggle-group--basic",
+    "name": "Basic",
+    "title": "Components/Toggle Group",
+    "importPath": "./stories/LoongArkToggleGroup.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "47-components-toggle-group--basic.jpg",
+    "dom": "- radiogroup:\n  - radio \"Overview\" [checked]\n  - radio \"Activity\"\n  - radio \"Settings\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 48,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-tooltip--basic",
+    "name": "Basic",
+    "title": "Components/Tooltip",
+    "importPath": "./stories/LoongArkTooltip.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "48-components-tooltip--basic.jpg",
+    "dom": "- button \"悬停查看提示\"",
+    "metrics": {
+      "error": "",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  },
+  {
+    "step": 49,
+    "type": "story",
+    "subtype": "story",
+    "id": "components-treeview--basic",
+    "name": "Basic",
+    "title": "Components/TreeView",
+    "importPath": "./stories/LoongArkTreeView.stories.tsx",
+    "tags": [
+      "dev",
+      "test",
+      "manifest",
+      "autodocs"
+    ],
+    "exportName": "Basic",
+    "file": "49-components-treeview--basic.jpg",
+    "dom": "- 'heading \"useTreeViewNodePropsContext returned `undefined`. Seems you forgot to wrap component within <TreeViewItemProvider />\" [level=1]'\n- paragraph: \"The component failed to render properly, likely due to a configuration issue in Storybook. Here are some common causes and how you can address them:\"\n- list:\n  - strong: Missing Context/Providers\n  - text: \": You can use decorators to supply specific contexts or providers, which are sometimes necessary for components to render correctly. For detailed instructions on using decorators, please visit the\"\n  - link \"Decorators documentation\":\n    - /url: https://storybook.js.org/docs/writing-stories/decorators\n  - text: .\n  - strong: Misconfigured Webpack or Vite\n  - text: \": Verify that Storybook picks up all necessary settings for loaders, plugins, and other relevant parameters. You can find step-by-step guides for configuring\"\n  - link \"Webpack\":\n    - /url: https://storybook.js.org/docs/builders/webpack\n  - text: or\n  - link \"Vite\":\n    - /url: https://storybook.js.org/docs/builders/vite\n  - text: with Storybook.\n  - strong: Missing Environment Variables\n  - text: \": Your Storybook may require specific environment variables to function as intended. You can set up custom environment variables as outlined in the\"\n  - link \"Environment Variables documentation\":\n    - /url: https://storybook.js.org/docs/configure/environment-variables\n  - text: .\n- code: \"ContextError: useTreeViewNodePropsContext returned `undefined`. Seems you forgot to wrap component within <TreeViewItemProvider /> at http://127.0.0.1:6006/assets/iframe-BF5aLqX2.js:6732:32153 at jf (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:47860) at zv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:67243) at qv (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:82866) at f1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:116408) at Vm (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:115490) at _c (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:115328) at l1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:112168) at A1 (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:8:123805) at MessagePort._t (http://127.0.0.1:6006/assets/react-18-JhKFcRIt.js:1:1792)\"",
+    "metrics": {
+      "error": "useTreeViewNodePropsContext returned `undefined`. Seems you forgot to wrap component within <TreeViewItemProvider />",
+      "nestedButtons": 0,
+      "scrollHeight": 720,
+      "scrollWidth": 1280,
+      "viewport": 1280
+    }
+  }
+]

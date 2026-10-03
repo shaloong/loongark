@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 import { defineComponent, h } from "vue";
 import { ark } from "@ark-ui/vue";
 import type { ButtonPrimitiveProps } from "@loongark/primitives";
@@ -38,14 +39,13 @@ export const LoongArkButton = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ark.button,
         {
           ...attrs,
           type: props.type,
           disabled: props.disabled || props.loading,
-          "aria-disabled":
-            props.disabled || props.loading ? "true" : undefined,
+          "aria-disabled": props.disabled || props.loading ? "true" : undefined,
           "aria-busy": props.loading ? "true" : undefined,
           "data-scope": "button",
           "data-part": "root",
@@ -54,7 +54,7 @@ export const LoongArkButton = defineComponent({
           "data-block": truthy(props.block),
           "data-loading": truthy(props.loading),
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });

@@ -1,0 +1,60 @@
+[verify] .verify-acceptance.log
+packages/tokens build: Done
+packages/theme build: Done
+packages/primitives build: Done
+packages/cli build: Done
+packages/kit build: Done
+packages/react build: Done
+packages/vue build: Done
+packages/svelte build: Done
+packages/solid build: Solid 与 Ark JSX 的 SSR 入口构建通过
+packages/solid build: Done
+
+[contracts] .contracts-acceptance.log
+明暗、高对比、VI、CSS 变量及 49 个组件 Token 契约验证通过
+表格筛选、排序、分页及图表负值/转义验证通过
+
+[publication] .publication-last.log
+发布入口、Svelte 声明与清单文件验证通过
+react: 发布声明无本地类型错误
+vue: 发布声明无本地类型错误
+solid: 发布声明无本地类型错误
+svelte: 发布声明无本地类型错误
+React SSR 通过
+Vue SSR 通过
+Solid SSR 通过
+React、Vue、Solid SSR 与服务端主题样式收集通过
+✓ built in 10.90s
+Svelte 发布产物 SSR 通过
+
+[svelte] .svelte-acceptance.log
+svelte-check found 0 errors and 0 warnings
+
+[frameworks] .frameworks-broad-final.log
+react 发布消费构建通过
+vue 发布消费构建通过
+solid 发布消费构建通过
+svelte 发布消费构建通过
+react: 25 个现有组件示例构建通过
+vue: 22 个现有组件示例构建通过
+solid: 22 个现有组件示例构建通过
+svelte: 22 个现有组件示例构建通过
+vue: 22 个组件示例已运行
+react: 25 个组件示例已运行
+solid: 22 个组件示例已运行
+svelte: 22 个组件示例已运行
+  8 passed (16.7s)
+
+[storybook] .storybook-acceptance.log
+|  Vite ✓ built in 44.78s
+
+[ui] .ui-acceptance.log
+  8 skipped
+  11 passed (1.1m)
+
+[visual] .visual-acceptance.log
+  ok 2 [chromium-visual] › tests\button-input-dialog.visual.spec.ts:35:7 › ButtonInputDialog 视觉与无障碍 › 弹窗展开截图并通过 Axe (2.1s)
+  2 passed (6.7s)
+
+[cli]
+CSS/JSON extraction and verification: passed

@@ -5,25 +5,31 @@
 import React, { forwardRef, createElement } from "react";
 import type { ComponentPropsWithoutRef, FC, ReactNode } from "react";
 import { HoverCard } from "@ark-ui/react/hover-card";
-import { Portal as ArkPortal } from "@ark-ui/react/portal";
+import { Portal as ArkPortal } from "./portal";
 import type { HoverCardSize } from "@loongark/primitives";
 
 type ArkHoverCardRootProps = ComponentPropsWithoutRef<typeof HoverCard.Root>;
-type ArkHoverCardTriggerProps = ComponentPropsWithoutRef<typeof HoverCard.Trigger>;
+type ArkHoverCardTriggerProps = ComponentPropsWithoutRef<
+  typeof HoverCard.Trigger
+>;
 type ArkHoverCardPositionerProps = ComponentPropsWithoutRef<
   typeof HoverCard.Positioner
 >;
-type ArkHoverCardContentProps = ComponentPropsWithoutRef<typeof HoverCard.Content>;
+type ArkHoverCardContentProps = ComponentPropsWithoutRef<
+  typeof HoverCard.Content
+>;
 type ArkHoverCardArrowProps = ComponentPropsWithoutRef<typeof HoverCard.Arrow>;
 type ArkHoverCardArrowTipProps = ComponentPropsWithoutRef<
   typeof HoverCard.ArrowTip
 >;
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
-  createElement(ArkPortal as unknown as FC<{ children?: ReactNode }>, null, children);
+  createElement(ArkPortal, null, children);
 
-export interface LoongArkHoverCardRootProps
-  extends Omit<ArkHoverCardRootProps, "asChild"> {
+export interface LoongArkHoverCardRootProps extends Omit<
+  ArkHoverCardRootProps,
+  "asChild"
+> {
   size?: HoverCardSize;
   children?: ReactNode;
 }
@@ -35,7 +41,6 @@ export const LoongArkHoverCardRoot = forwardRef<
   return (
     <HoverCard.Root
       {...props}
-      ref={ref}
       data-scope="hover-card"
       data-part="root"
       data-size={size}

@@ -32,55 +32,54 @@ export const StepsExample = defineComponent({
     },
   },
   setup(props) {
-    const value = ref(1);
+    const value = ref(0);
 
     return () =>
       h("div", { style: "display: grid; gap: 16px;" }, [
         h(
           LoongArkStepsRoot,
           {
-            value: value.value,
+            step: value.value,
             count: steps.length,
             size: props.size,
             orientation: props.orientation,
-            onValueChange: (details: { value: number }) => {
-              value.value = details.value;
+            onStepChange: (details: { step: number }) => {
+              value.value = details.step;
             },
           },
           {
             default: () => [
-              h(
-                LoongArkStepsList,
-                null,
-                {
-                  default: () =>
-                    steps.flatMap((step, index) => [
-                      h(
-                        LoongArkStepsItem,
-                        { value: index + 1, key: step.title },
-                        {
-                          default: () => [
-                            h(
-                              LoongArkStepsIndicator,
-                              null,
-                              { default: () => `${index + 1}` }
-                            ),
-                            h("div", null, [
-                              h(LoongArkStepsTrigger, null, {
-                                default: () => step.title,
-                              }),
-                              h(LoongArkStepsContent, null, {
-                                default: () => step.description,
-                              }),
-                            ]),
-                          ],
-                        }
-                      ),
-                      index < steps.length - 1
-                        ? h(LoongArkStepsSeparator, { key: `${step.title}-sep` })
-                        : null,
-                    ]),
-                }
+              h(LoongArkStepsList, null, {
+                default: () =>
+                  steps.flatMap((step, index) => [
+                    h(
+                      LoongArkStepsItem,
+                      { index, key: step.title },
+                      {
+                        default: () => [
+                          h(LoongArkStepsIndicator, null, {
+                            default: () => `${index + 1}`,
+                          }),
+                          h("div", null, [
+                            h(LoongArkStepsTrigger, null, {
+                              default: () => step.title,
+                            }),
+                            h("span", null, step.description),
+                          ]),
+                          index < steps.length - 1
+                            ? h(LoongArkStepsSeparator)
+                            : null,
+                        ],
+                      },
+                    ),
+                  ]),
+              }),
+              ...steps.map((step, index) =>
+                h(
+                  LoongArkStepsContent,
+                  { index, key: step.title },
+                  { default: () => step.description },
+                ),
               ),
               h(LoongArkStepsCompletedContent, null, {
                 default: () => "All steps completed.",
@@ -90,7 +89,7 @@ export const StepsExample = defineComponent({
                 h(LoongArkStepsNextTrigger, null, { default: () => "Next" }),
               ]),
             ],
-          }
+          },
         ),
       ]);
   },

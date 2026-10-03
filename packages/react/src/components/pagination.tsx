@@ -22,35 +22,44 @@ type ArkPaginationEllipsisProps = ComponentPropsWithoutRef<
   typeof Pagination.Ellipsis
 >;
 
-export interface LoongArkPaginationRootProps
-  extends Omit<ArkPaginationRootProps, "asChild"> {
+export interface LoongArkPaginationRootProps extends Omit<
+  ArkPaginationRootProps,
+  "asChild"
+> {
   size?: PaginationSize;
   orientation?: PaginationOrientation;
   children?: ReactNode;
 }
 
-export interface LoongArkPaginationListProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface LoongArkPaginationListProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-export interface LoongArkPaginationItemProps
-  extends Omit<ArkPaginationItemProps, "asChild"> {
+export interface LoongArkPaginationItemProps extends Omit<
+  ArkPaginationItemProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkPaginationPrevTriggerProps
-  extends Omit<ArkPaginationPrevTriggerProps, "asChild"> {
+export interface LoongArkPaginationPrevTriggerProps extends Omit<
+  ArkPaginationPrevTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkPaginationNextTriggerProps
-  extends Omit<ArkPaginationNextTriggerProps, "asChild"> {
+export interface LoongArkPaginationNextTriggerProps extends Omit<
+  ArkPaginationNextTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkPaginationEllipsisProps
-  extends Omit<ArkPaginationEllipsisProps, "asChild"> {
+export interface LoongArkPaginationEllipsisProps extends Omit<
+  ArkPaginationEllipsisProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
@@ -79,12 +88,7 @@ export const LoongArkPaginationList = forwardRef<
   LoongArkPaginationListProps
 >(({ children, ...props }, ref) => {
   return (
-    <div
-      {...props}
-      ref={ref}
-      data-scope="pagination"
-      data-part="list"
-    >
+    <div {...props} ref={ref} data-scope="pagination" data-part="list">
       {children}
     </div>
   );
@@ -147,7 +151,7 @@ export const LoongArkPaginationNextTrigger = forwardRef<
 LoongArkPaginationNextTrigger.displayName = "LoongArkPaginationNextTrigger";
 
 export const LoongArkPaginationEllipsis = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   LoongArkPaginationEllipsisProps
 >(({ children, ...props }, ref) => {
   return (

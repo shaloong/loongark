@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import {
   LoongArkSplitterRoot,
@@ -19,17 +20,22 @@ export const SplitterExample: Component<SplitterExampleProps> = (props) => {
 
   return (
     <LoongArkSplitterRoot
+      panels={[
+        { id: "notes", minSize: 20 },
+        { id: "preview", minSize: 20 },
+      ]}
+      defaultSize={[50, 50]}
       size={size()}
       orientation={orientation()}
       style={{ height: height() }}
     >
-      <LoongArkSplitterPanel minSize={20}>
+      <LoongArkSplitterPanel id="notes">
         <div style={{ padding: "12px" }}>Notes</div>
       </LoongArkSplitterPanel>
-      <LoongArkSplitterResizeTrigger>
+      <LoongArkSplitterResizeTrigger id="notes:preview">
         <LoongArkSplitterResizeTriggerIndicator />
       </LoongArkSplitterResizeTrigger>
-      <LoongArkSplitterPanel minSize={20}>
+      <LoongArkSplitterPanel id="preview">
         <div style={{ padding: "12px" }}>Preview</div>
       </LoongArkSplitterPanel>
     </LoongArkSplitterRoot>

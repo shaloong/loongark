@@ -1,17 +1,20 @@
+import { renderPart } from "../render-part";
 /**
  * Steps component - Vue wrapper.
  * Uses Ark UI Steps with data attributes for styling.
  */
-import { defineComponent, h, type PropType } from "vue";
-import { Steps as ArkSteps } from "@ark-ui/vue/steps";
+import { defineComponent, h, computed, type PropType } from "vue";
+import { Steps as ArkSteps, useSteps } from "@ark-ui/vue/steps";
 import type { StepsOrientation, StepsSize } from "@loongark/primitives";
 
 export interface StepsChangeDetails {
-  value: number | string;
+  step: number;
 }
 
 export const LoongArkStepsRoot = defineComponent({
   name: "LoongArkStepsRoot",
+  inheritAttrs: false,
+  emits: ["stepChange", "update:step", "stepComplete"],
   props: {
     size: {
       type: String as PropType<StepsSize>,
@@ -21,35 +24,43 @@ export const LoongArkStepsRoot = defineComponent({
       type: String as PropType<StepsOrientation>,
       default: "horizontal",
     },
-    value: {
-      type: [String, Number] as PropType<string | number>,
+    step: {
+      type: Number,
     },
-    defaultValue: {
-      type: [String, Number] as PropType<string | number>,
+    defaultStep: {
+      type: Number,
     },
     count: {
       type: Number as PropType<number>,
     },
     linear: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
-    onValueChange: {
+    onStepChange: {
       type: Function as PropType<(details: StepsChangeDetails) => void>,
     },
   },
-  setup(props, { slots, attrs }) {
+  setup(props, { slots, attrs, emit }) {
+    const steps = useSteps(
+      computed(() => {
+        const { onStepChange, size, ...nativeProps } = props;
+        return { ...attrs, ...nativeProps };
+      }),
+      emit,
+    );
     return () =>
-      h(
-        ArkSteps.Root,
+      renderPart(
+        ArkSteps.RootProvider,
         {
           ...attrs,
-          ...props,
+          value: steps.value,
           "data-scope": "steps",
           "data-part": "root",
           "data-size": props.size,
           "data-orientation": props.orientation,
         },
-        slots
+        slots,
       );
   },
 });
@@ -58,14 +69,14 @@ export const LoongArkStepsList = defineComponent({
   name: "LoongArkStepsList",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSteps.List,
         {
           ...attrs,
           "data-scope": "steps",
           "data-part": "list",
         },
-        slots
+        slots,
       );
   },
 });
@@ -73,21 +84,24 @@ export const LoongArkStepsList = defineComponent({
 export const LoongArkStepsItem = defineComponent({
   name: "LoongArkStepsItem",
   props: {
-    value: {
-      type: [String, Number] as PropType<string | number>,
+    index: {
+      type: Number,
+      required: true,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSteps.Item,
         {
+          role: "presentation",
+          "aria-current": null,
           ...attrs,
           ...props,
           "data-scope": "steps",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -96,14 +110,14 @@ export const LoongArkStepsIndicator = defineComponent({
   name: "LoongArkStepsIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSteps.Indicator,
         {
           ...attrs,
           "data-scope": "steps",
           "data-part": "indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -112,14 +126,14 @@ export const LoongArkStepsSeparator = defineComponent({
   name: "LoongArkStepsSeparator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSteps.Separator,
         {
           ...attrs,
           "data-scope": "steps",
           "data-part": "separator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -128,14 +142,14 @@ export const LoongArkStepsTrigger = defineComponent({
   name: "LoongArkStepsTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSteps.Trigger,
         {
           ...attrs,
           "data-scope": "steps",
           "data-part": "trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -144,14 +158,14 @@ export const LoongArkStepsContent = defineComponent({
   name: "LoongArkStepsContent",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSteps.Content,
         {
           ...attrs,
           "data-scope": "steps",
           "data-part": "content",
         },
-        slots
+        slots,
       );
   },
 });
@@ -160,14 +174,14 @@ export const LoongArkStepsCompletedContent = defineComponent({
   name: "LoongArkStepsCompletedContent",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSteps.CompletedContent,
         {
           ...attrs,
           "data-scope": "steps",
           "data-part": "completed-content",
         },
-        slots
+        slots,
       );
   },
 });
@@ -176,14 +190,14 @@ export const LoongArkStepsProgress = defineComponent({
   name: "LoongArkStepsProgress",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSteps.Progress,
         {
           ...attrs,
           "data-scope": "steps",
           "data-part": "progress",
         },
-        slots
+        slots,
       );
   },
 });
@@ -192,14 +206,14 @@ export const LoongArkStepsNextTrigger = defineComponent({
   name: "LoongArkStepsNextTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSteps.NextTrigger,
         {
           ...attrs,
           "data-scope": "steps",
           "data-part": "next-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -208,14 +222,14 @@ export const LoongArkStepsPrevTrigger = defineComponent({
   name: "LoongArkStepsPrevTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSteps.PrevTrigger,
         {
           ...attrs,
           "data-scope": "steps",
           "data-part": "prev-trigger",
         },
-        slots
+        slots,
       );
   },
 });

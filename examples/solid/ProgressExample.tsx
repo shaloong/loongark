@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import {
   LoongArkProgressRoot,
@@ -37,7 +38,7 @@ export const ProgressExample: Component<ProgressExampleProps> = (props) => {
         <LoongArkProgressValueText />
       </LoongArkProgressRoot>
       <LoongArkProgressRoot value={value()} size={size()}>
-        <LoongArkProgressView>
+        <LoongArkProgressView state="loading">
           <LoongArkProgressCircle>
             <LoongArkProgressCircleTrack />
             <LoongArkProgressCircleRange />

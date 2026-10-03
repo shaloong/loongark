@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type SliderSize = "sm" | "md" | "lg";
@@ -60,22 +59,22 @@ interface SliderDesignTokens {
 }
 
 const extractSliderTokens = (theme: LoongArkTheme): SliderDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
-  const shadow = asTokenTree(theme.tokens.shadow);
+  const radius = asTokenTree(theme.styleTokens.radius);
+  const shadow = asTokenTree(theme.styleTokens.shadow);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -107,7 +106,7 @@ const extractSliderTokens = (theme: LoongArkTheme): SliderDesignTokens => {
       radius: toStringToken(radius.pill ?? radius.lg, "999px"),
       shadow: toStringToken(
         (shadow as any).sm,
-        "0 4px 12px rgba(0, 0, 0, 0.12)"
+        "0 4px 12px rgba(0, 0, 0, 0.12)",
       ),
     },
     colors: {
@@ -186,13 +185,6 @@ ${root}[data-size="${size}"] ${control}[data-orientation="vertical"] {
 `;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) [data-scope="slider"] * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${root} {
   display: flex;
@@ -214,7 +206,7 @@ ${valueText} {
   font-family: ${tokens.fontFamily};
   font-size: ${tokens.fontSize.md};
   line-height: ${tokens.lineHeight};
-  color: ${tokens.colors.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
   align-self: flex-end;
 }
 
@@ -304,7 +296,7 @@ ${marker} {
   font-family: ${tokens.fontFamily};
   font-size: ${tokens.fontSize.sm};
   line-height: ${tokens.lineHeight};
-  color: ${tokens.colors.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
   white-space: nowrap;
 }
 
@@ -426,7 +418,7 @@ const sliderContract: PrimitiveContract<SliderPrimitiveProps> = {
 
 const SliderPrimitive = createPrimitive(sliderContract, (theme) => {
   const css = buildSliderStyles(theme);
-  mountPrimitiveStyles(`slider-${theme.mode}`, css);
+  theme.mountStyles(`slider-${theme.mode}`, css);
 });
 
 registerPrimitive(SliderPrimitive);

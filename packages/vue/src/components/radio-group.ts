@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 import { RadioGroup } from "@ark-ui/vue/radio-group";
 import { defineComponent, h } from "vue";
 import type { PropType } from "vue";
@@ -51,8 +52,8 @@ export const LoongArkRadioGroupRoot = defineComponent({
   },
   setup(props, { slots }) {
     return () =>
-      h(
-        RadioGroup.Root as any,
+      renderPart(
+        RadioGroup.Root,
         {
           defaultValue: props.defaultValue,
           value: props.value,
@@ -65,7 +66,7 @@ export const LoongArkRadioGroupRoot = defineComponent({
           "data-size": props.size,
           "data-orientation": props.orientation,
         },
-        slots
+        slots,
       );
   },
 });
@@ -75,7 +76,7 @@ export const LoongArkRadioGroupRoot = defineComponent({
 export const LoongArkRadioGroupLabel = defineComponent({
   name: "LoongArkRadioGroupLabel",
   setup(_, { slots }) {
-    return () => h(RadioGroup.Label as any, {}, slots);
+    return () => renderPart(RadioGroup.Label, {}, slots);
   },
 });
 
@@ -98,14 +99,14 @@ export const LoongArkRadioGroupItem = defineComponent({
   },
   setup(props, { slots }) {
     return () =>
-      h(
-        RadioGroup.Item as any,
+      renderPart(
+        RadioGroup.Item,
         {
           value: props.value,
           disabled: props.disabled,
           invalid: props.invalid,
         },
-        slots
+        slots,
       );
   },
 });
@@ -115,7 +116,7 @@ export const LoongArkRadioGroupItem = defineComponent({
 export const LoongArkRadioGroupItemControl = defineComponent({
   name: "LoongArkRadioGroupItemControl",
   setup(_, { slots }) {
-    return () => h(RadioGroup.ItemControl as any, {}, slots);
+    return () => renderPart(RadioGroup.ItemControl, {}, slots);
   },
 });
 
@@ -124,7 +125,7 @@ export const LoongArkRadioGroupItemControl = defineComponent({
 export const LoongArkRadioGroupItemText = defineComponent({
   name: "LoongArkRadioGroupItemText",
   setup(_, { slots }) {
-    return () => h(RadioGroup.ItemText as any, {}, slots);
+    return () => renderPart(RadioGroup.ItemText, {}, slots);
   },
 });
 
@@ -133,7 +134,7 @@ export const LoongArkRadioGroupItemText = defineComponent({
 export const LoongArkRadioGroupIndicator = defineComponent({
   name: "LoongArkRadioGroupIndicator",
   setup(_, { slots }) {
-    return () => h(RadioGroup.Indicator as any, {}, slots);
+    return () => renderPart(RadioGroup.Indicator, {}, slots);
   },
 });
 
@@ -142,6 +143,6 @@ export const LoongArkRadioGroupIndicator = defineComponent({
 export const LoongArkRadioGroupItemHiddenInput = defineComponent({
   name: "LoongArkRadioGroupItemHiddenInput",
   setup() {
-    return () => h(RadioGroup.ItemHiddenInput as any);
+    return () => renderPart(RadioGroup.ItemHiddenInput);
   },
 });

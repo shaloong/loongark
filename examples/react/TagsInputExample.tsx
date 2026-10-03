@@ -35,16 +35,10 @@ export const TagsInputExample: React.FC<TagsInputExampleProps> = ({
       disabled={disabled}
       readOnly={readOnly}
       value={value}
-      onValueChange={(details: { value: string[] }) =>
-        setValue(details.value)
-      }
+      onValueChange={(details: { value: string[] }) => setValue(details.value)}
     >
       <LoongArkTagsInputLabel>Frameworks</LoongArkTagsInputLabel>
-      <LoongArkTagsInputControl
-        size={size}
-        state={state}
-        disabled={disabled}
-      >
+      <LoongArkTagsInputControl size={size} state={state} disabled={disabled}>
         {value.map((tag, index) => (
           <LoongArkTagsInputItem key={tag} value={tag} index={index}>
             <LoongArkTagsInputItemPreview>

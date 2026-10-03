@@ -20,10 +20,10 @@
   };
 </script>
 
-<LoongArkClipboardRoot {size} {disabled} {value}>
+<LoongArkClipboardRoot {size} {value}>
   <LoongArkClipboardLabel>Share link</LoongArkClipboardLabel>
   <LoongArkClipboardControl>
-    <LoongArkClipboardInput value={value} onInput={handleInput} readOnly={disabled} />
+    <LoongArkClipboardInput {value} oninput={handleInput} readonly={disabled} />
     <LoongArkClipboardTrigger {disabled}>Copy</LoongArkClipboardTrigger>
   </LoongArkClipboardControl>
   <LoongArkClipboardIndicator>Copied</LoongArkClipboardIndicator>

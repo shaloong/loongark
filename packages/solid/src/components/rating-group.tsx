@@ -13,25 +13,27 @@ import {
 } from "@ark-ui/solid/rating-group";
 import type { RatingGroupSize } from "@loongark/primitives";
 
-export interface LoongArkRatingGroupRootProps
-  extends Omit<ArkRatingGroupRootProps, "asChild"> {
+export interface LoongArkRatingGroupRootProps extends Omit<
+  ArkRatingGroupRootProps,
+  "asChild"
+> {
   size?: RatingGroupSize;
   disabled?: boolean;
   children?: JSX.Element;
 }
 
-export const LoongArkRatingGroupRoot: Component<LoongArkRatingGroupRootProps> = (
-  props
-) => {
+export const LoongArkRatingGroupRoot: Component<
+  LoongArkRatingGroupRootProps
+> = (props) => {
   const merged = mergeProps(
     { size: "md" as RatingGroupSize, disabled: false },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, ["children", "size", "disabled"]);
 
   return (
     <ArkRatingGroup.Root
-      {...(others as any)}
+      {...others}
       disabled={local.disabled}
       data-scope="rating-group"
       data-part="root"
@@ -43,14 +45,16 @@ export const LoongArkRatingGroupRoot: Component<LoongArkRatingGroupRootProps> = 
   );
 };
 
-export interface LoongArkRatingGroupLabelProps
-  extends Omit<ArkRatingGroupLabelProps, "asChild"> {
+export interface LoongArkRatingGroupLabelProps extends Omit<
+  ArkRatingGroupLabelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
-export const LoongArkRatingGroupLabel: Component<LoongArkRatingGroupLabelProps> = (
-  props
-) => {
+export const LoongArkRatingGroupLabel: Component<
+  LoongArkRatingGroupLabelProps
+> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkRatingGroup.Label
@@ -63,8 +67,10 @@ export const LoongArkRatingGroupLabel: Component<LoongArkRatingGroupLabelProps> 
   );
 };
 
-export interface LoongArkRatingGroupControlProps
-  extends Omit<ArkRatingGroupControlProps, "asChild"> {
+export interface LoongArkRatingGroupControlProps extends Omit<
+  ArkRatingGroupControlProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -83,28 +89,28 @@ export const LoongArkRatingGroupControl: Component<
   );
 };
 
-export interface LoongArkRatingGroupItemProps
-  extends Omit<ArkRatingGroupItemProps, "asChild"> {
+export interface LoongArkRatingGroupItemProps extends Omit<
+  ArkRatingGroupItemProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
-export const LoongArkRatingGroupItem: Component<LoongArkRatingGroupItemProps> = (
-  props
-) => {
+export const LoongArkRatingGroupItem: Component<
+  LoongArkRatingGroupItemProps
+> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkRatingGroup.Item
-      {...others}
-      data-scope="rating-group"
-      data-part="item"
-    >
+    <ArkRatingGroup.Item {...others} data-scope="rating-group" data-part="item">
       {local.children}
     </ArkRatingGroup.Item>
   );
 };
 
-export interface LoongArkRatingGroupHiddenInputProps
-  extends Omit<ArkRatingGroupHiddenInputProps, "asChild"> {}
+export interface LoongArkRatingGroupHiddenInputProps extends Omit<
+  ArkRatingGroupHiddenInputProps,
+  "asChild"
+> {}
 
 export const LoongArkRatingGroupHiddenInput: Component<
   LoongArkRatingGroupHiddenInputProps

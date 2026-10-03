@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 import {
@@ -32,7 +33,9 @@ export const ClipboardExample: Component<ClipboardExampleProps> = (props) => {
           }
           readOnly={disabled()}
         />
-        <LoongArkClipboardTrigger disabled={disabled()}>Copy</LoongArkClipboardTrigger>
+        <LoongArkClipboardTrigger disabled={disabled()}>
+          Copy
+        </LoongArkClipboardTrigger>
       </LoongArkClipboardControl>
       <LoongArkClipboardIndicator>Copied</LoongArkClipboardIndicator>
       <LoongArkClipboardValueText>{value()}</LoongArkClipboardValueText>

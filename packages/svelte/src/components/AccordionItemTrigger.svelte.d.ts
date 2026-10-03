@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { AccordionItemTriggerProps } from "@ark-ui/svelte/accordion";
-export default class AccordionItemTrigger extends SvelteComponent<AccordionItemTriggerProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Accordion } from "@ark-ui/svelte/accordion";
+
+export default class LoongArkAccordionItemTrigger extends SvelteComponent<
+  Omit<ComponentProps<typeof Accordion.ItemTrigger>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

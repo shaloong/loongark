@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { ProgressTrackProps } from "@ark-ui/svelte/progress";
-export default class ProgressTrack extends SvelteComponent<ProgressTrackProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Progress } from "@ark-ui/svelte/progress";
+
+export default class LoongArkProgressTrack extends SvelteComponent<
+  Omit<ComponentProps<typeof Progress.Track>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

@@ -1,6 +1,8 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 import {
+  parseColor,
   LoongArkColorPickerRoot,
   LoongArkColorPickerLabel,
   LoongArkColorPickerControl,
@@ -28,17 +30,20 @@ interface ColorPickerExampleProps {
   size?: ColorPickerSize;
 }
 
-const swatches = ["#0EA5E9", "#8B5CF6", "#F97316", "#10B981"];
+const swatches = ["#006EFF", "#0A3565", "#5AC8FA", "#F58220"];
 
-export const ColorPickerExample: Component<ColorPickerExampleProps> = (props) => {
+export const ColorPickerExample: Component<ColorPickerExampleProps> = (
+  props,
+) => {
   const size = () => props.size ?? "md";
-  const [value, setValue] = createSignal("#6366F1");
+  const [value, setValue] = createSignal(parseColor("#006EFF"));
 
   return (
     <LoongArkColorPickerRoot
+      defaultFormat="hsla"
       size={size()}
       value={value()}
-      onValueChange={(details: { value: string }) => setValue(details.value)}
+      onValueChange={(details) => setValue(details.value)}
     >
       <LoongArkColorPickerLabel>Brand color</LoongArkColorPickerLabel>
       <LoongArkColorPickerControl>
@@ -48,14 +53,14 @@ export const ColorPickerExample: Component<ColorPickerExampleProps> = (props) =>
         </LoongArkColorPickerTrigger>
       </LoongArkColorPickerControl>
       <LoongArkColorPickerPositioner>
-        <LoongArkColorPickerContent>
+        <LoongArkColorPickerContent aria-label="Choose brand color">
           <div style={{ display: "grid", gap: "12px" }}>
-            <LoongArkColorPickerView>
+            <LoongArkColorPickerView format="hsla">
               <LoongArkColorPickerArea>
                 <LoongArkColorPickerAreaBackground />
                 <LoongArkColorPickerAreaThumb />
               </LoongArkColorPickerArea>
-              <LoongArkColorPickerChannelSlider channel="h">
+              <LoongArkColorPickerChannelSlider channel="hue">
                 <LoongArkColorPickerChannelSliderTrack />
                 <LoongArkColorPickerChannelSliderThumb />
               </LoongArkColorPickerChannelSlider>
@@ -64,8 +69,9 @@ export const ColorPickerExample: Component<ColorPickerExampleProps> = (props) =>
             <LoongArkColorPickerSwatchGroup>
               {swatches.map((swatch) => (
                 <LoongArkColorPickerSwatchTrigger value={swatch}>
-                  <LoongArkColorPickerSwatch value={swatch} />
-                  <LoongArkColorPickerSwatchIndicator />
+                  <LoongArkColorPickerSwatch value={swatch}>
+                    <LoongArkColorPickerSwatchIndicator />
+                  </LoongArkColorPickerSwatch>
                 </LoongArkColorPickerSwatchTrigger>
               ))}
             </LoongArkColorPickerSwatchGroup>

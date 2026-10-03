@@ -1,0 +1,380 @@
+{
+  "recordedAt": "2026-10-02T19:04:23.543Z",
+  "workspace": "E:/dev/loongark",
+  "status": "passed",
+  "phase": "Common component expansion with four-framework wrappers and full Story regression",
+  "environment": {
+    "os": "Windows",
+    "browser": "Chromium",
+    "mobileViewportWidth": 375,
+    "versions": {
+      "react": "19.2.1",
+      "vue": "3.5.25",
+      "solid-js": "1.9.15",
+      "svelte": "5.45.2",
+      "@ark-ui/react": "5.30.0",
+      "@ark-ui/vue": "5.30.0",
+      "@ark-ui/solid": "5.30.0",
+      "@ark-ui/svelte": "5.15.0"
+    }
+  },
+  "coverage": {
+    "families": 91,
+    "newFamilies": [
+      "Textarea",
+      "Link",
+      "Chip",
+      "List",
+      "AvatarGroup",
+      "Paper",
+      "Box",
+      "Stack",
+      "Container",
+      "Grid",
+      "Timeline",
+      "AppBar",
+      "BottomNavigation"
+    ],
+    "newValueExportsPerFramework": 32,
+    "publicValueExportsPerFramework": 606,
+    "stories": 221,
+    "primitiveTokenContracts": 49,
+    "examples": {
+      "react": 26,
+      "vue": 23,
+      "solid": 23,
+      "svelte": 23,
+      "total": 95
+    }
+  },
+  "colorProvenance": {
+    "source": "Shaloong fixed VI supplied by user",
+    "viPalette": {
+      "skyBlue": "#006EFF",
+      "deepBlue": "#0A3565",
+      "dawnBlue": "#5AC8FA",
+      "coral": "#F58220",
+      "cloudWhite": "#F2F2F2",
+      "leadGray": "#767680",
+      "stoneGray": "#3A3A3C",
+      "inkNight": "#121212"
+    },
+    "neutralPalette": {
+      "white": "#FFFFFF",
+      "paper": "#F9F9F9",
+      "cloud": "#F2F2F2",
+      "border": "#D9D9DB",
+      "input": "#898991",
+      "textMuted": "#6E6E77",
+      "lead": "#767680",
+      "stone": "#3A3A3C",
+      "stone90": "#363638",
+      "stone80": "#323234",
+      "stone60": "#2A2A2B",
+      "stone40": "#222223",
+      "ink": "#121212",
+      "darkCard": "#1B1B1B",
+      "darkMuted": "#242424",
+      "darkTextMuted": "#A1A1A8"
+    },
+    "derivation": "sRGB channel interpolation with rounding; Cloud White may extend to pure white; high-contrast uses black/white; status colors are semantic",
+    "referenceStyle": "shadcn default examples and MUI spacing/transitions, without importing their color palette"
+  },
+  "measurements": {
+    "light": {
+      "stories": 221,
+      "families": 91,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0,
+      "axe": {
+        "stories": 221,
+        "violations": 0
+      },
+      "screenshots": {
+        "desktop": 221,
+        "mobile": 91
+      }
+    },
+    "dark": {
+      "stories": 221,
+      "families": 91,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0,
+      "axe": {
+        "stories": 221,
+        "violations": 0
+      },
+      "screenshots": {
+        "desktop": 221,
+        "mobile": 91
+      }
+    }
+  },
+  "checks": [
+    {
+      "id": "initialVerify",
+      "status": "passed",
+      "log": "logs/initialVerify.txt",
+      "modifiedAt": "2026-10-02T18:33:43.504Z"
+    },
+    {
+      "id": "finalNinePackageBuild",
+      "status": "passed",
+      "log": "logs/finalNinePackageBuild.txt",
+      "modifiedAt": "2026-10-02T18:53:17.661Z"
+    },
+    {
+      "id": "projectTypes",
+      "status": "passed",
+      "log": "logs/projectTypes.txt",
+      "modifiedAt": "2026-10-02T18:46:04.154Z"
+    },
+    {
+      "id": "contracts",
+      "status": "passed",
+      "log": "logs/contracts.txt",
+      "modifiedAt": "2026-10-02T18:53:42.256Z"
+    },
+    {
+      "id": "publicationAndFourSSR",
+      "status": "passed",
+      "log": "logs/publicationAndFourSSR.txt",
+      "modifiedAt": "2026-10-02T18:57:08.805Z"
+    },
+    {
+      "id": "svelte",
+      "status": "passed",
+      "log": "logs/svelte.txt",
+      "modifiedAt": "2026-10-02T18:57:49.296Z"
+    },
+    {
+      "id": "storybookBuild",
+      "status": "passed",
+      "log": "logs/storybookBuild.txt",
+      "modifiedAt": "2026-10-02T18:42:13.553Z"
+    },
+    {
+      "id": "coverage",
+      "status": "passed",
+      "log": "logs/coverage.txt",
+      "modifiedAt": "2026-10-02T18:58:10.852Z"
+    },
+    {
+      "id": "storybookRegression",
+      "status": "passed",
+      "log": "logs/storybookRegression.txt",
+      "modifiedAt": "2026-10-02T18:51:37.972Z"
+    },
+    {
+      "id": "visualBaseline",
+      "status": "passed",
+      "log": "logs/visualBaseline.txt",
+      "modifiedAt": "2026-10-02T18:52:04.465Z"
+    },
+    {
+      "id": "frameworkRegression",
+      "status": "passed",
+      "log": "logs/frameworkRegression.txt",
+      "modifiedAt": "2026-10-02T19:00:32.088Z"
+    },
+    {
+      "id": "cli",
+      "status": "passed",
+      "log": "logs/cli.txt",
+      "modifiedAt": "2026-10-02T18:47:45.707Z"
+    },
+    {
+      "id": "workspaceLint",
+      "status": "passed",
+      "log": "logs/workspaceLint.txt",
+      "modifiedAt": "2026-10-02T19:01:55.711Z"
+    },
+    {
+      "id": "diffWhitespace",
+      "status": "passed",
+      "log": "logs/diffWhitespace.txt",
+      "modifiedAt": "2026-10-02T19:01:44.887Z"
+    }
+  ],
+  "browserTests": {
+    "storybookPassed": 27,
+    "storybookExpectedSkipped": 8,
+    "frameworkPassed": 8,
+    "visualPassed": 2
+  },
+  "notableFixes": [
+    "Solid native Textarea value serialized as textarea content during SSR; readOnly emitted as the native attribute",
+    "ChipRemoveTrigger and ListItemButton use native button semantics with type=button defaults",
+    "Textarea native events and bindings, List aria-pressed, BottomNavigation aria-current and responsive Grid verified in all four frameworks"
+  ],
+  "pending": [
+    {
+      "name": "TransferList",
+      "priority": "next",
+      "reason": "Dual-list selection, keyboard interaction and shared data model"
+    },
+    {
+      "name": "TimePicker",
+      "priority": "next",
+      "reason": "Time-only input, parsing, locale and keyboard interaction"
+    },
+    {
+      "name": "Textarea auto height",
+      "priority": "next",
+      "reason": "Native textarea and manual vertical resizing are shipped; content-driven height with min/max rows remains an enhancement"
+    },
+    {
+      "name": "SpeedDial / FloatingActionButton",
+      "priority": "later",
+      "reason": "Mobile action patterns; button size=icon is already available"
+    },
+    {
+      "name": "ImageList / Masonry",
+      "priority": "later",
+      "reason": "Responsive media layouts; Grid covers regular grids"
+    },
+    {
+      "name": "Attachment / Message / Bubble",
+      "priority": "specialized",
+      "reason": "Files and chat product patterns; not treated as general-purpose baseline"
+    },
+    {
+      "name": "Questionnaire / MessageScroller",
+      "priority": "specialized",
+      "reason": "Dedicated workflows and scrollers, rather than aliases for existing form/ScrollArea"
+    }
+  ],
+  "evidence": {
+    "gallery": [
+      "foundations-light.png",
+      "foundations-dark.png",
+      "foundations-light-mobile.png",
+      "foundations-dark-mobile.png"
+    ],
+    "newFamilyContactSheets": [
+      "new-components-light.png",
+      "new-components-dark.png"
+    ],
+    "frameworkMobile": [
+      "react-mobile.png",
+      "vue-mobile.png",
+      "solid-mobile.png",
+      "svelte-mobile.png"
+    ],
+    "metrics": ["after/light/metrics.json", "after/dark/metrics.json"],
+    "accessibility": ["accessibility/light.json", "accessibility/dark.json"],
+    "coverageManifest": "component-coverage.json",
+    "publicAPI": "api-parity.json"
+  },
+  "limits": [
+    "Chromium on Windows and installed framework versions",
+    "All 221 default Story displays in light/dark plus selected interaction states; not every prop/state/browser combination",
+    "Textarea manual vertical resizing is shipped; automatic height is a pending enhancement"
+  ],
+  "npmPublished": false,
+  "sourceSha256": {
+    "packages/tokens/src/index.ts": "6768051a1b1eb2a926e02a2b1ee658e42af7680194746fcaf4a6992222cb93b4",
+    "packages/kit/src/foundations.ts": "aa2c33348cc0c2fc479f930b16e73fe2e17cd48ce7ad826f2c9b74bc66546039",
+    "packages/kit/src/layout.ts": "34268e8bbaf98740322b746c6d984ebaeef16b09c2d7aa2ed7419a613aee560e",
+    "docs/component-coverage.json": "5573c95991f0acf7e3346dc9eb5a866c3ca0cabca0b6f3007379bfe869065b96",
+    "scripts/check-component-coverage.mjs": "fe01a315e2ad576ffa338245909c65906d91a0e434b2e1f2c86ad8d616d23276",
+    "scripts/test-ssr.mjs": "0b505bf3248f1fa8f6a22a8685e83014fedf01e28287eecfe477ec02ef578fe1",
+    "scripts/test-svelte-ssr.mjs": "af97847ac99f3997fa768f34edbcd823fb849cd7b653fb2fce87044176e56166",
+    "tests/consumers/svelte/Ssr.svelte": "4158712546f2ef75f2503a18e481bfa417dd1363f56e7b22054d148dfd82492a",
+    "tests/foundations.spec.ts": "984b693d61f6b7b1adc62424f57674dc4c0aeaddc29f3ec85e9087fb07838461",
+    "tests/design-quality.spec.ts": "200bacd907868f6929ba12c7955a4f8bb05096c94e5f660094ddb99b497fbba6",
+    "tests/design-accessibility.spec.ts": "48c3d9a68e8f07caa081fdc6e1c47d16f5b19b6a1dcf733f8f9b1c3880d9c878",
+    "tests/framework-examples.spec.ts": "8cace4f8d4e61482afce728a4d4c1f9a3e53ca5c037b484ae5b45ceeee412bf8",
+    "packages/react/src/index.ts": "dfa58e46ff7e907b8ce11baa38856bef36ba55ec04228f65eacb71b2d52cf15e",
+    "packages/react/src/components/layout.ts": "7ff64ad99758eef61b512dac38e23f23eedccbd9fcfe47bd79a369443ff68f69",
+    "packages/vue/src/index.ts": "2509a09e1ed1e938768c3f0517c2e3f0476a88a7a13c1c3acae4b8c304641fe1",
+    "packages/vue/src/components/layout.ts": "717ae3c8acc8bbabfa5267a7ec9d5aba72f804fca9293ab9f0cb6f730c51058a",
+    "packages/solid/src/index.ts": "9d30e86e1042552f5ed5edd3e0aaedb26e3be87ff99e5e4532558deb1fc6eca1",
+    "packages/solid/src/components/layout.tsx": "6e22572a5dba99ae996fd069ac1a603b5e646e7295806b65066704cc3159831e",
+    "packages/svelte/src/index.ts": "b5600cf2658b1cdd3c266ea8014523c260b7d58bb431dcb353cda7905958740b",
+    "packages/svelte/src/components/layout.ts": "a6e61bc618aecca19a2eb0c6c38f48c426ff059b1de2fd2832e9e3f9f46332c1",
+    "packages/react/src/components/textarea.ts": "4f71984e6519466d3d9b59bd321ddb1a491aa3b3e92c44d9e8e341793e0baf88",
+    "packages/vue/src/components/textarea.ts": "8f21e8f8dd9ffe3c90c9fc1d4e068df1ef58860c2da9ed1262ea6e2d6736bfbd",
+    "packages/solid/src/components/textarea.tsx": "0b17e27a6b7246f58d541855e9b03df638703fc98445591424920a693249b9bf",
+    "packages/svelte/src/components/Link.svelte": "f41a930aca9a8815ad317df334c8339b4ead0c996103b9f38ac0b4d99040ab39",
+    "packages/svelte/src/components/Link.svelte.d.ts": "5b0cf7a8aed9e20bb1664032a6edb5a98faf2a469943175dfd97ff6025456b3f",
+    "packages/svelte/src/components/Chip.svelte": "0ac700da46c09623f3c24c63bc70fd6c86a361e0dd8526c5ac08745fad6cdfcc",
+    "packages/svelte/src/components/Chip.svelte.d.ts": "445fd9132252da29cb7074ab4c6574f104fb1ee83f6b41d2ce45f12845e0e4bf",
+    "packages/svelte/src/components/ChipLabel.svelte": "41b7d5d7ad84965514fb3590f6b50a9c844fbef141476d4598c34d54bae51809",
+    "packages/svelte/src/components/ChipLabel.svelte.d.ts": "24c27dc8399b8e0aae438d60da3d33245c23ea30c78a8f7360d35318883887a4",
+    "packages/svelte/src/components/ChipRemoveTrigger.svelte": "2bcba44e2fcbe39b22b403a19901a72511b48319f68bf254f419e081684c760b",
+    "packages/svelte/src/components/ChipRemoveTrigger.svelte.d.ts": "c834ddbe26f4604bab2acb0386a8e00cd75478f66c866b90e10713081676eb70",
+    "packages/svelte/src/components/List.svelte": "c755b65a3f1cdf2d2e651eda511a817d07db213023ed69f4ea1c9056f7ce4363",
+    "packages/svelte/src/components/List.svelte.d.ts": "6d09027a0cdb1675cb3c82d0531c08aca689eb2219139ca26fab7c24e3542fbc",
+    "packages/svelte/src/components/ListItem.svelte": "11d4c1d67bad9efff86b7a6132441ba2790c69069230c93195ca72093ed9f833",
+    "packages/svelte/src/components/ListItem.svelte.d.ts": "c1feb597fd8e52cfb6e6ee634baf9211fb08514808e968e4ebc0d46d8ba46f62",
+    "packages/svelte/src/components/ListItemButton.svelte": "ad70d6094f68b296a55d46df2c672205e6af50694348e12cc934074d843f637c",
+    "packages/svelte/src/components/ListItemButton.svelte.d.ts": "7d5eaab83f115917e657b312cd8105fcabe94f69ce171c2c9ca5a0a679a602d2",
+    "packages/svelte/src/components/ListItemLink.svelte": "4077919853fccb640f9013ef09ae26b0ae367102acd17343bed6bb5a49e1c645",
+    "packages/svelte/src/components/ListItemLink.svelte.d.ts": "42096f2c1ecda3a242a0c84ba2272c3741c3fcf5f3225c900bc176d7ceddce60",
+    "packages/svelte/src/components/ListItemIcon.svelte": "a89557bb4f8e2d6d81cb3f27668664195f06b1c3c8d30a7813ba7376854feb79",
+    "packages/svelte/src/components/ListItemIcon.svelte.d.ts": "38668db1d988d97b4b0b45aa8830e02f03730d2481a2d0d8ce7f55e517bddfb0",
+    "packages/svelte/src/components/ListItemText.svelte": "9704b080fa8c8d2e0c62cbf9de427ab49211a19447b21ab09a7c0e83e90fffde",
+    "packages/svelte/src/components/ListItemText.svelte.d.ts": "cffa7de91df74ac5b05e3e5d19e92c1855afddb6c564f4f282a16d520e3efdb1",
+    "packages/svelte/src/components/ListItemDescription.svelte": "43d46db473ef5602e012a3a43838c41d2b0c9042dbbed3916dffd9087f8169f3",
+    "packages/svelte/src/components/ListItemDescription.svelte.d.ts": "11c895be2b4d41d6db6633a6e75506b703f731816ee71101e92a26694b937afe",
+    "packages/svelte/src/components/AvatarGroup.svelte": "dfd94ff710e2f5ddaf9d18634ac103026de2fd2a617fce3abc402061dafd0ca2",
+    "packages/svelte/src/components/AvatarGroup.svelte.d.ts": "35b6d8eddb583ef9bb297f33b92859ee0216e7dead5bdb5e142af5c0d0eaef7e",
+    "packages/svelte/src/components/AvatarGroupOverflow.svelte": "925ec2e541456e79d52b63104644e360d831327206ee6d2468d46f089144c99b",
+    "packages/svelte/src/components/AvatarGroupOverflow.svelte.d.ts": "5d4ed57c91a5511f66849ec5476ebc78c68e644ceef3c518d8bdb6893a09420d",
+    "packages/svelte/src/components/Paper.svelte": "23bed067601c946d04a0b63ff315eb7ddf6e963ddff7b355147a2ddd30ca2f6f",
+    "packages/svelte/src/components/Paper.svelte.d.ts": "13324553af4fac6b6182aeb351f2ab94565f217965827b20f50a4e3a64496666",
+    "packages/svelte/src/components/Box.svelte": "6285ef108b435de48577dc31fd11cdd1cc751abf90f5a9b62ee256f41396b415",
+    "packages/svelte/src/components/Box.svelte.d.ts": "e86073089dbc16c63d336e614c1065ce87b3f9ace34c541ff3e3b59bf0f7aad9",
+    "packages/svelte/src/components/Stack.svelte": "d110b2fc6d4cbc8af303ee41ead0948d0691f0e390c5c0a3d42921db4429a39d",
+    "packages/svelte/src/components/Stack.svelte.d.ts": "20a26e0707758e7c861097c73d34cadaf8961924b00438e2163b9084f9cbb929",
+    "packages/svelte/src/components/Container.svelte": "a9b032329e0afda3a2e51d0d60baa2d4efc9aa7ab08d342f19239cbe55dcd38f",
+    "packages/svelte/src/components/Container.svelte.d.ts": "0d02a74d389bb5bde16af1915b27e20172089c02ab07fa49a62b98a7a5b6c5ab",
+    "packages/svelte/src/components/Grid.svelte": "f7e5861d0ac7f8da5f4557f4774f75ce0243741c991797f7f2b5b7f19199df1c",
+    "packages/svelte/src/components/Grid.svelte.d.ts": "655709c51eb0d79b80ecba3eb0b275966e243240abe4f0ccd7b3a9641f6db62a",
+    "packages/svelte/src/components/Timeline.svelte": "f2bd39c5d43f3d0e8fb59c4479f59bc4e2cef0bcd899ebd7b1bd5322287e70b3",
+    "packages/svelte/src/components/Timeline.svelte.d.ts": "64ac66ecee3b3493f361494d2bea94c9f8714bb484c0dfb6d4701247d5706516",
+    "packages/svelte/src/components/TimelineItem.svelte": "9ee6f7adafb12a646c7a6c77454367f30d2350dbbf7471ccf3c3b14e9a5d4737",
+    "packages/svelte/src/components/TimelineItem.svelte.d.ts": "eaa63c1ea3a6102c01fd0ef034a36b7d1ce7aa92f9321b7133fba7c69249aca4",
+    "packages/svelte/src/components/TimelineIndicator.svelte": "9f76a431bb57da99057528793502c2323149661c0f8f20f4f6da6607981286f3",
+    "packages/svelte/src/components/TimelineIndicator.svelte.d.ts": "4720b10c047648e4b6b9844b1c38dc26ec34c9beb46bb5521b4f371fc286abfc",
+    "packages/svelte/src/components/TimelineContent.svelte": "26be0755e43747f6de3a2b65e7d9bb565ebaaf7eac88f65d5c207bcf14899735",
+    "packages/svelte/src/components/TimelineContent.svelte.d.ts": "e5eba044f8a20521c2b2c6611048fe8eedf0b79f78f5b1f9bfb7b6645200793c",
+    "packages/svelte/src/components/TimelineTitle.svelte": "7c2ff41dc4f885d2d5bec005a22daa4288d95d8041c0b15f57fd279cd09d85af",
+    "packages/svelte/src/components/TimelineTitle.svelte.d.ts": "19ca234986eeb0ed7c2efc654ec5390fdd3c5e3efb4caa258fd41ebd8ad11c0b",
+    "packages/svelte/src/components/TimelineDescription.svelte": "91ffb4ceab028ec412369646cfcbb52867b68b657dd0b50031721bcad74861a6",
+    "packages/svelte/src/components/TimelineDescription.svelte.d.ts": "f4c80ba9d1d1df84642feeb77ac36ae28a0ea412e732964c5cc3e96a034300db",
+    "packages/svelte/src/components/TimelineTime.svelte": "ea5bbf32d25c03789954c25a1150856e917180e69c513f6ddbdd699512be0663",
+    "packages/svelte/src/components/TimelineTime.svelte.d.ts": "7688908b7729320de7dc3556fb483944452736c69c61b561e8ea6fe8269dd0f1",
+    "packages/svelte/src/components/AppBar.svelte": "ebeefacc11b6b0ef0b2a996bbd166a06dfe9c2d52dfcee6db5537ac4a2afb1b3",
+    "packages/svelte/src/components/AppBar.svelte.d.ts": "3d9ea55f55630a2ffa3bf7e6a5d24228daa5f95b200902b1ffa15303b5e98084",
+    "packages/svelte/src/components/Toolbar.svelte": "d9b73e7afdd0f9a47595e3eceeba5094f7b14d4c83bf7cec53cc8c6d39af8f52",
+    "packages/svelte/src/components/Toolbar.svelte.d.ts": "d1dd252a2a7922dd70612495d40db6fb8f9b820935ddc409c6b9f4fc3c07bedd",
+    "packages/svelte/src/components/BottomNavigation.svelte": "113e31231edfa2a462d5d7bcc95eb11def8c515bdda84dd57dd64f08f576c930",
+    "packages/svelte/src/components/BottomNavigation.svelte.d.ts": "ef611d0dc4f121da05887145eef24e9c238744f1969c6abe3332526644a59307",
+    "packages/svelte/src/components/BottomNavigationItem.svelte": "008a8ba856df443d48f510da0539c70c762a99c3365cc4f762344e8e3a7c8c41",
+    "packages/svelte/src/components/BottomNavigationItem.svelte.d.ts": "5f54c51f631bd0258f5e8a3ee2c4e730ea8257bf86e0cfff90f0f38372a4f904",
+    "packages/svelte/src/components/BottomNavigationIcon.svelte": "4f33fe4388f247946d118ec343ed1805d3686db28903f18c89531532d8b4d647",
+    "packages/svelte/src/components/BottomNavigationIcon.svelte.d.ts": "73fbbdb4f46186912dbb35b993f776e10778d6e5a77530cb75f8b4aa80c6e641",
+    "packages/svelte/src/components/BottomNavigationLabel.svelte": "d9b1dddd6602e8605210e97d3ccd067722c9466178953c3e38994a1f4196c384",
+    "packages/svelte/src/components/BottomNavigationLabel.svelte.d.ts": "826e6b089ca13ae1f795874fd76c278ceae506b425d8e1f3de5b9629f04257e0",
+    "stories/LoongArkTextarea.stories.tsx": "b7141444077b7e20b5131fcca1fadf7e045422f192bc29976b6f5d23025c6388",
+    "stories/LoongArkLink.stories.tsx": "da7a36a2167727f88c390d77c998ad001d2f3ff9f855d64b26dc7e7d5640b7c5",
+    "stories/LoongArkChip.stories.tsx": "312000be15b558547112bdcc0a6a4a31623ffc461440b23d0c96c6db43b743cb",
+    "stories/LoongArkList.stories.tsx": "941bd40f98d70a2766c631656df5355785284fb5443868c106dc2e19851260b9",
+    "stories/LoongArkAvatarGroup.stories.tsx": "d6767554b03b08bfe3a378e4d53a5980ba3504cdd6eab5d7fbe82f9a36c67fd2",
+    "stories/LoongArkPaper.stories.tsx": "a26d5ad24b8768a43d022d55d9e4e5268a19b478a0c48767323f93aba9336487",
+    "stories/LoongArkBox.stories.tsx": "b3c3bf17a37b7efea60b7cfcb5bbf3fb7026e3d9480ba9cb5aa7ef7aa4de9713",
+    "stories/LoongArkStack.stories.tsx": "4f06fe28b8a3177474afcc5021af687ccc4476f6c072040910ed481d5781c6fa",
+    "stories/LoongArkContainer.stories.tsx": "7677e4707be3e136b32b852284c0d90933b48ea2050c64c919081d9c4c92749d",
+    "stories/LoongArkGrid.stories.tsx": "dfd26c8654c62777c1e10e316c9be8fc6516b47434a50cbb7bb574e766135be3",
+    "stories/LoongArkTimeline.stories.tsx": "ac52f0c66ce73c0f2123fbe1dc3ea10e2d6b315b878abefe9743ffe524e23789",
+    "stories/LoongArkAppBar.stories.tsx": "cc2c1d71f61c4a2fff3c667738289b381821e3729d76e95a6280fdfbfeee38cf",
+    "stories/LoongArkBottomNavigation.stories.tsx": "92f39e64a7416ef546c86aeaa483cf46df1381a1452c8b61254536ec79cb9bc7",
+    "stories/FoundationsGallery.stories.tsx": "379bb754a7b8699625a9e44fb081313f6a65b854bf14a1694cfdd16885b58522",
+    "examples/react/FoundationsExample.tsx": "b2984de0d018a79d0de0379b1d9f2d1ab4e7388bd5034cac782803760ad70a9b",
+    "examples/vue/FoundationsExample.ts": "c657e9c3039e0d2204de2cb893f8831e606685d260e1a10073b97a6d8363b353",
+    "examples/solid/FoundationsExample.tsx": "09955f0a2920f522ef16cfb874657cc210ba3229b4c572d3f6aff8540b852454",
+    "examples/svelte/FoundationsExample.svelte": "b7471cde9677e0d6ea214da86c05e19e7f5b1762d595a7fbe0af9ff46046c8b2"
+  }
+}

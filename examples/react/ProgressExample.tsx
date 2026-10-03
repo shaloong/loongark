@@ -25,11 +25,7 @@ export const ProgressExample: React.FC<ProgressExampleProps> = ({
 }) => {
   return (
     <div style={{ display: "grid", gap: 20 }}>
-      <LoongArkProgressRoot
-        value={value}
-        size={size}
-        orientation={orientation}
-      >
+      <LoongArkProgressRoot value={value} size={size} orientation={orientation}>
         <LoongArkProgressLabel>Project setup</LoongArkProgressLabel>
         <LoongArkProgressTrack>
           <LoongArkProgressRange />
@@ -37,7 +33,7 @@ export const ProgressExample: React.FC<ProgressExampleProps> = ({
         <LoongArkProgressValueText />
       </LoongArkProgressRoot>
       <LoongArkProgressRoot value={value} size={size}>
-        <LoongArkProgressView>
+        <LoongArkProgressView state="loading">
           <LoongArkProgressCircle>
             <LoongArkProgressCircleTrack />
             <LoongArkProgressCircleRange />

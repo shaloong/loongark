@@ -34,7 +34,9 @@ export const SegmentGroupExample: React.FC<SegmentGroupExampleProps> = ({
         orientation={orientation}
         disabled={disabled}
         value={value}
-        onValueChange={(details: { value: string[] }) => setValue(details.value)}
+        onValueChange={(details: { value: string[] }) =>
+          setValue(details.value)
+        }
       >
         {options.map((option) => (
           <LoongArkSegmentGroupItem key={option.value} value={option.value}>
@@ -42,7 +44,12 @@ export const SegmentGroupExample: React.FC<SegmentGroupExampleProps> = ({
           </LoongArkSegmentGroupItem>
         ))}
       </LoongArkSegmentGroupRoot>
-      <span style={{ fontSize: "14px", color: "#666" }}>
+      <span
+        style={{
+          fontSize: "14px",
+          color: "var(--lk-color-semantic-mutedforeground)",
+        }}
+      >
         Selected: {value[0] || "None"}
       </span>
     </div>

@@ -1,6 +1,9 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { LoongArkToggleGroupRoot, LoongArkToggleGroupItem } from "@loongark/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import {
+  LoongArkToggleGroupRoot,
+  LoongArkToggleGroupItem,
+} from "@loongark/react";
 
 const meta: Meta = {
   title: "Components/Toggle Group",

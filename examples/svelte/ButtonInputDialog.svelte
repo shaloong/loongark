@@ -1,118 +1,68 @@
 <script lang="ts">
-  import { Dialog } from "@ark-ui/svelte/dialog";
   import {
-    createThemeStore,
-    loongArkButton,
-    loongArkInputWrapper,
-    loongArkInputControl,
-    loongArkInputPrefix,
-    loongArkInputSuffix,
-    loongArkInputHelper,
-    loongArkDialogOverlay,
-    loongArkDialogContent,
-    loongArkDialogTitle,
-    loongArkDialogDescription,
-    loongArkDialogFooter,
-    loongArkDialogCloseTrigger,
+    LoongArkProvider,
+    LoongArkButton,
+    LoongArkInputRoot,
+    LoongArkInputGroup,
+    LoongArkInputLabel,
+    LoongArkInputControl,
+    LoongArkInputPrefix,
+    LoongArkInputSuffix,
+    LoongArkInputHelperText,
+    LoongArkDialog,
   } from "@loongark/svelte";
   import { defaultScenario, scenarioTestIds } from "../shared/demoScenario";
-
-  createThemeStore("light");
-
   let email = "";
-  const clearEmail = () => {
-    email = "";
-  };
 </script>
 
-<form data-testid={scenarioTestIds.form} class="demo-form">
-  <label>
-    <span class="demo-label">{defaultScenario.emailLabel}</span>
-    <div
-      data-testid={scenarioTestIds.inputWrapper}
-      use:loongArkInputWrapper={{ size: "md", state: email ? "default" : "default" }}
+<LoongArkProvider
+  ><form data-testid={scenarioTestIds.form} class="demo-form">
+    <LoongArkInputRoot
+      ><LoongArkInputLabel>{defaultScenario.emailLabel}</LoongArkInputLabel
+      ><LoongArkInputGroup data-testid={scenarioTestIds.inputWrapper}
+        ><LoongArkInputPrefix data-testid={scenarioTestIds.inputPrefix}
+          >{defaultScenario.prefixLabel}</LoongArkInputPrefix
+        ><LoongArkInputControl
+          type="email"
+          placeholder={defaultScenario.emailPlaceholder}
+          bind:value={email}
+        /><LoongArkInputSuffix data-testid={scenarioTestIds.inputSuffix}
+          ><LoongArkButton
+            variant="ghost"
+            size="sm"
+            onclick={() => (email = "")}
+            data-testid={scenarioTestIds.inputSuffix + "-button"}
+            >{defaultScenario.suffixAction}</LoongArkButton
+          ></LoongArkInputSuffix
+        ></LoongArkInputGroup
+      ><LoongArkInputHelperText data-testid={scenarioTestIds.helperText}
+        >{defaultScenario.helperText}</LoongArkInputHelperText
+      ></LoongArkInputRoot
     >
-      <span
-        data-testid={scenarioTestIds.inputPrefix}
-        use:loongArkInputPrefix
-      >
-        {defaultScenario.prefixLabel}
-      </span>
-      <input
-        type="email"
-        placeholder={defaultScenario.emailPlaceholder}
-        bind:value={email}
-        use:loongArkInputControl={{ size: "md" }}
-      />
-      <span
-        data-testid={scenarioTestIds.inputSuffix}
-        use:loongArkInputSuffix={{ action: "button" }}
-      >
-        <button
-          type="button"
-          on:click|preventDefault={clearEmail}
-          use:loongArkButton={{ variant: "ghost", size: "sm" }}
-          data-testid={`${scenarioTestIds.inputSuffix}-button`}
-        >
-          {defaultScenario.suffixAction}
-        </button>
-      </span>
-    </div>
-  </label>
-  <p
-    data-testid={scenarioTestIds.helperText}
-    use:loongArkInputHelper={{ variant: email ? "default" : "error" }}
-  >
-    {defaultScenario.helperText}
-  </p>
-
-  <Dialog.Root>
-    <Dialog.Trigger>
-      <button
-        type="button"
-        use:loongArkButton={{ variant: "solid" }}
-        data-testid={scenarioTestIds.primaryButton}
+    <LoongArkDialog.Root
+      ><LoongArkDialog.Trigger
         disabled={!email}
-      >
-        {defaultScenario.primaryLabel}
-      </button>
-    </Dialog.Trigger>
-    <Dialog.Backdrop use:loongArkDialogOverlay={{ blur: true }} />
-    <Dialog.Positioner>
-      <Dialog.Content use:loongArkDialogContent={{ size: "md" }}>
-        <Dialog.CloseTrigger
-          use:loongArkDialogCloseTrigger
-          aria-label="Close"
-        />
-        <Dialog.Title
-          data-testid={scenarioTestIds.dialogTitle}
-          use:loongArkDialogTitle
-        >
-          {defaultScenario.dialogTitle}
-        </Dialog.Title>
-        <Dialog.Description
-          data-testid={scenarioTestIds.dialogDescription}
-          use:loongArkDialogDescription
-        >
-          {defaultScenario.dialogDescription}
-        </Dialog.Description>
-        <footer use:loongArkDialogFooter>
-          <button
-            type="button"
-            use:loongArkButton={{ variant: "ghost" }}
-            data-testid={scenarioTestIds.secondaryButton}
-          >
-            {defaultScenario.secondaryLabel}
-          </button>
-          <button
-            type="button"
-            use:loongArkButton={{ variant: "solid" }}
-            data-testid={`${scenarioTestIds.primaryButton}-dialog`}
-          >
-            {defaultScenario.primaryLabel}
-          </button>
-        </footer>
-      </Dialog.Content>
-    </Dialog.Positioner>
-  </Dialog.Root>
-</form>
+        data-testid={scenarioTestIds.primaryButton}
+        >{defaultScenario.primaryLabel}</LoongArkDialog.Trigger
+      ><LoongArkDialog.Portal
+        ><LoongArkDialog.Overlay /><LoongArkDialog.Positioner
+          ><LoongArkDialog.Content
+            ><LoongArkDialog.Title data-testid={scenarioTestIds.dialogTitle}
+              >{defaultScenario.dialogTitle}</LoongArkDialog.Title
+            ><LoongArkDialog.Description
+              data-testid={scenarioTestIds.dialogDescription}
+              >{defaultScenario.dialogDescription}</LoongArkDialog.Description
+            ><LoongArkDialog.Footer
+              ><LoongArkDialog.CloseTrigger
+                >{defaultScenario.secondaryLabel}</LoongArkDialog.CloseTrigger
+              ><LoongArkButton
+                data-testid={scenarioTestIds.primaryButton + "-dialog"}
+                >{defaultScenario.primaryLabel}</LoongArkButton
+              ></LoongArkDialog.Footer
+            ></LoongArkDialog.Content
+          ></LoongArkDialog.Positioner
+        ></LoongArkDialog.Portal
+      ></LoongArkDialog.Root
+    >
+  </form></LoongArkProvider
+>

@@ -30,13 +30,23 @@ interface PaginationDemoProps {
   orientation?: "horizontal" | "vertical";
 }
 
-const PaginationDemo = ({ size = "md", orientation = "horizontal" }: PaginationDemoProps) => {
+const PaginationDemo = ({
+  size = "md",
+  orientation = "horizontal",
+}: PaginationDemoProps) => {
   const [page, setPage] = React.useState(1);
   const totalPages = 5;
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
-    <LoongArkPaginationRoot size={size} orientation={orientation}>
+    <LoongArkPaginationRoot
+      size={size}
+      orientation={orientation}
+      page={page}
+      count={totalPages * 10}
+      pageSize={10}
+      onPageChange={(details: { page: number }) => setPage(details.page)}
+    >
       <LoongArkPaginationPrevTrigger
         disabled={page === 1}
         onClick={() => setPage((prev) => Math.max(1, prev - 1))}
@@ -46,6 +56,8 @@ const PaginationDemo = ({ size = "md", orientation = "horizontal" }: PaginationD
       <LoongArkPaginationList>
         {pages.map((value) => (
           <LoongArkPaginationItem
+            type="page"
+            value={value}
             key={value}
             aria-current={page === value ? "page" : undefined}
             data-selected={page === value ? "true" : undefined}
@@ -81,16 +93,24 @@ export const Sizes: Story = {
 
 export const WithEllipsis: Story = {
   render: () => (
-    <LoongArkPaginationRoot>
-      <LoongArkPaginationPrevTrigger disabled>Prev</LoongArkPaginationPrevTrigger>
+    <LoongArkPaginationRoot count={100} pageSize={10} defaultPage={1}>
+      <LoongArkPaginationPrevTrigger disabled>
+        Prev
+      </LoongArkPaginationPrevTrigger>
       <LoongArkPaginationList>
-        <LoongArkPaginationItem aria-current="page" data-selected="true">
+        <LoongArkPaginationItem type="page" value={1}>
           1
         </LoongArkPaginationItem>
-        <LoongArkPaginationItem>2</LoongArkPaginationItem>
-        <LoongArkPaginationItem>3</LoongArkPaginationItem>
-        <LoongArkPaginationEllipsis>...</LoongArkPaginationEllipsis>
-        <LoongArkPaginationItem>10</LoongArkPaginationItem>
+        <LoongArkPaginationItem type="page" value={2}>
+          2
+        </LoongArkPaginationItem>
+        <LoongArkPaginationItem type="page" value={3}>
+          3
+        </LoongArkPaginationItem>
+        <LoongArkPaginationEllipsis index={0}>...</LoongArkPaginationEllipsis>
+        <LoongArkPaginationItem type="page" value={10}>
+          10
+        </LoongArkPaginationItem>
       </LoongArkPaginationList>
       <LoongArkPaginationNextTrigger>Next</LoongArkPaginationNextTrigger>
     </LoongArkPaginationRoot>

@@ -1,63 +1,25 @@
-import { createContext, useContext, createMemo, createEffect } from "solid-js";
-import type { ParentComponent } from "solid-js";
-import { createLoongArkTheme, LoongArkTheme } from "@loongark/theme";
-import { bootstrapKit } from "@loongark/kit";
-
-const ThemeContext = createContext<LoongArkTheme | null>(null);
-
-export interface LoongArkProviderProps {
-  mode?: "light" | "dark" | "high-contrast";
-  brand?: string;
-  accent?: string;
-  children?: unknown;
-}
-
-export const LoongArkProvider: ParentComponent<LoongArkProviderProps> = (
-  props
-) => {
-  const theme = createMemo(() => {
-    const instance = createLoongArkTheme({
-      mode: props.mode,
-      brand: props.brand,
-      accent: props.accent,
-    });
-    return instance;
-  });
-
-  createEffect(() => {
-    const instance = theme();
-    bootstrapKit(instance);
-    instance.mount();
-  });
-
-  return ThemeContext.Provider({
-    value: theme(),
-    get children() {
-      return props.children;
-    },
-  });
-};
-
-export const useLoongArkTheme = () => {
-  const theme = useContext(ThemeContext);
-  if (!theme) {
-    throw new Error("LoongArk theme context is missing");
-  }
-  return theme;
-};
-
+export { LoongArkProvider, type LoongArkProviderProps } from "./provider";
+export { useLoongArkTheme } from "./theme-context";
+export { LoongArkPortal } from "./components/portal";
 export { LoongArkButton } from "./components/button";
 export {
   LoongArkInputRoot,
+  LoongArkInputGroup,
+  LoongArkInputInput,
   LoongArkInputControl,
   LoongArkTextareaControl,
   LoongArkInputHelperText,
+  LoongArkInputErrorText,
   LoongArkInputLabel,
   LoongArkInputPrefix,
   LoongArkInputSuffix,
 } from "./components/input";
 export {
   LoongArkDialog,
+  LoongArkDialogRoot,
+  LoongArkDialogPositioner,
+  LoongArkDialogPortal,
+  LoongArkDialogTrigger,
   LoongArkDialogOverlay,
   LoongArkDialogContent,
   LoongArkDialogTitle,
@@ -76,6 +38,7 @@ export {
 export {
   LoongArkSwitch,
   LoongArkSwitchRoot,
+  LoongArkSwitchHiddenInput,
   LoongArkSwitchControl,
   LoongArkSwitchThumb,
   LoongArkSwitchLabel,
@@ -483,3 +446,27 @@ export {
   LoongArkTreeViewNodeCheckboxIndicator,
   LoongArkTreeViewNodeRenameInput,
 } from "./components/tree-view";
+
+export * from "./components/extended";
+
+export * from "./components/layout";
+
+export * from "./components/composed";
+
+export * from "./components/data";
+
+export { createListCollection } from "@ark-ui/solid/collection";
+export { createTreeCollection } from "@ark-ui/solid/collection";
+export { parseDate } from "@ark-ui/solid/date-picker";
+export { parseColor } from "@ark-ui/solid/color-picker";
+export { TreeViewNodeProvider as LoongArkTreeViewNodeProvider } from "@ark-ui/solid/tree-view";
+
+export { LoongArkTextarea } from "./components/textarea";
+export type { LoongArkTextareaProps } from "./components/textarea";
+
+export { LoongArkTransferList } from "./components/transfer-list";
+export { LoongArkTimePicker } from "./components/time-picker";
+export type { LoongArkTransferListProps } from "./components/transfer-list";
+export type { LoongArkTimePickerProps } from "./components/time-picker";
+
+export * from "./components/action-media";

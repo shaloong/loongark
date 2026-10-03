@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 import { defineComponent, h, type PropType } from "vue";
 import {
   CheckboxRoot,
@@ -5,8 +6,8 @@ import {
   CheckboxLabel,
   CheckboxIndicator,
   CheckboxHiddenInput,
-  type CheckedState,
-  type CheckedChangeDetails,
+  type CheckboxCheckedState as CheckedState,
+  type CheckboxCheckedChangeDetails as CheckedChangeDetails,
 } from "@ark-ui/vue/checkbox";
 import type { CheckboxSize } from "@loongark/primitives";
 
@@ -52,7 +53,7 @@ export const LoongArkCheckboxRoot = defineComponent({
   },
   setup(props, { slots }) {
     return () =>
-      h(
+      renderPart(
         CheckboxRoot,
         {
           checked: props.checked as CheckedState | undefined,
@@ -67,8 +68,8 @@ export const LoongArkCheckboxRoot = defineComponent({
           "data-scope": "checkbox",
           "data-part": "root",
           "data-size": props.size,
-        } as any,
-        slots.default ? { default: slots.default } : undefined
+        },
+        slots.default ? { default: slots.default } : undefined,
       );
   },
 });
@@ -84,14 +85,14 @@ export const LoongArkCheckboxControl = defineComponent({
   },
   setup(props, { slots }) {
     return () =>
-      h(
+      renderPart(
         CheckboxControl,
         {
           "data-scope": "checkbox",
           "data-part": "control",
           "data-size": props.size,
         },
-        slots.default ? { default: slots.default } : undefined
+        slots.default ? { default: slots.default } : undefined,
       );
   },
 });
@@ -101,13 +102,13 @@ export const LoongArkCheckboxLabel = defineComponent({
   name: "LoongArkCheckboxLabel",
   setup(props, { slots }) {
     return () =>
-      h(
+      renderPart(
         CheckboxLabel,
         {
           "data-scope": "checkbox",
           "data-part": "label",
         },
-        slots.default ? { default: slots.default } : undefined
+        slots.default ? { default: slots.default } : undefined,
       );
   },
 });
@@ -123,14 +124,14 @@ export const LoongArkCheckboxIndicator = defineComponent({
   },
   setup(props, { slots }) {
     return () =>
-      h(
+      renderPart(
         CheckboxIndicator,
         {
           indeterminate: props.indeterminate,
           "data-scope": "checkbox",
           "data-part": "indicator",
         },
-        slots.default ? { default: slots.default } : undefined
+        slots.default ? { default: slots.default } : undefined,
       );
   },
 });
@@ -140,7 +141,7 @@ export const LoongArkCheckboxHiddenInput = defineComponent({
   name: "LoongArkCheckboxHiddenInput",
   setup() {
     return () =>
-      h(CheckboxHiddenInput, {
+      renderPart(CheckboxHiddenInput, {
         "data-scope": "checkbox",
         "data-part": "hidden-input",
       });

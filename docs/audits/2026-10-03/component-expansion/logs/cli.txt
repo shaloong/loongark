@@ -1,0 +1,5 @@
+[loongark] 写入 CSS: E:\dev\loongark\docs\audits\2026-10-03\component-expansion\token-artifacts\tokens.css
+[loongark] 写入 JSON: E:\dev\loongark\docs\audits\2026-10-03\component-expansion\token-artifacts\tokens.json
+[loongark] JSON 校验通过 (E:\dev\loongark\docs\audits\2026-10-03\component-expansion\token-artifacts\tokens.json)
+[loongark] CSS 校验通过 (E:\dev\loongark\docs\audits\2026-10-03\component-expansion\token-artifacts\tokens.css)
+[loongark] 所有目标均已匹配最新 Token 产物

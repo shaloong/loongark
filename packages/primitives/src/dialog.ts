@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type DialogSize = "sm" | "md" | "lg";
@@ -58,41 +57,30 @@ interface DialogDesignTokens {
   };
 }
 
-const hexToOverlay = (hex: string, alpha = 0.7) => {
-  const sanitized = hex.replace("#", "");
-  const bigint = parseInt(sanitized, 16);
-  const r = (bigint >> 16) & 255;
-  const g = (bigint >> 8) & 255;
-  const b = bigint & 255;
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-};
-
 const extractDialogTokens = (theme: LoongArkTheme): DialogDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
   const layoutSpace = asTokenTree(space.layout);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
-
-  const overlayBase = toStringToken(neutral["900"], "#121212");
 
   return {
     fontFamily: {
       heading: toStringToken(
         fontFamily.heading,
-        "'DingTalk JinBuTi', sans-serif"
+        "'DingTalk JinBuTi', sans-serif",
       ),
       body: toStringToken(fontFamily.body, "'Alibaba PuHuiTi 3.0', sans-serif"),
     },
@@ -124,15 +112,18 @@ const extractDialogTokens = (theme: LoongArkTheme): DialogDesignTokens => {
       text: toStringToken(neutral["900"], "#121212"),
       subtle: toStringToken(neutral["500"], "#3A3A3C"),
       border: toStringToken(neutral["100"], "#E5E6EB"),
-      overlay: hexToOverlay(overlayBase, 0.65),
+      overlay: toStringToken(
+        asTokenTree(color.semantic).overlay,
+        "rgba(0,0,0,0.5)",
+      ),
     },
     shadow: toStringToken(
-      (theme.tokens as any).shadow?.xl,
-      "0 20px 60px rgba(0, 0, 0, 0.18)"
+      theme.styleTokens.shadow.xl,
+      "0 20px 60px rgba(0, 0, 0, 0.18)",
     ),
     motion: {
       durationIn: toStringToken(duration.base, "200ms"),
-      durationOut: toStringToken(duration.fast, "120ms"),
+      durationOut: toStringToken(duration.exit, "150ms"),
       easing: toStringToken(easing.emphasized, "cubic-bezier(0.2, 0, 0, 1)"),
     },
   };
@@ -147,11 +138,11 @@ const buildDialogStyles = (theme: LoongArkTheme): string => {
   const descriptionSelector = `${scopeSelector}[data-part="description"]`;
   const footerSelector = `${scopeSelector}[data-part="footer"]`;
   const closeSelector = `${scopeSelector}[data-part="close-trigger"]`;
-  const motionScaleSelector = `${contentSelector}:not([data-motion]), ${contentSelector}[data-motion='scale']`;
+  const motionScaleSelector = `${contentSelector}:is(:not([data-motion]), [data-motion='scale'])`;
   const motionSlideSelector = `${contentSelector}[data-motion='slide']`;
 
   return `
-@keyframes lk-dialog-overlay-in-${theme.mode} {
+@keyframes lk-dialog-overlay-in {
   from {
     opacity: 0;
   }
@@ -160,7 +151,7 @@ const buildDialogStyles = (theme: LoongArkTheme): string => {
   }
 }
 
-@keyframes lk-dialog-overlay-out-${theme.mode} {
+@keyframes lk-dialog-overlay-out {
   from {
     opacity: 1;
   }
@@ -169,7 +160,7 @@ const buildDialogStyles = (theme: LoongArkTheme): string => {
   }
 }
 
-@keyframes lk-dialog-content-scale-in-${theme.mode} {
+@keyframes lk-dialog-content-scale-in {
   from {
     opacity: 0;
     transform: translate(-50%, -48%) scale(0.96);
@@ -180,7 +171,7 @@ const buildDialogStyles = (theme: LoongArkTheme): string => {
   }
 }
 
-@keyframes lk-dialog-content-scale-out-${theme.mode} {
+@keyframes lk-dialog-content-scale-out {
   from {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
@@ -191,7 +182,7 @@ const buildDialogStyles = (theme: LoongArkTheme): string => {
   }
 }
 
-@keyframes lk-dialog-content-slide-in-${theme.mode} {
+@keyframes lk-dialog-content-slide-in {
   from {
     opacity: 0;
     transform: translate(-50%, -40%);
@@ -202,7 +193,7 @@ const buildDialogStyles = (theme: LoongArkTheme): string => {
   }
 }
 
-@keyframes lk-dialog-content-slide-out-${theme.mode} {
+@keyframes lk-dialog-content-slide-out {
   from {
     opacity: 1;
     transform: translate(-50%, -50%);
@@ -218,28 +209,21 @@ ${overlaySelector} {
   inset: 0;
   background: ${tokens.colors.overlay};
   backdrop-filter: blur(0px);
-  z-index: 1000;
+  z-index: ${theme.tokens.zIndex.dialog};
   opacity: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) [data-scope="dialog"] * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${overlaySelector}[data-blur='true'] {
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(var(--lk-space-component-xs));
 }
 
 ${overlaySelector}[data-state='open'] {
-  animation: lk-dialog-overlay-in-${theme.mode} ${tokens.motion.durationIn} ${tokens.motion.easing} forwards;
+  animation: lk-dialog-overlay-in ${tokens.motion.durationIn} ${tokens.motion.easing} forwards;
 }
 
 ${overlaySelector}[data-state='closed'] {
-  animation: lk-dialog-overlay-out-${theme.mode} ${tokens.motion.durationOut} ${tokens.motion.easing} forwards;
+  animation: lk-dialog-overlay-out ${tokens.motion.durationOut} ${tokens.motion.easing} forwards;
 }
 
 ${contentSelector} {
@@ -252,23 +236,23 @@ ${contentSelector} {
   border: 1px solid ${tokens.colors.border};
   border-radius: ${tokens.radius.md};
   box-shadow: ${tokens.shadow};
-  width: min(calc(100% - ${tokens.space.paddingLg}), 720px);
+  width: min(calc(100% - ${tokens.space.paddingLg}), var(--lk-control-dialogwidth-md));
   max-height: calc(100% - ${tokens.space.paddingLg});
   padding: ${tokens.space.padding};
   display: flex;
   flex-direction: column;
   gap: ${tokens.space.gap};
-  z-index: 1001;
+  z-index: calc(${theme.tokens.zIndex.dialog} + 1);
 }
 
 ${contentSelector}[data-size='sm'] {
-  width: min(calc(100% - ${tokens.space.paddingLg}), 420px);
+  width: min(calc(100% - ${tokens.space.paddingLg}), var(--lk-control-dialogwidth-sm));
   border-radius: ${tokens.radius.sm};
 }
 
 ${contentSelector}[data-size='lg'] {
-  width: min(calc(100% - ${tokens.space.paddingLg}), 960px);
-  padding: ${tokens.space.paddingLg};
+  width: min(calc(100% - ${tokens.space.paddingLg}), var(--lk-control-dialogwidth-lg));
+  padding: ${tokens.space.padding};
   border-radius: ${tokens.radius.lg};
 }
 
@@ -278,22 +262,25 @@ ${contentSelector}[data-placement='top'] {
 }
 
 ${motionScaleSelector}[data-state='open'] {
-  animation: lk-dialog-content-scale-in-${theme.mode} ${tokens.motion.durationIn} ${tokens.motion.easing} forwards;
+  animation: lk-dialog-content-scale-in ${tokens.motion.durationIn} ${tokens.motion.easing} forwards;
 }
 
 ${motionScaleSelector}[data-state='closed'] {
-  animation: lk-dialog-content-scale-out-${theme.mode} ${tokens.motion.durationOut} ${tokens.motion.easing} forwards;
+  animation: lk-dialog-content-scale-out ${tokens.motion.durationOut} ${tokens.motion.easing} forwards;
 }
 
 ${motionSlideSelector}[data-state='open'] {
-  animation: lk-dialog-content-slide-in-${theme.mode} ${tokens.motion.durationIn} ${tokens.motion.easing} forwards;
+  animation: lk-dialog-content-slide-in ${tokens.motion.durationIn} ${tokens.motion.easing} forwards;
 }
 
 ${motionSlideSelector}[data-state='closed'] {
-  animation: lk-dialog-content-slide-out-${theme.mode} ${tokens.motion.durationOut} ${tokens.motion.easing} forwards;
+  animation: lk-dialog-content-slide-out ${tokens.motion.durationOut} ${tokens.motion.easing} forwards;
 }
 
+${contentSelector}[data-state='closed'], ${overlaySelector}[data-state='closed'] { pointer-events: none; }
+
 ${titleSelector} {
+  text-wrap: balance;
   font-family: ${tokens.fontFamily.heading};
   font-size: ${tokens.fontSize.title};
   line-height: ${tokens.lineHeight.title};
@@ -302,6 +289,7 @@ ${titleSelector} {
 }
 
 ${descriptionSelector} {
+  text-wrap: pretty;
   font-family: ${tokens.fontFamily.body};
   font-size: ${tokens.fontSize.body};
   line-height: ${tokens.lineHeight.body};
@@ -340,13 +328,12 @@ ${closeSelector}:hover {
   border-color: ${tokens.colors.border};
 }
 
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) ${overlaySelector}[data-state],
-  :root:not([data-lk-motion="force"]) ${contentSelector}[data-state] {
-    animation-duration: 0.01ms;
-    animation-iteration-count: 1;
-  }
+${closeSelector}:empty::before {
+  content: "\\00d7";
+  font-size: 20px;
+  line-height: 1;
 }
+
 `;
 };
 
@@ -388,8 +375,8 @@ const dialogPrimitive = createPrimitive<DialogPrimitiveProps>(
   DIALOG_CONTRACT,
   (theme) => {
     const css = buildDialogStyles(theme);
-    mountPrimitiveStyles(`dialog-${theme.mode}`, css);
-  }
+    theme.mountStyles(`dialog`, css);
+  },
 );
 
 registerPrimitive(dialogPrimitive);

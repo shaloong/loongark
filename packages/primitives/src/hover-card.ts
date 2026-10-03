@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type HoverCardSize = "sm" | "md" | "lg";
@@ -25,17 +24,19 @@ interface HoverCardDesignTokens {
   };
 }
 
-const extractHoverCardTokens = (theme: LoongArkTheme): HoverCardDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+const extractHoverCardTokens = (
+  theme: LoongArkTheme,
+): HoverCardDesignTokens => {
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
 
   return {
@@ -154,8 +155,8 @@ const hoverCardPrimitive = createPrimitive<HoverCardPrimitiveProps>(
   HOVER_CARD_CONTRACT,
   (theme) => {
     const css = buildHoverCardStyles(theme);
-    mountPrimitiveStyles(`hover-card-${theme.mode}`, css);
-  }
+    theme.mountStyles(`hover-card-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(hoverCardPrimitive);

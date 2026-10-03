@@ -9,14 +9,24 @@ import type { ClipboardSize } from "@loongark/primitives";
 
 type ArkClipboardRootProps = ComponentPropsWithoutRef<typeof Clipboard.Root>;
 type ArkClipboardLabelProps = ComponentPropsWithoutRef<typeof Clipboard.Label>;
-type ArkClipboardControlProps = ComponentPropsWithoutRef<typeof Clipboard.Control>;
+type ArkClipboardControlProps = ComponentPropsWithoutRef<
+  typeof Clipboard.Control
+>;
 type ArkClipboardInputProps = ComponentPropsWithoutRef<typeof Clipboard.Input>;
-type ArkClipboardTriggerProps = ComponentPropsWithoutRef<typeof Clipboard.Trigger>;
-type ArkClipboardIndicatorProps = ComponentPropsWithoutRef<typeof Clipboard.Indicator>;
-type ArkClipboardValueTextProps = ComponentPropsWithoutRef<typeof Clipboard.ValueText>;
+type ArkClipboardTriggerProps = ComponentPropsWithoutRef<
+  typeof Clipboard.Trigger
+>;
+type ArkClipboardIndicatorProps = ComponentPropsWithoutRef<
+  typeof Clipboard.Indicator
+>;
+type ArkClipboardValueTextProps = ComponentPropsWithoutRef<
+  typeof Clipboard.ValueText
+>;
 
-export interface LoongArkClipboardRootProps
-  extends Omit<ArkClipboardRootProps, "asChild"> {
+export interface LoongArkClipboardRootProps extends Omit<
+  ArkClipboardRootProps,
+  "asChild"
+> {
   size?: ClipboardSize;
   disabled?: boolean;
   children?: ReactNode;
@@ -107,7 +117,7 @@ export const LoongArkClipboardTrigger = forwardRef<
 LoongArkClipboardTrigger.displayName = "LoongArkClipboardTrigger";
 
 export const LoongArkClipboardIndicator = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   ArkClipboardIndicatorProps
 >((props, ref) => {
   return (
@@ -123,7 +133,7 @@ export const LoongArkClipboardIndicator = forwardRef<
 LoongArkClipboardIndicator.displayName = "LoongArkClipboardIndicator";
 
 export const LoongArkClipboardValueText = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   ArkClipboardValueTextProps
 >((props, ref) => {
   return (

@@ -50,28 +50,31 @@ const StepsDemo = ({
 
   return (
     <LoongArkStepsRoot
-      value={value}
+      step={value}
       count={steps.length}
       size={size}
       orientation={orientation}
-      onValueChange={(details: { value: number | string }) =>
-        setValue(Number(details.value))
-      }
+      onStepChange={(details: { step: number }) => setValue(details.step)}
     >
       <LoongArkStepsList>
         {steps.map((step, index) => (
           <React.Fragment key={step.title}>
-            <LoongArkStepsItem value={index + 1}>
+            <LoongArkStepsItem index={index}>
               <LoongArkStepsIndicator>{index + 1}</LoongArkStepsIndicator>
               <div>
                 <LoongArkStepsTrigger>{step.title}</LoongArkStepsTrigger>
-                <LoongArkStepsContent>{step.description}</LoongArkStepsContent>
+                <span>{step.description}</span>
               </div>
+              {index < steps.length - 1 && <LoongArkStepsSeparator />}
             </LoongArkStepsItem>
-            {index < steps.length - 1 && <LoongArkStepsSeparator />}
           </React.Fragment>
         ))}
       </LoongArkStepsList>
+      {steps.map((step, index) => (
+        <LoongArkStepsContent key={step.title} index={index}>
+          {step.description}
+        </LoongArkStepsContent>
+      ))}
       <LoongArkStepsCompletedContent>
         All steps completed.
       </LoongArkStepsCompletedContent>

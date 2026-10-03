@@ -1,7 +1,9 @@
+import { dataProps } from "../data-props";
+import type { JSX } from "solid-js";
 import { Field } from "@ark-ui/solid/field";
 import { ark } from "@ark-ui/solid";
 import type { InputPrimitiveProps } from "@loongark/primitives";
-import { mergeProps } from "solid-js";
+import { mergeProps, splitProps } from "solid-js";
 import type { Component } from "solid-js";
 import { boolAttr, normalizeState } from "../utils";
 
@@ -12,8 +14,7 @@ type BaseInput = Partial<InputPrimitiveProps> & {
   disabled?: boolean;
   readOnly?: boolean;
   multiline?: boolean;
-  children?: unknown;
-  [key: string]: unknown;
+  children?: JSX.Element;
 };
 
 const inputDefaults: Required<
@@ -26,66 +27,113 @@ const inputDefaults: Required<
   multiline: false,
 };
 
-const buildControlProps = (
+const buildControlProps = <P extends BaseInput>(
   part: "root" | "control",
-  props: BaseInput
+  props: P,
 ) => {
   const merged = mergeProps(inputDefaults, props);
-  const { size, state, disabled, readOnly, multiline, children, ...rest } =
-    merged;
-
-  return {
-    ...rest,
-    disabled,
-    readonly: readOnly,
-    children,
+  const [local, rest] = splitProps(merged, [
+    "size",
+    "state",
+    "disabled",
+    "readOnly",
+    "multiline",
+  ]);
+  return mergeProps(rest, {
+    get disabled() {
+      return local.disabled;
+    },
+    get invalid() {
+      return local.state === "invalid";
+    },
+    get readOnly() {
+      return local.readOnly;
+    },
     "data-scope": "input",
     "data-part": part,
-    "data-size": size,
-    "data-state": normalizeState(state),
-    "data-multiline": boolAttr(multiline),
-  };
+    get "data-size"() {
+      return local.size;
+    },
+    get "data-state"() {
+      return normalizeState(local.state);
+    },
+    get "data-multiline"() {
+      return boolAttr(local.multiline);
+    },
+  });
 };
 
-export const LoongArkInputRoot: Component<BaseInput> = (props) =>
-  Field.Root({
-    ...buildControlProps("root", props),
-    "data-disabled": boolAttr(props.disabled),
-  });
+export const LoongArkInputRoot: Component<
+  BaseInput & import("@ark-ui/solid/field").FieldRootProps
+> = (props) =>
+  Field.Root(
+    mergeProps(buildControlProps("root", props), {
+      get "data-disabled"() {
+        return boolAttr(props.disabled);
+      },
+    }),
+  );
 
-export const LoongArkInputControl: Component<BaseInput> = (props) =>
-  Field.Input(buildControlProps("control", props));
+export const LoongArkInputControl: Component<
+  BaseInput & Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "size">
+> = (props) => Field.Input(buildControlProps("control", props));
 
-export const LoongArkTextareaControl: Component<BaseInput> = (props) =>
-  Field.Textarea(buildControlProps("control", { ...props, multiline: true }));
+export const LoongArkInputInput = LoongArkInputControl;
 
-interface HelperProps {
+export const LoongArkInputGroup: Component<
+  BaseInput & JSX.HTMLAttributes<HTMLDivElement>
+> = (props) =>
+  ark.div(mergeProps(props, { "data-scope": "input", "data-part": "group" }));
+
+export const LoongArkTextareaControl: Component<
+  BaseInput & JSX.TextareaHTMLAttributes<HTMLTextAreaElement>
+> = (props) =>
+  Field.Textarea(
+    buildControlProps("control", mergeProps(props, { multiline: true })),
+  );
+
+interface HelperProps extends Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
   variant?: "default" | "error" | "success";
-  children?: unknown;
-  [key: string]: unknown;
+  children?: JSX.Element;
 }
 
 export const LoongArkInputHelperText: Component<HelperProps> = (props) => {
   const { variant = "default", children, ...rest } = props;
-  return Field.HelperText({
-    ...rest,
-    children,
-    "data-scope": "input",
-    "data-part": "helper-text",
-    "data-variant": variant === "default" ? undefined : variant,
-  });
+  return (props.variant === "error" ? Field.ErrorText : Field.HelperText)(
+    dataProps({
+      ...rest,
+      children,
+      "data-scope": "input",
+      "data-part": "helper-text",
+      "data-variant": variant === "default" ? undefined : variant,
+    }),
+  );
 };
 
-export const LoongArkInputLabel: Component<{ children?: unknown }> = (props) =>
-  Field.Label({
-    ...props,
-    "data-scope": "input",
-    "data-part": "label",
-  });
+export const LoongArkInputErrorText: Component<Omit<HelperProps, "variant">> = (
+  props,
+) =>
+  Field.ErrorText(
+    mergeProps(props, {
+      "data-scope": "input",
+      "data-part": "helper-text",
+      "data-variant": "error",
+    }),
+  );
 
-interface InputAddonProps {
-  children?: unknown;
-  [key: string]: unknown;
+export const LoongArkInputLabel: Component<
+  Omit<JSX.HTMLAttributes<HTMLElement>, "ref">
+> = (props) =>
+  Field.Label(
+    dataProps({
+      ...props,
+      "data-scope": "input",
+      "data-part": "label",
+    }),
+  );
+
+interface InputAddonProps extends Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
+  children?: JSX.Element;
 }
 
 interface InputSuffixProps extends InputAddonProps {
@@ -93,22 +141,28 @@ interface InputSuffixProps extends InputAddonProps {
 }
 
 export const LoongArkInputPrefix: Component<InputAddonProps> = (props) =>
-  ark.span({
-    ...props,
-    "data-scope": "input",
-    "data-part": "prefix",
-  });
+  ark.span(
+    dataProps({
+      ...props,
+      "data-scope": "input",
+      "data-part": "prefix",
+    }),
+  );
 
 export const LoongArkInputSuffix: Component<InputSuffixProps> = (props) => {
   const { action = "none", ...rest } = props;
-  const isAction = action === "clear" || action === "button";
+  const isAction =
+    (action === "clear" || action === "button") &&
+    typeof props.onClick === "function";
   const Element = isAction ? ark.button : ark.span;
 
-  return Element({
-    ...rest,
-    type: isAction ? "button" : undefined,
-    "data-scope": "input",
-    "data-part": "suffix",
-    "data-action": isAction ? "clear" : undefined,
-  });
+  return Element(
+    dataProps({
+      ...rest,
+      type: isAction ? "button" : undefined,
+      "data-scope": "input",
+      "data-part": "suffix",
+      "data-action": isAction ? "clear" : undefined,
+    }),
+  );
 };

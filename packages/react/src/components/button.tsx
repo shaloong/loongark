@@ -1,16 +1,19 @@
+import { dataProps } from "../data-props";
 import { ark } from "@ark-ui/react";
 import type { ButtonPrimitiveProps } from "@loongark/primitives";
 import { createElement, forwardRef } from "react";
-import type { ReactNode } from "react";
+import type { ReactNode, ButtonHTMLAttributes } from "react";
 
 export type ButtonVariant = NonNullable<ButtonPrimitiveProps["variant"]>;
 export type ButtonSize = NonNullable<ButtonPrimitiveProps["size"]>;
 
-export interface LoongArkButtonProps extends Partial<ButtonPrimitiveProps> {
+export interface LoongArkButtonProps
+  extends
+    Partial<ButtonPrimitiveProps>,
+    ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
-  [key: string]: unknown;
 }
 
 export const LoongArkButton = forwardRef<
@@ -28,13 +31,13 @@ export const LoongArkButton = forwardRef<
       type = "button",
       ...rest
     },
-    ref
+    ref,
   ) => {
     const isInteractiveDisabled = disabled || loading;
 
     return createElement(
       ark.button,
-      {
+      dataProps({
         ...rest,
         ref,
         type,
@@ -47,10 +50,10 @@ export const LoongArkButton = forwardRef<
         "data-loading": loading ? "true" : undefined,
         "aria-disabled": isInteractiveDisabled || undefined,
         "aria-busy": loading || undefined,
-      },
-      children
+      }),
+      children,
     );
-  }
+  },
 );
 
 LoongArkButton.displayName = "LoongArkButton";

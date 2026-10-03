@@ -6,7 +6,7 @@ import {
 } from "../examples/shared/demoScenario";
 
 const storyPath =
-  "/iframe.html?id=examples-buttoninputdialog--default&viewMode=story";
+  "/iframe.html?id=examples-complete-demos-button-input-dialog--default&viewMode=story";
 
 const disableMotionStyles = `
   *,
@@ -40,7 +40,7 @@ test.describe("ButtonInputDialog 视觉与无障碍", () => {
       "button-input-dialog-dialog-open.png",
       {
         animations: "disabled",
-      }
+      },
     );
 
     const axe = new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]);
@@ -63,7 +63,7 @@ async function disableAnimations(page: Page) {
 
 async function resetFocus(page: Page) {
   await page.evaluate(() =>
-    (document.activeElement as HTMLElement | null)?.blur()
+    (document.activeElement as HTMLElement | null)?.blur(),
   );
 }
 

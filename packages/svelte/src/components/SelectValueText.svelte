@@ -1,9 +1,13 @@
 <script lang="ts">
+  import type { ComponentProps } from "svelte";
   import { Select } from "@ark-ui/svelte/select";
-
-  export let placeholder: string | undefined = undefined;
+  let { children, ...props }: ComponentProps<typeof Select.ValueText> =
+    $props();
 </script>
 
-<Select.ValueText {placeholder} data-scope="select" data-part="value-text">
-  <slot />
-</Select.ValueText>
+<Select.ValueText
+  {...props}
+  {children}
+  data-scope="select"
+  data-part="value-text"
+/>

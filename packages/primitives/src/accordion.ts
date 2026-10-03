@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type AccordionSize = "sm" | "md" | "lg";
@@ -43,23 +42,25 @@ interface AccordionDesignTokens {
   };
 }
 
-const extractAccordionTokens = (theme: LoongArkTheme): AccordionDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+const extractAccordionTokens = (
+  theme: LoongArkTheme,
+): AccordionDesignTokens => {
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
 
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -122,13 +123,6 @@ const buildAccordionStyles = (theme: LoongArkTheme): string => {
   const interactiveTrigger = `${trigger}:not([disabled]):not([data-disabled='true'])`;
 
   return `
-  @media (prefers-reduced-motion: reduce) {
-    :root:not([data-lk-motion="force"]) [data-scope="accordion"] * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 
   ${root} {
     display: flex;
@@ -296,13 +290,10 @@ const accordionContract: PrimitiveContract<AccordionPrimitiveProps> = {
   },
 };
 
-const AccordionPrimitive = createPrimitive(
-  accordionContract,
-  (theme) => {
-    const css = buildAccordionStyles(theme);
-    mountPrimitiveStyles(`accordion-${theme.mode}`, css);
-  }
-);
+const AccordionPrimitive = createPrimitive(accordionContract, (theme) => {
+  const css = buildAccordionStyles(theme);
+  theme.mountStyles(`accordion-${theme.mode}`, css);
+});
 
 registerPrimitive(AccordionPrimitive);
 

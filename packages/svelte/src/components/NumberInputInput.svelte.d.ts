@@ -1,9 +1,17 @@
-import type { SvelteComponent } from "svelte";
-import type { NumberInputPrimitiveProps } from "@loongark/primitives";
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { NumberInput } from "@ark-ui/svelte/number-input";
+import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
 
-export default class NumberInputInput extends SvelteComponent<{
-  size?: NonNullable<NumberInputPrimitiveProps["size"]>;
-  state?: NonNullable<NumberInputPrimitiveProps["state"]>;
-  disabled?: boolean;
-  readOnly?: boolean;
-}> {}
+export default class LoongArkNumberInputInput extends SvelteComponent<
+  Omit<
+    ComponentProps<typeof NumberInput.Input>,
+    "children" | "size" | "state" | "disabled" | "readOnly"
+  > & {
+    size?: NumberInputSize;
+    state?: NumberInputState;
+    disabled?: boolean;
+    readOnly?: boolean;
+  },
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

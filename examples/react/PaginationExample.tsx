@@ -1,31 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
+
 import {
   LoongArkPaginationRoot,
   LoongArkPaginationList,
   LoongArkPaginationItem,
   LoongArkPaginationPrevTrigger,
   LoongArkPaginationNextTrigger,
+  LoongArkPaginationEllipsis,
 } from "@loongark/react";
-import type {
-  PaginationOrientation,
-  PaginationSize,
-} from "@loongark/primitives";
 
-export interface PaginationExampleProps {
-  size?: PaginationSize;
-  orientation?: PaginationOrientation;
+interface PaginationDemoProps {
+  size?: "sm" | "md" | "lg";
+  orientation?: "horizontal" | "vertical";
 }
 
-export const PaginationExample: React.FC<PaginationExampleProps> = ({
+const PaginationDemo = ({
   size = "md",
   orientation = "horizontal",
-}) => {
-  const [page, setPage] = useState(1);
-  const totalPages = 6;
+}: PaginationDemoProps) => {
+  const [page, setPage] = React.useState(1);
+  const totalPages = 5;
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
-    <LoongArkPaginationRoot size={size} orientation={orientation}>
+    <LoongArkPaginationRoot
+      size={size}
+      orientation={orientation}
+      page={page}
+      count={totalPages * 10}
+      pageSize={10}
+      onPageChange={(details: { page: number }) => setPage(details.page)}
+    >
       <LoongArkPaginationPrevTrigger
         disabled={page === 1}
         onClick={() => setPage((prev) => Math.max(1, prev - 1))}
@@ -35,6 +40,8 @@ export const PaginationExample: React.FC<PaginationExampleProps> = ({
       <LoongArkPaginationList>
         {pages.map((value) => (
           <LoongArkPaginationItem
+            type="page"
+            value={value}
             key={value}
             aria-current={page === value ? "page" : undefined}
             data-selected={page === value ? "true" : undefined}
@@ -53,3 +60,5 @@ export const PaginationExample: React.FC<PaginationExampleProps> = ({
     </LoongArkPaginationRoot>
   );
 };
+export const PaginationExample = PaginationDemo;
+export type PaginationExampleProps = Parameters<typeof PaginationDemo>[0];

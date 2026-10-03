@@ -2,4 +2,4 @@
   import { RadioGroup } from "@ark-ui/svelte/radio-group";
 </script>
 
-<RadioGroup.ItemHiddenInput />
+<RadioGroup.ItemHiddenInput {...$$restProps} />

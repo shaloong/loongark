@@ -12,8 +12,10 @@ import {
 } from "@ark-ui/solid/collapsible";
 import type { CollapsibleSize } from "@loongark/primitives";
 
-export interface LoongArkCollapsibleRootProps
-  extends Omit<ArkCollapsibleRootProps, "asChild"> {
+export interface LoongArkCollapsibleRootProps extends Omit<
+  ArkCollapsibleRootProps,
+  "asChild"
+> {
   size?: CollapsibleSize;
   children?: JSX.Element;
 }
@@ -25,7 +27,7 @@ export const LoongArkCollapsibleRoot: Component<
 
   return (
     <ArkCollapsible.Root
-      {...(props as any)}
+      {...props}
       data-scope="collapsible"
       data-part="root"
       data-size={merged.size}

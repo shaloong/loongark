@@ -1,0 +1,304 @@
+{
+  "recordedAt": "2026-10-03T03:57:21.326Z",
+  "workspace": "E:/dev/loongark",
+  "status": "passed",
+  "phase": "Shared floating action buttons, accessible speed dial, image grids and column media layout",
+  "environment": {
+    "os": "Windows",
+    "browser": "Chromium",
+    "mobileViewportWidth": 375,
+    "versions": {
+      "react": "19.2.1",
+      "vue": "3.5.25",
+      "solid-js": "1.9.15",
+      "svelte": "5.45.2",
+      "@ark-ui/react": "5.30.0",
+      "@ark-ui/vue": "5.30.0",
+      "@ark-ui/solid": "5.30.0",
+      "@ark-ui/svelte": "5.15.0"
+    }
+  },
+  "coverage": {
+    "families": 97,
+    "newFamilies": [
+      "FloatingActionButton",
+      "SpeedDial",
+      "ImageList",
+      "Masonry"
+    ],
+    "enhancements": [],
+    "newValueExportsPerFramework": 7,
+    "publicValueExportsPerFramework": 615,
+    "publicValueExportCounting": "LoongArk-prefixed values excluding Provider; types and aliases are not families",
+    "stories": 239,
+    "primitiveTokenContracts": 49,
+    "examples": {
+      "react": 28,
+      "vue": 25,
+      "solid": 25,
+      "svelte": 25,
+      "total": 103
+    }
+  },
+  "colorProvenance": {
+    "source": "Shaloong fixed VI supplied by user",
+    "viPalette": {
+      "skyBlue": "#006EFF",
+      "deepBlue": "#0A3565",
+      "dawnBlue": "#5AC8FA",
+      "coral": "#F58220",
+      "cloudWhite": "#F2F2F2",
+      "leadGray": "#767680",
+      "stoneGray": "#3A3A3C",
+      "inkNight": "#121212"
+    },
+    "neutralPalette": {
+      "white": "#FFFFFF",
+      "paper": "#F9F9F9",
+      "cloud": "#F2F2F2",
+      "border": "#D9D9DB",
+      "input": "#898991",
+      "textMuted": "#6E6E77",
+      "lead": "#767680",
+      "stone": "#3A3A3C",
+      "stone90": "#363638",
+      "stone80": "#323234",
+      "stone60": "#2A2A2B",
+      "stone40": "#222223",
+      "ink": "#121212",
+      "darkCard": "#1B1B1B",
+      "darkMuted": "#242424",
+      "darkTextMuted": "#A1A1A8"
+    },
+    "derivation": "sRGB channel interpolation with rounding; Cloud White may extend to pure white; high-contrast uses black/white; status colors are semantic",
+    "referenceStyle": "shadcn default examples and MUI spacing/transitions, without importing their color palette",
+    "paletteSourceUnchangedFromPreviousBatch": true
+  },
+  "measurements": {
+    "light": {
+      "stories": 239,
+      "families": 97,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0,
+      "axe": {
+        "stories": 239,
+        "violations": 0
+      },
+      "screenshots": {
+        "desktop": 239,
+        "mobile": 97
+      }
+    },
+    "dark": {
+      "stories": 239,
+      "families": 97,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0,
+      "axe": {
+        "stories": 239,
+        "violations": 0
+      },
+      "screenshots": {
+        "desktop": 239,
+        "mobile": 97
+      }
+    }
+  },
+  "checks": [
+    {
+      "id": "verify",
+      "status": "passed",
+      "log": "logs/verify.txt",
+      "modifiedAt": "2026-10-03T03:33:14.836Z"
+    },
+    {
+      "id": "contracts",
+      "status": "passed",
+      "log": "logs/contracts.txt",
+      "modifiedAt": "2026-10-03T03:33:18.245Z"
+    },
+    {
+      "id": "coverage",
+      "status": "passed",
+      "log": "logs/coverage.txt",
+      "modifiedAt": "2026-10-03T03:33:38.185Z"
+    },
+    {
+      "id": "svelte",
+      "status": "passed",
+      "log": "logs/svelte.txt",
+      "modifiedAt": "2026-10-03T03:34:04.609Z"
+    },
+    {
+      "id": "storybook",
+      "status": "passed",
+      "log": "logs/storybook.txt",
+      "modifiedAt": "2026-10-03T03:34:34.405Z"
+    },
+    {
+      "id": "frameworkBuild",
+      "status": "passed",
+      "log": "logs/frameworkBuild.txt",
+      "modifiedAt": "2026-10-03T03:37:21.197Z"
+    },
+    {
+      "id": "frameworkInteractions",
+      "status": "passed",
+      "log": "logs/frameworkInteractions.txt",
+      "modifiedAt": "2026-10-03T03:39:57.189Z"
+    },
+    {
+      "id": "publication",
+      "status": "passed",
+      "log": "logs/publication.txt",
+      "modifiedAt": "2026-10-03T03:37:53.663Z"
+    },
+    {
+      "id": "storybookInitialSuccessfulCases",
+      "status": "passed",
+      "log": "logs/storybookInitialSuccessfulCases.txt",
+      "modifiedAt": "2026-10-03T03:48:52.924Z"
+    },
+    {
+      "id": "layoutRetestAndResize",
+      "status": "passed",
+      "log": "logs/layoutRetestAndResize.txt",
+      "modifiedAt": "2026-10-03T03:56:24.719Z"
+    },
+    {
+      "id": "visual",
+      "status": "passed",
+      "log": "logs/visual.txt",
+      "modifiedAt": "2026-10-03T03:56:36.332Z"
+    },
+    {
+      "id": "workspaceLint",
+      "status": "passed",
+      "log": "logs/workspaceLint.txt",
+      "modifiedAt": "2026-10-03T03:54:55.436Z"
+    },
+    {
+      "id": "diffCheck",
+      "status": "passed",
+      "log": "logs/diffCheck.txt",
+      "modifiedAt": "2026-10-03T03:41:28.755Z"
+    }
+  ],
+  "browserTests": {
+    "storybookPassed": 32,
+    "storybookCounting": "Unique cases: 30 initial passes plus resolved light layout and one new resize regression; dark layout is repeated. Full default accessibility scans were unchanged and retained.",
+    "storybookExpectedSkipped": 8,
+    "frameworkPassed": 8,
+    "visualPassed": 2
+  },
+  "notableFixes": [
+    "Floating action buttons use the established 40/48/56px size scale, pill radius, neutral semantic colors and type=button",
+    "SpeedDial supports controlled/uncontrolled open state, visible action labels, disabled skipping, keyboard focus loops and outside dismissal with listener/RAF cleanup",
+    "Explicit native-button selector specificity prevents generic Trigger rules from overriding SpeedDial radius, foreground and background; actual computed appearance is checked in four frameworks",
+    "ImageList clamps spans to inherited responsive columns; figure/figcaption and native image attributes are preserved",
+    "Masonry preserves natural image ratios and DOM reading order using CSS columns without runtime height measurement"
+  ],
+  "testHarnessFixes": [
+    "Wait for asynchronous anchored-overlay positioning to settle after viewport resize before measuring page width; added light/dark repeated date-range resize regression. Initial light layout timing failure is superseded by the complete layout rerun."
+  ],
+  "pending": [
+    {
+      "name": "Attachment / Message / Bubble",
+      "priority": "specialized",
+      "reason": "Files and chat product patterns; not treated as general-purpose baseline"
+    },
+    {
+      "name": "Questionnaire / MessageScroller",
+      "priority": "specialized",
+      "reason": "Dedicated workflows and scrollers, rather than aliases for existing form/ScrollArea"
+    }
+  ],
+  "evidence": {
+    "gallery": [
+      "overview-light.png",
+      "overview-dark.png",
+      "overview-light-mobile.png",
+      "overview-dark-mobile.png"
+    ],
+    "frameworkMobile": [
+      "action-react-mobile.png",
+      "action-vue-mobile.png",
+      "action-solid-mobile.png",
+      "action-svelte-mobile.png"
+    ],
+    "metrics": ["after/light/metrics.json", "after/dark/metrics.json"],
+    "accessibility": ["accessibility/light.json", "accessibility/dark.json"],
+    "snapshots": [
+      "component-coverage.json",
+      "api-parity.json",
+      "examples-index.json"
+    ]
+  },
+  "limitations": [
+    "Browser regression uses Chromium; peer version ranges were not tested exhaustively",
+    "All 239 default displays in light/dark and selected interactive states; not every prop/state combination",
+    "SpeedDial uses local placement without automatic viewport collision flipping; callers reserve space or compose with Portal",
+    "Masonry uses column-first ordering, without shortest-column packing or virtualization; ImageList/Grid suit sorting-sensitive content"
+  ],
+  "npmPublished": false,
+  "sourceSha256": {
+    "packages/kit/src/media-layout.ts": "8c9668090ffed93f2bd8a069fd13f6114ca52234b65644f4938e43609c361cb9",
+    "packages/kit/src/speed-dial.ts": "5d384ec5d349ba6d47103629da4537b1b6d1c10a0447a7160f3ae0a7c1db6457",
+    "packages/react/src/components/action-media.tsx": "3708ada05ba01f466f530d32662bece0d3173f86058b409b3689bd8f20fc65bf",
+    "packages/solid/src/components/action-media.tsx": "15a4873dfeb634b58764f085917115018e30940440c04eb95d6c374ca88741e5",
+    "packages/vue/src/components/action-media.ts": "2862a7783cd634c67e249b6d114c1f46d8f4875ecb58f347d664386886536629",
+    "packages/svelte/src/components/ImageList.svelte": "369ce5a97d270f625696caf47791095b97a63cb0bb2f0bf73f3c42ee60382ad3",
+    "packages/svelte/src/components/ImageList.svelte.d.ts": "5e003bd77f641841c1eae8ec30795b83db429512bf37ccb76686706872117a54",
+    "packages/svelte/src/components/ImageListItem.svelte": "0ffb8e28f19a9a40e9ea560546c7fc8e0a1f082ec58b9b4459cdc90f8d48a33c",
+    "packages/svelte/src/components/ImageListItem.svelte.d.ts": "f514365fa682adc78c612bd30a4e623b44631f3d20a3acf4d84ff6d0412edc28",
+    "packages/svelte/src/components/ImageListCaption.svelte": "0919be0ca7dad9b7f97b566e96fdb5fabd3b9246c53e178b44114bda22a3fdc7",
+    "packages/svelte/src/components/ImageListCaption.svelte.d.ts": "21d1615ee292bea8e1d85fb65e3517d0b987471b16d91dccb7b061af3724ff73",
+    "packages/svelte/src/components/Masonry.svelte": "eb6d2579279ca9ee0f6355caa36e014f4eefb3458cf91a50cde788083045d446",
+    "packages/svelte/src/components/Masonry.svelte.d.ts": "65f0003a6041c32503ddd46f47d47e5e79765b5d5e74b7341df42b7f528a912f",
+    "packages/svelte/src/components/MasonryItem.svelte": "b93f9a5400630a7d64fa864baf109bd7e44cc6c030f7d39415ff592852332130",
+    "packages/svelte/src/components/MasonryItem.svelte.d.ts": "7b3eac07d5cdb0e104aef1675185a048e620c299af7db9068afc9bb12302a1f8",
+    "packages/svelte/src/components/FloatingActionButton.svelte": "b95e1014a3282e2f890585e221945d77f8fa0f9760a58420c547cdc525895f24",
+    "packages/svelte/src/components/FloatingActionButton.svelte.d.ts": "2b68b33328c100da5a686ceb96929ce58bc5b687420e35ee0fc39c356070f6f5",
+    "packages/svelte/src/components/SpeedDial.svelte": "da6c8ccab975343f00980b9629985cd892b647312c3ac9356f210fdd3a291ab9",
+    "packages/svelte/src/components/SpeedDial.svelte.d.ts": "344e85b7f168c5541e4dcae1cd0b34b062be89d64257c6f65f84085b5bd665c9",
+    "examples/shared/mediaDemo.ts": "5235bd6a3cc93af434ab0ec48c602769a5e3f55dbca8530f925e3d7a8f907e09",
+    "examples/react/ActionMediaExample.tsx": "d3ca195c8c9a0ee34fed657a94756e95d277fcb7b34f6999a47e991efd3dddcf",
+    "examples/solid/ActionMediaExample.tsx": "a9270a60e612e295d2f9fdea79be1ea685a5673bf72383d83aa9b7d2a5d75394",
+    "examples/vue/ActionMediaExample.ts": "2e6b61ab5d9886289e5dd91c07947cd4037004af108997ebae054eb2dd625a04",
+    "examples/svelte/ActionMediaExample.svelte": "2a6dc91f14b4efb645161d902cf833772900c6347caaebc4ba20161d57ecdbac",
+    "stories/ActionMediaGallery.stories.tsx": "5bed89ad3b00fb32013f75fcb58ff9d698f863797ca891a0bbf2d8461e2a22e0",
+    "stories/LoongArkFloatingActionButton.stories.tsx": "22e3d46e5e27e0f3f39c570bd40d00adfe07b9b1a1dbcaf1fe5736b0d7c8c0e9",
+    "stories/LoongArkSpeedDial.stories.tsx": "3efe3fd763afe9cdec858f39e528ecbe697a4b5658cac10576a15af1f751d334",
+    "stories/LoongArkImageList.stories.tsx": "5a1103a775c3101831f2ce4a10ccc20077581cf933b2fae218dd773f838a8442",
+    "stories/LoongArkMasonry.stories.tsx": "c0fcab688b441394a9dcb22502071d2dfb04cf3e982b9a22212b7b88aaba2060",
+    "packages/kit/src/index.ts": "334e41582dd258d5c4f7d024ce1cfa42a2df3a48092ef96a384ea75d29bc793f",
+    "packages/react/src/index.ts": "92ebc2adc1ed44b8b84d482911c184d4ef0a7650798214df7c6c88ff2302b4fa",
+    "packages/vue/src/index.ts": "dfc7bf5fd7e615957c5261464956a609a22a4d529a773c9f60d6a470344f22f8",
+    "packages/solid/src/index.ts": "7acb6710de461167cd498de899e9ae663e9e704db1d6394c937f0ad6f9bfa84b",
+    "packages/svelte/src/index.ts": "67925dc1f83ae7d9d8369094f3cf1186e0ec9a30131b7c6d63fdd63ee9acf5d9",
+    "docs/component-coverage.json": "4ea65280c968eb9b22f391caed7a4f59dcc2e302a0c9585867e9a2a3af404d5c",
+    "tests/actionMediaChecks.ts": "1b3117c38c501d4b50804f69566c486aacfabb66827cbc0797656d2c3b744065",
+    "tests/action-media.spec.ts": "f2280ca268f92191ffb6fcc3401ae384ef0159b890f0fbdbdcd36fa12307dbd9",
+    "scripts/test-action-models.mjs": "7947de2a47eeaa5944302645ebaa299205bb96c18bb5ba3af213117aa256f058",
+    "tests/consumers/svelte/Ssr.svelte": "0efca6ca2a4592ec85c331403b4bde58ab48e31671363c3bf0f3b81c75f106a7",
+    "scripts/test-ssr.mjs": "483cb91c9698518143ab68fdcd49704a83c1424f9b4b176da120b4686791b1cd",
+    "scripts/test-svelte-ssr.mjs": "35a39afebbccf4cef9a1e8245ff9a5325da672306bac5492f1e53f61cf38e4d3",
+    "package.json": "2d8c83c3429d985fb3339ffb73b7c368cd75ba520718769a63201060bf8059fc",
+    "tests/framework-examples.spec.ts": "48b514c709ffb652d124a9b9bec55650a1b65e2619a847d1693714ff96cb78c4",
+    "tests/design-quality.spec.ts": "d7847ff11291a1a5506688a3dd75d51e810ee797c85af0bc1afb57eacae3d612",
+    "tests/design-accessibility.spec.ts": "41eb20da4ad2b7e239e08a5bcc88a0a85bd6ca5405fb959769a8593fcf80ade8",
+    "tests/design-motion.spec.ts": "a7d216e9293f8013bb9c85c9f04777ceea980f25ef61cf75707a6cf5e984e62d",
+    "tests/remediation-ui.spec.ts": "4c6a485c5db2de2b07b8cfbd80508e3421eac49ab08cec979183e3d536f4ec95",
+    "docs/action-media.md": "4f9bffebc50d132e415dedb4f609a4c9c1d83c044ecd8073ddd7cdb2267bbc43",
+    "docs/component-coverage.md": "79a36cb882b6370b88fdeca51b01e908f26a7d997dc84ad379945ab78bbfee10",
+    "docs/component-gaps.md": "62ef54f158f7293243f44552e00b448e64b8aa2cc0af5c4e8b577f1608235d46",
+    "docs/README.md": "0695f5c231dd2628a15d43c0119bb79ae77a947085d973eb4e40cc1112ef2d89",
+    "examples/README.md": "be3a8b323ed373823e22f11302cd94c562c3eb1d87b5715046484bb7fa21bd72",
+    "packages/tokens/src/index.ts": "6768051a1b1eb2a926e02a2b1ee658e42af7680194746fcaf4a6992222cb93b4"
+  },
+  "manualVisualReview": {
+    "scope": "New composite light/dark including expanded menus, plus all four frameworks at 375px",
+    "status": "passed",
+    "notes": "Neutral palette, native pill buttons, readable menu labels, grid spans and consistent single-column media layout inspected."
+  }
+}

@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Tabs 组件 - Vue 实现
  * 基于 Ark UI Tabs 的标签页
@@ -32,24 +33,30 @@ export const LoongArkTabsRoot = defineComponent({
     },
     loopFocus: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     composite: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     id: {
       type: String as PropType<string>,
     },
     lazyMount: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     unmountOnExit: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     present: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     skipAnimationOnMount: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     onValueChange: {
       type: Function as PropType<(details: TabsValueChangeDetails) => void>,
@@ -60,7 +67,7 @@ export const LoongArkTabsRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTabs.Root,
         {
           ...attrs,
@@ -70,7 +77,7 @@ export const LoongArkTabsRoot = defineComponent({
           "data-size": props.size,
           "data-orientation": props.orientation,
         },
-        slots
+        slots,
       );
   },
 });
@@ -79,14 +86,14 @@ export const LoongArkTabsList = defineComponent({
   name: "LoongArkTabsList",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTabs.List,
         {
           ...attrs,
           "data-scope": "tabs",
           "data-part": "list",
         },
-        slots
+        slots,
       );
   },
 });
@@ -100,11 +107,12 @@ export const LoongArkTabsTrigger = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTabs.Trigger,
         {
           ...attrs,
@@ -113,7 +121,7 @@ export const LoongArkTabsTrigger = defineComponent({
           "data-scope": "tabs",
           "data-part": "trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -128,7 +136,7 @@ export const LoongArkTabsContent = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTabs.Content,
         {
           ...attrs,
@@ -136,7 +144,7 @@ export const LoongArkTabsContent = defineComponent({
           "data-scope": "tabs",
           "data-part": "content",
         },
-        slots
+        slots,
       );
   },
 });
@@ -145,14 +153,14 @@ export const LoongArkTabsIndicator = defineComponent({
   name: "LoongArkTabsIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTabs.Indicator,
         {
           ...attrs,
           "data-scope": "tabs",
           "data-part": "indicator",
         },
-        slots
+        slots,
       );
   },
 });

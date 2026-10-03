@@ -1,0 +1,255 @@
+{
+  "recordedAt": "2026-10-02T17:49:45.157Z",
+  "workspace": "E:/dev/loongark",
+  "status": "passed",
+  "phase": "Shaloong VI, all existing Story spacing/motion and visual remediation",
+  "environment": {
+    "os": "Windows",
+    "browser": "Chromium",
+    "mobileViewportWidth": 375,
+    "versions": {
+      "react": "19.2.1",
+      "vue": "3.5.25",
+      "solid-js": "1.9.15",
+      "svelte": "5.45.2",
+      "@ark-ui/react": "5.30.0",
+      "@ark-ui/vue": "5.30.0",
+      "@ark-ui/solid": "5.30.0",
+      "@ark-ui/svelte": "5.15.0"
+    }
+  },
+  "coverage": {
+    "families": 78,
+    "newFamilies": 38,
+    "stories": 203,
+    "publicValueExportsPerFramework": 574,
+    "primitiveTokenContracts": 49,
+    "examples": {
+      "react": 25,
+      "vue": 22,
+      "solid": 22,
+      "svelte": 22,
+      "total": 91
+    },
+    "plannedFamiliesRemaining": 0
+  },
+  "colorProvenance": {
+    "source": "Shaloong fixed VI supplied by user",
+    "viPalette": {
+      "skyBlue": "#006EFF",
+      "deepBlue": "#0A3565",
+      "dawnBlue": "#5AC8FA",
+      "coral": "#F58220",
+      "cloudWhite": "#F2F2F2",
+      "leadGray": "#767680",
+      "stoneGray": "#3A3A3C",
+      "inkNight": "#121212"
+    },
+    "neutralPalette": {
+      "white": "#FFFFFF",
+      "paper": "#F9F9F9",
+      "cloud": "#F2F2F2",
+      "border": "#D9D9DB",
+      "input": "#898991",
+      "textMuted": "#6E6E77",
+      "lead": "#767680",
+      "stone": "#3A3A3C",
+      "stone90": "#363638",
+      "stone80": "#323234",
+      "stone60": "#2A2A2B",
+      "stone40": "#222223",
+      "ink": "#121212",
+      "darkCard": "#1B1B1B",
+      "darkMuted": "#242424",
+      "darkTextMuted": "#A1A1A8"
+    },
+    "derivation": "sRGB channel interpolation with rounding; Cloud White may extend to pure white; high-contrast uses black/white; status colors are semantic",
+    "referenceStyle": "shadcn default examples and MUI spacing/transitions, without importing their color palette"
+  },
+  "measurements": {
+    "light": {
+      "stories": 203,
+      "families": 78,
+      "before": {
+        "pageOverflowStories": 64,
+        "transitionAllStories": 23
+      },
+      "after": {
+        "pageOverflowStories": 0,
+        "transitionAllStories": 0
+      },
+      "axe": {
+        "stories": 203,
+        "violations": 0
+      },
+      "screenshots": {
+        "desktop": 203,
+        "mobile": 78
+      }
+    },
+    "dark": {
+      "stories": 203,
+      "families": 78,
+      "before": {
+        "pageOverflowStories": 64,
+        "transitionAllStories": 23
+      },
+      "after": {
+        "pageOverflowStories": 0,
+        "transitionAllStories": 0
+      },
+      "axe": {
+        "stories": 203,
+        "violations": 0
+      },
+      "screenshots": {
+        "desktop": 203,
+        "mobile": 78
+      }
+    }
+  },
+  "tests": {
+    "storybookPassed": 25,
+    "expectedSkippedFrameworkCases": 8,
+    "frameworksPassed": 8,
+    "finalPolishPassed": 11,
+    "visualPassed": 2,
+    "svelte": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "publicTypes": [
+      "react",
+      "vue",
+      "solid",
+      "svelte"
+    ],
+    "ssr": [
+      "react",
+      "vue",
+      "solid",
+      "svelte"
+    ],
+    "panelMotionCombinations": 30,
+    "nestedForcePolicyFrameworks": 4,
+    "cli": "passed"
+  },
+  "evidence": {
+    "contactSheets": 26,
+    "defaultDesktopPerMode": 203,
+    "defaultMobileFamiliesPerMode": 78,
+    "expandedPanelsPerMode": 5,
+    "previousVisualBaselines": "baselines-before",
+    "logs": "acceptance-logs.txt",
+    "metrics": "after/{light,dark}/metrics.json",
+    "accessibility": "accessibility/{light,dark}.json"
+  },
+  "validationSequence": "Full Storybook and four-framework regression, followed by a rebuilt Storybook and 11 focused final checks after the Sheet content alignment and Popover close-button polish; visual baselines reviewed, updated and checked again.",
+  "limits": [
+    "Chromium on Windows, installed framework versions only",
+    "All 203 default Story displays in light/dark; selected expanded and interaction states, not every possible prop/state combination",
+    "Visual inspection does not certify subjective equality to another library"
+  ],
+  "npmPublished": false,
+  "checks": [
+    {
+      "id": "verify",
+      "status": "passed",
+      "sourceLog": ".design-complete-verify.log",
+      "modifiedAt": "2026-10-02T17:38:07.235Z"
+    },
+    {
+      "id": "contracts",
+      "status": "passed",
+      "sourceLog": ".design-complete-contracts.log",
+      "modifiedAt": "2026-10-02T17:43:53.404Z"
+    },
+    {
+      "id": "publication",
+      "status": "passed",
+      "sourceLog": ".design-complete-publication.log",
+      "modifiedAt": "2026-10-02T17:41:27.449Z"
+    },
+    {
+      "id": "svelte",
+      "status": "passed",
+      "sourceLog": ".design-complete-svelte.log",
+      "modifiedAt": "2026-10-02T17:41:47.450Z"
+    },
+    {
+      "id": "cli",
+      "status": "passed",
+      "sourceLog": ".design-complete-cli.log",
+      "modifiedAt": "2026-10-02T17:38:34.713Z"
+    },
+    {
+      "id": "storybookBuild",
+      "status": "passed",
+      "sourceLog": ".design-complete-storybook.log",
+      "modifiedAt": "2026-10-02T17:44:46.224Z"
+    },
+    {
+      "id": "storybookFullSuite",
+      "status": "passed",
+      "sourceLog": ".design-final-browser.log",
+      "modifiedAt": "2026-10-02T17:41:08.357Z"
+    },
+    {
+      "id": "frameworks",
+      "status": "passed",
+      "sourceLog": ".design-final-frameworks.log",
+      "modifiedAt": "2026-10-02T17:42:56.700Z"
+    },
+    {
+      "id": "finalPolish",
+      "status": "passed",
+      "sourceLog": ".design-complete-polish.log",
+      "modifiedAt": "2026-10-02T17:46:25.493Z"
+    },
+    {
+      "id": "visualUpdate",
+      "status": "passed",
+      "sourceLog": ".design-complete-visual-update.log",
+      "modifiedAt": "2026-10-02T17:46:37.414Z"
+    },
+    {
+      "id": "visualRegression",
+      "status": "passed",
+      "sourceLog": ".design-complete-visual.log",
+      "modifiedAt": "2026-10-02T17:46:48.564Z"
+    },
+    {
+      "id": "diffWhitespace",
+      "status": "passed",
+      "sourceLog": ".design-complete-diff.log",
+      "modifiedAt": "2026-10-02T17:50:43.828Z"
+    },
+    {
+      "id": "finalWorkspaceLint",
+      "status": "passed",
+      "sourceLog": ".design-closure-lint.log",
+      "modifiedAt": "2026-10-02T17:50:41.367Z"
+    }
+  ],
+  "criticalSourceSha256": {
+    "packages/tokens/src/index.ts": "fe052f64954b2afa39688aaa55645f9ee2bfe030da6f57b670e67d2f484b00f8",
+    "packages/theme/src/runtime.ts": "282c13116d002f8c51c1a0b581fc6568bc9967b06bb4c765e8accdaa74c1b5b0",
+    "packages/primitives/src/button.ts": "2f2fa9e3f5b926923fe0aa2197c30d5b991a71bce98dacec21083e4901d0a6ce",
+    "packages/primitives/src/input.ts": "34ca3fd40a1fdc418652d06c5df659fba5beeb2f7250774b91ec6bbc40856558",
+    "packages/primitives/src/neutral-system.ts": "64b3435fe6d5304c65319378eac6816e9a06eedd1f064b375c27c9987e87f21c",
+    "packages/primitives/src/motion.ts": "c14288f78197a9fb16f4ea072eceaa4c0f79ad7d4a94945e484016d84567df47",
+    "packages/primitives/src/dialog.ts": "f5ae1ea91e8f01d8c811c7cb863f894a6d120c4d84a017ef2111ea958ff3ed6a",
+    "packages/kit/src/layout.ts": "d41ac99f2d8fbe2a626903f3e7a13c20d2ec831c8a412929e0b8d13627485497",
+    "packages/kit/src/components/filterBar.ts": "2b465b27e267c33a2bc8e174d001c3deaf67ea6337f54bb8f43e79ac6ed5c173",
+    ".storybook/preview.tsx": "6deafdc8c769872b25407de140b38ead10e42cdff690811cec2ae8f21a29cfcc",
+    ".storybook/preview.css": "ce133957e42f554746707eefb24134a2eba86b8e768ed365a55b7b0d84075a84",
+    "stories/LoongArkInput.stories.tsx": "21d11c5ea3f212db9d2fe023f3c66f0d3319e90dbd3f31a404368bf90ec828bc",
+    "stories/LoongArkSlider.stories.tsx": "0f9b196e95722c4dfd4b1a13e7461fe910a629a208dadc25467ec62cea616c4a",
+    "tests/design-motion.spec.ts": "65b053bf4845ba24987fdf35d8243f65e7bcdbb0bdf84c98a3b85dc95a6b613b",
+    "tests/design-quality.spec.ts": "5026a39d6b9dde5e48babd2b8232aa9c65dbbf1a9e54d30e07b66f5cba3eec59",
+    "tests/design-accessibility.spec.ts": "f28802d2f5d2c1cf50a929f206bb5dbfe71b2e639fcfc95bac65d882360f8d7e",
+    "tests/design-variants.spec.ts": "a22c0c36db365d8924a9a5ffe230cb28d2803b42ad1176d879b91735a1e0d1ee",
+    "tests/framework-consumers.spec.ts": "126eaddc1ea47b7b69ff3090a723672143ede3343cb45110dc47e8be1011db0f",
+    "tests/framework-examples.spec.ts": "873f8641a153279e87b275f32fe4286b7b99eaf8a9adc222af4346dd42da523e"
+  }
+}

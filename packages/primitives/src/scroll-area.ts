@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toStringToken } from "./tokenUtils";
 
 export type ScrollAreaSize = "sm" | "md" | "lg";
@@ -22,11 +21,13 @@ interface ScrollAreaDesignTokens {
   };
 }
 
-const extractScrollAreaTokens = (theme: LoongArkTheme): ScrollAreaDesignTokens => {
-  const space = asTokenTree(theme.tokens.space);
+const extractScrollAreaTokens = (
+  theme: LoongArkTheme,
+): ScrollAreaDesignTokens => {
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
-  const color = theme.tokens.color as TokenTree;
+  const radius = asTokenTree(theme.styleTokens.radius);
+  const color = theme.styleTokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
 
   return {
@@ -162,8 +163,8 @@ const scrollAreaPrimitive = createPrimitive<ScrollAreaPrimitiveProps>(
   SCROLL_AREA_CONTRACT,
   (theme) => {
     const css = buildScrollAreaStyles(theme);
-    mountPrimitiveStyles(`scroll-area-${theme.mode}`, css);
-  }
+    theme.mountStyles(`scroll-area-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(scrollAreaPrimitive);

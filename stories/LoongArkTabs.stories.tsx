@@ -1,5 +1,5 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkTabsRoot,
   LoongArkTabsList,
@@ -29,9 +29,15 @@ interface TabsDemoProps {
   orientation?: "horizontal" | "vertical";
 }
 
-const panelStyle = { padding: "12px 4px", color: "#3A3A3C" };
+const panelStyle = {
+  padding: "12px 4px",
+  color: "var(--lk-color-semantic-foreground)",
+};
 
-const TabsDemo = ({ size = "md", orientation = "horizontal" }: TabsDemoProps) => (
+const TabsDemo = ({
+  size = "md",
+  orientation = "horizontal",
+}: TabsDemoProps) => (
   <LoongArkTabsRoot
     defaultValue="overview"
     size={size}

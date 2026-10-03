@@ -1,6 +1,7 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
-import { createListCollection } from "@ark-ui/solid";
+import { createListCollection } from "@loongark/solid";
 import {
   LoongArkListboxRoot,
   LoongArkListboxLabel,

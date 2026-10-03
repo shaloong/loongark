@@ -13,24 +13,29 @@ import {
 } from "@ark-ui/solid/accordion";
 import type { AccordionOrientation, AccordionSize } from "@loongark/primitives";
 
-export interface LoongArkAccordionRootProps
-  extends Omit<ArkAccordionRootProps, "asChild"> {
+export interface LoongArkAccordionRootProps extends Omit<
+  ArkAccordionRootProps,
+  "asChild"
+> {
   size?: AccordionSize;
   orientation?: AccordionOrientation;
   children?: JSX.Element;
 }
 
 export const LoongArkAccordionRoot: Component<LoongArkAccordionRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps(
-    { size: "md" as AccordionSize, orientation: "vertical" as AccordionOrientation },
-    props
+    {
+      size: "md" as AccordionSize,
+      orientation: "vertical" as AccordionOrientation,
+    },
+    props,
   );
 
   return (
     <ArkAccordion.Root
-      {...(props as any)}
+      {...props}
       orientation={merged.orientation}
       data-scope="accordion"
       data-part="root"

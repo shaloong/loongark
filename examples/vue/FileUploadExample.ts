@@ -1,5 +1,5 @@
 import { defineComponent, h, type PropType } from "vue";
-import { FileUploadContext } from "@ark-ui/vue/file-upload";
+import { FileUploadContext } from "@loongark/vue";
 import {
   LoongArkFileUploadRoot,
   LoongArkFileUploadLabel,
@@ -47,44 +47,38 @@ export const FileUploadExample = defineComponent({
             h(LoongArkFileUploadDropzone, null, {
               default: () => [
                 h("p", { style: "margin: 0;" }, "Drag files here"),
-                h(LoongArkFileUploadTrigger, null, {
-                  default: () => "Browse",
-                }),
               ],
             }),
+            h(LoongArkFileUploadTrigger, null, { default: () => "Browse" }),
             h(LoongArkFileUploadHiddenInput),
             h(FileUploadContext, null, {
               default: (context: any) => {
                 const files = context.acceptedFiles ?? [];
                 return [
-                  h(
-                    LoongArkFileUploadItemGroup,
-                    null,
-                    {
-                      default: () =>
-                        files.map((file: File) =>
-                          h(
-                            LoongArkFileUploadItem,
-                            { file, key: file.name },
-                            {
-                              default: () => [
-                                h(LoongArkFileUploadItemPreview, null, {
-                                  default: () =>
-                                    h(LoongArkFileUploadItemPreviewImage),
-                                }),
-                                h("div", null, [
-                                  h(LoongArkFileUploadItemName),
-                                  h(LoongArkFileUploadItemSizeText),
-                                ]),
-                                h(LoongArkFileUploadItemDeleteTrigger, null, {
-                                  default: () => "Remove",
-                                }),
-                              ],
-                            }
-                          )
+                  h(LoongArkFileUploadItemGroup, null, {
+                    default: () =>
+                      files.map((file: File) =>
+                        h(
+                          LoongArkFileUploadItem,
+                          { file, key: file.name },
+                          {
+                            default: () => [
+                              h(LoongArkFileUploadItemPreview, null, {
+                                default: () =>
+                                  h(LoongArkFileUploadItemPreviewImage),
+                              }),
+                              h("div", null, [
+                                h(LoongArkFileUploadItemName),
+                                h(LoongArkFileUploadItemSizeText),
+                              ]),
+                              h(LoongArkFileUploadItemDeleteTrigger, null, {
+                                default: () => "Remove",
+                              }),
+                            ],
+                          },
                         ),
-                    }
-                  ),
+                      ),
+                  }),
                   files.length > 0
                     ? h(LoongArkFileUploadClearTrigger, null, {
                         default: () => "Clear all",
@@ -94,7 +88,7 @@ export const FileUploadExample = defineComponent({
               },
             }),
           ],
-        }
+        },
       );
   },
 });

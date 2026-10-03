@@ -4,6 +4,17 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "dependencies": {
     "@ark-ui/vue": "^5.30.0",
     "@loongark/kit": "workspace:*",
@@ -11,7 +22,7 @@
     "@loongark/theme": "workspace:*"
   },
   "peerDependencies": {
-    "vue": ">=3.3.0"
+    "vue": ">=3.5.0"
   },
   "peerDependenciesMeta": {
     "vue": {
@@ -19,6 +30,6 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json && node ../../scripts/fix-dist-imports.mjs dist"
   }
 }

@@ -38,17 +38,19 @@ import {
   type DatePickerTableCellTriggerProps as ArkDatePickerTableCellTriggerProps,
 } from "@ark-ui/react/date-picker";
 import type { DatePickerSize } from "@loongark/primitives";
-import { Portal as ArkPortal } from "@ark-ui/react/portal";
+import { Portal as ArkPortal } from "./portal";
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
-  createElement(ArkPortal as unknown as FC<{ children?: ReactNode }>, null, children);
+  createElement(ArkPortal, null, children);
 
 const DatePickerSizeContext = createContext<{ size: DatePickerSize }>({
   size: "md",
 });
 
-export interface LoongArkDatePickerRootProps
-  extends Omit<ArkDatePickerRootProps, "asChild"> {
+export interface LoongArkDatePickerRootProps extends Omit<
+  ArkDatePickerRootProps,
+  "asChild"
+> {
   size?: DatePickerSize;
   children?: ReactNode;
 }

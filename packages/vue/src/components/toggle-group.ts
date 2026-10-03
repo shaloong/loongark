@@ -1,10 +1,15 @@
+import type { ToggleGroupRootProps as NativeToggleGroupRootProps } from "@ark-ui/vue/toggle-group";
+import { renderPart } from "../render-part";
 /**
  * Toggle Group component - Vue wrapper.
  * Based on Ark UI Toggle Group.
  */
 import { defineComponent, h, type PropType } from "vue";
 import { ToggleGroup as ArkToggleGroup } from "@ark-ui/vue/toggle-group";
-import type { ToggleGroupOrientation, ToggleGroupSize } from "@loongark/primitives";
+import type {
+  ToggleGroupOrientation,
+  ToggleGroupSize,
+} from "@loongark/primitives";
 
 export interface ToggleGroupValueChangeDetails {
   value: string[];
@@ -29,32 +34,39 @@ export const LoongArkToggleGroupRoot = defineComponent({
     },
     multiple: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     loopFocus: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     rovingFocus: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     deselectable: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     id: {
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<Record<string, unknown>>,
+      type: Object as PropType<NativeToggleGroupRootProps["ids"]>,
     },
     onValueChange: {
-      type: Function as PropType<(details: ToggleGroupValueChangeDetails) => void>,
+      type: Function as PropType<
+        (details: ToggleGroupValueChangeDetails) => void
+      >,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToggleGroup.Root,
         {
           ...attrs,
@@ -65,7 +77,7 @@ export const LoongArkToggleGroupRoot = defineComponent({
           "data-size": props.size,
           "data-orientation": props.orientation,
         },
-        slots
+        slots,
       );
   },
 });
@@ -79,11 +91,12 @@ export const LoongArkToggleGroupItem = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToggleGroup.Item,
         {
           ...attrs,
@@ -92,7 +105,7 @@ export const LoongArkToggleGroupItem = defineComponent({
           "data-scope": "toggle-group",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });

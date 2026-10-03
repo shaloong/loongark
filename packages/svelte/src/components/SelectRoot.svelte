@@ -1,4 +1,5 @@
-<script lang="ts">
+<script lang="ts" generics="T extends object">
+  import type { SelectRootProps } from "@ark-ui/svelte/select";
   import { Select } from "@ark-ui/svelte/select";
   import type { SelectSize } from "@loongark/primitives";
   import { createSelectSizeContext } from "./selectContext";
@@ -6,7 +7,7 @@
   export let size: SelectSize = "md";
 
   // 导出所有 Ark UI Select Root 支持的属性
-  export let collection: any;
+  export let collection: SelectRootProps<T>["collection"];
   export let closeOnSelect: boolean = true;
   export let composite: boolean = true;
   export let defaultHighlightedValue: string | undefined = undefined;
@@ -17,7 +18,7 @@
   export let form: string | undefined = undefined;
   export let highlightedValue: string | undefined = undefined;
   export let id: string | undefined = undefined;
-  export let ids: any = undefined;
+  export let ids: SelectRootProps<T>["ids"] = undefined;
   export let immediate: boolean | undefined = undefined;
   export let invalid: boolean | undefined = undefined;
   export let lazyMount: boolean = false;
@@ -25,11 +26,11 @@
   export let multiple: boolean | undefined = undefined;
   export let name: string | undefined = undefined;
   export let open: boolean | undefined = undefined;
-  export let positioning: any = undefined;
+  export let positioning: SelectRootProps<T>["positioning"] = undefined;
   export let present: boolean | undefined = undefined;
   export let readOnly: boolean | undefined = undefined;
   export let required: boolean | undefined = undefined;
-  export let scrollToIndexFn: any = undefined;
+  export let scrollToIndexFn: SelectRootProps<T>["scrollToIndexFn"] = undefined;
   export let skipAnimationOnMount: boolean = false;
   export let unmountOnExit: boolean = false;
   export let value: string[] | undefined = undefined;
@@ -70,6 +71,7 @@
   data-scope="select"
   data-part="root"
   data-size={size}
+  {...$$restProps}
 >
   <slot />
 </Select.Root>

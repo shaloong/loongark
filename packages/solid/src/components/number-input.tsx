@@ -16,8 +16,10 @@ import {
 } from "@ark-ui/solid/number-input";
 import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
 
-export interface LoongArkNumberInputRootProps
-  extends Omit<ArkNumberInputRootProps, "asChild"> {
+export interface LoongArkNumberInputRootProps extends Omit<
+  ArkNumberInputRootProps,
+  "asChild"
+> {
   size?: NumberInputSize;
   state?: NumberInputState;
   children?: JSX.Element;
@@ -33,7 +35,7 @@ export const LoongArkNumberInputRoot: Component<
       disabled: false,
       readOnly: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -45,7 +47,7 @@ export const LoongArkNumberInputRoot: Component<
 
   return (
     <ArkNumberInput.Root
-      {...(others as any)}
+      {...others}
       disabled={local.disabled}
       readOnly={local.readOnly}
       data-scope="number-input"
@@ -60,8 +62,10 @@ export const LoongArkNumberInputRoot: Component<
   );
 };
 
-export interface LoongArkNumberInputLabelProps
-  extends Omit<ArkNumberInputLabelProps, "asChild"> {
+export interface LoongArkNumberInputLabelProps extends Omit<
+  ArkNumberInputLabelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -81,8 +85,10 @@ export const LoongArkNumberInputLabel: Component<
   );
 };
 
-export interface LoongArkNumberInputControlProps
-  extends Omit<ArkNumberInputControlProps, "asChild"> {
+export interface LoongArkNumberInputControlProps extends Omit<
+  ArkNumberInputControlProps,
+  "asChild"
+> {
   size?: NumberInputSize;
   state?: NumberInputState;
   disabled?: boolean;
@@ -98,7 +104,7 @@ export const LoongArkNumberInputControl: Component<
       state: "default" as NumberInputState,
       disabled: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -121,8 +127,10 @@ export const LoongArkNumberInputControl: Component<
   );
 };
 
-export interface LoongArkNumberInputInputProps
-  extends Omit<ArkNumberInputInputProps, "asChild"> {
+export interface LoongArkNumberInputInputProps extends Omit<
+  ArkNumberInputInputProps,
+  "asChild"
+> {
   size?: NumberInputSize;
   state?: NumberInputState;
   disabled?: boolean;
@@ -139,7 +147,7 @@ export const LoongArkNumberInputInput: Component<
       disabled: false,
       readOnly: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "size",
@@ -163,8 +171,10 @@ export const LoongArkNumberInputInput: Component<
   );
 };
 
-export interface LoongArkNumberInputIncrementTriggerProps
-  extends Omit<ArkNumberInputIncrementTriggerProps, "asChild"> {
+export interface LoongArkNumberInputIncrementTriggerProps extends Omit<
+  ArkNumberInputIncrementTriggerProps,
+  "asChild"
+> {
   size?: NumberInputSize;
   state?: NumberInputState;
   disabled?: boolean;
@@ -180,7 +190,7 @@ export const LoongArkNumberInputIncrementTrigger: Component<
       state: "default" as NumberInputState,
       disabled: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -204,8 +214,10 @@ export const LoongArkNumberInputIncrementTrigger: Component<
   );
 };
 
-export interface LoongArkNumberInputDecrementTriggerProps
-  extends Omit<ArkNumberInputDecrementTriggerProps, "asChild"> {
+export interface LoongArkNumberInputDecrementTriggerProps extends Omit<
+  ArkNumberInputDecrementTriggerProps,
+  "asChild"
+> {
   size?: NumberInputSize;
   state?: NumberInputState;
   disabled?: boolean;
@@ -221,7 +233,7 @@ export const LoongArkNumberInputDecrementTrigger: Component<
       state: "default" as NumberInputState,
       disabled: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -245,8 +257,10 @@ export const LoongArkNumberInputDecrementTrigger: Component<
   );
 };
 
-export interface LoongArkNumberInputValueTextProps
-  extends Omit<ArkNumberInputValueTextProps, "asChild"> {
+export interface LoongArkNumberInputValueTextProps extends Omit<
+  ArkNumberInputValueTextProps,
+  "asChild"
+> {
   size?: NumberInputSize;
   children?: JSX.Element;
 }
@@ -269,8 +283,10 @@ export const LoongArkNumberInputValueText: Component<
   );
 };
 
-export interface LoongArkNumberInputScrubberProps
-  extends Omit<ArkNumberInputScrubberProps, "asChild"> {
+export interface LoongArkNumberInputScrubberProps extends Omit<
+  ArkNumberInputScrubberProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 

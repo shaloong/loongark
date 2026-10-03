@@ -1,0 +1,25 @@
+<script>import {LoongArkProvider as Provider} from '@loongark/svelte'; import E0 from '../../../examples/svelte/ActionMediaExample.svelte';
+import E1 from '../../../examples/svelte/AvatarExample.svelte';
+import E2 from '../../../examples/svelte/CarouselExample.svelte';
+import E3 from '../../../examples/svelte/ClipboardExample.svelte';
+import E4 from '../../../examples/svelte/ColorPickerExample.svelte';
+import E5 from '../../../examples/svelte/ComboboxExample.svelte';
+import E6 from '../../../examples/svelte/EditableExample.svelte';
+import E7 from '../../../examples/svelte/FileUploadExample.svelte';
+import E8 from '../../../examples/svelte/FoundationsExample.svelte';
+import E9 from '../../../examples/svelte/HoverCardExample.svelte';
+import E10 from '../../../examples/svelte/ListboxExample.svelte';
+import E11 from '../../../examples/svelte/NumberInputExample.svelte';
+import E12 from '../../../examples/svelte/PaginationExample.svelte';
+import E13 from '../../../examples/svelte/PasswordInputExample.svelte';
+import E14 from '../../../examples/svelte/ProgressExample.svelte';
+import E15 from '../../../examples/svelte/RatingGroupExample.svelte';
+import E16 from '../../../examples/svelte/ScrollAreaExample.svelte';
+import E17 from '../../../examples/svelte/SegmentGroupExample.svelte';
+import E18 from '../../../examples/svelte/SelectionInputsExample.svelte';
+import E19 from '../../../examples/svelte/SplitterExample.svelte';
+import E20 from '../../../examples/svelte/StepsExample.svelte';
+import E21 from '../../../examples/svelte/SwitchExample.svelte';
+import E22 from '../../../examples/svelte/TagsInputExample.svelte';
+import E23 from '../../../examples/svelte/ToastExample.svelte';
+import E24 from '../../../examples/svelte/TreeViewExample.svelte'; const examples={'ActionMediaExample':E0,'AvatarExample':E1,'CarouselExample':E2,'ClipboardExample':E3,'ColorPickerExample':E4,'ComboboxExample':E5,'EditableExample':E6,'FileUploadExample':E7,'FoundationsExample':E8,'HoverCardExample':E9,'ListboxExample':E10,'NumberInputExample':E11,'PaginationExample':E12,'PasswordInputExample':E13,'ProgressExample':E14,'RatingGroupExample':E15,'ScrollAreaExample':E16,'SegmentGroupExample':E17,'SelectionInputsExample':E18,'SplitterExample':E19,'StepsExample':E20,'SwitchExample':E21,'TagsInputExample':E22,'ToastExample':E23,'TreeViewExample':E24}; const name=new URLSearchParams(location.search).get('example') || 'ActionMediaExample'; const Selected=examples[name];</script><Provider><section style="padding:24px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)"><h1 data-example-name>{name}</h1><div data-example-content><Selected/></div></section></Provider>

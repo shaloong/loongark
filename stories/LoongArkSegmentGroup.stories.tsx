@@ -35,9 +35,15 @@ const SegmentGroupDemo = ({
     size={size}
     orientation={orientation}
   >
-    <LoongArkSegmentGroupItem value="overview">Overview</LoongArkSegmentGroupItem>
-    <LoongArkSegmentGroupItem value="activity">Activity</LoongArkSegmentGroupItem>
-    <LoongArkSegmentGroupItem value="settings">Settings</LoongArkSegmentGroupItem>
+    <LoongArkSegmentGroupItem value="overview">
+      Overview
+    </LoongArkSegmentGroupItem>
+    <LoongArkSegmentGroupItem value="activity">
+      Activity
+    </LoongArkSegmentGroupItem>
+    <LoongArkSegmentGroupItem value="settings">
+      Settings
+    </LoongArkSegmentGroupItem>
   </LoongArkSegmentGroupRoot>
 );
 

@@ -48,7 +48,10 @@ interface FilterBarDemoProps {
   align?: "start" | "center";
 }
 
-const FilterBarDemo = ({ dense = false, align = "start" }: FilterBarDemoProps) => {
+const FilterBarDemo = ({
+  dense = false,
+  align = "start",
+}: FilterBarDemoProps) => {
   const [query, setQuery] = useState("");
   const [activeChip, setActiveChip] = useState("all");
 
@@ -70,7 +73,9 @@ const FilterBarDemo = ({ dense = false, align = "start" }: FilterBarDemoProps) =
             }
           />
         </LoongArkInputRoot>
-        <LoongArkInputHelperText>Try filtering by status</LoongArkInputHelperText>
+        <LoongArkInputHelperText>
+          Try filtering by status
+        </LoongArkInputHelperText>
       </LoongArkFilterBarSearch>
 
       <LoongArkFilterDivider />

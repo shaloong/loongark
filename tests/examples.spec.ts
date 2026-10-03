@@ -5,14 +5,16 @@ import {
 } from "../examples/shared/demoScenario";
 import { filterBarTestIds } from "../examples/shared/filterBarScenario";
 
-const storyPath = "/?path=/story/examples-buttoninputdialog--default";
-const filterBarStoryPath = "/?path=/story/examples-filterbar--default";
+const storyPath =
+  "/iframe.html?id=examples-complete-demos-button-input-dialog--default&viewMode=story";
+const filterBarStoryPath =
+  "/iframe.html?id=examples-complete-demos-filter-bar--default&viewMode=story";
 
 test.describe("ButtonInputDialog story", () => {
   test("renders helper texts and enables dialog button", async ({ page }) => {
     await page.goto(storyPath);
     await expect(page.getByTestId(scenarioTestIds.inputPrefix)).toHaveText(
-      defaultScenario.prefixLabel
+      defaultScenario.prefixLabel,
     );
 
     const primaryButton = page.getByTestId(scenarioTestIds.primaryButton);
@@ -26,7 +28,7 @@ test.describe("ButtonInputDialog story", () => {
     await primaryButton.click();
 
     await expect(page.getByTestId(scenarioTestIds.dialogTitle)).toHaveText(
-      defaultScenario.dialogTitle
+      defaultScenario.dialogTitle,
     );
   });
 });
@@ -50,7 +52,7 @@ test.describe("FilterBar story", () => {
 
     await expect(searchInput).toHaveValue("");
     await expect(
-      page.getByTestId(filterBarTestIds.chip("all"))
+      page.getByTestId(filterBarTestIds.chip("all")),
     ).toHaveAttribute("data-active", "true");
   });
 });

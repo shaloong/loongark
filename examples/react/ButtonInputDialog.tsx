@@ -1,8 +1,8 @@
 import { useState } from "react";
 import {
-  LoongArkProvider,
   LoongArkButton,
   LoongArkInputRoot,
+  LoongArkInputGroup,
   LoongArkInputControl,
   LoongArkInputLabel,
   LoongArkInputHelperText,
@@ -22,38 +22,40 @@ export const ButtonInputDialogExample = () => {
   const [email, setEmail] = useState("");
 
   return (
-    <LoongArkProvider mode="light">
+    <>
       <form data-testid={scenarioTestIds.form}>
-        <LoongArkInputLabel>{defaultScenario.emailLabel}</LoongArkInputLabel>
         <LoongArkInputRoot data-testid={scenarioTestIds.inputWrapper}>
-          <LoongArkInputPrefix data-testid={scenarioTestIds.inputPrefix}>
-            {defaultScenario.prefixLabel}
-          </LoongArkInputPrefix>
-          <LoongArkInputControl
-            placeholder={defaultScenario.emailPlaceholder}
-            value={email}
-            onChange={(event: { currentTarget: HTMLInputElement }) =>
-              setEmail(event.currentTarget.value)
-            }
-          />
-          <LoongArkInputSuffix
-            action="clear"
-            data-testid={scenarioTestIds.inputSuffix}
-          >
-            <LoongArkButton
-              type="button"
-              size="sm"
-              variant="ghost"
-              onClick={() => setEmail("")}
-              data-testid={`${scenarioTestIds.inputSuffix}-button`}
+          <LoongArkInputLabel>{defaultScenario.emailLabel}</LoongArkInputLabel>
+          <LoongArkInputGroup>
+            <LoongArkInputPrefix data-testid={scenarioTestIds.inputPrefix}>
+              {defaultScenario.prefixLabel}
+            </LoongArkInputPrefix>
+            <LoongArkInputControl
+              placeholder={defaultScenario.emailPlaceholder}
+              value={email}
+              onChange={(event: { currentTarget: HTMLInputElement }) =>
+                setEmail(event.currentTarget.value)
+              }
+            />
+            <LoongArkInputSuffix
+              action="clear"
+              data-testid={scenarioTestIds.inputSuffix}
             >
-              {defaultScenario.suffixAction}
-            </LoongArkButton>
-          </LoongArkInputSuffix>
+              <LoongArkButton
+                type="button"
+                size="sm"
+                variant="ghost"
+                onClick={() => setEmail("")}
+                data-testid={`${scenarioTestIds.inputSuffix}-button`}
+              >
+                {defaultScenario.suffixAction}
+              </LoongArkButton>
+            </LoongArkInputSuffix>
+          </LoongArkInputGroup>
+          <LoongArkInputHelperText data-testid={scenarioTestIds.helperText}>
+            {defaultScenario.helperText}
+          </LoongArkInputHelperText>
         </LoongArkInputRoot>
-        <LoongArkInputHelperText data-testid={scenarioTestIds.helperText}>
-          {defaultScenario.helperText}
-        </LoongArkInputHelperText>
 
         <LoongArkDialog.Root>
           <LoongArkDialog.Trigger asChild>
@@ -95,6 +97,6 @@ export const ButtonInputDialogExample = () => {
           </LoongArkDialog.Portal>
         </LoongArkDialog.Root>
       </form>
-    </LoongArkProvider>
+    </>
   );
 };

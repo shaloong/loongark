@@ -1,5 +1,4 @@
-import { createPrimitive, registerPrimitive } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
+import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
 import type { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { asTokenTree, toStringToken } from "./tokenUtils";
@@ -17,7 +16,7 @@ export interface RadioGroupPrimitiveProps {
 }
 
 // Radio Group 样式 contract（标记 token 依赖）
-const radioGroupContract = {
+const radioGroupContract: PrimitiveContract<RadioGroupPrimitiveProps> = {
   name: "radio-group",
   tokens: [
     "color.brand.primary",
@@ -43,17 +42,17 @@ const radioGroupContract = {
 const radioGroupPrimitive = createPrimitive(
   radioGroupContract,
   (theme: LoongArkTheme) => {
-    const color = theme.tokens.color as TokenTree;
+    const color = theme.styleTokens.color as TokenTree;
     const brand = asTokenTree(color.brand);
     const neutral = asTokenTree(color.neutral);
 
-    const space = theme.tokens.space as TokenTree;
+    const space = theme.styleTokens.space as TokenTree;
     const componentSpace = asTokenTree(space.component);
 
-    const radius = theme.tokens.radius as TokenTree;
+    const radius = theme.styleTokens.radius as TokenTree;
     const radiusTokens = asTokenTree(radius);
 
-    const shadow = asTokenTree(theme.tokens.shadow);
+    const shadow = asTokenTree(theme.styleTokens.shadow);
 
     // Radio Group Control 基础样式
     const controlBaseStyles = `
@@ -66,7 +65,7 @@ const radioGroupPrimitive = createPrimitive(
       border: 1px solid ${toStringToken(neutral.border, "#d1d5db")};
       background-color: ${toStringToken(color.white, "#ffffff")};
       cursor: pointer;
-      transition: all 0.2s ease-in-out;
+      transition: background-color var(--lk-motion-duration-fast) var(--lk-motion-easing-standard), border-color var(--lk-motion-duration-fast) var(--lk-motion-easing-standard), box-shadow var(--lk-motion-duration-fast) var(--lk-motion-easing-standard);
       position: relative;
     `;
 
@@ -266,11 +265,11 @@ const radioGroupPrimitive = createPrimitive(
       [data-scope="radio-group"][data-part="item-control"][data-state="checked"]:hover {
         background-color: ${toStringToken(
           brand.secondary,
-          toStringToken(brand.primary, "#0056cc")
+          toStringToken(brand.primary, "#0056cc"),
         )};
         border-color: ${toStringToken(
           brand.secondary,
-          toStringToken(brand.primary, "#0056cc")
+          toStringToken(brand.primary, "#0056cc"),
         )};
       }
 
@@ -326,8 +325,8 @@ const radioGroupPrimitive = createPrimitive(
       }
     `;
 
-    mountPrimitiveStyles(`radio-group-${theme.mode}`, css);
-  }
+    theme.mountStyles(`radio-group-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(radioGroupPrimitive);

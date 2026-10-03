@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type PasswordInputSize = "sm" | "md" | "lg";
@@ -47,23 +46,23 @@ interface PasswordInputDesignTokens {
 }
 
 const extractPasswordInputTokens = (
-  theme: LoongArkTheme
+  theme: LoongArkTheme,
 ): PasswordInputDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -132,13 +131,6 @@ const buildPasswordInputStyles = (theme: LoongArkTheme): string => {
   const readOnlySelector = `${inputSelector}[readonly]`;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${rootSelector} {
   display: inline-flex;
@@ -195,7 +187,7 @@ ${inputSelector} {
 }
 
 ${inputSelector}::placeholder {
-  color: ${tokens.neutral.placeholder};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
 ${visibilityTriggerSelector} {
@@ -204,7 +196,7 @@ ${visibilityTriggerSelector} {
   justify-content: center;
   border: none;
   background: none;
-  color: ${tokens.neutral.placeholder};
+  color: var(--lk-color-semantic-mutedforeground);
   cursor: pointer;
   padding: 0;
   font: inherit;
@@ -223,14 +215,14 @@ ${indicatorSelector} {
 }
 
 ${controlSelector}[data-size='sm'] {
-  font-size: ${tokens.fontSize.sm};
-  padding: ${tokens.paddingY.sm} ${tokens.paddingX.sm};
+  font-size: ${tokens.fontSize.md};
+  padding: 0 var(--lk-space-component-compact);
   border-radius: ${tokens.radius.sm};
 }
 
 ${controlSelector}[data-size='lg'] {
-  font-size: ${tokens.fontSize.lg};
-  padding: ${tokens.paddingY.lg} ${tokens.paddingX.lg};
+  font-size: ${tokens.fontSize.md};
+  padding: 0 var(--lk-space-component-compact);
   border-radius: ${tokens.radius.lg};
 }
 
@@ -260,46 +252,47 @@ ${disabledSelector} ${visibilityTriggerSelector} {
 `;
 };
 
-const PASSWORD_INPUT_CONTRACT: PrimitiveContract<PasswordInputPrimitiveProps> = {
-  name: "password-input",
-  tokens: [
-    "color.neutral.50",
-    "color.neutral.100",
-    "color.neutral.300",
-    "color.neutral.700",
-    "color.brand.primary",
-    "color.brand.accent",
-    "color.brand.warning",
-    "typography.fontFamily.body",
-    "typography.fontSize.sm",
-    "typography.fontSize.md",
-    "typography.fontSize.lg",
-    "typography.lineHeight.base",
-    "typography.fontWeight.regular",
-    "space.component.xs",
-    "space.component.sm",
-    "space.component.md",
-    "space.component.lg",
-    "radius.sm",
-    "radius.md",
-    "radius.lg",
-    "motion.duration.base",
-    "motion.easing.standard",
-  ],
-  defaults: {
-    size: "md",
-    state: "default",
-    disabled: false,
-    readOnly: false,
-  },
-};
+const PASSWORD_INPUT_CONTRACT: PrimitiveContract<PasswordInputPrimitiveProps> =
+  {
+    name: "password-input",
+    tokens: [
+      "color.neutral.50",
+      "color.neutral.100",
+      "color.neutral.300",
+      "color.neutral.700",
+      "color.brand.primary",
+      "color.brand.accent",
+      "color.brand.warning",
+      "typography.fontFamily.body",
+      "typography.fontSize.sm",
+      "typography.fontSize.md",
+      "typography.fontSize.lg",
+      "typography.lineHeight.base",
+      "typography.fontWeight.regular",
+      "space.component.xs",
+      "space.component.sm",
+      "space.component.md",
+      "space.component.lg",
+      "radius.sm",
+      "radius.md",
+      "radius.lg",
+      "motion.duration.base",
+      "motion.easing.standard",
+    ],
+    defaults: {
+      size: "md",
+      state: "default",
+      disabled: false,
+      readOnly: false,
+    },
+  };
 
 const passwordInputPrimitive = createPrimitive<PasswordInputPrimitiveProps>(
   PASSWORD_INPUT_CONTRACT,
   (theme) => {
     const css = buildPasswordInputStyles(theme);
-    mountPrimitiveStyles(`password-input-${theme.mode}`, css);
-  }
+    theme.mountStyles(`password-input-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(passwordInputPrimitive);

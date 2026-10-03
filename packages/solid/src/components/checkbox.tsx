@@ -1,7 +1,8 @@
+import type { JSX } from "solid-js";
 import { type Component, mergeProps, splitProps } from "solid-js";
 import { Checkbox } from "@ark-ui/solid/checkbox";
 import type { CheckboxSize } from "@loongark/primitives";
-import type { RootProps } from "@ark-ui/solid/checkbox";
+import type { CheckboxRootProps as RootProps } from "@ark-ui/solid/checkbox";
 
 // ========== Props 接口 ==========
 export interface LoongArkCheckboxRootProps extends RootProps {
@@ -10,22 +11,22 @@ export interface LoongArkCheckboxRootProps extends RootProps {
 
 export interface LoongArkCheckboxControlProps {
   size?: CheckboxSize;
-  children?: any;
+  children?: JSX.Element;
 }
 
 export interface LoongArkCheckboxLabelProps {
-  children?: any;
+  children?: JSX.Element;
 }
 
 export interface LoongArkCheckboxIndicatorProps {
   indeterminate?: boolean;
-  children?: any;
+  children?: JSX.Element;
 }
 
 // ========== 组件实现 ==========
 
 export const LoongArkCheckboxRoot: Component<LoongArkCheckboxRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps({ size: "md" as CheckboxSize }, props);
   const [local, others] = splitProps(merged, ["size"]);
@@ -57,7 +58,7 @@ export const LoongArkCheckboxControl: Component<
 };
 
 export const LoongArkCheckboxLabel: Component<LoongArkCheckboxLabelProps> = (
-  props
+  props,
 ) => {
   return <Checkbox.Label {...props} data-scope="checkbox" data-part="label" />;
 };

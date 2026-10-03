@@ -1,4 +1,7 @@
 import React from "react";
+
+import { parseColor } from "@ark-ui/react/color-picker";
+
 import {
   LoongArkColorPickerRoot,
   LoongArkColorPickerLabel,
@@ -21,57 +24,69 @@ import {
   LoongArkColorPickerValueText,
   LoongArkColorPickerValueSwatch,
 } from "@loongark/react";
-import type { ColorPickerSize } from "@loongark/primitives";
 
-interface ColorPickerExampleProps {
-  size?: ColorPickerSize;
+const swatches = ["#006EFF", "#0A3565", "#5AC8FA", "#F58220"];
+
+interface ColorPickerDemoProps {
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
+  showSwatches?: boolean;
 }
 
-const swatches = ["#0EA5E9", "#8B5CF6", "#F97316", "#10B981"];
-
-export const ColorPickerExample: React.FC<ColorPickerExampleProps> = ({
+const ColorPickerDemo = ({
   size = "md",
-}) => {
-  const [value, setValue] = React.useState("#6366F1");
+  disabled = false,
+  showSwatches = true,
+}: ColorPickerDemoProps) => {
+  const [value, setValue] = React.useState(parseColor("#006EFF"));
 
   return (
     <LoongArkColorPickerRoot
+      defaultFormat="hsla"
       size={size}
+      disabled={disabled}
       value={value}
-      onValueChange={(details: { value: string }) => setValue(details.value)}
+      onValueChange={(details: { value: ReturnType<typeof parseColor> }) =>
+        setValue(details.value)
+      }
     >
       <LoongArkColorPickerLabel>Brand color</LoongArkColorPickerLabel>
       <LoongArkColorPickerControl>
-        <LoongArkColorPickerTrigger>
+        <LoongArkColorPickerTrigger disabled={disabled}>
           <LoongArkColorPickerValueSwatch />
           <LoongArkColorPickerValueText />
         </LoongArkColorPickerTrigger>
       </LoongArkColorPickerControl>
       <LoongArkColorPickerPositioner>
-        <LoongArkColorPickerContent>
+        <LoongArkColorPickerContent aria-label="Choose brand color">
           <div style={{ display: "grid", gap: 12 }}>
-            <LoongArkColorPickerView>
+            <LoongArkColorPickerView format="hsla">
               <LoongArkColorPickerArea>
                 <LoongArkColorPickerAreaBackground />
                 <LoongArkColorPickerAreaThumb />
               </LoongArkColorPickerArea>
-              <LoongArkColorPickerChannelSlider channel="h">
+              <LoongArkColorPickerChannelSlider channel="hue">
                 <LoongArkColorPickerChannelSliderTrack />
                 <LoongArkColorPickerChannelSliderThumb />
               </LoongArkColorPickerChannelSlider>
             </LoongArkColorPickerView>
             <LoongArkColorPickerChannelInput channel="hex" />
-            <LoongArkColorPickerSwatchGroup>
-              {swatches.map((swatch) => (
-                <LoongArkColorPickerSwatchTrigger key={swatch} value={swatch}>
-                  <LoongArkColorPickerSwatch value={swatch} />
-                  <LoongArkColorPickerSwatchIndicator />
-                </LoongArkColorPickerSwatchTrigger>
-              ))}
-            </LoongArkColorPickerSwatchGroup>
+            {showSwatches && (
+              <LoongArkColorPickerSwatchGroup>
+                {swatches.map((swatch) => (
+                  <LoongArkColorPickerSwatchTrigger key={swatch} value={swatch}>
+                    <LoongArkColorPickerSwatch value={swatch}>
+                      <LoongArkColorPickerSwatchIndicator />
+                    </LoongArkColorPickerSwatch>
+                  </LoongArkColorPickerSwatchTrigger>
+                ))}
+              </LoongArkColorPickerSwatchGroup>
+            )}
           </div>
         </LoongArkColorPickerContent>
       </LoongArkColorPickerPositioner>
     </LoongArkColorPickerRoot>
   );
 };
+export const ColorPickerExample = ColorPickerDemo;
+export type ColorPickerExampleProps = Parameters<typeof ColorPickerDemo>[0];

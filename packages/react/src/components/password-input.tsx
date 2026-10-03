@@ -5,7 +5,10 @@
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { PasswordInput } from "@ark-ui/react/password-input";
-import type { PasswordInputSize, PasswordInputState } from "@loongark/primitives";
+import type {
+  PasswordInputSize,
+  PasswordInputState,
+} from "@loongark/primitives";
 
 type ArkPasswordInputRootProps = ComponentPropsWithoutRef<
   typeof PasswordInput.Root
@@ -26,41 +29,53 @@ type ArkPasswordInputVisibilityTriggerProps = ComponentPropsWithoutRef<
   typeof PasswordInput.VisibilityTrigger
 >;
 
-export interface LoongArkPasswordInputRootProps
-  extends Omit<ArkPasswordInputRootProps, "asChild"> {
+export interface LoongArkPasswordInputRootProps extends Omit<
+  ArkPasswordInputRootProps,
+  "asChild"
+> {
   size?: PasswordInputSize;
   state?: PasswordInputState;
   children?: ReactNode;
 }
 
-export interface LoongArkPasswordInputLabelProps
-  extends Omit<ArkPasswordInputLabelProps, "asChild"> {
+export interface LoongArkPasswordInputLabelProps extends Omit<
+  ArkPasswordInputLabelProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkPasswordInputControlProps
-  extends Omit<ArkPasswordInputControlProps, "asChild"> {
+export interface LoongArkPasswordInputControlProps extends Omit<
+  ArkPasswordInputControlProps,
+  "asChild"
+> {
   size?: PasswordInputSize;
   state?: PasswordInputState;
   disabled?: boolean;
   children?: ReactNode;
 }
 
-export interface LoongArkPasswordInputInputProps
-  extends Omit<ArkPasswordInputInputProps, "asChild"> {
+export interface LoongArkPasswordInputInputProps extends Omit<
+  ArkPasswordInputInputProps,
+  "asChild" | "size"
+> {
   size?: PasswordInputSize;
   state?: PasswordInputState;
   disabled?: boolean;
   readOnly?: boolean;
 }
 
-export interface LoongArkPasswordInputIndicatorProps
-  extends Omit<ArkPasswordInputIndicatorProps, "asChild"> {
+export interface LoongArkPasswordInputIndicatorProps extends Omit<
+  ArkPasswordInputIndicatorProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkPasswordInputVisibilityTriggerProps
-  extends Omit<ArkPasswordInputVisibilityTriggerProps, "asChild"> {
+export interface LoongArkPasswordInputVisibilityTriggerProps extends Omit<
+  ArkPasswordInputVisibilityTriggerProps,
+  "asChild"
+> {
   disabled?: boolean;
   children?: ReactNode;
 }
@@ -78,7 +93,7 @@ export const LoongArkPasswordInputRoot = forwardRef<
       readOnly = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <PasswordInput.Root
@@ -96,7 +111,7 @@ export const LoongArkPasswordInputRoot = forwardRef<
         {children}
       </PasswordInput.Root>
     );
-  }
+  },
 );
 
 LoongArkPasswordInputRoot.displayName = "LoongArkPasswordInputRoot";
@@ -125,7 +140,7 @@ export const LoongArkPasswordInputControl = forwardRef<
 >(
   (
     { children, size = "md", state = "default", disabled = false, ...props },
-    ref
+    ref,
   ) => {
     return (
       <PasswordInput.Control
@@ -140,7 +155,7 @@ export const LoongArkPasswordInputControl = forwardRef<
         {children}
       </PasswordInput.Control>
     );
-  }
+  },
 );
 
 LoongArkPasswordInputControl.displayName = "LoongArkPasswordInputControl";
@@ -157,7 +172,7 @@ export const LoongArkPasswordInputInput = forwardRef<
       readOnly = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <PasswordInput.Input
@@ -173,7 +188,7 @@ export const LoongArkPasswordInputInput = forwardRef<
         data-readonly={readOnly ? "true" : undefined}
       />
     );
-  }
+  },
 );
 
 LoongArkPasswordInputInput.displayName = "LoongArkPasswordInputInput";

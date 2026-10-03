@@ -1,3 +1,9 @@
-﻿import type { SvelteComponent } from "svelte";
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { ColorPicker } from "@ark-ui/svelte/color-picker";
 import type { ColorPickerSwatchIndicatorProps } from "@ark-ui/svelte/color-picker";
-export default class ColorPickerSwatchIndicator extends SvelteComponent<ColorPickerSwatchIndicatorProps> {}
+
+export default class LoongArkColorPickerSwatchIndicator extends SvelteComponent<
+  Omit<ComponentProps<typeof ColorPicker.SwatchIndicator>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

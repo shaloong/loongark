@@ -1,6 +1,9 @@
 <script lang="ts">
   import { PasswordInput } from "@ark-ui/svelte/password-input";
-  import type { PasswordInputSize, PasswordInputState } from "@loongark/primitives";
+  import type {
+    PasswordInputSize,
+    PasswordInputState,
+  } from "@loongark/primitives";
 
   export let size: PasswordInputSize = "md";
   export let state: PasswordInputState = "default";
@@ -10,7 +13,7 @@
 
 <PasswordInput.Input
   {disabled}
-  {readOnly}
+  readonly={readOnly}
   data-scope="password-input"
   data-part="input"
   data-size={size}

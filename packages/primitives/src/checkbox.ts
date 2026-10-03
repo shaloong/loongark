@@ -1,5 +1,4 @@
-import { createPrimitive, registerPrimitive } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
+import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
 import type { LoongArkTheme } from "@loongark/theme";
 import { DEFAULT_TOKENS, TokenTree } from "@loongark/tokens";
 import { asTokenTree, toStringToken } from "./tokenUtils";
@@ -11,7 +10,7 @@ export interface CheckboxProps {
   size?: CheckboxSize;
 }
 
-const checkboxContract = {
+const checkboxContract: PrimitiveContract<CheckboxProps> = {
   name: "checkbox",
   tokens: [
     "color.brand.primary",
@@ -37,22 +36,27 @@ const checkboxContract = {
 const checkboxPrimitive = createPrimitive(
   checkboxContract,
   (theme: LoongArkTheme) => {
-    const color = (theme.tokens.color as TokenTree) ?? DEFAULT_TOKENS.color;
+    const color =
+      (theme.styleTokens.color as TokenTree) ?? DEFAULT_TOKENS.color;
     const brand = asTokenTree(color.brand);
     const neutral = asTokenTree(color.neutral);
     const colorError = asTokenTree(color.error ?? {}, "color.error");
 
-    const space = (theme.tokens.space as TokenTree) ?? DEFAULT_TOKENS.space;
+    const space =
+      (theme.styleTokens.space as TokenTree) ?? DEFAULT_TOKENS.space;
     const componentSpace = asTokenTree(space.component);
 
-    const radius = (theme.tokens.radius as TokenTree) ?? DEFAULT_TOKENS.radius;
+    const radius =
+      (theme.styleTokens.radius as TokenTree) ?? DEFAULT_TOKENS.radius;
     const radiusTokens = asTokenTree(radius);
 
     const typography =
-      (theme.tokens.typography as TokenTree) ?? DEFAULT_TOKENS.typography;
+      (theme.styleTokens.typography as TokenTree) ?? DEFAULT_TOKENS.typography;
     const fontSize = asTokenTree(typography.fontSize);
 
-    const shadow = asTokenTree(theme.tokens.shadow ?? DEFAULT_TOKENS.shadow);
+    const shadow = asTokenTree(
+      theme.styleTokens.shadow ?? DEFAULT_TOKENS.shadow,
+    );
 
     // Checkbox Control 样式
     const controlBaseStyles = `
@@ -64,9 +68,9 @@ const checkboxPrimitive = createPrimitive(
       background: ${toStringToken(color.white, "#ffffff")};
       box-shadow: ${toStringToken(
         shadow.xs,
-        "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+        "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
       )};
-      transition: all 0.2s ease-in-out;
+      transition: background-color var(--lk-motion-duration-fast) var(--lk-motion-easing-standard), border-color var(--lk-motion-duration-fast) var(--lk-motion-easing-standard), box-shadow var(--lk-motion-duration-fast) var(--lk-motion-easing-standard);
       cursor: pointer;
       user-select: none;
     `;
@@ -87,7 +91,7 @@ const checkboxPrimitive = createPrimitive(
       border-color: ${toStringToken(brand.primary, "#3b82f6")};
       box-shadow: 0 0 0 1px ${toStringToken(
         brand.primary,
-        "#3b82f6"
+        "#3b82f6",
       )}, 0 0 0 4px ${toStringToken(brand.accent, "rgba(59, 130, 246, 0.15)")};
     `;
 
@@ -259,8 +263,8 @@ const checkboxPrimitive = createPrimitive(
       }
     `;
 
-    mountPrimitiveStyles(`checkbox-${theme.mode}`, css);
-  }
+    theme.mountStyles(`checkbox-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(checkboxPrimitive);

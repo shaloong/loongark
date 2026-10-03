@@ -27,17 +27,18 @@ import {
   type ComboboxItemTextProps as ArkComboboxItemTextProps,
   type ComboboxItemIndicatorProps as ArkComboboxItemIndicatorProps,
 } from "@ark-ui/react/combobox";
-import { Portal as ArkPortal } from "@ark-ui/react/portal";
+import { Portal as ArkPortal } from "./portal";
 import type { ComboboxSize } from "@loongark/primitives";
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
-  createElement(ArkPortal as unknown as FC<{ children?: ReactNode }>, null, children);
+  createElement(ArkPortal, null, children);
 
 const ComboboxContext = createContext<{ size: ComboboxSize }>({ size: "md" });
 
-export interface LoongArkComboboxRootProps<
-  T extends Record<string, any> = Record<string, any>
-> extends Omit<ArkComboboxRootProps<T>, "asChild"> {
+export interface LoongArkComboboxRootProps<T = object> extends Omit<
+  ArkComboboxRootProps<T>,
+  "asChild"
+> {
   size?: ComboboxSize;
   children?: ReactNode;
 }
@@ -59,7 +60,10 @@ export const LoongArkComboboxRoot = forwardRef<
       </ArkCombobox.Root>
     </ComboboxContext.Provider>
   );
-});
+}) as (<T>(
+  props: LoongArkComboboxRootProps<T> &
+    import("react").RefAttributes<HTMLDivElement>,
+) => import("react").ReactElement | null) & { displayName?: string };
 
 LoongArkComboboxRoot.displayName = "LoongArkComboboxRoot";
 

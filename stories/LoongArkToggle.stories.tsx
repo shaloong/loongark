@@ -1,5 +1,5 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { LoongArkToggleRoot, LoongArkToggleIndicator } from "@loongark/react";
 
 const meta: Meta = {
@@ -23,7 +23,10 @@ interface ToggleDemoProps {
   defaultPressed?: boolean;
 }
 
-const ToggleDemo = ({ size = "md", defaultPressed = false }: ToggleDemoProps) => (
+const ToggleDemo = ({
+  size = "md",
+  defaultPressed = false,
+}: ToggleDemoProps) => (
   <LoongArkToggleRoot size={size} defaultPressed={defaultPressed}>
     <LoongArkToggleIndicator>✓</LoongArkToggleIndicator>
     Favorite

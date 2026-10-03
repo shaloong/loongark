@@ -13,8 +13,10 @@ import type {
   SegmentGroupSize,
 } from "@loongark/primitives";
 
-export interface LoongArkSegmentGroupRootProps
-  extends Omit<ArkToggleGroupRootProps, "asChild"> {
+export interface LoongArkSegmentGroupRootProps extends Omit<
+  ArkToggleGroupRootProps,
+  "asChild"
+> {
   size?: SegmentGroupSize;
   orientation?: SegmentGroupOrientation;
   children?: JSX.Element;
@@ -28,12 +30,12 @@ export const LoongArkSegmentGroupRoot: Component<
       size: "md" as SegmentGroupSize,
       orientation: "horizontal" as SegmentGroupOrientation,
     },
-    props
+    props,
   );
 
   return (
     <ArkToggleGroup.Root
-      {...(props as any)}
+      {...props}
       data-scope="segment-group"
       data-part="root"
       data-size={merged.size}
@@ -48,11 +50,7 @@ export const LoongArkSegmentGroupItem: Component<
   ArkToggleGroupItemProps & { children?: JSX.Element }
 > = (props) => {
   return (
-    <ArkToggleGroup.Item
-      {...props}
-      data-scope="segment-group"
-      data-part="item"
-    >
+    <ArkToggleGroup.Item {...props} data-scope="segment-group" data-part="item">
       {props.children}
     </ArkToggleGroup.Item>
   );

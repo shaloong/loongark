@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Carousel component - Vue wrapper.
  * Uses Ark UI Carousel with data attributes for styling.
@@ -16,7 +17,7 @@ export const LoongArkCarouselRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.Root,
         {
           ...attrs,
@@ -25,7 +26,7 @@ export const LoongArkCarouselRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -34,14 +35,14 @@ export const LoongArkCarouselItemGroup = defineComponent({
   name: "LoongArkCarouselItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.ItemGroup,
         {
           ...attrs,
           "data-scope": "carousel",
           "data-part": "item-group",
         },
-        slots
+        slots,
       );
   },
 });
@@ -50,14 +51,14 @@ export const LoongArkCarouselItem = defineComponent({
   name: "LoongArkCarouselItem",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.Item,
         {
           ...attrs,
           "data-scope": "carousel",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -66,14 +67,14 @@ export const LoongArkCarouselControl = defineComponent({
   name: "LoongArkCarouselControl",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.Control,
         {
           ...attrs,
           "data-scope": "carousel",
           "data-part": "control",
         },
-        slots
+        slots,
       );
   },
 });
@@ -82,14 +83,14 @@ export const LoongArkCarouselNextTrigger = defineComponent({
   name: "LoongArkCarouselNextTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.NextTrigger,
         {
           ...attrs,
           "data-scope": "carousel",
           "data-part": "next-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -98,14 +99,14 @@ export const LoongArkCarouselPrevTrigger = defineComponent({
   name: "LoongArkCarouselPrevTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.PrevTrigger,
         {
           ...attrs,
           "data-scope": "carousel",
           "data-part": "prev-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -114,14 +115,14 @@ export const LoongArkCarouselIndicatorGroup = defineComponent({
   name: "LoongArkCarouselIndicatorGroup",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.IndicatorGroup,
         {
           ...attrs,
           "data-scope": "carousel",
           "data-part": "indicator-group",
         },
-        slots
+        slots,
       );
   },
 });
@@ -130,14 +131,14 @@ export const LoongArkCarouselIndicator = defineComponent({
   name: "LoongArkCarouselIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.Indicator,
         {
           ...attrs,
           "data-scope": "carousel",
           "data-part": "indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -146,14 +147,14 @@ export const LoongArkCarouselAutoplayTrigger = defineComponent({
   name: "LoongArkCarouselAutoplayTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.AutoplayTrigger,
         {
           ...attrs,
           "data-scope": "carousel",
           "data-part": "autoplay-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -162,14 +163,14 @@ export const LoongArkCarouselProgressText = defineComponent({
   name: "LoongArkCarouselProgressText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.ProgressText,
         {
           ...attrs,
           "data-scope": "carousel",
           "data-part": "progress-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -178,14 +179,14 @@ export const LoongArkCarouselAutoplayIndicator = defineComponent({
   name: "LoongArkCarouselAutoplayIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkCarousel.AutoplayIndicator,
         {
           ...attrs,
           "data-scope": "carousel",
           "data-part": "autoplay-indicator",
         },
-        slots
+        slots,
       );
   },
 });

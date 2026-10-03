@@ -1,3 +1,10 @@
+import type {
+  HTMLAttributes,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  ButtonHTMLAttributes,
+} from "react";
+import { dataProps } from "../data-props";
 import { PinInput } from "@ark-ui/react/pin-input";
 import type { PinInputPrimitiveProps } from "@loongark/primitives";
 import { createElement, forwardRef } from "react";
@@ -7,7 +14,7 @@ export type PinInputSize = NonNullable<PinInputPrimitiveProps["size"]>;
 export type PinInputState = NonNullable<PinInputPrimitiveProps["state"]>;
 
 export interface LoongArkPinInputRootProps
-  extends Partial<PinInputPrimitiveProps> {
+  extends Partial<PinInputPrimitiveProps>, HTMLAttributes<HTMLElement> {
   children?: ReactNode;
   value?: string[];
   defaultValue?: string[];
@@ -23,8 +30,7 @@ export interface LoongArkPinInputRootProps
   autoFocus?: boolean;
   selectOnFocus?: boolean;
   blurOnComplete?: boolean;
-  autoCapitalize?: boolean;
-  [key: string]: unknown;
+  autoCapitalize?: string;
 }
 
 export const LoongArkPinInputRoot = forwardRef<
@@ -40,11 +46,11 @@ export const LoongArkPinInputRoot = forwardRef<
       autoCapitalize,
       ...rest
     },
-    ref
+    ref,
   ) =>
     createElement(
       PinInput.Root,
-      {
+      dataProps({
         ...rest,
         ref,
         disabled,
@@ -55,17 +61,15 @@ export const LoongArkPinInputRoot = forwardRef<
         "data-size": size,
         "data-state": state !== "default" ? state : undefined,
         "data-disabled": disabled ? "true" : undefined,
-      },
-      children
-    )
+      }),
+      children,
+    ),
 );
 
 LoongArkPinInputRoot.displayName = "LoongArkPinInputRoot";
 
-export interface LoongArkPinInputControlProps
-  extends Partial<PinInputPrimitiveProps> {
+export interface LoongArkPinInputControlProps extends Partial<PinInputPrimitiveProps> {
   children?: ReactNode;
-  [key: string]: unknown;
 }
 
 export const LoongArkPinInputControl = forwardRef<
@@ -74,24 +78,22 @@ export const LoongArkPinInputControl = forwardRef<
 >(({ children, size = "md", ...rest }, ref) =>
   createElement(
     PinInput.Control,
-    {
+    dataProps({
       ...rest,
       ref,
       "data-scope": "pin-input",
       "data-part": "control",
       "data-size": size,
-    },
-    children
-  )
+    }),
+    children,
+  ),
 );
 
 LoongArkPinInputControl.displayName = "LoongArkPinInputControl";
 
-export interface LoongArkPinInputInputProps
-  extends Partial<PinInputPrimitiveProps> {
+export interface LoongArkPinInputInputProps extends Partial<PinInputPrimitiveProps> {
   index: number;
   autoCapitalize?: boolean;
-  [key: string]: unknown;
 }
 
 export const LoongArkPinInputInput = forwardRef<
@@ -100,26 +102,28 @@ export const LoongArkPinInputInput = forwardRef<
 >(
   (
     { size = "md", state = "default", index, autoCapitalize = false, ...rest },
-    ref
+    ref,
   ) =>
-    createElement(PinInput.Input, {
-      ...rest,
-      ref,
-      index,
-      autoCapitalize: autoCapitalize ? "characters" : undefined,
-      style: autoCapitalize ? { textTransform: "uppercase" } : undefined,
-      "data-scope": "pin-input",
-      "data-part": "input",
-      "data-size": size,
-      "data-state": state !== "default" ? state : undefined,
-    })
+    createElement(
+      PinInput.Input,
+      dataProps({
+        ...rest,
+        ref,
+        index,
+        autoCapitalize: autoCapitalize ? "characters" : undefined,
+        style: autoCapitalize ? { textTransform: "uppercase" } : undefined,
+        "data-scope": "pin-input",
+        "data-part": "input",
+        "data-size": size,
+        "data-state": state !== "default" ? state : undefined,
+      }),
+    ),
 );
 
 LoongArkPinInputInput.displayName = "LoongArkPinInputInput";
 
-export interface LoongArkPinInputLabelProps {
+export interface LoongArkPinInputLabelProps extends HTMLAttributes<HTMLElement> {
   children?: ReactNode;
-  [key: string]: unknown;
 }
 
 export const LoongArkPinInputLabel = ({
@@ -128,12 +132,12 @@ export const LoongArkPinInputLabel = ({
 }: LoongArkPinInputLabelProps) =>
   createElement(
     PinInput.Label,
-    {
+    dataProps({
       ...rest,
       "data-scope": "pin-input",
       "data-part": "label",
-    },
-    children
+    }),
+    children,
   );
 
 export const LoongArkPinInputHiddenInput: React.ComponentType<

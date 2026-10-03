@@ -1,3 +1,5 @@
+import { renderPart } from "../render-part";
+import { LoongArkPortal } from "./portal";
 import { defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import { Dialog as ArkDialog } from "@ark-ui/vue/dialog";
@@ -20,7 +22,7 @@ export const LoongArkDialogOverlay = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDialog.Backdrop,
         {
           ...attrs,
@@ -28,7 +30,7 @@ export const LoongArkDialogOverlay = defineComponent({
           "data-part": "backdrop",
           "data-blur": boolAttr(props.blur),
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
@@ -61,7 +63,7 @@ export const LoongArkDialogContent = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDialog.Content,
         {
           ...attrs,
@@ -72,7 +74,7 @@ export const LoongArkDialogContent = defineComponent({
           "data-placement": props.placement,
           "data-overlay-blur": boolAttr(props.overlayBlur),
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
@@ -81,14 +83,14 @@ export const LoongArkDialogTitle = defineComponent({
   name: "LoongArkDialogTitle",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDialog.Title,
         {
           ...attrs,
           "data-scope": "dialog",
           "data-part": "title",
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
@@ -97,14 +99,14 @@ export const LoongArkDialogDescription = defineComponent({
   name: "LoongArkDialogDescription",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDialog.Description,
         {
           ...attrs,
           "data-scope": "dialog",
           "data-part": "description",
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
@@ -113,14 +115,14 @@ export const LoongArkDialogFooter = defineComponent({
   name: "LoongArkDialogFooter",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ark.footer,
         {
           ...attrs,
           "data-scope": "dialog",
           "data-part": "footer",
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
@@ -129,22 +131,35 @@ export const LoongArkDialogCloseTrigger = defineComponent({
   name: "LoongArkDialogCloseTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDialog.CloseTrigger,
         {
           ...attrs,
+          "aria-label": attrs["aria-label"] ?? "Close dialog",
           "data-scope": "dialog",
           "data-part": "close-trigger",
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
 
-export const LoongArkDialog = {
+export const LoongArkDialog: {
+  Root: typeof ArkDialog.Root;
+  Trigger: typeof ArkDialog.Trigger;
+  Positioner: typeof ArkDialog.Positioner;
+  Portal: typeof LoongArkPortal;
+  Overlay: typeof LoongArkDialogOverlay;
+  Content: typeof LoongArkDialogContent;
+  Title: typeof LoongArkDialogTitle;
+  Description: typeof LoongArkDialogDescription;
+  Footer: typeof LoongArkDialogFooter;
+  CloseTrigger: typeof LoongArkDialogCloseTrigger;
+} = {
   Root: ArkDialog.Root,
   Trigger: ArkDialog.Trigger,
   Positioner: ArkDialog.Positioner,
+  Portal: LoongArkPortal,
   Overlay: LoongArkDialogOverlay,
   Content: LoongArkDialogContent,
   Title: LoongArkDialogTitle,
@@ -152,3 +167,11 @@ export const LoongArkDialog = {
   Footer: LoongArkDialogFooter,
   CloseTrigger: LoongArkDialogCloseTrigger,
 };
+
+export const LoongArkDialogRoot: typeof ArkDialog.Root = ArkDialog.Root;
+export const LoongArkDialogTrigger: typeof ArkDialog.Trigger =
+  ArkDialog.Trigger;
+
+export const LoongArkDialogPositioner: typeof ArkDialog.Positioner =
+  ArkDialog.Positioner;
+export const LoongArkDialogPortal = LoongArkPortal;

@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { ProgressCircleRangeProps } from "@ark-ui/svelte/progress";
-export default class ProgressCircleRange extends SvelteComponent<ProgressCircleRangeProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Progress } from "@ark-ui/svelte/progress";
+
+export default class LoongArkProgressCircleRange extends SvelteComponent<
+  Omit<ComponentProps<typeof Progress.CircleRange>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

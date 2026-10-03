@@ -71,7 +71,13 @@ export const SelectExample: React.FC<SelectExampleProps> = ({
         </LoongArkSelectPositioner>
         <LoongArkSelectHiddenSelect />
       </LoongArkSelectRoot>
-      <p style={{ marginTop: "16px", fontSize: "14px", color: "#666" }}>
+      <p
+        style={{
+          marginTop: "16px",
+          fontSize: "14px",
+          color: "var(--lk-color-semantic-mutedforeground)",
+        }}
+      >
         已选择: {value.length > 0 ? value.join(", ") : "无"}
       </p>
     </div>

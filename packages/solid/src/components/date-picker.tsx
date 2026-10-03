@@ -42,20 +42,22 @@ const DatePickerContext = createContext<{ size: DatePickerSize }>({
   size: "md",
 });
 
-export interface LoongArkDatePickerRootProps
-  extends Omit<ArkDatePickerRootProps, "asChild"> {
+export interface LoongArkDatePickerRootProps extends Omit<
+  ArkDatePickerRootProps,
+  "asChild"
+> {
   size?: DatePickerSize;
   children?: JSX.Element;
 }
 
 export const LoongArkDatePickerRoot: Component<LoongArkDatePickerRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps({ size: "md" as DatePickerSize }, props);
   return (
     <DatePickerContext.Provider value={{ size: merged.size }}>
       <ArkDatePicker.Root
-        {...(props as any)}
+        {...props}
         data-scope="date-picker"
         data-part="root"
         data-size={merged.size}

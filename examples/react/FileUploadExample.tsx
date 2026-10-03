@@ -36,8 +36,8 @@ export const FileUploadExample: React.FC<FileUploadExampleProps> = ({
       <LoongArkFileUploadLabel>Upload files</LoongArkFileUploadLabel>
       <LoongArkFileUploadDropzone>
         <p style={{ margin: 0 }}>Drag files here</p>
-        <LoongArkFileUploadTrigger>Browse</LoongArkFileUploadTrigger>
       </LoongArkFileUploadDropzone>
+      <LoongArkFileUploadTrigger>Browse</LoongArkFileUploadTrigger>
       <LoongArkFileUploadHiddenInput />
       <FileUpload.Context>
         {(context) => {

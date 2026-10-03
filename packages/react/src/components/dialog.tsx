@@ -1,5 +1,12 @@
+import type {
+  HTMLAttributes,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  ButtonHTMLAttributes,
+} from "react";
+import { dataProps } from "../data-props";
 import { Dialog as ArkDialog } from "@ark-ui/react/dialog";
-import { Portal as ArkPortal } from "@ark-ui/react/portal";
+import { Portal as ArkPortal } from "./portal";
 import { ark } from "@ark-ui/react";
 import type { DialogPrimitiveProps } from "@loongark/primitives";
 import { createElement, forwardRef } from "react";
@@ -9,10 +16,9 @@ export type DialogSize = NonNullable<DialogPrimitiveProps["size"]>;
 export type DialogPlacement = NonNullable<DialogPrimitiveProps["placement"]>;
 export type DialogMotion = NonNullable<DialogPrimitiveProps["motion"]>;
 
-export interface LoongArkDialogOverlayProps {
+export interface LoongArkDialogOverlayProps extends HTMLAttributes<HTMLElement> {
   blur?: boolean;
   children?: ReactNode;
-  [key: string]: unknown;
 }
 
 export const LoongArkDialogOverlay = forwardRef<
@@ -21,23 +27,22 @@ export const LoongArkDialogOverlay = forwardRef<
 >(({ blur = true, children, ...rest }, ref) =>
   createElement(
     ArkDialog.Backdrop,
-    {
+    dataProps({
       ...rest,
       ref,
       "data-scope": "dialog",
       "data-part": "backdrop",
       "data-blur": blur ? "true" : undefined,
-    },
-    children
-  )
+    }),
+    children,
+  ),
 );
 
 LoongArkDialogOverlay.displayName = "LoongArkDialogOverlay";
 
 export interface LoongArkDialogContentProps
-  extends Partial<DialogPrimitiveProps> {
+  extends Partial<DialogPrimitiveProps>, HTMLAttributes<HTMLElement> {
   children?: ReactNode;
-  [key: string]: unknown;
 }
 
 export const LoongArkDialogContent = forwardRef<
@@ -53,11 +58,11 @@ export const LoongArkDialogContent = forwardRef<
       overlayBlur = true,
       ...rest
     },
-    ref
+    ref,
   ) =>
     createElement(
       ArkDialog.Content,
-      {
+      dataProps({
         ...rest,
         ref,
         "data-scope": "dialog",
@@ -66,9 +71,9 @@ export const LoongArkDialogContent = forwardRef<
         "data-motion": motion,
         "data-placement": placement,
         "data-overlay-blur": overlayBlur ? "true" : undefined,
-      },
-      children
-    )
+      }),
+      children,
+    ),
 );
 
 LoongArkDialogContent.displayName = "LoongArkDialogContent";
@@ -78,16 +83,15 @@ export const LoongArkDialogTitle = ({
   ...rest
 }: {
   children?: ReactNode;
-  [key: string]: unknown;
 }) =>
   createElement(
     ArkDialog.Title,
-    {
+    dataProps({
       ...rest,
       "data-scope": "dialog",
       "data-part": "title",
-    },
-    children
+    }),
+    children,
   );
 
 export const LoongArkDialogDescription = ({
@@ -95,16 +99,15 @@ export const LoongArkDialogDescription = ({
   ...rest
 }: {
   children?: ReactNode;
-  [key: string]: unknown;
 }) =>
   createElement(
     ArkDialog.Description,
-    {
+    dataProps({
       ...rest,
       "data-scope": "dialog",
       "data-part": "description",
-    },
-    children
+    }),
+    children,
   );
 
 export const LoongArkDialogFooter = ({
@@ -112,41 +115,42 @@ export const LoongArkDialogFooter = ({
   ...rest
 }: {
   children?: ReactNode;
-  [key: string]: unknown;
 }) =>
   createElement(
     ark.footer,
-    {
+    dataProps({
       ...rest,
       "data-scope": "dialog",
       "data-part": "footer",
-    },
-    children
+    }),
+    children,
   );
 
-export interface LoongArkDialogCloseTriggerProps
-  extends Record<string, unknown> {
+export interface LoongArkDialogCloseTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   asChild?: boolean;
 }
 
 const defaultCloseIcon = createElement(
   "svg",
-  {
+  dataProps({
     width: 14,
     height: 14,
     viewBox: "0 0 14 14",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
     "aria-hidden": "true",
-  },
-  createElement("path", {
-    d: "M4 4l6 6m0-6-6 6",
-    stroke: "currentColor",
-    strokeWidth: 1.5,
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-  })
+  }),
+  createElement(
+    "path",
+    dataProps({
+      d: "M4 4l6 6m0-6-6 6",
+      stroke: "currentColor",
+      strokeWidth: 1.5,
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+    }),
+  ),
 );
 
 export const LoongArkDialogCloseTrigger = ({
@@ -157,14 +161,18 @@ export const LoongArkDialogCloseTrigger = ({
   const decorate = !asChild;
   return createElement(
     ArkDialog.CloseTrigger,
-    {
+    dataProps({
       ...rest,
       ...(asChild ? { asChild } : {}),
       ...(decorate
-        ? { "data-scope": "dialog", "data-part": "close-trigger" }
+        ? {
+            "aria-label": rest["aria-label"] ?? "Close dialog",
+            "data-scope": "dialog",
+            "data-part": "close-trigger",
+          }
         : {}),
-    },
-    decorate ? children ?? defaultCloseIcon : children ?? null
+    }),
+    decorate ? (children ?? defaultCloseIcon) : (children ?? null),
   );
 };
 
@@ -183,6 +191,7 @@ export const LoongArkDialog: {
   Root: ArkDialog.Root,
   Trigger: ArkDialog.Trigger,
   Positioner: ArkDialog.Positioner,
+
   Portal: ArkPortal,
   Overlay: LoongArkDialogOverlay,
   Content: LoongArkDialogContent,
@@ -191,3 +200,9 @@ export const LoongArkDialog: {
   Footer: LoongArkDialogFooter,
   CloseTrigger: LoongArkDialogCloseTrigger,
 };
+
+export const LoongArkDialogRoot = ArkDialog.Root;
+export const LoongArkDialogTrigger = ArkDialog.Trigger;
+
+export const LoongArkDialogPositioner = ArkDialog.Positioner;
+export const LoongArkDialogPortal = ArkPortal;

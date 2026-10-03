@@ -1,9 +1,9 @@
 <script lang="ts">
   import { Tabs } from "@ark-ui/svelte/tabs";
-  import type { TabsTriggerProps } from "@ark-ui/svelte/tabs";
+  import type { TabTriggerProps } from "@ark-ui/svelte/tabs";
 
-  export let value: TabsTriggerProps["value"];
-  export let disabled: TabsTriggerProps["disabled"] = undefined;
+  export let value: TabTriggerProps["value"];
+  export let disabled: TabTriggerProps["disabled"] = undefined;
 </script>
 
 <Tabs.Trigger

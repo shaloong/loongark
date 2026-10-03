@@ -8,7 +8,9 @@ import { FileUpload } from "@ark-ui/react/file-upload";
 import type { FileUploadSize } from "@loongark/primitives";
 
 type ArkFileUploadRootProps = ComponentPropsWithoutRef<typeof FileUpload.Root>;
-type ArkFileUploadLabelProps = ComponentPropsWithoutRef<typeof FileUpload.Label>;
+type ArkFileUploadLabelProps = ComponentPropsWithoutRef<
+  typeof FileUpload.Label
+>;
 type ArkFileUploadDropzoneProps = ComponentPropsWithoutRef<
   typeof FileUpload.Dropzone
 >;
@@ -41,65 +43,91 @@ type ArkFileUploadClearTriggerProps = ComponentPropsWithoutRef<
   typeof FileUpload.ClearTrigger
 >;
 
-export interface LoongArkFileUploadRootProps
-  extends Omit<ArkFileUploadRootProps, "asChild"> {
+export interface LoongArkFileUploadRootProps extends Omit<
+  ArkFileUploadRootProps,
+  "asChild"
+> {
   size?: FileUploadSize;
   children?: ReactNode;
 }
 
-export interface LoongArkFileUploadLabelProps
-  extends Omit<ArkFileUploadLabelProps, "asChild"> {
+export interface LoongArkFileUploadLabelProps extends Omit<
+  ArkFileUploadLabelProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkFileUploadDropzoneProps
-  extends Omit<ArkFileUploadDropzoneProps, "asChild"> {
+export interface LoongArkFileUploadDropzoneProps extends Omit<
+  ArkFileUploadDropzoneProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkFileUploadTriggerProps
-  extends Omit<ArkFileUploadTriggerProps, "asChild"> {
+export interface LoongArkFileUploadTriggerProps extends Omit<
+  ArkFileUploadTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkFileUploadHiddenInputProps
-  extends Omit<ArkFileUploadHiddenInputProps, "asChild"> {}
+export interface LoongArkFileUploadHiddenInputProps extends Omit<
+  ArkFileUploadHiddenInputProps,
+  "asChild"
+> {}
 
-export interface LoongArkFileUploadItemGroupProps
-  extends Omit<ArkFileUploadItemGroupProps, "asChild"> {
+export interface LoongArkFileUploadItemGroupProps extends Omit<
+  ArkFileUploadItemGroupProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkFileUploadItemProps
-  extends Omit<ArkFileUploadItemProps, "asChild"> {
+export interface LoongArkFileUploadItemProps extends Omit<
+  ArkFileUploadItemProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkFileUploadItemPreviewProps
-  extends Omit<ArkFileUploadItemPreviewProps, "asChild"> {
+export interface LoongArkFileUploadItemPreviewProps extends Omit<
+  ArkFileUploadItemPreviewProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkFileUploadItemPreviewImageProps
-  extends Omit<ArkFileUploadItemPreviewImageProps, "asChild"> {}
+export interface LoongArkFileUploadItemPreviewImageProps extends Omit<
+  ArkFileUploadItemPreviewImageProps,
+  "asChild"
+> {}
 
-export interface LoongArkFileUploadItemNameProps
-  extends Omit<ArkFileUploadItemNameProps, "asChild"> {
+export interface LoongArkFileUploadItemNameProps extends Omit<
+  ArkFileUploadItemNameProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkFileUploadItemSizeTextProps
-  extends Omit<ArkFileUploadItemSizeTextProps, "asChild"> {
+export interface LoongArkFileUploadItemSizeTextProps extends Omit<
+  ArkFileUploadItemSizeTextProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkFileUploadItemDeleteTriggerProps
-  extends Omit<ArkFileUploadItemDeleteTriggerProps, "asChild"> {
+export interface LoongArkFileUploadItemDeleteTriggerProps extends Omit<
+  ArkFileUploadItemDeleteTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkFileUploadClearTriggerProps
-  extends Omit<ArkFileUploadClearTriggerProps, "asChild"> {
+export interface LoongArkFileUploadClearTriggerProps extends Omit<
+  ArkFileUploadClearTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
@@ -231,7 +259,7 @@ export const LoongArkFileUploadItem = forwardRef<
 LoongArkFileUploadItem.displayName = "LoongArkFileUploadItem";
 
 export const LoongArkFileUploadItemPreview = forwardRef<
-  HTMLDivElement,
+  HTMLImageElement,
   LoongArkFileUploadItemPreviewProps
 >(({ children, ...props }, ref) => {
   return (
@@ -266,7 +294,7 @@ LoongArkFileUploadItemPreviewImage.displayName =
   "LoongArkFileUploadItemPreviewImage";
 
 export const LoongArkFileUploadItemName = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   LoongArkFileUploadItemNameProps
 >(({ children, ...props }, ref) => {
   return (
@@ -284,7 +312,7 @@ export const LoongArkFileUploadItemName = forwardRef<
 LoongArkFileUploadItemName.displayName = "LoongArkFileUploadItemName";
 
 export const LoongArkFileUploadItemSizeText = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   LoongArkFileUploadItemSizeTextProps
 >(({ children, ...props }, ref) => {
   return (
@@ -299,8 +327,7 @@ export const LoongArkFileUploadItemSizeText = forwardRef<
   );
 });
 
-LoongArkFileUploadItemSizeText.displayName =
-  "LoongArkFileUploadItemSizeText";
+LoongArkFileUploadItemSizeText.displayName = "LoongArkFileUploadItemSizeText";
 
 export const LoongArkFileUploadItemDeleteTrigger = forwardRef<
   HTMLButtonElement,

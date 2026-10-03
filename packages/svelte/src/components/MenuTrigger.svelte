@@ -7,9 +7,10 @@
 </script>
 
 <Menu.Trigger
-  {...{ asChild: asChild ?? true, id, disabled }}
+  {...{ asChild, id, disabled }}
   data-scope="menu"
   data-part="trigger"
+  {...$$restProps}
 >
   <slot />
 </Menu.Trigger>

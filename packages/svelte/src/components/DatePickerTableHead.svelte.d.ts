@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { DatePickerTableHeadProps } from "@ark-ui/svelte/date-picker";
-export default class DatePickerTableHead extends SvelteComponent<DatePickerTableHeadProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { DatePicker } from "@ark-ui/svelte/date-picker";
+
+export default class LoongArkDatePickerTableHead extends SvelteComponent<
+  Omit<ComponentProps<typeof DatePicker.TableHead>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

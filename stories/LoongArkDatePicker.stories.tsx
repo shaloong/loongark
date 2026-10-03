@@ -1,5 +1,5 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkDatePickerRoot,
   LoongArkDatePickerLabel,
@@ -153,7 +153,14 @@ const DatePickerDemo = ({
         <LoongArkDatePickerInput index={0} />
         {selectionMode === "range" && (
           <>
-            <span style={{ color: "#767680", padding: "0 4px" }}>-</span>
+            <span
+              style={{
+                color: "var(--lk-color-semantic-mutedforeground)",
+                padding: "0 4px",
+              }}
+            >
+              -
+            </span>
             <LoongArkDatePickerInput index={1} />
           </>
         )}
@@ -177,9 +184,7 @@ const DatePickerDemo = ({
 };
 
 export const Basic: Story = {
-  render: () => (
-    <DatePickerDemo defaultValue={[parseDate("2026-01-12")]} />
-  ),
+  render: () => <DatePickerDemo defaultValue={[parseDate("2026-01-12")]} />,
 };
 
 export const Range: Story = {

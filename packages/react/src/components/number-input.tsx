@@ -21,46 +21,56 @@ import type {
 } from "@loongark/primitives";
 
 export interface LoongArkNumberInputRootProps
-  extends Omit<ArkNumberInputRootProps, "asChild">,
+  extends
+    Omit<ArkNumberInputRootProps, "asChild">,
     Partial<NumberInputPrimitiveProps> {
   children?: ReactNode;
 }
 
-export interface LoongArkNumberInputLabelProps
-  extends Omit<ArkNumberInputLabelProps, "asChild"> {
+export interface LoongArkNumberInputLabelProps extends Omit<
+  ArkNumberInputLabelProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
 export interface LoongArkNumberInputControlProps
-  extends Omit<ArkNumberInputControlProps, "asChild">,
+  extends
+    Omit<ArkNumberInputControlProps, "asChild">,
     Partial<NumberInputPrimitiveProps> {
   children?: ReactNode;
 }
 
 export interface LoongArkNumberInputInputProps
-  extends Omit<ArkNumberInputInputProps, "asChild">,
+  extends
+    Omit<ArkNumberInputInputProps, "asChild" | "size">,
     Partial<NumberInputPrimitiveProps> {}
 
 export interface LoongArkNumberInputIncrementTriggerProps
-  extends Omit<ArkNumberInputIncrementTriggerProps, "asChild">,
+  extends
+    Omit<ArkNumberInputIncrementTriggerProps, "asChild">,
     Partial<NumberInputPrimitiveProps> {
   children?: ReactNode;
 }
 
 export interface LoongArkNumberInputDecrementTriggerProps
-  extends Omit<ArkNumberInputDecrementTriggerProps, "asChild">,
+  extends
+    Omit<ArkNumberInputDecrementTriggerProps, "asChild">,
     Partial<NumberInputPrimitiveProps> {
   children?: ReactNode;
 }
 
 export interface LoongArkNumberInputValueTextProps
-  extends Omit<ArkNumberInputValueTextProps, "asChild">,
+  extends
+    Omit<ArkNumberInputValueTextProps, "asChild">,
     Partial<NumberInputPrimitiveProps> {
   children?: ReactNode;
 }
 
-export interface LoongArkNumberInputScrubberProps
-  extends Omit<ArkNumberInputScrubberProps, "asChild"> {
+export interface LoongArkNumberInputScrubberProps extends Omit<
+  ArkNumberInputScrubberProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
@@ -77,7 +87,7 @@ export const LoongArkNumberInputRoot = forwardRef<
       readOnly = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <ArkNumberInput.Root
@@ -95,7 +105,7 @@ export const LoongArkNumberInputRoot = forwardRef<
         {children}
       </ArkNumberInput.Root>
     );
-  }
+  },
 );
 
 LoongArkNumberInputRoot.displayName = "LoongArkNumberInputRoot";
@@ -122,7 +132,7 @@ export const LoongArkNumberInputControl = forwardRef<
 >(
   (
     { children, size = "md", state = "default", disabled = false, ...props },
-    ref
+    ref,
   ) => {
     return (
       <ArkNumberInput.Control
@@ -137,7 +147,7 @@ export const LoongArkNumberInputControl = forwardRef<
         {children}
       </ArkNumberInput.Control>
     );
-  }
+  },
 );
 
 LoongArkNumberInputControl.displayName = "LoongArkNumberInputControl";
@@ -154,7 +164,7 @@ export const LoongArkNumberInputInput = forwardRef<
       readOnly = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <ArkNumberInput.Input
@@ -170,7 +180,7 @@ export const LoongArkNumberInputInput = forwardRef<
         data-readonly={readOnly ? "true" : undefined}
       />
     );
-  }
+  },
 );
 
 LoongArkNumberInputInput.displayName = "LoongArkNumberInputInput";
@@ -181,7 +191,7 @@ export const LoongArkNumberInputIncrementTrigger = forwardRef<
 >(
   (
     { children, size = "md", state = "default", disabled = false, ...props },
-    ref
+    ref,
   ) => {
     return (
       <ArkNumberInput.IncrementTrigger
@@ -197,7 +207,7 @@ export const LoongArkNumberInputIncrementTrigger = forwardRef<
         {children}
       </ArkNumberInput.IncrementTrigger>
     );
-  }
+  },
 );
 
 LoongArkNumberInputIncrementTrigger.displayName =
@@ -209,7 +219,7 @@ export const LoongArkNumberInputDecrementTrigger = forwardRef<
 >(
   (
     { children, size = "md", state = "default", disabled = false, ...props },
-    ref
+    ref,
   ) => {
     return (
       <ArkNumberInput.DecrementTrigger
@@ -225,7 +235,7 @@ export const LoongArkNumberInputDecrementTrigger = forwardRef<
         {children}
       </ArkNumberInput.DecrementTrigger>
     );
-  }
+  },
 );
 
 LoongArkNumberInputDecrementTrigger.displayName =

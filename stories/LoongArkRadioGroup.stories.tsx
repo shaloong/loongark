@@ -1,5 +1,5 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { RadioGroupExample } from "../examples/react/RadioGroupExample";
 
 const meta: Meta<typeof RadioGroupExample> = {

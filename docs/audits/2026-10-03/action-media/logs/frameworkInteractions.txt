@@ -1,0 +1,26 @@
+[serve-static] E:\dev\loongark\tests\consumer-dist on http://127.0.0.1:6007 (E:\dev\loongark\scripts\serve-static.mjs)
+
+Running 8 tests using 2 workers
+
+(node:36420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 [chromium] › tests\framework-consumers.spec.ts:4:7 › vue 发布消费、绑定、主题和浮层 (3.8s)
+  ok 1 [chromium] › tests\framework-consumers.spec.ts:4:7 › react 发布消费、绑定、主题和浮层 (3.7s)
+  ok 3 [chromium] › tests\framework-consumers.spec.ts:4:7 › solid 发布消费、绑定、主题和浮层 (2.6s)
+  ok 4 [chromium] › tests\framework-consumers.spec.ts:4:7 › svelte 发布消费、绑定、主题和浮层 (2.7s)
+vue: 25 个组件示例已运行
+  ok 6 [chromium] › tests\framework-examples.spec.ts:7:7 › vue 全部现有组件示例运行 (13.0s)
+react: 28 个组件示例已运行
+  ok 5 [chromium] › tests\framework-examples.spec.ts:7:7 › react 全部现有组件示例运行 (13.4s)
+solid: 25 个组件示例已运行
+  ok 7 [chromium] › tests\framework-examples.spec.ts:7:7 › solid 全部现有组件示例运行 (11.8s)
+svelte: 25 个组件示例已运行
+  ok 8 [chromium] › tests\framework-examples.spec.ts:7:7 › svelte 全部现有组件示例运行 (11.8s)
+
+  8 passed (39.3s)

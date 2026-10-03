@@ -12,7 +12,7 @@ import { mergeProps, type Component, type JSX } from "solid-js";
 export type { RadioGroupSize, RadioGroupOrientation };
 
 export interface ValueChangeDetails {
-  value: string;
+  value: string | null;
 }
 
 export interface RadioGroupRootProps {
@@ -67,7 +67,7 @@ export interface RadioGroupItemHiddenInputProps {
  * Radio Group Root - 单选按钮组根容器
  */
 export const LoongArkRadioGroupRoot: Component<RadioGroupRootProps> = (
-  props
+  props,
 ) => {
   return (
     <ArkRadioGroup.Root
@@ -85,7 +85,7 @@ export const LoongArkRadioGroupRoot: Component<RadioGroupRootProps> = (
  * Radio Group Label - 单选按钮组标签
  */
 export const LoongArkRadioGroupLabel: Component<RadioGroupLabelProps> = (
-  props
+  props,
 ) => {
   return <ArkRadioGroup.Label {...props}>{props.children}</ArkRadioGroup.Label>;
 };
@@ -94,7 +94,7 @@ export const LoongArkRadioGroupLabel: Component<RadioGroupLabelProps> = (
  * Radio Group Item - 单选按钮项
  */
 export const LoongArkRadioGroupItem: Component<RadioGroupItemProps> = (
-  props
+  props,
 ) => {
   return <ArkRadioGroup.Item {...props}>{props.children}</ArkRadioGroup.Item>;
 };
@@ -116,7 +116,7 @@ export const LoongArkRadioGroupItemControl: Component<
  * Radio Group Item Text - 单选按钮文本
  */
 export const LoongArkRadioGroupItemText: Component<RadioGroupItemTextProps> = (
-  props
+  props,
 ) => {
   return (
     <ArkRadioGroup.ItemText {...props}>{props.children}</ArkRadioGroup.ItemText>

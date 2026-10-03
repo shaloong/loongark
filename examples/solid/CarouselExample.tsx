@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import {
   LoongArkCarouselRoot,
@@ -25,7 +26,11 @@ export const CarouselExample: Component<CarouselExampleProps> = (props) => {
   const size = () => props.size ?? "md";
 
   return (
-    <LoongArkCarouselRoot size={size()} style={{ "max-width": "420px" }}>
+    <LoongArkCarouselRoot
+      slideCount={slides.length}
+      size={size()}
+      style={{ "max-width": "420px" }}
+    >
       <LoongArkCarouselItemGroup>
         {slides.map((slide, index) => (
           <LoongArkCarouselItem index={index}>

@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { ToastTitleProps } from "@ark-ui/svelte/toast";
-export default class ToastTitle extends SvelteComponent<ToastTitleProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Toast } from "@ark-ui/svelte/toast";
+
+export default class LoongArkToastTitle extends SvelteComponent<
+  Omit<ComponentProps<typeof Toast.Title>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

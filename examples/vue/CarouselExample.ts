@@ -31,6 +31,7 @@ export const CarouselExample = defineComponent({
         LoongArkCarouselRoot,
         {
           size: props.size,
+          slideCount: slides.length,
           style: { maxWidth: "420px" },
         },
         {
@@ -43,20 +44,16 @@ export const CarouselExample = defineComponent({
                     { index, key: slide.title },
                     {
                       default: () =>
-                        h(
-                          "div",
-                          { style: { display: "grid", gap: "4px" } },
-                          [
-                            h("strong", null, slide.title),
-                            h(
-                              "span",
-                              { style: { opacity: 0.7 } },
-                              slide.description
-                            ),
-                          ]
-                        ),
-                    }
-                  )
+                        h("div", { style: { display: "grid", gap: "4px" } }, [
+                          h("strong", null, slide.title),
+                          h(
+                            "span",
+                            { style: { opacity: 0.7 } },
+                            slide.description,
+                          ),
+                        ]),
+                    },
+                  ),
                 ),
             }),
             h(LoongArkCarouselControl, null, {
@@ -67,7 +64,7 @@ export const CarouselExample = defineComponent({
                 h(LoongArkCarouselIndicatorGroup, null, {
                   default: () =>
                     slides.map((_, index) =>
-                      h(LoongArkCarouselIndicator, { index, key: index })
+                      h(LoongArkCarouselIndicator, { index, key: index }),
                     ),
                 }),
                 h(LoongArkCarouselNextTrigger, null, {
@@ -76,7 +73,7 @@ export const CarouselExample = defineComponent({
               ],
             }),
           ],
-        }
+        },
       );
   },
 });

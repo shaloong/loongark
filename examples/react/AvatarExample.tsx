@@ -39,11 +39,7 @@ export const AvatarExample: React.FC<AvatarExampleProps> = ({
   return (
     <LoongArkAvatarRoot size={size} data-testid="avatar-root">
       {src ? (
-        <LoongArkAvatarImage
-          src={src}
-          alt={name}
-          data-testid="avatar-image"
-        />
+        <LoongArkAvatarImage src={src} alt={name} data-testid="avatar-image" />
       ) : null}
       <LoongArkAvatarFallback data-testid="avatar-fallback">
         {initials}

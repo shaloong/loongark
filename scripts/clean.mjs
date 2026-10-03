@@ -9,12 +9,30 @@ const packages = [
   "vue",
   "react",
   "svelte",
+  "solid",
   "cli",
 ];
 
 await Promise.all(
-  packages.map(async (pkg) => {
+  packages.flatMap((pkg) => {
     const dir = resolve("packages", pkg, "dist");
-    await rm(dir, { force: true, recursive: true });
-  })
+    const buildInfo = resolve("packages", pkg, "tsconfig.tsbuildinfo");
+
+    return [
+      rm(dir, { force: true, recursive: true }),
+      rm(buildInfo, { force: true }),
+    ];
+  }),
+);
+
+await Promise.all(
+  ["examples", "stories"].map((project) =>
+    rm(resolve(project, "tsconfig.tsbuildinfo"), { force: true }),
+  ),
+);
+
+await Promise.all(
+  ["storybook-static", "test-results", "playwright-report", "blob-report"].map(
+    (dir) => rm(resolve(dir), { force: true, recursive: true }),
+  ),
 );

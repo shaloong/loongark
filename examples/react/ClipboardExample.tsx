@@ -32,7 +32,9 @@ export const ClipboardExample: React.FC<ClipboardExampleProps> = ({
           }
           readOnly={disabled}
         />
-        <LoongArkClipboardTrigger disabled={disabled}>Copy</LoongArkClipboardTrigger>
+        <LoongArkClipboardTrigger disabled={disabled}>
+          Copy
+        </LoongArkClipboardTrigger>
       </LoongArkClipboardControl>
       <LoongArkClipboardIndicator>Copied</LoongArkClipboardIndicator>
       <LoongArkClipboardValueText>{value}</LoongArkClipboardValueText>

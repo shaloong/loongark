@@ -1,12 +1,18 @@
+import { dataProps } from "../data-props";
 import { RadioGroup } from "@ark-ui/react/radio-group";
 import { type ReactNode, forwardRef, createElement } from "react";
 import type { ComponentPropsWithoutRef } from "react";
-import type { RadioGroupSize, RadioGroupOrientation } from "@loongark/primitives";
+import type {
+  RadioGroupSize,
+  RadioGroupOrientation,
+} from "@loongark/primitives";
 
 // ============ 类型定义 ============
 
 type ArkRadioGroupRootProps = ComponentPropsWithoutRef<typeof RadioGroup.Root>;
-type ArkRadioGroupLabelProps = ComponentPropsWithoutRef<typeof RadioGroup.Label>;
+type ArkRadioGroupLabelProps = ComponentPropsWithoutRef<
+  typeof RadioGroup.Label
+>;
 type ArkRadioGroupItemProps = ComponentPropsWithoutRef<typeof RadioGroup.Item>;
 type ArkRadioGroupItemControlProps = ComponentPropsWithoutRef<
   typeof RadioGroup.ItemControl
@@ -21,40 +27,54 @@ type ArkRadioGroupItemHiddenInputProps = ComponentPropsWithoutRef<
   typeof RadioGroup.ItemHiddenInput
 >;
 
-export interface LoongArkRadioGroupRootProps
-  extends Omit<ArkRadioGroupRootProps, "asChild"> {
+export interface LoongArkRadioGroupRootProps extends Omit<
+  ArkRadioGroupRootProps,
+  "asChild"
+> {
   children?: ReactNode;
   size?: RadioGroupSize;
   orientation?: RadioGroupOrientation;
 }
 
-export interface LoongArkRadioGroupLabelProps
-  extends Omit<ArkRadioGroupLabelProps, "asChild"> {
+export interface LoongArkRadioGroupLabelProps extends Omit<
+  ArkRadioGroupLabelProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkRadioGroupItemProps
-  extends Omit<ArkRadioGroupItemProps, "asChild"> {
+export interface LoongArkRadioGroupItemProps extends Omit<
+  ArkRadioGroupItemProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkRadioGroupItemControlProps
-  extends Omit<ArkRadioGroupItemControlProps, "asChild"> {
+export interface LoongArkRadioGroupItemControlProps extends Omit<
+  ArkRadioGroupItemControlProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkRadioGroupItemTextProps
-  extends Omit<ArkRadioGroupItemTextProps, "asChild"> {
+export interface LoongArkRadioGroupItemTextProps extends Omit<
+  ArkRadioGroupItemTextProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkRadioGroupIndicatorProps
-  extends Omit<ArkRadioGroupIndicatorProps, "asChild"> {
+export interface LoongArkRadioGroupIndicatorProps extends Omit<
+  ArkRadioGroupIndicatorProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkRadioGroupItemHiddenInputProps
-  extends Omit<ArkRadioGroupItemHiddenInputProps, "asChild"> {}
+export interface LoongArkRadioGroupItemHiddenInputProps extends Omit<
+  ArkRadioGroupItemHiddenInputProps,
+  "asChild"
+> {}
 
 // ============ 组件实现 ============
 
@@ -80,11 +100,11 @@ export const LoongArkRadioGroupRoot = forwardRef<
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     return createElement(
       RadioGroup.Root,
-      {
+      dataProps({
         ref,
         defaultValue,
         value,
@@ -100,10 +120,10 @@ export const LoongArkRadioGroupRoot = forwardRef<
         "data-size": size,
         "data-orientation": orientation,
         ...props,
-      },
-      children
+      }),
+      children,
     );
-  }
+  },
 );
 
 LoongArkRadioGroupRoot.displayName = "LoongArkRadioGroupRoot";
@@ -117,13 +137,13 @@ export const LoongArkRadioGroupLabel = forwardRef<
 >(({ children, ...props }, ref) => {
   return createElement(
     RadioGroup.Label,
-    {
+    dataProps({
       ref,
       "data-scope": "radio-group",
       "data-part": "label",
       ...props,
-    },
-    children
+    }),
+    children,
   );
 });
 
@@ -138,7 +158,7 @@ export const LoongArkRadioGroupItem = forwardRef<
 >(({ children, value, disabled, invalid, ...props }, ref) => {
   return createElement(
     RadioGroup.Item,
-    {
+    dataProps({
       ref,
       value,
       disabled,
@@ -146,8 +166,8 @@ export const LoongArkRadioGroupItem = forwardRef<
       "data-scope": "radio-group",
       "data-part": "item",
       ...props,
-    },
-    children
+    }),
+    children,
   );
 });
 
@@ -162,14 +182,14 @@ export const LoongArkRadioGroupItemControl = forwardRef<
 >(({ children, className, ...props }, ref) => {
   return createElement(
     RadioGroup.ItemControl,
-    {
+    dataProps({
       ref,
       className,
       "data-scope": "radio-group",
       "data-part": "item-control",
       ...props,
-    },
-    children
+    }),
+    children,
   );
 });
 
@@ -184,14 +204,14 @@ export const LoongArkRadioGroupItemText = forwardRef<
 >(({ children, className, ...props }, ref) => {
   return createElement(
     RadioGroup.ItemText,
-    {
+    dataProps({
       ref,
       className,
       "data-scope": "radio-group",
       "data-part": "item-text",
       ...props,
-    },
-    children
+    }),
+    children,
   );
 });
 
@@ -206,14 +226,14 @@ export const LoongArkRadioGroupIndicator = forwardRef<
 >(({ children, className, ...props }, ref) => {
   return createElement(
     RadioGroup.Indicator,
-    {
+    dataProps({
       ref,
       className,
       "data-scope": "radio-group",
       "data-part": "indicator",
       ...props,
-    },
-    children
+    }),
+    children,
   );
 });
 
@@ -226,13 +246,16 @@ export const LoongArkRadioGroupItemHiddenInput = forwardRef<
   HTMLInputElement,
   LoongArkRadioGroupItemHiddenInputProps
 >(({ className, ...props }, ref) => {
-  return createElement(RadioGroup.ItemHiddenInput, {
-    ref,
-    className,
-    "data-scope": "radio-group",
-    "data-part": "item-hidden-input",
-    ...props,
-  });
+  return createElement(
+    RadioGroup.ItemHiddenInput,
+    dataProps({
+      ref,
+      className,
+      "data-scope": "radio-group",
+      "data-part": "item-hidden-input",
+      ...props,
+    }),
+  );
 });
 
 LoongArkRadioGroupItemHiddenInput.displayName =
@@ -255,4 +278,3 @@ export const LoongArkRadioGroup: {
   Indicator: LoongArkRadioGroupIndicator,
   ItemHiddenInput: LoongArkRadioGroupItemHiddenInput,
 };
-

@@ -25,20 +25,42 @@ export const SplitterExample = defineComponent({
     return () =>
       h(
         LoongArkSplitterRoot,
-        { size: props.size, orientation: props.orientation, style: { height } },
+        {
+          size: props.size,
+          orientation: props.orientation,
+          panels: [
+            { id: "notes", minSize: 20 },
+            { id: "preview", minSize: 20 },
+          ],
+          style: { height },
+        },
         {
           default: () => [
-            h(LoongArkSplitterPanel, { minSize: 20 }, {
-              default: () => h("div", { style: { padding: "12px" } }, "Notes"),
-            }),
-            h(LoongArkSplitterResizeTrigger, null, {
-              default: () => h(LoongArkSplitterResizeTriggerIndicator),
-            }),
-            h(LoongArkSplitterPanel, { minSize: 20 }, {
-              default: () => h("div", { style: { padding: "12px" } }, "Preview"),
-            }),
+            h(
+              LoongArkSplitterPanel,
+              { id: "notes" },
+              {
+                default: () =>
+                  h("div", { style: { padding: "12px" } }, "Notes"),
+              },
+            ),
+            h(
+              LoongArkSplitterResizeTrigger,
+              { id: "notes:preview" },
+              {
+                default: () => h(LoongArkSplitterResizeTriggerIndicator),
+              },
+            ),
+            h(
+              LoongArkSplitterPanel,
+              { id: "preview" },
+              {
+                default: () =>
+                  h("div", { style: { padding: "12px" } }, "Preview"),
+              },
+            ),
           ],
-        }
+        },
       );
   },
 });

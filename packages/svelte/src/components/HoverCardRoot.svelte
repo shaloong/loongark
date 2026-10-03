@@ -6,11 +6,6 @@
   export let size: HoverCardSize = "md";
 </script>
 
-<HoverCard.Root
-  data-scope="hover-card"
-  data-part="root"
-  data-size={size}
-  {...$$restProps}
->
-  <slot />
+<HoverCard.Root {...$$restProps}>
+  <div data-scope="hover-card" data-part="root" data-size={size}><slot /></div>
 </HoverCard.Root>

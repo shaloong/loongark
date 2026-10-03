@@ -11,20 +11,22 @@ import {
 } from "@ark-ui/solid/avatar";
 import type { AvatarSize } from "@loongark/primitives";
 
-export interface LoongArkAvatarRootProps
-  extends Omit<ArkAvatarRootProps, "asChild"> {
+export interface LoongArkAvatarRootProps extends Omit<
+  ArkAvatarRootProps,
+  "asChild"
+> {
   size?: AvatarSize;
   children?: JSX.Element;
 }
 
 export const LoongArkAvatarRoot: Component<LoongArkAvatarRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps({ size: "md" as AvatarSize }, props);
 
   return (
     <ArkAvatar.Root
-      {...(props as any)}
+      {...props}
       data-scope="avatar"
       data-part="root"
       data-size={merged.size}
@@ -35,9 +37,7 @@ export const LoongArkAvatarRoot: Component<LoongArkAvatarRootProps> = (
 };
 
 export const LoongArkAvatarImage: Component<ArkAvatarImageProps> = (props) => {
-  return (
-    <ArkAvatar.Image {...props} data-scope="avatar" data-part="image" />
-  );
+  return <ArkAvatar.Image {...props} data-scope="avatar" data-part="image" />;
 };
 
 export const LoongArkAvatarFallback: Component<

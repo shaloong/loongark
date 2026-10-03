@@ -37,7 +37,7 @@ const SelectContext = createContext<{ size: SelectSize }>({ size: "md" });
  * Select Root Props
  */
 export interface LoongArkSelectRootProps<
-  T extends Record<string, any> = Record<string, any>
+  T extends object = object,
 > extends Omit<ArkSelectRootProps<T>, "asChild"> {
   size?: SelectSize;
   children?: JSX.Element;
@@ -46,15 +46,15 @@ export interface LoongArkSelectRootProps<
 /**
  * Select Root 组件
  */
-export const LoongArkSelectRoot: Component<LoongArkSelectRootProps> = (
-  props
-) => {
+export const LoongArkSelectRoot = <T extends object>(
+  props: LoongArkSelectRootProps<T>,
+): JSX.Element => {
   const merged = mergeProps({ size: "md" as SelectSize }, props);
 
   return (
     <SelectContext.Provider value={{ size: merged.size }}>
       <ArkSelect.Root
-        {...(props as any)}
+        {...props}
         data-scope="select"
         data-part="root"
         data-size={merged.size}

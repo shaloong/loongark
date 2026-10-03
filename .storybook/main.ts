@@ -1,6 +1,9 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
 import type { StorybookConfig } from "@storybook/react-vite";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -18,17 +21,17 @@ const workspaceAlias: Record<string, string> = {
 
 const config: StorybookConfig = {
   stories: ["../stories/**/*.stories.@(ts|tsx|mdx)"],
-  addons: ["@storybook/addon-docs"],
+  addons: [getAbsolutePath("@storybook/addon-docs")],
+
   framework: {
-    name: "@storybook/react-vite",
+    name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
+
   core: {
     disableTelemetry: true,
   },
-  docs: {
-    autodocs: true,
-  },
+
   async viteFinal(config) {
     config.resolve = config.resolve ?? {};
     config.resolve.alias = {
@@ -41,3 +44,7 @@ const config: StorybookConfig = {
 };
 
 export default config;
+
+function getAbsolutePath(value: string): string {
+  return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)));
+}

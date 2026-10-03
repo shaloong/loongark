@@ -1,8 +1,0 @@
-import{R as e,r as s,p,q as k,a as E,b as A,d as L,g as y,s as F,t as b,u as h,v,w as B,f as c}from"./iframe-BlkAa_1r.js";import{a as t}from"./filterBarScenario-D2peLoqm.js";import"./preload-helper-PPVm8Dsz.js";const i=({dense:o,align:u="center"})=>{const[g,l]=s.useState("飞书"),[m,d]=s.useState("active");return e.createElement(p,{dense:o,align:u,style:{width:"100%"}},e.createElement(k,null,e.createElement(E,null,t.searchLabel),e.createElement(A,null,e.createElement(L,{value:g,placeholder:t.searchPlaceholder,onChange:r=>l(r.currentTarget.value)})),e.createElement(y,null,t.searchHelper)),e.createElement(F,null),e.createElement(b,null,t.chips.map(r=>e.createElement(h,{key:r.id,active:r.id===m,onClick:()=>d(r.id)},r.label,typeof r.badge=="number"?e.createElement(v.span,{"data-lk-filter-chip-badge":!0},r.badge):null))),e.createElement(B,null,e.createElement(c,{variant:"ghost",onClick:()=>l("")},"清除查询"),e.createElement(c,null,"保存视图")))},P={title:"Components/FilterBar",component:i,args:{dense:!1,align:"center"},argTypes:{align:{control:{type:"inline-radio"},options:["start","center"]},dense:{control:"boolean"}}},a={render:o=>e.createElement(i,{...o})},n={args:{dense:!0,align:"start"}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
-  render: args => <FilterBarPlayground {...args} />
-}`,...a.parameters?.docs?.source}}};n.parameters={...n.parameters,docs:{...n.parameters?.docs,source:{originalSource:`{
-  args: {
-    dense: true,
-    align: "start"
-  }
-}`,...n.parameters?.docs?.source}}};const x=["Playground","Dense"];export{n as Dense,a as Playground,x as __namedExportsOrder,P as default};

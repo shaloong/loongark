@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
   import type { CheckboxSize } from "@loongark/primitives";
-  import type { CheckedState } from "@ark-ui/svelte/checkbox";
+  type CheckedState = boolean | "indeterminate";
 
   export interface CheckboxRootProps {
     size?: CheckboxSize;
@@ -40,8 +40,7 @@
   export let name: string | undefined = undefined;
   export let value: string | undefined = undefined;
   export let onCheckedChange:
-    | ((details: { checked: CheckedState }) => void)
-    | undefined = undefined;
+    ((details: { checked: CheckedState }) => void) | undefined = undefined;
 
   $: dataAttrs = getDataAttrs("checkbox", "root", { size });
 </script>
@@ -56,6 +55,7 @@
   {name}
   {value}
   {onCheckedChange}
+  {...$$restProps}
   {...dataAttrs}
 >
   <slot />

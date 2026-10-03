@@ -19,8 +19,10 @@ import {
 } from "@ark-ui/solid/tags-input";
 import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
 
-export interface LoongArkTagsInputRootProps
-  extends Omit<ArkTagsInputRootProps, "asChild"> {
+export interface LoongArkTagsInputRootProps extends Omit<
+  ArkTagsInputRootProps,
+  "asChild"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   disabled?: boolean;
@@ -29,7 +31,7 @@ export interface LoongArkTagsInputRootProps
 }
 
 export const LoongArkTagsInputRoot: Component<LoongArkTagsInputRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps(
     {
@@ -38,7 +40,7 @@ export const LoongArkTagsInputRoot: Component<LoongArkTagsInputRootProps> = (
       disabled: false,
       readOnly: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -50,7 +52,7 @@ export const LoongArkTagsInputRoot: Component<LoongArkTagsInputRootProps> = (
 
   return (
     <ArkTagsInput.Root
-      {...(others as any)}
+      {...others}
       disabled={local.disabled}
       readOnly={local.readOnly}
       data-scope="tags-input"
@@ -65,28 +67,28 @@ export const LoongArkTagsInputRoot: Component<LoongArkTagsInputRootProps> = (
   );
 };
 
-export interface LoongArkTagsInputLabelProps
-  extends Omit<ArkTagsInputLabelProps, "asChild"> {
+export interface LoongArkTagsInputLabelProps extends Omit<
+  ArkTagsInputLabelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkTagsInputLabel: Component<LoongArkTagsInputLabelProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkTagsInput.Label
-      {...others}
-      data-scope="tags-input"
-      data-part="label"
-    >
+    <ArkTagsInput.Label {...others} data-scope="tags-input" data-part="label">
       {local.children}
     </ArkTagsInput.Label>
   );
 };
 
-export interface LoongArkTagsInputControlProps
-  extends Omit<ArkTagsInputControlProps, "asChild"> {
+export interface LoongArkTagsInputControlProps extends Omit<
+  ArkTagsInputControlProps,
+  "asChild"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   disabled?: boolean;
@@ -102,7 +104,7 @@ export const LoongArkTagsInputControl: Component<
       state: "default" as TagsInputState,
       disabled: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -125,8 +127,10 @@ export const LoongArkTagsInputControl: Component<
   );
 };
 
-export interface LoongArkTagsInputInputProps
-  extends Omit<ArkTagsInputInputProps, "asChild"> {
+export interface LoongArkTagsInputInputProps extends Omit<
+  ArkTagsInputInputProps,
+  "asChild"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   disabled?: boolean;
@@ -134,7 +138,7 @@ export interface LoongArkTagsInputInputProps
 }
 
 export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps(
     {
@@ -143,7 +147,7 @@ export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
       disabled: false,
       readOnly: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "size",
@@ -167,13 +171,15 @@ export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
   );
 };
 
-export interface LoongArkTagsInputItemProps
-  extends Omit<ArkTagsInputItemProps, "asChild"> {
+export interface LoongArkTagsInputItemProps extends Omit<
+  ArkTagsInputItemProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkTagsInputItem: Component<LoongArkTagsInputItemProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
@@ -183,8 +189,10 @@ export const LoongArkTagsInputItem: Component<LoongArkTagsInputItemProps> = (
   );
 };
 
-export interface LoongArkTagsInputItemPreviewProps
-  extends Omit<ArkTagsInputItemPreviewProps, "asChild"> {
+export interface LoongArkTagsInputItemPreviewProps extends Omit<
+  ArkTagsInputItemPreviewProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -203,8 +211,10 @@ export const LoongArkTagsInputItemPreview: Component<
   );
 };
 
-export interface LoongArkTagsInputItemTextProps
-  extends Omit<ArkTagsInputItemTextProps, "asChild"> {
+export interface LoongArkTagsInputItemTextProps extends Omit<
+  ArkTagsInputItemTextProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -223,8 +233,10 @@ export const LoongArkTagsInputItemText: Component<
   );
 };
 
-export interface LoongArkTagsInputItemInputProps
-  extends Omit<ArkTagsInputItemInputProps, "asChild"> {}
+export interface LoongArkTagsInputItemInputProps extends Omit<
+  ArkTagsInputItemInputProps,
+  "asChild"
+> {}
 
 export const LoongArkTagsInputItemInput: Component<
   LoongArkTagsInputItemInputProps
@@ -238,8 +250,10 @@ export const LoongArkTagsInputItemInput: Component<
   );
 };
 
-export interface LoongArkTagsInputItemDeleteTriggerProps
-  extends Omit<ArkTagsInputItemDeleteTriggerProps, "asChild"> {
+export interface LoongArkTagsInputItemDeleteTriggerProps extends Omit<
+  ArkTagsInputItemDeleteTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -258,8 +272,10 @@ export const LoongArkTagsInputItemDeleteTrigger: Component<
   );
 };
 
-export interface LoongArkTagsInputClearTriggerProps
-  extends Omit<ArkTagsInputClearTriggerProps, "asChild"> {
+export interface LoongArkTagsInputClearTriggerProps extends Omit<
+  ArkTagsInputClearTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -278,8 +294,10 @@ export const LoongArkTagsInputClearTrigger: Component<
   );
 };
 
-export interface LoongArkTagsInputHiddenInputProps
-  extends Omit<ArkTagsInputHiddenInputProps, "asChild"> {}
+export interface LoongArkTagsInputHiddenInputProps extends Omit<
+  ArkTagsInputHiddenInputProps,
+  "asChild"
+> {}
 
 export const LoongArkTagsInputHiddenInput: Component<
   LoongArkTagsInputHiddenInputProps

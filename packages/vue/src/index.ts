@@ -1,6 +1,8 @@
 import { App, Plugin } from "vue";
 import { createLoongArkTheme } from "@loongark/theme";
 import { bootstrapKit } from "@loongark/kit";
+export { LoongArkProvider, useLoongArkTheme } from "./provider";
+export { LoongArkPortal } from "./components/portal";
 
 export interface VuePluginOptions {
   mode?: "light" | "dark" | "high-contrast";
@@ -9,7 +11,7 @@ export interface VuePluginOptions {
 }
 
 export const createLoongArkVuePlugin = (
-  options: VuePluginOptions = {}
+  options: VuePluginOptions = {},
 ): Plugin => {
   const theme = createLoongArkTheme({
     mode: options.mode,
@@ -22,6 +24,14 @@ export const createLoongArkVuePlugin = (
       bootstrapKit(theme);
       theme.mount();
       app.provide("loongark-theme", theme);
+      if (app.onUnmount) app.onUnmount(() => theme.unmount());
+      else {
+        const unmount = app.unmount.bind(app);
+        app.unmount = () => {
+          theme.unmount();
+          unmount();
+        };
+      }
     },
   };
 };
@@ -29,15 +39,22 @@ export const createLoongArkVuePlugin = (
 export { LoongArkButton } from "./components/button";
 export {
   LoongArkInputRoot,
+  LoongArkInputGroup,
+  LoongArkInputInput,
   LoongArkInputControl,
   LoongArkTextareaControl,
   LoongArkInputHelperText,
+  LoongArkInputErrorText,
   LoongArkInputLabel,
   LoongArkInputPrefix,
   LoongArkInputSuffix,
 } from "./components/input";
 export {
   LoongArkDialog,
+  LoongArkDialogRoot,
+  LoongArkDialogPositioner,
+  LoongArkDialogPortal,
+  LoongArkDialogTrigger,
   LoongArkDialogOverlay,
   LoongArkDialogContent,
   LoongArkDialogTitle,
@@ -109,6 +126,7 @@ export {
 } from "./components/file-upload";
 export {
   LoongArkSwitch,
+  LoongArkSwitchHiddenInput,
   LoongArkSwitchRoot,
   LoongArkSwitchControl,
   LoongArkSwitchThumb,
@@ -439,3 +457,28 @@ export {
   LoongArkTreeViewNodeCheckboxIndicator,
   LoongArkTreeViewNodeRenameInput,
 } from "./components/tree-view";
+
+export * from "./components/extended";
+
+export * from "./components/layout";
+
+export * from "./components/composed";
+
+export * from "./components/data";
+
+export { createListCollection } from "@ark-ui/vue/collection";
+export { createTreeCollection } from "@ark-ui/vue/collection";
+export { parseDate } from "@ark-ui/vue/date-picker";
+export { parseColor } from "@ark-ui/vue/color-picker";
+export { TreeViewNodeProvider as LoongArkTreeViewNodeProvider } from "@ark-ui/vue/tree-view";
+
+export type { FileUploadFileAcceptDetails as FileAcceptDetails } from "@ark-ui/vue/file-upload";
+
+export { FileUploadContext } from "@ark-ui/vue/file-upload";
+
+export { LoongArkTextarea } from "./components/textarea";
+
+export { LoongArkTransferList } from "./components/transfer-list";
+export { LoongArkTimePicker } from "./components/time-picker";
+
+export * from "./components/action-media";

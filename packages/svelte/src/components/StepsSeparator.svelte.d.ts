@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { StepsSeparatorProps } from "@ark-ui/svelte/steps";
-export default class StepsSeparator extends SvelteComponent<StepsSeparatorProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Steps } from "@ark-ui/svelte/steps";
+
+export default class LoongArkStepsSeparator extends SvelteComponent<
+  Omit<ComponentProps<typeof Steps.Separator>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

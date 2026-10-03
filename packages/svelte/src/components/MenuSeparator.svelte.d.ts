@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { MenuSeparatorProps } from "@ark-ui/svelte/menu";
-export default class MenuSeparator extends SvelteComponent<MenuSeparatorProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Menu } from "@ark-ui/svelte/menu";
+
+export default class LoongArkMenuSeparator extends SvelteComponent<
+  Omit<ComponentProps<typeof Menu.Separator>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

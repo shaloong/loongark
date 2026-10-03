@@ -1,0 +1,8 @@
+
+> loongark@0.0.0 check:svelte E:\dev\loongark
+> node node_modules/svelte-check/bin/svelte-check --tsconfig packages/svelte/tsconfig.examples.json
+
+Loading svelte-check in workspace: e:\dev\loongark
+Getting Svelte diagnostics...
+
+svelte-check found 0 errors and 0 warnings

@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 import {
@@ -35,9 +36,7 @@ export const TagsInputExample: Component<TagsInputExampleProps> = (props) => {
       disabled={disabled()}
       readOnly={readOnly()}
       value={value()}
-      onValueChange={(details: { value: string[] }) =>
-        setValue(details.value)
-      }
+      onValueChange={(details: { value: string[] }) => setValue(details.value)}
     >
       <LoongArkTagsInputLabel>Frameworks</LoongArkTagsInputLabel>
       <LoongArkTagsInputControl

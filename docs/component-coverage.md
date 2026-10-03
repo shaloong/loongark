@@ -1,194 +1,117 @@
-# LoongArk 组件覆盖状态
+# LoongArk 组件覆盖
 
-> 更新时间：2026 年 2 月 11 日
+更新时间：2026-10-03。按组件族计数，Progress 的线性/圆形属于同一族。
 
-## 图例
+目前 97 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近两批补齐选择输入与浮动动作、媒体布局，详见 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
 
-- ✅ 已完整实现（Primitives + React + Vue + Solid + Svelte）
-- 🔶 部分实现（仅部分框架）
-- ⏳ 规划中
-- ❌ 未开始
+| 组件族               | React | Vue | Solid | Svelte | 交付来源        |
+| -------------------- | ----- | --- | ----- | ------ | --------------- |
+| FloatingActionButton | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| SpeedDial            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| ImageList            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Masonry              | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| TransferList         | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| TimePicker           | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Textarea             | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Link                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Chip                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| List                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| AvatarGroup          | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Paper                | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Box                  | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Stack                | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Container            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Grid                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Timeline             | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| AppBar               | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| BottomNavigation     | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Accordion            | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Alert                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Alert Dialog         | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Angle Slider         | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
+| Aspect Ratio         | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Avatar               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Badge                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Breadcrumb           | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Button               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Button Group         | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Calendar             | ✓     | ✓   | ✓     | ✓      | 补齐独立入口    |
+| Card                 | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Carousel             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Chart                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Checkbox             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Clipboard            | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Collapsible          | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Color Picker         | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Combobox             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Command              | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Context Menu         | ✓     | ✓   | ✓     | ✓      | 补齐独立入口    |
+| Data Table           | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Date Picker          | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Dialog               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Direction            | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Drawer               | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Editable             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Empty                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Field                | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
+| Fieldset             | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
+| File Upload          | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Filter Bar           | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Floating Panel       | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
+| Hover Card           | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Input                | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Input Group          | ✓     | ✓   | ✓     | ✓      | 补齐独立入口    |
+| Item                 | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Kbd                  | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Label                | ✓     | ✓   | ✓     | ✓      | 补齐独立入口    |
+| Listbox              | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Marquee              | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
+| Menu                 | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Menubar              | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Native Select        | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Navigation Menu      | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Number Input         | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Pagination           | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Password Input       | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Pin Input            | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Popover              | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Progress             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| QR Code              | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
+| Radio Group          | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Rating Group         | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Scroll Area          | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Segment Group        | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Select               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Separator            | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Sheet                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Sidebar              | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Signature Pad        | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
+| Skeleton             | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Slider               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Spinner              | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Splitter             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Steps                | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Switch               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Table                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| Tabs                 | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Tags Input           | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Timer                | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
+| Toast                | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Toggle               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Toggle Group         | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Tooltip              | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Tour                 | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
+| Tree View            | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
+| Typography           | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
 
-## 组件实现状态
+## 能力约定
 
-| 组件名称            | Primitives | React | Vue | Solid | Svelte | 状态 | 优先级 | 备注                                |
-| ------------------- | ---------- | ----- | --- | ----- | ------ | ---- | ------ | ----------------------------------- |
-| **Button**          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P0     | 基础组件，已完成                    |
-| **Dialog**          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P0     | 对话框，已完成                      |
-| **Input**           | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P0     | 输入框（含 Floating Label），已完成 |
-| **Pin Input**       | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 验证码输入，已完成                  |
-| **Switch**          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P0     | 开关，已完成                        |
-| **Field**           | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | -      | 已通过 Input 实现                   |
-| **Fieldset**        | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | -      | 表单分组，待评估                    |
-| Accordion           | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 折叠面板                            |
-| Angle Slider        | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 角度选择器，低优先级                |
-| Avatar              | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 头像                                |
-| Carousel | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 轮播图 |
-| **Checkbox**        | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 复选框，已完成                      |
-| Clipboard | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 剪贴板 |
-| Collapsible         | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 可折叠容器                          |
-| Color Picker | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 颜色选择器 |
-| Combobox            | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 组合框                              |
-| Date Picker         | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 日期选择器                          |
-| Editable | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 可编辑文本 |
-| File Upload         | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 文件上传                            |
-| Floating Panel      | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 浮动面板                            |
-| Hover Card | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 悬浮卡片 |
-| Listbox             | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 列表框                              |
-| Marquee             | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 跑马灯，低优先级                    |
-| **Menu**            | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 菜单，高优先级                      |
-| Number Input        | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 数字输入框                          |
-| Pagination          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 分页                                |
-| Password Input      | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 密码输入框                          |
-| **Popover**         | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 弹出框，高优先级                    |
-| Progress - Circular | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 圆形进度条                          |
-| Progress - Linear   | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 线性进度条                          |
-| QR Code             | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 二维码，低优先级                    |
-| **Radio Group**     | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 单选框组，已完成                    |
-| Rating Group | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 评分 |
-| Scroll Area | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 滚动区域 |
-| Segment Group       | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 分段控制器                          |
-| **Select**          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 选择器，已完成                      |
-| Signature Pad       | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 签名板，低优先级                    |
-| **Slider**          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 滑块，高优先级                      |
-| Splitter | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 分割器 |
-| Steps               | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 步骤条                              |
-| **Tabs**            | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 标签页，高优先级                    |
-| Tags Input          | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 标签输入                            |
-| Timer               | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 计时器，低优先级                    |
-| **Toast**           | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 轻提示，高优先级                    |
-| Toggle Group        | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 切换按钮组                          |
-| Toggle              | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P2     | 切换按钮                            |
-| **Tooltip**         | ✅         | ✅    | ✅  | ✅    | ✅     | ✅   | P1     | 工具提示，高优先级                  |
-| Tour                | ❌         | ❌    | ❌  | ❌    | ❌     | ❌   | P4     | 引导游览，低优先级                  |
-| Tree View | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | P3 | 树形视图 |
+Ark 组件保持原生状态机、事件和键盘语义。布局组件通过统一部件元数据渲染语义 HTML；四端共用 CSS。Calendar 使用 DatePicker 的 inline 模式；ContextMenu 使用真正的右键触发器；InputGroup 与 Label 使用 Field/Input 语义。
 
-## 统计摘要
+AlertDialog/Sheet/Drawer 复用 Dialog 的焦点锁、Escape、隐藏与恢复行为；Drawer 为底部模态抽屉，不承诺 Vaul 的弹簧拖拽、吸附点等第三方 API。Menubar 在多个 Ark Menu 根节点之间提供横向循环焦点。NavigationMenu 使用 Popover 与语义导航链接。Sidebar 使用 Collapsible 管理面板。
 
-- **已完成**: 40/49 (81.6%)
-  - Button, Dialog, Input, Switch, Pin Input, Checkbox, Radio Group, Select, Slider, Tooltip, Tabs, Menu, Popover, Toast, Accordion, Collapsible, Toggle, Toggle Group, Date Picker, Avatar, Combobox, Pagination, Segment Group, Listbox, Number Input, Progress (Linear/Circular), Password Input, Tags Input, Steps, File Upload (全框架), Carousel, Clipboard, Color Picker, Editable, Hover Card, Scroll Area, Rating Group, Splitter, Tree View
-- **进行中**: 0/49 (0%)
-- **未开始**: 9/49 (18.4%)
+DataTable 支持列排序、筛选、分页、行选择和空结果；当前行模型为标量字段。Chart 支持柱状/折线、多序列、负值、语义颜色、安全 SVG、原生提示和容器自适应；不是 Recharts 的 API 兼容层。Command 提供搜索、过滤集合和 Combobox 键盘选择。
 
-## 优先级说明
+上一轮按 shadcn 的 58 项传统需求清单验收；本轮新增 13 族及扩大对照后的缺口见 [常用组件缺口](component-gaps.md)。API 遵循 LoongArk/Ark 的组合方式，不承诺直接替换 shadcn 的 import 或 props。
 
-### P0 - 核心基础组件（已完成）
-
-✅ Button, Dialog, Input, Switch
-
-### P1 - 高优先级（表单 & 反馈）
-
-✅ 已完成：Pin Input, Checkbox, Radio Group, Select, Slider, Tabs, Tooltip, Toast, Menu, Popover, Combobox, Pagination, Segment Group, Listbox, Number Input
-
-下一阶段建议转向 P4 组件（Angle Slider, Floating Panel, Marquee, QR Code, Signature Pad, Timer, Tour）。
-
-### P2 - 中优先级（扩展表单 & 布局）
-
-✅ 已完成：File Upload, Password Input, Tags Input, Steps, Progress - Linear, Progress - Circular
-
-### P3 - 低优先级（高级功能，已完成）
-
-- Carousel, Color Picker, Editable, Hover Card, Scroll Area
-- Clipboard, Rating Group, Splitter, Tree View
-
-### P4 - 非必要（特殊场景）
-
-- Angle Slider, Floating Panel, Marquee, QR Code, Signature Pad, Timer, Tour
-
-## 下一步行动建议
-
-### Sprint 1: 表单组件补全（P1）
-
-1. **Checkbox** - 2 天
-
-   - Primitives: 尺寸、状态、禁用
-   - 框架封装：React, Vue, Solid, Svelte
-   - Storybook stories
-
-2. **Radio Group** - 2 天
-
-   - Primitives: 尺寸、方向、间距
-   - 框架封装：React, Vue, Solid, Svelte
-   - Storybook stories
-
-3. **Select** - 3 天
-
-   - Primitives: 尺寸、多选、搜索
-   - 框架封装：React, Vue, Solid, Svelte
-   - Storybook stories
-
-4. **Pin Input 补全** - 1 天
-   - 补充 Vue, Solid, Svelte 实现
-   - 更新文档
-
-### Sprint 2: 反馈组件（P1）
-
-1. **Tooltip** - 2 天
-2. **Toast** - 2 天
-3. **Popover** - 2 天
-
-### Sprint 3: 导航 & 布局（P1）
-
-1. **Tabs** - 2 天
-2. **Menu** - 3 天
-3. **Slider** - 2 天
-
-## 实现规范
-
-每个组件必须包含：
-
-1. **Primitives** (`packages/primitives/src/{component}.ts`)
-
-   - Token 定义与提取
-   - CSS 样式生成
-   - Primitive contract
-   - 注册到 registry
-
-2. **React** (`packages/react/src/components/{component}.tsx`)
-
-   - Ark UI 封装
-   - Props 接口
-   - Data attributes
-   - 导出到 `packages/react/src/index.ts`
-
-3. **Vue** (`packages/vue/src/components/{component}.ts`)
-
-   - Ark UI 封装
-   - defineComponent
-   - 导出到 `packages/vue/src/index.ts`
-
-4. **Solid** (`packages/solid/src/{component}.ts`)
-
-   - Ark UI 封装
-   - JSX 组件
-   - 导出到 `packages/solid/src/index.ts`
-
-5. **Svelte** (`packages/svelte/src/actions/{component}.ts`)
-
-   - Ark UI actions
-   - 类型定义
-   - 导出到 `packages/svelte/src/index.ts`
-
-6. **Type Stubs** (`types/ark-ui-{framework}-{component}.d.ts`)
-
-   - 为每个框架创建类型声明
-   - 避免引入实际依赖
-
-7. **Examples** (`examples/{framework}/{Component}Example.{tsx|vue|svelte}`)
-
-   - 至少一个基础示例
-   - 展示主要功能
-
-8. **Storybook** (`stories/LoongArk{Component}.stories.tsx`)
-
-   - Playground story
-   - 各种变体展示
-   - 状态演示
-
-## 参考资源
-
-- [Ark UI 官方文档](https://ark-ui.com/)
-- [Ark UI GitHub](https://github.com/chakra-ui/ark)
-- Sprint 计划：`docs/sprint-plan.md`
-- 主题系统：`docs/theme-system.md`
-- 架构文档：`docs/architecture.md`
+构建、真实消费、SSR、公开类型、交互与视觉证据见 [整改报告](remediation.md)。

@@ -1,9 +1,14 @@
 <script lang="ts">
   import { Tooltip } from "@ark-ui/svelte/tooltip";
   import type { TooltipRootProps } from "@ark-ui/svelte/tooltip";
-  const props: Partial<TooltipRootProps> = {};
+  const componentId = $props.id();
+  let {
+    id = componentId,
+    children,
+    ...props
+  }: Omit<TooltipRootProps, "id"> & { id?: string } = $props();
 </script>
 
-<Tooltip.Root {...props} data-scope="tooltip" data-part="root">
-  <slot />
+<Tooltip.Root {id} {...props}>
+  {@render children?.()}
 </Tooltip.Root>

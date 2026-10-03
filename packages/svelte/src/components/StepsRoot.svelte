@@ -5,20 +5,20 @@
 
   export let size: StepsSize = "md";
   export let orientation: StepsOrientation = "horizontal";
-  export let value: StepsRootProps["value"] = undefined;
-  export let defaultValue: StepsRootProps["defaultValue"] = undefined;
+  export let step: StepsRootProps["step"] = undefined;
+  export let defaultStep: StepsRootProps["defaultStep"] = undefined;
   export let count: StepsRootProps["count"] = undefined;
   export let linear: StepsRootProps["linear"] = undefined;
-  export let onValueChange: StepsRootProps["onValueChange"] = undefined;
+  export let onStepChange: StepsRootProps["onStepChange"] = undefined;
 </script>
 
 <Steps.Root
-  {value}
-  {defaultValue}
+  {step}
+  {defaultStep}
   {count}
   {linear}
   {orientation}
-  {onValueChange}
+  {onStepChange}
   data-scope="steps"
   data-part="root"
   data-size={size}

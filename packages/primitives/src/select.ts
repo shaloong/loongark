@@ -10,7 +10,6 @@ import {
   type PrimitiveContract,
   registerPrimitive,
 } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 /**
@@ -61,21 +60,21 @@ interface SelectDesignTokens {
 }
 
 const extractSelectTokens = (theme: LoongArkTheme): SelectDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -133,7 +132,7 @@ const extractSelectTokens = (theme: LoongArkTheme): SelectDesignTokens => {
 
 const buildSelectStyles = (theme: LoongArkTheme): string => {
   const tokens = extractSelectTokens(theme);
-  const zIndex = (theme.tokens as any).zIndex || {};
+  const zIndex = (theme.styleTokens as any).zIndex || {};
 
   return `
     @keyframes slideDownAndFade {
@@ -146,13 +145,6 @@ const buildSelectStyles = (theme: LoongArkTheme): string => {
       to { opacity: 0; transform: translateY(-2px); }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      :root:not([data-lk-motion="force"]) [data-scope="select"] * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
 
     /* Select Root */
     [data-scope="select"][data-part="root"] {
@@ -187,7 +179,7 @@ const buildSelectStyles = (theme: LoongArkTheme): string => {
       font-size: ${tokens.fontSize.md};
       line-height: ${tokens.lineHeight};
       cursor: pointer;
-      transition: all ${tokens.motion.duration} ${tokens.motion.easing};
+      transition: background-color ${tokens.motion.duration} ${tokens.motion.easing}, border-color ${tokens.motion.duration} ${tokens.motion.easing}, box-shadow ${tokens.motion.duration} ${tokens.motion.easing};
       outline: none;
     }
 
@@ -218,7 +210,7 @@ const buildSelectStyles = (theme: LoongArkTheme): string => {
     }
 
     [data-scope="select"][data-part="trigger"][data-placeholder-shown] [data-scope="select"][data-part="value-text"] {
-      color: ${tokens.neutral.placeholder};
+      color: var(--lk-color-semantic-mutedforeground);
     }
 
     /* Select Indicator (箭头图标) */
@@ -226,7 +218,7 @@ const buildSelectStyles = (theme: LoongArkTheme): string => {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: ${tokens.neutral.textMuted};
+      color: var(--lk-color-semantic-mutedforeground);
       margin-left: ${tokens.gap};
       transition: transform ${tokens.motion.duration} ${tokens.motion.easing};
     }
@@ -279,13 +271,13 @@ const buildSelectStyles = (theme: LoongArkTheme): string => {
     }
 
     [data-scope="select"][data-part="content"][data-size="sm"] [data-scope="select"][data-part="item"] {
-      padding: ${tokens.paddingY.sm} ${tokens.paddingX.sm};
-      font-size: ${tokens.fontSize.sm};
+      padding: var(--lk-control-fieldgap) var(--lk-space-component-sm);
+      font-size: var(--lk-typography-fontsize-md);
     }
 
     [data-scope="select"][data-part="content"][data-size="lg"] [data-scope="select"][data-part="item"] {
-      padding: ${tokens.paddingY.lg} ${tokens.paddingX.lg};
-      font-size: ${tokens.fontSize.lg};
+      padding: var(--lk-control-fieldgap) var(--lk-space-component-sm);
+      font-size: var(--lk-typography-fontsize-md);
     }
 
     [data-scope="select"][data-part="item"]:hover,
@@ -333,18 +325,20 @@ const buildSelectStyles = (theme: LoongArkTheme): string => {
 
     /* 尺寸变体 - Small */
     [data-scope="select"][data-part="root"][data-size="sm"] [data-scope="select"][data-part="trigger"] {
-      min-height: 32px;
-      padding: ${tokens.paddingY.sm} ${tokens.paddingX.sm};
-      font-size: ${tokens.fontSize.sm};
-      border-radius: ${tokens.radius.sm};
+      height: var(--lk-control-height-sm);
+      min-height: 0;
+      padding: 0 var(--lk-space-component-compact);
+      font-size: var(--lk-typography-fontsize-md);
+      border-radius: var(--lk-radius-md);
     }
 
     /* 尺寸变体 - Large */
     [data-scope="select"][data-part="root"][data-size="lg"] [data-scope="select"][data-part="trigger"] {
-      min-height: 48px;
-      padding: ${tokens.paddingY.lg} ${tokens.paddingX.lg};
-      font-size: ${tokens.fontSize.lg};
-      border-radius: ${tokens.radius.lg};
+      height: var(--lk-control-height-lg);
+      min-height: 0;
+      padding: 0 var(--lk-space-component-compact);
+      font-size: var(--lk-typography-fontsize-md);
+      border-radius: var(--lk-radius-md);
     }
   `;
 };
@@ -383,7 +377,7 @@ const selectContract: PrimitiveContract<SelectPrimitiveProps> = {
 
 const SelectPrimitive = createPrimitive(selectContract, (theme) => {
   const css = buildSelectStyles(theme);
-  mountPrimitiveStyles(`select-${theme.mode}`, css);
+  theme.mountStyles(`select-${theme.mode}`, css);
 });
 
 registerPrimitive(SelectPrimitive);

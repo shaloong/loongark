@@ -13,14 +13,23 @@
   $: height = orientation === "vertical" ? "240px" : "160px";
 </script>
 
-<LoongArkSplitterRoot {size} {orientation} style={`height: ${height};`}>
-  <LoongArkSplitterPanel minSize={20}>
+<LoongArkSplitterRoot
+  panels={[
+    { id: "notes", minSize: 20 },
+    { id: "preview", minSize: 20 },
+  ]}
+  defaultSize={[50, 50]}
+  {size}
+  {orientation}
+  style={`height: ${height};`}
+>
+  <LoongArkSplitterPanel id="notes">
     <div style="padding: 12px;">Notes</div>
   </LoongArkSplitterPanel>
-  <LoongArkSplitterResizeTrigger>
+  <LoongArkSplitterResizeTrigger id="notes:preview">
     <LoongArkSplitterResizeTriggerIndicator />
   </LoongArkSplitterResizeTrigger>
-  <LoongArkSplitterPanel minSize={20}>
+  <LoongArkSplitterPanel id="preview">
     <div style="padding: 12px;">Preview</div>
   </LoongArkSplitterPanel>
 </LoongArkSplitterRoot>

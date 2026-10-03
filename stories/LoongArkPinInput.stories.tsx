@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { LoongArkPinInput } from "@loongark/react";
 
 const meta = {
   title: "Components/PinInput",
   component: LoongArkPinInput.Root,
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof LoongArkPinInput.Root>;
@@ -14,12 +14,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const pinContainerStyle = { width: "360px" };
-const pinStackStyle = {
+const pinContainerStyle: React.CSSProperties = { width: "min(100%, 360px)" };
+const pinStackStyle: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   gap: "24px",
-  width: "360px",
+  width: "min(100%, 360px)",
 };
 
 // 基础 6 位验证码
@@ -109,7 +109,7 @@ export const Alphabetic: Story = {
           value={value}
           onValueChange={(details) => setValue(details.value)}
           type="alphabetic"
-          autoCapitalize
+          autoCapitalize="characters"
           selectOnFocus={false}
         >
           <LoongArkPinInput.Label>

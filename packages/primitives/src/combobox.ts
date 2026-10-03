@@ -9,7 +9,6 @@ import {
   type PrimitiveContract,
   registerPrimitive,
 } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type ComboboxSize = "sm" | "md" | "lg";
@@ -54,21 +53,21 @@ interface ComboboxDesignTokens {
 }
 
 const extractComboboxTokens = (theme: LoongArkTheme): ComboboxDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -126,7 +125,7 @@ const extractComboboxTokens = (theme: LoongArkTheme): ComboboxDesignTokens => {
 
 const buildComboboxStyles = (theme: LoongArkTheme): string => {
   const tokens = extractComboboxTokens(theme);
-  const zIndex = (theme.tokens as any).zIndex || {};
+  const zIndex = (theme.styleTokens as any).zIndex || {};
 
   return `
     @keyframes comboboxSlideDown {
@@ -139,13 +138,6 @@ const buildComboboxStyles = (theme: LoongArkTheme): string => {
       to { opacity: 0; transform: translateY(-2px); }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      :root:not([data-lk-motion="force"]) [data-scope="combobox"] * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
 
     [data-scope="combobox"][data-part="root"] {
       display: flex;
@@ -176,7 +168,7 @@ const buildComboboxStyles = (theme: LoongArkTheme): string => {
       font-family: ${tokens.fontFamily};
       font-size: ${tokens.fontSize.md};
       line-height: ${tokens.lineHeight};
-      transition: all ${tokens.motion.duration} ${tokens.motion.easing};
+      transition: background-color ${tokens.motion.duration} ${tokens.motion.easing}, border-color ${tokens.motion.duration} ${tokens.motion.easing}, box-shadow ${tokens.motion.duration} ${tokens.motion.easing};
       outline: none;
       cursor: text;
     }
@@ -215,7 +207,7 @@ const buildComboboxStyles = (theme: LoongArkTheme): string => {
     }
 
     [data-scope="combobox"][data-part="input"]::placeholder {
-      color: ${tokens.neutral.placeholder};
+      color: var(--lk-color-semantic-mutedforeground);
     }
 
     [data-scope="combobox"][data-part="trigger"],
@@ -226,7 +218,7 @@ const buildComboboxStyles = (theme: LoongArkTheme): string => {
       background: none;
       border: none;
       padding: 0;
-      color: ${tokens.neutral.textMuted};
+      color: var(--lk-color-semantic-mutedforeground);
       cursor: pointer;
       transition: color ${tokens.motion.duration} ${tokens.motion.easing};
     }
@@ -333,7 +325,7 @@ const buildComboboxStyles = (theme: LoongArkTheme): string => {
     }
 
     [data-scope="combobox"][data-part="item-group-label"] {
-      color: ${tokens.neutral.textMuted};
+      color: var(--lk-color-semantic-mutedforeground);
       font-family: ${tokens.fontFamily};
       font-size: ${tokens.fontSize.sm};
       font-weight: 600;
@@ -343,30 +335,32 @@ const buildComboboxStyles = (theme: LoongArkTheme): string => {
 
     [data-scope="combobox"][data-part="root"][data-size="sm"]
       [data-scope="combobox"][data-part="control"] {
-      min-height: 32px;
-      padding: ${tokens.paddingY.sm} ${tokens.paddingX.sm};
-      font-size: ${tokens.fontSize.sm};
-      border-radius: ${tokens.radius.sm};
+      height: var(--lk-control-height-sm);
+      min-height: 0;
+      padding: 0 var(--lk-space-component-compact);
+      font-size: var(--lk-typography-fontsize-md);
+      border-radius: var(--lk-radius-md);
     }
 
     [data-scope="combobox"][data-part="root"][data-size="lg"]
       [data-scope="combobox"][data-part="control"] {
-      min-height: 48px;
-      padding: ${tokens.paddingY.lg} ${tokens.paddingX.lg};
-      font-size: ${tokens.fontSize.lg};
-      border-radius: ${tokens.radius.lg};
+      height: var(--lk-control-height-lg);
+      min-height: 0;
+      padding: 0 var(--lk-space-component-compact);
+      font-size: var(--lk-typography-fontsize-md);
+      border-radius: var(--lk-radius-md);
     }
 
     [data-scope="combobox"][data-part="content"][data-size="sm"]
       [data-scope="combobox"][data-part="item"] {
-      padding: ${tokens.paddingY.sm} ${tokens.paddingX.sm};
-      font-size: ${tokens.fontSize.sm};
+      padding: var(--lk-control-fieldgap) var(--lk-space-component-sm);
+      font-size: var(--lk-typography-fontsize-md);
     }
 
     [data-scope="combobox"][data-part="content"][data-size="lg"]
       [data-scope="combobox"][data-part="item"] {
-      padding: ${tokens.paddingY.lg} ${tokens.paddingX.lg};
-      font-size: ${tokens.fontSize.lg};
+      padding: var(--lk-control-fieldgap) var(--lk-space-component-sm);
+      font-size: var(--lk-typography-fontsize-md);
     }
   `;
 };
@@ -405,7 +399,7 @@ const comboboxContract: PrimitiveContract<ComboboxPrimitiveProps> = {
 
 const ComboboxPrimitive = createPrimitive(comboboxContract, (theme) => {
   const css = buildComboboxStyles(theme);
-  mountPrimitiveStyles(`combobox-${theme.mode}`, css);
+  theme.mountStyles(`combobox-${theme.mode}`, css);
 });
 
 registerPrimitive(ComboboxPrimitive);

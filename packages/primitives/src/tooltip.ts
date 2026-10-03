@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export interface TooltipPrimitiveProps {
@@ -38,25 +37,25 @@ interface TooltipDesignTokens {
 }
 
 const extractTooltipTokens = (theme: LoongArkTheme): TooltipDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
-  const shadow = asTokenTree(theme.tokens.shadow);
-  const zIndex = asTokenTree(theme.tokens.zIndex);
+  const shadow = asTokenTree(theme.styleTokens.shadow);
+  const zIndex = asTokenTree(theme.styleTokens.zIndex);
 
   return {
     fontFamily: toStringToken(fontFamily.body, "sans-serif"),
@@ -88,13 +87,6 @@ const buildTooltipStyles = (theme: LoongArkTheme): string => {
   const tokens = extractTooltipTokens(theme);
 
   return `
-  @media (prefers-reduced-motion: reduce) {
-    :root:not([data-lk-motion="force"]) [data-scope="tooltip"] * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 
   [data-scope="tooltip"][data-part="root"] {
     position: relative;
@@ -237,7 +229,7 @@ const tooltipContract: PrimitiveContract<TooltipPrimitiveProps> = {
 
 const TooltipPrimitive = createPrimitive(tooltipContract, (theme) => {
   const css = buildTooltipStyles(theme);
-  mountPrimitiveStyles(`tooltip-${theme.mode}`, css);
+  theme.mountStyles(`tooltip-${theme.mode}`, css);
 });
 
 registerPrimitive(TooltipPrimitive);

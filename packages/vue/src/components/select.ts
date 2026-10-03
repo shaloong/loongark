@@ -1,16 +1,13 @@
+import type { CollectionItem } from "@ark-ui/vue/collection";
+import type { SelectRootProps as NativeSelectRootProps } from "@ark-ui/vue/select";
+import type { SelectItemProps as NativeSelectItemProps } from "@ark-ui/vue/select";
+import { renderPart } from "../render-part";
 /**
  * Select 组件 - Vue 实现
  * 基于 Ark UI Select 的下拉选择器
  */
 
-import {
-  defineComponent,
-  h,
-  provide,
-  inject,
-  toRef,
-  type PropType,
-} from "vue";
+import { defineComponent, h, provide, inject, toRef, type PropType } from "vue";
 import {
   SelectRoot as ArkSelectRoot,
   SelectLabel as ArkSelectLabel,
@@ -44,7 +41,9 @@ export const LoongArkSelectRoot = defineComponent({
       default: "md",
     },
     collection: {
-      type: Object as PropType<any>,
+      type: Object as PropType<
+        NativeSelectRootProps<CollectionItem>["collection"]
+      >,
     },
     closeOnSelect: {
       type: Boolean as PropType<boolean>,
@@ -59,15 +58,18 @@ export const LoongArkSelectRoot = defineComponent({
     },
     defaultOpen: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     defaultValue: {
       type: Array as PropType<string[]>,
     },
     deselectable: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     form: {
       type: String as PropType<string>,
@@ -79,13 +81,15 @@ export const LoongArkSelectRoot = defineComponent({
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeSelectRootProps<CollectionItem>["ids"]>,
     },
     immediate: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     invalid: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     lazyMount: {
       type: Boolean as PropType<boolean>,
@@ -97,27 +101,36 @@ export const LoongArkSelectRoot = defineComponent({
     },
     multiple: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     name: {
       type: String as PropType<string>,
     },
     open: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     positioning: {
-      type: Object as PropType<any>,
+      type: Object as PropType<
+        NativeSelectRootProps<CollectionItem>["positioning"]
+      >,
     },
     present: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     required: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     scrollToIndexFn: {
-      type: Function as PropType<any>,
+      type: Function as PropType<
+        NativeSelectRootProps<CollectionItem>["scrollToIndexFn"]
+      >,
     },
     skipAnimationOnMount: {
       type: Boolean as PropType<boolean>,
@@ -134,7 +147,7 @@ export const LoongArkSelectRoot = defineComponent({
   setup(props, { slots, attrs }) {
     provide(selectSizeKey, toRef(props, "size"));
     return () =>
-      h(
+      renderPart(
         ArkSelectRoot,
         {
           ...attrs,
@@ -143,7 +156,7 @@ export const LoongArkSelectRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -155,14 +168,14 @@ export const LoongArkSelectLabel = defineComponent({
   name: "LoongArkSelectLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectLabel,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -174,14 +187,14 @@ export const LoongArkSelectControl = defineComponent({
   name: "LoongArkSelectControl",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectControl,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "control",
         },
-        slots
+        slots,
       );
   },
 });
@@ -193,14 +206,14 @@ export const LoongArkSelectTrigger = defineComponent({
   name: "LoongArkSelectTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectTrigger,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -217,7 +230,7 @@ export const LoongArkSelectValueText = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectValueText,
         {
           ...attrs,
@@ -225,7 +238,7 @@ export const LoongArkSelectValueText = defineComponent({
           "data-scope": "select",
           "data-part": "value-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -237,14 +250,14 @@ export const LoongArkSelectIndicator = defineComponent({
   name: "LoongArkSelectIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectIndicator,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -256,14 +269,14 @@ export const LoongArkSelectClearTrigger = defineComponent({
   name: "LoongArkSelectClearTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectClearTrigger,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "clear-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -275,14 +288,14 @@ export const LoongArkSelectPositioner = defineComponent({
   name: "LoongArkSelectPositioner",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectPositioner,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "positioner",
         },
-        slots
+        slots,
       );
   },
 });
@@ -295,7 +308,7 @@ export const LoongArkSelectContent = defineComponent({
   setup(_, { slots, attrs }) {
     const size = inject(selectSizeKey, { value: "md" as SelectSize });
     return () =>
-      h(
+      renderPart(
         ArkSelectContent,
         {
           ...attrs,
@@ -303,7 +316,7 @@ export const LoongArkSelectContent = defineComponent({
           "data-part": "content",
           "data-size": size.value,
         },
-        slots
+        slots,
       );
   },
 });
@@ -315,14 +328,14 @@ export const LoongArkSelectList = defineComponent({
   name: "LoongArkSelectList",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectList,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "list",
         },
-        slots
+        slots,
       );
   },
 });
@@ -334,14 +347,14 @@ export const LoongArkSelectItemGroup = defineComponent({
   name: "LoongArkSelectItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectItemGroup,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "item-group",
         },
-        slots
+        slots,
       );
   },
 });
@@ -353,14 +366,14 @@ export const LoongArkSelectItemGroupLabel = defineComponent({
   name: "LoongArkSelectItemGroupLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectItemGroupLabel,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "item-group-label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -372,15 +385,16 @@ export const LoongArkSelectItem = defineComponent({
   name: "LoongArkSelectItem",
   props: {
     item: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeSelectItemProps["item"]>,
     },
     persistFocus: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectItem,
         {
           ...attrs,
@@ -389,7 +403,7 @@ export const LoongArkSelectItem = defineComponent({
           "data-scope": "select",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -401,14 +415,14 @@ export const LoongArkSelectItemText = defineComponent({
   name: "LoongArkSelectItemText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectItemText,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "item-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -420,14 +434,14 @@ export const LoongArkSelectItemIndicator = defineComponent({
   name: "LoongArkSelectItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSelectItemIndicator,
         {
           ...attrs,
           "data-scope": "select",
           "data-part": "item-indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -439,7 +453,7 @@ export const LoongArkSelectHiddenSelect = defineComponent({
   name: "LoongArkSelectHiddenSelect",
   setup(_, { attrs }) {
     return () =>
-      h(ArkSelectHiddenSelect, {
+      renderPart(ArkSelectHiddenSelect, {
         ...attrs,
         "data-scope": "select",
         "data-part": "hidden-select",

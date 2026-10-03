@@ -5,6 +5,11 @@
   export let id: PopoverCloseTriggerProps["id"] = undefined;
 </script>
 
-<Popover.CloseTrigger {...{ asChild, id }} data-scope="popover" data-part="close-trigger">
+<Popover.CloseTrigger
+  {...{ asChild, id }}
+  data-scope="popover"
+  data-part="close-trigger"
+  {...$$restProps}
+>
   <slot />
 </Popover.CloseTrigger>

@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Dialog } from "@ark-ui/svelte/dialog";
 
-export default class DialogCloseTrigger extends SvelteComponent<{}> {}
+export default class LoongArkDialogCloseTrigger extends SvelteComponent<
+  Omit<ComponentProps<typeof Dialog.CloseTrigger>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

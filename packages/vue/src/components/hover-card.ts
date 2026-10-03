@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Hover Card component - Vue wrapper.
  * Uses Ark UI Hover Card with data attributes for styling.
@@ -16,7 +17,7 @@ export const LoongArkHoverCardRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkHoverCard.Root,
         {
           ...attrs,
@@ -25,7 +26,7 @@ export const LoongArkHoverCardRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -34,14 +35,14 @@ export const LoongArkHoverCardTrigger = defineComponent({
   name: "LoongArkHoverCardTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkHoverCard.Trigger,
         {
           ...attrs,
           "data-scope": "hover-card",
           "data-part": "trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -50,14 +51,14 @@ export const LoongArkHoverCardPositioner = defineComponent({
   name: "LoongArkHoverCardPositioner",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkHoverCard.Positioner,
         {
           ...attrs,
           "data-scope": "hover-card",
           "data-part": "positioner",
         },
-        slots
+        slots,
       );
   },
 });
@@ -66,14 +67,14 @@ export const LoongArkHoverCardContent = defineComponent({
   name: "LoongArkHoverCardContent",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkHoverCard.Content,
         {
           ...attrs,
           "data-scope": "hover-card",
           "data-part": "content",
         },
-        slots
+        slots,
       );
   },
 });
@@ -82,14 +83,14 @@ export const LoongArkHoverCardArrow = defineComponent({
   name: "LoongArkHoverCardArrow",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkHoverCard.Arrow,
         {
           ...attrs,
           "data-scope": "hover-card",
           "data-part": "arrow",
         },
-        slots
+        slots,
       );
   },
 });
@@ -98,14 +99,14 @@ export const LoongArkHoverCardArrowTip = defineComponent({
   name: "LoongArkHoverCardArrowTip",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkHoverCard.ArrowTip,
         {
           ...attrs,
           "data-scope": "hover-card",
           "data-part": "arrow-tip",
         },
-        slots
+        slots,
       );
   },
 });

@@ -17,7 +17,8 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: "LoongArkEditable provides inline editing with control states.",
+        component:
+          "LoongArkEditable provides inline editing with control states.",
       },
     },
   },
@@ -50,9 +51,7 @@ const EditableDemo = ({
       value={value}
       onValueChange={(details: { value: string }) => setValue(details.value)}
     >
-      {showLabel && (
-        <LoongArkEditableLabel>Project name</LoongArkEditableLabel>
-      )}
+      {showLabel && <LoongArkEditableLabel>Project name</LoongArkEditableLabel>}
       <LoongArkEditableArea>
         <LoongArkEditablePreview />
         <LoongArkEditableInput state={state} />

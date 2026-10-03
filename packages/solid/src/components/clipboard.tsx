@@ -15,23 +15,29 @@ import {
 } from "@ark-ui/solid/clipboard";
 import type { ClipboardSize } from "@loongark/primitives";
 
-export interface LoongArkClipboardRootProps
-  extends Omit<ArkClipboardRootProps, "asChild"> {
+export interface LoongArkClipboardRootProps extends Omit<
+  ArkClipboardRootProps,
+  "asChild"
+> {
   size?: ClipboardSize;
   disabled?: boolean;
   children?: JSX.Element;
 }
 
 export const LoongArkClipboardRoot: Component<LoongArkClipboardRootProps> = (
-  props
+  props,
 ) => {
-  const merged = mergeProps({ size: "md" as ClipboardSize, disabled: false }, props);
+  const merged = mergeProps(
+    { size: "md" as ClipboardSize, disabled: false },
+    props,
+  );
   const [local, others] = splitProps(merged, ["children", "size", "disabled"]);
 
   return (
     <ArkClipboard.Root
-      {...(others as any)}
-      disabled={local.disabled}
+      {...others}
+      aria-disabled={local.disabled || undefined}
+      inert={local.disabled || undefined}
       data-scope="clipboard"
       data-part="root"
       data-size={local.size}
@@ -42,28 +48,28 @@ export const LoongArkClipboardRoot: Component<LoongArkClipboardRootProps> = (
   );
 };
 
-export interface LoongArkClipboardLabelProps
-  extends Omit<ArkClipboardLabelProps, "asChild"> {
+export interface LoongArkClipboardLabelProps extends Omit<
+  ArkClipboardLabelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkClipboardLabel: Component<LoongArkClipboardLabelProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkClipboard.Label
-      {...others}
-      data-scope="clipboard"
-      data-part="label"
-    >
+    <ArkClipboard.Label {...others} data-scope="clipboard" data-part="label">
       {local.children}
     </ArkClipboard.Label>
   );
 };
 
-export interface LoongArkClipboardControlProps
-  extends Omit<ArkClipboardControlProps, "asChild"> {
+export interface LoongArkClipboardControlProps extends Omit<
+  ArkClipboardControlProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -82,23 +88,23 @@ export const LoongArkClipboardControl: Component<
   );
 };
 
-export interface LoongArkClipboardInputProps
-  extends Omit<ArkClipboardInputProps, "asChild"> {}
+export interface LoongArkClipboardInputProps extends Omit<
+  ArkClipboardInputProps,
+  "asChild"
+> {}
 
 export const LoongArkClipboardInput: Component<LoongArkClipboardInputProps> = (
-  props
+  props,
 ) => {
   return (
-    <ArkClipboard.Input
-      {...props}
-      data-scope="clipboard"
-      data-part="input"
-    />
+    <ArkClipboard.Input {...props} data-scope="clipboard" data-part="input" />
   );
 };
 
-export interface LoongArkClipboardTriggerProps
-  extends Omit<ArkClipboardTriggerProps, "asChild"> {
+export interface LoongArkClipboardTriggerProps extends Omit<
+  ArkClipboardTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -117,8 +123,10 @@ export const LoongArkClipboardTrigger: Component<
   );
 };
 
-export interface LoongArkClipboardIndicatorProps
-  extends Omit<ArkClipboardIndicatorProps, "asChild"> {
+export interface LoongArkClipboardIndicatorProps extends Omit<
+  ArkClipboardIndicatorProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -137,8 +145,10 @@ export const LoongArkClipboardIndicator: Component<
   );
 };
 
-export interface LoongArkClipboardValueTextProps
-  extends Omit<ArkClipboardValueTextProps, "asChild"> {
+export interface LoongArkClipboardValueTextProps extends Omit<
+  ArkClipboardValueTextProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 

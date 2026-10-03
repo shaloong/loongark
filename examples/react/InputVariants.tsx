@@ -97,9 +97,10 @@ function PinInputExample() {
         onValueChange={(details: { value: string[]; valueAsString: string }) =>
           setValue(details.value)
         }
-        onValueComplete={(details: { value: string[]; valueAsString: string }) =>
-          alert(`验证码：${details.valueAsString}`)
-        }
+        onValueComplete={(details: {
+          value: string[];
+          valueAsString: string;
+        }) => alert(`验证码：${details.valueAsString}`)}
         selectOnFocus={false}
       >
         <LoongArkPinInput.Label>6 位验证码</LoongArkPinInput.Label>
@@ -114,9 +115,10 @@ function PinInputExample() {
       <div style={{ marginTop: "16px" }}>
         <LoongArkPinInput.Root
           value={code4}
-          onValueChange={(
-            details: { value: string[]; valueAsString: string }
-          ) => setCode4(details.value)}
+          onValueChange={(details: {
+            value: string[];
+            valueAsString: string;
+          }) => setCode4(details.value)}
           type="numeric"
           selectOnFocus={false}
         >
@@ -133,9 +135,10 @@ function PinInputExample() {
       <div style={{ marginTop: "16px" }}>
         <LoongArkPinInput.Root
           value={code8}
-          onValueChange={(
-            details: { value: string[]; valueAsString: string }
-          ) => setCode8(details.value)}
+          onValueChange={(details: {
+            value: string[];
+            valueAsString: string;
+          }) => setCode8(details.value)}
           mask
           selectOnFocus={false}
         >
@@ -152,11 +155,12 @@ function PinInputExample() {
       <div style={{ marginTop: "16px" }}>
         <LoongArkPinInput.Root
           value={codeUpper}
-          onValueChange={(
-            details: { value: string[]; valueAsString: string }
-          ) => setCodeUpper(details.value)}
+          onValueChange={(details: {
+            value: string[];
+            valueAsString: string;
+          }) => setCodeUpper(details.value)}
           type="alphabetic"
-          autoCapitalize
+          autoCapitalize="characters"
           selectOnFocus={false}
         >
           <LoongArkPinInput.Label>

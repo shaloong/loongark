@@ -1,19 +1,22 @@
+import type { JSX } from "solid-js";
 import { ark } from "@ark-ui/solid";
 import type { ButtonPrimitiveProps } from "@loongark/primitives";
-import { mergeProps } from "solid-js";
+import { mergeProps, splitProps } from "solid-js";
 import type { Component } from "solid-js";
 import { boolAttr } from "../utils";
 
 export type ButtonVariant = NonNullable<ButtonPrimitiveProps["variant"]>;
 export type ButtonSize = NonNullable<ButtonPrimitiveProps["size"]>;
 
-export interface LoongArkButtonProps extends Partial<ButtonPrimitiveProps> {
+export interface LoongArkButtonProps
+  extends
+    Partial<ButtonPrimitiveProps>,
+    JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   block?: boolean;
   loading?: boolean;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
-  children?: unknown;
-  [key: string]: unknown;
+  children?: JSX.Element;
 }
 
 const buttonDefaults: Required<
@@ -32,24 +35,42 @@ const buttonDefaults: Required<
 
 const buildButtonProps = (props: LoongArkButtonProps) => {
   const merged = mergeProps(buttonDefaults, props);
-  const { variant, size, block, loading, disabled, type, children, ...rest } =
-    merged;
-  const isInteractiveDisabled = disabled || loading;
-
-  return {
-    ...rest,
-    type,
-    disabled: isInteractiveDisabled,
-    children,
+  const [local, rest] = splitProps(merged, [
+    "variant",
+    "size",
+    "block",
+    "loading",
+    "disabled",
+    "type",
+  ]);
+  return mergeProps(rest, {
+    get type() {
+      return local.type;
+    },
+    get disabled() {
+      return local.disabled || local.loading;
+    },
     "data-scope": "button",
     "data-part": "root",
-    "data-variant": variant,
-    "data-size": size,
-    "data-block": boolAttr(block),
-    "data-loading": boolAttr(loading),
-    "aria-disabled": isInteractiveDisabled ? "true" : undefined,
-    "aria-busy": loading ? "true" : undefined,
-  };
+    get "data-variant"() {
+      return local.variant;
+    },
+    get "data-size"() {
+      return local.size;
+    },
+    get "data-block"() {
+      return boolAttr(local.block);
+    },
+    get "data-loading"() {
+      return local.loading || undefined;
+    },
+    get "aria-disabled"() {
+      return local.disabled || local.loading || undefined;
+    },
+    get "aria-busy"() {
+      return boolAttr(local.loading);
+    },
+  });
 };
 
 export const LoongArkButton: Component<LoongArkButtonProps> = (props) =>

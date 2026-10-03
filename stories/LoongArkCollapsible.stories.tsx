@@ -1,5 +1,5 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkCollapsibleRoot,
   LoongArkCollapsibleTrigger,
@@ -28,7 +28,7 @@ interface CollapsibleDemoProps {
   defaultOpen?: boolean;
 }
 
-const panelStyle = { color: "#3A3A3C" };
+const panelStyle = { color: "var(--lk-color-semantic-foreground)" };
 
 const CollapsibleDemo = ({
   size = "md",

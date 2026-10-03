@@ -17,19 +17,24 @@ import {
 } from "@ark-ui/solid/progress";
 import type { ProgressOrientation, ProgressSize } from "@loongark/primitives";
 
-export interface LoongArkProgressRootProps
-  extends Omit<ArkProgressRootProps, "asChild"> {
+export interface LoongArkProgressRootProps extends Omit<
+  ArkProgressRootProps,
+  "asChild"
+> {
   size?: ProgressSize;
   orientation?: ProgressOrientation;
   children?: JSX.Element;
 }
 
 export const LoongArkProgressRoot: Component<LoongArkProgressRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps(
-    { size: "md" as ProgressSize, orientation: "horizontal" as ProgressOrientation },
-    props
+    {
+      size: "md" as ProgressSize,
+      orientation: "horizontal" as ProgressOrientation,
+    },
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -39,7 +44,7 @@ export const LoongArkProgressRoot: Component<LoongArkProgressRootProps> = (
 
   return (
     <ArkProgress.Root
-      {...(others as any)}
+      {...others}
       orientation={local.orientation}
       data-scope="progress"
       data-part="root"
@@ -51,68 +56,64 @@ export const LoongArkProgressRoot: Component<LoongArkProgressRootProps> = (
   );
 };
 
-export interface LoongArkProgressLabelProps
-  extends Omit<ArkProgressLabelProps, "asChild"> {
+export interface LoongArkProgressLabelProps extends Omit<
+  ArkProgressLabelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkProgressLabel: Component<LoongArkProgressLabelProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkProgress.Label
-      {...others}
-      data-scope="progress"
-      data-part="label"
-    >
+    <ArkProgress.Label {...others} data-scope="progress" data-part="label">
       {local.children}
     </ArkProgress.Label>
   );
 };
 
-export interface LoongArkProgressTrackProps
-  extends Omit<ArkProgressTrackProps, "asChild"> {
+export interface LoongArkProgressTrackProps extends Omit<
+  ArkProgressTrackProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkProgressTrack: Component<LoongArkProgressTrackProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkProgress.Track
-      {...others}
-      data-scope="progress"
-      data-part="track"
-    >
+    <ArkProgress.Track {...others} data-scope="progress" data-part="track">
       {local.children}
     </ArkProgress.Track>
   );
 };
 
-export interface LoongArkProgressRangeProps
-  extends Omit<ArkProgressRangeProps, "asChild"> {
+export interface LoongArkProgressRangeProps extends Omit<
+  ArkProgressRangeProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkProgressRange: Component<LoongArkProgressRangeProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkProgress.Range
-      {...others}
-      data-scope="progress"
-      data-part="range"
-    >
+    <ArkProgress.Range {...others} data-scope="progress" data-part="range">
       {local.children}
     </ArkProgress.Range>
   );
 };
 
-export interface LoongArkProgressValueTextProps
-  extends Omit<ArkProgressValueTextProps, "asChild"> {
+export interface LoongArkProgressValueTextProps extends Omit<
+  ArkProgressValueTextProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -131,48 +132,46 @@ export const LoongArkProgressValueText: Component<
   );
 };
 
-export interface LoongArkProgressViewProps
-  extends Omit<ArkProgressViewProps, "asChild"> {
+export interface LoongArkProgressViewProps extends Omit<
+  ArkProgressViewProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkProgressView: Component<LoongArkProgressViewProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkProgress.View
-      {...others}
-      data-scope="progress"
-      data-part="view"
-    >
+    <ArkProgress.View {...others} data-scope="progress" data-part="view">
       {local.children}
     </ArkProgress.View>
   );
 };
 
-export interface LoongArkProgressCircleProps
-  extends Omit<ArkProgressCircleProps, "asChild"> {
+export interface LoongArkProgressCircleProps extends Omit<
+  ArkProgressCircleProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkProgressCircle: Component<LoongArkProgressCircleProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkProgress.Circle
-      {...others}
-      data-scope="progress"
-      data-part="circle"
-    >
+    <ArkProgress.Circle {...others} data-scope="progress" data-part="circle">
       {local.children}
     </ArkProgress.Circle>
   );
 };
 
-export interface LoongArkProgressCircleTrackProps
-  extends Omit<ArkProgressCircleTrackProps, "asChild"> {
+export interface LoongArkProgressCircleTrackProps extends Omit<
+  ArkProgressCircleTrackProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -191,8 +190,10 @@ export const LoongArkProgressCircleTrack: Component<
   );
 };
 
-export interface LoongArkProgressCircleRangeProps
-  extends Omit<ArkProgressCircleRangeProps, "asChild"> {
+export interface LoongArkProgressCircleRangeProps extends Omit<
+  ArkProgressCircleRangeProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 

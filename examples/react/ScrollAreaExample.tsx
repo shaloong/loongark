@@ -13,8 +13,9 @@ interface ScrollAreaExampleProps {
   size?: ScrollAreaSize;
 }
 
-const items = Array.from({ length: 12 }, (_, index) =>
-  `Release note ${index + 1}`
+const items = Array.from(
+  { length: 12 },
+  (_, index) => `Release note ${index + 1}`,
 );
 
 export const ScrollAreaExample: React.FC<ScrollAreaExampleProps> = ({

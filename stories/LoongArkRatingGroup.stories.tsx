@@ -40,6 +40,7 @@ const RatingGroupDemo = ({
   return (
     <LoongArkRatingGroupRoot
       size={size}
+      count={max}
       disabled={disabled}
       value={value}
       onValueChange={(details: { value: number }) => setValue(details.value)}
@@ -47,8 +48,10 @@ const RatingGroupDemo = ({
       <LoongArkRatingGroupLabel>Rating</LoongArkRatingGroupLabel>
       <LoongArkRatingGroupControl>
         {items.map((item) => (
-          <LoongArkRatingGroupItem key={item} value={item}>
-            {item <= value ? "*" : "-"}
+          <LoongArkRatingGroupItem key={item} index={item}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.3-5.7-3-5.7 3 1.1-6.3-4.5-4.4 6.3-.9Z" />
+            </svg>
           </LoongArkRatingGroupItem>
         ))}
       </LoongArkRatingGroupControl>

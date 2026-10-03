@@ -31,28 +31,27 @@ import {
   type SelectHiddenSelectProps as ArkSelectHiddenSelectProps,
 } from "@ark-ui/react/select";
 import type { SelectSize } from "@loongark/primitives";
-import { Portal as ArkPortal } from "@ark-ui/react/portal";
+import { Portal as ArkPortal } from "./portal";
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
-  createElement(ArkPortal as unknown as FC<{ children?: ReactNode }>, null, children);
+  createElement(ArkPortal, null, children);
 
 const SelectContext = createContext<{ size: SelectSize }>({ size: "md" });
 
 /**
  * Select Root Props
  */
-export interface SelectRootProps<
-  T extends Record<string, any> = Record<string, any>
-> extends Omit<ArkSelectRootProps<T>, "asChild"> {
+export interface SelectRootProps<T = object> extends Omit<
+  ArkSelectRootProps<T>,
+  "asChild"
+> {
   size?: SelectSize;
 }
 
 /**
  * Select Root 组件
  */
-export function SelectRoot<T extends Record<string, any> = Record<string, any>>(
-  props: SelectRootProps<T>
-) {
+export function SelectRoot<T = object>(props: SelectRootProps<T>) {
   const { size = "md", ...rest } = props;
 
   return (
@@ -82,7 +81,7 @@ export const SelectLabel = forwardRef<HTMLLabelElement, ArkSelectLabelProps>(
         data-part="label"
       />
     );
-  }
+  },
 );
 
 SelectLabel.displayName = "LoongArkSelectLabel";
@@ -100,7 +99,7 @@ export const SelectControl = forwardRef<HTMLDivElement, ArkSelectControlProps>(
         data-part="control"
       />
     );
-  }
+  },
 );
 
 SelectControl.displayName = "LoongArkSelectControl";
@@ -217,7 +216,7 @@ export const SelectContent = forwardRef<HTMLDivElement, ArkSelectContentProps>(
         data-size={size}
       />
     );
-  }
+  },
 );
 
 SelectContent.displayName = "LoongArkSelectContent";
@@ -235,7 +234,7 @@ export const SelectList = forwardRef<HTMLDivElement, ArkSelectListProps>(
         data-part="list"
       />
     );
-  }
+  },
 );
 
 SelectList.displayName = "LoongArkSelectList";
@@ -291,7 +290,7 @@ export const SelectItem = forwardRef<HTMLDivElement, ArkSelectItemProps>(
         data-part="item"
       />
     );
-  }
+  },
 );
 
 SelectItem.displayName = "LoongArkSelectItem";

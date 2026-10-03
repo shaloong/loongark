@@ -15,15 +15,18 @@ import {
   type PopoverTitleProps as ArkPopoverTitleProps,
   type PopoverDescriptionProps as ArkPopoverDescriptionProps,
 } from "@ark-ui/react/popover";
-import { Portal as ArkPortal } from "@ark-ui/react/portal";
+import { Portal as ArkPortal } from "./portal";
 
-export interface LoongArkPopoverRootProps extends Omit<ArkPopoverRootProps, "asChild"> {}
+export interface LoongArkPopoverRootProps extends Omit<
+  ArkPopoverRootProps,
+  "asChild"
+> {}
 
 type ArkTriggerProps = ArkPopoverTriggerProps & { children?: ReactNode };
 type ArkContentProps = ArkPopoverContentProps & { children?: ReactNode };
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
-  createElement(ArkPortal as unknown as FC<{ children?: ReactNode }>, null, children);
+  createElement(ArkPortal, null, children);
 
 export const LoongArkPopoverRoot = (props: LoongArkPopoverRootProps) => (
   <ArkPopover.Root {...props} data-scope="popover" data-part="root" />
@@ -57,8 +60,8 @@ export const LoongArkPopoverPositioner = forwardRef<
       data-part="positioner"
     />
   </SafePortal>
- ));
- LoongArkPopoverPositioner.displayName = "LoongArkPopoverPositioner";
+));
+LoongArkPopoverPositioner.displayName = "LoongArkPopoverPositioner";
 
 export const LoongArkPopoverContent = forwardRef<
   HTMLDivElement,
@@ -93,7 +96,12 @@ export const LoongArkPopoverTitle = forwardRef<
   HTMLDivElement,
   Omit<ArkPopoverTitleProps, "asChild">
 >((props, ref) => (
-  <ArkPopover.Title {...props} ref={ref} data-scope="popover" data-part="title" />
+  <ArkPopover.Title
+    {...props}
+    ref={ref}
+    data-scope="popover"
+    data-part="title"
+  />
 ));
 LoongArkPopoverTitle.displayName = "LoongArkPopoverTitle";
 
@@ -122,4 +130,3 @@ export const LoongArkPopoverCloseTrigger = forwardRef<
   />
 ));
 LoongArkPopoverCloseTrigger.displayName = "LoongArkPopoverCloseTrigger";
-

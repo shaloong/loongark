@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 import { defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import { PinInput as ArkPinInput } from "@ark-ui/vue/pin-input";
@@ -52,7 +53,7 @@ export const LoongArkPinInputRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPinInput.Root,
         {
           ...attrs,
@@ -72,7 +73,7 @@ export const LoongArkPinInputRoot = defineComponent({
           "data-state": props.state !== "default" ? props.state : undefined,
           "data-disabled": props.disabled ? "true" : undefined,
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
@@ -84,7 +85,7 @@ export const LoongArkPinInputControl = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPinInput.Control,
         {
           ...attrs,
@@ -92,7 +93,7 @@ export const LoongArkPinInputControl = defineComponent({
           "data-part": "control",
           "data-size": props.size,
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
@@ -110,7 +111,7 @@ export const LoongArkPinInputInput = defineComponent({
   },
   setup(props, { attrs }) {
     return () =>
-      h(ArkPinInput.Input, {
+      renderPart(ArkPinInput.Input, {
         ...attrs,
         index: props.index,
         "data-scope": "pin-input",
@@ -125,21 +126,28 @@ export const LoongArkPinInputLabel = defineComponent({
   name: "LoongArkPinInputLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPinInput.Label,
         {
           ...attrs,
           "data-scope": "pin-input",
           "data-part": "label",
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
 
-export const LoongArkPinInputHiddenInput = ArkPinInput.HiddenInput;
+export const LoongArkPinInputHiddenInput: typeof ArkPinInput.HiddenInput =
+  ArkPinInput.HiddenInput;
 
-export const LoongArkPinInput = {
+export const LoongArkPinInput: {
+  Root: typeof LoongArkPinInputRoot;
+  Control: typeof LoongArkPinInputControl;
+  Input: typeof LoongArkPinInputInput;
+  Label: typeof LoongArkPinInputLabel;
+  HiddenInput: typeof LoongArkPinInputHiddenInput;
+} = {
   Root: LoongArkPinInputRoot,
   Control: LoongArkPinInputControl,
   Input: LoongArkPinInputInput,

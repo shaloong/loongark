@@ -1,5 +1,5 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AvatarExample } from "../examples/react/AvatarExample";
 
 const DEMO_AVATAR_SRC =

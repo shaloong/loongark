@@ -17,7 +17,7 @@ type ToastVariant = "info" | "success" | "warning" | "error";
 const createToast = (
   toaster: ReturnType<typeof createToaster>,
   type: ToastVariant,
-  title: string
+  title: string,
 ) => {
   const actionLabel = type === "success" ? "Undo" : "Details";
   toaster[type]({
@@ -44,7 +44,9 @@ export const ToastExample: Component = () => {
             Create toast
           </LoongArkButton>
           <LoongArkButton
-            onClick={() => createToast(toaster, "success", "Saved successfully")}
+            onClick={() =>
+              createToast(toaster, "success", "Saved successfully")
+            }
           >
             Success
           </LoongArkButton>
@@ -52,16 +54,20 @@ export const ToastExample: Component = () => {
         <LoongArkToaster toaster={toaster}>
           {(toast) => (
             <LoongArkToastRoot>
-              {toast.title ? <LoongArkToastTitle>{toast.title}</LoongArkToastTitle> : null}
-              {toast.description ? (
-                <LoongArkToastDescription>{toast.description}</LoongArkToastDescription>
+              {toast().title ? (
+                <LoongArkToastTitle>{toast().title}</LoongArkToastTitle>
               ) : null}
-              {toast.action ? (
+              {toast().description ? (
+                <LoongArkToastDescription>
+                  {toast().description}
+                </LoongArkToastDescription>
+              ) : null}
+              {toast().action ? (
                 <LoongArkToastActionTrigger>
-                  {toast.action.label}
+                  {toast().action?.label}
                 </LoongArkToastActionTrigger>
               ) : null}
-              {toast.closable ? (
+              {toast().closable ? (
                 <LoongArkToastCloseTrigger>Close</LoongArkToastCloseTrigger>
               ) : null}
             </LoongArkToastRoot>

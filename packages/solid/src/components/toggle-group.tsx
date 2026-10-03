@@ -8,10 +8,15 @@ import {
   type ToggleGroupRootProps as ArkToggleGroupRootProps,
   type ToggleGroupItemProps as ArkToggleGroupItemProps,
 } from "@ark-ui/solid/toggle-group";
-import type { ToggleGroupOrientation, ToggleGroupSize } from "@loongark/primitives";
+import type {
+  ToggleGroupOrientation,
+  ToggleGroupSize,
+} from "@loongark/primitives";
 
-export interface LoongArkToggleGroupRootProps
-  extends Omit<ArkToggleGroupRootProps, "asChild"> {
+export interface LoongArkToggleGroupRootProps extends Omit<
+  ArkToggleGroupRootProps,
+  "asChild"
+> {
   size?: ToggleGroupSize;
   orientation?: ToggleGroupOrientation;
   children?: JSX.Element;
@@ -21,13 +26,16 @@ export const LoongArkToggleGroupRoot: Component<
   LoongArkToggleGroupRootProps
 > = (props) => {
   const merged = mergeProps(
-    { size: "md" as ToggleGroupSize, orientation: "horizontal" as ToggleGroupOrientation },
-    props
+    {
+      size: "md" as ToggleGroupSize,
+      orientation: "horizontal" as ToggleGroupOrientation,
+    },
+    props,
   );
 
   return (
     <ArkToggleGroup.Root
-      {...(props as any)}
+      {...props}
       data-scope="toggle-group"
       data-part="root"
       data-size={merged.size}
@@ -42,11 +50,7 @@ export const LoongArkToggleGroupItem: Component<
   ArkToggleGroupItemProps & { children?: JSX.Element }
 > = (props) => {
   return (
-    <ArkToggleGroup.Item
-      {...props}
-      data-scope="toggle-group"
-      data-part="item"
-    >
+    <ArkToggleGroup.Item {...props} data-scope="toggle-group" data-part="item">
       {props.children}
     </ArkToggleGroup.Item>
   );

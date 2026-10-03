@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { ark } from "@ark-ui/svelte";
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher<{ input: Event; change: Event }>();
+  import { Field } from "@ark-ui/svelte/field";
   import type { InputPrimitiveProps } from "@loongark/primitives";
 
   export let size: NonNullable<InputPrimitiveProps["size"]> = "md";
@@ -15,7 +17,9 @@
 </script>
 
 {#if multiline}
-  <ark.textarea
+  <Field.Textarea
+    oninput={(event) => dispatch("input", event)}
+    onchange={(event) => dispatch("change", event)}
     data-scope="input"
     data-part="control"
     data-size={size}
@@ -23,14 +27,16 @@
     data-multiline="true"
     {placeholder}
     {disabled}
-    {readOnly}
+    readonly={readOnly}
     {required}
     {name}
-    {value}
+    bind:value
     {...$$restProps}
   />
 {:else}
-  <ark.input
+  <Field.Input
+    oninput={(event) => dispatch("input", event)}
+    onchange={(event) => dispatch("change", event)}
     data-scope="input"
     data-part="control"
     data-size={size}
@@ -38,10 +44,10 @@
     {type}
     {placeholder}
     {disabled}
-    {readOnly}
+    readonly={readOnly}
     {required}
     {name}
-    {value}
+    bind:value
     {...$$restProps}
   />
 {/if}

@@ -1,10 +1,15 @@
+import type { PasswordInputRootProps as NativePasswordInputRootProps } from "@ark-ui/vue/password-input";
+import { renderPart } from "../render-part";
 /**
  * Password Input component - Vue wrapper.
  * Uses Ark UI Password Input with data attributes for styling.
  */
 import { defineComponent, h, type PropType } from "vue";
 import { PasswordInput as ArkPasswordInput } from "@ark-ui/vue/password-input";
-import type { PasswordInputSize, PasswordInputState } from "@loongark/primitives";
+import type {
+  PasswordInputSize,
+  PasswordInputState,
+} from "@loongark/primitives";
 
 export interface PasswordVisibilityChangeDetails {
   visible: boolean;
@@ -29,21 +34,27 @@ export const LoongArkPasswordInputRoot = defineComponent({
     },
     visible: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     defaultVisible: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     required: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     invalid: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     name: {
       type: String as PropType<string>,
@@ -55,7 +66,7 @@ export const LoongArkPasswordInputRoot = defineComponent({
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativePasswordInputRootProps["ids"]>,
     },
     onVisibilityChange: {
       type: Function as PropType<
@@ -68,7 +79,7 @@ export const LoongArkPasswordInputRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPasswordInput.Root,
         {
           ...attrs,
@@ -80,7 +91,7 @@ export const LoongArkPasswordInputRoot = defineComponent({
           "data-disabled": props.disabled ? "true" : undefined,
           "data-readonly": props.readOnly ? "true" : undefined,
         },
-        slots
+        slots,
       );
   },
 });
@@ -89,14 +100,14 @@ export const LoongArkPasswordInputLabel = defineComponent({
   name: "LoongArkPasswordInputLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPasswordInput.Label,
         {
           ...attrs,
           "data-scope": "password-input",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -119,7 +130,7 @@ export const LoongArkPasswordInputControl = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPasswordInput.Control,
         {
           ...attrs,
@@ -130,7 +141,7 @@ export const LoongArkPasswordInputControl = defineComponent({
           "data-state": props.state !== "default" ? props.state : undefined,
           "data-disabled": props.disabled ? "true" : undefined,
         },
-        slots
+        slots,
       );
   },
 });
@@ -157,7 +168,7 @@ export const LoongArkPasswordInputInput = defineComponent({
   },
   setup(props, { attrs }) {
     return () =>
-      h(ArkPasswordInput.Input, {
+      renderPart(ArkPasswordInput.Input, {
         ...attrs,
         ...props,
         "data-scope": "password-input",
@@ -174,14 +185,14 @@ export const LoongArkPasswordInputIndicator = defineComponent({
   name: "LoongArkPasswordInputIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPasswordInput.Indicator,
         {
           ...attrs,
           "data-scope": "password-input",
           "data-part": "indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -196,7 +207,7 @@ export const LoongArkPasswordInputVisibilityTrigger = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPasswordInput.VisibilityTrigger,
         {
           ...attrs,
@@ -205,7 +216,7 @@ export const LoongArkPasswordInputVisibilityTrigger = defineComponent({
           "data-part": "visibility-trigger",
           "data-disabled": props.disabled ? "true" : undefined,
         },
-        slots
+        slots,
       );
   },
 });

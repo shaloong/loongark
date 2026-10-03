@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type ToggleSize = "sm" | "md" | "lg";
@@ -43,22 +42,22 @@ interface ToggleDesignTokens {
 }
 
 const extractToggleTokens = (theme: LoongArkTheme): ToggleDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
 
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -111,17 +110,9 @@ const buildToggleStyles = (theme: LoongArkTheme): string => {
   const tokens = extractToggleTokens(theme);
   const root = `[data-scope="toggle"][data-part="root"]`;
   const indicator = `[data-scope="toggle"][data-part="indicator"]`;
-  const interactiveRoot =
-    `${root}:not([disabled]):not([data-disabled='true'])`;
+  const interactiveRoot = `${root}:not([disabled]):not([data-disabled='true'])`;
 
   return `
-  @media (prefers-reduced-motion: reduce) {
-    :root:not([data-lk-motion="force"]) [data-scope="toggle"] * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 
   ${root} {
     appearance: none;
@@ -231,7 +222,7 @@ const toggleContract: PrimitiveContract<TogglePrimitiveProps> = {
 
 const TogglePrimitive = createPrimitive(toggleContract, (theme) => {
   const css = buildToggleStyles(theme);
-  mountPrimitiveStyles(`toggle-${theme.mode}`, css);
+  theme.mountStyles(`toggle-${theme.mode}`, css);
 });
 
 registerPrimitive(TogglePrimitive);

@@ -39,7 +39,9 @@
       </LoongArkSegmentGroupItem>
     {/each}
   </LoongArkSegmentGroupRoot>
-  <span style="font-size: 14px; color: #666;">
+  <span
+    style="font-size: 14px; color: var(--lk-color-semantic-mutedforeground);"
+  >
     Selected: {value[0] || "None"}
   </span>
 </div>

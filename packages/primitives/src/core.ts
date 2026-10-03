@@ -1,8 +1,9 @@
 import { LoongArkTheme } from "@loongark/theme";
+import type { TokenPath } from "@loongark/tokens";
 
 export interface PrimitiveContract<TProps> {
   name: string;
-  tokens: string[];
+  tokens: TokenPath[];
   defaults: Partial<TProps>;
 }
 
@@ -13,13 +14,22 @@ export interface PrimitiveRegistration<TProps> {
 
 export const createPrimitive = <TProps>(
   contract: PrimitiveContract<TProps>,
-  apply: (theme: LoongArkTheme) => void
+  apply: (theme: LoongArkTheme) => void,
 ): PrimitiveRegistration<TProps> => ({ contract, apply });
 
 export const registry: PrimitiveRegistration<unknown>[] = [];
 
 export const registerPrimitive = <TProps>(
-  primitive: PrimitiveRegistration<TProps>
+  primitive: PrimitiveRegistration<TProps>,
 ) => {
-  registry.push(primitive);
+  const existingIndex = registry.findIndex(
+    (registered) => registered.contract.name === primitive.contract.name,
+  );
+
+  if (existingIndex >= 0) {
+    registry[existingIndex] = primitive as PrimitiveRegistration<unknown>;
+    return;
+  }
+
+  registry.push(primitive as PrimitiveRegistration<unknown>);
 };

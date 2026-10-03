@@ -7,7 +7,7 @@ import {
   Listbox as ArkListbox,
   type ListboxRootProps as ArkListboxRootProps,
   type ListboxLabelProps as ArkListboxLabelProps,
-  type ListboxListProps as ArkListboxListProps,
+  type ListboxContentProps as ArkListboxListProps,
   type ListboxItemGroupProps as ArkListboxItemGroupProps,
   type ListboxItemGroupLabelProps as ArkListboxItemGroupLabelProps,
   type ListboxItemProps as ArkListboxItemProps,
@@ -17,24 +17,27 @@ import {
 import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
 
 export interface LoongArkListboxRootProps<
-  T extends Record<string, any> = Record<string, any>
+  T extends object = object,
 > extends Omit<ArkListboxRootProps<T>, "asChild"> {
   size?: ListboxSize;
   orientation?: ListboxOrientation;
   children?: JSX.Element;
 }
 
-export const LoongArkListboxRoot: Component<LoongArkListboxRootProps> = (
-  props
-) => {
+export const LoongArkListboxRoot = <T extends object>(
+  props: LoongArkListboxRootProps<T>,
+): JSX.Element => {
   const merged = mergeProps(
-    { size: "md" as ListboxSize, orientation: "vertical" as ListboxOrientation },
-    props
+    {
+      size: "md" as ListboxSize,
+      orientation: "vertical" as ListboxOrientation,
+    },
+    props,
   );
 
   return (
     <ArkListbox.Root
-      {...(props as any)}
+      {...props}
       orientation={merged.orientation}
       data-scope="listbox"
       data-part="root"
@@ -60,9 +63,9 @@ export const LoongArkListboxList: Component<
   ArkListboxListProps & { children?: JSX.Element }
 > = (props) => {
   return (
-    <ArkListbox.List {...props} data-scope="listbox" data-part="list">
+    <ArkListbox.Content {...props} data-scope="listbox" data-part="list">
       {props.children}
-    </ArkListbox.List>
+    </ArkListbox.Content>
   );
 };
 
@@ -70,7 +73,11 @@ export const LoongArkListboxItemGroup: Component<
   ArkListboxItemGroupProps & { children?: JSX.Element }
 > = (props) => {
   return (
-    <ArkListbox.ItemGroup {...props} data-scope="listbox" data-part="item-group">
+    <ArkListbox.ItemGroup
+      {...props}
+      data-scope="listbox"
+      data-part="item-group"
+    >
       {props.children}
     </ArkListbox.ItemGroup>
   );

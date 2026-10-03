@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { AccordionItemIndicatorProps } from "@ark-ui/svelte/accordion";
-export default class AccordionItemIndicator extends SvelteComponent<AccordionItemIndicatorProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Accordion } from "@ark-ui/svelte/accordion";
+
+export default class LoongArkAccordionItemIndicator extends SvelteComponent<
+  Omit<ComponentProps<typeof Accordion.ItemIndicator>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

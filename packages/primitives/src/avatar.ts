@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type AvatarSize = "sm" | "md" | "lg";
@@ -37,21 +36,21 @@ interface AvatarDesignTokens {
 }
 
 const extractAvatarTokens = (theme: LoongArkTheme): AvatarDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
   const brand = asTokenTree(color.brand);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -68,11 +67,11 @@ const extractAvatarTokens = (theme: LoongArkTheme): AvatarDesignTokens => {
       sm: `calc(${toStringToken(componentSpace.md, "16px")} * 2)`,
       md: `calc(${toStringToken(componentSpace.md, "16px")} * 2 + ${toStringToken(
         componentSpace.sm,
-        "8px"
+        "8px",
       )})`,
       lg: `calc(${toStringToken(componentSpace.lg, "24px")} * 2 + ${toStringToken(
         componentSpace.sm,
-        "8px"
+        "8px",
       )})`,
     },
     radius: toStringToken(radius.pill, "999px"),
@@ -99,13 +98,6 @@ const buildAvatarStyles = (theme: LoongArkTheme): string => {
   const fallback = `[data-scope="avatar"][data-part="fallback"]`;
 
   return `
-  @media (prefers-reduced-motion: reduce) {
-    :root:not([data-lk-motion="force"]) [data-scope="avatar"] * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 
   ${root} {
     width: ${tokens.size.md};
@@ -198,7 +190,7 @@ const avatarContract: PrimitiveContract<AvatarPrimitiveProps> = {
 
 const AvatarPrimitive = createPrimitive(avatarContract, (theme) => {
   const css = buildAvatarStyles(theme);
-  mountPrimitiveStyles(`avatar-${theme.mode}`, css);
+  theme.mountStyles(`avatar-${theme.mode}`, css);
 });
 
 registerPrimitive(AvatarPrimitive);

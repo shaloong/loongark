@@ -25,60 +25,82 @@ type ArkStepsPrevTriggerProps = ComponentPropsWithoutRef<
   typeof Steps.PrevTrigger
 >;
 
-export interface LoongArkStepsRootProps
-  extends Omit<ArkStepsRootProps, "asChild"> {
+export interface LoongArkStepsRootProps extends Omit<
+  ArkStepsRootProps,
+  "asChild"
+> {
   size?: StepsSize;
   orientation?: StepsOrientation;
   children?: ReactNode;
 }
 
-export interface LoongArkStepsListProps
-  extends Omit<ArkStepsListProps, "asChild"> {
+export interface LoongArkStepsListProps extends Omit<
+  ArkStepsListProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkStepsItemProps
-  extends Omit<ArkStepsItemProps, "asChild"> {
+export interface LoongArkStepsItemProps extends Omit<
+  ArkStepsItemProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkStepsIndicatorProps
-  extends Omit<ArkStepsIndicatorProps, "asChild"> {
+export interface LoongArkStepsIndicatorProps extends Omit<
+  ArkStepsIndicatorProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkStepsSeparatorProps
-  extends Omit<ArkStepsSeparatorProps, "asChild"> {
+export interface LoongArkStepsSeparatorProps extends Omit<
+  ArkStepsSeparatorProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkStepsTriggerProps
-  extends Omit<ArkStepsTriggerProps, "asChild"> {
+export interface LoongArkStepsTriggerProps extends Omit<
+  ArkStepsTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkStepsContentProps
-  extends Omit<ArkStepsContentProps, "asChild"> {
+export interface LoongArkStepsContentProps extends Omit<
+  ArkStepsContentProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkStepsCompletedContentProps
-  extends Omit<ArkStepsCompletedContentProps, "asChild"> {
+export interface LoongArkStepsCompletedContentProps extends Omit<
+  ArkStepsCompletedContentProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkStepsProgressProps
-  extends Omit<ArkStepsProgressProps, "asChild"> {
+export interface LoongArkStepsProgressProps extends Omit<
+  ArkStepsProgressProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkStepsNextTriggerProps
-  extends Omit<ArkStepsNextTriggerProps, "asChild"> {
+export interface LoongArkStepsNextTriggerProps extends Omit<
+  ArkStepsNextTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkStepsPrevTriggerProps
-  extends Omit<ArkStepsPrevTriggerProps, "asChild"> {
+export interface LoongArkStepsPrevTriggerProps extends Omit<
+  ArkStepsPrevTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
@@ -121,7 +143,15 @@ export const LoongArkStepsItem = forwardRef<
   LoongArkStepsItemProps
 >(({ children, ...props }, ref) => {
   return (
-    <Steps.Item {...props} ref={ref} data-scope="steps" data-part="item">
+    <Steps.Item
+      role="presentation"
+      // Ark preserves undefined overrides; null clears state on this presentational container.
+      aria-current={null as unknown as LoongArkStepsItemProps["aria-current"]}
+      {...props}
+      ref={ref}
+      data-scope="steps"
+      data-part="item"
+    >
       {children}
     </Steps.Item>
   );
@@ -170,12 +200,7 @@ export const LoongArkStepsTrigger = forwardRef<
   LoongArkStepsTriggerProps
 >(({ children, ...props }, ref) => {
   return (
-    <Steps.Trigger
-      {...props}
-      ref={ref}
-      data-scope="steps"
-      data-part="trigger"
-    >
+    <Steps.Trigger {...props} ref={ref} data-scope="steps" data-part="trigger">
       {children}
     </Steps.Trigger>
   );
@@ -188,12 +213,7 @@ export const LoongArkStepsContent = forwardRef<
   LoongArkStepsContentProps
 >(({ children, ...props }, ref) => {
   return (
-    <Steps.Content
-      {...props}
-      ref={ref}
-      data-scope="steps"
-      data-part="content"
-    >
+    <Steps.Content {...props} ref={ref} data-scope="steps" data-part="content">
       {children}
     </Steps.Content>
   );

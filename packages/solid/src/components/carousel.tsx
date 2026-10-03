@@ -19,21 +19,23 @@ import {
 } from "@ark-ui/solid/carousel";
 import type { CarouselSize } from "@loongark/primitives";
 
-export interface LoongArkCarouselRootProps
-  extends Omit<ArkCarouselRootProps, "asChild"> {
+export interface LoongArkCarouselRootProps extends Omit<
+  ArkCarouselRootProps,
+  "asChild"
+> {
   size?: CarouselSize;
   children?: JSX.Element;
 }
 
 export const LoongArkCarouselRoot: Component<LoongArkCarouselRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps({ size: "md" as CarouselSize }, props);
   const [local, others] = splitProps(merged, ["children", "size"]);
 
   return (
     <ArkCarousel.Root
-      {...(others as any)}
+      {...others}
       data-scope="carousel"
       data-part="root"
       data-size={local.size}
@@ -43,8 +45,10 @@ export const LoongArkCarouselRoot: Component<LoongArkCarouselRootProps> = (
   );
 };
 
-export interface LoongArkCarouselItemGroupProps
-  extends Omit<ArkCarouselItemGroupProps, "asChild"> {
+export interface LoongArkCarouselItemGroupProps extends Omit<
+  ArkCarouselItemGroupProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -63,13 +67,15 @@ export const LoongArkCarouselItemGroup: Component<
   );
 };
 
-export interface LoongArkCarouselItemProps
-  extends Omit<ArkCarouselItemProps, "asChild"> {
+export interface LoongArkCarouselItemProps extends Omit<
+  ArkCarouselItemProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkCarouselItem: Component<LoongArkCarouselItemProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
@@ -79,28 +85,28 @@ export const LoongArkCarouselItem: Component<LoongArkCarouselItemProps> = (
   );
 };
 
-export interface LoongArkCarouselControlProps
-  extends Omit<ArkCarouselControlProps, "asChild"> {
+export interface LoongArkCarouselControlProps extends Omit<
+  ArkCarouselControlProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
-export const LoongArkCarouselControl: Component<LoongArkCarouselControlProps> = (
-  props
-) => {
+export const LoongArkCarouselControl: Component<
+  LoongArkCarouselControlProps
+> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkCarousel.Control
-      {...others}
-      data-scope="carousel"
-      data-part="control"
-    >
+    <ArkCarousel.Control {...others} data-scope="carousel" data-part="control">
       {local.children}
     </ArkCarousel.Control>
   );
 };
 
-export interface LoongArkCarouselNextTriggerProps
-  extends Omit<ArkCarouselNextTriggerProps, "asChild"> {
+export interface LoongArkCarouselNextTriggerProps extends Omit<
+  ArkCarouselNextTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -119,8 +125,10 @@ export const LoongArkCarouselNextTrigger: Component<
   );
 };
 
-export interface LoongArkCarouselPrevTriggerProps
-  extends Omit<ArkCarouselPrevTriggerProps, "asChild"> {
+export interface LoongArkCarouselPrevTriggerProps extends Omit<
+  ArkCarouselPrevTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -139,8 +147,10 @@ export const LoongArkCarouselPrevTrigger: Component<
   );
 };
 
-export interface LoongArkCarouselIndicatorGroupProps
-  extends Omit<ArkCarouselIndicatorGroupProps, "asChild"> {
+export interface LoongArkCarouselIndicatorGroupProps extends Omit<
+  ArkCarouselIndicatorGroupProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -159,8 +169,10 @@ export const LoongArkCarouselIndicatorGroup: Component<
   );
 };
 
-export interface LoongArkCarouselIndicatorProps
-  extends Omit<ArkCarouselIndicatorProps, "asChild"> {
+export interface LoongArkCarouselIndicatorProps extends Omit<
+  ArkCarouselIndicatorProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -179,8 +191,10 @@ export const LoongArkCarouselIndicator: Component<
   );
 };
 
-export interface LoongArkCarouselAutoplayTriggerProps
-  extends Omit<ArkCarouselAutoplayTriggerProps, "asChild"> {
+export interface LoongArkCarouselAutoplayTriggerProps extends Omit<
+  ArkCarouselAutoplayTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -199,8 +213,10 @@ export const LoongArkCarouselAutoplayTrigger: Component<
   );
 };
 
-export interface LoongArkCarouselProgressTextProps
-  extends Omit<ArkCarouselProgressTextProps, "asChild"> {
+export interface LoongArkCarouselProgressTextProps extends Omit<
+  ArkCarouselProgressTextProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -219,8 +235,10 @@ export const LoongArkCarouselProgressText: Component<
   );
 };
 
-export interface LoongArkCarouselAutoplayIndicatorProps
-  extends Omit<ArkCarouselAutoplayIndicatorProps, "asChild"> {
+export interface LoongArkCarouselAutoplayIndicatorProps extends Omit<
+  ArkCarouselAutoplayIndicatorProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 

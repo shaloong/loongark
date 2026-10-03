@@ -55,9 +55,7 @@ const TagsInputDemo = ({
       disabled={disabled}
       readOnly={readOnly}
       value={value}
-      onValueChange={(details: { value: string[] }) =>
-        setValue(details.value)
-      }
+      onValueChange={(details: { value: string[] }) => setValue(details.value)}
     >
       <LoongArkTagsInputLabel>Frameworks</LoongArkTagsInputLabel>
       <LoongArkTagsInputControl size={size} state={state} disabled={disabled}>

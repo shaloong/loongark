@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type DatePickerSize = "sm" | "md" | "lg";
@@ -53,23 +52,25 @@ interface DatePickerDesignTokens {
   shadow: string;
 }
 
-const extractDatePickerTokens = (theme: LoongArkTheme): DatePickerDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+const extractDatePickerTokens = (
+  theme: LoongArkTheme,
+): DatePickerDesignTokens => {
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
-  const shadow = asTokenTree(theme.tokens.shadow);
+  const radius = asTokenTree(theme.styleTokens.radius);
+  const shadow = asTokenTree(theme.styleTokens.shadow);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -133,16 +134,13 @@ const extractDatePickerTokens = (theme: LoongArkTheme): DatePickerDesignTokens =
       duration: toStringToken(duration.base, "200ms"),
       easing: toStringToken(easing.standard, "cubic-bezier(0.2, 0, 0, 1)"),
     },
-    shadow: toStringToken(
-      shadow.popover,
-      "0 8px 40px rgba(0, 0, 0, 0.08)"
-    ),
+    shadow: toStringToken(shadow.popover, "0 8px 40px rgba(0, 0, 0, 0.08)"),
   };
 };
 
 const buildDatePickerStyles = (theme: LoongArkTheme): string => {
   const tokens = extractDatePickerTokens(theme);
-  const zIndex = (theme.tokens as any).zIndex || {};
+  const zIndex = (theme.styleTokens as any).zIndex || {};
   const scopeSelector = `[data-scope="date-picker"]`;
   const rootSelector = `${scopeSelector}[data-part="root"]`;
   const labelSelector = `${scopeSelector}[data-part="label"]`;
@@ -170,13 +168,6 @@ const buildDatePickerStyles = (theme: LoongArkTheme): string => {
   const tableCellTriggerSelector = `${scopeSelector}[data-part="table-cell-trigger"]`;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) [data-scope="date-picker"] * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${rootSelector} {
   display: flex;
@@ -233,7 +224,7 @@ ${inputSelector} {
 }
 
 ${inputSelector}::placeholder {
-  color: ${tokens.neutral.placeholder};
+  color: var(--lk-color-semantic-mutedforeground);
   opacity: 1;
 }
 
@@ -252,7 +243,7 @@ ${clearTriggerSelector} {
   border: none;
   border-radius: ${tokens.radius.sm};
   background: transparent;
-  color: ${tokens.neutral.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
   cursor: pointer;
   transition:
     background ${tokens.motion.duration} ${tokens.motion.easing},
@@ -274,7 +265,7 @@ ${clearTriggerSelector}:focus-visible {
 ${rangeTextSelector} {
   font-size: ${tokens.fontSize.sm};
   line-height: ${tokens.lineHeight};
-  color: ${tokens.neutral.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
 ${controlSelector}[data-disabled="true"] {
@@ -330,6 +321,8 @@ ${positionerSelector} {
 }
 
 ${contentSelector} {
+  width: var(--lk-control-calendarwidth);
+  max-width: calc(100vw - var(--lk-space-component-lg));
   background: ${tokens.neutral.surface};
   border: 1px solid ${tokens.neutral.border};
   border-radius: ${tokens.radius.md};
@@ -508,7 +501,7 @@ ${tableSelector} {
 }
 
 ${tableHeadSelector} {
-  color: ${tokens.neutral.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
   font-size: ${tokens.fontSize.sm};
   font-weight: ${tokens.fontWeight};
 }
@@ -561,11 +554,11 @@ ${tableCellTriggerSelector}[data-disabled="true"] {
 
 ${tableCellTriggerSelector}[data-unavailable="true"] {
   text-decoration: line-through;
-  color: ${tokens.neutral.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
 ${tableCellTriggerSelector}[data-outside-range="true"] {
-  color: ${tokens.neutral.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
 ${tableCellTriggerSelector}[data-in-hover-range="true"]:not([data-selected="true"]) {
@@ -656,7 +649,7 @@ const datePickerContract: PrimitiveContract<DatePickerPrimitiveProps> = {
 
 const DatePickerPrimitive = createPrimitive(datePickerContract, (theme) => {
   const css = buildDatePickerStyles(theme);
-  mountPrimitiveStyles(`date-picker-${theme.mode}`, css);
+  theme.mountStyles(`date-picker-${theme.mode}`, css);
 });
 
 registerPrimitive(DatePickerPrimitive);

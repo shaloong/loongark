@@ -2,11 +2,11 @@ import React, { forwardRef } from "react";
 import { Checkbox } from "@ark-ui/react/checkbox";
 import type { CheckboxSize } from "@loongark/primitives";
 import type {
-  RootProps,
-  ControlProps,
-  LabelProps,
-  IndicatorProps,
-  HiddenInputProps,
+  CheckboxRootProps as RootProps,
+  CheckboxControlProps as ControlProps,
+  CheckboxLabelProps as LabelProps,
+  CheckboxIndicatorProps as IndicatorProps,
+  CheckboxHiddenInputProps as HiddenInputProps,
 } from "@ark-ui/react/checkbox";
 
 // ========== Props 接口 ==========
@@ -14,19 +14,27 @@ export interface LoongArkCheckboxRootProps extends Omit<RootProps, "asChild"> {
   size?: CheckboxSize;
 }
 
-export interface LoongArkCheckboxControlProps
-  extends Omit<ControlProps, "asChild"> {
+export interface LoongArkCheckboxControlProps extends Omit<
+  ControlProps,
+  "asChild"
+> {
   size?: CheckboxSize;
 }
 
-export interface LoongArkCheckboxLabelProps
-  extends Omit<LabelProps, "asChild"> {}
+export interface LoongArkCheckboxLabelProps extends Omit<
+  LabelProps,
+  "asChild"
+> {}
 
-export interface LoongArkCheckboxIndicatorProps
-  extends Omit<IndicatorProps, "asChild"> {}
+export interface LoongArkCheckboxIndicatorProps extends Omit<
+  IndicatorProps,
+  "asChild"
+> {}
 
-export interface LoongArkCheckboxHiddenInputProps
-  extends Omit<HiddenInputProps, "asChild"> {}
+export interface LoongArkCheckboxHiddenInputProps extends Omit<
+  HiddenInputProps,
+  "asChild"
+> {}
 
 // ========== 组件实现 ==========
 
@@ -92,11 +100,7 @@ export const LoongArkCheckboxIndicator = forwardRef<
       data-part="indicator"
     >
       {children || (
-        <svg
-          viewBox="0 0 14 14"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M11.6666 3.5L5.24992 9.91667L2.33325 7"
             stroke="currentColor"

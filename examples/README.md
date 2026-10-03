@@ -1,28 +1,7 @@
-# LoongArk Examples
+# LoongArk 四端示例
 
-> 本目录聚焦“跨框架同一交互场景”，所有示例共享一套文案/测试 ID，方便 Storybook 与 Playwright 直接复用。
+react、vue、solid、svelte 目录使用对应的 LoongArk 包，shared 目录统一场景文案与测试 ID。所有 TS/TSX 示例参与真实类型检查，Svelte 示例由 pnpm run check:svelte 检查。
 
-## 结构
+Storybook 展示 React 示例。pnpm run test:frameworks 从真实发布 dist 构建四端消费项目，统一验证输入绑定、禁用、主题、浮层、选择器键盘操作、表格和窄屏；同时运行现有 103 个组件示例（React 28 个，其余三端各 25 个），新增 FoundationsExample 验证多行输入、删除标签、列表选择、底部导航和响应式 Grid；SelectionInputsExample 验证穿梭搬移与焦点、时间绑定和禁用选项、多行输入自动伸缩与窄屏；ActionMediaExample 验证浮动动作、受控菜单、媒体跨度和手机单列；检查颜色面板、受控步骤切换、列表选项选择与嵌套按钮。Svelte 优先使用 LoongArkProvider；createThemeStore 提供 set/update/destroy，旧全局 action 接入方式见历史版本。
 
-```text
-examples/
-  shared/          # 统一的 props、文案、data-testid 定义
-  react/           # React + @loongark/react 组件示例
-  vue/             # Vue + @loongark/vue 组件示例
-  svelte/          # Svelte actions 示例
-  solid/           # Solid 组件示例
-```
-
-每个框架的入口文件都实现同一场景：包含带前后缀的输入框、错误提示以及带按钮的对话框触发链路。`data-testid` 与 props 均来自 `shared/demoScenario.ts`，这样：
-
-- Storybook 只需导入 React 版本即可实时展示；
-- Playwright 用同一批测试 ID（`input-prefix`、`primary-button` 等）在不同框架下复用断言；
-- 未来扩展更多组件时，可在 `shared/` 追加新的情境对象。
-
-> 示例文件不会在构建中参与打包，只提供团队在 Storybook/Playwright/文档中复用的源代码片段。
-
-## 使用方式
-
-1. 启动 Storybook：`pnpm storybook`（或 `pnpm storybook --ci` 供 Playwright 复用）。
-2. 运行可视化/可访问性测试：`pnpm visual:test`（底层调用 Playwright，自动访问 Storybook story）。
-3. 若只想在本地查看 React 示例，可直接在 `stories/ButtonInputDialog.stories.tsx` 中引入其它情境，保持 `data-testid` 不变即可被测试脚本捕获。
+组件 API 与覆盖范围见 ../docs/component-coverage.md，主题接入见 ../docs/theme-system.md。

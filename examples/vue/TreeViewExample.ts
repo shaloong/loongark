@@ -13,8 +13,32 @@ import {
   LoongArkTreeViewBranchIndicator,
   LoongArkTreeViewBranchText,
   LoongArkTreeViewBranchIndentGuide,
+  LoongArkTreeViewNodeProvider,
+  createTreeCollection,
 } from "@loongark/vue";
 import type { TreeViewSize } from "@loongark/primitives";
+
+interface WorkspaceNode {
+  id: string;
+  name: string;
+  children?: WorkspaceNode[];
+}
+const nodes: WorkspaceNode[] = [
+  {
+    id: "src",
+    name: "src",
+    children: [
+      { id: "components", name: "components" },
+      { id: "styles", name: "styles" },
+    ],
+  },
+  { id: "package.json", name: "package.json" },
+];
+const collection = createTreeCollection<WorkspaceNode>({
+  rootNode: { id: "ROOT", name: "", children: nodes },
+  nodeToValue: (node) => node.id,
+  nodeToString: (node) => node.name,
+});
 
 export const TreeViewExample = defineComponent({
   name: "TreeViewExample",
@@ -25,53 +49,69 @@ export const TreeViewExample = defineComponent({
     },
   },
   setup(props) {
+    const renderNode = (
+      node: WorkspaceNode,
+      indexPath: number[],
+    ): ReturnType<typeof h> =>
+      h(
+        LoongArkTreeViewNodeProvider,
+        { node, indexPath },
+        {
+          default: () =>
+            node.children
+              ? h(
+                  LoongArkTreeViewBranch,
+                  {},
+                  {
+                    default: () => [
+                      h(
+                        LoongArkTreeViewBranchControl,
+                        {},
+                        {
+                          default: () => [
+                            h(LoongArkTreeViewBranchIndicator, {}, () => ">"),
+                            h(LoongArkTreeViewBranchText, {}, () => node.name),
+                          ],
+                        },
+                      ),
+                      h(
+                        LoongArkTreeViewBranchContent,
+                        {},
+                        {
+                          default: () =>
+                            node.children!.map((child, index) =>
+                              renderNode(child, [...indexPath, index]),
+                            ),
+                        },
+                      ),
+                    ],
+                  },
+                )
+              : h(
+                  LoongArkTreeViewItem,
+                  {},
+                  {
+                    default: () => [
+                      h(LoongArkTreeViewItemIndicator, {}, () => "-"),
+                      h(LoongArkTreeViewItemText, {}, () => node.name),
+                    ],
+                  },
+                ),
+        },
+      );
     return () =>
-      h(LoongArkTreeViewRoot, { size: props.size }, {
-        default: () => [
-          h(LoongArkTreeViewLabel, null, { default: () => "Workspace" }),
-          h(LoongArkTreeViewTree, null, {
-            default: () => [
-              h(LoongArkTreeViewBranch, { value: "src" }, {
-                default: () => [
-                  h(LoongArkTreeViewBranchControl, null, {
-                    default: () =>
-                      h(LoongArkTreeViewBranchTrigger, null, {
-                        default: () => [
-                          h(LoongArkTreeViewBranchIndicator, null, { default: () => ">" }),
-                          h(LoongArkTreeViewBranchText, null, { default: () => "src" }),
-                        ],
-                      }),
-                  }),
-                  h(LoongArkTreeViewBranchIndentGuide, null, {
-                    default: () =>
-                      h(LoongArkTreeViewBranchContent, null, {
-                        default: () => [
-                          h(LoongArkTreeViewItem, { value: "components" }, {
-                            default: () => [
-                              h(LoongArkTreeViewItemIndicator, null, { default: () => "-" }),
-                              h(LoongArkTreeViewItemText, null, { default: () => "components" }),
-                            ],
-                          }),
-                          h(LoongArkTreeViewItem, { value: "styles" }, {
-                            default: () => [
-                              h(LoongArkTreeViewItemIndicator, null, { default: () => "-" }),
-                              h(LoongArkTreeViewItemText, null, { default: () => "styles" }),
-                            ],
-                          }),
-                        ],
-                      }),
-                  }),
-                ],
-              }),
-              h(LoongArkTreeViewItem, { value: "package.json" }, {
-                default: () => [
-                  h(LoongArkTreeViewItemIndicator, null, { default: () => "-" }),
-                  h(LoongArkTreeViewItemText, null, { default: () => "package.json" }),
-                ],
-              }),
-            ],
-          }),
-        ],
-      });
+      h(
+        LoongArkTreeViewRoot,
+        { size: props.size, collection },
+        {
+          default: () => [
+            h(LoongArkTreeViewLabel, null, { default: () => "Workspace" }),
+            h(LoongArkTreeViewTree, null, {
+              default: () =>
+                nodes.map((node, index) => renderNode(node, [index])),
+            }),
+          ],
+        },
+      );
   },
 });

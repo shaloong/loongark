@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 import { defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import { Switch as ArkSwitch } from "@ark-ui/vue/switch";
@@ -24,7 +25,7 @@ export const LoongArkSwitchRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSwitch.Root,
         {
           ...attrs,
@@ -34,7 +35,7 @@ export const LoongArkSwitchRoot = defineComponent({
           "data-size": props.size,
           "data-disabled": props.disabled ? "true" : undefined,
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
@@ -45,16 +46,20 @@ export const LoongArkSwitchControl = defineComponent({
     size: sizeProp,
     disabled: boolProp(false),
   },
-  setup(props, { attrs }) {
+  setup(props, { attrs, slots }) {
     return () =>
-      h(ArkSwitch.Control, {
-        ...attrs,
-        disabled: props.disabled,
-        "data-scope": "switch",
-        "data-part": "control",
-        "data-size": props.size,
-        "data-disabled": props.disabled ? "true" : undefined,
-      });
+      renderPart(
+        ArkSwitch.Control,
+        {
+          ...attrs,
+          disabled: props.disabled,
+          "data-scope": "switch",
+          "data-part": "control",
+          "data-size": props.size,
+          "data-disabled": props.disabled ? "true" : undefined,
+        },
+        slots,
+      );
   },
 });
 
@@ -65,7 +70,7 @@ export const LoongArkSwitchThumb = defineComponent({
   },
   setup(props, { attrs }) {
     return () =>
-      h(ArkSwitch.Thumb, {
+      renderPart(ArkSwitch.Thumb, {
         ...attrs,
         "data-scope": "switch",
         "data-part": "thumb",
@@ -81,7 +86,7 @@ export const LoongArkSwitchLabel = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSwitch.Label,
         {
           ...attrs,
@@ -89,14 +94,21 @@ export const LoongArkSwitchLabel = defineComponent({
           "data-part": "label",
           "data-disabled": props.disabled ? "true" : undefined,
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
 
-export const LoongArkSwitchHiddenInput = ArkSwitch.HiddenInput;
+export const LoongArkSwitchHiddenInput: typeof ArkSwitch.HiddenInput =
+  ArkSwitch.HiddenInput;
 
-export const LoongArkSwitch = {
+export const LoongArkSwitch: {
+  Root: typeof LoongArkSwitchRoot;
+  Control: typeof LoongArkSwitchControl;
+  Thumb: typeof LoongArkSwitchThumb;
+  Label: typeof LoongArkSwitchLabel;
+  HiddenInput: typeof LoongArkSwitchHiddenInput;
+} = {
   Root: LoongArkSwitchRoot,
   Control: LoongArkSwitchControl,
   Thumb: LoongArkSwitchThumb,

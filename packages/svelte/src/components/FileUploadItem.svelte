@@ -2,7 +2,7 @@
   import { FileUpload } from "@ark-ui/svelte/file-upload";
   import type { FileUploadItemProps } from "@ark-ui/svelte/file-upload";
 
-  export let file: FileUploadItemProps["file"] = undefined;
+  export let file: FileUploadItemProps["file"];
 </script>
 
 <FileUpload.Item

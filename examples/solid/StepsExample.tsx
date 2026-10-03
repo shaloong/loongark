@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 import {
@@ -28,33 +29,36 @@ const steps = [
 export const StepsExample: Component<StepsExampleProps> = (props) => {
   const size = () => props.size ?? "md";
   const orientation = () => props.orientation ?? "horizontal";
-  const [value, setValue] = createSignal(1);
+  const [value, setValue] = createSignal(0);
 
   return (
     <div style={{ display: "grid", gap: "16px" }}>
       <LoongArkStepsRoot
-        value={value()}
+        step={value()}
         count={steps.length}
         size={size()}
         orientation={orientation()}
-        onValueChange={(details: { value: number | string }) =>
-          setValue(Number(details.value))
-        }
+        onStepChange={(details) => setValue(Number(details.step))}
       >
         <LoongArkStepsList>
           {steps.map((step, index) => (
             <>
-              <LoongArkStepsItem value={index + 1}>
+              <LoongArkStepsItem index={index}>
                 <LoongArkStepsIndicator>{index + 1}</LoongArkStepsIndicator>
                 <div>
                   <LoongArkStepsTrigger>{step.title}</LoongArkStepsTrigger>
-                  <LoongArkStepsContent>{step.description}</LoongArkStepsContent>
+                  <span>{step.description}</span>
                 </div>
+                {index < steps.length - 1 && <LoongArkStepsSeparator />}
               </LoongArkStepsItem>
-              {index < steps.length - 1 && <LoongArkStepsSeparator />}
             </>
           ))}
         </LoongArkStepsList>
+        {steps.map((step, index) => (
+          <LoongArkStepsContent index={index}>
+            {step.description}
+          </LoongArkStepsContent>
+        ))}
         <LoongArkStepsCompletedContent>
           All steps completed.
         </LoongArkStepsCompletedContent>

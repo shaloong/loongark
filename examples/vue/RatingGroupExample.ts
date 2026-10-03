@@ -42,14 +42,25 @@ export const RatingGroupExample = defineComponent({
                 [1, 2, 3, 4, 5].map((item) =>
                   h(
                     LoongArkRatingGroupItem,
-                    { value: item, key: item },
-                    { default: () => (item <= value.value ? "*" : "-") }
-                  )
+                    { index: item, key: item },
+                    {
+                      default: () =>
+                        h(
+                          "svg",
+                          { viewBox: "0 0 24 24", "aria-hidden": "true" },
+                          [
+                            h("path", {
+                              d: "m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.3-5.7-3-5.7 3 1.1-6.3-4.5-4.4 6.3-.9Z",
+                            }),
+                          ],
+                        ),
+                    },
+                  ),
                 ),
             }),
             h(LoongArkRatingGroupHiddenInput),
           ],
-        }
+        },
       );
   },
 });

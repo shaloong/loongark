@@ -16,8 +16,10 @@ type ArkSplitterResizeTriggerIndicatorProps = ComponentPropsWithoutRef<
   typeof Splitter.ResizeTriggerIndicator
 >;
 
-export interface LoongArkSplitterRootProps
-  extends Omit<ArkSplitterRootProps, "asChild"> {
+export interface LoongArkSplitterRootProps extends Omit<
+  ArkSplitterRootProps,
+  "asChild" | "size"
+> {
   size?: SplitterSize;
   children?: ReactNode;
 }
@@ -58,11 +60,12 @@ export const LoongArkSplitterPanel = forwardRef<
 LoongArkSplitterPanel.displayName = "LoongArkSplitterPanel";
 
 export const LoongArkSplitterResizeTrigger = forwardRef<
-  HTMLDivElement,
+  HTMLButtonElement,
   ArkSplitterResizeTriggerProps
 >((props, ref) => {
   return (
     <Splitter.ResizeTrigger
+      aria-label="Resize panels"
       {...props}
       ref={ref}
       data-scope="splitter"

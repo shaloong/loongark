@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type ColorPickerSize = "sm" | "md" | "lg";
@@ -29,17 +28,19 @@ interface ColorPickerDesignTokens {
   };
 }
 
-const extractColorPickerTokens = (theme: LoongArkTheme): ColorPickerDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+const extractColorPickerTokens = (
+  theme: LoongArkTheme,
+): ColorPickerDesignTokens => {
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
   const brand = asTokenTree(color.brand);
 
@@ -227,7 +228,7 @@ ${swatchIndicatorSelector} {
 
 ${valueTextSelector} {
   font-size: ${tokens.fontSize.sm};
-  color: ${tokens.neutral.muted};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
 ${eyeDropperTriggerSelector},
@@ -280,8 +281,8 @@ const colorPickerPrimitive = createPrimitive<ColorPickerPrimitiveProps>(
   COLOR_PICKER_CONTRACT,
   (theme) => {
     const css = buildColorPickerStyles(theme);
-    mountPrimitiveStyles(`color-picker-${theme.mode}`, css);
-  }
+    theme.mountStyles(`color-picker-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(colorPickerPrimitive);

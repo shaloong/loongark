@@ -12,21 +12,23 @@ import {
 } from "@ark-ui/solid/splitter";
 import type { SplitterSize } from "@loongark/primitives";
 
-export interface LoongArkSplitterRootProps
-  extends Omit<ArkSplitterRootProps, "asChild"> {
+export interface LoongArkSplitterRootProps extends Omit<
+  ArkSplitterRootProps,
+  "asChild" | "size"
+> {
   size?: SplitterSize;
   children?: JSX.Element;
 }
 
 export const LoongArkSplitterRoot: Component<LoongArkSplitterRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps({ size: "md" as SplitterSize }, props);
   const [local, others] = splitProps(merged, ["children", "size"]);
 
   return (
     <ArkSplitter.Root
-      {...(others as any)}
+      {...others}
       data-scope="splitter"
       data-part="root"
       data-size={local.size}
@@ -36,28 +38,28 @@ export const LoongArkSplitterRoot: Component<LoongArkSplitterRootProps> = (
   );
 };
 
-export interface LoongArkSplitterPanelProps
-  extends Omit<ArkSplitterPanelProps, "asChild"> {
+export interface LoongArkSplitterPanelProps extends Omit<
+  ArkSplitterPanelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkSplitterPanel: Component<LoongArkSplitterPanelProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkSplitter.Panel
-      {...others}
-      data-scope="splitter"
-      data-part="panel"
-    >
+    <ArkSplitter.Panel {...others} data-scope="splitter" data-part="panel">
       {local.children}
     </ArkSplitter.Panel>
   );
 };
 
-export interface LoongArkSplitterResizeTriggerProps
-  extends Omit<ArkSplitterResizeTriggerProps, "asChild"> {
+export interface LoongArkSplitterResizeTriggerProps extends Omit<
+  ArkSplitterResizeTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -67,6 +69,7 @@ export const LoongArkSplitterResizeTrigger: Component<
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkSplitter.ResizeTrigger
+      aria-label="Resize panels"
       {...others}
       data-scope="splitter"
       data-part="resize-trigger"
@@ -76,8 +79,10 @@ export const LoongArkSplitterResizeTrigger: Component<
   );
 };
 
-export interface LoongArkSplitterResizeTriggerIndicatorProps
-  extends Omit<ArkSplitterResizeTriggerIndicatorProps, "asChild"> {
+export interface LoongArkSplitterResizeTriggerIndicatorProps extends Omit<
+  ArkSplitterResizeTriggerIndicatorProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 

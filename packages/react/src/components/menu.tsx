@@ -31,15 +31,18 @@ import {
   type MenuIndicatorProps as ArkMenuIndicatorProps,
   type MenuSeparatorProps as ArkMenuSeparatorProps,
 } from "@ark-ui/react/menu";
-import { Portal as ArkPortal } from "@ark-ui/react/portal";
+import { Portal as ArkPortal } from "./portal";
 import type { MenuSize } from "@loongark/primitives";
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
-  createElement(ArkPortal as unknown as FC<{ children?: ReactNode }>, null, children);
+  createElement(ArkPortal, null, children);
 
 const MenuContext = createContext<{ size: MenuSize }>({ size: "md" });
 
-export interface LoongArkMenuRootProps extends Omit<ArkMenuRootProps, "asChild"> {
+export interface LoongArkMenuRootProps extends Omit<
+  ArkMenuRootProps,
+  "asChild"
+> {
   size?: MenuSize;
 }
 
@@ -47,14 +50,19 @@ export const LoongArkMenuRoot = (props: LoongArkMenuRootProps) => {
   const { size = "md", ...rest } = props;
   return (
     <MenuContext.Provider value={{ size }}>
-      <ArkMenu.Root {...rest} data-scope="menu" data-part="root" data-size={size} />
+      <ArkMenu.Root
+        {...rest}
+        data-scope="menu"
+        data-part="root"
+        data-size={size}
+      />
     </MenuContext.Provider>
   );
 };
 
 type TriggerProps = ArkMenuTriggerProps & { children?: ReactNode };
 
-export const LoongArkMenuTrigger = forwardRef<HTMLElement, TriggerProps>(
+export const LoongArkMenuTrigger = forwardRef<HTMLButtonElement, TriggerProps>(
   ({ asChild = true, children, ...rest }, ref) => (
     <ArkMenu.Trigger
       {...rest}
@@ -65,14 +73,16 @@ export const LoongArkMenuTrigger = forwardRef<HTMLElement, TriggerProps>(
     >
       {children}
     </ArkMenu.Trigger>
-  )
+  ),
 );
 LoongArkMenuTrigger.displayName = "LoongArkMenuTrigger";
 
-type ContextTriggerProps = ArkMenuContextTriggerProps & { children?: ReactNode };
+type ContextTriggerProps = ArkMenuContextTriggerProps & {
+  children?: ReactNode;
+};
 
 export const LoongArkMenuContextTrigger = forwardRef<
-  HTMLElement,
+  HTMLButtonElement,
   ContextTriggerProps
 >(({ asChild = true, children, ...rest }, ref) => (
   <ArkMenu.ContextTrigger
@@ -122,7 +132,7 @@ LoongArkMenuContent.displayName = "LoongArkMenuContent";
 export const LoongArkMenuArrow = forwardRef<HTMLDivElement, ArkMenuArrowProps>(
   (props, ref) => (
     <ArkMenu.Arrow {...props} ref={ref} data-scope="menu" data-part="arrow" />
-  )
+  ),
 );
 LoongArkMenuArrow.displayName = "LoongArkMenuArrow";
 
@@ -130,14 +140,19 @@ export const LoongArkMenuArrowTip = forwardRef<
   HTMLDivElement,
   ArkMenuArrowTipProps
 >((props, ref) => (
-  <ArkMenu.ArrowTip {...props} ref={ref} data-scope="menu" data-part="arrow-tip" />
+  <ArkMenu.ArrowTip
+    {...props}
+    ref={ref}
+    data-scope="menu"
+    data-part="arrow-tip"
+  />
 ));
 LoongArkMenuArrowTip.displayName = "LoongArkMenuArrowTip";
 
 export const LoongArkMenuItem = forwardRef<HTMLDivElement, ArkMenuItemProps>(
   (props, ref) => (
     <ArkMenu.Item {...props} ref={ref} data-scope="menu" data-part="item" />
-  )
+  ),
 );
 LoongArkMenuItem.displayName = "LoongArkMenuItem";
 
@@ -158,7 +173,12 @@ export const LoongArkMenuCheckboxItem = forwardRef<
   HTMLDivElement,
   ArkMenuCheckboxItemProps
 >((props, ref) => (
-  <ArkMenu.CheckboxItem {...props} ref={ref} data-scope="menu" data-part="item" />
+  <ArkMenu.CheckboxItem
+    {...props}
+    ref={ref}
+    data-scope="menu"
+    data-part="item"
+  />
 ));
 LoongArkMenuCheckboxItem.displayName = "LoongArkMenuCheckboxItem";
 
@@ -249,7 +269,7 @@ export const LoongArkMenuIndicator = forwardRef<
 LoongArkMenuIndicator.displayName = "LoongArkMenuIndicator";
 
 export const LoongArkMenuSeparator = forwardRef<
-  HTMLDivElement,
+  HTMLHRElement,
   ArkMenuSeparatorProps
 >((props, ref) => (
   <ArkMenu.Separator

@@ -1,0 +1,126 @@
+{
+  "recordedAt": "2026-10-02T14:35:23.054Z",
+  "workspace": "E:/dev/loongark",
+  "status": "passed",
+  "environment": {
+    "os": "Windows",
+    "browser": "Chromium",
+    "mobileViewportWidth": 375,
+    "versions": {
+      "react": "19.2.1",
+      "vue": "3.5.25",
+      "solid-js": "1.9.15",
+      "svelte": "5.45.2",
+      "@ark-ui/react": "5.30.0",
+      "@ark-ui/vue": "5.30.0",
+      "@ark-ui/solid": "5.30.0",
+      "@ark-ui/svelte": "5.15.0"
+    }
+  },
+  "coverage": {
+    "families": 78,
+    "newFamilies": 38,
+    "stories": 203,
+    "publicValueExportsPerFramework": 574,
+    "primitiveTokenContracts": 49,
+    "examples": {
+      "react": 25,
+      "vue": 22,
+      "solid": 22,
+      "svelte": 22,
+      "total": 91
+    }
+  },
+  "tests": {
+    "frameworksPassed": 8,
+    "storybookPassed": 11,
+    "storybookExpectedSkippedFrameworkCases": 8,
+    "visualPassed": 2,
+    "svelte": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "publicDeclarations": [
+      "react",
+      "vue",
+      "solid",
+      "svelte"
+    ],
+    "ssr": [
+      "react",
+      "vue",
+      "solid",
+      "svelte"
+    ],
+    "cliTokenExtractAndVerify": "passed",
+    "axe": "Zero violations in tested core consumers, expanded color panels, galleries and open dialog"
+  },
+  "checks": [
+    {
+      "id": "verify",
+      "status": "passed",
+      "sourceLog": ".verify-acceptance.log",
+      "logModifiedAt": "2026-10-02T14:13:01.121Z"
+    },
+    {
+      "id": "contracts",
+      "status": "passed",
+      "sourceLog": ".contracts-acceptance.log",
+      "logModifiedAt": "2026-10-02T14:25:53.086Z"
+    },
+    {
+      "id": "publication",
+      "status": "passed",
+      "sourceLog": ".publication-last.log",
+      "logModifiedAt": "2026-10-02T14:23:13.539Z"
+    },
+    {
+      "id": "svelte",
+      "status": "passed",
+      "sourceLog": ".svelte-acceptance.log",
+      "logModifiedAt": "2026-10-02T14:19:09.328Z"
+    },
+    {
+      "id": "frameworks",
+      "status": "passed",
+      "sourceLog": ".frameworks-broad-final.log",
+      "logModifiedAt": "2026-10-02T14:27:23.790Z"
+    },
+    {
+      "id": "storybook",
+      "status": "passed",
+      "sourceLog": ".storybook-acceptance.log",
+      "logModifiedAt": "2026-10-02T14:28:15.522Z"
+    },
+    {
+      "id": "ui",
+      "status": "passed",
+      "sourceLog": ".ui-acceptance.log",
+      "logModifiedAt": "2026-10-02T14:29:33.069Z"
+    },
+    {
+      "id": "visual",
+      "status": "passed",
+      "sourceLog": ".visual-acceptance.log",
+      "logModifiedAt": "2026-10-02T14:29:42.678Z"
+    }
+  ],
+  "limitations": [
+    "Public declaration acceptance filters upstream node_modules diagnostics; local package declarations use real dependencies.",
+    "Chromium and listed runtime versions verified; no claim of all peer versions or all component states.",
+    "Chart provides responsive SVG bar/line charts; DataTable uses scalar row data; Drawer provides a bottom modal, without complete Recharts/Vaul API compatibility.",
+    "Additional AI-specific components are outside the original remediation scope.",
+    "npm registry publish was not executed."
+  ],
+  "visualEvidence": [
+    "gallery-light.png",
+    "gallery-dark.png",
+    "gallery-dark-mobile.png",
+    "color-picker-open.png",
+    "after-contact-sheet-01.png",
+    "after-contact-sheet-02.png",
+    "after-contact-sheet-03.png",
+    "after-contact-sheet-04.png",
+    "after-contact-sheet-05.png"
+  ]
+}

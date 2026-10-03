@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Tree View component - Vue wrapper.
  * Uses Ark UI Tree View with data attributes for styling.
@@ -16,7 +17,7 @@ export const LoongArkTreeViewRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.Root,
         {
           ...attrs,
@@ -25,7 +26,7 @@ export const LoongArkTreeViewRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -34,14 +35,14 @@ export const LoongArkTreeViewLabel = defineComponent({
   name: "LoongArkTreeViewLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.Label,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -50,14 +51,14 @@ export const LoongArkTreeViewTree = defineComponent({
   name: "LoongArkTreeViewTree",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.Tree,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "tree",
         },
-        slots
+        slots,
       );
   },
 });
@@ -66,14 +67,14 @@ export const LoongArkTreeViewItem = defineComponent({
   name: "LoongArkTreeViewItem",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.Item,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -82,14 +83,14 @@ export const LoongArkTreeViewItemIndicator = defineComponent({
   name: "LoongArkTreeViewItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.ItemIndicator,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "item-indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -98,14 +99,14 @@ export const LoongArkTreeViewItemText = defineComponent({
   name: "LoongArkTreeViewItemText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.ItemText,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "item-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -114,14 +115,14 @@ export const LoongArkTreeViewBranch = defineComponent({
   name: "LoongArkTreeViewBranch",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.Branch,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "branch",
         },
-        slots
+        slots,
       );
   },
 });
@@ -130,14 +131,14 @@ export const LoongArkTreeViewBranchContent = defineComponent({
   name: "LoongArkTreeViewBranchContent",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.BranchContent,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "branch-content",
         },
-        slots
+        slots,
       );
   },
 });
@@ -146,14 +147,14 @@ export const LoongArkTreeViewBranchControl = defineComponent({
   name: "LoongArkTreeViewBranchControl",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.BranchControl,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "branch-control",
         },
-        slots
+        slots,
       );
   },
 });
@@ -162,14 +163,14 @@ export const LoongArkTreeViewBranchTrigger = defineComponent({
   name: "LoongArkTreeViewBranchTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.BranchTrigger,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "branch-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -178,14 +179,14 @@ export const LoongArkTreeViewBranchIndicator = defineComponent({
   name: "LoongArkTreeViewBranchIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.BranchIndicator,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "branch-indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -194,14 +195,14 @@ export const LoongArkTreeViewBranchText = defineComponent({
   name: "LoongArkTreeViewBranchText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.BranchText,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "branch-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -210,14 +211,14 @@ export const LoongArkTreeViewBranchIndentGuide = defineComponent({
   name: "LoongArkTreeViewBranchIndentGuide",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.BranchIndentGuide,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "branch-indent-guide",
         },
-        slots
+        slots,
       );
   },
 });
@@ -226,14 +227,14 @@ export const LoongArkTreeViewNodeCheckbox = defineComponent({
   name: "LoongArkTreeViewNodeCheckbox",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.NodeCheckbox,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "node-checkbox",
         },
-        slots
+        slots,
       );
   },
 });
@@ -242,14 +243,14 @@ export const LoongArkTreeViewNodeCheckboxIndicator = defineComponent({
   name: "LoongArkTreeViewNodeCheckboxIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTreeView.NodeCheckboxIndicator,
         {
           ...attrs,
           "data-scope": "tree-view",
           "data-part": "node-checkbox-indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -258,7 +259,7 @@ export const LoongArkTreeViewNodeRenameInput = defineComponent({
   name: "LoongArkTreeViewNodeRenameInput",
   setup(_, { attrs }) {
     return () =>
-      h(ArkTreeView.NodeRenameInput, {
+      renderPart(ArkTreeView.NodeRenameInput, {
         ...attrs,
         "data-scope": "tree-view",
         "data-part": "node-rename-input",

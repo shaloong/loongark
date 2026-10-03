@@ -29,7 +29,7 @@ export const FilterBarExample = () => {
   };
 
   return (
-    <LoongArkProvider mode="light">
+    <>
       <LoongArkFilterBar data-testid={filterBarTestIds.root} align="center">
         <LoongArkFilterBarSearch data-testid={filterBarTestIds.search}>
           <LoongArkInputLabel>
@@ -80,6 +80,6 @@ export const FilterBarExample = () => {
           </LoongArkButton>
         </LoongArkFilterBarActions>
       </LoongArkFilterBar>
-    </LoongArkProvider>
+    </>
   );
 };

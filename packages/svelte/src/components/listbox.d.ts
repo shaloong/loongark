@@ -1,7 +1,7 @@
 import type {
   ListboxRootProps,
   ListboxLabelProps,
-  ListboxListProps,
+  ListboxContentProps,
   ListboxItemGroupProps,
   ListboxItemGroupLabelProps,
   ListboxItemProps,
@@ -9,10 +9,11 @@ import type {
   ListboxItemIndicatorProps,
 } from "@ark-ui/svelte/listbox";
 
+export type ListboxListProps = ListboxContentProps;
+
 export type {
   ListboxRootProps,
   ListboxLabelProps,
-  ListboxListProps,
   ListboxItemGroupProps,
   ListboxItemGroupLabelProps,
   ListboxItemProps,

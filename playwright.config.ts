@@ -32,11 +32,4 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: "pnpm storybook --ci",
-    url: storybookUrl,
-    reuseExistingServer: !process.env.CI,
-    stdout: "pipe",
-    stderr: "pipe",
-  },
 });

@@ -10,7 +10,7 @@
 
 <TagsInput.Input
   {disabled}
-  {readOnly}
+  readonly={readOnly}
   data-scope="tags-input"
   data-part="input"
   data-size={size}
