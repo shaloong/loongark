@@ -92,37 +92,6 @@ export const LoongArkSheetAction: typeof LoongArkSheet.Action =
   LoongArkSheet.Action;
 export const LoongArkSheetCancel: typeof LoongArkSheet.Cancel =
   LoongArkSheet.Cancel;
-export const LoongArkDrawer = {
-  ...Dialog,
-  Root: Dialog.Root,
-  Portal: LoongArkPortal,
-  Content: content("drawer"),
-  Overlay: Dialog.Backdrop,
-  Action: DialogAction,
-  Cancel: DialogCancel,
-};
-export const LoongArkDrawerRoot: typeof LoongArkDrawer.Root =
-  LoongArkDrawer.Root;
-export const LoongArkDrawerTrigger: typeof LoongArkDrawer.Trigger =
-  LoongArkDrawer.Trigger;
-export const LoongArkDrawerPortal: typeof LoongArkDrawer.Portal =
-  LoongArkDrawer.Portal;
-export const LoongArkDrawerOverlay: typeof LoongArkDrawer.Overlay =
-  LoongArkDrawer.Overlay;
-export const LoongArkDrawerPositioner: typeof LoongArkDrawer.Positioner =
-  LoongArkDrawer.Positioner;
-export const LoongArkDrawerContent: typeof LoongArkDrawer.Content =
-  LoongArkDrawer.Content;
-export const LoongArkDrawerTitle: typeof LoongArkDrawer.Title =
-  LoongArkDrawer.Title;
-export const LoongArkDrawerDescription: typeof LoongArkDrawer.Description =
-  LoongArkDrawer.Description;
-export const LoongArkDrawerCloseTrigger: typeof LoongArkDrawer.CloseTrigger =
-  LoongArkDrawer.CloseTrigger;
-export const LoongArkDrawerAction: typeof LoongArkDrawer.Action =
-  LoongArkDrawer.Action;
-export const LoongArkDrawerCancel: typeof LoongArkDrawer.Cancel =
-  LoongArkDrawer.Cancel;
 export const LoongArkCommand = Combobox;
 export { createListCollection as createCommandCollection };
 export const LoongArkContextMenu = { ...Menu, Trigger: Menu.ContextTrigger };

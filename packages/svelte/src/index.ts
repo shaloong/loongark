@@ -878,3 +878,7 @@ export {default as LoongArkQuestionnaire} from "./components/Questionnaire.svelt
 export * from "./components/ark-additions";
 
 export * from "./components/ark-advanced";
+
+export * from "./components/ark-next";
+export * from "./components/drawer";
+export * from "./components/ark-controls";

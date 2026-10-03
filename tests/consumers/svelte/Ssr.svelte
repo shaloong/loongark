@@ -1,7 +1,11 @@
 <script lang="ts">
   import * as L from "@loongark/svelte";
-  const advancedSelect=L.useSelect(()=>({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']}));
-  const cropper=L.useImageCropper();
+  const advancedSelect = L.useSelect(() => ({
+    collection: L.createListCollection({ items: ["react", "vue"] }),
+    name: "ssr-framework",
+    defaultValue: ["react"],
+  }));
+  const cropper = L.useImageCropper();
   import {
     LoongArkChart,
     LoongArkDataTable,
@@ -96,9 +100,42 @@
   </LoongArkContainer></LoongArkProvider
 >
 
-<L.LoongArkSelectRootProvider value={advancedSelect}><L.LoongArkSelectHiddenSelect/></L.LoongArkSelectRootProvider>
-<L.LoongArkImageCropperRootProvider value={cropper}><L.LoongArkImageCropperViewport/></L.LoongArkImageCropperRootProvider>
-<L.LoongArkJsonTreeViewRoot data={{project:'SSR JSON'}} defaultExpandedDepth={1}><L.LoongArkJsonTreeViewTree aria-label="SSR structured data"/></L.LoongArkJsonTreeViewRoot>
-<L.LoongArkClientOnly>Client-only secret{#snippet fallback()}SSR client fallback{/snippet}</L.LoongArkClientOnly>
-<L.LoongArkHighlight text="SSR highlighted text" query="highlighted"/>
-<L.LoongArkFormatByte value={2048} unitSystem="binary"/>
+<L.LoongArkSelectRootProvider value={advancedSelect}
+  ><L.LoongArkSelectHiddenSelect /></L.LoongArkSelectRootProvider
+>
+<L.LoongArkImageCropperRootProvider value={cropper}
+  ><L.LoongArkImageCropperViewport /></L.LoongArkImageCropperRootProvider
+>
+<L.LoongArkJsonTreeViewRoot
+  data={{ project: "SSR JSON" }}
+  defaultExpandedDepth={1}
+  ><L.LoongArkJsonTreeViewTree
+    aria-label="SSR structured data"
+  /></L.LoongArkJsonTreeViewRoot
+>
+<L.LoongArkClientOnly
+  >Client-only secret{#snippet fallback()}SSR client fallback{/snippet}</L.LoongArkClientOnly
+>
+<L.LoongArkHighlight text="SSR highlighted text" query="highlighted" />
+<L.LoongArkFormatByte value={2048} unitSystem="binary" />
+
+<L.LoongArkDateInputRoot
+  name="ssr-date"
+  locale="en-US"
+  defaultValue={[L.parseDate("2026-10-03")]}
+  ><L.LoongArkDateInputLabel>SSR date</L.LoongArkDateInputLabel
+  ><L.LoongArkDateInputHiddenInput /></L.LoongArkDateInputRoot
+>
+<L.LoongArkTocRoot id="ssr-outline" items={[]}
+  ><L.LoongArkTocNav
+    ><L.LoongArkTocTitle>SSR outline</L.LoongArkTocTitle></L.LoongArkTocNav
+  ></L.LoongArkTocRoot
+>
+<L.LoongArkSwapRoot swapped={false}
+  ><L.LoongArkSwapIndicator type="off">SSR swap off</L.LoongArkSwapIndicator
+  ></L.LoongArkSwapRoot
+>
+<L.LoongArkDrawerRoot
+  ><L.LoongArkDrawerTrigger>SSR drawer trigger</L.LoongArkDrawerTrigger
+  ></L.LoongArkDrawerRoot
+>

@@ -120,6 +120,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       );
     const equivalents = {
       "Dialog.Backdrop": "LoongArkDialogOverlay",
+      "Drawer.Backdrop": "LoongArkDrawerOverlay",
       "Listbox.Content": "LoongArkListboxList",
     };
     const equivalentParts = Object.fromEntries(

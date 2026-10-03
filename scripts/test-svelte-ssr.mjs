@@ -39,12 +39,12 @@ assert.match(
   /<textarea(?=[^>]*data-autosize="true")(?=[^>]*rows="2")[^>]*>/,
 );
 assert.match(html, /Hello from Svelte SSR/);
-assert.match(html,/SSR client fallback/);
-assert.doesNotMatch(html,/Client-only secret/);
-assert.match(html,/SSR JSON/);
-assert.match(html,/data-scope="image-cropper"/);
-assert.match(html,/name="ssr-framework"/);
-assert.match(html,/<mark[^>]*>highlighted<\/mark>/);
+assert.match(html, /SSR client fallback/);
+assert.doesNotMatch(html, /Client-only secret/);
+assert.match(html, /SSR JSON/);
+assert.match(html, /data-scope="image-cropper"/);
+assert.match(html, /name="ssr-framework"/);
+assert.match(html, /<mark[^>]*>highlighted<\/mark>/);
 
 assert.match(html, /aria-label="SSR legend"/);
 assert.match(html, /SSR category — SSR series: 1e\+308/);
@@ -66,4 +66,12 @@ assert.match(html, /data-scope="floating-action-button"/);
 assert.match(html, /data-scope="speed-dial"/);
 assert.match(html, /Image SSR/);
 assert.match(html, /Media SSR/);
+assert.match(
+  html,
+  /<input(?=[^>]*name="ssr-date")(?=[^>]*value="10\/3\/2026")[^>]*>/,
+);
+for (const text of ["SSR outline", "SSR swap off", "SSR drawer trigger"])
+  assert.ok(html.includes(text));
+assert.equal((html.match(/id="toc:ssr-outline"/g) ?? []).length, 1);
+assert.match(html, /id="toc:ssr-outline-nav"/);
 console.log("Svelte 发布产物 SSR 通过");

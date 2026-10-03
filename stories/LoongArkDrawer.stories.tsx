@@ -1,4 +1,6 @@
 import React from "react";
+import { DrawerExample } from "../examples/react/DrawerExample";
+import { withArkExamplePage } from "./arkStory";
 import type { Meta, StoryObj } from "@storybook/react";
 import * as L from "@loongark/react";
 function OverlayDemo({ kind }: { kind: "sheet" | "drawer" }) {
@@ -27,6 +29,7 @@ const meta = {
   title: "Components/Drawer",
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],
+  decorators: [withArkExamplePage],
 } satisfies Meta;
 export default meta;
 export const Basic: StoryObj = {
@@ -36,3 +39,5 @@ export const Basic: StoryObj = {
     </div>
   ),
 };
+
+export const SnapPoints: StoryObj = { render: () => <DrawerExample /> };

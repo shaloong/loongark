@@ -40,11 +40,18 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkChart,${chartProps})));`
         : `console.log(renderToString(h(L.LoongArkChart,${chartProps})));`;
-  const arkScript = framework === "Vue"
-    ? `function AdvancedSSR(){const select=L.useSelect({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']});const crop=L.useImageCropper();return ()=>h('div',{},[h(L.LoongArkSelectRootProvider,{value:select.value},()=>h(L.LoongArkSelectHiddenSelect)),h(L.LoongArkImageCropperRootProvider,{value:crop.value},()=>h(L.LoongArkImageCropperViewport)),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1},()=>h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})),h(L.LoongArkClientOnly,{}, {default:()=> 'Client-only secret',fallback:()=> 'SSR client fallback'}),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'})]);}console.log(await renderToString(createSSRApp({setup:AdvancedSSR})));`
-    : framework === "Solid"
-    ? `function AdvancedSSR(){const select=L.useSelect(()=>({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']})),crop=L.useImageCropper();return [h(L.LoongArkSelectRootProvider,{value:select,get children(){return h(L.LoongArkSelectHiddenSelect,{})}}),h(L.LoongArkImageCropperRootProvider,{value:crop,get children(){return h(L.LoongArkImageCropperViewport,{})}}),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1,get children(){return h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})}}),h(L.LoongArkClientOnly,{children:'Client-only secret',fallback:'SSR client fallback'}),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'})];}console.log(renderToString(()=>h(AdvancedSSR,{})));`
-    : `function AdvancedSSR(){const select=L.useSelect({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']}),crop=L.useImageCropper();return h('div',null,h(L.LoongArkSelectRootProvider,{value:select},h(L.LoongArkSelectHiddenSelect)),h(L.LoongArkImageCropperRootProvider,{value:crop},h(L.LoongArkImageCropperViewport)),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1},h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})),h(L.LoongArkClientOnly,{fallback:'SSR client fallback'},'Client-only secret'),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'}));}console.log(renderToString(h(AdvancedSSR)));`;
+  const arkScript =
+    framework === "Vue"
+      ? `function AdvancedSSR(){const select=L.useSelect({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']});const crop=L.useImageCropper();return ()=>h('div',{},[h(L.LoongArkSelectRootProvider,{value:select.value},()=>h(L.LoongArkSelectHiddenSelect)),h(L.LoongArkImageCropperRootProvider,{value:crop.value},()=>h(L.LoongArkImageCropperViewport)),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1},()=>h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})),h(L.LoongArkClientOnly,{}, {default:()=> 'Client-only secret',fallback:()=> 'SSR client fallback'}),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'})]);}console.log(await renderToString(createSSRApp({setup:AdvancedSSR})));`
+      : framework === "Solid"
+        ? `function AdvancedSSR(){const select=L.useSelect(()=>({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']})),crop=L.useImageCropper();return [h(L.LoongArkSelectRootProvider,{value:select,get children(){return h(L.LoongArkSelectHiddenSelect,{})}}),h(L.LoongArkImageCropperRootProvider,{value:crop,get children(){return h(L.LoongArkImageCropperViewport,{})}}),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1,get children(){return h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})}}),h(L.LoongArkClientOnly,{children:'Client-only secret',fallback:'SSR client fallback'}),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'})];}console.log(renderToString(()=>h(AdvancedSSR,{})));`
+        : `function AdvancedSSR(){const select=L.useSelect({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']}),crop=L.useImageCropper();return h('div',null,h(L.LoongArkSelectRootProvider,{value:select},h(L.LoongArkSelectHiddenSelect)),h(L.LoongArkImageCropperRootProvider,{value:crop},h(L.LoongArkImageCropperViewport)),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1},h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})),h(L.LoongArkClientOnly,{fallback:'SSR client fallback'},'Client-only secret'),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'}));}console.log(renderToString(h(AdvancedSSR)));`;
+  const nextScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h('div',{},[h(L.LoongArkDateInputRoot,{name:'ssr-date',locale:'en-US',defaultValue:[L.parseDate('2026-10-03')]},()=>[h(L.LoongArkDateInputLabel,{},()=> 'SSR date'),h(L.LoongArkDateInputHiddenInput)]),h(L.LoongArkTocRoot,{id:'ssr-outline',items:[]},()=>h(L.LoongArkTocNav,{},()=>h(L.LoongArkTocTitle,{},()=> 'SSR outline'))),h(L.LoongArkSwapRoot,{swapped:false},()=>h(L.LoongArkSwapIndicator,{type:'off'},()=> 'SSR swap off')),h(L.LoongArkDrawerRoot,{},()=>h(L.LoongArkDrawerTrigger,{},()=> 'SSR drawer trigger'))])})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>[h(L.LoongArkDateInputRoot,{name:'ssr-date',locale:'en-US',defaultValue:[L.parseDate('2026-10-03')],get children(){return [h(L.LoongArkDateInputLabel,{children:'SSR date'}),h(L.LoongArkDateInputHiddenInput,{})]}}),h(L.LoongArkTocRoot,{id:'ssr-outline',items:[],get children(){return h(L.LoongArkTocNav,{get children(){return h(L.LoongArkTocTitle,{children:'SSR outline'})}})}}),h(L.LoongArkSwapRoot,{swapped:false,get children(){return h(L.LoongArkSwapIndicator,{type:'off',children:'SSR swap off'})}}),h(L.LoongArkDrawerRoot,{get children(){return h(L.LoongArkDrawerTrigger,{children:'SSR drawer trigger'})}})]));`
+        : `console.log(renderToString(h('div',null,h(L.LoongArkDateInputRoot,{name:'ssr-date',locale:'en-US',defaultValue:[L.parseDate('2026-10-03')]},h(L.LoongArkDateInputLabel,null,'SSR date'),h(L.LoongArkDateInputHiddenInput)),h(L.LoongArkTocRoot,{id:'ssr-outline',items:[]},h(L.LoongArkTocNav,null,h(L.LoongArkTocTitle,null,'SSR outline'))),h(L.LoongArkSwapRoot,{swapped:false},h(L.LoongArkSwapIndicator,{type:'off'},'SSR swap off')),h(L.LoongArkDrawerRoot,null,h(L.LoongArkDrawerTrigger,null,'SSR drawer trigger')))));`;
   const result = spawnSync(
     process.execPath,
     [
@@ -52,7 +59,7 @@ for (const [framework, script] of [
       "-e",
       script.replace(
         "process.exit(0);",
-        tableScript + chartScript + arkScript + "process.exit(0);",
+        tableScript + chartScript + arkScript + nextScript + "process.exit(0);",
       ),
     ],
     { encoding: "utf8", timeout: 60000 },
@@ -62,6 +69,14 @@ for (const [framework, script] of [
     0,
     `${framework}: ${result.stderr} ${result.error ?? ""}`,
   );
+  assert.match(
+    result.stdout,
+    /<input(?=[^>]*name="ssr-date")(?=[^>]*value="10\/3\/2026")[^>]*>/,
+  );
+  for (const text of ["SSR outline", "SSR swap off", "SSR drawer trigger"])
+    assert.ok(result.stdout.includes(text));
+  assert.equal((result.stdout.match(/id="toc:ssr-outline"/g) ?? []).length, 1);
+  assert.match(result.stdout, /id="toc:ssr-outline-nav"/);
   assert.match(result.stdout, /Hello/);
   assert.match(result.stdout, /SSR client fallback/);
   assert.doesNotMatch(result.stdout, /Client-only secret/);

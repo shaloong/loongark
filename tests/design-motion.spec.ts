@@ -196,8 +196,14 @@ for (const mode of ["light", "dark"] as const) {
           expect(compact).toBeLessThanOrEqual(24);
         }
 
-        const duration = await content.evaluate((el) =>
-          parseFloat(getComputedStyle(el).animationDuration),
+        const duration = await content.evaluate(
+          (el, usesTransition) =>
+            parseFloat(
+              usesTransition
+                ? getComputedStyle(el).transitionDuration
+                : getComputedStyle(el).animationDuration,
+            ),
+          family === "drawer",
         );
         expect(duration).toBe(preference === "reduce" ? 0.00001 : 0.2);
         await expect

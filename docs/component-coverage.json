@@ -38,6 +38,7 @@
     "ContextMenu",
     "DataTable",
     "Date Picker",
+    "DateInput",
     "Dialog",
     "Direction",
     "DownloadTrigger",
@@ -101,6 +102,7 @@
     "Splitter",
     "Stack",
     "Steps",
+    "Swap",
     "Switch",
     "Table",
     "Tabs",
@@ -110,6 +112,7 @@
     "Timeline",
     "Timer",
     "Toast",
+    "Toc",
     "Toggle",
     "Toggle Group",
     "Tooltip",
@@ -119,15 +122,9 @@
     "Typography"
   ],
   "latestBatch": [
-    "ImageCropper",
-    "JsonTreeView",
-    "ClientOnly",
-    "DownloadTrigger",
-    "FocusTrap",
-    "Format",
-    "Frame",
-    "Highlight",
-    "Presence"
+    "DateInput",
+    "Swap",
+    "Toc"
   ],
   "equivalences": {
     "Input OTP": "PinInput",
@@ -139,14 +136,12 @@
     "Divider": "Separator",
     "Modal/Backdrop/Portal": "Dialog and shared overlay parts"
   },
-  "pending": [
-    "DateInput",
-    "Swap",
-    "TOC",
-    "Drawer gesture/snap points"
-  ],
+  "pending": [],
   "latestEnhancements": [
-    "Segment Group",
-    "Advanced RootProvider/Context/parts"
+    "Drawer gesture/snap points/stack",
+    "DateInput segmented editing",
+    "Toc observed navigation",
+    "Swap lifecycle",
+    "Context and collection control hooks"
   ]
 }

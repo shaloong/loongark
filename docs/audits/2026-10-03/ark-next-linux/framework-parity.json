@@ -1,0 +1,386 @@
+[
+  {
+    "component": "date",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "date",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "date",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "date",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "date",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "date",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "date",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "date",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "date",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "date",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "date",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "date",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "toc",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "toc",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "toc",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "toc",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "toc",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "toc",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "toc",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "toc",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "toc",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "toc",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "toc",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "toc",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "swap",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "swap",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "swap",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "swap",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "swap",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "swap",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "swap",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "swap",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "swap",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "swap",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "swap",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "swap",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "drawer",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "drawer",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "drawer",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "drawer",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "drawer",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "drawer",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "drawer",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "drawer",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "drawer",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 1469440
+  },
+  {
+    "component": "drawer",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "drawer",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  },
+  {
+    "component": "drawer",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "differentPixels": 0,
+    "totalPixels": 430500
+  }
+]

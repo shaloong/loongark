@@ -2,10 +2,13 @@
 
 更新时间：2026-10-03。按组件族计数，Progress 的线性/圆形属于同一族。
 
-目前 111 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐 Ark 裁剪、JSON 与辅助组件，并复核高级部件，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
+目前 114 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐 Ark 裁剪、JSON 与辅助组件，并复核高级部件，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
 
 | 组件族               | React | Vue | Solid | Svelte | 交付来源        |
 | -------------------- | ----- | --- | ----- | ------ | --------------- |
+| DateInput | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 新版 |
+| Swap | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 新版 |
+| Toc | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 新版 |
 | ImageCropper | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
 | JsonTreeView | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
 | ClientOnly | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |

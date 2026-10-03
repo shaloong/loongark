@@ -16,8 +16,8 @@
 | Highlight | 未公开 | 原生文本匹配高亮与 Hook；共享样式使用既有语义 Token |
 | Presence | 浮层已有内置生命周期，缺少独立封装 | 原生 lazyMount、unmountOnExit、present 与 Hook |
 | Collection / Environment / Locale | 部分助手已公开 | 补网格/文件树 Collection 工厂、环境与语言 Provider，不计为新组件族 |
-| DateInput / Swap / TOC | 原锁定依赖没有提供，本批升级后已经提供 | 下一批实现四端，仍记录待补 |
-| 手势抽屉 | 现有 Drawer/Sheet 基于 Dialog；不具备拖拽关闭、吸附点 | 旧锁定版有 BottomSheet；新版更名 Drawer，需要单独补齐与迁移验证 |
+| DateInput / Swap / TOC | 原锁定依赖没有提供 | 四端 Root/Provider/Context/部件及 Hook；分段日期与范围、受控切换、真实文章滚动与活动目录 |
+| 手势抽屉 | 原 Drawer/Sheet 基于 Dialog | Drawer 迁移原生 Drawer：手势、吸附点、Stack、Grabber、SwipeArea、Indent；Sheet 保留 Dialog |
 
 官方 [Ark UI 文档](https://ark-ui.com/docs/overview/introduction) 是行为/API 参考。Portal 在 React/Svelte 是组件，在 Vue/Solid 采用框架原生传送机制；现有 LoongArkPortal 已提供四端局部主题容器，不增加别名。Collection、factory 与 hooks 等辅助模块不混入组件族数量。
 
@@ -39,8 +39,22 @@ Svelte Frame 在写入文档前保存了旧 body，Portal 会挂到脱离文档�
 
 ## 高级能力仍需持续补齐
 
-公开 Ark 原生能力不代表所有 LoongArk 组合组件的高级场景已经全部交付。继续处理新版组件、手势抽屉及组合模型的明确能力：DataTable 列与服务端数据控制、Chart 序列交互/坐标范围/可访问数据、Questionnaire 条件与校验、消息与附件的操作状态。具体交付必须同步四端示例、逻辑回归和桌面/手机明暗截图；不通过一个布尔“完整”字段掩盖未验收场景。
+公开 Ark 原生能力不代表所有 LoongArk 组合组件的高级场景已经全部交付。新版组件与原生 Drawer 已实现，继续处理组合模型的明确能力：DataTable 列与服务端数据控制、Chart 序列交互/坐标范围/可访问数据、Questionnaire 条件与校验、消息与附件的操作状态。具体交付必须同步四端示例、逻辑回归和桌面/手机明暗截图；不通过一个布尔“完整”字段掩盖未验收场景。
 
-Linux 手工截图复核修正了裁剪图片顶对齐、手机默认裁剪框越出图片、拖拽命中区域被画成粗白条、分页首尾按钮高度不一致，以及 JSON 导航起点/装饰箭头错误显示焦点框。四端裁剪与 iframe 像素一致；JSON 分隔符空格和 Select 原生箭头有细微差异，保留实际像素对照，不声称四端完全逐像素相同。组件 Context Hook 与 Collection 异步 Hook 也仍需继续复核，不把本批已开放的控制 Hook 误写成所有 Hook 均完整。
+Linux 手工截图复核修正了裁剪图片顶对齐、手机默认裁剪框越出图片、拖拽命中区域被画成粗白条、分页首尾按钮高度不一致，以及 JSON 导航起点/装饰箭头错误显示焦点框。四端裁剪与 iframe 像素一致；JSON 分隔符空格和 Select 原生箭头有细微差异，保留实际像素对照，不声称四端完全逐像素相同。后续批次公开四端共同的 75 个 Context/ItemContext/Collection 控制 Hook，包括 useAsyncList、useListCollection、useListSelection。公开原生 Hook 仍不代表异步错误、取消、竞争请求等应用情景已经全部专项验收。
 
 本批验证与限制见 [Linux 验收](audits/2026-10-03/ark-ui-linux/acceptance.json)。保留 Windows 基线；系统 Chromium 与 Playwright 固定下载版本分别记录。
+
+## DateInput、Swap、Toc 与 Drawer
+
+当前覆盖 114 个组件族、283 个 Story、四端各 789 个 LoongArk 值入口和 147 个示例。成功构建后的原生部件审计没有遗漏的独有可渲染部件。原生模块整体命名空间可能与 LoongArk 组合命名不同；纯类型、collection 类和框架内部 Props Context 不计为新组件族。Svelte 上游独有的四个部件 Props Context Hook 也按原生名称公开，不为其他端创建假 Hook；模块 API 审计中的 Hook 缺口已清零。
+
+DateInput 保留 Ark 的 DateValue 和各段语义，支持 value/defaultValue、single/range、min/max、disabled/readOnly/invalid、locale、name、RootProvider 与受控 Hook。HiddenInput 按原生契约提交本地化日期字符串（例子 en-US 为 `10/4/2026`）；若服务端要求 ISO，请通过 value 的 DateValue.toString() 转换。范围名为 `trip[0]` 与 `trip[1]`，不把隐藏输入当成 native input[type=date]。
+
+Swap 是指示内容切换部件，不另建业务状态机；例子以真实按钮控制 swapped，结合 Presence 对细节内容按需挂载，aria-expanded/aria-controls 同步。Toc 使用真实文章标题和原生 IntersectionObserver；四端 Root/Nav 生成不同 ID，Svelte Root 补齐上游遗漏的根属性，Vue 保持默认 autoScroll 一致。默认 scrollBehavior 为 auto，避免默认平滑滚动违背减弱动效。需要平滑滚动时由业务显式设置。上游 React onActiveChange 在实际回归中返回前一状态；例子从 Context 读取真实 activeIds，回调限制保留为后续修复项，未声称受控 activeIds 已完整验收。
+
+Drawer 的命名保持现有 Root/Trigger/Portal/Overlay/Positioner/Content/Title/Description/Action/Cancel，并加入 Stack、RootProvider、Context、Grabber/Indicator、SwipeArea、Indent/IndentBackground 及控制 Hook。Overlay 对应原生 Backdrop，不再增加重复平铺别名。原 Dialog 的 placement Props 不等同于原生 swipeDirection；下/上/左/右使用 swipeDirection，并由共享样式对齐布局。默认 Root 与 RootProvider 开启 lazyMount/unmountOnExit，防止未打开的嵌套 Positioner 先被外层模态隐藏、打开后仍无法进入无障碍树；Solid DrawerPortal 同时根据 Presence 挂载 Portal，防止 Solid 的空包装提前被隐藏。业务可显式覆盖，两项同时关闭的嵌套行为仍属上游限制。Svelte 目录示例在滚动容器 ref 就绪后挂载 Root，保证 IntersectionObserver 使用指定文章而非默认视口。
+
+高级能力继续按可复现情景交付，不能把“公开所有部件”写成“全部业务能力已完成”。待补验证包括 DateInput 完整输入/粘贴/日期时间/国际化组合、Drawer 真实触摸/RTL/所有方向、Collection 异步取消与请求竞争，以及表格服务端/列控制、图表序列交互与可访问数据、条件问卷和消息操作状态。
+
+本批 Linux 验收：114 族、283 Story、四端各 789 个公开值入口；147 个四端示例运行通过，专项行为 8 项、全量浏览器 106 项、视觉 46 项通过。明暗默认 WCAG、窄屏溢出和有效 transition: all 为 0；64 张四端和 16 张 Story 截图已目视核验。新增 16 张 Linux 基线，原有 30 张 Linux 与 2 张 Windows 基线不变。详细范围与限制见 [验收记录](audits/2026-10-03/ark-next-linux/acceptance.json)。

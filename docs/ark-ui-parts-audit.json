@@ -190,17 +190,7 @@
         "SegmentContext"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Context",
-        "Label",
-        "Root",
-        "RootProvider",
-        "Segment",
-        "SegmentGroup",
-        "HiddenInput",
-        "Control",
-        "SegmentContext"
-      ]
+      "missing": []
     },
     "date-picker": {
       "namespace": "DatePicker",
@@ -283,18 +273,10 @@
         "Title",
         "Trigger"
       ],
-      "equivalentParts": {},
-      "missing": [
-        "Backdrop",
-        "Context",
-        "Indent",
-        "IndentBackground",
-        "Grabber",
-        "GrabberIndicator",
-        "RootProvider",
-        "Stack",
-        "SwipeArea"
-      ]
+      "equivalentParts": {
+        "Backdrop": "LoongArkDrawerOverlay"
+      },
+      "missing": []
     },
     "editable": {
       "namespace": "Editable",
@@ -836,11 +818,7 @@
         "RootProvider"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Indicator",
-        "Root",
-        "RootProvider"
-      ]
+      "missing": []
     },
     "switch": {
       "namespace": "Switch",
@@ -934,18 +912,7 @@
         "Title"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Content",
-        "Context",
-        "Indicator",
-        "Item",
-        "Link",
-        "List",
-        "Nav",
-        "Root",
-        "RootProvider",
-        "Title"
-      ]
+      "missing": []
     },
     "toggle": {
       "namespace": "Toggle",
@@ -1224,17 +1191,7 @@
         "Segment"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Context",
-        "SegmentContext",
-        "Control",
-        "HiddenInput",
-        "Label",
-        "RootProvider",
-        "Root",
-        "SegmentGroup",
-        "Segment"
-      ]
+      "missing": []
     },
     "date-picker": {
       "namespace": "DatePicker",
@@ -1317,18 +1274,10 @@
         "Title",
         "Trigger"
       ],
-      "equivalentParts": {},
-      "missing": [
-        "Backdrop",
-        "Context",
-        "Grabber",
-        "GrabberIndicator",
-        "Indent",
-        "IndentBackground",
-        "RootProvider",
-        "Stack",
-        "SwipeArea"
-      ]
+      "equivalentParts": {
+        "Backdrop": "LoongArkDrawerOverlay"
+      },
+      "missing": []
     },
     "editable": {
       "namespace": "Editable",
@@ -1863,11 +1812,7 @@
         "Indicator"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Root",
-        "RootProvider",
-        "Indicator"
-      ]
+      "missing": []
     },
     "switch": {
       "namespace": "Switch",
@@ -1961,18 +1906,7 @@
         "Title"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Content",
-        "Context",
-        "Indicator",
-        "Item",
-        "Link",
-        "List",
-        "Nav",
-        "Root",
-        "RootProvider",
-        "Title"
-      ]
+      "missing": []
     },
     "toggle": {
       "namespace": "Toggle",
@@ -2251,17 +2185,7 @@
         "SegmentGroup"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Context",
-        "Control",
-        "HiddenInput",
-        "Label",
-        "Root",
-        "RootProvider",
-        "Segment",
-        "SegmentContext",
-        "SegmentGroup"
-      ]
+      "missing": []
     },
     "date-picker": {
       "namespace": "DatePicker",
@@ -2344,18 +2268,10 @@
         "Title",
         "Trigger"
       ],
-      "equivalentParts": {},
-      "missing": [
-        "Backdrop",
-        "Context",
-        "Grabber",
-        "GrabberIndicator",
-        "Indent",
-        "IndentBackground",
-        "RootProvider",
-        "Stack",
-        "SwipeArea"
-      ]
+      "equivalentParts": {
+        "Backdrop": "LoongArkDrawerOverlay"
+      },
+      "missing": []
     },
     "editable": {
       "namespace": "Editable",
@@ -2891,11 +2807,7 @@
         "RootProvider"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Indicator",
-        "Root",
-        "RootProvider"
-      ]
+      "missing": []
     },
     "switch": {
       "namespace": "Switch",
@@ -2989,18 +2901,7 @@
         "Title"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Content",
-        "Context",
-        "Indicator",
-        "Item",
-        "Link",
-        "List",
-        "Nav",
-        "Root",
-        "RootProvider",
-        "Title"
-      ]
+      "missing": []
     },
     "toggle": {
       "namespace": "Toggle",
@@ -3279,17 +3180,7 @@
         "SegmentGroup"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Context",
-        "SegmentContext",
-        "Control",
-        "HiddenInput",
-        "Label",
-        "Root",
-        "RootProvider",
-        "Segment",
-        "SegmentGroup"
-      ]
+      "missing": []
     },
     "date-picker": {
       "namespace": "DatePicker",
@@ -3372,18 +3263,10 @@
         "Stack",
         "SwipeArea"
       ],
-      "equivalentParts": {},
-      "missing": [
-        "Backdrop",
-        "Context",
-        "Grabber",
-        "GrabberIndicator",
-        "RootProvider",
-        "Indent",
-        "IndentBackground",
-        "Stack",
-        "SwipeArea"
-      ]
+      "equivalentParts": {
+        "Backdrop": "LoongArkDrawerOverlay"
+      },
+      "missing": []
     },
     "editable": {
       "namespace": "Editable",
@@ -3925,11 +3808,7 @@
         "RootProvider"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Indicator",
-        "Root",
-        "RootProvider"
-      ]
+      "missing": []
     },
     "switch": {
       "namespace": "Switch",
@@ -4023,18 +3902,7 @@
         "Title"
       ],
       "equivalentParts": {},
-      "missing": [
-        "Content",
-        "Context",
-        "Indicator",
-        "Item",
-        "Link",
-        "List",
-        "Nav",
-        "Root",
-        "RootProvider",
-        "Title"
-      ]
+      "missing": []
     },
     "toggle": {
       "namespace": "Toggle",

@@ -200,15 +200,10 @@ h1[data-scope=typography] { font-size:var(--lk-control-height-md); } h2[data-sco
 [data-scope=sidebar] [data-part=menu-button] { width:100%; text-align:left; }
 [data-scope=sidebar][data-state=closed] { display:none; }
 [data-scope=sidebar][data-part=inset] { flex:1; min-width:0; }
-[data-scope=sheet][data-part=content], [data-scope=drawer][data-part=content] { position:fixed; z-index:var(--lk-z-index-dialog); background:var(--lk-color-semantic-background); color:var(--lk-color-semantic-foreground); box-shadow:var(--lk-shadow-xl); padding:var(--lk-space-component-lg); display:grid; gap:var(--lk-space-component-md); align-content:start; overflow:auto; max-width:100vw; }
+[data-scope=sheet][data-part=content] { position:fixed; z-index:var(--lk-z-index-dialog); background:var(--lk-color-semantic-background); color:var(--lk-color-semantic-foreground); box-shadow:var(--lk-shadow-xl); padding:var(--lk-space-component-lg); display:grid; gap:var(--lk-space-component-md); align-content:start; overflow:auto; max-width:100vw; }
 [data-scope=sheet][data-part=content] { inset:0 0 0 auto; width:min(var(--lk-control-dialogwidth-sm),90vw); border-left:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border); }
-[data-scope=drawer][data-part=content] { inset:auto 0 0; max-height:85dvh; border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border); border-radius:var(--lk-space-component-md) var(--lk-space-component-md) 0 0; }
 @keyframes lk-sheet-in { from { opacity:0; transform:translateX(100%); } to { opacity:1; transform:translateX(0); } }
 @keyframes lk-sheet-out { to { opacity:0; transform:translateX(100%); } }
-@keyframes lk-drawer-in { from { opacity:0; transform:translateY(100%); } to { opacity:1; transform:translateY(0); } }
-@keyframes lk-drawer-out { to { opacity:0; transform:translateY(100%); } }
 [data-scope=sheet][data-part=content][data-state=open] { animation:lk-sheet-in var(--lk-motion-duration-base) var(--lk-motion-easing-entrance); }
 [data-scope=sheet][data-part=content][data-state=closed] { animation:lk-sheet-out var(--lk-motion-duration-exit) var(--lk-motion-easing-exit) forwards; pointer-events:none; }
-[data-scope=drawer][data-part=content][data-state=open] { animation:lk-drawer-in var(--lk-motion-duration-base) var(--lk-motion-easing-entrance); }
-[data-scope=drawer][data-part=content][data-state=closed] { animation:lk-drawer-out var(--lk-motion-duration-exit) var(--lk-motion-easing-exit) forwards; pointer-events:none; }
 `;

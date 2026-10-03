@@ -1,4 +1,10 @@
 import {
+  checkDateInput,
+  checkToc,
+  checkSwap,
+  checkDrawer,
+} from "./arkNextChecks";
+import {
   checkImageCropper,
   checkJsonTreeView,
   checkArkUtilities,
@@ -151,6 +157,10 @@ for (const framework of ["react", "vue", "solid", "svelte"])
       if (name === "ArkUtilitiesExample") await checkArkUtilities(page);
       if (name === "AdvancedSelectionExample")
         await checkAdvancedSelection(page);
+      if (name === "DateInputExample") await checkDateInput(page);
+      if (name === "TocExample") await checkToc(page);
+      if (name === "SwapExample") await checkSwap(page);
+      if (name === "DrawerExample") await checkDrawer(page);
       if (name === "SegmentGroupExample") await checkSegmentGroup(page);
       if (name === "ColorPickerExample") {
         await page

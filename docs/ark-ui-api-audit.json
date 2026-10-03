@@ -20,10 +20,7 @@
         "Accordion"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useAccordionContext",
-        "useAccordionItemContext"
-      ]
+      "missingHooks": []
     },
     "angle-slider": {
       "exportedValues": [
@@ -44,10 +41,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useAngleSlider",
-        "useAngleSliderContext"
-      ]
+      "missingHooks": []
     },
     "avatar": {
       "exportedValues": [
@@ -65,9 +59,7 @@
         "Avatar"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useAvatarContext"
-      ]
+      "missingHooks": []
     },
     "carousel": {
       "exportedValues": [
@@ -93,9 +85,7 @@
         "Carousel"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCarouselContext"
-      ]
+      "missingHooks": []
     },
     "checkbox": {
       "exportedValues": [
@@ -119,11 +109,7 @@
         "Checkbox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCheckboxContext",
-        "useCheckboxGroup",
-        "useCheckboxGroupContext"
-      ]
+      "missingHooks": []
     },
     "client-only": {
       "exportedValues": [
@@ -153,9 +139,7 @@
         "Clipboard"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useClipboardContext"
-      ]
+      "missingHooks": []
     },
     "collapsible": {
       "exportedValues": [
@@ -174,9 +158,7 @@
         "Collapsible"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCollapsibleContext"
-      ]
+      "missingHooks": []
     },
     "collection": {
       "exportedValues": [
@@ -190,11 +172,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useAsyncList",
-        "useListCollection",
-        "useListSelection"
-      ]
+      "missingHooks": []
     },
     "color-picker": {
       "exportedValues": [
@@ -237,9 +215,7 @@
         "ColorPicker"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useColorPickerContext"
-      ]
+      "missingHooks": []
     },
     "combobox": {
       "exportedValues": [
@@ -273,11 +249,7 @@
         "Combobox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListCollection",
-        "useComboboxContext",
-        "useComboboxItemContext"
-      ]
+      "missingHooks": []
     },
     "date-input": {
       "exportedValues": [
@@ -295,24 +267,9 @@
         "dateInputAnatomy",
         "DateInput"
       ],
-      "missingPublicParts": [
-        "DateInputContext",
-        "DateInputLabel",
-        "DateInputRoot",
-        "DateInputSegment",
-        "DateInputSegmentGroup",
-        "DateInputHiddenInput",
-        "DateInputControl",
-        "DateInputSegmentContext",
-        "DateInput"
-      ],
-      "missingProviders": [
-        "DateInputRootProvider"
-      ],
-      "missingHooks": [
-        "useDateInput",
-        "useDateInputContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "date-picker": {
       "exportedValues": [
@@ -355,9 +312,7 @@
         "DatePicker"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useDatePickerContext"
-      ]
+      "missingHooks": []
     },
     "dialog": {
       "exportedValues": [
@@ -380,9 +335,7 @@
         "DialogBackdrop"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useDialogContext"
-      ]
+      "missingHooks": []
     },
     "download-trigger": {
       "exportedValues": [
@@ -391,9 +344,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useDownload"
-      ]
+      "missingHooks": []
     },
     "drawer": {
       "exportedValues": [
@@ -420,23 +371,10 @@
         "Drawer"
       ],
       "missingPublicParts": [
-        "DrawerBackdrop",
-        "DrawerContext",
-        "DrawerGrabber",
-        "DrawerGrabberIndicator",
-        "DrawerIndent",
-        "DrawerIndentBackground",
-        "DrawerStack",
-        "DrawerSwipeArea"
+        "DrawerBackdrop"
       ],
-      "missingProviders": [
-        "DrawerRootProvider"
-      ],
-      "missingHooks": [
-        "useDrawer",
-        "useDrawerContext",
-        "useDrawerStackContext"
-      ]
+      "missingProviders": [],
+      "missingHooks": []
     },
     "editable": {
       "exportedValues": [
@@ -460,9 +398,7 @@
         "Editable"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useEditableContext"
-      ]
+      "missingHooks": []
     },
     "field": {
       "exportedValues": [
@@ -484,10 +420,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useField",
-        "useFieldContext"
-      ]
+      "missingHooks": []
     },
     "fieldset": {
       "exportedValues": [
@@ -504,10 +437,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useFieldset",
-        "useFieldsetContext"
-      ]
+      "missingHooks": []
     },
     "file-upload": {
       "exportedValues": [
@@ -535,9 +465,7 @@
         "FileUpload"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useFileUploadContext"
-      ]
+      "missingHooks": []
     },
     "floating-panel": {
       "exportedValues": [
@@ -562,10 +490,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useFloatingPanel",
-        "useFloatingPanelContext"
-      ]
+      "missingHooks": []
     },
     "focus-trap": {
       "exportedValues": [
@@ -623,9 +548,7 @@
         "HoverCard"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useHoverCardContext"
-      ]
+      "missingHooks": []
     },
     "image-cropper": {
       "exportedValues": [
@@ -644,9 +567,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useImageCropperContext"
-      ]
+      "missingHooks": []
     },
     "json-tree-view": {
       "exportedValues": [
@@ -688,10 +609,7 @@
         "Listbox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListboxContext",
-        "useListboxItemContext"
-      ]
+      "missingHooks": []
     },
     "marquee": {
       "exportedValues": [
@@ -709,10 +627,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useMarquee",
-        "useMarqueeContext"
-      ]
+      "missingHooks": []
     },
     "menu": {
       "exportedValues": [
@@ -747,10 +662,7 @@
         "Menu"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useMenuContext",
-        "useMenuItemContext"
-      ]
+      "missingHooks": []
     },
     "navigation-menu": {
       "exportedValues": [
@@ -774,9 +686,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useNavigationMenuContext"
-      ]
+      "missingHooks": []
     },
     "number-input": {
       "exportedValues": [
@@ -799,9 +709,7 @@
         "NumberInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useNumberInputContext"
-      ]
+      "missingHooks": []
     },
     "pagination": {
       "exportedValues": [
@@ -823,9 +731,7 @@
         "Pagination"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePaginationContext"
-      ]
+      "missingHooks": []
     },
     "password-input": {
       "exportedValues": [
@@ -846,9 +752,7 @@
         "PasswordInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePasswordInputContext"
-      ]
+      "missingHooks": []
     },
     "pin-input": {
       "exportedValues": [
@@ -866,9 +770,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "usePinInputContext"
-      ]
+      "missingHooks": []
     },
     "popover": {
       "exportedValues": [
@@ -894,9 +796,7 @@
         "Popover"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePopoverContext"
-      ]
+      "missingHooks": []
     },
     "portal": {
       "exportedValues": [
@@ -915,9 +815,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "usePresenceContext"
-      ]
+      "missingHooks": []
     },
     "progress": {
       "exportedValues": [
@@ -941,9 +839,7 @@
         "Progress"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useProgressContext"
-      ]
+      "missingHooks": []
     },
     "qr-code": {
       "exportedValues": [
@@ -961,10 +857,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useQrCode",
-        "useQrCodeContext"
-      ]
+      "missingHooks": []
     },
     "radio-group": {
       "exportedValues": [
@@ -988,10 +881,7 @@
         "RadioGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useRadioGroupContext",
-        "useRadioGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "rating-group": {
       "exportedValues": [
@@ -1013,10 +903,7 @@
         "RatingGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useRatingGroupContext",
-        "useRatingGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "scroll-area": {
       "exportedValues": [
@@ -1037,9 +924,7 @@
         "ScrollArea"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useScrollAreaContext"
-      ]
+      "missingHooks": []
     },
     "segment-group": {
       "exportedValues": [
@@ -1063,10 +948,7 @@
         "SegmentGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSegmentGroupContext",
-        "useSegmentGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "select": {
       "exportedValues": [
@@ -1101,11 +983,7 @@
         "Select"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListCollection",
-        "useSelectContext",
-        "useSelectItemContext"
-      ]
+      "missingHooks": []
     },
     "signature-pad": {
       "exportedValues": [
@@ -1125,10 +1003,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useSignaturePad",
-        "useSignaturePadContext"
-      ]
+      "missingHooks": []
     },
     "slider": {
       "exportedValues": [
@@ -1154,9 +1029,7 @@
         "Slider"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSliderContext"
-      ]
+      "missingHooks": []
     },
     "splitter": {
       "exportedValues": [
@@ -1177,9 +1050,7 @@
         "Splitter"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSplitterContext"
-      ]
+      "missingHooks": []
     },
     "steps": {
       "exportedValues": [
@@ -1207,10 +1078,7 @@
         "Steps"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useStepsContext",
-        "useStepsItemContext"
-      ]
+      "missingHooks": []
     },
     "swap": {
       "exportedValues": [
@@ -1222,18 +1090,9 @@
         "useSwap",
         "useSwapContext"
       ],
-      "missingPublicParts": [
-        "Swap",
-        "SwapIndicator",
-        "SwapRoot"
-      ],
-      "missingProviders": [
-        "SwapRootProvider"
-      ],
-      "missingHooks": [
-        "useSwap",
-        "useSwapContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "switch": {
       "exportedValues": [
@@ -1251,9 +1110,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useSwitchContext"
-      ]
+      "missingHooks": []
     },
     "tabs": {
       "exportedValues": [
@@ -1277,9 +1134,7 @@
         "Tabs"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTabsContext"
-      ]
+      "missingHooks": []
     },
     "tags-input": {
       "exportedValues": [
@@ -1307,10 +1162,7 @@
         "TagsInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTagsInputContext",
-        "useTagsInputItemContext"
-      ]
+      "missingHooks": []
     },
     "timer": {
       "exportedValues": [
@@ -1329,10 +1181,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useTimer",
-        "useTimerContext"
-      ]
+      "missingHooks": []
     },
     "toast": {
       "exportedValues": [
@@ -1352,9 +1201,7 @@
         "Toast"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToastContext"
-      ]
+      "missingHooks": []
     },
     "toc": {
       "exportedValues": [
@@ -1373,25 +1220,9 @@
         "useTocContext",
         "Toc"
       ],
-      "missingPublicParts": [
-        "TocContent",
-        "TocContext",
-        "TocIndicator",
-        "TocItem",
-        "TocLink",
-        "TocList",
-        "TocNav",
-        "TocRoot",
-        "TocTitle",
-        "Toc"
-      ],
-      "missingProviders": [
-        "TocRootProvider"
-      ],
-      "missingHooks": [
-        "useToc",
-        "useTocContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "toggle": {
       "exportedValues": [
@@ -1407,10 +1238,7 @@
         "Toggle"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToggle",
-        "useToggleContext"
-      ]
+      "missingHooks": []
     },
     "toggle-group": {
       "exportedValues": [
@@ -1427,9 +1255,7 @@
         "ToggleGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToggleGroupContext"
-      ]
+      "missingHooks": []
     },
     "tooltip": {
       "exportedValues": [
@@ -1450,9 +1276,7 @@
         "Tooltip"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTooltipContext"
-      ]
+      "missingHooks": []
     },
     "tour": {
       "exportedValues": [
@@ -1482,9 +1306,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useTourContext"
-      ]
+      "missingHooks": []
     },
     "tree-view": {
       "exportedValues": [
@@ -1520,10 +1342,7 @@
         "TreeView"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTreeViewContext",
-        "useTreeViewNodeContext"
-      ]
+      "missingHooks": []
     }
   },
   "vue": {
@@ -1547,10 +1366,7 @@
         "Accordion"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useAccordionContext",
-        "useAccordionItemContext"
-      ]
+      "missingHooks": []
     },
     "angle-slider": {
       "exportedValues": [
@@ -1571,10 +1387,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useAngleSlider",
-        "useAngleSliderContext"
-      ]
+      "missingHooks": []
     },
     "avatar": {
       "exportedValues": [
@@ -1592,9 +1405,7 @@
         "Avatar"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useAvatarContext"
-      ]
+      "missingHooks": []
     },
     "carousel": {
       "exportedValues": [
@@ -1620,9 +1431,7 @@
         "Carousel"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCarouselContext"
-      ]
+      "missingHooks": []
     },
     "checkbox": {
       "exportedValues": [
@@ -1646,11 +1455,7 @@
         "Checkbox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCheckboxContext",
-        "useCheckboxGroup",
-        "useCheckboxGroupContext"
-      ]
+      "missingHooks": []
     },
     "client-only": {
       "exportedValues": [
@@ -1680,9 +1485,7 @@
         "Clipboard"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useClipboardContext"
-      ]
+      "missingHooks": []
     },
     "collapsible": {
       "exportedValues": [
@@ -1701,9 +1504,7 @@
         "Collapsible"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCollapsibleContext"
-      ]
+      "missingHooks": []
     },
     "collection": {
       "exportedValues": [
@@ -1717,11 +1518,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useAsyncList",
-        "useListCollection",
-        "useListSelection"
-      ]
+      "missingHooks": []
     },
     "color-picker": {
       "exportedValues": [
@@ -1764,9 +1561,7 @@
         "ColorPicker"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useColorPickerContext"
-      ]
+      "missingHooks": []
     },
     "combobox": {
       "exportedValues": [
@@ -1800,11 +1595,7 @@
         "Combobox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListCollection",
-        "useComboboxContext",
-        "useComboboxItemContext"
-      ]
+      "missingHooks": []
     },
     "date-input": {
       "exportedValues": [
@@ -1822,24 +1613,9 @@
         "useDateInputContext",
         "DateInput"
       ],
-      "missingPublicParts": [
-        "DateInputContext",
-        "DateInputSegmentContext",
-        "DateInputControl",
-        "DateInputHiddenInput",
-        "DateInputLabel",
-        "DateInputRoot",
-        "DateInputSegmentGroup",
-        "DateInputSegment",
-        "DateInput"
-      ],
-      "missingProviders": [
-        "DateInputRootProvider"
-      ],
-      "missingHooks": [
-        "useDateInput",
-        "useDateInputContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "date-picker": {
       "exportedValues": [
@@ -1882,9 +1658,7 @@
         "DatePicker"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useDatePickerContext"
-      ]
+      "missingHooks": []
     },
     "dialog": {
       "exportedValues": [
@@ -1907,9 +1681,7 @@
         "DialogBackdrop"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useDialogContext"
-      ]
+      "missingHooks": []
     },
     "download-trigger": {
       "exportedValues": [
@@ -1918,9 +1690,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useDownload"
-      ]
+      "missingHooks": []
     },
     "drawer": {
       "exportedValues": [
@@ -1947,23 +1717,10 @@
         "Drawer"
       ],
       "missingPublicParts": [
-        "DrawerBackdrop",
-        "DrawerContext",
-        "DrawerGrabber",
-        "DrawerGrabberIndicator",
-        "DrawerIndent",
-        "DrawerIndentBackground",
-        "DrawerStack",
-        "DrawerSwipeArea"
+        "DrawerBackdrop"
       ],
-      "missingProviders": [
-        "DrawerRootProvider"
-      ],
-      "missingHooks": [
-        "useDrawer",
-        "useDrawerContext",
-        "useDrawerStackContext"
-      ]
+      "missingProviders": [],
+      "missingHooks": []
     },
     "editable": {
       "exportedValues": [
@@ -1987,9 +1744,7 @@
         "Editable"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useEditableContext"
-      ]
+      "missingHooks": []
     },
     "field": {
       "exportedValues": [
@@ -2011,10 +1766,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useField",
-        "useFieldContext"
-      ]
+      "missingHooks": []
     },
     "fieldset": {
       "exportedValues": [
@@ -2031,10 +1783,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useFieldset",
-        "useFieldsetContext"
-      ]
+      "missingHooks": []
     },
     "file-upload": {
       "exportedValues": [
@@ -2062,9 +1811,7 @@
         "FileUpload"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useFileUploadContext"
-      ]
+      "missingHooks": []
     },
     "floating-panel": {
       "exportedValues": [
@@ -2089,10 +1836,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useFloatingPanel",
-        "useFloatingPanelContext"
-      ]
+      "missingHooks": []
     },
     "focus-trap": {
       "exportedValues": [
@@ -2150,9 +1894,7 @@
         "HoverCard"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useHoverCardContext"
-      ]
+      "missingHooks": []
     },
     "image-cropper": {
       "exportedValues": [
@@ -2171,9 +1913,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useImageCropperContext"
-      ]
+      "missingHooks": []
     },
     "json-tree-view": {
       "exportedValues": [
@@ -2215,10 +1955,7 @@
         "Listbox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListboxContext",
-        "useListboxItemContext"
-      ]
+      "missingHooks": []
     },
     "marquee": {
       "exportedValues": [
@@ -2236,10 +1973,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useMarquee",
-        "useMarqueeContext"
-      ]
+      "missingHooks": []
     },
     "menu": {
       "exportedValues": [
@@ -2274,10 +2008,7 @@
         "Menu"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useMenuContext",
-        "useMenuItemContext"
-      ]
+      "missingHooks": []
     },
     "navigation-menu": {
       "exportedValues": [
@@ -2301,9 +2032,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useNavigationMenuContext"
-      ]
+      "missingHooks": []
     },
     "number-input": {
       "exportedValues": [
@@ -2326,9 +2055,7 @@
         "NumberInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useNumberInputContext"
-      ]
+      "missingHooks": []
     },
     "pagination": {
       "exportedValues": [
@@ -2350,9 +2077,7 @@
         "Pagination"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePaginationContext"
-      ]
+      "missingHooks": []
     },
     "password-input": {
       "exportedValues": [
@@ -2373,9 +2098,7 @@
         "PasswordInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePasswordInputContext"
-      ]
+      "missingHooks": []
     },
     "pin-input": {
       "exportedValues": [
@@ -2393,9 +2116,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "usePinInputContext"
-      ]
+      "missingHooks": []
     },
     "popover": {
       "exportedValues": [
@@ -2421,9 +2142,7 @@
         "Popover"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePopoverContext"
-      ]
+      "missingHooks": []
     },
     "presence": {
       "exportedValues": [
@@ -2434,9 +2153,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "usePresenceContext"
-      ]
+      "missingHooks": []
     },
     "progress": {
       "exportedValues": [
@@ -2460,9 +2177,7 @@
         "Progress"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useProgressContext"
-      ]
+      "missingHooks": []
     },
     "qr-code": {
       "exportedValues": [
@@ -2480,10 +2195,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useQrCode",
-        "useQrCodeContext"
-      ]
+      "missingHooks": []
     },
     "radio-group": {
       "exportedValues": [
@@ -2507,10 +2219,7 @@
         "RadioGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useRadioGroupContext",
-        "useRadioGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "rating-group": {
       "exportedValues": [
@@ -2532,10 +2241,7 @@
         "RatingGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useRatingGroupContext",
-        "useRatingGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "scroll-area": {
       "exportedValues": [
@@ -2556,9 +2262,7 @@
         "ScrollArea"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useScrollAreaContext"
-      ]
+      "missingHooks": []
     },
     "segment-group": {
       "exportedValues": [
@@ -2582,10 +2286,7 @@
         "SegmentGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSegmentGroupContext",
-        "useSegmentGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "select": {
       "exportedValues": [
@@ -2620,11 +2321,7 @@
         "Select"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListCollection",
-        "useSelectContext",
-        "useSelectItemContext"
-      ]
+      "missingHooks": []
     },
     "signature-pad": {
       "exportedValues": [
@@ -2644,10 +2341,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useSignaturePad",
-        "useSignaturePadContext"
-      ]
+      "missingHooks": []
     },
     "slider": {
       "exportedValues": [
@@ -2673,9 +2367,7 @@
         "Slider"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSliderContext"
-      ]
+      "missingHooks": []
     },
     "splitter": {
       "exportedValues": [
@@ -2696,9 +2388,7 @@
         "Splitter"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSplitterContext"
-      ]
+      "missingHooks": []
     },
     "steps": {
       "exportedValues": [
@@ -2726,10 +2416,7 @@
         "Steps"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useStepsContext",
-        "useStepsItemContext"
-      ]
+      "missingHooks": []
     },
     "swap": {
       "exportedValues": [
@@ -2741,18 +2428,9 @@
         "swapAnatomy",
         "Swap"
       ],
-      "missingPublicParts": [
-        "SwapRoot",
-        "SwapIndicator",
-        "Swap"
-      ],
-      "missingProviders": [
-        "SwapRootProvider"
-      ],
-      "missingHooks": [
-        "useSwap",
-        "useSwapContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "switch": {
       "exportedValues": [
@@ -2770,9 +2448,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useSwitchContext"
-      ]
+      "missingHooks": []
     },
     "tabs": {
       "exportedValues": [
@@ -2796,9 +2472,7 @@
         "Tabs"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTabsContext"
-      ]
+      "missingHooks": []
     },
     "tags-input": {
       "exportedValues": [
@@ -2826,10 +2500,7 @@
         "TagsInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTagsInputContext",
-        "useTagsInputItemContext"
-      ]
+      "missingHooks": []
     },
     "timer": {
       "exportedValues": [
@@ -2848,10 +2519,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useTimer",
-        "useTimerContext"
-      ]
+      "missingHooks": []
     },
     "toast": {
       "exportedValues": [
@@ -2871,9 +2539,7 @@
         "Toast"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToastContext"
-      ]
+      "missingHooks": []
     },
     "toc": {
       "exportedValues": [
@@ -2892,25 +2558,9 @@
         "useTocContext",
         "Toc"
       ],
-      "missingPublicParts": [
-        "TocContent",
-        "TocContext",
-        "TocIndicator",
-        "TocItem",
-        "TocLink",
-        "TocList",
-        "TocNav",
-        "TocRoot",
-        "TocTitle",
-        "Toc"
-      ],
-      "missingProviders": [
-        "TocRootProvider"
-      ],
-      "missingHooks": [
-        "useToc",
-        "useTocContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "toggle": {
       "exportedValues": [
@@ -2926,10 +2576,7 @@
         "Toggle"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToggle",
-        "useToggleContext"
-      ]
+      "missingHooks": []
     },
     "toggle-group": {
       "exportedValues": [
@@ -2946,9 +2593,7 @@
         "ToggleGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToggleGroupContext"
-      ]
+      "missingHooks": []
     },
     "tooltip": {
       "exportedValues": [
@@ -2969,9 +2614,7 @@
         "Tooltip"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTooltipContext"
-      ]
+      "missingHooks": []
     },
     "tour": {
       "exportedValues": [
@@ -3001,9 +2644,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useTourContext"
-      ]
+      "missingHooks": []
     },
     "tree-view": {
       "exportedValues": [
@@ -3039,10 +2680,7 @@
         "TreeView"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTreeViewContext",
-        "useTreeViewNodeContext"
-      ]
+      "missingHooks": []
     }
   },
   "solid": {
@@ -3066,10 +2704,7 @@
         "Accordion"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useAccordionContext",
-        "useAccordionItemContext"
-      ]
+      "missingHooks": []
     },
     "angle-slider": {
       "exportedValues": [
@@ -3090,10 +2725,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useAngleSlider",
-        "useAngleSliderContext"
-      ]
+      "missingHooks": []
     },
     "avatar": {
       "exportedValues": [
@@ -3111,9 +2743,7 @@
         "Avatar"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useAvatarContext"
-      ]
+      "missingHooks": []
     },
     "carousel": {
       "exportedValues": [
@@ -3139,9 +2769,7 @@
         "Carousel"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCarouselContext"
-      ]
+      "missingHooks": []
     },
     "checkbox": {
       "exportedValues": [
@@ -3165,11 +2793,7 @@
         "Checkbox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCheckboxContext",
-        "useCheckboxGroup",
-        "useCheckboxGroupContext"
-      ]
+      "missingHooks": []
     },
     "client-only": {
       "exportedValues": [
@@ -3199,9 +2823,7 @@
         "Clipboard"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useClipboardContext"
-      ]
+      "missingHooks": []
     },
     "collapsible": {
       "exportedValues": [
@@ -3220,9 +2842,7 @@
         "Collapsible"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCollapsibleContext"
-      ]
+      "missingHooks": []
     },
     "collection": {
       "exportedValues": [
@@ -3243,11 +2863,7 @@
         "TreeCollection"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListCollection",
-        "useAsyncList",
-        "useListSelection"
-      ]
+      "missingHooks": []
     },
     "color-picker": {
       "exportedValues": [
@@ -3292,9 +2908,7 @@
         "ColorPicker"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useColorPickerContext"
-      ]
+      "missingHooks": []
     },
     "combobox": {
       "exportedValues": [
@@ -3330,11 +2944,7 @@
         "Combobox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListCollection",
-        "useComboboxContext",
-        "useComboboxItemContext"
-      ]
+      "missingHooks": []
     },
     "date-input": {
       "exportedValues": [
@@ -3352,24 +2962,9 @@
         "useDateInput",
         "useDateInputContext"
       ],
-      "missingPublicParts": [
-        "DateInput",
-        "DateInputContext",
-        "DateInputControl",
-        "DateInputHiddenInput",
-        "DateInputLabel",
-        "DateInputRoot",
-        "DateInputSegment",
-        "DateInputSegmentContext",
-        "DateInputSegmentGroup"
-      ],
-      "missingProviders": [
-        "DateInputRootProvider"
-      ],
-      "missingHooks": [
-        "useDateInput",
-        "useDateInputContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "date-picker": {
       "exportedValues": [
@@ -3412,9 +3007,7 @@
         "DatePicker"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useDatePickerContext"
-      ]
+      "missingHooks": []
     },
     "dialog": {
       "exportedValues": [
@@ -3437,9 +3030,7 @@
         "DialogBackdrop"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useDialogContext"
-      ]
+      "missingHooks": []
     },
     "download-trigger": {
       "exportedValues": [
@@ -3448,9 +3039,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useDownload"
-      ]
+      "missingHooks": []
     },
     "drawer": {
       "exportedValues": [
@@ -3477,23 +3066,10 @@
         "useDrawerStackContext"
       ],
       "missingPublicParts": [
-        "DrawerBackdrop",
-        "DrawerContext",
-        "DrawerGrabber",
-        "DrawerGrabberIndicator",
-        "DrawerIndent",
-        "DrawerIndentBackground",
-        "DrawerStack",
-        "DrawerSwipeArea"
+        "DrawerBackdrop"
       ],
-      "missingProviders": [
-        "DrawerRootProvider"
-      ],
-      "missingHooks": [
-        "useDrawer",
-        "useDrawerContext",
-        "useDrawerStackContext"
-      ]
+      "missingProviders": [],
+      "missingHooks": []
     },
     "editable": {
       "exportedValues": [
@@ -3517,9 +3093,7 @@
         "Editable"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useEditableContext"
-      ]
+      "missingHooks": []
     },
     "field": {
       "exportedValues": [
@@ -3541,10 +3115,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useField",
-        "useFieldContext"
-      ]
+      "missingHooks": []
     },
     "fieldset": {
       "exportedValues": [
@@ -3561,10 +3132,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useFieldset",
-        "useFieldsetContext"
-      ]
+      "missingHooks": []
     },
     "file-upload": {
       "exportedValues": [
@@ -3592,9 +3160,7 @@
         "FileUpload"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useFileUploadContext"
-      ]
+      "missingHooks": []
     },
     "floating-panel": {
       "exportedValues": [
@@ -3619,10 +3185,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useFloatingPanel",
-        "useFloatingPanelContext"
-      ]
+      "missingHooks": []
     },
     "focus-trap": {
       "exportedValues": [
@@ -3680,9 +3243,7 @@
         "HoverCard"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useHoverCardContext"
-      ]
+      "missingHooks": []
     },
     "image-cropper": {
       "exportedValues": [
@@ -3701,9 +3262,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useImageCropperContext"
-      ]
+      "missingHooks": []
     },
     "json-tree-view": {
       "exportedValues": [
@@ -3747,10 +3306,7 @@
         "ListboxContent"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListboxContext",
-        "useListboxItemContext"
-      ]
+      "missingHooks": []
     },
     "marquee": {
       "exportedValues": [
@@ -3768,10 +3324,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useMarquee",
-        "useMarqueeContext"
-      ]
+      "missingHooks": []
     },
     "menu": {
       "exportedValues": [
@@ -3806,10 +3359,7 @@
         "Menu"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useMenuContext",
-        "useMenuItemContext"
-      ]
+      "missingHooks": []
     },
     "navigation-menu": {
       "exportedValues": [
@@ -3833,9 +3383,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useNavigationMenuContext"
-      ]
+      "missingHooks": []
     },
     "number-input": {
       "exportedValues": [
@@ -3858,9 +3406,7 @@
         "NumberInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useNumberInputContext"
-      ]
+      "missingHooks": []
     },
     "pagination": {
       "exportedValues": [
@@ -3882,9 +3428,7 @@
         "Pagination"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePaginationContext"
-      ]
+      "missingHooks": []
     },
     "password-input": {
       "exportedValues": [
@@ -3905,9 +3449,7 @@
         "PasswordInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePasswordInputContext"
-      ]
+      "missingHooks": []
     },
     "pin-input": {
       "exportedValues": [
@@ -3925,9 +3467,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "usePinInputContext"
-      ]
+      "missingHooks": []
     },
     "popover": {
       "exportedValues": [
@@ -3953,9 +3493,7 @@
         "Popover"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePopoverContext"
-      ]
+      "missingHooks": []
     },
     "presence": {
       "exportedValues": [
@@ -3966,9 +3504,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "usePresenceContext"
-      ]
+      "missingHooks": []
     },
     "progress": {
       "exportedValues": [
@@ -3992,9 +3528,7 @@
         "Progress"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useProgressContext"
-      ]
+      "missingHooks": []
     },
     "qr-code": {
       "exportedValues": [
@@ -4012,10 +3546,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useQrCode",
-        "useQrCodeContext"
-      ]
+      "missingHooks": []
     },
     "radio-group": {
       "exportedValues": [
@@ -4039,10 +3570,7 @@
         "RadioGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useRadioGroupContext",
-        "useRadioGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "rating-group": {
       "exportedValues": [
@@ -4064,10 +3592,7 @@
         "RatingGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useRatingGroupContext",
-        "useRatingGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "scroll-area": {
       "exportedValues": [
@@ -4088,9 +3613,7 @@
         "ScrollArea"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useScrollAreaContext"
-      ]
+      "missingHooks": []
     },
     "segment-group": {
       "exportedValues": [
@@ -4114,10 +3637,7 @@
         "SegmentGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSegmentGroupContext",
-        "useSegmentGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "select": {
       "exportedValues": [
@@ -4154,11 +3674,7 @@
         "Select"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListCollection",
-        "useSelectContext",
-        "useSelectItemContext"
-      ]
+      "missingHooks": []
     },
     "signature-pad": {
       "exportedValues": [
@@ -4178,10 +3694,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useSignaturePad",
-        "useSignaturePadContext"
-      ]
+      "missingHooks": []
     },
     "slider": {
       "exportedValues": [
@@ -4207,9 +3720,7 @@
         "Slider"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSliderContext"
-      ]
+      "missingHooks": []
     },
     "splitter": {
       "exportedValues": [
@@ -4230,9 +3741,7 @@
         "Splitter"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSplitterContext"
-      ]
+      "missingHooks": []
     },
     "steps": {
       "exportedValues": [
@@ -4260,10 +3769,7 @@
         "Steps"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useStepsContext",
-        "useStepsItemContext"
-      ]
+      "missingHooks": []
     },
     "swap": {
       "exportedValues": [
@@ -4275,18 +3781,9 @@
         "useSwap",
         "useSwapContext"
       ],
-      "missingPublicParts": [
-        "Swap",
-        "SwapIndicator",
-        "SwapRoot"
-      ],
-      "missingProviders": [
-        "SwapRootProvider"
-      ],
-      "missingHooks": [
-        "useSwap",
-        "useSwapContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "switch": {
       "exportedValues": [
@@ -4304,9 +3801,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useSwitchContext"
-      ]
+      "missingHooks": []
     },
     "tabs": {
       "exportedValues": [
@@ -4330,9 +3825,7 @@
         "Tabs"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTabsContext"
-      ]
+      "missingHooks": []
     },
     "tags-input": {
       "exportedValues": [
@@ -4360,10 +3853,7 @@
         "TagsInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTagsInputContext",
-        "useTagsInputItemContext"
-      ]
+      "missingHooks": []
     },
     "timer": {
       "exportedValues": [
@@ -4382,10 +3872,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useTimer",
-        "useTimerContext"
-      ]
+      "missingHooks": []
     },
     "toast": {
       "exportedValues": [
@@ -4405,9 +3892,7 @@
         "Toast"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToastContext"
-      ]
+      "missingHooks": []
     },
     "toc": {
       "exportedValues": [
@@ -4426,25 +3911,9 @@
         "useToc",
         "useTocContext"
       ],
-      "missingPublicParts": [
-        "Toc",
-        "TocContent",
-        "TocContext",
-        "TocIndicator",
-        "TocItem",
-        "TocLink",
-        "TocList",
-        "TocNav",
-        "TocRoot",
-        "TocTitle"
-      ],
-      "missingProviders": [
-        "TocRootProvider"
-      ],
-      "missingHooks": [
-        "useToc",
-        "useTocContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "toggle": {
       "exportedValues": [
@@ -4460,10 +3929,7 @@
         "Toggle"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToggle",
-        "useToggleContext"
-      ]
+      "missingHooks": []
     },
     "toggle-group": {
       "exportedValues": [
@@ -4480,9 +3946,7 @@
         "ToggleGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToggleGroupContext"
-      ]
+      "missingHooks": []
     },
     "tooltip": {
       "exportedValues": [
@@ -4503,9 +3967,7 @@
         "Tooltip"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTooltipContext"
-      ]
+      "missingHooks": []
     },
     "tour": {
       "exportedValues": [
@@ -4535,9 +3997,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useTourContext"
-      ]
+      "missingHooks": []
     },
     "tree-view": {
       "exportedValues": [
@@ -4575,10 +4035,7 @@
         "TreeView"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTreeViewContext",
-        "useTreeViewNodeContext"
-      ]
+      "missingHooks": []
     }
   },
   "svelte": {
@@ -4602,10 +4059,7 @@
         "Accordion"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useAccordionContext",
-        "useAccordionItemContext"
-      ]
+      "missingHooks": []
     },
     "angle-slider": {
       "exportedValues": [
@@ -4626,10 +4080,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useAngleSliderContext",
-        "useAngleSlider"
-      ]
+      "missingHooks": []
     },
     "avatar": {
       "exportedValues": [
@@ -4647,9 +4098,7 @@
         "Avatar"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useAvatarContext"
-      ]
+      "missingHooks": []
     },
     "carousel": {
       "exportedValues": [
@@ -4675,9 +4124,7 @@
         "Carousel"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCarouselContext"
-      ]
+      "missingHooks": []
     },
     "checkbox": {
       "exportedValues": [
@@ -4702,11 +4149,7 @@
         "Checkbox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCheckboxContext",
-        "useCheckboxGroupContext",
-        "useCheckboxGroup"
-      ]
+      "missingHooks": []
     },
     "client-only": {
       "exportedValues": [
@@ -4737,9 +4180,7 @@
         "Clipboard"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useClipboardContext"
-      ]
+      "missingHooks": []
     },
     "collapsible": {
       "exportedValues": [
@@ -4758,9 +4199,7 @@
         "Collapsible"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useCollapsibleContext"
-      ]
+      "missingHooks": []
     },
     "collection": {
       "exportedValues": [
@@ -4774,11 +4213,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useAsyncList",
-        "useListCollection",
-        "useListSelection"
-      ]
+      "missingHooks": []
     },
     "color-picker": {
       "exportedValues": [
@@ -4826,11 +4261,7 @@
         "ColorPicker"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useColorPickerContext",
-        "useColorPickerChannelPropsContext",
-        "useColorPickerSwatchPropsContext"
-      ]
+      "missingHooks": []
     },
     "combobox": {
       "exportedValues": [
@@ -4864,11 +4295,7 @@
         "Combobox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListCollection",
-        "useComboboxContext",
-        "useComboboxItemContext"
-      ]
+      "missingHooks": []
     },
     "date-input": {
       "exportedValues": [
@@ -4886,24 +4313,9 @@
         "useDateInputContext",
         "DateInput"
       ],
-      "missingPublicParts": [
-        "DateInputContext",
-        "DateInputSegmentContext",
-        "DateInputControl",
-        "DateInputHiddenInput",
-        "DateInputLabel",
-        "DateInputRoot",
-        "DateInputSegment",
-        "DateInputSegmentGroup",
-        "DateInput"
-      ],
-      "missingProviders": [
-        "DateInputRootProvider"
-      ],
-      "missingHooks": [
-        "useDateInput",
-        "useDateInputContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "date-picker": {
       "exportedValues": [
@@ -4946,9 +4358,7 @@
         "DatePicker"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useDatePickerContext"
-      ]
+      "missingHooks": []
     },
     "dialog": {
       "exportedValues": [
@@ -4977,9 +4387,7 @@
       "missingProviders": [
         "RootProvider"
       ],
-      "missingHooks": [
-        "useDialogContext"
-      ]
+      "missingHooks": []
     },
     "download-trigger": {
       "exportedValues": [
@@ -4988,9 +4396,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useDownload"
-      ]
+      "missingHooks": []
     },
     "drawer": {
       "exportedValues": [
@@ -5017,23 +4423,10 @@
         "Drawer"
       ],
       "missingPublicParts": [
-        "DrawerBackdrop",
-        "DrawerContext",
-        "DrawerGrabber",
-        "DrawerGrabberIndicator",
-        "DrawerIndent",
-        "DrawerIndentBackground",
-        "DrawerStack",
-        "DrawerSwipeArea"
+        "DrawerBackdrop"
       ],
-      "missingProviders": [
-        "DrawerRootProvider"
-      ],
-      "missingHooks": [
-        "useDrawerContext",
-        "useDrawerStackContext",
-        "useDrawer"
-      ]
+      "missingProviders": [],
+      "missingHooks": []
     },
     "editable": {
       "exportedValues": [
@@ -5057,9 +4450,7 @@
         "Editable"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useEditableContext"
-      ]
+      "missingHooks": []
     },
     "factory": {
       "exportedValues": [
@@ -5091,10 +4482,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useFieldContext",
-        "useField"
-      ]
+      "missingHooks": []
     },
     "fieldset": {
       "exportedValues": [
@@ -5111,10 +4499,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useFieldsetContext",
-        "useFieldset"
-      ]
+      "missingHooks": []
     },
     "file-upload": {
       "exportedValues": [
@@ -5143,10 +4528,7 @@
         "FileUpload"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useFileUploadContext",
-        "useFileUploadItemPropsContext"
-      ]
+      "missingHooks": []
     },
     "floating-panel": {
       "exportedValues": [
@@ -5171,10 +4553,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useFloatingPanel",
-        "useFloatingPanelContext"
-      ]
+      "missingHooks": []
     },
     "focus-trap": {
       "exportedValues": [
@@ -5232,9 +4611,7 @@
         "HoverCard"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useHoverCardContext"
-      ]
+      "missingHooks": []
     },
     "image-cropper": {
       "exportedValues": [
@@ -5253,9 +4630,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useImageCropperContext"
-      ]
+      "missingHooks": []
     },
     "json-tree-view": {
       "exportedValues": [
@@ -5297,10 +4672,7 @@
         "Listbox"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListboxContext",
-        "useListboxItemContext"
-      ]
+      "missingHooks": []
     },
     "marquee": {
       "exportedValues": [
@@ -5318,10 +4690,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useMarquee",
-        "useMarqueeContext"
-      ]
+      "missingHooks": []
     },
     "menu": {
       "exportedValues": [
@@ -5356,10 +4725,7 @@
         "Menu"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useMenuContext",
-        "useMenuItemContext"
-      ]
+      "missingHooks": []
     },
     "navigation-menu": {
       "exportedValues": [
@@ -5383,9 +4749,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useNavigationMenuContext"
-      ]
+      "missingHooks": []
     },
     "number-input": {
       "exportedValues": [
@@ -5409,9 +4773,7 @@
         "NumberInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useNumberInputContext"
-      ]
+      "missingHooks": []
     },
     "pagination": {
       "exportedValues": [
@@ -5433,9 +4795,7 @@
         "Pagination"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePaginationContext"
-      ]
+      "missingHooks": []
     },
     "password-input": {
       "exportedValues": [
@@ -5456,9 +4816,7 @@
         "PasswordInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePasswordInputContext"
-      ]
+      "missingHooks": []
     },
     "pin-input": {
       "exportedValues": [
@@ -5476,9 +4834,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "usePinInputContext"
-      ]
+      "missingHooks": []
     },
     "popover": {
       "exportedValues": [
@@ -5504,9 +4860,7 @@
         "Popover"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "usePopoverContext"
-      ]
+      "missingHooks": []
     },
     "portal": {
       "exportedValues": [
@@ -5525,9 +4879,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "usePresenceContext"
-      ]
+      "missingHooks": []
     },
     "progress": {
       "exportedValues": [
@@ -5551,9 +4903,7 @@
         "Progress"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useProgressContext"
-      ]
+      "missingHooks": []
     },
     "qr-code": {
       "exportedValues": [
@@ -5571,10 +4921,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useQrCodeContext",
-        "useQrCode"
-      ]
+      "missingHooks": []
     },
     "radio-group": {
       "exportedValues": [
@@ -5598,10 +4945,7 @@
         "RadioGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useRadioGroupContext",
-        "useRadioGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "rating-group": {
       "exportedValues": [
@@ -5623,10 +4967,7 @@
         "RatingGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useRatingGroupContext",
-        "useRatingGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "scroll-area": {
       "exportedValues": [
@@ -5647,9 +4988,7 @@
         "ScrollArea"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useScrollAreaContext"
-      ]
+      "missingHooks": []
     },
     "segment-group": {
       "exportedValues": [
@@ -5673,10 +5012,7 @@
         "SegmentGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSegmentGroupContext",
-        "useSegmentGroupItemContext"
-      ]
+      "missingHooks": []
     },
     "select": {
       "exportedValues": [
@@ -5711,11 +5047,7 @@
         "Select"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useListCollection",
-        "useSelectContext",
-        "useSelectItemContext"
-      ]
+      "missingHooks": []
     },
     "signature-pad": {
       "exportedValues": [
@@ -5735,10 +5067,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useSignaturePad",
-        "useSignaturePadContext"
-      ]
+      "missingHooks": []
     },
     "slider": {
       "exportedValues": [
@@ -5764,9 +5093,7 @@
         "Slider"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSliderContext"
-      ]
+      "missingHooks": []
     },
     "splitter": {
       "exportedValues": [
@@ -5786,9 +5113,7 @@
         "Splitter"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useSplitterContext"
-      ]
+      "missingHooks": []
     },
     "steps": {
       "exportedValues": [
@@ -5816,10 +5141,7 @@
         "Steps"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useStepsContext",
-        "useStepsItemContext"
-      ]
+      "missingHooks": []
     },
     "swap": {
       "exportedValues": [
@@ -5831,18 +5153,9 @@
         "useSwapContext",
         "Swap"
       ],
-      "missingPublicParts": [
-        "SwapIndicator",
-        "SwapRoot",
-        "Swap"
-      ],
-      "missingProviders": [
-        "SwapRootProvider"
-      ],
-      "missingHooks": [
-        "useSwap",
-        "useSwapContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "switch": {
       "exportedValues": [
@@ -5860,9 +5173,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useSwitchContext"
-      ]
+      "missingHooks": []
     },
     "tabs": {
       "exportedValues": [
@@ -5886,9 +5197,7 @@
         "Tabs"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTabsContext"
-      ]
+      "missingHooks": []
     },
     "tags-input": {
       "exportedValues": [
@@ -5916,10 +5225,7 @@
         "TagsInput"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTagsInputContext",
-        "useTagsInputItemContext"
-      ]
+      "missingHooks": []
     },
     "timer": {
       "exportedValues": [
@@ -5938,10 +5244,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useTimerContext",
-        "useTimer"
-      ]
+      "missingHooks": []
     },
     "toast": {
       "exportedValues": [
@@ -5961,9 +5264,7 @@
         "Toast"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToastContext"
-      ]
+      "missingHooks": []
     },
     "toc": {
       "exportedValues": [
@@ -5982,25 +5283,9 @@
         "useTocContext",
         "Toc"
       ],
-      "missingPublicParts": [
-        "TocContent",
-        "TocContext",
-        "TocIndicator",
-        "TocItem",
-        "TocLink",
-        "TocList",
-        "TocNav",
-        "TocRoot",
-        "TocTitle",
-        "Toc"
-      ],
-      "missingProviders": [
-        "TocRootProvider"
-      ],
-      "missingHooks": [
-        "useToc",
-        "useTocContext"
-      ]
+      "missingPublicParts": [],
+      "missingProviders": [],
+      "missingHooks": []
     },
     "toggle": {
       "exportedValues": [
@@ -6016,10 +5301,7 @@
         "Toggle"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToggle",
-        "useToggleContext"
-      ]
+      "missingHooks": []
     },
     "toggle-group": {
       "exportedValues": [
@@ -6036,9 +5318,7 @@
         "ToggleGroup"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useToggleGroupContext"
-      ]
+      "missingHooks": []
     },
     "tooltip": {
       "exportedValues": [
@@ -6059,9 +5339,7 @@
         "Tooltip"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTooltipContext"
-      ]
+      "missingHooks": []
     },
     "tour": {
       "exportedValues": [
@@ -6091,9 +5369,7 @@
       ],
       "missingPublicParts": [],
       "missingProviders": [],
-      "missingHooks": [
-        "useTourContext"
-      ]
+      "missingHooks": []
     },
     "tree-view": {
       "exportedValues": [
@@ -6130,11 +5406,7 @@
         "TreeView"
       ],
       "missingProviders": [],
-      "missingHooks": [
-        "useTreeViewContext",
-        "useTreeViewNodeContext",
-        "useTreeViewNodePropsContext"
-      ]
+      "missingHooks": []
     }
   }
 }
