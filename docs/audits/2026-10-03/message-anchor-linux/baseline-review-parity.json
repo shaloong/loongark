@@ -1,0 +1,30 @@
+[
+  {
+    "mode": "light",
+    "width": 1280,
+    "baseline": "tests/message-scroller-advanced.visual.spec.ts-snapshots/message-scroller-light-1280-chromium-visual-linux.png",
+    "reviewReference": "review/anchor-default-story-light-1280.png",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 375,
+    "baseline": "tests/message-scroller-advanced.visual.spec.ts-snapshots/message-scroller-light-375-chromium-visual-linux.png",
+    "reviewReference": "review/anchor-default-story-light-375.png",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 1280,
+    "baseline": "tests/message-scroller-advanced.visual.spec.ts-snapshots/message-scroller-dark-1280-chromium-visual-linux.png",
+    "reviewReference": "review/anchor-default-story-dark-1280.png",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 375,
+    "baseline": "tests/message-scroller-advanced.visual.spec.ts-snapshots/message-scroller-dark-375-chromium-visual-linux.png",
+    "reviewReference": "review/anchor-default-story-dark-375.png",
+    "changedPixels": 0
+  }
+]

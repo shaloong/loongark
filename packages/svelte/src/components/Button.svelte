@@ -16,7 +16,6 @@
   {type}
   disabled={isInteractiveDisabled}
   aria-disabled={isInteractiveDisabled || undefined}
-  aria-busy={loading || undefined}
   data-scope="button"
   data-part="root"
   data-variant={variant}
@@ -25,6 +24,7 @@
   data-loading={loading || undefined}
   data-disabled={isInteractiveDisabled || undefined}
   {...$$restProps}
+  aria-busy={loading || $$restProps["aria-busy"]}
 >
   <slot />
 </button>

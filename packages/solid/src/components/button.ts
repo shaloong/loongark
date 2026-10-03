@@ -68,7 +68,7 @@ const buildButtonProps = (props: LoongArkButtonProps) => {
       return local.disabled || local.loading || undefined;
     },
     get "aria-busy"() {
-      return boolAttr(local.loading);
+      return local.loading ? "true" : rest["aria-busy"];
     },
   });
 };

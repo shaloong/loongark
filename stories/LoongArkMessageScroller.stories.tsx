@@ -51,3 +51,10 @@ export const Empty = {
     </L.LoongArkMessageScroller>
   ),
 };
+
+import { MessageScrollerAdvancedExample } from "../examples/react/MessageScrollerAdvancedExample";
+import { withArkExamplePage } from "./arkStory";
+export const Advanced = {
+  decorators: [withArkExamplePage],
+  render: () => <MessageScrollerAdvancedExample />,
+};

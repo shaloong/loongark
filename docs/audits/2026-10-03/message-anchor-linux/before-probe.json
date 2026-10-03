@@ -1,0 +1,21 @@
+{
+  "before": {
+    "scrollTop": 400,
+    "anchorOffset": 0,
+    "atBottom": "false",
+    "inlineOverflowAnchor": "none"
+  },
+  "after": {
+    "scrollTop": 400,
+    "anchorOffset": 160,
+    "atBottom": "false",
+    "inlineOverflowAnchor": "none"
+  },
+  "readerJumpPixels": 160,
+  "cleanup": {
+    "scrollTop": 400,
+    "anchorOffset": 160,
+    "atBottom": "false",
+    "inlineOverflowAnchor": ""
+  }
+}

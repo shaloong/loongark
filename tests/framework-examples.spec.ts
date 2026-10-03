@@ -1,3 +1,4 @@
+import { checkMessageScrollerAdvanced } from "./messageScrollerAdvancedChecks";
 import { checkConversationActions } from "./conversationActionsChecks";
 import { checkChartAdvanced } from "./chartAdvancedChecks";
 import { checkDataTableAdvanced } from "./dataTableAdvancedChecks";
@@ -58,6 +59,8 @@ for (const framework of ["react", "vue", "solid", "svelte"])
 
       if (name === "ChartExample") await checkChart(page, framework);
       if (name === "DataTableExample") await checkDataTable(page, framework);
+      if (name === "MessageScrollerAdvancedExample")
+        await checkMessageScrollerAdvanced(page);
       if (name === "ConversationActionsExample")
         await checkConversationActions(page);
       if (name === "ChartAdvancedExample") await checkChartAdvanced(page);

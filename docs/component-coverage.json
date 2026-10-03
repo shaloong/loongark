@@ -142,6 +142,7 @@
     "Swap lifecycle",
     "Context and collection control hooks",
     "Chart controlled legend, bounded domain and accessible data table",
-    "Message and Attachment async actions, preview/cancel and lifecycle"
+    "Message and Attachment async actions, preview/cancel and lifecycle",
+    "MessageScroller visible-text/media anchors, compound insertion and cleanup"
   ]
 }

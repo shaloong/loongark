@@ -1,0 +1,22 @@
+
+> loongark@0.0.0 verify /workspace/loongark
+> pnpm run lint && pnpm run tsc && pnpm run build
+
+
+> loongark@0.0.0 lint /workspace/loongark
+> node ./scripts/verify-workspace.mjs
+
+[verify-workspace] ok
+
+> loongark@0.0.0 tsc /workspace/loongark
+> pnpm exec tsc -b
+
+examples/solid/MessageScrollerAdvancedExample.tsx(100,12): error TS2769: No overload matches this call.
+  Overload 2 of 2, '(props: { when: number | false | null | undefined; keyed: true; fallback?: Element; children: Element; }): Element', gave the following error.
+    Type '() => JSX.Element' is not assignable to type 'Element'.
+examples/solid/MessageScrollerAdvancedExample.tsx(100,12): error TS2769: No overload matches this call.
+  Overload 2 of 2, '(props: { when: number | false | null | undefined; keyed: true; fallback?: Element; children: Element; }): Element', gave the following error.
+    Type '() => JSX.Element' is not assignable to type 'Element'.
+stories/LoongArkMessageScroller.stories.tsx(56,36): error TS2307: Cannot find module './arkExamplePage' or its corresponding type declarations.
+ ELIFECYCLE  Command failed with exit code 1.
+ ELIFECYCLE  Command failed with exit code 1.

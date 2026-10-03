@@ -22,7 +22,7 @@ Vue 支持 `v-model`（modelValue）；Svelte 支持 `bind:value`；React/Solid 
 
 本批 Linux 证据位于 [验收记录](audits/2026-10-03/conversation-linux/acceptance.json)。截图单独建立 Linux 基线，未覆盖 Windows。测试浏览器与验证范围以该记录为准。
 
-滚动组件不提供虚拟列表或像素级媒体加载锚定；上翻期间图片延迟加载的高度变化可能改变内容位置，调用方应为媒体预留尺寸。Questionnaire 按可见题目导航，支持条件跳题与同步业务校验；不提供文件题目或评分引擎。未测试全部 peer 版本与浏览器。
+滚动组件支持稳定消息与文字节点的媒体高度锚定，但不提供虚拟列表；调用方仍建议为媒体预留尺寸以减少布局变化。Questionnaire 按可见题目导航，支持条件跳题与同步业务校验；不提供文件题目或评分引擎。未测试全部 peer 版本与浏览器。
 
 本次目视修正：附件使用共享 SVG 文件图标，避免系统字体缺字；双操作按钮在窄屏独立成行，长文件名保持可读宽度。问卷题组按 id 维护渲染身份，避免跨题导航复用原生 radio 节点导致 checked 状态丢失。Linux 测试输出目录与既有 Windows 审查证据隔离。
 
@@ -49,3 +49,18 @@ Attachment 仅在 ready 提供 `onPreview`，uploading 提供 `onCancel`；既�
 操作造成原按钮消失后，焦点恢复到对应的新按钮或当前组件根；用户已移到外部时保留外部焦点。删除整个组件后的业务焦点由调用方负责。四端 ConversationActionsExample 展示真实剪贴板复制、延迟保存与失败、替换消息中止旧保存、下载、Dialog 文本预览、模拟上传进度/取消及删除后的恢复按钮。剪贴板需要安全上下文与浏览器权限；上传是可取消的模拟源，没有真实服务器。Bubble 仍只呈现业务内容；Markdown、评分和消息虚拟化未包含在这批能力中。
 
 迁移说明：显式传入 Attachment removeLabel/retryLabel 时，现在可见文字也使用该标签，与可访问名称一致。需要短按钮文字时请传入短而明确的标签。验收范围与平台限制见 [操作批次记录](audits/2026-10-03/conversation-actions-linux/acceptance.json)。
+
+
+## 媒体变化与阅读锚点
+
+MessageScroller 在用户暂停跟随后记录首条可见消息及可见文字位置。图片在视口上方加载、同条消息内媒体撑高、上方增高同时下方缩短、历史与新回复同时插入，都会按实际阅读锚点调整 scrollTop；不会使用整个列表的高度差替代前插位移。位于底部时继续跟随；用户主动滚动立即更新锚点，Jump to latest 保留键盘焦点语义。
+
+共享行为使用临时 Range 测量横排文字，不改变 Selection；ResizeObserver 同时观察内容、视口和直接消息行，MutationObserver 跟踪消息与文字变化，更新合并到动画帧。卸载取消帧、断开观察器、释放引用，恢复接管前的 overflow-anchor/跟随属性/跳转按钮状态，并保留调用方后续覆盖。嵌套滚动组件只接管自己直接所属的部件。
+
+四端 MessageScrollerAdvancedExample 与 Advanced Story 提供延迟预览、加载取消、历史和新回复同时插入、重置、隐藏与重新挂载。图片复用既有中性媒体示例，媒体真正解码并改变自然高度；示例500ms延迟仅模拟元数据，不假定后端协议。
+
+锚定依赖稳定的消息与文字 DOM 身份：被阅读消息移除时以当前合法位置重新取锚点；文字节点替换时退回消息边界。纯图片内容保留消息边界，不能承诺图片缩放后的内部像素位置。虚拟化、竖排/旋转文本、跨浏览器与真实手机专项验收尚未交付。详细证据见 [媒体锚点验收](audits/2026-10-03/message-anchor-linux/acceptance.json)。
+
+Button 的 `loading` 会同时禁用交互并设置 `aria-busy=true`；其余情况保留调用方显式 `aria-busy`。预览加载中的取消按钮因此保持可操作，取消/完成后移除忙碌标记；四端均验证调用方 true/false 和 loading 优先级。
+
+清理后若容器仍留在 DOM，恢复 `overflow-anchor:auto` 会重新交回浏览器锚定，Chromium 可能自行调整位置。卸载回归分别检查关闭原生锚定时无延迟滚动、auto 恢复与外部覆盖；不把浏览器恢复行为误判为组件遗留帧。

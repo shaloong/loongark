@@ -49,7 +49,7 @@ export const LoongArkButton = forwardRef<
         "data-block": block ? "true" : undefined,
         "data-loading": loading ? "true" : undefined,
         "aria-disabled": isInteractiveDisabled || undefined,
-        "aria-busy": loading || undefined,
+        "aria-busy": loading || rest["aria-busy"],
       }),
       children,
     );

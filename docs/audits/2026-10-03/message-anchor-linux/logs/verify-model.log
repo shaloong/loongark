@@ -1,0 +1,25 @@
+
+> loongark@0.0.0 verify /workspace/loongark
+> pnpm run lint && pnpm run tsc && pnpm run build
+
+
+> loongark@0.0.0 lint /workspace/loongark
+> node ./scripts/verify-workspace.mjs
+
+[verify-workspace] ok
+
+> loongark@0.0.0 tsc /workspace/loongark
+> pnpm exec tsc -b
+
+packages/kit/src/message-scroller.ts(137,26): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(iterable?: Iterable<unknown> | null | undefined): Set<unknown>', gave the following error.
+    Argument of type 'HTMLCollection' is not assignable to parameter of type 'Iterable<unknown>'.
+      Property '[Symbol.iterator]' is missing in type 'HTMLCollection' but required in type 'Iterable<unknown>'.
+  Overload 2 of 2, '(values?: readonly any[] | null | undefined): Set<any>', gave the following error.
+    Argument of type 'HTMLCollection' is not assignable to parameter of type 'readonly any[]'.
+      Type 'HTMLCollection' is missing the following properties from type 'readonly any[]': concat, join, slice, indexOf, and 18 more.
+packages/kit/src/message-scroller.ts(144,29): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'Element'.
+packages/kit/src/message-scroller.ts(145,26): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'Element'.
+packages/kit/src/message-scroller.ts(146,26): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'Element'.
+ ELIFECYCLE  Command failed with exit code 2.
+ ELIFECYCLE  Command failed with exit code 2.

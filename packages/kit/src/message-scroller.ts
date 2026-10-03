@@ -3,20 +3,44 @@ export interface MessageScrollerOptions {
   jumpLabel?: string;
   onAtBottomChange?: (details: { atBottom: boolean }) => void;
 }
-/** 仅在用户仍跟随底部时自动滚动；上翻阅读与 prepend 保留视口。 */
+/** 跟随底部或保留阅读位置；范围测量不修改用户选择。 */
 export function mountMessageScroller(
   root: HTMLElement,
   onChange?: MessageScrollerOptions["onAtBottomChange"],
 ) {
-  const viewport = root.querySelector<HTMLElement>('[data-part="viewport"]');
-  const content = root.querySelector<HTMLElement>('[data-part="content"]');
-  const jump = root.querySelector<HTMLButtonElement>('[data-part="jump"]');
+  const viewport = root.querySelector<HTMLElement>(
+    ':scope > [data-part="viewport"]',
+  );
+  const content = viewport?.querySelector<HTMLElement>(
+    ':scope > [data-part="content"]',
+  );
+  const jump = root.querySelector<HTMLButtonElement>(
+    ':scope > [data-part="jump"]',
+  );
   if (!viewport || !content || !jump) return () => {};
-  const win = root.ownerDocument.defaultView;
+  const document = root.ownerDocument,
+    win = document.defaultView;
   if (!win) return () => {};
+  const previousOverflowAnchor = viewport.style.overflowAnchor,
+    previousAtBottom = root.dataset.atBottom,
+    previousHidden = jump.hidden;
   let atBottom = true,
-    height = viewport.scrollHeight,
-    first = content.firstElementChild;
+    disposed = false,
+    frame = 0;
+  let anchor:
+    | {
+        row: Element;
+        rowOffset: number;
+        text?: Text;
+        offset?: number;
+        textOffset?: number;
+      }
+    | undefined;
+  const observedRows = new Set<Element>();
+  const viewportTop = () =>
+    viewport.getBoundingClientRect().top + viewport.clientTop;
+  const rowOffset = (row: Element) =>
+    row.getBoundingClientRect().top - viewportTop();
   const nearBottom = () =>
     viewport.scrollHeight - viewport.clientHeight - viewport.scrollTop <= 4;
   const report = (next: boolean) => {
@@ -27,25 +51,108 @@ export function mountMessageScroller(
       onChange?.({ atBottom: next });
     }
   };
+  const textRect = (text: Text, offset: number) => {
+    const range = document.createRange();
+    range.setStart(text, offset);
+    range.setEnd(text, offset + 1);
+    return range.getBoundingClientRect();
+  };
+  const capture = () => {
+    const top = viewportTop(),
+      bottom = top + viewport.clientHeight;
+    const row = Array.from(content.children).find((child) => {
+      const rect = child.getBoundingClientRect();
+      return rect.height > 0 && rect.bottom > top + 1 && rect.top < bottom;
+    });
+    anchor = row ? { row, rowOffset: rowOffset(row) } : undefined;
+    if (!row || !anchor) return;
+    const walker = document.createTreeWalker(row, win.NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      const text = node as Text;
+      if (
+        !text.length ||
+        !text.data.trim() ||
+        text.parentElement?.closest(
+          'button,input,textarea,[aria-hidden="true"]',
+        )
+      )
+        continue;
+      const last = textRect(text, text.length - 1);
+      if (last.height === 0 || last.bottom <= top + 1) continue;
+      // 横排文字的行位置按 DOM 顺序递增；二分查找视口中的第一字形。
+      let start = 0,
+        end = text.length - 1;
+      while (start < end) {
+        const middle = Math.floor((start + end) / 2);
+        if (textRect(text, middle).bottom > top + 1) end = middle;
+        else start = middle + 1;
+      }
+      const rect = textRect(text, start);
+      if (rect.height > 0 && rect.top < bottom) {
+        anchor.text = text;
+        anchor.offset = start;
+        anchor.textOffset = rect.top - top;
+        return;
+      }
+    }
+  };
   const bottom = () => {
     viewport.scrollTop = viewport.scrollHeight;
     report(true);
-    height = viewport.scrollHeight;
+    capture();
   };
-  const scroll = () => report(nearBottom());
-  const resize = () => {
-    if (atBottom) bottom();
-    height = viewport.scrollHeight;
-  };
-  const mutations = () => {
-    const nextFirst = content.firstElementChild;
-    if (atBottom) bottom();
-    else if (first && first !== nextFirst && content.contains(first)) {
-      // prepend 的内容增长不应把读者正在查看的消息移出视口。
-      viewport.scrollTop += viewport.scrollHeight - height;
+  const restore = () => {
+    if (atBottom) {
+      bottom();
+      return;
     }
-    first = nextFirst;
-    height = viewport.scrollHeight;
+    if (anchor?.row.parentElement === content) {
+      const { text, offset, textOffset } = anchor;
+      const textValid =
+        text &&
+        offset !== undefined &&
+        textOffset !== undefined &&
+        text.isConnected &&
+        anchor.row.contains(text) &&
+        offset < text.length;
+      const rect = textValid ? textRect(text, offset) : undefined;
+      const delta =
+        rect && rect.height > 0
+          ? rect.top - viewportTop() - textOffset!
+          : rowOffset(anchor.row) - anchor.rowOffset;
+      if (Math.abs(delta) > 0.5) viewport.scrollTop += delta;
+    }
+    report(nearBottom());
+    capture();
+  };
+  const schedule = () => {
+    if (disposed || frame) return;
+    frame = win.requestAnimationFrame(() => {
+      frame = 0;
+      if (!disposed) restore();
+    });
+  };
+  const observer = new win.ResizeObserver(schedule);
+  const syncRows = () => {
+    const rows = new Set(Array.from(content.children));
+    for (const row of observedRows)
+      if (!rows.has(row)) {
+        observer.unobserve(row);
+        observedRows.delete(row);
+      }
+    for (const row of rows)
+      if (!observedRows.has(row)) {
+        observedRows.add(row);
+        observer.observe(row);
+      }
+  };
+  const mutation = new win.MutationObserver(() => {
+    syncRows();
+    schedule();
+  });
+  const scroll = () => {
+    report(nearBottom());
+    capture();
   };
   const click = () => {
     bottom();
@@ -55,21 +162,30 @@ export function mountMessageScroller(
   bottom();
   viewport.addEventListener("scroll", scroll, { passive: true });
   jump.addEventListener("click", click);
-  const mutation = new win.MutationObserver(mutations);
   mutation.observe(content, {
     childList: true,
     subtree: true,
     characterData: true,
   });
-  const observer = new win.ResizeObserver(resize);
   observer.observe(content);
   observer.observe(viewport);
+  syncRows();
   return () => {
+    disposed = true;
+    if (frame) win.cancelAnimationFrame(frame);
     mutation.disconnect();
     observer.disconnect();
+    observedRows.clear();
+    anchor = undefined;
     viewport.removeEventListener("scroll", scroll);
     jump.removeEventListener("click", click);
-    viewport.style.overflowAnchor = "";
+    if (viewport.style.overflowAnchor === "none")
+      viewport.style.overflowAnchor = previousOverflowAnchor;
+    if (root.dataset.atBottom === String(atBottom)) {
+      if (previousAtBottom === undefined) delete root.dataset.atBottom;
+      else root.dataset.atBottom = previousAtBottom;
+    }
+    if (jump.hidden === atBottom) jump.hidden = previousHidden;
   };
 }
 export const messageScrollerCSS = `

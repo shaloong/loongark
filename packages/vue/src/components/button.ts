@@ -11,6 +11,7 @@ const truthy = (value: boolean) => (value ? "true" : undefined);
 
 export const LoongArkButton = defineComponent({
   name: "LoongArkButton",
+  inheritAttrs: false,
   props: {
     variant: {
       type: {} as PropType<ButtonVariant>,
@@ -46,7 +47,7 @@ export const LoongArkButton = defineComponent({
           type: props.type,
           disabled: props.disabled || props.loading,
           "aria-disabled": props.disabled || props.loading ? "true" : undefined,
-          "aria-busy": props.loading ? "true" : undefined,
+          "aria-busy": props.loading ? "true" : attrs["aria-busy"],
           "data-scope": "button",
           "data-part": "root",
           "data-variant": props.variant,

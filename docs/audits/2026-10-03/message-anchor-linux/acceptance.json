@@ -1,0 +1,258 @@
+{
+  "recordedAt": "2026-10-03T22:00:55.643173+00:00",
+  "branch": "develop",
+  "baseCommit": "b8b19a4b8ebbb7ba083f265787e6de5e5e8c5c87",
+  "status": "passed",
+  "phase": "MessageScroller 媒体/可见文字锚点、复合插入、清理与 Button 忙碌语义",
+  "environment": {
+    "os": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "installation": "冻结锁文件，复用上一批已成功安装的依赖；本批锁文件不变",
+    "ark": {
+      "react": "5.39.2",
+      "vue": "5.39.2",
+      "solid": "5.39.2",
+      "svelte": "5.24.2"
+    },
+    "browser": "system Chromium 151.0.7922.173",
+    "playwright": "1.57.0",
+    "browserExecutable": "/usr/bin/chromium",
+    "browserDeviation": "固定 Chromium 143 下载受网络策略阻止，系统 Chromium 不等同于固定版本",
+    "viewports": [
+      375,
+      900,
+      1280
+    ]
+  },
+  "coverage": {
+    "families": 114,
+    "stories": 291,
+    "publicValueExportsPerFramework": 789,
+    "examples": {
+      "react": 44,
+      "vue": 41,
+      "solid": 41,
+      "svelte": 41,
+      "total": 167
+    },
+    "pending": [
+      "问卷复杂题型与逐题服务校验",
+      "消息虚拟化及被删除/替换内容的语义位置",
+      "表格虚拟化/冻结列/编辑等引擎级能力",
+      "图表缩放/刷选/实时流",
+      "原生高级能力未专项验收组合"
+    ]
+  },
+  "checks": [
+    {
+      "command": "pnpm verify",
+      "status": "passed",
+      "log": "logs/verify-reviewed.log"
+    },
+    {
+      "command": "pnpm check:contracts",
+      "status": "passed",
+      "log": "logs/contracts-reviewed.log"
+    },
+    {
+      "command": "pnpm storybook:build",
+      "status": "passed",
+      "log": "logs/storybook-reviewed.log"
+    },
+    {
+      "command": "pnpm check:coverage",
+      "status": "passed",
+      "log": "logs/coverage-reviewed.log"
+    },
+    {
+      "command": "pnpm check:publication",
+      "status": "passed",
+      "log": "logs/publication-reviewed.log"
+    },
+    {
+      "command": "pnpm check:svelte",
+      "status": "passed",
+      "log": "logs/svelte-reviewed.log"
+    },
+    {
+      "command": "pnpm test:frameworks",
+      "status": "passed",
+      "log": "logs/frameworks-reviewed.log"
+    },
+    {
+      "command": "node scripts/run-playwright.mjs --project=chromium --workers=2",
+      "status": "resolved_by_model_fixture_rerun",
+      "log": "logs/e2e.log"
+    },
+    {
+      "command": "node scripts/run-playwright.mjs tests/message-scroller-model.spec.ts tests/message-scroller-advanced.spec.ts --project=chromium --workers=2",
+      "status": "passed",
+      "log": "logs/behavior-final.log"
+    },
+    {
+      "command": "node scripts/run-playwright.mjs --project=chromium-visual --workers=2",
+      "status": "passed",
+      "log": "logs/visual-final.log"
+    }
+  ],
+  "measurements": {
+    "light": {
+      "stories": 291,
+      "wcagViolations": 0,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0,
+      "screenshots": 405
+    },
+    "dark": {
+      "stories": 291,
+      "wcagViolations": 0,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0,
+      "screenshots": 405
+    }
+  },
+  "browserTests": {
+    "uniqueBrowserCasesPassed": 73,
+    "fullRunPassed": 72,
+    "fullRunFixtureFailuresResolved": 1,
+    "finalAffectedBehaviorTestsPassed": 4,
+    "note": "一次全量72项通过、8项预期跳过、1项卸载用例边界失败；模型夹具修正后2项复验通过；目视修正隐藏状态说明后四端完整消费/示例重验及4项模型/高级Story通过，最终共73项独立用例完成验收。共享模型与Button实现在全量运行后不变，默认分支不变；不声称这是同一次全量73项无失败运行。",
+    "expectedSkippedFrameworkTests": 8,
+    "independentFrameworkTestsPassed": 8,
+    "visualTestsPassed": 66
+  },
+  "manualReview": {
+    "frameworkImages": 64,
+    "storyImages": 16,
+    "states": [
+      "default",
+      "media",
+      "reading",
+      "empty"
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1280,
+      375
+    ],
+    "contacts": [
+      "default-dark-1280-parity.jpg",
+      "default-dark-375-parity.jpg",
+      "default-light-1280-parity.jpg",
+      "default-light-375-parity.jpg",
+      "empty-dark-1280-parity.jpg",
+      "empty-dark-375-parity.jpg",
+      "empty-light-1280-parity.jpg",
+      "empty-light-375-parity.jpg",
+      "media-dark-1280-parity.jpg",
+      "media-dark-375-parity.jpg",
+      "media-light-1280-parity.jpg",
+      "media-light-375-parity.jpg",
+      "reading-dark-1280-parity.jpg",
+      "reading-dark-375-parity.jpg",
+      "reading-light-1280-parity.jpg",
+      "reading-light-375-parity.jpg",
+      "stories-dark-1280.jpg",
+      "stories-dark-375.jpg",
+      "stories-light-1280.jpg",
+      "stories-light-375.jpg"
+    ],
+    "frameworkParityComparisons": 48,
+    "exactParityComparisons": 44,
+    "remainingParityComparisons": 4,
+    "maximumChangedPixels": 12,
+    "maximumChannelDifference": 1,
+    "remainingDifferenceEvidence": "reading-raster-differences.json",
+    "unchangedReviewedImages": 60,
+    "continuityProof": "manual-review-continuity.json",
+    "readingOffsetMeasurements": 20,
+    "maximumReadingDriftPixels": 0.421875,
+    "parityFile": "framework-parity.json",
+    "notes": "manual-review-notes.md",
+    "findingsFixed": [
+      "隐藏会话后改为Conversation hidden，避免报告不存在的跟随状态",
+      "React Button保留aria-busy，四端loading优先级一致"
+    ],
+    "originalImages": [
+      "frameworks-screenshots.tar.gz",
+      "review/"
+    ],
+    "runtimeScreenshotsArchived": 171
+  },
+  "baseline": {
+    "newLinuxImages": 4,
+    "existingLinuxImagesUnchanged": 62,
+    "windowsImagesUnchanged": 2,
+    "existingHashes": "existing-baseline-sha256.json",
+    "reviewedBeforeCreation": true,
+    "creationLog": "logs/baseline-create.log",
+    "creationExitCode": 1,
+    "creationRunIsNotComparisonPass": true,
+    "creationNote": "missing 模式仅写入4张缺少的独立Linux基线，创建运行不能视作比较通过。",
+    "comparisonRunPassed": true,
+    "comparisonLog": "logs/visual-final.log",
+    "manualReferenceParity": "baseline-review-parity.json"
+  },
+  "regressions": [
+    "等总高度的上增下减仍保持可见文字",
+    "同条消息内真实图片解码撑高后文字位置不变",
+    "前插历史与后追加回复同时发生，以阅读锚点而非总高度差恢复",
+    "用户主动滚动更新锚点，移除消息后合法退回，键盘跳转聚焦区域",
+    "取消排队帧、释放观察器、恢复原样式/属性，保留外部覆盖",
+    "四端延迟媒体、取消、加载中重置、隐藏与重挂、跟随及375px无溢出",
+    "Button调用方aria-busy true/false保留，loading强制忙碌并禁用，媒体加载完成移除标记"
+  ],
+  "earlierFailures": {
+    "logs": [
+      "verify-model.log",
+      "verify.log",
+      "frameworks.log"
+    ],
+    "proofBefore": "before-probe.json",
+    "proofAfter": "after-probe.json",
+    "beforeCleanupBoundaryFix": "before-cleanup-boundary-fix.zip",
+    "beforeHiddenModeFix": "before-hidden-mode-fix.zip",
+    "readerDriftBeforePixels": 160,
+    "readerDriftAfterPixels": 0,
+    "beforeButtonFix": "before-button-busy-fix.zip",
+    "notes": "初次模型类型检查发现DOM.Iterable未启用，使用Array.from修正；新增Solid Show需带keyed参数，Story页面装饰器导入路径修正；真实四端回归发现React Button吞掉aria-busy，四端补强优先级后重建重验；卸载恢复auto后原生Chromium自身调整160px，测试分离帧取消、auto恢复和外部覆盖，共享生产模型不变，模型复验通过；目视修正隐藏会话后仍显示正在跟随的说明，四端和高级Story重验。",
+    "earlierFailureIsNotAcceptancePass": true
+  },
+  "limits": [
+    "全量默认Story明暗自动检查；人工复核本批80张场景图与漂移前后图，不声称逐张放大全量默认图",
+    "锚定依赖稳定消息与文字DOM身份；移除消息重新取当前位置，文字替换退回消息边界，纯图不能承诺内部像素位置",
+    "组件清理后还留在DOM中的容器重新交回原生锚定，浏览器可能调整位置；组件不得继续滚动或通知",
+    "Range二分测量横排文字；未专项验收竖排/旋转、真实触摸、屏幕阅读器、Firefox/WebKit及全部peer版本",
+    "媒体示例仅模拟500ms元数据延迟，浏览器实际解码既有SVG资产；不提供消息/媒体服务协议或虚拟列表",
+    "视觉比较沿用仓库1%阈值；本批48次四端对照中44次0像素差异，4次手机阅读状态10–12像素且RGB通道最大差1；4次新基线/目视参考按0像素差异核对",
+    "系统Chromium151与Playwright固定Chromium143有偏差，固定版下载受网络策略阻止；Windows基线未覆盖"
+  ],
+  "changes": {
+    "dependenciesAdded": [],
+    "paletteAndTokensUnchanged": true,
+    "mainUnchanged": true
+  },
+  "sourceHashes": "source-sha256.json",
+  "arkAudit": {
+    "log": "logs/ark-coverage.log",
+    "missingRenderablePartsPerFramework": {
+      "react": 0,
+      "vue": 0,
+      "solid": 0,
+      "svelte": 0
+    },
+    "missingHooksPerFramework": {
+      "react": 0,
+      "vue": 0,
+      "solid": 0,
+      "svelte": 0
+    },
+    "note": "按真实安装版本与构建声明核验；短名/命名空间不当作新增组件别名。"
+  },
+  "frameworkBuildLog": "logs/frameworks-reviewed.log",
+  "frameworkBuildNote": "当前成功构建产物完成167示例与8项消费回归；修正忙碌语义后重新按顺序构建及验证，没有消费失败构建的旧产物。"
+}

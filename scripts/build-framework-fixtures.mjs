@@ -61,6 +61,9 @@ const imports =
   names.map((n) => `LoongArk${n} as ${n}`).join(", ") +
   ", createListCollection";
 const body = `<InputRoot state="invalid"><InputLabel>Email</InputLabel><InputControl data-testid="email" value={email} onInput={(e) => setEmail(e.currentTarget.value)} /><InputErrorText>Enter a valid email</InputErrorText></InputRoot>
+<Button data-testid="busy-cancel" aria-busy="true">Cancel background work</Button>
+<Button data-testid="busy-false" aria-busy="false">Ready action</Button>
+<Button data-testid="busy-loading" loading aria-busy="false">Working</Button>
 <Button data-testid="submit" disabled={!email}>Continue</Button>
 <Button data-testid="mode" onClick={() => setMode(mode === "light" ? "dark" : "light")}>Theme</Button>
 <DialogRoot><DialogTrigger>Open dialog</DialogTrigger><DialogPortal><DialogOverlay /><DialogPositioner><DialogContent><DialogTitle>Review details</DialogTitle><DialogDescription>Theme follows this dialog.</DialogDescription><DialogCloseTrigger>Close</DialogCloseTrigger></DialogContent></DialogPositioner></DialogPortal></DialogRoot>
@@ -86,6 +89,9 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
   if (framework === "vue")
     source = `import { createApp, defineComponent, h, ref } from 'vue'; import { ${imports} } from '@loongark/vue'; const App=defineComponent({setup(){const email=ref(''), mode=ref<'light'|'dark'>('light'); return ()=>h(Provider,{mode:mode.value},{default:()=>h('section',{style:{padding:'24px',display:'grid',gap:'16px','min-height':'100dvh',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}},[
 h(InputRoot,{state:'invalid'},{default:()=>[h(InputLabel,{},()=> 'Email'),h(InputControl,{'data-testid':'email',modelValue:email.value,'onUpdate:modelValue':(v:string)=>email.value=v}),h(InputErrorText,{},()=> 'Enter a valid email')]}),
+h(Button,{'data-testid':'busy-cancel','aria-busy':'true'},()=> 'Cancel background work'),
+h(Button,{'data-testid':'busy-false','aria-busy':'false'},()=> 'Ready action'),
+h(Button,{'data-testid':'busy-loading',loading:true,'aria-busy':'false'},()=> 'Working'),
 h(Button,{'data-testid':'submit',disabled:!email.value},()=> 'Continue'),h(Button,{'data-testid':'mode',onClick:()=>mode.value=mode.value==='light'?'dark':'light'},()=> 'Theme'),
 h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()=>[h(DialogOverlay),h(DialogPositioner,{},()=>h(DialogContent,{},()=>[h(DialogTitle,{},()=> 'Review details'),h(DialogDescription,{},()=> 'Theme follows this dialog.'),h(DialogCloseTrigger,{},()=> 'Close')]))])])])});}}); createApp(App).mount('#app');`;
   if (framework === "svelte") {

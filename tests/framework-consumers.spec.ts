@@ -10,6 +10,22 @@ for (const framework of ["react", "vue", "solid", "svelte"])
     const input = page.getByTestId("email"),
       submit = page.getByTestId("submit");
     await expect(submit).toBeDisabled();
+    await expect(page.getByTestId("busy-cancel")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    await expect(page.getByTestId("busy-cancel")).toBeEnabled();
+    await expect(page.getByTestId("busy-false")).toHaveAttribute(
+      "aria-busy",
+      "false",
+    );
+    await expect(page.getByTestId("busy-false")).toBeEnabled();
+    await expect(page.getByTestId("busy-loading")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    await expect(page.getByTestId("busy-loading")).toBeDisabled();
+    await expect(submit).not.toHaveAttribute("aria-busy");
     await expect(input).toHaveAttribute("aria-invalid", "true");
     await expect(page.getByLabel("Email", { exact: true })).toHaveCount(1);
     await input.fill("user@loongark.dev");
