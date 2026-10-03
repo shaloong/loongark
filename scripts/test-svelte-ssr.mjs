@@ -78,3 +78,8 @@ for (const text of ["SSR outline", "SSR swap off", "SSR drawer trigger"])
 assert.equal((html.match(/id="toc:ssr-outline"/g) ?? []).length, 1);
 assert.match(html, /id="toc:ssr-outline-nav"/);
 console.log("Svelte 发布产物 SSR 通过");
+
+assert.match(html, /SSR remote row/);
+assert.match(html, /SSR remote failure/);
+assert.match(html, /aria-busy="true"/);
+assert.match(html.replace(/<[^>]*>/g, ""), /21 rows · 1 selected · 3 \/ 11/);

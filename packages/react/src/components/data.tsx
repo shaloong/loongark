@@ -1,10 +1,12 @@
 import {
-  createDataTableView,
+  dataTableView,
+  retryDataTable,
+  type DataTableState,
   nextDataSort,
   type DataSort,
   type DataTableProps,
   dataTableLabels,
-  normalizeDataSelection,
+  dataTableSelection,
   dataSelectionState,
   toggleDataSelection,
   setDataSelectionMixed,
@@ -36,25 +38,33 @@ export const LoongArkChart = (props: ChartOptions) => {
   );
 };
 export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
-  const [query, setQuery] = useState(""),
-    [sort, setSort] = useState<DataSort>(),
-    [page, setPage] = useState(1),
+  const [query, setQuery] = useState(props.defaultState?.query ?? ""),
+    [sort, setSort] = useState<DataSort | undefined>(props.defaultState?.sort),
+    [page, setPage] = useState(props.defaultState?.page ?? 1),
     [internal, setInternal] = useState<string[]>([
       ...(props.defaultSelectedIds ?? []),
     ]);
   const pageInput = useRef<HTMLInputElement>(null);
   const labels = dataTableLabels(props.labels),
     label = props.label ?? "Data table";
-  const view = createDataTableView(props.data, props.columns, {
-    query,
-    sort,
-    page,
-    pageSize: props.pageSize,
-    rowKey: props.rowKey,
-  });
-  const selected = normalizeDataSelection(
+  const current = props.state ?? { query, sort, page };
+  const latest = useRef(current);
+  latest.current = current;
+  const changeState = (patch: Partial<DataTableState>) => {
+    if (props.loading) return;
+    const next = { ...current, sort: view.sort, ...patch };
+    if (props.state === undefined) {
+      setQuery(next.query);
+      setSort(next.sort);
+      setPage(next.page);
+    }
+    props.onStateChange?.(next);
+  };
+  const view = dataTableView(props, current);
+  const selected = dataTableSelection(
     props.selectedIds ?? internal,
     view.allIds,
+    props.mode,
   );
   const pageIds = view.rows.map(({ id }) => id),
     pageSelection = dataSelectionState(selected, pageIds);
@@ -62,8 +72,10 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     setDataSelectionMixed(pageInput.current, pageSelection.mixed);
   }, [pageSelection.mixed]);
   useEffect(() => {
-    if (page !== view.page) setPage(view.page);
-    if (sort && !view.sort) setSort(undefined);
+    if (props.state === undefined) {
+      if (page !== view.page) setPage(view.page);
+      if (sort && !view.sort) setSort(undefined);
+    }
     if (
       props.selectedIds === undefined &&
       selected.length !== internal.length
@@ -76,28 +88,61 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     props.columns,
     props.rowKey,
     props.pageSize,
+    props.state,
+    props.columnKeys,
+    props.mode,
+    props.totalRows,
     props.selectedIds,
     page,
     sort,
     internal,
   ]);
   const change = (ids: string[], input: HTMLInputElement, rowId?: string) => {
+    if (props.loading) return;
     if (props.selectedIds === undefined) setInternal(ids);
     props.onSelectionChange?.(ids);
     if (props.selectedIds !== undefined)
       restoreDataSelection(input, selected, pageIds, rowId);
   };
   return (
-    <section data-scope="data-table" data-part="root">
+    <section
+      data-scope="data-table"
+      data-part="root"
+      aria-busy={props.loading || undefined}
+    >
       <input
         aria-label={labels.filter}
         placeholder={labels.filterPlaceholder}
-        value={query}
+        value={current.query}
+        disabled={props.loading}
         onChange={(e) => {
-          setQuery(e.currentTarget.value);
-          setPage(1);
+          const input = e.currentTarget;
+          changeState({ query: input.value, page: 1 });
+          if (props.state !== undefined)
+            queueMicrotask(() => {
+              if (input.isConnected) input.value = latest.current.query;
+            });
         }}
       />
+      {props.loading && (
+        <p role="status" data-part="loading">
+          {labels.loading}
+        </p>
+      )}
+      {props.error && (
+        <div role="alert" data-part="error">
+          <span>{props.error}</span>
+          {props.onRetry && (
+            <button
+              type="button"
+              disabled={props.loading}
+              onClick={(e) => retryDataTable(e.currentTarget, props.onRetry)}
+            >
+              {labels.retry}
+            </button>
+          )}
+        </div>
+      )}
       <div
         data-scope="table"
         data-part="root"
@@ -118,7 +163,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                       pageSelection.mixed ? "mixed" : pageSelection.checked
                     }
                     checked={pageSelection.checked}
-                    disabled={!pageIds.length}
+                    disabled={props.loading || !pageIds.length}
                     onChange={(e) =>
                       change(
                         toggleDataSelection(
@@ -132,7 +177,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                   />
                 </label>
               </th>
-              {props.columns.map((c) => (
+              {view.columns.map((c) => (
                 <th
                   key={c.key}
                   scope="col"
@@ -150,7 +195,13 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                     <button
                       aria-label={c.label}
                       type="button"
-                      onClick={() => setSort(nextDataSort(view.sort, c.key))}
+                      disabled={props.loading}
+                      onClick={() =>
+                        changeState({
+                          sort: nextDataSort(view.sort, c.key),
+                          page: 1,
+                        })
+                      }
                     >
                       {c.label}
                     </button>
@@ -166,6 +217,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                   <label data-part="selection">
                     <input
                       type="checkbox"
+                      disabled={props.loading}
                       aria-label={labels.selectRow(id)}
                       checked={selected.includes(id)}
                       onChange={(e) =>
@@ -182,15 +234,15 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                     />
                   </label>
                 </td>
-                {props.columns.map((c) => (
+                {view.columns.map((c) => (
                   <td key={c.key}>{String(row[c.key] ?? "")}</td>
                 ))}
               </tr>
             ))}
             {!view.rows.length && (
               <tr>
-                <td colSpan={props.columns.length + 1} data-part="empty">
-                  {labels.empty}
+                <td colSpan={view.columns.length + 1} data-part="empty">
+                  {props.loading ? labels.loading : labels.empty}
                 </td>
               </tr>
             )}
@@ -208,15 +260,15 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
         </span>
         <button
           type="button"
-          disabled={view.page <= 1}
-          onClick={() => setPage(view.page - 1)}
+          disabled={props.loading || view.page <= 1}
+          onClick={() => changeState({ page: view.page - 1 })}
         >
           {labels.previous}
         </button>
         <button
           type="button"
-          disabled={view.page >= view.pageCount}
-          onClick={() => setPage(view.page + 1)}
+          disabled={props.loading || view.page >= view.pageCount}
+          onClick={() => changeState({ page: view.page + 1 })}
         >
           {labels.next}
         </button>

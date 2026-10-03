@@ -174,3 +174,33 @@
     throw Error("SSR must not complete");
   }}
 />
+
+<L.LoongArkDataTable
+  label="SSR remote table"
+  data={[{ id: "remoteSSR", name: "SSR remote row", value: 9 }]}
+  columns={[
+    { key: "name", label: "Remote project" },
+    { key: "value", label: "Remote revenue" },
+  ]}
+  columnKeys={["value", "name"]}
+  mode="server"
+  totalRows={21}
+  pageSize={2}
+  state={{
+    query: "not-matching",
+    page: 3,
+    sort: { key: "value", direction: "asc" },
+  }}
+  selectedIds={["off-page"]}
+  loading
+  error="SSR remote failure"
+  onRetry={() => {
+    throw Error("SSR must not retry");
+  }}
+  onStateChange={() => {
+    throw Error("SSR must not change table state");
+  }}
+  onSelectionChange={() => {
+    throw Error("SSR must not select");
+  }}
+/>

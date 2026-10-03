@@ -1,0 +1,111 @@
+[serve-static] /workspace/loongark/storybook-static on http://127.0.0.1:6006 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 4 tests using 2 workers
+
+(node:377873) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:377872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:377873) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:377872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table light 375 (1.3s)
+(node:378140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table light 1280 (1.4s)
+(node:378149) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:378140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:378149) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table dark 1280 (1.3s)
+  ✘  4 [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table dark 375 (1.2s)
+
+
+  1) [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table light 1280 ────
+
+    Error: A snapshot doesn't exist at /workspace/loongark/tests/data-table-advanced.visual.spec.ts-snapshots/data-table-server-light-1280-chromium-visual-linux.png, writing actual.
+
+      10 |         page.getByRole("table", { name: "Remote projects" }),
+      11 |       ).toBeVisible();
+    > 12 |       await expect(page.locator("body")).toHaveScreenshot(
+         |       ^
+      13 |         `data-table-server-${mode}-${width}.png`,
+      14 |         { animations: "disabled" },
+      15 |       );
+        at /workspace/loongark/tests/data-table-advanced.visual.spec.ts:12:7
+
+    attachment #1: data-table-server-light-1280 (image/png) ────────────────────────────────────────
+    Expected: tests/data-table-advanced.visual.spec.ts-snapshots/data-table-server-light-1280-chromium-visual-linux.png
+    Received: test-results/data-table-advanced.visual-Remote-table-light-1280-chromium-visual/data-table-server-light-1280-actual.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/data-table-advanced.visual-Remote-table-light-1280-chromium-visual/error-context.md
+
+  2) [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table light 375 ─────
+
+    Error: A snapshot doesn't exist at /workspace/loongark/tests/data-table-advanced.visual.spec.ts-snapshots/data-table-server-light-375-chromium-visual-linux.png, writing actual.
+
+      10 |         page.getByRole("table", { name: "Remote projects" }),
+      11 |       ).toBeVisible();
+    > 12 |       await expect(page.locator("body")).toHaveScreenshot(
+         |       ^
+      13 |         `data-table-server-${mode}-${width}.png`,
+      14 |         { animations: "disabled" },
+      15 |       );
+        at /workspace/loongark/tests/data-table-advanced.visual.spec.ts:12:7
+
+    attachment #1: data-table-server-light-375 (image/png) ─────────────────────────────────────────
+    Expected: tests/data-table-advanced.visual.spec.ts-snapshots/data-table-server-light-375-chromium-visual-linux.png
+    Received: test-results/data-table-advanced.visual-Remote-table-light-375-chromium-visual/data-table-server-light-375-actual.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/data-table-advanced.visual-Remote-table-light-375-chromium-visual/error-context.md
+
+  3) [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table dark 1280 ─────
+
+    Error: A snapshot doesn't exist at /workspace/loongark/tests/data-table-advanced.visual.spec.ts-snapshots/data-table-server-dark-1280-chromium-visual-linux.png, writing actual.
+
+      10 |         page.getByRole("table", { name: "Remote projects" }),
+      11 |       ).toBeVisible();
+    > 12 |       await expect(page.locator("body")).toHaveScreenshot(
+         |       ^
+      13 |         `data-table-server-${mode}-${width}.png`,
+      14 |         { animations: "disabled" },
+      15 |       );
+        at /workspace/loongark/tests/data-table-advanced.visual.spec.ts:12:7
+
+    attachment #1: data-table-server-dark-1280 (image/png) ─────────────────────────────────────────
+    Expected: tests/data-table-advanced.visual.spec.ts-snapshots/data-table-server-dark-1280-chromium-visual-linux.png
+    Received: test-results/data-table-advanced.visual-Remote-table-dark-1280-chromium-visual/data-table-server-dark-1280-actual.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/data-table-advanced.visual-Remote-table-dark-1280-chromium-visual/error-context.md
+
+  4) [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table dark 375 ──────
+
+    Error: A snapshot doesn't exist at /workspace/loongark/tests/data-table-advanced.visual.spec.ts-snapshots/data-table-server-dark-375-chromium-visual-linux.png, writing actual.
+
+      10 |         page.getByRole("table", { name: "Remote projects" }),
+      11 |       ).toBeVisible();
+    > 12 |       await expect(page.locator("body")).toHaveScreenshot(
+         |       ^
+      13 |         `data-table-server-${mode}-${width}.png`,
+      14 |         { animations: "disabled" },
+      15 |       );
+        at /workspace/loongark/tests/data-table-advanced.visual.spec.ts:12:7
+
+    attachment #1: data-table-server-dark-375 (image/png) ──────────────────────────────────────────
+    Expected: tests/data-table-advanced.visual.spec.ts-snapshots/data-table-server-dark-375-chromium-visual-linux.png
+    Received: test-results/data-table-advanced.visual-Remote-table-dark-375-chromium-visual/data-table-server-dark-375-actual.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/data-table-advanced.visual-Remote-table-dark-375-chromium-visual/error-context.md
+
+  4 failed
+    [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table light 1280 ─────
+    [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table light 375 ──────
+    [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table dark 1280 ──────
+    [chromium-visual] › tests/data-table-advanced.visual.spec.ts:4:9 › Remote table dark 375 ───────

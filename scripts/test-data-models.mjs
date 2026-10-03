@@ -171,3 +171,67 @@ const zeroChart = renderChartSVG({
 assert(!zeroChart.includes('data-part="empty"'));
 assert(zeroChart.includes("Zero — Net &lt;balance&gt;: 0"));
 console.log("图表零值是有效数据，不显示空状态，通过回归");
+
+// 服务端当前页不得重复过滤、排序与分页；总数来自业务，选择跨页保留。
+const { dataTableView, dataTableSelection } =
+  await import("../packages/kit/dist/index.js");
+const server = createDataTableView(rows, columns, {
+  mode: "server",
+  totalRows: 21,
+  page: 3,
+  pageSize: 2,
+  query: "absent",
+  sort: { key: "value", direction: "asc" },
+});
+assert.deepEqual(
+  server.rows.map((x) => x.id),
+  ["a", "b", "c"],
+);
+assert.equal(server.total, 21);
+assert.equal(server.page, 3);
+assert.equal(server.pageCount, 11);
+assert.deepEqual(
+  dataTableSelection(["a", "remote", "remote"], ["b"], "server"),
+  ["a", "remote"],
+);
+assert.deepEqual(dataTableSelection(["a", "remote"], ["b"]), []);
+assert.throws(
+  () => createDataTableView([{ name: "missing" }], columns, { mode: "server" }),
+  /stable row ids/,
+);
+const reordered = dataTableView(
+  { data: rows, columns, columnKeys: ["value", "name", "value", "absent"] },
+  { query: "", page: 1, sort: { key: "value", direction: "asc" } },
+);
+assert.deepEqual(
+  reordered.columns.map((x) => x.key),
+  ["value", "name"],
+);
+assert.equal(
+  dataTableView(
+    { data: rows, columns, columnKeys: ["name"] },
+    { query: "", page: 1, sort: { key: "value", direction: "asc" } },
+  ).sort,
+  undefined,
+);
+assert.throws(
+  () =>
+    dataTableView(
+      { data: rows, columns: [...columns, columns[0]], columnKeys: [] },
+      { query: "", page: 1 },
+    ),
+  /unique/,
+);
+assert.deepEqual(
+  dataTableView({ data: rows, columns, columnKeys: [] }, { query: "", page: 1 })
+    .columns,
+  [],
+);
+
+assert.throws(
+  () =>
+    createDataTableView([{ id: "", name: "blank" }], columns, {
+      mode: "server",
+    }),
+  /stable row ids/,
+);

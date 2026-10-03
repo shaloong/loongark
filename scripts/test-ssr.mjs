@@ -60,6 +60,14 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${questionnaireProps})));`
         : `console.log(renderToString(h(L.LoongArkQuestionnaire,${questionnaireProps})));`;
+  const serverProps =
+    "{label:'SSR remote table',data:[{id:'remoteSSR',name:'SSR remote row',value:9}],columns:[{key:'name',label:'Remote project'},{key:'value',label:'Remote revenue'}],columnKeys:['value','name'],mode:'server',totalRows:21,pageSize:2,state:{query:'not-matching',page:3,sort:{key:'value',direction:'asc'}},selectedIds:['off-page'],loading:true,error:'SSR remote failure',onRetry:()=>{throw Error('SSR must not retry')},onStateChange:()=>{throw Error('SSR must not change table state')},onSelectionChange:()=>{throw Error('SSR must not select')}}";
+  const serverScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${serverProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${serverProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${serverProps})));`;
   const result = spawnSync(
     process.execPath,
     [
@@ -72,6 +80,7 @@ for (const [framework, script] of [
           arkScript +
           nextScript +
           questionnaireScript +
+          serverScript +
           "process.exit(0);",
       ),
     ],
@@ -90,6 +99,13 @@ for (const [framework, script] of [
     assert.ok(result.stdout.includes(text));
   assert.equal((result.stdout.match(/id="toc:ssr-outline"/g) ?? []).length, 1);
   assert.match(result.stdout, /id="toc:ssr-outline-nav"/);
+  assert.match(result.stdout, /SSR remote row/);
+  assert.match(result.stdout, /SSR remote failure/);
+  assert.match(result.stdout, /aria-busy="true"/);
+  assert.match(
+    result.stdout.replace(/<[^>]*>/g, ""),
+    /21 rows · 1 selected · 3 \/ 11/,
+  );
   assert.match(result.stdout, /Visible conditional SSR answer/);
   assert.doesNotMatch(
     result.stdout,

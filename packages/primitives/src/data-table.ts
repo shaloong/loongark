@@ -20,9 +20,12 @@ const css = `
 [data-scope=data-table] [data-part=empty] { height:calc(var(--lk-control-height-lg) * 3);text-align:center;color:var(--lk-color-semantic-mutedforeground); }
 [data-scope=data-table] footer { display:flex;align-items:center;justify-content:flex-end;gap:var(--lk-space-component-sm);flex-wrap:wrap; }
 [data-scope=data-table] footer span { flex:1 0 auto;max-width:100%;min-width:0;color:var(--lk-color-semantic-mutedforeground);font-size:var(--lk-typography-fontsize-sm);overflow-wrap:anywhere; }
-[data-scope=data-table] footer button { min-height:var(--lk-control-height-sm);padding:var(--lk-space-component-xs) var(--lk-space-component-md);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md);color:var(--lk-color-semantic-foreground);background:var(--lk-color-semantic-background);font:inherit;cursor:pointer; }
-[data-scope=data-table] footer button:hover:not(:disabled) { background:var(--lk-color-semantic-muted); }
-[data-scope=data-table] footer button:disabled { opacity:.5;cursor:not-allowed; }
+[data-scope=data-table] :is(footer,[data-part=error]) button { min-height:var(--lk-control-height-sm);padding:var(--lk-space-component-xs) var(--lk-space-component-md);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md);color:var(--lk-color-semantic-foreground);background:var(--lk-color-semantic-background);font:inherit;cursor:pointer; }
+[data-scope=data-table] :is(footer,[data-part=error]) button:hover:not(:disabled) { background:var(--lk-color-semantic-muted); }
+[data-scope=data-table] :is(footer,[data-part=error]) button:disabled { opacity:.5;cursor:not-allowed; }
+[data-scope=data-table] [data-part=loading] { margin:0;font-size:var(--lk-typography-fontsize-sm);color:var(--lk-color-semantic-mutedforeground); }
+[data-scope=data-table] [data-part=error] { display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--lk-space-component-sm);padding:var(--lk-space-component-compact);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-destructive);border-radius:var(--lk-radius-md);font-size:var(--lk-typography-fontsize-sm);color:var(--lk-color-semantic-destructive);overflow-wrap:anywhere; }
+[data-scope=data-table] input:disabled { cursor:not-allowed;opacity:.5; }
 @media(max-width:480px) { [data-scope=data-table] footer span { flex-basis:100%; } }
 `;
 registerPrimitive(

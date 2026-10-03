@@ -1,4 +1,14 @@
-import type { DataRow, DataColumn } from "./data-models";
+import {
+  createDataTableView,
+  type DataRow,
+  type DataColumn,
+  type DataSort,
+} from "./data-models";
+export interface DataTableState {
+  query: string;
+  sort?: DataSort;
+  page: number;
+}
 export interface DataTableSummary {
   total: number;
   selected: number;
@@ -13,6 +23,8 @@ export interface DataTableLabels {
   empty: string;
   previous: string;
   next: string;
+  loading: string;
+  retry: string;
   summary: (details: DataTableSummary) => string;
 }
 export interface DataTableProps {
@@ -25,6 +37,16 @@ export interface DataTableProps {
   selectedIds?: readonly string[];
   defaultSelectedIds?: readonly string[];
   onSelectionChange?: (ids: string[]) => void;
+  state?: DataTableState;
+  defaultState?: Partial<DataTableState>;
+  onStateChange?: (state: DataTableState) => void;
+  mode?: "client" | "server";
+  totalRows?: number;
+  /** 按此顺序显示已有列；不传时显示全部列，空数组允许只保留选择列。 */
+  columnKeys?: readonly string[];
+  loading?: boolean;
+  error?: string;
+  onRetry?: () => void;
 }
 export const dataTableLabels = (
   labels?: Partial<DataTableLabels>,
@@ -36,6 +58,8 @@ export const dataTableLabels = (
   empty: labels?.empty ?? "No results",
   previous: labels?.previous ?? "Previous",
   next: labels?.next ?? "Next",
+  loading: labels?.loading ?? "Loading rows…",
+  retry: labels?.retry ?? "Retry",
   summary:
     labels?.summary ??
     (({ total, selected, page, pageCount }) =>
@@ -89,4 +113,49 @@ export function restoreDataSelection(
       : { checked: ids.includes(rowId), mixed: false };
   input.checked = state.checked;
   input.indeterminate = state.mixed;
+}
+
+/** 先检查完整结构，再应用列显示/顺序；服务端数据不得重复本地处理。 */
+export function dataTableView(props: DataTableProps, state: DataTableState) {
+  const keys = props.columns.map((column) => column.key);
+  if (keys.some((key) => !key) || new Set(keys).size !== keys.length)
+    throw Error("DataTable requires unique non-empty column keys");
+  const byKey = new Map(props.columns.map((column) => [column.key, column]));
+  const columns =
+    props.columnKeys === undefined
+      ? props.columns
+      : [...new Set(props.columnKeys)].flatMap((key) => {
+          const column = byKey.get(key);
+          return column ? [column] : [];
+        });
+  return {
+    ...createDataTableView(props.data, columns, {
+      ...state,
+      pageSize: props.pageSize,
+      rowKey: props.rowKey,
+      mode: props.mode,
+      totalRows: props.totalRows,
+    }),
+    columns,
+  };
+}
+/** 服务端当前页不是完整数据集，不依据换页清除远端已选行。 */
+export function dataTableSelection(
+  ids: readonly string[],
+  allIds: readonly string[],
+  mode?: "client" | "server",
+) {
+  return mode === "server"
+    ? [...new Set(ids)].filter((id) => id !== "")
+    : normalizeDataSelection(ids, allIds);
+}
+
+/** 重试按钮即将被加载/成功状态替换；将键盘焦点留在稳定的表格区域。 */
+export function retryDataTable(button: HTMLElement, retry?: () => void) {
+  if (!retry) return;
+  button
+    .closest('[data-scope="data-table"][data-part="root"]')
+    ?.querySelector<HTMLElement>('[role="region"]')
+    ?.focus();
+  retry();
 }

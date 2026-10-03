@@ -1,5 +1,7 @@
 import {
-  createDataTableView,
+  dataTableView,
+  retryDataTable,
+  type DataTableState,
   nextDataSort,
   type DataSort,
   type DataRow,
@@ -7,7 +9,7 @@ import {
   renderChartMarkup,
   observeChartWidth,
   dataTableLabels,
-  normalizeDataSelection,
+  dataTableSelection,
   dataSelectionState,
   toggleDataSelection,
   setDataSelectionMixed,
@@ -22,6 +24,7 @@ import {
   watchEffect,
   h,
   onMounted,
+  nextTick,
   onBeforeUnmount,
   type PropType,
 } from "vue";
@@ -68,30 +71,46 @@ export const LoongArkDataTable = defineComponent({
     labels: Object as PropType<Partial<DataTableLabels>>,
     selectedIds: Array as PropType<readonly string[]>,
     defaultSelectedIds: Array as PropType<readonly string[]>,
+    state: Object as PropType<DataTableState>,
+    defaultState: Object as PropType<Partial<DataTableState>>,
+    mode: String as PropType<"client" | "server">,
+    totalRows: Number,
+    columnKeys: Array as PropType<readonly string[]>,
+    loading: Boolean,
+    error: String,
+    onRetry: Function as PropType<() => void>,
   },
   emits: {
+    stateChange: (state: DataTableState) => !!state,
+    "update:state": (state: DataTableState) => !!state,
     selectionChange: (ids: string[]) => Array.isArray(ids),
     "update:selectedIds": (ids: string[]) => Array.isArray(ids),
   },
   setup(props, { emit }) {
-    const query = ref(""),
-      sort = ref<DataSort>(),
-      page = ref(1),
+    const query = ref(props.defaultState?.query ?? ""),
+      sort = ref<DataSort | undefined>(props.defaultState?.sort),
+      page = ref(props.defaultState?.page ?? 1),
       internal = ref<string[]>([...(props.defaultSelectedIds ?? [])]),
       pageInput = ref<HTMLInputElement>();
-    const view = computed(() =>
-      createDataTableView(props.data, props.columns, {
-        query: query.value,
-        sort: sort.value,
-        page: page.value,
-        pageSize: props.pageSize,
-        rowKey: props.rowKey,
-      }),
-    );
+    const current = () =>
+      props.state ?? { query: query.value, sort: sort.value, page: page.value };
+    const changeState = (patch: Partial<DataTableState>) => {
+      if (props.loading) return;
+      const next = { ...current(), sort: view.value.sort, ...patch };
+      if (props.state === undefined) {
+        query.value = next.query;
+        sort.value = next.sort;
+        page.value = next.page;
+      }
+      emit("stateChange", next);
+      emit("update:state", next);
+    };
+    const view = computed(() => dataTableView(props, current()));
     const selected = () =>
-      normalizeDataSelection(
+      dataTableSelection(
         props.selectedIds ?? internal.value,
         view.value.allIds,
+        props.mode,
       );
     const pageIds = () => view.value.rows.map(({ id }) => id),
       pageSelection = () => dataSelectionState(selected(), pageIds());
@@ -104,8 +123,10 @@ export const LoongArkDataTable = defineComponent({
     });
     watchEffect(() => {
       if (!mounted.value) return;
-      if (page.value !== view.value.page) page.value = view.value.page;
-      if (sort.value && !view.value.sort) sort.value = undefined;
+      if (props.state === undefined) {
+        if (page.value !== view.value.page) page.value = view.value.page;
+        if (sort.value && !view.value.sort) sort.value = undefined;
+      }
       if (
         props.selectedIds === undefined &&
         selected().length !== internal.value.length
@@ -117,6 +138,7 @@ export const LoongArkDataTable = defineComponent({
       }
     });
     const change = (ids: string[], input: HTMLInputElement, rowId?: string) => {
+      if (props.loading) return;
       if (props.selectedIds === undefined) internal.value = ids;
       emit("selectionChange", ids);
       emit("update:selectedIds", ids);
@@ -128,182 +150,225 @@ export const LoongArkDataTable = defineComponent({
         model = view.value,
         ids = selected(),
         state = pageSelection();
-      return h("section", { "data-scope": "data-table", "data-part": "root" }, [
-        h("input", {
-          "aria-label": labels.filter,
-          placeholder: labels.filterPlaceholder,
-          value: query.value,
-          onInput: (e: Event) => {
-            if (e.currentTarget instanceof HTMLInputElement) {
-              query.value = e.currentTarget.value;
-              page.value = 1;
-            }
-          },
-        }),
-        h(
-          "div",
-          {
-            "data-scope": "table",
-            "data-part": "root",
-            role: "region",
-            "aria-label": props.label,
-            tabindex: 0,
-          },
-          [
-            h(
-              "table",
-              {
-                "data-scope": "table",
-                "data-part": "table",
-                "aria-label": props.label,
-              },
-              [
-                h("thead", [
-                  h("tr", [
-                    h("th", { scope: "col" }, [
-                      h("label", { "data-part": "selection" }, [
-                        h("input", {
-                          ref: pageInput,
-                          type: "checkbox",
-                          "aria-label": labels.selectPage,
-                          "aria-checked": state.mixed ? "mixed" : state.checked,
-                          checked: state.checked,
-                          disabled: !pageIds().length,
-                          onChange: (e: Event) => {
-                            if (e.currentTarget instanceof HTMLInputElement)
-                              change(
-                                toggleDataSelection(
-                                  ids,
-                                  pageIds(),
-                                  e.currentTarget.checked,
-                                ),
-                                e.currentTarget,
-                              );
-                          },
-                        }),
-                      ]),
-                    ]),
-                    ...props.columns.map((c) =>
-                      h(
-                        "th",
-                        {
-                          key: c.key,
-                          scope: "col",
-                          "aria-sort":
-                            model.sort?.key === c.key
-                              ? model.sort.direction === "asc"
-                                ? "ascending"
-                                : "descending"
-                              : undefined,
+      return h(
+        "section",
+        {
+          "data-scope": "data-table",
+          "data-part": "root",
+          "aria-busy": props.loading || undefined,
+        },
+        [
+          h("input", {
+            "aria-label": labels.filter,
+            placeholder: labels.filterPlaceholder,
+            value: current().query,
+            disabled: props.loading,
+            onInput: (e: Event) => {
+              if (e.currentTarget instanceof HTMLInputElement) {
+                const input = e.currentTarget;
+                changeState({ query: input.value, page: 1 });
+                if (props.state !== undefined)
+                  nextTick(() => {
+                    if (input.isConnected) input.value = current().query;
+                  });
+              }
+            },
+          }),
+          props.loading
+            ? h("p", { role: "status", "data-part": "loading" }, labels.loading)
+            : null,
+          props.error
+            ? h("div", { role: "alert", "data-part": "error" }, [
+                h("span", props.error),
+                props.onRetry
+                  ? h(
+                      "button",
+                      {
+                        type: "button",
+                        disabled: props.loading,
+                        onClick: (e: Event) => {
+                          if (e.currentTarget instanceof HTMLElement)
+                            retryDataTable(e.currentTarget, props.onRetry);
                         },
-                        c.sortable === false
-                          ? c.label
-                          : h(
-                              "button",
-                              {
-                                type: "button",
-                                "aria-label": c.label,
-                                onClick: () =>
-                                  (sort.value = nextDataSort(
-                                    model.sort,
-                                    c.key,
-                                  )),
-                              },
-                              c.label,
-                            ),
-                      ),
-                    ),
-                  ]),
-                ]),
-                h(
-                  "tbody",
-                  model.rows.length
-                    ? model.rows.map(({ row, id }) =>
-                        h(
-                          "tr",
-                          {
-                            key: id,
-                            "data-selected": ids.includes(id) || undefined,
-                          },
-                          [
-                            h("td", [
-                              h("label", { "data-part": "selection" }, [
-                                h("input", {
-                                  type: "checkbox",
-                                  "aria-label": labels.selectRow(id),
-                                  checked: ids.includes(id),
-                                  onChange: (e: Event) => {
-                                    if (
-                                      e.currentTarget instanceof
-                                      HTMLInputElement
-                                    )
-                                      change(
-                                        toggleDataSelection(
-                                          ids,
-                                          [id],
-                                          e.currentTarget.checked,
-                                        ),
-                                        e.currentTarget,
-                                        id,
-                                      );
-                                  },
-                                }),
-                              ]),
-                            ]),
-                            ...props.columns.map((c) =>
-                              h("td", { key: c.key }, String(row[c.key] ?? "")),
-                            ),
-                          ],
-                        ),
-                      )
-                    : [
-                        h("tr", [
-                          h(
-                            "td",
-                            {
-                              colspan: props.columns.length + 1,
-                              "data-part": "empty",
+                      },
+                      labels.retry,
+                    )
+                  : null,
+              ])
+            : null,
+          h(
+            "div",
+            {
+              "data-scope": "table",
+              "data-part": "root",
+              role: "region",
+              "aria-label": props.label,
+              tabindex: 0,
+            },
+            [
+              h(
+                "table",
+                {
+                  "data-scope": "table",
+                  "data-part": "table",
+                  "aria-label": props.label,
+                },
+                [
+                  h("thead", [
+                    h("tr", [
+                      h("th", { scope: "col" }, [
+                        h("label", { "data-part": "selection" }, [
+                          h("input", {
+                            ref: pageInput,
+                            type: "checkbox",
+                            "aria-label": labels.selectPage,
+                            "aria-checked": state.mixed
+                              ? "mixed"
+                              : state.checked,
+                            checked: state.checked,
+                            disabled: props.loading || !pageIds().length,
+                            onChange: (e: Event) => {
+                              if (e.currentTarget instanceof HTMLInputElement)
+                                change(
+                                  toggleDataSelection(
+                                    ids,
+                                    pageIds(),
+                                    e.currentTarget.checked,
+                                  ),
+                                  e.currentTarget,
+                                );
                             },
-                            labels.empty,
-                          ),
+                          }),
                         ]),
-                      ],
-                ),
-              ],
+                      ]),
+                      ...model.columns.map((c) =>
+                        h(
+                          "th",
+                          {
+                            key: c.key,
+                            scope: "col",
+                            "aria-sort":
+                              model.sort?.key === c.key
+                                ? model.sort.direction === "asc"
+                                  ? "ascending"
+                                  : "descending"
+                                : undefined,
+                          },
+                          c.sortable === false
+                            ? c.label
+                            : h(
+                                "button",
+                                {
+                                  type: "button",
+                                  disabled: props.loading,
+                                  "aria-label": c.label,
+                                  onClick: () =>
+                                    changeState({
+                                      sort: nextDataSort(model.sort, c.key),
+                                      page: 1,
+                                    }),
+                                },
+                                c.label,
+                              ),
+                        ),
+                      ),
+                    ]),
+                  ]),
+                  h(
+                    "tbody",
+                    model.rows.length
+                      ? model.rows.map(({ row, id }) =>
+                          h(
+                            "tr",
+                            {
+                              key: id,
+                              "data-selected": ids.includes(id) || undefined,
+                            },
+                            [
+                              h("td", [
+                                h("label", { "data-part": "selection" }, [
+                                  h("input", {
+                                    type: "checkbox",
+                                    disabled: props.loading,
+                                    "aria-label": labels.selectRow(id),
+                                    checked: ids.includes(id),
+                                    onChange: (e: Event) => {
+                                      if (
+                                        e.currentTarget instanceof
+                                        HTMLInputElement
+                                      )
+                                        change(
+                                          toggleDataSelection(
+                                            ids,
+                                            [id],
+                                            e.currentTarget.checked,
+                                          ),
+                                          e.currentTarget,
+                                          id,
+                                        );
+                                    },
+                                  }),
+                                ]),
+                              ]),
+                              ...model.columns.map((c) =>
+                                h(
+                                  "td",
+                                  { key: c.key },
+                                  String(row[c.key] ?? ""),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : [
+                          h("tr", [
+                            h(
+                              "td",
+                              {
+                                colspan: model.columns.length + 1,
+                                "data-part": "empty",
+                              },
+                              props.loading ? labels.loading : labels.empty,
+                            ),
+                          ]),
+                        ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+          h("footer", [
+            h(
+              "span",
+              { "aria-live": "polite" },
+              labels.summary({
+                total: model.total,
+                selected: ids.length,
+                page: model.page,
+                pageCount: model.pageCount,
+              }),
             ),
-          ],
-        ),
-        h("footer", [
-          h(
-            "span",
-            { "aria-live": "polite" },
-            labels.summary({
-              total: model.total,
-              selected: ids.length,
-              page: model.page,
-              pageCount: model.pageCount,
-            }),
-          ),
-          h(
-            "button",
-            {
-              type: "button",
-              disabled: model.page <= 1,
-              onClick: () => (page.value = model.page - 1),
-            },
-            labels.previous,
-          ),
-          h(
-            "button",
-            {
-              type: "button",
-              disabled: model.page >= model.pageCount,
-              onClick: () => (page.value = model.page + 1),
-            },
-            labels.next,
-          ),
-        ]),
-      ]);
+            h(
+              "button",
+              {
+                type: "button",
+                disabled: props.loading || model.page <= 1,
+                onClick: () => changeState({ page: model.page - 1 }),
+              },
+              labels.previous,
+            ),
+            h(
+              "button",
+              {
+                type: "button",
+                disabled: props.loading || model.page >= model.pageCount,
+                onClick: () => changeState({ page: model.page + 1 }),
+              },
+              labels.next,
+            ),
+          ]),
+        ],
+      );
     };
   },
 });

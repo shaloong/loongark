@@ -1,3 +1,4 @@
+import { checkDataTableAdvanced } from "./dataTableAdvancedChecks";
 import { checkQuestionnaireAdvanced } from "./questionnaireAdvancedChecks";
 import {
   checkDateInput,
@@ -55,6 +56,8 @@ for (const framework of ["react", "vue", "solid", "svelte"])
 
       if (name === "ChartExample") await checkChart(page, framework);
       if (name === "DataTableExample") await checkDataTable(page, framework);
+      if (name === "DataTableAdvancedExample")
+        await checkDataTableAdvanced(page);
       if (name === "QuestionnaireAdvancedExample")
         await checkQuestionnaireAdvanced(page);
       if (name === "ConversationExample") {

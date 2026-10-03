@@ -31,6 +31,8 @@ export interface DataTableOptions {
   page?: number;
   pageSize?: number;
   rowKey?: string;
+  mode?: "client" | "server";
+  totalRows?: number;
 }
 const collator = new Intl.Collator(undefined, {
   numeric: true,
@@ -47,6 +49,13 @@ export const createDataTableView = (
     id: String(row[options.rowKey ?? "id"] ?? index),
     index,
   }));
+  if (
+    options.mode === "server" &&
+    allRows.some(
+      ({ row, id }) => row[options.rowKey ?? "id"] == null || id === "",
+    )
+  )
+    throw Error("Server DataTable requires stable row ids");
   const allIds = allRows.map(({ id }) => id);
   if (new Set(allIds).size !== allIds.length)
     throw Error("DataTable requires unique row ids");
@@ -56,21 +65,24 @@ export const createDataTableView = (
     new Set(columnKeys).size !== columnKeys.length
   )
     throw Error("DataTable requires unique non-empty column keys");
-  let rows = allRows.filter(
-    ({ row }) =>
-      !query ||
-      columns.some(({ key }) =>
-        String(row[key] ?? "")
-          .toLocaleLowerCase()
-          .includes(query),
-      ),
-  );
+  let rows =
+    options.mode === "server"
+      ? allRows
+      : allRows.filter(
+          ({ row }) =>
+            !query ||
+            columns.some(({ key }) =>
+              String(row[key] ?? "")
+                .toLocaleLowerCase()
+                .includes(query),
+            ),
+        );
   const sort = columns.some(
     (column) => column.key === options.sort?.key && column.sortable !== false,
   )
     ? options.sort
     : undefined;
-  if (sort)
+  if (sort && options.mode !== "server")
     rows = rows.sort((a, b) => {
       const left = a.row[sort.key],
         right = b.row[sort.key];
@@ -87,7 +99,11 @@ export const createDataTableView = (
     1,
     Math.floor(Number.isFinite(options.pageSize) ? options.pageSize! : 10),
   );
-  const pageCount = Math.max(1, Math.ceil(rows.length / pageSize));
+  const total =
+    options.mode === "server" && Number.isFinite(options.totalRows)
+      ? Math.max(0, Math.floor(options.totalRows!))
+      : rows.length;
+  const pageCount = Math.max(1, Math.ceil(total / pageSize));
   const page = Math.min(
     pageCount,
     Math.max(1, Math.floor(Number.isFinite(options.page) ? options.page! : 1)),
@@ -95,8 +111,11 @@ export const createDataTableView = (
   return {
     allIds,
     sort,
-    rows: rows.slice((page - 1) * pageSize, page * pageSize),
-    total: rows.length,
+    rows:
+      options.mode === "server"
+        ? rows
+        : rows.slice((page - 1) * pageSize, page * pageSize),
+    total,
     page,
     pageSize,
     pageCount,

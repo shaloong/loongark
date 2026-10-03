@@ -29,3 +29,7 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 ## 问卷高级能力（2026-10-03）
 
 四端 Questionnaire 新增条件可见性、同步跨题校验与受控拒绝恢复；隐藏答案保留在编辑状态，但不参与表单和最终提交。新增四端高级示例与两个 Story，覆盖清单仍为 114 族，累计 285 Story 和 151 个示例。API 与 Svelte 回调绑定说明见 [问卷说明](../docs/conversation.md)，验证范围见 [验收记录](../docs/audits/2026-10-03/questionnaire-advanced-linux/acceptance.json)。
+
+## 四端服务端表格示例（2026-10-03）
+
+新增 DataTableAdvancedExample 与 Server/Loading Story，114 族、287 Story、四端各 789 个公开值入口和 155 个示例。查询/排序/分页由统一 state 控制；columnKeys 控制显示与顺序；服务端数据不再本地处理，选择跨页保留，并补加载、失败和重试焦点。API 见 [表格说明](../docs/data-table.md)。

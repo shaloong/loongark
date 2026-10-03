@@ -142,6 +142,7 @@
     "DateInput segmented editing",
     "Toc controlled navigation and active-change payload",
     "Questionnaire conditions, cross-field validation and controlled rejection",
+    "DataTable server state, column visibility/order and request states",
     "Swap lifecycle",
     "Context and collection control hooks"
   ]

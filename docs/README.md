@@ -57,3 +57,9 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 四端 Questionnaire 新增条件可见性、同步跨题校验与受控拒绝恢复；隐藏答案保留在编辑状态，但不参与表单和最终提交。新增四端高级示例与两个 Story，覆盖清单仍为 114 族，累计 285 Story 和 151 个示例。API 与 Svelte 回调绑定说明见 [问卷说明](conversation.md)，验证范围见 [验收记录](audits/2026-10-03/questionnaire-advanced-linux/acceptance.json)。
 
 本批验收：四端消费与示例 8 项通过，151 个示例实际运行；全量浏览器 63 项、视觉 50 项通过。285 Story 的明暗默认 WCAG、窄屏溢出和有效 transition: all 为 0。40 张截图已目视复核，新增 4 张 Linux 基线，已有 46 张 Linux 与 2 张 Windows 基线不变。24 次四端场景对比为 0 像素差异；复杂题型与异步逐题校验仍未交付。
+
+## 表格高级能力（2026-10-03）
+
+新增 DataTableAdvancedExample 与 Server/Loading Story，114 族、287 Story、四端各 789 个公开值入口和 155 个示例。查询/排序/分页由统一 state 控制；columnKeys 控制显示与顺序；服务端数据不再本地处理，选择跨页保留，并补加载、失败和重试焦点。API 见 [表格说明](data-table.md)。
+
+表格批次验收：四端消费/示例 8 项、155 个示例运行、全量浏览器 65 项、视觉 54 项通过。287 Story 的明暗默认 WCAG、窄屏溢出和有效 transition: all 为 0；60 张截图已目视核验，36 次四端场景对比为 0 像素差异。新增 4 张 Linux 基线，原有 50 张 Linux 与 2 张 Windows 基线不变。真实后端、虚拟化、冻结列和编辑未验收；详见 [独立验收记录](audits/2026-10-03/data-table-advanced-linux/acceptance.json)。

@@ -24,4 +24,16 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 
 ## 边界
 
-当前使用客户端标量数据，未提供服务端分页、虚拟化、冻结列、列拖动或编辑单元格。加载、请求失败与重试由调用方组合 Progress、Alert 和 Button，不假定业务接口协议。它是已有能力的完善，不声称兼容 MUI Data Grid、Ant Design Table 或第三方表格引擎的全部 API。
+现支持客户端与服务端标量数据、列显示及顺序控制。未提供虚拟化、冻结列、指针列拖动或编辑单元格；数据请求、取消与竞争处理由调用方负责，不假定业务接口协议。它是已有能力的完善，不声称兼容 MUI Data Grid、Ant Design Table 或第三方表格引擎的全部 API。
+
+## 高级状态与服务端模式
+
+`state/defaultState/onStateChange` 统一控制 `{query, sort?, page}`，page 从 1 开始；`pageSize` 继续独立设置。未传 state 保持现有客户端非受控行为；受控调用方可以拒绝更新，原生过滤输入恢复业务值。排序和查询变化从第一页开始。Vue 支持 `stateChange` 与 `update:state`（v-model:state）；其它三端显式传 state/onStateChange，Svelte 不会先自行改变业务传入的 state。
+
+`columnKeys` 按指定顺序显示已有列；不传时显示全部列。重复/未知 key 被去重/忽略，空数组允许只保留选择列。完整 columns 仍检查非空唯一 key；隐藏排序列不再显示旧排序，下一次状态通知清除无效 sort。它是显示/顺序控制，不新增重复的列类型或虚假的拖动 API。
+
+`mode="server"` 直接展示 data 当前页，禁止再次本地过滤、排序、切页；调用方收到新 state 后请求并返回该页和 `totalRows`。总数归一为非负整数，未传或非有限数回退到当前 data.length；应提供真实总数。每行必须具有非空稳定 rowKey（默认 id），不能用跨页不稳定的下标。server 选择跨页保留，不把当前页之外的 ID 当成已删除；业务应在明确删除时清理 selectedIds。client 延续原有删除清理。初次渲染/SSR 不触发请求或业务回调。
+
+`loading` 设置 aria-busy 与状态说明，禁用过滤、排序、分页和选择；`error` 提供 alert，`onRetry` 提供真实重试按钮。Retry 激活后先把焦点放到稳定的表格滚动区域，避免按钮消失后丢失键盘位置。`labels.loading/retry` 可本地化。加载中保留或清空旧数据由调用方决定，组件不会自行发请求。
+
+四端 DataTableAdvancedExample 使用同一模拟服务端，展示列显示/顺序、受控拒绝、跨页选择、异步加载、错误重试、旧请求取消与卸载清理；模拟服务仅用于示例。新增 Server/Loading Story，当前总数为 114 族、287 Story、155 个四端示例。验收见 [服务端表格 Linux 记录](audits/2026-10-03/data-table-advanced-linux/acceptance.json)。

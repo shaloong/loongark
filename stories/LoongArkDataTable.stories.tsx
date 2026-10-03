@@ -72,3 +72,20 @@ export const Localized: StoryObj = {
     />
   ),
 };
+
+import { DataTableAdvancedExample } from "../examples/react/DataTableAdvancedExample";
+import { withArkExamplePage } from "./arkStory";
+export const Server = {
+  decorators: [withArkExamplePage],
+  render: () => <DataTableAdvancedExample />,
+};
+export const Loading = {
+  render: () => (
+    <L.LoongArkDataTable
+      label="Loading projects"
+      data={[]}
+      columns={columns}
+      loading
+    />
+  ),
+};
