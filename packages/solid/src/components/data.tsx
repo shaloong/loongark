@@ -9,7 +9,7 @@ import {
   toggleDataSelection,
   setDataSelectionMixed,
   restoreDataSelection,
-  renderChartSVG,
+  renderChartMarkup,
   observeChartWidth,
   type ChartOptions,
 } from "@loongark/kit";
@@ -34,7 +34,7 @@ export const LoongArkChart = (props: ChartOptions) => {
     <div
       ref={element}
       data-scope="chart"
-      innerHTML={renderChartSVG({
+      innerHTML={renderChartMarkup({
         ...props,
         width: props.width ?? (measuredWidth() || undefined),
       })}

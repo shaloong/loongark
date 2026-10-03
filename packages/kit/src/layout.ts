@@ -130,7 +130,6 @@ export const layoutAttributes = (
 export const layoutCSS =
   foundationCSS +
   `
-[data-scope=chart] { min-width:0; color:var(--lk-color-semantic-foreground); }
 [data-scope=card][data-part=root] { display:flex; flex-direction:column; gap:var(--lk-space-component-lg); border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border); border-radius:var(--lk-radius-lg); background:var(--lk-color-semantic-card); color:var(--lk-color-semantic-cardforeground); padding:var(--lk-space-component-lg) 0; box-shadow:var(--lk-shadow-sm); }
 [data-scope=card] :is([data-part=header],[data-part=content],[data-part=footer]) { padding:0 var(--lk-space-component-lg); }
 [data-scope=card] [data-part=header] { display:grid; gap:var(--lk-control-fieldgap); }

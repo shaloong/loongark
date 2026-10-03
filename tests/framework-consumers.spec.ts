@@ -62,6 +62,9 @@ for (const framework of ["react", "vue", "solid", "svelte"])
       page.getByRole("dialog", { name: "Edit profile" }),
     ).toBeVisible();
     await page.keyboard.press("Escape");
+    await expect(
+      page.getByRole("dialog", { name: "Edit profile" }),
+    ).not.toBeVisible();
     await page.emulateMedia({ reducedMotion: "reduce" });
     const runtime = await page.evaluate(() => window.checkThemeLifecycle());
     await page.emulateMedia({ reducedMotion: "no-preference" });

@@ -1,0 +1,26 @@
+[serve-static] /workspace/loongark/storybook-static on http://127.0.0.1:6006 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 4 tests using 2 workers
+
+(node:130593) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:130592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:130592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:130593) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+/workspace/loongark/tests/chart.visual.spec.ts-snapshots/chart-light-1280-chromium-visual-linux.png is re-generated, writing actual.
+/workspace/loongark/tests/chart.visual.spec.ts-snapshots/chart-light-1280-chromium-visual-linux.png is re-generated, writing actual.
+  ✓  2 [chromium-visual] › tests/chart.visual.spec.ts:4:9 › Chart light 1280 (1.2s)
+/workspace/loongark/tests/chart.visual.spec.ts-snapshots/chart-light-375-chromium-visual-linux.png is re-generated, writing actual.
+/workspace/loongark/tests/chart.visual.spec.ts-snapshots/chart-light-375-chromium-visual-linux.png is re-generated, writing actual.
+  ✓  1 [chromium-visual] › tests/chart.visual.spec.ts:4:9 › Chart light 375 (1.3s)
+/workspace/loongark/tests/chart.visual.spec.ts-snapshots/chart-dark-375-chromium-visual-linux.png is re-generated, writing actual.
+/workspace/loongark/tests/chart.visual.spec.ts-snapshots/chart-dark-375-chromium-visual-linux.png is re-generated, writing actual.
+/workspace/loongark/tests/chart.visual.spec.ts-snapshots/chart-dark-1280-chromium-visual-linux.png is re-generated, writing actual.
+/workspace/loongark/tests/chart.visual.spec.ts-snapshots/chart-dark-1280-chromium-visual-linux.png is re-generated, writing actual.
+  ✓  4 [chromium-visual] › tests/chart.visual.spec.ts:4:9 › Chart dark 375 (1.1s)
+  ✓  3 [chromium-visual] › tests/chart.visual.spec.ts:4:9 › Chart dark 1280 (1.3s)
+
+  4 passed (3.6s)

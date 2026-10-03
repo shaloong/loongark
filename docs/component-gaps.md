@@ -55,3 +55,5 @@
 本轮不因目录名称相近而增加第三方兼容封装。继续以全量 Story 的浅深色、375px 溢出、Axe 与动效检查，以及四端真实消费回归发现具体问题。Linux 验收中修复的真实问题和限制记入本批验收，未将旧 Windows 验收结果作为 Linux 已通过的依据。
 
 DataTable 后续复核发现选择清理、旧页码、失效排序与受控 checkbox 原生状态不一致，已完成四端修正；选择列、窄屏页脚及 Typography muted 层级也根据真实截图调整。当前累计 102 族、262 Story 和 111 个框架示例，见 [表格说明](data-table.md) 与 [Linux 验收](audits/2026-10-03/data-table-linux/acceptance.json)。
+
+Chart 压力场景进一步确认长分类重叠、数值轴裁切、系列辨识与 SVG 占位问题，已在共享模型/样式修正，四端同步图例、缺失值语义与回归。当前累计 102 族、266 Story 和 115 个框架示例；清单仍无待补组件族。见 [图表说明](chart.md) 与 [Linux 验收](audits/2026-10-03/chart-linux/acceptance.json)。

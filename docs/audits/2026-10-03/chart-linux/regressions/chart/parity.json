@@ -1,0 +1,30 @@
+{
+  "react": {
+    "size": [
+      327,
+      906
+    ],
+    "differentPixelsFromReact": 0
+  },
+  "vue": {
+    "size": [
+      327,
+      906
+    ],
+    "differentPixelsFromReact": 0
+  },
+  "solid": {
+    "size": [
+      327,
+      906
+    ],
+    "differentPixelsFromReact": 0
+  },
+  "svelte": {
+    "size": [
+      327,
+      906
+    ],
+    "differentPixelsFromReact": 0
+  }
+}

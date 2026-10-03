@@ -1,0 +1,95 @@
+[serve-static] /workspace/loongark/storybook-static on http://127.0.0.1:6006 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 3 tests using 2 workers
+
+(node:102754) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:102753) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:102754) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:102753) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [chromium] › tests/chart.spec.ts:5:7 › Chart dark 标签、缺失值、图例和尺寸更新 (1.9s)
+(node:103050) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:103050) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/chart.spec.ts:5:7 › Chart light 标签、缺失值、图例和尺寸更新 (2.9s)
+  ✓  3 [chromium] › tests/chart.spec.ts:14:5 › Chart 极值坐标与本地化空状态 (966ms)
+
+
+  1) [chromium] › tests/chart.spec.ts:5:7 › Chart dark 标签、缺失值、图例和尺寸更新 ──────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  -  1[39m
+    [31m+ Received  + 51[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   Object {[39m
+    [31m+     "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",[39m
+    [31m+     "help": "Elements must meet minimum color contrast ratio thresholds",[39m
+    [31m+     "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",[39m
+    [31m+     "id": "color-contrast",[39m
+    [31m+     "impact": "serious",[39m
+    [31m+     "nodes": Array [[39m
+    [31m+       Object {[39m
+    [31m+         "all": Array [],[39m
+    [31m+         "any": Array [[39m
+    [31m+           Object {[39m
+    [31m+             "data": Object {[39m
+    [31m+               "bgColor": "#ffffff",[39m
+    [31m+               "contrastRatio": 1.11,[39m
+    [31m+               "expectedContrastRatio": "4.5:1",[39m
+    [31m+               "fgColor": "#f2f2f2",[39m
+    [31m+               "fontSize": "10.5pt (14px)",[39m
+    [31m+               "fontWeight": "normal",[39m
+    [31m+               "messageKey": null,[39m
+    [31m+             },[39m
+    [31m+             "id": "color-contrast",[39m
+    [31m+             "impact": "serious",[39m
+    [31m+             "message": "Element has insufficient color contrast of 1.11 (foreground color: #f2f2f2, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",[39m
+    [31m+             "relatedNodes": Array [],[39m
+    [31m+           },[39m
+    [31m+         ],[39m
+    [31m+         "failureSummary": "Fix any of the following:[39m
+    [31m+   Element has insufficient color contrast of 1.11 (foreground color: #f2f2f2, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",[39m
+    [31m+         "html": "<span>Completed runs</span>",[39m
+    [31m+         "impact": "serious",[39m
+    [31m+         "none": Array [],[39m
+    [31m+         "target": Array [[39m
+    [31m+           "div[data-orientation=\"vertical\"][data-scope=\"stack\"][data-variant=\"default\"]:nth-child(4) > div[data-scope=\"chart\"] > ul[data-part=\"legend\"][aria-label=\"Chart series\"] > li[data-part=\"legend-item\"] > span",[39m
+    [31m+         ],[39m
+    [31m+       },[39m
+    [31m+     ],[39m
+    [31m+     "tags": Array [[39m
+    [31m+       "cat.color",[39m
+    [31m+       "wcag2aa",[39m
+    [31m+       "wcag143",[39m
+    [31m+       "TTv5",[39m
+    [31m+       "TT13.c",[39m
+    [31m+       "EN-301-549",[39m
+    [31m+       "EN-9.1.4.3",[39m
+    [31m+       "ACT",[39m
+    [31m+       "RGAAv4",[39m
+    [31m+       "RGAA-3.2.1",[39m
+    [31m+     ],[39m
+    [31m+   },[39m
+    [31m+ ][39m
+
+       8 |     );
+       9 |     await expect(page.locator("[data-scope=chart]").first()).toBeVisible();
+    > 10 |     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+         |                                                                   ^
+      11 |     await checkChart(page);
+      12 |     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+      13 |   });
+        at /workspace/loongark/tests/chart.spec.ts:10:67
+
+    Error Context: test-results/chart-Chart-dark-标签、缺失值、图例和尺寸更新-chromium/error-context.md
+
+  1 failed
+    [chromium] › tests/chart.spec.ts:5:7 › Chart dark 标签、缺失值、图例和尺寸更新 ───────────────────────────────
+  2 passed (5.2s)

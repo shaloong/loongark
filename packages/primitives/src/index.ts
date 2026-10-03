@@ -45,3 +45,5 @@ export * from "./neutral-system";
 export * from "./extended";
 
 import "./data-table";
+
+import "./chart";

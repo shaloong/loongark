@@ -1,0 +1,16 @@
+
+> loongark@0.0.0 verify /workspace/loongark
+> pnpm run lint && pnpm run tsc && pnpm run build
+
+
+> loongark@0.0.0 lint /workspace/loongark
+> node ./scripts/verify-workspace.mjs
+
+[verify-workspace] ok
+
+> loongark@0.0.0 tsc /workspace/loongark
+> pnpm exec tsc -b
+
+packages/kit/src/data-models.ts(165,33): error TS2339: Property 'Segmenter' does not exist on type 'typeof Intl'.
+ ELIFECYCLE  Command failed with exit code 2.
+ ELIFECYCLE  Command failed with exit code 2.

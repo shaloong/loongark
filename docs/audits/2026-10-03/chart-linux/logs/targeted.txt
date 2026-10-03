@@ -1,0 +1,17 @@
+[serve-static] /workspace/loongark/storybook-static on http://127.0.0.1:6006 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 3 tests using 2 workers
+
+(node:128763) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:128762) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:128763) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:128762) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/chart.spec.ts:5:7 › Chart light 标签、缺失值、图例和尺寸更新 (2.9s)
+  ✓  1 [chromium] › tests/chart.spec.ts:5:7 › Chart dark 标签、缺失值、图例和尺寸更新 (3.1s)
+  ✓  3 [chromium] › tests/chart.spec.ts:14:5 › Chart 极值坐标与本地化空状态 (987ms)
+
+  3 passed (5.0s)

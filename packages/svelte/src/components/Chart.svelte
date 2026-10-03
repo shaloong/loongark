@@ -1,6 +1,6 @@
 <script lang="ts">
   import {
-    renderChartSVG,
+    renderChartMarkup,
     observeChartWidth,
     type ChartOptions,
   } from "@loongark/kit";
@@ -19,7 +19,8 @@
   export let title: ChartOptions["title"] = undefined;
   export let width: ChartOptions["width"] = undefined;
   export let height: ChartOptions["height"] = undefined;
-  $: svg = renderChartSVG({
+  export let labels: ChartOptions["labels"] = undefined;
+  $: svg = renderChartMarkup({
     data,
     series,
     labelKey,
@@ -27,6 +28,7 @@
     title,
     width: width ?? (measuredWidth || undefined),
     height,
+    labels,
   });
 </script>
 

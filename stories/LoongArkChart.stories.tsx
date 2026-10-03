@@ -25,3 +25,42 @@ export const Basic: StoryObj = {
     </div>
   ),
 };
+export const Empty: StoryObj = {
+  render: () => (
+    <L.LoongArkChart
+      data={[]}
+      series={[{ key: "amount", label: "Revenue" }]}
+      labelKey="name"
+      title="Revenue"
+      labels={{ empty: "暂无数据", series: "数据系列" }}
+    />
+  ),
+};
+export const MissingValues: StoryObj = {
+  render: () => (
+    <L.LoongArkChart
+      data={[
+        { name: "Monday", amount: 10 },
+        { name: "Tuesday", amount: null },
+        { name: "Wednesday", amount: 5 },
+      ]}
+      series={[{ key: "amount", label: "Completed runs" }]}
+      labelKey="name"
+      title="Availability"
+    />
+  ),
+};
+export const ExtremeValues: StoryObj = {
+  render: () => (
+    <L.LoongArkChart
+      data={[
+        { name: "Loss", amount: -1e308 },
+        { name: "Neutral", amount: 0 },
+        { name: "Gain", amount: 1e308 },
+      ]}
+      series={[{ key: "amount", label: "Balance" }]}
+      labelKey="name"
+      title="Extreme balance"
+    />
+  ),
+};

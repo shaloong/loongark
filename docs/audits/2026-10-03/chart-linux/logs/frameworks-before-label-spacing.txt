@@ -1,0 +1,135 @@
+
+> loongark@0.0.0 test:frameworks /workspace/loongark
+> node scripts/build-framework-fixtures.mjs && node scripts/build-example-fixtures.mjs && node scripts/run-framework-tests.mjs
+
+react 发布消费构建通过
+vue 发布消费构建通过
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+solid 发布消费构建通过
+svelte 发布消费构建通过
+react: 31 个现有组件示例构建通过
+vue: 28 个现有组件示例构建通过
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+solid: 28 个现有组件示例构建通过
+svelte: 28 个现有组件示例构建通过
+[serve-static] /workspace/loongark/tests/consumer-dist on http://127.0.0.1:6007 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 8 tests using 2 workers
+
+(node:100076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:100077) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:100076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:100077) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/framework-consumers.spec.ts:5:7 › vue 发布消费、绑定、主题和浮层 (2.7s)
+  ✓  1 [chromium] › tests/framework-consumers.spec.ts:5:7 › react 发布消费、绑定、主题和浮层 (2.7s)
+  ✓  3 [chromium] › tests/framework-consumers.spec.ts:5:7 › solid 发布消费、绑定、主题和浮层 (2.4s)
+  ✓  4 [chromium] › tests/framework-consumers.spec.ts:5:7 › svelte 发布消费、绑定、主题和浮层 (2.7s)
+  ✘  5 [chromium] › tests/framework-examples.spec.ts:11:7 › react 全部现有组件示例运行 (3.1s)
+(node:100582) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 [chromium] › tests/framework-examples.spec.ts:11:7 › vue 全部现有组件示例运行 (2.9s)
+(node:100591) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:100582) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:100591) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  7 [chromium] › tests/framework-examples.spec.ts:11:7 › solid 全部现有组件示例运行 (3.4s)
+  ✘  8 [chromium] › tests/framework-examples.spec.ts:11:7 › svelte 全部现有组件示例运行 (3.5s)
+
+
+  1) [chromium] › tests/framework-examples.spec.ts:11:7 › react 全部现有组件示例运行 ─────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: <= [32m232.28125[39m
+    Received:    [31m232.8515625[39m
+
+       at chartChecks.ts:48
+
+      46 |   expect(categories.length).toBeLessThan(8);
+      47 |   for (let i = 1; i < categories.length; i++)
+    > 48 |     expect(categories[i - 1].x + categories[i - 1].width).toBeLessThanOrEqual(
+         |                                                           ^
+      49 |       categories[i].x - 2,
+      50 |     );
+      51 |   await expect(
+        at checkChart (/workspace/loongark/tests/chartChecks.ts:48:59)
+        at /workspace/loongark/tests/framework-examples.spec.ts:42:36
+
+    Error Context: test-results/framework-examples-react-全部现有组件示例运行-chromium/error-context.md
+
+  2) [chromium] › tests/framework-examples.spec.ts:11:7 › vue 全部现有组件示例运行 ───────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: <= [32m232.28125[39m
+    Received:    [31m232.8515625[39m
+
+       at chartChecks.ts:48
+
+      46 |   expect(categories.length).toBeLessThan(8);
+      47 |   for (let i = 1; i < categories.length; i++)
+    > 48 |     expect(categories[i - 1].x + categories[i - 1].width).toBeLessThanOrEqual(
+         |                                                           ^
+      49 |       categories[i].x - 2,
+      50 |     );
+      51 |   await expect(
+        at checkChart (/workspace/loongark/tests/chartChecks.ts:48:59)
+        at /workspace/loongark/tests/framework-examples.spec.ts:42:36
+
+    Error Context: test-results/framework-examples-vue-全部现有组件示例运行-chromium/error-context.md
+
+  3) [chromium] › tests/framework-examples.spec.ts:11:7 › solid 全部现有组件示例运行 ─────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: <= [32m232.28125[39m
+    Received:    [31m232.8515625[39m
+
+       at chartChecks.ts:48
+
+      46 |   expect(categories.length).toBeLessThan(8);
+      47 |   for (let i = 1; i < categories.length; i++)
+    > 48 |     expect(categories[i - 1].x + categories[i - 1].width).toBeLessThanOrEqual(
+         |                                                           ^
+      49 |       categories[i].x - 2,
+      50 |     );
+      51 |   await expect(
+        at checkChart (/workspace/loongark/tests/chartChecks.ts:48:59)
+        at /workspace/loongark/tests/framework-examples.spec.ts:42:36
+
+    Error Context: test-results/framework-examples-solid-全部现有组件示例运行-chromium/error-context.md
+
+  4) [chromium] › tests/framework-examples.spec.ts:11:7 › svelte 全部现有组件示例运行 ────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: <= [32m232.28125[39m
+    Received:    [31m232.8515625[39m
+
+       at chartChecks.ts:48
+
+      46 |   expect(categories.length).toBeLessThan(8);
+      47 |   for (let i = 1; i < categories.length; i++)
+    > 48 |     expect(categories[i - 1].x + categories[i - 1].width).toBeLessThanOrEqual(
+         |                                                           ^
+      49 |       categories[i].x - 2,
+      50 |     );
+      51 |   await expect(
+        at checkChart (/workspace/loongark/tests/chartChecks.ts:48:59)
+        at /workspace/loongark/tests/framework-examples.spec.ts:42:36
+
+    Error Context: test-results/framework-examples-svelte-全部现有组件示例运行-chromium/error-context.md
+
+  4 failed
+    [chromium] › tests/framework-examples.spec.ts:11:7 › react 全部现有组件示例运行 ──────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:11:7 › vue 全部现有组件示例运行 ────────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:11:7 › solid 全部现有组件示例运行 ──────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:11:7 › svelte 全部现有组件示例运行 ─────────────────────────
+  4 passed (14.2s)
+ ELIFECYCLE  Command failed with exit code 1.

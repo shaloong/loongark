@@ -126,3 +126,5 @@ DataTable 支持列排序、筛选、分页、行选择和空结果；当前行�
 DataTable 一致性批次完善受控选择、当前页全选、动态数据和列更新、局部键盘滚动与标签覆盖。累计 102 族、262 Story、四端各 620 个公开值入口、111 个框架示例。详见 [组件说明](data-table.md) 与 [Linux 验收](audits/2026-10-03/data-table-linux/acceptance.json)。
 
 Typography 的 muted 变体现在使用已有语义次要文字颜色，补独立 Story 与四端示例的实际计算颜色回归。
+
+Chart 可读性批次完善紧凑数值轴、分类密度、共享图例、缺失值断线和极值坐标。累计 102 族、266 Story、四端各 620 个公开值入口、115 个框架示例。见 [Chart 说明](chart.md) 和 [Linux 验收](audits/2026-10-03/chart-linux/acceptance.json)。

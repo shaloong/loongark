@@ -4,7 +4,7 @@ import {
   type DataSort,
   type DataRow,
   type DataColumn,
-  renderChartSVG,
+  renderChartMarkup,
   observeChartWidth,
   dataTableLabels,
   normalizeDataSelection,
@@ -34,6 +34,7 @@ export const LoongArkChart = defineComponent({
     title: String,
     width: Number,
     height: Number,
+    labels: Object as PropType<ChartOptions["labels"]>,
   },
   setup(props) {
     const element = ref<HTMLElement>();
@@ -50,7 +51,7 @@ export const LoongArkChart = defineComponent({
       h("div", {
         ref: element,
         "data-scope": "chart",
-        innerHTML: renderChartSVG({
+        innerHTML: renderChartMarkup({
           ...props,
           width: props.width ?? (measuredWidth.value || undefined),
         }),

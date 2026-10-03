@@ -32,12 +32,23 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${tableProps})));`
         : `console.log(renderToString(h(L.LoongArkDataTable,${tableProps})));`;
+  const chartProps =
+    "{data:[{name:'SSR category',value:1e308},{name:'Missing',value:null}],series:[{key:'value',label:'SSR series'}],labelKey:'name',title:'SSR chart',labels:{series:'SSR legend'}}";
+  const chartScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkChart,${chartProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkChart,${chartProps})));`
+        : `console.log(renderToString(h(L.LoongArkChart,${chartProps})));`;
   const result = spawnSync(
     process.execPath,
     [
       "--input-type=module",
       "-e",
-      script.replace("process.exit(0);", tableScript + "process.exit(0);"),
+      script.replace(
+        "process.exit(0);",
+        tableScript + chartScript + "process.exit(0);",
+      ),
     ],
     { encoding: "utf8", timeout: 60000 },
   );
@@ -47,6 +58,8 @@ for (const [framework, script] of [
     `${framework}: ${result.stderr} ${result.error ?? ""}`,
   );
   assert.match(result.stdout, /Hello/);
+  assert.match(result.stdout, /aria-label="SSR legend"/);
+  assert.match(result.stdout, /SSR category — SSR series: 1e\+308/);
   assert.match(result.stdout.replace(/<[^>]*>/g, ""), /1 rows · 1 selected/);
   for (const scope of [
     "attachment",

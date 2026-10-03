@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    LoongArkChart,
     LoongArkDataTable,
     LoongArkAttachment,
     LoongArkMessage,
@@ -71,6 +72,16 @@
     <LoongArkBottomNavigationItem href="#home" active
       >Home</LoongArkBottomNavigationItem
     >
+    <LoongArkChart
+      data={[
+        { name: "SSR category", value: 1e308 },
+        { name: "Missing", value: null },
+      ]}
+      series={[{ key: "value", label: "SSR series" }]}
+      labelKey="name"
+      title="SSR chart"
+      labels={{ series: "SSR legend" }}
+    />
     <LoongArkDataTable
       data={[{ id: "a", name: "Alpha" }]}
       columns={[{ key: "name", label: "Name" }]}

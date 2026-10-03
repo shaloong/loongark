@@ -1,0 +1,171 @@
+
+> loongark@0.0.0 test:frameworks /workspace/loongark
+> node scripts/build-framework-fixtures.mjs && node scripts/build-example-fixtures.mjs && node scripts/run-framework-tests.mjs
+
+react 发布消费构建通过
+vue 发布消费构建通过
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+solid 发布消费构建通过
+svelte 发布消费构建通过
+react: 31 个现有组件示例构建通过
+vue: 28 个现有组件示例构建通过
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+solid: 28 个现有组件示例构建通过
+svelte: 28 个现有组件示例构建通过
+[serve-static] /workspace/loongark/tests/consumer-dist on http://127.0.0.1:6007 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 8 tests using 2 workers
+
+(node:122304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:122303) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:122304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:122303) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/framework-consumers.spec.ts:5:7 › react 发布消费、绑定、主题和浮层 (2.6s)
+  ✓  1 [chromium] › tests/framework-consumers.spec.ts:5:7 › vue 发布消费、绑定、主题和浮层 (2.8s)
+  ✓  3 [chromium] › tests/framework-consumers.spec.ts:5:7 › solid 发布消费、绑定、主题和浮层 (2.3s)
+  ✓  4 [chromium] › tests/framework-consumers.spec.ts:5:7 › svelte 发布消费、绑定、主题和浮层 (2.5s)
+  ✘  5 [chromium] › tests/framework-examples.spec.ts:11:7 › react 全部现有组件示例运行 (8.4s)
+(node:122804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 [chromium] › tests/framework-examples.spec.ts:11:7 › vue 全部现有组件示例运行 (8.3s)
+(node:122813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:122804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:122813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  7 [chromium] › tests/framework-examples.spec.ts:11:7 › solid 全部现有组件示例运行 (8.5s)
+  ✘  8 [chromium] › tests/framework-examples.spec.ts:11:7 › svelte 全部现有组件示例运行 (8.5s)
+
+
+  1) [chromium] › tests/framework-examples.spec.ts:11:7 › react 全部现有组件示例运行 ─────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveAccessibleDescription[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('[data-scope=chart]').first().locator(':scope > svg')
+    Expected: [32m"No data"[39m
+    Received: [31m""[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveAccessibleDescription" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-scope=chart]').first().locator(':scope > svg')[22m
+    [2m    9 × locator resolved to <svg role="img" width="327" height="260" viewBox="0 0 327 260" aria-label="Regional revenue" xmlns="http://www.w3.org/2000/svg">…</svg>[22m
+    [2m      - unexpected value ""[22m
+
+
+       at chartChecks.ts:91
+
+      89 |   await page.getByRole("button", { name: "Clear data", exact: true }).click();
+      90 |   await expect(chart.locator("[data-part=empty]")).toHaveText("No data");
+    > 91 |   await expect(svg).toHaveAccessibleDescription("No data");
+         |                     ^
+      92 |   await expect(chart.locator("[data-part=legend]")).toHaveCount(0);
+      93 |   await page.getByRole("button", { name: "Restore data", exact: true }).click();
+      94 |   await expect(chart.locator("[data-part=line]")).toHaveCount(3);
+        at checkChart (/workspace/loongark/tests/chartChecks.ts:91:21)
+        at /workspace/loongark/tests/framework-examples.spec.ts:42:36
+
+    Error Context: test-results/framework-examples-react-全部现有组件示例运行-chromium/error-context.md
+
+  2) [chromium] › tests/framework-examples.spec.ts:11:7 › vue 全部现有组件示例运行 ───────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveAccessibleDescription[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('[data-scope=chart]').first().locator(':scope > svg')
+    Expected: [32m"No data"[39m
+    Received: [31m""[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveAccessibleDescription" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-scope=chart]').first().locator(':scope > svg')[22m
+    [2m    9 × locator resolved to <svg role="img" width="327" height="260" viewBox="0 0 327 260" aria-label="Regional revenue" xmlns="http://www.w3.org/2000/svg">…</svg>[22m
+    [2m      - unexpected value ""[22m
+
+
+       at chartChecks.ts:91
+
+      89 |   await page.getByRole("button", { name: "Clear data", exact: true }).click();
+      90 |   await expect(chart.locator("[data-part=empty]")).toHaveText("No data");
+    > 91 |   await expect(svg).toHaveAccessibleDescription("No data");
+         |                     ^
+      92 |   await expect(chart.locator("[data-part=legend]")).toHaveCount(0);
+      93 |   await page.getByRole("button", { name: "Restore data", exact: true }).click();
+      94 |   await expect(chart.locator("[data-part=line]")).toHaveCount(3);
+        at checkChart (/workspace/loongark/tests/chartChecks.ts:91:21)
+        at /workspace/loongark/tests/framework-examples.spec.ts:42:36
+
+    Error Context: test-results/framework-examples-vue-全部现有组件示例运行-chromium/error-context.md
+
+  3) [chromium] › tests/framework-examples.spec.ts:11:7 › solid 全部现有组件示例运行 ─────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveAccessibleDescription[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('[data-scope=chart]').first().locator(':scope > svg')
+    Expected: [32m"No data"[39m
+    Received: [31m""[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveAccessibleDescription" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-scope=chart]').first().locator(':scope > svg')[22m
+    [2m    9 × locator resolved to <svg role="img" width="327" height="260" viewBox="0 0 327 260" aria-label="Regional revenue" xmlns="http://www.w3.org/2000/svg">…</svg>[22m
+    [2m      - unexpected value ""[22m
+
+
+       at chartChecks.ts:91
+
+      89 |   await page.getByRole("button", { name: "Clear data", exact: true }).click();
+      90 |   await expect(chart.locator("[data-part=empty]")).toHaveText("No data");
+    > 91 |   await expect(svg).toHaveAccessibleDescription("No data");
+         |                     ^
+      92 |   await expect(chart.locator("[data-part=legend]")).toHaveCount(0);
+      93 |   await page.getByRole("button", { name: "Restore data", exact: true }).click();
+      94 |   await expect(chart.locator("[data-part=line]")).toHaveCount(3);
+        at checkChart (/workspace/loongark/tests/chartChecks.ts:91:21)
+        at /workspace/loongark/tests/framework-examples.spec.ts:42:36
+
+    Error Context: test-results/framework-examples-solid-全部现有组件示例运行-chromium/error-context.md
+
+  4) [chromium] › tests/framework-examples.spec.ts:11:7 › svelte 全部现有组件示例运行 ────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveAccessibleDescription[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('[data-scope=chart]').first().locator(':scope > svg')
+    Expected: [32m"No data"[39m
+    Received: [31m""[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveAccessibleDescription" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-scope=chart]').first().locator(':scope > svg')[22m
+    [2m    9 × locator resolved to <svg role="img" width="327" height="260" viewBox="0 0 327 260" aria-label="Regional revenue" xmlns="http://www.w3.org/2000/svg">…</svg>[22m
+    [2m      - unexpected value ""[22m
+
+
+       at chartChecks.ts:91
+
+      89 |   await page.getByRole("button", { name: "Clear data", exact: true }).click();
+      90 |   await expect(chart.locator("[data-part=empty]")).toHaveText("No data");
+    > 91 |   await expect(svg).toHaveAccessibleDescription("No data");
+         |                     ^
+      92 |   await expect(chart.locator("[data-part=legend]")).toHaveCount(0);
+      93 |   await page.getByRole("button", { name: "Restore data", exact: true }).click();
+      94 |   await expect(chart.locator("[data-part=line]")).toHaveCount(3);
+        at checkChart (/workspace/loongark/tests/chartChecks.ts:91:21)
+        at /workspace/loongark/tests/framework-examples.spec.ts:42:36
+
+    Error Context: test-results/framework-examples-svelte-全部现有组件示例运行-chromium/error-context.md
+
+  4 failed
+    [chromium] › tests/framework-examples.spec.ts:11:7 › react 全部现有组件示例运行 ──────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:11:7 › vue 全部现有组件示例运行 ────────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:11:7 › solid 全部现有组件示例运行 ──────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:11:7 › svelte 全部现有组件示例运行 ─────────────────────────
+  4 passed (24.4s)
+ ELIFECYCLE  Command failed with exit code 1.
