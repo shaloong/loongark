@@ -1,0 +1,22 @@
+[
+  {
+    "baseline": "tests/ark-next.visual.spec.ts-snapshots/ark-next-toc-light-1280-chromium-visual-linux.png",
+    "reviewedImage": "review/toc-story-light-1280.png",
+    "changedPixels": 0
+  },
+  {
+    "baseline": "tests/ark-next.visual.spec.ts-snapshots/ark-next-toc-light-375-chromium-visual-linux.png",
+    "reviewedImage": "review/toc-story-light-375.png",
+    "changedPixels": 0
+  },
+  {
+    "baseline": "tests/ark-next.visual.spec.ts-snapshots/ark-next-toc-dark-1280-chromium-visual-linux.png",
+    "reviewedImage": "review/toc-story-dark-1280.png",
+    "changedPixels": 0
+  },
+  {
+    "baseline": "tests/ark-next.visual.spec.ts-snapshots/ark-next-toc-dark-375-chromium-visual-linux.png",
+    "reviewedImage": "review/toc-story-dark-375.png",
+    "changedPixels": 0
+  }
+]

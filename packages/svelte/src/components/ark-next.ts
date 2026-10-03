@@ -52,7 +52,8 @@ export const LoongArkTocList: typeof Toc.List = Toc.List;
 export const LoongArkTocRootProvider: typeof Toc.RootProvider =
   Toc.RootProvider;
 export const LoongArkTocTitle: typeof Toc.Title = Toc.Title;
-export { useToc, useTocContext } from "@ark-ui/svelte/toc";
+export { useTocContext } from "@ark-ui/svelte/toc";
+export { useToc } from "./use-toc.svelte";
 export type {
   UseTocProps,
   UseTocReturn,

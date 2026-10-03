@@ -10,7 +10,13 @@ import { documentItems, documentSections } from "../shared/arkNextDemo";
 export const TocExample = defineComponent({
   setup() {
     const scroll = shallowRef<HTMLElement | null>(null),
-      mounted = ref(true);
+      mounted = ref(true),
+      paused = ref(false),
+      active = shallowRef<string[]>([]),
+      notice = shallowRef<L.TocActiveChangeDetails>({
+        activeIds: [],
+        activeItems: [],
+      });
     return () =>
       h(
         L.LoongArkStack,
@@ -31,10 +37,24 @@ export const TocExample = defineComponent({
             },
             () => (mounted.value ? "Hide outline" : "Show outline"),
           ),
+          h(
+            L.LoongArkButton,
+            {
+              variant: "outline",
+              onClick: () => (paused.value = !paused.value),
+            },
+            () =>
+              paused.value ? "Resume outline updates" : "Pause outline updates",
+          ),
           mounted.value &&
             h(
               L.LoongArkTocRoot,
               {
+                activeIds: active.value,
+                onActiveChange: (details: L.TocActiveChangeDetails) => {
+                  notice.value = details;
+                  if (!paused.value) active.value = details.activeIds;
+                },
                 items: documentItems,
                 scrollEl: () => scroll.value,
               },
@@ -57,16 +77,14 @@ export const TocExample = defineComponent({
                   ]),
                 ]),
                 h(
-                  L.LoongArkTocContext,
-                  {},
+                  "output",
                   {
-                    default: (toc: L.UseTocReturn["value"]) =>
-                      h(
-                        "output",
-                        { "aria-label": "Visible sections" },
-                        toc.activeIds.join(", ") || "No visible section",
-                      ),
+                    "aria-label": "Visible sections",
+                    "data-notified-items": notice.value.activeItems
+                      .map((item) => item.value)
+                      .join(","),
                   },
+                  notice.value.activeIds.join(", ") || "No visible section",
                 ),
               ],
             ),

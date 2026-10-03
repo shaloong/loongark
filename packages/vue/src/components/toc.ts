@@ -1,19 +1,22 @@
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import {
   Toc,
   useTocContext,
   type TocRootProps,
   type TocNavProps,
 } from "@ark-ui/vue/toc";
-import { tocNavId } from "@loongark/kit";
+import { tocNavId, tocControlKeys } from "@loongark/kit";
+import { useToc } from "./use-toc";
 import { renderPart } from "../render-part";
 export const LoongArkTocRoot = defineComponent<TocRootProps>({
   inheritAttrs: false,
-  setup(_, context) {
+  props: tocControlKeys,
+  setup(props, context) {
+    const toc = useToc(computed(() => props));
     return () =>
       renderPart(
-        Toc.Root,
-        { scrollBehavior: "auto", autoScroll: true, ...context.attrs },
+        Toc.RootProvider,
+        { ...context.attrs, value: toc.value },
         context.slots,
       );
   },

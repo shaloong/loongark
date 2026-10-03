@@ -2,7 +2,13 @@
   import * as L from "@loongark/svelte";
   import { documentItems, documentSections } from "../shared/arkNextDemo";
   let scroll = $state<HTMLElement | null>(null),
-    mounted = $state(true);
+    mounted = $state(true),
+    paused = $state(false),
+    active = $state<string[]>([]),
+    notice = $state<L.TocActiveChangeDetails>({
+      activeIds: [],
+      activeItems: [],
+    });
 </script>
 
 <L.LoongArkStack gap="lg" style="width:100%;max-width:640px"
@@ -12,7 +18,17 @@
   ><L.LoongArkButton variant="outline" onclick={() => (mounted = !mounted)}
     >{mounted ? "Hide outline" : "Show outline"}</L.LoongArkButton
   >
+  <L.LoongArkButton variant="outline" onclick={() => (paused = !paused)}
+    >{paused
+      ? "Resume outline updates"
+      : "Pause outline updates"}</L.LoongArkButton
+  >
   {#if mounted && scroll}<L.LoongArkTocRoot
+      activeIds={active}
+      onActiveChange={(details) => {
+        notice = details;
+        if (!paused) active = details.activeIds;
+      }}
       items={documentItems}
       scrollEl={() => scroll}
       ><L.LoongArkTocNav placement="left"
@@ -27,10 +43,12 @@
               >{/each}</L.LoongArkTocList
           ></L.LoongArkBox
         ></L.LoongArkTocNav
-      ><L.LoongArkTocContext
-        >{#snippet render(toc)}<output aria-label="Visible sections"
-            >{toc().activeIds.join(", ") || "No visible section"}</output
-          >{/snippet}</L.LoongArkTocContext
+      ><output
+        aria-label="Visible sections"
+        data-notified-items={notice.activeItems
+          .map((item) => item.value)
+          .join(",")}
+        >{notice.activeIds.join(", ") || "No visible section"}</output
       ></L.LoongArkTocRoot
     >{/if}
   <L.LoongArkTocContent

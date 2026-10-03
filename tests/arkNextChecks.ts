@@ -44,6 +44,12 @@ export async function checkToc(page: Page) {
     link = page.getByRole("link", { name: "Delivery checklist", exact: true });
   await expect(guide).toBeVisible();
   await expect(
+    page.locator("div[data-scope=toc][data-part=root]"),
+  ).toHaveAttribute("id", /^toc:(?!undefined|$).+/);
+  await expect(
+    page.locator("[data-scope=toc][data-part=indicator]"),
+  ).toHaveAttribute("id", /^toc:(?!undefined|$).+/);
+  await expect(
     page.getByRole("navigation", { name: "On this page" }),
   ).toBeVisible();
   expect(
@@ -74,12 +80,38 @@ export async function checkToc(page: Page) {
     )
     .toBeLessThan(2);
   await expect(page.getByLabel("Visible sections")).toContainText("delivery");
+  await expect(page.getByLabel("Visible sections")).toHaveAttribute(
+    "data-notified-items",
+    "delivery",
+  );
   await guide.evaluate((el) => {
     el.scrollTop = 0;
   });
   await expect(
     page.getByRole("link", { name: "Overview", exact: true }),
   ).toHaveAttribute("aria-current", "location");
+  await expect(page.getByLabel("Visible sections")).toContainText("overview");
+  await page
+    .getByRole("button", { name: "Pause outline updates", exact: true })
+    .click();
+  await link.click();
+  await expect(page.getByLabel("Visible sections")).toHaveAttribute(
+    "data-notified-items",
+    "delivery",
+  );
+  await expect(
+    page.getByRole("link", { name: "Overview", exact: true }),
+  ).toHaveAttribute("aria-current", "location");
+  await expect(link).not.toHaveAttribute("aria-current", "location");
+  await page
+    .getByRole("button", { name: "Resume outline updates", exact: true })
+    .click();
+  await guide.evaluate((el) => {
+    el.scrollTop = 240;
+  });
+  await expect(page.getByLabel("Visible sections")).toContainText("keyboard");
+  await link.click();
+  await expect(link).toHaveAttribute("aria-current", "location");
   await page.getByRole("button", { name: "Hide outline", exact: true }).click();
   await expect(page.getByRole("navigation")).toHaveCount(0);
   await guide.evaluate((el) => {

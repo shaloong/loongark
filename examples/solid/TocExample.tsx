@@ -4,7 +4,13 @@ import * as L from "@loongark/solid";
 import { documentItems, documentSections } from "../shared/arkNextDemo";
 export function TocExample() {
   let scroll: HTMLElement | undefined;
-  const [mounted, setMounted] = createSignal(true);
+  const [mounted, setMounted] = createSignal(true),
+    [paused, setPaused] = createSignal(false),
+    [active, setActive] = createSignal<string[]>([]),
+    [notice, setNotice] = createSignal<L.TocActiveChangeDetails>({
+      activeIds: [],
+      activeItems: [],
+    });
   return (
     <L.LoongArkStack gap="lg" style={{ width: "100%", "max-width": "640px" }}>
       <L.LoongArkTypography as="h2">Follow a document</L.LoongArkTypography>
@@ -17,8 +23,16 @@ export function TocExample() {
       >
         {mounted() ? "Hide outline" : "Show outline"}
       </L.LoongArkButton>
+      <L.LoongArkButton variant="outline" onClick={() => setPaused(!paused())}>
+        {paused() ? "Resume outline updates" : "Pause outline updates"}
+      </L.LoongArkButton>
       {mounted() && (
         <L.LoongArkTocRoot
+          activeIds={active()}
+          onActiveChange={(details) => {
+            setNotice(details);
+            if (!paused()) setActive(details.activeIds);
+          }}
           items={documentItems}
           scrollEl={() => scroll ?? null}
         >
@@ -37,13 +51,14 @@ export function TocExample() {
               </L.LoongArkTocList>
             </L.LoongArkBox>
           </L.LoongArkTocNav>
-          <L.LoongArkTocContext>
-            {(toc) => (
-              <output aria-label="Visible sections">
-                {toc().activeIds.join(", ") || "No visible section"}
-              </output>
-            )}
-          </L.LoongArkTocContext>
+          <output
+            aria-label="Visible sections"
+            data-notified-items={notice()
+              .activeItems.map((item) => item.value)
+              .join(",")}
+          >
+            {notice().activeIds.join(", ") || "No visible section"}
+          </output>
         </L.LoongArkTocRoot>
       )}
       <L.LoongArkTocContent

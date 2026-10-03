@@ -36,22 +36,31 @@ export type {
   SwapRootProps,
 } from "@ark-ui/react/swap";
 import { Toc } from "@ark-ui/react/toc";
-import { LoongArkTocRoot, LoongArkTocNav } from "./toc";
-export { LoongArkTocRoot, LoongArkTocNav };
-export const LoongArkToc: Omit<typeof Toc, "Root" | "Nav"> & {
+import {
+  LoongArkTocRoot,
+  LoongArkTocNav,
+  LoongArkTocRootProvider,
+} from "./toc";
+export { LoongArkTocRoot, LoongArkTocNav, LoongArkTocRootProvider };
+export const LoongArkToc: Omit<typeof Toc, "Root" | "Nav" | "RootProvider"> & {
   Root: typeof LoongArkTocRoot;
   Nav: typeof LoongArkTocNav;
-} = { ...Toc, Root: LoongArkTocRoot, Nav: LoongArkTocNav };
+  RootProvider: typeof LoongArkTocRootProvider;
+} = {
+  ...Toc,
+  Root: LoongArkTocRoot,
+  Nav: LoongArkTocNav,
+  RootProvider: LoongArkTocRootProvider,
+};
 export const LoongArkTocContent: typeof Toc.Content = Toc.Content;
 export const LoongArkTocContext: typeof Toc.Context = Toc.Context;
 export const LoongArkTocIndicator: typeof Toc.Indicator = Toc.Indicator;
 export const LoongArkTocItem: typeof Toc.Item = Toc.Item;
 export const LoongArkTocLink: typeof Toc.Link = Toc.Link;
 export const LoongArkTocList: typeof Toc.List = Toc.List;
-export const LoongArkTocRootProvider: typeof Toc.RootProvider =
-  Toc.RootProvider;
 export const LoongArkTocTitle: typeof Toc.Title = Toc.Title;
-export { useToc, useTocContext } from "@ark-ui/react/toc";
+export { useTocContext } from "@ark-ui/react/toc";
+export { useToc } from "./use-toc";
 export type {
   UseTocProps,
   UseTocReturn,

@@ -140,7 +140,7 @@
   "latestEnhancements": [
     "Drawer gesture/snap points/stack",
     "DateInput segmented editing",
-    "Toc observed navigation",
+    "Toc controlled navigation and active-change payload",
     "Swap lifecycle",
     "Context and collection control hooks"
   ]

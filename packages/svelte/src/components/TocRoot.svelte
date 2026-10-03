@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Toc, useToc, type TocRootProps } from "@ark-ui/svelte/toc";
+  import { Toc, type TocRootProps } from "@ark-ui/svelte/toc";
+  import { useToc } from "./use-toc.svelte";
   let {
     ref = $bindable(null),
     children,

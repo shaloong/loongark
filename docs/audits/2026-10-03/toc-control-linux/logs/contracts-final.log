@@ -1,0 +1,16 @@
+
+> loongark@0.0.0 check:contracts /workspace/loongark
+> node scripts/test-theme.mjs && node scripts/check-css-variables.mjs && node scripts/check-api-parity.mjs && node scripts/test-data-models.mjs && node scripts/test-selection-models.mjs && node scripts/test-action-models.mjs && node scripts/test-conversation-models.mjs
+
+明暗、高对比、VI、CSS 变量及 58 个组件 Token 契约验证通过
+共享样式中的 CSS Token 引用全部有效
+四端 789 个公开 LoongArk 导出一致
+表格筛选、排序、分页及图表负值/转义验证通过
+表格分页全选、陈旧选择归一化、失效排序、唯一标识与标签默认值回归通过
+图表缺失值断线、极值有限坐标、空状态转义与大型数组归约通过
+图表截短保留完整组合 emoji，通过 grapheme 回归
+无 Intl.Segmenter 环境保留完整提示且不崩溃，通过回归
+图表零值是有效数据，不显示空状态，通过回归
+TransferList immutable moves/disabled items, TimePicker midnight/step/locale, Textarea row bounds passed.
+Action/media shared bounds, inherited columns, disabled filtering and unique keys passed.
+附件无效进度、禁用下载；问卷陈旧答案、必填、长度、不可变选择与重复标识回归通过

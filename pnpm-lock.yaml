@@ -115,6 +115,9 @@ importers:
       '@zag-js/json-tree-utils':
         specifier: 1.43.3
         version: 1.43.3
+      '@zag-js/toc':
+        specifier: 1.43.3
+        version: 1.43.3
 
   packages/primitives:
     dependencies:
@@ -139,6 +142,9 @@ importers:
       '@loongark/theme':
         specifier: workspace:*
         version: link:../theme
+      '@zag-js/react':
+        specifier: 1.43.3
+        version: 1.43.3(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       react:
         specifier: '>=18.0.0'
         version: 19.2.1
@@ -160,6 +166,9 @@ importers:
       '@loongark/theme':
         specifier: workspace:*
         version: link:../theme
+      '@zag-js/solid':
+        specifier: 1.43.3
+        version: 1.43.3(solid-js@1.9.15)
       solid-js:
         specifier: 1.9.15
         version: 1.9.15
@@ -178,6 +187,9 @@ importers:
       '@loongark/theme':
         specifier: workspace:*
         version: link:../theme
+      '@zag-js/svelte':
+        specifier: 1.43.3
+        version: 1.43.3(svelte@5.45.2)
       svelte:
         specifier: '>=5.20.0'
         version: 5.45.2
@@ -204,6 +216,9 @@ importers:
       '@loongark/theme':
         specifier: workspace:*
         version: link:../theme
+      '@zag-js/vue':
+        specifier: 1.43.3
+        version: 1.43.3(vue@3.5.25(typescript@5.9.3))
       vue:
         specifier: 3.5.25
         version: 3.5.25(typescript@5.9.3)

@@ -1,0 +1,171 @@
+
+> loongark@0.0.0 test:frameworks /workspace/loongark
+> node scripts/build-framework-fixtures.mjs && node scripts/build-example-fixtures.mjs && node scripts/run-framework-tests.mjs
+
+react 发布消费构建通过
+vue 发布消费构建通过
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+solid 发布消费构建通过
+svelte 发布消费构建通过
+react: 39 个现有组件示例构建通过
+vue: 36 个现有组件示例构建通过
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+solid: 36 个现有组件示例构建通过
+svelte: 36 个现有组件示例构建通过
+[serve-static] /workspace/loongark/tests/consumer-dist on http://127.0.0.1:6007 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 8 tests using 2 workers
+
+(node:292387) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:292388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:292388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:292387) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/framework-consumers.spec.ts:5:7 › react 发布消费、绑定、主题和浮层 (3.7s)
+  ✓  1 [chromium] › tests/framework-consumers.spec.ts:5:7 › vue 发布消费、绑定、主题和浮层 (3.8s)
+  ✓  3 [chromium] › tests/framework-consumers.spec.ts:5:7 › solid 发布消费、绑定、主题和浮层 (2.7s)
+  ✓  4 [chromium] › tests/framework-consumers.spec.ts:5:7 › svelte 发布消费、绑定、主题和浮层 (3.0s)
+  ✘  5 [chromium] › tests/framework-examples.spec.ts:24:7 › react 全部现有组件示例运行 (30.3s)
+(node:293114) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 [chromium] › tests/framework-examples.spec.ts:24:7 › vue 全部现有组件示例运行 (30.0s)
+(node:293123) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:293114) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:293123) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  8 [chromium] › tests/framework-examples.spec.ts:24:7 › svelte 全部现有组件示例运行 (28.1s)
+  ✘  7 [chromium] › tests/framework-examples.spec.ts:24:7 › solid 全部现有组件示例运行 (28.9s)
+
+
+  1) [chromium] › tests/framework-examples.spec.ts:24:7 › react 全部现有组件示例运行 ─────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByLabel('Visible sections')
+    Expected substring: "overview"
+    Received string:    "delivery"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByLabel('Visible sections')
+        9 × locator resolved to <output aria-label="Visible sections" data-notified-items="delivery">delivery</output>
+          - unexpected value "delivery"
+
+
+       at arkNextChecks.ts:106
+
+      104 |     el.scrollTop = 0;
+      105 |   });
+    > 106 |   await expect(page.getByLabel("Visible sections")).toContainText("overview");
+          |                                                     ^
+      107 |   await link.click();
+      108 |   await expect(link).toHaveAttribute("aria-current", "location");
+      109 |   await page.getByRole("button", { name: "Hide outline", exact: true }).click();
+        at checkToc (/workspace/loongark/tests/arkNextChecks.ts:106:53)
+        at /workspace/loongark/tests/framework-examples.spec.ts:161:34
+
+    Error Context: test-results/framework-examples-react-全部现有组件示例运行-chromium/error-context.md
+
+  2) [chromium] › tests/framework-examples.spec.ts:24:7 › vue 全部现有组件示例运行 ───────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByLabel('Visible sections')
+    Expected substring: "overview"
+    Received string:    "delivery"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByLabel('Visible sections')
+        9 × locator resolved to <output aria-label="Visible sections" data-notified-items="delivery">delivery</output>
+          - unexpected value "delivery"
+
+
+       at arkNextChecks.ts:106
+
+      104 |     el.scrollTop = 0;
+      105 |   });
+    > 106 |   await expect(page.getByLabel("Visible sections")).toContainText("overview");
+          |                                                     ^
+      107 |   await link.click();
+      108 |   await expect(link).toHaveAttribute("aria-current", "location");
+      109 |   await page.getByRole("button", { name: "Hide outline", exact: true }).click();
+        at checkToc (/workspace/loongark/tests/arkNextChecks.ts:106:53)
+        at /workspace/loongark/tests/framework-examples.spec.ts:161:34
+
+    Error Context: test-results/framework-examples-vue-全部现有组件示例运行-chromium/error-context.md
+
+  3) [chromium] › tests/framework-examples.spec.ts:24:7 › solid 全部现有组件示例运行 ─────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByLabel('Visible sections')
+    Expected substring: "overview"
+    Received string:    "delivery"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByLabel('Visible sections')
+        9 × locator resolved to <output aria-label="Visible sections" data-notified-items="delivery">delivery</output>
+          - unexpected value "delivery"
+
+
+       at arkNextChecks.ts:106
+
+      104 |     el.scrollTop = 0;
+      105 |   });
+    > 106 |   await expect(page.getByLabel("Visible sections")).toContainText("overview");
+          |                                                     ^
+      107 |   await link.click();
+      108 |   await expect(link).toHaveAttribute("aria-current", "location");
+      109 |   await page.getByRole("button", { name: "Hide outline", exact: true }).click();
+        at checkToc (/workspace/loongark/tests/arkNextChecks.ts:106:53)
+        at /workspace/loongark/tests/framework-examples.spec.ts:161:34
+
+    Error Context: test-results/framework-examples-solid-全部现有组件示例运行-chromium/error-context.md
+
+  4) [chromium] › tests/framework-examples.spec.ts:24:7 › svelte 全部现有组件示例运行 ────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByLabel('Visible sections')
+    Expected substring: "overview"
+    Received string:    "delivery"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByLabel('Visible sections')
+        9 × locator resolved to <output aria-label="Visible sections" data-notified-items="delivery">delivery</output>
+          - unexpected value "delivery"
+
+
+       at arkNextChecks.ts:106
+
+      104 |     el.scrollTop = 0;
+      105 |   });
+    > 106 |   await expect(page.getByLabel("Visible sections")).toContainText("overview");
+          |                                                     ^
+      107 |   await link.click();
+      108 |   await expect(link).toHaveAttribute("aria-current", "location");
+      109 |   await page.getByRole("button", { name: "Hide outline", exact: true }).click();
+        at checkToc (/workspace/loongark/tests/arkNextChecks.ts:106:53)
+        at /workspace/loongark/tests/framework-examples.spec.ts:161:34
+
+    Error Context: test-results/framework-examples-svelte-全部现有组件示例运行-chromium/error-context.md
+
+  4 failed
+    [chromium] › tests/framework-examples.spec.ts:24:7 › react 全部现有组件示例运行 ──────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:24:7 › vue 全部现有组件示例运行 ────────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:24:7 › solid 全部现有组件示例运行 ──────────────────────────
+    [chromium] › tests/framework-examples.spec.ts:24:7 › svelte 全部现有组件示例运行 ─────────────────────────
+  4 passed (1.1m)
+ ELIFECYCLE  Command failed with exit code 1.

@@ -19,7 +19,8 @@
     "@ark-ui/react": "^5.39.2",
     "@loongark/kit": "workspace:*",
     "@loongark/primitives": "workspace:*",
-    "@loongark/theme": "workspace:*"
+    "@loongark/theme": "workspace:*",
+    "@zag-js/react": "1.43.3"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

@@ -51,7 +51,8 @@ export const LoongArkTocList: typeof Toc.List = Toc.List;
 export const LoongArkTocRootProvider: typeof Toc.RootProvider =
   Toc.RootProvider;
 export const LoongArkTocTitle: typeof Toc.Title = Toc.Title;
-export { useToc, useTocContext } from "@ark-ui/vue/toc";
+export { useTocContext } from "@ark-ui/vue/toc";
+export { useToc } from "./use-toc";
 export type { UseTocProps, UseTocReturn, TocRootProps } from "@ark-ui/vue/toc";
 export type {
   DateInputDateValue,
