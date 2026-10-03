@@ -41,22 +41,34 @@ export const createDataTableView = (
   options: DataTableOptions = {},
 ) => {
   const query = options.query?.trim().toLocaleLowerCase() ?? "";
-  let rows = data
-    .map((row, index) => ({
-      row,
-      id: String(row[options.rowKey ?? "id"] ?? index),
-      index,
-    }))
-    .filter(
-      ({ row }) =>
-        !query ||
-        columns.some(({ key }) =>
-          String(row[key] ?? "")
-            .toLocaleLowerCase()
-            .includes(query),
-        ),
-    );
-  const sort = options.sort;
+  const allRows = data.map((row, index) => ({
+    row,
+    id: String(row[options.rowKey ?? "id"] ?? index),
+    index,
+  }));
+  const allIds = allRows.map(({ id }) => id);
+  if (new Set(allIds).size !== allIds.length)
+    throw Error("DataTable requires unique row ids");
+  const columnKeys = columns.map(({ key }) => key);
+  if (
+    columnKeys.some((key) => !key) ||
+    new Set(columnKeys).size !== columnKeys.length
+  )
+    throw Error("DataTable requires unique non-empty column keys");
+  let rows = allRows.filter(
+    ({ row }) =>
+      !query ||
+      columns.some(({ key }) =>
+        String(row[key] ?? "")
+          .toLocaleLowerCase()
+          .includes(query),
+      ),
+  );
+  const sort = columns.some(
+    (column) => column.key === options.sort?.key && column.sortable !== false,
+  )
+    ? options.sort
+    : undefined;
   if (sort)
     rows = rows.sort((a, b) => {
       const left = a.row[sort.key],
@@ -80,6 +92,8 @@ export const createDataTableView = (
     Math.max(1, Math.floor(Number.isFinite(options.page) ? options.page! : 1)),
   );
   return {
+    allIds,
+    sort,
     rows: rows.slice((page - 1) * pageSize, page * pageSize),
     total: rows.length,
     page,

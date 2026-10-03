@@ -43,3 +43,5 @@ export * from "./tree-view";
 export * from "./neutral-system";
 
 export * from "./extended";
+
+import "./data-table";

@@ -15,3 +15,9 @@
 ## 2026-10-03 附件、消息与问卷
 
 补齐五个专用组件，明确与 FileUpload、ScrollArea、基础表单的职责边界。共享数据模型与滚动控制复用四端；同步原生语义、答案绑定、焦点与禁用操作。增加独立 Story、四端 ConversationExample、发布产物 SSR 与行为回归。Linux 验收和独立截图见 [本批记录](audits/2026-10-03/conversation-linux/acceptance.json)。
+
+## 2026-10-03 DataTable 一致性
+
+修复删除源行后选择数量残留、数据恢复时跳回旧页和被删除列的旧排序。四端共享选择模型，增加当前页三态全选、受控选择和完整标签覆盖；原生 checkbox 在受控调用方拒绝更新时恢复正确状态。专用共享样式归入 Primitives，统一 48px 行密度、排序反馈、表格边界和窄屏分页。新增四端示例、SSR 与真实行为回归，证据见 [本批验收](audits/2026-10-03/data-table-linux/acceptance.json)。
+
+目视核验修正：选择列固定为 48px，不随短内容分配表格余宽；Typography 的 muted 变体消费已有 mutedForeground Token，恢复说明文字与正文的层次。

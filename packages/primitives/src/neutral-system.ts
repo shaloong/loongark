@@ -2,6 +2,7 @@ import { createPrimitive, registerPrimitive } from "./core";
 import { stateMotionCSS } from "./motion";
 const css = `
 [data-scope][hidden] { display:none !important; }
+[data-scope=typography][data-variant=muted] { color:var(--lk-color-semantic-mutedforeground); }
 [data-scope=field] :is([data-part=input],[data-part=select]) { height:var(--lk-control-height-md); padding-block:0; }
 [data-scope=popover][data-part=close-trigger]:is(button), [data-scope][data-part=trigger]:is(button), [data-scope=menu][data-part=context-trigger]:is(button), [data-scope=timer][data-part=action-trigger], [data-scope=signature-pad][data-part=clear-trigger] { min-height:var(--lk-control-height-md); padding:0 var(--lk-space-component-compact); display:inline-flex; align-items:center; justify-content:center; border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input); border-radius:var(--lk-radius-md); background:var(--lk-color-semantic-background); color:var(--lk-color-semantic-foreground); font:inherit; cursor:pointer; }
 [data-scope][data-part=trigger]:is(button):disabled { opacity:.5; cursor:not-allowed; }

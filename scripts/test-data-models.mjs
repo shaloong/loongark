@@ -46,3 +46,53 @@ assert(!svg.includes("invalid.test"));
 assert(!svg.includes("NaN"));
 assert(!svg.includes('height="-'));
 console.log("表格筛选、排序、分页及图表负值/转义验证通过");
+
+const {
+  normalizeDataSelection,
+  dataSelectionState,
+  toggleDataSelection,
+  dataTableLabels,
+} = await import("../packages/kit/dist/index.js");
+assert.deepEqual(
+  normalizeDataSelection(["a", "a", "gone", "b"], ["a", "b", "c"]),
+  ["a", "b"],
+);
+assert.deepEqual(toggleDataSelection(["c"], ["a", "b"], true), ["c", "a", "b"]);
+assert.deepEqual(toggleDataSelection(["c", "a", "b"], ["a", "b"], false), [
+  "c",
+]);
+assert.deepEqual(dataSelectionState(["a"], ["a", "b"]), {
+  checked: false,
+  mixed: true,
+});
+assert.deepEqual(dataSelectionState([], []), { checked: false, mixed: false });
+assert.deepEqual(
+  createDataTableView(rows, columns, { query: "Alpha" }).allIds,
+  ["a", "b", "c"],
+);
+assert.equal(
+  createDataTableView(rows, columns, {
+    sort: { key: "value", direction: "asc" },
+  }).sort?.direction,
+  "asc",
+);
+assert.equal(
+  createDataTableView(
+    rows,
+    columns.filter((c) => c.key !== "value"),
+    { sort: { key: "value", direction: "asc" } },
+  ).sort,
+  undefined,
+);
+assert.throws(
+  () => createDataTableView([rows[0], rows[0]], columns),
+  /unique row ids/,
+);
+assert.throws(
+  () => createDataTableView(rows, [columns[0], columns[0]]),
+  /unique non-empty column/,
+);
+assert.equal(dataTableLabels({ previous: undefined }).previous, "Previous");
+console.log(
+  "表格分页全选、陈旧选择归一化、失效排序、唯一标识与标签默认值回归通过",
+);

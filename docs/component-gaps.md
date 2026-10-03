@@ -53,3 +53,5 @@
 重新核对公开入口与独立 Story：输入与表单（Input、Textarea、Field、Fieldset、选择组、Combobox、TransferList、TimePicker）、反馈与浮层（Alert、Toast、Empty、Progress、Dialog、AlertDialog、Drawer、Sheet）、导航与布局（Tabs、Sidebar、NavigationMenu、AppBar、BottomNavigation、Grid、Masonry）、数据与媒体（Table、DataTable、Chart、ImageList、Carousel）均已有四端能力。IconButton 继续使用 Button 的 icon 尺寸，OTP、Autocomplete、Snackbar 等保持既有等价记录，不新增别名。
 
 本轮不因目录名称相近而增加第三方兼容封装。继续以全量 Story 的浅深色、375px 溢出、Axe 与动效检查，以及四端真实消费回归发现具体问题。Linux 验收中修复的真实问题和限制记入本批验收，未将旧 Windows 验收结果作为 Linux 已通过的依据。
+
+DataTable 后续复核发现选择清理、旧页码、失效排序与受控 checkbox 原生状态不一致，已完成四端修正；选择列、窄屏页脚及 Typography muted 层级也根据真实截图调整。当前累计 102 族、262 Story 和 111 个框架示例，见 [表格说明](data-table.md) 与 [Linux 验收](audits/2026-10-03/data-table-linux/acceptance.json)。

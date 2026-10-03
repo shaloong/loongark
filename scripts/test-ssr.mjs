@@ -24,9 +24,21 @@ for (const [framework, script] of [
     `import {renderToString} from 'solid-js/web';import {createComponent as h} from 'solid-js';import * as L from './packages/solid/dist/server/index.js';console.log(renderToString(()=>h(L.LoongArkContainer,{children:[h(L.LoongArkButton,{children:'Hello'}),h(L.LoongArkTextarea,{name:'notes',value:'SSR notes',readOnly:true,autoSize:true,minRows:2,maxRows:5}),h(L.LoongArkChipRemoveTrigger,{children:'Remove'}),h(L.LoongArkTransferList,{items:[{value:'alpha',label:'Alpha'}],defaultValue:['alpha'],name:'assigned'}),h(L.LoongArkTimePicker,{defaultValue:'13:30',name:'meeting',minuteStep:15}),h(L.LoongArkFloatingActionButton,{'aria-label':'Create SSR',children:'＋'}),h(L.LoongArkSpeedDial,{label:'SSR actions',actions:[{value:'new',label:'New'}]}),h(L.LoongArkImageList,{columns:2,children:h(L.LoongArkImageListItem,{children:'Image SSR'})}),h(L.LoongArkMasonry,{columns:2,children:h(L.LoongArkMasonryItem,{children:'Media SSR'})}),h(L.LoongArkBottomNavigationItem,{href:'#home',active:true,children:'Home'})]})));console.log(renderToString(()=>h(L.LoongArkMessageScroller,{label:'SSR conversation',children:[h(L.LoongArkMessage,{author:'Lin',children:[h(L.LoongArkBubble,{children:'Conversation SSR'}),h(L.LoongArkAttachment,{name:'SSR.pdf',status:'uploading'})]}),h(L.LoongArkQuestionnaire,{label:'SSR feedback',questions:[{id:'answer',label:'Your answer',type:'text'}],defaultValue:{answer:'SSR answer'}})]})));process.exit(0);`,
   ],
 ]) {
+  const tableProps =
+    "{data:[{id:'a',name:'Alpha'}],columns:[{key:'name',label:'Name'}],defaultSelectedIds:['a','missing'],onSelectionChange:()=>{throw Error('SSR must not emit selection updates')}}";
+  const tableScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${tableProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${tableProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${tableProps})));`;
   const result = spawnSync(
     process.execPath,
-    ["--input-type=module", "-e", script],
+    [
+      "--input-type=module",
+      "-e",
+      script.replace("process.exit(0);", tableScript + "process.exit(0);"),
+    ],
     { encoding: "utf8", timeout: 60000 },
   );
   assert.equal(
@@ -35,6 +47,7 @@ for (const [framework, script] of [
     `${framework}: ${result.stderr} ${result.error ?? ""}`,
   );
   assert.match(result.stdout, /Hello/);
+  assert.match(result.stdout.replace(/<[^>]*>/g, ""), /1 rows · 1 selected/);
   for (const scope of [
     "attachment",
     "bubble",

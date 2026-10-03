@@ -2,20 +2,19 @@ import {
   createDataTableView,
   nextDataSort,
   type DataSort,
-  type DataRow,
-  type DataColumn,
+  type DataTableProps,
+  dataTableLabels,
+  normalizeDataSelection,
+  dataSelectionState,
+  toggleDataSelection,
+  setDataSelectionMixed,
+  restoreDataSelection,
   renderChartSVG,
   observeChartWidth,
   type ChartOptions,
 } from "@loongark/kit";
 import React, { useState, useRef, useEffect } from "react";
-export interface LoongArkDataTableProps {
-  data: readonly DataRow[];
-  columns: readonly DataColumn[];
-  pageSize?: number;
-  rowKey?: string;
-  onSelectionChange?: (ids: string[]) => void;
-}
+export type LoongArkDataTableProps = DataTableProps;
 export const LoongArkChart = (props: ChartOptions) => {
   const element = useRef<HTMLDivElement>(null);
   const [measuredWidth, setMeasuredWidth] = useState(0);
@@ -40,7 +39,12 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
   const [query, setQuery] = useState(""),
     [sort, setSort] = useState<DataSort>(),
     [page, setPage] = useState(1),
-    [selected, setSelected] = useState<string[]>([]);
+    [internal, setInternal] = useState<string[]>([
+      ...(props.defaultSelectedIds ?? []),
+    ]);
+  const pageInput = useRef<HTMLInputElement>(null);
+  const labels = dataTableLabels(props.labels),
+    label = props.label ?? "Data table";
   const view = createDataTableView(props.data, props.columns, {
     query,
     sort,
@@ -48,47 +52,105 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     pageSize: props.pageSize,
     rowKey: props.rowKey,
   });
-  const select = (id: string) => {
-    const ids = selected.includes(id)
-      ? selected.filter((x) => x !== id)
-      : [...selected, id];
-    setSelected(ids);
+  const selected = normalizeDataSelection(
+    props.selectedIds ?? internal,
+    view.allIds,
+  );
+  const pageIds = view.rows.map(({ id }) => id),
+    pageSelection = dataSelectionState(selected, pageIds);
+  useEffect(() => {
+    setDataSelectionMixed(pageInput.current, pageSelection.mixed);
+  }, [pageSelection.mixed]);
+  useEffect(() => {
+    if (page !== view.page) setPage(view.page);
+    if (sort && !view.sort) setSort(undefined);
+    if (
+      props.selectedIds === undefined &&
+      selected.length !== internal.length
+    ) {
+      setInternal(selected);
+      props.onSelectionChange?.(selected);
+    }
+  }, [
+    props.data,
+    props.columns,
+    props.rowKey,
+    props.pageSize,
+    props.selectedIds,
+    page,
+    sort,
+    internal,
+  ]);
+  const change = (ids: string[], input: HTMLInputElement, rowId?: string) => {
+    if (props.selectedIds === undefined) setInternal(ids);
     props.onSelectionChange?.(ids);
+    if (props.selectedIds !== undefined)
+      restoreDataSelection(input, selected, pageIds, rowId);
   };
   return (
-    <section data-scope="data-table">
+    <section data-scope="data-table" data-part="root">
       <input
-        aria-label="Filter rows"
-        placeholder="Filter rows…"
+        aria-label={labels.filter}
+        placeholder={labels.filterPlaceholder}
         value={query}
         onChange={(e) => {
           setQuery(e.currentTarget.value);
           setPage(1);
         }}
       />
-      <div data-scope="table" data-part="root">
-        <table data-scope="table" data-part="table">
+      <div
+        data-scope="table"
+        data-part="root"
+        role="region"
+        aria-label={label}
+        tabIndex={0}
+      >
+        <table data-scope="table" data-part="table" aria-label={label}>
           <thead>
             <tr>
-              <th scope="col">Select</th>
+              <th scope="col">
+                <label data-part="selection">
+                  <input
+                    ref={pageInput}
+                    type="checkbox"
+                    aria-label={labels.selectPage}
+                    aria-checked={
+                      pageSelection.mixed ? "mixed" : pageSelection.checked
+                    }
+                    checked={pageSelection.checked}
+                    disabled={!pageIds.length}
+                    onChange={(e) =>
+                      change(
+                        toggleDataSelection(
+                          selected,
+                          pageIds,
+                          e.currentTarget.checked,
+                        ),
+                        e.currentTarget,
+                      )
+                    }
+                  />
+                </label>
+              </th>
               {props.columns.map((c) => (
                 <th
                   key={c.key}
                   scope="col"
                   aria-sort={
-                    sort?.key === c.key
-                      ? sort.direction === "asc"
+                    view.sort?.key === c.key
+                      ? view.sort.direction === "asc"
                         ? "ascending"
                         : "descending"
-                      : "none"
+                      : undefined
                   }
                 >
                   {c.sortable === false ? (
                     c.label
                   ) : (
                     <button
+                      aria-label={c.label}
                       type="button"
-                      onClick={() => setSort(nextDataSort(sort, c.key))}
+                      onClick={() => setSort(nextDataSort(view.sort, c.key))}
                     >
                       {c.label}
                     </button>
@@ -101,12 +163,24 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
             {view.rows.map(({ row, id }) => (
               <tr key={id} data-selected={selected.includes(id) || undefined}>
                 <td>
-                  <input
-                    type="checkbox"
-                    aria-label={"Select " + id}
-                    checked={selected.includes(id)}
-                    onChange={() => select(id)}
-                  />
+                  <label data-part="selection">
+                    <input
+                      type="checkbox"
+                      aria-label={labels.selectRow(id)}
+                      checked={selected.includes(id)}
+                      onChange={(e) =>
+                        change(
+                          toggleDataSelection(
+                            selected,
+                            [id],
+                            e.currentTarget.checked,
+                          ),
+                          e.currentTarget,
+                          id,
+                        )
+                      }
+                    />
+                  </label>
                 </td>
                 {props.columns.map((c) => (
                   <td key={c.key}>{String(row[c.key] ?? "")}</td>
@@ -115,7 +189,9 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
             ))}
             {!view.rows.length && (
               <tr>
-                <td colSpan={props.columns.length + 1}>No results</td>
+                <td colSpan={props.columns.length + 1} data-part="empty">
+                  {labels.empty}
+                </td>
               </tr>
             )}
           </tbody>
@@ -123,22 +199,26 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
       </div>
       <footer>
         <span aria-live="polite">
-          {view.total} rows · {selected.length} selected · {view.page} /{" "}
-          {view.pageCount}
+          {labels.summary({
+            total: view.total,
+            selected: selected.length,
+            page: view.page,
+            pageCount: view.pageCount,
+          })}
         </span>
         <button
           type="button"
           disabled={view.page <= 1}
           onClick={() => setPage(view.page - 1)}
         >
-          Previous
+          {labels.previous}
         </button>
         <button
           type="button"
           disabled={view.page >= view.pageCount}
           onClick={() => setPage(view.page + 1)}
         >
-          Next
+          {labels.next}
         </button>
       </footer>
     </section>

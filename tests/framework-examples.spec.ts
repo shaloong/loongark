@@ -2,6 +2,7 @@ import { auditDirectory } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { checkSelectionInputs } from "./selectionInputChecks";
+import { checkDataTable } from "./dataTableChecks";
 import { checkConversation } from "./conversationChecks";
 import { checkActionMedia } from "./actionMediaChecks";
 import { mkdir } from "node:fs/promises";
@@ -37,6 +38,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
       if (await page.locator("button button").count())
         failures.push(name + ": 嵌套按钮");
 
+      if (name === "DataTableExample") await checkDataTable(page, framework);
       if (name === "ConversationExample") {
         await checkConversation(page, framework);
       }

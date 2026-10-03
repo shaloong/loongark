@@ -14,6 +14,7 @@ export * from "./conversation";
 export * from "./layout";
 export * from "./menubar";
 export * from "./data-models";
+export * from "./data-table";
 export * from "./transfer-list";
 export * from "./time-picker";
 export * from "./textarea-autosize";

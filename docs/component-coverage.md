@@ -122,3 +122,7 @@ DataTable 支持列排序、筛选、分页、行选择和空结果；当前行�
 构建、真实消费、SSR、公开类型、交互与视觉证据见 [整改报告](remediation.md)。
 
 附件、消息与问卷批次补齐 Attachment、Message、Bubble、MessageScroller、Questionnaire；累计 102 族、257 Story、四端各 620 个公开值入口。等价职责与限制见 [组件说明](conversation.md)，真实验收见 [Linux 记录](audits/2026-10-03/conversation-linux/acceptance.json)。
+
+DataTable 一致性批次完善受控选择、当前页全选、动态数据和列更新、局部键盘滚动与标签覆盖。累计 102 族、262 Story、四端各 620 个公开值入口、111 个框架示例。详见 [组件说明](data-table.md) 与 [Linux 验收](audits/2026-10-03/data-table-linux/acceptance.json)。
+
+Typography 的 muted 变体现在使用已有语义次要文字颜色，补独立 Story 与四端示例的实际计算颜色回归。

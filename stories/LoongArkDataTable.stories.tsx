@@ -23,3 +23,52 @@ export const Basic: StoryObj = {
     </div>
   ),
 };
+
+export const Empty: StoryObj = {
+  render: () => (
+    <L.LoongArkDataTable
+      data={[]}
+      columns={columns}
+      label="Empty project list"
+    />
+  ),
+};
+export const LongCells: StoryObj = {
+  render: () => (
+    <L.LoongArkDataTable
+      data={[
+        {
+          id: "long",
+          name: "International-accessibility-workspace-with-a-long-project-name-and-release-notes",
+          amount: 2400,
+        },
+      ]}
+      columns={columns}
+      label="Long project names"
+    />
+  ),
+};
+export const Localized: StoryObj = {
+  render: () => (
+    <L.LoongArkDataTable
+      data={rows}
+      columns={[
+        { key: "name", label: "项目" },
+        { key: "amount", label: "收入" },
+      ]}
+      pageSize={2}
+      label="项目列表"
+      labels={{
+        filter: "筛选项目",
+        filterPlaceholder: "搜索项目…",
+        selectPage: "选择当前页",
+        selectRow: (id) => "选择项目 " + id,
+        empty: "没有匹配的项目",
+        previous: "上一页",
+        next: "下一页",
+        summary: ({ total, selected, page, pageCount }) =>
+          `${total} 项 · 已选 ${selected} 项 · ${page} / ${pageCount}`,
+      }}
+    />
+  ),
+};

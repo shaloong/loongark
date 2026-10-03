@@ -1,0 +1,27 @@
+# DataTable 的选择、排序与更新
+
+DataTable 提供原生表格、文本筛选、三态排序、分页、行选择和空结果。共享行模型和选择状态位于 Kit，专用样式位于 Primitives；框架层负责渲染、受控绑定与挂载后的状态清理。四端共享同一套标签和 Token，不增加第三方表格依赖。
+
+## API
+
+`data` 和 `columns` 为必需项。数据行仍是标量字段，列由 `key/label/sortable` 定义。列 key 必须非空且唯一；行 `rowKey` 默认为 `id`，未提供值时使用原始下标，最终 ID 必须唯一。会更新、插入或重排的数据应提供稳定的 rowKey。
+
+`pageSize` 控制每页行数，非法数值归一为默认大小。排序只作用于当前存在且可排序的列；列删除或改为不可排序时清理旧排序。源数据收缩时页码限制到合法范围，后续恢复数据不会自动跳回旧页。
+
+`defaultSelectedIds` 初始化非受控选择，`selectedIds` 配合 `onSelectionChange(ids)` 使用受控选择。选择跨分页和筛选保留；全选只作用于当前页，取消全选保留其它页的选择。页内部分选中时，原生 header checkbox 同时具备 indeterminate 与 mixed 语义。数据删除后，非受控组件清理失效 ID 并通知一次；恢复同一行不会恢复旧选择。受控选择由业务维护，显示与后续用户通知均剔除无效或重复 ID，不在渲染中修改业务状态。调用方拒绝一次更新时，DOM checkbox 恢复到受控值。
+
+Vue 支持 `v-model:selectedIds` 和 `selectionChange`；React、Solid、Svelte 使用 `selectedIds/onSelectionChange`。Svelte 沿用显式回调，不增加独立选择别名。
+
+`label` 命名原生 table 和可聚焦的滚动区域，默认 Data table。长单元格保持完整内容，通过键盘或指针在局部横向滚动，不撑宽页面。
+
+`labels` 为局部文本覆盖对象：`filter/filterPlaceholder/selectPage/empty/previous/next` 是文本，`selectRow(id)` 提供行选择名称，`summary({total,selected,page,pageCount})` 提供页脚摘要。缺省或 undefined 的字段回退到共享默认值。标签与可见操作同步，不只替换 aria-label。
+
+## 四端示例与证据
+
+DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部清空、拒绝选择更新、删除源数据、切换列和恢复数据。非受控 Live queue 单独验证删除后的选择清理、回调次数与页码保持。独立 Story 补充空结果、长单元格和中文标签。
+
+[本批 Linux 验收](audits/2026-10-03/data-table-linux/acceptance.json)记录实际命令、浏览器版本、桌面/375px 和浅深色截图。Windows 证据保留。默认所有 Story 的布局与无障碍检查仍执行，不仅检查表格。
+
+## 边界
+
+当前使用客户端标量数据，未提供服务端分页、虚拟化、冻结列、列拖动或编辑单元格。加载、请求失败与重试由调用方组合 Progress、Alert 和 Button，不假定业务接口协议。它是已有能力的完善，不声称兼容 MUI Data Grid、Ant Design Table 或第三方表格引擎的全部 API。

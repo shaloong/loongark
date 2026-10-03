@@ -22,3 +22,14 @@ export const Basic: StoryObj = {
     </div>
   ),
 };
+
+export const Muted: StoryObj = {
+  render: () => (
+    <L.LoongArkStack gap="sm">
+      <L.LoongArkTypography>Workspace details</L.LoongArkTypography>
+      <L.LoongArkTypography variant="muted">
+        Secondary information stays readable in both themes.
+      </L.LoongArkTypography>
+    </L.LoongArkStack>
+  ),
+};

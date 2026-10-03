@@ -130,20 +130,6 @@ export const layoutAttributes = (
 export const layoutCSS =
   foundationCSS +
   `
-[data-scope=data-table] { display:grid; gap:var(--lk-space-component-lg); min-width:0; }
-[data-scope=data-table] > input { width:min(100%,320px); height:var(--lk-control-height-md); padding:0 var(--lk-space-component-compact); border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input); border-radius:var(--lk-radius-md); background:var(--lk-color-semantic-background); color:var(--lk-color-semantic-foreground); font:inherit; }
-[data-scope=data-table] table { width:100%; border-collapse:collapse; }
-[data-scope=data-table] tr { border-bottom:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border); }
-[data-scope=data-table] tbody tr:hover, [data-scope=data-table] tr[data-selected] { background:var(--lk-color-semantic-muted); }
-[data-scope=data-table] :is(th,td) { padding:var(--lk-space-component-sm); text-align:left; font-size:var(--lk-typography-fontsize-md); white-space:nowrap; }
-[data-scope=data-table] th { font-weight:600; height:var(--lk-control-height-lg); }
-[data-scope=data-table] th button { border:0; background:transparent; color:inherit; font:inherit; font-weight:inherit; padding:0; cursor:pointer; }
-[data-scope=data-table] th[aria-sort=ascending] button::after { content:' ↑'; } [data-scope=data-table] th[aria-sort=descending] button::after { content:' ↓'; }
-[data-scope=data-table] footer { display:flex; align-items:center; justify-content:flex-end; gap:var(--lk-space-component-sm); flex-wrap:wrap; }
-[data-scope=data-table] footer span { flex:1; color:var(--lk-color-semantic-mutedforeground); font-size:var(--lk-typography-fontsize-sm); }
-[data-scope=data-table] footer button { height:var(--lk-control-height-sm); padding:0 var(--lk-space-component-md); border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border); border-radius:var(--lk-radius-md); color:var(--lk-color-semantic-foreground); background:var(--lk-color-semantic-background); font:inherit; cursor:pointer; }
-[data-scope=data-table] footer button:disabled { opacity:.5; cursor:not-allowed; }
-[data-scope=data-table] input[type=checkbox] { accent-color:var(--lk-color-semantic-primary); }
 [data-scope=chart] { min-width:0; color:var(--lk-color-semantic-foreground); }
 [data-scope=card][data-part=root] { display:flex; flex-direction:column; gap:var(--lk-space-component-lg); border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border); border-radius:var(--lk-radius-lg); background:var(--lk-color-semantic-card); color:var(--lk-color-semantic-cardforeground); padding:var(--lk-space-component-lg) 0; box-shadow:var(--lk-shadow-sm); }
 [data-scope=card] :is([data-part=header],[data-part=content],[data-part=footer]) { padding:0 var(--lk-space-component-lg); }

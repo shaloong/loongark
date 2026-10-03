@@ -1,0 +1,17 @@
+[serve-static] /workspace/loongark/storybook-static on http://127.0.0.1:6006 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 3 tests using 2 workers
+
+(node:73573) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73574) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73573) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:73574) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/data-table.spec.ts:5:7 › DataTable light 受控选择、删除和分页 (3.6s)
+  ✓  2 [chromium] › tests/data-table.spec.ts:5:7 › DataTable dark 受控选择、删除和分页 (3.7s)
+  ✓  3 [chromium] › tests/data-table.spec.ts:14:5 › 表格翻页和空状态使用同一套本地化标签 (757ms)
+
+  3 passed (5.3s)

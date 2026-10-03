@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    LoongArkDataTable,
     LoongArkAttachment,
     LoongArkMessage,
     LoongArkBubble,
@@ -70,5 +71,13 @@
     <LoongArkBottomNavigationItem href="#home" active
       >Home</LoongArkBottomNavigationItem
     >
+    <LoongArkDataTable
+      data={[{ id: "a", name: "Alpha" }]}
+      columns={[{ key: "name", label: "Name" }]}
+      defaultSelectedIds={["a", "missing"]}
+      onSelectionChange={() => {
+        throw Error("SSR must not emit selection updates");
+      }}
+    />
   </LoongArkContainer></LoongArkProvider
 >
