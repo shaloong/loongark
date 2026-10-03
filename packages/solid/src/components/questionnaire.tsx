@@ -7,11 +7,12 @@ import {
   type JSX,
 } from "solid-js";
 import {
-  questionnaireQuestions,
+  questionnaireVisibleQuestions,
   questionnaireValue,
   questionError,
   toggleQuestionAnswer,
   focusQuestion,
+  restoreQuestionAnswers,
   type QuestionnaireValue,
   type QuestionnaireOptions,
 } from "@loongark/kit";
@@ -58,13 +59,16 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
     }
   });
   const current = () => questionnaireValue(p.questions, p.value ?? internal());
-  const index = () => Math.min(page(), Math.max(0, p.questions.length - 1));
-  const question = () => questionnaireQuestions(p.questions)[index()];
+  const visible = () => questionnaireVisibleQuestions(p.questions, current());
+  const submitted = () => questionnaireValue(visible(), current());
+  const index = () => Math.min(page(), Math.max(0, visible().length - 1));
+  const question = () => visible()[index()];
   const blocked = () => p.disabled || p.submitting;
   const change = (next: QuestionnaireValue) => {
     if (blocked()) return;
     if (p.value === undefined) setInternal(next);
     p.onValueChange?.({ value: next });
+    queueMicrotask(() => restoreQuestionAnswers(root, question(), current()));
     setShowError(false);
   };
   const move = (next: number) => {
@@ -81,16 +85,16 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
       focusQuestion(root);
       return;
     }
-    if (index() < p.questions.length - 1) move(index() + 1);
+    if (index() < visible().length - 1) move(index() + 1);
     else {
-      const invalid = p.questions.findIndex(
+      const invalid = visible().findIndex(
         (q) => !!questionError(q, current(), p),
       );
       if (invalid >= 0) {
         setPage(invalid);
         focusNext = true;
         queueMicrotask(() => focusQuestion(root));
-      } else p.onComplete?.({ value: current() });
+      } else p.onComplete?.({ value: submitted() });
     }
   };
   const err = () =>
@@ -110,9 +114,9 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
         <h2 data-scope="questionnaire" data-part="title">
           {p.label}
         </h2>
-        {!p.completed && p.questions.length > 0 && (
+        {!p.completed && visible().length > 0 && (
           <span data-scope="questionnaire" data-part="count" aria-live="polite">
-            {index() + 1} / {p.questions.length}
+            {`${index() + 1} / ${visible().length}`}
           </span>
         )}
       </header>
@@ -217,7 +221,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
           </fieldset>
           {
             <For
-              each={Object.entries(current()).filter(
+              each={Object.entries(submitted()).filter(
                 ([key]) => question().type === "text" || key !== question().id,
               )}
             >
@@ -254,7 +258,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
             <LoongArkButton type="submit" disabled={blocked()}>
               {p.submitting
                 ? "Submitting…"
-                : index() < p.questions.length - 1
+                : index() < visible().length - 1
                   ? (p.nextLabel ?? "Next")
                   : (p.submitLabel ?? "Submit")}
             </LoongArkButton>

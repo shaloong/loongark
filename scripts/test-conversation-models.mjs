@@ -6,6 +6,7 @@ import {
   questionError,
   toggleQuestionAnswer,
   questionnaireQuestions,
+  questionnaireVisibleQuestions,
 } from "../packages/kit/dist/index.js";
 assert.equal(fileSize(-1), "");
 assert.equal(fileSize(Infinity), "");
@@ -109,3 +110,76 @@ assert.equal(Object.hasOwn(normalizedReserved, "__proto__"), true);
 assert.equal(normalizedReserved["__proto__"], "valid");
 assert.equal(questionError(reservedId, reservedAnswer), "");
 assert.ok(questionError(reservedId, {}));
+
+// 分支返回保留编辑答案；隐藏无效必填题不参与提交，校验看到完整归一化答案。
+const conditional = [
+  {
+    id: "kind",
+    label: "Kind",
+    type: "single",
+    options: [
+      { value: "team", label: "Team" },
+      { value: "personal", label: "Personal" },
+    ],
+  },
+  {
+    id: "team",
+    label: "Team",
+    type: "text",
+    required: true,
+    when: (value) => value.kind === "team",
+    validate: (answer, value) =>
+      answer === value.kind ? "Use a specific name." : undefined,
+  },
+  {
+    id: "email",
+    label: "Email",
+    type: "text",
+    validate: (answer) =>
+      typeof answer === "string" && answer.includes("@")
+        ? undefined
+        : "Use an email address.",
+  },
+];
+const all = questionnaireValue(conditional, {
+  kind: "personal",
+  team: "Retained team",
+  email: "wrong",
+  stale: "removed",
+});
+const visible = questionnaireVisibleQuestions(conditional, all);
+assert.deepEqual(
+  visible.map((q) => q.id),
+  ["kind", "email"],
+);
+assert.deepEqual(questionnaireValue(visible, all), {
+  kind: "personal",
+  email: "wrong",
+});
+assert.equal(all.team, "Retained team");
+assert.deepEqual(
+  questionnaireVisibleQuestions(conditional, { ...all, kind: "team" }).map(
+    (q) => q.id,
+  ),
+  ["kind", "team", "email"],
+);
+assert.equal(
+  questionError(conditional[1], { kind: "team", team: "team" }),
+  "Use a specific name.",
+);
+assert.equal(
+  questionError(conditional[1], { kind: "team", team: "" }),
+  "Please answer this question.",
+);
+assert.equal(questionError(conditional[2], all), "Use an email address.");
+assert.equal(
+  questionError(conditional[2], { ...all, email: "reader@example.com" }),
+  "",
+);
+assert.equal(
+  questionnaireVisibleQuestions([{ ...conditional[1], when: () => false }], {
+    team: "",
+  }).length,
+  0,
+);
+console.log("条件题可见性、隐藏值序列化、分支恢复与业务校验通过");

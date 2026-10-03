@@ -1,0 +1,170 @@
+[
+  {
+    "mode": "light",
+    "width": 1280,
+    "state": "default",
+    "framework": "vue",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 1280,
+    "state": "default",
+    "framework": "solid",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 1280,
+    "state": "default",
+    "framework": "svelte",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 1280,
+    "state": "error",
+    "framework": "vue",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 1280,
+    "state": "error",
+    "framework": "solid",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 1280,
+    "state": "error",
+    "framework": "svelte",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 375,
+    "state": "default",
+    "framework": "vue",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 375,
+    "state": "default",
+    "framework": "solid",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 375,
+    "state": "default",
+    "framework": "svelte",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 375,
+    "state": "error",
+    "framework": "vue",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 375,
+    "state": "error",
+    "framework": "solid",
+    "changedPixels": 0
+  },
+  {
+    "mode": "light",
+    "width": 375,
+    "state": "error",
+    "framework": "svelte",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 1280,
+    "state": "default",
+    "framework": "vue",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 1280,
+    "state": "default",
+    "framework": "solid",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 1280,
+    "state": "default",
+    "framework": "svelte",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 1280,
+    "state": "error",
+    "framework": "vue",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 1280,
+    "state": "error",
+    "framework": "solid",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 1280,
+    "state": "error",
+    "framework": "svelte",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 375,
+    "state": "default",
+    "framework": "vue",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 375,
+    "state": "default",
+    "framework": "solid",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 375,
+    "state": "default",
+    "framework": "svelte",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 375,
+    "state": "error",
+    "framework": "vue",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 375,
+    "state": "error",
+    "framework": "solid",
+    "changedPixels": 0
+  },
+  {
+    "mode": "dark",
+    "width": 375,
+    "state": "error",
+    "framework": "svelte",
+    "changedPixels": 0
+  }
+]

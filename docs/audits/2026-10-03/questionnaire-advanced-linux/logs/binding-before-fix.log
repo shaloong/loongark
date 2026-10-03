@@ -1,0 +1,40 @@
+[serve-static] /workspace/loongark/tests/consumer-dist on http://127.0.0.1:6007 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 1 test using 1 worker
+
+(node:328848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:328848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/framework-consumers.spec.ts:5:7 › svelte 发布消费、绑定、主题和浮层 (5.5s)
+
+
+  1) [chromium] › tests/framework-consumers.spec.ts:5:7 › svelte 发布消费、绑定、主题和浮层 ─────────────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByLabel('Bound fresh note')
+    Expected: "Binding from undefined"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for getByLabel('Bound fresh note')
+        9 × locator resolved to <output aria-label="Bound fresh note"></output>
+          - unexpected value ""
+
+
+      19 |         .getByRole("textbox", { name: "Fresh note", exact: true })
+      20 |         .fill("Binding from undefined");
+    > 21 |       await expect(page.getByLabel("Bound fresh note")).toHaveText(
+         |                                                         ^
+      22 |         "Binding from undefined",
+      23 |       );
+      24 |     }
+        at /workspace/loongark/tests/framework-consumers.spec.ts:21:57
+
+    Error Context: test-results/framework-consumers-svelte-发布消费、绑定、主题和浮层-chromium/error-context.md
+
+  1 failed
+    [chromium] › tests/framework-consumers.spec.ts:5:7 › svelte 发布消费、绑定、主题和浮层 ──────────────────────

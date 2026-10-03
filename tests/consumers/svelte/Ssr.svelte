@@ -29,6 +29,26 @@
     LoongArkChipRemoveTrigger,
     LoongArkBottomNavigationItem,
   } from "@loongark/svelte";
+  const conditionalQuestions: readonly L.Question[] = [
+    {
+      id: "hiddenSSR",
+      label: "Hidden SSR",
+      type: "text",
+      required: true,
+      when: () => false,
+      validate: () => {
+        throw Error("SSR must not validate");
+      },
+    },
+    {
+      id: "visibleSSR",
+      label: "Visible SSR",
+      type: "text",
+      validate: () => {
+        throw Error("SSR must not validate");
+      },
+    },
+  ];
 </script>
 
 <LoongArkProvider
@@ -139,3 +159,18 @@
   ><L.LoongArkDrawerTrigger>SSR drawer trigger</L.LoongArkDrawerTrigger
   ></L.LoongArkDrawerRoot
 >
+
+<L.LoongArkQuestionnaire
+  label="Conditional SSR"
+  questions={conditionalQuestions}
+  defaultValue={{
+    hiddenSSR: "Hidden answer must not leak",
+    visibleSSR: "Visible conditional SSR answer",
+  }}
+  onValueChange={() => {
+    throw Error("SSR must not emit");
+  }}
+  onComplete={() => {
+    throw Error("SSR must not complete");
+  }}
+/>

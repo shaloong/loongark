@@ -2,11 +2,12 @@
   import { tick, untrack } from "svelte";
   import type { HTMLFormAttributes } from "svelte/elements";
   import {
-    questionnaireQuestions,
+    questionnaireVisibleQuestions,
     questionnaireValue,
     questionError,
     toggleQuestionAnswer,
     focusQuestion,
+    restoreQuestionAnswers,
     type QuestionnaireOptions,
     type QuestionnaireValue,
   } from "@loongark/kit";
@@ -38,18 +39,33 @@
     page = $state(0),
     showError = $state(false);
   const current = $derived(questionnaireValue(questions, value ?? internal)),
-    index = $derived(Math.min(page, Math.max(0, questions.length - 1))),
-    question = $derived(questionnaireQuestions(questions)[index]),
+    visible = $derived(questionnaireVisibleQuestions(questions, current)),
+    submittedValue = $derived(questionnaireValue(visible, current)),
+    index = $derived(Math.min(page, Math.max(0, visible.length - 1))),
+    question = $derived(visible[index]),
     blocked = $derived(disabled || submitting),
     options = $derived({ requiredLabel, invalidLabel }),
     err = $derived(
       showError && question ? questionError(question, current, options) : "",
     );
+  let textAnswer = $state<string | undefined>(
+    untrack(() =>
+      question?.type === "text" ? String(current[question.id]) : "",
+    ),
+  );
+  $effect(() => {
+    textAnswer = question?.type === "text" ? String(current[question.id]) : "";
+  });
   function change(next: QuestionnaireValue) {
     if (blocked) return;
     if (value === undefined) internal = next;
-    else value = next;
+    if (!onValueChange) value = next;
     onValueChange?.({ value: next });
+    tick().then(() => {
+      textAnswer =
+        question?.type === "text" ? String(current[question.id]) : "";
+      restoreQuestionAnswers(root, question, current);
+    });
     showError = false;
   }
   async function move(next: number) {
@@ -66,16 +82,16 @@
       focusQuestion(root);
       return;
     }
-    if (index < questions.length - 1) await move(index + 1);
+    if (index < visible.length - 1) await move(index + 1);
     else {
-      const invalid = questions.findIndex(
+      const invalid = visible.findIndex(
         (q) => !!questionError(q, current, options),
       );
       if (invalid >= 0) {
         page = invalid;
         await tick();
         focusQuestion(root);
-      } else onComplete?.({ value: current });
+      } else onComplete?.({ value: submittedValue });
     }
   }
 </script>
@@ -92,10 +108,10 @@
 >
   <header data-scope="questionnaire" data-part="header">
     <h2 data-scope="questionnaire" data-part="title">{label}</h2>
-    {#if !completed && questions.length > 0}<span
+    {#if !completed && visible.length > 0}<span
         data-scope="questionnaire"
         data-part="count"
-        aria-live="polite">{index + 1} / {questions.length}</span
+        aria-live="polite">{index + 1} / {visible.length}</span
       >{/if}
   </header>
   {#if completed}<p role="status">
@@ -126,9 +142,7 @@
             aria-required={question.required}
             aria-invalid={err ? "true" : undefined}
             aria-describedby={uid + "-description " + uid + "-error"}
-            value={typeof current[question.id] === "string"
-              ? String(current[question.id])
-              : ""}
+            bind:value={textAnswer}
             maxlength={question.maxLength}
             oninput={(e) =>
               change({ ...current, [question.id]: e.currentTarget.value })}
@@ -176,7 +190,7 @@
         </div>
       </fieldset>
     {/key}
-    {#each Object.entries(current).filter(([key]) => question.type === "text" || key !== question.id) as [name, answer]}{#each typeof answer === "string" ? [answer] : answer as text}<input
+    {#each Object.entries(submittedValue).filter(([key]) => question.type === "text" || key !== question.id) as [name, answer]}{#each typeof answer === "string" ? [answer] : answer as text}<input
           type="hidden"
           {name}
           value={text}
@@ -194,7 +208,7 @@
       ><Button type="submit" disabled={blocked}
         >{submitting
           ? "Submitting…"
-          : index < questions.length - 1
+          : index < visible.length - 1
             ? (nextLabel ?? "Next")
             : (submitLabel ?? "Submit")}</Button
       >

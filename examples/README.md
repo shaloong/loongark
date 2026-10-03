@@ -25,3 +25,7 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 ## Toc 受控更新（2026-10-03）
 
 四端 Toc 的 Root 与 useToc 共享新值回调修正；示例直接控制 activeIds，支持暂停/恢复业务更新，并展示观察回调数据。回归检查 activeItems、业务拒绝更新、恢复后的新回调、真实滚动与卸载重建。详见 [Toc 验收](../docs/audits/2026-10-03/toc-control-linux/acceptance.json)。高级组合能力继续按场景补齐，完整组件目录不代表全部高级业务能力已验收。
+
+## 问卷高级能力（2026-10-03）
+
+四端 Questionnaire 新增条件可见性、同步跨题校验与受控拒绝恢复；隐藏答案保留在编辑状态，但不参与表单和最终提交。新增四端高级示例与两个 Story，覆盖清单仍为 114 族，累计 285 Story 和 151 个示例。API 与 Svelte 回调绑定说明见 [问卷说明](../docs/conversation.md)，验证范围见 [验收记录](../docs/audits/2026-10-03/questionnaire-advanced-linux/acceptance.json)。

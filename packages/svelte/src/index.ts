@@ -882,3 +882,5 @@ export * from "./components/ark-advanced";
 export * from "./components/ark-next";
 export * from "./components/drawer";
 export * from "./components/ark-controls";
+
+export type { Question, QuestionOption, QuestionnaireOptions, QuestionnaireValue } from "@loongark/kit";

@@ -141,6 +141,7 @@
     "Drawer gesture/snap points/stack",
     "DateInput segmented editing",
     "Toc controlled navigation and active-change payload",
+    "Questionnaire conditions, cross-field validation and controlled rejection",
     "Swap lifecycle",
     "Context and collection control hooks"
   ]

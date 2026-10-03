@@ -14,6 +14,14 @@ for (const framework of ["react", "vue", "solid", "svelte"])
     await expect(page.getByLabel("Email", { exact: true })).toHaveCount(1);
     await input.fill("user@loongark.dev");
     await expect(submit).toBeEnabled();
+    if (framework === "svelte") {
+      await page
+        .getByRole("textbox", { name: "Fresh note", exact: true })
+        .fill("Binding from undefined");
+      await expect(page.getByLabel("Bound fresh note")).toHaveText(
+        "Binding from undefined",
+      );
+    }
     const before = await submit.evaluate(
       (el) => getComputedStyle(el).backgroundColor,
     );
@@ -61,7 +69,9 @@ for (const framework of ["react", "vue", "solid", "svelte"])
     await expect(
       page.getByRole("dialog", { name: "Edit profile" }),
     ).toBeVisible();
-    await expect(page.getByRole("button", { name: "Save changes" })).toBeFocused();
+    await expect(
+      page.getByRole("button", { name: "Save changes" }),
+    ).toBeFocused();
     await page.keyboard.press("Escape");
     await expect(
       page.getByRole("dialog", { name: "Edit profile" }),

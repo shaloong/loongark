@@ -38,6 +38,9 @@ assert.match(
   html,
   /<textarea(?=[^>]*data-autosize="true")(?=[^>]*rows="2")[^>]*>/,
 );
+assert.match(html, /Visible conditional SSR answer/);
+assert.doesNotMatch(html, /Hidden answer must not leak|name="hiddenSSR"/);
+assert.match(html, /name="visibleSSR"/);
 assert.match(html, /Hello from Svelte SSR/);
 assert.match(html, /SSR client fallback/);
 assert.doesNotMatch(html, /Client-only secret/);

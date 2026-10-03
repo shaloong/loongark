@@ -7,11 +7,12 @@ import {
   type HTMLAttributes,
 } from "react";
 import {
-  questionnaireQuestions,
+  questionnaireVisibleQuestions,
   questionnaireValue,
   questionError,
   toggleQuestionAnswer,
   focusQuestion,
+  restoreQuestionAnswers,
   type QuestionnaireValue,
   type QuestionnaireOptions,
 } from "@loongark/kit";
@@ -55,13 +56,24 @@ export function LoongArkQuestionnaire({
     }
   }, [page]);
   const current = () => questionnaireValue(questions, value ?? internal);
-  const index = () => Math.min(page, Math.max(0, questions.length - 1));
-  const question = () => questionnaireQuestions(questions)[index()];
+  const visible = () => questionnaireVisibleQuestions(questions, current());
+  const submitted = () => questionnaireValue(visible(), current());
+  const index = () => Math.min(page, Math.max(0, visible().length - 1));
+  const question = () => visible()[index()];
+  const latest = useRef({ question: question(), value: current() });
+  latest.current = { question: question(), value: current() };
   const blocked = () => disabled || submitting;
   const change = (next: QuestionnaireValue) => {
     if (blocked()) return;
     if (value === undefined) setInternal(next);
     onValueChange?.({ value: next });
+    queueMicrotask(() =>
+      restoreQuestionAnswers(
+        root.current,
+        latest.current.question,
+        latest.current.value,
+      ),
+    );
     setShowError(false);
   };
   const move = (next: number) => {
@@ -77,15 +89,15 @@ export function LoongArkQuestionnaire({
       focusQuestion(root.current);
       return;
     }
-    if (index() < questions.length - 1) move(index() + 1);
+    if (index() < visible().length - 1) move(index() + 1);
     else {
-      const invalid = questions.findIndex(
+      const invalid = visible().findIndex(
         (q) => !!questionError(q, current(), { requiredLabel, invalidLabel }),
       );
       if (invalid >= 0) {
         setPage(invalid);
         focusNext.current = true;
-      } else onComplete?.({ value: current() });
+      } else onComplete?.({ value: submitted() });
     }
   };
   const err = () =>
@@ -107,9 +119,9 @@ export function LoongArkQuestionnaire({
         <h2 data-scope="questionnaire" data-part="title">
           {label}
         </h2>
-        {!completed && questions.length > 0 && (
+        {!completed && visible().length > 0 && (
           <span data-scope="questionnaire" data-part="count" aria-live="polite">
-            {index() + 1} / {questions.length}
+            {`${index() + 1} / ${visible().length}`}
           </span>
         )}
       </header>
@@ -210,7 +222,7 @@ export function LoongArkQuestionnaire({
               {err()}
             </div>
           </fieldset>
-          {Object.entries(current())
+          {Object.entries(submitted())
             .filter(
               ([key]) => question().type === "text" || key !== question().id,
             )
@@ -244,7 +256,7 @@ export function LoongArkQuestionnaire({
             <LoongArkButton type="submit" disabled={blocked()}>
               {submitting
                 ? "Submitting…"
-                : index() < questions.length - 1
+                : index() < visible().length - 1
                   ? (nextLabel ?? "Next")
                   : (submitLabel ?? "Submit")}
             </LoongArkButton>

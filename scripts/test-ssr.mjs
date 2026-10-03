@@ -52,6 +52,14 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>[h(L.LoongArkDateInputRoot,{name:'ssr-date',locale:'en-US',defaultValue:[L.parseDate('2026-10-03')],get children(){return [h(L.LoongArkDateInputLabel,{children:'SSR date'}),h(L.LoongArkDateInputHiddenInput,{})]}}),h(L.LoongArkTocRoot,{id:'ssr-outline',items:[],get children(){return h(L.LoongArkTocNav,{get children(){return h(L.LoongArkTocTitle,{children:'SSR outline'})}})}}),h(L.LoongArkSwapRoot,{swapped:false,get children(){return h(L.LoongArkSwapIndicator,{type:'off',children:'SSR swap off'})}}),h(L.LoongArkDrawerRoot,{get children(){return h(L.LoongArkDrawerTrigger,{children:'SSR drawer trigger'})}})]));`
         : `console.log(renderToString(h('div',null,h(L.LoongArkDateInputRoot,{name:'ssr-date',locale:'en-US',defaultValue:[L.parseDate('2026-10-03')]},h(L.LoongArkDateInputLabel,null,'SSR date'),h(L.LoongArkDateInputHiddenInput)),h(L.LoongArkTocRoot,{id:'ssr-outline',items:[]},h(L.LoongArkTocNav,null,h(L.LoongArkTocTitle,null,'SSR outline'))),h(L.LoongArkSwapRoot,{swapped:false},h(L.LoongArkSwapIndicator,{type:'off'},'SSR swap off')),h(L.LoongArkDrawerRoot,null,h(L.LoongArkDrawerTrigger,null,'SSR drawer trigger')))));`;
+  const questionnaireProps =
+    "{label:'Conditional SSR',questions:[{id:'hiddenSSR',label:'Hidden SSR',type:'text',required:true,when:()=>false,validate:()=>{throw Error('SSR must not validate')}},{id:'visibleSSR',label:'Visible SSR',type:'text',validate:()=>{throw Error('SSR must not validate')}}],defaultValue:{hiddenSSR:'Hidden answer must not leak',visibleSSR:'Visible conditional SSR answer'},onValueChange:()=>{throw Error('SSR must not emit')},onComplete:()=>{throw Error('SSR must not complete')}}";
+  const questionnaireScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${questionnaireProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${questionnaireProps})));`
+        : `console.log(renderToString(h(L.LoongArkQuestionnaire,${questionnaireProps})));`;
   const result = spawnSync(
     process.execPath,
     [
@@ -59,7 +67,12 @@ for (const [framework, script] of [
       "-e",
       script.replace(
         "process.exit(0);",
-        tableScript + chartScript + arkScript + nextScript + "process.exit(0);",
+        tableScript +
+          chartScript +
+          arkScript +
+          nextScript +
+          questionnaireScript +
+          "process.exit(0);",
       ),
     ],
     { encoding: "utf8", timeout: 60000 },
@@ -77,6 +90,12 @@ for (const [framework, script] of [
     assert.ok(result.stdout.includes(text));
   assert.equal((result.stdout.match(/id="toc:ssr-outline"/g) ?? []).length, 1);
   assert.match(result.stdout, /id="toc:ssr-outline-nav"/);
+  assert.match(result.stdout, /Visible conditional SSR answer/);
+  assert.doesNotMatch(
+    result.stdout,
+    /Hidden answer must not leak|name="hiddenSSR"/,
+  );
+  assert.match(result.stdout, /name="visibleSSR"/);
   assert.match(result.stdout, /Hello/);
   assert.match(result.stdout, /SSR client fallback/);
   assert.doesNotMatch(result.stdout, /Client-only secret/);

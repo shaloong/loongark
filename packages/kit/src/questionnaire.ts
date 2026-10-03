@@ -12,6 +12,13 @@ export interface Question {
   minLength?: number;
   maxLength?: number;
   options?: readonly QuestionOption[];
+  /** 基于归一化完整答案判断可见性；应保持纯函数。 */
+  when?: (value: QuestionnaireValue) => boolean;
+  /** 内建校验通过后执行同步业务校验，返回错误说明或 undefined。 */
+  validate?: (
+    answer: string | readonly string[],
+    value: QuestionnaireValue,
+  ) => string | undefined;
 }
 export type QuestionnaireValue = Record<string, string | readonly string[]>;
 export interface QuestionnaireOptions {
@@ -76,6 +83,16 @@ export function questionnaireValue(
     }),
   );
 }
+/** 隐藏答案保留在编辑状态，但仅可见题目参与导航、序列化与提交校验。 */
+export function questionnaireVisibleQuestions(
+  questions: readonly Question[],
+  value: QuestionnaireValue,
+) {
+  const normalized = questionnaireValue(questions, value);
+  return questions.filter(
+    (question) => !question.when || question.when(normalized),
+  );
+}
 export function questionError(
   q: Question,
   value: QuestionnaireValue,
@@ -92,7 +109,7 @@ export function questionError(
     (length < (q.minLength ?? 0) || length > (q.maxLength ?? Infinity))
   )
     return options.invalidLabel ?? "Check the answer length.";
-  return "";
+  return q.validate?.(answer, value) ?? "";
 }
 export function toggleQuestionAnswer(
   value: QuestionnaireValue,
@@ -112,6 +129,31 @@ export function toggleQuestionAnswer(
           : (Array.isArray(current) ? current : []).filter((v) => v !== option)
         : option,
   };
+}
+/** 拒绝受控更新后恢复真实控件；只触及当前题，不影响表单外的焦点。 */
+export function restoreQuestionAnswers(
+  root: HTMLElement | null | undefined,
+  question: Question | undefined,
+  value: QuestionnaireValue,
+) {
+  if (!root?.isConnected || !question) return;
+  const answer = questionnaireValue([question], value)[question.id];
+  if (question.type === "text") {
+    const input = root.querySelector<HTMLTextAreaElement>(
+      '[data-part="question"] textarea',
+    );
+    if (input && typeof answer === "string" && input.value !== answer)
+      input.value = answer;
+  } else {
+    for (const input of Array.from(
+      root.querySelectorAll<HTMLInputElement>('[data-part="question"] input'),
+    )) {
+      input.checked =
+        question.type === "multiple"
+          ? answer.includes(input.value)
+          : answer === input.value;
+    }
+  }
 }
 export function focusQuestion(root?: HTMLElement | null) {
   const input = root?.querySelector<HTMLElement>(

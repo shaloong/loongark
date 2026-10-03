@@ -1,10 +1,11 @@
 import { defineComponent, h, ref, useId, nextTick, type PropType } from "vue";
 import {
-  questionnaireQuestions,
+  questionnaireVisibleQuestions,
   questionnaireValue,
   questionError,
   toggleQuestionAnswer,
   focusQuestion,
+  restoreQuestionAnswers,
   type QuestionnaireOptions,
   type QuestionnaireValue,
 } from "@loongark/kit";
@@ -52,8 +53,10 @@ export const LoongArkQuestionnaire = defineComponent({
           p.questions,
           p.value ?? p.modelValue ?? internal.value,
         ),
-      index = () => Math.min(page.value, Math.max(0, p.questions.length - 1)),
-      question = () => questionnaireQuestions(p.questions)[index()],
+      visible = () => questionnaireVisibleQuestions(p.questions, current()),
+      submitted = () => questionnaireValue(visible(), current()),
+      index = () => Math.min(page.value, Math.max(0, visible().length - 1)),
+      question = () => visible()[index()],
       blocked = () => p.disabled || p.submitting;
     const change = (value: QuestionnaireValue) => {
       if (blocked()) return;
@@ -61,6 +64,7 @@ export const LoongArkQuestionnaire = defineComponent({
         internal.value = value;
       p.onValueChange?.({ value });
       emit("update:modelValue", value);
+      nextTick(() => restoreQuestionAnswers(root.value, question(), current()));
       showError.value = false;
     };
     const move = (next: number) => {
@@ -76,15 +80,15 @@ export const LoongArkQuestionnaire = defineComponent({
         focusQuestion(root.value);
         return;
       }
-      if (index() < p.questions.length - 1) move(index() + 1);
+      if (index() < visible().length - 1) move(index() + 1);
       else {
-        const invalid = p.questions.findIndex(
+        const invalid = visible().findIndex(
           (q) => !!questionError(q, current(), p),
         );
         if (invalid >= 0) {
           page.value = invalid;
           nextTick(() => focusQuestion(root.value));
-        } else p.onComplete?.({ value: current() });
+        } else p.onComplete?.({ value: submitted() });
       }
     };
     return () => {
@@ -106,11 +110,11 @@ export const LoongArkQuestionnaire = defineComponent({
           h("header", part("header"), [
             h("h2", part("title"), p.label),
             !p.completed &&
-              p.questions.length > 0 &&
+              visible().length > 0 &&
               h(
                 "span",
                 { ...part("count"), "aria-live": "polite" },
-                `${index() + 1} / ${p.questions.length}`,
+                `${index() + 1} / ${visible().length}`,
               ),
           ]),
           p.completed
@@ -211,7 +215,7 @@ export const LoongArkQuestionnaire = defineComponent({
                       ),
                     ],
                   ),
-                  ...Object.entries(v)
+                  ...Object.entries(submitted())
                     .filter(([key]) => q.type === "text" || key !== q.id)
                     .flatMap(([name, answer]) =>
                       (typeof answer === "string" ? [answer] : answer).map(
@@ -243,7 +247,7 @@ export const LoongArkQuestionnaire = defineComponent({
                       () =>
                         p.submitting
                           ? "Submitting…"
-                          : index() < p.questions.length - 1
+                          : index() < visible().length - 1
                             ? (p.nextLabel ?? "Next")
                             : (p.submitLabel ?? "Submit"),
                     ),

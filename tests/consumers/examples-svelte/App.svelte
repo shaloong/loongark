@@ -22,15 +22,16 @@ import E20 from '../../../examples/svelte/NumberInputExample.svelte';
 import E21 from '../../../examples/svelte/PaginationExample.svelte';
 import E22 from '../../../examples/svelte/PasswordInputExample.svelte';
 import E23 from '../../../examples/svelte/ProgressExample.svelte';
-import E24 from '../../../examples/svelte/RatingGroupExample.svelte';
-import E25 from '../../../examples/svelte/ScrollAreaExample.svelte';
-import E26 from '../../../examples/svelte/SegmentGroupExample.svelte';
-import E27 from '../../../examples/svelte/SelectionInputsExample.svelte';
-import E28 from '../../../examples/svelte/SplitterExample.svelte';
-import E29 from '../../../examples/svelte/StepsExample.svelte';
-import E30 from '../../../examples/svelte/SwapExample.svelte';
-import E31 from '../../../examples/svelte/SwitchExample.svelte';
-import E32 from '../../../examples/svelte/TagsInputExample.svelte';
-import E33 from '../../../examples/svelte/ToastExample.svelte';
-import E34 from '../../../examples/svelte/TocExample.svelte';
-import E35 from '../../../examples/svelte/TreeViewExample.svelte'; const examples={'ActionMediaExample':E0,'AdvancedSelectionExample':E1,'ArkUtilitiesExample':E2,'AvatarExample':E3,'CarouselExample':E4,'ChartExample':E5,'ClipboardExample':E6,'ColorPickerExample':E7,'ComboboxExample':E8,'ConversationExample':E9,'DataTableExample':E10,'DateInputExample':E11,'DrawerExample':E12,'EditableExample':E13,'FileUploadExample':E14,'FoundationsExample':E15,'HoverCardExample':E16,'ImageCropperExample':E17,'JsonTreeViewExample':E18,'ListboxExample':E19,'NumberInputExample':E20,'PaginationExample':E21,'PasswordInputExample':E22,'ProgressExample':E23,'RatingGroupExample':E24,'ScrollAreaExample':E25,'SegmentGroupExample':E26,'SelectionInputsExample':E27,'SplitterExample':E28,'StepsExample':E29,'SwapExample':E30,'SwitchExample':E31,'TagsInputExample':E32,'ToastExample':E33,'TocExample':E34,'TreeViewExample':E35}; const name=new URLSearchParams(location.search).get('example') || 'ActionMediaExample'; const Selected=examples[name]; const mode=new URLSearchParams(location.search).get('mode')==='dark'?'dark':'light';</script><Provider mode={mode}><section style="padding:24px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)"><h1 data-example-name>{name}</h1><div data-example-content><Selected/></div></section></Provider>
+import E24 from '../../../examples/svelte/QuestionnaireAdvancedExample.svelte';
+import E25 from '../../../examples/svelte/RatingGroupExample.svelte';
+import E26 from '../../../examples/svelte/ScrollAreaExample.svelte';
+import E27 from '../../../examples/svelte/SegmentGroupExample.svelte';
+import E28 from '../../../examples/svelte/SelectionInputsExample.svelte';
+import E29 from '../../../examples/svelte/SplitterExample.svelte';
+import E30 from '../../../examples/svelte/StepsExample.svelte';
+import E31 from '../../../examples/svelte/SwapExample.svelte';
+import E32 from '../../../examples/svelte/SwitchExample.svelte';
+import E33 from '../../../examples/svelte/TagsInputExample.svelte';
+import E34 from '../../../examples/svelte/ToastExample.svelte';
+import E35 from '../../../examples/svelte/TocExample.svelte';
+import E36 from '../../../examples/svelte/TreeViewExample.svelte'; const examples={'ActionMediaExample':E0,'AdvancedSelectionExample':E1,'ArkUtilitiesExample':E2,'AvatarExample':E3,'CarouselExample':E4,'ChartExample':E5,'ClipboardExample':E6,'ColorPickerExample':E7,'ComboboxExample':E8,'ConversationExample':E9,'DataTableExample':E10,'DateInputExample':E11,'DrawerExample':E12,'EditableExample':E13,'FileUploadExample':E14,'FoundationsExample':E15,'HoverCardExample':E16,'ImageCropperExample':E17,'JsonTreeViewExample':E18,'ListboxExample':E19,'NumberInputExample':E20,'PaginationExample':E21,'PasswordInputExample':E22,'ProgressExample':E23,'QuestionnaireAdvancedExample':E24,'RatingGroupExample':E25,'ScrollAreaExample':E26,'SegmentGroupExample':E27,'SelectionInputsExample':E28,'SplitterExample':E29,'StepsExample':E30,'SwapExample':E31,'SwitchExample':E32,'TagsInputExample':E33,'ToastExample':E34,'TocExample':E35,'TreeViewExample':E36}; const name=new URLSearchParams(location.search).get('example') || 'ActionMediaExample'; const Selected=examples[name]; const mode=new URLSearchParams(location.search).get('mode')==='dark'?'dark':'light';</script><Provider mode={mode}><section style="padding:24px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)"><h1 data-example-name>{name}</h1><div data-example-content><Selected/></div></section></Provider>

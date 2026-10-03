@@ -46,3 +46,23 @@ export const Error = {
     />
   ),
 };
+
+import { QuestionnaireAdvancedExample } from "../examples/react/QuestionnaireAdvancedExample";
+import { withArkExamplePage } from "./arkStory";
+export const Conditional = {
+  decorators: [withArkExamplePage],
+  render: () => <QuestionnaireAdvancedExample />,
+};
+
+export const ConditionalEmpty = {
+  decorators: [withArkExamplePage],
+  render: () => (
+    <L.LoongArkQuestionnaire
+      label="No applicable questions"
+      questions={feedbackQuestions.map((question) => ({
+        ...question,
+        when: () => false,
+      }))}
+    />
+  ),
+};

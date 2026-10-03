@@ -1,0 +1,202 @@
+{
+  "recordedAt": "2026-10-03T17:41:54.837610+00:00",
+  "branch": "develop",
+  "baseCommit": "95e1847f1f0241d027532ba8e6c5c073f5ab50bf",
+  "status": "passed",
+  "phase": "Questionnaire 条件题、同步业务与跨题校验、受控恢复及 Svelte 未定义值绑定",
+  "environment": {
+    "os": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "installation": "冻结锁文件，复用上一批已成功安装的依赖；本批锁文件不变",
+    "ark": {
+      "react": "5.39.2",
+      "vue": "5.39.2",
+      "solid": "5.39.2",
+      "svelte": "5.24.2"
+    },
+    "browser": "system Chromium 151.0.7922.173",
+    "playwright": "1.57.0",
+    "browserExecutable": "/usr/bin/chromium",
+    "browserDeviation": "固定 Chromium 143 下载受网络策略阻止，系统 Chromium 不等同于固定版本",
+    "viewports": [
+      375,
+      900,
+      1280
+    ]
+  },
+  "coverage": {
+    "families": 114,
+    "stories": 285,
+    "publicValueExportsPerFramework": 789,
+    "examples": {
+      "react": 40,
+      "vue": 37,
+      "solid": 37,
+      "svelte": 37,
+      "total": 151
+    },
+    "pending": [
+      "表格服务端与列控制",
+      "图表序列交互、范围和可访问数据表",
+      "问卷复杂题型与服务校验",
+      "消息与附件操作状态",
+      "原生高级能力未专项验收组合"
+    ]
+  },
+  "checks": [
+    {
+      "command": "verify",
+      "status": "passed",
+      "log": "logs/verify-count-final.log"
+    },
+    {
+      "command": "check:contracts",
+      "status": "passed",
+      "log": "logs/contracts-count-final.log"
+    },
+    {
+      "command": "storybook:build",
+      "status": "passed",
+      "log": "logs/storybook-count-final.log"
+    },
+    {
+      "command": "check:coverage",
+      "status": "passed",
+      "log": "logs/coverage-count-final.log"
+    },
+    {
+      "command": "check:publication",
+      "status": "passed",
+      "log": "logs/publication-count-final.log"
+    },
+    {
+      "command": "check:svelte",
+      "status": "passed",
+      "log": "logs/svelte-count-final.log"
+    },
+    {
+      "command": "test:frameworks",
+      "status": "passed",
+      "log": "logs/frameworks-count-final.log"
+    },
+    {
+      "command": "浏览器全量回归",
+      "status": "passed",
+      "log": "logs/e2e-final.log"
+    },
+    {
+      "command": "视觉比较",
+      "status": "passed",
+      "log": "logs/visual-final.log"
+    }
+  ],
+  "measurements": {
+    "light": {
+      "stories": 285,
+      "wcagViolations": 0,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0,
+      "screenshots": 399
+    },
+    "dark": {
+      "stories": 285,
+      "wcagViolations": 0,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0,
+      "screenshots": 399
+    }
+  },
+  "browserTests": {
+    "e2ePassed": 63,
+    "expectedSkippedFrameworkTests": 8,
+    "independentFrameworkTestsPassed": 8,
+    "visualTestsPassed": 50
+  },
+  "manualReview": {
+    "frameworkImages": 32,
+    "storyImages": 8,
+    "states": [
+      "default",
+      "custom-validation-error"
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1280,
+      375
+    ],
+    "contacts": [
+      "default-dark-1280-parity.jpg",
+      "default-dark-375-parity.jpg",
+      "default-light-1280-parity.jpg",
+      "default-light-375-parity.jpg",
+      "error-dark-1280-parity.jpg",
+      "error-dark-375-parity.jpg",
+      "error-light-1280-parity.jpg",
+      "error-light-375-parity.jpg",
+      "stories-dark-1280.jpg",
+      "stories-dark-375.jpg",
+      "stories-light-1280.jpg",
+      "stories-light-375.jpg"
+    ],
+    "frameworkParityComparisons": 24,
+    "changedPixels": 0,
+    "parityFile": "framework-parity.json",
+    "findingsFixed": [
+      "受控答案被拒绝后恢复原生控件，Svelte textarea 同步绑定内部值",
+      "Svelte bind:value 初值 undefined 首次输入写回父级",
+      "进度数字用整段文本渲染，消除四端字形差异"
+    ],
+    "originalImages": [
+      "frameworks-screenshots.tar.gz",
+      "review/"
+    ],
+    "runtimeScreenshotsArchived": 171
+  },
+  "baseline": {
+    "newLinuxImages": 4,
+    "existingLinuxImagesUnchanged": 46,
+    "windowsImagesUnchanged": 2,
+    "reviewedBeforeCreation": true,
+    "creationLog": "logs/baseline-create.log",
+    "creationRunIsNotComparisonPass": true,
+    "comparisonRunPassed": true,
+    "comparisonLog": "logs/visual-final.log"
+  },
+  "regressions": [
+    "条件分支返回保留答案；隐藏必填题不阻止提交",
+    "隐藏题不进入 FormData 或 onComplete，但编辑值保留",
+    "内建错误优先、同步格式错误和跨题错误、焦点与 ARIA",
+    "受控拒绝选择/文本、接受更新、重置与最终 DTO",
+    "初始 undefined 的 Svelte 双向绑定",
+    "条件题 SSR 不触发提交校验或业务回调",
+    "所有题隐藏时无提交按钮与 WCAG 校验"
+  ],
+  "earlierFailures": {
+    "logs": [
+      "verify.log",
+      "questionnaire-story-landmark.log",
+      "binding-fixture-source.log",
+      "binding-before-fix.log"
+    ],
+    "beforeCountFixImages": "before-count-fix.zip",
+    "earlierFailureIsNotAcceptancePass": true
+  },
+  "limits": [
+    "人工复核本批40张截图；默认 Story 明暗全量自动检查，不声称逐张查看所有截图",
+    "单行输入、数字日期文件题、动态重复题、评分与服务端逐题校验尚未封装；同步 validate 不接受 Promise",
+    "when/validate 要求纯函数，业务异步提交继续控制 submitting/error/completed",
+    "没有穷举所有条件依赖与外部结构替换组合；独立会话重新挂载",
+    "未覆盖真实手机、触摸、屏幕阅读器、Firefox/WebKit 或全部 peer 版本",
+    "视觉比较沿用仓库 1% 阈值；本批24次框架场景比较额外检查为0像素差异"
+  ],
+  "changes": {
+    "dependenciesAdded": [],
+    "paletteAndTokensUnchanged": true,
+    "mainUnchanged": true
+  },
+  "sourceHashes": "source-sha256.json"
+}
