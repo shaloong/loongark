@@ -94,6 +94,8 @@ export async function checkSelectionInputs(page: Page) {
   await expect(hours).toBeHidden();
   await expect(trigger).toBeFocused();
   await trigger.click();
+  // 等待 Ark 重新打开后的初始焦点，避免其延迟焦点覆盖待触发的 Done 按钮。
+  await expect(hours).toBeFocused();
   await page.getByRole("button", { name: "Done", exact: true }).press("Enter");
   await expect(hours).toBeHidden();
   const textarea = page.getByRole("textbox", { name: "Notes", exact: true }),

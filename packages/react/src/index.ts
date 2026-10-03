@@ -585,3 +585,9 @@ export type { LoongArkTransferListProps } from "./components/transfer-list";
 export type { LoongArkTimePickerProps } from "./components/time-picker";
 
 export * from "./components/action-media";
+
+export * from "./components/conversation";
+
+export * from "./components/message-scroller";
+
+export * from "./components/questionnaire";

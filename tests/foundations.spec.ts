@@ -1,3 +1,4 @@
+import { auditDirectory } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { mkdir } from "node:fs/promises";
@@ -24,7 +25,7 @@ for (const mode of ["light", "dark"] as const)
         ),
       )
       .toBe(2);
-    const root = "docs/audits/2026-10-03/component-expansion";
+    const root = auditDirectory("2026-10-03/component-expansion");
     await mkdir(root, { recursive: true });
     await page.screenshot({
       path: root + "/foundations-" + mode + ".png",

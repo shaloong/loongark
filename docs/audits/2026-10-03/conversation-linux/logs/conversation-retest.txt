@@ -1,0 +1,17 @@
+[serve-static] /workspace/loongark/storybook-static on http://127.0.0.1:6006 (/workspace/loongark/scripts/serve-static.mjs)
+
+Running 3 tests using 2 workers
+
+(node:26103) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26103) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/conversation.spec.ts:5:7 › 消息和问卷 dark (3.4s)
+  ✓  1 [chromium] › tests/conversation.spec.ts:5:7 › 消息和问卷 light (3.6s)
+  ✓  3 [chromium] › tests/conversation.spec.ts:22:5 › 前插历史消息保留视口 (610ms)
+
+  3 passed (5.2s)

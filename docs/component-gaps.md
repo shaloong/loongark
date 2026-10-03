@@ -36,9 +36,9 @@
 
 - SpeedDial / FloatingActionButton：已补齐，见 [浮动动作与媒体布局](action-media.md)。
 - ImageList / Masonry：已补齐跨行跨列网格与按列媒体布局，见同批文档。
-- Attachment、Message、Bubble、MessageScroller、Questionnaire：专用文件、聊天或问卷流程，按业务需求后续补齐。
+- Attachment、Message、Bubble、MessageScroller、Questionnaire：本批补齐，职责、API 与限制见 [附件、消息与问卷](conversation.md)。
 
-当前待补项保留聊天/文件与问卷两组专用流程，共 5 个组件。以下 91 族/221 Story 验收对应基础批次；最新累计 97 族/239 Story 的证据见 [动作与媒体批次验收](audits/2026-10-03/action-media/acceptance.json)。
+上述 5 个专用组件已补齐，当前覆盖清单无待补项；这是已声明目录的覆盖结果，不代表所有第三方组件 API 均兼容。以下 91 族/221 Story 验收对应基础批次；上一批累计 97 族/239 Story 的证据见 [动作与媒体批次验收](audits/2026-10-03/action-media/acceptance.json)。
 
 ## 验证和证据
 
@@ -47,3 +47,9 @@
 新增交互回归检查 Textarea 的绑定与 FormData、Chip 键盘删除和表单提交隔离、List 选择、BottomNavigation 当前页、Grid 的桌面/375px 布局，以及明暗无障碍。既有全部 Story 的测量与无障碍回归继续执行，不只测试新组件。
 
 本批验收结果：91 个组件族、221 个 Story、四端各 606 个公开 LoongArk 值入口；95 个框架示例运行通过。全量浏览器回归 27 项通过（四端消费的 8 项另行执行并通过），既有视觉基线 2 项通过。明暗各 221 个 Story 的默认展示无障碍违规、375px 页面溢出与 transition: all 均为 0。九包构建、公开声明、四端 SSR、Svelte 检查和 CLI Token 产物校验通过。
+
+## 五项补齐后的常用组件复核
+
+重新核对公开入口与独立 Story：输入与表单（Input、Textarea、Field、Fieldset、选择组、Combobox、TransferList、TimePicker）、反馈与浮层（Alert、Toast、Empty、Progress、Dialog、AlertDialog、Drawer、Sheet）、导航与布局（Tabs、Sidebar、NavigationMenu、AppBar、BottomNavigation、Grid、Masonry）、数据与媒体（Table、DataTable、Chart、ImageList、Carousel）均已有四端能力。IconButton 继续使用 Button 的 icon 尺寸，OTP、Autocomplete、Snackbar 等保持既有等价记录，不新增别名。
+
+本轮不因目录名称相近而增加第三方兼容封装。继续以全量 Story 的浅深色、375px 溢出、Axe 与动效检查，以及四端真实消费回归发现具体问题。Linux 验收中修复的真实问题和限制记入本批验收，未将旧 Windows 验收结果作为 Linux 已通过的依据。

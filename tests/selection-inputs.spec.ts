@@ -1,8 +1,9 @@
+import { auditDirectory } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import { checkSelectionInputs } from "./selectionInputChecks";
 import AxeBuilder from "@axe-core/playwright";
-const root = "docs/audits/2026-10-03/selection-inputs";
+const root = auditDirectory("2026-10-03/selection-inputs");
 for (const mode of ["light", "dark"] as const)
   test(
     "Selection inputs " + mode + " transfer, picker and autosize",

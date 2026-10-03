@@ -1,3 +1,4 @@
+import { auditDirectory } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 for (const framework of ["react", "vue", "solid", "svelte"])
@@ -93,7 +94,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
     ).toBeLessThanOrEqual(375);
     expect(errors).toEqual([]);
     await page.screenshot({
-      path: `docs/audits/2026-10-02/after-${framework}-dark.png`,
+      path: `${auditDirectory("2026-10-02")}/after-${framework}-dark.png`,
       fullPage: true,
       animations: "disabled",
     });

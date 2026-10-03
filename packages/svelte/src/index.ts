@@ -864,3 +864,13 @@ export { default as LoongArkMasonryItem } from "./components/MasonryItem.svelte"
 export { default as LoongArkFloatingActionButton } from "./components/FloatingActionButton.svelte";
 
 export { default as LoongArkSpeedDial } from "./components/SpeedDial.svelte";
+
+export { default as LoongArkAttachment } from "./components/Attachment.svelte";
+
+export { default as LoongArkBubble } from "./components/Bubble.svelte";
+
+export { default as LoongArkMessage } from "./components/Message.svelte";
+
+export {default as LoongArkMessageScroller} from "./components/MessageScroller.svelte";
+
+export {default as LoongArkQuestionnaire} from "./components/Questionnaire.svelte";

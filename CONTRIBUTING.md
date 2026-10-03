@@ -51,3 +51,5 @@ pnpm visual:test
 当前验收在 Windows/Chromium 完成，仓库中的既有视觉基线带 win32 标记。云端 Linux 首次执行视觉测试需要建立并人工审阅对应平台的基线；不得将缺少基线视为通过，也不得自动覆盖 Windows 基线。修改样式后应查看截图再确认基线变化。
 
 验证记录见 [docs/README.md](docs/README.md) 和 [组件覆盖清单](docs/component-coverage.json)。合入 `main` 不等于发布 npm；正式包发布和版本标签按实际发布任务执行。
+
+若环境已提供系统 Chromium，可使用 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium pnpm test:e2e`；验收必须记录实际浏览器版本，不声称等同于 Playwright 固定版本。相同变量适用于四端和视觉回归。Linux 基线仍独立审阅与保存。

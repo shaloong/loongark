@@ -1,0 +1,5 @@
+screenshots-light.tar.gz: 359 截图，归档大小与路径校验通过
+screenshots-dark.tar.gz: 359 截图，归档大小与路径校验通过
+screenshots-regressions.tar.gz: 31 截图，归档大小与路径校验通过
+screenshots-additional.tar.gz: 118 截图，归档大小与路径校验通过
+归档前后全部组件、示例、Story、回归与 Linux 基线哈希一致

@@ -14,6 +14,9 @@ export default defineConfig({
   fullyParallel: true,
   use: {
     baseURL: storybookUrl,
+    launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
+      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH }
+      : undefined,
     trace: "on-first-retry",
   },
   projects: [

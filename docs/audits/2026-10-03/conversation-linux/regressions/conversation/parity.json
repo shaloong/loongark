@@ -1,0 +1,40 @@
+{
+  "react": {
+    "size": [
+      327,
+      1154
+    ],
+    "differenceBoundingBox": null
+  },
+  "vue": {
+    "size": [
+      327,
+      1154
+    ],
+    "differenceBoundingBox": [
+      310,
+      830,
+      316,
+      840
+    ]
+  },
+  "solid": {
+    "size": [
+      327,
+      1154
+    ],
+    "differenceBoundingBox": null
+  },
+  "svelte": {
+    "size": [
+      327,
+      1154
+    ],
+    "differenceBoundingBox": [
+      310,
+      830,
+      316,
+      840
+    ]
+  }
+}

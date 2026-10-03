@@ -1,3 +1,4 @@
+import { auditDirectory } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 test("核心控件的最终样式与选中状态", async ({ page }) => {
   await page.goto(
@@ -67,7 +68,7 @@ test("颜色选择器展示色块和单行值并可展开", async ({ page }) => 
     )
     .toBeGreaterThan(100);
   await page.screenshot({
-    path: "docs/audits/2026-10-02/color-picker-open.png",
+    path: auditDirectory("2026-10-02") + "/color-picker-open.png",
     animations: "disabled",
   });
 });

@@ -39,6 +39,16 @@ assert.match(
   /<textarea(?=[^>]*data-autosize="true")(?=[^>]*rows="2")[^>]*>/,
 );
 assert.match(html, /Hello from Svelte SSR/);
+for (const scope of [
+  "attachment",
+  "bubble",
+  "message",
+  "message-scroller",
+  "questionnaire",
+])
+  assert.match(html, new RegExp(`data-scope="${scope}"`));
+assert.match(html, /Conversation SSR/);
+assert.match(html, /SSR answer/);
 assert.match(html, /<textarea[^>]*name="notes"[^>]*>SSR notes<\/textarea>/);
 assert.match(html, /<button[^>]*type="button"[^>]*>.*?Remove.*?<\/button>/);
 assert.match(html, /<a[^>]*aria-current="page"[^>]*>.*?Home.*?<\/a>/);

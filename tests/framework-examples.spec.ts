@@ -1,6 +1,8 @@
+import { auditDirectory } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { checkSelectionInputs } from "./selectionInputChecks";
+import { checkConversation } from "./conversationChecks";
 import { checkActionMedia } from "./actionMediaChecks";
 import { mkdir } from "node:fs/promises";
 for (const framework of ["react", "vue", "solid", "svelte"])
@@ -35,13 +37,19 @@ for (const framework of ["react", "vue", "solid", "svelte"])
       if (await page.locator("button button").count())
         failures.push(name + ": 嵌套按钮");
 
+      if (name === "ConversationExample") {
+        await checkConversation(page, framework);
+      }
       if (name === "ActionMediaExample") {
         await page.setViewportSize({ width: 900, height: 900 });
         await checkActionMedia(page);
-        await mkdir("docs/audits/2026-10-03/action-media", { recursive: true });
+        await mkdir(auditDirectory("2026-10-03/action-media"), {
+          recursive: true,
+        });
         await page.screenshot({
           path:
-            "docs/audits/2026-10-03/action-media/action-" +
+            auditDirectory("2026-10-03/action-media") +
+            "/action-" +
             framework +
             "-mobile.png",
           fullPage: true,
@@ -52,7 +60,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
       if (name === "SelectionInputsExample") {
         await page.setViewportSize({ width: 900, height: 900 });
         await checkSelectionInputs(page);
-        const root = "docs/audits/2026-10-03/action-media";
+        const root = auditDirectory("2026-10-03/action-media");
         await mkdir(root, { recursive: true });
         await page.screenshot({
           path: root + "/" + framework + "-mobile.png",
@@ -117,7 +125,8 @@ for (const framework of ["react", "vue", "solid", "svelte"])
         ).toEqual([]);
         await page.screenshot({
           path:
-            "docs/audits/2026-10-03/action-media/foundations-" +
+            auditDirectory("2026-10-03/action-media") +
+            "/foundations-" +
             framework +
             "-mobile.png",
           fullPage: true,

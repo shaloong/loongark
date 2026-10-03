@@ -5,6 +5,12 @@ import { layoutCSS } from "./layout";
 import { selectionInputsCSS } from "./selection-styles";
 import { mediaLayoutCSS } from "./media-layout";
 import { actionMediaCSS } from "./speed-dial";
+import { questionnaireCSS } from "./questionnaire";
+export * from "./questionnaire";
+import { messageScrollerCSS } from "./message-scroller";
+export * from "./message-scroller";
+import { conversationCSS } from "./conversation";
+export * from "./conversation";
 export * from "./layout";
 export * from "./menubar";
 export * from "./data-models";
@@ -42,7 +48,13 @@ export const bootstrapKit = (theme: LoongArkTheme) => {
   kitRegistry.forEach((component) => component.mount(theme));
   theme.mountStyles(
     "layout",
-    layoutCSS + selectionInputsCSS + mediaLayoutCSS + actionMediaCSS,
+    layoutCSS +
+      selectionInputsCSS +
+      mediaLayoutCSS +
+      actionMediaCSS +
+      conversationCSS +
+      messageScrollerCSS +
+      questionnaireCSS,
     "kit",
   );
 };

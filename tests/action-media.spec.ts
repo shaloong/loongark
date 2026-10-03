@@ -1,7 +1,8 @@
+import { auditDirectory } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import { checkActionMedia } from "./actionMediaChecks";
-const root = "docs/audits/2026-10-03/action-media";
+const root = auditDirectory("2026-10-03/action-media");
 for (const mode of ["light", "dark"])
   test(
     "Action media " + mode + " keyboard, form and responsive layout",

@@ -2,10 +2,15 @@
 
 更新时间：2026-10-03。按组件族计数，Progress 的线性/圆形属于同一族。
 
-目前 97 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近两批补齐选择输入与浮动动作、媒体布局，详见 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
+目前 102 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐选择输入、浮动动作、媒体布局以及附件、消息与问卷，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
 
 | 组件族               | React | Vue | Solid | Svelte | 交付来源        |
 | -------------------- | ----- | --- | ----- | ------ | --------------- |
+| Attachment           | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Message              | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Bubble               | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| MessageScroller      | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
+| Questionnaire        | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
 | FloatingActionButton | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
 | SpeedDial            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
 | ImageList            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
@@ -115,3 +120,5 @@ DataTable 支持列排序、筛选、分页、行选择和空结果；当前行�
 上一轮按 shadcn 的 58 项传统需求清单验收；本轮新增 13 族及扩大对照后的缺口见 [常用组件缺口](component-gaps.md)。API 遵循 LoongArk/Ark 的组合方式，不承诺直接替换 shadcn 的 import 或 props。
 
 构建、真实消费、SSR、公开类型、交互与视觉证据见 [整改报告](remediation.md)。
+
+附件、消息与问卷批次补齐 Attachment、Message、Bubble、MessageScroller、Questionnaire；累计 102 族、257 Story、四端各 620 个公开值入口。等价职责与限制见 [组件说明](conversation.md)，真实验收见 [Linux 记录](audits/2026-10-03/conversation-linux/acceptance.json)。

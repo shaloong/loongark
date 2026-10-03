@@ -1,5 +1,10 @@
 <script lang="ts">
   import {
+    LoongArkAttachment,
+    LoongArkMessage,
+    LoongArkBubble,
+    LoongArkMessageScroller,
+    LoongArkQuestionnaire,
     LoongArkFloatingActionButton,
     LoongArkSpeedDial,
     LoongArkImageList,
@@ -19,6 +24,19 @@
 
 <LoongArkProvider
   ><LoongArkContainer>
+    <LoongArkMessageScroller label="SSR conversation"
+      ><LoongArkMessage author="Lin"
+        ><LoongArkBubble>Conversation SSR</LoongArkBubble><LoongArkAttachment
+          name="SSR.pdf"
+          status="uploading"
+        /></LoongArkMessage
+      ></LoongArkMessageScroller
+    >
+    <LoongArkQuestionnaire
+      label="SSR feedback"
+      questions={[{ id: "answer", label: "Your answer", type: "text" }]}
+      defaultValue={{ answer: "SSR answer" }}
+    />
     <LoongArkFloatingActionButton aria-label="Create SSR"
       >＋</LoongArkFloatingActionButton
     >
