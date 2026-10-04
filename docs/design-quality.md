@@ -74,9 +74,9 @@
 
 本轮计划补齐的 38 个组件族已完成，合计 78 个组件族；四端公开 LoongArk 值导出各 574 个一致。已完成构建及发布产物检查，未执行 npm 发布。
 
-人工检查包含明暗默认组件与其他 Story 的 26 张联系表；由最终桌面截图重新生成。示例见 [浅色默认](audits/2026-10-02/design-quality/after-light-default-01.png)、[深色默认](audits/2026-10-02/design-quality/after-dark-default-01.png)、[滑块与 Tabs 变体](audits/2026-10-02/design-quality/after-light-variants-07.png)、[窄屏 Sheet 展开](audits/2026-10-02/design-quality/expanded/light/sheet.png)。
+人工检查包含明暗默认组件与其他 Story 的 26 张联系表；由最终桌面截图重新生成。示例见 [浅色默认](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/design-quality/after-light-default-01.png)、[深色默认](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/design-quality/after-dark-default-01.png)、[滑块与 Tabs 变体](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/design-quality/after-light-variants-07.png)、[窄屏 Sheet 展开](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/design-quality/expanded/light/sheet.png)。
 
-最终机器结果见 [设计验收记录](audits/2026-10-02/design-quality/acceptance.json)，完整测量见 [浅色](audits/2026-10-02/design-quality/after/light/metrics.json) / [深色](audits/2026-10-02/design-quality/after/dark/metrics.json)。截图对照和展开状态证据保存在同一目录；此前运行与架构整改见 [整改与验收](remediation.md)。
+最终机器结果见 [设计验收记录](audits/2026-10-02/design-quality/acceptance.json)，完整测量见 [浅色](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/design-quality/after/light/metrics.json) / [深色](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/design-quality/after/dark/metrics.json)。截图对照和展开状态证据保存在同一目录；此前运行与架构整改见 [整改与验收](remediation.md)。
 
 自动化检查覆盖默认展示、关键表单密度、浮动标签、五类弹层的三种动效策略、四端真实发布产物与既有示例。无障碍覆盖全部 203 个 Story 的明暗默认状态；不将这些结果解释为每个组件的所有组合状态、所有浏览器或所有运行时版本均已认证。视觉检查用于识别布局缺陷，不能以自动化结果保证主观设计品质与任一库完全等同。
 

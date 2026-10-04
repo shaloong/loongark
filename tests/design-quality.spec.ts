@@ -1,3 +1,4 @@
+import { auditRoot as resolveAuditRoot } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 
@@ -9,8 +10,7 @@ for (const mode of ["light", "dark"] as const) {
     test.setTimeout(240_000);
     const phase =
       process.env.DESIGN_AUDIT_PHASE === "before" ? "before" : "after";
-    const auditRoot =
-      process.env.DESIGN_AUDIT_DIR ?? "docs/audits/2026-10-03/action-media";
+    const auditRoot = resolveAuditRoot();
     const root = `${auditRoot}/${phase}/${mode}`;
     await mkdir(root, { recursive: true });
     if (phase === "after") await mkdir(`${root}/mobile`, { recursive: true });

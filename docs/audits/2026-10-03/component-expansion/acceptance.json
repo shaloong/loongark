@@ -261,8 +261,14 @@
       "solid-mobile.png",
       "svelte-mobile.png"
     ],
-    "metrics": ["after/light/metrics.json", "after/dark/metrics.json"],
-    "accessibility": ["accessibility/light.json", "accessibility/dark.json"],
+    "metrics": [
+      "after/light/metrics.json",
+      "after/dark/metrics.json"
+    ],
+    "accessibility": [
+      "accessibility/light.json",
+      "accessibility/dark.json"
+    ],
     "coverageManifest": "component-coverage.json",
     "publicAPI": "api-parity.json"
   },
@@ -376,5 +382,11 @@
     "examples/vue/FoundationsExample.ts": "c657e9c3039e0d2204de2cb893f8831e606685d260e1a10073b97a6d8363b353",
     "examples/solid/FoundationsExample.tsx": "09955f0a2920f522ef16cfb874657cc210ba3229b4c572d3f6aff8540b852454",
     "examples/svelte/FoundationsExample.svelte": "b7471cde9677e0d6ea214da86c05e19e7f5b1762d595a7fbe0af9ff46046c8b2"
+  },
+  "evidenceStorage": {
+    "kind": "historical-git-snapshot",
+    "commit": "c6e0d14eb282c985a9dd4eab0f8d7b32d1668262",
+    "directory": "docs/audits/2026-10-03/component-expansion",
+    "note": "过程截图、详细测量和日志已从当前分支移出；本记录原有证据相对路径对应上述历史提交，不再代表当前目录内文件。后续批次使用 GitHub Actions Artifact 或本地忽略目录保存临时证据。"
   }
 }

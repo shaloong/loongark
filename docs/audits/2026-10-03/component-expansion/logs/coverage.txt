@@ -1,6 +1,0 @@
-
-> loongark@0.0.0 check:coverage E:\dev\loongark
-> node scripts/check-api-parity.mjs && node scripts/check-component-coverage.mjs
-
-四端 606 个公开 LoongArk 导出一致
-Coverage: 91 families, 221 stories, four-framework roots verified.

@@ -254,5 +254,11 @@
     "note": "按真实安装版本与构建声明核验；短名/命名空间不当作新增组件别名。"
   },
   "frameworkBuildLog": "logs/frameworks-reviewed.log",
-  "frameworkBuildNote": "当前成功构建产物完成167示例与8项消费回归；修正忙碌语义后重新按顺序构建及验证，没有消费失败构建的旧产物。"
+  "frameworkBuildNote": "当前成功构建产物完成167示例与8项消费回归；修正忙碌语义后重新按顺序构建及验证，没有消费失败构建的旧产物。",
+  "evidenceStorage": {
+    "kind": "historical-git-snapshot",
+    "commit": "c6e0d14eb282c985a9dd4eab0f8d7b32d1668262",
+    "directory": "docs/audits/2026-10-03/message-anchor-linux",
+    "note": "过程截图、详细测量和日志已从当前分支移出；本记录原有证据相对路径对应上述历史提交，不再代表当前目录内文件。后续批次使用 GitHub Actions Artifact 或本地忽略目录保存临时证据。"
+  }
 }

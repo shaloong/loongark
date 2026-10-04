@@ -251,5 +251,11 @@
     "tests/design-variants.spec.ts": "a22c0c36db365d8924a9a5ffe230cb28d2803b42ad1176d879b91735a1e0d1ee",
     "tests/framework-consumers.spec.ts": "126eaddc1ea47b7b69ff3090a723672143ede3343cb45110dc47e8be1011db0f",
     "tests/framework-examples.spec.ts": "873f8641a153279e87b275f32fe4286b7b99eaf8a9adc222af4346dd42da523e"
+  },
+  "evidenceStorage": {
+    "kind": "historical-git-snapshot",
+    "commit": "c6e0d14eb282c985a9dd4eab0f8d7b32d1668262",
+    "directory": "docs/audits/2026-10-02/design-quality",
+    "note": "过程截图、详细测量和日志已从当前分支移出；本记录原有证据相对路径对应上述历史提交，不再代表当前目录内文件。后续批次使用 GitHub Actions Artifact 或本地忽略目录保存临时证据。"
   }
 }

@@ -1,3 +1,4 @@
+import { auditRoot as resolveAuditRoot } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 
@@ -161,7 +162,7 @@ for (const mode of ["light", "dark"] as const) {
       await page.emulateMedia({
         reducedMotion: preference === "normal" ? "no-preference" : "reduce",
       });
-      const root = `${process.env.DESIGN_AUDIT_DIR ?? "docs/audits/2026-10-03/action-media"}/expanded/${mode}`;
+      const root = `${resolveAuditRoot()}/expanded/${mode}`;
       await mkdir(root, { recursive: true });
       for (const family of [
         "popover",

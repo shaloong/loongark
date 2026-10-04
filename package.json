@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "pnpm -r run build",
-    "lint": "node ./scripts/verify-workspace.mjs",
+    "lint": "node ./scripts/verify-workspace.mjs && node ./scripts/check-audit-hygiene.mjs",
     "clean": "node ./scripts/clean.mjs",
     "tsc": "pnpm exec tsc -b",
     "verify": "pnpm run lint && pnpm run tsc && pnpm run build",

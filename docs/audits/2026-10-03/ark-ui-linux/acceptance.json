@@ -177,5 +177,11 @@
     ],
     "mainUnchanged": true
   },
-  "sourceHashes": "source-sha256.json"
+  "sourceHashes": "source-sha256.json",
+  "evidenceStorage": {
+    "kind": "historical-git-snapshot",
+    "commit": "c6e0d14eb282c985a9dd4eab0f8d7b32d1668262",
+    "directory": "docs/audits/2026-10-03/ark-ui-linux",
+    "note": "过程截图、详细测量和日志已从当前分支移出；本记录原有证据相对路径对应上述历史提交，不再代表当前目录内文件。后续批次使用 GitHub Actions Artifact 或本地忽略目录保存临时证据。"
+  }
 }

@@ -1,3 +1,4 @@
+import { auditRoot as resolveAuditRoot } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -38,9 +39,7 @@ for (const mode of ["light", "dark"] as const) {
         .analyze();
       results.push({ title, id, violations });
     }
-    const root =
-      (process.env.DESIGN_AUDIT_DIR ?? "docs/audits/2026-10-03/action-media") +
-      "/accessibility";
+    const root = resolveAuditRoot() + "/accessibility";
     await mkdir(root, { recursive: true });
     await writeFile(`${root}/${mode}.json`, JSON.stringify(results, null, 2));
     expect(

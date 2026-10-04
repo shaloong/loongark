@@ -53,3 +53,9 @@ pnpm visual:test
 验证记录见 [docs/README.md](docs/README.md) 和 [组件覆盖清单](docs/component-coverage.json)。合入 `main` 不等于发布 npm；正式包发布和版本标签按实际发布任务执行。
 
 若环境已提供系统 Chromium，可使用 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium pnpm test:e2e`；验收必须记录实际浏览器版本，不声称等同于 Playwright 固定版本。相同变量适用于四端和视觉回归。Linux 基线仍独立审阅与保存。
+
+## 验收保存与展示部署
+
+临时截图、日志、详细测量和归档默认写入忽略目录 `.artifacts/`，CI 使用有保留期限的 Artifact。Git 只保存验收摘要及用于自动比较的已审阅视觉基线；不要强制添加过程文件。`pnpm lint` 检查此约定，详见 [证据保存](docs/audits/README.md)。
+
+Storybook 可以静态部署到 GitHub Pages 或 Vercel；平台、商业用途和仓库可见性须分别考虑，见 [展示与公开范围](docs/storybook-hosting.md)。部署产物不提交到源码分支。

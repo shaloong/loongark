@@ -36,7 +36,7 @@
 | Tree View | 5 | 缺少 TreeView Item 上下文；collection 和 node 接口未对齐 | `stories/LoongArkTreeView.stories.tsx:49` |
 | Menu | 1 | Options 的 ItemGroupLabel 没有 ItemGroupProvider | `stories/LoongArkMenu.stories.tsx:94` |
 
-完整错误列表见 [source-checks.json](./source-checks.json)。Menu Basic 可渲染，与 Options 报错并不矛盾。
+完整错误列表见 [source-checks.json](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/source-checks.json)。Menu Basic 可渲染，与 Options 报错并不矛盾。
 
 ### P1 日期选择器布局失效
 
@@ -77,7 +77,7 @@ shadcn 的官方主题采用按用途配对的背景与前景变量，并定义�
 | Button 只有 solid/outline/ghost | 缺少通用操作层级 | 补 secondary/destructive/link 和明确的 icon 尺寸；保持名称映射兼容 |
 | Emoji、文本箭头等混用 | 图标笔画、基线和大小不稳定 | 统一 SVG 图标体系、尺寸、stroke 和图标按钮名称 |
 
-Token 静态检查共发现 **18 个路径未定义、29 处引用**：`shadow.xl/sm`、`space.component.xl/xxl`、`color.brand.primaryHover/subtle`、`color.neutral.200/400/600/border/borderStrong/bg/text`、`color.white`、`color.border.default/hover`、`color.bg.default`、`color.text.primary`。详情和可重复执行的检查见 [inspect-source.mjs](./inspect-source.mjs) 与 [source-checks.json](./source-checks.json)。
+Token 静态检查共发现 **18 个路径未定义、29 处引用**：`shadow.xl/sm`、`space.component.xl/xxl`、`color.brand.primaryHover/subtle`、`color.neutral.200/400/600/border/borderStrong/bg/text`、`color.white`、`color.border.default/hover`、`color.bg.default`、`color.text.primary`。详情和可重复执行的检查见 [inspect-source.mjs](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/inspect-source.mjs) 与 [source-checks.json](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/source-checks.json)。
 
 应让契约 Token 路径具有类型约束，并在构建时检查引用存在。当前 fallback 会使缺失被静默掩盖。Input、Select 的阴影直接写在组件内；Dialog 的 z-index 硬编码为 1000/1001，低于 Token 中 toast 1300、tooltip 1200，也未使用 dialog 1400，浮层叠放存在风险。
 
@@ -94,7 +94,7 @@ Token 静态检查共发现 **18 个路径未定义、29 处引用**：`shadow.x
 | Solid | 构建通过；真实 dist 主入口导入失败 | `react-jsx` 输出引用 `solid-js/jsx-runtime` 的 jsx，真实 Solid 无此导出；需要 Solid 编译链 |
 | Svelte | 327 个组件声明加 32 个聚合声明未进入 dist；只有 4 个由 TS 生成的辅助声明 | 发布类型支持不完整；同屏渲染、事件、双向绑定尚未验证 |
 
-Solid/Vue 的复现使用 `node --conditions=browser --input-type=module` 导入各自 `packages/*/dist/index.js`，错误分别为 `jsx` 导出不存在和 Vue Portal 模块不存在。它们是现有发布产物的实际故障，不是四端视觉不同的推测。可重复执行 [check-publication.mjs](./check-publication.mjs)，实际输出见 [publication-checks.json](./publication-checks.json)。
+Solid/Vue 的复现使用 `node --conditions=browser --input-type=module` 导入各自 `packages/*/dist/index.js`，错误分别为 `jsx` 导出不存在和 Vue Portal 模块不存在。它们是现有发布产物的实际故障，不是四端视觉不同的推测。可重复执行 [check-publication.mjs](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/check-publication.mjs)，实际输出见 [publication-checks.json](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/publication-checks.json)。
 
 Svelte 还声明 peer `svelte >=4.0.0`，实际安装的 Ark Svelte 5.15.0 要求 `svelte >=5.20.0`。应收窄兼容声明或提供经过验证的兼容实现。React Dialog namespace 有 Portal/Positioner，Svelte namespace 没有这两项；不能仅凭顶层导出同名断言复合 API 一致。
 
@@ -149,90 +149,90 @@ Field、Fieldset、Angle Slider、Floating Panel、Marquee、QR Code、Signature
 
 | 步骤 | 状态 | 健康度和说明 | 截图 |
 | --- | --- | --- | --- |
-| 01 | 浅色邀请表单 | 可显示；嵌套按钮、标签关联和控件对比需要修复 | [截图](./01-form-light.jpg) |
-| 02 | 浅色弹窗打开 | 打开和 Escape 回焦可用；布局及关闭隐藏语义需修复 | [截图](./02-dialog-light.jpg) |
-| 03 | 暗色邀请表单 | 不合格；标签、说明几乎不可读 | [截图](./03-form-dark.jpg) |
-| 04 | 暗色弹窗打开 | 不合格；弹窗仍使用浅色面板 | [截图](./04-dialog-dark.jpg) |
-| 05 | 日期浮层打开 | 不合格；巨大横向溢出，日历不可用 | [截图](./05-date-picker-open.jpg) |
-| 06 | Select 打开和选择 | 主要路径可用；视觉仍需统一 | [截图](./06-select-open.jpg) |
-| 07 | 390px Filter Bar | 本次窄屏换行正常，无横向溢出 | [截图](./07-filter-mobile.jpg) |
-| 08 | Input invalid | 不合格；横向拥挤、缺少无效语义 | [截图](./08-input-invalid.jpg) |
-| 09 | Menu Options | 阻塞；上下文错误，无法渲染 | [截图](./09-menu-options-error.jpg) |
+| 01 | 浅色邀请表单 | 可显示；嵌套按钮、标签关联和控件对比需要修复 | [截图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/01-form-light.jpg) |
+| 02 | 浅色弹窗打开 | 打开和 Escape 回焦可用；布局及关闭隐藏语义需修复 | [截图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/02-dialog-light.jpg) |
+| 03 | 暗色邀请表单 | 不合格；标签、说明几乎不可读 | [截图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/03-form-dark.jpg) |
+| 04 | 暗色弹窗打开 | 不合格；弹窗仍使用浅色面板 | [截图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/04-dialog-dark.jpg) |
+| 05 | 日期浮层打开 | 不合格；巨大横向溢出，日历不可用 | [截图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/05-date-picker-open.jpg) |
+| 06 | Select 打开和选择 | 主要路径可用；视觉仍需统一 | [截图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/06-select-open.jpg) |
+| 07 | 390px Filter Bar | 本次窄屏换行正常，无横向溢出 | [截图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/07-filter-mobile.jpg) |
+| 08 | Input invalid | 不合格；横向拥挤、缺少无效语义 | [截图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/08-input-invalid.jpg) |
+| 09 | Menu Options | 阻塞；上下文错误，无法渲染 | [截图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/09-menu-options-error.jpg) |
 
-![浅色邀请表单](./01-form-light.jpg)
+![浅色邀请表单](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/01-form-light.jpg)
 
-![浅色弹窗](./02-dialog-light.jpg)
+![浅色弹窗](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/02-dialog-light.jpg)
 
-![暗色邀请表单](./03-form-dark.jpg)
+![暗色邀请表单](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/03-form-dark.jpg)
 
-![暗色弹窗](./04-dialog-dark.jpg)
+![暗色弹窗](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/04-dialog-dark.jpg)
 
-![日期浮层错误](./05-date-picker-open.jpg)
+![日期浮层错误](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/05-date-picker-open.jpg)
 
-![Select 打开](./06-select-open.jpg)
+![Select 打开](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/06-select-open.jpg)
 
-![Filter Bar 窄屏](./07-filter-mobile.jpg)
+![Filter Bar 窄屏](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/07-filter-mobile.jpg)
 
-![输入无效态](./08-input-invalid.jpg)
+![输入无效态](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/08-input-invalid.jpg)
 
-![Menu Options 错误](./09-menu-options-error.jpg)
+![Menu Options 错误](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/09-menu-options-error.jpg)
 
 ### 组件基线
 
-每类组件的步骤、首屏健康度和原图链接见下表；后面的五张总览按相同顺序排列。完整 DOM、页面尺寸与故事元数据保存在 [component-captures.json](./component-captures.json)，其余 124 个示例记录保存在 [story-sweep.json](./story-sweep.json)。
+每类组件的步骤、首屏健康度和原图链接见下表；后面的五张总览按相同顺序排列。完整 DOM、页面尺寸与故事元数据保存在 [component-captures.json](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/component-captures.json)，其余 124 个示例记录保存在 [story-sweep.json](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/story-sweep.json)。
 
 | 步骤 | 组件和状态 | 健康度 | 截图 |
 | --- | --- | --- | --- |
-| 10 | Accordion / Basic | 首屏可渲染，交互完整性待验收 | [原图](./10-components-accordion--basic.jpg) |
-| 11 | Avatar / Playground | 首屏可渲染，交互完整性待验收 | [原图](./11-components-avatar--playground.jpg) |
-| 12 | Button / Playground | 首屏可渲染，交互完整性待验收 | [原图](./12-components-button--playground.jpg) |
-| 13 | Carousel / Basic | 阻塞，首屏运行错误 | [原图](./13-components-carousel--basic.jpg) |
-| 14 | Checkbox / Playground | 首屏可渲染，交互完整性待验收 | [原图](./14-components-checkbox--playground.jpg) |
-| 15 | Clipboard / Basic | 首屏可渲染，交互完整性待验收 | [原图](./15-components-clipboard--basic.jpg) |
-| 16 | Collapsible / Basic | 首屏可渲染，交互完整性待验收 | [原图](./16-components-collapsible--basic.jpg) |
-| 17 | ColorPicker / Basic | 阻塞，首屏运行错误 | [原图](./17-components-colorpicker--basic.jpg) |
-| 18 | Combobox / Playground | 首屏可渲染，交互完整性待验收 | [原图](./18-components-combobox--playground.jpg) |
-| 19 | Date Picker / Basic | 不合格，日期浮层巨大横向溢出 | [原图](./19-components-date-picker--basic.jpg) |
-| 20 | Dialog / Playground | 首屏可渲染，交互完整性待验收 | [原图](./20-components-dialog--playground.jpg) |
-| 21 | Editable / Basic | 首屏可渲染，交互完整性待验收 | [原图](./21-components-editable--basic.jpg) |
-| 22 | FileUpload / Basic | 首屏可渲染，交互完整性待验收 | [原图](./22-components-fileupload--basic.jpg) |
-| 23 | Filter Bar / Basic | 首屏可渲染，交互完整性待验收 | [原图](./23-components-filter-bar--basic.jpg) |
-| 24 | HoverCard / Basic | 首屏可渲染，交互完整性待验收 | [原图](./24-components-hovercard--basic.jpg) |
-| 25 | Input / Playground | 需修复，状态和字段布局见步骤 08 | [原图](./25-components-input--playground.jpg) |
-| 26 | Listbox / Basic | 首屏可渲染，交互完整性待验收 | [原图](./26-components-listbox--basic.jpg) |
-| 27 | Menu / Basic | Basic 可渲染，Options 在步骤 09 报错 | [原图](./27-components-menu--basic.jpg) |
-| 28 | NumberInput / Basic | 首屏可渲染，交互完整性待验收 | [原图](./28-components-numberinput--basic.jpg) |
-| 29 | Pagination / Basic | 需修复，页码名称为 page undefined | [原图](./29-components-pagination--basic.jpg) |
-| 30 | PasswordInput / Basic | 首屏可渲染，交互完整性待验收 | [原图](./30-components-passwordinput--basic.jpg) |
-| 31 | PinInput / Basic | 首屏可渲染，交互完整性待验收 | [原图](./31-components-pininput--basic.jpg) |
-| 32 | Popover / Basic | 首屏可渲染，交互完整性待验收 | [原图](./32-components-popover--basic.jpg) |
-| 33 | Progress / Basic | 首屏可渲染，交互完整性待验收 | [原图](./33-components-progress--basic.jpg) |
-| 34 | RadioGroup / Playground | 首屏可渲染，交互完整性待验收 | [原图](./34-components-radiogroup--playground.jpg) |
-| 35 | RatingGroup / Basic | 阻塞，首屏运行错误 | [原图](./35-components-ratinggroup--basic.jpg) |
-| 36 | ScrollArea / Basic | 首屏可渲染，交互完整性待验收 | [原图](./36-components-scrollarea--basic.jpg) |
-| 37 | Segment Group / Basic | 首屏可渲染，交互完整性待验收 | [原图](./37-components-segment-group--basic.jpg) |
-| 38 | Select / Playground | 首屏可渲染，交互完整性待验收 | [原图](./38-components-select--playground.jpg) |
-| 39 | Slider / Basic | 首屏可渲染，交互完整性待验收 | [原图](./39-components-slider--basic.jpg) |
-| 40 | Splitter / Basic | 阻塞，首屏运行错误 | [原图](./40-components-splitter--basic.jpg) |
-| 41 | Steps / Basic | 阻塞，首屏运行错误 | [原图](./41-components-steps--basic.jpg) |
-| 42 | Switch / Playground | 首屏可渲染，交互完整性待验收 | [原图](./42-components-switch--playground.jpg) |
-| 43 | Tabs / Basic | 首屏可渲染，交互完整性待验收 | [原图](./43-components-tabs--basic.jpg) |
-| 44 | TagsInput / Basic | 首屏可渲染，交互完整性待验收 | [原图](./44-components-tagsinput--basic.jpg) |
-| 45 | Toast / Basic | 首屏仅触发器，通知完整交互待验证 | [原图](./45-components-toast--basic.jpg) |
-| 46 | Toggle / Basic | 首屏可渲染，交互完整性待验收 | [原图](./46-components-toggle--basic.jpg) |
-| 47 | Toggle Group / Basic | 首屏可渲染，交互完整性待验收 | [原图](./47-components-toggle-group--basic.jpg) |
-| 48 | Tooltip / Basic | 首屏可渲染，交互完整性待验收 | [原图](./48-components-tooltip--basic.jpg) |
-| 49 | TreeView / Basic | 阻塞，首屏运行错误 | [原图](./49-components-treeview--basic.jpg) |
+| 10 | Accordion / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/10-components-accordion--basic.jpg) |
+| 11 | Avatar / Playground | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/11-components-avatar--playground.jpg) |
+| 12 | Button / Playground | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/12-components-button--playground.jpg) |
+| 13 | Carousel / Basic | 阻塞，首屏运行错误 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/13-components-carousel--basic.jpg) |
+| 14 | Checkbox / Playground | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/14-components-checkbox--playground.jpg) |
+| 15 | Clipboard / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/15-components-clipboard--basic.jpg) |
+| 16 | Collapsible / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/16-components-collapsible--basic.jpg) |
+| 17 | ColorPicker / Basic | 阻塞，首屏运行错误 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/17-components-colorpicker--basic.jpg) |
+| 18 | Combobox / Playground | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/18-components-combobox--playground.jpg) |
+| 19 | Date Picker / Basic | 不合格，日期浮层巨大横向溢出 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/19-components-date-picker--basic.jpg) |
+| 20 | Dialog / Playground | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/20-components-dialog--playground.jpg) |
+| 21 | Editable / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/21-components-editable--basic.jpg) |
+| 22 | FileUpload / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/22-components-fileupload--basic.jpg) |
+| 23 | Filter Bar / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/23-components-filter-bar--basic.jpg) |
+| 24 | HoverCard / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/24-components-hovercard--basic.jpg) |
+| 25 | Input / Playground | 需修复，状态和字段布局见步骤 08 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/25-components-input--playground.jpg) |
+| 26 | Listbox / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/26-components-listbox--basic.jpg) |
+| 27 | Menu / Basic | Basic 可渲染，Options 在步骤 09 报错 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/27-components-menu--basic.jpg) |
+| 28 | NumberInput / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/28-components-numberinput--basic.jpg) |
+| 29 | Pagination / Basic | 需修复，页码名称为 page undefined | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/29-components-pagination--basic.jpg) |
+| 30 | PasswordInput / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/30-components-passwordinput--basic.jpg) |
+| 31 | PinInput / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/31-components-pininput--basic.jpg) |
+| 32 | Popover / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/32-components-popover--basic.jpg) |
+| 33 | Progress / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/33-components-progress--basic.jpg) |
+| 34 | RadioGroup / Playground | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/34-components-radiogroup--playground.jpg) |
+| 35 | RatingGroup / Basic | 阻塞，首屏运行错误 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/35-components-ratinggroup--basic.jpg) |
+| 36 | ScrollArea / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/36-components-scrollarea--basic.jpg) |
+| 37 | Segment Group / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/37-components-segment-group--basic.jpg) |
+| 38 | Select / Playground | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/38-components-select--playground.jpg) |
+| 39 | Slider / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/39-components-slider--basic.jpg) |
+| 40 | Splitter / Basic | 阻塞，首屏运行错误 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/40-components-splitter--basic.jpg) |
+| 41 | Steps / Basic | 阻塞，首屏运行错误 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/41-components-steps--basic.jpg) |
+| 42 | Switch / Playground | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/42-components-switch--playground.jpg) |
+| 43 | Tabs / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/43-components-tabs--basic.jpg) |
+| 44 | TagsInput / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/44-components-tagsinput--basic.jpg) |
+| 45 | Toast / Basic | 首屏仅触发器，通知完整交互待验证 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/45-components-toast--basic.jpg) |
+| 46 | Toggle / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/46-components-toggle--basic.jpg) |
+| 47 | Toggle Group / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/47-components-toggle-group--basic.jpg) |
+| 48 | Tooltip / Basic | 首屏可渲染，交互完整性待验收 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/48-components-tooltip--basic.jpg) |
+| 49 | TreeView / Basic | 阻塞，首屏运行错误 | [原图](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/49-components-treeview--basic.jpg) |
 
-![组件基线总览 1](./contact-1.jpg)
+![组件基线总览 1](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/contact-1.jpg)
 
-![组件基线总览 2](./contact-2.jpg)
+![组件基线总览 2](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/contact-2.jpg)
 
-![组件基线总览 3](./contact-3.jpg)
+![组件基线总览 3](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/contact-3.jpg)
 
-![组件基线总览 4](./contact-4.jpg)
+![组件基线总览 4](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/contact-4.jpg)
 
-![组件基线总览 5](./contact-5.jpg)
+![组件基线总览 5](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/contact-5.jpg)
 
 ## shadcn 目录逐项映射
 

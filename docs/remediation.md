@@ -51,7 +51,7 @@ Storybook 任务中的 8 个四端测试按设计跳过，由独立 `test:framew
 
 保留 Tokens → Theme → Primitives → Kit → 四端 Adapters 的分层。组件 CSS、布局元数据、数据模型和菜单栏焦点逻辑共享；框架层负责渲染与事件。删除一次性迁移脚本和冗余检查配置，统一源码格式。构建产物与 tsbuildinfo 从版本控制中退出，源码目录不再混入生成 JS。
 
-旧类型桩及源码目录的生成物共 163 个文件，在移除前已保存到 [归档 ZIP](audits/2026-10-02/legacy-generated-sources.zip)，并逐文件校验 [SHA-256 清单](audits/2026-10-02/legacy-source-hashes.json)。原始视觉基线也已保存，避免覆盖历史证据。历史审查报告保持原样，反映整改前状态。
+旧类型桩及源码目录的生成物共 163 个文件，在移除前已保存到 [归档 ZIP](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/legacy-generated-sources.zip)，并逐文件校验 [SHA-256 清单](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/legacy-source-hashes.json)。原始视觉基线也已保存，避免覆盖历史证据。历史审查报告保持原样，反映整改前状态。
 
 发布方面已修复构建产物、入口、ESM 引用、Solid DOM/SSR 分离和 Svelte 资产复制；本轮未执行 npm registry 发布。
 
@@ -60,10 +60,10 @@ Storybook 任务中的 8 个四端测试按设计跳过，由独立 `test:framew
 本轮审查要求的传统组件入口缺口为 0；额外 AI 专用组件不在此次范围。Chart 是自适应 SVG 柱状/折线图，DataTable 使用标量行模型，Drawer 为底部模态抽屉；不提供 Recharts/Vaul 的完整高级能力或第三方 API 兼容。详细能力见 [组件覆盖](component-coverage.md)。
 
 - [整改前审查](audits/2026-10-02/review.md)
-- [浅色中性组合展示](audits/2026-10-02/gallery-light.png)
-- [深色中性组合展示](audits/2026-10-02/gallery-dark.png)
-- [深色 375px 窄屏](audits/2026-10-02/gallery-dark-mobile.png)
-- [展开颜色面板](audits/2026-10-02/color-picker-open.png)
+- [浅色中性组合展示](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/gallery-light.png)
+- [深色中性组合展示](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/gallery-dark.png)
+- [深色 375px 窄屏](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/gallery-dark-mobile.png)
+- [展开颜色面板](https://github.com/shaloong/loongark/blob/c6e0d14eb282c985a9dd4eab0f8d7b32d1668262/docs/audits/2026-10-02/color-picker-open.png)
 - [78 个默认组件截图](audits/2026-10-02/after-components/)
 - [最终机器验收记录](audits/2026-10-02/acceptance.json)
 

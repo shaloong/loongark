@@ -1,3 +1,0 @@
-/tmp/chart-advanced-contacts.py:14: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
-  parity.append({'mode':mode,'width':width,'state':state,'framework':f,'changedPixels':sum(x!=(0,0,0,0) for x in ImageChops.difference(reference,raw).getdata())})
-comparisons 36 pixel differences []

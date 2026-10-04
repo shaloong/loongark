@@ -8,3 +8,10 @@ playwright-report/
 blob-report/
 storybook-static/
 tests/consumer-dist/
+.artifacts/
+docs/audits/**
+!docs/audits/**/
+!docs/audits/**/acceptance.json
+!docs/audits/**/README.md
+!docs/audits/**/review.md
+!docs/audits/**/manual-review-notes.md

@@ -1,9 +1,12 @@
 import { mkdirSync } from "node:fs";
-/** Linux 验收不得写入既有 Windows 证据目录。 */
+/** 临时证据默认留在忽略目录；平台隔离，不改动受版本管理的视觉基线。 */
+export function auditRoot() {
+  return (
+    process.env.DESIGN_AUDIT_DIR ?? `.artifacts/audits/${process.platform}`
+  );
+}
 export function auditDirectory(batch: string) {
-  const path = process.env.DESIGN_AUDIT_DIR
-    ? `${process.env.DESIGN_AUDIT_DIR}/regressions/${batch.replaceAll("/", "-")}`
-    : `docs/audits/${batch}${process.platform === "win32" ? "" : "-" + process.platform}`;
+  const path = `${auditRoot()}/regressions/${batch.replaceAll("/", "-")}`;
   mkdirSync(path, { recursive: true });
   return path;
 }

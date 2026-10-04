@@ -331,5 +331,11 @@
     "tests/selectionInputChecks.ts": "4a1564613cf81df29701d5169094c139c3d8cc48b1b25caa0ffc9a6de117dbee"
   },
   "validatedLocalSourceCommit": "0887e6b99a149217d80fcd509a47d2807a69adf4",
-  "deliveryMethod": "GitHub 已连接应用的 Git data API；终端 GH_TOKEN 无效。远端树须与归档后的本地树完全一致。"
+  "deliveryMethod": "GitHub 已连接应用的 Git data API；终端 GH_TOKEN 无效。远端树须与归档后的本地树完全一致。",
+  "evidenceStorage": {
+    "kind": "historical-git-snapshot",
+    "commit": "c6e0d14eb282c985a9dd4eab0f8d7b32d1668262",
+    "directory": "docs/audits/2026-10-03/conversation-linux",
+    "note": "过程截图、详细测量和日志已从当前分支移出；本记录原有证据相对路径对应上述历史提交，不再代表当前目录内文件。后续批次使用 GitHub Actions Artifact 或本地忽略目录保存临时证据。"
+  }
 }

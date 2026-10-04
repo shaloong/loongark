@@ -1,7 +1,7 @@
+import { auditRoot as resolveAuditRoot } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-const auditRoot =
-  process.env.DESIGN_AUDIT_DIR ?? "docs/audits/2026-10-03/action-media";
+const auditRoot = resolveAuditRoot();
 
 test("中性展示页明暗、窄屏和无障碍", async ({ page }) => {
   for (const mode of ["light", "dark", "high-contrast"]) {

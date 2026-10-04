@@ -20,8 +20,13 @@
   },
   "coverage": {
     "families": 93,
-    "newFamilies": ["TransferList", "TimePicker"],
-    "enhancements": ["Textarea auto height"],
+    "newFamilies": [
+      "TransferList",
+      "TimePicker"
+    ],
+    "enhancements": [
+      "Textarea auto height"
+    ],
     "newValueExportsPerFramework": 2,
     "publicValueExportsPerFramework": 608,
     "publicValueExportCounting": "LoongArk-prefixed values excluding Provider; types and aliases are not families",
@@ -231,8 +236,14 @@
       "solid-mobile.png",
       "svelte-mobile.png"
     ],
-    "metrics": ["after/light/metrics.json", "after/dark/metrics.json"],
-    "accessibility": ["accessibility/light.json", "accessibility/dark.json"],
+    "metrics": [
+      "after/light/metrics.json",
+      "after/dark/metrics.json"
+    ],
+    "accessibility": [
+      "accessibility/light.json",
+      "accessibility/dark.json"
+    ],
     "snapshots": [
       "component-coverage.json",
       "api-parity.json",
@@ -307,5 +318,11 @@
     "scope": "Representative new composite in light/dark, mobile transfer layout and expanded time panel",
     "status": "passed",
     "notes": "Shared neutral tokens; consistent 36px controls, capped textarea height and narrow-screen stacking inspected."
+  },
+  "evidenceStorage": {
+    "kind": "historical-git-snapshot",
+    "commit": "c6e0d14eb282c985a9dd4eab0f8d7b32d1668262",
+    "directory": "docs/audits/2026-10-03/selection-inputs",
+    "note": "过程截图、详细测量和日志已从当前分支移出；本记录原有证据相对路径对应上述历史提交，不再代表当前目录内文件。后续批次使用 GitHub Actions Artifact 或本地忽略目录保存临时证据。"
   }
 }
