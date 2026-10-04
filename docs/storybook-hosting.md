@@ -1,10 +1,10 @@
 # Storybook 展示与公开范围
 
-Storybook 构建输出 `storybook-static/`，直接部署到 GitHub Pages，无需另做展示站。仓库已选择 MIT 许可并核验为 public，根目录与9个发布包包含 LICENSE。展示使用 `.github/workflows/storybook-pages.yml`，站点目标地址为 [shaloong.github.io/loongark](https://shaloong.github.io/loongark/)；首次开通与实际上线状态见 [工作流](https://github.com/shaloong/loongark/actions/workflows/storybook-pages.yml)。
+Storybook 构建输出 `storybook-static/`，直接部署到 GitHub Pages，无需另做展示站。仓库已选择 MIT 许可并核验为 public，根目录与9个发布包包含 LICENSE。展示使用 `.github/workflows/storybook-pages.yml`，在线地址为 [shaloong.github.io/loongark](https://shaloong.github.io/loongark/)；已于2026-10-04部署并检查线上首页、iframe和Story索引，验收见 [摘要](audits/2026-10-04/mit-pages/acceptance.json)；后续状态见 [工作流](https://github.com/shaloong/loongark/actions/workflows/storybook-pages.yml)。
 
 每次 develop 推送及手动触发时，冻结安装依赖，验证构建/契约/覆盖/发布/SSR/Svelte，构建 Storybook，再在真实 `/loongark/` 子路径检查首页、iframe、手机明暗场景、键盘交互与资源加载。构建或验证失败不会进入部署。只上传 `storybook-static/`；过程截图和日志留在 Actions，烟雾验收 Artifact 保留14天，不进源码分支。
 
-首次需在 Settings → Pages 将 Source 设为 GitHub Actions，github-pages 环境允许 develop 部署。官方 `configure-pages` 的自动开通需要额外管理员 Token，工作流采用标准读取配置与 OIDC 部署，不要求用户提供该 Token。部署后从 Actions runner 实际检查线上首页、iframe 与 Story 索引。云端管理 API 目前被网络策略阻止，连接器可提交代码和查看 Actions，但没有 Pages 管理写接口，不能把配置完成说成已上线。
+首次需在 Settings → Pages 将 Source 设为 GitHub Actions，github-pages 环境允许 develop 部署。官方 `configure-pages` 的自动开通需要额外管理员 Token，工作流采用标准读取配置与 OIDC 部署，不要求用户提供该 Token。部署后从 Actions runner 实际检查线上首页、iframe 与 Story 索引。首次开通已完成，工作流部署及线上 HTTP 检查通过。云端浏览器访问 Pages 域名仍受网络策略限制；桌面/手机明暗截图已对部署产物实际目视核验，线上检查由 Actions runner 执行。
 
 ## 平台选择
 

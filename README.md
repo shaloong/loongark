@@ -4,7 +4,7 @@
 
 [在线组件展示](https://shaloong.github.io/loongark/) · [Pages 部署状态](https://github.com/shaloong/loongark/actions/workflows/storybook-pages.yml) · [MIT License](LICENSE)
 
-在线展示使用 Storybook：可以直接浏览示例、操作控件、切换主题和查看 Props，无需克隆仓库。首次开通状态见部署工作流；展示自动跟随 develop，属于开发预览。
+在线展示使用 Storybook：可以直接浏览示例、操作控件、切换主题和查看 Props，无需克隆仓库。部署状态见工作流；展示自动跟随 develop，属于开发预览。
 
 - `develop`：日常开发与云端任务，频繁提交和推送。
 - `main`：稳定版本，通过发布 PR 不定期更新。

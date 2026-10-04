@@ -1,9 +1,9 @@
 {
-  "recordedAt": "2026-10-04T07:42:44.411334+00:00",
+  "recordedAt": "2026-10-04T15:36:24Z",
   "baseCommit": "2bb14f44c2e3027fe782fbb0b8f63a49a0501e8b",
   "branch": "develop",
   "localValidation": "passed",
-  "deployment": "awaiting Settings → Pages → Source: GitHub Actions; configured workflow, not claimed online",
+  "deployment": "passed: https://shaloong.github.io/loongark/",
   "repositoryVisibility": "public confirmed through GitHub repository metadata",
   "license": "MIT",
   "packagesWithLicense": 9,
@@ -46,9 +46,9 @@
   "limits": [
     "No npm publication or main merge",
     "Cloud GitHub administration API requests blocked by destination policy; repo public state independently confirmed",
-    "Local smoke validates deployment artifact, not actual GitHub Pages URL until deployment is confirmed",
     "No whole component behavior/visual rerun for licensing and Storybook deployment configuration",
-    "Official configure-pages automatic enablement requires an additional administrator token; standard setup uses a one-time Pages setting instead"
+    "Official configure-pages automatic enablement requires an additional administrator token; standard setup uses a one-time Pages setting instead",
+    "Actual online HTTP checks run on GitHub Actions; cloud browser access to shaloong.github.io remains restricted. Six deployment-artifact views were manually reviewed locally; no whole-library visual rerun."
   ],
   "evidenceStorage": {
     "kind": "local ignored artifacts",
@@ -75,17 +75,18 @@
       "Svelte check",
       "Chromium install",
       "six-scene /loongark/ static browser smoke",
-      "smoke Artifact upload"
+      "smoke Artifact upload",
+      "Pages configuration",
+      "Pages artifact upload",
+      "Pages deployment",
+      "actual online homepage / iframe.html / index.json HTTP 200 and frozen Story presence"
     ],
-    "blockedStep": "actions/configure-pages@v5: Get Pages site failed: Not Found",
-    "cause": "Pages has not been enabled; repository metadata has_pages=false",
-    "deploymentExecuted": false,
-    "requiredSetting": "Settings → Pages → Source: GitHub Actions",
     "artifact": {
-      "id": 11297557032,
+      "id": 11306988989,
       "name": "storybook-pages-smoke",
-      "sizeBytes": 334156,
-      "expiresAt": "2026-10-18T08:00:58Z",
+      "sizeBytes": 334620,
+      "expiresAt": "2026-10-18T15:36:02Z",
+      "url": "https://github.com/shaloong/loongark/actions/runs/37187397928/artifacts/11306988989",
       "inSourceRepository": false
     },
     "environment": {
@@ -93,6 +94,29 @@
       "pnpm": "10.14.0",
       "browser": "Chromium Headless Shell 143.0.7499.4 (Playwright build v1200)",
       "os": "ubuntu-24.04"
+    },
+    "firstAttempt": {
+      "blockedStep": "actions/configure-pages@v5: Get Pages site failed: Not Found",
+      "cause": "Pages has not been enabled; repository metadata has_pages=false",
+      "deploymentExecuted": false,
+      "requiredSetting": "Settings → Pages → Source: GitHub Actions"
+    },
+    "result": "success",
+    "attempt": 2,
+    "completedAt": "2026-10-04T15:36:24Z",
+    "buildJobId": 111469150707,
+    "deployJobId": 111469588771,
+    "deploymentExecuted": true,
+    "publishedSite": {
+      "url": "https://shaloong.github.io/loongark/",
+      "checkedAt": "2026-10-04T15:36:21Z",
+      "checker": "GitHub Actions deploy job",
+      "http200": [
+        "",
+        "iframe.html",
+        "index.json"
+      ],
+      "storyPresent": "components-datatable--frozen"
     }
   }
 }
