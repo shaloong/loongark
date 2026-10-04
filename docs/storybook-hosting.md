@@ -4,7 +4,7 @@ Storybook 构建输出 `storybook-static/`，直接部署到 GitHub Pages，无�
 
 每次 develop 推送及手动触发时，冻结安装依赖，验证构建/契约/覆盖/发布/SSR/Svelte，构建 Storybook，再在真实 `/loongark/` 子路径检查首页、iframe、手机明暗场景、键盘交互与资源加载。构建或验证失败不会进入部署。只上传 `storybook-static/`；过程截图和日志留在 Actions，烟雾验收 Artifact 保留14天，不进源码分支。
 
-工作流使用官方 `configure-pages` 开通 workflow 类型的 Pages。若账号/组织权限阻止开通，在 Settings → Pages 将 Source 设为 GitHub Actions 后重新运行工作流；github-pages 环境需允许 develop 部署。云端管理 API 目前被网络策略阻止，连接器可提交代码和查看 Actions，但没有仓库可见性/Pages 管理写接口，不能把配置完成说成已上线。
+首次需在 Settings → Pages 将 Source 设为 GitHub Actions，github-pages 环境允许 develop 部署。官方 `configure-pages` 的自动开通需要额外管理员 Token，工作流采用标准读取配置与 OIDC 部署，不要求用户提供该 Token。部署后从 Actions runner 实际检查线上首页、iframe 与 Story 索引。云端管理 API 目前被网络策略阻止，连接器可提交代码和查看 Actions，但没有 Pages 管理写接口，不能把配置完成说成已上线。
 
 ## 平台选择
 

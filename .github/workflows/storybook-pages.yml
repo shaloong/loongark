@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: read
-      pages: write
+      pages: read
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -45,8 +45,6 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: storybook-static
@@ -65,3 +63,26 @@ jobs:
       - name: Deploy Storybook
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify published site
+        env:
+          PAGES_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PY'
+          import json, os, time, urllib.request
+          from urllib.parse import urljoin
+          base = os.environ['PAGES_URL'].rstrip('/') + '/'
+          for attempt in range(12):
+              try:
+                  for path in ['', 'iframe.html', 'index.json']:
+                      with urllib.request.urlopen(urljoin(base, path), timeout=15) as response:
+                          assert response.status == 200
+                          content = response.read()
+                      if path == 'index.json':
+                          assert 'components-datatable--frozen' in json.loads(content)['entries']
+                  print('Published Storybook homepage, iframe and Story index verified:', base)
+                  break
+              except Exception:
+                  if attempt == 11:
+                      raise
+                  time.sleep(5)
+          PY

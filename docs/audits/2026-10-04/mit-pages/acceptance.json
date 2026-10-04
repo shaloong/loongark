@@ -3,7 +3,7 @@
   "baseCommit": "2bb14f44c2e3027fe782fbb0b8f63a49a0501e8b",
   "branch": "develop",
   "localValidation": "passed",
-  "deployment": "pending GitHub Actions; not claimed online",
+  "deployment": "awaiting Settings → Pages → Source: GitHub Actions; configured workflow, not claimed online",
   "repositoryVisibility": "public confirmed through GitHub repository metadata",
   "license": "MIT",
   "packagesWithLicense": 9,
@@ -47,7 +47,8 @@
     "No npm publication or main merge",
     "Cloud GitHub administration API requests blocked by destination policy; repo public state independently confirmed",
     "Local smoke validates deployment artifact, not actual GitHub Pages URL until deployment is confirmed",
-    "No whole component behavior/visual rerun for licensing and Storybook deployment configuration"
+    "No whole component behavior/visual rerun for licensing and Storybook deployment configuration",
+    "Official configure-pages automatic enablement requires an additional administrator token; standard setup uses a one-time Pages setting instead"
   ],
   "evidenceStorage": {
     "kind": "local ignored artifacts",
