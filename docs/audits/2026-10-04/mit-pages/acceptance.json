@@ -61,5 +61,38 @@
     "fix": "move successful Storybook build before coverage; align CONTRIBUTING and copilot instructions",
     "verification": "removed local static output, rebuilt successfully, coverage passed (114/292), then six-view static smoke passed",
     "olderIndexNotUsedInRecheck": true
+  },
+  "ciValidation": {
+    "run": "https://github.com/shaloong/loongark/actions/runs/37187397928",
+    "sourceCommit": "9afd44d2db72464d62bbdb02ae05aa5b7a6aa276",
+    "passed": [
+      "frozen installation",
+      "verify",
+      "contracts",
+      "Storybook build",
+      "coverage 114/292",
+      "publication and four-framework SSR",
+      "Svelte check",
+      "Chromium install",
+      "six-scene /loongark/ static browser smoke",
+      "smoke Artifact upload"
+    ],
+    "blockedStep": "actions/configure-pages@v5: Get Pages site failed: Not Found",
+    "cause": "Pages has not been enabled; repository metadata has_pages=false",
+    "deploymentExecuted": false,
+    "requiredSetting": "Settings → Pages → Source: GitHub Actions",
+    "artifact": {
+      "id": 11297557032,
+      "name": "storybook-pages-smoke",
+      "sizeBytes": 334156,
+      "expiresAt": "2026-10-18T08:00:58Z",
+      "inSourceRepository": false
+    },
+    "environment": {
+      "node": "24.21.0",
+      "pnpm": "10.14.0",
+      "browser": "Chromium Headless Shell 143.0.7499.4 (Playwright build v1200)",
+      "os": "ubuntu-24.04"
+    }
   }
 }
