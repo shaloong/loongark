@@ -38,6 +38,7 @@ GitHub 的仓库默认分支设为 `develop`，云端任务创建时仍应明确
 ```sh
 pnpm verify
 pnpm check:contracts
+pnpm storybook:build
 pnpm check:coverage
 pnpm check:publication
 pnpm check:svelte
@@ -46,7 +47,7 @@ pnpm test:e2e
 pnpm visual:test
 ```
 
-先构建成功，再验证真实发布产物；不要并行运行多个 Playwright 命令，它们共用测试结果目录。运行 Storybook 开发预览使用 `pnpm storybook`。
+先构建成功，再验证真实发布产物。覆盖检查读取 `storybook-static/index.json`，必须先成功构建 Storybook，不能依赖工作区里的旧索引；Pages 工作流和干净检出也遵守此依赖顺序。不要并行运行多个 Playwright 命令，它们共用测试结果目录。运行 Storybook 开发预览使用 `pnpm storybook`。
 
 当前验收在 Windows/Chromium 完成，仓库中的既有视觉基线带 win32 标记。云端 Linux 首次执行视觉测试需要建立并人工审阅对应平台的基线；不得将缺少基线视为通过，也不得自动覆盖 Windows 基线。修改样式后应查看截图再确认基线变化。
 

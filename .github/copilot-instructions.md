@@ -10,7 +10,7 @@
 
 架构与公共 API 见 docs/README.md、docs/theme-system.md、docs/component-coverage.md。使用 pnpm workspace 与根项目引用。共享包采用 tsc；Solid 增加 DOM/SSR JSX 编译；Svelte 发布源码与声明。src 只保留源码，dist、构建缓存、Storybook 静态产物和消费测试产物不跟踪。
 
-验收顺序：pnpm run verify → pnpm run check:contracts → pnpm run check:publication → pnpm run check:svelte → pnpm run test:frameworks → pnpm run test:e2e → pnpm run visual:test。
+验收顺序：pnpm run verify → pnpm run check:contracts → pnpm run storybook:build → pnpm run check:coverage → pnpm run check:publication → pnpm run check:svelte → pnpm run test:frameworks → pnpm run test:e2e → pnpm run visual:test。覆盖检查依赖新构建的 Storybook 索引，不消费旧产物。
 
 CLI：构建后 node packages/cli/dist/index.js extract --dir dist/tokens --format css,json，再使用 verify --dir dist/tokens 校验。修改 tokens 后应重新提取对应产物。
 

@@ -53,5 +53,13 @@
   "evidenceStorage": {
     "kind": "local ignored artifacts",
     "directory": ".artifacts/mit-pages/"
+  },
+  "ciFirstCleanCheckout": {
+    "run": "https://github.com/shaloong/loongark/actions/runs/37186895971",
+    "result": "failed coverage before deployment",
+    "reason": "coverage reads storybook-static/index.json; initial workflow scheduled coverage before Storybook build",
+    "fix": "move successful Storybook build before coverage; align CONTRIBUTING and copilot instructions",
+    "verification": "removed local static output, rebuilt successfully, coverage passed (114/292), then six-view static smoke passed",
+    "olderIndexNotUsedInRecheck": true
   }
 }
