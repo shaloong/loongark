@@ -1,0 +1,21 @@
+
+> loongark@0.0.0 verify /workspace/loongark
+> pnpm run lint && pnpm run tsc && pnpm run build
+
+
+> loongark@0.0.0 lint /workspace/loongark
+> node ./scripts/verify-workspace.mjs
+
+[verify-workspace] ok
+
+> loongark@0.0.0 tsc /workspace/loongark
+> pnpm exec tsc -b
+
+examples/solid/DataTableFrozenExample.tsx(21,55): error TS2561: Object literal may only specify known properties, but 'maxWidth' does not exist in type 'CSSProperties'. Did you mean to write 'max-width'?
+examples/solid/DataTableFrozenExample.tsx(57,12): error TS2322: Type '"rtl()" | "ltr"' is not assignable to type 'HTMLDir | undefined'.
+  Type '"rtl()"' is not assignable to type 'HTMLDir | undefined'. Did you mean '"rtl"'?
+examples/solid/DataTableFrozenExample.tsx(21,55): error TS2561: Object literal may only specify known properties, but 'maxWidth' does not exist in type 'CSSProperties'. Did you mean to write 'max-width'?
+examples/solid/DataTableFrozenExample.tsx(57,12): error TS2322: Type '"rtl()" | "ltr"' is not assignable to type 'HTMLDir | undefined'.
+  Type '"rtl()"' is not assignable to type 'HTMLDir | undefined'. Did you mean '"rtl"'?
+ ELIFECYCLE  Command failed with exit code 2.
+ ELIFECYCLE  Command failed with exit code 2.

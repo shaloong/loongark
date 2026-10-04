@@ -1,7 +1,9 @@
 <script lang="ts">
-  import { afterUpdate, tick } from "svelte";
+  import { afterUpdate, tick, onMount } from "svelte";
   import {
     dataTableView,
+    mountDataTablePins,
+    type DataTableProps,
     retryDataTable,
     type DataTableState,
     nextDataSort,
@@ -33,6 +35,9 @@
   export let mode: "client" | "server" = "client";
   export let totalRows: number | undefined = undefined;
   export let columnKeys: readonly string[] | undefined = undefined;
+  export let pinnedColumns: DataTableProps["pinnedColumns"] = undefined;
+  let region: HTMLDivElement;
+  onMount(() => mountDataTablePins(region));
   export let loading = false;
   export let error: string | undefined = undefined;
   export let onRetry: (() => void) | undefined = undefined;
@@ -43,7 +48,16 @@
     pageInput: HTMLInputElement | undefined;
   $: current = state ?? { query, sort, page };
   $: view = dataTableView(
-    { data, columns, pageSize, rowKey, mode, totalRows, columnKeys },
+    {
+      data,
+      columns,
+      pageSize,
+      rowKey,
+      mode,
+      totalRows,
+      columnKeys,
+      pinnedColumns,
+    },
     current,
   );
   $: text = dataTableLabels(labels);
@@ -113,6 +127,7 @@
   <div
     data-scope="table"
     data-part="root"
+    bind:this={region}
     role="region"
     aria-label={label}
     tabindex="0"
@@ -120,7 +135,7 @@
     <table data-scope="table" data-part="table" aria-label={label}>
       <thead
         ><tr
-          ><th scope="col"
+          ><th scope="col" data-pinned={view.pinSelection ? "start" : undefined}
             ><label data-part="selection"
               ><input
                 bind:this={pageInput}
@@ -145,6 +160,7 @@
           >
           {#each view.columns as c (c.key)}<th
               scope="col"
+              data-pinned={view.pins.get(c.key)}
               aria-sort={view.sort?.key === c.key
                 ? view.sort.direction === "asc"
                   ? "ascending"
@@ -168,7 +184,7 @@
         >{#each view.rows as { row, id } (id)}<tr
             data-selected={selected.includes(id) || undefined}
           >
-            <td
+            <td data-pinned={view.pinSelection ? "start" : undefined}
               ><label data-part="selection"
                 ><input
                   type="checkbox"
@@ -188,11 +204,13 @@
                 /></label
               ></td
             >
-            {#each view.columns as c (c.key)}<td>{String(row[c.key] ?? "")}</td
+            {#each view.columns as c (c.key)}<td
+                data-pinned={view.pins.get(c.key)}
+                >{String(row[c.key] ?? "")}</td
               >{/each}
           </tr>{:else}<tr
             ><td colspan={view.columns.length + 1} data-part="empty"
-              >{loading ? text.loading : text.empty}</td
+              ><span>{loading ? text.loading : text.empty}</span></td
             ></tr
           >{/each}</tbody
       >

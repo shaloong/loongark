@@ -1,0 +1,114 @@
+[
+  {
+    "state": "scrolled",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 3,
+    "bbox": [
+      24,
+      660,
+      26,
+      662
+    ],
+    "maximumChannelDifference": 1
+  },
+  {
+    "state": "scrolled",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 3,
+    "bbox": [
+      24,
+      660,
+      26,
+      662
+    ],
+    "maximumChannelDifference": 1
+  },
+  {
+    "state": "rtl",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 2,
+    "bbox": [
+      349,
+      660,
+      350,
+      662
+    ],
+    "maximumChannelDifference": 1
+  },
+  {
+    "state": "rtl",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 2,
+    "bbox": [
+      349,
+      660,
+      350,
+      662
+    ],
+    "maximumChannelDifference": 1
+  },
+  {
+    "state": "scrolled",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 2,
+    "bbox": [
+      24,
+      659,
+      25,
+      662
+    ],
+    "maximumChannelDifference": 1
+  },
+  {
+    "state": "scrolled",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 2,
+    "bbox": [
+      24,
+      659,
+      25,
+      662
+    ],
+    "maximumChannelDifference": 1
+  },
+  {
+    "state": "rtl",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 2,
+    "bbox": [
+      350,
+      659,
+      351,
+      661
+    ],
+    "maximumChannelDifference": 1
+  },
+  {
+    "state": "rtl",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 2,
+    "bbox": [
+      350,
+      659,
+      351,
+      661
+    ],
+    "maximumChannelDifference": 1
+  }
+]

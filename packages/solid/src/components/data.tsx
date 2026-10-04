@@ -1,5 +1,6 @@
 import {
   dataTableView,
+  mountDataTablePins,
   retryDataTable,
   type DataTableState,
   nextDataSort,
@@ -58,6 +59,8 @@ export const LoongArkChart = (props: ChartOptions) => {
   );
 };
 export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
+  let region!: HTMLDivElement;
+  onMount(() => onCleanup(mountDataTablePins(region)));
   const [query, setQuery] = createSignal(props.defaultState?.query ?? ""),
     [sort, setSort] = createSignal<DataSort | undefined>(
       props.defaultState?.sort,
@@ -154,6 +157,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
       <div
         data-scope="table"
         data-part="root"
+        ref={region}
         role="region"
         aria-label={label()}
         tabIndex={0}
@@ -161,7 +165,10 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
         <table data-scope="table" data-part="table" aria-label={label()}>
           <thead>
             <tr>
-              <th scope="col">
+              <th
+                scope="col"
+                data-pinned={view().pinSelection ? "start" : undefined}
+              >
                 <label data-part="selection">
                   <input
                     ref={pageInput}
@@ -189,6 +196,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                 {(c) => (
                   <th
                     scope="col"
+                    data-pinned={view().pins.get(c.key)}
                     aria-sort={
                       view().sort?.key === c.key
                         ? view().sort?.direction === "asc"
@@ -223,7 +231,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
             <For each={view().rows}>
               {({ row, id }) => (
                 <tr data-selected={selected().includes(id) || undefined}>
-                  <td>
+                  <td data-pinned={view().pinSelection ? "start" : undefined}>
                     <label data-part="selection">
                       <input
                         type="checkbox"
@@ -245,7 +253,11 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                     </label>
                   </td>
                   <For each={view().columns}>
-                    {(c) => <td>{String(row[c.key] ?? "")}</td>}
+                    {(c) => (
+                      <td data-pinned={view().pins.get(c.key)}>
+                        {String(row[c.key] ?? "")}
+                      </td>
+                    )}
                   </For>
                 </tr>
               )}
@@ -253,7 +265,9 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
             <Show when={!view().rows.length}>
               <tr>
                 <td colSpan={view().columns.length + 1} data-part="empty">
-                  {props.loading ? labels().loading : labels().empty}
+                  <span>
+                    {props.loading ? labels().loading : labels().empty}
+                  </span>
                 </td>
               </tr>
             </Show>

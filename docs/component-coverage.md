@@ -4,122 +4,122 @@
 
 目前 114 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐 Ark 裁剪、JSON 与辅助组件，并复核高级部件，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
 
-| 组件族               | React | Vue | Solid | Svelte | 交付来源        |
-| -------------------- | ----- | --- | ----- | ------ | --------------- |
-| DateInput | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 新版 |
-| Swap | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 新版 |
-| Toc | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 新版 |
-| ImageCropper | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
-| JsonTreeView | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
-| ClientOnly | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
-| DownloadTrigger | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
-| FocusTrap | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
-| Format | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
-| Frame | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
-| Highlight | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
-| Presence | ✓ | ✓ | ✓ | ✓ | 2026-10-03 Ark 复核 |
-| Attachment           | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Message              | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Bubble               | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| MessageScroller      | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Questionnaire        | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| FloatingActionButton | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| SpeedDial            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| ImageList            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Masonry              | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| TransferList         | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| TimePicker           | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Textarea             | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Link                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Chip                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| List                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| AvatarGroup          | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Paper                | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Box                  | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Stack                | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Container            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Grid                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Timeline             | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| AppBar               | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| BottomNavigation     | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增 |
-| Accordion            | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Alert                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Alert Dialog         | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Angle Slider         | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
-| Aspect Ratio         | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Avatar               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Badge                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Breadcrumb           | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Button               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Button Group         | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Calendar             | ✓     | ✓   | ✓     | ✓      | 补齐独立入口    |
-| Card                 | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Carousel             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Chart                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Checkbox             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Clipboard            | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Collapsible          | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Color Picker         | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Combobox             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Command              | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Context Menu         | ✓     | ✓   | ✓     | ✓      | 补齐独立入口    |
-| Data Table           | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Date Picker          | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Dialog               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Direction            | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Drawer               | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Editable             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Empty                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Field                | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
-| Fieldset             | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
-| File Upload          | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Filter Bar           | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Floating Panel       | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
-| Hover Card           | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Input                | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Input Group          | ✓     | ✓   | ✓     | ✓      | 补齐独立入口    |
-| Item                 | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Kbd                  | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Label                | ✓     | ✓   | ✓     | ✓      | 补齐独立入口    |
-| Listbox              | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Marquee              | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
-| Menu                 | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Menubar              | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Native Select        | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Navigation Menu      | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Number Input         | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Pagination           | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Password Input       | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Pin Input            | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Popover              | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Progress             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| QR Code              | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
-| Radio Group          | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Rating Group         | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Scroll Area          | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Segment Group        | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Select               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Separator            | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Sheet                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Sidebar              | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Signature Pad        | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
-| Skeleton             | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Slider               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Spinner              | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Splitter             | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Steps                | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Switch               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Table                | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
-| Tabs                 | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Tags Input           | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Timer                | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
-| Toast                | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Toggle               | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Toggle Group         | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Tooltip              | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Tour                 | ✓     | ✓   | ✓     | ✓      | 补齐原计划      |
-| Tree View            | ✓     | ✓   | ✓     | ✓      | 原有组件修复    |
-| Typography           | ✓     | ✓   | ✓     | ✓      | 新增常规组件    |
+| 组件族               | React | Vue | Solid | Svelte | 交付来源            |
+| -------------------- | ----- | --- | ----- | ------ | ------------------- |
+| DateInput            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 新版 |
+| Swap                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 新版 |
+| Toc                  | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 新版 |
+| ImageCropper         | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 复核 |
+| JsonTreeView         | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 复核 |
+| ClientOnly           | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 复核 |
+| DownloadTrigger      | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 复核 |
+| FocusTrap            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 复核 |
+| Format               | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 复核 |
+| Frame                | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 复核 |
+| Highlight            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 复核 |
+| Presence             | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 复核 |
+| Attachment           | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Message              | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Bubble               | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| MessageScroller      | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Questionnaire        | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| FloatingActionButton | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| SpeedDial            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| ImageList            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Masonry              | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| TransferList         | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| TimePicker           | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Textarea             | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Link                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Chip                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| List                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| AvatarGroup          | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Paper                | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Box                  | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Stack                | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Container            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Grid                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Timeline             | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| AppBar               | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| BottomNavigation     | ✓     | ✓   | ✓     | ✓      | 2026-10-03 新增     |
+| Accordion            | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Alert                | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Alert Dialog         | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Angle Slider         | ✓     | ✓   | ✓     | ✓      | 补齐原计划          |
+| Aspect Ratio         | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Avatar               | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Badge                | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Breadcrumb           | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Button               | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Button Group         | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Calendar             | ✓     | ✓   | ✓     | ✓      | 补齐独立入口        |
+| Card                 | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Carousel             | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Chart                | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Checkbox             | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Clipboard            | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Collapsible          | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Color Picker         | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Combobox             | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Command              | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Context Menu         | ✓     | ✓   | ✓     | ✓      | 补齐独立入口        |
+| Data Table           | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Date Picker          | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Dialog               | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Direction            | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Drawer               | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Editable             | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Empty                | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Field                | ✓     | ✓   | ✓     | ✓      | 补齐原计划          |
+| Fieldset             | ✓     | ✓   | ✓     | ✓      | 补齐原计划          |
+| File Upload          | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Filter Bar           | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Floating Panel       | ✓     | ✓   | ✓     | ✓      | 补齐原计划          |
+| Hover Card           | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Input                | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Input Group          | ✓     | ✓   | ✓     | ✓      | 补齐独立入口        |
+| Item                 | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Kbd                  | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Label                | ✓     | ✓   | ✓     | ✓      | 补齐独立入口        |
+| Listbox              | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Marquee              | ✓     | ✓   | ✓     | ✓      | 补齐原计划          |
+| Menu                 | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Menubar              | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Native Select        | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Navigation Menu      | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Number Input         | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Pagination           | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Password Input       | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Pin Input            | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Popover              | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Progress             | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| QR Code              | ✓     | ✓   | ✓     | ✓      | 补齐原计划          |
+| Radio Group          | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Rating Group         | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Scroll Area          | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Segment Group        | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Select               | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Separator            | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Sheet                | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Sidebar              | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Signature Pad        | ✓     | ✓   | ✓     | ✓      | 补齐原计划          |
+| Skeleton             | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Slider               | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Spinner              | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Splitter             | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Steps                | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Switch               | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Table                | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
+| Tabs                 | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Tags Input           | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Timer                | ✓     | ✓   | ✓     | ✓      | 补齐原计划          |
+| Toast                | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Toggle               | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Toggle Group         | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Tooltip              | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Tour                 | ✓     | ✓   | ✓     | ✓      | 补齐原计划          |
+| Tree View            | ✓     | ✓   | ✓     | ✓      | 原有组件修复        |
+| Typography           | ✓     | ✓   | ✓     | ✓      | 新增常规组件        |
 
 ## 能力约定
 
@@ -153,5 +153,8 @@ Chart 可读性批次完善紧凑数值轴、分类密度、共享图例、缺�
 
 图表批次验收：四端消费/示例 8 项、159 个示例运行、全量浏览器 67 项、视觉 58 项通过。289 Story 的明暗默认 WCAG、窄屏溢出和有效 transition: all 为 0；60 张场景图已通过联系表复核，36 次四端对比为 0 像素差异。目视发现手机展开表格撑开页面，修复 max-width 并补局部键盘滚动回归后重验。新增 4 张 Linux 基线，原有 54 张 Linux 与 2 张 Windows 基线不变；缩放、刷选及实时流未提供。详见 [独立验收记录](audits/2026-10-03/chart-advanced-linux/acceptance.json)。
 
-
 MessageScroller 媒体与可见文字锚点批次新增四端 MessageScrollerAdvancedExample 和 Advanced Story。当前114族、291 Story、四端各789个公开值入口、167个框架示例；组合能力涵盖异步媒体、复合前后插入、用户阅读位置与卸载清理，Button 忙碌语义同时按四端统一。API 见 [会话说明](conversation.md)，验证与限制见 [独立记录](audits/2026-10-03/message-anchor-linux/acceptance.json)。组件族目录覆盖不代表虚拟化、冻结列、编辑、缩放、刷选或复杂题型全部完成。
+
+### DataTable 冻结列（2026-10-04）
+
+继续完善现有组件，不新增别名或组件族。四端 pinnedColumns 支持逻辑两边冻结、显示/顺序联动、真实尺寸更新、RTL、过宽时普通滚动和键盘焦点可见；增加四端示例与 Frozen Story。当前114族、292 Story、四端各789个公开值入口、171个示例。验证和高级能力边界见 [冻结列验收](audits/2026-10-04/data-table-frozen-linux/acceptance.json)及 [API](data-table.md#冻结列)。

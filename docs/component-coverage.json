@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03",
+  "updatedAt": "2026-10-04",
   "sources": [
     "https://ui.shadcn.com/docs/components",
     "https://mui.com/material-ui/all-components/",
@@ -143,6 +143,7 @@
     "Context and collection control hooks",
     "Chart controlled legend, bounded domain and accessible data table",
     "Message and Attachment async actions, preview/cancel and lifecycle",
-    "MessageScroller visible-text/media anchors, compound insertion and cleanup"
+    "MessageScroller visible-text/media anchors, compound insertion and cleanup",
+    "DataTable logical frozen columns, measured offsets and responsive fallback"
   ]
 }

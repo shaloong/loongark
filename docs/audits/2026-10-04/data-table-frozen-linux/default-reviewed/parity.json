@@ -1,0 +1,86 @@
+[
+  {
+    "id": "components-datatable--empty",
+    "mode": "light",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--server",
+    "mode": "dark",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--loading",
+    "mode": "light",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--long-cells",
+    "mode": "light",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--empty",
+    "mode": "dark",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--frozen",
+    "mode": "light",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--server",
+    "mode": "light",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--localized",
+    "mode": "dark",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--frozen",
+    "mode": "dark",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--basic",
+    "mode": "dark",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--basic",
+    "mode": "light",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--loading",
+    "mode": "dark",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--long-cells",
+    "mode": "dark",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "id": "components-datatable--localized",
+    "mode": "light",
+    "changedPixels": 0,
+    "bbox": null
+  }
+]

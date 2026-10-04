@@ -1,0 +1,181 @@
+
+> loongark@0.0.0 verify /workspace/loongark
+> pnpm run lint && pnpm run tsc && pnpm run build
+
+
+> loongark@0.0.0 lint /workspace/loongark
+> node ./scripts/verify-workspace.mjs
+
+[verify-workspace] ok
+
+> loongark@0.0.0 tsc /workspace/loongark
+> pnpm exec tsc -b
+
+examples/solid/DataTableFrozenExample.tsx(20,6): error TS2786: 'L.LoongArkStack' cannot be used as a JSX component.
+  Its type '(props: LoongArkLayoutProps) => Element' is not a valid JSX element type.
+    Type '(props: LoongArkLayoutProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(20,55): error TS2561: Object literal may only specify known properties, but 'maxWidth' does not exist in type 'CSSProperties'. Did you mean to write 'max-width'?
+examples/solid/DataTableFrozenExample.tsx(21,7): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(21,8): error TS2786: 'L.LoongArkStack' cannot be used as a JSX component.
+  Its type '(props: LoongArkLayoutProps) => Element' is not a valid JSX element type.
+    Type '(props: LoongArkLayoutProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(22,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(22,10): error TS2786: 'L.LoongArkTypography' cannot be used as a JSX component.
+  Its type '(props: LoongArkLayoutProps) => Element' is not a valid JSX element type.
+    Type '(props: LoongArkLayoutProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(23,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(23,10): error TS2786: 'L.LoongArkTypography' cannot be used as a JSX component.
+  Its type '(props: LoongArkLayoutProps) => Element' is not a valid JSX element type.
+    Type '(props: LoongArkLayoutProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(27,7): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(27,8): error TS2786: 'L.LoongArkStack' cannot be used as a JSX component.
+  Its type '(props: LoongArkLayoutProps) => Element' is not a valid JSX element type.
+    Type '(props: LoongArkLayoutProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(28,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(28,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(34,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(34,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(37,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(37,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(40,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(40,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(46,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(46,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(49,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(49,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(56,7): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(57,10): error TS2769: No overload matches this call.
+  Overload 2 of 2, '(props: { when: boolean | null | undefined; keyed: true; fallback?: Element; children: Element | ((item: true) => Element); }): Element', gave the following error.
+    Type 'React.JSX.Element' is not assignable to type 'import("/workspace/loongark/node_modules/.pnpm/solid-js@1.9.15/node_modules/solid-js/types/jsx").JSX.Element'.
+  Overload 2 of 2, '(props: { when: boolean | null | undefined; keyed: true; fallback?: Element; children: Element | ((item: true) => Element); }): Element', gave the following error.
+    Type 'Element' is not assignable to type 'Element | ((item: true) => Element)'.
+examples/solid/DataTableFrozenExample.tsx(57,10): error TS2786: 'Show' cannot be used as a JSX component.
+  Its type '{ <T, TRenderFunction extends (item: Accessor<NonNullable<T>>) => JSX.Element>(props: { when: false | T | null | undefined; keyed?: false | undefined; fallback?: Element; children: Element | RequiredParameter<...>; }): Element; <T, TRenderFunction extends (item: NonNullable<T>) => JSX.Element>(props: { ...; }): Elem...' is not a valid JSX element type.
+    Type '{ <T, TRenderFunction extends (item: Accessor<NonNullable<T>>) => JSX.Element>(props: { when: false | T | null | undefined; keyed?: false | undefined; fallback?: Element; children: Element | RequiredParameter<...>; }): Element; <T, TRenderFunction extends (item: NonNullable<T>) => JSX.Element>(props: { ...; }): Elem...' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(58,12): error TS2786: 'L.LoongArkDataTable' cannot be used as a JSX component.
+  Its type '(props: DataTableProps) => Element' is not a valid JSX element type.
+    Type '(props: DataTableProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(70,7): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(20,6): error TS2786: 'L.LoongArkStack' cannot be used as a JSX component.
+  Its type '(props: LoongArkLayoutProps) => Element' is not a valid JSX element type.
+    Type '(props: LoongArkLayoutProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(20,55): error TS2561: Object literal may only specify known properties, but 'maxWidth' does not exist in type 'CSSProperties'. Did you mean to write 'max-width'?
+examples/solid/DataTableFrozenExample.tsx(21,7): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(21,8): error TS2786: 'L.LoongArkStack' cannot be used as a JSX component.
+  Its type '(props: LoongArkLayoutProps) => Element' is not a valid JSX element type.
+    Type '(props: LoongArkLayoutProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(22,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(22,10): error TS2786: 'L.LoongArkTypography' cannot be used as a JSX component.
+  Its type '(props: LoongArkLayoutProps) => Element' is not a valid JSX element type.
+    Type '(props: LoongArkLayoutProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(23,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(23,10): error TS2786: 'L.LoongArkTypography' cannot be used as a JSX component.
+  Its type '(props: LoongArkLayoutProps) => Element' is not a valid JSX element type.
+    Type '(props: LoongArkLayoutProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(27,7): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(27,8): error TS2786: 'L.LoongArkStack' cannot be used as a JSX component.
+  Its type '(props: LoongArkLayoutProps) => Element' is not a valid JSX element type.
+    Type '(props: LoongArkLayoutProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(28,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(28,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(34,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(34,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(37,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(37,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(40,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(40,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(46,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(46,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(49,9): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(49,10): error TS2786: 'L.LoongArkButton' cannot be used as a JSX component.
+  Its type 'Component<LoongArkButtonProps>' is not a valid JSX element type.
+    Type 'Component<LoongArkButtonProps>' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(56,7): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+examples/solid/DataTableFrozenExample.tsx(57,10): error TS2769: No overload matches this call.
+  Overload 2 of 2, '(props: { when: boolean | null | undefined; keyed: true; fallback?: Element; children: Element | ((item: true) => Element); }): Element', gave the following error.
+    Type 'React.JSX.Element' is not assignable to type 'import("/workspace/loongark/node_modules/.pnpm/solid-js@1.9.15/node_modules/solid-js/types/jsx").JSX.Element'.
+  Overload 2 of 2, '(props: { when: boolean | null | undefined; keyed: true; fallback?: Element; children: Element | ((item: true) => Element); }): Element', gave the following error.
+    Type 'Element' is not assignable to type 'Element | ((item: true) => Element)'.
+examples/solid/DataTableFrozenExample.tsx(57,10): error TS2786: 'Show' cannot be used as a JSX component.
+  Its type '{ <T, TRenderFunction extends (item: Accessor<NonNullable<T>>) => JSX.Element>(props: { when: false | T | null | undefined; keyed?: false | undefined; fallback?: Element; children: Element | RequiredParameter<...>; }): Element; <T, TRenderFunction extends (item: NonNullable<T>) => JSX.Element>(props: { ...; }): Elem...' is not a valid JSX element type.
+    Type '{ <T, TRenderFunction extends (item: Accessor<NonNullable<T>>) => JSX.Element>(props: { when: false | T | null | undefined; keyed?: false | undefined; fallback?: Element; children: Element | RequiredParameter<...>; }): Element; <T, TRenderFunction extends (item: NonNullable<T>) => JSX.Element>(props: { ...; }): Elem...' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(58,12): error TS2786: 'L.LoongArkDataTable' cannot be used as a JSX component.
+  Its type '(props: DataTableProps) => Element' is not a valid JSX element type.
+    Type '(props: DataTableProps) => Element' is not assignable to type '(props: any) => ReactNode | Promise<ReactNode>'.
+      Type 'Element' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+        Type 'Node' is not assignable to type 'ReactNode | Promise<ReactNode>'.
+examples/solid/DataTableFrozenExample.tsx(70,7): error TS2322: Type 'Element' is not assignable to type 'string | Element'.
+ ELIFECYCLE  Command failed with exit code 2.
+ ELIFECYCLE  Command failed with exit code 2.

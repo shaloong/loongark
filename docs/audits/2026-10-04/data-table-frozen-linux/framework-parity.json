@@ -1,0 +1,522 @@
+[
+  {
+    "state": "default",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "scrolled",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "scrolled",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "scrolled",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "rtl",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "rtl",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "rtl",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "wide-pins",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "wide-pins",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "wide-pins",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "light",
+    "width": 1280,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "light",
+    "width": 1280,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "light",
+    "width": 1280,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "scrolled",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 3,
+    "bbox": [
+      24,
+      660,
+      26,
+      662
+    ]
+  },
+  {
+    "state": "scrolled",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "scrolled",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 3,
+    "bbox": [
+      24,
+      660,
+      26,
+      662
+    ]
+  },
+  {
+    "state": "rtl",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 2,
+    "bbox": [
+      349,
+      660,
+      350,
+      662
+    ]
+  },
+  {
+    "state": "rtl",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "rtl",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 2,
+    "bbox": [
+      349,
+      660,
+      350,
+      662
+    ]
+  },
+  {
+    "state": "wide-pins",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "wide-pins",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "wide-pins",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "light",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "light",
+    "width": 375,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "light",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "scrolled",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "scrolled",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "scrolled",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "rtl",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "rtl",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "rtl",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "wide-pins",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "wide-pins",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "wide-pins",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "dark",
+    "width": 1280,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "default",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "scrolled",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 2,
+    "bbox": [
+      24,
+      659,
+      25,
+      662
+    ]
+  },
+  {
+    "state": "scrolled",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "scrolled",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 2,
+    "bbox": [
+      24,
+      659,
+      25,
+      662
+    ]
+  },
+  {
+    "state": "rtl",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 2,
+    "bbox": [
+      350,
+      659,
+      351,
+      661
+    ]
+  },
+  {
+    "state": "rtl",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "rtl",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 2,
+    "bbox": [
+      350,
+      659,
+      351,
+      661
+    ]
+  },
+  {
+    "state": "wide-pins",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "wide-pins",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "wide-pins",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "dark",
+    "width": 375,
+    "framework": "vue",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "dark",
+    "width": 375,
+    "framework": "solid",
+    "changedPixels": 0,
+    "bbox": null
+  },
+  {
+    "state": "empty",
+    "mode": "dark",
+    "width": 375,
+    "framework": "svelte",
+    "changedPixels": 0,
+    "bbox": null
+  }
+]

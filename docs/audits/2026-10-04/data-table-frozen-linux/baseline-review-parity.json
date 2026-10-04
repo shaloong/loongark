@@ -1,0 +1,22 @@
+[
+  {
+    "baseline": "tests/data-table-frozen.visual.spec.ts-snapshots/data-table-frozen-light-1280-chromium-visual-linux.png",
+    "reference": "review/story-default-light-1280.png",
+    "changedPixels": 0
+  },
+  {
+    "baseline": "tests/data-table-frozen.visual.spec.ts-snapshots/data-table-frozen-light-375-chromium-visual-linux.png",
+    "reference": "review/story-default-light-375.png",
+    "changedPixels": 0
+  },
+  {
+    "baseline": "tests/data-table-frozen.visual.spec.ts-snapshots/data-table-frozen-dark-1280-chromium-visual-linux.png",
+    "reference": "review/story-default-dark-1280.png",
+    "changedPixels": 0
+  },
+  {
+    "baseline": "tests/data-table-frozen.visual.spec.ts-snapshots/data-table-frozen-dark-375-chromium-visual-linux.png",
+    "reference": "review/story-default-dark-375.png",
+    "changedPixels": 0
+  }
+]

@@ -3,6 +3,19 @@ const css = `
 [data-scope=data-table][data-part=root] { display:grid;gap:var(--lk-space-component-md);min-width:0; }
 [data-scope=data-table] > input { width:min(100%,320px);height:var(--lk-control-height-md);padding:0 var(--lk-space-component-compact);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input);border-radius:var(--lk-radius-md);background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground);font:inherit; }
 [data-scope=data-table] [data-scope=table][data-part=root] { border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-lg);overscroll-behavior-inline:contain; }
+[data-scope=data-table] [data-scope=table][data-part=root] { --lk-data-table-pin-offset:0px;--lk-data-table-viewport-width:100%; }
+[data-scope=data-table] table:has(th[data-pinned]) { border-collapse:separate;border-spacing:0; }
+[data-scope=data-table] table:has(th[data-pinned]) :is(th,td) { border-bottom:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border); }
+[data-scope=data-table] table:has(th[data-pinned]) tbody tr:last-child td { border-bottom:0; }
+[data-scope=data-table] [data-scope=table][data-part=root]:has(th[data-pinned]) { isolation:isolate; }
+[data-scope=data-table] [data-pinned] { position:sticky;background:var(--lk-color-semantic-background);z-index:1; }
+[data-scope=data-table] [data-pinned=start] { inset-inline-start:var(--lk-data-table-pin-offset); }
+[data-scope=data-table] [data-pinned=end] { inset-inline-end:var(--lk-data-table-pin-offset); }
+[data-scope=data-table] [data-pin-edge=start] { box-shadow:inset calc(-1 * var(--lk-control-borderwidth)) 0 var(--lk-color-semantic-border); }
+[data-scope=data-table] [data-pin-edge=end] { box-shadow:inset var(--lk-control-borderwidth) 0 var(--lk-color-semantic-border); }
+[data-scope=data-table] tbody tr:is(:hover,[data-selected]) [data-pinned] { background:var(--lk-color-semantic-muted); }
+[data-scope=data-table] [data-pin-overflow=true] [data-pinned] { position:static;box-shadow:none; }
+[data-scope=data-table] table:has(th[data-pinned]) [data-part=empty] > span { display:block;position:sticky;inset-inline-start:var(--lk-space-component-sm);width:calc(var(--lk-data-table-viewport-width) - var(--lk-space-component-sm) * 2);max-width:100%;text-align:center; }
 [data-scope=data-table] table { width:100%;border-collapse:collapse; }
 [data-scope=data-table] tr { border-bottom:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border); }
 [data-scope=data-table] tbody tr:last-child { border-bottom:0; }

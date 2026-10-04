@@ -1,0 +1,222 @@
+[
+  {
+    "framework": "story",
+    "state": "default",
+    "mode": "light",
+    "scrollLeft": 0,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 1280,
+    "regionWidth": 638
+  },
+  {
+    "framework": "story",
+    "state": "scrolled",
+    "mode": "light",
+    "scrollLeft": 164,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 1280,
+    "regionWidth": 638
+  },
+  {
+    "framework": "story",
+    "state": "rtl",
+    "mode": "light",
+    "scrollLeft": -164,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 1280,
+    "regionWidth": 638
+  },
+  {
+    "framework": "story",
+    "state": "wide-pins",
+    "mode": "light",
+    "scrollLeft": 164,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 1280,
+    "regionWidth": 638
+  },
+  {
+    "framework": "story",
+    "state": "empty",
+    "mode": "light",
+    "scrollLeft": 0,
+    "scrollWidth": 638,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 1280,
+    "regionWidth": 638
+  },
+  {
+    "framework": "story",
+    "state": "default",
+    "mode": "light",
+    "scrollLeft": 0,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 375,
+    "regionWidth": 341
+  },
+  {
+    "framework": "story",
+    "state": "scrolled",
+    "mode": "light",
+    "scrollLeft": 200,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 375,
+    "regionWidth": 341
+  },
+  {
+    "framework": "story",
+    "state": "rtl",
+    "mode": "light",
+    "scrollLeft": -200,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 375,
+    "regionWidth": 341
+  },
+  {
+    "framework": "story",
+    "state": "wide-pins",
+    "mode": "light",
+    "scrollLeft": 200,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 375,
+    "regionWidth": 341
+  },
+  {
+    "framework": "story",
+    "state": "empty",
+    "mode": "light",
+    "scrollLeft": 0,
+    "scrollWidth": 426,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 375,
+    "regionWidth": 341
+  },
+  {
+    "framework": "story",
+    "state": "default",
+    "mode": "dark",
+    "scrollLeft": 0,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 1280,
+    "regionWidth": 638
+  },
+  {
+    "framework": "story",
+    "state": "scrolled",
+    "mode": "dark",
+    "scrollLeft": 164,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 1280,
+    "regionWidth": 638
+  },
+  {
+    "framework": "story",
+    "state": "rtl",
+    "mode": "dark",
+    "scrollLeft": -164,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 1280,
+    "regionWidth": 638
+  },
+  {
+    "framework": "story",
+    "state": "wide-pins",
+    "mode": "dark",
+    "scrollLeft": 164,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 1280,
+    "regionWidth": 638
+  },
+  {
+    "framework": "story",
+    "state": "empty",
+    "mode": "dark",
+    "scrollLeft": 0,
+    "scrollWidth": 638,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 1280,
+    "regionWidth": 638
+  },
+  {
+    "framework": "story",
+    "state": "default",
+    "mode": "dark",
+    "scrollLeft": 0,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 375,
+    "regionWidth": 341
+  },
+  {
+    "framework": "story",
+    "state": "scrolled",
+    "mode": "dark",
+    "scrollLeft": 200,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 375,
+    "regionWidth": 341
+  },
+  {
+    "framework": "story",
+    "state": "rtl",
+    "mode": "dark",
+    "scrollLeft": -200,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 375,
+    "regionWidth": 341
+  },
+  {
+    "framework": "story",
+    "state": "wide-pins",
+    "mode": "dark",
+    "scrollLeft": 200,
+    "scrollWidth": 802,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 375,
+    "regionWidth": 341
+  },
+  {
+    "framework": "story",
+    "state": "empty",
+    "mode": "dark",
+    "scrollLeft": 0,
+    "scrollWidth": 426,
+    "overflow": null,
+    "bodyOverflow": 0,
+    "viewportWidth": 375,
+    "regionWidth": 341
+  }
+]

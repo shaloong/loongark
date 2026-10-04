@@ -1,0 +1,283 @@
+{
+  "recordedAt": "2026-10-04T01:30:05.274480+00:00",
+  "branch": "develop",
+  "baseCommit": "f9f10091c1fd341e5d0b9eca0cd4ea7b26a5dc93",
+  "status": "passed",
+  "phase": "DataTable 逻辑冻结列、真实尺寸测量、RTL、窄屏恢复与键盘焦点",
+  "environment": {
+    "os": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "installation": "CI=true pnpm install --frozen-lockfile 成功，锁文件未改",
+    "browser": "system Chromium 151.0.7922.173",
+    "playwright": "1.57.0",
+    "browserExecutable": "/usr/bin/chromium",
+    "svelteCheck": "0 errors, 2 existing warnings",
+    "browserDeviation": "使用系统 Chromium 151；不声称等同于 Playwright 固定 Chromium 143。",
+    "viewports": [
+      375,
+      900,
+      1280
+    ]
+  },
+  "coverage": {
+    "families": 114,
+    "stories": 292,
+    "publicValueExportsPerFramework": 789,
+    "examples": {
+      "react": 45,
+      "vue": 42,
+      "solid": 42,
+      "svelte": 42,
+      "total": 171
+    }
+  },
+  "checks": [
+    {
+      "command": "pnpm verify",
+      "status": "passed",
+      "log": "logs/verify-aria-reviewed.log"
+    },
+    {
+      "command": "pnpm check:contracts",
+      "status": "passed",
+      "log": "logs/contracts-reviewed.log"
+    },
+    {
+      "command": "pnpm storybook:build",
+      "status": "passed",
+      "log": "logs/storybook-reviewed.log"
+    },
+    {
+      "command": "pnpm check:coverage",
+      "status": "passed",
+      "log": "logs/coverage-reviewed.log"
+    },
+    {
+      "command": "pnpm check:publication",
+      "status": "passed",
+      "log": "logs/publication-reviewed.log"
+    },
+    {
+      "command": "pnpm check:svelte",
+      "status": "passed",
+      "log": "logs/svelte-reviewed.log"
+    },
+    {
+      "command": "pnpm test:frameworks",
+      "status": "passed",
+      "log": "logs/frameworks-reviewed.log"
+    },
+    {
+      "command": "node scripts/run-playwright.mjs --project=chromium --workers=2",
+      "status": "passed",
+      "log": "logs/e2e.log"
+    },
+    {
+      "command": "node scripts/run-playwright.mjs tests/data-table.spec.ts tests/data-table-advanced.spec.ts tests/data-table-frozen.spec.ts tests/data-table-pins-model.spec.ts --project=chromium --workers=2",
+      "status": "passed",
+      "log": "logs/behavior-reviewed.log"
+    },
+    {
+      "command": "node scripts/run-playwright.mjs --project=chromium-visual --workers=2",
+      "status": "passed",
+      "log": "logs/visual-final.log"
+    },
+    {
+      "command": "pnpm exec tsc -b examples",
+      "status": "passed",
+      "log": "logs/example-types-corrected.log"
+    },
+    {
+      "command": "pnpm lint",
+      "status": "passed",
+      "log": "logs/lint-final.log"
+    }
+  ],
+  "measurements": {
+    "light": {
+      "stories": 292,
+      "screenshots": 406,
+      "wcagViolations": 0,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0
+    },
+    "dark": {
+      "stories": 292,
+      "screenshots": 406,
+      "wcagViolations": 0,
+      "pageOverflowStories": 0,
+      "transitionAllStories": 0
+    }
+  },
+  "browserTests": {
+    "fullRunPassed": 77,
+    "finalAffectedBehaviorTestsPassed": 9,
+    "note": "全量77项通过后，目视修正新增冻结表格空结果的可视区域居中和未排序手机额外冻结Owner时的排序按钮空间；重新完整构建/契约/Storybook/发布/SSR/Svelte/四端消费171示例，并复验9项全部表格行为。最终14个表格默认明暗状态再次通过WCAG及与全量截图逐像素核对；不声称这是同一次全量77项在最后空态修正后的运行。",
+    "expectedSkippedFrameworkTests": 8,
+    "independentFrameworkTestsPassed": 8,
+    "visualTestsPassed": 70
+  },
+  "manualReview": {
+    "frameworkImages": 80,
+    "storyImages": 20,
+    "states": [
+      "default",
+      "scrolled",
+      "rtl",
+      "wide-pins",
+      "empty"
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1280,
+      375
+    ],
+    "contacts": [
+      "default-dark-1280-parity.jpg",
+      "default-dark-375-parity.jpg",
+      "default-light-1280-parity.jpg",
+      "default-light-375-parity.jpg",
+      "empty-dark-1280-parity.jpg",
+      "empty-dark-375-parity.jpg",
+      "empty-light-1280-parity.jpg",
+      "empty-light-375-parity.jpg",
+      "rtl-dark-1280-parity.jpg",
+      "rtl-dark-375-parity.jpg",
+      "rtl-light-1280-parity.jpg",
+      "rtl-light-375-parity.jpg",
+      "scrolled-dark-1280-parity.jpg",
+      "scrolled-dark-375-parity.jpg",
+      "scrolled-light-1280-parity.jpg",
+      "scrolled-light-375-parity.jpg",
+      "stories-dark-1280.jpg",
+      "stories-dark-375.jpg",
+      "stories-light-1280.jpg",
+      "stories-light-375.jpg",
+      "wide-pins-dark-1280-parity.jpg",
+      "wide-pins-dark-375-parity.jpg",
+      "wide-pins-light-1280-parity.jpg",
+      "wide-pins-light-375-parity.jpg"
+    ],
+    "frameworkParityComparisons": 60,
+    "exactParityComparisons": 52,
+    "maximumChangedPixels": 3,
+    "maximumChannelDifference": 1,
+    "remainingDifferenceEvidence": "framework-raster-differences.json",
+    "parityFile": "framework-parity.json",
+    "notes": "manual-review-notes.md",
+    "unchangedReviewedImages": 78,
+    "continuityProof": "manual-review-continuity.json",
+    "emptyAlignment": "manual-framework-empty-geometry.json",
+    "originalImages": [
+      "frameworks-screenshots.tar.gz",
+      "review/"
+    ]
+  },
+  "baseline": {
+    "newLinuxImages": 4,
+    "existingLinuxImagesUnchanged": 66,
+    "windowsImagesUnchanged": 2,
+    "existingHashes": "existing-baseline-sha256.json",
+    "reviewedBeforeCreation": true,
+    "creationRunIsNotComparisonPass": true,
+    "creationLog": "logs/baseline-create.log",
+    "comparisonLog": "logs/visual-final.log",
+    "manualReferenceParity": "baseline-review-parity.json"
+  },
+  "archives": [
+    {
+      "file": "frameworks-screenshots.tar.gz",
+      "images": 80
+    },
+    {
+      "file": "runtime-screenshots.tar.gz",
+      "images": 47
+    },
+    {
+      "file": "after/light-screenshots.tar.gz",
+      "images": 406
+    },
+    {
+      "file": "after/dark-screenshots.tar.gz",
+      "images": 406
+    },
+    {
+      "file": "overview-screenshots.tar.gz",
+      "images": 120
+    }
+  ],
+  "regressions": [
+    "重复/未知/隐藏列与起始优先、输入数组不变",
+    "真实横向滚动后的两侧位置和选择/排序",
+    "冻结Owner、隐藏与重排、RTL、375px空间不足暂停及恢复",
+    "普通排序按钮焦点处于冻结区之间，隐藏重挂保留受控选择",
+    "空结果原生colspan/禁用当前页选择与保留原选择",
+    "真实列宽和容器尺寸变化、表头列宽不变时排序控件增宽、取消排队帧、观察器及事件清理",
+    "四端发布产物SSR保留列语义且不读布局/调用业务回调"
+  ],
+  "earlierFailures": {
+    "logs": [
+      "logs/verify.log",
+      "logs/verify-final.log",
+      "logs/frameworks.log"
+    ],
+    "evidence": [
+      "before-example-label-fix.zip",
+      "before-empty-alignment-fix.zip",
+      "before-control-space-fix.zip",
+      "before-focus-settle.zip"
+    ],
+    "note": "初次新Solid示例缺少JSX声明、使用React样式属性及方向文字误替换；修正类型后构建成功。首轮四端6项通过、Vue/Solid两项按钮标签误替换失败，保存失败上下文，修正后重建全部四端消费/171示例，8项通过。没有消费失败构建后的旧产物。",
+    "earlierFailureIsNotAcceptancePass": true
+  },
+  "arkAudit": {
+    "log": "logs/ark-coverage.log",
+    "installedVersions": {
+      "react": "5.39.2",
+      "vue": "5.39.2",
+      "solid": "5.39.2",
+      "svelte": "5.24.2"
+    },
+    "missingNativePartsPerFramework": {
+      "react": 0,
+      "vue": 0,
+      "solid": 0,
+      "svelte": 0
+    },
+    "missingHooksPerFramework": {
+      "react": 0,
+      "vue": 0,
+      "solid": 0,
+      "svelte": 0
+    }
+  },
+  "limits": [
+    "原生标量表格；虚拟化、单元格编辑与指针列拖动未提供",
+    "过宽冻结区自动恢复原生横向滚动，不承诺所有列同时可见；列组内采用columnKeys顺序",
+    "全量默认Story明暗自动检查；人工复核本批100张场景图，不声称逐张放大全量默认图",
+    "未专项验收真实触摸、屏幕阅读器、Firefox/WebKit、CSS缩放变换以及全部peer版本",
+    "现有视觉比较沿用仓库1%阈值，四端差异和新基线/参考按实际像素统计保存",
+    "系统Chromium151与Playwright固定Chromium143不同；Windows基线未覆盖"
+  ],
+  "changes": {
+    "dependenciesAdded": [],
+    "paletteAndTokensUnchanged": true,
+    "mainUnchanged": true
+  },
+  "focusTransient": {
+    "evidence": "focus-transient-probe.json",
+    "before": "before-focus-settle.zip",
+    "note": "云端Chromium151首次程序聚焦，Vue/Svelte出现短暂3px白色描边；300ms后四端均为共享Token的2px灰色描边。稳定状态采样等待Token，不把瞬态当成已修复，证据保留。"
+  },
+  "currentDefaultReview": {
+    "states": 14,
+    "wcagViolations": 0,
+    "changedPixels": 0,
+    "evidence": "default-reviewed/"
+  },
+  "sourceHashes": "source-sha256.json"
+}

@@ -1,0 +1,180 @@
+
+> loongark@0.0.0 check:svelte /workspace/loongark
+> node node_modules/svelte-check/bin/svelte-check --tsconfig packages/svelte/tsconfig.examples.json
+
+Loading svelte-check in workspace: /workspace/loongark
+Getting Svelte diagnostics...
+
+/workspace/loongark/packages/svelte/src/components/Attachment.svelte:74:1
+Warn: noninteractive element cannot have nonnegative tabIndex value
+https://svelte.dev/e/a11y_no_noninteractive_tabindex (svelte)
+
+<div
+  bind:this={root}
+  role="group"
+  aria-label={"Attachment " + name}
+  tabindex={-1}
+  aria-busy={actionState.pendingId ? true : undefined}
+  data-scope="attachment"
+  data-part="root"
+  data-status={view.status}
+  data-disabled={disabled ? "true" : undefined}
+  {...attrs}
+>
+  <span data-scope="attachment" data-part="icon" aria-hidden="true"
+    ><svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      focusable="false"><path d={attachmentIconPath} /></svg
+    ></span
+  >
+  <div data-scope="attachment" data-part="content">
+    {#if view.link}<a
+        data-scope="attachment"
+        data-part="name"
+        href={view.link}
+        download={name}>{name}</a
+      >{:else}<span data-scope="attachment" data-part="name">{name}</span>{/if}
+    {#if view.size}<span data-scope="attachment" data-part="description"
+        >{view.size}</span
+      >{/if}
+    {#if view.status === "uploading"}<progress
+        data-scope="attachment"
+        data-part="progress"
+        aria-label={"Uploading " + name}
+        max={100}
+        value={view.progress}
+      ></progress>{/if}
+    {#if view.status === "error"}<span
+        data-scope="attachment"
+        data-part="description"
+        role="status">{view.error}</span
+      >{/if}
+  </div>
+  <div data-scope="attachment" data-part="actions">
+    {#if view.status === "error" && onRetry}<button
+        data-scope="attachment"
+        data-part="action"
+        type="button"
+        disabled={blocked}
+        aria-label={view.retry}
+        data-action-id="retry"
+        onclick={() => run("retry", view.retry, onRetry)}
+        >{retryLabel ?? "Retry"}</button
+      >{/if}
+    {#if view.status === "ready" && onPreview}<button
+        data-scope="attachment"
+        data-part="action"
+        type="button"
+        disabled={blocked}
+        aria-label={previewLabel ?? "Preview " + name}
+        data-action-id="preview"
+        onclick={() =>
+          run("preview", previewLabel ?? "Preview " + name, onPreview)}
+        >{previewLabel ?? "Preview"}</button
+      >{/if}
+    {#if view.status === "uploading" && onCancel}<button
+        data-scope="attachment"
+        data-part="action"
+        type="button"
+        disabled={blocked}
+        aria-label={cancelLabel ?? "Cancel upload " + name}
+        data-action-id="cancel"
+        onclick={() =>
+          run("cancel", cancelLabel ?? "Cancel upload " + name, onCancel)}
+        >{cancelLabel ?? "Cancel"}</button
+      >{/if}
+    {#if onRemove}<button
+        data-scope="attachment"
+        data-part="action"
+        type="button"
+        disabled={blocked}
+        aria-label={view.remove}
+        data-action-id="remove"
+        onclick={() => run("remove", view.remove, onRemove)}
+        >{removeLabel ?? "Remove"}</button
+      >{/if}
+  </div>
+  {#if actionState.message}<span
+      data-scope="attachment"
+      data-part="action-feedback"
+      data-outcome={actionState.outcome}
+      role={actionState.outcome === "error" ? "alert" : "status"}
+      >{actionState.message}</span
+    >{/if}
+</div>
+
+/workspace/loongark/packages/svelte/src/components/Message.svelte:62:1
+Warn: noninteractive element cannot have nonnegative tabIndex value
+https://svelte.dev/e/a11y_no_noninteractive_tabindex (svelte)
+
+<article
+  bind:this={root}
+  tabindex={-1}
+  aria-busy={actionState.pendingId ? true : undefined}
+  data-scope="message"
+  data-part="root"
+  data-side={side}
+  data-status={status}
+  aria-label={"Message from " + author}
+  {...attrs}
+>
+  <header data-scope="message" data-part="meta">
+    <span data-scope="message" data-part="author">{author}</span
+    >{#if dateTime}<time datetime={dateTime}>{timeLabel ?? dateTime}</time>{/if}
+  </header>
+  <div data-scope="message" data-part="content">{@render children?.()}</div>
+  <footer data-scope="message" data-part="meta">
+    <span
+      data-scope="message"
+      data-part="status"
+      role={status === "error" || status === "sending" ? "status" : undefined}
+      >{messageStatus({ author, status, statusLabel })}</span
+    >
+    {#if status === "error" && onRetry}<button
+        data-scope="message"
+        data-part="action"
+        type="button"
+        disabled={blocked}
+        data-action-id="retry"
+        onclick={() => run("retry", retryLabel ?? "Retry message", onRetry)}
+        >{retryLabel ?? "Retry message"}</button
+      >{/if}
+  </footer>
+  {#if available.length}<div
+      data-scope="message"
+      data-part="actions"
+      role="group"
+      aria-label={actionLabels?.group ?? "Message actions"}
+    >
+      {#each available as action (action.id)}<button
+          data-scope="message"
+          data-part="action"
+          type="button"
+          disabled={blocked || action.disabled}
+          data-action-id={action.id}
+          onclick={() =>
+            run(
+              action.id,
+              action.label,
+              action.onAction,
+              action.successLabel,
+              action.disabled,
+            )}>{action.label}</button
+        >{/each}
+    </div>{/if}
+  {#if actionState.message}<span
+      data-scope="message"
+      data-part="action-feedback"
+      data-outcome={actionState.outcome}
+      role={actionState.outcome === "error" ? "alert" : "status"}
+      >{actionState.message}</span
+    >{/if}
+</article>
+
+====================================
+svelte-check found 0 errors and 2 warnings in 2 files

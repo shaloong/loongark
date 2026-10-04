@@ -309,3 +309,44 @@ assert.match(
   renderChartSVG({ ...controlledChart, seriesKeys: [], domain: [0, 50] }),
   /data-part="empty"[^>]*>No data<\/text>/,
 );
+
+// 冻结列不能复活隐藏列，也不能重复渲染；组内继续采用显示顺序。
+const pinned = dataTableView(
+  {
+    data: rows,
+    columns,
+    columnKeys: ["value", "name"],
+    pinnedColumns: {
+      start: ["name", "missing", "name"],
+      end: ["name", "value"],
+    },
+  },
+  { query: "", page: 1 },
+);
+assert.deepEqual(
+  pinned.columns.map((c) => c.key),
+  ["name", "value"],
+);
+assert.equal(pinned.pinSelection, true);
+assert.deepEqual(
+  [...pinned.pins],
+  [
+    ["value", "end"],
+    ["name", "start"],
+  ],
+);
+const hiddenPinned = dataTableView(
+  {
+    data: rows,
+    columns,
+    columnKeys: ["value"],
+    pinnedColumns: { start: ["name"] },
+  },
+  { query: "", page: 1 },
+);
+assert.equal(hiddenPinned.pinSelection, false);
+assert.equal(hiddenPinned.pins.size, 0);
+assert.deepEqual(
+  columns.map((c) => c.key),
+  ["name", "value"],
+);

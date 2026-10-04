@@ -1,0 +1,4 @@
+Error: Please use browser.newContext()
+ Please check out https://github.com/dequelabs/axe-core-npm/blob/develop/packages/playwright/error-handling.md
+    at AxeBuilder.analyze (/workspace/loongark/node_modules/.pnpm/@axe-core+playwright@4.11.0_playwright-core@1.57.0/node_modules/@axe-core/playwright/dist/index.js:253:13)
+    at async /tmp/check-frozen-defaults.cjs:5:862

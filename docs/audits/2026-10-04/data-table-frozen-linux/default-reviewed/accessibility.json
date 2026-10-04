@@ -1,0 +1,72 @@
+[
+  {
+    "id": "components-datatable--basic",
+    "mode": "light",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--empty",
+    "mode": "light",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--long-cells",
+    "mode": "light",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--localized",
+    "mode": "light",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--server",
+    "mode": "light",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--loading",
+    "mode": "light",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--frozen",
+    "mode": "light",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--basic",
+    "mode": "dark",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--empty",
+    "mode": "dark",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--long-cells",
+    "mode": "dark",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--localized",
+    "mode": "dark",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--server",
+    "mode": "dark",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--loading",
+    "mode": "dark",
+    "violations": []
+  },
+  {
+    "id": "components-datatable--frozen",
+    "mode": "dark",
+    "violations": []
+  }
+]

@@ -183,6 +183,7 @@
     { key: "value", label: "Remote revenue" },
   ]}
   columnKeys={["value", "name"]}
+  pinnedColumns={{ start: ["value"], end: ["name"] }}
   mode="server"
   totalRows={21}
   pageSize={2}

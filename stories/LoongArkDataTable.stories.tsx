@@ -89,3 +89,9 @@ export const Loading = {
     />
   ),
 };
+
+import { DataTableFrozenExample } from "../examples/react/DataTableFrozenExample";
+export const Frozen = {
+  decorators: [withArkExamplePage],
+  render: () => <DataTableFrozenExample />,
+};

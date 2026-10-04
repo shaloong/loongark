@@ -60,14 +60,18 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 
 四端8项、浏览器69项、视觉62项通过；100张场景图已复核，60次四端对照为0像素差异。新增4张独立Linux基线，原有58张Linux与2张Windows基线文件未改。验收见 [本批记录](audits/2026-10-03/conversation-actions-linux/acceptance.json)，剩余高级能力继续以真实场景验收，见 [范围表](ark-ui-coverage.md#下一批高级能力的边界)。
 
-
 ## MessageScroller 媒体锚点与清理（2026-10-03）
 
 新增四端 MessageScrollerAdvancedExample 和 Advanced Story，覆盖清单为114族、291 Story、四端各789个公开值入口、167个示例。共享模型按稳定可见消息/文字节点保留阅读位置，观察直接消息行以处理等总高度重排，复合前后插入使用锚点位移；卸载恢复 overflow-anchor 并取消排队帧。
 
 回归实际发现 React Button 丢失调用方 aria-busy；四端统一属性优先级，保留可取消的忙碌动作，loading 仍强制忙碌并禁用。媒体复用现有资产，无新增依赖或调色板。虚拟化、冻结列/编辑、缩放/刷选等高级能力仍有边界，不以目录覆盖代替验收。
 
-
 本批验收为114族、291 Story、四端各789个公开值入口、167个示例。四端消费/示例8项、最终影响行为4项和视觉66项通过；首轮全量72项通过、1项卸载测试边界修正后复验，最终覆盖73个独立浏览器用例，具体分批范围保留在验收记录中。291 Story明暗默认WCAG、窄屏页面溢出和有效transition: all均为0。
 
 80张场景图经20种联系表及重点原图复核；隐藏说明修正后复核8张涉及空态的联系表，其余60张已审阅原图未变。48次四端对照中44次完全一致，4次手机阅读状态仅10–12个边缘像素且RGB通道差最大1；保留差异记录。20次阅读位移最大0.421875px，原始夹具160px漂移修正为0px。新增4张独立Linux基线，与已审阅默认原图0差异，原有62张Linux及2张Windows文件哈希不变。详见 [媒体锚点验收](audits/2026-10-03/message-anchor-linux/acceptance.json)。
+
+## 2026-10-04 — DataTable 冻结列
+
+- 四端共享 pinnedColumns 的逻辑起始/结束分组、真实列宽测量、RTL 和窄屏自动暂停/恢复吸附；继续使用原生表格和现有 Token。
+- 新增四端 DataTableFrozenExample、Frozen Story、模型/SSR/交互与 Linux 视觉回归；覆盖为114族、292 Story、四端各789个公开值入口和171个示例。
+- 验收范围与环境限制见 [冻结列记录](audits/2026-10-04/data-table-frozen-linux/acceptance.json)。虚拟化、编辑、图表缩放/刷选和复杂题型仍需后续独立批次。

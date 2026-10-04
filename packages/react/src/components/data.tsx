@@ -1,5 +1,6 @@
 import {
   dataTableView,
+  mountDataTablePins,
   retryDataTable,
   type DataTableState,
   nextDataSort,
@@ -65,6 +66,10 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     [internal, setInternal] = useState<string[]>([
       ...(props.defaultSelectedIds ?? []),
     ]);
+  const region = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (region.current) return mountDataTablePins(region.current);
+  }, []);
   const pageInput = useRef<HTMLInputElement>(null);
   const labels = dataTableLabels(props.labels),
     label = props.label ?? "Data table";
@@ -167,6 +172,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
       <div
         data-scope="table"
         data-part="root"
+        ref={region}
         role="region"
         aria-label={label}
         tabIndex={0}
@@ -174,7 +180,10 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
         <table data-scope="table" data-part="table" aria-label={label}>
           <thead>
             <tr>
-              <th scope="col">
+              <th
+                scope="col"
+                data-pinned={view.pinSelection ? "start" : undefined}
+              >
                 <label data-part="selection">
                   <input
                     ref={pageInput}
@@ -202,6 +211,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                 <th
                   key={c.key}
                   scope="col"
+                  data-pinned={view.pins.get(c.key)}
                   aria-sort={
                     view.sort?.key === c.key
                       ? view.sort.direction === "asc"
@@ -234,7 +244,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
           <tbody>
             {view.rows.map(({ row, id }) => (
               <tr key={id} data-selected={selected.includes(id) || undefined}>
-                <td>
+                <td data-pinned={view.pinSelection ? "start" : undefined}>
                   <label data-part="selection">
                     <input
                       type="checkbox"
@@ -256,14 +266,16 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                   </label>
                 </td>
                 {view.columns.map((c) => (
-                  <td key={c.key}>{String(row[c.key] ?? "")}</td>
+                  <td key={c.key} data-pinned={view.pins.get(c.key)}>
+                    {String(row[c.key] ?? "")}
+                  </td>
                 ))}
               </tr>
             ))}
             {!view.rows.length && (
               <tr>
                 <td colSpan={view.columns.length + 1} data-part="empty">
-                  {props.loading ? labels.loading : labels.empty}
+                  <span>{props.loading ? labels.loading : labels.empty}</span>
                 </td>
               </tr>
             )}

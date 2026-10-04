@@ -1,3 +1,4 @@
+import { checkDataTableFrozen } from "./dataTableFrozenChecks";
 import { checkMessageScrollerAdvanced } from "./messageScrollerAdvancedChecks";
 import { checkConversationActions } from "./conversationActionsChecks";
 import { checkChartAdvanced } from "./chartAdvancedChecks";
@@ -64,6 +65,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
       if (name === "ConversationActionsExample")
         await checkConversationActions(page);
       if (name === "ChartAdvancedExample") await checkChartAdvanced(page);
+      if (name === "DataTableFrozenExample") await checkDataTableFrozen(page);
       if (name === "DataTableAdvancedExample")
         await checkDataTableAdvanced(page);
       if (name === "QuestionnaireAdvancedExample")

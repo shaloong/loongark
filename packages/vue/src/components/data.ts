@@ -1,5 +1,7 @@
 import {
   dataTableView,
+  mountDataTablePins,
+  type DataTableProps,
   retryDataTable,
   type DataTableState,
   nextDataSort,
@@ -111,6 +113,7 @@ export const LoongArkDataTable = defineComponent({
     mode: String as PropType<"client" | "server">,
     totalRows: Number,
     columnKeys: Array as PropType<readonly string[]>,
+    pinnedColumns: Object as PropType<DataTableProps["pinnedColumns"]>,
     loading: Boolean,
     error: String,
     onRetry: Function as PropType<() => void>,
@@ -122,6 +125,12 @@ export const LoongArkDataTable = defineComponent({
     "update:selectedIds": (ids: string[]) => Array.isArray(ids),
   },
   setup(props, { emit }) {
+    const region = ref<HTMLDivElement>();
+    let stopPins: (() => void) | undefined;
+    onMounted(() => {
+      if (region.value) stopPins = mountDataTablePins(region.value);
+    });
+    onBeforeUnmount(() => stopPins?.());
     const query = ref(props.defaultState?.query ?? ""),
       sort = ref<DataSort | undefined>(props.defaultState?.sort),
       page = ref(props.defaultState?.page ?? 1),
@@ -236,6 +245,7 @@ export const LoongArkDataTable = defineComponent({
             {
               "data-scope": "table",
               "data-part": "root",
+              ref: region,
               role: "region",
               "aria-label": props.label,
               tabindex: 0,
@@ -251,37 +261,47 @@ export const LoongArkDataTable = defineComponent({
                 [
                   h("thead", [
                     h("tr", [
-                      h("th", { scope: "col" }, [
-                        h("label", { "data-part": "selection" }, [
-                          h("input", {
-                            ref: pageInput,
-                            type: "checkbox",
-                            "aria-label": labels.selectPage,
-                            "aria-checked": state.mixed
-                              ? "mixed"
-                              : state.checked,
-                            checked: state.checked,
-                            disabled: props.loading || !pageIds().length,
-                            onChange: (e: Event) => {
-                              if (e.currentTarget instanceof HTMLInputElement)
-                                change(
-                                  toggleDataSelection(
-                                    ids,
-                                    pageIds(),
-                                    e.currentTarget.checked,
-                                  ),
-                                  e.currentTarget,
-                                );
-                            },
-                          }),
-                        ]),
-                      ]),
+                      h(
+                        "th",
+                        {
+                          scope: "col",
+                          "data-pinned": model.pinSelection
+                            ? "start"
+                            : undefined,
+                        },
+                        [
+                          h("label", { "data-part": "selection" }, [
+                            h("input", {
+                              ref: pageInput,
+                              type: "checkbox",
+                              "aria-label": labels.selectPage,
+                              "aria-checked": state.mixed
+                                ? "mixed"
+                                : state.checked,
+                              checked: state.checked,
+                              disabled: props.loading || !pageIds().length,
+                              onChange: (e: Event) => {
+                                if (e.currentTarget instanceof HTMLInputElement)
+                                  change(
+                                    toggleDataSelection(
+                                      ids,
+                                      pageIds(),
+                                      e.currentTarget.checked,
+                                    ),
+                                    e.currentTarget,
+                                  );
+                              },
+                            }),
+                          ]),
+                        ],
+                      ),
                       ...model.columns.map((c) =>
                         h(
                           "th",
                           {
                             key: c.key,
                             scope: "col",
+                            "data-pinned": model.pins.get(c.key),
                             "aria-sort":
                               model.sort?.key === c.key
                                 ? model.sort.direction === "asc"
@@ -320,35 +340,46 @@ export const LoongArkDataTable = defineComponent({
                               "data-selected": ids.includes(id) || undefined,
                             },
                             [
-                              h("td", [
-                                h("label", { "data-part": "selection" }, [
-                                  h("input", {
-                                    type: "checkbox",
-                                    disabled: props.loading,
-                                    "aria-label": labels.selectRow(id),
-                                    checked: ids.includes(id),
-                                    onChange: (e: Event) => {
-                                      if (
-                                        e.currentTarget instanceof
-                                        HTMLInputElement
-                                      )
-                                        change(
-                                          toggleDataSelection(
-                                            ids,
-                                            [id],
-                                            e.currentTarget.checked,
-                                          ),
-                                          e.currentTarget,
-                                          id,
-                                        );
-                                    },
-                                  }),
-                                ]),
-                              ]),
+                              h(
+                                "td",
+                                {
+                                  "data-pinned": model.pinSelection
+                                    ? "start"
+                                    : undefined,
+                                },
+                                [
+                                  h("label", { "data-part": "selection" }, [
+                                    h("input", {
+                                      type: "checkbox",
+                                      disabled: props.loading,
+                                      "aria-label": labels.selectRow(id),
+                                      checked: ids.includes(id),
+                                      onChange: (e: Event) => {
+                                        if (
+                                          e.currentTarget instanceof
+                                          HTMLInputElement
+                                        )
+                                          change(
+                                            toggleDataSelection(
+                                              ids,
+                                              [id],
+                                              e.currentTarget.checked,
+                                            ),
+                                            e.currentTarget,
+                                            id,
+                                          );
+                                      },
+                                    }),
+                                  ]),
+                                ],
+                              ),
                               ...model.columns.map((c) =>
                                 h(
                                   "td",
-                                  { key: c.key },
+                                  {
+                                    key: c.key,
+                                    "data-pinned": model.pins.get(c.key),
+                                  },
                                   String(row[c.key] ?? ""),
                                 ),
                               ),
@@ -363,7 +394,10 @@ export const LoongArkDataTable = defineComponent({
                                 colspan: model.columns.length + 1,
                                 "data-part": "empty",
                               },
-                              props.loading ? labels.loading : labels.empty,
+                              h(
+                                "span",
+                                props.loading ? labels.loading : labels.empty,
+                              ),
                             ),
                           ]),
                         ],
