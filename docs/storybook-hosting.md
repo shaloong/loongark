@@ -1,6 +1,10 @@
 # Storybook 展示与公开范围
 
-Storybook 构建输出 `storybook-static/`，可以作为静态站点部署。当前仓库为 private，尚无 Pages/Vercel 部署工作流，也未配置开源 LICENSE。展示站点是否公开、源码是否公开、包是否发布是三个独立决定。
+Storybook 构建输出 `storybook-static/`，直接部署到 GitHub Pages，无需另做展示站。仓库已选择 MIT 许可并核验为 public，根目录与9个发布包包含 LICENSE。展示使用 `.github/workflows/storybook-pages.yml`，站点目标地址为 [shaloong.github.io/loongark](https://shaloong.github.io/loongark/)；首次开通与实际上线状态见 [工作流](https://github.com/shaloong/loongark/actions/workflows/storybook-pages.yml)。
+
+每次 develop 推送及手动触发时，冻结安装依赖，验证构建/契约/覆盖/发布/SSR/Svelte，构建 Storybook，再在真实 `/loongark/` 子路径检查首页、iframe、手机明暗场景、键盘交互与资源加载。构建或验证失败不会进入部署。只上传 `storybook-static/`；过程截图和日志留在 Actions，烟雾验收 Artifact 保留14天，不进源码分支。
+
+工作流使用官方 `configure-pages` 开通 workflow 类型的 Pages。若账号/组织权限阻止开通，在 Settings → Pages 将 Source 设为 GitHub Actions 后重新运行工作流；github-pages 环境需允许 develop 部署。云端管理 API 目前被网络策略阻止，连接器可提交代码和查看 Actions，但没有仓库可见性/Pages 管理写接口，不能把配置完成说成已上线。
 
 ## 平台选择
 
@@ -17,6 +21,6 @@ Storybook 构建输出 `storybook-static/`，可以作为静态站点部署。�
 
 ## 是否公开
 
-通用组件库适合公开，公开源码有利于使用者排查问题、提 Issue 和贡献四端适配。但在公开前应明确代码归属、第三方素材权利和许可证，并检查完整 Git 历史中的凭据及内部资料；当前没有 LICENSE，不能把可见源码当成已授予开源使用许可。MIT 可作为宽松许可候选，Apache-2.0 则包含更明确的专利条款，最终由权利人选择。
+用户已授权采用 MIT 并公开仓库；当前 GitHub 返回 public。历史文本与ZIP内文本已执行基础凭据模式检查，未发现匹配项；这不等同于完整安全或权属审查。第三方依赖继续遵守各自许可。公开源码、部署 Storybook 和发布 npm 是三个独立动作，本批不发布 npm。
 
-如果暂时没有开源计划，可以保持源码 private，单独公开经过检查的 Storybook 静态展示。套餐不支持私有仓库 Pages 时，可考虑独立展示仓库；它只保存部署配置和展示产物，不应包含验收过程文件。没有明确公开或部署指令时，不修改仓库可见性、不创建公开展示仓库、不发布站点。
+根 `package.json` 的 `private: true` 用于防止将工作区根包误发到 npm，不代表 GitHub 仓库 private。后续稳定发布仍遵守 develop → main PR；Pages 当前跟随 develop 的开发预览不自动更新 main。

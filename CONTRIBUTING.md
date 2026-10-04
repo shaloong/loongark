@@ -59,3 +59,5 @@ pnpm visual:test
 临时截图、日志、详细测量和归档默认写入忽略目录 `.artifacts/`，CI 使用有保留期限的 Artifact。Git 只保存验收摘要及用于自动比较的已审阅视觉基线；不要强制添加过程文件。`pnpm lint` 检查此约定，详见 [证据保存](docs/audits/README.md)。
 
 Storybook 可以静态部署到 GitHub Pages 或 Vercel；平台、商业用途和仓库可见性须分别考虑，见 [展示与公开范围](docs/storybook-hosting.md)。部署产物不提交到源码分支。
+
+本库采用 MIT，根目录及全部发布包必须包含 LICENSE，`pnpm lint` 校验许可一致性。Pages 自动跟随 develop；工作流在子路径烟雾验收通过后部署 Storybook，截图 Artifact 保留14天。稳定发布和 npm 发布仍按单独发布指令执行。

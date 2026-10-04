@@ -1,0 +1,56 @@
+{
+  "recordedAt": "2026-10-04T07:42:44.411334+00:00",
+  "baseCommit": "2bb14f44c2e3027fe782fbb0b8f63a49a0501e8b",
+  "branch": "develop",
+  "localValidation": "passed",
+  "deployment": "pending GitHub Actions; not claimed online",
+  "repositoryVisibility": "public confirmed through GitHub repository metadata",
+  "license": "MIT",
+  "packagesWithLicense": 9,
+  "packageArchivesVerified": 9,
+  "checks": [
+    "frozen-lockfile install",
+    "pnpm verify",
+    "pnpm check:contracts",
+    "pnpm check:coverage",
+    "pnpm check:publication (four-framework SSR)",
+    "pnpm check:svelte (0 errors, 2 existing warnings)",
+    "pnpm storybook:build",
+    "Pages workflow YAML structure",
+    "actual /loongark/ static browser smoke, root fallback 404, 6 manager/preview views, zero runtime/resource errors",
+    "all nine package tarballs contain LICENSE and MIT metadata",
+    "72 existing baseline hashes unchanged"
+  ],
+  "screenshots": {
+    "reviewed": 6,
+    "directory": ".artifacts/pages-smoke/",
+    "inGit": false
+  },
+  "historyReview": {
+    "commits": 36,
+    "textAndZipBlobsChecked": 3606,
+    "zipTextEntriesChecked": 179,
+    "credentialPatternMatches": [],
+    "scope": "所有本地引用可达历史的文本与ZIP内文本；不展示内容或凭据",
+    "limitations": [
+      "基础凭据模式检查，不等同完整安全审计或权属法律审查",
+      "截图为仓库示例与本地测试；不通过OCR判断任意内部信息"
+    ]
+  },
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "browser": "system Chromium 151.0.7922.173",
+    "os": "Linux"
+  },
+  "limits": [
+    "No npm publication or main merge",
+    "Cloud GitHub administration API requests blocked by destination policy; repo public state independently confirmed",
+    "Local smoke validates deployment artifact, not actual GitHub Pages URL until deployment is confirmed",
+    "No whole component behavior/visual rerun for licensing and Storybook deployment configuration"
+  ],
+  "evidenceStorage": {
+    "kind": "local ignored artifacts",
+    "directory": ".artifacts/mit-pages/"
+  }
+}

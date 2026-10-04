@@ -34,5 +34,6 @@
   },
   "scripts": {
     "build": "node ../../scripts/reset-build-info.mjs tsconfig.tsbuildinfo && tsc -p tsconfig.json && node ../../scripts/compile-solid.mjs dist && node ../../scripts/fix-dist-imports.mjs dist && node ../../scripts/build-solid-ssr.mjs"
-  }
+  },
+  "license": "MIT"
 }

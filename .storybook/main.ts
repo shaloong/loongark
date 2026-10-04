@@ -33,6 +33,8 @@ const config: StorybookConfig = {
   },
 
   async viteFinal(config) {
+    // Pages 项目站点位于 /loongark/；相对资源路径也支持本地根路径预览。
+    config.base = "./";
     config.resolve = config.resolve ?? {};
     config.resolve.alias = {
       ...(config.resolve.alias ?? {}),
