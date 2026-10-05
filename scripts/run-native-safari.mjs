@@ -1,0 +1,275 @@
+import assert from "node:assert/strict";
+import { spawn } from "node:child_process";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
+
+// 使用 Apple 原生 WebDriver；不把 Playwright WebKit 标记为 Safari。
+if (process.platform !== "darwin") {
+  throw Error(
+    "原生 Safari 验收需要 macOS 和 /usr/bin/safaridriver；Linux 不能替代。",
+  );
+}
+const evidence = resolve(".artifacts/native-safari");
+await mkdir(evidence, { recursive: true });
+const server = spawn(
+  process.execPath,
+  ["scripts/serve-static.mjs", "tests/consumer-dist", "6007"],
+  { stdio: "inherit" },
+);
+const driver = spawn("/usr/bin/safaridriver", ["--port", "4444"], {
+  stdio: "inherit",
+});
+let startupError, sessionId;
+for (const child of [server, driver])
+  child.on("error", (error) => (startupError = error));
+const report = {
+  commit: process.env.GITHUB_SHA,
+  platform: process.platform,
+  browser: null,
+  defaultExamples: [],
+  interactions: [],
+  limitations: [
+    "Desktop native Safari; not a real iOS device.",
+    "Default example smoke is not exhaustive interaction coverage for every component.",
+    "Keyboard/batch history and Chart range flows run in both themes across all four frameworks.",
+  ],
+};
+const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+async function waitFor(check, label, timeout = 15000) {
+  const until = Date.now() + timeout;
+  let last;
+  while (Date.now() < until) {
+    if (startupError) throw startupError;
+    try {
+      if (await check()) return;
+    } catch (error) {
+      last = error;
+    }
+    await pause(100);
+  }
+  throw Error(`Safari 等待失败：${label}${last ? ` (${last.message})` : ""}`);
+}
+async function command(method, path, body) {
+  const response = await fetch(`http://127.0.0.1:4444${path}`, {
+    method,
+    headers: { "Content-Type": "application/json" },
+    ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+    signal: AbortSignal.timeout(60000),
+  });
+  const result = await response.json();
+  if (!response.ok || result.value?.error)
+    throw Error(
+      `Safari WebDriver ${path}: ${result.value?.message ?? response.status}`,
+    );
+  return result.value;
+}
+const session = (method, path, body) =>
+  command(method, `/session/${sessionId}${path}`, body);
+const execute = (script, args = []) =>
+  session("POST", "/execute/sync", { script, args });
+const elementKey = "element-6066-11e4-a52e-4f735466cecf";
+async function find(selector) {
+  const node = await session("POST", "/element", {
+    using: "css selector",
+    value: selector,
+  });
+  return node[elementKey];
+}
+const click = async (selector) =>
+  session("POST", `/element/${await find(selector)}/click`, {});
+async function type(selector, text) {
+  const id = await find(selector);
+  await session("POST", `/element/${id}/clear`, {});
+  await session("POST", `/element/${id}/value`, { text, value: [...text] });
+}
+const text = (selector) =>
+  execute("return document.querySelector(arguments[0])?.textContent ?? null", [
+    selector,
+  ]);
+async function navigate(framework, name, mode = "light") {
+  await session("POST", "/url", {
+    url: `http://127.0.0.1:6007/examples-${framework}/?example=${name}&mode=${mode}`,
+  });
+  await waitFor(
+    () =>
+      execute(
+        "return !!document.querySelector('[data-example-content]')?.children.length",
+      ),
+    `${framework}/${name} 渲染`,
+  );
+  assert.equal(await text("[data-example-name]"), name);
+  await execute(
+    "window.__safariErrors=[];window.addEventListener('error',event=>window.__safariErrors.push(event.message));window.addEventListener('unhandledrejection',event=>window.__safariErrors.push(String(event.reason)));",
+  );
+}
+async function screenshot(name) {
+  const content = await session("GET", "/screenshot");
+  await writeFile(
+    resolve(evidence, `${name}.png`),
+    Buffer.from(content, "base64"),
+  );
+}
+async function assertLayout() {
+  const measurement = await execute(
+    "return {width:innerWidth,scroll:document.documentElement.scrollWidth,focus:document.activeElement?.tagName,errors:window.__safariErrors}",
+  );
+  assert(
+    measurement.scroll <= measurement.width + 1,
+    `页面溢出 ${JSON.stringify(measurement)}`,
+  );
+  assert.deepEqual(measurement.errors, []);
+  return measurement;
+}
+try {
+  await waitFor(
+    async () => (await fetch("http://127.0.0.1:6007/examples-index.json")).ok,
+    "静态产物服务器",
+  );
+  await waitFor(
+    async () => (await command("GET", "/status"))?.ready,
+    "SafariDriver",
+  );
+  const created = await command("POST", "/session", {
+    capabilities: { alwaysMatch: { browserName: "safari" } },
+  });
+  sessionId = created.sessionId;
+  assert(sessionId, "Safari 会话必须真实创建");
+  assert.match(created.capabilities.browserName, /safari/i);
+  report.browser = created.capabilities;
+  await session("POST", "/window/rect", { width: 1280, height: 1100 });
+  const index = JSON.parse(
+    await readFile("tests/consumer-dist/examples-index.json", "utf8"),
+  );
+  for (const [framework, names] of Object.entries(index)) {
+    for (const name of names) {
+      await navigate(framework, name);
+      const layout = await assertLayout();
+      report.defaultExamples.push({ framework, name, width: layout.width });
+    }
+  }
+  for (const framework of Object.keys(index))
+    for (const mode of ["light", "dark"]) {
+      await navigate(framework, "DataTableBatchExample", mode);
+      for (const name of ["Safari first batch", "Safari second batch"]) {
+        await click('[data-part="batch-trigger"]');
+        await click('[data-part="batch-enable"][data-column-key="name"]');
+        await type('[data-part="batch-input"][data-column-key="name"]', name);
+        await click('[data-part="batch-form"] button[type="submit"]');
+        await waitFor(
+          async () => (await text("output")) === "Applied batch: 2 cells",
+          "批量提交",
+        );
+        await waitFor(
+          () =>
+            execute(
+              "return !document.querySelector('[data-part=\"batch-form\"]')",
+            ),
+          "提交面板关闭",
+        );
+        assert.equal(
+          await execute("return document.activeElement?.dataset.part"),
+          "batch-trigger",
+        );
+      }
+      await click('[data-part="batch-undo"]');
+      await waitFor(
+        () =>
+          execute(
+            "return [...document.querySelectorAll('tbody td')].filter(node=>node.textContent.trim()==='Safari first batch').length===2",
+          ),
+        "第一步撤销",
+      );
+      await click('[data-part="batch-undo"]');
+      await waitFor(
+        () =>
+          execute(
+            "return [...document.querySelectorAll('tbody td')].some(node=>node.textContent.trim()==='Alpha release')",
+          ),
+        "第二步撤销",
+      );
+      await execute(
+        "document.querySelector('[data-part=\"batch-redo\"]').focus()",
+      );
+      await session("POST", "/actions", {
+        actions: [
+          {
+            type: "key",
+            id: "keyboard",
+            actions: [
+              { type: "keyDown", value: "\uE03D" },
+              { type: "keyDown", value: "\uE008" },
+              { type: "keyDown", value: "z" },
+              { type: "keyUp", value: "z" },
+              { type: "keyUp", value: "\uE008" },
+              { type: "keyUp", value: "\uE03D" },
+            ],
+          },
+        ],
+      });
+      await waitFor(
+        async () => (await text("output")) === "Redid batch: 2 cells",
+        "Command+Shift+Z 重做",
+      );
+      await click('[data-part="batch-redo"]');
+      await waitFor(
+        () =>
+          execute(
+            "return [...document.querySelectorAll('tbody td')].filter(node=>node.textContent.trim()==='Safari second batch').length===2",
+          ),
+        "第二步重做",
+      );
+      const layout = await assertLayout();
+      await screenshot(`history-${framework}-${mode}`);
+      report.interactions.push({
+        framework,
+        mode,
+        case: "batch-history-keyboard-focus",
+        width: layout.width,
+      });
+      await navigate(framework, "ChartInteractionExample", mode);
+      assert.equal(
+        await text('[data-part="range-status"]'),
+        "Categories 1–12 of 12",
+      );
+      await click('[data-scope="chart"] button[data-part="zoom-in"]');
+      await waitFor(
+        async () =>
+          (await text('[data-part="range-status"]')) !==
+          "Categories 1–12 of 12",
+        "图表缩放",
+      );
+      await click('[data-scope="chart"] button[data-part="zoom-reset"]');
+      await waitFor(
+        async () =>
+          (await text('[data-part="range-status"]')) ===
+          "Categories 1–12 of 12",
+        "图表恢复",
+      );
+      await assertLayout();
+      await screenshot(`chart-${framework}-${mode}`);
+      report.interactions.push({ framework, mode, case: "chart-window" });
+    }
+  report.result = "passed";
+  console.log(
+    `Native Safari ${report.browser.browserVersion}: ${report.defaultExamples.length} default examples and ${report.interactions.length} interaction cases passed.`,
+  );
+} catch (error) {
+  report.result = "failed";
+  report.error = error.stack ?? String(error);
+  if (sessionId)
+    try {
+      await screenshot("failure");
+    } catch {}
+  throw error;
+} finally {
+  await writeFile(
+    resolve(evidence, "results.json"),
+    JSON.stringify(report, null, 2),
+  );
+  if (sessionId)
+    try {
+      await session("DELETE", "");
+    } catch {}
+  driver.kill("SIGTERM");
+  server.kill("SIGTERM");
+}

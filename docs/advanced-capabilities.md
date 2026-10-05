@@ -47,3 +47,6 @@
 - [ ] 真实手机验收（模拟视口和模拟触摸不等同真机）
 
 当前云端为 Linux，Playwright Firefox 下载被域名策略拒绝；真实手机需取得设备或设备云连接。其余实现继续推进。过程截图与日志仅保留在 `.artifacts/` 或有期限的 CI Artifact；Git 保存简短摘要及实际用于回归的已审阅基线。
+
+
+独立浏览器流水线及原生 Safari runner 已配置；[本地配置验证](audits/2026-10-05/browser-ci-setup/acceptance.json)不计作远端或真机验收，平台项目仍等待实际运行及截图审阅。

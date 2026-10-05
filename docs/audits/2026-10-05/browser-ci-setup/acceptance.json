@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-05",
+  "branch": "develop",
+  "base": "19a7bf50477304636f82824faf7136c119d02127",
+  "scope": [
+    "独立 Chromium/Firefox/WebKit CI，四端消费、207个现有示例及Story交互",
+    "Apple原生Safari/macOS WebDriver：全部默认示例及四端明暗表格历史/键盘/焦点、Chart窗口专项",
+    "记录真实浏览器版本，失败截图/trace及14天CI证据；不混用已有平台基线"
+  ],
+  "localValidation": {
+    "lint": "passed",
+    "syntax": "node --check passed for both runners",
+    "workflow": "YAML parse, develop branch, read-only permission, frozen install, ordered build checks, matrix and14-day retention passed",
+    "projectDiscovery": "default Chromium plus explicit Firefox/WebKit discovery passed",
+    "chromium": "5 passed including browser identity and4history Story cases;16framework-only expected skips"
+  },
+  "remoteValidation": "pending actual GitHub Actions run and screenshot review; workflow addition alone is not acceptance",
+  "limitations": [
+    "Local Linux cannot execute native Safari.",
+    "Local Firefox install blocked by official download-domain policy403; browsers will be installed by authorized GitHub runners.",
+    "WebKit is not native Safari; native desktop Safari is not real iOS.",
+    "Safari default-example smoke does not exhaust every component interaction; history/chart16cases are explicit subset."
+  ],
+  "evidence": ".artifacts/gap-completion/browser-ci-* locally; .artifacts/native-safari and browser-specific CIArtifact after run"
+}

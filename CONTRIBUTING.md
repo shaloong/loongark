@@ -62,3 +62,19 @@ pnpm visual:test
 Storybook 可以静态部署到 GitHub Pages 或 Vercel；平台、商业用途和仓库可见性须分别考虑，见 [展示与公开范围](docs/storybook-hosting.md)。部署产物不提交到源码分支。
 
 本库采用 MIT，根目录及全部发布包必须包含 LICENSE，`pnpm lint` 校验许可一致性。Pages 自动跟随 develop；工作流在子路径烟雾验收通过后部署 Storybook，截图 Artifact 保留14天。稳定发布和 npm 发布仍按单独发布指令执行。
+
+## 多浏览器与原生 Safari
+
+`Browser contracts` 工作流独立于 Pages：Linux 三个浏览器任务以冻结锁文件安装、按上述顺序新构建和检查，再执行全部四端消费/示例与 Story 交互。Firefox/WebKit 仅在显式开启矩阵时加入，默认本地 Chromium 验收命令及 Windows 基线保持独立：
+
+```sh
+pnpm exec playwright install --with-deps firefox webkit
+CROSS_BROWSER=1 BROWSER_PROJECT=firefox pnpm test:frameworks
+CROSS_BROWSER=1 node scripts/run-playwright.mjs --project=firefox --workers=2
+CROSS_BROWSER=1 BROWSER_PROJECT=webkit pnpm test:frameworks
+CROSS_BROWSER=1 node scripts/run-playwright.mjs --project=webkit --workers=2
+```
+
+矩阵不运行 Chromium 截图比较；它保留对应浏览器实际交互截图、失败截图和环境信息，CI Artifact 保存14天。首次验收仍须下载并目视检查实际截图，不因添加流水线就宣称通过。
+
+原生 Safari 任务在 macOS 15 使用 Apple `/usr/bin/safaridriver` 的 W3C WebDriver，检查全部四端默认示例、页面溢出、批量多级历史/键盘/焦点和图表窗口的明暗交互。它独立于 Playwright WebKit，报告实际 Safari 版本及每个场景。Linux 不能运行此任务，桌面 Safari 也不代表真实 iOS 手机；真机验收仍需单独取得设备连接。只有对应任务成功且截图审阅完成才关闭平台清单。

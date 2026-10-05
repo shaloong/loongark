@@ -3,6 +3,7 @@ const child = spawn(
   process.execPath,
   [
     "scripts/run-playwright.mjs",
+    "tests/browser-environment.spec.ts",
     "tests/framework-consumers.spec.ts",
     "tests/framework-examples.spec.ts",
     "tests/date-input-paste.spec.ts",
@@ -12,7 +13,7 @@ const child = spawn(
     "tests/chart-interaction.spec.ts",
     "tests/questionnaire-types.spec.ts",
     "tests/async-collection.spec.ts",
-    "--project=chromium",
+    `--project=${process.env.BROWSER_PROJECT ?? "chromium"}`,
     "--workers=2",
   ],
   {

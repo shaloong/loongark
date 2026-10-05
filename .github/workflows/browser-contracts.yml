@@ -1,0 +1,86 @@
+name: Browser contracts
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: browser-contracts-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  engines:
+    name: Four frameworks / ${{ matrix.browser }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    env:
+      CROSS_BROWSER: "1"
+      BROWSER_PROJECT: ${{ matrix.browser }}
+      DESIGN_AUDIT_DIR: .artifacts/browser-audits/${{ matrix.browser }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm verify
+      - run: pnpm check:contracts
+      - run: pnpm storybook:build
+      - run: pnpm check:coverage
+      - run: pnpm check:publication
+      - run: pnpm check:svelte
+      - run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
+      - run: pnpm test:frameworks
+      - run: node scripts/run-playwright.mjs --project=${{ matrix.browser }} --workers=2
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-contracts-${{ matrix.browser }}
+          path: |
+            .artifacts/
+            test-results/
+          retention-days: 14
+          if-no-files-found: ignore
+
+  safari:
+    name: Native Safari / macOS
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm verify
+      - run: pnpm check:contracts
+      - run: pnpm storybook:build
+      - run: pnpm check:coverage
+      - run: pnpm check:publication
+      - run: pnpm check:svelte
+      - run: node scripts/build-example-fixtures.mjs
+      - run: sudo /usr/bin/safaridriver --enable
+      - run: node scripts/run-native-safari.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-safari
+          path: .artifacts/native-safari/
+          retention-days: 14
+          if-no-files-found: ignore

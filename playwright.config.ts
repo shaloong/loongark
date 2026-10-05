@@ -17,9 +17,27 @@ export default defineConfig({
     launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
       ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH }
       : undefined,
-    trace: "on-first-retry",
+    trace:
+      process.env.CROSS_BROWSER === "1"
+        ? "retain-on-failure"
+        : "on-first-retry",
+    screenshot: "only-on-failure",
   },
   projects: [
+    ...(process.env.CROSS_BROWSER === "1"
+      ? [
+          {
+            name: "firefox",
+            testIgnore: ["**/*.visual.spec.ts"],
+            use: { ...devices["Desktop Firefox"], launchOptions: {} },
+          },
+          {
+            name: "webkit",
+            testIgnore: ["**/*.visual.spec.ts"],
+            use: { ...devices["Desktop Safari"], launchOptions: {} },
+          },
+        ]
+      : []),
     {
       name: "chromium",
       testIgnore: ["**/*.visual.spec.ts"],
