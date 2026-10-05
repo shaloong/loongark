@@ -2,6 +2,9 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  createDataTableEditor,
+  mountDataTableEditor,
+  type DataTableEditState,
   mountDataTablePins,
   retryDataTable,
   type DataTableState,
@@ -21,6 +24,7 @@ import {
 } from "@loongark/kit";
 import {
   createSignal,
+  createUniqueId,
   createMemo,
   createEffect,
   For,
@@ -62,6 +66,18 @@ export const LoongArkChart = (props: ChartOptions) => {
 };
 export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
   let region!: HTMLDivElement;
+  const editId = createUniqueId();
+  const [edit, setEdit] = createSignal<DataTableEditState>();
+  const editor = createDataTableEditor(setEdit);
+  onMount(() =>
+    onCleanup(mountDataTableEditor(region, editor, () => props, view)),
+  );
+  // 共享模型不持有框架响应状态；草稿激活后重新订阅 loading 与校验器。
+  createEffect(() => {
+    edit();
+    props.loading;
+    editor.sync(props, view());
+  });
   onMount(() => onCleanup(mountDataTablePins(region)));
   const [query, setQuery] = createSignal(props.defaultState?.query ?? ""),
     [sort, setSort] = createSignal<DataSort | undefined>(
@@ -199,6 +215,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                   <th
                     scope="col"
                     data-pinned={view().pins.get(c.key)}
+                    data-align={c.align}
                     aria-sort={
                       view().sort?.key === c.key
                         ? view().sort?.direction === "asc"
@@ -266,8 +283,75 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                   </td>
                   <For each={view().columns}>
                     {(c) => (
-                      <td data-pinned={view().pins.get(c.key)}>
-                        {String(row[c.key] ?? "")}
+                      <td
+                        data-pinned={view().pins.get(c.key)}
+                        data-align={c.align}
+                      >
+                        {edit()?.rowId === id && edit()?.columnKey === c.key ? (
+                          <div
+                            data-part="cell-editor"
+                            aria-busy={edit()?.pending || undefined}
+                          >
+                            <input
+                              data-part="cell-input"
+                              dir={
+                                c.editor?.type === "number" ? "ltr" : undefined
+                              }
+                              type={c.editor?.type ?? "text"}
+                              step="any"
+                              value={edit()?.draft ?? ""}
+                              aria-label={labels().editCell(c.label, id)}
+                              aria-invalid={!!edit()?.error || undefined}
+                              aria-describedby={
+                                edit()?.error ? editId : undefined
+                              }
+                              disabled={edit()?.pending}
+                            />
+                            <div data-part="cell-actions">
+                              <button
+                                data-part="cell-save"
+                                type="button"
+                                disabled={edit()?.pending}
+                              >
+                                {labels().save}
+                              </button>
+                              <button data-part="cell-cancel" type="button">
+                                {labels().cancel}
+                              </button>
+                            </div>
+                            {edit()?.pending && (
+                              <span data-part="cell-status" role="status">
+                                {labels().saving}
+                              </span>
+                            )}
+                            {edit()?.error && (
+                              <span
+                                id={editId}
+                                data-part="cell-error"
+                                role="alert"
+                              >
+                                {edit()?.error}
+                              </span>
+                            )}
+                          </div>
+                        ) : editor.canEdit(props, c) ? (
+                          <button
+                            data-part="cell-trigger"
+                            data-row-id={id}
+                            data-column-key={c.key}
+                            type="button"
+                            aria-label={`${labels().editCell(c.label, id)}: ${String(row[c.key] ?? "") || labels().emptyCell}`}
+                            disabled={!!edit()?.pending}
+                          >
+                            {String(row[c.key] ?? "") || labels().emptyCell}
+                            <LoongArkIcon
+                              icon={controlIcons.pencil}
+                              size="sm"
+                            />
+                          </button>
+                        ) : (
+                          String(row[c.key] ?? "")
+                        )}
                       </td>
                     )}
                   </For>
@@ -288,12 +372,14 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
       </div>
       <footer>
         <span aria-live="polite">
-          {labels().summary({
-            total: view().total,
-            selected: selected().length,
-            page: view().page,
-            pageCount: view().pageCount,
-          })}
+          <bdi>
+            {labels().summary({
+              total: view().total,
+              selected: selected().length,
+              page: view().page,
+              pageCount: view().pageCount,
+            })}
+          </bdi>
         </span>
         <button
           type="button"

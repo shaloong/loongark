@@ -1,3 +1,4 @@
+import { checkDataTableEditing } from "./dataTableEditChecks";
 import {
   checkQuestionnaireAsync,
   checkQuestionnaireCancellation,
@@ -63,6 +64,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
       if (await page.locator("button button").count())
         failures.push(name + ": 嵌套按钮");
 
+      if (name === "DataTableEditExample") await checkDataTableEditing(page);
       if (name === "QuestionnaireAsyncExample") {
         await checkQuestionnaireCancellation(page);
         await checkQuestionnaireAsync(page);

@@ -39,7 +39,7 @@ Svelte Frame 在写入文档前保存了旧 body，Portal 会挂到脱离文档�
 
 ## 高级能力仍需持续补齐
 
-公开 Ark 原生能力不代表所有 LoongArk 组合组件的高级场景已经全部交付。新版组件与原生 Drawer 已实现，继续处理组合模型的明确能力：DataTable 虚拟化/编辑、Chart 缩放/刷选/实时流、Questionnaire 复杂题型、消息虚拟化。具体交付必须同步四端示例、逻辑回归和桌面/手机明暗截图；不通过一个布尔“完整”字段掩盖未验收场景。
+公开 Ark 原生能力不代表所有 LoongArk 组合组件的高级场景已经全部交付。新版组件与原生 Drawer 已实现，继续处理组合模型的明确能力：DataTable 虚拟化、Chart 缩放/刷选/实时流、Questionnaire 复杂题型、消息虚拟化。具体交付必须同步四端示例、逻辑回归和桌面/手机明暗截图；不通过一个布尔“完整”字段掩盖未验收场景。
 
 Linux 手工截图复核修正了裁剪图片顶对齐、手机默认裁剪框越出图片、拖拽命中区域被画成粗白条、分页首尾按钮高度不一致，以及 JSON 导航起点/装饰箭头错误显示焦点框。四端裁剪与 iframe 像素一致；JSON 分隔符空格和 Select 原生箭头有细微差异，保留实际像素对照，不声称四端完全逐像素相同。后续批次公开四端共同的 75 个 Context/ItemContext/Collection 控制 Hook，包括 useAsyncList、useListCollection、useListSelection。公开原生 Hook 仍不代表异步错误、取消、竞争请求等应用情景已经全部专项验收。
 
@@ -55,13 +55,13 @@ Swap 是指示内容切换部件，不另建业务状态机；例子以真实按
 
 Drawer 的命名保持现有 Root/Trigger/Portal/Overlay/Positioner/Content/Title/Description/Action/Cancel，并加入 Stack、RootProvider、Context、Grabber/Indicator、SwipeArea、Indent/IndentBackground 及控制 Hook。Overlay 对应原生 Backdrop，不再增加重复平铺别名。原 Dialog 的 placement Props 不等同于原生 swipeDirection；下/上/左/右使用 swipeDirection，并由共享样式对齐布局。默认 Root 与 RootProvider 开启 lazyMount/unmountOnExit，防止未打开的嵌套 Positioner 先被外层模态隐藏、打开后仍无法进入无障碍树；Solid DrawerPortal 同时根据 Presence 挂载 Portal，防止 Solid 的空包装提前被隐藏。业务可显式覆盖，两项同时关闭的嵌套行为仍属上游限制。Svelte 目录示例在滚动容器 ref 就绪后挂载 Root，保证 IntersectionObserver 使用指定文章而非默认视口。
 
-高级能力继续按可复现情景交付，不能把“公开所有部件”写成“全部业务能力已完成”。待补验证包括 DateInput 完整输入/粘贴/日期时间/国际化组合、Drawer 真实触摸/RTL/所有方向、Collection 异步取消与请求竞争，以及表格虚拟化/编辑、图表缩放/刷选/实时流、复杂问卷题型和消息虚拟化。
+高级能力继续按可复现情景交付，不能把“公开所有部件”写成“全部业务能力已完成”。待补验证包括 DateInput 完整输入/粘贴/日期时间/国际化组合、Drawer 真实触摸/RTL/所有方向、Collection 异步取消与请求竞争，以及表格虚拟化、图表缩放/刷选/实时流、复杂问卷题型和消息虚拟化。
 
 本批 Linux 验收：114 族、283 Story、四端各 789 个公开值入口；147 个四端示例运行通过，专项行为 8 项、全量浏览器 106 项、视觉 46 项通过。明暗默认 WCAG、窄屏溢出和有效 transition: all 为 0；64 张四端和 16 张 Story 截图已目视核验。新增 16 张 Linux 基线，原有 30 张 Linux 与 2 张 Windows 基线不变。详细范围与限制见 [验收记录](audits/2026-10-03/ark-next-linux/acceptance.json)。
 
 四端问卷条件题、格式/跨题同步校验和受控拒绝恢复已进入独立批次，见 [问卷说明](conversation.md) 与 [验收](audits/2026-10-03/questionnaire-advanced-linux/acceptance.json)。这属于 LoongArk 组合能力，Ark UI 没有提供现成问卷组件。
 
-表格 state、服务端分页和 columnKeys 列显示/顺序已同步四端；API 与证据见 [表格说明](data-table.md)。逻辑冻结列已同步四端（见 [冻结列 API](data-table.md#冻结列)）；虚拟化和编辑仍未交付；不将这些能力混入 Ark 原生部件覆盖结论。
+表格 state、服务端分页和 columnKeys 列显示/顺序已同步四端；API 与证据见 [表格说明](data-table.md)。逻辑冻结列已同步四端（见 [冻结列 API](data-table.md#冻结列)）；虚拟化仍未交付；不将这些能力混入 Ark 原生部件覆盖结论。
 
 图表受控序列、数值范围与可访问数据表已同步四端，见 [图表说明](chart.md) 与 [验收](audits/2026-10-03/chart-advanced-linux/acceptance.json)。这属于 LoongArk 组合模型能力；缩放/刷选/实时流仍不算已完成。
 
@@ -78,7 +78,7 @@ Drawer 的命名保持现有 Root/Trigger/Portal/Overlay/Positioner/Content/Titl
 | Message / Attachment | 异步互斥、错误/成功反馈、替换与卸载中止、复制/下载/预览/取消、焦点          | 真实消息/上传服务由业务实现；Markdown 解析不属于 Bubble |
 | MessageScroller      | 跟随、暂停、回到底部、媒体/可见文字锚点、复合历史插入及清理                 | 虚拟列表、被移除消息或替换文字节点的语义位置            |
 | Questionnaire        | 条件题、答案保留、受控拒绝、表单与同步/异步跨题校验、取消/过期结果与重试                              | 复杂输入题型、真机与多浏览器验收    |
-| DataTable            | 受控查询/排序/分页、服务器模式、跨页选择、列显示/顺序、逻辑冻结列、请求状态 | 虚拟化、编辑及其键盘/表单契约                           |
+| DataTable            | 受控查询/排序/分页、服务器模式、跨页选择、列显示/顺序、逻辑冻结列、请求状态、草稿编辑与校验 | 虚拟化、复杂编辑器与批量编辑                           |
 | Chart                | 受控图例、范围裁切、缺失值/极值、可访问数据表、重绘焦点                     | 缩放、刷选、增量数据渲染与交互工具提示                  |
 | DateInput / Drawer   | 分段编辑/范围/真实表单；手势/吸附点/嵌套模态                                | 完整粘贴/日期时间/国际化组合；真实触摸、RTL 与全部方向  |
 | Async Collection     | 已公开原生控制 Hook                                                         | 通用异步控制契约、分页边界与卸载清理回归                |

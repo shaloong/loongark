@@ -89,3 +89,12 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 - 新增四端 QuestionnaireAsyncExample 和 AsyncValidation/LongOptions/CallbackUpdates Story；115族、297 Story、四端各790公开值入口、179示例。复杂题型与表格编辑等后续范围仍单独列出。
 
 - 复核确认长按钮换行偏移106.578125px与异步错误后body失焦，修正逻辑结束边缘及有条件焦点恢复；React完成回调改为读取最新绑定。
+
+## 表格编辑与逻辑对齐（2026-10-05）
+
+- 四端同步文字/数值草稿、同步校验、异步保存、取消/过期结果、受控数据、错误重试、SSR和清理。
+- 用原生按钮进入编辑，Enter保存、Escape取消，不篡改表格为grid；表头、值和输入框共用start/center/end，继承RTL。
+- 新增四端DataTableEditExample与Editing Story；115族、298 Story、四端各790公开值入口、183示例。虚拟化、复杂编辑器与批量编辑继续保留在范围表。
+
+- 明确订阅 Vue/Solid 草稿激活与 loading，校验器按函数值比较，原位替换也中止草稿。
+- 截图修正 Save 样式优先级、窄屏编辑区宽度/聚焦留白和示例计数间距；全量回归发现的 React 会话删除后焦点改为实际 DOM 提交后恢复。

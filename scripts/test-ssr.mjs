@@ -25,7 +25,7 @@ for (const [framework, script] of [
   ],
 ]) {
   const tableProps =
-    "{data:[{id:'a',name:'Alpha'}],columns:[{key:'name',label:'Name'}],defaultSelectedIds:['a','missing'],onSelectionChange:()=>{throw Error('SSR must not emit selection updates')}}";
+    "{data:[{id:'a',name:'Alpha'}],columns:[{key:'name',label:'Name',editor:{validate:()=>{throw Error('SSR must not validate edit')}}}],onCellCommit:()=>{throw Error('SSR must not save edit')},defaultSelectedIds:['a','missing'],onSelectionChange:()=>{throw Error('SSR must not emit selection updates')}}";
   const tableScript =
     framework === "Vue"
       ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${tableProps})})));`

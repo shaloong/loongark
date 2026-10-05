@@ -24,7 +24,7 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 
 ## 边界
 
-现支持客户端与服务端标量数据、列显示及顺序控制。已提供逻辑冻结列；未提供虚拟化、指针列拖动或编辑单元格；数据请求、取消与竞争处理由调用方负责，不假定业务接口协议。它是已有能力的完善，不声称兼容 MUI Data Grid、Ant Design Table 或第三方表格引擎的全部 API。
+现支持客户端与服务端标量数据、列显示及顺序控制。已提供逻辑冻结列；已提供文字/数值单元格编辑；未提供虚拟化或指针列拖动；数据请求、取消与竞争处理由调用方负责，不假定业务接口协议。它是已有能力的完善，不声称兼容 MUI Data Grid、Ant Design Table 或第三方表格引擎的全部 API。
 
 ## 高级状态与服务端模式
 
@@ -48,4 +48,18 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 
 窄屏至少给中间列保留一个选择单元格宽度的阅读空间（普通列更窄时采用该列宽度），且不小于普通列排序按钮的实际宽度。冻结组过宽时暂停吸附，保留可聚焦的原生横向滚动；可用空间恢复后自动吸附。它不是裁切长列或隐藏数据的替代方式。
 
-四端 DataTableFrozenExample 展示两边冻结、追加/隐藏 Owner、重排列、RTL、横向滚动、选择/排序、空结果和隐藏重挂。独立 Frozen Story 与 Linux 基线见 [冻结列验收](audits/2026-10-04/data-table-frozen-linux/acceptance.json)。仍未提供虚拟化、单元格编辑和指针拖动列；不声称全部高级表格能力已交付。
+四端 DataTableFrozenExample 展示两边冻结、追加/隐藏 Owner、重排列、RTL、横向滚动、选择/排序、空结果和隐藏重挂。独立 Frozen Story 与 Linux 基线见 [冻结列验收](audits/2026-10-04/data-table-frozen-linux/acceptance.json)。仍未提供虚拟化和指针拖动列；不声称全部高级表格能力已交付。
+
+## 单元格编辑与逻辑对齐
+
+列的 `align="start" | "center" | "end"` 同时对齐表头、静态值、编辑入口和输入框，继承 RTL。数字编辑器保持数字与负号的 LTR 顺序，但按列的逻辑方向对齐；摘要文字使用原生双向隔离。数值列推荐 end；不根据第一行猜测数据类型。只读列和旧的列定义保持兼容。
+
+`columns[].editor` 提供 `{type?: "text" | "number", validate?: (value, row) => string | undefined}`；只有同时传 `onCellCommit` 才渲染编辑按钮，rowKey 身份列始终只读。数字编辑拒绝空串、非有限数字，允许小数；其它业务限制由 validate 提供。编辑按钮名称在 labels.editCell 提示后包含当前可见值，支持语音按可见文字定位。可编辑空值使用 labels.emptyCell 名称，保存后的值始终来自 data，不偷偷改写源行。
+
+`onCellCommit({rowId,columnKey,value,previousValue,row,signal})` 可同步或异步返回 void（接受）或错误文字（保留草稿），抛异常显示 labels.commitError，不暴露异常详情。row 是冻结的浅复制，value 为文字或数值。调用方负责保存和更新 data；返回 void 后若拒绝更新 data，组件恢复原值。组件不创建请求、缓存或业务字段。
+
+按钮进入编辑并选中文字，编辑区域限制到滚动区可视宽度并保留焦点边缘留白；Enter 保存、Escape 取消，组合输入期间不拦截 Enter。Tab 沿原生控件移动，不自动提交，离开编辑区仍保留草稿。同步验证失败关联字段错误；异步保存互斥、禁用输入/保存，取消按钮继续可用。迟到完成与拒绝不改变后续草稿；若保存服务忽略 signal，取消仍立即结束组件等待，但调用方必须自行防止过期业务写入。
+
+分页、排序、过滤后的视图变化，行数据变化、删除、列隐藏/重排、校验器替换、loading 和卸载会取消草稿。保存及取消恢复原入口，入口不在页面时回到稳定滚动区域；外部控件已经取得焦点时不抢回。SSR 不创建编辑器 DOM、不执行校验或保存；Vue 的 onCellCommit 是带返回值的函数 Prop，不是无返回的 emit 事件，其余端同名回调。Svelte 字段错误ID只在挂载后分配，初始SSR无活动草稿。
+
+新增 labels.editCell(columnLabel,rowId)/save/cancel/saving/invalidNumber/commitError/emptyCell；可完整本地化可见操作、状态与字段名称。四端 DataTableEditExample 和 Editing Story 演示实际异步接受、拒绝、失败重试、取消、隐藏列、删除行、RTL 与重挂。复杂选择器、批量编辑、撤销和虚拟化仍未交付。

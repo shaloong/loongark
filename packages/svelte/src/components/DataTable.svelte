@@ -1,9 +1,16 @@
+<script context="module" lang="ts">
+  let editorSequence = 0;
+</script>
+
 <script lang="ts">
   import { controlIcons } from "@loongark/kit";
   import Icon from "./Icon.svelte";
   import { afterUpdate, tick, onMount } from "svelte";
   import {
     dataTableView,
+    createDataTableEditor,
+    mountDataTableEditor,
+    type DataTableEditState,
     mountDataTablePins,
     type DataTableProps,
     retryDataTable,
@@ -43,6 +50,37 @@
   export let loading = false;
   export let error: string | undefined = undefined;
   export let onRetry: (() => void) | undefined = undefined;
+  export let onCellCommit: DataTableProps["onCellCommit"] = undefined;
+  let edit: DataTableEditState | undefined;
+  const editor = createDataTableEditor((value) => {
+    edit = value;
+  });
+  let editId = "";
+  onMount(() => {
+    editId = `lk-data-cell-${++editorSequence}`;
+  });
+  $: editProps = {
+    data,
+    columns,
+    pageSize,
+    rowKey,
+    mode,
+    totalRows,
+    columnKeys,
+    pinnedColumns,
+    loading,
+    labels,
+    onCellCommit,
+  };
+  $: editor.sync(editProps, view);
+  onMount(() =>
+    mountDataTableEditor(
+      region,
+      editor,
+      () => editProps,
+      () => view,
+    ),
+  );
   let query = defaultState.query ?? "",
     sort: DataSort | undefined = defaultState.sort,
     page = defaultState.page ?? 1;
@@ -163,6 +201,7 @@
           {#each view.columns as c (c.key)}<th
               scope="col"
               data-pinned={view.pins.get(c.key)}
+              data-align={c.align}
               aria-sort={view.sort?.key === c.key
                 ? view.sort.direction === "asc"
                   ? "ascending"
@@ -214,7 +253,57 @@
             >
             {#each view.columns as c (c.key)}<td
                 data-pinned={view.pins.get(c.key)}
-                >{String(row[c.key] ?? "")}</td
+                data-align={c.align}
+                >{#if edit?.rowId === id && edit?.columnKey === c.key}
+                  <div
+                    data-part="cell-editor"
+                    aria-busy={edit?.pending || undefined}
+                  >
+                    <input
+                      data-part="cell-input"
+                      dir={c.editor?.type === "number" ? "ltr" : undefined}
+                      type={c.editor?.type ?? "text"}
+                      step="any"
+                      value={edit?.draft ?? ""}
+                      aria-label={text.editCell(c.label, id)}
+                      aria-invalid={!!edit?.error || undefined}
+                      aria-describedby={edit?.error ? editId : undefined}
+                      disabled={edit?.pending}
+                    />
+                    <div data-part="cell-actions">
+                      <button
+                        data-part="cell-save"
+                        type="button"
+                        disabled={edit?.pending}>{text.save}</button
+                      ><button data-part="cell-cancel" type="button"
+                        >{text.cancel}</button
+                      >
+                    </div>
+                    {#if edit?.pending}<span
+                        data-part="cell-status"
+                        role="status">{text.saving}</span
+                      >{/if}
+                    {#if edit?.error}<span
+                        id={editId}
+                        data-part="cell-error"
+                        role="alert">{edit.error}</span
+                      >{/if}
+                  </div>
+                {:else if editor.canEdit(editProps, c)}
+                  <button
+                    data-part="cell-trigger"
+                    data-row-id={id}
+                    data-column-key={c.key}
+                    type="button"
+                    aria-label={`${text.editCell(c.label, id)}: ${String(row[c.key] ?? "") || text.emptyCell}`}
+                    disabled={!!edit?.pending}
+                  >
+                    {String(row[c.key] ?? "") || text.emptyCell}<Icon
+                      icon={controlIcons.pencil}
+                      size="sm"
+                    />
+                  </button>
+                {:else}{String(row[c.key] ?? "")}{/if}</td
               >{/each}
           </tr>{:else}<tr
             ><td colspan={view.columns.length + 1} data-part="empty"
@@ -226,12 +315,14 @@
   </div>
   <footer>
     <span aria-live="polite"
-      >{text.summary({
-        total: view.total,
-        selected: selected.length,
-        page: view.page,
-        pageCount: view.pageCount,
-      })}</span
+      ><bdi
+        >{text.summary({
+          total: view.total,
+          selected: selected.length,
+          page: view.page,
+          pageCount: view.pageCount,
+        })}</bdi
+      ></span
     >
     <button
       type="button"

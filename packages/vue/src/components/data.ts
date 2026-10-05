@@ -2,6 +2,9 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  createDataTableEditor,
+  mountDataTableEditor,
+  type DataTableEditState,
   mountDataTablePins,
   type DataTableProps,
   retryDataTable,
@@ -24,6 +27,7 @@ import {
 } from "@loongark/kit";
 import {
   defineComponent,
+  useId,
   ref,
   computed,
   watchEffect,
@@ -119,6 +123,7 @@ export const LoongArkDataTable = defineComponent({
     loading: Boolean,
     error: String,
     onRetry: Function as PropType<() => void>,
+    onCellCommit: Function as PropType<DataTableProps["onCellCommit"]>,
   },
   emits: {
     stateChange: (state: DataTableState) => !!state,
@@ -128,6 +133,22 @@ export const LoongArkDataTable = defineComponent({
   },
   setup(props, { emit }) {
     const region = ref<HTMLDivElement>();
+    const editId = useId(),
+      edit = ref<DataTableEditState>();
+    const editor = createDataTableEditor((value) => {
+      edit.value = value;
+    });
+    let stopEditor: (() => void) | undefined;
+    onMounted(() => {
+      if (region.value)
+        stopEditor = mountDataTableEditor(
+          region.value,
+          editor,
+          () => props,
+          () => view.value,
+        );
+    });
+    onBeforeUnmount(() => stopEditor?.());
     let stopPins: (() => void) | undefined;
     onMounted(() => {
       if (region.value) stopPins = mountDataTablePins(region.value);
@@ -152,6 +173,12 @@ export const LoongArkDataTable = defineComponent({
       emit("update:state", next);
     };
     const view = computed(() => dataTableView(props, current()));
+    // 共享模型不持有框架响应状态；草稿激活后重新订阅 loading 与校验器。
+    watchEffect(() => {
+      void edit.value;
+      void props.loading;
+      editor.sync(props, view.value);
+    });
     const selected = () =>
       dataTableSelection(
         props.selectedIds ?? internal.value,
@@ -304,6 +331,7 @@ export const LoongArkDataTable = defineComponent({
                             key: c.key,
                             scope: "col",
                             "data-pinned": model.pins.get(c.key),
+                            "data-align": c.align,
                             "aria-sort":
                               model.sort?.key === c.key
                                 ? model.sort.direction === "asc"
@@ -392,8 +420,105 @@ export const LoongArkDataTable = defineComponent({
                                   {
                                     key: c.key,
                                     "data-pinned": model.pins.get(c.key),
+                                    "data-align": c.align,
                                   },
-                                  String(row[c.key] ?? ""),
+                                  edit.value?.rowId === id &&
+                                    edit.value?.columnKey === c.key
+                                    ? h(
+                                        "div",
+                                        {
+                                          "data-part": "cell-editor",
+                                          "aria-busy":
+                                            edit.value.pending || undefined,
+                                        },
+                                        [
+                                          h("input", {
+                                            "data-part": "cell-input",
+                                            dir:
+                                              c.editor?.type === "number"
+                                                ? "ltr"
+                                                : undefined,
+                                            type: c.editor?.type ?? "text",
+                                            step: "any",
+                                            value: edit.value.draft,
+                                            "aria-label": labels.editCell(
+                                              c.label,
+                                              id,
+                                            ),
+                                            "aria-invalid":
+                                              !!edit.value.error || undefined,
+                                            "aria-describedby": edit.value.error
+                                              ? editId
+                                              : undefined,
+                                            disabled: edit.value.pending,
+                                          }),
+                                          h(
+                                            "div",
+                                            { "data-part": "cell-actions" },
+                                            [
+                                              h(
+                                                "button",
+                                                {
+                                                  "data-part": "cell-save",
+                                                  type: "button",
+                                                  disabled: edit.value.pending,
+                                                },
+                                                labels.save,
+                                              ),
+                                              h(
+                                                "button",
+                                                {
+                                                  "data-part": "cell-cancel",
+                                                  type: "button",
+                                                },
+                                                labels.cancel,
+                                              ),
+                                            ],
+                                          ),
+                                          edit.value.pending
+                                            ? h(
+                                                "span",
+                                                {
+                                                  "data-part": "cell-status",
+                                                  role: "status",
+                                                },
+                                                labels.saving,
+                                              )
+                                            : null,
+                                          edit.value.error
+                                            ? h(
+                                                "span",
+                                                {
+                                                  id: editId,
+                                                  "data-part": "cell-error",
+                                                  role: "alert",
+                                                },
+                                                edit.value.error,
+                                              )
+                                            : null,
+                                        ],
+                                      )
+                                    : editor.canEdit(props, c)
+                                      ? h(
+                                          "button",
+                                          {
+                                            "data-part": "cell-trigger",
+                                            "data-row-id": id,
+                                            "data-column-key": c.key,
+                                            type: "button",
+                                            "aria-label": `${labels.editCell(c.label, id)}: ${String(row[c.key] ?? "") || labels.emptyCell}`,
+                                            disabled: !!edit.value?.pending,
+                                          },
+                                          [
+                                            String(row[c.key] ?? "") ||
+                                              labels.emptyCell,
+                                            h(LoongArkIcon, {
+                                              icon: controlIcons.pencil,
+                                              size: "sm",
+                                            }),
+                                          ],
+                                        )
+                                      : String(row[c.key] ?? ""),
                                 ),
                               ),
                             ],
@@ -423,12 +548,15 @@ export const LoongArkDataTable = defineComponent({
             h(
               "span",
               { "aria-live": "polite" },
-              labels.summary({
-                total: model.total,
-                selected: ids.length,
-                page: model.page,
-                pageCount: model.pageCount,
-              }),
+              h(
+                "bdi",
+                labels.summary({
+                  total: model.total,
+                  selected: ids.length,
+                  page: model.page,
+                  pageCount: model.pageCount,
+                }),
+              ),
             ),
             h(
               "button",

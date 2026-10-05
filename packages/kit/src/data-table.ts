@@ -3,6 +3,7 @@ import {
   type DataRow,
   type DataColumn,
   type DataSort,
+  type CellValue,
 } from "./data-models";
 export interface DataTableState {
   query: string;
@@ -26,6 +27,13 @@ export interface DataTableLabels {
   loading: string;
   retry: string;
   summary: (details: DataTableSummary) => string;
+  editCell: (column: string, rowId: string) => string;
+  save: string;
+  cancel: string;
+  saving: string;
+  invalidNumber: string;
+  commitError: string;
+  emptyCell: string;
 }
 export interface DataTableProps {
   data: readonly DataRow[];
@@ -49,6 +57,15 @@ export interface DataTableProps {
   loading?: boolean;
   error?: string;
   onRetry?: () => void;
+  /** 返回错误文字保留草稿；void 表示接受，源数据仍由调用方更新。 */
+  onCellCommit?: (details: {
+    rowId: string;
+    columnKey: string;
+    value: string | number;
+    previousValue: CellValue | undefined;
+    row: Readonly<DataRow>;
+    signal: AbortSignal;
+  }) => void | string | Promise<void | string>;
 }
 export const dataTableLabels = (
   labels?: Partial<DataTableLabels>,
@@ -62,6 +79,13 @@ export const dataTableLabels = (
   next: labels?.next ?? "Next",
   loading: labels?.loading ?? "Loading rows…",
   retry: labels?.retry ?? "Retry",
+  editCell: labels?.editCell ?? ((column, id) => `Edit ${column} for ${id}`),
+  save: labels?.save ?? "Save",
+  cancel: labels?.cancel ?? "Cancel",
+  saving: labels?.saving ?? "Saving…",
+  invalidNumber: labels?.invalidNumber ?? "Enter a finite number",
+  commitError: labels?.commitError ?? "Could not save. Try again.",
+  emptyCell: labels?.emptyCell ?? "Empty",
   summary:
     labels?.summary ??
     (({ total, selected, page, pageCount }) =>
@@ -152,6 +176,7 @@ export function dataTableView(props: DataTableProps, state: DataTableState) {
       totalRows: props.totalRows,
     }),
     columns,
+    query: state.query,
     pins,
     pinSelection: [...pins.values()].includes("start"),
   };
@@ -333,5 +358,289 @@ export function mountDataTablePins(region: HTMLElement): () => void {
         region.removeAttribute("data-pin-overflow");
       else region.setAttribute("data-pin-overflow", originalOverflow);
     }
+  };
+}
+
+export interface DataTableEditState {
+  rowId: string;
+  columnKey: string;
+  draft: string;
+  pending: boolean;
+  error?: string;
+}
+/** 独立草稿，不修改输入数据；所有端共用互斥、取消与过期结果隔离。 */
+export function createDataTableEditor(
+  notify: (state: DataTableEditState | undefined) => void,
+) {
+  let state: DataTableEditState | undefined,
+    version = 0,
+    abort: AbortController | undefined,
+    snapshot = "";
+  const listeners = new Set<
+    (
+      focus: "input" | "trigger" | undefined,
+      previous: DataTableEditState | undefined,
+    ) => void
+  >();
+  const emit = (
+    next: DataTableEditState | undefined,
+    focus?: "input" | "trigger",
+  ) => {
+    const previous = state;
+    state = next;
+    for (const listener of listeners) listener(focus, previous);
+    notify(state);
+  };
+  const cancel = () => {
+    version++;
+    abort?.abort();
+    abort = undefined;
+    if (state) emit(undefined, "trigger");
+  };
+  const canEdit = (props: DataTableProps, column: DataColumn) =>
+    !!props.onCellCommit &&
+    !!column.editor &&
+    column.key !== (props.rowKey ?? "id") &&
+    !props.loading;
+  const stamp = (
+    props: DataTableProps,
+    view: ReturnType<typeof dataTableView>,
+    edit: DataTableEditState,
+  ) => {
+    const entry = view.rows.find(({ id }) => id === edit.rowId);
+    const column = view.columns.find(({ key }) => key === edit.columnKey);
+    if (!entry || !column || !canEdit(props, column)) return undefined;
+    return JSON.stringify([
+      entry.row,
+      view.rows.map(({ id }) => id),
+      view.columns.map(({ key }) => key),
+      view.query,
+      view.sort,
+      view.page,
+      column.editor?.type,
+    ]);
+  };
+  let validator: NonNullable<DataColumn["editor"]>["validate"];
+  return {
+    get state() {
+      return state;
+    },
+    canEdit,
+    subscribe(
+      listener: (
+        focus: "input" | "trigger" | undefined,
+        previous: DataTableEditState | undefined,
+      ) => void,
+    ) {
+      listeners.add(listener);
+      return () => {
+        listeners.delete(listener);
+      };
+    },
+    sync(props: DataTableProps, view: ReturnType<typeof dataTableView>) {
+      if (!state) return;
+      const column = view.columns.find(({ key }) => key === state?.columnKey);
+      if (
+        stamp(props, view, state) !== snapshot ||
+        column?.editor?.validate !== validator
+      )
+        cancel();
+    },
+    begin(
+      props: DataTableProps,
+      view: ReturnType<typeof dataTableView>,
+      rowId: string,
+      columnKey: string,
+    ) {
+      if (state?.pending) return;
+      const entry = view.rows.find(({ id }) => id === rowId),
+        column = view.columns.find(({ key }) => key === columnKey);
+      if (!entry || !column || !canEdit(props, column)) return;
+      cancel();
+      const next = {
+        rowId,
+        columnKey,
+        draft: String(entry.row[columnKey] ?? ""),
+        pending: false,
+      };
+      snapshot = stamp(props, view, next)!;
+      validator = column.editor?.validate;
+      emit(next, "input");
+    },
+    change(draft: string) {
+      if (state && !state.pending) emit({ ...state, draft, error: undefined });
+    },
+    cancel,
+    async save(props: DataTableProps, view: ReturnType<typeof dataTableView>) {
+      if (!state || state.pending) return;
+      if (stamp(props, view, state) !== snapshot) {
+        cancel();
+        return;
+      }
+      const edit = state,
+        column = view.columns.find(({ key }) => key === edit.columnKey)!;
+      const row = Object.freeze({
+        ...view.rows.find(({ id }) => id === edit.rowId)!.row,
+      });
+      const labels = dataTableLabels(props.labels);
+      const value =
+        column.editor?.type === "number" ? Number(edit.draft) : edit.draft;
+      let error: string | undefined;
+      try {
+        error =
+          typeof value === "number" &&
+          (!edit.draft.trim() || !Number.isFinite(value))
+            ? labels.invalidNumber
+            : column.editor?.validate?.(value, row);
+      } catch {
+        error = labels.commitError;
+      }
+      if (error) {
+        emit({ ...edit, error }, "input");
+        return;
+      }
+      const currentVersion = ++version,
+        controller = new AbortController();
+      abort = controller;
+      emit({ ...edit, pending: true, error: undefined });
+      // 取消不依赖调用方是否遵守 signal；迟到拒绝也已被消费。
+      const result = await new Promise<{ error?: string; canceled?: boolean }>(
+        (resolve) => {
+          const canceled = () => resolve({ canceled: true });
+          controller.signal.addEventListener("abort", canceled, { once: true });
+          Promise.resolve()
+            .then(() => {
+              if (controller.signal.aborted) return;
+              return props.onCellCommit?.({
+                rowId: edit.rowId,
+                columnKey: edit.columnKey,
+                value,
+                previousValue: row[edit.columnKey],
+                row,
+                signal: controller.signal,
+              });
+            })
+            .then(
+              (message) => resolve({ error: message || undefined }),
+              () => resolve({ error: labels.commitError }),
+            )
+            .finally(() =>
+              controller.signal.removeEventListener("abort", canceled),
+            );
+        },
+      );
+      if (currentVersion !== version || result.canceled) return;
+      abort = undefined;
+      if (result.error)
+        emit({ ...edit, pending: false, error: result.error }, "input");
+      else emit(undefined, "trigger");
+    },
+    dispose() {
+      cancel();
+      listeners.clear();
+    },
+  };
+}
+/** 仅挂载后处理键盘与焦点，编辑器 DOM 由各框架渲染。 */
+export function mountDataTableEditor(
+  region: HTMLElement,
+  editor: ReturnType<typeof createDataTableEditor>,
+  props: () => DataTableProps,
+  view: () => ReturnType<typeof dataTableView>,
+) {
+  const win = region.ownerDocument.defaultView;
+  if (!win) return () => {};
+  let frame = 0,
+    pendingOwned = false;
+  const stop = editor.subscribe((focus, previous) => {
+    const active = region.ownerDocument.activeElement;
+    if (editor.state?.pending && !previous?.pending)
+      pendingOwned = region.contains(active);
+    if (!focus) return;
+    const owned =
+      region.contains(active) ||
+      (!!previous?.pending &&
+        pendingOwned &&
+        active === region.ownerDocument.body);
+    win.cancelAnimationFrame(frame);
+    if (!owned) return;
+    frame = win.requestAnimationFrame(() => {
+      frame = 0;
+      const now = region.ownerDocument.activeElement;
+      if (
+        !region.isConnected ||
+        (now !== region.ownerDocument.body && !region.contains(now))
+      )
+        return;
+      if (focus === "input") {
+        const input = region.querySelector<HTMLInputElement>(
+          '[data-part="cell-input"]',
+        );
+        input?.focus({ preventScroll: true });
+        input
+          ?.closest<HTMLElement>('[data-part="cell-editor"]')
+          ?.scrollIntoView({ block: "nearest", inline: "nearest" });
+        if (!editor.state?.error) input?.select();
+      } else {
+        const trigger = Array.from(
+          region.querySelectorAll<HTMLButtonElement>(
+            '[data-part="cell-trigger"]',
+          ),
+        ).find(
+          (element) =>
+            element.dataset.rowId === previous?.rowId &&
+            element.dataset.columnKey === previous?.columnKey,
+        );
+        (trigger ?? region).focus();
+      }
+    });
+  });
+  const click = (event: Event) => {
+    if (!(event.target instanceof win.Element)) return;
+    const button = event.target.closest<HTMLButtonElement>("button[data-part]");
+    if (!button || !region.contains(button)) return;
+    if (button.dataset.part === "cell-trigger")
+      editor.begin(
+        props(),
+        view(),
+        button.dataset.rowId!,
+        button.dataset.columnKey!,
+      );
+    if (button.dataset.part === "cell-save") void editor.save(props(), view());
+    if (button.dataset.part === "cell-cancel") editor.cancel();
+  };
+  const input = (event: Event) => {
+    if (
+      event.target instanceof win.HTMLInputElement &&
+      event.target.dataset.part === "cell-input"
+    )
+      editor.change(event.target.value);
+  };
+  const keydown = (event: KeyboardEvent) => {
+    if (
+      event.isComposing ||
+      !(event.target instanceof win.Element) ||
+      !event.target.closest('[data-part="cell-editor"]')
+    )
+      return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      editor.cancel();
+    }
+    if (event.key === "Enter" && event.target instanceof win.HTMLInputElement) {
+      event.preventDefault();
+      void editor.save(props(), view());
+    }
+  };
+  region.addEventListener("click", click);
+  region.addEventListener("input", input);
+  region.addEventListener("keydown", keydown);
+  return () => {
+    stop();
+    win.cancelAnimationFrame(frame);
+    region.removeEventListener("click", click);
+    region.removeEventListener("input", input);
+    region.removeEventListener("keydown", keydown);
+    editor.cancel();
   };
 }

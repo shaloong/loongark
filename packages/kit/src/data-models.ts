@@ -20,6 +20,16 @@ export interface DataColumn {
   key: string;
   label: string;
   sortable?: boolean;
+  /** 逻辑对齐；表头、只读值与编辑器共用。 */
+  align?: "start" | "center" | "end";
+  /** 只有提供 onCellCommit 时才允许编辑；不编辑行身份字段。 */
+  editor?: {
+    type?: "text" | "number";
+    validate?: (
+      value: string | number,
+      row: Readonly<DataRow>,
+    ) => string | undefined;
+  };
 }
 export interface DataSort {
   key: string;

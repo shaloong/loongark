@@ -159,4 +159,4 @@ MessageScroller 媒体与可见文字锚点批次新增四端 MessageScrollerAdv
 
 继续完善现有组件，不新增别名或组件族。四端 pinnedColumns 支持逻辑两边冻结、显示/顺序联动、真实尺寸更新、RTL、过宽时普通滚动和键盘焦点可见；增加四端示例与 Frozen Story。该批完成时为114族、292 Story、四端各789个公开值入口、171个示例。验证和高级能力边界见 [冻结列验收](audits/2026-10-04/data-table-frozen-linux/acceptance.json)及 [API](data-table.md#冻结列)。
 
-Icon 提供四端共享 Lucide 节点、可访问名称、尺寸、固定描边与 RTL；共297个Story，四端各790个公开值入口和179个示例。详细验收见 [图标摘要](audits/2026-10-05/icons-linux/acceptance.json)，完整组件目录仍不代表所有高级能力完成。
+Icon 提供四端共享 Lucide 节点、可访问名称、尺寸、固定描边与 RTL；共298个Story，四端各790个公开值入口和183个示例。详细验收见 [图标摘要](audits/2026-10-05/icons-linux/acceptance.json)，完整组件目录仍不代表所有高级能力完成。

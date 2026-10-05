@@ -16,6 +16,7 @@ import {
   Search,
   LoaderCircle,
   Star,
+  Pencil,
 } from "lucide";
 import type { IconNode } from "lucide";
 export type { IconNode } from "lucide";
@@ -50,6 +51,7 @@ export const controlIcons = {
   search: Search,
   loading: LoaderCircle,
   star: Star,
+  pencil: Pencil,
 };
 export function iconAttributes(
   options: IconOptions,

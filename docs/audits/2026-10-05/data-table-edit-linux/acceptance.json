@@ -1,0 +1,130 @@
+{
+  "recordedAt": "2026-10-05T08:58:25.985050+00:00",
+  "branch": "develop",
+  "baseCommit": "a55dddfb28bb6fbf9a09781c0a6bff901d7c04f2",
+  "result": "passed",
+  "scope": [
+    "四端文字/数值单元格草稿、校验、可取消异步保存、互斥及迟到结果隔离",
+    "键盘/组合输入、错误关联、数据和视图变化取消、焦点恢复与卸载清理",
+    "表头/值/编辑器逻辑对齐、窄屏焦点留白、RTL 数字符号与摘要隔离、可见值无障碍名称",
+    "复现并修正 React 会话示例删除焦点时序；现有菜单 Axe 等待入场结束"
+  ],
+  "coverage": {
+    "families": 115,
+    "stories": 298,
+    "publicValuesPerFramework": 790,
+    "examples": 183
+  },
+  "environment": {
+    "os": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "browser": "Chromium 151.0.7922.173",
+    "playwright": "1.57.0"
+  },
+  "validation": {
+    "frozenInstall": "passed; dependency and lockfile unchanged",
+    "verify": "passed",
+    "contracts": "passed; new editing model branches and validator replacement regression",
+    "freshStorybookBuild": "passed",
+    "coverage": "passed",
+    "publicationAndFourFrameworkSSR": "passed; no edit validation/commit callbacks during SSR",
+    "svelte": {
+      "errors": 0,
+      "existingWarnings": 2
+    },
+    "frameworkConsumptionAndExamples": {
+      "passed": 8,
+      "examplesRun": 183
+    },
+    "browser": {
+      "initialFullRunPassed": 94,
+      "initialConversationFocusFailure": 1,
+      "finalAffectedTestsPassed": 17,
+      "uniqueCasesCoveredAcrossRuns": 95,
+      "frameworkCasesSkippedOnStoryServer": 8,
+      "frameworkCasesSeparatelyPassed": 8,
+      "note": "首轮全量后修正会话焦点并扩充编辑/加载/语义回归，最终重跑17项受影响测试；不是最终全量95项单次运行"
+    },
+    "visual": {
+      "passed": 86,
+      "initialExistingPassed": 82,
+      "initialNewMissingBaselines": 4,
+      "existingComparisonThreshold": 0.01,
+      "thresholdChanged": false,
+      "updatesDisabledInFinalRun": true
+    },
+    "accessibility": {
+      "initialDefaultStoriesPerTheme": 298,
+      "initialDefaultWcagViolations": 0,
+      "initialDefaultNarrowOverflow": 0,
+      "initialEffectiveTransitionAll": 0,
+      "finalExampleStatesChecked": 64,
+      "finalExampleWcagViolations": 0,
+      "experimentalLabelInName": "final shared regression passed across four adapters and four Story viewport/theme combinations; initial five trigger mismatches reproduced"
+    },
+    "pagesConfiguration": "YAML及线上验收Python语法通过；部署检查断言Editing Story存在",
+    "failedIntermediateChecks": "开发阶段的类型/SSR/绑定失败均修正并从verify重新构建验证；未将中间失败后的旧产物检查计入最终验收"
+  },
+  "manualReview": {
+    "screenshots": 112,
+    "contactSheets": 28,
+    "finalRecapturePixelIdentical": 81,
+    "changedGroupContactsReReviewed": 12,
+    "finalStoryBaselineOriginalsReviewed": 4,
+    "reviewNote": "先审阅28种联系表；最终重采集112图，其中81图像素不变，31图变化按12种联系表及新增Story原图再次审阅",
+    "selectedOriginalsAlsoReviewed": true,
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1280,
+      375
+    ],
+    "states": [
+      "default",
+      "text editing",
+      "invalid number",
+      "pending",
+      "RTL invalid number",
+      "loading"
+    ],
+    "existingStoryComparisons": [
+      "project tables",
+      "server",
+      "frozen"
+    ],
+    "numericHeaderValueEdgeMaxPx": 0,
+    "ownerCenterMaxPx": 0.0078125,
+    "rowControlsCenterMaxPx": 0,
+    "actionCentersMaxPx": 0,
+    "editorMinGutterPx": 8.734375,
+    "frameworkImageComparisons": 72,
+    "sameDimensions": 72,
+    "exactComparisons": 38,
+    "maxDifferentPixels": 651,
+    "maxChannelDifference": 2,
+    "comparisonNote": "布局与几何一致；微小文字/原生焦点边缘差异如实保留，不宣称四端零像素差异"
+  },
+  "baselines": {
+    "existingFilesHashUnchanged": 84,
+    "windowsUnchanged": 2,
+    "newReviewedLinuxFiles": 4,
+    "rawFilesCommitted": false
+  },
+  "evidenceStorage": {
+    "localIgnoredDirectory": ".artifacts/table-edit/",
+    "ciArtifactRetentionDays": 14,
+    "note": "日志、原图、联系表、逐场景测量仅存忽略目录；Git仅保留摘要与自动回归使用的4张Linux基线"
+  },
+  "limitations": [
+    "手机是375px Chromium视口，不是真机；本地151不同于CI固定Chromium版本；未专项验证Safari/Firefox",
+    "初轮298 Story默认扫描与最终64例子状态扫描分批执行，不声称最终全量状态覆盖",
+    "调用方负责更新data并阻止忽略AbortSignal的过期业务写入；row冻结仅为浅复制",
+    "复杂编辑器、批量编辑、撤销与虚拟化仍未交付；数字采用原生number输入，没有新增本地化解析器"
+  ],
+  "deployment": {
+    "status": "pending push and actual Pages CI"
+  }
+}

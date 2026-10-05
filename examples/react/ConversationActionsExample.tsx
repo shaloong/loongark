@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import * as L from "@loongark/react";
 import type { ConversationActionContext, MessageOptions } from "@loongark/kit";
 import {
@@ -35,12 +35,19 @@ export function ConversationActionsExample() {
     version % 2
       ? "The updated launch checklist is ready for a second review."
       : conversationNote;
-  const restoreFocus = (name: string) =>
-    requestAnimationFrame(() =>
-      document
-        .querySelector<HTMLButtonElement>(`[data-restore-${name}]`)
-        ?.focus(),
+  const [focusTarget, setFocusTarget] = useState<string>();
+  const restoreFocus = (name: string) => setFocusTarget(name);
+  // 等待实际提交后的替代按钮；单个 RAF 可能先于 React 的并发提交执行。
+  useLayoutEffect(() => {
+    if (!focusTarget) return;
+    const button = document.querySelector<HTMLButtonElement>(
+      `[data-restore-${focusTarget}]`,
     );
+    if (button) {
+      button.focus();
+      setFocusTarget(undefined);
+    }
+  }, [focusTarget, shown, removed, upload.status]);
   const save = async (ctx: ConversationActionContext) => {
     const failing = fail;
     await waitForConversationAction(ctx, 700);

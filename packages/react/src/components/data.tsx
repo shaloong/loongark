@@ -2,6 +2,9 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  createDataTableEditor,
+  mountDataTableEditor,
+  type DataTableEditState,
   mountDataTablePins,
   retryDataTable,
   type DataTableState,
@@ -19,7 +22,13 @@ import {
   observeChartWidth,
   type ChartOptions,
 } from "@loongark/kit";
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useId,
+} from "react";
 export type LoongArkDataTableProps = DataTableProps;
 export const LoongArkChart = (props: ChartOptions) => {
   const element = useRef<HTMLDivElement>(null);
@@ -68,14 +77,38 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     [internal, setInternal] = useState<string[]>([
       ...(props.defaultSelectedIds ?? []),
     ]);
+  const current = props.state ?? { query, sort, page };
+  const view = dataTableView(props, current);
   const region = useRef<HTMLDivElement>(null);
+  const editId = useId();
+  const [edit, setEdit] = useState<DataTableEditState>();
+  const [editor] = useState(() => createDataTableEditor(setEdit));
+  const editLatest = useRef({
+    props,
+    view,
+  });
+  editLatest.current = {
+    props,
+    view,
+  };
+  useLayoutEffect(() =>
+    editor.sync(editLatest.current.props, editLatest.current.view),
+  );
+  useEffect(() => {
+    if (region.current)
+      return mountDataTableEditor(
+        region.current,
+        editor,
+        () => editLatest.current.props,
+        () => editLatest.current.view,
+      );
+  }, [editor]);
   useEffect(() => {
     if (region.current) return mountDataTablePins(region.current);
   }, []);
   const pageInput = useRef<HTMLInputElement>(null);
   const labels = dataTableLabels(props.labels),
     label = props.label ?? "Data table";
-  const current = props.state ?? { query, sort, page };
   const latest = useRef(current);
   latest.current = current;
   const changeState = (patch: Partial<DataTableState>) => {
@@ -88,7 +121,6 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     }
     props.onStateChange?.(next);
   };
-  const view = dataTableView(props, current);
   const selected = dataTableSelection(
     props.selectedIds ?? internal,
     view.allIds,
@@ -214,6 +246,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                   key={c.key}
                   scope="col"
                   data-pinned={view.pins.get(c.key)}
+                  data-align={c.align}
                   aria-sort={
                     view.sort?.key === c.key
                       ? view.sort.direction === "asc"
@@ -278,8 +311,66 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                   </label>
                 </td>
                 {view.columns.map((c) => (
-                  <td key={c.key} data-pinned={view.pins.get(c.key)}>
-                    {String(row[c.key] ?? "")}
+                  <td
+                    key={c.key}
+                    data-pinned={view.pins.get(c.key)}
+                    data-align={c.align}
+                  >
+                    {edit?.rowId === id && edit?.columnKey === c.key ? (
+                      <div
+                        data-part="cell-editor"
+                        aria-busy={edit?.pending || undefined}
+                      >
+                        <input
+                          data-part="cell-input"
+                          dir={c.editor?.type === "number" ? "ltr" : undefined}
+                          onChange={() => {}}
+                          type={c.editor?.type ?? "text"}
+                          step="any"
+                          value={edit?.draft ?? ""}
+                          aria-label={labels.editCell(c.label, id)}
+                          aria-invalid={!!edit?.error || undefined}
+                          aria-describedby={edit?.error ? editId : undefined}
+                          disabled={edit?.pending}
+                        />
+                        <div data-part="cell-actions">
+                          <button
+                            data-part="cell-save"
+                            type="button"
+                            disabled={edit?.pending}
+                          >
+                            {labels.save}
+                          </button>
+                          <button data-part="cell-cancel" type="button">
+                            {labels.cancel}
+                          </button>
+                        </div>
+                        {edit?.pending && (
+                          <span data-part="cell-status" role="status">
+                            {labels.saving}
+                          </span>
+                        )}
+                        {edit?.error && (
+                          <span id={editId} data-part="cell-error" role="alert">
+                            {edit?.error}
+                          </span>
+                        )}
+                      </div>
+                    ) : editor.canEdit(props, c) ? (
+                      <button
+                        data-part="cell-trigger"
+                        data-row-id={id}
+                        data-column-key={c.key}
+                        type="button"
+                        aria-label={`${labels.editCell(c.label, id)}: ${String(row[c.key] ?? "") || labels.emptyCell}`}
+                        disabled={!!edit?.pending}
+                      >
+                        {String(row[c.key] ?? "") || labels.emptyCell}
+                        <LoongArkIcon icon={controlIcons.pencil} size="sm" />
+                      </button>
+                    ) : (
+                      String(row[c.key] ?? "")
+                    )}
                   </td>
                 ))}
               </tr>
@@ -296,12 +387,14 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
       </div>
       <footer>
         <span aria-live="polite">
-          {labels.summary({
-            total: view.total,
-            selected: selected.length,
-            page: view.page,
-            pageCount: view.pageCount,
-          })}
+          <bdi>
+            {labels.summary({
+              total: view.total,
+              selected: selected.length,
+              page: view.page,
+              pageCount: view.pageCount,
+            })}
+          </bdi>
         </span>
         <button
           type="button"

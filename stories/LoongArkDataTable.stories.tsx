@@ -95,3 +95,6 @@ export const Frozen = {
   decorators: [withArkExamplePage],
   render: () => <DataTableFrozenExample />,
 };
+
+import { DataTableEditExample } from "../examples/react/DataTableEditExample";
+export const Editing: StoryObj = { render: () => <DataTableEditExample /> };

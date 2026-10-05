@@ -147,6 +147,7 @@
     "MessageScroller visible-text/media anchors, compound insertion and cleanup",
     "DataTable logical frozen columns, measured offsets and responsive fallback",
     "Icon shared Lucide nodes, accessible names, fixed strokes, RTL and four-framework defaults",
-    "Questionnaire async validation, cancellable snapshots, retry and first-line option alignment"
+    "Questionnaire async validation, cancellable snapshots, retry and first-line option alignment",
+    "DataTable text/number drafts, validation, cancellable commit, keyboard/focus and logical alignment"
   ]
 }

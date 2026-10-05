@@ -48,6 +48,7 @@ export async function checkActionMedia(page: Page) {
   await expect(
     page.getByRole("menuitem", { name: "New note", exact: true }),
   ).toBeFocused();
+  await expect(menu).toHaveCSS("opacity", "1");
   expect(
     (await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze())
       .violations,
