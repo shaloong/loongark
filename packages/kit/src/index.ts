@@ -87,3 +87,5 @@ export * from "./async-collection";
 export * from "./table-query";
 
 export * from "./table-columns";
+
+export * from "./table-structure";

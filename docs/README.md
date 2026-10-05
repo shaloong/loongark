@@ -179,3 +179,8 @@ DataTable 四端提供稳定多列排序、Shift键盘/指针追加优先级和�
 ## 浏览器一致性修正（2026-10-05）
 
 修复四端键盘追加排序、异步消息焦点与滚动锚点、菜单退出焦点及窄屏标题。Chart 与 Sheet 修正跨浏览器布局和退出状态；取消问卷回归使用受控时钟。CI 截图按框架拆分保存14天。Linux 验收范围、原生 Safari/Firefox 列交互的实际结果及尚未完成的平台复验见 [验收摘要](audits/2026-10-05/browser-consistency-linux/acceptance.json)。
+
+浏览器修复的后续实际CI：原生Safari215默认示例和24交互通过，24张PNG已审阅；Firefox152通过/2失败，WebKit140通过/14失败，Chromium任务取消。按框架拆分截图已实际验证。未把部分结果计作全平台完成，详见[真实CI复核](audits/2026-10-05/browser-consistency-ci/acceptance.json)。
+
+
+分组聚合与树形行已完成四端实现和Linux专项验收：完整四端170项及219示例、Story116项通过；最终布局修正后新构建、32项四端与4项Story复验、138项全量视觉比较通过。新增8张已审阅Linux基线，既有144张含2张Windows基线哈希不变。当前115族、308Story、四端各790值入口、219示例。详见[结构行验收](audits/2026-10-05/data-table-structure-linux/acceptance.json)。其余高级缺口和实际平台失败继续处理。

@@ -141,3 +141,15 @@ assert.match(
   html,
   /<option(?=[^>]*value="0")(?=[^>]*selected)[^>]*>Unassigned/,
 );
+
+assert.match(html, /Team: Team &lt;safe&gt; · 2 rows/);
+assert.match(html, /data-row-kind="group"/);
+assert.match(html, /data-part="row-expand"[^>]*aria-expanded="true"/);
+assert.match(html, /SSR grouped row/);
+console.log("Svelte 分组聚合原生展开、转义及SSR无回调通过");
+
+assert.match(
+  html,
+  /aria-label="SSR hidden columns"[\s\S]*data-part="row-expand"/,
+);
+assert.match(html, /Team: Hidden columns group · 1 row/);

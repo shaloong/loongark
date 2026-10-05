@@ -3,7 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 export async function checkDataTableQuery(page: Page) {
   const root = page.locator('[data-scope="data-table"][data-part="root"]');
   const rows = root.locator("tbody tr");
-  const names = () => rows.locator("td:nth-child(2)").allTextContents();
+  const names = () => rows.locator("td:nth-child(2)").allInnerTexts();
   const project = root.getByRole("textbox", {
     name: "Filter Project",
     exact: true,

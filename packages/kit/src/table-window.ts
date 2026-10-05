@@ -36,10 +36,20 @@ export function dataTableVirtualRows(
     return row ? [{ ...row, virtualIndex: entry.index, gap: entry.gap }] : [];
   });
 }
-export function dataTableVirtualStyle(props: DataTableProps) {
+export function dataTableVirtualStyle(
+  props: DataTableProps,
+  view?: ReturnType<typeof dataTableView>,
+) {
   return props.virtualization
     ? {
         height: `${virtualViewportHeight(props.virtualization)}px`,
+        "--lk-data-table-structure-depth": Math.min(
+          8,
+          view?.rows.reduce(
+            (depth, entry) => Math.max(depth, entry.structure?.depth ?? 0),
+            0,
+          ) ?? 0,
+        ),
         "--lk-data-table-column-count": props.columns.filter(
           (column) =>
             props.columnKeys === undefined ||

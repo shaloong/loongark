@@ -77,6 +77,14 @@ async function find(selector) {
 }
 const click = async (selector) =>
   session("POST", `/element/${await find(selector)}/click`, {});
+async function clickText(text) {
+  const node = await execute(
+    "return [...document.querySelectorAll('button')].find(node => node.textContent.trim() === arguments[0])",
+    [text],
+  );
+  assert(node?.[elementKey], `Safari 未找到按钮 ${text}`);
+  await session("POST", `/element/${node[elementKey]}/click`, {});
+}
 async function type(selector, text) {
   const id = await find(selector);
   await session("POST", `/element/${id}/clear`, {});
@@ -321,6 +329,107 @@ try {
         framework,
         mode,
         case: "column-keyboard-and-native-pointer-resize",
+      });
+    }
+  for (const framework of Object.keys(index))
+    for (const mode of ["light", "dark"]) {
+      await navigate(framework, "DataTableStructureExample", mode);
+      assert((await text('tr[data-row-kind="group"]')).includes("3000"));
+      assert.equal(
+        await execute(
+          "return document.querySelector('tr[data-row-kind=group] input') === null",
+        ),
+        true,
+      );
+      await execute("document.querySelector('[data-part=row-expand]').focus()");
+      await session("POST", "/actions", {
+        actions: [
+          {
+            type: "key",
+            id: "structure-keyboard",
+            actions: [
+              { type: "keyDown", value: " " },
+              { type: "keyUp", value: " " },
+            ],
+          },
+        ],
+      });
+      await waitFor(
+        () =>
+          execute(
+            "return document.activeElement?.getAttribute('aria-label') === 'Expand Team: Design · 3 rows'",
+          ),
+        "分组折叠焦点恢复",
+      );
+      await session("POST", "/actions", {
+        actions: [
+          {
+            type: "key",
+            id: "structure-keyboard",
+            actions: [
+              { type: "keyDown", value: " " },
+              { type: "keyUp", value: " " },
+            ],
+          },
+        ],
+      });
+      await waitFor(
+        () =>
+          execute(
+            "return document.activeElement?.getAttribute('aria-label') === 'Collapse Team: Design · 3 rows'",
+          ),
+        "分组空格展开焦点恢复",
+      );
+      await clickText("Reject expansion");
+      await click(
+        '[data-part="row-expand"][aria-label="Collapse Team: Design · 3 rows"]',
+      );
+      assert.equal(
+        await execute(
+          "return document.querySelector('[data-part=row-expand]').getAttribute('aria-expanded')",
+        ),
+        "true",
+      );
+      await clickText("Allow expansion");
+      await clickText("Show tree rows");
+      await click('[data-part="row-expand"][data-row-id="atlas"]');
+      await waitFor(
+        () =>
+          execute(
+            "return document.querySelector('[data-part=row-expand][data-row-id=atlas]').getAttribute('aria-expanded') === 'false'",
+          ),
+        "树折叠",
+      );
+      assert.equal(
+        await execute(
+          "return document.querySelector('tr[data-row-id=tokens]') === null",
+        ),
+        true,
+      );
+      await clickText("Collapse all");
+      await type('input[aria-label="Filter Project"]', "keyboard");
+      await waitFor(
+        () =>
+          execute(
+            "return document.querySelector('[data-part=row-expand][data-row-id=mobile]')?.disabled === true && !!document.querySelector('tr[data-row-id=mobile-check]')",
+          ),
+        "筛选强制展开祖先上下文",
+      );
+      await type('input[aria-label="Filter Project"]', "");
+      await waitFor(
+        () =>
+          execute(
+            "return document.querySelector('[data-part=row-expand][data-row-id=mobile]')?.getAttribute('aria-expanded') === 'false'",
+          ),
+        "筛选清除恢复原展开状态",
+      );
+      await clickText("Expand all");
+      await assertLayout();
+      await screenshot(`structure-${framework}-${mode}`);
+      report.interactions.push({
+        framework,
+        mode,
+        case: "grouping-tree-expansion-filter-context",
       });
     }
   report.result = "passed";

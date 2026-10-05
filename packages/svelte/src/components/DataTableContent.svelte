@@ -4,6 +4,9 @@
   import { afterUpdate, tick, onMount, onDestroy } from "svelte";
   import {
     dataTableView,
+    renderDataTableRowPrefix,
+    dataTableGroupText,
+    mountDataTableStructure,
     dataColumnWidth,
     dataColumnTableStyle,
     renderDataColumnControls,
@@ -89,6 +92,28 @@
     }
   });
   onDestroy(() => stopVirtual?.());
+  export let groupBy: DataTableProps["groupBy"] = undefined;
+  export let aggregations: DataTableProps["aggregations"] = undefined;
+  export let tree: DataTableProps["tree"] = undefined;
+  export let expandedRowIds: DataTableProps["expandedRowIds"] = undefined;
+  export let defaultExpandedRowIds: DataTableProps["defaultExpandedRowIds"] =
+    undefined;
+  export let onExpandedRowIdsChange: DataTableProps["onExpandedRowIdsChange"] =
+    undefined;
+  let internalExpanded =
+    defaultExpandedRowIds === undefined
+      ? undefined
+      : [...defaultExpandedRowIds];
+  onMount(() =>
+    mountDataTableStructure(
+      region,
+      () => ({ props: editProps, view }),
+      (ids) => {
+        if (expandedRowIds === undefined) internalExpanded = [...ids];
+        onExpandedRowIdsChange?.([...ids]);
+      },
+    ),
+  );
   export let totalRows: number | undefined = undefined;
   export let columnKeys: readonly string[] | undefined = undefined;
   export let columnWidths: DataTableProps["columnWidths"] = undefined;
@@ -174,6 +199,11 @@
     rowKey,
     mode,
     totalRows,
+    groupBy,
+    aggregations,
+    tree,
+    expandedRowIds: expandedRowIds ?? internalExpanded,
+    defaultExpandedRowIds: undefined,
     columnKeys: columnKeys ?? internalColumnKeys,
     columnWidths: columnWidths ?? internalColumnWidths,
     columnReorderable,
@@ -219,7 +249,9 @@
     }
     onStateChange?.(next);
   }
-  $: pageIds = view.rows.map(({ id }) => id);
+  $: pageIds = view.rows
+    .filter((entry) => entry.structure?.kind !== "group")
+    .map(({ id }) => id);
   $: pageSelection = dataSelectionState(selected, pageIds);
   $: setDataSelectionMixed(pageInput, pageSelection.mixed);
   afterUpdate(() => {
@@ -447,6 +479,11 @@
           "--lk-data-table-column-count"
         ]
       : undefined}
+    style:--lk-data-table-structure-depth={virtualization
+      ? dataTableVirtualStyle({ ...editProps, virtualization }, view)?.[
+          "--lk-data-table-structure-depth"
+        ]
+      : undefined}
     role="region"
     aria-label={label}
     tabindex="0"
@@ -462,7 +499,7 @@
       style:width={columnStyle.width}
       aria-label={label}
       aria-rowcount={virtualization && view.total > 0
-        ? view.total + 1
+        ? (tree || groupBy?.length ? view.rows.length : view.total) + 1
         : undefined}
     >
       {#if columnResizable || editProps.columnWidths !== undefined}<colgroup
@@ -520,7 +557,7 @@
         </tr></thead
       >
       <tbody
-        >{#each virtualRows as { row, id, virtualIndex, gap } (id)}
+        >{#each virtualRows as { row, id, virtualIndex, gap, structure } (id)}
           {#if gap > 0}<tr
               data-part="virtual-spacer"
               aria-hidden="true"
@@ -530,107 +567,163 @@
           <tr
             data-virtual-key={virtualization ? id : undefined}
             aria-rowindex={virtualization
-              ? (view.page - 1) * view.pageSize + virtualIndex + 2
+              ? (tree || groupBy?.length
+                  ? 0
+                  : (view.page - 1) * view.pageSize) +
+                virtualIndex +
+                2
               : undefined}
-            data-selected={selected.includes(id) || undefined}
+            data-row-id={id}
+            data-row-kind={structure?.kind}
+            data-selected={(structure?.kind !== "group" &&
+              selected.includes(id)) ||
+              undefined}
           >
             <td data-pinned={view.pinSelection ? "start" : undefined}
-              ><label data-part="selection"
-                ><input
-                  type="checkbox"
-                  disabled={loading}
-                  aria-label={text.selectRow(id)}
-                  checked={selected.includes(id)}
-                  on:change={(e) =>
-                    change(
-                      toggleDataSelection(
-                        selected,
-                        [id],
-                        e.currentTarget.checked,
-                      ),
-                      e.currentTarget,
-                      id,
-                    )}
-                /></label
-              ></td
+              >{#if structure && !view.columns.length}<div
+                  data-part="cell-layout"
+                  data-structured="true"
+                  style={`--lk-row-depth:${Math.min(structure.depth, 8)}`}
+                >
+                  <span
+                    >{@html renderDataTableRowPrefix(
+                      { row, id, index: virtualIndex, structure },
+                      editProps,
+                      view,
+                      text,
+                    )}</span
+                  >{#if structure.kind === "group"}<div data-part="cell-value">
+                      {dataTableGroupText(
+                        { row, id, index: virtualIndex, structure },
+                        { key: "", label: "" },
+                        true,
+                        text,
+                        editProps,
+                      )}
+                    </div>{/if}
+                </div>{/if}{#if structure?.kind !== "group"}<label
+                  data-part="selection"
+                  ><input
+                    type="checkbox"
+                    disabled={loading}
+                    aria-label={text.selectRow(id)}
+                    checked={selected.includes(id)}
+                    on:change={(e) =>
+                      change(
+                        toggleDataSelection(
+                          selected,
+                          [id],
+                          e.currentTarget.checked,
+                        ),
+                        e.currentTarget,
+                        id,
+                      )}
+                  /></label
+                >{/if}</td
             >
-            {#each view.columns as c (c.key)}<td
+            {#each view.columns as c, columnIndex (c.key)}<td
                 data-pinned={view.pins.get(c.key)}
                 data-align={c.align}
-                >{#if edit?.rowId === id && edit?.columnKey === c.key}
-                  <div
-                    data-part="cell-editor"
-                    aria-busy={edit?.pending || undefined}
-                  >
-                    {#if c.editor?.type === "textarea"}<textarea
-                        data-part="cell-input"
-                        value={edit?.draft ?? ""}
-                        aria-label={text.editCell(c.label, id)}
-                        aria-invalid={!!edit?.error || undefined}
-                        aria-describedby={edit?.error ? editId : undefined}
-                        disabled={edit?.pending}
-                        rows={c.editor.rows ?? 3}></textarea>
-                    {:else if c.editor?.type === "select"}<select
-                        data-part="cell-input"
-                        value={edit?.draft ?? ""}
-                        aria-label={text.editCell(c.label, id)}
-                        aria-invalid={!!edit?.error || undefined}
-                        aria-describedby={edit?.error ? editId : undefined}
-                        disabled={edit?.pending}
+                ><div
+                  data-part="cell-layout"
+                  data-structured={(!!structure && columnIndex === 0) ||
+                    undefined}
+                  style={`--lk-row-depth:${Math.min(structure?.depth ?? 0, 8)}`}
+                >
+                  {#if structure && columnIndex === 0}<span
+                      >{@html renderDataTableRowPrefix(
+                        { row, id, index: virtualIndex, structure },
+                        editProps,
+                        view,
+                        text,
+                      )}</span
+                    >{/if}
+                  <div data-part="cell-value">
+                    {#if structure?.kind === "group"}{dataTableGroupText(
+                        { row, id, index: virtualIndex, structure },
+                        c,
+                        columnIndex === 0,
+                        text,
+                        editProps,
+                      )}{:else if edit?.rowId === id && edit?.columnKey === c.key}
+                      <div
+                        data-part="cell-editor"
+                        aria-busy={edit?.pending || undefined}
                       >
-                        {#if !(c.editor.options ?? []).some((option) => option.value === edit?.draft)}<option
+                        {#if c.editor?.type === "textarea"}<textarea
+                            data-part="cell-input"
                             value={edit?.draft ?? ""}
-                            disabled>{edit?.draft || text.emptyCell}</option
+                            aria-label={text.editCell(c.label, id)}
+                            aria-invalid={!!edit?.error || undefined}
+                            aria-describedby={edit?.error ? editId : undefined}
+                            disabled={edit?.pending}
+                            rows={c.editor.rows ?? 3}></textarea>
+                        {:else if c.editor?.type === "select"}<select
+                            data-part="cell-input"
+                            value={edit?.draft ?? ""}
+                            aria-label={text.editCell(c.label, id)}
+                            aria-invalid={!!edit?.error || undefined}
+                            aria-describedby={edit?.error ? editId : undefined}
+                            disabled={edit?.pending}
+                          >
+                            {#if !(c.editor.options ?? []).some((option) => option.value === edit?.draft)}<option
+                                value={edit?.draft ?? ""}
+                                disabled>{edit?.draft || text.emptyCell}</option
+                              >{/if}
+                            {#each c.editor.options ?? [] as option}<option
+                                value={option.value}
+                                disabled={option.disabled}
+                                >{option.label}</option
+                              >{/each}
+                          </select>{:else}<input
+                            data-part="cell-input"
+                            dir={c.editor?.type === "number"
+                              ? "ltr"
+                              : undefined}
+                            type={c.editor?.type ?? "text"}
+                            step="any"
+                            value={edit?.draft ?? ""}
+                            aria-label={text.editCell(c.label, id)}
+                            aria-invalid={!!edit?.error || undefined}
+                            aria-describedby={edit?.error ? editId : undefined}
+                            disabled={edit?.pending}
+                          />{/if}
+                        <div data-part="cell-actions">
+                          <button
+                            data-part="cell-save"
+                            type="button"
+                            disabled={edit?.pending}>{text.save}</button
+                          ><button data-part="cell-cancel" type="button"
+                            >{text.cancel}</button
+                          >
+                        </div>
+                        {#if edit?.pending}<span
+                            data-part="cell-status"
+                            role="status">{text.saving}</span
                           >{/if}
-                        {#each c.editor.options ?? [] as option}<option
-                            value={option.value}
-                            disabled={option.disabled}>{option.label}</option
-                          >{/each}
-                      </select>{:else}<input
-                        data-part="cell-input"
-                        dir={c.editor?.type === "number" ? "ltr" : undefined}
-                        type={c.editor?.type ?? "text"}
-                        step="any"
-                        value={edit?.draft ?? ""}
-                        aria-label={text.editCell(c.label, id)}
-                        aria-invalid={!!edit?.error || undefined}
-                        aria-describedby={edit?.error ? editId : undefined}
-                        disabled={edit?.pending}
-                      />{/if}
-                    <div data-part="cell-actions">
+                        {#if edit?.error}<span
+                            id={editId}
+                            data-part="cell-error"
+                            role="alert">{edit.error}</span
+                          >{/if}
+                      </div>
+                    {:else if !batch.active && !batch.pending && editor.canEdit(editProps, c)}
                       <button
-                        data-part="cell-save"
+                        data-part="cell-trigger"
+                        data-row-id={id}
+                        data-column-key={c.key}
                         type="button"
-                        disabled={edit?.pending}>{text.save}</button
-                      ><button data-part="cell-cancel" type="button"
-                        >{text.cancel}</button
+                        aria-label={`${text.editCell(c.label, id)}: ${dataTableCellText(row, c) || text.emptyCell}`}
+                        disabled={!!edit?.pending}
                       >
-                    </div>
-                    {#if edit?.pending}<span
-                        data-part="cell-status"
-                        role="status">{text.saving}</span
-                      >{/if}
-                    {#if edit?.error}<span
-                        id={editId}
-                        data-part="cell-error"
-                        role="alert">{edit.error}</span
-                      >{/if}
+                        {dataTableCellText(row, c) || text.emptyCell}<Icon
+                          icon={controlIcons.pencil}
+                          size="sm"
+                        />
+                      </button>
+                    {:else}{dataTableCellText(row, c)}{/if}
                   </div>
-                {:else if !batch.active && !batch.pending && editor.canEdit(editProps, c)}
-                  <button
-                    data-part="cell-trigger"
-                    data-row-id={id}
-                    data-column-key={c.key}
-                    type="button"
-                    aria-label={`${text.editCell(c.label, id)}: ${dataTableCellText(row, c) || text.emptyCell}`}
-                    disabled={!!edit?.pending}
-                  >
-                    {dataTableCellText(row, c) || text.emptyCell}<Icon
-                      icon={controlIcons.pencil}
-                      size="sm"
-                    />
-                  </button>
-                {:else}{dataTableCellText(row, c)}{/if}</td
+                </div></td
               >{/each}
           </tr>{:else}<tr
             ><td colspan={view.columns.length + 1} data-part="empty"

@@ -11,6 +11,11 @@ import {
   type DataFilter,
   type DataColumnFilter,
 } from "./table-query";
+import {
+  createDataTableStructure,
+  type DataTableRowEntry,
+  type DataTableStructureOptions,
+} from "./table-structure";
 import type { DataColumnGeometry } from "./table-columns";
 export type CellValue = string | number | boolean | null;
 export const observeChartWidth = (
@@ -70,7 +75,7 @@ export interface DataSort {
   key: string;
   direction: "asc" | "desc";
 }
-export interface DataTableOptions {
+export interface DataTableOptions extends DataTableStructureOptions {
   query?: string;
   sort?: DataSort;
   sorts?: readonly DataSort[];
@@ -89,20 +94,21 @@ export const createDataTableView = (
   data: readonly DataRow[],
   columns: readonly DataColumn[],
   options: DataTableOptions = {},
+  structureColumns: readonly DataColumn[] = columns,
 ) => {
   const query = options.query?.trim().toLocaleLowerCase() ?? "";
-  const allRows = data.map((row, index) => ({
+  const allRows: DataTableRowEntry[] = data.map((row, index) => ({
     row,
     id: String(row[options.rowKey ?? "id"] ?? index),
     index,
   }));
   if (
-    options.mode === "server" &&
+    (options.mode === "server" || options.tree) &&
     allRows.some(
       ({ row, id }) => row[options.rowKey ?? "id"] == null || id === "",
     )
   )
-    throw Error("Server DataTable requires stable row ids");
+    throw Error("Server and tree DataTable require stable row ids");
   const allIds = allRows.map(({ id }) => id);
   if (new Set(allIds).size !== allIds.length)
     throw Error("DataTable requires unique row ids");
@@ -140,20 +146,33 @@ export const createDataTableView = (
     options.sorts ?? (options.sort ? [options.sort] : []),
   );
   const sort = sorts[0];
-  if (sorts.length && options.mode !== "server")
-    rows = rows.sort((a, b) => {
-      for (const sort of sorts) {
-        const left = a.row[sort.key],
-          right = b.row[sort.key];
-        const comparison =
-          typeof left === "number" && typeof right === "number"
-            ? left - right
-            : collator.compare(String(left ?? ""), String(right ?? ""));
-        if (comparison)
-          return sort.direction === "asc" ? comparison : -comparison;
-      }
-      return a.index - b.index;
-    });
+  const compare = (a: DataTableRowEntry, b: DataTableRowEntry) => {
+    for (const sort of sorts) {
+      const left = a.row[sort.key],
+        right = b.row[sort.key];
+      const comparison =
+        typeof left === "number" && typeof right === "number"
+          ? left - right
+          : collator.compare(String(left ?? ""), String(right ?? ""));
+      if (comparison)
+        return sort.direction === "asc" ? comparison : -comparison;
+    }
+    return a.index - b.index;
+  };
+  if (sorts.length && options.mode !== "server") rows = rows.sort(compare);
+  const structure =
+    options.tree ||
+    options.groupBy?.length ||
+    Object.keys(options.aggregations ?? {}).length
+      ? createDataTableStructure(
+          allRows,
+          rows,
+          structureColumns,
+          options,
+          compare,
+          !!query || filters.length > 0,
+        )
+      : undefined;
   const pageSize = Math.max(
     1,
     Math.floor(Number.isFinite(options.pageSize) ? options.pageSize! : 10),
@@ -181,6 +200,11 @@ export const createDataTableView = (
     page,
     pageSize,
     pageCount,
+    forcedExpandedRowIds: [] as string[],
+    expandedRowIds: [] as string[],
+    expandableRowIds: [] as string[],
+    parentRowIds: new Map<string, string | undefined>(),
+    ...structure,
   };
 };
 export const nextDataSort = (

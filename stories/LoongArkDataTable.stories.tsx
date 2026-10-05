@@ -138,3 +138,19 @@ export const ColumnLayout: StoryObj = {
   },
   render: () => <DataTableColumnsExample />,
 };
+
+import { DataTableStructureExample } from "../examples/react/DataTableStructureExample";
+export const GroupingAndTree: StoryObj = {
+  decorators: [withArkExamplePage],
+  parameters: {
+    heading: "Structured table",
+    pageWidth: 850,
+    docs: {
+      description: {
+        story:
+          "客户端多级分组与有限数值聚合、根节点分页、父ID树行、祖先上下文筛选、受控展开与虚拟化。",
+      },
+    },
+  },
+  render: () => <DataTableStructureExample />,
+};

@@ -7,8 +7,11 @@ const css = `
 [data-scope=data-table] [data-part=column-filter] :is(input,select) { box-sizing:border-box;width:100%;min-width:0;min-height:var(--lk-control-height-md);padding:var(--lk-space-component-xs) var(--lk-space-component-sm);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md);background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground);font:inherit; }
 [data-scope=data-table] [data-part=column-filter] :is(input,select):disabled { opacity:.5;cursor:not-allowed; }
 [data-scope=data-table] [data-part=column-filter] p { margin:0;color:var(--lk-color-semantic-destructive);font-size:var(--lk-typography-fontsize-sm);overflow-wrap:anywhere; }
-[data-scope=data-table] [data-virtualized=true] { --lk-data-table-column-count:1;overflow:auto;scrollbar-gutter:stable; }
+[data-scope=data-table] [data-virtualized=true] { --lk-data-table-column-count:1;--lk-data-table-structure-depth:0;overflow:auto;scrollbar-gutter:stable; }
 [data-scope=data-table] [data-virtualized=true] table:not([data-column-layout]) { table-layout:fixed;min-width:calc(var(--lk-control-height-md) * 4 * var(--lk-data-table-column-count) + var(--lk-control-height-sm) + var(--lk-space-component-sm) * 2); }
+/* 结构首列为缩进、展开及编辑图标留出空间，其他列保持原有密度。 */
+[data-scope=data-table] [data-virtualized=true]:has(tr[data-row-kind]) table:not([data-column-layout]) { min-width:calc(var(--lk-control-height-md) * 4 * var(--lk-data-table-column-count) + var(--lk-control-height-md) * 2 + var(--lk-data-table-structure-depth) * var(--lk-space-component-lg) + var(--lk-control-height-sm) + var(--lk-space-component-sm) * 2); }
+[data-scope=data-table] [data-virtualized=true]:has(tr[data-row-kind]) table:not([data-column-layout]) thead th:nth-child(2) { width:calc(var(--lk-control-height-md) * 6 + var(--lk-data-table-structure-depth) * var(--lk-space-component-lg)); }
 [data-scope=data-table] [data-virtualized=true] :is(th,td) { white-space:normal;overflow-wrap:anywhere; }
 [data-scope=data-table] [data-virtualized=true] thead th { position:sticky;top:0;z-index:3;background:var(--lk-color-semantic-background); }
 [data-scope=data-table] [data-virtualized=true] [data-part=cell-editor] { min-width:0;max-width:100%; }
@@ -114,6 +117,19 @@ const css = `
 [data-scope=data-table] table[data-column-layout] [data-part=cell-editor] { min-width:min(100%,calc(var(--lk-control-height-md) * 4)); }
 /* 标准视觉隐藏几何，保证列更新由读屏播报。 */
 [data-scope=data-table] [data-part=column-status] { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+
+[data-scope=data-table] [data-part=cell-layout] { --lk-row-depth:0;display:contents; }
+[data-scope=data-table] [data-part=cell-value] { display:contents; }
+[data-scope=data-table] [data-part=cell-layout][data-structured] { display:flex;align-items:center;gap:var(--lk-space-component-sm);padding-inline-start:calc(var(--lk-row-depth,0) * var(--lk-space-component-lg));min-width:0;text-align:start; }
+[data-scope=data-table] [data-structured] > [data-part=cell-value] { display:block;flex:1;min-width:0;overflow-wrap:anywhere; }
+[data-scope=data-table] [data-part=row-expand], [data-scope=data-table] [data-part=row-indent] { display:inline-flex;align-items:center;justify-content:center;flex:none;width:var(--lk-control-height-sm);height:var(--lk-control-height-sm); }
+[data-scope=data-table] [data-part=row-expand] { padding:0;border:0;border-radius:var(--lk-radius-sm);background:transparent;color:inherit;cursor:pointer; }
+[data-scope=data-table] [data-part=row-expand]:hover:not(:disabled) { background:var(--lk-color-semantic-muted); }
+[data-scope=data-table] [data-part=row-expand]:focus-visible { outline:2px solid var(--lk-color-semantic-ring);outline-offset:2px; }
+[data-scope=data-table] [data-part=row-expand]:disabled { cursor:not-allowed;opacity:.5; }
+[data-scope=data-table] [data-part=row-expand] svg { width:var(--lk-control-icon-sm);height:var(--lk-control-icon-sm); }
+[data-scope=data-table] [data-part=row-expand] svg[data-mirror-rtl]:dir(rtl) { transform:scaleX(-1); }
+[data-scope=data-table] tr[data-row-kind=group] { background:var(--lk-color-semantic-muted);font-weight:var(--lk-typography-fontweight-medium); }
 `;
 registerPrimitive(
   createPrimitive(

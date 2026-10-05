@@ -113,3 +113,16 @@ textarea 可设置原生 `rows`（默认3），Enter 换行，Ctrl/Command+Enter
 手动列宽使用原生 `colgroup` 和固定布局，长正文换行，窄屏局部横向滚动。四端 DataTableColumnsExample 及 ColumnLayout Story 展示真实拖动、键盘、RTL、冻结、受控拒绝、动态列和卸载。SSR 输出列宽与控件语义，不调用更新回调、不读取浏览器 DOM。原生 Safari 已完成四端明暗桌面 W3C 指针调整与键盘排序，8张实际列交互截图已审阅；见[专项验收](audits/2026-10-05/data-table-columns-safari/acceptance.json)。完整RTL、窄屏与真机验收仍开放。
 
 Firefox144.0.2的16项四端明暗、桌面/375px列交互用例及32张LTR/RTL实际截图已验收，见[列交互专项](audits/2026-10-05/data-table-columns-firefox/acceptance.json)。完整Firefox套件的排序键盘和既有焦点/阅读锚点仍有失败，专项通过不关闭平台清单。
+
+## 分组聚合与树形行
+
+`groupBy` 按字段形成客户端多级分组，`aggregations` 为列选择 `sum | average | min | max | count`。数值聚合忽略空值、字符串和非有限值；没有数值或结果溢出时为 `null`，`count` 计匹配数据行。先筛选再聚合，排序分别作用于组和同级数据行，聚合值参与组排序。分页按最外层组计算，组的可见子行不被拆到另页。分组字段可隐藏，仍按完整列声明校验；界面只显示明确配置的聚合结果；聚合列被移动到首列时，组标签同时包含该列结果。隐藏全部列仍在选择列提供展开控制和组标签。合成组行不可选择或编辑。
+
+`tree={{ parentKey: "parentId" }}` 使用现有标量行 ID 和父 ID；必须提供稳定且唯一的 `rowKey`，不复制业务嵌套结构。找不到父行的记录作为根，父子循环立即报错。筛选保留命中行的祖先并暂时展开这些祖先；此时展开按钮禁用，清空筛选后恢复原状态。客户端分页按根行计算并保留展开子树；排序保持父子关系，只对同级行应用。服务端树保留提供方顺序，提供方按根分页并包含本页所需子行；`totalRows` 表示总根数，不从当前页推断全量聚合。`groupBy` 与 `tree` 互斥；服务端模式不接受客户端分组配置。
+
+`expandedRowIds` / `onExpandedRowIdsChange` 提供受控展开，Vue 同时支持 `v-model:expandedRowIds` 和 `expandedRowIdsChange`；`defaultExpandedRowIds` 只在挂载时复制为非受控初始状态。组默认全部展开，树默认收起。使用 Kit 的 `dataTableGroupId([[columnKey,value], ...])` 生成不依赖可见位置的组 ID，数值和字符串的同形值互不混淆。筛选隐藏的展开状态保留，服务端尚未加载的 ID 也保留。调用方拒绝受控更新时按钮仍反映原状态。
+
+原生表格保留表头、checkbox 和编辑语义；展开按钮支持 Enter/Space，不宣称完整 ARIA treegrid 导航。选择当前页只作用于当前可见数据行，折叠不会清除选择，也不级联选择整组。首列显示逻辑方向缩进与 Lucide 展开图标，数值沿用列对齐。结构行参与既有可变高度纵向虚拟化；虚拟表格的行索引按当前结构页计算。折叠或结构更新移除焦点行时，恢复最近可见祖先或表格区域；外部已获得焦点时不会抢回。示例 `DataTableStructureExample` / Story `GroupingAndTree` 展示受控拒绝、动态数据、RTL、加载、编辑和卸载重建。
+
+
+结构行Linux验收范围与限制见[分组和树行验收](audits/2026-10-05/data-table-structure-linux/acceptance.json)。虚拟结构表格首列按有界深度为缩进和编辑图标留出空间，其他列维持原有密度，手动列宽仍遵守显式列宽配置。

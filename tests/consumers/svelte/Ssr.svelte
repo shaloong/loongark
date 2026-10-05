@@ -393,10 +393,49 @@
 {/each}
 <LoongArkDataTable
   label="SSR column layout"
-  data={[{id:"column",name:"Column SSR row"}]}
-  columns={[{key:"name",label:"Project <safe>",minWidth:120,maxWidth:480}]}
-  columnReorderable columnResizable loading
-  columnWidths={{name:220}}
-  onColumnKeysChange={()=>{throw Error("SSR must not change columns");}}
-  onColumnWidthsChange={()=>{throw Error("SSR must not resize columns");}}
+  data={[{ id: "column", name: "Column SSR row" }]}
+  columns={[
+    { key: "name", label: "Project <safe>", minWidth: 120, maxWidth: 480 },
+  ]}
+  columnReorderable
+  columnResizable
+  loading
+  columnWidths={{ name: 220 }}
+  onColumnKeysChange={() => {
+    throw Error("SSR must not change columns");
+  }}
+  onColumnWidthsChange={() => {
+    throw Error("SSR must not resize columns");
+  }}
+/>
+
+<LoongArkDataTable
+  label="SSR groups"
+  data={[
+    { id: "sr1", name: "SSR grouped row", team: "Team <safe>", budget: 2 },
+    {
+      id: "sr2",
+      name: "SSR second grouped row",
+      team: "Team <safe>",
+      budget: 3,
+    },
+  ]}
+  columns={[
+    { key: "name", label: "Project" },
+    { key: "team", label: "Team" },
+    { key: "budget", label: "Budget" },
+  ]}
+  groupBy={["team"]}
+  aggregations={{ budget: "sum" }}
+  onExpandedRowIdsChange={() => {
+    throw Error("SSR must not expand rows");
+  }}
+/>
+
+<LoongArkDataTable
+  label="SSR hidden columns"
+  data={[{ id: "sh1", team: "Hidden columns group" }]}
+  columns={[{ key: "team", label: "Team" }]}
+  columnKeys={[]}
+  groupBy={["team"]}
 />

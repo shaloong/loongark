@@ -52,6 +52,14 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${columnProps})));`
         : `console.log(renderToString(h(L.LoongArkDataTable,${columnProps})));`;
+  const structureProps =
+    "{label:'SSR groups',data:[{id:'sr1',name:'SSR grouped row',team:'Team <safe>',budget:2},{id:'sr2',name:'SSR second grouped row',team:'Team <safe>',budget:3}],columns:[{key:'name',label:'Project'},{key:'team',label:'Team'},{key:'budget',label:'Budget'}],groupBy:['team'],aggregations:{budget:'sum'},onExpandedRowIdsChange:()=>{throw Error('SSR must not expand rows')}}";
+  const structureScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${structureProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${structureProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${structureProps})));`;
   const queryScript =
     framework === "Vue"
       ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${queryProps})})));`
@@ -155,6 +163,11 @@ for (const [framework, script] of [
           tableScript +
           queryScript +
           columnScript +
+          structureScript +
+          structureScript.replace(
+            "label:'SSR groups'",
+            "label:'SSR hidden columns',columnKeys:[]",
+          ) +
           chartScript +
           interactiveChartScript +
           arkScript +
@@ -170,6 +183,17 @@ for (const [framework, script] of [
     { encoding: "utf8", timeout: 60000 },
   );
   assert.match(result.stdout, /data-part="batch-trigger"/);
+  assert.match(result.stdout, /Team: Team &lt;safe&gt; · 2 rows/);
+  assert.match(result.stdout, /data-row-kind="group"/);
+  assert.match(
+    result.stdout,
+    /data-part="row-expand"[^>]*aria-expanded="true"/,
+  );
+  assert.match(result.stdout, /SSR grouped row/);
+  assert.match(
+    result.stdout,
+    /aria-label="SSR hidden columns"[\s\S]*data-part="row-expand"/,
+  );
   assert.match(result.stdout, /aria-label="Move Project &lt;safe&gt; column"/);
   assert.match(
     result.stdout,

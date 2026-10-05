@@ -3,6 +3,7 @@ import {
   type DataTableColumnLabels,
   type DataTableColumnOptions,
 } from "./table-columns";
+import type { DataTableStructureLabels } from "./table-structure";
 import { resolveDataFilterLabels } from "./table-query";
 import {
   createDataTableView,
@@ -24,7 +25,8 @@ export interface DataTableSummary {
   page: number;
   pageCount: number;
 }
-export interface DataTableLabels extends DataTableColumnLabels {
+export interface DataTableLabels
+  extends DataTableColumnLabels, DataTableStructureLabels {
   filter: string;
   filterPlaceholder: string;
   filterColumn: (column: string) => string;
@@ -63,6 +65,12 @@ export interface DataTableLabels extends DataTableColumnLabels {
   batchEnable: (column: string) => string;
 }
 export interface DataTableProps extends DataTableColumnOptions {
+  groupBy?: readonly string[];
+  aggregations?: import("./table-structure").DataTableStructureOptions["aggregations"];
+  tree?: { parentKey: string };
+  expandedRowIds?: readonly string[];
+  defaultExpandedRowIds?: readonly string[];
+  onExpandedRowIdsChange?: (ids: string[]) => void;
   data: readonly DataRow[];
   columns: readonly DataColumn[];
   defaultColumnWidths?: Readonly<Record<string, number>>;
@@ -128,6 +136,14 @@ export const dataTableLabels = (
   empty: labels?.empty ?? "No results",
   previous: labels?.previous ?? "Previous",
   next: labels?.next ?? "Next",
+  expandRow: labels?.expandRow ?? ((name) => `Expand ${name}`),
+  collapseRow: labels?.collapseRow ?? ((name) => `Collapse ${name}`),
+  groupRow:
+    labels?.groupRow ??
+    ((column, value, count) =>
+      `${column}: ${value} · ${count} ${count === 1 ? "row" : "rows"}`),
+  filteredAncestors:
+    labels?.filteredAncestors ?? "Expanded to show matching descendants",
   loading: labels?.loading ?? "Loading rows…",
   retry: labels?.retry ?? "Retry",
   editCell: labels?.editCell ?? ((column, id) => `Edit ${column} for ${id}`),
@@ -241,13 +257,23 @@ export function dataTableView(props: DataTableProps, state: DataTableState) {
     ...visible.filter((column) => pins.get(column.key) === "end"),
   ];
   return {
-    ...createDataTableView(props.data, columns, {
-      ...state,
-      pageSize: props.pageSize,
-      rowKey: props.rowKey,
-      mode: props.mode,
-      totalRows: props.totalRows,
-    }),
+    ...createDataTableView(
+      props.data,
+      columns,
+      {
+        ...state,
+        pageSize: props.pageSize,
+        rowKey: props.rowKey,
+        mode: props.mode,
+        totalRows: props.totalRows,
+        groupBy: props.groupBy,
+        aggregations: props.aggregations,
+        tree: props.tree,
+        expandedRowIds: props.expandedRowIds,
+        defaultExpandedRowIds: props.defaultExpandedRowIds,
+      },
+      props.columns,
+    ),
     columns,
     query: state.query,
     pins,
@@ -517,7 +543,13 @@ export function createDataTableEditor(
   ) => {
     const entry = view.rows.find(({ id }) => id === edit.rowId);
     const column = view.columns.find(({ key }) => key === edit.columnKey);
-    if (!entry || !column || !canEdit(props, column)) return undefined;
+    if (
+      !entry ||
+      entry.structure?.kind === "group" ||
+      !column ||
+      !canEdit(props, column)
+    )
+      return undefined;
     return JSON.stringify([
       entry.row,
       view.rows.map(({ id }) => id),
@@ -565,7 +597,13 @@ export function createDataTableEditor(
       if (state?.pending) return;
       const entry = view.rows.find(({ id }) => id === rowId),
         column = view.columns.find(({ key }) => key === columnKey);
-      if (!entry || !column || !canEdit(props, column)) return;
+      if (
+        !entry ||
+        entry.structure?.kind === "group" ||
+        !column ||
+        !canEdit(props, column)
+      )
+        return;
       cancel();
       const next = {
         rowId,

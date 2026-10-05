@@ -2,6 +2,9 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  renderDataTableRowPrefix,
+  dataTableGroupText,
+  mountDataTableStructure,
   dataColumnWidth,
   reconcileDataColumnOrder,
   reconcileDataColumnWidths,
@@ -100,6 +103,13 @@ export const LoongArkChart = (props: ChartOptions) => {
   );
 };
 export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
+  const [internalExpanded, setExpanded] = createSignal<
+    readonly string[] | undefined
+  >(
+    props.defaultExpandedRowIds === undefined
+      ? undefined
+      : [...props.defaultExpandedRowIds],
+  );
   const [internalColumnKeys, setColumnKeys] = createSignal<readonly string[]>();
   const [internalColumnWidths, setColumnWidths] = createSignal<
     DataTableProps["columnWidths"]
@@ -110,6 +120,8 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
   );
   const columnProps = () => ({
     ...props,
+    expandedRowIds: props.expandedRowIds ?? internalExpanded(),
+    defaultExpandedRowIds: undefined,
     columnKeys: props.columnKeys ?? internalColumnKeys(),
     columnWidths: props.columnWidths ?? internalColumnWidths(),
   });
@@ -218,6 +230,18 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     props.onStateChange?.(next);
   };
   const view = createMemo(() => dataTableView(columnProps(), current()));
+  onMount(() =>
+    onCleanup(
+      mountDataTableStructure(
+        region,
+        () => ({ props: columnProps(), view: view() }),
+        (ids) => {
+          if (props.expandedRowIds === undefined) setExpanded([...ids]);
+          props.onExpandedRowIdsChange?.([...ids]);
+        },
+      ),
+    ),
+  );
   const virtualizer = createVirtualWindow(
     dataTableVirtualOptions(props, view()),
     (value) => setVirtualState(value),
@@ -253,7 +277,10 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
       view().allIds,
       props.mode,
     );
-  const pageIds = () => view().rows.map(({ id }) => id),
+  const pageIds = () =>
+      view()
+        .rows.filter((entry) => entry.structure?.kind !== "group")
+        .map(({ id }) => id),
     pageSelection = () => dataSelectionState(selected(), pageIds());
   createEffect(() => setDataSelectionMixed(pageInput, pageSelection().mixed));
   createEffect(() => {
@@ -535,7 +562,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
         data-part="root"
         ref={region}
         data-virtualized={props.virtualization ? "true" : undefined}
-        style={dataTableVirtualStyle(columnProps())}
+        style={dataTableVirtualStyle(columnProps(), view())}
         role="region"
         aria-label={label()}
         tabIndex={0}
@@ -555,7 +582,9 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
           aria-label={label()}
           aria-rowcount={
             props.virtualization && view().total > 0
-              ? view().total + 1
+              ? (props.tree || props.groupBy?.length
+                  ? view().rows.length
+                  : view().total) + 1
               : undefined
           }
         >
@@ -666,158 +695,262 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                       data-virtual-key={props.virtualization ? id : undefined}
                       aria-rowindex={
                         props.virtualization
-                          ? (view().page - 1) * view().pageSize +
+                          ? (props.tree || props.groupBy?.length
+                              ? 0
+                              : (view().page - 1) * view().pageSize) +
                             entry().virtualIndex +
                             2
                           : undefined
                       }
-                      data-selected={selected().includes(id) || undefined}
+                      data-row-id={id}
+                      data-row-kind={entry().structure?.kind}
+                      data-selected={
+                        (entry().structure?.kind !== "group" &&
+                          selected().includes(id)) ||
+                        undefined
+                      }
                     >
                       <td
                         data-pinned={view().pinSelection ? "start" : undefined}
                       >
-                        <label data-part="selection">
-                          <input
-                            type="checkbox"
-                            disabled={props.loading}
-                            aria-label={labels().selectRow(id)}
-                            checked={selected().includes(id)}
-                            onChange={(e) =>
-                              change(
-                                toggleDataSelection(
-                                  selected(),
-                                  [id],
-                                  e.currentTarget.checked,
-                                ),
-                                e.currentTarget,
-                                id,
-                              )
-                            }
-                          />
-                        </label>
+                        <Show
+                          when={entry().structure && !view().columns.length}
+                        >
+                          <div
+                            data-part="cell-layout"
+                            data-structured="true"
+                            style={{
+                              "--lk-row-depth": Math.min(
+                                entry().structure?.depth ?? 0,
+                                8,
+                              ),
+                            }}
+                          >
+                            <span
+                              innerHTML={renderDataTableRowPrefix(
+                                entry(),
+                                columnProps(),
+                                view(),
+                                labels(),
+                              )}
+                            />
+                            <Show when={entry().structure?.kind === "group"}>
+                              <div data-part="cell-value">
+                                {dataTableGroupText(
+                                  entry(),
+                                  { key: "", label: "" },
+                                  true,
+                                  labels(),
+                                  columnProps(),
+                                )}
+                              </div>
+                            </Show>
+                          </div>
+                        </Show>
+                        <Show when={entry().structure?.kind !== "group"}>
+                          <label data-part="selection">
+                            <input
+                              type="checkbox"
+                              disabled={props.loading}
+                              aria-label={labels().selectRow(id)}
+                              checked={selected().includes(id)}
+                              onChange={(e) =>
+                                change(
+                                  toggleDataSelection(
+                                    selected(),
+                                    [id],
+                                    e.currentTarget.checked,
+                                  ),
+                                  e.currentTarget,
+                                  id,
+                                )
+                              }
+                            />
+                          </label>
+                        </Show>
                       </td>
                       <For each={view().columns}>
-                        {(c) => (
+                        {(c, columnIndex) => (
                           <td
                             data-pinned={view().pins.get(c.key)}
                             data-align={c.align}
                           >
-                            {edit()?.rowId === id &&
-                            edit()?.columnKey === c.key ? (
-                              <div
-                                data-part="cell-editor"
-                                aria-busy={edit()?.pending || undefined}
+                            <div
+                              data-part="cell-layout"
+                              data-structured={
+                                (!!entry().structure && columnIndex() === 0) ||
+                                undefined
+                              }
+                              style={{
+                                "--lk-row-depth": Math.min(
+                                  entry().structure?.depth ?? 0,
+                                  8,
+                                ),
+                              }}
+                            >
+                              <Show
+                                when={entry().structure && columnIndex() === 0}
                               >
-                                {c.editor?.type === "textarea" ? (
-                                  <textarea
-                                    data-part="cell-input"
-                                    value={edit()?.draft ?? ""}
-                                    aria-label={labels().editCell(c.label, id)}
-                                    aria-invalid={!!edit()?.error || undefined}
-                                    aria-describedby={
-                                      edit()?.error ? editId : undefined
-                                    }
-                                    disabled={edit()?.pending}
-                                    rows={c.editor.rows ?? 3}
-                                  />
-                                ) : c.editor?.type === "select" ? (
-                                  <select
-                                    data-part="cell-input"
-                                    value={edit()?.draft ?? ""}
-                                    aria-label={labels().editCell(c.label, id)}
-                                    aria-invalid={!!edit()?.error || undefined}
-                                    aria-describedby={
-                                      edit()?.error ? editId : undefined
-                                    }
-                                    disabled={edit()?.pending}
+                                <span
+                                  innerHTML={renderDataTableRowPrefix(
+                                    entry(),
+                                    columnProps(),
+                                    view(),
+                                    labels(),
+                                  )}
+                                />
+                              </Show>
+                              <div data-part="cell-value">
+                                {entry().structure?.kind === "group" ? (
+                                  dataTableGroupText(
+                                    entry(),
+                                    c,
+                                    columnIndex() === 0,
+                                    labels(),
+                                    columnProps(),
+                                  )
+                                ) : edit()?.rowId === id &&
+                                  edit()?.columnKey === c.key ? (
+                                  <div
+                                    data-part="cell-editor"
+                                    aria-busy={edit()?.pending || undefined}
                                   >
-                                    {!(c.editor?.options ?? []).some(
-                                      (option) =>
-                                        option.value === edit()?.draft,
-                                    ) && (
-                                      <option
+                                    {c.editor?.type === "textarea" ? (
+                                      <textarea
+                                        data-part="cell-input"
                                         value={edit()?.draft ?? ""}
-                                        disabled
+                                        aria-label={labels().editCell(
+                                          c.label,
+                                          id,
+                                        )}
+                                        aria-invalid={
+                                          !!edit()?.error || undefined
+                                        }
+                                        aria-describedby={
+                                          edit()?.error ? editId : undefined
+                                        }
+                                        disabled={edit()?.pending}
+                                        rows={c.editor.rows ?? 3}
+                                      />
+                                    ) : c.editor?.type === "select" ? (
+                                      <select
+                                        data-part="cell-input"
+                                        value={edit()?.draft ?? ""}
+                                        aria-label={labels().editCell(
+                                          c.label,
+                                          id,
+                                        )}
+                                        aria-invalid={
+                                          !!edit()?.error || undefined
+                                        }
+                                        aria-describedby={
+                                          edit()?.error ? editId : undefined
+                                        }
+                                        disabled={edit()?.pending}
                                       >
-                                        {edit()?.draft || labels().emptyCell}
-                                      </option>
+                                        {!(c.editor?.options ?? []).some(
+                                          (option) =>
+                                            option.value === edit()?.draft,
+                                        ) && (
+                                          <option
+                                            value={edit()?.draft ?? ""}
+                                            disabled
+                                          >
+                                            {edit()?.draft ||
+                                              labels().emptyCell}
+                                          </option>
+                                        )}
+                                        {(c.editor?.options ?? []).map(
+                                          (option) => (
+                                            <option
+                                              value={option.value}
+                                              disabled={option.disabled}
+                                            >
+                                              {option.label}
+                                            </option>
+                                          ),
+                                        )}
+                                      </select>
+                                    ) : (
+                                      <input
+                                        data-part="cell-input"
+                                        dir={
+                                          c.editor?.type === "number"
+                                            ? "ltr"
+                                            : undefined
+                                        }
+                                        type={c.editor?.type ?? "text"}
+                                        step="any"
+                                        value={edit()?.draft ?? ""}
+                                        aria-label={labels().editCell(
+                                          c.label,
+                                          id,
+                                        )}
+                                        aria-invalid={
+                                          !!edit()?.error || undefined
+                                        }
+                                        aria-describedby={
+                                          edit()?.error ? editId : undefined
+                                        }
+                                        disabled={edit()?.pending}
+                                      />
                                     )}
-                                    {(c.editor?.options ?? []).map((option) => (
-                                      <option
-                                        value={option.value}
-                                        disabled={option.disabled}
+                                    <div data-part="cell-actions">
+                                      <button
+                                        data-part="cell-save"
+                                        type="button"
+                                        disabled={edit()?.pending}
                                       >
-                                        {option.label}
-                                      </option>
-                                    ))}
-                                  </select>
-                                ) : (
-                                  <input
-                                    data-part="cell-input"
-                                    dir={
-                                      c.editor?.type === "number"
-                                        ? "ltr"
-                                        : undefined
-                                    }
-                                    type={c.editor?.type ?? "text"}
-                                    step="any"
-                                    value={edit()?.draft ?? ""}
-                                    aria-label={labels().editCell(c.label, id)}
-                                    aria-invalid={!!edit()?.error || undefined}
-                                    aria-describedby={
-                                      edit()?.error ? editId : undefined
-                                    }
-                                    disabled={edit()?.pending}
-                                  />
-                                )}
-                                <div data-part="cell-actions">
+                                        {labels().save}
+                                      </button>
+                                      <button
+                                        data-part="cell-cancel"
+                                        type="button"
+                                      >
+                                        {labels().cancel}
+                                      </button>
+                                    </div>
+                                    {edit()?.pending && (
+                                      <span
+                                        data-part="cell-status"
+                                        role="status"
+                                      >
+                                        {labels().saving}
+                                      </span>
+                                    )}
+                                    {edit()?.error && (
+                                      <span
+                                        id={editId}
+                                        data-part="cell-error"
+                                        role="alert"
+                                      >
+                                        {edit()?.error}
+                                      </span>
+                                    )}
+                                  </div>
+                                ) : !batch().active &&
+                                  !batch().pending &&
+                                  editor.canEdit(props, c) ? (
                                   <button
-                                    data-part="cell-save"
+                                    data-part="cell-trigger"
+                                    data-row-id={id}
+                                    data-column-key={c.key}
                                     type="button"
-                                    disabled={edit()?.pending}
+                                    aria-label={`${labels().editCell(c.label, id)}: ${dataTableCellText(row(), c) || labels().emptyCell}`}
+                                    disabled={!!edit()?.pending}
                                   >
-                                    {labels().save}
+                                    {dataTableCellText(row(), c) ||
+                                      labels().emptyCell}
+                                    <LoongArkIcon
+                                      icon={controlIcons.pencil}
+                                      size="sm"
+                                    />
                                   </button>
-                                  <button data-part="cell-cancel" type="button">
-                                    {labels().cancel}
-                                  </button>
-                                </div>
-                                {edit()?.pending && (
-                                  <span data-part="cell-status" role="status">
-                                    {labels().saving}
-                                  </span>
-                                )}
-                                {edit()?.error && (
-                                  <span
-                                    id={editId}
-                                    data-part="cell-error"
-                                    role="alert"
-                                  >
-                                    {edit()?.error}
-                                  </span>
+                                ) : (
+                                  dataTableCellText(row(), c)
                                 )}
                               </div>
-                            ) : !batch().active &&
-                              !batch().pending &&
-                              editor.canEdit(props, c) ? (
-                              <button
-                                data-part="cell-trigger"
-                                data-row-id={id}
-                                data-column-key={c.key}
-                                type="button"
-                                aria-label={`${labels().editCell(c.label, id)}: ${dataTableCellText(row(), c) || labels().emptyCell}`}
-                                disabled={!!edit()?.pending}
-                              >
-                                {dataTableCellText(row(), c) ||
-                                  labels().emptyCell}
-                                <LoongArkIcon
-                                  icon={controlIcons.pencil}
-                                  size="sm"
-                                />
-                              </button>
-                            ) : (
-                              dataTableCellText(row(), c)
-                            )}
+                            </div>
                           </td>
                         )}
                       </For>
