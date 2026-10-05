@@ -137,6 +137,42 @@
     "不发布npm，不更新main"
   ],
   "deployment": {
-    "result": "awaiting-push"
+    "result": "passed",
+    "sourceCommit": "2574fdf02786cfe823e0b3c98b37af1ba7f4a2f5",
+    "runUrl": "https://github.com/shaloong/loongark/actions/runs/37274424741",
+    "completedAt": "2026-10-05T06:52:52Z",
+    "buildJob": 111648212232,
+    "deployJob": 111648911758,
+    "checks": [
+      "frozen install",
+      "verify",
+      "contracts",
+      "fresh Storybook build",
+      "coverage",
+      "publication and four-framework SSR",
+      "Svelte",
+      "static Storybook smoke",
+      "Pages deployment",
+      "published homepage/iframe/index with async Questionnaire Story"
+    ],
+    "ciBrowser": "Playwright Chromium 143.0.7499.4 build v1200; static smoke only, local visual tests use Chromium151",
+    "publishedUrl": "https://shaloong.github.io/loongark/",
+    "publishedHttpChecks": {
+      "homepage": 200,
+      "iframe.html": 200,
+      "index.json": 200
+    },
+    "publishedRequiredStories": [
+      "components-datatable--frozen",
+      "components-icon--basic",
+      "components-questionnaire--async-validation"
+    ],
+    "onlineVerifiedBy": "GitHub Actions runner; cloud direct Pages access restricted",
+    "smokeArtifact": {
+      "id": 11329687341,
+      "retentionDays": 14,
+      "expiresAt": "2026-10-19T06:52:31Z",
+      "processFilesCommitted": false
+    }
   }
 }

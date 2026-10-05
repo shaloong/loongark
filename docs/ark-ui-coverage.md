@@ -39,7 +39,7 @@ Svelte Frame 在写入文档前保存了旧 body，Portal 会挂到脱离文档�
 
 ## 高级能力仍需持续补齐
 
-公开 Ark 原生能力不代表所有 LoongArk 组合组件的高级场景已经全部交付。新版组件与原生 Drawer 已实现，继续处理组合模型的明确能力：DataTable 虚拟化/编辑、Chart 缩放/刷选/实时流、Questionnaire 复杂题型与服务校验、消息虚拟化。具体交付必须同步四端示例、逻辑回归和桌面/手机明暗截图；不通过一个布尔“完整”字段掩盖未验收场景。
+公开 Ark 原生能力不代表所有 LoongArk 组合组件的高级场景已经全部交付。新版组件与原生 Drawer 已实现，继续处理组合模型的明确能力：DataTable 虚拟化/编辑、Chart 缩放/刷选/实时流、Questionnaire 复杂题型、消息虚拟化。具体交付必须同步四端示例、逻辑回归和桌面/手机明暗截图；不通过一个布尔“完整”字段掩盖未验收场景。
 
 Linux 手工截图复核修正了裁剪图片顶对齐、手机默认裁剪框越出图片、拖拽命中区域被画成粗白条、分页首尾按钮高度不一致，以及 JSON 导航起点/装饰箭头错误显示焦点框。四端裁剪与 iframe 像素一致；JSON 分隔符空格和 Select 原生箭头有细微差异，保留实际像素对照，不声称四端完全逐像素相同。后续批次公开四端共同的 75 个 Context/ItemContext/Collection 控制 Hook，包括 useAsyncList、useListCollection、useListSelection。公开原生 Hook 仍不代表异步错误、取消、竞争请求等应用情景已经全部专项验收。
 
