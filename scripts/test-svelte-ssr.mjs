@@ -115,3 +115,5 @@ assert.doesNotMatch(html, /data-part="action-feedback"/);
 
 assert.match(html, /aria-label="SSR search"/);
 assert.match(html, /non-scaling-stroke/);
+
+assert.match(html, /name="typed\[row\]"/);

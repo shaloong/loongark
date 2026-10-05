@@ -327,3 +327,5 @@
     throw Error("SSR must not change range");
   }}
 />
+
+<LoongArkQuestionnaire label="SSR typed survey" questions={[{id:"typed",label:"SSR matrix",type:"matrix",rows:[{id:"row",label:"SSR row"}],options:[{value:"yes",label:"Yes"}],validateAsync:()=>{throw Error("SSR must not validate")}}]} defaultValue={{typed:{row:"yes"}}} />

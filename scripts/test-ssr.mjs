@@ -78,6 +78,8 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${questionnaireProps})));`
         : `console.log(renderToString(h(L.LoongArkQuestionnaire,${questionnaireProps})));`;
+  const typedQuestionProps = "{label:'SSR typed survey',questions:[{id:'typed',label:'SSR matrix',type:'matrix',rows:[{id:'row',label:'SSR row'}],options:[{value:'yes',label:'Yes'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{typed:{row:'yes'}},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const typedQuestionScript = framework === "Vue" ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})})));` : framework === "Solid" ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})));` : `console.log(renderToString(h(L.LoongArkQuestionnaire,${typedQuestionProps})));`;
   const serverProps =
     "{label:'SSR remote table',data:[{id:'remoteSSR',name:'SSR remote row',value:9}],columns:[{key:'name',label:'Remote project'},{key:'value',label:'Remote revenue'}],columnKeys:['value','name'],pinnedColumns:{start:['value'],end:['name']},mode:'server',totalRows:21,pageSize:2,state:{query:'not-matching',page:3,sort:{key:'value',direction:'asc'}},selectedIds:['off-page'],loading:true,error:'SSR remote failure',onRetry:()=>{throw Error('SSR must not retry')},onStateChange:()=>{throw Error('SSR must not change table state')},onSelectionChange:()=>{throw Error('SSR must not select')}}";
   const serverScript =
@@ -123,6 +125,7 @@ for (const [framework, script] of [
           arkScript +
           nextScript +
           questionnaireScript +
+          typedQuestionScript +
           serverScript +
           conversationScript +
           "process.exit(0);",
@@ -131,6 +134,7 @@ for (const [framework, script] of [
     { encoding: "utf8", timeout: 60000 },
   );
   assert.match(result.stdout, /data-part="batch-trigger"/);
+  assert.match(result.stdout, /name="typed\[row\]"/);
   assert.match(result.stdout, /data-part="range-start"/);
   assert.match(result.stdout, /data-part="inspect-category"/);
   assert.match(result.stdout, /aria-rowcount="1001"/);

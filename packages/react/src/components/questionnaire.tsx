@@ -1,5 +1,6 @@
 import {
   useState,
+  useMemo,
   useRef,
   useId,
   useLayoutEffect,
@@ -7,6 +8,10 @@ import {
   type HTMLAttributes,
 } from "react";
 import {
+  questionIncludes,
+  questionnaireFormEntries,
+  createQuestionControlRenderer,
+  mountQuestionControls,
   questionnaireVisibleQuestions,
   questionnaireValue,
   questionError,
@@ -98,6 +103,11 @@ export function LoongArkQuestionnaire({
     );
     setShowError(false);
   };
+  const [renderControl] = useState(createQuestionControlRenderer);
+  useLayoutEffect(() => restoreQuestionAnswers(root.current, latest.current.question, latest.current.value));
+  const changeRef = useRef(change);
+  changeRef.current = change;
+  useLayoutEffect(() => mountQuestionControls(root.current!, () => ({ ...latest.current, blocked: !!(disabled || submitting || completed) }), next => changeRef.current(next)), [disabled, submitting, completed]);
   const move = (next: number) => {
     validation.cancel();
     setPage(next);
@@ -141,6 +151,8 @@ export function LoongArkQuestionnaire({
           validationState.errors,
         )
       : "";
+  const controlHTML = question() ? renderControl(question(), current(), uid + "-description " + uid + "-error", !!err()) : "";
+  const controlMarkup = useMemo(() => ({ __html: controlHTML }), [controlHTML]);
   return (
     <form
       data-scope="questionnaire"
@@ -206,6 +218,8 @@ export function LoongArkQuestionnaire({
                   })
                 }
               />
+            ) : !["single", "multiple"].includes(question().type) ? (
+              <div data-part="advanced-answer" dangerouslySetInnerHTML={controlMarkup} />
             ) : (
               (question().options ?? []).map((o) => (
                 <label
@@ -214,7 +228,7 @@ export function LoongArkQuestionnaire({
                   data-selected={
                     (
                       question().type === "multiple"
-                        ? current()[question().id].includes(o.value)
+                        ? questionIncludes(current()[question().id], o.value)
                         : current()[question().id] === o.value
                     )
                       ? "true"
@@ -229,7 +243,7 @@ export function LoongArkQuestionnaire({
                     disabled={o.disabled}
                     checked={
                       question().type === "multiple"
-                        ? current()[question().id].includes(o.value)
+                        ? questionIncludes(current()[question().id], o.value)
                         : current()[question().id] === o.value
                     }
                     aria-required={question().required}
@@ -259,23 +273,7 @@ export function LoongArkQuestionnaire({
               {err()}
             </div>
           </fieldset>
-          {Object.entries(submitted())
-            .filter(
-              ([key]) => question().type === "text" || key !== question().id,
-            )
-            .flatMap((entry) =>
-              (typeof entry[1] === "string" ? [entry[1]] : entry[1]).map(
-                (answer) => (
-                  <input
-                    type="hidden"
-                    name={entry[0]}
-                    value={answer}
-                    disabled={blocked()}
-                    key={entry[0] + "-" + answer}
-                  />
-                ),
-              ),
-            )}
+          {questionnaireFormEntries(submitted(), question().type === "text" ? undefined : question().id).map(([name, answer], i) => <input type="hidden" name={name} value={answer} disabled={blocked()} key={name + "-" + i} />)}
           {error && (
             <div data-scope="questionnaire" data-part="error" role="alert">
               {error}

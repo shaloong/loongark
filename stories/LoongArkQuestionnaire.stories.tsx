@@ -1,3 +1,4 @@
+import type { StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import * as L from "@loongark/react";
 import { feedbackQuestions } from "../examples/shared/conversationDemo";
@@ -117,3 +118,6 @@ export const CallbackUpdates = {
   decorators: [withArkExamplePage],
   render: () => <CallbackSurvey />,
 };
+
+import { QuestionnaireTypesExample } from "../examples/react/QuestionnaireTypesExample";
+export const StructuredTypes: StoryObj = { render: () => <QuestionnaireTypesExample /> };

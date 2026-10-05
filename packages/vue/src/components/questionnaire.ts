@@ -7,8 +7,13 @@ import {
   type PropType,
   watchEffect,
   onBeforeUnmount,
+  onMounted,
 } from "vue";
 import {
+  questionIncludes,
+  questionnaireFormEntries,
+  createQuestionControlRenderer,
+  mountQuestionControls,
   questionnaireVisibleQuestions,
   questionnaireValue,
   questionError,
@@ -99,6 +104,11 @@ export const LoongArkQuestionnaire = defineComponent({
       nextTick(() => restoreQuestionAnswers(root.value, question(), current()));
       showError.value = false;
     };
+    const renderControl = createQuestionControlRenderer();
+    watchEffect(() => { const q = question(), v = current(); nextTick(() => restoreQuestionAnswers(root.value, q, v)); });
+    let disposeControls: (() => void) | undefined;
+    onBeforeUnmount(() => disposeControls?.());
+    onMounted(() => { disposeControls = mountQuestionControls(root.value!, () => ({ question: question(), value: current(), blocked: !!(blocked() || p.completed) }), change); });
     const move = (next: number) => {
       validation.cancel();
       page.value = next;
@@ -211,6 +221,8 @@ export const LoongArkQuestionnaire = defineComponent({
                                 [q.id]: (e.target as HTMLTextAreaElement).value,
                               }),
                           })
+                        : !["single", "multiple"].includes(q.type)
+                          ? h("div", { "data-part": "advanced-answer", innerHTML: renderControl(q, current(), uid + "-description " + uid + "-error", !!err) })
                         : (q.options ?? []).map((o) =>
                             h(
                               "label",
@@ -218,7 +230,7 @@ export const LoongArkQuestionnaire = defineComponent({
                                 ...part("option"),
                                 "data-selected": (
                                   q.type === "multiple"
-                                    ? v[q.id].includes(o.value)
+                                    ? questionIncludes(v[q.id], o.value)
                                     : v[q.id] === o.value
                                 )
                                   ? "true"
@@ -235,7 +247,7 @@ export const LoongArkQuestionnaire = defineComponent({
                                   disabled: o.disabled,
                                   checked:
                                     q.type === "multiple"
-                                      ? v[q.id].includes(o.value)
+                                      ? questionIncludes(v[q.id], o.value)
                                       : v[q.id] === o.value,
                                   "aria-required": q.required,
                                   "aria-invalid": err ? "true" : undefined,
@@ -261,19 +273,7 @@ export const LoongArkQuestionnaire = defineComponent({
                       ),
                     ],
                   ),
-                  ...Object.entries(submitted())
-                    .filter(([key]) => q.type === "text" || key !== q.id)
-                    .flatMap(([name, answer]) =>
-                      (typeof answer === "string" ? [answer] : answer).map(
-                        (value) =>
-                          h("input", {
-                            type: "hidden",
-                            name,
-                            value,
-                            disabled: blocked(),
-                          }),
-                      ),
-                    ),
+                  ...questionnaireFormEntries(submitted(), q.type === "text" ? undefined : q.id).map(([name, value]) => h("input", { type: "hidden", name, value, disabled: blocked() })),
                   p.error &&
                     h("div", { ...part("error"), role: "alert" }, p.error),
                   validationState.value.pending &&

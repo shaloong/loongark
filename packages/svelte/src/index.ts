@@ -883,7 +883,7 @@ export * from "./components/ark-next";
 export * from "./components/drawer";
 export * from "./components/ark-controls";
 
-export type { Question, QuestionOption, QuestionnaireOptions, QuestionnaireValue } from "@loongark/kit";
+export type { Question, QuestionRow, QuestionAnswer, QuestionOption, QuestionnaireOptions, QuestionnaireValue } from "@loongark/kit";
 
 export type { DataTableState, DataTableLabels, DataTableSummary, DataRow, DataColumn, DataSort } from "@loongark/kit";
 

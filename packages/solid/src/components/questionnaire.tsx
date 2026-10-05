@@ -1,13 +1,19 @@
 import {
   createSignal,
+  createMemo,
   createUniqueId,
   createEffect,
   onCleanup,
+  onMount,
   splitProps,
   For,
   type JSX,
 } from "solid-js";
 import {
+  questionIncludes,
+  questionnaireFormEntries,
+  createQuestionControlRenderer,
+  mountQuestionControls,
   questionnaireVisibleQuestions,
   questionnaireValue,
   questionError,
@@ -55,15 +61,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
     [page, setPage] = createSignal(0),
     [showError, setShowError] = createSignal(false);
   const uid = createUniqueId();
-  let root!: HTMLFormElement,
-    focusNext = false;
-  createEffect(() => {
-    page();
-    if (focusNext) {
-      focusNext = false;
-      focusQuestion(root);
-    }
-  });
+  let root!: HTMLFormElement;
   const current = () => questionnaireValue(p.questions, p.value ?? internal());
   const visible = () => questionnaireVisibleQuestions(p.questions, current());
   const submitted = () => questionnaireValue(visible(), current());
@@ -92,11 +90,13 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
     queueMicrotask(() => restoreQuestionAnswers(root, question(), current()));
     setShowError(false);
   };
+  const renderControl = createQuestionControlRenderer();
+  createEffect(() => restoreQuestionAnswers(root, question(), current()));
+  onMount(() => { const dispose = mountQuestionControls(root, () => ({ question: question(), value: current(), blocked: !!(blocked() || p.completed) }), change); onCleanup(dispose); });
   const move = (next: number) => {
     validation.cancel();
     setPage(next);
     setShowError(false);
-    focusNext = true;
     queueMicrotask(() => focusQuestion(root));
   };
   const submit = async (event: SubmitEvent) => {
@@ -131,6 +131,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
     showError() && question()
       ? questionError(question(), current(), p, validationState().errors)
       : "";
+  const controlHTML = createMemo(() => question() ? renderControl(question(), current(), uid + "-description " + uid + "-error", !!err()) : "");
   return (
     <form
       data-scope="questionnaire"
@@ -195,6 +196,8 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
                   })
                 }
               />
+            ) : !["single", "multiple"].includes(question().type) ? (
+              <div data-part="advanced-answer" innerHTML={controlHTML()} />
             ) : (
               <For each={question().options ?? []}>
                 {(o) => (
@@ -204,7 +207,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
                     data-selected={
                       (
                         question().type === "multiple"
-                          ? current()[question().id].includes(o.value)
+                          ? questionIncludes(current()[question().id], o.value)
                           : current()[question().id] === o.value
                       )
                         ? "true"
@@ -220,7 +223,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
                       disabled={o.disabled}
                       checked={
                         question().type === "multiple"
-                          ? current()[question().id].includes(o.value)
+                          ? questionIncludes(current()[question().id], o.value)
                           : current()[question().id] === o.value
                       }
                       aria-required={question().required}
@@ -251,28 +254,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
               {err()}
             </div>
           </fieldset>
-          {
-            <For
-              each={Object.entries(submitted()).filter(
-                ([key]) => question().type === "text" || key !== question().id,
-              )}
-            >
-              {(entry) => (
-                <For
-                  each={typeof entry[1] === "string" ? [entry[1]] : entry[1]}
-                >
-                  {(answer) => (
-                    <input
-                      type="hidden"
-                      name={entry[0]}
-                      value={answer}
-                      disabled={blocked()}
-                    />
-                  )}
-                </For>
-              )}
-            </For>
-          }
+          <For each={questionnaireFormEntries(submitted(), question().type === "text" ? undefined : question().id)}>{([name, answer]) => <input type="hidden" name={name} value={answer} disabled={blocked()} />}</For>
           {p.error && (
             <div data-scope="questionnaire" data-part="error" role="alert">
               {p.error}

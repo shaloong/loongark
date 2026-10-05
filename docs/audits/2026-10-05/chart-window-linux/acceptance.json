@@ -150,5 +150,10 @@
     "工具提示适用于原生SVG的点与柱，完整可访问检查使用分类选择器；缺失值保留No data。",
     "系统 Chromium 验收不等同于固定浏览器、Windows、真实手机或跨浏览器。"
   ],
-  "evidence": "临时图像、联系表、测量与日志保存在忽略目录 .artifacts/advanced-completion，Git只存本摘要及已审阅回归基线。"
+  "evidence": "临时图像、联系表、测量与日志保存在忽略目录 .artifacts/advanced-completion，Git只存本摘要及已审阅回归基线。",
+  "pages": {
+    "head": "1477d3d1112011fbda153b6d60792fb683b92b75",
+    "run": "https://github.com/shaloong/loongark/actions/runs/37308441488",
+    "result": "success"
+  }
 }

@@ -10,6 +10,7 @@ const child = spawn(
     "tests/data-table-batch.spec.ts",
     "tests/virtualization.spec.ts",
     "tests/chart-interaction.spec.ts",
+    "tests/questionnaire-types.spec.ts",
     "--project=chromium",
     "--workers=2",
   ],

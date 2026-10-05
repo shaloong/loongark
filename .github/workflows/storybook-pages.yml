@@ -79,7 +79,7 @@ jobs:
                           content = response.read()
                       if path == 'index.json':
                           entries = json.loads(content)['entries']
-                          assert all(story in entries for story in ['components-datatable--frozen', 'components-icon--basic', 'components-questionnaire--async-validation', 'components-datatable--editing', 'components-datatable--complex-editors', 'components-datatable--batch-editing', 'components-datatable--virtualized', 'components-messagescroller--virtualized'])
+                          assert all(story in entries for story in ['components-datatable--frozen', 'components-icon--basic', 'components-questionnaire--async-validation', 'components-datatable--editing', 'components-datatable--complex-editors', 'components-datatable--batch-editing', 'components-datatable--virtualized', 'components-messagescroller--virtualized', 'components-chart--zoom-and-brush', 'components-questionnaire--structured-types'])
                   print('Published Storybook homepage, iframe and Story index verified:', base)
                   break
               except Exception:

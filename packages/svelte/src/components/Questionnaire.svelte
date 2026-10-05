@@ -1,8 +1,12 @@
 <script lang="ts">
-  import { tick, untrack, onDestroy } from "svelte";
+  import { tick, untrack, onDestroy, onMount } from "svelte";
   import type { HTMLFormAttributes } from "svelte/elements";
   import {
-    questionnaireVisibleQuestions,
+    questionIncludes,
+  questionnaireFormEntries,
+  createQuestionControlRenderer,
+  mountQuestionControls,
+  questionnaireVisibleQuestions,
     questionnaireValue,
     questionError,
     createQuestionnaireValidationController,
@@ -100,6 +104,9 @@
     });
     showError = false;
   }
+  const renderControl = createQuestionControlRenderer();
+  $effect(() => { const q = question, v = current; tick().then(() => restoreQuestionAnswers(root, q, v)); });
+  onMount(() => mountQuestionControls(root, () => ({ question, value: current, blocked: !!(blocked || completed) }), change));
   async function move(next: number) {
     validation.cancel();
     page = next;
@@ -182,13 +189,15 @@
             maxlength={question.maxLength}
             oninput={(e) =>
               change({ ...current, [question.id]: e.currentTarget.value })}
-          />{:else}
+          />{:else if !["single", "multiple"].includes(question.type)}
+          <div data-part="advanced-answer">{@html renderControl(question, current, uid + "-description " + uid + "-error", !!err)}</div>
+          {:else}
           {#each question.options ?? [] as o}<label
               data-scope="questionnaire"
               data-part="option"
               data-selected={(
                 question.type === "multiple"
-                  ? current[question.id].includes(o.value)
+                  ? questionIncludes(current[question.id], o.value)
                   : current[question.id] === o.value
               )
                 ? "true"
@@ -200,7 +209,7 @@
                 value={o.value}
                 disabled={o.disabled}
                 checked={question.type === "multiple"
-                  ? current[question.id].includes(o.value)
+                  ? questionIncludes(current[question.id], o.value)
                   : current[question.id] === o.value}
                 aria-required={question.required}
                 aria-invalid={err ? "true" : undefined}
@@ -226,12 +235,7 @@
         </div>
       </fieldset>
     {/key}
-    {#each Object.entries(submittedValue).filter(([key]) => question.type === "text" || key !== question.id) as [name, answer]}{#each typeof answer === "string" ? [answer] : answer as text}<input
-          type="hidden"
-          {name}
-          value={text}
-          disabled={blocked}
-        />{/each}{/each}
+    {#each questionnaireFormEntries(submittedValue, question.type === "text" ? undefined : question.id) as [name, answer]}<input type="hidden" {name} value={answer} disabled={blocked} />{/each}
     {#if error}<div data-scope="questionnaire" data-part="error" role="alert">
         {error}
       </div>{/if}

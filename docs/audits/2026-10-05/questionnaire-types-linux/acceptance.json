@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-05",
+  "branch": "develop",
+  "base": "1477d3d1112011fbda153b6d60792fb683b92b75",
+  "scope": [
+    "四端 number/date/select/matrix/ranking 题型、原生表单与窄屏排版",
+    "边界/步长/日历校验、矩阵与排序归一化、受控拒绝与稳定输入节点",
+    "键盘排序、边界焦点、冻结异步快照、卸载取消与 SSR"
+  ],
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "platform": "Linux",
+    "browser": "system Chromium 151.0.7922.173",
+    "playwright": "1.57.0"
+  },
+  "validation": {
+    "verify": "passed",
+    "contracts": "passed including floating step, leap dates, stale/disabled matrix keys, ranking reconciliation, form entries and frozen async maps",
+    "storybook": "fresh passed",
+    "coverage": "115 families / 304 Story / 790 public LoongArk values per framework / 203 examples",
+    "publicationAndSSR": "passed; four-framework matrix native radio names and no validation during SSR",
+    "svelte": "0 errors, 2 existing warnings",
+    "frameworks": "104 passed, all 203 examples run; includes 16 structured-type combinations",
+    "spacingFollowup": "After narrow ranking layout correction, fresh verify/contracts/Storybook/publication/Svelte, rebuilt all examples and 16 structured-type combinations passed",
+    "affectedE2E": "15 passed",
+    "visual": "118 passed, --update-snapshots=none; 110 previous Linux + 8 reviewed new Linux baselines",
+    "axeAndOverflow": "16 combinations: 0 violations and no page overflow"
+  },
+  "manualReview": {
+    "images": "8 complete Story originals, 1280/375 light/dark, plus corrected narrow ranking originals; 32 framework images via contact sheets",
+    "observations": "矩阵每行独立语义、长标签换行与选中/禁用对比一致。手机排序按钮原先挤压标签，已改为标签下方，避免普通单词断开；桌面保持横向布局。修正 React/Solid innerHTML 重建导致的小数连续输入位置丢失；修正 Solid 导航焦点意外订阅答案更新而回到首项。",
+    "fourFrameworkComparisons": "24 comparisons (matrix/ranking × light/dark × 1280/375 × Vue/Solid/Svelte vs React): 0 different pixels after narrow layout correction",
+    "newLinuxBaselines": 8,
+    "windowsBaselines": "unchanged"
+  },
+  "limitations": [
+    "日期保留平台原生输入/日历外观，本批没有跨浏览器或真实手机验收。",
+    "排序初始完整顺序就是合法答案，不包含业务确认、打分或拖拽排序；排序以原生按钮提供完整键盘路径。",
+    "表单矩阵采用 question[row] 名称，服务端解析规则由调用方实现；条件隐藏值只保留编辑状态。"
+  ],
+  "evidence": "过程截图、联系表、像素测量与日志只在忽略目录 .artifacts/advanced-completion；Git仅保留本摘要与已审阅回归基线。"
+}
