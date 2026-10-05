@@ -2,6 +2,9 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  createDataTableBatchEditor,
+  renderDataTableBatchMarkup,
+  mountDataTableBatch,
   dataTableCellText,
   createDataTableEditor,
   mountDataTableEditor,
@@ -125,6 +128,7 @@ export const LoongArkDataTable = defineComponent({
     error: String,
     onRetry: Function as PropType<() => void>,
     onCellCommit: Function as PropType<DataTableProps["onCellCommit"]>,
+    onBatchCommit: Function as PropType<DataTableProps["onBatchCommit"]>,
   },
   emits: {
     stateChange: (state: DataTableState) => !!state,
@@ -134,6 +138,22 @@ export const LoongArkDataTable = defineComponent({
   },
   setup(props, { emit }) {
     const region = ref<HTMLDivElement>();
+    const batchHost = ref<HTMLDivElement>();
+    const batchEditor = createDataTableBatchEditor((value) => {
+      batch.value = value;
+    });
+    const batch = ref(batchEditor.state);
+    let stopBatch: (() => void) | undefined;
+    onMounted(() => {
+      if (batchHost.value)
+        stopBatch = mountDataTableBatch(
+          batchHost.value,
+          batchEditor,
+          () => props,
+          selected,
+        );
+    });
+    onBeforeUnmount(() => stopBatch?.());
     const editId = useId(),
       edit = ref<DataTableEditState>();
     const editor = createDataTableEditor((value) => {
@@ -186,6 +206,11 @@ export const LoongArkDataTable = defineComponent({
         view.value.allIds,
         props.mode,
       );
+    watchEffect(() => {
+      void batch.value;
+      void props.loading;
+      batchEditor.sync(props, selected());
+    });
     const pageIds = () => view.value.rows.map(({ id }) => id),
       pageSelection = () => dataSelectionState(selected(), pageIds());
     watchEffect(() =>
@@ -270,6 +295,17 @@ export const LoongArkDataTable = defineComponent({
                   : null,
               ])
             : null,
+          h("div", {
+            ref: batchHost,
+            "data-part": "batch-editor",
+            hidden: !props.onBatchCommit,
+            innerHTML: renderDataTableBatchMarkup(
+              props,
+              ids,
+              batch.value,
+              editId,
+            ),
+          }),
           h(
             "div",
             {

@@ -1,0 +1,203 @@
+{
+  "date": "2026-10-05",
+  "branch": "develop",
+  "base": "3b8fb688b80d6af0b1835642165ef4475cd8ed62",
+  "scope": [
+    "四端原子批量变更、共享字段解析与逐行校验",
+    "只提交实际变化的冻结快照；异常/拒绝保留草稿；取消和迟到结果隔离",
+    "源数据/选择/配置/校验器变化取消；接受新数据对象后同步撤销；单级冲突安全撤销",
+    "原生表单、键盘、错误关联与焦点恢复；共享Token布局与四端示例"
+  ],
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "platform": "Linux",
+    "browser": "system Chromium 151.0.7922.173",
+    "playwright": "1.57.0"
+  },
+  "validation": {
+    "verify": "passed",
+    "contracts": "passed, including replacement props / failed undo / escaped markup",
+    "storybook": "fresh passed",
+    "coverage": "115 families / 300 Story / 790 public values per framework / 191 examples",
+    "publicationAndSSR": "passed; batch callbacks never invoked during SSR",
+    "svelte": "0 errors, 2 existing warnings",
+    "frameworks": "56 passed, including 16 batch + 16 complex editors + 16 date paste + 8 consumers/examples",
+    "affectedE2E": "9 passed",
+    "existingVisual": "94 passed, no baseline update",
+    "batchAxeAndOverflow": "16 combinations: 0 violations, no page overflow",
+    "visualFinal": "98 passed, --update-snapshots=none"
+  },
+  "manualReview": {
+    "images": "16 framework screenshots via four contact sheets; 4 complete Story screenshots reviewed at 1280/375 and light/dark",
+    "observations": "字段开关与原生字段对齐；批量面板按容器宽度换行，手机纵向展示，错误文字换行不溢出；字段关联错误且焦点返回对应字段；表格滚动仍在内部。",
+    "fourFrameworkComparisons": [
+      {
+        "mode": "light",
+        "width": 1280,
+        "framework": "vue",
+        "differentPixels": 4,
+        "maxChannelDifference": 1,
+        "bounds": [
+          24,
+          636,
+          26,
+          639
+        ]
+      },
+      {
+        "mode": "light",
+        "width": 1280,
+        "framework": "solid",
+        "differentPixels": 23,
+        "maxChannelDifference": 2,
+        "bounds": [
+          24,
+          306,
+          30,
+          639
+        ]
+      },
+      {
+        "mode": "light",
+        "width": 1280,
+        "framework": "svelte",
+        "differentPixels": 14,
+        "maxChannelDifference": 1,
+        "bounds": [
+          24,
+          285,
+          30,
+          639
+        ]
+      },
+      {
+        "mode": "light",
+        "width": 375,
+        "framework": "vue",
+        "differentPixels": 51,
+        "maxChannelDifference": 2,
+        "bounds": [
+          24,
+          272,
+          27,
+          514
+        ]
+      },
+      {
+        "mode": "light",
+        "width": 375,
+        "framework": "solid",
+        "differentPixels": 3,
+        "maxChannelDifference": 1,
+        "bounds": [
+          25,
+          511,
+          26,
+          514
+        ]
+      },
+      {
+        "mode": "light",
+        "width": 375,
+        "framework": "svelte",
+        "differentPixels": 43,
+        "maxChannelDifference": 1,
+        "bounds": [
+          24,
+          272,
+          144,
+          415
+        ]
+      },
+      {
+        "mode": "dark",
+        "width": 1280,
+        "framework": "vue",
+        "differentPixels": 40,
+        "maxChannelDifference": 2,
+        "bounds": [
+          24,
+          306,
+          984,
+          639
+        ]
+      },
+      {
+        "mode": "dark",
+        "width": 1280,
+        "framework": "solid",
+        "differentPixels": 15,
+        "maxChannelDifference": 1,
+        "bounds": [
+          24,
+          284,
+          125,
+          341
+        ]
+      },
+      {
+        "mode": "dark",
+        "width": 1280,
+        "framework": "svelte",
+        "differentPixels": 4,
+        "maxChannelDifference": 1,
+        "bounds": [
+          24,
+          636,
+          26,
+          639
+        ]
+      },
+      {
+        "mode": "dark",
+        "width": 375,
+        "framework": "vue",
+        "differentPixels": 60,
+        "maxChannelDifference": 1,
+        "bounds": [
+          24,
+          273,
+          146,
+          514
+        ]
+      },
+      {
+        "mode": "dark",
+        "width": 375,
+        "framework": "solid",
+        "differentPixels": 25,
+        "maxChannelDifference": 1,
+        "bounds": [
+          24,
+          302,
+          146,
+          496
+        ]
+      },
+      {
+        "mode": "dark",
+        "width": 375,
+        "framework": "svelte",
+        "differentPixels": 46,
+        "maxChannelDifference": 1,
+        "bounds": [
+          24,
+          273,
+          27,
+          496
+        ]
+      }
+    ],
+    "newLinuxBaselines": 4,
+    "windowsBaselines": "unchanged",
+    "comparisonLimit": "原生控件/焦点边缘存在少量像素差异，保留实际差异计数，不宣称逐像素完全一致。"
+  },
+  "limitations": [
+    "调用方仍负责服务端原子事务与更新 data；组件一次回调不等同于服务器事务证明。",
+    "撤销为最近一次接受批次，行发生任何外部改动时不可覆盖；value undefined 表示恢复不存在的键。",
+    "服务端只能编辑 data 已加载且完整提供的选中行；未加载选择会禁用入口。",
+    "系统 Chromium 与固定 Playwright 浏览器、Windows 不等同。"
+  ],
+  "evidence": "过程截图/联系表/日志只保存 .artifacts/advanced-completion；Git只保存本摘要与审阅基线"
+}

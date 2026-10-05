@@ -118,8 +118,23 @@
     />
     <LoongArkDataTable
       data={[{ id: "a", name: "Alpha" }]}
-      columns={[{ key: "name", label: "Name", editor: { validate: () => { throw Error("SSR must not validate edit"); } } }]}
-      onCellCommit={() => { throw Error("SSR must not save edit"); }}
+      columns={[
+        {
+          key: "name",
+          label: "Name",
+          editor: {
+            validate: () => {
+              throw Error("SSR must not validate edit");
+            },
+          },
+        },
+      ]}
+      onBatchCommit={() => {
+        throw Error("SSR must not save batch");
+      }}
+      onCellCommit={() => {
+        throw Error("SSR must not save edit");
+      }}
       defaultSelectedIds={["a", "missing"]}
       onSelectionChange={() => {
         throw Error("SSR must not emit selection updates");

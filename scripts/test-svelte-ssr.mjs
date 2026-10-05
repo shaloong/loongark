@@ -29,6 +29,7 @@ const { default: component } = await import(
   pathToFileURL(resolve("tests/consumer-dist/svelte-ssr/index.mjs")).href
 );
 const html = render(component).body;
+assert.match(html, /data-part="batch-trigger"/);
 assert.match(
   html,
   /<input(?=[^>]*name="assigned")(?=[^>]*value="alpha")[^>]*>/,

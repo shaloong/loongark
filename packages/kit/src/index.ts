@@ -74,3 +74,5 @@ export * from "./conversation-actions";
 export * from "./conversation-focus";
 
 export * from "./icon";
+
+export * from "./table-batch";

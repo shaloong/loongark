@@ -103,3 +103,8 @@ export const Editing: StoryObj = { render: () => <DataTableEditExample /> };
 export const ComplexEditors: StoryObj = {
   render: () => <DataTableComplexEditorsExample />,
 };
+
+import { DataTableBatchExample } from "../examples/react/DataTableBatchExample";
+export const BatchEditing: StoryObj = {
+  render: () => <DataTableBatchExample />,
+};

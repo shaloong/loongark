@@ -70,3 +70,13 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 `columns[].editor.type` 增加 `select` 和 `textarea`。select 使用 `options: readonly {value:string,label:string,disabled?:boolean}[]`，显示 label，保存稳定字符串 value；重复 value 明确报错，无可用选项时只读。当前值未知或已禁用时仍显示旧值，进入编辑后必须选可用项才能保存；不会静默改为第一项。`labels.invalidOption` 支持本地化非法选项错误。选项、禁用状态或行数据变化中止草稿及待处理提交。
 
 textarea 可设置原生 `rows`（默认3），Enter 换行，Ctrl/Command+Enter 保存；select 保留原生方向键和 Enter 行为，用保存按钮或 Ctrl/Command+Enter 提交。Escape 取消，组合输入时不拦截按键，Tab 只移动焦点。两者复用已有异步互斥、错误关联、外部焦点保护及卸载清理，SSR 不触发业务回调。DataTableComplexEditorsExample 与 ComplexEditors Story 提供真实多行及离散选项编辑；组件不内置业务富文本格式或远端选项服务。
+
+## 批量编辑与撤销
+
+提供 `onBatchCommit({ changes, signal, operation })` 启用选择区的批量面板。每个变更包含 `rowId`、`columnKey`、`value`、`previousValue` 和冻结的原始 `row`；`operation` 为 `apply` 或 `undo`。回调一次接收完整、只包含实际变化的只读变更集；调用方负责事务提交并更新 `data`，返回错误文字或抛错会保留草稿。组件不会逐行调用 `onCellCommit`，也不会自动访问接口。
+
+先勾选需要改变的字段，再输入统一的新值。选择、数值和多行字段复用单格的解析与校验，所有选中行通过校验后才调用一次回调。空字符串是文字字段的有效草稿，未勾选字段不修改。数值必须有限，选择必须是可用选项。Ctrl/Command+Enter 提交，Escape 或 Cancel 取消，包括已经开始的请求；取消不依赖服务是否及时响应 `signal`，迟到结果不会重开面板。
+
+支持跨客户端分页选择；服务端模式只能编辑当前已加载且完整提供给 `data` 的选中行，选中缺失行时按钮不可用。行身份字段和隐藏列不参与编辑。选择集合、选中行、字段配置、校验器、提交回调或 loading 改变会取消过期事务；已接受且与变更集完全吻合的源数据更新允许正常完成。
+
+最近一次接受的批次可撤销；撤销仍通过同一个可取消回调，以逆向变更集提交。源数据需要完整吻合该批次接受后的行快照，否则禁用撤销，避免覆盖调用方后续修改。`value: undefined` 表示恢复原来不存在的键，调用方应删除该键。回调拒绝撤销时保留撤销机会。撤销为单级，并且不是跨刷新持久化历史。`labels` 支持批量动作、计数、字段开关、冲突和空变更说明的本地化。

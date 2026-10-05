@@ -2,6 +2,9 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  createDataTableBatchEditor,
+  renderDataTableBatchMarkup,
+  mountDataTableBatch,
   dataTableCellText,
   createDataTableEditor,
   mountDataTableEditor,
@@ -68,6 +71,19 @@ export const LoongArkChart = (props: ChartOptions) => {
 export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
   let region!: HTMLDivElement;
   const editId = createUniqueId();
+  let batchHost!: HTMLDivElement;
+  const batchEditor = createDataTableBatchEditor((value) => setBatch(value));
+  const [batch, setBatch] = createSignal(batchEditor.state);
+  onMount(() =>
+    onCleanup(
+      mountDataTableBatch(batchHost, batchEditor, () => props, selected),
+    ),
+  );
+  createEffect(() => {
+    batch();
+    props.loading;
+    batchEditor.sync(props, selected());
+  });
   const [edit, setEdit] = createSignal<DataTableEditState>();
   const editor = createDataTableEditor(setEdit);
   onMount(() =>
@@ -173,6 +189,17 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
           </Show>
         </div>
       </Show>
+      <div
+        ref={batchHost}
+        data-part="batch-editor"
+        hidden={!props.onBatchCommit}
+        innerHTML={renderDataTableBatchMarkup(
+          props,
+          selected(),
+          batch(),
+          editId,
+        )}
+      />
       <div
         data-scope="table"
         data-part="root"

@@ -6,7 +6,7 @@ import {
 } from "@loongark/vue";
 import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
 export const DataTableEditExample = defineComponent({
-  props: { complex: Boolean },
+  props: { complex: Boolean, batch: Boolean },
   setup(props) {
     const version = ref(0),
       demo = createDataTableEditDemo(() => {
@@ -101,7 +101,9 @@ export const DataTableEditExample = defineComponent({
                     columnKeys: state.hidden ? ["name", "owner"] : undefined,
                     pinnedColumns: { start: ["name"] },
                     loading: state.loading,
-                    onCellCommit: demo.onCellCommit,
+                    onCellCommit: props.batch ? undefined : demo.onCellCommit,
+                    onBatchCommit: props.batch ? demo.onBatchCommit : undefined,
+                    defaultSelectedIds: props.batch ? ["alpha", "beta"] : [],
                   }),
                 ]
               : [],

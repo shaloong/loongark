@@ -8,6 +8,9 @@
   import { afterUpdate, tick, onMount } from "svelte";
   import {
     dataTableView,
+    createDataTableBatchEditor,
+    renderDataTableBatchMarkup,
+    mountDataTableBatch,
     dataTableCellText,
     createDataTableEditor,
     mountDataTableEditor,
@@ -51,6 +54,24 @@
   export let loading = false;
   export let error: string | undefined = undefined;
   export let onRetry: (() => void) | undefined = undefined;
+  export let onBatchCommit: DataTableProps["onBatchCommit"] = undefined;
+  let batchHost: HTMLDivElement;
+  const batchEditor = createDataTableBatchEditor((value) => {
+    batch = value;
+  });
+  let batch = batchEditor.state;
+  $: {
+    batch;
+    batchEditor.sync(editProps, selected);
+  }
+  onMount(() =>
+    mountDataTableBatch(
+      batchHost,
+      batchEditor,
+      () => editProps,
+      () => selected,
+    ),
+  );
   export let onCellCommit: DataTableProps["onCellCommit"] = undefined;
   let edit: DataTableEditState | undefined;
   const editor = createDataTableEditor((value) => {
@@ -72,6 +93,7 @@
     loading,
     labels,
     onCellCommit,
+    onBatchCommit,
   };
   $: editor.sync(editProps, view);
   onMount(() =>
@@ -164,6 +186,9 @@
           >{text.retry}</button
         >{/if}
     </div>{/if}
+  <div bind:this={batchHost} data-part="batch-editor" hidden={!onBatchCommit}>
+    {@html renderDataTableBatchMarkup(editProps, selected, batch, editId)}
+  </div>
   <!-- svelte-ignore a11y_no_noninteractive_tabindex (滚动区域需要键盘聚焦以读取横向内容) -->
   <div
     data-scope="table"

@@ -122,7 +122,11 @@
     "TreeView",
     "Typography"
   ],
-  "latestBatch": ["DateInput", "Swap", "Toc"],
+  "latestBatch": [
+    "DateInput",
+    "Swap",
+    "Toc"
+  ],
   "equivalences": {
     "Input OTP": "PinInput",
     "Dropdown Menu": "Menu",
@@ -149,6 +153,7 @@
     "Icon shared Lucide nodes, accessible names, fixed strokes, RTL and four-framework defaults",
     "Questionnaire async validation, cancellable snapshots, retry and first-line option alignment",
     "DataTable text/number drafts, validation, cancellable commit, keyboard/focus and logical alignment",
-    "DataTable select/textarea editors, option validation and multiline keyboard contracts"
+    "DataTable select/textarea editors, option validation and multiline keyboard contracts",
+    "DataTable atomic batch editor, shared validation, cancellable transaction and conflict-safe undo"
   ]
 }

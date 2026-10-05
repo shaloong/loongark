@@ -35,6 +35,14 @@ export interface DataTableLabels {
   invalidOption: string;
   commitError: string;
   emptyCell: string;
+  batchEdit: string;
+  batchTitle: string;
+  batchApply: string;
+  batchUndo: string;
+  batchConflict: string;
+  batchNoChanges: string;
+  batchCount: (count: number) => string;
+  batchEnable: (column: string) => string;
 }
 export interface DataTableProps {
   data: readonly DataRow[];
@@ -59,6 +67,11 @@ export interface DataTableProps {
   error?: string;
   onRetry?: () => void;
   /** 返回错误文字保留草稿；void 表示接受，源数据仍由调用方更新。 */
+  onBatchCommit?: (details: {
+    changes: readonly import("./table-batch").DataTableBatchChange[];
+    signal: AbortSignal;
+    operation: "apply" | "undo";
+  }) => void | string | Promise<void | string>;
   onCellCommit?: (details: {
     rowId: string;
     columnKey: string;
@@ -88,6 +101,17 @@ export const dataTableLabels = (
   invalidOption: labels?.invalidOption ?? "Choose an available option",
   commitError: labels?.commitError ?? "Could not save. Try again.",
   emptyCell: labels?.emptyCell ?? "Empty",
+  batchEdit: labels?.batchEdit ?? "Edit selected",
+  batchTitle: labels?.batchTitle ?? "Batch edit",
+  batchApply: labels?.batchApply ?? "Apply changes",
+  batchUndo: labels?.batchUndo ?? "Undo batch",
+  batchConflict:
+    labels?.batchConflict ?? "Rows changed. Review the current values.",
+  batchNoChanges:
+    labels?.batchNoChanges ?? "Choose a field and change its value",
+  batchCount:
+    labels?.batchCount ?? ((count) => `Editing ${count} selected rows`),
+  batchEnable: labels?.batchEnable ?? ((column) => `Change ${column}`),
   summary:
     labels?.summary ??
     (({ total, selected, page, pageCount }) =>
@@ -389,6 +413,30 @@ export interface DataTableEditState {
   error?: string;
 }
 /** 独立草稿，不修改输入数据；所有端共用互斥、取消与过期结果隔离。 */
+/** 单格与批量共享解析和校验；业务规则由 column.editor.validate 提供。 */
+export function validateDataTableDraft(
+  props: DataTableProps,
+  column: DataColumn,
+  draft: string,
+  row: Readonly<DataRow>,
+): { value: string | number; error?: string } {
+  const labels = dataTableLabels(props.labels),
+    value = column.editor?.type === "number" ? Number(draft) : draft;
+  try {
+    const error =
+      typeof value === "number" && (!draft.trim() || !Number.isFinite(value))
+        ? labels.invalidNumber
+        : column.editor?.type === "select" &&
+            !column.editor.options?.some(
+              (option) => option.value === value && !option.disabled,
+            )
+          ? labels.invalidOption
+          : column.editor?.validate?.(value, row);
+    return { value, error };
+  } catch {
+    return { value, error: labels.commitError };
+  }
+}
 export function createDataTableEditor(
   notify: (state: DataTableEditState | undefined) => void,
 ) {
@@ -507,23 +555,12 @@ export function createDataTableEditor(
         ...view.rows.find(({ id }) => id === edit.rowId)!.row,
       });
       const labels = dataTableLabels(props.labels);
-      const value =
-        column.editor?.type === "number" ? Number(edit.draft) : edit.draft;
-      let error: string | undefined;
-      try {
-        error =
-          typeof value === "number" &&
-          (!edit.draft.trim() || !Number.isFinite(value))
-            ? labels.invalidNumber
-            : column.editor?.type === "select" &&
-                !column.editor.options?.some(
-                  (option) => option.value === value && !option.disabled,
-                )
-              ? labels.invalidOption
-              : column.editor?.validate?.(value, row);
-      } catch {
-        error = labels.commitError;
-      }
+      const { value, error } = validateDataTableDraft(
+        props,
+        column,
+        edit.draft,
+        row,
+      );
       if (error) {
         emit({ ...edit, error }, "input");
         return;

@@ -92,12 +92,54 @@ export function createDataTableEditDemo(changed: () => void, complex = false) {
     saved = `Saved ${columnKey} for ${rowId}: ${value}`;
     changed();
   };
+  const onBatchCommit: NonNullable<DataTableProps["onBatchCommit"]> = async ({
+    changes,
+    signal,
+    operation,
+  }) => {
+    await new Promise<void>((resolve) => {
+      const finish = () => {
+        signal.removeEventListener("abort", abort);
+        resolve();
+      };
+      const timer = setTimeout(finish, 700);
+      const abort = () => {
+        clearTimeout(timer);
+        canceled++;
+        changed();
+        finish();
+      };
+      if (signal.aborted) abort();
+      else signal.addEventListener("abort", abort, { once: true });
+    });
+    if (signal.aborted) return;
+    if (fail) {
+      fail = false;
+      changed();
+      throw Error("simulated failure");
+    }
+    if (changes.some((change) => change.value === "reserved"))
+      return "This project name is reserved";
+    const next = rows.map((row) => {
+      const patch = changes.filter((change) => change.rowId === row.id);
+      return patch.reduce<DataRow>((current, change) => {
+        const next = { ...current };
+        if (change.value === undefined) delete next[change.columnKey];
+        else next[change.columnKey] = change.value;
+        return next;
+      }, row);
+    });
+    rows = next;
+    saved = `${operation === "undo" ? "Undid" : "Applied"} batch: ${changes.length} cells`;
+    changed();
+  };
   return {
     columns: complex ? complexEditableColumns : editableColumns,
     get state() {
       return { rows, shown, rtl, hidden, loading, fail, canceled, saved };
     },
     onCellCommit,
+    onBatchCommit,
     failNext() {
       fail = true;
       changed();

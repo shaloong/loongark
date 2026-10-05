@@ -7,7 +7,8 @@ import {
 import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
 export const DataTableEditExample = ({
   complex = false,
-}: { complex?: boolean } = {}) => {
+  batch = false,
+}: { complex?: boolean; batch?: boolean } = {}) => {
   const [, redraw] = useState(0);
   const [demo] = useState(() =>
     createDataTableEditDemo(() => redraw((n) => n + 1), complex),
@@ -82,7 +83,9 @@ export const DataTableEditExample = ({
             columnKeys={state.hidden ? ["name", "owner"] : undefined}
             pinnedColumns={{ start: ["name"] }}
             loading={state.loading}
-            onCellCommit={demo.onCellCommit}
+            onCellCommit={batch ? undefined : demo.onCellCommit}
+            onBatchCommit={batch ? demo.onBatchCommit : undefined}
+            defaultSelectedIds={batch ? ["alpha", "beta"] : []}
           />
         )}
       </div>

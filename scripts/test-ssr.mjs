@@ -25,7 +25,7 @@ for (const [framework, script] of [
   ],
 ]) {
   const tableProps =
-    "{data:[{id:'a',name:'Alpha'}],columns:[{key:'name',label:'Name',editor:{validate:()=>{throw Error('SSR must not validate edit')}}}],onCellCommit:()=>{throw Error('SSR must not save edit')},defaultSelectedIds:['a','missing'],onSelectionChange:()=>{throw Error('SSR must not emit selection updates')}}";
+    "{data:[{id:'a',name:'Alpha'}],columns:[{key:'name',label:'Name',editor:{validate:()=>{throw Error('SSR must not validate edit')}}}],onCellCommit:()=>{throw Error('SSR must not save edit')},onBatchCommit:()=>{throw Error('SSR must not save batch')},defaultSelectedIds:['a','missing'],onSelectionChange:()=>{throw Error('SSR must not emit selection updates')}}";
   const tableScript =
     framework === "Vue"
       ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${tableProps})})));`
@@ -119,6 +119,7 @@ for (const [framework, script] of [
     ],
     { encoding: "utf8", timeout: 60000 },
   );
+  assert.match(result.stdout, /data-part="batch-trigger"/);
   assert.equal(
     result.status,
     0,

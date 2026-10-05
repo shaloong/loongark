@@ -2,6 +2,9 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  createDataTableBatchEditor,
+  renderDataTableBatchMarkup,
+  mountDataTableBatch,
   dataTableCellText,
   createDataTableEditor,
   mountDataTableEditor,
@@ -82,6 +85,24 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
   const view = dataTableView(props, current);
   const region = useRef<HTMLDivElement>(null);
   const editId = useId();
+  const batchHost = useRef<HTMLDivElement>(null);
+  const [batchEditor] = useState(() =>
+    createDataTableBatchEditor((value) => setBatch(value)),
+  );
+  const [batch, setBatch] = useState(batchEditor.state);
+  const batchLatest = useRef({ props, selected: [] as string[] });
+  useLayoutEffect(() =>
+    batchEditor.sync(batchLatest.current.props, batchLatest.current.selected),
+  );
+  useEffect(() => {
+    if (batchHost.current)
+      return mountDataTableBatch(
+        batchHost.current,
+        batchEditor,
+        () => batchLatest.current.props,
+        () => batchLatest.current.selected,
+      );
+  }, [batchEditor]);
   const [edit, setEdit] = useState<DataTableEditState>();
   const [editor] = useState(() => createDataTableEditor(setEdit));
   const editLatest = useRef({
@@ -127,6 +148,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     view.allIds,
     props.mode,
   );
+  batchLatest.current = { props, selected };
   const pageIds = view.rows.map(({ id }) => id),
     pageSelection = dataSelectionState(selected, pageIds);
   useEffect(() => {
@@ -204,6 +226,14 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
           )}
         </div>
       )}
+      <div
+        ref={batchHost}
+        data-part="batch-editor"
+        hidden={!props.onBatchCommit}
+        dangerouslySetInnerHTML={{
+          __html: renderDataTableBatchMarkup(props, selected, batch, editId),
+        }}
+      />
       <div
         data-scope="table"
         data-part="root"

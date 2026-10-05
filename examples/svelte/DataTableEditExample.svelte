@@ -6,6 +6,7 @@
   } from "@loongark/svelte";
   import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
   export let complex = false;
+  export let batch = false;
   const demo = createDataTableEditDemo(() => {
     state = demo.state;
   }, complex);
@@ -47,7 +48,9 @@
         columnKeys={state.hidden ? ["name", "owner"] : undefined}
         pinnedColumns={{ start: ["name"] }}
         loading={state.loading}
-        onCellCommit={demo.onCellCommit}
+        onCellCommit={batch ? undefined : demo.onCellCommit}
+        onBatchCommit={batch ? demo.onBatchCommit : undefined}
+        defaultSelectedIds={batch ? ["alpha", "beta"] : []}
       />{/if}
   </div>
   <LoongArkTypography variant="muted"

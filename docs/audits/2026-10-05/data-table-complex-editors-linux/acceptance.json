@@ -29,5 +29,10 @@
   },
   "behavior": "禁用和未知选项不可保存；重复值拒绝；原生选项标签展示；选项变更取消过期草稿；Enter 保留多行，Ctrl/Command+Enter 保存，Escape 取消；拒绝/取消/卸载不提交过期请求。",
   "limitations": "原生选择弹出菜单依赖平台；未宣称 Linux Chromium 与 Windows 或 Playwright 固定浏览器版本等同；不是富文本编辑器。",
-  "evidence": "过程截图和日志仅 .artifacts/advanced-completion；只跟踪人工审阅回归基线"
+  "evidence": "过程截图和日志仅 .artifacts/advanced-completion；只跟踪人工审阅回归基线",
+  "pages": {
+    "head": "3b8fb688b80d6af0b1835642165ef4475cd8ed62",
+    "run": "https://github.com/shaloong/loongark/actions/runs/37294801442",
+    "result": "success; build, static smoke, deploy and published homepage/iframe/index checks passed"
+  }
 }

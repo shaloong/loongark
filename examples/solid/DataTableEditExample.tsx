@@ -6,7 +6,9 @@ import {
   LoongArkTypography,
 } from "@loongark/solid";
 import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
-export const DataTableEditExample = (props: { complex?: boolean } = {}) => {
+export const DataTableEditExample = (
+  props: { complex?: boolean; batch?: boolean } = {},
+) => {
   const [version, setVersion] = createSignal(0);
   const demo = createDataTableEditDemo(
     () => setVersion((n) => n + 1),
@@ -85,7 +87,9 @@ export const DataTableEditExample = (props: { complex?: boolean } = {}) => {
             columnKeys={state().hidden ? ["name", "owner"] : undefined}
             pinnedColumns={{ start: ["name"] }}
             loading={state().loading}
-            onCellCommit={demo.onCellCommit}
+            onCellCommit={props.batch ? undefined : demo.onCellCommit}
+            onBatchCommit={props.batch ? demo.onBatchCommit : undefined}
+            defaultSelectedIds={props.batch ? ["alpha", "beta"] : []}
           />
         )}
       </div>
