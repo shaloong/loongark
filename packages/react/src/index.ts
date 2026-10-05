@@ -614,3 +614,6 @@ export type {IconOptions, IconNode} from "@loongark/kit";
 export type { VirtualizationOptions, VirtualRenderDetails } from "@loongark/kit";
 
 export type {ChartRange} from "@loongark/kit";
+
+export { createAsyncCollectionLoader } from "@loongark/kit";
+export type { AsyncCollectionSort, AsyncCollectionRequest, AsyncCollectionLoadDetails, AsyncCollectionPage, AsyncCollectionLoaderOptions } from "@loongark/kit";

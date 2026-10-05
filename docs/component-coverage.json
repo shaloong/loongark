@@ -157,6 +157,7 @@
     "DataTable atomic batch editor, shared validation, cancellable transaction and conflict-safe undo",
     "DataTable and MessageScroller measured virtualization, stable reading anchors, pinned focus, bounded SSR and lifecycle",
     "Chart category zoom/brush, controlled rejection, keyboard/pointer inspection and incremental data",
-    "Questionnaire number/date/select/matrix/ranking controls, validation, form entries and keyboard focus"
+    "Questionnaire number/date/select/matrix/ranking controls, validation, form entries and keyboard focus",
+    "Async Collection loader and native success acknowledgement: stable-key dedup, atomic page retry, cursor cycles, query/sort snapshots, abort and disposal"
   ]
 }

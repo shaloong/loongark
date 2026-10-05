@@ -106,6 +106,22 @@ try {
       results.push({ view: "preview", width, mode, keyboardSelection: true });
       await context.close();
     }
+  for (const mode of ["light", "dark"])
+    for (const width of [1280, 375]) {
+      const context = await browser.newContext({ viewport: { width, height: 1000 }, reducedMotion: "reduce" });
+      const page = await context.newPage();watch(page);
+      await page.goto(`${base}iframe.html?id=compositions-ark-utilities--async-collection&globals=mode:${mode}`);
+      await page.getByRole("button", { name: "Load collection", exact: true }).click();
+      const items = page.getByRole("list", { name: "Collection items" }).getByRole("listitem");
+      await items.nth(2).waitFor();
+      assert.equal(await items.count(), 3);
+      await page.getByRole("button", { name: "Load more", exact: true }).click();
+      await items.nth(4).waitFor();assert.equal(await items.count(), 5);
+      assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "异步 Collection 手机页面溢出");
+      await page.screenshot({ path: `${evidence}/collection-${mode}-${width}.png` });
+      results.push({ view: "async-collection", width, mode, dedupPageCount: 5 });
+      await context.close();
+    }
   assert.deepEqual(errors, [], "静态展示有运行时或资源加载错误");
   console.log(
     "Storybook 子路径检查通过：首页/iframe、桌面/手机、浅深色、键盘交互及资源加载。",

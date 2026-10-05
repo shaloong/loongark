@@ -1,25 +1,46 @@
-import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { build } from "vite";
 import { test, expect, type Page } from "@playwright/test";
 import { settleMessageLayout } from "./messageScrollerAdvancedChecks";
 declare global {
   interface Window {
+    messageModelMount: (root: HTMLElement, changed: (details: { atBottom: boolean }) => void) => () => void;
     messageModelCleanup: () => void;
     messageModelChanges: boolean[];
   }
 }
+let browserModule = "";
+test.beforeAll(async () => {
+  const entry = "loongark-message-model-fixture";
+  const result = await build({
+    configFile: false,
+    logLevel: "silent",
+    plugins: [{
+      name: entry,
+      resolveId(id) { if (id === entry) return "\0" + entry; },
+      load(id) {
+        if (id === "\0" + entry)
+          return `import { mountMessageScroller } from ${JSON.stringify(resolve("packages/kit/dist/message-scroller.js"))};window.messageModelMount=mountMessageScroller;`;
+      },
+    }],
+    build: {
+      write: false,
+      minify: false,
+      rollupOptions: { input: entry, output: { format: "iife" } },
+    },
+  });
+  const bundle = Array.isArray(result) ? result[0] : result;
+  if (!("output" in bundle)) throw Error("Expected a complete fixture bundle");
+  const chunk = bundle.output.find(item => item.type === "chunk");
+  if (!chunk) throw Error("Missing message model fixture chunk");
+  browserModule = chunk.code;
+});
 async function fixture(page: Page, overflowAnchor: "auto" | "none" = "auto") {
   await page.setContent(
     `<main><h1>Conversation reading fixture</h1><div id="root" data-at-bottom="original"><div data-part="viewport" tabindex="0" style="height:300px;overflow:auto;overflow-anchor:${overflowAnchor}"><div data-part="content" style="display:flex;flex-direction:column;gap:16px;padding:16px">${Array.from({ length: 12 }, (_, i) => `<article id="m${i}" style="min-height:${i === 11 ? 240 : 80}px;flex-shrink:0"><p style="margin:0">Message ${i}: keep this paragraph in view while other messages change.</p></article>`).join("")}</div></div><button data-part="jump" hidden>Latest</button></div></main>`,
   );
-  const source = await readFile(
-    "packages/kit/dist/message-scroller.js",
-    "utf8",
-  );
   await page.addScriptTag({
-    type: "module",
-    content:
-      source +
-      '\nwindow.messageModelChanges=[];window.messageModelCleanup=mountMessageScroller(document.getElementById("root"),d=>window.messageModelChanges.push(d.atBottom));',
+    content: browserModule + '\nwindow.messageModelChanges=[];window.messageModelCleanup=window.messageModelMount(document.getElementById("root"),d=>window.messageModelChanges.push(d.atBottom));',
   });
   await expect
     .poll(() => page.evaluate(() => typeof window.messageModelCleanup))

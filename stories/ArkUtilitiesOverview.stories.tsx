@@ -8,3 +8,6 @@ const meta = {
 } satisfies Meta;
 export default meta;
 export const Basic: StoryObj = { render: () => <ArkUtilitiesExample /> };
+
+import { AsyncCollectionExample } from "../examples/react/AsyncCollectionExample";
+export const AsyncCollection = { render: () => <AsyncCollectionExample /> };

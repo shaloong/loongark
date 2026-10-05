@@ -620,48 +620,47 @@ export function mountDataTableEditor(
   if (!win) return () => {};
   let frame = 0,
     pendingOwned = false;
+  let intent: { focus: "input" | "trigger"; previous: DataTableEditState | undefined } | undefined;
+  const restore = () => {
+    frame = 0;
+    if (!intent) return;
+    const { focus, previous } = intent;
+    const now = region.ownerDocument.activeElement;
+    if (!region.isConnected || (now !== region.ownerDocument.body && !region.contains(now))) {
+      intent = undefined;
+      return;
+    }
+    if (focus === "input") {
+      const input = region.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('[data-part="cell-input"]');
+      if (!input) return;
+      intent = undefined;
+      input.focus({ preventScroll: true });
+      input.closest<HTMLElement>('[data-part="cell-editor"]')?.scrollIntoView({ block: "nearest", inline: "nearest" });
+      if (!editor.state?.error && "select" in input) input.select();
+    } else {
+      // React can commit after this frame. Keep the intent until the old editor
+      // has actually been replaced, rather than focusing a temporary fallback.
+      if (region.querySelector('[data-part="cell-editor"]')) return;
+      const trigger = Array.from(region.querySelectorAll<HTMLButtonElement>('[data-part="cell-trigger"]')).find(element => element.dataset.rowId === previous?.rowId && element.dataset.columnKey === previous?.columnKey);
+      intent = undefined;
+      (trigger ?? region).focus();
+    }
+  };
+  const schedule = () => {
+    if (intent && !frame) frame = win.requestAnimationFrame(restore);
+  };
+  const observer = new win.MutationObserver(schedule);
+  observer.observe(region, { childList: true, subtree: true });
   const stop = editor.subscribe((focus, previous) => {
     const active = region.ownerDocument.activeElement;
     if (editor.state?.pending && !previous?.pending)
       pendingOwned = region.contains(active);
     if (!focus) return;
-    const owned =
-      region.contains(active) ||
-      (!!previous?.pending &&
-        pendingOwned &&
-        active === region.ownerDocument.body);
+    const owned = region.contains(active) || (!!previous?.pending && pendingOwned && active === region.ownerDocument.body);
     win.cancelAnimationFrame(frame);
-    if (!owned) return;
-    frame = win.requestAnimationFrame(() => {
-      frame = 0;
-      const now = region.ownerDocument.activeElement;
-      if (
-        !region.isConnected ||
-        (now !== region.ownerDocument.body && !region.contains(now))
-      )
-        return;
-      if (focus === "input") {
-        const input = region.querySelector<
-          HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-        >('[data-part="cell-input"]');
-        input?.focus({ preventScroll: true });
-        input
-          ?.closest<HTMLElement>('[data-part="cell-editor"]')
-          ?.scrollIntoView({ block: "nearest", inline: "nearest" });
-        if (!editor.state?.error && input && "select" in input) input.select();
-      } else {
-        const trigger = Array.from(
-          region.querySelectorAll<HTMLButtonElement>(
-            '[data-part="cell-trigger"]',
-          ),
-        ).find(
-          (element) =>
-            element.dataset.rowId === previous?.rowId &&
-            element.dataset.columnKey === previous?.columnKey,
-        );
-        (trigger ?? region).focus();
-      }
-    });
+    frame = 0;
+    intent = owned ? { focus, previous } : undefined;
+    schedule();
   });
   const click = (event: Event) => {
     if (blocked()) return;
@@ -716,6 +715,8 @@ export function mountDataTableEditor(
   region.addEventListener("keydown", keydown);
   return () => {
     stop();
+    observer.disconnect();
+    intent = undefined;
     win.cancelAnimationFrame(frame);
     region.removeEventListener("click", click);
     region.removeEventListener("input", input);

@@ -6,6 +6,8 @@
     name: "ssr-framework",
     defaultValue: ["react"],
   }));
+  const asyncSSRLoader = L.createAsyncCollectionLoader<{id: string}>({getKey: item => item.id,load:()=>{throw Error("SSR must not request a collection");}});
+  const asyncSSRList = L.useAsyncList(() => ({load: asyncSSRLoader.load,autoReload:false,initialItems:[{id:"initial"}]}));
   const cropper = L.useImageCropper();
   import {
     LoongArkChart,
@@ -329,3 +331,5 @@
 />
 
 <LoongArkQuestionnaire label="SSR typed survey" questions={[{id:"typed",label:"SSR matrix",type:"matrix",rows:[{id:"row",label:"SSR row"}],options:[{value:"yes",label:"Yes"}],validateAsync:()=>{throw Error("SSR must not validate")}}]} defaultValue={{typed:{row:"yes"}}} />
+
+<p>SSR async idle {asyncSSRList().items.length}</p>

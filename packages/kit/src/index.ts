@@ -81,3 +81,5 @@ export * from "./virtual-window";
 export * from "./table-window";
 
 export * from "./chart-window";
+
+export * from "./async-collection";

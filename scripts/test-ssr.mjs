@@ -80,6 +80,9 @@ for (const [framework, script] of [
         : `console.log(renderToString(h(L.LoongArkQuestionnaire,${questionnaireProps})));`;
   const typedQuestionProps = "{label:'SSR typed survey',questions:[{id:'typed',label:'SSR matrix',type:'matrix',rows:[{id:'row',label:'SSR row'}],options:[{value:'yes',label:'Yes'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{typed:{row:'yes'}},onValueChange:()=>{throw Error('SSR must not emit')}}";
   const typedQuestionScript = framework === "Vue" ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})})));` : framework === "Solid" ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})));` : `console.log(renderToString(h(L.LoongArkQuestionnaire,${typedQuestionProps})));`;
+  const asyncLoaderSetup = "const asyncSSRLoader=L.createAsyncCollectionLoader({getKey:item=>item.id,load:()=>{throw Error('SSR must not request a collection')}});";
+  const asyncProps = "{load:asyncSSRLoader.load,autoReload:false,initialItems:[{id:'initial'}],onSuccess:()=>{throw Error('SSR must not complete a load')}}";
+  const asyncScript = asyncLoaderSetup + (framework === "Vue" ? `const AsyncSSR={setup(){const list=L.useAsyncList(${asyncProps});return()=>h('p',{},'SSR async idle '+list.value.items.length)}};console.log(await renderToString(createSSRApp(AsyncSSR)));` : framework === "Solid" ? `function AsyncSSR(){const list=L.useAsyncList(()=>(${asyncProps}));return 'SSR async idle '+list().items.length;}console.log(renderToString(()=>h(AsyncSSR,{})));` : `function AsyncSSR(){const list=L.useAsyncList(${asyncProps});return h('p',null,'SSR async idle '+list.items.length);}console.log(renderToString(h(AsyncSSR)));`);
   const serverProps =
     "{label:'SSR remote table',data:[{id:'remoteSSR',name:'SSR remote row',value:9}],columns:[{key:'name',label:'Remote project'},{key:'value',label:'Remote revenue'}],columnKeys:['value','name'],pinnedColumns:{start:['value'],end:['name']},mode:'server',totalRows:21,pageSize:2,state:{query:'not-matching',page:3,sort:{key:'value',direction:'asc'}},selectedIds:['off-page'],loading:true,error:'SSR remote failure',onRetry:()=>{throw Error('SSR must not retry')},onStateChange:()=>{throw Error('SSR must not change table state')},onSelectionChange:()=>{throw Error('SSR must not select')}}";
   const serverScript =
@@ -126,6 +129,7 @@ for (const [framework, script] of [
           nextScript +
           questionnaireScript +
           typedQuestionScript +
+          asyncScript +
           serverScript +
           conversationScript +
           "process.exit(0);",
@@ -134,6 +138,7 @@ for (const [framework, script] of [
     { encoding: "utf8", timeout: 60000 },
   );
   assert.match(result.stdout, /data-part="batch-trigger"/);
+  assert.match(result.stdout, /SSR async idle 1/);
   assert.match(result.stdout, /name="typed\[row\]"/);
   assert.match(result.stdout, /data-part="range-start"/);
   assert.match(result.stdout, /data-part="inspect-category"/);

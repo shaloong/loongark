@@ -39,5 +39,10 @@
     "排序初始完整顺序就是合法答案，不包含业务确认、打分或拖拽排序；排序以原生按钮提供完整键盘路径。",
     "表单矩阵采用 question[row] 名称，服务端解析规则由调用方实现；条件隐藏值只保留编辑状态。"
   ],
-  "evidence": "过程截图、联系表、像素测量与日志只在忽略目录 .artifacts/advanced-completion；Git仅保留本摘要与已审阅回归基线。"
+  "evidence": "过程截图、联系表、像素测量与日志只在忽略目录 .artifacts/advanced-completion；Git仅保留本摘要与已审阅回归基线。",
+  "pages": {
+    "head": "3a3040e6a5b1d8dea3f6ae9c95c00180c1390e7a",
+    "run": "https://github.com/shaloong/loongark/actions/runs/37313166854",
+    "result": "success on attempt 2; initial deploy OIDC token request timed out; only failed deployment job retried"
+  }
 }

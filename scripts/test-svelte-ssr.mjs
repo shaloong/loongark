@@ -117,3 +117,5 @@ assert.match(html, /aria-label="SSR search"/);
 assert.match(html, /non-scaling-stroke/);
 
 assert.match(html, /name="typed\[row\]"/);
+
+assert.match(html, /SSR async idle 1/);

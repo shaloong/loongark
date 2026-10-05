@@ -1,0 +1,42 @@
+import assert from "node:assert/strict";
+import { createAsyncCollectionLoader } from "../packages/kit/dist/index.js";
+async function acceptLoad(loader,details){const page=await loader.load(details);loader.onSuccess(page);return page;}
+const deferred=()=>{let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b;});return{resolve,reject,promise};};
+let result={items:[{id:"a"},{id:"a"},{id:"b"}],cursor:0},calls=0;
+const loader=createAsyncCollectionLoader({getKey:item=>item.id,load:()=>{calls++;if(result instanceof Error)throw result;return result;}});
+const request=(cursor,filterText="",sortDescriptor)=>acceptLoad(loader,{filterText,cursor,sortDescriptor});
+assert.deepEqual(await request(null),{items:[{id:"a"},{id:"b"}],cursor:0});
+result=Error("sync fail");await assert.rejects(request(0),/sync fail/);
+result={items:[{id:"b"},{id:"c"}],cursor:1};assert.deepEqual(await request(0),{items:[{id:"c"}],cursor:1});
+result={items:[{id:"d"}],cursor:0};await assert.rejects(request(1),/cycle/);
+result={items:[{id:"bad"},{id:""}],cursor:2};await assert.rejects(request(1),/keys/);
+result={items:[{id:"c"},{id:"bad"}],cursor:2};assert.deepEqual(await request(1),{items:[{id:"bad"}],cursor:2});
+result={items:[],cursor:2};await assert.rejects(request(2),/cycle/);
+result={items:[{id:"z"}]};assert.deepEqual(await request(2),{items:[{id:"z"}],cursor:undefined});
+await assert.rejects(request(2),/accepted query/);
+result={items:[{id:"a"}],cursor:0};assert.deepEqual(await request(undefined,"changed"),{items:[{id:"a"}],cursor:0});
+await assert.rejects(request(0,"other"),/reload first/);
+assert.deepEqual(await request(null,"changed",{column:"id",direction:"descending"}),{items:[{id:"a"}],cursor:0});
+const aborted=new AbortController();aborted.abort();const before=calls;await assert.rejects(acceptLoad(loader,{filterText:"",signal:aborted.signal}),{name:"AbortError"});assert.equal(calls,before);
+loader.dispose();await assert.rejects(request(null),{name:"AbortError"});
+const works=[],observed=[];
+const racing=createAsyncCollectionLoader({getKey:item=>item.id,load:details=>{observed.push(details.signal);const work=deferred();works.push(work);return work.promise;}});
+const one=acceptLoad(racing,{filterText:"old"});await new Promise(r=>setImmediate(r));
+const two=acceptLoad(racing,{filterText:"new"});await assert.rejects(one,{name:"AbortError"});await new Promise(r=>setImmediate(r));assert.equal(observed[0].aborted,true);
+works[1].resolve({items:[{id:"new"}],cursor:0});assert.deepEqual(await two,{items:[{id:"new"}],cursor:0});works[0].resolve({items:[{id:"old"}],cursor:9});await new Promise(r=>setImmediate(r));
+const three=acceptLoad(racing,{filterText:"new",cursor:0});await new Promise(r=>setImmediate(r));works[2].resolve({items:[{id:"new"},{id:"last"}]});assert.deepEqual(await three,{items:[{id:"last"}],cursor:undefined});
+const four=acceptLoad(racing,{filterText:"dispose"});await new Promise(r=>setImmediate(r));racing.dispose();await assert.rejects(four,{name:"AbortError"});works[3].reject(Error("late ignored rejection"));await new Promise(r=>setImmediate(r));
+const link=deferred(),signal=new AbortController();const linked=createAsyncCollectionLoader({getKey:x=>x.id,load:()=>link.promise});const pending=acceptLoad(linked,{filterText:"",signal:signal.signal});await new Promise(r=>setImmediate(r));signal.abort();await assert.rejects(pending,{name:"AbortError"});link.reject(Error("late"));await new Promise(r=>setImmediate(r));linked.dispose();
+console.log("Async Collection: sync failures, dedup, cursor 0/cycles, atomic failed-page retry, query/sort reset, cancellation, late rejection and disposal passed.");
+
+let work=deferred(),first=true;
+const reusable=createAsyncCollectionLoader({getKey:x=>x.id,load:()=>first ? {items:[{id:"a"}],cursor:0} : work.promise});
+await acceptLoad(reusable,{filterText:""});first=false;const cancelled=acceptLoad(reusable,{filterText:"",cursor:0});await new Promise(r=>setImmediate(r));reusable.cancel();await assert.rejects(cancelled,{name:"AbortError"});work.resolve({items:[{id:"b"}]});await new Promise(r=>setImmediate(r));work=deferred();const retryPage=acceptLoad(reusable,{filterText:"",cursor:0});await new Promise(r=>setImmediate(r));work.resolve({items:[{id:"a"},{id:"b"}]});assert.deepEqual(await retryPage,{items:[{id:"b"}],cursor:undefined});reusable.dispose();
+let received;const snapshotLoader=createAsyncCollectionLoader({getKey:x=>x.id,load:details=>{received=details;return {items:[]};}});const query={filterText:"original",sortDescriptor:{column:"id",direction:"ascending"}};const snapshotRequest=acceptLoad(snapshotLoader,query);query.filterText="mutated";query.sortDescriptor.direction="descending";await snapshotRequest;assert.equal(received.filterText,"original");assert.equal(received.sortDescriptor.direction,"ascending");snapshotLoader.dispose();
+console.log("Async Collection: reusable cancel preserves page ledger and request arguments are snapshotted.");
+
+const gap=createAsyncCollectionLoader({getKey:x=>x.id,load:({cursor})=>cursor==null ? {items:[{id:"a"}],cursor:0} : cursor===0 ? {items:[{id:"a"},{id:"b"}],cursor:1} : {items:[{id:"b"},{id:"c"}]}});
+await acceptLoad(gap,{filterText:""});const ignoredSignal=new AbortController();const ignoredPage=await gap.load({filterText:"",cursor:0,signal:ignoredSignal.signal});assert.deepEqual(ignoredPage.items,[{id:"b"}]);ignoredSignal.abort();await new Promise(r=>setImmediate(r));
+const acceptedSignal=new AbortController();const acceptedPage=await gap.load({filterText:"",cursor:0,signal:acceptedSignal.signal});assert.deepEqual(acceptedPage.items,[{id:"b"}],"返回但未接收的页不污染去重与游标");acceptedSignal.abort();gap.onSuccess(acceptedPage);await new Promise(r=>setImmediate(r));assert.deepEqual(await acceptLoad(gap,{filterText:"",cursor:1}),{items:[{id:"c"}],cursor:undefined});gap.dispose();
+const missingAck=createAsyncCollectionLoader({getKey:x=>x.id,load:()=>({items:[{id:"a"}],cursor:0})});await missingAck.load({filterText:""});await assert.rejects(missingAck.load({filterText:"",cursor:0}),/accepted query/);missingAck.dispose();
+console.log("Async Collection: staged-page cancellation, native exit-abort followed by acceptance, and missing acceptance acknowledgement passed.");

@@ -11,6 +11,7 @@ const child = spawn(
     "tests/virtualization.spec.ts",
     "tests/chart-interaction.spec.ts",
     "tests/questionnaire-types.spec.ts",
+    "tests/async-collection.spec.ts",
     "--project=chromium",
     "--workers=2",
   ],

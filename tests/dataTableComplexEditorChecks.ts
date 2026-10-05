@@ -56,4 +56,16 @@ export async function checkComplexEditors(page: Page) {
   await expect(
     page.getByText("Cancelled saves: 1", { exact: true }),
   ).toBeVisible();
+  // Completion must restore an owned editor, but must never steal focus from
+  // an unrelated control selected while the asynchronous save is pending.
+  await trigger("Owner").click();
+  await field.selectOption("Design");
+  await field.press("Control+Enter");
+  await expect(field).toBeDisabled();
+  const external = page.getByRole("button", { name: "Fail next save", exact: true });
+  await external.focus();
+  await expect(page.locator("output")).toHaveText("Saved owner for alpha: Design");
+  await expect(trigger("Owner")).toHaveText("Design");
+  await expect(external).toBeFocused();
+
 }
