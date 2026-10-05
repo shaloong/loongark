@@ -12,7 +12,12 @@ export function dataTableVirtualOptions(
     ...props.virtualization,
     height: virtualViewportHeight(props.virtualization),
     keys: props.virtualization ? view.rows.map((row) => row.id) : [],
-    contextKey: JSON.stringify([view.query, view.sort, view.page]),
+    contextKey: JSON.stringify([
+      view.query,
+      view.sorts,
+      view.filters,
+      view.page,
+    ]),
   };
 }
 export function dataTableVirtualRows(

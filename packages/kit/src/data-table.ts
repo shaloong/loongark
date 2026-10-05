@@ -1,3 +1,4 @@
+import { resolveDataFilterLabels } from "./table-query";
 import {
   createDataTableView,
   type DataRow,
@@ -8,6 +9,8 @@ import {
 export interface DataTableState {
   query: string;
   sort?: DataSort;
+  sorts?: readonly DataSort[];
+  filters?: readonly import("./table-query").DataFilter[];
   page: number;
 }
 export interface DataTableSummary {
@@ -19,6 +22,15 @@ export interface DataTableSummary {
 export interface DataTableLabels {
   filter: string;
   filterPlaceholder: string;
+  filterColumn: (column: string) => string;
+  filterOperator: (column: string) => string;
+  filterOperators: Record<import("./table-query").DataFilterOperator, string>;
+  invalidFilter: string;
+  allOptions: string;
+  sortDescription: (
+    direction: "asc" | "desc" | undefined,
+    priority: number,
+  ) => string;
   selectPage: string;
   selectRow: (id: string) => string;
   empty: string;
@@ -51,7 +63,9 @@ export interface DataTableProps {
   pageSize?: number;
   rowKey?: string;
   label?: string;
-  labels?: Partial<DataTableLabels>;
+  labels?: Partial<Omit<DataTableLabels, "filterOperators">> & {
+    filterOperators?: Partial<DataTableLabels["filterOperators"]>;
+  };
   selectedIds?: readonly string[];
   defaultSelectedIds?: readonly string[];
   onSelectionChange?: (ids: string[]) => void;
@@ -86,10 +100,20 @@ export interface DataTableProps {
   }) => void | string | Promise<void | string>;
 }
 export const dataTableLabels = (
-  labels?: Partial<DataTableLabels>,
+  labels?: DataTableProps["labels"],
 ): DataTableLabels => ({
   filter: labels?.filter ?? "Filter rows",
   filterPlaceholder: labels?.filterPlaceholder ?? "Filter rows…",
+  filterColumn: labels?.filterColumn ?? ((column) => `Filter ${column}`),
+  filterOperator:
+    labels?.filterOperator ?? ((column) => `Condition for ${column}`),
+  filterOperators: resolveDataFilterLabels(labels?.filterOperators),
+  invalidFilter: labels?.invalidFilter ?? "Choose an available condition",
+  allOptions: labels?.allOptions ?? "All options",
+  sortDescription:
+    labels?.sortDescription ??
+    ((direction, priority) =>
+      `${direction ? `Sorted ${direction === "asc" ? "ascending" : "descending"}, priority ${priority}. ` : ""}Shift+click or Shift+Enter adds another sort column.`),
   selectPage: labels?.selectPage ?? "Select current page",
   selectRow: labels?.selectRow ?? ((id) => "Select " + id),
   empty: labels?.empty ?? "No results",

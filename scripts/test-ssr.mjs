@@ -42,6 +42,14 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${tableProps})));`
         : `console.log(renderToString(h(L.LoongArkDataTable,${tableProps})));`;
+  const queryProps =
+    "{label:'SSR query table',data:[{id:'q',name:'Query SSR row',amount:9,team:''}],columns:[{key:'name',label:'Project',filter:{type:'text'}},{key:'amount',label:'Revenue',filter:{type:'number'}},{key:'team',label:'Team',filter:{type:'select',options:[{value:'',label:'Unassigned'}]}}],state:{query:'',page:1,sorts:[{key:'name',direction:'asc'},{key:'amount',direction:'desc'}],filters:[{key:'amount',operator:'gte',value:'-'},{key:'team',operator:'equals',value:''}]},onStateChange:()=>{throw Error('SSR must not change query')}}";
+  const queryScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${queryProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${queryProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${queryProps})));`;
   const chartProps =
     "{data:[{name:'SSR category',value:1e308},{name:'Missing',value:null}],series:[{key:'value',label:'SSR series'}],labelKey:'name',title:'SSR chart',labels:{series:'SSR legend'}}";
   const chartScript =
@@ -78,11 +86,25 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${questionnaireProps})));`
         : `console.log(renderToString(h(L.LoongArkQuestionnaire,${questionnaireProps})));`;
-  const typedQuestionProps = "{label:'SSR typed survey',questions:[{id:'typed',label:'SSR matrix',type:'matrix',rows:[{id:'row',label:'SSR row'}],options:[{value:'yes',label:'Yes'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{typed:{row:'yes'}},onValueChange:()=>{throw Error('SSR must not emit')}}";
-  const typedQuestionScript = framework === "Vue" ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})})));` : framework === "Solid" ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})));` : `console.log(renderToString(h(L.LoongArkQuestionnaire,${typedQuestionProps})));`;
-  const asyncLoaderSetup = "const asyncSSRLoader=L.createAsyncCollectionLoader({getKey:item=>item.id,load:()=>{throw Error('SSR must not request a collection')}});";
-  const asyncProps = "{load:asyncSSRLoader.load,autoReload:false,initialItems:[{id:'initial'}],onSuccess:()=>{throw Error('SSR must not complete a load')}}";
-  const asyncScript = asyncLoaderSetup + (framework === "Vue" ? `const AsyncSSR={setup(){const list=L.useAsyncList(${asyncProps});return()=>h('p',{},'SSR async idle '+list.value.items.length)}};console.log(await renderToString(createSSRApp(AsyncSSR)));` : framework === "Solid" ? `function AsyncSSR(){const list=L.useAsyncList(()=>(${asyncProps}));return 'SSR async idle '+list().items.length;}console.log(renderToString(()=>h(AsyncSSR,{})));` : `function AsyncSSR(){const list=L.useAsyncList(${asyncProps});return h('p',null,'SSR async idle '+list.items.length);}console.log(renderToString(h(AsyncSSR)));`);
+  const typedQuestionProps =
+    "{label:'SSR typed survey',questions:[{id:'typed',label:'SSR matrix',type:'matrix',rows:[{id:'row',label:'SSR row'}],options:[{value:'yes',label:'Yes'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{typed:{row:'yes'}},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const typedQuestionScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})));`
+        : `console.log(renderToString(h(L.LoongArkQuestionnaire,${typedQuestionProps})));`;
+  const asyncLoaderSetup =
+    "const asyncSSRLoader=L.createAsyncCollectionLoader({getKey:item=>item.id,load:()=>{throw Error('SSR must not request a collection')}});";
+  const asyncProps =
+    "{load:asyncSSRLoader.load,autoReload:false,initialItems:[{id:'initial'}],onSuccess:()=>{throw Error('SSR must not complete a load')}}";
+  const asyncScript =
+    asyncLoaderSetup +
+    (framework === "Vue"
+      ? `const AsyncSSR={setup(){const list=L.useAsyncList(${asyncProps});return()=>h('p',{},'SSR async idle '+list.value.items.length)}};console.log(await renderToString(createSSRApp(AsyncSSR)));`
+      : framework === "Solid"
+        ? `function AsyncSSR(){const list=L.useAsyncList(()=>(${asyncProps}));return 'SSR async idle '+list().items.length;}console.log(renderToString(()=>h(AsyncSSR,{})));`
+        : `function AsyncSSR(){const list=L.useAsyncList(${asyncProps});return h('p',null,'SSR async idle '+list.items.length);}console.log(renderToString(h(AsyncSSR)));`);
   const serverProps =
     "{label:'SSR remote table',data:[{id:'remoteSSR',name:'SSR remote row',value:9}],columns:[{key:'name',label:'Remote project'},{key:'value',label:'Remote revenue'}],columnKeys:['value','name'],pinnedColumns:{start:['value'],end:['name']},mode:'server',totalRows:21,pageSize:2,state:{query:'not-matching',page:3,sort:{key:'value',direction:'asc'}},selectedIds:['off-page'],loading:true,error:'SSR remote failure',onRetry:()=>{throw Error('SSR must not retry')},onStateChange:()=>{throw Error('SSR must not change table state')},onSelectionChange:()=>{throw Error('SSR must not select')}}";
   const serverScript =
@@ -123,6 +145,7 @@ for (const [framework, script] of [
         "process.exit(0);",
         virtualScript +
           tableScript +
+          queryScript +
           chartScript +
           interactiveChartScript +
           arkScript +
@@ -175,6 +198,17 @@ for (const [framework, script] of [
   assert.equal((result.stdout.match(/data-pinned="start"/g) ?? []).length, 4);
   assert.equal((result.stdout.match(/data-pinned="end"/g) ?? []).length, 2);
   assert.doesNotMatch(result.stdout, /style="[^"]*--lk-data-table-pin-offset/);
+  assert.match(result.stdout, /Query SSR row/);
+  assert.match(
+    result.stdout,
+    /aria-label="Filter Revenue"[^>]*aria-invalid="true"/,
+  );
+  assert.match(result.stdout, /Enter a finite number/);
+  assert.match(result.stdout, /data-part="sort-priority"/);
+  assert.match(
+    result.stdout,
+    /<option(?=[^>]*value="0")(?=[^>]*selected)[^>]*>Unassigned/,
+  );
   assert.match(result.stdout, /SSR remote failure/);
   assert.match(result.stdout, /aria-busy="true"/);
   assert.match(

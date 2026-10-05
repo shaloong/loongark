@@ -88,3 +88,13 @@ textarea 可设置原生 `rows`（默认3），Enter 换行，Ctrl/Command+Enter
 行 id 必须稳定且唯一。活动焦点行离开窗口时额外保留一行，避免输入框、草稿和焦点丢失；失焦后释放。表头保持可见，冻结列沿用既有测量与过宽回退。窄屏在表内水平滚动，长值换行。aria-rowcount/aria-rowindex 保留数据行数和索引；SSR 仅输出估算窗口，不触发提交或滚动回调。
 
 单元格编辑与批量编辑可同时声明；开始批量编辑会取消活动单元格草稿，批量操作结束前阻止新单元格编辑。四端 VirtualizationExample 同时演示千行表格及可变高度消息。
+
+## 多列排序与列级筛选
+
+`state.sorts: readonly DataSort[]` 按数组顺序定义优先级；未提供时兼容原有 `state.sort`，显式空数组清空排序。普通点击/Enter 循环升序、降序、无排序并替换其它排序；Shift 点击或 Shift+Enter 保留其它列并追加优先级。多列排序显示序号和方向，只有主排序表头使用 `aria-sort`，每列通过 `aria-description` 提供方向、优先级和操作提示。排序相同的行保留源顺序。不可排序及已删除列、重复排序键会被归一化。非受控状态清理被隐藏/移除的排序和筛选，重新显示列不会复活旧条件；受控状态由调用方维护，组件只归一化当前视图。
+
+`columns[].filter` 启用列筛选控件，支持 `type: "text" | "number" | "select"`；select 的 `options` 使用唯一字符串 value、label 和可选 disabled。`state.filters: readonly DataFilter[]` 由 key、operator 和可选标量 value 组成，全部条件以 AND 组合，并与全表搜索共同生效。文本支持 contains/equals/startsWith，数值支持 equals/gt/gte/lt/lte，选项支持 equals；三类均支持 empty/not-empty。empty 包含 null、缺失值和空字符串，数字零及 false 不是空。选项的空字符串可以作为独立有效选项，不与“All options”混淆。
+
+数值控件保留原始字符串草稿，例如负号；非法或无限数值不参与筛选，字段通过 `aria-invalid`、关联错误文字及 alert 反馈，修正后错误解除。虚拟窗口只在有效查询改变时回到开头，非法数值草稿不会打断阅读位置。未知或已禁用的选项、与列类型不兼容的操作符报告对应错误。有效筛选变化回到第一页；受控调用方拒绝更新时控件恢复到接受的状态。内置面板每列编辑一个条件，模型允许调用方提供同列多个条件，例如数值上下界。
+
+服务端模式保留 `sorts/filters` 查询契约并通过 `onStateChange` 通知，组件不重新排序或筛选当前返回页。加载时查询控件禁用，SSR 不触发状态回调。标签由 `filterColumn`、`filterOperator`、`filterOperators`、`allOptions`、`invalidFilter` 与既有错误标签本地化；操作符标签可逐项覆盖，undefined 回退到默认值；`sortDescription` 定义排序说明。四端 DataTableQueryExample 与 ColumnQueries Story 覆盖优先级、组合筛选、受控拒绝、草稿错误、分页及重挂。

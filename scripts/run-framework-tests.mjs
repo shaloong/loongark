@@ -9,6 +9,7 @@ const child = spawn(
     "tests/date-input-paste.spec.ts",
     "tests/data-table-complex-editors.spec.ts",
     "tests/data-table-batch.spec.ts",
+    "tests/data-table-query.spec.ts",
     "tests/virtualization.spec.ts",
     "tests/chart-interaction.spec.ts",
     "tests/questionnaire-types.spec.ts",

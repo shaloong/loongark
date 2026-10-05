@@ -6,8 +6,17 @@
     name: "ssr-framework",
     defaultValue: ["react"],
   }));
-  const asyncSSRLoader = L.createAsyncCollectionLoader<{id: string}>({getKey: item => item.id,load:()=>{throw Error("SSR must not request a collection");}});
-  const asyncSSRList = L.useAsyncList(() => ({load: asyncSSRLoader.load,autoReload:false,initialItems:[{id:"initial"}]}));
+  const asyncSSRLoader = L.createAsyncCollectionLoader<{ id: string }>({
+    getKey: (item) => item.id,
+    load: () => {
+      throw Error("SSR must not request a collection");
+    },
+  });
+  const asyncSSRList = L.useAsyncList(() => ({
+    load: asyncSSRLoader.load,
+    autoReload: false,
+    initialItems: [{ id: "initial" }],
+  }));
   const cropper = L.useImageCropper();
   import {
     LoongArkChart,
@@ -330,6 +339,55 @@
   }}
 />
 
-<LoongArkQuestionnaire label="SSR typed survey" questions={[{id:"typed",label:"SSR matrix",type:"matrix",rows:[{id:"row",label:"SSR row"}],options:[{value:"yes",label:"Yes"}],validateAsync:()=>{throw Error("SSR must not validate")}}]} defaultValue={{typed:{row:"yes"}}} />
+<LoongArkQuestionnaire
+  label="SSR typed survey"
+  questions={[
+    {
+      id: "typed",
+      label: "SSR matrix",
+      type: "matrix",
+      rows: [{ id: "row", label: "SSR row" }],
+      options: [{ value: "yes", label: "Yes" }],
+      validateAsync: () => {
+        throw Error("SSR must not validate");
+      },
+    },
+  ]}
+  defaultValue={{ typed: { row: "yes" } }}
+/>
 
 <p>SSR async idle {asyncSSRList().items.length}</p>
+
+{#each ["first", "second"] as instance}
+  <LoongArkDataTable
+    label={`SSR query table ${instance}`}
+    data={[{ id: "query", name: "Query SSR row", amount: 9, team: "" }]}
+    columns={[
+      { key: "name", label: "Project", filter: { type: "text" } },
+      { key: "amount", label: "Revenue", filter: { type: "number" } },
+      {
+        key: "team",
+        label: "Team",
+        filter: {
+          type: "select",
+          options: [{ value: "", label: "Unassigned" }],
+        },
+      },
+    ]}
+    state={{
+      query: "",
+      page: 1,
+      sorts: [
+        { key: "name", direction: "asc" },
+        { key: "amount", direction: "desc" },
+      ],
+      filters: [
+        { key: "amount", operator: "gte", value: "-" },
+        { key: "team", operator: "equals", value: "" },
+      ],
+    }}
+    onStateChange={() => {
+      throw Error("SSR must not change query");
+    }}
+  />
+{/each}

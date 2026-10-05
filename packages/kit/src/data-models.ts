@@ -4,6 +4,13 @@ import {
   renderChartNavigation,
   type ChartRange,
 } from "./chart-window";
+import {
+  normalizeDataSorts,
+  normalizeDataFilters,
+  matchesDataFilter,
+  type DataFilter,
+  type DataColumnFilter,
+} from "./table-query";
 export type CellValue = string | number | boolean | null;
 export const observeChartWidth = (
   element: HTMLElement,
@@ -25,6 +32,7 @@ export interface DataColumn {
   key: string;
   label: string;
   sortable?: boolean;
+  filter?: DataColumnFilter;
   /** 逻辑对齐；表头、只读值与编辑器共用。 */
   align?: "start" | "center" | "end";
   /** 只有提供 onCellCommit 时才允许编辑；不编辑行身份字段。 */
@@ -45,6 +53,8 @@ export interface DataSort {
 export interface DataTableOptions {
   query?: string;
   sort?: DataSort;
+  sorts?: readonly DataSort[];
+  filters?: readonly DataFilter[];
   page?: number;
   pageSize?: number;
   rowKey?: string;
@@ -82,35 +92,47 @@ export const createDataTableView = (
     new Set(columnKeys).size !== columnKeys.length
   )
     throw Error("DataTable requires unique non-empty column keys");
+  for (const column of columns) {
+    if (column.filter?.type !== "select") continue;
+    const values = column.filter.options?.map((option) => option.value) ?? [];
+    if (new Set(values).size !== values.length)
+      throw Error("DataTable filter options require unique values");
+  }
+  const { filters, filterErrors } = normalizeDataFilters(
+    columns,
+    options.filters ?? [],
+  );
   let rows =
     options.mode === "server"
       ? allRows
       : allRows.filter(
           ({ row }) =>
-            !query ||
-            columns.some(({ key }) =>
-              String(row[key] ?? "")
-                .toLocaleLowerCase()
-                .includes(query),
-            ),
+            filters.every((filter) => matchesDataFilter(row, filter)) &&
+            (!query ||
+              columns.some(({ key }) =>
+                String(row[key] ?? "")
+                  .toLocaleLowerCase()
+                  .includes(query),
+              )),
         );
-  const sort = columns.some(
-    (column) => column.key === options.sort?.key && column.sortable !== false,
-  )
-    ? options.sort
-    : undefined;
-  if (sort && options.mode !== "server")
+  const sorts = normalizeDataSorts(
+    columns,
+    options.sorts ?? (options.sort ? [options.sort] : []),
+  );
+  const sort = sorts[0];
+  if (sorts.length && options.mode !== "server")
     rows = rows.sort((a, b) => {
-      const left = a.row[sort.key],
-        right = b.row[sort.key];
-      const comparison =
-        typeof left === "number" && typeof right === "number"
-          ? left - right
-          : collator.compare(String(left ?? ""), String(right ?? ""));
-      return (
-        (sort.direction === "asc" ? comparison : -comparison) ||
-        a.index - b.index
-      );
+      for (const sort of sorts) {
+        const left = a.row[sort.key],
+          right = b.row[sort.key];
+        const comparison =
+          typeof left === "number" && typeof right === "number"
+            ? left - right
+            : collator.compare(String(left ?? ""), String(right ?? ""));
+        if (comparison)
+          return sort.direction === "asc" ? comparison : -comparison;
+      }
+      return a.index - b.index;
     });
   const pageSize = Math.max(
     1,
@@ -128,6 +150,9 @@ export const createDataTableView = (
   return {
     allIds,
     sort,
+    sorts,
+    filters,
+    filterErrors,
     rows:
       options.mode === "server"
         ? rows

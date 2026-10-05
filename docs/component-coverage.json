@@ -122,7 +122,11 @@
     "TreeView",
     "Typography"
   ],
-  "latestBatch": ["DateInput", "Swap", "Toc"],
+  "latestBatch": [
+    "DateInput",
+    "Swap",
+    "Toc"
+  ],
   "equivalences": {
     "Input OTP": "PinInput",
     "Dropdown Menu": "Menu",
@@ -155,6 +159,7 @@
     "Chart category zoom/brush, controlled rejection, keyboard/pointer inspection and incremental data",
     "Questionnaire number/date/select/matrix/ranking controls, validation, form entries and keyboard focus",
     "Async Collection loader and native success acknowledgement: stable-key dedup, atomic page retry, cursor cycles, query/sort snapshots, abort and disposal",
-    "DataTable bounded multi-step batch undo/redo, conflict-safe replay, branch invalidation and native text undo protection"
+    "DataTable bounded multi-step batch undo/redo, conflict-safe replay, branch invalidation and native text undo protection",
+    "DataTable stable multi-column sorting, column text/number/select filters, invalid drafts, server contracts and stale-column reconciliation"
   ]
 }

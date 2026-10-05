@@ -83,3 +83,5 @@ export * from "./table-window";
 export * from "./chart-window";
 
 export * from "./async-collection";
+
+export * from "./table-query";

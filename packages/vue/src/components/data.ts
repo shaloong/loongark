@@ -19,7 +19,13 @@ import {
   type DataTableProps,
   retryDataTable,
   type DataTableState,
-  nextDataSort,
+  nextDataTableSort,
+  reconcileDataTableQuery,
+  dataFilterError,
+  dataFilterSelectValue,
+  dataFilterControl,
+  dataFilterOperators,
+  changeDataFilter,
   type DataSort,
   type DataRow,
   type DataColumn,
@@ -32,7 +38,6 @@ import {
   toggleDataSelection,
   setDataSelectionMixed,
   restoreDataSelection,
-  type DataTableLabels,
   type ChartOptions,
 } from "@loongark/kit";
 import {
@@ -138,7 +143,7 @@ export const LoongArkDataTable = defineComponent({
     pageSize: { type: Number, default: 10 },
     rowKey: { type: String, default: "id" },
     label: { type: String, default: "Data table" },
-    labels: Object as PropType<Partial<DataTableLabels>>,
+    labels: Object as PropType<DataTableProps["labels"]>,
     selectedIds: Array as PropType<readonly string[]>,
     defaultSelectedIds: Array as PropType<readonly string[]>,
     state: Object as PropType<DataTableState>,
@@ -206,17 +211,27 @@ export const LoongArkDataTable = defineComponent({
     onBeforeUnmount(() => stopPins?.());
     const query = ref(props.defaultState?.query ?? ""),
       sort = ref<DataSort | undefined>(props.defaultState?.sort),
+      sorts = ref<DataTableState["sorts"]>(props.defaultState?.sorts),
+      filters = ref<DataTableState["filters"]>(props.defaultState?.filters),
       page = ref(props.defaultState?.page ?? 1),
       internal = ref<string[]>([...(props.defaultSelectedIds ?? [])]),
       pageInput = ref<HTMLInputElement>();
     const current = () =>
-      props.state ?? { query: query.value, sort: sort.value, page: page.value };
+      props.state ?? {
+        query: query.value,
+        sort: sort.value,
+        sorts: sorts.value,
+        filters: filters.value,
+        page: page.value,
+      };
     const changeState = (patch: Partial<DataTableState>) => {
       if (props.loading) return;
       const next = { ...current(), sort: view.value.sort, ...patch };
       if (props.state === undefined) {
         query.value = next.query;
         sort.value = next.sort;
+        sorts.value = next.sorts;
+        filters.value = next.filters;
         page.value = next.page;
       }
       emit("stateChange", next);
@@ -295,7 +310,13 @@ export const LoongArkDataTable = defineComponent({
       if (!mounted.value) return;
       if (props.state === undefined) {
         if (page.value !== view.value.page) page.value = view.value.page;
-        if (sort.value && !view.value.sort) sort.value = undefined;
+        const previous = current(),
+          reconciled = reconcileDataTableQuery(previous, view.value);
+        if (reconciled !== previous) {
+          sort.value = reconciled.sort;
+          sorts.value = reconciled.sorts;
+          filters.value = reconciled.filters;
+        }
       }
       if (
         props.selectedIds === undefined &&
@@ -344,6 +365,192 @@ export const LoongArkDataTable = defineComponent({
               }
             },
           }),
+          model.columns.some((column) => column.filter)
+            ? h(
+                "div",
+                { "data-part": "column-filters" },
+                model.columns
+                  .filter((column) => column.filter)
+                  .map((column, index) => {
+                    const control = dataFilterControl(
+                        column,
+                        current().filters,
+                      ),
+                      error = dataFilterError(
+                        model.filterErrors.get(column.key),
+                        labels,
+                      ),
+                      errorId = `${editId}-filter-${index}`;
+                    const common = {
+                      "aria-label": labels.filterColumn(column.label),
+                      disabled: props.loading,
+                      "aria-invalid": !!error || undefined,
+                      "aria-describedby": error ? errorId : undefined,
+                    };
+                    return h(
+                      "div",
+                      { key: column.key, "data-part": "column-filter" },
+                      [
+                        h("label", [
+                          column.label,
+                          h(
+                            "select",
+                            {
+                              "aria-label": labels.filterOperator(column.label),
+                              disabled: props.loading,
+                              value: control.operator,
+                              onChange: (event: Event) => {
+                                if (
+                                  !(
+                                    event.currentTarget instanceof
+                                    HTMLSelectElement
+                                  )
+                                )
+                                  return;
+                                const target = event.currentTarget;
+                                changeState(
+                                  changeDataFilter(current(), column, {
+                                    operator:
+                                      dataFilterOperators(column).find(
+                                        (operator) => operator === target.value,
+                                      ) ?? control.operator,
+                                  }),
+                                );
+                                if (props.state !== undefined)
+                                  nextTick(() => {
+                                    if (target.isConnected)
+                                      target.value = dataFilterControl(
+                                        column,
+                                        current().filters,
+                                      ).operator;
+                                  });
+                              },
+                            },
+                            dataFilterOperators(column).map((operator) =>
+                              h(
+                                "option",
+                                {
+                                  value: operator,
+                                  selected: control.operator === operator,
+                                },
+                                labels.filterOperators[operator],
+                              ),
+                            ),
+                          ),
+                        ]),
+                        ["empty", "not-empty"].includes(control.operator)
+                          ? null
+                          : column.filter?.type === "select"
+                            ? h(
+                                "select",
+                                {
+                                  ...common,
+                                  value: dataFilterSelectValue(
+                                    column,
+                                    current().filters,
+                                  ),
+                                  onChange: (event: Event) => {
+                                    if (
+                                      !(
+                                        event.currentTarget instanceof
+                                        HTMLSelectElement
+                                      )
+                                    )
+                                      return;
+                                    const target = event.currentTarget,
+                                      index = Number(target.value);
+                                    changeState(
+                                      changeDataFilter(current(), column, {
+                                        value:
+                                          index < 0
+                                            ? undefined
+                                            : column.filter?.options?.[index]
+                                                ?.value,
+                                      }),
+                                    );
+                                    if (props.state !== undefined)
+                                      nextTick(() => {
+                                        if (target.isConnected)
+                                          target.value = dataFilterSelectValue(
+                                            column,
+                                            current().filters,
+                                          );
+                                      });
+                                  },
+                                },
+                                [
+                                  h(
+                                    "option",
+                                    {
+                                      value: "-1",
+                                      selected:
+                                        dataFilterSelectValue(
+                                          column,
+                                          current().filters,
+                                        ) === "-1",
+                                    },
+                                    labels.allOptions,
+                                  ),
+                                  ...(column.filter.options?.map(
+                                    (option, index) =>
+                                      h(
+                                        "option",
+                                        {
+                                          value: String(index),
+                                          selected:
+                                            dataFilterSelectValue(
+                                              column,
+                                              current().filters,
+                                            ) === String(index),
+                                          disabled: option.disabled,
+                                        },
+                                        option.label,
+                                      ),
+                                  ) ?? []),
+                                ],
+                              )
+                            : h("input", {
+                                ...common,
+                                type: "text",
+                                inputmode:
+                                  column.filter?.type === "number"
+                                    ? "decimal"
+                                    : undefined,
+                                value: String(control.value),
+                                onInput: (event: Event) => {
+                                  if (
+                                    !(
+                                      event.currentTarget instanceof
+                                      HTMLInputElement
+                                    )
+                                  )
+                                    return;
+                                  const target = event.currentTarget;
+                                  changeState(
+                                    changeDataFilter(current(), column, {
+                                      value: target.value,
+                                    }),
+                                  );
+                                  if (props.state !== undefined)
+                                    nextTick(() => {
+                                      if (target.isConnected)
+                                        target.value = String(
+                                          dataFilterControl(
+                                            column,
+                                            current().filters,
+                                          ).value,
+                                        );
+                                    });
+                                },
+                              }),
+                        error
+                          ? h("p", { id: errorId, role: "alert" }, error)
+                          : null,
+                      ],
+                    );
+                  }),
+              )
+            : null,
           props.loading
             ? h("p", { role: "status", "data-part": "loading" }, labels.loading)
             : null,
@@ -461,18 +668,44 @@ export const LoongArkDataTable = defineComponent({
                                   type: "button",
                                   disabled: props.loading,
                                   "aria-label": c.label,
-                                  onClick: () =>
-                                    changeState({
-                                      sort: nextDataSort(model.sort, c.key),
-                                      page: 1,
-                                    }),
+                                  "aria-description": labels.sortDescription(
+                                    model.sorts.find(
+                                      (sort) => sort.key === c.key,
+                                    )?.direction,
+                                    model.sorts.findIndex(
+                                      (sort) => sort.key === c.key,
+                                    ) + 1,
+                                  ),
+                                  onClick: (event: MouseEvent) =>
+                                    changeState(
+                                      nextDataTableSort(
+                                        model.sorts,
+                                        c.key,
+                                        event.shiftKey,
+                                      ),
+                                    ),
                                 },
                                 [
                                   c.label,
-                                  model.sort?.key === c.key
+                                  model.sorts.length > 1 &&
+                                  model.sorts.some((sort) => sort.key === c.key)
+                                    ? h(
+                                        "span",
+                                        {
+                                          "data-part": "sort-priority",
+                                          "aria-hidden": "true",
+                                        },
+                                        model.sorts.findIndex(
+                                          (sort) => sort.key === c.key,
+                                        ) + 1,
+                                      )
+                                    : null,
+                                  model.sorts.some((sort) => sort.key === c.key)
                                     ? h(LoongArkIcon, {
                                         icon:
-                                          model.sort.direction === "asc"
+                                          model.sorts.find(
+                                            (sort) => sort.key === c.key,
+                                          )?.direction === "asc"
                                             ? controlIcons.arrowUp
                                             : controlIcons.arrowDown,
                                         size: "sm",

@@ -119,3 +119,19 @@ assert.match(html, /non-scaling-stroke/);
 assert.match(html, /name="typed\[row\]"/);
 
 assert.match(html, /SSR async idle 1/);
+
+assert.match(html, /Query SSR row/);
+assert.match(html, /data-part="sort-priority"/);
+const filterErrorIds = [
+  ...html.matchAll(/<p[^>]*id="([^"]+-filter-1)"[^>]*role="alert"/g),
+].map((match) => match[1]);
+assert.equal(filterErrorIds.length, 2);
+assert.equal(new Set(filterErrorIds).size, 2);
+for (const id of filterErrorIds)
+  assert(html.includes(`aria-describedby="${id}"`));
+console.log("Svelte 多列查询 SSR 草稿、选项与多实例错误关联通过");
+
+assert.match(
+  html,
+  /<option(?=[^>]*value="0")(?=[^>]*selected)[^>]*>Unassigned/,
+);

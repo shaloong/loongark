@@ -121,3 +121,8 @@ import { VirtualizationExample } from "../examples/react/VirtualizationExample";
 export const Virtualized: StoryObj = {
   render: () => <VirtualizationExample mode="table" />,
 };
+
+import { DataTableQueryExample } from "../examples/react/DataTableQueryExample";
+export const ColumnQueries: StoryObj = {
+  render: () => <DataTableQueryExample />,
+};

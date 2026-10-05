@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-05",
+  "branch": "develop",
+  "base": "1d50efbebdb37981a1c8ae0014984567c245a7f2",
+  "scope": [
+    "四端多列稳定排序、Shift指针/键盘追加优先级、主排序aria-sort与各列说明",
+    "文本/数值/选项列筛选、组合AND、空选项与草稿错误关联、有效查询分页和虚拟窗口协调",
+    "客户端及服务端契约、受控拒绝、加载与重挂、陈旧列清理",
+    "Svelte稳定SSR多实例字段ID，Vue/Solid/Svelte原生选项SSR选中状态"
+  ],
+  "environment": {
+    "platform": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "browser": "system Chromium151.0.7922.173",
+    "playwright": "1.57.0"
+  },
+  "validation": {
+    "verify": "passed fresh",
+    "contracts": "passed including stable ties, sort precedence, combined conditions, invalid/disabled options, duplicate options, draft errors, server no-local-processing, prototype keys, stale-column reconciliation and virtual-window resets",
+    "storybook": "fresh passed",
+    "coverage": "115 families /306 Story /790 public values per framework /211 examples",
+    "publicationAndSSR": "passed, including selected option and two Svelte instance error associations",
+    "svelte": "0 errors /2 existing warnings",
+    "frameworks": "40 distinct cases passed including all211 examples, history and query; final16query cases repeated after pagination-draft refinement, all passed",
+    "story": "104 full-suite cases passed; final4affected query Story cases repeated after pagination refinement, all passed; expected framework-only skips recorded separately",
+    "visual": "130 passed on final build; --update-snapshots=none",
+    "pagesStaticSmoke": "passed /loongark/ desktop/mobile, both themes, keyboard and resources"
+  },
+  "firstRunFindings": [
+    "Svelte native HTML attribute typing did not include aria-description; standard attribute now uses a typed object spread, without replacing native types.",
+    "New SSR regression exposed unselected native select options in Vue. Explicit option selection now synchronized in Vue/Solid/Svelte, and Svelte gets a stable SSR/client instance ID.",
+    "Existing four-framework table flows failed because hidden sorts were retained in the new sorts array and revived when columns returned. Shared reconciliation now removes stale columns while preserving invalid drafts for existing fields.",
+    "Visual first run correctly reported8missing Linux images and4failed cases while capturing them; captures were reviewed before final non-updating comparison."
+  ],
+  "manualReview": {
+    "frameworks": "16 final desktop/375px light/dark captures reviewed through4contact sheets; corrected Vue Reset query variant to match the other frameworks",
+    "story": "8 sorted/error captures,2contact sheets and detailed desktop/mobile originals reviewed; new8regression baselines additionally reviewed through2contact sheets",
+    "result": "三列筛选控件在桌面对齐，手机垂直排列；排序序号、图标及数值保持逻辑对齐；字段错误可读，无页面横向溢出。",
+    "baselines": "8 new Linux baselines;128 existing baseline hashes unchanged, including2Windows files"
+  },
+  "limitations": [
+    "本批列筛选面板每列编辑一个条件；共享模型支持同列多个AND条件。",
+    "服务端数据和请求由调用方维护；原始草稿状态可通过共享归一化模型转换为有效查询。",
+    "本功能接受范围为Linux system Chromium与模拟手机视口；Firefox/WebKit矩阵和原生Safari的新增查询交互仍需后续验收。",
+    "独立浏览器CI已真实运行但存在已记录的既有焦点/窄屏/测试契约失败，不以本批验收关闭平台清单。",
+    "其余列拖动/宽度、分组树行、范围粘贴、编辑器、图表、问卷、二维虚拟化、日期、Drawer与真机项目仍开放。"
+  ],
+  "evidence": ".artifacts/gap-completion/query-* and .artifacts/advanced-completion/query-*; process screenshots and logs not committed"
+}

@@ -14,7 +14,33 @@
     "projectDiscovery": "default Chromium plus explicit Firefox/WebKit discovery passed",
     "chromium": "5 passed including browser identity and4history Story cases;16framework-only expected skips"
   },
-  "remoteValidation": "pending actual GitHub Actions run and screenshot review; workflow addition alone is not acceptance",
+  "remoteValidation": {
+    "firstRun": "https://github.com/shaloong/loongark/actions/runs/37332545670",
+    "firstCommit": "e8fe3c44bdbc081963c8f948575d905d34575b7f",
+    "nativeSafari": {
+      "result": "passed",
+      "version": "Safari26.6.1 / macOS15.7.9",
+      "scope": "207 default examples and16 history/chart desktop light/dark interactions; all4frameworks",
+      "review": "16 captures reviewed through4contact sheets; corresponding layout and alignment normal",
+      "artifact": "https://github.com/shaloong/loongark/actions/runs/37332545670/artifacts/11354883421"
+    },
+    "engines": {
+      "chromium": "16 failures",
+      "firefox": "35 failures",
+      "webkit": "33 failures",
+      "storySuite": "not executed after framework failures"
+    },
+    "findings": [
+      "Completed QuestionnaireTypes example output has narrow-screen JSON overflow.",
+      "Virtual message test compares document viewport coordinates across Playwright outer-page scrolling; requires container-relative measurement and independent scrolling assertions.",
+      "Firefox React batch and Solid virtual-editor focus recovery failed.",
+      "Firefox clipboard permissions in test are Chromium-specific; segmented DateInput synthetic paste also failed.",
+      "WebKit closed dialog remains geometrically visible after exit; chart inspector sizing/ResizeObserver and SVG natural-width assertions failed."
+    ],
+    "evidenceFollowup": "https://github.com/shaloong/loongark/actions/runs/37335723376",
+    "followupCommit": "1d50efbebdb37981a1c8ae0014984567c245a7f2",
+    "followup": "Split screenshot/environment evidence from large traces; downloaded and reviewed actual Chromium143.0.7499.4, Firefox144.0.2 and WebKit26.0 failure captures. Raw artifacts remain ignored; engine regressions still open."
+  },
   "limitations": [
     "Local Linux cannot execute native Safari.",
     "Local Firefox install blocked by official download-domain policy403; browsers will be installed by authorized GitHub runners.",

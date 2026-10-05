@@ -18,7 +18,13 @@ import {
   mountDataTablePins,
   retryDataTable,
   type DataTableState,
-  nextDataSort,
+  nextDataTableSort,
+  reconcileDataTableQuery,
+  dataFilterError,
+  dataFilterSelectValue,
+  dataFilterControl,
+  dataFilterOperators,
+  changeDataFilter,
   type DataSort,
   type DataTableProps,
   dataTableLabels,
@@ -92,11 +98,17 @@ export const LoongArkChart = (props: ChartOptions) => {
 export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
   const [query, setQuery] = useState(props.defaultState?.query ?? ""),
     [sort, setSort] = useState<DataSort | undefined>(props.defaultState?.sort),
+    [sorts, setSorts] = useState<DataTableState["sorts"]>(
+      props.defaultState?.sorts,
+    ),
+    [filters, setFilters] = useState<DataTableState["filters"]>(
+      props.defaultState?.filters,
+    ),
     [page, setPage] = useState(props.defaultState?.page ?? 1),
     [internal, setInternal] = useState<string[]>([
       ...(props.defaultSelectedIds ?? []),
     ]);
-  const current = props.state ?? { query, sort, page };
+  const current = props.state ?? { query, sort, sorts, filters, page };
   const view = dataTableView(props, current);
   const region = useRef<HTMLDivElement>(null);
   const [virtualizer] = useState(() =>
@@ -185,6 +197,8 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     if (props.state === undefined) {
       setQuery(next.query);
       setSort(next.sort);
+      setSorts(next.sorts);
+      setFilters(next.filters);
       setPage(next.page);
     }
     props.onStateChange?.(next);
@@ -203,7 +217,12 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
   useEffect(() => {
     if (props.state === undefined) {
       if (page !== view.page) setPage(view.page);
-      if (sort && !view.sort) setSort(undefined);
+      const reconciled = reconcileDataTableQuery(current, view);
+      if (reconciled !== current) {
+        setSort(reconciled.sort);
+        setSorts(reconciled.sorts);
+        setFilters(reconciled.filters);
+      }
     }
     if (
       props.selectedIds === undefined &&
@@ -224,6 +243,8 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     props.selectedIds,
     page,
     sort,
+    sorts,
+    filters,
     internal,
   ]);
   const change = (ids: string[], input: HTMLInputElement, rowId?: string) => {
@@ -253,6 +274,135 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
             });
         }}
       />
+      {view.columns.some((column) => column.filter) && (
+        <div data-part="column-filters">
+          {view.columns
+            .filter((column) => column.filter)
+            .map((column, index) => {
+              const control = dataFilterControl(column, current.filters),
+                error = dataFilterError(
+                  view.filterErrors.get(column.key),
+                  labels,
+                ),
+                errorId = `${editId}-filter-${index}`;
+              return (
+                <div key={column.key} data-part="column-filter">
+                  <label>
+                    {column.label}
+                    <select
+                      aria-label={labels.filterOperator(column.label)}
+                      disabled={props.loading}
+                      value={control.operator}
+                      onChange={(event) => {
+                        const target = event.currentTarget;
+                        changeState(
+                          changeDataFilter(current, column, {
+                            operator:
+                              dataFilterOperators(column).find(
+                                (operator) => operator === target.value,
+                              ) ?? control.operator,
+                          }),
+                        );
+                        if (props.state !== undefined)
+                          queueMicrotask(() => {
+                            if (target.isConnected)
+                              target.value = dataFilterControl(
+                                column,
+                                latest.current.filters,
+                              ).operator;
+                          });
+                      }}
+                    >
+                      {dataFilterOperators(column).map((operator) => (
+                        <option key={operator} value={operator}>
+                          {labels.filterOperators[operator]}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  {!["empty", "not-empty"].includes(control.operator) &&
+                    (column.filter?.type === "select" ? (
+                      <select
+                        aria-label={labels.filterColumn(column.label)}
+                        disabled={props.loading}
+                        aria-invalid={!!error || undefined}
+                        aria-describedby={error ? errorId : undefined}
+                        value={dataFilterSelectValue(column, current.filters)}
+                        onChange={(event) => {
+                          const target = event.currentTarget,
+                            index = Number(target.value);
+                          changeState(
+                            changeDataFilter(current, column, {
+                              value:
+                                index < 0
+                                  ? undefined
+                                  : column.filter?.options?.[index]?.value,
+                            }),
+                          );
+                          if (props.state !== undefined)
+                            queueMicrotask(() => {
+                              if (target.isConnected)
+                                target.value = dataFilterSelectValue(
+                                  column,
+                                  latest.current.filters,
+                                );
+                            });
+                        }}
+                      >
+                        <option value="-1">{labels.allOptions}</option>
+                        {column.filter?.options?.map((option, index) => (
+                          <option
+                            key={option.value}
+                            value={index}
+                            disabled={option.disabled}
+                          >
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <input
+                        type="text"
+                        inputMode={
+                          column.filter?.type === "number"
+                            ? "decimal"
+                            : undefined
+                        }
+                        aria-label={labels.filterColumn(column.label)}
+                        disabled={props.loading}
+                        aria-invalid={!!error || undefined}
+                        aria-describedby={error ? errorId : undefined}
+                        value={String(control.value)}
+                        onChange={(event) => {
+                          const target = event.currentTarget;
+                          changeState(
+                            changeDataFilter(current, column, {
+                              value: target.value,
+                            }),
+                          );
+                          if (props.state !== undefined)
+                            queueMicrotask(() => {
+                              if (target.isConnected)
+                                target.value = String(
+                                  dataFilterControl(
+                                    column,
+                                    latest.current.filters,
+                                  ).value,
+                                );
+                            });
+                        }}
+                      />
+                    ))}
+                  {error && (
+                    <p id={errorId} role="alert">
+                      {error}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+        </div>
+      )}
       {props.loading && (
         <p role="status" data-part="loading">
           {labels.loading}
@@ -348,18 +498,31 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                       aria-label={c.label}
                       type="button"
                       disabled={props.loading}
-                      onClick={() =>
-                        changeState({
-                          sort: nextDataSort(view.sort, c.key),
-                          page: 1,
-                        })
+                      aria-description={labels.sortDescription(
+                        view.sorts.find((sort) => sort.key === c.key)
+                          ?.direction,
+                        view.sorts.findIndex((sort) => sort.key === c.key) + 1,
+                      )}
+                      onClick={(event) =>
+                        changeState(
+                          nextDataTableSort(view.sorts, c.key, event.shiftKey),
+                        )
                       }
                     >
                       {c.label}
-                      {view.sort?.key === c.key && (
+                      {view.sorts.length > 1 &&
+                        view.sorts.some((sort) => sort.key === c.key) && (
+                          <span data-part="sort-priority" aria-hidden="true">
+                            {view.sorts.findIndex(
+                              (sort) => sort.key === c.key,
+                            ) + 1}
+                          </span>
+                        )}
+                      {view.sorts.some((sort) => sort.key === c.key) && (
                         <LoongArkIcon
                           icon={
-                            view.sort?.direction === "asc"
+                            view.sorts.find((sort) => sort.key === c.key)
+                              ?.direction === "asc"
                               ? controlIcons.arrowUp
                               : controlIcons.arrowDown
                           }
