@@ -12,6 +12,7 @@ const child = spawn(
     "tests/data-table-query.spec.ts",
     "tests/data-table-columns.spec.ts",
     "tests/data-table-structure.spec.ts",
+    "tests/data-table-range.spec.ts",
     "tests/virtualization.spec.ts",
     "tests/chart-interaction.spec.ts",
     "tests/questionnaire-types.spec.ts",

@@ -89,3 +89,5 @@ export * from "./table-query";
 export * from "./table-columns";
 
 export * from "./table-structure";
+
+export * from "./table-range";

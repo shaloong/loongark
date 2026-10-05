@@ -4,6 +4,10 @@ import {
   type DataTableColumnOptions,
 } from "./table-columns";
 import type { DataTableStructureLabels } from "./table-structure";
+import type {
+  DataTableCellSelectionLabels,
+  DataTableCellSelectionOptions,
+} from "./table-range";
 import { resolveDataFilterLabels } from "./table-query";
 import {
   createDataTableView,
@@ -26,7 +30,10 @@ export interface DataTableSummary {
   pageCount: number;
 }
 export interface DataTableLabels
-  extends DataTableColumnLabels, DataTableStructureLabels {
+  extends
+    DataTableColumnLabels,
+    DataTableStructureLabels,
+    DataTableCellSelectionLabels {
   filter: string;
   filterPlaceholder: string;
   filterColumn: (column: string) => string;
@@ -64,7 +71,8 @@ export interface DataTableLabels
   batchCount: (count: number) => string;
   batchEnable: (column: string) => string;
 }
-export interface DataTableProps extends DataTableColumnOptions {
+export interface DataTableProps
+  extends DataTableColumnOptions, DataTableCellSelectionOptions {
   groupBy?: readonly string[];
   aggregations?: import("./table-structure").DataTableStructureOptions["aggregations"];
   tree?: { parentKey: string };
@@ -119,6 +127,28 @@ export const dataTableLabels = (
   labels?: DataTableProps["labels"],
 ): DataTableLabels => ({
   ...dataColumnLabels(labels),
+  rangeHint:
+    labels?.rangeHint ??
+    "Arrow keys move between cells; Shift extends a range. Enter edits, Ctrl/Cmd+C copies and Ctrl/Cmd+V pastes.",
+  rangeSelected:
+    labels?.rangeSelected ?? ((count) => `${count} cells selected`),
+  pasteInvalid:
+    labels?.pasteInvalid ?? "The clipboard is not valid tab-separated text.",
+  pasteMismatch:
+    labels?.pasteMismatch ??
+    "Clipboard rows and columns must fit the selected rectangle.",
+  pasteOutside:
+    labels?.pasteOutside ?? "The clipboard extends beyond the current page.",
+  pasteTooLarge:
+    labels?.pasteTooLarge ??
+    "Clipboard text exceeds the 10000-cell or 1048576-character limit.",
+  pasteReadonly:
+    labels?.pasteReadonly ??
+    "The paste includes a missing, duplicate or read-only cell.",
+  copiedCells: labels?.copiedCells ?? ((count) => `Copied ${count} cells`),
+  pastedCells: labels?.pastedCells ?? ((count) => `Pasted ${count} cells`),
+  pasteCanceled:
+    labels?.pasteCanceled ?? "Paste canceled. No changes were accepted.",
   filter: labels?.filter ?? "Filter rows",
   filterPlaceholder: labels?.filterPlaceholder ?? "Filter rows…",
   filterColumn: labels?.filterColumn ?? ((column) => `Filter ${column}`),
@@ -223,6 +253,20 @@ export function restoreDataSelection(
 
 /** 先检查完整结构，再应用列显示/顺序；服务端数据不得重复本地处理。 */
 export function dataTableView(props: DataTableProps, state: DataTableState) {
+  if (props.cellSelection) {
+    const rowKey = props.rowKey ?? "id",
+      ids = props.data.map((row) => row[rowKey]);
+    if (
+      ids.some(
+        (id) =>
+          (typeof id !== "string" && typeof id !== "number") ||
+          String(id) === "" ||
+          (typeof id === "number" && !Number.isFinite(id)),
+      ) ||
+      new Set(ids.map(String)).size !== ids.length
+    )
+      throw Error("DataTable cell selection requires stable unique row IDs");
+  }
   const keys = props.columns.map((column) => column.key);
   if (keys.some((key) => !key) || new Set(keys).size !== keys.length)
     throw Error("DataTable requires unique non-empty column keys");
@@ -714,7 +758,7 @@ export function mountDataTableEditor(
       const input = region.querySelector<
         HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
       >('[data-part="cell-input"]');
-      if (!input) return;
+      if (!input || input.disabled || editor.state?.pending) return;
       intent = undefined;
       input.focus({ preventScroll: true });
       input
@@ -735,14 +779,22 @@ export function mountDataTableEditor(
           element.dataset.columnKey === previous?.columnKey,
       );
       intent = undefined;
-      (trigger ?? region).focus();
+      const cell = props().cellSelection
+        ? trigger?.closest<HTMLElement>("td")
+        : undefined;
+      (cell ?? trigger ?? region).focus();
     }
   };
   const schedule = () => {
     if (intent && !frame) frame = win.requestAnimationFrame(restore);
   };
   const observer = new win.MutationObserver(schedule);
-  observer.observe(region, { childList: true, subtree: true });
+  observer.observe(region, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["disabled", "aria-busy"],
+  });
   const stop = editor.subscribe((focus, previous) => {
     const active = region.ownerDocument.activeElement;
     if (editor.state?.pending && !previous?.pending)

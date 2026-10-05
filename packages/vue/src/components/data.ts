@@ -2,6 +2,10 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  copyDataTableCellRange,
+  dataTableCellSelectionView,
+  renderDataTableRangeCell,
+  mountDataTableCellSelection,
   renderDataTableRowPrefix,
   dataTableGroupText,
   mountDataTableStructure,
@@ -56,6 +60,7 @@ import {
   ref,
   computed,
   watchEffect,
+  watch,
   h,
   onMounted,
   nextTick,
@@ -160,6 +165,9 @@ export const LoongArkDataTable = defineComponent({
     mode: String as PropType<"client" | "server">,
     totalRows: Number,
     virtualization: Object as PropType<DataTableProps["virtualization"]>,
+    cellSelection: Boolean,
+    cellRange: Object as PropType<DataTableProps["cellRange"]>,
+    defaultCellRange: Object as PropType<DataTableProps["defaultCellRange"]>,
     groupBy: Array as PropType<readonly string[]>,
     aggregations: Object as PropType<DataTableProps["aggregations"]>,
     tree: Object as PropType<DataTableProps["tree"]>,
@@ -181,6 +189,11 @@ export const LoongArkDataTable = defineComponent({
     historyLimit: Number,
   },
   emits: {
+    cellRangeChange: (range: Exclude<DataTableProps["cellRange"], undefined>) =>
+      range === null || !!range?.anchor,
+    "update:cellRange": (
+      range: Exclude<DataTableProps["cellRange"], undefined>,
+    ) => range === null || !!range?.anchor,
     expandedRowIdsChange: (ids: string[]) => Array.isArray(ids),
     "update:expandedRowIds": (ids: string[]) => Array.isArray(ids),
     columnKeysChange: (keys: string[]) => Array.isArray(keys),
@@ -194,6 +207,9 @@ export const LoongArkDataTable = defineComponent({
   },
   setup(props, { emit }) {
     const region = ref<HTMLDivElement>();
+    const internalCellRange = ref<DataTableProps["cellRange"]>(
+      copyDataTableCellRange(props.defaultCellRange) ?? null,
+    );
     const internalExpanded = ref<readonly string[] | undefined>(
       props.defaultExpandedRowIds === undefined
         ? undefined
@@ -207,6 +223,11 @@ export const LoongArkDataTable = defineComponent({
       );
     const columnProps = () => ({
       ...props,
+      cellRange:
+        props.cellRange === undefined
+          ? internalCellRange.value
+          : props.cellRange,
+      defaultCellRange: undefined,
       expandedRowIds: props.expandedRowIds ?? internalExpanded.value,
       defaultExpandedRowIds: undefined,
       columnKeys: props.columnKeys ?? internalColumnKeys.value,
@@ -265,7 +286,7 @@ export const LoongArkDataTable = defineComponent({
         stopBatch = mountDataTableBatch(
           batchHost.value,
           batchEditor,
-          () => props,
+          columnProps,
           selected,
         );
     });
@@ -321,6 +342,30 @@ export const LoongArkDataTable = defineComponent({
       emit("update:state", next);
     };
     const view = computed(() => dataTableView(columnProps(), current()));
+    watch(
+      [() => props.cellSelection, () => columnsMounted.value],
+      ([enabled, mounted], _previous, cleanup) => {
+        if (!enabled || !mounted || !region.value) return;
+        cleanup(
+          mountDataTableCellSelection(
+            region.value,
+            () => ({
+              props: { ...columnProps(), state: current() },
+              view: view.value,
+            }),
+            (range) => {
+              if (props.cellRange === undefined)
+                internalCellRange.value = copyDataTableCellRange(range) ?? null;
+              emit("cellRangeChange", copyDataTableCellRange(range) ?? null);
+              emit("update:cellRange", copyDataTableCellRange(range) ?? null);
+            },
+            editor,
+            batchEditor,
+            virtualizer,
+          ),
+        );
+      },
+    );
     let stopStructure: (() => void) | undefined;
     onMounted(() => {
       if (region.value)
@@ -393,7 +438,7 @@ export const LoongArkDataTable = defineComponent({
     watchEffect(() => {
       void batch.value;
       void props.loading;
-      batchEditor.sync(props, selected());
+      batchEditor.sync(columnProps(), selected());
     });
     const pageIds = () =>
         view.value.rows
@@ -438,6 +483,10 @@ export const LoongArkDataTable = defineComponent({
         restoreDataSelection(input, selected(), pageIds(), rowId);
     };
     return () => {
+      const cellSelection = dataTableCellSelectionView(
+        columnProps(),
+        view.value,
+      );
       const labels = dataTableLabels(props.labels),
         model = view.value,
         ids = selected(),
@@ -737,7 +786,7 @@ export const LoongArkDataTable = defineComponent({
             "data-part": "batch-editor",
             hidden: !props.onBatchCommit,
             innerHTML: renderDataTableBatchMarkup(
-              props,
+              columnProps(),
               ids,
               batch.value,
               editId,
@@ -775,6 +824,18 @@ export const LoongArkDataTable = defineComponent({
                       : undefined,
                   style: dataColumnTableStyle(columnProps()),
                   "aria-label": props.label,
+                  role: props.cellSelection ? "grid" : undefined,
+                  "aria-multiselectable": props.cellSelection
+                    ? true
+                    : undefined,
+                  "aria-colcount": props.cellSelection
+                    ? model.columns.length + 1
+                    : undefined,
+                  "aria-description": props.cellSelection
+                    ? labels.rangeHint
+                    : undefined,
+                  "aria-disabled":
+                    props.cellSelection && props.loading ? true : undefined,
                   "aria-rowcount":
                     props.virtualization && model.total > 0
                       ? (props.tree || props.groupBy?.length
@@ -995,6 +1056,7 @@ export const LoongArkDataTable = defineComponent({
                                     "td",
                                     {
                                       key: c.key,
+                                      ...cellSelection?.attributes(id, c.key),
                                       "data-pinned": model.pins.get(c.key),
                                       "data-align": c.align,
                                     },
@@ -1200,29 +1262,41 @@ export const LoongArkDataTable = defineComponent({
                                               : !batch.value.active &&
                                                   !batch.value.pending &&
                                                   editor.canEdit(props, c)
-                                                ? h(
-                                                    "button",
-                                                    {
-                                                      "data-part":
-                                                        "cell-trigger",
-                                                      "data-row-id": id,
-                                                      "data-column-key": c.key,
-                                                      type: "button",
-                                                      "aria-label": `${labels.editCell(c.label, id)}: ${dataTableCellText(row, c) || labels.emptyCell}`,
-                                                      disabled:
-                                                        !!edit.value?.pending,
-                                                    },
-                                                    [
-                                                      dataTableCellText(
-                                                        row,
-                                                        c,
-                                                      ) || labels.emptyCell,
-                                                      h(LoongArkIcon, {
-                                                        icon: controlIcons.pencil,
-                                                        size: "sm",
-                                                      }),
-                                                    ],
-                                                  )
+                                                ? props.cellSelection
+                                                  ? h("span", {
+                                                      innerHTML:
+                                                        renderDataTableRangeCell(
+                                                          columnProps(),
+                                                          row,
+                                                          c,
+                                                          id,
+                                                          !!edit.value?.pending,
+                                                        ),
+                                                    })
+                                                  : h(
+                                                      "button",
+                                                      {
+                                                        "data-part":
+                                                          "cell-trigger",
+                                                        "data-row-id": id,
+                                                        "data-column-key":
+                                                          c.key,
+                                                        type: "button",
+                                                        "aria-label": `${labels.editCell(c.label, id)}: ${dataTableCellText(row, c) || labels.emptyCell}`,
+                                                        disabled:
+                                                          !!edit.value?.pending,
+                                                      },
+                                                      [
+                                                        dataTableCellText(
+                                                          row,
+                                                          c,
+                                                        ) || labels.emptyCell,
+                                                        h(LoongArkIcon, {
+                                                          icon: controlIcons.pencil,
+                                                          size: "sm",
+                                                        }),
+                                                      ],
+                                                    )
                                                 : dataTableCellText(row, c),
                                         ),
                                       ],
@@ -1256,6 +1330,28 @@ export const LoongArkDataTable = defineComponent({
               ),
             ],
           ),
+          props.cellSelection
+            ? h(
+                "div",
+                { "data-part": "range-controls", hidden: !batch.value.pending },
+                [
+                  h("p", {
+                    "data-part": "range-status",
+                    role: "status",
+                    "aria-live": "polite",
+                  }),
+                  h(
+                    "button",
+                    {
+                      type: "button",
+                      "data-part": "range-cancel",
+                      hidden: !batch.value.pending,
+                    },
+                    labels.cancel,
+                  ),
+                ],
+              )
+            : null,
           h("footer", [
             h(
               "span",

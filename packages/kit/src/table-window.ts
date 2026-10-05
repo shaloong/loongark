@@ -40,9 +40,11 @@ export function dataTableVirtualStyle(
   props: DataTableProps,
   view?: ReturnType<typeof dataTableView>,
 ) {
-  return props.virtualization
+  return props.virtualization || props.cellSelection
     ? {
-        height: `${virtualViewportHeight(props.virtualization)}px`,
+        ...(props.virtualization
+          ? { height: `${virtualViewportHeight(props.virtualization)}px` }
+          : {}),
         "--lk-data-table-structure-depth": Math.min(
           8,
           view?.rows.reduce(

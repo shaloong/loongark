@@ -153,3 +153,11 @@ assert.match(
   /aria-label="SSR hidden columns"[\s\S]*data-part="row-expand"/,
 );
 assert.match(html, /Team: Hidden columns group · 1 row/);
+
+assert.match(html, /role="grid"[^>]*aria-multiselectable="true"/);
+assert.match(
+  html,
+  /role="gridcell"[^>]*data-cell-row="range"[^>]*aria-selected="true"/,
+);
+assert.match(html, /Range &lt;safe&gt;/);
+console.log("Svelte 范围选择 SSR 单一焦点、原生grid语义、转义及无回调通过");

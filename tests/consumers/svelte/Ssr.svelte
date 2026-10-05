@@ -439,3 +439,5 @@
   columnKeys={[]}
   groupBy={["team"]}
 />
+
+<L.LoongArkDataTable label="SSR range selection" data={[{id:"range",name:"Range <safe>"}]} columns={[{key:"name",label:"Project",editor:true}]} cellSelection defaultCellRange={{anchor:{rowId:"range",columnKey:"name"},focus:{rowId:"range",columnKey:"name"}}} onCellRangeChange={()=>{throw Error("SSR must not select cells")}} onCellCommit={()=>{throw Error("SSR must not edit cells")}}/>

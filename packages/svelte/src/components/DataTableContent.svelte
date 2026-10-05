@@ -4,6 +4,10 @@
   import { afterUpdate, tick, onMount, onDestroy } from "svelte";
   import {
     dataTableView,
+    copyDataTableCellRange,
+    dataTableCellSelectionView,
+    renderDataTableRangeCell,
+    mountDataTableCellSelection,
     renderDataTableRowPrefix,
     dataTableGroupText,
     mountDataTableStructure,
@@ -63,6 +67,32 @@
     undefined;
   export let mode: "client" | "server" = "client";
   export let virtualization: DataTableProps["virtualization"] = undefined;
+  export let cellSelection = false;
+  export let cellRange: DataTableProps["cellRange"] = undefined;
+  export let defaultCellRange: DataTableProps["defaultCellRange"] = undefined;
+  export let onCellRangeChange: DataTableProps["onCellRangeChange"] = undefined;
+  let internalCellRange = copyDataTableCellRange(defaultCellRange) ?? null;
+  let stopRange: (() => void) | undefined;
+  afterUpdate(() => {
+    if (cellSelection && !stopRange)
+      stopRange = mountDataTableCellSelection(
+        region,
+        () => ({ props: { ...editProps, state: current }, view }),
+        (range) => {
+          if (cellRange === undefined)
+            internalCellRange = copyDataTableCellRange(range) ?? null;
+          onCellRangeChange?.(copyDataTableCellRange(range) ?? null);
+        },
+        editor,
+        batchEditor,
+        virtualizer,
+      );
+    else if (!cellSelection && stopRange) {
+      stopRange();
+      stopRange = undefined;
+    }
+  });
+  onDestroy(() => stopRange?.());
   const virtualizer = createVirtualWindow(
     { keys: [], height: 320 },
     (value) => {
@@ -194,6 +224,10 @@
   $: editId = `lk-data-cell-${instanceId}`;
   $: editProps = {
     data,
+    cellSelection,
+    virtualization,
+    cellRange: cellRange === undefined ? internalCellRange : cellRange,
+    defaultCellRange: undefined,
     columns,
     pageSize,
     rowKey,
@@ -234,6 +268,7 @@
     pageInput: HTMLInputElement | undefined;
   $: current = state ?? { query, sort, sorts, filters, page };
   $: view = dataTableView(editProps, current);
+  $: cellSelectionView = dataTableCellSelectionView(editProps, view);
   $: columnStyle = dataColumnTableStyle(editProps);
   $: text = dataTableLabels(labels);
   $: selected = dataTableSelection(selectedIds ?? internal, view.allIds, mode);
@@ -474,7 +509,7 @@
     style:height={virtualization
       ? dataTableVirtualStyle({ ...editProps, virtualization })?.height
       : undefined}
-    style:--lk-data-table-column-count={virtualization
+    style:--lk-data-table-column-count={virtualization || cellSelection
       ? dataTableVirtualStyle({ ...editProps, virtualization })?.[
           "--lk-data-table-column-count"
         ]
@@ -498,6 +533,11 @@
       style:table-layout={columnStyle.tableLayout}
       style:width={columnStyle.width}
       aria-label={label}
+      role={cellSelection ? "grid" : undefined}
+      aria-multiselectable={cellSelection ? true : undefined}
+      aria-colcount={cellSelection ? view.columns.length + 1 : undefined}
+      {...(cellSelection ? { "aria-description": text.rangeHint } : {})}
+      aria-disabled={cellSelection && loading ? true : undefined}
       aria-rowcount={virtualization && view.total > 0
         ? (tree || groupBy?.length ? view.rows.length : view.total) + 1
         : undefined}
@@ -622,6 +662,7 @@
                 >{/if}</td
             >
             {#each view.columns as c, columnIndex (c.key)}<td
+                {...cellSelectionView?.attributes(id, c.key)}
                 data-pinned={view.pins.get(c.key)}
                 data-align={c.align}
                 ><div
@@ -708,19 +749,29 @@
                           >{/if}
                       </div>
                     {:else if !batch.active && !batch.pending && editor.canEdit(editProps, c)}
-                      <button
-                        data-part="cell-trigger"
-                        data-row-id={id}
-                        data-column-key={c.key}
-                        type="button"
-                        aria-label={`${text.editCell(c.label, id)}: ${dataTableCellText(row, c) || text.emptyCell}`}
-                        disabled={!!edit?.pending}
-                      >
-                        {dataTableCellText(row, c) || text.emptyCell}<Icon
-                          icon={controlIcons.pencil}
-                          size="sm"
-                        />
-                      </button>
+                      {#if cellSelection}<span
+                          >{@html renderDataTableRangeCell(
+                            editProps,
+                            row,
+                            c,
+                            id,
+                            !!edit?.pending,
+                          )}</span
+                        >{:else}
+                        <button
+                          data-part="cell-trigger"
+                          data-row-id={id}
+                          data-column-key={c.key}
+                          type="button"
+                          aria-label={`${text.editCell(c.label, id)}: ${dataTableCellText(row, c) || text.emptyCell}`}
+                          disabled={!!edit?.pending}
+                        >
+                          {dataTableCellText(row, c) || text.emptyCell}<Icon
+                            icon={controlIcons.pencil}
+                            size="sm"
+                          />
+                        </button>
+                      {/if}
                     {:else}{dataTableCellText(row, c)}{/if}
                   </div>
                 </div></td
@@ -740,6 +791,12 @@
       </tbody>
     </table>
   </div>
+  {#if cellSelection}<div data-part="range-controls" hidden={!batch.pending}>
+      <p data-part="range-status" role="status" aria-live="polite"></p>
+      <button type="button" data-part="range-cancel" hidden={!batch.pending}
+        >{text.cancel}</button
+      >
+    </div>{/if}
   <footer>
     <span aria-live="polite"
       ><bdi

@@ -163,6 +163,7 @@
     "DataTable stable multi-column sorting, column text/number/select filters, invalid drafts, server contracts and stale-column reconciliation",
     "DataTable pointer/keyboard column reordering, bounded interactive widths, RTL, controlled rejection, dynamic schema and SSR",
     "Four-framework keyboard multi-sort, async focus/scroll anchors and responsive browser consistency",
-    "DataTable multi-level grouping, finite aggregation, root paging, parent-ID tree rows, controlled expansion and filtered ancestor context"
+    "DataTable multi-level grouping, finite aggregation, root paging, parent-ID tree rows, controlled expansion and filtered ancestor context",
+    "DataTable stable cell ranges, keyboard/pointer selection, quoted TSV clipboard, atomic validated paste and shared multi-step history"
   ]
 }

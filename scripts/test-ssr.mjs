@@ -52,6 +52,14 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${columnProps})));`
         : `console.log(renderToString(h(L.LoongArkDataTable,${columnProps})));`;
+  const rangeProps =
+    "{label:'SSR range selection',data:[{id:'range',name:'Range <safe>'}],columns:[{key:'name',label:'Project',editor:true}],cellSelection:true,defaultCellRange:{anchor:{rowId:'range',columnKey:'name'},focus:{rowId:'range',columnKey:'name'}},onCellRangeChange:()=>{throw Error('SSR must not select cells')},onCellCommit:()=>{throw Error('SSR must not edit cells')}}";
+  const rangeScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${rangeProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${rangeProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${rangeProps})));`;
   const structureProps =
     "{label:'SSR groups',data:[{id:'sr1',name:'SSR grouped row',team:'Team <safe>',budget:2},{id:'sr2',name:'SSR second grouped row',team:'Team <safe>',budget:3}],columns:[{key:'name',label:'Project'},{key:'team',label:'Team'},{key:'budget',label:'Budget'}],groupBy:['team'],aggregations:{budget:'sum'},onExpandedRowIdsChange:()=>{throw Error('SSR must not expand rows')}}";
   const structureScript =
@@ -163,6 +171,7 @@ for (const [framework, script] of [
           tableScript +
           queryScript +
           columnScript +
+          rangeScript +
           structureScript +
           structureScript.replace(
             "label:'SSR groups'",
@@ -182,6 +191,12 @@ for (const [framework, script] of [
     ],
     { encoding: "utf8", timeout: 60000 },
   );
+  assert.match(result.stdout, /role="grid"[^>]*aria-multiselectable="true"/);
+  assert.match(
+    result.stdout,
+    /role="gridcell"[^>]*data-cell-row="range"[^>]*aria-selected="true"/,
+  );
+  assert.match(result.stdout, /Range &lt;safe&gt;/);
   assert.match(result.stdout, /data-part="batch-trigger"/);
   assert.match(result.stdout, /Team: Team &lt;safe&gt; · 2 rows/);
   assert.match(result.stdout, /data-row-kind="group"/);

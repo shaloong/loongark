@@ -2,6 +2,10 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  copyDataTableCellRange,
+  dataTableCellSelectionView,
+  renderDataTableRangeCell,
+  mountDataTableCellSelection,
   renderDataTableRowPrefix,
   dataTableGroupText,
   mountDataTableStructure,
@@ -105,6 +109,9 @@ export const LoongArkChart = (props: ChartOptions) => {
   );
 };
 export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
+  const [internalCellRange, setCellRange] = useState<
+    DataTableProps["cellRange"]
+  >(() => copyDataTableCellRange(props.defaultCellRange) ?? null);
   const [internalExpanded, setExpanded] = useState<
     readonly string[] | undefined
   >(() =>
@@ -122,6 +129,9 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
   );
   const columnProps = {
     ...props,
+    cellRange:
+      props.cellRange === undefined ? internalCellRange : props.cellRange,
+    defaultCellRange: undefined,
     expandedRowIds: props.expandedRowIds ?? internalExpanded,
     defaultExpandedRowIds: undefined,
     columnKeys: props.columnKeys ?? internalColumnKeys,
@@ -156,6 +166,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     ]);
   const current = props.state ?? { query, sort, sorts, filters, page };
   const view = dataTableView(columnProps, current);
+  const cellSelection = dataTableCellSelectionView(columnProps, view);
   const region = useRef<HTMLDivElement>(null);
   const structureLatest = useRef({ props: columnProps, view });
   structureLatest.current = { props: columnProps, view };
@@ -263,6 +274,26 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
       );
   }, [editor]);
   useEffect(() => {
+    if (!props.cellSelection || !region.current) return;
+    return mountDataTableCellSelection(
+      region.current,
+      () => ({
+        ...structureLatest.current,
+        props: { ...structureLatest.current.props, state: latest.current },
+      }),
+      (range) => {
+        if (columnRaw.current.cellRange === undefined)
+          setCellRange(copyDataTableCellRange(range) ?? null);
+        columnRaw.current.onCellRangeChange?.(
+          copyDataTableCellRange(range) ?? null,
+        );
+      },
+      editor,
+      batchEditor,
+      virtualizer,
+    );
+  }, [!!props.cellSelection]);
+  useEffect(() => {
     if (region.current) return mountDataTablePins(region.current);
   }, []);
   const pageInput = useRef<HTMLInputElement>(null);
@@ -287,7 +318,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     view.allIds,
     props.mode,
   );
-  batchLatest.current = { props, selected };
+  batchLatest.current = { props: columnProps, selected };
   const pageIds = view.rows
       .filter((entry) => entry.structure?.kind !== "group")
       .map(({ id }) => id),
@@ -556,7 +587,12 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
         data-part="batch-editor"
         hidden={!props.onBatchCommit}
         dangerouslySetInnerHTML={{
-          __html: renderDataTableBatchMarkup(props, selected, batch, editId),
+          __html: renderDataTableBatchMarkup(
+            columnProps,
+            selected,
+            batch,
+            editId,
+          ),
         }}
       />
       {(props.columnReorderable || props.columnResizable) && (
@@ -581,6 +617,15 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
               : undefined
           }
           style={dataColumnTableStyle(columnProps)}
+          role={props.cellSelection ? "grid" : undefined}
+          aria-multiselectable={props.cellSelection ? true : undefined}
+          aria-colcount={
+            props.cellSelection ? view.columns.length + 1 : undefined
+          }
+          aria-description={props.cellSelection ? labels.rangeHint : undefined}
+          aria-disabled={
+            props.cellSelection && props.loading ? true : undefined
+          }
           aria-label={label}
           aria-rowcount={
             props.virtualization && view.total > 0
@@ -764,6 +809,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                   {view.columns.map((c, columnIndex) => (
                     <td
                       key={c.key}
+                      {...cellSelection?.attributes(id, c.key)}
                       data-pinned={view.pins.get(c.key)}
                       data-align={c.align}
                     >
@@ -900,20 +946,34 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                           ) : !batch.active &&
                             !batch.pending &&
                             editor.canEdit(props, c) ? (
-                            <button
-                              data-part="cell-trigger"
-                              data-row-id={id}
-                              data-column-key={c.key}
-                              type="button"
-                              aria-label={`${labels.editCell(c.label, id)}: ${dataTableCellText(row, c) || labels.emptyCell}`}
-                              disabled={!!edit?.pending}
-                            >
-                              {dataTableCellText(row, c) || labels.emptyCell}
-                              <LoongArkIcon
-                                icon={controlIcons.pencil}
-                                size="sm"
+                            props.cellSelection ? (
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: renderDataTableRangeCell(
+                                    columnProps,
+                                    row,
+                                    c,
+                                    id,
+                                    !!edit?.pending,
+                                  ),
+                                }}
                               />
-                            </button>
+                            ) : (
+                              <button
+                                data-part="cell-trigger"
+                                data-row-id={id}
+                                data-column-key={c.key}
+                                type="button"
+                                aria-label={`${labels.editCell(c.label, id)}: ${dataTableCellText(row, c) || labels.emptyCell}`}
+                                disabled={!!edit?.pending}
+                              >
+                                {dataTableCellText(row, c) || labels.emptyCell}
+                                <LoongArkIcon
+                                  icon={controlIcons.pencil}
+                                  size="sm"
+                                />
+                              </button>
+                            )
                           ) : (
                             dataTableCellText(row, c)
                           )}
@@ -943,6 +1003,18 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
           </tbody>
         </table>
       </div>
+      {props.cellSelection && (
+        <div data-part="range-controls" hidden={!batch.pending}>
+          <p data-part="range-status" role="status" aria-live="polite" />
+          <button
+            type="button"
+            data-part="range-cancel"
+            hidden={!batch.pending}
+          >
+            {labels.cancel}
+          </button>
+        </div>
+      )}
       <footer>
         <span aria-live="polite">
           <bdi>

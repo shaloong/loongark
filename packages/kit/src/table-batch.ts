@@ -4,6 +4,11 @@ import {
   type DataTableProps,
 } from "./data-table";
 import type { CellValue, DataRow } from "./data-models";
+export interface DataTableCellDraft {
+  rowId: string;
+  columnKey: string;
+  draft: string;
+}
 export interface DataTableBatchChange {
   rowId: string;
   columnKey: string;
@@ -271,6 +276,7 @@ export function createDataTableBatchEditor(
     async save(
       props: DataTableProps,
       operation: boolean | "apply" | "undo" | "redo" = "apply",
+      cells?: readonly DataTableCellDraft[],
     ) {
       if (state.pending || props.loading || !props.onBatchCommit) return;
       latestProps = props;
@@ -283,7 +289,55 @@ export function createDataTableBatchEditor(
           : undoHistory[undoHistory.length - 1];
       const labels = dataTableLabels(props.labels);
       let changes: DataTableBatchChange[] = [];
-      if (replay) {
+      if (cells) {
+        if (state.active || !cells.length || cells.length > 10000) {
+          emit({ error: labels.batchConflict });
+          return "rejected";
+        }
+        const source = new Map(rows(props).map((entry) => [entry.id, entry]));
+        const available = new Map(
+          columns(props).map((column) => [column.key, column]),
+        );
+        const seen = new Map<string, Set<string>>();
+        const frozen = new Map<string, Readonly<DataRow>>();
+        for (const cell of cells) {
+          const entry = source.get(cell.rowId),
+            column = available.get(cell.columnKey);
+          const keys = seen.get(cell.rowId) ?? new Set<string>();
+          if (!entry || !column || keys.has(cell.columnKey)) {
+            emit({ error: labels.pasteReadonly });
+            return "rejected";
+          }
+          keys.add(cell.columnKey);
+          seen.set(cell.rowId, keys);
+          let row = frozen.get(cell.rowId);
+          if (!row) {
+            row = Object.freeze({ ...entry.row });
+            frozen.set(cell.rowId, row);
+          }
+          const result = validateDataTableDraft(props, column, cell.draft, row);
+          if (result.error) {
+            emit({
+              error: `${entry.id} · ${column.label}: ${result.error}`,
+              errorColumn: column.key,
+            });
+            return "rejected";
+          }
+          if (!Object.is(row[column.key], result.value))
+            changes.push({
+              rowId: entry.id,
+              columnKey: column.key,
+              value: result.value,
+              previousValue: row[column.key],
+              row,
+            });
+        }
+        if (!changes.length) {
+          emit({ error: labels.batchNoChanges });
+          return "unchanged";
+        }
+        beforeBegin?.();
+      } else if (replay) {
         if (!history || !expected(props, history)) {
           emit({ error: labels.batchConflict });
           return;
@@ -339,7 +393,7 @@ export function createDataTableBatchEditor(
           return;
         }
       }
-      if (replay) {
+      if (replay || cells) {
         ids = [...new Set(changes.map((change) => change.rowId))];
         snapshot = stamp(props);
         schema = schemaStamp(props);
@@ -379,7 +433,7 @@ export function createDataTableBatchEditor(
             .finally(() => abort.signal.removeEventListener("abort", canceled));
         },
       );
-      if (current !== revision || result.canceled) return;
+      if (current !== revision || result.canceled) return "canceled";
       controller = undefined;
       pendingChanges = undefined;
       if (result.error)
@@ -417,6 +471,10 @@ export function createDataTableBatchEditor(
           "trigger",
         );
       }
+      return result.error ? "rejected" : "applied";
+    },
+    saveCells(props: DataTableProps, cells: readonly DataTableCellDraft[]) {
+      return api.save(props, "apply", cells);
     },
     dispose() {
       cancel();

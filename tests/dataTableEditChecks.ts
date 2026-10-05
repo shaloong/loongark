@@ -69,6 +69,9 @@ export async function checkDataTableEditing(page: Page) {
   await cell("Project").click();
   await input.fill("reserved");
   await input.press("Enter");
+  await expect(input).toBeDisabled();
+  // Firefox 禁用原生输入会退到 body；错误后必须等 DOM 重新启用再恢复。
+  await input.evaluate((node: HTMLInputElement) => node.blur());
   await expect(page.getByRole("alert")).toHaveText(
     "This project name is reserved",
   );

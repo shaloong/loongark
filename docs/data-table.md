@@ -126,3 +126,13 @@ Firefox144.0.2的16项四端明暗、桌面/375px列交互用例及32张LTR/RTL�
 
 
 结构行Linux验收范围与限制见[分组和树行验收](audits/2026-10-05/data-table-structure-linux/acceptance.json)。虚拟结构表格首列按有界深度为缩进和编辑图标留出空间，其他列维持原有密度，手动列宽仍遵守显式列宽配置。
+
+## 单元格范围与批量粘贴
+
+`cellSelection` 启用基于稳定 `rowKey` / 列键的矩形选择；`cellRange`、`defaultCellRange` 与 `onCellRangeChange` 使用 `{ anchor: { rowId, columnKey }, focus: { rowId, columnKey } }`，受控 `null` 明确清空。Vue 同时支持 `v-model:cellRange`。范围按当前页可见数据行和列顺序解析，合成分组行排除；不存在的端点不复活到别的行。正文点击、指针拖动和 Shift + 方向键扩展选择；Home/End 与 Ctrl/Cmd + Home/End 定位，RTL 尊重视觉方向。Enter/F2、双击正文或 Lucide 铅笔进入既有编辑器。输入框保留自己的复制粘贴和撤销行为。
+
+原生剪贴板处理 `text/plain` TSV，支持引号、引号转义和字段内换行；不解析或插入 HTML。单一单元格范围向右下扩展矩阵；已有多格范围只接受可整除的矩形平铺。越界、错误引号、超过 10,000 格或 1,048,576 UTF-16 码元整批拒绝；不自动创建行或截断数据。只读列、行键、禁用选项、重复地址和任意单元格校验失败均不会调用提交回调。数字和选项使用既有编辑器校验。
+
+粘贴通过 `onBatchCommit` 提交一个不可变事务，复用有界多级 Undo/Redo；只有提供方接受并更新数据后才记入历史。Escape 或可见取消按钮中止提交，卸载、查询/页码/列结构变化也中止过期请求；提供方必须遵守 `signal`。外部已获得焦点时不抢回。纵向虚拟化使用共享窗口定位焦点格；触屏保持原生滚动并支持点击选择，真实手机交互另行验收。
+
+范围模式使用原生表格的 `grid`/`gridcell` 语义、`aria-selected` 与单一正文 Tab 入口；表头按钮和行 checkbox 继续保留原生操作，未宣称完整 APG treegrid。窄屏为正文和图标留出最小可读列宽，在表格视口内滚动。提示和错误沿用 `labels` 本地化接口。`DataTableRangeExample` 与 `CellRangeAndPaste` Story 展示这些能力；Linux四端验收及实际平台限制见[范围与粘贴验收](audits/2026-10-05/data-table-range-linux/acceptance.json)。

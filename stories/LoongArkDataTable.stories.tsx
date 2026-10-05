@@ -154,3 +154,19 @@ export const GroupingAndTree: StoryObj = {
   },
   render: () => <DataTableStructureExample />,
 };
+
+import { DataTableRangeExample } from "../examples/react/DataTableRangeExample";
+export const CellRangeAndPaste: StoryObj = {
+  decorators: [withArkExamplePage],
+  parameters: {
+    heading: "Range editing",
+    pageWidth: 850,
+    docs: {
+      description: {
+        story:
+          "指针与键盘范围选择、TSV 复制粘贴、原子校验、可取消事务、多级撤销重做及虚拟定位。",
+      },
+    },
+  },
+  render: () => <DataTableRangeExample />,
+};
