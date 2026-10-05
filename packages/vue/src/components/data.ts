@@ -2,6 +2,12 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  createVirtualWindow,
+  mountVirtualWindow,
+  dataTableVirtualOptions,
+  dataTableVirtualRows,
+  dataTableVirtualStyle,
+  dataTableVirtualInset,
   createDataTableBatchEditor,
   renderDataTableBatchMarkup,
   mountDataTableBatch,
@@ -31,6 +37,7 @@ import {
 } from "@loongark/kit";
 import {
   defineComponent,
+  Fragment,
   useId,
   ref,
   computed,
@@ -122,6 +129,7 @@ export const LoongArkDataTable = defineComponent({
     defaultState: Object as PropType<Partial<DataTableState>>,
     mode: String as PropType<"client" | "server">,
     totalRows: Number,
+    virtualization: Object as PropType<DataTableProps["virtualization"]>,
     columnKeys: Array as PropType<readonly string[]>,
     pinnedColumns: Object as PropType<DataTableProps["pinnedColumns"]>,
     loading: Boolean,
@@ -139,9 +147,12 @@ export const LoongArkDataTable = defineComponent({
   setup(props, { emit }) {
     const region = ref<HTMLDivElement>();
     const batchHost = ref<HTMLDivElement>();
-    const batchEditor = createDataTableBatchEditor((value) => {
-      batch.value = value;
-    });
+    const batchEditor = createDataTableBatchEditor(
+      (value) => {
+        batch.value = value;
+      },
+      () => editor.cancel(),
+    );
     const batch = ref(batchEditor.state);
     let stopBatch: (() => void) | undefined;
     onMounted(() => {
@@ -167,6 +178,7 @@ export const LoongArkDataTable = defineComponent({
           editor,
           () => props,
           () => view.value,
+          () => batchEditor.state.active || batchEditor.state.pending,
         );
     });
     onBeforeUnmount(() => stopEditor?.());
@@ -200,6 +212,48 @@ export const LoongArkDataTable = defineComponent({
       void props.loading;
       editor.sync(props, view.value);
     });
+    const virtualizer = createVirtualWindow(
+      dataTableVirtualOptions(props, view.value),
+      (value) => {
+        virtualState.value = value;
+      },
+    );
+    const virtualState = ref(virtualizer.state);
+    watchEffect(() =>
+      virtualizer.setOptions(dataTableVirtualOptions(props, view.value)),
+    );
+    let stopVirtual: (() => void) | undefined;
+    const virtualMounted = ref(false);
+    onMounted(() => {
+      virtualMounted.value = true;
+    });
+    watchEffect(() => {
+      if (!virtualMounted.value || !region.value) return;
+      const viewport = region.value;
+      if (props.virtualization && !stopVirtual)
+        stopVirtual = mountVirtualWindow(
+          viewport,
+          virtualizer,
+          () => viewport.querySelector("tbody"),
+          () => dataTableVirtualInset(viewport),
+        );
+      else if (!props.virtualization && stopVirtual) {
+        stopVirtual();
+        stopVirtual = undefined;
+      }
+    });
+    onBeforeUnmount(() => stopVirtual?.());
+    const spacer = (size: number, key: string) =>
+      h(
+        "tr",
+        {
+          key,
+          "data-part": "virtual-spacer",
+          "aria-hidden": "true",
+          style: { height: `${size}px` },
+        },
+        [h("td", { colspan: view.value.columns.length + 1 })],
+      );
     const selected = () =>
       dataTableSelection(
         props.selectedIds ?? internal.value,
@@ -312,6 +366,8 @@ export const LoongArkDataTable = defineComponent({
               "data-scope": "table",
               "data-part": "root",
               ref: region,
+              "data-virtualized": props.virtualization ? "true" : undefined,
+              style: dataTableVirtualStyle(props),
               role: "region",
               "aria-label": props.label,
               tabindex: 0,
@@ -323,6 +379,10 @@ export const LoongArkDataTable = defineComponent({
                   "data-scope": "table",
                   "data-part": "table",
                   "aria-label": props.label,
+                  "aria-rowcount":
+                    props.virtualization && model.total > 0
+                      ? model.total + 1
+                      : undefined,
                 },
                 [
                   h("thead", [
@@ -407,208 +467,226 @@ export const LoongArkDataTable = defineComponent({
                       ),
                     ]),
                   ]),
-                  h(
-                    "tbody",
+                  h("tbody", [
                     model.rows.length
-                      ? model.rows.map(({ row, id }) =>
-                          h(
-                            "tr",
-                            {
-                              key: id,
-                              "data-selected": ids.includes(id) || undefined,
-                            },
-                            [
-                              h(
-                                "td",
-                                {
-                                  "data-pinned": model.pinSelection
-                                    ? "start"
-                                    : undefined,
-                                },
-                                [
-                                  h("label", { "data-part": "selection" }, [
-                                    h("input", {
-                                      type: "checkbox",
-                                      disabled: props.loading,
-                                      "aria-label": labels.selectRow(id),
-                                      checked: ids.includes(id),
-                                      onChange: (e: Event) => {
-                                        if (
-                                          e.currentTarget instanceof
-                                          HTMLInputElement
-                                        )
-                                          change(
-                                            toggleDataSelection(
-                                              ids,
-                                              [id],
-                                              e.currentTarget.checked,
-                                            ),
-                                            e.currentTarget,
-                                            id,
-                                          );
-                                      },
-                                    }),
-                                  ]),
-                                ],
-                              ),
-                              ...model.columns.map((c) =>
+                      ? dataTableVirtualRows(
+                          model,
+                          props.virtualization ? virtualState.value : undefined,
+                        ).map(({ row, id, virtualIndex, gap }) =>
+                          h(Fragment, { key: id }, [
+                            gap > 0 ? spacer(gap, `before-${id}`) : null,
+                            h(
+                              "tr",
+                              {
+                                key: id,
+                                "data-virtual-key": props.virtualization
+                                  ? id
+                                  : undefined,
+                                "aria-rowindex": props.virtualization
+                                  ? (model.page - 1) * model.pageSize +
+                                    virtualIndex +
+                                    2
+                                  : undefined,
+                                "data-selected": ids.includes(id) || undefined,
+                              },
+                              [
                                 h(
                                   "td",
                                   {
-                                    key: c.key,
-                                    "data-pinned": model.pins.get(c.key),
-                                    "data-align": c.align,
+                                    "data-pinned": model.pinSelection
+                                      ? "start"
+                                      : undefined,
                                   },
-                                  edit.value?.rowId === id &&
-                                    edit.value?.columnKey === c.key
-                                    ? h(
-                                        "div",
-                                        {
-                                          "data-part": "cell-editor",
-                                          "aria-busy":
-                                            edit.value.pending || undefined,
+                                  [
+                                    h("label", { "data-part": "selection" }, [
+                                      h("input", {
+                                        type: "checkbox",
+                                        disabled: props.loading,
+                                        "aria-label": labels.selectRow(id),
+                                        checked: ids.includes(id),
+                                        onChange: (e: Event) => {
+                                          if (
+                                            e.currentTarget instanceof
+                                            HTMLInputElement
+                                          )
+                                            change(
+                                              toggleDataSelection(
+                                                ids,
+                                                [id],
+                                                e.currentTarget.checked,
+                                              ),
+                                              e.currentTarget,
+                                              id,
+                                            );
                                         },
-                                        [
-                                          h(
-                                            c.editor?.type === "select"
-                                              ? "select"
-                                              : c.editor?.type === "textarea"
-                                                ? "textarea"
-                                                : "input",
-                                            {
-                                              "data-part": "cell-input",
-                                              dir:
-                                                c.editor?.type === "number"
-                                                  ? "ltr"
-                                                  : undefined,
-                                              type:
-                                                c.editor?.type === "number"
-                                                  ? "number"
-                                                  : "text",
-                                              rows: c.editor?.rows ?? 3,
-                                              step: "any",
-                                              value: edit.value.draft,
-                                              "aria-label": labels.editCell(
-                                                c.label,
-                                                id,
-                                              ),
-                                              "aria-invalid":
-                                                !!edit.value.error || undefined,
-                                              "aria-describedby": edit.value
-                                                .error
-                                                ? editId
-                                                : undefined,
-                                              disabled: edit.value.pending,
-                                            },
-                                            c.editor?.type === "select"
-                                              ? [
-                                                  ...((
-                                                    c.editor.options ?? []
-                                                  ).some(
-                                                    (option) =>
-                                                      option.value ===
-                                                      edit.value?.draft,
-                                                  )
-                                                    ? []
-                                                    : [
-                                                        h(
-                                                          "option",
-                                                          {
-                                                            value:
-                                                              edit.value.draft,
-                                                            disabled: true,
-                                                          },
-                                                          edit.value.draft ||
-                                                            labels.emptyCell,
-                                                        ),
-                                                      ]),
-                                                  ...(
-                                                    c.editor.options ?? []
-                                                  ).map((option) =>
-                                                    h(
-                                                      "option",
-                                                      {
-                                                        value: option.value,
-                                                        disabled:
-                                                          option.disabled,
-                                                      },
-                                                      option.label,
-                                                    ),
-                                                  ),
-                                                ]
-                                              : undefined,
-                                          ),
-                                          h(
-                                            "div",
-                                            { "data-part": "cell-actions" },
-                                            [
-                                              h(
-                                                "button",
-                                                {
-                                                  "data-part": "cell-save",
-                                                  type: "button",
-                                                  disabled: edit.value.pending,
-                                                },
-                                                labels.save,
-                                              ),
-                                              h(
-                                                "button",
-                                                {
-                                                  "data-part": "cell-cancel",
-                                                  type: "button",
-                                                },
-                                                labels.cancel,
-                                              ),
-                                            ],
-                                          ),
-                                          edit.value.pending
-                                            ? h(
-                                                "span",
-                                                {
-                                                  "data-part": "cell-status",
-                                                  role: "status",
-                                                },
-                                                labels.saving,
-                                              )
-                                            : null,
-                                          edit.value.error
-                                            ? h(
-                                                "span",
-                                                {
-                                                  id: editId,
-                                                  "data-part": "cell-error",
-                                                  role: "alert",
-                                                },
-                                                edit.value.error,
-                                              )
-                                            : null,
-                                        ],
-                                      )
-                                    : editor.canEdit(props, c)
+                                      }),
+                                    ]),
+                                  ],
+                                ),
+                                ...model.columns.map((c) =>
+                                  h(
+                                    "td",
+                                    {
+                                      key: c.key,
+                                      "data-pinned": model.pins.get(c.key),
+                                      "data-align": c.align,
+                                    },
+                                    edit.value?.rowId === id &&
+                                      edit.value?.columnKey === c.key
                                       ? h(
-                                          "button",
+                                          "div",
                                           {
-                                            "data-part": "cell-trigger",
-                                            "data-row-id": id,
-                                            "data-column-key": c.key,
-                                            type: "button",
-                                            "aria-label": `${labels.editCell(c.label, id)}: ${dataTableCellText(row, c) || labels.emptyCell}`,
-                                            disabled: !!edit.value?.pending,
+                                            "data-part": "cell-editor",
+                                            "aria-busy":
+                                              edit.value.pending || undefined,
                                           },
                                           [
-                                            dataTableCellText(row, c) ||
-                                              labels.emptyCell,
-                                            h(LoongArkIcon, {
-                                              icon: controlIcons.pencil,
-                                              size: "sm",
-                                            }),
+                                            h(
+                                              c.editor?.type === "select"
+                                                ? "select"
+                                                : c.editor?.type === "textarea"
+                                                  ? "textarea"
+                                                  : "input",
+                                              {
+                                                "data-part": "cell-input",
+                                                dir:
+                                                  c.editor?.type === "number"
+                                                    ? "ltr"
+                                                    : undefined,
+                                                type:
+                                                  c.editor?.type === "number"
+                                                    ? "number"
+                                                    : "text",
+                                                rows: c.editor?.rows ?? 3,
+                                                step: "any",
+                                                value: edit.value.draft,
+                                                "aria-label": labels.editCell(
+                                                  c.label,
+                                                  id,
+                                                ),
+                                                "aria-invalid":
+                                                  !!edit.value.error ||
+                                                  undefined,
+                                                "aria-describedby": edit.value
+                                                  .error
+                                                  ? editId
+                                                  : undefined,
+                                                disabled: edit.value.pending,
+                                              },
+                                              c.editor?.type === "select"
+                                                ? [
+                                                    ...((
+                                                      c.editor.options ?? []
+                                                    ).some(
+                                                      (option) =>
+                                                        option.value ===
+                                                        edit.value?.draft,
+                                                    )
+                                                      ? []
+                                                      : [
+                                                          h(
+                                                            "option",
+                                                            {
+                                                              value:
+                                                                edit.value
+                                                                  .draft,
+                                                              disabled: true,
+                                                            },
+                                                            edit.value.draft ||
+                                                              labels.emptyCell,
+                                                          ),
+                                                        ]),
+                                                    ...(
+                                                      c.editor.options ?? []
+                                                    ).map((option) =>
+                                                      h(
+                                                        "option",
+                                                        {
+                                                          value: option.value,
+                                                          disabled:
+                                                            option.disabled,
+                                                        },
+                                                        option.label,
+                                                      ),
+                                                    ),
+                                                  ]
+                                                : undefined,
+                                            ),
+                                            h(
+                                              "div",
+                                              { "data-part": "cell-actions" },
+                                              [
+                                                h(
+                                                  "button",
+                                                  {
+                                                    "data-part": "cell-save",
+                                                    type: "button",
+                                                    disabled:
+                                                      edit.value.pending,
+                                                  },
+                                                  labels.save,
+                                                ),
+                                                h(
+                                                  "button",
+                                                  {
+                                                    "data-part": "cell-cancel",
+                                                    type: "button",
+                                                  },
+                                                  labels.cancel,
+                                                ),
+                                              ],
+                                            ),
+                                            edit.value.pending
+                                              ? h(
+                                                  "span",
+                                                  {
+                                                    "data-part": "cell-status",
+                                                    role: "status",
+                                                  },
+                                                  labels.saving,
+                                                )
+                                              : null,
+                                            edit.value.error
+                                              ? h(
+                                                  "span",
+                                                  {
+                                                    id: editId,
+                                                    "data-part": "cell-error",
+                                                    role: "alert",
+                                                  },
+                                                  edit.value.error,
+                                                )
+                                              : null,
                                           ],
                                         )
-                                      : dataTableCellText(row, c),
+                                      : !batch.value.active &&
+                                          !batch.value.pending &&
+                                          editor.canEdit(props, c)
+                                        ? h(
+                                            "button",
+                                            {
+                                              "data-part": "cell-trigger",
+                                              "data-row-id": id,
+                                              "data-column-key": c.key,
+                                              type: "button",
+                                              "aria-label": `${labels.editCell(c.label, id)}: ${dataTableCellText(row, c) || labels.emptyCell}`,
+                                              disabled: !!edit.value?.pending,
+                                            },
+                                            [
+                                              dataTableCellText(row, c) ||
+                                                labels.emptyCell,
+                                              h(LoongArkIcon, {
+                                                icon: controlIcons.pencil,
+                                                size: "sm",
+                                              }),
+                                            ],
+                                          )
+                                        : dataTableCellText(row, c),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
+                          ]),
                         )
                       : [
                           h("tr", [
@@ -625,7 +703,10 @@ export const LoongArkDataTable = defineComponent({
                             ),
                           ]),
                         ],
-                  ),
+                    props.virtualization && virtualState.value.after > 0
+                      ? spacer(virtualState.value.after, "after")
+                      : null,
+                  ]),
                 ],
               ),
             ],

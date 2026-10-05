@@ -108,3 +108,8 @@ import { DataTableBatchExample } from "../examples/react/DataTableBatchExample";
 export const BatchEditing: StoryObj = {
   render: () => <DataTableBatchExample />,
 };
+
+import { VirtualizationExample } from "../examples/react/VirtualizationExample";
+export const Virtualized: StoryObj = {
+  render: () => <VirtualizationExample mode="table" />,
+};

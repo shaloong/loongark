@@ -5,9 +5,15 @@
 <script lang="ts">
   import { controlIcons } from "@loongark/kit";
   import Icon from "./Icon.svelte";
-  import { afterUpdate, tick, onMount } from "svelte";
+  import { afterUpdate, tick, onMount, onDestroy } from "svelte";
   import {
     dataTableView,
+    createVirtualWindow,
+    mountVirtualWindow,
+    dataTableVirtualOptions,
+    dataTableVirtualRows,
+    dataTableVirtualStyle,
+    dataTableVirtualInset,
     createDataTableBatchEditor,
     renderDataTableBatchMarkup,
     mountDataTableBatch,
@@ -46,6 +52,36 @@
   export let onStateChange: ((state: DataTableState) => void) | undefined =
     undefined;
   export let mode: "client" | "server" = "client";
+  export let virtualization: DataTableProps["virtualization"] = undefined;
+  const virtualizer = createVirtualWindow(
+    { keys: [], height: 320 },
+    (value) => {
+      virtualState = value;
+    },
+  );
+  let virtualState = virtualizer.state;
+  let stopVirtual: (() => void) | undefined;
+  $: virtualizer.setOptions(
+    dataTableVirtualOptions({ ...editProps, virtualization }, view),
+  );
+  $: virtualRows = dataTableVirtualRows(
+    view,
+    virtualization ? virtualState : undefined,
+  );
+  afterUpdate(() => {
+    if (virtualization && !stopVirtual)
+      stopVirtual = mountVirtualWindow(
+        region,
+        virtualizer,
+        () => region.querySelector("tbody"),
+        () => dataTableVirtualInset(region),
+      );
+    else if (!virtualization && stopVirtual) {
+      stopVirtual();
+      stopVirtual = undefined;
+    }
+  });
+  onDestroy(() => stopVirtual?.());
   export let totalRows: number | undefined = undefined;
   export let columnKeys: readonly string[] | undefined = undefined;
   export let pinnedColumns: DataTableProps["pinnedColumns"] = undefined;
@@ -56,9 +92,12 @@
   export let onRetry: (() => void) | undefined = undefined;
   export let onBatchCommit: DataTableProps["onBatchCommit"] = undefined;
   let batchHost: HTMLDivElement;
-  const batchEditor = createDataTableBatchEditor((value) => {
-    batch = value;
-  });
+  const batchEditor = createDataTableBatchEditor(
+    (value) => {
+      batch = value;
+    },
+    () => editor.cancel(),
+  );
   let batch = batchEditor.state;
   $: {
     batch;
@@ -102,6 +141,7 @@
       editor,
       () => editProps,
       () => view,
+      () => batchEditor.state.active || batchEditor.state.pending,
     ),
   );
   let query = defaultState.query ?? "",
@@ -194,11 +234,27 @@
     data-scope="table"
     data-part="root"
     bind:this={region}
+    data-virtualized={virtualization ? "true" : undefined}
+    style:height={virtualization
+      ? dataTableVirtualStyle({ ...editProps, virtualization })?.height
+      : undefined}
+    style:--lk-data-table-column-count={virtualization
+      ? dataTableVirtualStyle({ ...editProps, virtualization })?.[
+          "--lk-data-table-column-count"
+        ]
+      : undefined}
     role="region"
     aria-label={label}
     tabindex="0"
   >
-    <table data-scope="table" data-part="table" aria-label={label}>
+    <table
+      data-scope="table"
+      data-part="table"
+      aria-label={label}
+      aria-rowcount={virtualization && view.total > 0
+        ? view.total + 1
+        : undefined}
+    >
       <thead
         ><tr
           ><th scope="col" data-pinned={view.pinSelection ? "start" : undefined}
@@ -254,7 +310,18 @@
         </tr></thead
       >
       <tbody
-        >{#each view.rows as { row, id } (id)}<tr
+        >{#each virtualRows as { row, id, virtualIndex, gap } (id)}
+          {#if gap > 0}<tr
+              data-part="virtual-spacer"
+              aria-hidden="true"
+              style:height={`${gap}px`}
+              ><td colspan={view.columns.length + 1}></td></tr
+            >{/if}
+          <tr
+            data-virtual-key={virtualization ? id : undefined}
+            aria-rowindex={virtualization
+              ? (view.page - 1) * view.pageSize + virtualIndex + 2
+              : undefined}
             data-selected={selected.includes(id) || undefined}
           >
             <td data-pinned={view.pinSelection ? "start" : undefined}
@@ -339,7 +406,7 @@
                         role="alert">{edit.error}</span
                       >{/if}
                   </div>
-                {:else if editor.canEdit(editProps, c)}
+                {:else if !batch.active && !batch.pending && editor.canEdit(editProps, c)}
                   <button
                     data-part="cell-trigger"
                     data-row-id={id}
@@ -359,8 +426,15 @@
             ><td colspan={view.columns.length + 1} data-part="empty"
               ><span>{loading ? text.loading : text.empty}</span></td
             ></tr
-          >{/each}</tbody
-      >
+          >
+        {/each}
+        {#if virtualization && virtualState.after > 0}<tr
+            data-part="virtual-spacer"
+            aria-hidden="true"
+            style:height={`${virtualState.after}px`}
+            ><td colspan={view.columns.length + 1}></td></tr
+          >{/if}
+      </tbody>
     </table>
   </div>
   <footer>

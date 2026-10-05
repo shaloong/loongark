@@ -9,7 +9,7 @@ React、Vue、Solid、Svelte 使用相同的五个公开名称。共享类型、
 - `LoongArkAttachment`：必需 `name`，可选 `size`（字节）、`href`、`status=ready|uploading|error`、`progress`（0–100，未传表示不确定进度）、`disabled`、`onRemove`、`onRetry`、`onPreview`、`onCancel`。上传与失败状态不显示下载链接；禁用状态禁用下载和操作。`errorLabel` 定义错误说明，`removeLabel/retryLabel/previewLabel/cancelLabel` 同时定义可见与可访问标签；默认短标签为 Remove/Retry/Preview/Cancel，可访问名称包含文件名。上传、文件移除与重试的数据操作由调用者提供。
 - `LoongArkBubble`：内容容器，`side=incoming|outgoing` 控制中性背景。支持长文本与显式换行；无需消息作者或发送状态，适合消息内容与其它回复内容。
 - `LoongArkMessage`：原生 article，必需 `author`，支持 `side`、`dateTime`（机器时间）、`timeLabel`（展示时间）、`status=sent|sending|error`、`statusLabel`、`retryLabel`、`onRetry`。内容可组合 Bubble、Attachment 或其它基础组件。不会自行发送消息，也不解析 HTML/Markdown。
-- `LoongArkMessageScroller`：`label` 命名可聚焦滚动区域，`jumpLabel` 命名回到底部按钮，`onAtBottomChange({atBottom})` 报告跟随状态。初次挂载到最新消息；用户上翻后新消息不强制滚动，前插消息保持当前阅读位置；回到最新后恢复跟随。监听器、MutationObserver 和 ResizeObserver 在卸载时释放。高度可覆盖共享 viewport 的 CSS；默认使用已有控件高度 Token。容器不会接管消息数据、分页或虚拟化。
+- `LoongArkMessageScroller`：`label` 命名可聚焦滚动区域，`jumpLabel` 命名回到底部按钮，`onAtBottomChange({atBottom})` 报告跟随状态。初次挂载到最新消息；用户上翻后新消息不强制滚动，前插消息保持当前阅读位置；回到最新后恢复跟随。监听器、MutationObserver 和 ResizeObserver 在卸载时释放。高度可覆盖共享 viewport 的 CSS；默认使用已有控件高度 Token。容器不会获取消息数据或分页；可选虚拟化见下文。
 - `LoongArkQuestionnaire`：必需 `label/questions`；题型为 `text/single/multiple`。题目具有唯一 `id`、`label`、`description`、`required`，文本支持 `minLength/maxLength`，`when(value)` 控制条件可见性，`validate(answer, value)` 返回同步业务错误说明或 undefined；选项具有唯一 `value`、`label`、`disabled`。`value/defaultValue` 保存答案，`onValueChange({value})` 通知变化，`onComplete({value})` 只在全部题目有效时调用。`disabled/submitting` 阻止交互，`completed` 展示完成状态，`error` 展示提交错误。空题集有明确空状态，不提供提交按钮。显示文本支持 `emptyLabel/successLabel/nextLabel/backLabel/submitLabel/requiredLabel/invalidLabel`。
 
 Questionnaire 在当前题内校验，前进与后退将焦点移动到第一项可用输入，校验失败保留当前题并聚焦。答案按题目与可用选项归一化，移除陈旧题目、无效或禁用选项，去重多选答案。原生 FormData 按题目 id 序列化；多选为同名多个值，未作答的多选无条目。答案长度按去除首尾空白后的字符数校验。题目变化时页码限制到合法范围；需要重新开始一个独立问卷时重新挂载组件。
@@ -59,7 +59,7 @@ MessageScroller 在用户暂停跟随后记录首条可见消息及可见文字�
 
 四端 MessageScrollerAdvancedExample 与 Advanced Story 提供延迟预览、加载取消、历史和新回复同时插入、重置、隐藏与重新挂载。图片复用既有中性媒体示例，媒体真正解码并改变自然高度；示例500ms延迟仅模拟元数据，不假定后端协议。
 
-锚定依赖稳定的消息与文字 DOM 身份：被阅读消息移除时以当前合法位置重新取锚点；文字节点替换时退回消息边界。纯图片内容保留消息边界，不能承诺图片缩放后的内部像素位置。虚拟化、竖排/旋转文本、跨浏览器与真实手机专项验收尚未交付。详细证据见 [媒体锚点验收](audits/2026-10-03/message-anchor-linux/acceptance.json)。
+锚定依赖稳定的消息与文字 DOM 身份：被阅读消息移除时以当前合法位置重新取锚点；文字节点替换时退回消息边界。纯图片内容保留消息边界，不能承诺图片缩放后的内部像素位置。该媒体批次未涵盖虚拟化，后续实现见下文；竖排/旋转文本、跨浏览器与真实手机专项验收尚未交付。详细证据见 [媒体锚点验收](audits/2026-10-03/message-anchor-linux/acceptance.json)。
 
 Button 的 `loading` 会同时禁用交互并设置 `aria-busy=true`；其余情况保留调用方显式 `aria-busy`。预览加载中的取消按钮因此保持可操作，取消/完成后移除忙碌标记；四端均验证调用方 true/false 和 loading 优先级。
 
@@ -76,3 +76,9 @@ Button 的 `loading` 会同时禁用交互并设置 `aria-busy=true`；其余情
 单选/多选的原生控件使用既有尺寸 Token，清除浏览器默认 margin，并与多行标签首行居中对齐；操作区按按钮中心对齐，提交按钮换行后仍位于逻辑结束边缘。四端 `QuestionnaireAsyncExample` 和 `AsyncValidation/LongOptions/CallbackUpdates` Story 展示实际延迟校验、错误重试、取消、题目替换、卸载以及长文本换行。375px 视口验证不等同于真机测试。
 
 校验期间替换 `onComplete` 后，完成时使用最新回调；React 使用实例引用追踪，其他框架使用当前绑定。`CallbackUpdates` 展示更新处理函数后仍由新函数接收结果。
+
+## 消息虚拟化
+
+通过 `virtualization={{keys,height:360,estimateSize:96,overscan:3,scrollToIndex:250}}` 提供稳定且唯一的有序消息键。React/Solid 使用 `renderItem({key,index})`，Vue 使用 item 插槽，Svelte 使用 `item` Snippet；按键读取调用方的最新内容。索引从0开始，改变 scrollToIndex 发出定位命令。默认从最新消息开始，只有用户位于末尾时追加才自动跟随。前插历史、可见内容增高时保留消息边界与内部偏移；正在阅读的键删除后优先定位后一个合法键。
+
+真实测量包含每条消息的容器间距。内容使用原生 list/listitem 与 aria-posinset/aria-setsize；活动焦点消息额外保留，缓冲之外的其他消息卸载，消息组件的局部状态如需跨卸载保存由调用方管理。SSR 输出末尾的估算窗口，不触发 onAtBottomChange。观察器、滚动及焦点监听器在卸载时清理。此模式保证消息边界/内部偏移；原生非虚拟模式继续提供可见文字锚点，不承诺虚拟模式保持文字节点内部的像素位置。

@@ -610,3 +610,5 @@ export type {AttachmentOptions,MessageOptions,ConversationAction,ConversationAct
 
 export * from "./components/icon";
 export type {IconOptions, IconNode} from "@loongark/kit";
+
+export type { VirtualizationOptions, VirtualRenderDetails } from "@loongark/kit";

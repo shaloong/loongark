@@ -154,6 +154,7 @@
     "Questionnaire async validation, cancellable snapshots, retry and first-line option alignment",
     "DataTable text/number drafts, validation, cancellable commit, keyboard/focus and logical alignment",
     "DataTable select/textarea editors, option validation and multiline keyboard contracts",
-    "DataTable atomic batch editor, shared validation, cancellable transaction and conflict-safe undo"
+    "DataTable atomic batch editor, shared validation, cancellable transaction and conflict-safe undo",
+    "DataTable and MessageScroller measured virtualization, stable reading anchors, pinned focus, bounded SSR and lifecycle"
   ]
 }

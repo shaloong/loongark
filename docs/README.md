@@ -132,3 +132,7 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 复杂编辑器验收：[Linux / 四端选择与多行编辑](audits/2026-10-05/data-table-complex-editors-linux/acceptance.json)。
 
 批量编辑已完成四端原子变更、共享校验、取消和冲突安全撤销；验证及限制见 [Linux 验收](audits/2026-10-05/data-table-batch-linux/acceptance.json)。
+
+DataTable 与 MessageScroller 可变高度虚拟化已同步四端：稳定键、真实尺寸测量、阅读锚点、焦点保留与有界 SSR。四端 VirtualizationExample 与两个 Virtualized Story；当前115族、302 Story、四端各790公开值入口、195示例。API 见 [表格](data-table.md#可变行高虚拟化) 和 [消息](conversation.md#消息虚拟化)。
+
+虚拟化验收：四端72项、受影响16项、Linux视觉106项通过；范围、短暂失败与平台限制见 [验收摘要](audits/2026-10-05/virtualization-linux/acceptance.json)。

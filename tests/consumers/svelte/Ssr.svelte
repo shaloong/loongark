@@ -294,3 +294,24 @@
   size={32}
   absoluteStrokeWidth
 />
+
+<LoongArkDataTable
+  data={Array.from({ length: 1000 }, (_, i) => ({
+    id: `v-${i}`,
+    name: `Virtual ${i}`,
+  }))}
+  columns={[{ key: "name", label: "Virtual name" }]}
+  pageSize={1000}
+  virtualization={{ height: 200, estimateSize: 50, overscan: 1 }}
+/>
+<LoongArkMessageScroller
+  virtualization={{
+    keys: Array.from({ length: 500 }, (_, i) => `m-${i}`),
+    height: 200,
+    estimateSize: 50,
+    overscan: 1,
+  }}
+  onAtBottomChange={() => {
+    throw Error("SSR must not emit virtual scroll");
+  }}
+/>

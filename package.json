@@ -20,7 +20,7 @@
     "storybook:build": "storybook build --config-dir .storybook",
     "test:e2e": "pnpm storybook:build && node ./scripts/run-playwright.mjs",
     "visual:test": "pnpm storybook:build && node ./scripts/run-playwright.mjs --project=chromium-visual",
-    "check:contracts": "node scripts/test-theme.mjs && node scripts/check-css-variables.mjs && node scripts/check-api-parity.mjs && node scripts/test-data-models.mjs && node scripts/test-selection-models.mjs && node scripts/test-action-models.mjs && node scripts/test-conversation-models.mjs && node scripts/test-conversation-actions.mjs && node scripts/test-icon-models.mjs && node scripts/test-questionnaire-async.mjs && node scripts/test-data-table-edit.mjs && node scripts/test-data-table-batch.mjs",
+    "check:contracts": "node scripts/test-theme.mjs && node scripts/check-css-variables.mjs && node scripts/check-api-parity.mjs && node scripts/test-data-models.mjs && node scripts/test-selection-models.mjs && node scripts/test-action-models.mjs && node scripts/test-conversation-models.mjs && node scripts/test-conversation-actions.mjs && node scripts/test-icon-models.mjs && node scripts/test-questionnaire-async.mjs && node scripts/test-data-table-edit.mjs && node scripts/test-data-table-batch.mjs && node scripts/test-virtual-window.mjs",
     "check:publication": "node scripts/verify-publication.mjs && node scripts/check-public-types.mjs && node scripts/test-ssr.mjs && node scripts/test-svelte-ssr.mjs",
     "check:svelte": "node node_modules/svelte-check/bin/svelte-check --tsconfig packages/svelte/tsconfig.examples.json",
     "test:frameworks": "node scripts/build-framework-fixtures.mjs && node scripts/build-example-fixtures.mjs && node scripts/run-framework-tests.mjs",

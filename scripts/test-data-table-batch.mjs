@@ -165,3 +165,15 @@ editor.dispose();
 console.log(
   "DataTable batch: atomic validation, immutable change set, accepted update, undo conflict, cancellation, stale validators and escaped markup passed",
 );
+let beginCount = 0;
+const coordinated = createDataTableBatchEditor(
+  () => {},
+  () => beginCount++,
+);
+coordinated.begin(make(), []);
+assert.equal(beginCount, 0);
+coordinated.begin(make(), ["missing"]);
+assert.equal(beginCount, 0);
+coordinated.begin(make(), ["a"]);
+assert.equal(beginCount, 1);
+coordinated.dispose();

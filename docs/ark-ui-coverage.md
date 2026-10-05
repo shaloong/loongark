@@ -39,7 +39,7 @@ Svelte Frame 在写入文档前保存了旧 body，Portal 会挂到脱离文档�
 
 ## 高级能力仍需持续补齐
 
-公开 Ark 原生能力不代表所有 LoongArk 组合组件的高级场景已经全部交付。新版组件与原生 Drawer 已实现，继续处理组合模型的明确能力：DataTable 虚拟化、Chart 缩放/刷选/实时流、Questionnaire 复杂题型、消息虚拟化。具体交付必须同步四端示例、逻辑回归和桌面/手机明暗截图；不通过一个布尔“完整”字段掩盖未验收场景。
+公开 Ark 原生能力不代表所有 LoongArk 组合组件的高级场景已经全部交付。新版组件与原生 Drawer 已实现，继续处理组合模型的明确能力：Chart 缩放/刷选/增量数据、Questionnaire 复杂题型与异步 Collection；DataTable/MessageScroller 虚拟化见后续说明。具体交付必须同步四端示例、逻辑回归和桌面/手机明暗截图；不通过一个布尔“完整”字段掩盖未验收场景。
 
 Linux 手工截图复核修正了裁剪图片顶对齐、手机默认裁剪框越出图片、拖拽命中区域被画成粗白条、分页首尾按钮高度不一致，以及 JSON 导航起点/装饰箭头错误显示焦点框。四端裁剪与 iframe 像素一致；JSON 分隔符空格和 Select 原生箭头有细微差异，保留实际像素对照，不声称四端完全逐像素相同。后续批次公开四端共同的 75 个 Context/ItemContext/Collection 控制 Hook，包括 useAsyncList、useListCollection、useListSelection。公开原生 Hook 仍不代表异步错误、取消、竞争请求等应用情景已经全部专项验收。
 
@@ -61,7 +61,7 @@ Drawer 的命名保持现有 Root/Trigger/Portal/Overlay/Positioner/Content/Titl
 
 四端问卷条件题、格式/跨题同步校验和受控拒绝恢复已进入独立批次，见 [问卷说明](conversation.md) 与 [验收](audits/2026-10-03/questionnaire-advanced-linux/acceptance.json)。这属于 LoongArk 组合能力，Ark UI 没有提供现成问卷组件。
 
-表格 state、服务端分页和 columnKeys 列显示/顺序已同步四端；API 与证据见 [表格说明](data-table.md)。逻辑冻结列已同步四端（见 [冻结列 API](data-table.md#冻结列)）；虚拟化仍未交付；不将这些能力混入 Ark 原生部件覆盖结论。
+表格 state、服务端分页和 columnKeys 列显示/顺序已同步四端；API 与证据见 [表格说明](data-table.md)。逻辑冻结列已同步四端（见 [冻结列 API](data-table.md#冻结列)）；虚拟化见后续批次；不将这些能力混入 Ark 原生部件覆盖结论。
 
 图表受控序列、数值范围与可访问数据表已同步四端，见 [图表说明](chart.md) 与 [验收](audits/2026-10-03/chart-advanced-linux/acceptance.json)。这属于 LoongArk 组合模型能力；缩放/刷选/实时流仍不算已完成。
 
@@ -89,3 +89,5 @@ Drawer 的命名保持现有 Root/Trigger/Portal/Overlay/Positioner/Content/Titl
 ### 完整日期粘贴的原生契约
 
 DateInput 已透传原生完整 ISO 日期粘贴（`YYYY-MM-DD`），无需新增解析器或组件别名。非法日期和空白不替换当前值；min/max 按原生分段约束保留可用日期段，不能假设总是直接返回 min 或 max。范围中粘贴只更新当前取得焦点的端点，真实表单仍提交本地化字符串。四端桌面/手机明暗专项回归见 [日期粘贴验收](audits/2026-10-05/date-input-paste-linux/acceptance.json)。本地化自由文本和日期时间组合仍待验收，不据此声称全部日期能力已完成。
+
+DataTable/MessageScroller 的共享可变行高虚拟化已接入四端、有界 SSR、键盘焦点保留与稳定键阅读锚点；新增 VirtualizationExample 与对应 Story。它属于 LoongArk 组合能力，未新增 Ark 组件别名。

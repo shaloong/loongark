@@ -162,3 +162,7 @@ MessageScroller 媒体与可见文字锚点批次新增四端 MessageScrollerAdv
 Icon 提供四端共享 Lucide 节点、可访问名称、尺寸、固定描边与 RTL；共299个Story，四端各790个公开值入口和187个示例。详细验收见 [图标摘要](audits/2026-10-05/icons-linux/acceptance.json)，完整组件目录仍不代表所有高级能力完成。
 
 批量编辑批次：当前115族、300 Story、四端各790公开值入口、191个框架示例。原子变更集和冲突安全撤销见 [表格说明](data-table.md#批量编辑与撤销)。
+
+虚拟化批次同步 DataTable/MessageScroller、四端 VirtualizationExample 与两个 Virtualized Story：115族、302 Story、四端各790公开值入口、195示例。实际测量、焦点行保留、有界 SSR 与阅读锚点见 [表格](data-table.md#可变行高虚拟化) 与 [消息](conversation.md#消息虚拟化)。
+
+虚拟化验收：四端72项、受影响16项、Linux视觉106项通过；范围、短暂失败与平台限制见 [验收摘要](audits/2026-10-05/virtualization-linux/acceptance.json)。

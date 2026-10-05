@@ -1,0 +1,143 @@
+{
+  "date": "2026-10-05",
+  "branch": "develop",
+  "base": "adcc42c5ff36e300786768facf4b4fe1b07810bc",
+  "scope": [
+    "四端 DataTable/MessageScroller 可变高度窗口、真实测量、稳定键与有界 SSR",
+    "阅读锚点、删除后邻近锚点、末尾跟随、定位与焦点行保留",
+    "单元格与批量编辑互斥、过滤/空状态、重挂与观察器清理",
+    "窄屏内部滚动、原生表格/list 语义与四端一致性"
+  ],
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "platform": "Linux",
+    "browser": "system Chromium 151.0.7922.173",
+    "playwright": "1.57.0"
+  },
+  "validation": {
+    "verify": "passed",
+    "contracts": "passed, including 10000 rows, spacer conservation, focus pin, measurement/prepend/delete anchors, follow-end, empty/context reset and edit coordination",
+    "storybook": "fresh passed",
+    "coverage": "115 families / 302 Story / 790 public LoongArk values per framework / 195 examples",
+    "publicationAndSSR": "passed; bounded table/list markup and no virtual scroll or edit callback in SSR",
+    "svelte": "0 errors, 2 existing warnings",
+    "frameworks": "72 passed, all 195 examples run; includes 16 virtualization combinations",
+    "spacingFollowup": "after whitespace correction, rebuilt all examples and 16 virtualization combinations passed",
+    "affectedE2E": "final 16 passed",
+    "visual": "106 passed, --update-snapshots=none; 98 previous Linux + 8 reviewed new Linux baselines",
+    "axeAndOverflow": "16 virtualization combinations: 0 violations and no page overflow",
+    "transientFailure": "Initial affected suite had one light/375 edit rejection focus failure; no reproducible source cause. Three targeted repeats and the final affected suite all passed. No assertion relaxation or baseline replacement."
+  },
+  "manualReview": {
+    "images": "8 complete Story screenshots at 1280/375, light/dark; 16 framework screenshots via contact sheets; corrected Svelte original reviewed",
+    "observations": "表格表头、值、选择与编辑图标对齐；窄屏仅表内滚动，长字段换行；消息容器留白与回到最新按钮一致。复核并修正 Svelte 示例在 Bubble pre-wrap 中保留的按钮前空白。Solid keyed DOM 移动导致临时 body 失焦，按实际 DOM 移动恢复，外部指针操作清除恢复意图。",
+    "fourFrameworkComparisons": [
+      {
+        "mode": "light",
+        "width": 1280,
+        "framework": "vue",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "light",
+        "width": 1280,
+        "framework": "solid",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "light",
+        "width": 1280,
+        "framework": "svelte",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "light",
+        "width": 375,
+        "framework": "vue",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "light",
+        "width": 375,
+        "framework": "solid",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "light",
+        "width": 375,
+        "framework": "svelte",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "dark",
+        "width": 1280,
+        "framework": "vue",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "dark",
+        "width": 1280,
+        "framework": "solid",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "dark",
+        "width": 1280,
+        "framework": "svelte",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "dark",
+        "width": 375,
+        "framework": "vue",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "dark",
+        "width": 375,
+        "framework": "solid",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      },
+      {
+        "mode": "dark",
+        "width": 375,
+        "framework": "svelte",
+        "differentPixels": 0,
+        "maxChannelDifference": 0,
+        "bounds": null
+      }
+    ],
+    "newLinuxBaselines": 8,
+    "windowsBaselines": "unchanged"
+  },
+  "limitations": [
+    "估算窗口在浏览器测量后修正；只测量已渲染项，不保证未知项的精确总高或初次定位像素。",
+    "表格虚拟化只处理当前页/已加载服务端行，不获取数据。aria 行数按已有分页总量报告。",
+    "消息虚拟化保留键与内部偏移；非虚拟模式的文字节点内部像素锚点不属于虚拟模式契约。卸载项的组件局部状态由调用方保存。",
+    "验收使用系统 Chromium；不等同于固定 Playwright Chromium、Windows、真实手机或跨浏览器。"
+  ],
+  "evidence": "临时截图、联系表、测量和日志保存在忽略目录 .artifacts/advanced-completion；Git仅存本摘要及回归基线。"
+}

@@ -2,6 +2,12 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  createVirtualWindow,
+  mountVirtualWindow,
+  dataTableVirtualOptions,
+  dataTableVirtualRows,
+  dataTableVirtualStyle,
+  dataTableVirtualInset,
   createDataTableBatchEditor,
   renderDataTableBatchMarkup,
   mountDataTableBatch,
@@ -84,10 +90,40 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
   const current = props.state ?? { query, sort, page };
   const view = dataTableView(props, current);
   const region = useRef<HTMLDivElement>(null);
+  const [virtualizer] = useState(() =>
+    createVirtualWindow(dataTableVirtualOptions(props, view), (value) =>
+      setVirtualState(value),
+    ),
+  );
+  const [virtualState, setVirtualState] = useState(virtualizer.state);
+  const virtualLatest = useRef({ props, view });
+  virtualLatest.current = { props, view };
+  useLayoutEffect(() =>
+    virtualizer.setOptions(
+      dataTableVirtualOptions(
+        virtualLatest.current.props,
+        virtualLatest.current.view,
+      ),
+    ),
+  );
+  useEffect(() => {
+    if (region.current && props.virtualization) {
+      const viewport = region.current;
+      return mountVirtualWindow(
+        viewport,
+        virtualizer,
+        () => viewport.querySelector("tbody"),
+        () => dataTableVirtualInset(viewport),
+      );
+    }
+  }, [virtualizer, !!props.virtualization]);
   const editId = useId();
   const batchHost = useRef<HTMLDivElement>(null);
   const [batchEditor] = useState(() =>
-    createDataTableBatchEditor((value) => setBatch(value)),
+    createDataTableBatchEditor(
+      (value) => setBatch(value),
+      () => editor.cancel(),
+    ),
   );
   const [batch, setBatch] = useState(batchEditor.state);
   const batchLatest = useRef({ props, selected: [] as string[] });
@@ -123,6 +159,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
         editor,
         () => editLatest.current.props,
         () => editLatest.current.view,
+        () => batchEditor.state.active || batchEditor.state.pending,
       );
   }, [editor]);
   useEffect(() => {
@@ -238,11 +275,20 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
         data-scope="table"
         data-part="root"
         ref={region}
+        data-virtualized={props.virtualization ? "true" : undefined}
+        style={dataTableVirtualStyle(props)}
         role="region"
         aria-label={label}
         tabIndex={0}
       >
-        <table data-scope="table" data-part="table" aria-label={label}>
+        <table
+          data-scope="table"
+          data-part="table"
+          aria-label={label}
+          aria-rowcount={
+            props.virtualization && view.total > 0 ? view.total + 1 : undefined
+          }
+        >
           <thead>
             <tr>
               <th
@@ -318,136 +364,179 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
             </tr>
           </thead>
           <tbody>
-            {view.rows.map(({ row, id }) => (
-              <tr key={id} data-selected={selected.includes(id) || undefined}>
-                <td data-pinned={view.pinSelection ? "start" : undefined}>
-                  <label data-part="selection">
-                    <input
-                      type="checkbox"
-                      disabled={props.loading}
-                      aria-label={labels.selectRow(id)}
-                      checked={selected.includes(id)}
-                      onChange={(e) =>
-                        change(
-                          toggleDataSelection(
-                            selected,
-                            [id],
-                            e.currentTarget.checked,
-                          ),
-                          e.currentTarget,
-                          id,
-                        )
-                      }
-                    />
-                  </label>
-                </td>
-                {view.columns.map((c) => (
-                  <td
-                    key={c.key}
-                    data-pinned={view.pins.get(c.key)}
-                    data-align={c.align}
+            {dataTableVirtualRows(
+              view,
+              props.virtualization ? virtualState : undefined,
+            ).map(({ row, id, virtualIndex, gap }) => (
+              <React.Fragment key={id}>
+                {gap > 0 && (
+                  <tr
+                    data-part="virtual-spacer"
+                    aria-hidden="true"
+                    style={{ height: `${gap}px` }}
                   >
-                    {edit?.rowId === id && edit?.columnKey === c.key ? (
-                      <div
-                        data-part="cell-editor"
-                        aria-busy={edit?.pending || undefined}
-                      >
-                        {c.editor?.type === "textarea" ? (
-                          <textarea
-                            data-part="cell-input"
-                            value={edit?.draft ?? ""}
-                            aria-label={labels.editCell(c.label, id)}
-                            aria-invalid={!!edit?.error || undefined}
-                            aria-describedby={edit?.error ? editId : undefined}
-                            disabled={edit?.pending}
-                            onChange={() => {}}
-                            rows={c.editor.rows ?? 3}
-                          />
-                        ) : c.editor?.type === "select" ? (
-                          <select
-                            data-part="cell-input"
-                            value={edit?.draft ?? ""}
-                            aria-label={labels.editCell(c.label, id)}
-                            aria-invalid={!!edit?.error || undefined}
-                            aria-describedby={edit?.error ? editId : undefined}
-                            disabled={edit?.pending}
-                            onChange={() => {}}
-                          >
-                            {!(c.editor?.options ?? []).some(
-                              (option) => option.value === edit?.draft,
-                            ) && (
-                              <option value={edit?.draft ?? ""} disabled>
-                                {edit?.draft || labels.emptyCell}
-                              </option>
-                            )}
-                            {(c.editor?.options ?? []).map((option) => (
-                              <option
-                                key={option.value}
-                                value={option.value}
-                                disabled={option.disabled}
-                              >
-                                {option.label}
-                              </option>
-                            ))}
-                          </select>
-                        ) : (
-                          <input
-                            data-part="cell-input"
-                            dir={
-                              c.editor?.type === "number" ? "ltr" : undefined
-                            }
-                            onChange={() => {}}
-                            type={c.editor?.type ?? "text"}
-                            step="any"
-                            value={edit?.draft ?? ""}
-                            aria-label={labels.editCell(c.label, id)}
-                            aria-invalid={!!edit?.error || undefined}
-                            aria-describedby={edit?.error ? editId : undefined}
-                            disabled={edit?.pending}
-                          />
-                        )}
-                        <div data-part="cell-actions">
-                          <button
-                            data-part="cell-save"
-                            type="button"
-                            disabled={edit?.pending}
-                          >
-                            {labels.save}
-                          </button>
-                          <button data-part="cell-cancel" type="button">
-                            {labels.cancel}
-                          </button>
-                        </div>
-                        {edit?.pending && (
-                          <span data-part="cell-status" role="status">
-                            {labels.saving}
-                          </span>
-                        )}
-                        {edit?.error && (
-                          <span id={editId} data-part="cell-error" role="alert">
-                            {edit?.error}
-                          </span>
-                        )}
-                      </div>
-                    ) : editor.canEdit(props, c) ? (
-                      <button
-                        data-part="cell-trigger"
-                        data-row-id={id}
-                        data-column-key={c.key}
-                        type="button"
-                        aria-label={`${labels.editCell(c.label, id)}: ${dataTableCellText(row, c) || labels.emptyCell}`}
-                        disabled={!!edit?.pending}
-                      >
-                        {dataTableCellText(row, c) || labels.emptyCell}
-                        <LoongArkIcon icon={controlIcons.pencil} size="sm" />
-                      </button>
-                    ) : (
-                      dataTableCellText(row, c)
-                    )}
+                    <td colSpan={view.columns.length + 1} />
+                  </tr>
+                )}
+                <tr
+                  data-virtual-key={props.virtualization ? id : undefined}
+                  aria-rowindex={
+                    props.virtualization
+                      ? (view.page - 1) * view.pageSize + virtualIndex + 2
+                      : undefined
+                  }
+                  data-selected={selected.includes(id) || undefined}
+                >
+                  <td data-pinned={view.pinSelection ? "start" : undefined}>
+                    <label data-part="selection">
+                      <input
+                        type="checkbox"
+                        disabled={props.loading}
+                        aria-label={labels.selectRow(id)}
+                        checked={selected.includes(id)}
+                        onChange={(e) =>
+                          change(
+                            toggleDataSelection(
+                              selected,
+                              [id],
+                              e.currentTarget.checked,
+                            ),
+                            e.currentTarget,
+                            id,
+                          )
+                        }
+                      />
+                    </label>
                   </td>
-                ))}
-              </tr>
+                  {view.columns.map((c) => (
+                    <td
+                      key={c.key}
+                      data-pinned={view.pins.get(c.key)}
+                      data-align={c.align}
+                    >
+                      {edit?.rowId === id && edit?.columnKey === c.key ? (
+                        <div
+                          data-part="cell-editor"
+                          aria-busy={edit?.pending || undefined}
+                        >
+                          {c.editor?.type === "textarea" ? (
+                            <textarea
+                              data-part="cell-input"
+                              value={edit?.draft ?? ""}
+                              aria-label={labels.editCell(c.label, id)}
+                              aria-invalid={!!edit?.error || undefined}
+                              aria-describedby={
+                                edit?.error ? editId : undefined
+                              }
+                              disabled={edit?.pending}
+                              onChange={() => {}}
+                              rows={c.editor.rows ?? 3}
+                            />
+                          ) : c.editor?.type === "select" ? (
+                            <select
+                              data-part="cell-input"
+                              value={edit?.draft ?? ""}
+                              aria-label={labels.editCell(c.label, id)}
+                              aria-invalid={!!edit?.error || undefined}
+                              aria-describedby={
+                                edit?.error ? editId : undefined
+                              }
+                              disabled={edit?.pending}
+                              onChange={() => {}}
+                            >
+                              {!(c.editor?.options ?? []).some(
+                                (option) => option.value === edit?.draft,
+                              ) && (
+                                <option value={edit?.draft ?? ""} disabled>
+                                  {edit?.draft || labels.emptyCell}
+                                </option>
+                              )}
+                              {(c.editor?.options ?? []).map((option) => (
+                                <option
+                                  key={option.value}
+                                  value={option.value}
+                                  disabled={option.disabled}
+                                >
+                                  {option.label}
+                                </option>
+                              ))}
+                            </select>
+                          ) : (
+                            <input
+                              data-part="cell-input"
+                              dir={
+                                c.editor?.type === "number" ? "ltr" : undefined
+                              }
+                              onChange={() => {}}
+                              type={c.editor?.type ?? "text"}
+                              step="any"
+                              value={edit?.draft ?? ""}
+                              aria-label={labels.editCell(c.label, id)}
+                              aria-invalid={!!edit?.error || undefined}
+                              aria-describedby={
+                                edit?.error ? editId : undefined
+                              }
+                              disabled={edit?.pending}
+                            />
+                          )}
+                          <div data-part="cell-actions">
+                            <button
+                              data-part="cell-save"
+                              type="button"
+                              disabled={edit?.pending}
+                            >
+                              {labels.save}
+                            </button>
+                            <button data-part="cell-cancel" type="button">
+                              {labels.cancel}
+                            </button>
+                          </div>
+                          {edit?.pending && (
+                            <span data-part="cell-status" role="status">
+                              {labels.saving}
+                            </span>
+                          )}
+                          {edit?.error && (
+                            <span
+                              id={editId}
+                              data-part="cell-error"
+                              role="alert"
+                            >
+                              {edit?.error}
+                            </span>
+                          )}
+                        </div>
+                      ) : !batch.active &&
+                        !batch.pending &&
+                        editor.canEdit(props, c) ? (
+                        <button
+                          data-part="cell-trigger"
+                          data-row-id={id}
+                          data-column-key={c.key}
+                          type="button"
+                          aria-label={`${labels.editCell(c.label, id)}: ${dataTableCellText(row, c) || labels.emptyCell}`}
+                          disabled={!!edit?.pending}
+                        >
+                          {dataTableCellText(row, c) || labels.emptyCell}
+                          <LoongArkIcon icon={controlIcons.pencil} size="sm" />
+                        </button>
+                      ) : (
+                        dataTableCellText(row, c)
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              </React.Fragment>
             ))}
+            {props.virtualization && virtualState.after > 0 && (
+              <tr
+                data-part="virtual-spacer"
+                aria-hidden="true"
+                style={{ height: `${virtualState.after}px` }}
+              >
+                <td colSpan={view.columns.length + 1} />
+              </tr>
+            )}
             {!view.rows.length && (
               <tr>
                 <td colSpan={view.columns.length + 1} data-part="empty">

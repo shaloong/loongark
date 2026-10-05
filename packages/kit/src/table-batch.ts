@@ -24,6 +24,7 @@ export interface DataTableBatchState {
 /** 一次回调包含完整变更集。事务是否落盘仍由调用方负责。 */
 export function createDataTableBatchEditor(
   notify: (state: DataTableBatchState) => void,
+  beforeBegin?: () => void,
 ) {
   let state: DataTableBatchState = {
     active: false,
@@ -155,6 +156,7 @@ export function createDataTableBatchEditor(
         ids.some((id) => !source.some((entry) => entry.id === id))
       )
         return;
+      beforeBegin?.();
       snapshot = stamp(props);
       validators = columns(props).map((column) => column.editor?.validate);
       schema = schemaStamp(props);

@@ -59,6 +59,7 @@ export interface DataTableProps {
   onStateChange?: (state: DataTableState) => void;
   mode?: "client" | "server";
   totalRows?: number;
+  virtualization?: import("./virtual-window").VirtualizationOptions;
   /** 按此顺序显示已有列；不传时显示全部列，空数组允许只保留选择列。 */
   columnKeys?: readonly string[];
   /** 冻结在逻辑起始/结束边；隐藏与未知列忽略，重复列以 start 为准。 */
@@ -613,6 +614,7 @@ export function mountDataTableEditor(
   editor: ReturnType<typeof createDataTableEditor>,
   props: () => DataTableProps,
   view: () => ReturnType<typeof dataTableView>,
+  blocked: () => boolean = () => false,
 ) {
   const win = region.ownerDocument.defaultView;
   if (!win) return () => {};
@@ -662,6 +664,7 @@ export function mountDataTableEditor(
     });
   });
   const click = (event: Event) => {
+    if (blocked()) return;
     if (!(event.target instanceof win.Element)) return;
     const button = event.target.closest<HTMLButtonElement>("button[data-part]");
     if (!button || !region.contains(button)) return;
@@ -676,6 +679,7 @@ export function mountDataTableEditor(
     if (button.dataset.part === "cell-cancel") editor.cancel();
   };
   const input = (event: Event) => {
+    if (blocked()) return;
     if (
       (event.target instanceof win.HTMLInputElement ||
         event.target instanceof win.HTMLTextAreaElement ||
@@ -686,6 +690,7 @@ export function mountDataTableEditor(
   };
   const keydown = (event: KeyboardEvent) => {
     if (
+      blocked() ||
       event.isComposing ||
       !(event.target instanceof win.Element) ||
       !event.target.closest('[data-part="cell-editor"]')

@@ -24,6 +24,16 @@ for (const [framework, script] of [
     `import {renderToString} from 'solid-js/web';import {createComponent as h} from 'solid-js';import * as L from './packages/solid/dist/server/index.js';console.log(renderToString(()=>h(L.LoongArkContainer,{children:[h(L.LoongArkButton,{children:'Hello'}),h(L.LoongArkTextarea,{name:'notes',value:'SSR notes',readOnly:true,autoSize:true,minRows:2,maxRows:5}),h(L.LoongArkChipRemoveTrigger,{children:'Remove'}),h(L.LoongArkTransferList,{items:[{value:'alpha',label:'Alpha'}],defaultValue:['alpha'],name:'assigned'}),h(L.LoongArkTimePicker,{defaultValue:'13:30',name:'meeting',minuteStep:15}),h(L.LoongArkFloatingActionButton,{'aria-label':'Create SSR',children:'＋'}),h(L.LoongArkSpeedDial,{label:'SSR actions',actions:[{value:'new',label:'New'}]}),h(L.LoongArkImageList,{columns:2,children:h(L.LoongArkImageListItem,{children:'Image SSR'})}),h(L.LoongArkMasonry,{columns:2,children:h(L.LoongArkMasonryItem,{children:'Media SSR'})}),h(L.LoongArkBottomNavigationItem,{href:'#home',active:true,children:'Home'})]})));console.log(renderToString(()=>h(L.LoongArkMessageScroller,{label:'SSR conversation',children:[h(L.LoongArkMessage,{author:'Lin',children:[h(L.LoongArkBubble,{children:'Conversation SSR'}),h(L.LoongArkAttachment,{name:'SSR.pdf',status:'uploading'})]}),h(L.LoongArkQuestionnaire,{label:'SSR feedback',questions:[{id:'answer',label:'Your answer',type:'text'}],defaultValue:{answer:'SSR answer'}})]})));process.exit(0);`,
   ],
 ]) {
+  const virtualProps =
+    "{data:Array.from({length:1000},(_,i)=>({id:'v-'+i,name:'Virtual '+i})),columns:[{key:'name',label:'Virtual name'}],pageSize:1000,virtualization:{height:200,estimateSize:50,overscan:1},onCellCommit:()=>{throw Error('SSR must not edit virtual row')}}";
+  const virtualMessageProps =
+    "{virtualization:{keys:Array.from({length:500},(_,i)=>'m-'+i),height:200,estimateSize:50,overscan:1},onAtBottomChange:()=>{throw Error('SSR must not emit virtual scroll')}}";
+  const virtualScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h('div',{},[h(L.LoongArkDataTable,${virtualProps}),h(L.LoongArkMessageScroller,${virtualMessageProps})])})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>[h(L.LoongArkDataTable,${virtualProps}),h(L.LoongArkMessageScroller,${virtualMessageProps})]));`
+        : `console.log(renderToString(h('div',null,h(L.LoongArkDataTable,${virtualProps}),h(L.LoongArkMessageScroller,${virtualMessageProps}))));`;
   const tableProps =
     "{data:[{id:'a',name:'Alpha'}],columns:[{key:'name',label:'Name',editor:{validate:()=>{throw Error('SSR must not validate edit')}}}],onCellCommit:()=>{throw Error('SSR must not save edit')},onBatchCommit:()=>{throw Error('SSR must not save batch')},defaultSelectedIds:['a','missing'],onSelectionChange:()=>{throw Error('SSR must not emit selection updates')}}";
   const tableScript =
@@ -106,7 +116,8 @@ for (const [framework, script] of [
       "-e",
       scriptWithIcon.replace(
         "process.exit(0);",
-        tableScript +
+        virtualScript +
+          tableScript +
           chartScript +
           interactiveChartScript +
           arkScript +
@@ -120,6 +131,17 @@ for (const [framework, script] of [
     { encoding: "utf8", timeout: 60000 },
   );
   assert.match(result.stdout, /data-part="batch-trigger"/);
+  assert.match(result.stdout, /aria-rowcount="1001"/);
+  assert.match(result.stdout, /aria-setsize="500"/);
+  const virtualKeys = [
+    ...result.stdout.matchAll(/data-virtual-key="([^"]+)"/g),
+  ].map((m) => m[1]);
+  assert(
+    virtualKeys.length > 0 && virtualKeys.length < 20,
+    `${framework}: SSR window must be bounded`,
+  );
+  assert(virtualKeys.includes("m-499"));
+  assert(!virtualKeys.includes("v-500"));
   assert.equal(
     result.status,
     0,

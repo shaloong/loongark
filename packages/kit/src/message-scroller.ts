@@ -1,4 +1,12 @@
+import {
+  mountVirtualWindow,
+  virtualViewportHeight,
+  type createVirtualWindow,
+  type VirtualizationOptions,
+  type VirtualWindowOptions,
+} from "./virtual-window";
 export interface MessageScrollerOptions {
+  virtualization?: VirtualizationOptions & { keys: readonly string[] };
   label?: string;
   jumpLabel?: string;
   onAtBottomChange?: (details: { atBottom: boolean }) => void;
@@ -189,9 +197,68 @@ export function mountMessageScroller(
   };
 }
 export const messageScrollerCSS = `
+[data-scope=message-scroller][data-part=content][data-virtualized=true] { display:block;gap:0;padding:0; }
+[data-scope=message-scroller] [data-part=virtual-item] { padding:var(--lk-space-component-sm) var(--lk-space-component-md); }
+[data-scope=message-scroller] [data-part=virtual-spacer] { pointer-events:none; }
+
 [data-scope=message-scroller][data-part=root] { position:relative;min-width:0; }
 [data-scope=message-scroller][data-part=viewport] { height:calc(var(--lk-control-height-lg) * 8);overflow:auto;overscroll-behavior:contain;border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-lg);background:var(--lk-color-semantic-background); }
 [data-scope=message-scroller][data-part=content] { display:flex;flex-direction:column;gap:var(--lk-space-component-md);padding:var(--lk-space-component-md); }
 [data-scope=message-scroller][data-part=jump]:is(button) { position:absolute;bottom:var(--lk-space-component-sm);left:50%;transform:translateX(-50%);max-width:90%;min-height:var(--lk-control-height-md);padding:var(--lk-space-component-xs) var(--lk-space-component-compact);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-pill);background:var(--lk-color-semantic-card);color:var(--lk-color-semantic-cardforeground);box-shadow:var(--lk-shadow-sm);font:inherit;font-size:var(--lk-typography-fontsize-sm);cursor:pointer; }
 [data-scope=message-scroller][data-part=jump][hidden] { display:none; }
 `;
+
+export function messageVirtualOptions(
+  options: MessageScrollerOptions,
+): VirtualWindowOptions {
+  return {
+    ...options.virtualization,
+    keys: options.virtualization?.keys ?? [],
+    height: virtualViewportHeight(options.virtualization),
+    followEnd: true,
+  };
+}
+export function mountVirtualMessageScroller(
+  root: HTMLElement,
+  model: ReturnType<typeof createVirtualWindow>,
+  onChange?: MessageScrollerOptions["onAtBottomChange"],
+) {
+  const viewport = root.querySelector<HTMLElement>(
+      ':scope > [data-part="viewport"]',
+    ),
+    content = viewport?.querySelector<HTMLElement>(
+      ':scope > [data-part="content"]',
+    ),
+    jump = root.querySelector<HTMLButtonElement>(':scope > [data-part="jump"]');
+  if (!viewport || !content || !jump) return () => {};
+  const previousAtBottom = root.dataset.atBottom,
+    previousHidden = jump.hidden;
+  let atBottom = model.state.atBottom;
+  const report = () => {
+    const next = model.state.atBottom;
+    jump.hidden = next;
+    root.dataset.atBottom = String(next);
+    if (next !== atBottom) {
+      atBottom = next;
+      onChange?.({ atBottom: next });
+    }
+  };
+  const stop = model.subscribe(report);
+  const release = mountVirtualWindow(viewport, model, () => content);
+  const click = () => {
+    model.scrollToIndex(model.state.count - 1, "end");
+    viewport.focus({ preventScroll: true });
+  };
+  jump.addEventListener("click", click);
+  report();
+  return () => {
+    stop();
+    release();
+    jump.removeEventListener("click", click);
+    if (root.dataset.atBottom === String(atBottom)) {
+      if (previousAtBottom === undefined) delete root.dataset.atBottom;
+      else root.dataset.atBottom = previousAtBottom;
+    }
+    if (jump.hidden === atBottom) jump.hidden = previousHidden;
+  };
+}

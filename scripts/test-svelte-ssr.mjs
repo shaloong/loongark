@@ -30,6 +30,14 @@ const { default: component } = await import(
 );
 const html = render(component).body;
 assert.match(html, /data-part="batch-trigger"/);
+assert.match(html, /aria-rowcount="1001"/);
+assert.match(html, /aria-setsize="500"/);
+const virtualKeys = [...html.matchAll(/data-virtual-key="([^"]+)"/g)].map(
+  (m) => m[1],
+);
+assert(virtualKeys.length > 0 && virtualKeys.length < 20);
+assert(virtualKeys.includes("m-499"));
+assert(!virtualKeys.includes("v-500"));
 assert.match(
   html,
   /<input(?=[^>]*name="assigned")(?=[^>]*value="alpha")[^>]*>/,

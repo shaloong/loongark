@@ -58,3 +58,8 @@ export const Advanced = {
   decorators: [withArkExamplePage],
   render: () => <MessageScrollerAdvancedExample />,
 };
+
+import { VirtualizationExample } from "../examples/react/VirtualizationExample";
+export const Virtualized = {
+  render: () => <VirtualizationExample mode="messages" />,
+};

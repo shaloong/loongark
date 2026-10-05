@@ -24,7 +24,7 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 
 ## 边界
 
-现支持客户端与服务端标量数据、列显示及顺序控制。已提供逻辑冻结列；已提供文字/数值单元格编辑；未提供虚拟化或指针列拖动；数据请求、取消与竞争处理由调用方负责，不假定业务接口协议。它是已有能力的完善，不声称兼容 MUI Data Grid、Ant Design Table 或第三方表格引擎的全部 API。
+现支持客户端与服务端标量数据、列显示及顺序控制。已提供逻辑冻结列；已提供文字/数值单元格编辑；虚拟化见下文；未提供指针列拖动；数据请求、取消与竞争处理由调用方负责，不假定业务接口协议。它是已有能力的完善，不声称兼容 MUI Data Grid、Ant Design Table 或第三方表格引擎的全部 API。
 
 ## 高级状态与服务端模式
 
@@ -48,7 +48,7 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 
 窄屏至少给中间列保留一个选择单元格宽度的阅读空间（普通列更窄时采用该列宽度），且不小于普通列排序按钮的实际宽度。冻结组过宽时暂停吸附，保留可聚焦的原生横向滚动；可用空间恢复后自动吸附。它不是裁切长列或隐藏数据的替代方式。
 
-四端 DataTableFrozenExample 展示两边冻结、追加/隐藏 Owner、重排列、RTL、横向滚动、选择/排序、空结果和隐藏重挂。独立 Frozen Story 与 Linux 基线见 [冻结列验收](audits/2026-10-04/data-table-frozen-linux/acceptance.json)。仍未提供虚拟化和指针拖动列；不声称全部高级表格能力已交付。
+四端 DataTableFrozenExample 展示两边冻结、追加/隐藏 Owner、重排列、RTL、横向滚动、选择/排序、空结果和隐藏重挂。独立 Frozen Story 与 Linux 基线见 [冻结列验收](audits/2026-10-04/data-table-frozen-linux/acceptance.json)。虚拟化见下文；仍未提供指针拖动列；不声称全部高级表格能力已交付。
 
 ## 单元格编辑与逻辑对齐
 
@@ -62,7 +62,7 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 
 分页、排序、过滤后的视图变化，行数据变化、删除、列隐藏/重排、校验器替换、loading 和卸载会取消草稿。保存及取消恢复原入口，入口不在页面时回到稳定滚动区域；外部控件已经取得焦点时不抢回。SSR 不创建编辑器 DOM、不执行校验或保存；Vue 的 onCellCommit 是带返回值的函数 Prop，不是无返回的 emit 事件，其余端同名回调。Svelte 字段错误ID只在挂载后分配，初始SSR无活动草稿。
 
-新增 labels.editCell(columnLabel,rowId)/save/cancel/saving/invalidNumber/commitError/emptyCell；可完整本地化可见操作、状态与字段名称。四端 DataTableEditExample 和 Editing Story 演示实际异步接受、拒绝、失败重试、取消、隐藏列、删除行、RTL 与重挂。复杂选择器、批量编辑、撤销和虚拟化仍未交付。
+新增 labels.editCell(columnLabel,rowId)/save/cancel/saving/invalidNumber/commitError/emptyCell；可完整本地化可见操作、状态与字段名称。四端 DataTableEditExample 和 Editing Story 演示实际异步接受、拒绝、失败重试、取消、隐藏列、删除行、RTL 与重挂。后续选择/多行、批量编辑/撤销与虚拟化见下文。
 
 
 ### 选择与多行编辑
@@ -80,3 +80,11 @@ textarea 可设置原生 `rows`（默认3），Enter 换行，Ctrl/Command+Enter
 支持跨客户端分页选择；服务端模式只能编辑当前已加载且完整提供给 `data` 的选中行，选中缺失行时按钮不可用。行身份字段和隐藏列不参与编辑。选择集合、选中行、字段配置、校验器、提交回调或 loading 改变会取消过期事务；已接受且与变更集完全吻合的源数据更新允许正常完成。
 
 最近一次接受的批次可撤销；撤销仍通过同一个可取消回调，以逆向变更集提交。源数据需要完整吻合该批次接受后的行快照，否则禁用撤销，避免覆盖调用方后续修改。`value: undefined` 表示恢复原来不存在的键，调用方应删除该键。回调拒绝撤销时保留撤销机会。撤销为单级，并且不是跨刷新持久化历史。`labels` 支持批量动作、计数、字段开关、冲突和空变更说明的本地化。
+
+## 可变行高虚拟化
+
+`virtualization={{height:360,estimateSize:56,overscan:3,scrollToIndex:500}}` 只渲染当前页的可视行及上下缓冲，仍使用原生 table。`height` 是 px，估算高度在浏览器测量后修正；overscan 上限50。`scrollToIndex` 是当前页从0起的索引命令，修改该值时滚动；排序、筛选、换页重新回到开头。服务端模式不会替调用方获取全量数据。
+
+行 id 必须稳定且唯一。活动焦点行离开窗口时额外保留一行，避免输入框、草稿和焦点丢失；失焦后释放。表头保持可见，冻结列沿用既有测量与过宽回退。窄屏在表内水平滚动，长值换行。aria-rowcount/aria-rowindex 保留数据行数和索引；SSR 仅输出估算窗口，不触发提交或滚动回调。
+
+单元格编辑与批量编辑可同时声明；开始批量编辑会取消活动单元格草稿，批量操作结束前阻止新单元格编辑。四端 VirtualizationExample 同时演示千行表格及可变高度消息。

@@ -76,3 +76,6 @@ export * from "./conversation-focus";
 export * from "./icon";
 
 export * from "./table-batch";
+
+export * from "./virtual-window";
+export * from "./table-window";
