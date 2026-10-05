@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-05T05:19:08.461630+00:00",
+  "recordedAt": "2026-10-05T05:34:57.658814+00:00",
   "branch": "develop",
   "baseCommit": "e886e50ba33c622c0ef98fb7b247323ac5015abd",
   "result": "passed",
@@ -113,5 +113,44 @@
     "云端 Pages 域名访问受限制，实际线上检查由 GitHub Actions 执行",
     "不发布 npm，不更新 main"
   ],
-  "deployment": "awaiting automatic CI after develop push"
+  "deployment": {
+    "result": "passed",
+    "sourceCommit": "f02940476f382cb5f257d080d02bbea7452ba268",
+    "featureCommit": "c49f4588e0bc3942bb18a278cef1676c893dd40c",
+    "deliveryCorrection": "首次功能提交遗漏已在本地验收的9个Story文件；以独立fix提交补齐，完整源码的CI与部署成功，未重写历史",
+    "runUrl": "https://github.com/shaloong/loongark/actions/runs/37268139605",
+    "completedAt": "2026-10-05T05:34:19Z",
+    "buildJob": 111629207268,
+    "deployJob": 111629850960,
+    "checks": [
+      "frozen install",
+      "verify",
+      "contracts",
+      "fresh Storybook build",
+      "coverage",
+      "publication and four-framework SSR",
+      "Svelte",
+      "static Storybook smoke",
+      "Pages deployment",
+      "published homepage/iframe/index"
+    ],
+    "ciBrowser": "Playwright Chromium 143.0.7499.4 build v1200; static smoke only, local full visual verification uses system Chromium 151",
+    "publishedUrl": "https://shaloong.github.io/loongark/",
+    "publishedHttpChecks": {
+      "homepage": 200,
+      "iframe.html": 200,
+      "index.json": 200
+    },
+    "publishedRequiredStories": [
+      "components-datatable--frozen",
+      "components-icon--basic"
+    ],
+    "onlineVerifiedBy": "GitHub Actions runner; cloud session direct Pages access remains restricted",
+    "smokeArtifact": {
+      "id": 11326928690,
+      "retentionDays": 14,
+      "expiresAt": "2026-10-19T05:33:53Z",
+      "processFilesCommitted": false
+    }
+  }
 }
