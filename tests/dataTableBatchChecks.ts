@@ -15,6 +15,10 @@ export async function checkDataTableBatch(page: Page) {
   await page
     .getByRole("checkbox", { name: "Change Revenue", exact: true })
     .check();
+  await page
+    .getByRole("checkbox", { name: "Change Owner", exact: true })
+    .check();
+  await form.getByLabel("Owner", { exact: true }).selectOption("Platform");
   const amount = form.getByLabel("Revenue", { exact: true });
   await amount.fill("-1");
   await amount.press("Control+Enter");
@@ -25,11 +29,8 @@ export async function checkDataTableBatch(page: Page) {
     page.getByRole("cell", { name: "2400", exact: true }),
   ).toBeVisible();
   await expect(amount).toHaveAttribute("aria-invalid", "true");
+  await expect(amount).toBeFocused();
   await amount.fill("1250");
-  await page
-    .getByRole("checkbox", { name: "Change Owner", exact: true })
-    .check();
-  await form.getByLabel("Owner", { exact: true }).selectOption("Platform");
   await page
     .getByRole("button", { name: "Apply changes", exact: true })
     .click();
@@ -144,9 +145,15 @@ export async function checkDataTableBatch(page: Page) {
   await page
     .getByRole("button", { name: "Apply changes", exact: true })
     .click();
+  const outside = page.getByRole("button", {
+    name: "Remove first row",
+    exact: true,
+  });
+  await outside.focus();
   await expect(
     page.getByText("Applied batch: 1 cells", { exact: true }),
   ).toBeVisible();
+  await expect(outside).toBeFocused();
   await expect(undo).toBeEnabled();
   await page
     .getByRole("button", { name: "Remove first row", exact: true })

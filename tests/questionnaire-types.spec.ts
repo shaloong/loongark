@@ -44,4 +44,5 @@ for (const framework of ["react", "vue", "solid", "svelte"])
     await expect(number).toHaveValue("0.5");await next();await next();await next();await next();await form.getByRole("button",{name:"Submit",exact:true}).click();await expect(form.getByRole("status")).toHaveText("Thank you for your answers.");
     const saved=JSON.parse(await page.getByLabel("Saved structured answers").innerText());expect(saved.review).toEqual({navigation:"clear",content:"improve"});expect(saved.priority).toEqual(["layout","speed","access"]);
     expect(errors).toEqual([]);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    await page.screenshot({path:`.artifacts/advanced-completion/question-completed-${framework}-${mode}-${width}.png`,fullPage:true});
    });

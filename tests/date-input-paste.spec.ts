@@ -20,13 +20,18 @@ for (const framework of ["react", "vue", "solid", "svelte"])
           await target.evaluate((element, value) => {
             const clipboardData = new DataTransfer();
             clipboardData.setData("text/plain", value);
-            element.dispatchEvent(
-              new ClipboardEvent("paste", {
-                clipboardData,
-                bubbles: true,
-                cancelable: true,
-              }),
-            );
+            // 避免各浏览器 ClipboardEvent 构造器对载荷保留的差异。
+            // 明确注入合成事件的载荷；这里只验证组件消费契约，不代表系统粘贴。
+            const event = new Event("paste", {
+              bubbles: true,
+              cancelable: true,
+            });
+            Object.defineProperty(event, "clipboardData", {
+              value: clipboardData,
+            });
+            if (clipboardData.getData("text/plain") !== value)
+              throw new Error("Synthetic clipboard payload unavailable");
+            element.dispatchEvent(event);
           }, text);
         };
         await paste(" 2026-10-18 ");

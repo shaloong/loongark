@@ -14,5 +14,5 @@
   <L.LoongArkButton variant="outline" onclick={demo.reset}>Reset survey</L.LoongArkButton>
  </L.LoongArkStack>
  {#if snapshot.shown}<L.LoongArkQuestionnaire label="Structured review" questions={complexQuestions} value={snapshot.value} disabled={snapshot.disabled} completed={!!snapshot.saved} onValueChange={demo.change} onComplete={demo.complete} />{/if}
- <output aria-label="Saved structured answers">{snapshot.saved ? JSON.stringify(snapshot.saved) : "No answers saved"}</output>
+ <output aria-label="Saved structured answers" style="min-width:0;max-width:100%;overflow-wrap:anywhere">{snapshot.saved ? JSON.stringify(snapshot.saved) : "No answers saved"}</output>
 </L.LoongArkStack>

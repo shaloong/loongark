@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  observeChartWidth,
   chartRange,
   chartWindow,
   chartZoomRange,
@@ -76,4 +77,71 @@ assert.match(escaped, /&lt;script&gt;/);
 assert.equal(options.data.length, 24);
 console.log(
   "Chart windows: zoom bounds, controlled range normalization, incremental data, missing values, disabled/empty and escaped inspection passed",
+);
+
+// 连续尺寸只在下一帧消费最后一值；取整相同不重绘，卸载取消待提交。
+let callback,
+  nextFrame = 0,
+  canceled = 0,
+  disconnected = false;
+const frames = new Map();
+const reported = [];
+const element = {
+  getBoundingClientRect: () => ({ width: 400.2 }),
+  ownerDocument: {
+    defaultView: {
+      ResizeObserver: class {
+        constructor(fn) {
+          callback = fn;
+        }
+        observe(target) {
+          assert.equal(target, element);
+        }
+        disconnect() {
+          disconnected = true;
+        }
+      },
+      requestAnimationFrame: (fn) => {
+        frames.set(++nextFrame, fn);
+        return nextFrame;
+      },
+      cancelAnimationFrame: (id) => {
+        canceled = id;
+        frames.delete(id);
+      },
+    },
+  },
+};
+const disposeWidth = observeChartWidth(element, (width) =>
+  reported.push(width),
+);
+const resize = (width) =>
+  callback([{ target: element, contentRect: { width } }]);
+const flush = () => {
+  const queued = [...frames.values()];
+  frames.clear();
+  queued.forEach((fn) => fn());
+};
+assert.deepEqual(reported, [400]);
+resize(450);
+resize(480.2);
+assert.equal(frames.size, 1);
+assert.deepEqual(reported, [400]);
+flush();
+assert.deepEqual(reported, [400, 480]);
+resize(480.4);
+flush();
+assert.deepEqual(reported, [400, 480]);
+resize(0);
+flush();
+assert.deepEqual(reported, [400, 480]);
+resize(520);
+disposeWidth();
+assert.equal(disconnected, true);
+assert.ok(canceled > 0);
+assert.equal(frames.size, 0);
+flush();
+assert.deepEqual(reported, [400, 480]);
+console.log(
+  "Chart width: coalescing, rounded deduplication and canceled lifecycle passed",
 );

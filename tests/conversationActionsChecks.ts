@@ -1,7 +1,22 @@
 import { expect, type Page } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 export async function checkConversationActions(page: Page) {
-  await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
+  const chromium =
+    page.context().browser()?.browserType().name() === "chromium";
+  if (chromium)
+    await page
+      .context()
+      .grantPermissions(["clipboard-read", "clipboard-write"]);
+  else
+    await page.evaluate(() => {
+      const clipboard = navigator.clipboard;
+      const write = clipboard.writeText.bind(clipboard);
+      clipboard.writeText = async (value) => {
+        // 保留真实系统写入；其他引擎不支持 Chromium 的权限/读取接口。
+        await write(value);
+        document.documentElement.dataset.writtenClipboard = value;
+      };
+    });
   const message = page.getByRole("article", {
     name: "Message from Lin",
     exact: true,
@@ -77,7 +92,16 @@ export async function checkConversationActions(page: Page) {
   const note = await message.locator("[data-scope=bubble]").innerText();
   await message.getByRole("button", { name: "Copy note", exact: true }).click();
   await expect(feedback()).toHaveText("Note copied");
-  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(note);
+  if (chromium)
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+      note,
+    );
+  else
+    expect(
+      await page.evaluate(
+        () => document.documentElement.dataset.writtenClipboard,
+      ),
+    ).toBe(note);
   await page
     .getByRole("button", { name: "Mark message failed", exact: true })
     .click();

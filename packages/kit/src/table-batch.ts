@@ -226,7 +226,7 @@ export function createDataTableBatchEditor(
     },
     change(key: string, draft: string) {
       // 原生输入在键入时保留节点和选择范围；保存/错误时才通知渲染。
-      if (state.active && !state.pending)
+      if (state.active && !state.pending && state.drafts[key] !== draft)
         state = {
           ...state,
           drafts: { ...state.drafts, [key]: draft },
@@ -495,6 +495,53 @@ export function mountDataTableBatch(
   const win = host.ownerDocument.defaultView;
   if (!win) return () => {};
   let frame = 0;
+  let intent: { focus: "field" | "trigger"; errorColumn?: string } | undefined;
+  const restore = () => {
+    frame = 0;
+    if (!intent) return;
+    const active = host.ownerDocument.activeElement;
+    if (
+      !host.isConnected ||
+      (!host.contains(active) && active !== host.ownerDocument.body)
+    ) {
+      intent = undefined;
+      return;
+    }
+    // 等待框架真正替换旧表单；单次 RAF 可能早于 React 的提交。
+    if (
+      intent.focus === "trigger" &&
+      host.querySelector('[data-part="batch-form"]')
+    )
+      return;
+    const target =
+      intent.focus === "trigger"
+        ? host.querySelector<HTMLElement>(
+            '[data-part="batch-trigger"]:not(:disabled)',
+          )
+        : intent.errorColumn
+          ? host.querySelector<HTMLElement>(
+              '[data-part="batch-input"][aria-invalid="true"]:not(:disabled)',
+            )
+          : (host.querySelector<HTMLElement>(
+              '[data-part="batch-input"]:not(:disabled)',
+            ) ??
+            host.querySelector<HTMLElement>(
+              '[data-part="batch-enable"]:not(:disabled)',
+            ));
+    if (!target) return;
+    intent = undefined;
+    target.focus({ preventScroll: true });
+  };
+  const schedule = () => {
+    if (intent && !frame) frame = win.requestAnimationFrame(restore);
+  };
+  const observer = new win.MutationObserver(schedule);
+  observer.observe(host, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["disabled", "aria-invalid"],
+  });
   const stop = editor.subscribe((focus) => {
     if (
       !focus ||
@@ -503,28 +550,17 @@ export function mountDataTableBatch(
     )
       return;
     win.cancelAnimationFrame(frame);
-    frame = win.requestAnimationFrame(() => {
-      if (
-        !host.isConnected ||
-        (!host.contains(host.ownerDocument.activeElement) &&
-          host.ownerDocument.activeElement !== host.ownerDocument.body)
-      )
-        return;
-      const target =
-        focus === "trigger"
-          ? host.querySelector<HTMLElement>('[data-part="batch-trigger"]')
-          : (host.querySelector<HTMLElement>(
-              '[data-part="batch-input"][aria-invalid="true"]:not(:disabled)',
-            ) ??
-            host.querySelector<HTMLElement>(
-              '[data-part="batch-input"]:not(:disabled)',
-            ) ??
-            host.querySelector<HTMLElement>(
-              '[data-part="batch-enable"]:not(:disabled)',
-            ));
-      target?.focus();
-    });
+    frame = 0;
+    // 原生 change/后续输入可以清掉模型错误；焦点请求使用通知时的快照。
+    intent = { focus, errorColumn: editor.state.errorColumn };
+    schedule();
   });
+  const abandon = (event: Event) => {
+    if (event.target instanceof win.Element && !host.contains(event.target))
+      intent = undefined;
+  };
+  host.ownerDocument.addEventListener("pointerdown", abandon, true);
+  host.ownerDocument.addEventListener("focusin", abandon, true);
   const input = (event: Event) => {
     const target = event.target;
     if (!(
@@ -533,6 +569,7 @@ export function mountDataTableBatch(
       target instanceof win.HTMLTextAreaElement
     ))
       return;
+    if (!host.contains(target)) return;
     const key = target.dataset.columnKey;
     if (!key) return;
     if (
@@ -596,7 +633,11 @@ export function mountDataTableBatch(
   host.addEventListener("keydown", keydown);
   return () => {
     stop();
+    observer.disconnect();
+    intent = undefined;
     win.cancelAnimationFrame(frame);
+    host.ownerDocument.removeEventListener("pointerdown", abandon, true);
+    host.ownerDocument.removeEventListener("focusin", abandon, true);
     host.removeEventListener("change", input);
     host.removeEventListener("input", input);
     host.removeEventListener("click", click);

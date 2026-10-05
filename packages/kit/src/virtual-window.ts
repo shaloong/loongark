@@ -267,6 +267,7 @@ export function mountVirtualWindow(
     frame = win.requestAnimationFrame(() => {
       frame = 0;
       sync();
+      restoreMovedFocus();
     });
   };
   const measure = () => {
@@ -355,8 +356,21 @@ export function mountVirtualWindow(
         : undefined,
     );
   };
+  const restoreMovedFocus = () => {
+    inspectMutations(mutation.takeRecords());
+    if (
+      movedFocusedNode &&
+      focusedNode?.isConnected &&
+      viewport.contains(focusedNode) &&
+      viewport.ownerDocument.activeElement === viewport.ownerDocument.body
+    )
+      focusedNode.focus({ preventScroll: true });
+  };
   const blur = (event: FocusEvent) => {
-    if (event.relatedTarget) {
+    if (
+      event.relatedTarget &&
+      event.relatedTarget !== viewport.ownerDocument.body
+    ) {
       focus();
       return;
     }
@@ -365,26 +379,30 @@ export function mountVirtualWindow(
       if (disposed) return;
       inspectMutations(mutation.takeRecords());
       schedule();
-      // keyed DOM 在框架提交时移动，浏览器可能临时把焦点置于 body。
-      if (
-        movedFocusedNode &&
-        previousFocus === focusedNode &&
-        previousFocus?.isConnected &&
-        viewport.contains(previousFocus) &&
-        viewport.ownerDocument.activeElement === viewport.ownerDocument.body
-      )
-        previousFocus.focus({ preventScroll: true });
-      focus();
+      // 保留移动中的焦点意图，后续框架提交/RAF 才可能重新插入节点。
+      if (movedFocusedNode && previousFocus === focusedNode)
+        restoreMovedFocus();
+      else focus();
     });
   };
   const pointer = (event: Event) => {
-    if (event.target instanceof win.Element && !viewport.contains(event.target))
+    if (
+      event.target instanceof win.Element &&
+      !viewport.contains(event.target)
+    ) {
       focusedNode = undefined;
+      movedFocusedNode = false;
+      model.focus(undefined);
+    }
+  };
+  const externalFocus = (event: Event) => {
+    if (event.target !== viewport.ownerDocument.body) pointer(event);
   };
   viewport.addEventListener("scroll", scroll, { passive: true });
   viewport.addEventListener("focusin", focus);
   viewport.addEventListener("focusout", blur);
   viewport.ownerDocument.addEventListener("pointerdown", pointer, true);
+  viewport.ownerDocument.addEventListener("focusin", externalFocus, true);
   schedule();
   return () => {
     disposed = true;
@@ -397,6 +415,7 @@ export function mountVirtualWindow(
     viewport.removeEventListener("focusin", focus);
     viewport.removeEventListener("focusout", blur);
     viewport.ownerDocument.removeEventListener("pointerdown", pointer, true);
+    viewport.ownerDocument.removeEventListener("focusin", externalFocus, true);
     focusedNode = undefined;
     if (viewport.style.overflowAnchor === "none")
       viewport.style.overflowAnchor = previous;

@@ -57,7 +57,13 @@ await editor.save(props);
 assert.equal(calls, 0);
 assert.match(editor.state.error, /b.*below original/);
 assert.equal(props.data[0].amount, 2);
+// 错误渲染引发的原生 blur/change 载荷未变，不得清掉错误字段与焦点依据。
+editor.change("amount", "2");
+assert.match(editor.state.error, /b.*below original/);
+assert.equal(editor.state.errorColumn, "amount");
 editor.change("amount", "5");
+assert.equal(editor.state.error, undefined);
+assert.equal(editor.state.errorColumn, undefined);
 editor.enable("name", true);
 editor.change("name", "New name");
 await editor.save(props);

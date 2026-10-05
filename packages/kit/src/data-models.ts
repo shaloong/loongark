@@ -16,16 +16,35 @@ export const observeChartWidth = (
   element: HTMLElement,
   update: (width: number) => void,
 ): (() => void) => {
+  const win = element.ownerDocument.defaultView;
+  let last = 0,
+    frame = 0,
+    pending = 0;
   const report = (width: number) => {
-    if (width > 0) update(Math.round(width));
+    const rounded = Math.round(width);
+    if (Number.isFinite(rounded) && rounded > 0 && rounded !== last) {
+      last = rounded;
+      update(rounded);
+    }
   };
   report(element.getBoundingClientRect().width);
-  if (typeof ResizeObserver === "undefined") return () => {};
-  const observer = new ResizeObserver((entries) =>
-    report(entries[0].contentRect.width),
-  );
+  if (!win || typeof win.ResizeObserver !== "function") return () => {};
+  // 在下一帧提交尺寸，避免观察回调内同步重绘触发 WebKit 的循环保护。
+  const observer = new win.ResizeObserver((entries) => {
+    const entry = entries.find((entry) => entry.target === element);
+    if (!entry) return;
+    pending = entry.contentRect.width;
+    if (!frame)
+      frame = win.requestAnimationFrame(() => {
+        frame = 0;
+        report(pending);
+      });
+  });
   observer.observe(element);
-  return () => observer.disconnect();
+  return () => {
+    observer.disconnect();
+    win.cancelAnimationFrame(frame);
+  };
 };
 export type DataRow = Record<string, CellValue>;
 export interface DataColumn {

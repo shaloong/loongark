@@ -14,6 +14,6 @@ export function QuestionnaireTypesExample() {
       <L.LoongArkButton variant="outline" onClick={demo.reset}>Reset survey</L.LoongArkButton>
     </L.LoongArkStack>
     {snapshot().shown && <L.LoongArkQuestionnaire label="Structured review" questions={complexQuestions} value={snapshot().value} disabled={snapshot().disabled} completed={!!snapshot().saved} onValueChange={demo.change} onComplete={demo.complete} />}
-    <output aria-label="Saved structured answers">{snapshot().saved ? JSON.stringify(snapshot().saved) : "No answers saved"}</output>
+    <output aria-label="Saved structured answers" style={{"min-width":"0","max-width":"100%","overflow-wrap":"anywhere"}}>{snapshot().saved ? JSON.stringify(snapshot().saved) : "No answers saved"}</output>
   </L.LoongArkStack>;
 }

@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-05",
+  "branch": "develop",
+  "base": "d570c283711185644366a2b05bf1556147e83bc7",
+  "scope": [
+    "共享 Chart 尺寸 RAF 合并/取整去重及 WebKit 原生选项盒模型",
+    "批量编辑 DOM 提交后的触发器/错误字段焦点恢复、未变值 change 保留错误及外部焦点保护",
+    "虚拟行移动后的延迟焦点恢复和外部焦点取消",
+    "Dialog 退场动画最终 visibility:hidden",
+    "四端问卷完成结果窄屏换行",
+    "跨引擎剪贴板、SVG 加载和容器相对锚定测试契约",
+    "CI 四端与 Story 证据分阶段保存，原始默认截图单独保留14天"
+  ],
+  "environment": {
+    "platform": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "playwright": "1.57.0",
+    "browser": "system Chromium 151.0.7922.173",
+    "realDevice": false,
+    "nativeSafari": false
+  },
+  "validation": {
+    "verify": "passed fresh nine-package builds",
+    "contracts": "passed including width coalescing/dedup/cancellation and unchanged draft validation preservation",
+    "storybook": "fresh 306 stories",
+    "coverage": "115 families; 790 public LoongArk values in each adapter; 211 examples",
+    "publication": "four-framework public types and SSR passed",
+    "svelte": "0 errors; 2 existing warnings",
+    "frameworks": "138 passed, 8 Story-only skips; all 211 examples actually ran before final batch-only refinement",
+    "completedQuestionnaire": "16 passed with final result screenshots",
+    "storybookE2e": "104 passed, 137 consumer-only skips before final batch-only refinement",
+    "finalAffected": "fresh consumer rebuild; 16 framework multi-field batch cases + 4 Story batch cases passed",
+    "visual": "130 passed on final build, update-snapshots=none; prior 4 focus failures repaired without baseline updates",
+    "workflow": "YAML parsed; read-only contents; ordered checks; split artifacts; 14-day retention"
+  },
+  "visualReview": {
+    "frameworks": [
+      "react",
+      "vue",
+      "solid",
+      "svelte"
+    ],
+    "modes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1280,
+      375
+    ],
+    "capturesReviewed": [
+      "16 chart interactions",
+      "16 batch states",
+      "16 completed questionnaires",
+      "4 final Story multi-field error-focus captures"
+    ],
+    "baselineChanges": "none; Windows remains independent"
+  },
+  "failuresAndCorrections": [
+    {
+      "run": "first local full visual after initial focus repair",
+      "result": "126 passed, 4 batch cases failed focus assertions before comparing screenshots",
+      "evidence": "native unchanged number change fired during error rerender and cleared errorColumn; focused Owner instead of invalid Revenue",
+      "fix": "snapshot focus intent; ignore unchanged draft payloads; model and four-framework multi-field regressions; rebuild before final affected/visual verification"
+    }
+  ],
+  "crossBrowserEvidence": {
+    "discoveryRun": "https://github.com/shaloong/loongark/actions/runs/37335723376",
+    "status": "Actual Linux Chromium/Firefox/WebKit CI failures and earlier native desktop Safari success were inspected; repairs require the next actual CI run, not closed from local Chromium alone"
+  },
+  "limits": [
+    "Synthetic DateInput paste checks event consumption, not OS clipboard paste.",
+    "Firefox/WebKit clipboard harness awaits real native writeText; only Chromium also checks OS clipboard readback.",
+    "SVG loading asserts complete positive intrinsic dimensions; WebKit intrinsic SVG sizes can differ.",
+    "375px is an emulated viewport, not a real phone.",
+    "Native Safari desktop smoke is not exhaustive Safari/iOS interaction acceptance."
+  ],
+  "evidenceStorage": {
+    "local": ".artifacts/gap-completion/browser-fix-*.log; browser-fix-review; focus-debug-result.json; .artifacts/advanced-completion",
+    "git": "Only this summary; no raw screenshots, logs, contacts or archives added",
+    "ci": "Browser contracts artifacts retained14days; actual repair results pending next run"
+  }
+}

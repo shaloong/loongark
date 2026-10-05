@@ -86,8 +86,16 @@ export async function checkActionMedia(page: Page) {
     .toBe("3");
   for (const img of await page.locator("img").all()) {
     await expect
-      .poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth))
-      .toBe(400);
+      .poll(() =>
+        img.evaluate(
+          (el) =>
+            el instanceof HTMLImageElement &&
+            el.complete &&
+            el.naturalWidth > 0 &&
+            el.naturalHeight > 0,
+        ),
+      )
+      .toBe(true);
   }
   await page.setViewportSize({ width: 375, height: 812 });
   await expect

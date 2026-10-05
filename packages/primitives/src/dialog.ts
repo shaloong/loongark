@@ -157,6 +157,7 @@ const buildDialogStyles = (theme: LoongArkTheme): string => {
   }
   to {
     opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -178,6 +179,7 @@ const buildDialogStyles = (theme: LoongArkTheme): string => {
   }
   to {
     opacity: 0;
+    visibility: hidden;
     transform: translate(-50%, -48%) scale(0.96);
   }
 }
@@ -200,6 +202,7 @@ const buildDialogStyles = (theme: LoongArkTheme): string => {
   }
   to {
     opacity: 0;
+    visibility: hidden;
     transform: translate(-50%, -40%);
   }
 }

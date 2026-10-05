@@ -103,44 +103,44 @@ for (const framework of ["react", "vue", "solid", "svelte"])
         await expect(anchor).toHaveAttribute("aria-posinset", "251");
         await expect(anchor).toHaveAttribute("aria-setsize", "500");
         await page.waitForTimeout(200);
-        const top = await anchor.evaluate(
-          (el) => el.getBoundingClientRect().top,
-        );
+        // 相对滚动容器验证锚定；点击外部按钮可以合法滚动整个页面。
+        const relativeTop = () =>
+          anchor.evaluate(
+            (el) =>
+              el.getBoundingClientRect().top -
+              el.closest('[data-part="viewport"]')!.getBoundingClientRect().top,
+          );
+        const top = await relativeTop();
+        const offset = await scroller
+          .locator('[data-part="viewport"]')
+          .evaluate((el) => el.scrollTop);
         await page
           .getByRole("button", { name: "Add earlier message", exact: true })
           .click();
         await expect(anchor).toHaveAttribute("aria-posinset", "252");
         await expect
-          .poll(async () =>
-            Math.abs(
-              (await anchor.evaluate((el) => el.getBoundingClientRect().top)) -
-                top,
-            ),
+          .poll(() =>
+            scroller
+              .locator('[data-part="viewport"]')
+              .evaluate((el) => el.scrollTop),
           )
+          .toBeGreaterThan(offset);
+        await expect
+          .poll(async () => Math.abs((await relativeTop()) - top))
           .toBeLessThan(2);
         await page
           .getByRole("button", { name: "Append message", exact: true })
           .click();
         await expect(anchor).toHaveAttribute("aria-setsize", "502");
         await expect
-          .poll(async () =>
-            Math.abs(
-              (await anchor.evaluate((el) => el.getBoundingClientRect().top)) -
-                top,
-            ),
-          )
+          .poll(async () => Math.abs((await relativeTop()) - top))
           .toBeLessThan(2);
         await page
           .getByRole("button", { name: "Expand message 251", exact: true })
           .click();
         await expect(anchor).toContainText("Additional detail");
         await expect
-          .poll(async () =>
-            Math.abs(
-              (await anchor.evaluate((el) => el.getBoundingClientRect().top)) -
-                top,
-            ),
-          )
+          .poll(async () => Math.abs((await relativeTop()) - top))
           .toBeLessThan(2);
         await page
           .getByRole("button", { name: "Remove message 251", exact: true })

@@ -43,7 +43,6 @@ jobs:
       - run: pnpm check:svelte
       - run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
       - run: pnpm test:frameworks
-      - run: node scripts/run-playwright.mjs --project=${{ matrix.browser }} --workers=2
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -63,6 +62,41 @@ jobs:
         with:
           name: browser-traces-${{ matrix.browser }}
           path: test-results/**/trace.zip
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - id: stories
+        run: node scripts/run-playwright.mjs --project=${{ matrix.browser }} --workers=2
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.stories.outcome != 'skipped'
+        with:
+          name: story-evidence-${{ matrix.browser }}
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*.json
+            .artifacts/browser-audits/${{ matrix.browser }}/regressions/
+            .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-chart--*.png
+            .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-datatable--*.png
+            .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-questionnaire--*.png
+            .artifacts/advanced-completion/query-story-*.png
+            .artifacts/browser-environment/
+            test-results/**/*.png
+            test-results/**/error-context.md
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.stories.outcome != 'skipped'
+        with:
+          name: story-traces-${{ matrix.browser }}
+          path: test-results/**/trace.zip
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.stories.outcome != 'skipped'
+        with:
+          name: story-default-captures-${{ matrix.browser }}
+          path: .artifacts/browser-audits/${{ matrix.browser }}/after/**/*.png
+          include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore
 
