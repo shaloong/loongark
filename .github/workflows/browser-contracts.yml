@@ -48,12 +48,62 @@ jobs:
         with:
           name: browser-evidence-${{ matrix.browser }}
           path: |
-            .artifacts/browser-audits/${{ matrix.browser }}/
-            .artifacts/advanced-completion/
-            .artifacts/date-paste/
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*.json
             .artifacts/browser-environment/
             test-results/**/*.png
             test-results/**/error-context.md
+            !test-results/**/*react*/**/*.png
+            !test-results/**/*vue*/**/*.png
+            !test-results/**/*solid*/**/*.png
+            !test-results/**/*svelte*/**/*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-captures-${{ matrix.browser }}-react
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*react*.png
+            .artifacts/advanced-completion/*react*.png
+            .artifacts/date-paste/*react*.png
+            test-results/**/*react*/**/*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-captures-${{ matrix.browser }}-vue
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*vue*.png
+            .artifacts/advanced-completion/*vue*.png
+            .artifacts/date-paste/*vue*.png
+            test-results/**/*vue*/**/*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-captures-${{ matrix.browser }}-solid
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*solid*.png
+            .artifacts/advanced-completion/*solid*.png
+            .artifacts/date-paste/*solid*.png
+            test-results/**/*solid*/**/*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-captures-${{ matrix.browser }}-svelte
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*svelte*.png
+            .artifacts/advanced-completion/*svelte*.png
+            .artifacts/date-paste/*svelte*.png
+            test-results/**/*svelte*/**/*.png
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore

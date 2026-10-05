@@ -186,7 +186,9 @@ export const LoongArkDataTable = defineComponent({
     const region = ref<HTMLDivElement>();
     const internalColumnKeys = ref<readonly string[]>(),
       internalColumnWidths = ref<DataTableProps["columnWidths"]>(
-        props.defaultColumnWidths === undefined ? undefined : {...props.defaultColumnWidths},
+        props.defaultColumnWidths === undefined
+          ? undefined
+          : { ...props.defaultColumnWidths },
       );
     const columnProps = () => ({
       ...props,
@@ -217,15 +219,16 @@ export const LoongArkDataTable = defineComponent({
           region.value,
           columnProps,
           (keys) => {
-            if (props.columnKeys === undefined) internalColumnKeys.value = [...keys];
+            if (props.columnKeys === undefined)
+              internalColumnKeys.value = [...keys];
             emit("columnKeysChange", [...keys]);
             emit("update:columnKeys", [...keys]);
           },
           (widths) => {
             if (props.columnWidths === undefined)
-              internalColumnWidths.value = {...widths};
-            emit("columnWidthsChange", {...widths});
-            emit("update:columnWidths", {...widths});
+              internalColumnWidths.value = { ...widths };
+            emit("columnWidthsChange", { ...widths });
+            emit("update:columnWidths", { ...widths });
           },
         ),
       );
@@ -418,6 +421,16 @@ export const LoongArkDataTable = defineComponent({
                   model.sorts.find((sort) => sort.key === c.key)?.direction,
                   model.sorts.findIndex((sort) => sort.key === c.key) + 1,
                 ),
+                onKeydown: (event: KeyboardEvent) => {
+                  if (
+                    event.shiftKey &&
+                    (event.key === "Enter" || event.key === " ")
+                  ) {
+                    event.preventDefault();
+                    if (!event.repeat)
+                      changeState(nextDataTableSort(model.sorts, c.key, true));
+                  }
+                },
                 onClick: (event: MouseEvent) =>
                   changeState(
                     nextDataTableSort(model.sorts, c.key, event.shiftKey),

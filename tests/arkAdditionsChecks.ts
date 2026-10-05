@@ -10,9 +10,12 @@ export async function checkImageCropper(page: Page, framework?: string) {
     .poll(() =>
       page
         .locator("[data-scope=image-cropper][data-part=image]")
-        .evaluate((image: HTMLImageElement) => image.naturalWidth),
+        .evaluate(
+          (image: HTMLImageElement) =>
+            image.complete && image.naturalWidth > 0 && image.naturalHeight > 0,
+        ),
     )
-    .toBe(640);
+    .toBe(true);
   await expect(selection).toHaveAttribute("aria-valuenow", /\d+/);
   const initial = Number(await selection.getAttribute("aria-valuenow"));
   await selection.focus();

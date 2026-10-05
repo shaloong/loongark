@@ -103,7 +103,11 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
   const [internalColumnKeys, setColumnKeys] = createSignal<readonly string[]>();
   const [internalColumnWidths, setColumnWidths] = createSignal<
     DataTableProps["columnWidths"]
-  >(props.defaultColumnWidths === undefined ? undefined : {...props.defaultColumnWidths});
+  >(
+    props.defaultColumnWidths === undefined
+      ? undefined
+      : { ...props.defaultColumnWidths },
+  );
   const columnProps = () => ({
     ...props,
     columnKeys: props.columnKeys ?? internalColumnKeys(),
@@ -132,8 +136,8 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
           props.onColumnKeysChange?.([...keys]);
         },
         (widths) => {
-          if (props.columnWidths === undefined) setColumnWidths({...widths});
-          props.onColumnWidthsChange?.({...widths});
+          if (props.columnWidths === undefined) setColumnWidths({ ...widths });
+          props.onColumnWidthsChange?.({ ...widths });
         },
       ),
     );
@@ -294,6 +298,14 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
           view().sorts.find((sort) => sort.key === c.key)?.direction,
           view().sorts.findIndex((sort) => sort.key === c.key) + 1,
         )}
+        onKeyDown={(event) => {
+          // Firefox 的原生键盘 click 不保留 Shift，直接处理组合键。
+          if (event.shiftKey && (event.key === "Enter" || event.key === " ")) {
+            event.preventDefault();
+            if (!event.repeat)
+              changeState(nextDataTableSort(view().sorts, c.key, true));
+          }
+        }}
         onClick={(event) =>
           changeState(nextDataTableSort(view().sorts, c.key, event.shiftKey))
         }

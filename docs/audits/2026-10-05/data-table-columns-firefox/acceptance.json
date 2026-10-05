@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-05",
+  "commit": "b88bc67580f7d4c7690fb294abf2d0d870046c34",
+  "platform": "Linux GitHub Actions",
+  "browser": "Firefox144.0.2 /Playwright1.57.0",
+  "run": "https://github.com/shaloong/loongark/actions/runs/37359356812",
+  "artifact": "browser-evidence-firefox /11366995886 (14days)",
+  "scope": "四端×明暗×1280/375px全部16列交互用例，含LTR/RTL真实鼠标拖动、窄屏边缘滚动、键盘、列宽边界/取消、冻结、受控拒绝、动态列、卸载和焦点",
+  "result": "column16passed; whole frameworks135passed /19failed /12Story-only skips",
+  "manualReview": "32actual column LTR/RTL PNGs reviewed through8contact sheets; existing neutral palette, local scrolling, wrapped text and column alignment checked.",
+  "limitations": [
+    "375px为模拟视口，未包含真实触摸设备。",
+    "完整套件仍有16Shift+Enter排序及3既有示例焦点/锚点失败，正在独立修复；Firefox平台清单不关闭。",
+    "无Firefox截图自动比较基线；本次为实际截图审阅和行为断言。"
+  ],
+  "evidence": ".artifacts/gap-completion/columns-firefox; process files ignored"
+}

@@ -43,6 +43,8 @@ export async function checkConversationActions(page: Page) {
   await expect(feedback()).toHaveAttribute("role", "status");
   for (const button of await message.getByRole("button").all())
     await expect(button).toBeDisabled();
+  // Firefox 会在待完成按钮禁用时失去焦点；四端均覆盖这个恢复路径。
+  await save().evaluate((el: HTMLButtonElement) => el.blur());
   await save().evaluate((el: HTMLButtonElement) => el.click());
   await expect(saved).toHaveText("Saved drafts: 1");
   await expect(feedback()).toHaveText("Draft saved");

@@ -16,24 +16,35 @@ export function withConversationActionFocus(
     const document = root.ownerDocument,
       view = document.defaultView,
       trigger = initialTrigger;
-    let external = !startedInside;
+    let external = !startedInside,
+      finished = false,
+      frame = 0;
+    let observer: MutationObserver | undefined;
     const moved = (event: Event) => {
       const target = event.target;
       if (
         target instanceof (view?.Element ?? Element) &&
         !root.contains(target) &&
         target !== document.body
-      )
+      ) {
         external = true;
+        cleanup();
+      }
     };
     const pointer = (event: Event) => {
       if (
         event.target instanceof (view?.Element ?? Element) &&
         !root.contains(event.target)
-      )
+      ) {
         external = true;
+        cleanup();
+      }
     };
     const cleanup = () => {
+      finished = true;
+      if (frame) view?.cancelAnimationFrame(frame);
+      frame = 0;
+      observer?.disconnect();
       document.removeEventListener("focusin", moved);
       document.removeEventListener("pointerdown", pointer, true);
       context.signal.removeEventListener("abort", cleanup);
@@ -44,10 +55,23 @@ export function withConversationActionFocus(
     try {
       await handler(context);
     } finally {
-      cleanup();
-      view?.requestAnimationFrame(() => {
-        if (context.signal.aborted || !root.isConnected || external || !trigger)
+      const restore = () => {
+        frame = 0;
+        if (finished) return;
+        if (
+          context.signal.aborted ||
+          !root.isConnected ||
+          external ||
+          !trigger
+        ) {
+          cleanup();
           return;
+        }
+        // handler 完成先于控制器 publish；等待适配层清除忙碌状态。
+        if (root.getAttribute("aria-busy") === "true") {
+          schedule();
+          return;
+        }
         const active = document.activeElement;
         if (
           !active ||
@@ -78,7 +102,21 @@ export function withConversationActionFocus(
               : root);
           restored.focus({ preventScroll: true });
         }
-      });
+        cleanup();
+      };
+      const schedule = () => {
+        if (!finished && !frame && view)
+          frame = view.requestAnimationFrame(restore);
+      };
+      if (view && !finished) {
+        observer = new view.MutationObserver(schedule);
+        observer.observe(root, {
+          attributes: true,
+          childList: true,
+          subtree: true,
+        });
+        schedule();
+      } else cleanup();
     }
   };
 }

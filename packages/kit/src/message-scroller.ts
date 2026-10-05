@@ -44,6 +44,8 @@ export function mountMessageScroller(
         textOffset?: number;
       }
     | undefined;
+  let capturedHeight = 0,
+    capturedViewportHeight = 0;
   const observedRows = new Set<Element>();
   const viewportTop = () =>
     viewport.getBoundingClientRect().top + viewport.clientTop;
@@ -66,6 +68,8 @@ export function mountMessageScroller(
     return range.getBoundingClientRect();
   };
   const capture = () => {
+    capturedHeight = content.getBoundingClientRect().height;
+    capturedViewportHeight = viewport.clientHeight;
     const top = viewportTop(),
       bottom = top + viewport.clientHeight;
     const row = Array.from(content.children).find((child) => {
@@ -159,6 +163,14 @@ export function mountMessageScroller(
     schedule();
   });
   const scroll = () => {
+    // 媒体/字体布局产生的 scroll 可能先于 ResizeObserver，不覆盖旧阅读锚点。
+    if (
+      Math.abs(content.getBoundingClientRect().height - capturedHeight) > 0.5 ||
+      viewport.clientHeight !== capturedViewportHeight
+    ) {
+      schedule();
+      return;
+    }
     report(nearBottom());
     capture();
   };

@@ -101,7 +101,8 @@
   export let onColumnWidthsChange: DataTableProps["onColumnWidthsChange"] =
     undefined;
   let internalColumnKeys: readonly string[] | undefined;
-  let internalColumnWidths = defaultColumnWidths === undefined ? undefined : {...defaultColumnWidths};
+  let internalColumnWidths =
+    defaultColumnWidths === undefined ? undefined : { ...defaultColumnWidths };
   let stopColumns: (() => void) | undefined;
   $: if (columnKeys === undefined)
     internalColumnKeys = reconcileDataColumnOrder(internalColumnKeys, columns);
@@ -120,8 +121,8 @@
           onColumnKeysChange?.([...keys]);
         },
         (widths) => {
-          if (columnWidths === undefined) internalColumnWidths = {...widths};
-          onColumnWidthsChange?.({...widths});
+          if (columnWidths === undefined) internalColumnWidths = { ...widths };
+          onColumnWidthsChange?.({ ...widths });
         },
       );
     else if (!(columnReorderable || columnResizable) && stopColumns) {
@@ -258,6 +259,13 @@
           view.sorts.find((sort) => sort.key === c.key)?.direction,
           view.sorts.findIndex((sort) => sort.key === c.key) + 1,
         ),
+      }}
+      on:keydown={(event) => {
+        if (event.shiftKey && (event.key === "Enter" || event.key === " ")) {
+          event.preventDefault();
+          if (!event.repeat)
+            changeState(nextDataTableSort(view.sorts, c.key, true));
+        }
       }}
       on:click={(event) =>
         changeState(nextDataTableSort(view.sorts, c.key, event.shiftKey))}

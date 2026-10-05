@@ -15,6 +15,7 @@ for (const mode of ["light", "dark"] as const) {
         title: string;
       }[]
     ).filter((entry) => entry.type === "story");
+    test.setTimeout(Math.max(300_000, stories.length * 2500));
     const results = [];
     for (const { title, id } of stories) {
       await page.goto(

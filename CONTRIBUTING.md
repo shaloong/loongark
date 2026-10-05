@@ -75,6 +75,6 @@ CROSS_BROWSER=1 BROWSER_PROJECT=webkit pnpm test:frameworks
 CROSS_BROWSER=1 node scripts/run-playwright.mjs --project=webkit --workers=2
 ```
 
-矩阵不运行 Chromium 截图比较；它在四端测试后先保存对应浏览器实际交互截图、失败截图和环境信息，再运行 Story，避免测试结果目录被后续命令覆盖。Story 摘要/代表场景、trace 与全部默认截图分别保存，CI Artifact 保留14天。首次验收仍须下载并目视检查实际截图，不因添加流水线就宣称通过。
+矩阵不运行 Chromium 截图比较；它在四端测试后先保存对应浏览器实际交互截图、失败截图和环境信息，再运行 Story，避免测试结果目录被后续命令覆盖。四端截图按框架拆分归档，环境信息与错误摘要单独保存，避免单个证据ZIP过大。Story 摘要/代表场景、trace 与全部默认截图分别保存，CI Artifact 保留14天。首次验收仍须下载并目视检查实际截图，不因添加流水线就宣称通过。
 
 原生 Safari 任务在 macOS 15 使用 Apple `/usr/bin/safaridriver` 的 W3C WebDriver，检查全部四端默认示例、页面溢出、批量多级历史/键盘/焦点和图表窗口的明暗交互。它独立于 Playwright WebKit，报告实际 Safari 版本及每个场景。Linux 不能运行此任务，桌面 Safari 也不代表真实 iOS 手机；真机验收仍需单独取得设备连接。只有对应任务成功且截图审阅完成才关闭平台清单。

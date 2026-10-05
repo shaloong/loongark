@@ -1,7 +1,7 @@
 import { createPrimitive, registerPrimitive } from "./core";
 const css = `
 [data-scope=chart] { min-width:0;max-width:100%;flex-shrink:0;color:var(--lk-color-semantic-foreground); }
-[data-scope=chart] > svg { display:block; }
+[data-scope=chart] > svg { display:block; max-width:100%; height:auto; }
 [data-scope=chart] [data-part=bar] { rx:var(--lk-radius-sm); }
 [data-scope=chart] [data-part=legend] { list-style:none;display:flex;flex-wrap:wrap;gap:var(--lk-space-component-sm) var(--lk-space-component-md);margin:var(--lk-space-component-sm) 0 0;padding:0; }
 [data-scope=chart] [data-part=legend-item] { display:flex;align-items:center;gap:var(--lk-space-component-sm);min-width:0;max-width:100%;font-size:var(--lk-typography-fontsize-sm);line-height:var(--lk-typography-lineheight-base); }

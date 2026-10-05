@@ -5,9 +5,12 @@ export const withArkExamplePage: Decorator = (Story, context) => (
   <main style={{ width: "100%", maxWidth: 640 }}>
     <LoongArkTypography
       as="h1"
-      style={{ marginBottom: "var(--lk-space-component-lg)" }}
+      style={{
+        marginBottom: "var(--lk-space-component-lg)",
+        overflowWrap: "anywhere",
+      }}
     >
-      {context.title.split("/").pop()}
+      {context.parameters.heading ?? context.title.split("/").pop()}
     </LoongArkTypography>
     <Story />
   </main>

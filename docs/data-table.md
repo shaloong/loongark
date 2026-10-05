@@ -110,4 +110,6 @@ textarea 可设置原生 `rows`（默认3），Enter 换行，Ctrl/Command+Enter
 
 拖动手柄使用 ArrowLeft/ArrowRight 移动，Home/End 到当前冻结区域边界；方向继承原生 `dir`。Enter/Space 开始或结束键盘移动，`aria-pressed` 表示状态，Escape 请求恢复起始顺序；受控调用方仍可拒绝恢复。separator 使用方向键调整10像素、Shift调整50像素、Home/End达到最小/最大值，双击恢复160像素（仍限制边界）。原生 `aria-valuemin/max/now`、加载禁用和局部直播状态同步；重排后的焦点只恢复同一手柄并滚动表格区域，避免重排保持旧 DOM 焦点却把手柄移出窄屏。
 
-手动列宽使用原生 `colgroup` 和固定布局，长正文换行，窄屏局部横向滚动。四端 DataTableColumnsExample 及 ColumnLayout Story 展示真实拖动、键盘、RTL、冻结、受控拒绝、动态列和卸载。SSR 输出列宽与控件语义，不调用更新回调、不读取浏览器 DOM。原生 Safari runner 已增加 W3C 指针调整与键盘排序；远端实际结果取得并审阅后再计入平台验收。
+手动列宽使用原生 `colgroup` 和固定布局，长正文换行，窄屏局部横向滚动。四端 DataTableColumnsExample 及 ColumnLayout Story 展示真实拖动、键盘、RTL、冻结、受控拒绝、动态列和卸载。SSR 输出列宽与控件语义，不调用更新回调、不读取浏览器 DOM。原生 Safari 已完成四端明暗桌面 W3C 指针调整与键盘排序，8张实际列交互截图已审阅；见[专项验收](audits/2026-10-05/data-table-columns-safari/acceptance.json)。完整RTL、窄屏与真机验收仍开放。
+
+Firefox144.0.2的16项四端明暗、桌面/375px列交互用例及32张LTR/RTL实际截图已验收，见[列交互专项](audits/2026-10-05/data-table-columns-firefox/acceptance.json)。完整Firefox套件的排序键盘和既有焦点/阅读锚点仍有失败，专项通过不关闭平台清单。

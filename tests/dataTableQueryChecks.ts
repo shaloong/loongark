@@ -34,6 +34,12 @@ export async function checkDataTableQuery(page: Page) {
   await expect(sortRevenue.locator('[data-part="sort-priority"]')).toHaveCount(
     0,
   );
+  // Space 保留主排序，且不再次触发原生 click。
+  await sortRevenue.press("Shift+Space");
+  await expect(sortRevenue).toHaveAttribute("aria-description", /asc.*2/i);
+  await expect(sortTeam.locator('[data-part="sort-priority"]')).toHaveText("1");
+  await sortRevenue.press("Shift+Enter");
+  await sortRevenue.press("Shift+Enter");
   await team.selectOption({ label: "Design" });
   await expect.poll(names).toEqual(["Alpha", "Gamma", "Epsilon"]);
   await root

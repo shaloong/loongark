@@ -3,7 +3,7 @@ import { ConversationActionsExample } from "../examples/react/ConversationAction
 import { withArkExamplePage } from "./arkStory";
 export default {
   title: "Examples/ConversationActions",
-  parameters: { layout: "fullscreen" },
+  parameters: { layout: "fullscreen", heading: "Conversation actions" },
   tags: ["autodocs"],
 };
 export const Overview = {
