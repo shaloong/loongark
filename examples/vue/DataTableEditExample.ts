@@ -4,16 +4,14 @@ import {
   LoongArkButton,
   LoongArkTypography,
 } from "@loongark/vue";
-import {
-  createDataTableEditDemo,
-  editableColumns,
-} from "../shared/dataTableEditDemo";
+import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
 export const DataTableEditExample = defineComponent({
-  setup() {
+  props: { complex: Boolean },
+  setup(props) {
     const version = ref(0),
       demo = createDataTableEditDemo(() => {
         version.value++;
-      });
+      }, props.complex);
     return () => {
       version.value;
       const state = demo.state;
@@ -28,11 +26,10 @@ export const DataTableEditExample = defineComponent({
         },
         [
           h(LoongArkTypography, { as: "h2" }, () => "Edit project details"),
-          h(
-            LoongArkTypography,
-            { variant: "muted" },
-            () =>
-              "Enter to save, Escape to cancel. Changes stay in the draft until accepted.",
+          h(LoongArkTypography, { variant: "muted" }, () =>
+            props.complex
+              ? "Choose an owner, or enter multiple lines. Ctrl/Command+Enter saves; Escape cancels."
+              : "Enter to save, Escape to cancel. Changes stay in the draft until accepted.",
           ),
           h(
             "div",
@@ -100,7 +97,7 @@ export const DataTableEditExample = defineComponent({
                   h(LoongArkDataTable, {
                     label: "Editable projects",
                     data: state.rows,
-                    columns: editableColumns,
+                    columns: demo.columns,
                     columnKeys: state.hidden ? ["name", "owner"] : undefined,
                     pinnedColumns: { start: ["name"] },
                     loading: state.loading,

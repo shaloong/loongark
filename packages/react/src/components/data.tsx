@@ -2,6 +2,7 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  dataTableCellText,
   createDataTableEditor,
   mountDataTableEditor,
   type DataTableEditState,
@@ -321,18 +322,60 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                         data-part="cell-editor"
                         aria-busy={edit?.pending || undefined}
                       >
-                        <input
-                          data-part="cell-input"
-                          dir={c.editor?.type === "number" ? "ltr" : undefined}
-                          onChange={() => {}}
-                          type={c.editor?.type ?? "text"}
-                          step="any"
-                          value={edit?.draft ?? ""}
-                          aria-label={labels.editCell(c.label, id)}
-                          aria-invalid={!!edit?.error || undefined}
-                          aria-describedby={edit?.error ? editId : undefined}
-                          disabled={edit?.pending}
-                        />
+                        {c.editor?.type === "textarea" ? (
+                          <textarea
+                            data-part="cell-input"
+                            value={edit?.draft ?? ""}
+                            aria-label={labels.editCell(c.label, id)}
+                            aria-invalid={!!edit?.error || undefined}
+                            aria-describedby={edit?.error ? editId : undefined}
+                            disabled={edit?.pending}
+                            onChange={() => {}}
+                            rows={c.editor.rows ?? 3}
+                          />
+                        ) : c.editor?.type === "select" ? (
+                          <select
+                            data-part="cell-input"
+                            value={edit?.draft ?? ""}
+                            aria-label={labels.editCell(c.label, id)}
+                            aria-invalid={!!edit?.error || undefined}
+                            aria-describedby={edit?.error ? editId : undefined}
+                            disabled={edit?.pending}
+                            onChange={() => {}}
+                          >
+                            {!(c.editor?.options ?? []).some(
+                              (option) => option.value === edit?.draft,
+                            ) && (
+                              <option value={edit?.draft ?? ""} disabled>
+                                {edit?.draft || labels.emptyCell}
+                              </option>
+                            )}
+                            {(c.editor?.options ?? []).map((option) => (
+                              <option
+                                key={option.value}
+                                value={option.value}
+                                disabled={option.disabled}
+                              >
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                        ) : (
+                          <input
+                            data-part="cell-input"
+                            dir={
+                              c.editor?.type === "number" ? "ltr" : undefined
+                            }
+                            onChange={() => {}}
+                            type={c.editor?.type ?? "text"}
+                            step="any"
+                            value={edit?.draft ?? ""}
+                            aria-label={labels.editCell(c.label, id)}
+                            aria-invalid={!!edit?.error || undefined}
+                            aria-describedby={edit?.error ? editId : undefined}
+                            disabled={edit?.pending}
+                          />
+                        )}
                         <div data-part="cell-actions">
                           <button
                             data-part="cell-save"
@@ -362,14 +405,14 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                         data-row-id={id}
                         data-column-key={c.key}
                         type="button"
-                        aria-label={`${labels.editCell(c.label, id)}: ${String(row[c.key] ?? "") || labels.emptyCell}`}
+                        aria-label={`${labels.editCell(c.label, id)}: ${dataTableCellText(row, c) || labels.emptyCell}`}
                         disabled={!!edit?.pending}
                       >
-                        {String(row[c.key] ?? "") || labels.emptyCell}
+                        {dataTableCellText(row, c) || labels.emptyCell}
                         <LoongArkIcon icon={controlIcons.pencil} size="sm" />
                       </button>
                     ) : (
-                      String(row[c.key] ?? "")
+                      dataTableCellText(row, c)
                     )}
                   </td>
                 ))}

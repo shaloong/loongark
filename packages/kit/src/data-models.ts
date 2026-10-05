@@ -24,7 +24,9 @@ export interface DataColumn {
   align?: "start" | "center" | "end";
   /** 只有提供 onCellCommit 时才允许编辑；不编辑行身份字段。 */
   editor?: {
-    type?: "text" | "number";
+    type?: "text" | "number" | "textarea" | "select";
+    rows?: number;
+    options?: readonly { value: string; label: string; disabled?: boolean }[];
     validate?: (
       value: string | number,
       row: Readonly<DataRow>,

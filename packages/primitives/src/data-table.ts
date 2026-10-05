@@ -51,6 +51,7 @@ const css = `
 [data-scope=data-table] [data-align=end] [data-part=cell-editor] { margin-inline-start:auto; }
 [data-scope=data-table] [data-align=center] [data-part=cell-editor] { margin-inline:auto; }
 [data-scope=data-table] [data-part=cell-input] { box-sizing:border-box;width:100%;min-width:0;height:var(--lk-control-height-sm);padding:0 var(--lk-space-component-sm);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input);border-radius:var(--lk-radius-md);background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground);font:inherit;text-align:inherit; }
+[data-scope=data-table] textarea[data-part=cell-input] { height:auto;min-height:calc(var(--lk-control-height-sm) * 2);padding-block:var(--lk-space-component-sm);resize:vertical; }
 [data-scope=data-table] [data-part=cell-input][type=number] { text-align:left; }
 [data-scope=data-table]:dir(rtl) [data-part=cell-input][type=number] { text-align:right; }
 [data-scope=data-table] [data-align=end] [data-part=cell-input][type=number] { text-align:right; }

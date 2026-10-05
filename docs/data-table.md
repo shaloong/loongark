@@ -63,3 +63,10 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 分页、排序、过滤后的视图变化，行数据变化、删除、列隐藏/重排、校验器替换、loading 和卸载会取消草稿。保存及取消恢复原入口，入口不在页面时回到稳定滚动区域；外部控件已经取得焦点时不抢回。SSR 不创建编辑器 DOM、不执行校验或保存；Vue 的 onCellCommit 是带返回值的函数 Prop，不是无返回的 emit 事件，其余端同名回调。Svelte 字段错误ID只在挂载后分配，初始SSR无活动草稿。
 
 新增 labels.editCell(columnLabel,rowId)/save/cancel/saving/invalidNumber/commitError/emptyCell；可完整本地化可见操作、状态与字段名称。四端 DataTableEditExample 和 Editing Story 演示实际异步接受、拒绝、失败重试、取消、隐藏列、删除行、RTL 与重挂。复杂选择器、批量编辑、撤销和虚拟化仍未交付。
+
+
+### 选择与多行编辑
+
+`columns[].editor.type` 增加 `select` 和 `textarea`。select 使用 `options: readonly {value:string,label:string,disabled?:boolean}[]`，显示 label，保存稳定字符串 value；重复 value 明确报错，无可用选项时只读。当前值未知或已禁用时仍显示旧值，进入编辑后必须选可用项才能保存；不会静默改为第一项。`labels.invalidOption` 支持本地化非法选项错误。选项、禁用状态或行数据变化中止草稿及待处理提交。
+
+textarea 可设置原生 `rows`（默认3），Enter 换行，Ctrl/Command+Enter 保存；select 保留原生方向键和 Enter 行为，用保存按钮或 Ctrl/Command+Enter 提交。Escape 取消，组合输入时不拦截按键，Tab 只移动焦点。两者复用已有异步互斥、错误关联、外部焦点保护及卸载清理，SSR 不触发业务回调。DataTableComplexEditorsExample 与 ComplexEditors Story 提供真实多行及离散选项编辑；组件不内置业务富文本格式或远端选项服务。

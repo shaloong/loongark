@@ -32,6 +32,7 @@ export interface DataTableLabels {
   cancel: string;
   saving: string;
   invalidNumber: string;
+  invalidOption: string;
   commitError: string;
   emptyCell: string;
 }
@@ -84,6 +85,7 @@ export const dataTableLabels = (
   cancel: labels?.cancel ?? "Cancel",
   saving: labels?.saving ?? "Saving…",
   invalidNumber: labels?.invalidNumber ?? "Enter a finite number",
+  invalidOption: labels?.invalidOption ?? "Choose an available option",
   commitError: labels?.commitError ?? "Could not save. Try again.",
   emptyCell: labels?.emptyCell ?? "Empty",
   summary:
@@ -146,6 +148,15 @@ export function dataTableView(props: DataTableProps, state: DataTableState) {
   const keys = props.columns.map((column) => column.key);
   if (keys.some((key) => !key) || new Set(keys).size !== keys.length)
     throw Error("DataTable requires unique non-empty column keys");
+  for (const column of props.columns) {
+    const options =
+      column.editor?.type === "select" ? column.editor.options : undefined;
+    if (
+      options &&
+      new Set(options.map((option) => option.value)).size !== options.length
+    )
+      throw Error("DataTable select options require unique values");
+  }
   const byKey = new Map(props.columns.map((column) => [column.key, column]));
   const visible =
     props.columnKeys === undefined
@@ -361,6 +372,15 @@ export function mountDataTablePins(region: HTMLElement): () => void {
   };
 }
 
+/** 选择编辑器显示选项名称，保留未知旧值以便调用方迁移。 */
+export function dataTableCellText(row: Readonly<DataRow>, column: DataColumn) {
+  const value = String(row[column.key] ?? "");
+  return column.editor?.type === "select"
+    ? (column.editor.options?.find((option) => option.value === value)?.label ??
+        value)
+    : value;
+}
+
 export interface DataTableEditState {
   rowId: string;
   columnKey: string;
@@ -401,7 +421,9 @@ export function createDataTableEditor(
     !!props.onCellCommit &&
     !!column.editor &&
     column.key !== (props.rowKey ?? "id") &&
-    !props.loading;
+    !props.loading &&
+    (column.editor?.type !== "select" ||
+      !!column.editor.options?.some((option) => !option.disabled));
   const stamp = (
     props: DataTableProps,
     view: ReturnType<typeof dataTableView>,
@@ -418,6 +440,8 @@ export function createDataTableEditor(
       view.sort,
       view.page,
       column.editor?.type,
+      column.editor?.options,
+      column.editor?.rows,
     ]);
   };
   let validator: NonNullable<DataColumn["editor"]>["validate"];
@@ -491,7 +515,12 @@ export function createDataTableEditor(
           typeof value === "number" &&
           (!edit.draft.trim() || !Number.isFinite(value))
             ? labels.invalidNumber
-            : column.editor?.validate?.(value, row);
+            : column.editor?.type === "select" &&
+                !column.editor.options?.some(
+                  (option) => option.value === value && !option.disabled,
+                )
+              ? labels.invalidOption
+              : column.editor?.validate?.(value, row);
       } catch {
         error = labels.commitError;
       }
@@ -573,14 +602,14 @@ export function mountDataTableEditor(
       )
         return;
       if (focus === "input") {
-        const input = region.querySelector<HTMLInputElement>(
-          '[data-part="cell-input"]',
-        );
+        const input = region.querySelector<
+          HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+        >('[data-part="cell-input"]');
         input?.focus({ preventScroll: true });
         input
           ?.closest<HTMLElement>('[data-part="cell-editor"]')
           ?.scrollIntoView({ block: "nearest", inline: "nearest" });
-        if (!editor.state?.error) input?.select();
+        if (!editor.state?.error && input && "select" in input) input.select();
       } else {
         const trigger = Array.from(
           region.querySelectorAll<HTMLButtonElement>(
@@ -611,7 +640,9 @@ export function mountDataTableEditor(
   };
   const input = (event: Event) => {
     if (
-      event.target instanceof win.HTMLInputElement &&
+      (event.target instanceof win.HTMLInputElement ||
+        event.target instanceof win.HTMLTextAreaElement ||
+        event.target instanceof win.HTMLSelectElement) &&
       event.target.dataset.part === "cell-input"
     )
       editor.change(event.target.value);
@@ -627,19 +658,26 @@ export function mountDataTableEditor(
       event.preventDefault();
       editor.cancel();
     }
-    if (event.key === "Enter" && event.target instanceof win.HTMLInputElement) {
+    if (
+      event.key === "Enter" &&
+      (event.target instanceof win.HTMLInputElement ||
+        event.ctrlKey ||
+        event.metaKey)
+    ) {
       event.preventDefault();
       void editor.save(props(), view());
     }
   };
   region.addEventListener("click", click);
   region.addEventListener("input", input);
+  region.addEventListener("change", input);
   region.addEventListener("keydown", keydown);
   return () => {
     stop();
     win.cancelAnimationFrame(frame);
     region.removeEventListener("click", click);
     region.removeEventListener("input", input);
+    region.removeEventListener("change", input);
     region.removeEventListener("keydown", keydown);
     editor.cancel();
   };

@@ -2,6 +2,7 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  dataTableCellText,
   createDataTableEditor,
   mountDataTableEditor,
   type DataTableEditState,
@@ -432,26 +433,75 @@ export const LoongArkDataTable = defineComponent({
                                             edit.value.pending || undefined,
                                         },
                                         [
-                                          h("input", {
-                                            "data-part": "cell-input",
-                                            dir:
-                                              c.editor?.type === "number"
-                                                ? "ltr"
+                                          h(
+                                            c.editor?.type === "select"
+                                              ? "select"
+                                              : c.editor?.type === "textarea"
+                                                ? "textarea"
+                                                : "input",
+                                            {
+                                              "data-part": "cell-input",
+                                              dir:
+                                                c.editor?.type === "number"
+                                                  ? "ltr"
+                                                  : undefined,
+                                              type:
+                                                c.editor?.type === "number"
+                                                  ? "number"
+                                                  : "text",
+                                              rows: c.editor?.rows ?? 3,
+                                              step: "any",
+                                              value: edit.value.draft,
+                                              "aria-label": labels.editCell(
+                                                c.label,
+                                                id,
+                                              ),
+                                              "aria-invalid":
+                                                !!edit.value.error || undefined,
+                                              "aria-describedby": edit.value
+                                                .error
+                                                ? editId
                                                 : undefined,
-                                            type: c.editor?.type ?? "text",
-                                            step: "any",
-                                            value: edit.value.draft,
-                                            "aria-label": labels.editCell(
-                                              c.label,
-                                              id,
-                                            ),
-                                            "aria-invalid":
-                                              !!edit.value.error || undefined,
-                                            "aria-describedby": edit.value.error
-                                              ? editId
+                                              disabled: edit.value.pending,
+                                            },
+                                            c.editor?.type === "select"
+                                              ? [
+                                                  ...((
+                                                    c.editor.options ?? []
+                                                  ).some(
+                                                    (option) =>
+                                                      option.value ===
+                                                      edit.value?.draft,
+                                                  )
+                                                    ? []
+                                                    : [
+                                                        h(
+                                                          "option",
+                                                          {
+                                                            value:
+                                                              edit.value.draft,
+                                                            disabled: true,
+                                                          },
+                                                          edit.value.draft ||
+                                                            labels.emptyCell,
+                                                        ),
+                                                      ]),
+                                                  ...(
+                                                    c.editor.options ?? []
+                                                  ).map((option) =>
+                                                    h(
+                                                      "option",
+                                                      {
+                                                        value: option.value,
+                                                        disabled:
+                                                          option.disabled,
+                                                      },
+                                                      option.label,
+                                                    ),
+                                                  ),
+                                                ]
                                               : undefined,
-                                            disabled: edit.value.pending,
-                                          }),
+                                          ),
                                           h(
                                             "div",
                                             { "data-part": "cell-actions" },
@@ -506,11 +556,11 @@ export const LoongArkDataTable = defineComponent({
                                             "data-row-id": id,
                                             "data-column-key": c.key,
                                             type: "button",
-                                            "aria-label": `${labels.editCell(c.label, id)}: ${String(row[c.key] ?? "") || labels.emptyCell}`,
+                                            "aria-label": `${labels.editCell(c.label, id)}: ${dataTableCellText(row, c) || labels.emptyCell}`,
                                             disabled: !!edit.value?.pending,
                                           },
                                           [
-                                            String(row[c.key] ?? "") ||
+                                            dataTableCellText(row, c) ||
                                               labels.emptyCell,
                                             h(LoongArkIcon, {
                                               icon: controlIcons.pencil,
@@ -518,7 +568,7 @@ export const LoongArkDataTable = defineComponent({
                                             }),
                                           ],
                                         )
-                                      : String(row[c.key] ?? ""),
+                                      : dataTableCellText(row, c),
                                 ),
                               ),
                             ],

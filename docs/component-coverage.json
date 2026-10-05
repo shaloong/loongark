@@ -148,6 +148,7 @@
     "DataTable logical frozen columns, measured offsets and responsive fallback",
     "Icon shared Lucide nodes, accessible names, fixed strokes, RTL and four-framework defaults",
     "Questionnaire async validation, cancellable snapshots, retry and first-line option alignment",
-    "DataTable text/number drafts, validation, cancellable commit, keyboard/focus and logical alignment"
+    "DataTable text/number drafts, validation, cancellable commit, keyboard/focus and logical alignment",
+    "DataTable select/textarea editors, option validation and multiline keyboard contracts"
   ]
 }

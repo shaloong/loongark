@@ -164,3 +164,43 @@ editor.cancel();
 console.log(
   "DataTable editing: drafts, validation, numeric conversion, immutable data, mutex, cancel, late rejection, source/view changes and cleanup passed",
 );
+
+props = make();
+props.columns[1].editor = {
+  type: "select",
+  options: [
+    { value: "Alpha", label: "Alpha" },
+    { value: "Beta", label: "Beta", disabled: true },
+  ],
+};
+editor.begin(props, view(props), "a", "name");
+editor.change("Beta");
+await editor.save(props, view(props));
+assert.equal(editor.state.error, "Choose an available option");
+editor.change("missing");
+await editor.save(props, view(props));
+assert.equal(editor.state.error, "Choose an available option");
+props.columns[1].editor.options[0].disabled = true;
+editor.sync(props, view(props));
+assert.equal(editor.state, undefined);
+assert.equal(editor.canEdit(props, props.columns[1]), false);
+props = make();
+props.columns[1].editor = { type: "textarea" };
+editor.begin(props, view(props), "a", "name");
+editor.change("First line\nSecond line");
+let multiline;
+props.onCellCommit = (details) => {
+  multiline = details.value;
+};
+await editor.save(props, view(props));
+assert.equal(multiline, "First line\nSecond line");
+
+props = make();
+props.columns[1].editor = {
+  type: "select",
+  options: [
+    { value: "x", label: "One" },
+    { value: "x", label: "Two" },
+  ],
+};
+assert.throws(() => view(props), /unique values/);

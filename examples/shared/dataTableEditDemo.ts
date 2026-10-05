@@ -22,7 +22,25 @@ export const editableColumns: readonly DataColumn[] = [
     },
   },
 ];
-export function createDataTableEditDemo(changed: () => void) {
+export const complexEditableColumns: readonly DataColumn[] =
+  editableColumns.map((column) =>
+    column.key === "name"
+      ? { ...column, editor: { ...column.editor, type: "textarea", rows: 4 } }
+      : column.key === "owner"
+        ? {
+            ...column,
+            editor: {
+              type: "select",
+              options: [
+                { value: "Design", label: "Design" },
+                { value: "Platform", label: "Platform" },
+                { value: "Archived", label: "Archived", disabled: true },
+              ],
+            },
+          }
+        : column,
+  );
+export function createDataTableEditDemo(changed: () => void, complex = false) {
   let rows: readonly DataRow[] = [
     { id: "alpha", name: "Alpha release", owner: "Design", amount: 2400 },
     {
@@ -75,6 +93,7 @@ export function createDataTableEditDemo(changed: () => void) {
     changed();
   };
   return {
+    columns: complex ? complexEditableColumns : editableColumns,
     get state() {
       return { rows, shown, rtl, hidden, loading, fail, canceled, saved };
     },

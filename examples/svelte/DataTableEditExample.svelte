@@ -4,20 +4,20 @@
     LoongArkButton,
     LoongArkTypography,
   } from "@loongark/svelte";
-  import {
-    createDataTableEditDemo,
-    editableColumns,
-  } from "../shared/dataTableEditDemo";
+  import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
+  export let complex = false;
   const demo = createDataTableEditDemo(() => {
     state = demo.state;
-  });
+  }, complex);
   let state = demo.state;
 </script>
 
 <div style="max-width:960px;display:grid;gap:var(--lk-space-component-md)">
   <LoongArkTypography as="h2">Edit project details</LoongArkTypography>
   <LoongArkTypography variant="muted"
-    >Enter to save, Escape to cancel. Changes stay in the draft until accepted.</LoongArkTypography
+    >{complex
+      ? "Choose an owner, or enter multiple lines. Ctrl/Command+Enter saves; Escape cancels."
+      : "Enter to save, Escape to cancel. Changes stay in the draft until accepted."}</LoongArkTypography
   >
   <div style="display:flex;flex-wrap:wrap;gap:var(--lk-space-component-sm)">
     <LoongArkButton variant="outline" type="button" onclick={demo.failNext}
@@ -43,7 +43,7 @@
     {#if state.shown}<LoongArkDataTable
         label="Editable projects"
         data={state.rows}
-        columns={editableColumns}
+        columns={demo.columns}
         columnKeys={state.hidden ? ["name", "owner"] : undefined}
         pinnedColumns={{ start: ["name"] }}
         loading={state.loading}

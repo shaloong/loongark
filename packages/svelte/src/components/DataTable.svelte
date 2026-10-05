@@ -8,6 +8,7 @@
   import { afterUpdate, tick, onMount } from "svelte";
   import {
     dataTableView,
+    dataTableCellText,
     createDataTableEditor,
     mountDataTableEditor,
     type DataTableEditState,
@@ -259,17 +260,41 @@
                     data-part="cell-editor"
                     aria-busy={edit?.pending || undefined}
                   >
-                    <input
-                      data-part="cell-input"
-                      dir={c.editor?.type === "number" ? "ltr" : undefined}
-                      type={c.editor?.type ?? "text"}
-                      step="any"
-                      value={edit?.draft ?? ""}
-                      aria-label={text.editCell(c.label, id)}
-                      aria-invalid={!!edit?.error || undefined}
-                      aria-describedby={edit?.error ? editId : undefined}
-                      disabled={edit?.pending}
-                    />
+                    {#if c.editor?.type === "textarea"}<textarea
+                        data-part="cell-input"
+                        value={edit?.draft ?? ""}
+                        aria-label={text.editCell(c.label, id)}
+                        aria-invalid={!!edit?.error || undefined}
+                        aria-describedby={edit?.error ? editId : undefined}
+                        disabled={edit?.pending}
+                        rows={c.editor.rows ?? 3}></textarea>
+                    {:else if c.editor?.type === "select"}<select
+                        data-part="cell-input"
+                        value={edit?.draft ?? ""}
+                        aria-label={text.editCell(c.label, id)}
+                        aria-invalid={!!edit?.error || undefined}
+                        aria-describedby={edit?.error ? editId : undefined}
+                        disabled={edit?.pending}
+                      >
+                        {#if !(c.editor.options ?? []).some((option) => option.value === edit?.draft)}<option
+                            value={edit?.draft ?? ""}
+                            disabled>{edit?.draft || text.emptyCell}</option
+                          >{/if}
+                        {#each c.editor.options ?? [] as option}<option
+                            value={option.value}
+                            disabled={option.disabled}>{option.label}</option
+                          >{/each}
+                      </select>{:else}<input
+                        data-part="cell-input"
+                        dir={c.editor?.type === "number" ? "ltr" : undefined}
+                        type={c.editor?.type ?? "text"}
+                        step="any"
+                        value={edit?.draft ?? ""}
+                        aria-label={text.editCell(c.label, id)}
+                        aria-invalid={!!edit?.error || undefined}
+                        aria-describedby={edit?.error ? editId : undefined}
+                        disabled={edit?.pending}
+                      />{/if}
                     <div data-part="cell-actions">
                       <button
                         data-part="cell-save"
@@ -295,15 +320,15 @@
                     data-row-id={id}
                     data-column-key={c.key}
                     type="button"
-                    aria-label={`${text.editCell(c.label, id)}: ${String(row[c.key] ?? "") || text.emptyCell}`}
+                    aria-label={`${text.editCell(c.label, id)}: ${dataTableCellText(row, c) || text.emptyCell}`}
                     disabled={!!edit?.pending}
                   >
-                    {String(row[c.key] ?? "") || text.emptyCell}<Icon
+                    {dataTableCellText(row, c) || text.emptyCell}<Icon
                       icon={controlIcons.pencil}
                       size="sm"
                     />
                   </button>
-                {:else}{String(row[c.key] ?? "")}{/if}</td
+                {:else}{dataTableCellText(row, c)}{/if}</td
               >{/each}
           </tr>{:else}<tr
             ><td colspan={view.columns.length + 1} data-part="empty"

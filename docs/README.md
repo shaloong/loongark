@@ -123,3 +123,10 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 ## DateInput 完整 ISO 粘贴核验
 
 确认原生完整日期粘贴已由四端封装提供，增加非法日期、边界、焦点、范围端点与真实表单提交回归，避免重复实现。该批只补回归和契约说明，不增加公共入口或修改外观；详见 [专项验收](audits/2026-10-05/date-input-paste-linux/acceptance.json)。其余高级缺口继续保留在 [范围表](ark-ui-coverage.md#下一批高级能力的边界)。
+
+
+## 剩余高级能力持续交付
+
+本轮逐项实现：表格选择与多行编辑、批量编辑、表格/消息虚拟化、图表交互、复杂问卷输入和异步Collection契约。第一项增加原生select/textarea及对应校验、键盘、焦点和生命周期，详见 [表格说明](data-table.md#选择与多行编辑)。当前115族、299 Story、四端各790公开值入口、187示例；各项仅在对应验收通过后关闭，不把业务服务或格式规则混入组件。
+
+复杂编辑器验收：[Linux / 四端选择与多行编辑](audits/2026-10-05/data-table-complex-editors-linux/acceptance.json)。

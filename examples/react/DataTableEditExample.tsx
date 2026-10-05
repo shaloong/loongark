@@ -4,14 +4,13 @@ import {
   LoongArkButton,
   LoongArkTypography,
 } from "@loongark/react";
-import {
-  createDataTableEditDemo,
-  editableColumns,
-} from "../shared/dataTableEditDemo";
-export const DataTableEditExample = () => {
+import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
+export const DataTableEditExample = ({
+  complex = false,
+}: { complex?: boolean } = {}) => {
   const [, redraw] = useState(0);
   const [demo] = useState(() =>
-    createDataTableEditDemo(() => redraw((n) => n + 1)),
+    createDataTableEditDemo(() => redraw((n) => n + 1), complex),
   );
   const state = demo.state;
   return (
@@ -24,8 +23,9 @@ export const DataTableEditExample = () => {
     >
       <LoongArkTypography as="h2">Edit project details</LoongArkTypography>
       <LoongArkTypography variant="muted">
-        Enter to save, Escape to cancel. Changes stay in the draft until
-        accepted.
+        {complex
+          ? "Choose an owner, or enter multiple lines. Ctrl/Command+Enter saves; Escape cancels."
+          : "Enter to save, Escape to cancel. Changes stay in the draft until accepted."}
       </LoongArkTypography>
       <div
         style={{
@@ -78,7 +78,7 @@ export const DataTableEditExample = () => {
           <LoongArkDataTable
             label="Editable projects"
             data={state.rows}
-            columns={editableColumns}
+            columns={demo.columns}
             columnKeys={state.hidden ? ["name", "owner"] : undefined}
             pinnedColumns={{ start: ["name"] }}
             loading={state.loading}
