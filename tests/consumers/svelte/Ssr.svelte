@@ -40,6 +40,9 @@
       validate: () => {
         throw Error("SSR must not validate");
       },
+      validateAsync: () => {
+        throw Error("SSR must not request async validation");
+      },
     },
     {
       id: "visibleSSR",
@@ -47,6 +50,9 @@
       type: "text",
       validate: () => {
         throw Error("SSR must not validate");
+      },
+      validateAsync: () => {
+        throw Error("SSR must not request async validation");
       },
     },
   ];

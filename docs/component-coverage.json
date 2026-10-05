@@ -146,6 +146,7 @@
     "Message and Attachment async actions, preview/cancel and lifecycle",
     "MessageScroller visible-text/media anchors, compound insertion and cleanup",
     "DataTable logical frozen columns, measured offsets and responsive fallback",
-    "Icon shared Lucide nodes, accessible names, fixed strokes, RTL and four-framework defaults"
+    "Icon shared Lucide nodes, accessible names, fixed strokes, RTL and four-framework defaults",
+    "Questionnaire async validation, cancellable snapshots, retry and first-line option alignment"
   ]
 }

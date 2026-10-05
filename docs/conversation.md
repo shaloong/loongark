@@ -22,7 +22,7 @@ Vue 支持 `v-model`（modelValue）；Svelte 支持 `bind:value`；React/Solid 
 
 本批 Linux 证据位于 [验收记录](audits/2026-10-03/conversation-linux/acceptance.json)。截图单独建立 Linux 基线，未覆盖 Windows。测试浏览器与验证范围以该记录为准。
 
-滚动组件支持稳定消息与文字节点的媒体高度锚定，但不提供虚拟列表；调用方仍建议为媒体预留尺寸以减少布局变化。Questionnaire 按可见题目导航，支持条件跳题与同步业务校验；不提供文件题目或评分引擎。未测试全部 peer 版本与浏览器。
+滚动组件支持稳定消息与文字节点的媒体高度锚定，但不提供虚拟列表；调用方仍建议为媒体预留尺寸以减少布局变化。Questionnaire 按可见题目导航，支持条件跳题与同步/异步业务校验；不提供文件题目或评分引擎。未测试全部 peer 版本与浏览器。
 
 本次目视修正：附件使用共享 SVG 文件图标，避免系统字体缺字；双操作按钮在窄屏独立成行，长文件名保持可读宽度。问卷题组按 id 维护渲染身份，避免跨题导航复用原生 radio 节点导致 checked 状态丢失。Linux 测试输出目录与既有 Windows 审查证据隔离。
 
@@ -30,7 +30,7 @@ Vue 支持 `v-model`（modelValue）；Svelte 支持 `bind:value`；React/Solid 
 
 `when` 接收已归一化的完整答案。隐藏题的答案保留在 value/onValueChange 中，返回分支时恢复；它们不参与题数、前后导航、FormData、最后提交校验和 onComplete。所有题目 ID 与选项仍需合法唯一，隐藏不会绕过结构检查。条件函数必须是纯函数，不在其中发起请求或修改答案。
 
-`validate` 在内建必填与长度校验通过后执行，接收当前题的归一化答案及完整答案对象；可以验证邮件、格式和确认字段。返回 undefined 表示通过，字符串作为字段错误与 aria-describedby/aria-invalid 关联。校验函数应保持纯函数；初始渲染与 SSR 不执行提交校验，不发出答案或完成回调。异步服务校验继续由 submitting/error/completed 控制。
+`validate` 在内建必填与长度校验通过后执行，接收当前题的归一化答案及完整答案对象；可以验证邮件、格式和确认字段。返回 undefined 表示通过，字符串作为字段错误与 aria-describedby/aria-invalid 关联。校验函数应保持纯函数；初始渲染与 SSR 不执行提交校验，不发出答案或完成回调。异步逐题校验使用 `validateAsync`，提交服务仍由 `submitting/error/completed` 控制。
 
 受控值被业务拒绝后，真实 radio/checkbox/textarea 会恢复业务值，不只恢复选中样式。Svelte 的 onValueChange 由业务决定是否接受，和其它三端一致；简单双向绑定可以只使用 bind:value，初值可以为 undefined，首次输入也会写回父级。若同时使用 bind:value 与 onValueChange，请在回调里明确写回答案，或省略回调使用自动绑定。这样避免业务拒绝后组件先自行改变 value。
 
@@ -64,3 +64,15 @@ MessageScroller 在用户暂停跟随后记录首条可见消息及可见文字�
 Button 的 `loading` 会同时禁用交互并设置 `aria-busy=true`；其余情况保留调用方显式 `aria-busy`。预览加载中的取消按钮因此保持可操作，取消/完成后移除忙碌标记；四端均验证调用方 true/false 和 loading 优先级。
 
 清理后若容器仍留在 DOM，恢复 `overflow-anchor:auto` 会重新交回浏览器锚定，Chromium 可能自行调整位置。卸载回归分别检查关闭原生锚定时无延迟滚动、auto 恢复与外部覆盖；不把浏览器恢复行为误判为组件遗留帧。
+
+## 问卷异步校验与对齐
+
+`Question.validateAsync(answer, value, { signal })` 返回 `Promise<string | undefined>`；字符串作为当前字段错误，undefined 表示通过。答案快照只读使用；仅在前进或最终提交时调用，渲染与 SSR 不发送请求。所有待校验题目的内建及同步校验先通过，才请求异步服务；最终提交重新校验全部可见题目，包括前面已通过的题目。业务请求、账户规则和服务端权限由调用方实现。
+
+等待期间表单具有 `aria-busy`、状态说明和取消按钮，前进/提交互斥；答案仍可编辑，后退仍可用。编辑、后退、主动取消、可见题集/题目元数据/校验函数替换、外部答案替换、禁用、提交中、完成和卸载均使当前请求失效并中止 signal。即使请求忽略 signal，组件也立即停止等待并忽略迟到的成功、错误或拒绝。异步异常显示可重试的字段错误，不把异常对象直接显示给用户；可通过 `validatingLabel/cancelValidationLabel/validationErrorLabel` 本地化。
+
+失败保留答案并标记输入 `aria-invalid`，最终校验失败会回到对应题目；失败恢复因禁用触发器丢失的焦点；用户已移到表单外的控件时保留外部焦点。取消不会发出完成回调；输入重新通过校验后可以继续。题目描述和错误通过既有 `aria-describedby` 关联，隐藏答案仍不参与最终提交。新问卷会话通过重新挂载重置，不提供跨会话缓存或后台自动保存。
+
+单选/多选的原生控件使用既有尺寸 Token，清除浏览器默认 margin，并与多行标签首行居中对齐；操作区按按钮中心对齐，提交按钮换行后仍位于逻辑结束边缘。四端 `QuestionnaireAsyncExample` 和 `AsyncValidation/LongOptions/CallbackUpdates` Story 展示实际延迟校验、错误重试、取消、题目替换、卸载以及长文本换行。375px 视口验证不等同于真机测试。
+
+校验期间替换 `onComplete` 后，完成时使用最新回调；React 使用实例引用追踪，其他框架使用当前绑定。`CallbackUpdates` 展示更新处理函数后仍由新函数接收结果。

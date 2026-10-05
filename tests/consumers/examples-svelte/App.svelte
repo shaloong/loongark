@@ -29,15 +29,16 @@ import E27 from '../../../examples/svelte/PaginationExample.svelte';
 import E28 from '../../../examples/svelte/PasswordInputExample.svelte';
 import E29 from '../../../examples/svelte/ProgressExample.svelte';
 import E30 from '../../../examples/svelte/QuestionnaireAdvancedExample.svelte';
-import E31 from '../../../examples/svelte/RatingGroupExample.svelte';
-import E32 from '../../../examples/svelte/ScrollAreaExample.svelte';
-import E33 from '../../../examples/svelte/SegmentGroupExample.svelte';
-import E34 from '../../../examples/svelte/SelectionInputsExample.svelte';
-import E35 from '../../../examples/svelte/SplitterExample.svelte';
-import E36 from '../../../examples/svelte/StepsExample.svelte';
-import E37 from '../../../examples/svelte/SwapExample.svelte';
-import E38 from '../../../examples/svelte/SwitchExample.svelte';
-import E39 from '../../../examples/svelte/TagsInputExample.svelte';
-import E40 from '../../../examples/svelte/ToastExample.svelte';
-import E41 from '../../../examples/svelte/TocExample.svelte';
-import E42 from '../../../examples/svelte/TreeViewExample.svelte'; const examples={'ActionMediaExample':E0,'AdvancedSelectionExample':E1,'ArkUtilitiesExample':E2,'AvatarExample':E3,'CarouselExample':E4,'ChartAdvancedExample':E5,'ChartExample':E6,'ClipboardExample':E7,'ColorPickerExample':E8,'ComboboxExample':E9,'ConversationActionsExample':E10,'ConversationExample':E11,'DataTableAdvancedExample':E12,'DataTableExample':E13,'DataTableFrozenExample':E14,'DateInputExample':E15,'DrawerExample':E16,'EditableExample':E17,'FileUploadExample':E18,'FoundationsExample':E19,'HoverCardExample':E20,'IconExample':E21,'ImageCropperExample':E22,'JsonTreeViewExample':E23,'ListboxExample':E24,'MessageScrollerAdvancedExample':E25,'NumberInputExample':E26,'PaginationExample':E27,'PasswordInputExample':E28,'ProgressExample':E29,'QuestionnaireAdvancedExample':E30,'RatingGroupExample':E31,'ScrollAreaExample':E32,'SegmentGroupExample':E33,'SelectionInputsExample':E34,'SplitterExample':E35,'StepsExample':E36,'SwapExample':E37,'SwitchExample':E38,'TagsInputExample':E39,'ToastExample':E40,'TocExample':E41,'TreeViewExample':E42}; const name=new URLSearchParams(location.search).get('example') || 'ActionMediaExample'; const Selected=examples[name]; const mode=new URLSearchParams(location.search).get('mode')==='dark'?'dark':'light';</script><Provider mode={mode}><section style="padding:24px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)"><h1 data-example-name>{name}</h1><div data-example-content><Selected/></div></section></Provider>
+import E31 from '../../../examples/svelte/QuestionnaireAsyncExample.svelte';
+import E32 from '../../../examples/svelte/RatingGroupExample.svelte';
+import E33 from '../../../examples/svelte/ScrollAreaExample.svelte';
+import E34 from '../../../examples/svelte/SegmentGroupExample.svelte';
+import E35 from '../../../examples/svelte/SelectionInputsExample.svelte';
+import E36 from '../../../examples/svelte/SplitterExample.svelte';
+import E37 from '../../../examples/svelte/StepsExample.svelte';
+import E38 from '../../../examples/svelte/SwapExample.svelte';
+import E39 from '../../../examples/svelte/SwitchExample.svelte';
+import E40 from '../../../examples/svelte/TagsInputExample.svelte';
+import E41 from '../../../examples/svelte/ToastExample.svelte';
+import E42 from '../../../examples/svelte/TocExample.svelte';
+import E43 from '../../../examples/svelte/TreeViewExample.svelte'; const examples={'ActionMediaExample':E0,'AdvancedSelectionExample':E1,'ArkUtilitiesExample':E2,'AvatarExample':E3,'CarouselExample':E4,'ChartAdvancedExample':E5,'ChartExample':E6,'ClipboardExample':E7,'ColorPickerExample':E8,'ComboboxExample':E9,'ConversationActionsExample':E10,'ConversationExample':E11,'DataTableAdvancedExample':E12,'DataTableExample':E13,'DataTableFrozenExample':E14,'DateInputExample':E15,'DrawerExample':E16,'EditableExample':E17,'FileUploadExample':E18,'FoundationsExample':E19,'HoverCardExample':E20,'IconExample':E21,'ImageCropperExample':E22,'JsonTreeViewExample':E23,'ListboxExample':E24,'MessageScrollerAdvancedExample':E25,'NumberInputExample':E26,'PaginationExample':E27,'PasswordInputExample':E28,'ProgressExample':E29,'QuestionnaireAdvancedExample':E30,'QuestionnaireAsyncExample':E31,'RatingGroupExample':E32,'ScrollAreaExample':E33,'SegmentGroupExample':E34,'SelectionInputsExample':E35,'SplitterExample':E36,'StepsExample':E37,'SwapExample':E38,'SwitchExample':E39,'TagsInputExample':E40,'ToastExample':E41,'TocExample':E42,'TreeViewExample':E43}; const name=new URLSearchParams(location.search).get('example') || 'ActionMediaExample'; const Selected=examples[name]; const mode=new URLSearchParams(location.search).get('mode')==='dark'?'dark':'light';</script><Provider mode={mode}><section style="padding:24px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)"><h1 data-example-name>{name}</h1><div data-example-content><Selected/></div></section></Provider>

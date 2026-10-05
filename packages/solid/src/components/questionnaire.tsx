@@ -2,6 +2,7 @@ import {
   createSignal,
   createUniqueId,
   createEffect,
+  onCleanup,
   splitProps,
   For,
   type JSX,
@@ -10,6 +11,8 @@ import {
   questionnaireVisibleQuestions,
   questionnaireValue,
   questionError,
+  createQuestionnaireValidationController,
+  type QuestionnaireValidationState,
   toggleQuestionAnswer,
   focusQuestion,
   restoreQuestionAnswers,
@@ -40,6 +43,9 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
     "submitLabel",
     "requiredLabel",
     "invalidLabel",
+    "validatingLabel",
+    "cancelValidationLabel",
+    "validationErrorLabel",
     "onValueChange",
     "onComplete",
   ]);
@@ -64,47 +70,73 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
   const index = () => Math.min(page(), Math.max(0, visible().length - 1));
   const question = () => visible()[index()];
   const blocked = () => p.disabled || p.submitting;
+  const [validationState, setValidationState] =
+    createSignal<QuestionnaireValidationState>({ pending: false, errors: {} });
+  const validation =
+    createQuestionnaireValidationController(setValidationState);
+  createEffect(() =>
+    validation.sync(
+      visible(),
+      current(),
+      question()?.id,
+      !!(blocked() || p.completed),
+    ),
+  );
+  onCleanup(() => validation.dispose());
+
   const change = (next: QuestionnaireValue) => {
     if (blocked()) return;
+    validation.cancel();
     if (p.value === undefined) setInternal(next);
     p.onValueChange?.({ value: next });
     queueMicrotask(() => restoreQuestionAnswers(root, question(), current()));
     setShowError(false);
   };
   const move = (next: number) => {
+    validation.cancel();
     setPage(next);
     setShowError(false);
     focusNext = true;
     queueMicrotask(() => focusQuestion(root));
   };
-  const submit = (event: SubmitEvent) => {
+  const submit = async (event: SubmitEvent) => {
     event.preventDefault();
-    if (blocked() || !question()) return;
-    setShowError(true);
-    if (questionError(question(), current(), p)) {
-      focusQuestion(root);
+    if (blocked() || p.completed || validation.state.pending || !question())
       return;
-    }
-    if (index() < visible().length - 1) move(index() + 1);
-    else {
-      const invalid = visible().findIndex(
-        (q) => !!questionError(q, current(), p),
-      );
-      if (invalid >= 0) {
+    validation.sync(
+      visible(),
+      current(),
+      question()?.id,
+      !!(blocked() || p.completed),
+    );
+    const ownedAtStart = !!root?.contains(document.activeElement);
+    const last = index() === visible().length - 1;
+    const result = await validation.run(
+      last ? visible() : [question()],
+      current(),
+      p,
+    );
+    if (!result) return;
+    if (result.invalidId) {
+      setShowError(true);
+      const invalid = visible().findIndex((q) => q.id === result.invalidId);
+      if (invalid !== index()) {
         setPage(invalid);
-        focusNext = true;
-        queueMicrotask(() => focusQuestion(root));
-      } else p.onComplete?.({ value: submitted() });
-    }
+        queueMicrotask(() => focusQuestion(root, ownedAtStart));
+      } else focusQuestion(root, ownedAtStart);
+    } else if (!last) move(index() + 1);
+    else p.onComplete?.({ value: result.value! });
   };
   const err = () =>
-    showError() && question() ? questionError(question(), current(), p) : "";
+    showError() && question()
+      ? questionError(question(), current(), p, validationState().errors)
+      : "";
   return (
     <form
       data-scope="questionnaire"
       data-part="root"
       aria-label={p.label}
-      aria-busy={p.submitting ? "true" : undefined}
+      aria-busy={p.submitting || validationState().pending ? "true" : undefined}
       noValidate
       onSubmit={submit}
       {...attrs}
@@ -246,6 +278,11 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
               {p.error}
             </div>
           )}
+          {validationState().pending && (
+            <p data-scope="questionnaire" data-part="validation" role="status">
+              {p.validatingLabel ?? "Checking answers…"}
+            </p>
+          )}
           <div data-scope="questionnaire" data-part="actions">
             <LoongArkButton
               type="button"
@@ -255,7 +292,23 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
             >
               {p.backLabel ?? "Back"}
             </LoongArkButton>
-            <LoongArkButton type="submit" disabled={blocked()}>
+            {validationState().pending && (
+              <LoongArkButton
+                type="button"
+                variant="outline"
+                disabled={blocked()}
+                onClick={() => {
+                  validation.cancel();
+                  focusQuestion(root);
+                }}
+              >
+                {p.cancelValidationLabel ?? "Cancel validation"}
+              </LoongArkButton>
+            )}
+            <LoongArkButton
+              type="submit"
+              disabled={blocked() || validationState().pending}
+            >
               {p.submitting
                 ? "Submitting…"
                 : index() < visible().length - 1

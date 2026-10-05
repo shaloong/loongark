@@ -1,8 +1,19 @@
-import { defineComponent, h, ref, useId, nextTick, type PropType } from "vue";
+import {
+  defineComponent,
+  h,
+  ref,
+  useId,
+  nextTick,
+  type PropType,
+  watchEffect,
+  onBeforeUnmount,
+} from "vue";
 import {
   questionnaireVisibleQuestions,
   questionnaireValue,
   questionError,
+  createQuestionnaireValidationController,
+  type QuestionnaireValidationState,
   toggleQuestionAnswer,
   focusQuestion,
   restoreQuestionAnswers,
@@ -38,6 +49,9 @@ export const LoongArkQuestionnaire = defineComponent({
     submitLabel: String,
     requiredLabel: String,
     invalidLabel: String,
+    validatingLabel: String,
+    cancelValidationLabel: String,
+    validationErrorLabel: String,
     onValueChange: Function as PropType<QuestionnaireOptions["onValueChange"]>,
     onComplete: Function as PropType<QuestionnaireOptions["onComplete"]>,
   },
@@ -58,8 +72,26 @@ export const LoongArkQuestionnaire = defineComponent({
       index = () => Math.min(page.value, Math.max(0, visible().length - 1)),
       question = () => visible()[index()],
       blocked = () => p.disabled || p.submitting;
+    const validationState = ref<QuestionnaireValidationState>({
+      pending: false,
+      errors: {},
+    });
+    const validation = createQuestionnaireValidationController((next) => {
+      validationState.value = next;
+    });
+    watchEffect(() =>
+      validation.sync(
+        visible(),
+        current(),
+        question()?.id,
+        !!(blocked() || p.completed),
+      ),
+    );
+    onBeforeUnmount(() => validation.dispose());
+
     const change = (value: QuestionnaireValue) => {
       if (blocked()) return;
+      validation.cancel();
       if (p.value === undefined && p.modelValue === undefined)
         internal.value = value;
       p.onValueChange?.({ value });
@@ -68,33 +100,46 @@ export const LoongArkQuestionnaire = defineComponent({
       showError.value = false;
     };
     const move = (next: number) => {
+      validation.cancel();
       page.value = next;
       showError.value = false;
       nextTick(() => focusQuestion(root.value));
     };
-    const submit = (e: Event) => {
+    const submit = async (e: Event) => {
       e.preventDefault();
-      if (blocked() || !question()) return;
-      showError.value = true;
-      if (questionError(question(), current(), p)) {
-        focusQuestion(root.value);
+      if (blocked() || p.completed || validation.state.pending || !question())
         return;
-      }
-      if (index() < visible().length - 1) move(index() + 1);
-      else {
-        const invalid = visible().findIndex(
-          (q) => !!questionError(q, current(), p),
-        );
-        if (invalid >= 0) {
+      validation.sync(
+        visible(),
+        current(),
+        question()?.id,
+        !!(blocked() || p.completed),
+      );
+      const ownedAtStart = !!root.value?.contains(document.activeElement);
+      const last = index() === visible().length - 1;
+      const result = await validation.run(
+        last ? visible() : [question()],
+        current(),
+        p,
+      );
+      if (!result) return;
+      if (result.invalidId) {
+        showError.value = true;
+        const invalid = visible().findIndex((q) => q.id === result.invalidId);
+        if (invalid !== index()) {
           page.value = invalid;
-          nextTick(() => focusQuestion(root.value));
-        } else p.onComplete?.({ value: submitted() });
-      }
+          nextTick(() => focusQuestion(root.value, ownedAtStart));
+        } else focusQuestion(root.value, ownedAtStart);
+      } else if (!last) move(index() + 1);
+      else p.onComplete?.({ value: result.value! });
     };
     return () => {
       const q = question(),
         v = current(),
-        err = showError.value && q ? questionError(q, v, p) : "";
+        err =
+          showError.value && q
+            ? questionError(q, v, p, validationState.value.errors)
+            : "";
       return h(
         "form",
         {
@@ -102,7 +147,8 @@ export const LoongArkQuestionnaire = defineComponent({
           ...part("root"),
           ref: root,
           "aria-label": p.label,
-          "aria-busy": p.submitting ? "true" : undefined,
+          "aria-busy":
+            p.submitting || validationState.value.pending ? "true" : undefined,
           novalidate: true,
           onSubmit: submit,
         },
@@ -230,6 +276,12 @@ export const LoongArkQuestionnaire = defineComponent({
                     ),
                   p.error &&
                     h("div", { ...part("error"), role: "alert" }, p.error),
+                  validationState.value.pending &&
+                    h(
+                      "p",
+                      { ...part("validation"), role: "status" },
+                      p.validatingLabel ?? "Checking answers…",
+                    ),
                   h("div", part("actions"), [
                     h(
                       LoongArkButton,
@@ -241,9 +293,26 @@ export const LoongArkQuestionnaire = defineComponent({
                       },
                       () => p.backLabel ?? "Back",
                     ),
+                    validationState.value.pending &&
+                      h(
+                        LoongArkButton,
+                        {
+                          type: "button",
+                          variant: "outline",
+                          disabled: blocked(),
+                          onClick: () => {
+                            validation.cancel();
+                            focusQuestion(root.value);
+                          },
+                        },
+                        () => p.cancelValidationLabel ?? "Cancel validation",
+                      ),
                     h(
                       LoongArkButton,
-                      { type: "submit", disabled: blocked() },
+                      {
+                        type: "submit",
+                        disabled: blocked() || validationState.value.pending,
+                      },
                       () =>
                         p.submitting
                           ? "Submitting…"

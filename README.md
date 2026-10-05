@@ -22,6 +22,6 @@ pnpm storybook
 
 [技术架构与验证](docs/README.md) · [组件覆盖](docs/component-coverage.md) · [开发约定](AGENTS.md)
 
-当前组件目录覆盖 115 个组件族、294 个 Story，React/Vue/Solid/Svelte 各 790 个公开值入口；Ark UI 独有部件和 Hook 的安装版本对照已补齐。图标统一采用 Lucide，四端节点与高级 Props 见 [图标说明](docs/icons.md)。高级场景仍逐批验收，范围与限制见 [Ark UI 核对](docs/ark-ui-coverage.md)。
+当前组件目录覆盖 115 个组件族、297 个 Story，React/Vue/Solid/Svelte 各 790 个公开值入口；Ark UI 独有部件和 Hook 的安装版本对照已补齐。图标统一采用 Lucide，四端节点与高级 Props 见 [图标说明](docs/icons.md)。高级场景仍逐批验收，范围与限制见 [Ark UI 核对](docs/ark-ui-coverage.md)。
 
 代码采用 [MIT License](LICENSE)。发布包包含相同许可；第三方依赖保留各自许可证。

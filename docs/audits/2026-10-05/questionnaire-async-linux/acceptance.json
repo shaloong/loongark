@@ -1,0 +1,142 @@
+{
+  "recordedAt": "2026-10-05T06:44:45.746390+00:00",
+  "branch": "develop",
+  "baseCommit": "93b02d45bfa40692b65fc21b85f0f04f89f4c4df",
+  "result": "passed",
+  "scope": [
+    "四端可取消异步问卷校验、互斥、错误重试、过期结果隔离及卸载清理",
+    "同步预检、提交时重验全部可见题目，SSR 不执行校验回调",
+    "长选项首行对齐、LTR/RTL 换行按钮逻辑末端、错误焦点及最新完成回调"
+  ],
+  "coverage": {
+    "families": 115,
+    "stories": 297,
+    "publicValuesPerFramework": 790,
+    "examples": 179
+  },
+  "environment": {
+    "os": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "browser": "Chromium 151.0.7922.173",
+    "playwright": "1.57.0"
+  },
+  "validation": {
+    "frozenInstall": "passed; dependency and lockfile unchanged",
+    "verify": "passed",
+    "contracts": "passed",
+    "freshStorybookBuild": "passed",
+    "coverage": "passed",
+    "publicationAndFourFrameworkSSR": "passed",
+    "svelte": {
+      "errors": 0,
+      "existingWarnings": 2
+    },
+    "frameworkConsumptionAndExamples": {
+      "passed": 8,
+      "examplesRun": 179
+    },
+    "browser": {
+      "initialFullRunPassed": 83,
+      "finalAffectedTestsPassed": 20,
+      "uniqueCasesCoveredAcrossRuns": 91,
+      "frameworkCasesSkippedOnStoryServer": 8,
+      "frameworkCasesSeparatelyPassed": 8,
+      "note": "全量首轮后补充焦点、页脚和回调回归，最终只重跑20项受影响测试；不是最终全量91项单次运行"
+    },
+    "visual": {
+      "result": "passed",
+      "existingComparisonThreshold": 0.01,
+      "thresholdChanged": false,
+      "passed": 82
+    },
+    "accessibility": {
+      "initialDefaultStoriesPerTheme": 296,
+      "initialDefaultWcagViolations": 0,
+      "initialDefaultNarrowOverflow": 0,
+      "initialEffectiveTransitionAll": 0,
+      "finalCallbackStoryStatesChecked": 8,
+      "finalCallbackWcagViolations": 0,
+      "note": "新增第297个CallbackUpdates Story另验默认与更新状态；未声称最终297个Story单次全量复验"
+    },
+    "pagesConfiguration": "YAML与线上检查Python语法通过；新增已发布异步问卷Story存在断言"
+  },
+  "manualReview": {
+    "screenshots": 100,
+    "contactSheets": 28,
+    "selectedOriginalsAlsoReviewed": true,
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1280,
+      375
+    ],
+    "states": [
+      "default",
+      "pending",
+      "error",
+      "options",
+      "disabled",
+      "submitting",
+      "conditional",
+      "conversation",
+      "callback-updated"
+    ],
+    "runtimeErrors": 0,
+    "overflow": 0,
+    "longOptionFirstLineCenterDeltaPx": {
+      "before": 22.5,
+      "after": 0
+    },
+    "wrappedSubmitLogicalEndDeltaPx": {
+      "before": 106.578125,
+      "after": 0,
+      "finalRegressionDirections": [
+        "ltr",
+        "rtl"
+      ]
+    },
+    "focus": {
+      "before": "异步错误后落到BODY",
+      "afterFieldFocused": 16,
+      "externalFocusPreserved": true
+    },
+    "latestCompletionCallbackRevision": 1,
+    "captionFix": "四端取消计数补充Cancelled checks文字，避免孤立数字",
+    "frameworkComparisons": {
+      "count": 48,
+      "exact": 35,
+      "nonExact": 13,
+      "maxDifferentPixels": 28,
+      "maxChannelDifference": 1,
+      "note": "保留原生控件与焦点边缘的1通道差异，未声明四端逐像素完全相同"
+    },
+    "evidenceStorage": ".artifacts/questionnaire-async/",
+    "rawProcessFilesInGit": false
+  },
+  "baselines": {
+    "existingFiles": 76,
+    "updatedLinuxFiles": 8,
+    "unchangedExistingFiles": 68,
+    "windowsFilesUnchanged": 2,
+    "newLinuxFiles": 8,
+    "updateReason": "实际审阅的原生选项尺寸、margin及首行对齐修正；只更新问卷条件页与Conversation中问卷的受影响基线",
+    "savedOnlyAfterReview": true
+  },
+  "correctedFailures": [
+    "开发过程中Svelte声明顺序与ES2020不支持Object.hasOwn引起的检查失败已修复，失败后未消费旧产物",
+    "临时截图采集器Axe需显式browser.newContext；修正采集器后100张重新采集成功"
+  ],
+  "limits": [
+    "375px浏览器视口，非真机触摸验收",
+    "系统Chromium151不同于CI固定Chromium143；沿用1%视觉容差",
+    "业务接口、业务规则与请求由调用方提供；复杂题型、表格编辑与虚拟化仍按范围表分批实现",
+    "直接访问Pages受云端策略限制，上线检查交由GitHub Actions真实执行",
+    "不发布npm，不更新main"
+  ],
+  "deployment": {
+    "result": "awaiting-push"
+  }
+}

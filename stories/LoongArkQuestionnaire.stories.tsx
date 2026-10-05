@@ -66,3 +66,54 @@ export const ConditionalEmpty = {
     />
   ),
 };
+
+import { QuestionnaireAsyncExample } from "../examples/react/QuestionnaireAsyncExample";
+import { createQuestionnaireAsyncDemo } from "../examples/shared/questionnaireAsyncDemo";
+export const AsyncValidation = {
+  decorators: [withArkExamplePage],
+  render: () => <QuestionnaireAsyncExample />,
+};
+const alignmentQuestions = createQuestionnaireAsyncDemo(
+  () => {},
+).questions.slice(1);
+export const LongOptions = {
+  decorators: [withArkExamplePage],
+  render: () => (
+    <L.LoongArkQuestionnaire
+      label="Choose how to collaborate"
+      backLabel="Return to the previous question"
+      submitLabel="Save collaboration preferences"
+      questions={alignmentQuestions}
+      defaultValue={{ plan: "team" }}
+    />
+  ),
+};
+
+function CallbackSurvey() {
+  const [revision, setRevision] = useState(0),
+    [handled, setHandled] = useState<number>();
+  const [demo] = useState(() => createQuestionnaireAsyncDemo(() => {}));
+  return (
+    <L.LoongArkStack gap="lg" style={{ width: "100%", maxWidth: 640 }}>
+      <L.LoongArkButton
+        variant="outline"
+        onClick={() => setRevision(revision + 1)}
+      >
+        Update completion handler
+      </L.LoongArkButton>
+      <L.LoongArkQuestionnaire
+        label="Callback updates"
+        questions={demo.questions.slice(0, 1)}
+        defaultValue={{ name: "Shaloong" }}
+        onComplete={() => setHandled(revision)}
+      />
+      <output aria-label="Handled revision">
+        {`Handled revision: ${handled ?? "Not submitted"}`}
+      </output>
+    </L.LoongArkStack>
+  );
+}
+export const CallbackUpdates = {
+  decorators: [withArkExamplePage],
+  render: () => <CallbackSurvey />,
+};

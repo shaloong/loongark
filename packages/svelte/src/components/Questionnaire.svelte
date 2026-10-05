@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { tick, untrack } from "svelte";
+  import { tick, untrack, onDestroy } from "svelte";
   import type { HTMLFormAttributes } from "svelte/elements";
   import {
     questionnaireVisibleQuestions,
     questionnaireValue,
     questionError,
+    createQuestionnaireValidationController,
+    type QuestionnaireValidationState,
     toggleQuestionAnswer,
     focusQuestion,
     restoreQuestionAnswers,
@@ -29,6 +31,9 @@
     submitLabel,
     requiredLabel,
     invalidLabel,
+    validatingLabel,
+    cancelValidationLabel,
+    validationErrorLabel,
     onValueChange,
     onComplete,
     ...attrs
@@ -38,16 +43,42 @@
   let internal = $state(untrack(() => defaultValue)),
     page = $state(0),
     showError = $state(false);
+  let validationState = $state<QuestionnaireValidationState>({
+    pending: false,
+    errors: {},
+  });
   const current = $derived(questionnaireValue(questions, value ?? internal)),
     visible = $derived(questionnaireVisibleQuestions(questions, current)),
     submittedValue = $derived(questionnaireValue(visible, current)),
     index = $derived(Math.min(page, Math.max(0, visible.length - 1))),
     question = $derived(visible[index]),
     blocked = $derived(disabled || submitting),
-    options = $derived({ requiredLabel, invalidLabel }),
+    options = $derived({ requiredLabel, invalidLabel, validationErrorLabel }),
     err = $derived(
-      showError && question ? questionError(question, current, options) : "",
+      showError && question
+        ? questionError(question, current, options, validationState.errors)
+        : "",
     );
+  const validation = createQuestionnaireValidationController((next) => {
+    validationState = next;
+  });
+  $effect(() => {
+    const snapshot = {
+      questions: visible,
+      value: current,
+      id: question?.id,
+      blocked: !!(blocked || completed),
+    };
+    untrack(() =>
+      validation.sync(
+        snapshot.questions,
+        snapshot.value,
+        snapshot.id,
+        snapshot.blocked,
+      ),
+    );
+  });
+  onDestroy(() => validation.dispose());
   let textAnswer = $state<string | undefined>(
     untrack(() =>
       question?.type === "text" ? String(current[question.id]) : "",
@@ -58,6 +89,7 @@
   });
   function change(next: QuestionnaireValue) {
     if (blocked) return;
+    validation.cancel();
     if (value === undefined) internal = next;
     if (!onValueChange) value = next;
     onValueChange?.({ value: next });
@@ -69,6 +101,7 @@
     showError = false;
   }
   async function move(next: number) {
+    validation.cancel();
     page = next;
     showError = false;
     await tick();
@@ -76,23 +109,26 @@
   }
   async function submit(e: SubmitEvent) {
     e.preventDefault();
-    if (blocked || !question) return;
-    showError = true;
-    if (questionError(question, current, options)) {
-      focusQuestion(root);
-      return;
-    }
-    if (index < visible.length - 1) await move(index + 1);
-    else {
-      const invalid = visible.findIndex(
-        (q) => !!questionError(q, current, options),
-      );
-      if (invalid >= 0) {
+    if (blocked || completed || validation.state.pending || !question) return;
+    validation.sync(visible, current, question?.id, !!(blocked || completed));
+    const ownedAtStart = !!root?.contains(document.activeElement);
+    const last = index === visible.length - 1;
+    const result = await validation.run(
+      last ? visible : [question],
+      current,
+      options,
+    );
+    if (!result) return;
+    if (result.invalidId) {
+      showError = true;
+      const invalid = visible.findIndex((q) => q.id === result.invalidId);
+      if (invalid !== index) {
         page = invalid;
         await tick();
-        focusQuestion(root);
-      } else onComplete?.({ value: submittedValue });
-    }
+        focusQuestion(root, ownedAtStart);
+      } else focusQuestion(root, ownedAtStart);
+    } else if (!last) await move(index + 1);
+    else onComplete?.({ value: result.value! });
   }
 </script>
 
@@ -100,7 +136,7 @@
   data-scope="questionnaire"
   data-part="root"
   aria-label={label}
-  aria-busy={submitting ? "true" : undefined}
+  aria-busy={submitting || validationState.pending ? "true" : undefined}
   novalidate
   onsubmit={submit}
   {...attrs}
@@ -199,13 +235,30 @@
     {#if error}<div data-scope="questionnaire" data-part="error" role="alert">
         {error}
       </div>{/if}
+    {#if validationState.pending}<p
+        data-scope="questionnaire"
+        data-part="validation"
+        role="status"
+      >
+        {validatingLabel ?? "Checking answers…"}
+      </p>{/if}
     <div data-scope="questionnaire" data-part="actions">
       <Button
         type="button"
         variant="outline"
         disabled={blocked || index === 0}
         onclick={() => move(index - 1)}>{backLabel ?? "Back"}</Button
-      ><Button type="submit" disabled={blocked}
+      >
+      {#if validationState.pending}<Button
+          type="button"
+          variant="outline"
+          disabled={blocked}
+          onclick={() => {
+            validation.cancel();
+            focusQuestion(root);
+          }}>{cancelValidationLabel ?? "Cancel validation"}</Button
+        >{/if}
+      <Button type="submit" disabled={blocked || validationState.pending}
         >{submitting
           ? "Submitting…"
           : index < visible.length - 1

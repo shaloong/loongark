@@ -10,6 +10,8 @@ import {
   questionnaireVisibleQuestions,
   questionnaireValue,
   questionError,
+  createQuestionnaireValidationController,
+  type QuestionnaireValidationState,
   toggleQuestionAnswer,
   focusQuestion,
   restoreQuestionAnswers,
@@ -39,6 +41,9 @@ export function LoongArkQuestionnaire({
   submitLabel,
   requiredLabel,
   invalidLabel,
+  validatingLabel,
+  cancelValidationLabel,
+  validationErrorLabel,
   onValueChange,
   onComplete,
   ...attrs
@@ -52,7 +57,7 @@ export function LoongArkQuestionnaire({
   useLayoutEffect(() => {
     if (focusNext.current) {
       focusNext.current = false;
-      focusQuestion(root.current);
+      focusQuestion(root.current, true);
     }
   }, [page]);
   const current = () => questionnaireValue(questions, value ?? internal);
@@ -60,11 +65,28 @@ export function LoongArkQuestionnaire({
   const submitted = () => questionnaireValue(visible(), current());
   const index = () => Math.min(page, Math.max(0, visible().length - 1));
   const question = () => visible()[index()];
-  const latest = useRef({ question: question(), value: current() });
-  latest.current = { question: question(), value: current() };
+  const latest = useRef({ question: question(), value: current(), onComplete });
+  latest.current = { question: question(), value: current(), onComplete };
   const blocked = () => disabled || submitting;
+  const [validationState, setValidationState] =
+    useState<QuestionnaireValidationState>({ pending: false, errors: {} });
+  const [validation] = useState(() =>
+    createQuestionnaireValidationController(setValidationState),
+  );
+  useLayoutEffect(() => {
+    validation.sync(
+      visible(),
+      current(),
+      question()?.id,
+      !!(blocked() || completed),
+    );
+  });
+  // cancel 保持 StrictMode 再挂载可用，并使卸载前的请求失效。
+  useLayoutEffect(() => () => validation.cancel(), [validation]);
+
   const change = (next: QuestionnaireValue) => {
     if (blocked()) return;
+    validation.cancel();
     if (value === undefined) setInternal(next);
     onValueChange?.({ value: next });
     queueMicrotask(() =>
@@ -77,39 +99,54 @@ export function LoongArkQuestionnaire({
     setShowError(false);
   };
   const move = (next: number) => {
+    validation.cancel();
     setPage(next);
     setShowError(false);
     focusNext.current = true;
   };
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (blocked() || !question()) return;
-    setShowError(true);
-    if (questionError(question(), current(), { requiredLabel, invalidLabel })) {
-      focusQuestion(root.current);
+    if (blocked() || completed || validation.state.pending || !question())
       return;
-    }
-    if (index() < visible().length - 1) move(index() + 1);
-    else {
-      const invalid = visible().findIndex(
-        (q) => !!questionError(q, current(), { requiredLabel, invalidLabel }),
-      );
-      if (invalid >= 0) {
+    validation.sync(
+      visible(),
+      current(),
+      question()?.id,
+      !!(blocked() || completed),
+    );
+    const ownedAtStart = !!root.current?.contains(document.activeElement);
+    const last = index() === visible().length - 1;
+    const result = await validation.run(
+      last ? visible() : [question()],
+      current(),
+      { requiredLabel, invalidLabel, validationErrorLabel },
+    );
+    if (!result) return;
+    if (result.invalidId) {
+      setShowError(true);
+      const invalid = visible().findIndex((q) => q.id === result.invalidId);
+      if (invalid !== index()) {
         setPage(invalid);
-        focusNext.current = true;
-      } else onComplete?.({ value: submitted() });
-    }
+        focusNext.current = ownedAtStart;
+      } else focusQuestion(root.current, ownedAtStart);
+    } else if (!last) move(index() + 1);
+    else latest.current.onComplete?.({ value: result.value! });
   };
   const err = () =>
     showError && question()
-      ? questionError(question(), current(), { requiredLabel, invalidLabel })
+      ? questionError(
+          question(),
+          current(),
+          { requiredLabel, invalidLabel },
+          validationState.errors,
+        )
       : "";
   return (
     <form
       data-scope="questionnaire"
       data-part="root"
       aria-label={label}
-      aria-busy={submitting ? "true" : undefined}
+      aria-busy={submitting || validationState.pending ? "true" : undefined}
       noValidate
       onSubmit={submit}
       {...attrs}
@@ -244,6 +281,11 @@ export function LoongArkQuestionnaire({
               {error}
             </div>
           )}
+          {validationState.pending && (
+            <p data-scope="questionnaire" data-part="validation" role="status">
+              {validatingLabel ?? "Checking answers…"}
+            </p>
+          )}
           <div data-scope="questionnaire" data-part="actions">
             <LoongArkButton
               type="button"
@@ -253,7 +295,23 @@ export function LoongArkQuestionnaire({
             >
               {backLabel ?? "Back"}
             </LoongArkButton>
-            <LoongArkButton type="submit" disabled={blocked()}>
+            {validationState.pending && (
+              <LoongArkButton
+                type="button"
+                variant="outline"
+                disabled={blocked()}
+                onClick={() => {
+                  validation.cancel();
+                  focusQuestion(root.current);
+                }}
+              >
+                {cancelValidationLabel ?? "Cancel validation"}
+              </LoongArkButton>
+            )}
+            <LoongArkButton
+              type="submit"
+              disabled={blocked() || validationState.pending}
+            >
               {submitting
                 ? "Submitting…"
                 : index() < visible().length - 1
