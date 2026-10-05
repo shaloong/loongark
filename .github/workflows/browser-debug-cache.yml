@@ -1,0 +1,84 @@
+name: Browser debug cache
+on:
+  push:
+    branches: [develop]
+    paths: [.github/workflows/browser-debug-cache.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  firefox:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install firefox
+      - name: 打包同版本浏览器用于本地重现
+        run: |
+          mkdir -p .artifacts/browser-debug
+          tar -C "$HOME/.cache/ms-playwright" -czf .artifacts/browser-debug/firefox.tar.gz  .
+          split -b 16M -d .artifacts/browser-debug/firefox.tar.gz .artifacts/browser-debug/firefox-part-
+          rm .artifacts/browser-debug/firefox.tar.gz
+          test "$(ls .artifacts/browser-debug/firefox-part-* | wc -l)" -le 8
+          cd .artifacts/browser-debug
+          sha256sum firefox-part-* > checksums.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firefox-part-0
+          path: .artifacts/browser-debug/firefox-part-00
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firefox-part-1
+          path: .artifacts/browser-debug/firefox-part-01
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firefox-part-2
+          path: .artifacts/browser-debug/firefox-part-02
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firefox-part-3
+          path: .artifacts/browser-debug/firefox-part-03
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firefox-part-4
+          path: .artifacts/browser-debug/firefox-part-04
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firefox-part-5
+          path: .artifacts/browser-debug/firefox-part-05
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firefox-part-6
+          path: .artifacts/browser-debug/firefox-part-06
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firefox-part-7
+          path: .artifacts/browser-debug/firefox-part-07
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firefox-debug-checksums
+          path: .artifacts/browser-debug/checksums.txt
+          retention-days: 14
