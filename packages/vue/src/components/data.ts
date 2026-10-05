@@ -153,6 +153,7 @@ export const LoongArkDataTable = defineComponent({
     onRetry: Function as PropType<() => void>,
     onCellCommit: Function as PropType<DataTableProps["onCellCommit"]>,
     onBatchCommit: Function as PropType<DataTableProps["onBatchCommit"]>,
+    historyLimit: Number,
   },
   emits: {
     stateChange: (state: DataTableState) => !!state,

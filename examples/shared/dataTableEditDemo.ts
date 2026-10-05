@@ -130,7 +130,7 @@ export function createDataTableEditDemo(changed: () => void, complex = false) {
       }, row);
     });
     rows = next;
-    saved = `${operation === "undo" ? "Undid" : "Applied"} batch: ${changes.length} cells`;
+    saved = `${operation === "undo" ? "Undid" : operation === "redo" ? "Redid" : "Applied"} batch: ${changes.length} cells`;
     changed();
   };
   return {

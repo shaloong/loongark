@@ -16,9 +16,11 @@
 <div style="max-width:960px;display:grid;gap:var(--lk-space-component-md)">
   <LoongArkTypography as="h2">Edit project details</LoongArkTypography>
   <LoongArkTypography variant="muted"
-    >{complex
-      ? "Choose an owner, or enter multiple lines. Ctrl/Command+Enter saves; Escape cancels."
-      : "Enter to save, Escape to cancel. Changes stay in the draft until accepted."}</LoongArkTypography
+    >{batch
+      ? "Edit selected rows together. Undo and redo accepted batches; Ctrl/Command+Enter saves and Escape cancels."
+      : complex
+        ? "Choose an owner, or enter multiple lines. Ctrl/Command+Enter saves; Escape cancels."
+        : "Enter to save, Escape to cancel. Changes stay in the draft until accepted."}</LoongArkTypography
   >
   <div style="display:flex;flex-wrap:wrap;gap:var(--lk-space-component-sm)">
     <LoongArkButton variant="outline" type="button" onclick={demo.failNext}

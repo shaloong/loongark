@@ -177,3 +177,91 @@ assert.equal(beginCount, 0);
 coordinated.begin(make(), ["a"]);
 assert.equal(beginCount, 1);
 coordinated.dispose();
+
+// 多步历史必须逐批恢复原始快照，并且拒绝、取消不消耗历史。
+const historyEditor = createDataTableBatchEditor(() => {});
+let historyProps = make();
+const historySelection = ["a", "b"];
+let operations = [],
+  rejected = false;
+const commitHistory = (details) => {
+  operations.push(details.operation);
+  if (rejected) return "replay rejected";
+  historyProps.data = historyProps.data.map((row) =>
+    details.changes
+      .filter((change) => change.rowId === row.id)
+      .reduce((row, change) => {
+        const next = { ...row };
+        if (change.value === undefined) delete next[change.columnKey];
+        else next[change.columnKey] = change.value;
+        return next;
+      }, row),
+  );
+  historyEditor.sync(historyProps, historySelection);
+};
+historyProps.onBatchCommit = commitHistory;
+async function batchName(name) {
+  historyEditor.begin(historyProps, historySelection);
+  historyEditor.enable("name", true);
+  historyEditor.change("name", name);
+  await historyEditor.save(historyProps);
+}
+await batchName("First batch");
+await batchName("Second batch");
+assert.equal(historyEditor.state.undoCount, 2);
+await historyEditor.save(historyProps, "undo");
+assert.equal(historyProps.data[0].name, "First batch");
+await historyEditor.save(historyProps, "undo");
+assert.equal(historyProps.data[0].name, "Alpha");
+assert.equal(historyProps.data[1].name, "Beta");
+assert.equal(historyEditor.state.redoCount, 2);
+rejected = true;
+await historyEditor.save(historyProps, "redo");
+assert.equal(historyEditor.state.redoCount, 2);
+assert.equal(historyEditor.state.redo, true);
+rejected = false;
+await historyEditor.save(historyProps, "redo");
+assert.equal(historyProps.data[0].name, "First batch");
+await historyEditor.save(historyProps, "redo");
+assert.equal(historyProps.data[0].name, "Second batch");
+assert.equal(historyEditor.state.redoCount, 0);
+await historyEditor.save(historyProps, "undo");
+historyProps.historyLimit = 1;
+historyEditor.sync(historyProps, historySelection);
+assert.equal(historyEditor.state.undoCount + historyEditor.state.redoCount, 1);
+assert.equal(historyEditor.state.redo, true);
+historyProps.historyLimit = 50;
+await batchName("Branch batch");
+assert.equal(historyEditor.state.redoCount, 0);
+assert.deepEqual(operations.slice(0, 4), ["apply", "apply", "undo", "undo"]);
+historyProps.historyLimit = 1;
+historyEditor.sync(historyProps, historySelection);
+assert.equal(historyEditor.state.undoCount, 1);
+await historyEditor.save(historyProps, "undo");
+assert.equal(historyEditor.state.undo, false);
+// 外部修改整行的其他字段同样禁止重做，防止静默覆盖并发状态。
+historyProps.data[0] = { ...historyProps.data[0], amount: 99 };
+historyEditor.sync(historyProps, historySelection);
+assert.equal(historyEditor.state.redo, false);
+const priorCalls = operations.length;
+await historyEditor.save(historyProps, "redo");
+assert.equal(operations.length, priorCalls);
+assert.match(historyEditor.state.error, /Rows changed/);
+historyProps.data[0] = { ...historyProps.data[0], amount: 2 };
+historyEditor.sync(historyProps, historySelection);
+assert.equal(historyEditor.state.redo, true);
+let release;
+historyProps.onBatchCommit = () =>
+  new Promise((resolve) => (release = resolve));
+const canceledRedo = historyEditor.save(historyProps, "redo");
+await Promise.resolve();
+historyEditor.cancel();
+await canceledRedo;
+release();
+await Promise.resolve();
+assert.equal(historyEditor.state.redoCount, 1);
+assert.equal(historyEditor.state.redo, true);
+historyEditor.dispose();
+console.log(
+  "DataTable multi-step history: undo/redo order, rejected replay, branch invalidation, bounded storage, external conflicts and canceled replay passed",
+);

@@ -19,6 +19,9 @@ export interface DataTableBatchState {
   error?: string;
   errorColumn?: string;
   undo: boolean;
+  redo: boolean;
+  undoCount: number;
+  redoCount: number;
   count: number;
 }
 /** 一次回调包含完整变更集。事务是否落盘仍由调用方负责。 */
@@ -32,6 +35,9 @@ export function createDataTableBatchEditor(
     enabled: [],
     drafts: {},
     undo: false,
+    redo: false,
+    undoCount: 0,
+    redoCount: 0,
     count: 0,
   };
   let revision = 0,
@@ -54,7 +60,8 @@ export function createDataTableBatchEditor(
         column.editor?.options,
       ]),
     ]);
-  let history: DataTableBatchChange[] | undefined;
+  const undoHistory: DataTableBatchChange[][] = [];
+  const redoHistory: DataTableBatchChange[][] = [];
   let latestProps: DataTableProps | undefined;
   const listeners = new Set<(focus?: "field" | "trigger") => void>();
   const rows = (props: DataTableProps) =>
@@ -104,6 +111,35 @@ export function createDataTableBatchEditor(
       );
     });
   };
+  const historyState = (props: DataTableProps, pending = state.pending) => ({
+    undo:
+      !pending &&
+      !props.loading &&
+      !!props.onBatchCommit &&
+      !!undoHistory.length &&
+      expected(props, undoHistory[undoHistory.length - 1]),
+    redo:
+      !pending &&
+      !props.loading &&
+      !!props.onBatchCommit &&
+      !!redoHistory.length &&
+      expected(props, redoHistory[redoHistory.length - 1]),
+    undoCount: undoHistory.length,
+    redoCount: redoHistory.length,
+  });
+  const limitHistory = (props: DataTableProps) => {
+    const limit = Number.isFinite(props.historyLimit)
+      ? Math.max(1, Math.min(1000, Math.floor(props.historyLimit!)))
+      : 50;
+    // 两个分支合计遵守上限。优先保留即将重做的批次，淘汰最旧撤销项。
+    const overflow = Math.max(
+      0,
+      undoHistory.length + redoHistory.length - limit,
+    );
+    const removedUndo = Math.min(overflow, undoHistory.length);
+    if (removedUndo) undoHistory.splice(0, removedUndo);
+    if (overflow > removedUndo) redoHistory.splice(0, overflow - removedUndo);
+  };
   let pendingChanges: DataTableBatchChange[] | undefined;
   const emit = (
     patch: Partial<DataTableBatchState>,
@@ -125,6 +161,7 @@ export function createDataTableBatchEditor(
           pending: false,
           error: undefined,
           errorColumn: undefined,
+          ...(latestProps ? historyState(latestProps, false) : {}),
         },
         "trigger",
       );
@@ -221,20 +258,32 @@ export function createDataTableBatchEditor(
             )))
       )
         cancel();
-      const undo =
-        !!history &&
-        !state.pending &&
-        !props.loading &&
-        !!props.onBatchCommit &&
-        expected(props, history);
-      if (undo !== state.undo) emit({ undo });
+      limitHistory(props);
+      const next = historyState(props);
+      if (
+        Object.entries(next).some(
+          ([key, value]) => state[key as keyof DataTableBatchState] !== value,
+        )
+      )
+        emit(next);
     },
     cancel,
-    async save(props: DataTableProps, undo = false) {
+    async save(
+      props: DataTableProps,
+      operation: boolean | "apply" | "undo" | "redo" = "apply",
+    ) {
       if (state.pending || props.loading || !props.onBatchCommit) return;
+      latestProps = props;
+      const action =
+        operation === true ? "undo" : operation === false ? "apply" : operation;
+      const replay = action !== "apply";
+      const history =
+        action === "redo"
+          ? redoHistory[redoHistory.length - 1]
+          : undoHistory[undoHistory.length - 1];
       const labels = dataTableLabels(props.labels);
       let changes: DataTableBatchChange[] = [];
-      if (undo) {
+      if (replay) {
         if (!history || !expected(props, history)) {
           emit({ error: labels.batchConflict });
           return;
@@ -290,7 +339,7 @@ export function createDataTableBatchEditor(
           return;
         }
       }
-      if (undo) {
+      if (replay) {
         ids = [...new Set(changes.map((change) => change.rowId))];
         snapshot = stamp(props);
         schema = schemaStamp(props);
@@ -306,6 +355,7 @@ export function createDataTableBatchEditor(
         error: undefined,
         errorColumn: undefined,
         undo: false,
+        redo: false,
       });
       const result = await new Promise<{ error?: string; canceled?: boolean }>(
         (resolve) => {
@@ -319,7 +369,7 @@ export function createDataTableBatchEditor(
                     changes.map((change) => Object.freeze(change)),
                   ),
                   signal: abort.signal,
-                  operation: undo ? "undo" : "apply",
+                  operation: action,
                 });
             })
             .then(
@@ -338,19 +388,29 @@ export function createDataTableBatchEditor(
             pending: false,
             error: result.error,
             errorColumn: undefined,
-            undo: !!history && expected(latestProps ?? props, history),
+            ...historyState(latestProps ?? props, false),
           },
           "field",
         );
       else {
-        history = undo ? undefined : changes;
+        if (action === "undo") {
+          undoHistory.pop();
+          redoHistory.push(changes);
+        } else if (action === "redo") {
+          redoHistory.pop();
+          undoHistory.push(changes);
+        } else {
+          undoHistory.push(changes);
+          redoHistory.length = 0;
+        }
+        limitHistory(latestProps ?? props);
         emit(
           {
             active: false,
             pending: false,
             enabled: [],
             drafts: {},
-            undo: !!history && expected(latestProps ?? props, history),
+            ...historyState(latestProps ?? props, false),
             error: undefined,
             errorColumn: undefined,
           },
@@ -361,7 +421,8 @@ export function createDataTableBatchEditor(
     dispose() {
       cancel();
       listeners.clear();
-      history = undefined;
+      undoHistory.length = 0;
+      redoHistory.length = 0;
     },
   };
   return api;
@@ -401,7 +462,7 @@ export function renderDataTableBatchMarkup(
       ),
     );
   const disabled = props.loading || state.pending;
-  let body = `<div data-part="batch-actions"><button type="button" data-part="batch-trigger" ${disabled || !available || !fields.length ? "disabled" : ""}>${text(labels.batchEdit)}</button><button type="button" data-part="batch-undo" ${!state.undo || disabled ? "disabled" : ""}>${text(labels.batchUndo)}</button></div>`;
+  let body = `<div data-part="batch-actions"><button type="button" data-part="batch-trigger" ${disabled || !available || !fields.length ? "disabled" : ""}>${text(labels.batchEdit)}</button><button type="button" data-part="batch-undo" ${!state.undo || disabled ? "disabled" : ""}>${text(labels.batchUndo)}</button><button type="button" data-part="batch-redo" ${!state.redo || disabled ? "disabled" : ""}>${text(labels.batchRedo)}</button></div>`;
   if (state.active)
     body += `<form novalidate data-part="batch-form" aria-label="${text(labels.batchTitle)}" aria-busy="${state.pending}"><p>${text(labels.batchCount(state.count))}</p><div data-part="batch-fields">${fields
       .map((column, index) => {
@@ -487,7 +548,8 @@ export function mountDataTableBatch(
     const button = event.target.closest("button[data-part]");
     const part = button?.getAttribute("data-part");
     if (part === "batch-trigger") editor.begin(props(), selected());
-    if (part === "batch-undo") void editor.save(props(), true);
+    if (part === "batch-undo") void editor.save(props(), "undo");
+    if (part === "batch-redo") void editor.save(props(), "redo");
     if (part === "batch-cancel") editor.cancel();
   };
   const submit = (event: Event) => {
@@ -495,7 +557,29 @@ export function mountDataTableBatch(
     void editor.save(props());
   };
   const keydown = (event: KeyboardEvent) => {
-    if (event.isComposing || !editor.state.active) return;
+    if (event.isComposing) return;
+    // 保留输入控件自己的撤销历史，表格操作区使用平台惯例。
+    const target = event.target;
+    const typing =
+      target instanceof win.Element &&
+      !!target.closest(
+        'input,textarea,select,[contenteditable]:not([contenteditable="false"])',
+      );
+    if (!typing && !editor.state.active && (event.ctrlKey || event.metaKey)) {
+      const action =
+        event.key.toLowerCase() === "z"
+          ? event.shiftKey
+            ? "redo"
+            : "undo"
+          : event.key.toLowerCase() === "y"
+            ? "redo"
+            : undefined;
+      if (action && editor.state[action]) {
+        event.preventDefault();
+        void editor.save(props(), action);
+      }
+    }
+    if (!editor.state.active) return;
     if (event.key === "Escape") {
       event.preventDefault();
       editor.cancel();

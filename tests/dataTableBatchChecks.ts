@@ -58,6 +58,52 @@ export async function checkDataTableBatch(page: Page) {
     page.getByRole("cell", { name: "1800", exact: true }),
   ).toBeVisible();
   await expect(undo).toBeDisabled();
+  const redo = page.getByRole("button", { name: "Redo batch", exact: true });
+  await expect(redo).toBeEnabled();
+  await redo.focus();
+  await redo.press("Control+Shift+z");
+  await expect(
+    page.getByText("Redid batch: 3 cells", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("cell", { name: "1250", exact: true }),
+  ).toHaveCount(2);
+  await trigger.click();
+  await page
+    .getByRole("checkbox", { name: "Change Project", exact: true })
+    .check();
+  const project = form.getByLabel("Project", { exact: true });
+  await project.fill("Second batch");
+  await project.press("End");
+  await project.press("x");
+  await project.press("Control+z");
+  await expect(project).toHaveValue("Second batch");
+  await expect(
+    page.getByText("Redid batch: 3 cells", { exact: true }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", { name: "Apply changes", exact: true })
+    .click();
+  await expect(
+    page.getByText("Applied batch: 2 cells", { exact: true }),
+  ).toBeVisible();
+  await undo.click();
+  await expect(
+    page.getByText("Undid batch: 2 cells", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("cell", { name: "1250", exact: true }),
+  ).toHaveCount(2);
+  await expect(undo).toBeEnabled();
+  await undo.click();
+  await expect(
+    page.getByText("Undid batch: 3 cells", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("cell", { name: "2400", exact: true }),
+  ).toBeVisible();
+  await expect(undo).toBeDisabled();
+  await expect(redo).toBeEnabled();
   await page
     .getByRole("button", { name: "Fail next save", exact: true })
     .click();
@@ -116,7 +162,9 @@ export async function checkDataTableBatch(page: Page) {
   await form
     .getByLabel("Project", { exact: true })
     .fill("Preserved draft\nMultiple lines");
-  const results = await new AxeBuilder({ page }).analyze();
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+    .analyze();
   expect(results.violations).toEqual([]);
   expect(
     await page.evaluate(

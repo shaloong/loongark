@@ -74,7 +74,7 @@ export function createVirtualizationDemo(changed: () => void) {
           return next;
         }, row),
     );
-    status = `${operation === "undo" ? "Undid" : "Applied"} ${changes.length} changes`;
+    status = `${operation === "undo" ? "Undid" : operation === "redo" ? "Redid" : "Applied"} ${changes.length} changes`;
     update();
   };
   return {

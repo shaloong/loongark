@@ -14,3 +14,14 @@ for (const framework of ["react", "vue", "solid", "svelte"])
           path: `.artifacts/advanced-completion/batch-${framework}-${mode}-${width}.png`,
         });
       });
+
+for (const mode of ["light", "dark"])
+  for (const width of [1280, 375])
+    test(`batch Story ${mode} ${width}`, async ({ page }) => {
+      test.skip(!!process.env.STATIC_DIR, "Story 服务专项");
+      await page.setViewportSize({ width, height: 1100 });
+      await page.goto(
+        `/iframe.html?id=components-datatable--batch-editing&globals=mode:${mode}`,
+      );
+      await checkDataTableBatch(page);
+    });

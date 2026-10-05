@@ -27,9 +27,11 @@ export const DataTableEditExample = defineComponent({
         [
           h(LoongArkTypography, { as: "h2" }, () => "Edit project details"),
           h(LoongArkTypography, { variant: "muted" }, () =>
-            props.complex
-              ? "Choose an owner, or enter multiple lines. Ctrl/Command+Enter saves; Escape cancels."
-              : "Enter to save, Escape to cancel. Changes stay in the draft until accepted.",
+            props.batch
+              ? "Edit selected rows together. Undo and redo accepted batches; Ctrl/Command+Enter saves and Escape cancels."
+              : props.complex
+                ? "Choose an owner, or enter multiple lines. Ctrl/Command+Enter saves; Escape cancels."
+                : "Enter to save, Escape to cancel. Changes stay in the draft until accepted.",
           ),
           h(
             "div",

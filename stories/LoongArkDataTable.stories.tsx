@@ -106,6 +106,14 @@ export const ComplexEditors: StoryObj = {
 
 import { DataTableBatchExample } from "../examples/react/DataTableBatchExample";
 export const BatchEditing: StoryObj = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Select rows and apply multiple batches. Undo and redo walk the accepted history; a new batch replaces the redo branch. Native text fields retain their own undo history.",
+      },
+    },
+  },
   render: () => <DataTableBatchExample />,
 };
 

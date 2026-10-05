@@ -39,6 +39,7 @@ export interface DataTableLabels {
   batchTitle: string;
   batchApply: string;
   batchUndo: string;
+  batchRedo: string;
   batchConflict: string;
   batchNoChanges: string;
   batchCount: (count: number) => string;
@@ -67,11 +68,13 @@ export interface DataTableProps {
   loading?: boolean;
   error?: string;
   onRetry?: () => void;
-  /** 返回错误文字保留草稿；void 表示接受，源数据仍由调用方更新。 */
+  /** 挂载期间保留的批次历史数，默认 50，归一到 1–1000；不持久化。 */
+  historyLimit?: number;
+  /** 返回错误文字保留草稿或重放机会；void 表示接受，源数据仍由调用方更新。 */
   onBatchCommit?: (details: {
     changes: readonly import("./table-batch").DataTableBatchChange[];
     signal: AbortSignal;
-    operation: "apply" | "undo";
+    operation: "apply" | "undo" | "redo";
   }) => void | string | Promise<void | string>;
   onCellCommit?: (details: {
     rowId: string;
@@ -106,6 +109,7 @@ export const dataTableLabels = (
   batchTitle: labels?.batchTitle ?? "Batch edit",
   batchApply: labels?.batchApply ?? "Apply changes",
   batchUndo: labels?.batchUndo ?? "Undo batch",
+  batchRedo: labels?.batchRedo ?? "Redo batch",
   batchConflict:
     labels?.batchConflict ?? "Rows changed. Review the current values.",
   batchNoChanges:
@@ -620,28 +624,45 @@ export function mountDataTableEditor(
   if (!win) return () => {};
   let frame = 0,
     pendingOwned = false;
-  let intent: { focus: "input" | "trigger"; previous: DataTableEditState | undefined } | undefined;
+  let intent:
+    | { focus: "input" | "trigger"; previous: DataTableEditState | undefined }
+    | undefined;
   const restore = () => {
     frame = 0;
     if (!intent) return;
     const { focus, previous } = intent;
     const now = region.ownerDocument.activeElement;
-    if (!region.isConnected || (now !== region.ownerDocument.body && !region.contains(now))) {
+    if (
+      !region.isConnected ||
+      (now !== region.ownerDocument.body && !region.contains(now))
+    ) {
       intent = undefined;
       return;
     }
     if (focus === "input") {
-      const input = region.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('[data-part="cell-input"]');
+      const input = region.querySelector<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >('[data-part="cell-input"]');
       if (!input) return;
       intent = undefined;
       input.focus({ preventScroll: true });
-      input.closest<HTMLElement>('[data-part="cell-editor"]')?.scrollIntoView({ block: "nearest", inline: "nearest" });
+      input
+        .closest<HTMLElement>('[data-part="cell-editor"]')
+        ?.scrollIntoView({ block: "nearest", inline: "nearest" });
       if (!editor.state?.error && "select" in input) input.select();
     } else {
       // React can commit after this frame. Keep the intent until the old editor
       // has actually been replaced, rather than focusing a temporary fallback.
       if (region.querySelector('[data-part="cell-editor"]')) return;
-      const trigger = Array.from(region.querySelectorAll<HTMLButtonElement>('[data-part="cell-trigger"]')).find(element => element.dataset.rowId === previous?.rowId && element.dataset.columnKey === previous?.columnKey);
+      const trigger = Array.from(
+        region.querySelectorAll<HTMLButtonElement>(
+          '[data-part="cell-trigger"]',
+        ),
+      ).find(
+        (element) =>
+          element.dataset.rowId === previous?.rowId &&
+          element.dataset.columnKey === previous?.columnKey,
+      );
       intent = undefined;
       (trigger ?? region).focus();
     }
@@ -656,7 +677,11 @@ export function mountDataTableEditor(
     if (editor.state?.pending && !previous?.pending)
       pendingOwned = region.contains(active);
     if (!focus) return;
-    const owned = region.contains(active) || (!!previous?.pending && pendingOwned && active === region.ownerDocument.body);
+    const owned =
+      region.contains(active) ||
+      (!!previous?.pending &&
+        pendingOwned &&
+        active === region.ownerDocument.body);
     win.cancelAnimationFrame(frame);
     frame = 0;
     intent = owned ? { focus, previous } : undefined;

@@ -91,6 +91,7 @@
   export let error: string | undefined = undefined;
   export let onRetry: (() => void) | undefined = undefined;
   export let onBatchCommit: DataTableProps["onBatchCommit"] = undefined;
+  export let historyLimit: number | undefined = undefined;
   let batchHost: HTMLDivElement;
   const batchEditor = createDataTableBatchEditor(
     (value) => {
@@ -133,6 +134,7 @@
     labels,
     onCellCommit,
     onBatchCommit,
+    historyLimit,
   };
   $: editor.sync(editProps, view);
   onMount(() =>
