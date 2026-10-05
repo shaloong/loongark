@@ -55,7 +55,7 @@ Swap 是指示内容切换部件，不另建业务状态机；例子以真实按
 
 Drawer 的命名保持现有 Root/Trigger/Portal/Overlay/Positioner/Content/Title/Description/Action/Cancel，并加入 Stack、RootProvider、Context、Grabber/Indicator、SwipeArea、Indent/IndentBackground 及控制 Hook。Overlay 对应原生 Backdrop，不再增加重复平铺别名。原 Dialog 的 placement Props 不等同于原生 swipeDirection；下/上/左/右使用 swipeDirection，并由共享样式对齐布局。默认 Root 与 RootProvider 开启 lazyMount/unmountOnExit，防止未打开的嵌套 Positioner 先被外层模态隐藏、打开后仍无法进入无障碍树；Solid DrawerPortal 同时根据 Presence 挂载 Portal，防止 Solid 的空包装提前被隐藏。业务可显式覆盖，两项同时关闭的嵌套行为仍属上游限制。Svelte 目录示例在滚动容器 ref 就绪后挂载 Root，保证 IntersectionObserver 使用指定文章而非默认视口。
 
-高级能力继续按可复现情景交付，不能把“公开所有部件”写成“全部业务能力已完成”。待补验证包括 DateInput 完整输入/粘贴/日期时间/国际化组合、Drawer 真实触摸/RTL/所有方向、Collection 异步取消与请求竞争，以及表格虚拟化、图表缩放/刷选/实时流、复杂问卷题型和消息虚拟化。
+高级能力继续按可复现情景交付，不能把“公开所有部件”写成“全部业务能力已完成”。待补验证包括 DateInput 本地化文本解析/日期时间/国际化组合、Drawer 真实触摸/RTL/所有方向、Collection 异步取消与请求竞争，以及表格虚拟化、图表缩放/刷选/实时流、复杂问卷题型和消息虚拟化。
 
 本批 Linux 验收：114 族、283 Story、四端各 789 个公开值入口；147 个四端示例运行通过，专项行为 8 项、全量浏览器 106 项、视觉 46 项通过。明暗默认 WCAG、窄屏溢出和有效 transition: all 为 0；64 张四端和 16 张 Story 截图已目视核验。新增 16 张 Linux 基线，原有 30 张 Linux 与 2 张 Windows 基线不变。详细范围与限制见 [验收记录](audits/2026-10-03/ark-next-linux/acceptance.json)。
 
@@ -80,7 +80,12 @@ Drawer 的命名保持现有 Root/Trigger/Portal/Overlay/Positioner/Content/Titl
 | Questionnaire        | 条件题、答案保留、受控拒绝、表单与同步/异步跨题校验、取消/过期结果与重试                              | 复杂输入题型、真机与多浏览器验收    |
 | DataTable            | 受控查询/排序/分页、服务器模式、跨页选择、列显示/顺序、逻辑冻结列、请求状态、草稿编辑与校验 | 虚拟化、复杂编辑器与批量编辑                           |
 | Chart                | 受控图例、范围裁切、缺失值/极值、可访问数据表、重绘焦点                     | 缩放、刷选、增量数据渲染与交互工具提示                  |
-| DateInput / Drawer   | 分段编辑/范围/真实表单；手势/吸附点/嵌套模态                                | 完整粘贴/日期时间/国际化组合；真实触摸、RTL 与全部方向  |
+| DateInput / Drawer   | 分段编辑/范围/真实表单；手势/吸附点/嵌套模态                                | 本地化文本解析/日期时间/国际化组合；真实触摸、RTL 与全部方向  |
 | Async Collection     | 已公开原生控制 Hook                                                         | 通用异步控制契约、分页边界与卸载清理回归                |
 
 后续以能复现的问题和真实使用场景逐批推进；目录和原生部件覆盖清零不关闭上表。媒体高度变化已按可见消息/文字锚点补齐，真实复现的160px漂移修正为0px；共享行为与四端高级示例见 [会话说明](conversation.md)，验收见 [媒体锚点记录](audits/2026-10-03/message-anchor-linux/acceptance.json)。
+
+
+### 完整日期粘贴的原生契约
+
+DateInput 已透传原生完整 ISO 日期粘贴（`YYYY-MM-DD`），无需新增解析器或组件别名。非法日期和空白不替换当前值；min/max 按原生分段约束保留可用日期段，不能假设总是直接返回 min 或 max。范围中粘贴只更新当前取得焦点的端点，真实表单仍提交本地化字符串。四端桌面/手机明暗专项回归见 [日期粘贴验收](audits/2026-10-05/date-input-paste-linux/acceptance.json)。本地化自由文本和日期时间组合仍待验收，不据此声称全部日期能力已完成。

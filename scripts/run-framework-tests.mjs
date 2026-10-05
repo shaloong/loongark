@@ -5,6 +5,7 @@ const child = spawn(
     "scripts/run-playwright.mjs",
     "tests/framework-consumers.spec.ts",
     "tests/framework-examples.spec.ts",
+    "tests/date-input-paste.spec.ts",
     "--project=chromium",
     "--workers=2",
   ],

@@ -1,0 +1,48 @@
+{
+  "recordedAt": "2026-10-05T09:27:25.523949+00:00",
+  "branch": "develop",
+  "baseCommit": "cb6613b837ab19b7914c57b2ec00066fcd04d7eb",
+  "result": "passed",
+  "scope": "核验四端已有原生ISO整日期粘贴，不新增解析器或别名；回归加入四端验证入口",
+  "validation": {
+    "frozenInstall": "passed; lockfile unchanged",
+    "newFourFrameworkThemeViewportCases": 16,
+    "existingDateInputVisualCases": 4,
+    "snapshotUpdates": "disabled; existing baselines unchanged",
+    "lint": "passed",
+    "buildScope": "组件、示例和Story源码未改，使用上一批成功构建且源码一致的消费/Story产物；本批不声称重新执行完整发布、SSR或全部示例验证"
+  },
+  "manualReview": {
+    "screenshots": 16,
+    "contactSheets": 4,
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1280,
+      375
+    ],
+    "frameworks": [
+      "react",
+      "vue",
+      "solid",
+      "svelte"
+    ],
+    "result": "目视对齐、范围端点焦点与按钮换行一致，无截图基线更新"
+  },
+  "initialFailures": "初轮错误假设越界日期总返回整个min/max；更正为原生分段约束后，真实表单断言对照选中值。失败日志保留在忽略目录。",
+  "evidenceStorage": ".artifacts/date-paste/; 原图、联系表和日志不入Git",
+  "limitations": [
+    "使用DOM ClipboardEvent/DataTransfer核验原生粘贴处理，未声称操作系统剪贴板或真机验收",
+    "本地化自由文本、日期时间组合、复杂编辑器、批量编辑、表格/消息虚拟化、图表高级交互、复杂题型和异步Collection契约仍未全部交付",
+    "此批只关闭ISO粘贴专项验收缺口，不能代表剩余所有能力已完成"
+  ],
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "os": "Linux",
+    "chromium": "151.0.7922.173",
+    "playwright": "1.57.0"
+  }
+}
