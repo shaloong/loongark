@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-05",
+  "branch": "develop",
+  "base": "b03c3a63d8f6a683dbcef723a1244f5bbbd9063e",
+  "scope": [
+    "四端列拖动/边缘自动滚动、键盘排序与取消、冻结区域约束",
+    "交互式列宽预览/一次提交、RTL、边界、受控拒绝和加载取消",
+    "动态列清理、非受控默认副本、焦点可见性、SSR语义及生命周期"
+  ],
+  "environment": {
+    "platform": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "browser": "system Chromium 151.0.7922.173",
+    "playwright": "1.57.0"
+  },
+  "validation": {
+    "verify": "fresh passed: lint, tsc and all9package builds",
+    "contracts": "passed including column geometry, stable order, frozen regions, prototype keys, escaping and schema reconciliation",
+    "storybook": "fresh passed",
+    "coverage": "115families /307Story /790LoongArk values per framework /215examples",
+    "publicationAndSSR": "passed four frameworks including manual colgroup, disabled controls and no SSR callbacks",
+    "svelte": "0 errors /3 warnings (2existing and native focusable table scroll region)",
+    "fullFrameworks": "154passed /12Story-only skips; all215examples, before final edge-autoscroll and default-copy refinement",
+    "fullE2E": "108ordinary cases plus130existing visual cases passed;153consumer-only skips;4new visual cases failed for8missing Linux snapshots, prior to final refinement",
+    "finalAffected": "fresh rebuild then16framework +4Story passed, including new narrow-screen LTR/RTL real pointer edge drag",
+    "finalVisual": "134passed on final fresh build; --update-snapshots=none"
+  },
+  "findings": [
+    "Svelte quoted multiline style produced check errors; corrected expression and rebuilt before further acceptance.",
+    "Header alignment and narrow-screen focus visibility corrected after actual capture review.",
+    "An earlier interrupted runner left child processes and contaminated a concurrent run; those results excluded and whole framework/e2e suites rerun serially.",
+    "Initial direct runner lacked system Chromium environment; corrected pnpm wrapper invocation.",
+    "Missing Linux baselines were reported as failure; actual8images reviewed, original136images unchanged."
+  ],
+  "manualReview": {
+    "frameworkAndStory": "40 final desktop/375px light/dark LTR/RTL images reviewed through10contact sheets",
+    "baselines": "8new Linux images reviewed through2contact sheets;136existing hashes unchanged including2Windows",
+    "result": "表头正文对齐、长文本换行、局部横向滚动、窄屏移动焦点保持可见；明暗与RTL布局已目视检查。",
+    "preview": "8additional final-build Story LTR/RTL desktop/mobile light/dark previews reviewed"
+  },
+  "limitations": [
+    "本批接受平台仅Linux system Chromium与375px模拟视口；Pointer Events实现触摸通道，未计作真机触摸验收。",
+    "原生Safari runner新增W3C指针/键盘列交互，尚未取得该新增用例远端结果。",
+    "Firefox/WebKit既有失败见browser-ci-recheck，平台清单仍开放。",
+    "分组聚合、树行、单元格范围粘贴及其余本轮高级组件缺口仍继续实现。"
+  ],
+  "evidence": ".artifacts/gap-completion/columns-* and .artifacts/advanced-completion/columns-*; process files ignored"
+}

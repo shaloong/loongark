@@ -24,13 +24,13 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 
 ## 边界
 
-现支持客户端与服务端标量数据、列显示及顺序控制。已提供逻辑冻结列；已提供文字/数值单元格编辑；虚拟化见下文；未提供指针列拖动；数据请求、取消与竞争处理由调用方负责，不假定业务接口协议。它是已有能力的完善，不声称兼容 MUI Data Grid、Ant Design Table 或第三方表格引擎的全部 API。
+现支持客户端与服务端标量数据、列显示及顺序控制。已提供逻辑冻结列；已提供文字/数值单元格编辑；虚拟化见下文；列交互见下文；数据请求、取消与竞争处理由调用方负责，不假定业务接口协议。它是已有能力的完善，不声称兼容 MUI Data Grid、Ant Design Table 或第三方表格引擎的全部 API。
 
 ## 高级状态与服务端模式
 
 `state/defaultState/onStateChange` 统一控制 `{query, sort?, page}`，page 从 1 开始；`pageSize` 继续独立设置。未传 state 保持现有客户端非受控行为；受控调用方可以拒绝更新，原生过滤输入恢复业务值。排序和查询变化从第一页开始。Vue 支持 `stateChange` 与 `update:state`（v-model:state）；其它三端显式传 state/onStateChange，Svelte 不会先自行改变业务传入的 state。
 
-`columnKeys` 按指定顺序显示已有列；不传时显示全部列。重复/未知 key 被去重/忽略，空数组允许只保留选择列。完整 columns 仍检查非空唯一 key；隐藏排序列不再显示旧排序，下一次状态通知清除无效 sort。它是显示/顺序控制，不新增重复的列类型或虚假的拖动 API。
+`columnKeys` 按指定顺序显示已有列；不传时显示全部列。重复/未知 key 被去重/忽略，空数组允许只保留选择列。完整 columns 仍检查非空唯一 key；隐藏排序列不再显示旧排序，下一次状态通知清除无效 sort。它是显示/顺序控制，拖动与键盘操作仍使用同一顺序契约。
 
 `mode="server"` 直接展示 data 当前页，禁止再次本地过滤、排序、切页；调用方收到新 state 后请求并返回该页和 `totalRows`。总数归一为非负整数，未传或非有限数回退到当前 data.length；应提供真实总数。每行必须具有非空稳定 rowKey（默认 id），不能用跨页不稳定的下标。server 选择跨页保留，不把当前页之外的 ID 当成已删除；业务应在明确删除时清理 selectedIds。client 延续原有删除清理。初次渲染/SSR 不触发请求或业务回调。
 
@@ -98,3 +98,16 @@ textarea 可设置原生 `rows`（默认3），Enter 换行，Ctrl/Command+Enter
 数值控件保留原始字符串草稿，例如负号；非法或无限数值不参与筛选，字段通过 `aria-invalid`、关联错误文字及 alert 反馈，修正后错误解除。虚拟窗口只在有效查询改变时回到开头，非法数值草稿不会打断阅读位置。未知或已禁用的选项、与列类型不兼容的操作符报告对应错误。有效筛选变化回到第一页；受控调用方拒绝更新时控件恢复到接受的状态。内置面板每列编辑一个条件，模型允许调用方提供同列多个条件，例如数值上下界。
 
 服务端模式保留 `sorts/filters` 查询契约并通过 `onStateChange` 通知，组件不重新排序或筛选当前返回页。加载时查询控件禁用，SSR 不触发状态回调。标签由 `filterColumn`、`filterOperator`、`filterOperators`、`allOptions`、`invalidFilter` 与既有错误标签本地化；操作符标签可逐项覆盖，undefined 回退到默认值；`sortDescription` 定义排序说明。四端 DataTableQueryExample 与 ColumnQueries Story 覆盖优先级、组合筛选、受控拒绝、草稿错误、分页及重挂。
+
+
+## 列拖动与交互式列宽
+
+`columnReorderable` 启用独立 Lucide 拖动手柄；`columnResizable` 启用列边缘的可聚焦纵向 separator。两者默认关闭，原有自动表格布局保留。鼠标/触摸 Pointer Events 共用 Kit 挂载行为，拖动过程中仅预览，靠近滚动区域边缘时自动横向滚动，释放时通知一次；Escape、取消、卸载、加载中或外部列配置变化终止当前手势。
+
+顺序复用 `columnKeys/onColumnKeysChange(keys)`；不传 `columnKeys` 时内部管理顺序，删除列清理旧 key，新列加入末尾。传入时由调用方决定是否接受更新，拒绝时不保留预览。Vue 同时提供 `columnKeysChange` 与 `update:columnKeys`。冻结列仅在同一 start/body/end 区域内重排，不隐式改变 `pinnedColumns`；隐藏列仍由调用方控制。
+
+`columnWidths/onColumnWidthsChange(widths)` 控制像素列宽；`defaultColumnWidths` 的副本只初始化非受控宽度，不与调用方的默认对象共享可变状态。Vue 提供 `columnWidthsChange` 与 `update:columnWidths`。`DataColumn.minWidth/maxWidth` 默认为80/1200，未配置宽度默认为160并限制到该列边界；非有限宽度回退，最大数据几何限制为100000。未知宽度 key 不参与计算，非受控列删除后清理宽度，重新加入使用默认值。列宽属于数据几何，不新增主题尺寸 Token。
+
+拖动手柄使用 ArrowLeft/ArrowRight 移动，Home/End 到当前冻结区域边界；方向继承原生 `dir`。Enter/Space 开始或结束键盘移动，`aria-pressed` 表示状态，Escape 请求恢复起始顺序；受控调用方仍可拒绝恢复。separator 使用方向键调整10像素、Shift调整50像素、Home/End达到最小/最大值，双击恢复160像素（仍限制边界）。原生 `aria-valuemin/max/now`、加载禁用和局部直播状态同步；重排后的焦点只恢复同一手柄并滚动表格区域，避免重排保持旧 DOM 焦点却把手柄移出窄屏。
+
+手动列宽使用原生 `colgroup` 和固定布局，长正文换行，窄屏局部横向滚动。四端 DataTableColumnsExample 及 ColumnLayout Story 展示真实拖动、键盘、RTL、冻结、受控拒绝、动态列和卸载。SSR 输出列宽与控件语义，不调用更新回调、不读取浏览器 DOM。原生 Safari runner 已增加 W3C 指针调整与键盘排序；远端实际结果取得并审阅后再计入平台验收。

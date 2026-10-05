@@ -901,3 +901,5 @@ export type {ChartRange} from "@loongark/kit";
 
 export { createAsyncCollectionLoader } from "@loongark/kit";
 export type { AsyncCollectionSort, AsyncCollectionRequest, AsyncCollectionLoadDetails, AsyncCollectionPage, AsyncCollectionLoaderOptions } from "@loongark/kit";
+
+export type { DataColumnGeometry, DataTableColumnLabels, DataTableColumnOptions } from "@loongark/kit";

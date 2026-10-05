@@ -11,6 +11,7 @@ import {
   type DataFilter,
   type DataColumnFilter,
 } from "./table-query";
+import type { DataColumnGeometry } from "./table-columns";
 export type CellValue = string | number | boolean | null;
 export const observeChartWidth = (
   element: HTMLElement,
@@ -47,7 +48,7 @@ export const observeChartWidth = (
   };
 };
 export type DataRow = Record<string, CellValue>;
-export interface DataColumn {
+export interface DataColumn extends DataColumnGeometry {
   key: string;
   label: string;
   sortable?: boolean;

@@ -4,8 +4,8 @@
 
 ## 高级表格
 
-- [ ] 列拖动排序及键盘替代操作
-- [ ] 交互式列宽调整及 RTL
+- [x] 列拖动排序及键盘替代操作（[Linux 四端验收](audits/2026-10-05/data-table-columns-linux/acceptance.json)）
+- [x] 交互式列宽调整及 RTL（同上）
 - [x] 多列排序（[Linux 四端验收](audits/2026-10-05/data-table-query-linux/acceptance.json)）
 - [x] 列级筛选（同上：文本、数值、选项、组合条件、错误草稿及服务端契约）
 - [ ] 分组与聚合
@@ -46,7 +46,7 @@
 - [ ] Safari 实际运行、截图与焦点验收（WebKit 引擎验收不等同 Safari）
 - [ ] 真实手机验收（模拟视口和模拟触摸不等同真机）
 
-当前本地云端为 Linux，官方 Firefox/WebKit 下载被域名策略拒绝；独立 GitHub CI 已实际运行三个浏览器及原生桌面 Safari。Safari 的现有默认示例和历史/图表桌面专项通过且截图已审阅；Linux 三引擎仍有已记录的焦点、窄屏与测试契约失败，平台清单不关闭。真实手机需取得设备或设备云连接。其余实现继续推进。过程截图与日志仅保留在 `.artifacts/` 或有期限的 CI Artifact；Git 保存简短摘要及实际用于回归的已审阅基线。
+当前本地云端为 Linux，官方 Firefox/WebKit 下载被域名策略拒绝；独立 GitHub CI 已实际运行三个浏览器及原生桌面 Safari。Safari 的现有默认示例和历史/图表桌面专项通过且截图已审阅；最新整改后的真实CI中，Chromium四端138项通过，但Story仍有6项失败；Firefox四端19项、WebKit四端17项失败，Safari211默认示例及16桌面专项通过且16张截图已审阅。详见[远端复核](audits/2026-10-05/browser-ci-recheck/acceptance.json)，平台清单不关闭。真实手机需取得设备或设备云连接。其余实现继续推进。过程截图与日志仅保留在 `.artifacts/` 或有期限的 CI Artifact；Git 保存简短摘要及实际用于回归的已审阅基线。
 
 
 独立浏览器流水线及原生 Safari runner 已配置；[本地配置验证](audits/2026-10-05/browser-ci-setup/acceptance.json)不计作远端或真机验收，实际首轮结果和截图审阅已补入该记录；平台项目仍等待修复后的完整验收。

@@ -2,6 +2,12 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  dataColumnWidth,
+  dataColumnTableStyle,
+  renderDataColumnControls,
+  mountDataColumnControls,
+  reconcileDataColumnOrder,
+  reconcileDataColumnWidths,
   createVirtualWindow,
   mountVirtualWindow,
   dataTableVirtualOptions,
@@ -152,6 +158,12 @@ export const LoongArkDataTable = defineComponent({
     totalRows: Number,
     virtualization: Object as PropType<DataTableProps["virtualization"]>,
     columnKeys: Array as PropType<readonly string[]>,
+    columnWidths: Object as PropType<DataTableProps["columnWidths"]>,
+    defaultColumnWidths: Object as PropType<
+      DataTableProps["defaultColumnWidths"]
+    >,
+    columnReorderable: Boolean,
+    columnResizable: Boolean,
     pinnedColumns: Object as PropType<DataTableProps["pinnedColumns"]>,
     loading: Boolean,
     error: String,
@@ -161,6 +173,10 @@ export const LoongArkDataTable = defineComponent({
     historyLimit: Number,
   },
   emits: {
+    columnKeysChange: (keys: string[]) => Array.isArray(keys),
+    "update:columnKeys": (keys: string[]) => Array.isArray(keys),
+    columnWidthsChange: (widths: Record<string, number>) => !!widths,
+    "update:columnWidths": (widths: Record<string, number>) => !!widths,
     stateChange: (state: DataTableState) => !!state,
     "update:state": (state: DataTableState) => !!state,
     selectionChange: (ids: string[]) => Array.isArray(ids),
@@ -168,6 +184,53 @@ export const LoongArkDataTable = defineComponent({
   },
   setup(props, { emit }) {
     const region = ref<HTMLDivElement>();
+    const internalColumnKeys = ref<readonly string[]>(),
+      internalColumnWidths = ref<DataTableProps["columnWidths"]>(
+        props.defaultColumnWidths === undefined ? undefined : {...props.defaultColumnWidths},
+      );
+    const columnProps = () => ({
+      ...props,
+      columnKeys: props.columnKeys ?? internalColumnKeys.value,
+      columnWidths: props.columnWidths ?? internalColumnWidths.value,
+    });
+    watchEffect(() => {
+      if (props.columnKeys === undefined)
+        internalColumnKeys.value = reconcileDataColumnOrder(
+          internalColumnKeys.value,
+          props.columns,
+        );
+      if (props.columnWidths === undefined)
+        internalColumnWidths.value = reconcileDataColumnWidths(
+          internalColumnWidths.value,
+          props.columns,
+        );
+    });
+    const columnsMounted = ref(false);
+    onMounted(() => {
+      columnsMounted.value = true;
+    });
+    watchEffect((cleanup) => {
+      const enabled = props.columnReorderable || props.columnResizable;
+      if (!columnsMounted.value || !region.value || !enabled) return;
+      cleanup(
+        mountDataColumnControls(
+          region.value,
+          columnProps,
+          (keys) => {
+            if (props.columnKeys === undefined) internalColumnKeys.value = [...keys];
+            emit("columnKeysChange", [...keys]);
+            emit("update:columnKeys", [...keys]);
+          },
+          (widths) => {
+            if (props.columnWidths === undefined)
+              internalColumnWidths.value = {...widths};
+            emit("columnWidthsChange", {...widths});
+            emit("update:columnWidths", {...widths});
+          },
+        ),
+      );
+    });
+
     const batchHost = ref<HTMLDivElement>();
     const batchEditor = createDataTableBatchEditor(
       (value) => {
@@ -237,7 +300,7 @@ export const LoongArkDataTable = defineComponent({
       emit("stateChange", next);
       emit("update:state", next);
     };
-    const view = computed(() => dataTableView(props, current()));
+    const view = computed(() => dataTableView(columnProps(), current()));
     // 共享模型不持有框架响应状态；草稿激活后重新订阅 loading 与校验器。
     watchEffect(() => {
       void edit.value;
@@ -341,6 +404,54 @@ export const LoongArkDataTable = defineComponent({
         model = view.value,
         ids = selected(),
         state = pageSelection();
+      const columnHeading = (c: DataColumn) =>
+        c.sortable === false
+          ? h("span", { "data-part": "column-label", title: c.label }, c.label)
+          : h(
+              "button",
+              {
+                "data-part": "column-sort",
+                type: "button",
+                disabled: props.loading,
+                "aria-label": c.label,
+                "aria-description": labels.sortDescription(
+                  model.sorts.find((sort) => sort.key === c.key)?.direction,
+                  model.sorts.findIndex((sort) => sort.key === c.key) + 1,
+                ),
+                onClick: (event: MouseEvent) =>
+                  changeState(
+                    nextDataTableSort(model.sorts, c.key, event.shiftKey),
+                  ),
+              },
+              [
+                h(
+                  "span",
+                  { "data-part": "column-label", title: c.label },
+                  c.label,
+                ),
+                model.sorts.length > 1 &&
+                model.sorts.some((sort) => sort.key === c.key)
+                  ? h(
+                      "span",
+                      {
+                        "data-part": "sort-priority",
+                        "aria-hidden": "true",
+                      },
+                      model.sorts.findIndex((sort) => sort.key === c.key) + 1,
+                    )
+                  : null,
+                model.sorts.some((sort) => sort.key === c.key)
+                  ? h(LoongArkIcon, {
+                      icon:
+                        model.sorts.find((sort) => sort.key === c.key)
+                          ?.direction === "asc"
+                          ? controlIcons.arrowUp
+                          : controlIcons.arrowDown,
+                      size: "sm",
+                    })
+                  : null,
+              ],
+            );
       return h(
         "section",
         {
@@ -584,6 +695,13 @@ export const LoongArkDataTable = defineComponent({
               editId,
             ),
           }),
+          props.columnReorderable || props.columnResizable
+            ? h("p", {
+                "data-part": "column-status",
+                role: "status",
+                "aria-live": "polite",
+              })
+            : null,
           h(
             "div",
             {
@@ -591,7 +709,7 @@ export const LoongArkDataTable = defineComponent({
               "data-part": "root",
               ref: region,
               "data-virtualized": props.virtualization ? "true" : undefined,
-              style: dataTableVirtualStyle(props),
+              style: dataTableVirtualStyle(columnProps()),
               role: "region",
               "aria-label": props.label,
               tabindex: 0,
@@ -602,6 +720,12 @@ export const LoongArkDataTable = defineComponent({
                 {
                   "data-scope": "table",
                   "data-part": "table",
+                  "data-column-layout":
+                    props.columnResizable ||
+                    columnProps().columnWidths !== undefined
+                      ? "true"
+                      : undefined,
+                  style: dataColumnTableStyle(columnProps()),
                   "aria-label": props.label,
                   "aria-rowcount":
                     props.virtualization && model.total > 0
@@ -609,6 +733,26 @@ export const LoongArkDataTable = defineComponent({
                       : undefined,
                 },
                 [
+                  props.columnResizable ||
+                  columnProps().columnWidths !== undefined
+                    ? h("colgroup", [
+                        h("col", {
+                          style: {
+                            width:
+                              "calc(var(--lk-control-height-sm) + var(--lk-space-component-sm) * 2)",
+                          },
+                        }),
+                        ...model.columns.map((column) =>
+                          h("col", {
+                            key: column.key,
+                            "data-column-key": column.key,
+                            style: {
+                              width: `${dataColumnWidth(column, columnProps().columnWidths)}px`,
+                            },
+                          }),
+                        ),
+                      ])
+                    : null,
                   h("thead", [
                     h("tr", [
                       h(
@@ -650,6 +794,7 @@ export const LoongArkDataTable = defineComponent({
                           "th",
                           {
                             key: c.key,
+                            "data-column-key": c.key,
                             scope: "col",
                             "data-pinned": model.pins.get(c.key),
                             "data-align": c.align,
@@ -660,59 +805,18 @@ export const LoongArkDataTable = defineComponent({
                                   : "descending"
                                 : undefined,
                           },
-                          c.sortable === false
-                            ? c.label
-                            : h(
-                                "button",
-                                {
-                                  type: "button",
-                                  disabled: props.loading,
-                                  "aria-label": c.label,
-                                  "aria-description": labels.sortDescription(
-                                    model.sorts.find(
-                                      (sort) => sort.key === c.key,
-                                    )?.direction,
-                                    model.sorts.findIndex(
-                                      (sort) => sort.key === c.key,
-                                    ) + 1,
+                          props.columnReorderable || props.columnResizable
+                            ? h("div", { "data-part": "column-header" }, [
+                                columnHeading(c),
+                                h("span", {
+                                  "data-part": "column-controls",
+                                  innerHTML: renderDataColumnControls(
+                                    columnProps(),
+                                    c,
                                   ),
-                                  onClick: (event: MouseEvent) =>
-                                    changeState(
-                                      nextDataTableSort(
-                                        model.sorts,
-                                        c.key,
-                                        event.shiftKey,
-                                      ),
-                                    ),
-                                },
-                                [
-                                  c.label,
-                                  model.sorts.length > 1 &&
-                                  model.sorts.some((sort) => sort.key === c.key)
-                                    ? h(
-                                        "span",
-                                        {
-                                          "data-part": "sort-priority",
-                                          "aria-hidden": "true",
-                                        },
-                                        model.sorts.findIndex(
-                                          (sort) => sort.key === c.key,
-                                        ) + 1,
-                                      )
-                                    : null,
-                                  model.sorts.some((sort) => sort.key === c.key)
-                                    ? h(LoongArkIcon, {
-                                        icon:
-                                          model.sorts.find(
-                                            (sort) => sort.key === c.key,
-                                          )?.direction === "asc"
-                                            ? controlIcons.arrowUp
-                                            : controlIcons.arrowDown,
-                                        size: "sm",
-                                      })
-                                    : null,
-                                ],
-                              ),
+                                }),
+                              ])
+                            : columnHeading(c),
                         ),
                       ),
                     ]),

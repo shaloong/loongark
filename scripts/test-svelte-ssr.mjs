@@ -29,6 +29,12 @@ const { default: component } = await import(
   pathToFileURL(resolve("tests/consumer-dist/svelte-ssr/index.mjs")).href
 );
 const html = render(component).body;
+assert.match(html, /aria-label="Move Project &lt;safe&gt; column"/);
+assert.match(
+  html,
+  /aria-valuemin="120"[^>]*aria-valuemax="480"[^>]*aria-valuenow="220"/,
+);
+assert.match(html, /tabindex="-1"[^>]*aria-disabled="true"/);
 assert.match(html, /data-part="batch-trigger"/);
 assert.match(html, /data-part="range-start"/);
 assert.match(html, /data-part="inspect-category"/);

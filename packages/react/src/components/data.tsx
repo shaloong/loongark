@@ -2,6 +2,12 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
+  dataColumnWidth,
+  reconcileDataColumnOrder,
+  reconcileDataColumnWidths,
+  dataColumnTableStyle,
+  renderDataColumnControls,
+  mountDataColumnControls,
   createVirtualWindow,
   mountVirtualWindow,
   dataTableVirtualOptions,
@@ -96,6 +102,30 @@ export const LoongArkChart = (props: ChartOptions) => {
   );
 };
 export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
+  const [internalColumnKeys, setColumnKeys] = useState<readonly string[]>();
+  const [internalColumnWidths, setColumnWidths] = useState<
+    DataTableProps["columnWidths"]
+  >(() => props.defaultColumnWidths === undefined ? undefined : {...props.defaultColumnWidths});
+  const columnProps = {
+    ...props,
+    columnKeys: props.columnKeys ?? internalColumnKeys,
+    columnWidths: props.columnWidths ?? internalColumnWidths,
+  };
+  useLayoutEffect(() => {
+    if (props.columnKeys === undefined)
+      setColumnKeys((previous) =>
+        reconcileDataColumnOrder(previous, props.columns),
+      );
+    if (props.columnWidths === undefined)
+      setColumnWidths((previous) =>
+        reconcileDataColumnWidths(previous, props.columns),
+      );
+  }, [props.columns, props.columnKeys, props.columnWidths]);
+  const columnLatest = useRef(columnProps),
+    columnRaw = useRef(props);
+  columnLatest.current = columnProps;
+  columnRaw.current = props;
+
   const [query, setQuery] = useState(props.defaultState?.query ?? ""),
     [sort, setSort] = useState<DataSort | undefined>(props.defaultState?.sort),
     [sorts, setSorts] = useState<DataTableState["sorts"]>(
@@ -109,8 +139,26 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
       ...(props.defaultSelectedIds ?? []),
     ]);
   const current = props.state ?? { query, sort, sorts, filters, page };
-  const view = dataTableView(props, current);
+  const view = dataTableView(columnProps, current);
   const region = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!region.current || !(props.columnReorderable || props.columnResizable))
+      return;
+    return mountDataColumnControls(
+      region.current,
+      () => columnLatest.current,
+      (keys) => {
+        if (columnRaw.current.columnKeys === undefined) setColumnKeys([...keys]);
+        columnRaw.current.onColumnKeysChange?.([...keys]);
+      },
+      (widths) => {
+        if (columnRaw.current.columnWidths === undefined)
+          setColumnWidths({...widths});
+        columnRaw.current.onColumnWidthsChange?.({...widths});
+      },
+    );
+  }, [!!(props.columnReorderable || props.columnResizable)]);
+
   const [virtualizer] = useState(() =>
     createVirtualWindow(dataTableVirtualOptions(props, view), (value) =>
       setVirtualState(value),
@@ -254,6 +302,46 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
     if (props.selectedIds !== undefined)
       restoreDataSelection(input, selected, pageIds, rowId);
   };
+  const columnHeading = (c: DataTableProps["columns"][number]) =>
+    c.sortable === false ? (
+      <span data-part="column-label" title={c.label}>
+        {c.label}
+      </span>
+    ) : (
+      <button
+        data-part="column-sort"
+        aria-label={c.label}
+        type="button"
+        disabled={props.loading}
+        aria-description={labels.sortDescription(
+          view.sorts.find((sort) => sort.key === c.key)?.direction,
+          view.sorts.findIndex((sort) => sort.key === c.key) + 1,
+        )}
+        onClick={(event) =>
+          changeState(nextDataTableSort(view.sorts, c.key, event.shiftKey))
+        }
+      >
+        <span data-part="column-label" title={c.label}>
+          {c.label}
+        </span>
+        {view.sorts.length > 1 &&
+          view.sorts.some((sort) => sort.key === c.key) && (
+            <span data-part="sort-priority" aria-hidden="true">
+              {view.sorts.findIndex((sort) => sort.key === c.key) + 1}
+            </span>
+          )}
+        {view.sorts.some((sort) => sort.key === c.key) && (
+          <LoongArkIcon
+            icon={
+              view.sorts.find((sort) => sort.key === c.key)?.direction === "asc"
+                ? controlIcons.arrowUp
+                : controlIcons.arrowDown
+            }
+            size="sm"
+          />
+        )}
+      </button>
+    );
   return (
     <section
       data-scope="data-table"
@@ -430,12 +518,15 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
           __html: renderDataTableBatchMarkup(props, selected, batch, editId),
         }}
       />
+      {(props.columnReorderable || props.columnResizable) && (
+        <p data-part="column-status" role="status" aria-live="polite" />
+      )}
       <div
         data-scope="table"
         data-part="root"
         ref={region}
         data-virtualized={props.virtualization ? "true" : undefined}
-        style={dataTableVirtualStyle(props)}
+        style={dataTableVirtualStyle(columnProps)}
         role="region"
         aria-label={label}
         tabIndex={0}
@@ -443,11 +534,37 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
         <table
           data-scope="table"
           data-part="table"
+          data-column-layout={
+            props.columnResizable || columnProps.columnWidths !== undefined
+              ? "true"
+              : undefined
+          }
+          style={dataColumnTableStyle(columnProps)}
           aria-label={label}
           aria-rowcount={
             props.virtualization && view.total > 0 ? view.total + 1 : undefined
           }
         >
+          {(props.columnResizable ||
+            columnProps.columnWidths !== undefined) && (
+            <colgroup>
+              <col
+                style={{
+                  width:
+                    "calc(var(--lk-control-height-sm) + var(--lk-space-component-sm) * 2)",
+                }}
+              />
+              {view.columns.map((column) => (
+                <col
+                  key={column.key}
+                  data-column-key={column.key}
+                  style={{
+                    width: `${dataColumnWidth(column, columnProps.columnWidths)}px`,
+                  }}
+                />
+              ))}
+            </colgroup>
+          )}
           <thead>
             <tr>
               <th
@@ -480,6 +597,7 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
               {view.columns.map((c) => (
                 <th
                   key={c.key}
+                  data-column-key={c.key}
                   scope="col"
                   data-pinned={view.pins.get(c.key)}
                   data-align={c.align}
@@ -491,45 +609,18 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                       : undefined
                   }
                 >
-                  {c.sortable === false ? (
-                    c.label
+                  {props.columnReorderable || props.columnResizable ? (
+                    <div data-part="column-header">
+                      {columnHeading(c)}
+                      <span
+                        data-part="column-controls"
+                        dangerouslySetInnerHTML={{
+                          __html: renderDataColumnControls(columnProps, c),
+                        }}
+                      />
+                    </div>
                   ) : (
-                    <button
-                      aria-label={c.label}
-                      type="button"
-                      disabled={props.loading}
-                      aria-description={labels.sortDescription(
-                        view.sorts.find((sort) => sort.key === c.key)
-                          ?.direction,
-                        view.sorts.findIndex((sort) => sort.key === c.key) + 1,
-                      )}
-                      onClick={(event) =>
-                        changeState(
-                          nextDataTableSort(view.sorts, c.key, event.shiftKey),
-                        )
-                      }
-                    >
-                      {c.label}
-                      {view.sorts.length > 1 &&
-                        view.sorts.some((sort) => sort.key === c.key) && (
-                          <span data-part="sort-priority" aria-hidden="true">
-                            {view.sorts.findIndex(
-                              (sort) => sort.key === c.key,
-                            ) + 1}
-                          </span>
-                        )}
-                      {view.sorts.some((sort) => sort.key === c.key) && (
-                        <LoongArkIcon
-                          icon={
-                            view.sorts.find((sort) => sort.key === c.key)
-                              ?.direction === "asc"
-                              ? controlIcons.arrowUp
-                              : controlIcons.arrowDown
-                          }
-                          size="sm"
-                        />
-                      )}
-                    </button>
+                    columnHeading(c)
                   )}
                 </th>
               ))}

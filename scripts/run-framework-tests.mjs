@@ -10,6 +10,7 @@ const child = spawn(
     "tests/data-table-complex-editors.spec.ts",
     "tests/data-table-batch.spec.ts",
     "tests/data-table-query.spec.ts",
+    "tests/data-table-columns.spec.ts",
     "tests/virtualization.spec.ts",
     "tests/chart-interaction.spec.ts",
     "tests/questionnaire-types.spec.ts",

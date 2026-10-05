@@ -44,6 +44,14 @@ for (const [framework, script] of [
         : `console.log(renderToString(h(L.LoongArkDataTable,${tableProps})));`;
   const queryProps =
     "{label:'SSR query table',data:[{id:'q',name:'Query SSR row',amount:9,team:''}],columns:[{key:'name',label:'Project',filter:{type:'text'}},{key:'amount',label:'Revenue',filter:{type:'number'}},{key:'team',label:'Team',filter:{type:'select',options:[{value:'',label:'Unassigned'}]}}],state:{query:'',page:1,sorts:[{key:'name',direction:'asc'},{key:'amount',direction:'desc'}],filters:[{key:'amount',operator:'gte',value:'-'},{key:'team',operator:'equals',value:''}]},onStateChange:()=>{throw Error('SSR must not change query')}}";
+  const columnProps =
+    "{label:'SSR column layout',data:[{id:'column',name:'Column SSR row'}],columns:[{key:'name',label:'Project <safe>',minWidth:120,maxWidth:480}],columnReorderable:true,columnResizable:true,columnWidths:{name:220},loading:true,onColumnKeysChange:()=>{throw Error('SSR must not change columns')},onColumnWidthsChange:()=>{throw Error('SSR must not resize columns')}}";
+  const columnScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${columnProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${columnProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${columnProps})));`;
   const queryScript =
     framework === "Vue"
       ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${queryProps})})));`
@@ -146,6 +154,7 @@ for (const [framework, script] of [
         virtualScript +
           tableScript +
           queryScript +
+          columnScript +
           chartScript +
           interactiveChartScript +
           arkScript +
@@ -161,6 +170,12 @@ for (const [framework, script] of [
     { encoding: "utf8", timeout: 60000 },
   );
   assert.match(result.stdout, /data-part="batch-trigger"/);
+  assert.match(result.stdout, /aria-label="Move Project &lt;safe&gt; column"/);
+  assert.match(
+    result.stdout,
+    /aria-valuemin="120"[^>]*aria-valuemax="480"[^>]*aria-valuenow="220"/,
+  );
+  assert.match(result.stdout, /tabindex="-1"[^>]*aria-disabled="true"/);
   assert.match(result.stdout, /SSR async idle 1/);
   assert.match(result.stdout, /name="typed\[row\]"/);
   assert.match(result.stdout, /data-part="range-start"/);

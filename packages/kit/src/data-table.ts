@@ -1,3 +1,8 @@
+import {
+  dataColumnLabels,
+  type DataTableColumnLabels,
+  type DataTableColumnOptions,
+} from "./table-columns";
 import { resolveDataFilterLabels } from "./table-query";
 import {
   createDataTableView,
@@ -19,7 +24,7 @@ export interface DataTableSummary {
   page: number;
   pageCount: number;
 }
-export interface DataTableLabels {
+export interface DataTableLabels extends DataTableColumnLabels {
   filter: string;
   filterPlaceholder: string;
   filterColumn: (column: string) => string;
@@ -57,9 +62,12 @@ export interface DataTableLabels {
   batchCount: (count: number) => string;
   batchEnable: (column: string) => string;
 }
-export interface DataTableProps {
+export interface DataTableProps extends DataTableColumnOptions {
   data: readonly DataRow[];
   columns: readonly DataColumn[];
+  defaultColumnWidths?: Readonly<Record<string, number>>;
+  onColumnKeysChange?: (keys: string[]) => void;
+  onColumnWidthsChange?: (widths: Record<string, number>) => void;
   pageSize?: number;
   rowKey?: string;
   label?: string;
@@ -102,6 +110,7 @@ export interface DataTableProps {
 export const dataTableLabels = (
   labels?: DataTableProps["labels"],
 ): DataTableLabels => ({
+  ...dataColumnLabels(labels),
   filter: labels?.filter ?? "Filter rows",
   filterPlaceholder: labels?.filterPlaceholder ?? "Filter rows…",
   filterColumn: labels?.filterColumn ?? ((column) => `Filter ${column}`),

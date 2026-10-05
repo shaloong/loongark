@@ -126,3 +126,15 @@ import { DataTableQueryExample } from "../examples/react/DataTableQueryExample";
 export const ColumnQueries: StoryObj = {
   render: () => <DataTableQueryExample />,
 };
+
+import { DataTableColumnsExample } from "../examples/react/DataTableColumnsExample";
+export const ColumnLayout: StoryObj = {
+  parameters: {
+    docs: {
+      description: {
+        story: "列拖动与键盘排序、宽度调整、冻结区域、RTL、受控拒绝和动态列。",
+      },
+    },
+  },
+  render: () => <DataTableColumnsExample />,
+};

@@ -4,6 +4,12 @@
   import { afterUpdate, tick, onMount, onDestroy } from "svelte";
   import {
     dataTableView,
+    dataColumnWidth,
+    dataColumnTableStyle,
+    renderDataColumnControls,
+    mountDataColumnControls,
+    reconcileDataColumnOrder,
+    reconcileDataColumnWidths,
     createVirtualWindow,
     mountVirtualWindow,
     dataTableVirtualOptions,
@@ -85,6 +91,46 @@
   onDestroy(() => stopVirtual?.());
   export let totalRows: number | undefined = undefined;
   export let columnKeys: readonly string[] | undefined = undefined;
+  export let columnWidths: DataTableProps["columnWidths"] = undefined;
+  export let defaultColumnWidths: DataTableProps["defaultColumnWidths"] =
+    undefined;
+  export let columnReorderable = false;
+  export let columnResizable = false;
+  export let onColumnKeysChange: DataTableProps["onColumnKeysChange"] =
+    undefined;
+  export let onColumnWidthsChange: DataTableProps["onColumnWidthsChange"] =
+    undefined;
+  let internalColumnKeys: readonly string[] | undefined;
+  let internalColumnWidths = defaultColumnWidths === undefined ? undefined : {...defaultColumnWidths};
+  let stopColumns: (() => void) | undefined;
+  $: if (columnKeys === undefined)
+    internalColumnKeys = reconcileDataColumnOrder(internalColumnKeys, columns);
+  $: if (columnWidths === undefined)
+    internalColumnWidths = reconcileDataColumnWidths(
+      internalColumnWidths,
+      columns,
+    );
+  afterUpdate(() => {
+    if ((columnReorderable || columnResizable) && !stopColumns)
+      stopColumns = mountDataColumnControls(
+        region,
+        () => editProps,
+        (keys) => {
+          if (columnKeys === undefined) internalColumnKeys = [...keys];
+          onColumnKeysChange?.([...keys]);
+        },
+        (widths) => {
+          if (columnWidths === undefined) internalColumnWidths = {...widths};
+          onColumnWidthsChange?.({...widths});
+        },
+      );
+    else if (!(columnReorderable || columnResizable) && stopColumns) {
+      stopColumns();
+      stopColumns = undefined;
+    }
+  });
+  onDestroy(() => stopColumns?.());
+
   export let pinnedColumns: DataTableProps["pinnedColumns"] = undefined;
   let region: HTMLDivElement;
   onMount(() => mountDataTablePins(region));
@@ -127,7 +173,10 @@
     rowKey,
     mode,
     totalRows,
-    columnKeys,
+    columnKeys: columnKeys ?? internalColumnKeys,
+    columnWidths: columnWidths ?? internalColumnWidths,
+    columnReorderable,
+    columnResizable,
     pinnedColumns,
     loading,
     labels,
@@ -153,19 +202,8 @@
   let internal = [...defaultSelectedIds],
     pageInput: HTMLInputElement | undefined;
   $: current = state ?? { query, sort, sorts, filters, page };
-  $: view = dataTableView(
-    {
-      data,
-      columns,
-      pageSize,
-      rowKey,
-      mode,
-      totalRows,
-      columnKeys,
-      pinnedColumns,
-    },
-    current,
-  );
+  $: view = dataTableView(editProps, current);
+  $: columnStyle = dataColumnTableStyle(editProps);
   $: text = dataTableLabels(labels);
   $: selected = dataTableSelection(selectedIds ?? internal, view.allIds, mode);
   function changeState(patch: Partial<DataTableState>) {
@@ -206,6 +244,37 @@
       restoreDataSelection(input, selected, pageIds, rowId);
   }
 </script>
+
+{#snippet columnHeading(c: DataColumn)}
+  {#if c.sortable === false}<span data-part="column-label" title={c.label}
+      >{c.label}</span
+    >{:else}<button
+      data-part="column-sort"
+      aria-label={c.label}
+      type="button"
+      disabled={loading}
+      {...{
+        "aria-description": text.sortDescription(
+          view.sorts.find((sort) => sort.key === c.key)?.direction,
+          view.sorts.findIndex((sort) => sort.key === c.key) + 1,
+        ),
+      }}
+      on:click={(event) =>
+        changeState(nextDataTableSort(view.sorts, c.key, event.shiftKey))}
+      ><span data-part="column-label" title={c.label}>{c.label}</span
+      >{#if view.sorts.length > 1 && view.sorts.some((sort) => sort.key === c.key)}<span
+          data-part="sort-priority"
+          aria-hidden="true"
+          >{view.sorts.findIndex((sort) => sort.key === c.key) + 1}</span
+        >{/if}{#if view.sorts.some((sort) => sort.key === c.key)}<Icon
+          icon={view.sorts.find((sort) => sort.key === c.key)?.direction ===
+          "asc"
+            ? controlIcons.arrowUp
+            : controlIcons.arrowDown}
+          size="sm"
+        />{/if}</button
+    >{/if}
+{/snippet}
 
 <section
   data-scope="data-table"
@@ -352,6 +421,11 @@
     {@html renderDataTableBatchMarkup(editProps, selected, batch, editId)}
   </div>
   <!-- svelte-ignore a11y_no_noninteractive_tabindex (滚动区域需要键盘聚焦以读取横向内容) -->
+  {#if columnReorderable || columnResizable}<p
+      data-part="column-status"
+      role="status"
+      aria-live="polite"
+    ></p>{/if}
   <div
     data-scope="table"
     data-part="root"
@@ -372,11 +446,25 @@
     <table
       data-scope="table"
       data-part="table"
+      data-column-layout={columnResizable ||
+      editProps.columnWidths !== undefined
+        ? "true"
+        : undefined}
+      style:table-layout={columnStyle.tableLayout}
+      style:width={columnStyle.width}
       aria-label={label}
       aria-rowcount={virtualization && view.total > 0
         ? view.total + 1
         : undefined}
     >
+      {#if columnResizable || editProps.columnWidths !== undefined}<colgroup
+          ><col
+            style:width={"calc(var(--lk-control-height-sm) + var(--lk-space-component-sm) * 2)"}
+          />{#each view.columns as column (column.key)}<col
+              data-column-key={column.key}
+              style:width={`${dataColumnWidth(column, editProps.columnWidths)}px`}
+            />{/each}</colgroup
+        >{/if}
       <thead
         ><tr
           ><th scope="col" data-pinned={view.pinSelection ? "start" : undefined}
@@ -404,6 +492,7 @@
           >
           {#each view.columns as c (c.key)}<th
               scope="col"
+              data-column-key={c.key}
               data-pinned={view.pins.get(c.key)}
               data-align={c.align}
               aria-sort={view.sort?.key === c.key
@@ -412,33 +501,13 @@
                   : "descending"
                 : undefined}
             >
-              {#if c.sortable === false}{c.label}{:else}<button
-                  aria-label={c.label}
-                  type="button"
-                  disabled={loading}
-                  {...{
-                    "aria-description": text.sortDescription(
-                      view.sorts.find((sort) => sort.key === c.key)?.direction,
-                      view.sorts.findIndex((sort) => sort.key === c.key) + 1,
-                    ),
-                  }}
-                  on:click={(event) =>
-                    changeState(
-                      nextDataTableSort(view.sorts, c.key, event.shiftKey),
-                    )}
-                  >{c.label}{#if view.sorts.length > 1 && view.sorts.some((sort) => sort.key === c.key)}<span
-                      data-part="sort-priority"
-                      aria-hidden="true"
-                      >{view.sorts.findIndex((sort) => sort.key === c.key) +
-                        1}</span
-                    >{/if}{#if view.sorts.some((sort) => sort.key === c.key)}<Icon
-                      icon={view.sorts.find((sort) => sort.key === c.key)
-                        ?.direction === "asc"
-                        ? controlIcons.arrowUp
-                        : controlIcons.arrowDown}
-                      size="sm"
-                    />{/if}</button
-                >{/if}
+              {#if columnReorderable || columnResizable}<div
+                  data-part="column-header"
+                >
+                  {@render columnHeading(c)}<span data-part="column-controls"
+                    >{@html renderDataColumnControls(editProps, c)}</span
+                  >
+                </div>{:else}{@render columnHeading(c)}{/if}
             </th>{/each}
         </tr></thead
       >

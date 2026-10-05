@@ -391,3 +391,12 @@
     }}
   />
 {/each}
+<LoongArkDataTable
+  label="SSR column layout"
+  data={[{id:"column",name:"Column SSR row"}]}
+  columns={[{key:"name",label:"Project <safe>",minWidth:120,maxWidth:480}]}
+  columnReorderable columnResizable loading
+  columnWidths={{name:220}}
+  onColumnKeysChange={()=>{throw Error("SSR must not change columns");}}
+  onColumnWidthsChange={()=>{throw Error("SSR must not resize columns");}}
+/>

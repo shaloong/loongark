@@ -103,6 +103,8 @@ async function navigate(framework, name, mode = "light") {
   );
 }
 async function screenshot(name) {
+  // 状态断言在绘制前即可通过；截图等待绘制完成，避免保存上一帧。
+  await pause(100);
   const content = await session("GET", "/screenshot");
   await writeFile(
     resolve(evidence, `${name}.png`),
@@ -248,6 +250,78 @@ try {
       await assertLayout();
       await screenshot(`chart-${framework}-${mode}`);
       report.interactions.push({ framework, mode, case: "chart-window" });
+      await navigate(framework, "DataTableColumnsExample", mode);
+      const move = '[data-part="column-move"][data-column-key="name"]';
+      const resize = '[data-part="column-resize"][data-column-key="name"]';
+      await execute("document.querySelector(arguments[0]).focus()", [move]);
+      await session("POST", "/actions", {
+        actions: [
+          {
+            type: "key",
+            id: "keyboard",
+            actions: [
+              { type: "keyDown", value: "\uE014" },
+              { type: "keyUp", value: "\uE014" },
+            ],
+          },
+        ],
+      });
+      await waitFor(
+        () =>
+          execute(
+            "return [...document.querySelectorAll('thead th[data-column-key]')].map(n=>n.dataset.columnKey).join(',')==='owner,name,status,revenue'",
+          ),
+        "列键盘排序",
+      );
+      assert.equal(
+        await execute("return document.activeElement?.dataset.columnKey"),
+        "name",
+      );
+      const rectangle = await execute(
+        "const n=document.querySelector(arguments[0]);n.scrollIntoView({block:'nearest',inline:'nearest'});const r=n.getBoundingClientRect();return {x:Math.round(r.x+r.width/2),y:Math.round(r.y+r.height/2)}",
+        [resize],
+      );
+      await session("POST", "/actions", {
+        actions: [
+          {
+            type: "pointer",
+            id: "mouse",
+            parameters: { pointerType: "mouse" },
+            actions: [
+              {
+                type: "pointerMove",
+                duration: 0,
+                origin: "viewport",
+                ...rectangle,
+              },
+              { type: "pointerDown", button: 0 },
+              {
+                type: "pointerMove",
+                duration: 200,
+                origin: "viewport",
+                x: rectangle.x + 40,
+                y: rectangle.y,
+              },
+              { type: "pointerUp", button: 0 },
+            ],
+          },
+        ],
+      });
+      await waitFor(
+        () =>
+          execute(
+            "return document.querySelector(arguments[0]).getAttribute('aria-valuenow')==='280'",
+            [resize],
+          ),
+        "原生列宽拖动",
+      );
+      await assertLayout();
+      await screenshot(`columns-${framework}-${mode}`);
+      report.interactions.push({
+        framework,
+        mode,
+        case: "column-keyboard-and-native-pointer-resize",
+      });
     }
   report.result = "passed";
   console.log(
