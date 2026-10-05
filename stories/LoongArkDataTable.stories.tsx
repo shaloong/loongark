@@ -1,3 +1,4 @@
+import { DataTableComplexEditorsExample } from "../examples/react/DataTableComplexEditorsExample";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import * as L from "@loongark/react";
@@ -98,3 +99,7 @@ export const Frozen = {
 
 import { DataTableEditExample } from "../examples/react/DataTableEditExample";
 export const Editing: StoryObj = { render: () => <DataTableEditExample /> };
+
+export const ComplexEditors: StoryObj = {
+  render: () => <DataTableComplexEditorsExample />,
+};
