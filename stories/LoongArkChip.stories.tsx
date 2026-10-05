@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as L from "@loongark/react";
@@ -19,7 +21,7 @@ function Demo() {
               aria-label="移除设计规范"
               onClick={() => setShown(false)}
             >
-              ×
+              <LoongArkIcon icon={controlIcons.close} size="sm" />
             </L.LoongArkChipRemoveTrigger>
           </L.LoongArkChip>
         ) : (
@@ -52,7 +54,7 @@ export const Variants: StoryObj = {
         <L.LoongArkChip key={variant} variant={variant}>
           <L.LoongArkChipLabel>{variant}</L.LoongArkChipLabel>
           <L.LoongArkChipRemoveTrigger disabled aria-label={"移除 " + variant}>
-            ×
+            <LoongArkIcon icon={controlIcons.close} size="sm" />
           </L.LoongArkChipRemoveTrigger>
         </L.LoongArkChip>
       ))}

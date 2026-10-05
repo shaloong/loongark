@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as L from "@loongark/react";
@@ -10,7 +12,7 @@ function Demo() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        外部链接 ↗
+        外部链接 <LoongArkIcon icon={controlIcons.externalLink} size="sm" />
       </L.LoongArkLink>
     </L.LoongArkStack>
   );

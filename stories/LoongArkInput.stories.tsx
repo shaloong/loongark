@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
@@ -207,7 +209,7 @@ export const WithSuffix: Story = {
                 action="clear"
                 onClick={() => setValue("")}
               >
-                ✕
+                <LoongArkIcon icon={controlIcons.close} size="sm" />
               </LoongArkInputSuffix>
             )}
           </LoongArkInputGroup>

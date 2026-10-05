@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
@@ -64,7 +66,7 @@ const TagsInputDemo = ({
             <LoongArkTagsInputItemPreview>
               <LoongArkTagsInputItemText>{tag}</LoongArkTagsInputItemText>
               <LoongArkTagsInputItemDeleteTrigger>
-                ×
+                <LoongArkIcon icon={controlIcons.close} size="sm" />
               </LoongArkTagsInputItemDeleteTrigger>
             </LoongArkTagsInputItemPreview>
           </LoongArkTagsInputItem>

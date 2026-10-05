@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { LoongArkCalendar as Calendar, parseDate } from "@loongark/react";
@@ -17,11 +19,11 @@ export const Basic: StoryObj = {
               <>
                 <Calendar.ViewControl>
                   <Calendar.PrevTrigger aria-label="Previous month">
-                    ‹
+                    <LoongArkIcon icon={controlIcons.chevronLeft} size="sm" />
                   </Calendar.PrevTrigger>
                   <Calendar.RangeText />
                   <Calendar.NextTrigger aria-label="Next month">
-                    ›
+                    <LoongArkIcon icon={controlIcons.chevronRight} size="sm" />
                   </Calendar.NextTrigger>
                 </Calendar.ViewControl>
                 <Calendar.Table>

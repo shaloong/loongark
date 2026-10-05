@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
@@ -49,9 +51,7 @@ const RatingGroupDemo = ({
       <LoongArkRatingGroupControl>
         {items.map((item) => (
           <LoongArkRatingGroupItem key={item} index={item}>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.3-5.7-3-5.7 3 1.1-6.3-4.5-4.4 6.3-.9Z" />
-            </svg>
+            <LoongArkIcon icon={controlIcons.star} size="lg" />
           </LoongArkRatingGroupItem>
         ))}
       </LoongArkRatingGroupControl>

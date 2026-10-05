@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { LoongArkToggleRoot, LoongArkToggleIndicator } from "@loongark/react";
@@ -28,7 +30,9 @@ const ToggleDemo = ({
   defaultPressed = false,
 }: ToggleDemoProps) => (
   <LoongArkToggleRoot size={size} defaultPressed={defaultPressed}>
-    <LoongArkToggleIndicator>✓</LoongArkToggleIndicator>
+    <LoongArkToggleIndicator>
+      <LoongArkIcon icon={controlIcons.check} size="sm" />
+    </LoongArkToggleIndicator>
     Favorite
   </LoongArkToggleRoot>
 );
