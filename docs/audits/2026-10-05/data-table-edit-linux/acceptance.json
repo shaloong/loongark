@@ -125,6 +125,24 @@
     "复杂编辑器、批量编辑、撤销与虚拟化仍未交付；数字采用原生number输入，没有新增本地化解析器"
   ],
   "deployment": {
-    "status": "pending push and actual Pages CI"
-  }
+    "status": "passed",
+    "verifiedAt": "2026-10-05T09:09:56.868363+00:00",
+    "featureCommit": "acaf59a0a75365e22dba6800f8bf0b96c4497946",
+    "runUrl": "https://github.com/shaloong/loongark/actions/runs/37287819637",
+    "buildJob": 111690824694,
+    "deployJob": 111691673834,
+    "build": "success",
+    "deploy": "success",
+    "publishedSiteVerification": "success; homepage, iframe and index each returned HTTP 200; Editing, Frozen, Icon and Questionnaire AsyncValidation entries asserted",
+    "editingStory": "https://shaloong.github.io/loongark/?path=/story/components-datatable--editing",
+    "environment": "ubuntu-24.04 / repository Node.js 24 / pnpm 10.14.0 / Playwright 1.57.0 managed Chromium",
+    "smokeArtifact": {
+      "id": 11334779264,
+      "url": "https://github.com/shaloong/loongark/actions/runs/37287819637/artifacts/11334779264",
+      "expiresAt": "2026-10-19T09:08:28Z",
+      "retentionDays": 14
+    },
+    "note": "Pages部署用于组件展示；未更新main、创建发布标签或发布npm包。该后续提交仅补验收元数据。"
+  },
+  "validatedFeatureCommit": "acaf59a0a75365e22dba6800f8bf0b96c4497946"
 }
