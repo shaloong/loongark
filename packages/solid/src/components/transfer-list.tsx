@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import { createSignal, For, Show, splitProps, type JSX } from "solid-js";
 import {
   transferView,
@@ -146,7 +148,7 @@ export function LoongArkTransferList(props: LoongArkTransferListProps) {
           disabled={local.disabled || !view().leftSelected.length}
           onClick={() => move("right")}
         >
-          <span aria-hidden="true">→</span>
+          <LoongArkIcon icon={controlIcons.arrowRight} mirrorInRtl />
         </button>
         <button
           {...part("move")}
@@ -155,7 +157,7 @@ export function LoongArkTransferList(props: LoongArkTransferListProps) {
           disabled={local.disabled || !view().rightSelected.length}
           onClick={() => move("left")}
         >
-          <span aria-hidden="true">←</span>
+          <LoongArkIcon icon={controlIcons.arrowLeft} mirrorInRtl />
         </button>
       </div>
       {panel(

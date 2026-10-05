@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
   import * as L from "@loongark/svelte";
   const advancedSelect = L.useSelect(() => ({
     collection: L.createListCollection({ items: ["react", "vue"] }),
@@ -263,4 +264,11 @@
   onCancel={() => {
     throw Error("SSR must not cancel");
   }}
+/>
+
+<L.LoongArkIcon
+  icon={controlIcons.search}
+  label="SSR search"
+  size={32}
+  absoluteStrokeWidth
 />

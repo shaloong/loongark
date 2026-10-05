@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import {
   LoongArkTagsInputRoot,
@@ -44,7 +46,7 @@ export const TagsInputExample: React.FC<TagsInputExampleProps> = ({
             <LoongArkTagsInputItemPreview>
               <LoongArkTagsInputItemText>{tag}</LoongArkTagsInputItemText>
               <LoongArkTagsInputItemDeleteTrigger>
-                ×
+                <LoongArkIcon icon={controlIcons.close} size="sm" />
               </LoongArkTagsInputItemDeleteTrigger>
             </LoongArkTagsInputItemPreview>
           </LoongArkTagsInputItem>

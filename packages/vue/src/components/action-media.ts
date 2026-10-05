@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import {
   defineComponent,
   h,
@@ -143,7 +145,9 @@ export const LoongArkSpeedDial = defineComponent({
               disabled: props.disabled || !available().length,
               onClick: () => change(!opened()),
             },
-            h("span", { ...part("icon"), "aria-hidden": "true" }, "＋"),
+            h("span", { ...part("icon"), "aria-hidden": "true" }, [
+              h(LoongArkIcon, { icon: controlIcons.plus, size: "lg" }),
+            ]),
           ),
           h(
             "ul",
@@ -173,7 +177,17 @@ export const LoongArkSpeedDial = defineComponent({
                     onClick: () => select(a.value),
                   },
                   [
-                    h("span", { "aria-hidden": "true" }, a.icon ?? "•"),
+                    h(
+                      "span",
+                      { "aria-hidden": "true" },
+                      typeof a.icon === "string"
+                        ? a.icon
+                        : [
+                            h(LoongArkIcon, {
+                              icon: a.icon ?? controlIcons.circle,
+                            }),
+                          ],
+                    ),
                     a.label,
                   ],
                 ),

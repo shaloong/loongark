@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import Icon from "./Icon.svelte";
   import { onMount, untrack } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import {
@@ -58,7 +60,8 @@
     aria-controls={uid}
     disabled={disabled || !available.length}
     onclick={() => change(!opened)}
-    ><span data-scope="speed-dial" data-part="icon" aria-hidden="true">＋</span
+    ><span data-scope="speed-dial" data-part="icon" aria-hidden="true"
+      ><Icon icon={controlIcons.plus} size="lg" /></span
     ></button
   >
   <ul
@@ -81,7 +84,11 @@
           tabindex="-1"
           disabled={disabled || a.disabled}
           onclick={() => select(a.value)}
-          ><span aria-hidden="true">{a.icon ?? "•"}</span>{a.label}</button
+          ><span aria-hidden="true"
+            >{#if typeof a.icon === "string"}{a.icon}{:else}<Icon
+                icon={a.icon ?? controlIcons.circle}
+              />{/if}</span
+          >{a.label}</button
         >
       </li>{/each}
   </ul>

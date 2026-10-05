@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 /**
  * Select 组件 - Solid 实现
  * 基于 Ark UI Select 的下拉选择器
@@ -125,7 +127,9 @@ export const LoongArkSelectIndicator: Component<
 > = (props) => {
   return (
     <ArkSelect.Indicator {...props} data-scope="select" data-part="indicator">
-      {props.children}
+      {props.children ?? (
+        <LoongArkIcon icon={controlIcons.chevronDown} size="sm" />
+      )}
     </ArkSelect.Indicator>
   );
 };
@@ -260,7 +264,7 @@ export const LoongArkSelectItemIndicator: Component<
       data-scope="select"
       data-part="item-indicator"
     >
-      {props.children}
+      {props.children ?? <LoongArkIcon icon={controlIcons.check} size="sm" />}
     </ArkSelect.ItemIndicator>
   );
 };

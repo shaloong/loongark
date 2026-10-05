@@ -75,3 +75,7 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 - 四端共享 pinnedColumns 的逻辑起始/结束分组、真实列宽测量、RTL 和窄屏自动暂停/恢复吸附；继续使用原生表格和现有 Token。
 - 新增四端 DataTableFrozenExample、Frozen Story、模型/SSR/交互与 Linux 视觉回归；覆盖为114族、292 Story、四端各789个公开值入口和171个示例。
 - 验收范围与环境限制见 [冻结列记录](audits/2026-10-04/data-table-frozen-linux/acceptance.json)。虚拟化、编辑、图表缩放/刷选和复杂题型仍需后续独立批次。
+
+## 2026-10-05：统一图标能力
+
+选择 Lucide 的框架无关节点，新增四端 Icon、按需导入、动态节点/尺寸/描边、名称语义、固定描边和 RTL 镜像。替换内置关闭/勾选/文件/转移/排序/快捷操作与示例符号；SpeedDial 接受 IconNode，保留字符串兼容。四端示例与Story同步，截图和详细过程仅进入忽略目录。剩余组合能力继续按 [范围表](ark-ui-coverage.md#下一批高级能力的边界) 分批推进。

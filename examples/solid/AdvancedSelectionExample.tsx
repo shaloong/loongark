@@ -1,4 +1,7 @@
 /** @jsxImportSource solid-js */
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/solid";
+
 import { createSignal } from "solid-js";
 import * as L from "@loongark/solid";
 const choices = [
@@ -39,7 +42,7 @@ export function AdvancedSelectionExample() {
             <L.LoongArkSelectTrigger>
               <L.LoongArkSelectValueText placeholder="Choose frameworks" />
               <L.LoongArkSelectIndicator aria-hidden="true">
-                ⌄
+                <LoongArkIcon icon={controlIcons.chevronDown} size="sm" />
               </L.LoongArkSelectIndicator>
             </L.LoongArkSelectTrigger>
           </L.LoongArkSelectControl>

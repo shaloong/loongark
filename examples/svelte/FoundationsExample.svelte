@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import { LoongArkIcon } from "@loongark/svelte";
+
   import * as L from "@loongark/svelte";
   let notes = "",
     chip = true,
@@ -37,7 +40,10 @@
                   ><L.LoongArkChipRemoveTrigger
                     aria-label="Remove Design"
                     on:click={() => (chip = false)}
-                    >×</L.LoongArkChipRemoveTrigger
+                    ><LoongArkIcon
+                      icon={controlIcons.close}
+                      size="sm"
+                    /></L.LoongArkChipRemoveTrigger
                   ></L.LoongArkChip
                 >
               {:else}<L.LoongArkButton

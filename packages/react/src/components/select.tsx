@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 /**
  * Select 组件 - React 实现
  * 基于 Ark UI Select 的下拉选择器
@@ -155,7 +157,11 @@ export const SelectIndicator = forwardRef<
       ref={ref}
       data-scope="select"
       data-part="indicator"
-    />
+    >
+      {props.children ?? (
+        <LoongArkIcon icon={controlIcons.chevronDown} size="sm" />
+      )}
+    </ArkSelect.Indicator>
   );
 });
 
@@ -328,22 +334,7 @@ export const SelectItemIndicator = forwardRef<
       data-scope="select"
       data-part="item-indicator"
     >
-      {children || (
-        <svg
-          viewBox="0 0 14 14"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ width: "1em", height: "1em" }}
-        >
-          <path
-            d="M11.6666 3.5L5.24992 9.91667L2.33325 7"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      )}
+      {children || <LoongArkIcon icon={controlIcons.check} size="sm" />}
     </ArkSelect.ItemIndicator>
   );
 });

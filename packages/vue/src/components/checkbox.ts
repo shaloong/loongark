@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import { renderPart } from "../render-part";
 import { defineComponent, h, type PropType } from "vue";
 import {
@@ -131,7 +133,18 @@ export const LoongArkCheckboxIndicator = defineComponent({
           "data-scope": "checkbox",
           "data-part": "indicator",
         },
-        slots.default ? { default: slots.default } : undefined,
+        {
+          default:
+            slots.default ??
+            (() => [
+              h(LoongArkIcon, {
+                icon: props.indeterminate
+                  ? controlIcons.minus
+                  : controlIcons.check,
+                size: "sm",
+              }),
+            ]),
+        },
       );
   },
 });

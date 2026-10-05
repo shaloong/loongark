@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import type { CollectionItem } from "@ark-ui/vue/collection";
 import type { SelectRootProps as NativeSelectRootProps } from "@ark-ui/vue/select";
 import type { SelectItemProps as NativeSelectItemProps } from "@ark-ui/vue/select";
@@ -260,7 +262,13 @@ export const LoongArkSelectIndicator = defineComponent({
           "data-scope": "select",
           "data-part": "indicator",
         },
-        slots,
+        {
+          default:
+            slots.default ??
+            (() => [
+              h(LoongArkIcon, { icon: controlIcons.chevronDown, size: "sm" }),
+            ]),
+        },
       );
   },
 });
@@ -444,7 +452,11 @@ export const LoongArkSelectItemIndicator = defineComponent({
           "data-scope": "select",
           "data-part": "item-indicator",
         },
-        slots,
+        {
+          default:
+            slots.default ??
+            (() => [h(LoongArkIcon, { icon: controlIcons.check, size: "sm" })]),
+        },
       );
   },
 });
@@ -458,7 +470,8 @@ export const LoongArkSelectHiddenSelect = defineComponent({
     const select = useSelectContext();
     const element = shallowRef<HTMLSelectElement | null>(null);
     const sync = () => {
-      if (element.value) syncNativeSelectOptions(element.value, select.value.value);
+      if (element.value)
+        syncNativeSelectOptions(element.value, select.value.value);
     };
     const mounted = (node: VNode) => {
       if (node.el instanceof HTMLSelectElement) element.value = node.el;

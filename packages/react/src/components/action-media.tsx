@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import {
   createElement,
   forwardRef,
@@ -134,7 +136,7 @@ export function LoongArkSpeedDial({
         onClick={() => change(!opened)}
       >
         <span data-scope="speed-dial" data-part="icon" aria-hidden="true">
-          ＋
+          <LoongArkIcon icon={controlIcons.plus} size="lg" />
         </span>
       </button>
       <ul
@@ -159,7 +161,13 @@ export function LoongArkSpeedDial({
               disabled={disabled || a.disabled}
               onClick={() => select(a.value)}
             >
-              <span aria-hidden="true">{a.icon ?? "•"}</span>
+              <span aria-hidden="true">
+                {typeof a.icon === "string" ? (
+                  a.icon
+                ) : (
+                  <LoongArkIcon icon={a.icon ?? controlIcons.circle} />
+                )}
+              </span>
               {a.label}
             </button>
           </li>

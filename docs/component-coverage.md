@@ -1,8 +1,8 @@
 # LoongArk 组件覆盖
 
-更新时间：2026-10-03。按组件族计数，Progress 的线性/圆形属于同一族。
+更新时间：2026-10-05。按组件族计数，Progress 的线性/圆形属于同一族。
 
-目前 114 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐 Ark 裁剪、JSON 与辅助组件，并复核高级部件，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
+目前 115 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐 Ark 裁剪、JSON 与辅助组件，并复核高级部件，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
 
 | 组件族               | React | Vue | Solid | Svelte | 交付来源            |
 | -------------------- | ----- | --- | ----- | ------ | ------------------- |
@@ -157,4 +157,6 @@ MessageScroller 媒体与可见文字锚点批次新增四端 MessageScrollerAdv
 
 ### DataTable 冻结列（2026-10-04）
 
-继续完善现有组件，不新增别名或组件族。四端 pinnedColumns 支持逻辑两边冻结、显示/顺序联动、真实尺寸更新、RTL、过宽时普通滚动和键盘焦点可见；增加四端示例与 Frozen Story。当前114族、292 Story、四端各789个公开值入口、171个示例。验证和高级能力边界见 [冻结列验收](audits/2026-10-04/data-table-frozen-linux/acceptance.json)及 [API](data-table.md#冻结列)。
+继续完善现有组件，不新增别名或组件族。四端 pinnedColumns 支持逻辑两边冻结、显示/顺序联动、真实尺寸更新、RTL、过宽时普通滚动和键盘焦点可见；增加四端示例与 Frozen Story。该批完成时为114族、292 Story、四端各789个公开值入口、171个示例。验证和高级能力边界见 [冻结列验收](audits/2026-10-04/data-table-frozen-linux/acceptance.json)及 [API](data-table.md#冻结列)。
+
+Icon 提供四端共享 Lucide 节点、可访问名称、尺寸、固定描边与 RTL；共294个Story，四端各790个公开值入口和175个示例。详细验收见 [图标摘要](audits/2026-10-05/icons-linux/acceptance.json)，完整组件目录仍不代表所有高级能力完成。

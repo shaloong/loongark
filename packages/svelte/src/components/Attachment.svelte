@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import Icon from "./Icon.svelte";
   import { onDestroy } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import {
@@ -6,7 +8,6 @@
     withConversationActionFocus,
     type ConversationActionState,
     type ConversationActionHandler,
-    attachmentIconPath,
     attachmentView,
     type AttachmentOptions,
   } from "@loongark/kit";
@@ -84,15 +85,7 @@
   {...attrs}
 >
   <span data-scope="attachment" data-part="icon" aria-hidden="true"
-    ><svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      focusable="false"><path d={attachmentIconPath} /></svg
-    ></span
+    ><Icon icon={controlIcons.file} size="lg" /></span
   >
   <div data-scope="attachment" data-part="content">
     {#if view.link}<a

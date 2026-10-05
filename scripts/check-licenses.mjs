@@ -17,3 +17,8 @@ for (const path of manifests) {
   assert.equal(JSON.parse(await readFile(path, "utf8")).license, "MIT", path);
 }
 console.log(`MIT 许可检查通过：根清单与 ${manifests.length - 1} 个发布包。`);
+
+assert.equal(
+  await readFile("packages/kit/THIRD_PARTY_NOTICES.txt", "utf8"),
+  await readFile(".storybook/public/third-party-licenses.txt", "utf8"),
+);

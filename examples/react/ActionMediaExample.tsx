@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import * as L from "@loongark/react";
 import { useState } from "react";
 import { quickActions, mediaDemoItems } from "../shared/mediaDemo";
@@ -21,7 +23,9 @@ export function ActionMediaExample() {
                 aria-label="Create workspace"
                 onClick={() => setSelected("workspace")}
               >
-                <span aria-hidden="true">＋</span>
+                <span aria-hidden="true">
+                  <LoongArkIcon icon={controlIcons.plus} size="sm" />
+                </span>
               </L.LoongArkFloatingActionButton>
               <L.LoongArkFloatingActionButton
                 extended
@@ -34,7 +38,9 @@ export function ActionMediaExample() {
                 disabled
                 aria-label="Unavailable action"
               >
-                <span aria-hidden="true">−</span>
+                <span aria-hidden="true">
+                  <LoongArkIcon icon={controlIcons.minus} size="sm" />
+                </span>
               </L.LoongArkFloatingActionButton>
             </L.LoongArkStack>
             <div

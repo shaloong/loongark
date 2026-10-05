@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
   mountDataTablePins,
@@ -235,6 +237,16 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
                       }
                     >
                       {c.label}
+                      {view.sort?.key === c.key && (
+                        <LoongArkIcon
+                          icon={
+                            view.sort?.direction === "asc"
+                              ? controlIcons.arrowUp
+                              : controlIcons.arrowDown
+                          }
+                          size="sm"
+                        />
+                      )}
                     </button>
                   )}
                 </th>

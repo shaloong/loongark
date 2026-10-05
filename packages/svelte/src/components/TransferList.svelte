@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import Icon from "./Icon.svelte";
   import {
     transferView,
     moveTransferItems,
@@ -73,7 +75,7 @@
           aria-label={"Move selected to " + rightLabel}
           disabled={disabled || !view.leftSelected.length}
           on:click={() => move("right")}
-          ><span aria-hidden="true">→</span></button
+          ><Icon icon={controlIcons.arrowRight} mirrorInRtl /></button
         ><button
           data-scope="transfer-list"
           data-part="move"
@@ -81,7 +83,7 @@
           aria-label={"Move selected to " + leftLabel}
           disabled={disabled || !view.rightSelected.length}
           on:click={() => move("left")}
-          ><span aria-hidden="true">←</span></button
+          ><Icon icon={controlIcons.arrowLeft} mirrorInRtl /></button
         >
       </div>{/if}
     <fieldset

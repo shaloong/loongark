@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import { useState, useRef, type HTMLAttributes } from "react";
 import {
   transferView,
@@ -120,7 +122,7 @@ export function LoongArkTransferList({
           disabled={disabled || !view.leftSelected.length}
           onClick={() => move("right")}
         >
-          <span aria-hidden="true">→</span>
+          <LoongArkIcon icon={controlIcons.arrowRight} mirrorInRtl />
         </button>
         <button
           {...part("move")}
@@ -129,7 +131,7 @@ export function LoongArkTransferList({
           disabled={disabled || !view.rightSelected.length}
           onClick={() => move("left")}
         >
-          <span aria-hidden="true">←</span>
+          <LoongArkIcon icon={controlIcons.arrowLeft} mirrorInRtl />
         </button>
       </div>
       {panel("right", rightLabel, view.right, view.rightSelected)}

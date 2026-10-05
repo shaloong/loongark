@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import { LoongArkIcon } from "@loongark/svelte";
+
   import * as L from "@loongark/svelte";
   import { quickActions, mediaDemoItems } from "../shared/mediaDemo";
   let selected = "None",
@@ -15,7 +18,9 @@
           <L.LoongArkFloatingActionButton
             aria-label="Create workspace"
             on:click={() => (selected = "workspace")}
-            ><span aria-hidden="true">＋</span></L.LoongArkFloatingActionButton
+            ><span aria-hidden="true"
+              ><LoongArkIcon icon={controlIcons.plus} size="sm" /></span
+            ></L.LoongArkFloatingActionButton
           ><L.LoongArkFloatingActionButton
             extended
             variant="secondary"
@@ -24,7 +29,9 @@
           ><L.LoongArkFloatingActionButton
             disabled
             aria-label="Unavailable action"
-            ><span aria-hidden="true">−</span></L.LoongArkFloatingActionButton
+            ><span aria-hidden="true"
+              ><LoongArkIcon icon={controlIcons.minus} size="sm" /></span
+            ></L.LoongArkFloatingActionButton
           ></L.LoongArkStack
         >
         <div

@@ -20,6 +20,7 @@ const workspaceAlias: Record<string, string> = {
 };
 
 const config: StorybookConfig = {
+  staticDirs: ["./public"],
   stories: ["../stories/**/*.stories.@(ts|tsx|mdx)"],
   addons: [getAbsolutePath("@storybook/addon-docs")],
 

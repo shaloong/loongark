@@ -13,13 +13,15 @@
   },
   "files": [
     "dist",
-    "package.json"
+    "package.json",
+    "THIRD_PARTY_NOTICES.txt"
   ],
   "dependencies": {
     "@loongark/primitives": "workspace:*",
     "@loongark/theme": "workspace:*",
     "@zag-js/json-tree-utils": "1.43.3",
-    "@zag-js/toc": "1.43.3"
+    "@zag-js/toc": "1.43.3",
+    "lucide": "1.52.0"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json && node ../../scripts/fix-dist-imports.mjs dist"

@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/vue";
 import { defineComponent, h, ref, type Component } from "vue";
 import * as L from "@loongark/vue";
 export const FoundationsExample = defineComponent({
@@ -75,7 +77,10 @@ export const FoundationsExample = defineComponent({
                               "aria-label": "Remove Design",
                               onClick: () => (chip.value = false),
                             },
-                            "×",
+                            h(LoongArkIcon, {
+                              icon: controlIcons.close,
+                              size: "sm",
+                            }),
                           ),
                         )
                       : el(

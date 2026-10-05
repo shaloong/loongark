@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import {
   defineComponent,
   h,
@@ -13,7 +15,6 @@ import {
   type ConversationActionState,
   type ConversationAction,
   type ConversationActionHandler,
-  attachmentIconPath,
   attachmentView,
   messageStatus,
   type AttachmentOptions,
@@ -95,19 +96,7 @@ export const LoongArkAttachment = defineComponent({
         },
         [
           h("span", { ...part("attachment", "icon"), "aria-hidden": "true" }, [
-            h(
-              "svg",
-              {
-                viewBox: "0 0 24 24",
-                fill: "none",
-                stroke: "currentColor",
-                "stroke-width": 1.5,
-                "stroke-linecap": "round",
-                "stroke-linejoin": "round",
-                focusable: "false",
-              },
-              [h("path", { d: attachmentIconPath })],
-            ),
+            h(LoongArkIcon, { icon: controlIcons.file, size: "lg" }),
           ]),
           h("div", part("attachment", "content"), [
             h(

@@ -1,8 +1,9 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import { useRef, type HTMLAttributes } from "react";
 import {
   withConversationActionFocus,
   normalizeConversationActions,
-  attachmentIconPath,
   attachmentView,
   messageStatus,
   type AttachmentOptions,
@@ -79,17 +80,7 @@ export function LoongArkAttachment({
       {...attrs}
     >
       <span data-scope="attachment" data-part="icon" aria-hidden="true">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={1.5}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          focusable="false"
-        >
-          <path d={attachmentIconPath} />
-        </svg>
+        <LoongArkIcon icon={controlIcons.file} size="lg" />
       </span>
       <div data-scope="attachment" data-part="content">
         {view.link ? (

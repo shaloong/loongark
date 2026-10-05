@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import { defineComponent, h, ref, type PropType } from "vue";
 import {
   transferView,
@@ -164,11 +166,15 @@ export const LoongArkTransferList = defineComponent({
                   ).length,
                 onClick: () => move(side as "right" | "left"),
               },
-              h(
-                "span",
-                { "aria-hidden": "true" },
-                side === "right" ? "→" : "←",
-              ),
+              h("span", { "aria-hidden": "true" }, [
+                h(LoongArkIcon, {
+                  icon:
+                    side === "right"
+                      ? controlIcons.arrowRight
+                      : controlIcons.arrowLeft,
+                  mirrorInRtl: true,
+                }),
+              ]),
             ),
           ),
         ),

@@ -25,8 +25,6 @@ const css = `
 [data-scope=data-table] th { font-weight:var(--lk-typography-fontweight-semibold);height:var(--lk-control-height-lg); }
 [data-scope=data-table] th button { min-height:var(--lk-control-height-sm);margin-inline:calc(-1 * var(--lk-space-component-sm));padding:0 var(--lk-space-component-sm);border:0;border-radius:var(--lk-radius-sm);background:transparent;color:inherit;font:inherit;font-weight:inherit;cursor:pointer; }
 [data-scope=data-table] th button:hover { background:var(--lk-color-semantic-muted); }
-[data-scope=data-table] th[aria-sort=ascending] button::after { content:' ↑'; }
-[data-scope=data-table] th[aria-sort=descending] button::after { content:' ↓'; }
 [data-scope=data-table] [data-part=selection] { display:inline-flex;align-items:center;justify-content:center;width:var(--lk-control-height-sm);height:var(--lk-control-height-sm);cursor:pointer; }
 [data-scope=data-table] input[type=checkbox] { margin:0;width:var(--lk-control-icon-md);height:var(--lk-control-icon-md);accent-color:var(--lk-color-semantic-primary);cursor:inherit; }
 [data-scope=data-table] [data-part=selection]:has(input:disabled) { cursor:not-allowed; }

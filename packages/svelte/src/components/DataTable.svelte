@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import Icon from "./Icon.svelte";
   import { afterUpdate, tick, onMount } from "svelte";
   import {
     dataTableView,
@@ -175,7 +177,13 @@
                     changeState({
                       sort: nextDataSort(view.sort, c.key),
                       page: 1,
-                    })}>{c.label}</button
+                    })}
+                  >{c.label}{#if view.sort?.key === c.key}<Icon
+                      icon={view.sort.direction === "asc"
+                        ? controlIcons.arrowUp
+                        : controlIcons.arrowDown}
+                      size="sm"
+                    />{/if}</button
                 >{/if}
             </th>{/each}
         </tr></thead

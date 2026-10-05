@@ -1,3 +1,4 @@
+import { checkIcons } from "./iconChecks";
 import { checkDataTableFrozen } from "./dataTableFrozenChecks";
 import { checkMessageScrollerAdvanced } from "./messageScrollerAdvancedChecks";
 import { checkConversationActions } from "./conversationActionsChecks";
@@ -58,6 +59,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
       if (await page.locator("button button").count())
         failures.push(name + ": 嵌套按钮");
 
+      if (name === "IconExample") await checkIcons(page);
       if (name === "ChartExample") await checkChart(page, framework);
       if (name === "DataTableExample") await checkDataTable(page, framework);
       if (name === "MessageScrollerAdvancedExample")

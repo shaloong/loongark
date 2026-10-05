@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import { LoongArkIcon } from "@loongark/svelte";
+
   import * as L from "@loongark/svelte";
   const choices = [
       { label: "React", value: "react" },
@@ -39,7 +42,10 @@
           ><L.LoongArkSelectValueText
             placeholder="Choose frameworks"
           /><L.LoongArkSelectIndicator aria-hidden="true"
-            >⌄</L.LoongArkSelectIndicator
+            ><LoongArkIcon
+              icon={controlIcons.chevronDown}
+              size="sm"
+            /></L.LoongArkSelectIndicator
           ></L.LoongArkSelectTrigger
         ></L.LoongArkSelectControl
       >

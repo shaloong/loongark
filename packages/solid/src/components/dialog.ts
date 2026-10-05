@@ -1,3 +1,6 @@
+import { createComponent } from "solid-js";
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import { dataProps } from "../data-props";
 import type { JSX } from "solid-js";
 import { LoongArkPortal } from "./portal";
@@ -153,7 +156,10 @@ export const LoongArkDialogCloseTrigger: Component<DialogTextProps> = (
     dataProps(
       mergeProps(rest, {
         get children() {
-          return local.children;
+          return (
+            local.children ??
+            createComponent(LoongArkIcon, { icon: controlIcons.close })
+          );
         },
         "aria-label": rest["aria-label"] ?? "Close dialog",
         "data-scope": "dialog",

@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import { LoongArkIcon } from "@loongark/svelte";
+
   import {
     LoongArkTagsInputRoot,
     LoongArkTagsInputLabel,
@@ -39,9 +42,12 @@
       <LoongArkTagsInputItem value={tag} {index}>
         <LoongArkTagsInputItemPreview>
           <LoongArkTagsInputItemText>{tag}</LoongArkTagsInputItemText>
-          <LoongArkTagsInputItemDeleteTrigger>
-            ×
-          </LoongArkTagsInputItemDeleteTrigger>
+          <LoongArkTagsInputItemDeleteTrigger
+            ><LoongArkIcon
+              icon={controlIcons.close}
+              size="sm"
+            /></LoongArkTagsInputItemDeleteTrigger
+          >
         </LoongArkTagsInputItemPreview>
       </LoongArkTagsInputItem>
     {/each}

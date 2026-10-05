@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import { useState } from "react";
 import * as L from "@loongark/react";
 import { inspectionData } from "../shared/arkAdditionsDemo";
@@ -27,7 +29,11 @@ export function JsonTreeViewExample() {
       <L.LoongArkJsonTreeViewRoot data={data} defaultExpandedDepth={1}>
         <L.LoongArkJsonTreeViewTree
           aria-label="Project data"
-          arrow={<span aria-hidden="true">›</span>}
+          arrow={
+            <span aria-hidden="true">
+              <LoongArkIcon icon={controlIcons.chevronRight} size="sm" />
+            </span>
+          }
         />
       </L.LoongArkJsonTreeViewRoot>
     </L.LoongArkStack>

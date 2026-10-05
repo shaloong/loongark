@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/vue";
 import { defineComponent, h, ref } from "vue";
 import * as L from "@loongark/vue";
 import { inspectionData } from "../shared/arkAdditionsDemo";
@@ -44,7 +46,17 @@ export const JsonTreeViewExample = defineComponent({
               h(
                 L.LoongArkJsonTreeViewTree,
                 { "aria-label": "Project data" },
-                { arrow: () => h("span", { "aria-hidden": "true" }, "›") },
+                {
+                  arrow: () =>
+                    h(
+                      "span",
+                      { "aria-hidden": "true" },
+                      h(LoongArkIcon, {
+                        icon: controlIcons.chevronRight,
+                        size: "sm",
+                      }),
+                    ),
+                },
               ),
           ),
         ],

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04",
+  "updatedAt": "2026-10-05",
   "sources": [
     "https://ui.shadcn.com/docs/components",
     "https://mui.com/material-ui/all-components/",
@@ -57,6 +57,7 @@
     "Grid",
     "Highlight",
     "HoverCard",
+    "Icon",
     "ImageCropper",
     "ImageList",
     "Input",
@@ -144,6 +145,7 @@
     "Chart controlled legend, bounded domain and accessible data table",
     "Message and Attachment async actions, preview/cancel and lifecycle",
     "MessageScroller visible-text/media anchors, compound insertion and cleanup",
-    "DataTable logical frozen columns, measured offsets and responsive fallback"
+    "DataTable logical frozen columns, measured offsets and responsive fallback",
+    "Icon shared Lucide nodes, accessible names, fixed strokes, RTL and four-framework defaults"
   ]
 }

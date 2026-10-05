@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import type {
   HTMLAttributes,
   InputHTMLAttributes,
@@ -150,7 +152,10 @@ export const LoongArkDialogCloseTrigger = ({
           }
         : {}),
     }),
-    children ?? null,
+    children ??
+      (decorate
+        ? createElement(LoongArkIcon, { icon: controlIcons.close })
+        : null),
   );
 };
 

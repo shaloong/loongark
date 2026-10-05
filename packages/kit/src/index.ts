@@ -72,3 +72,5 @@ export * from "./chart-controls";
 
 export * from "./conversation-actions";
 export * from "./conversation-focus";
+
+export * from "./icon";

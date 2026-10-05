@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import Icon from "./Icon.svelte";
   import { CheckboxIndicator } from "@ark-ui/svelte/checkbox";
   import { getDataAttrs } from "./utils";
 
@@ -8,5 +10,10 @@
 </script>
 
 <CheckboxIndicator {indeterminate} {...dataAttrs}>
-  <slot />
+  <slot
+    ><Icon
+      icon={indeterminate ? controlIcons.minus : controlIcons.check}
+      size="sm"
+    /></slot
+  >
 </CheckboxIndicator>

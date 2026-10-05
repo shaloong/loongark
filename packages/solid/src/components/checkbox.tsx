@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import type { JSX } from "solid-js";
 import { type Component, mergeProps, splitProps } from "solid-js";
 import { Checkbox } from "@ark-ui/solid/checkbox";
@@ -67,11 +69,14 @@ export const LoongArkCheckboxIndicator: Component<
   LoongArkCheckboxIndicatorProps
 > = (props) => {
   return (
-    <Checkbox.Indicator
-      {...props}
-      data-scope="checkbox"
-      data-part="indicator"
-    />
+    <Checkbox.Indicator {...props} data-scope="checkbox" data-part="indicator">
+      {props.children ?? (
+        <LoongArkIcon
+          icon={props.indeterminate ? controlIcons.minus : controlIcons.check}
+          size="sm"
+        />
+      )}
+    </Checkbox.Indicator>
   );
 };
 

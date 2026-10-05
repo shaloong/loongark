@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 /**
  * Combobox component - Solid wrapper.
  * Uses Ark UI Combobox with data attributes for styling.
@@ -89,7 +91,9 @@ export const LoongArkComboboxTrigger: Component<
 > = (props) => {
   return (
     <ArkCombobox.Trigger {...props} data-scope="combobox" data-part="trigger">
-      {props.children}
+      {props.children ?? (
+        <LoongArkIcon icon={controlIcons.chevronDown} size="sm" />
+      )}
     </ArkCombobox.Trigger>
   );
 };
@@ -209,7 +213,7 @@ export const LoongArkComboboxItemIndicator: Component<
       data-scope="combobox"
       data-part="item-indicator"
     >
-      {props.children}
+      {props.children ?? <LoongArkIcon icon={controlIcons.check} size="sm" />}
     </ArkCombobox.ItemIndicator>
   );
 };

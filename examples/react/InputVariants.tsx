@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import { useState } from "react";
 import {
   LoongArkInputRoot,
@@ -54,7 +56,7 @@ export function InputVariantsExample() {
         />
         {email && (
           <LoongArkInputSuffix action="clear" onClick={() => setEmail("")}>
-            ✕
+            <LoongArkIcon icon={controlIcons.close} size="sm" />
           </LoongArkInputSuffix>
         )}
         <LoongArkInputHelperText>请输入有效的邮箱地址</LoongArkInputHelperText>

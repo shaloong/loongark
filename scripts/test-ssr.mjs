@@ -88,12 +88,23 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>[h(L.LoongArkMessage,${conversationProps}),h(L.LoongArkAttachment,${attachmentProps}),h(L.LoongArkAttachment,${uploadingProps})]));`
         : `console.log(renderToString(h('div',null,h(L.LoongArkMessage,${conversationProps}),h(L.LoongArkAttachment,${attachmentProps}),h(L.LoongArkAttachment,${uploadingProps}))));`;
+  const iconProps =
+    "{icon:controlIcons.search,label:'SSR search',absoluteStrokeWidth:true,size:32}";
+  const iconScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkIcon,${iconProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkIcon,${iconProps})));`
+        : `console.log(renderToString(h(L.LoongArkIcon,${iconProps})));`;
+  const scriptWithIcon =
+    "import {controlIcons} from './packages/kit/dist/index.js';" +
+    script.replace("process.exit(0);", iconScript + "process.exit(0);");
   const result = spawnSync(
     process.execPath,
     [
       "--input-type=module",
       "-e",
-      script.replace(
+      scriptWithIcon.replace(
         "process.exit(0);",
         tableScript +
           chartScript +
@@ -171,6 +182,8 @@ for (const [framework, script] of [
   assert.match(result.stdout, /aria-label="Cancel upload SSR upload.zip"/);
   assert.doesNotMatch(result.stdout, /data-part="action-feedback"/);
   assert.match(result.stdout, /SSR answer/);
+  assert.match(result.stdout, /aria-label="SSR search"/);
+  assert.match(result.stdout, /non-scaling-stroke/);
   assert.match(
     result.stdout,
     /<button(?=[^>]*data-scope="floating-action-button")(?=[^>]*type="button")[^>]*>/,

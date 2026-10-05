@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import type { CollectionItem } from "@ark-ui/vue/collection";
 import type { ComboboxRootProps as NativeComboboxRootProps } from "@ark-ui/vue/combobox";
 import type { ComboboxItemProps as NativeComboboxItemProps } from "@ark-ui/vue/combobox";
@@ -217,7 +219,13 @@ export const LoongArkComboboxTrigger = defineComponent({
           "data-scope": "combobox",
           "data-part": "trigger",
         },
-        slots,
+        {
+          default:
+            slots.default ??
+            (() => [
+              h(LoongArkIcon, { icon: controlIcons.chevronDown, size: "sm" }),
+            ]),
+        },
       );
   },
 });
@@ -379,7 +387,11 @@ export const LoongArkComboboxItemIndicator = defineComponent({
           "data-scope": "combobox",
           "data-part": "item-indicator",
         },
-        slots,
+        {
+          default:
+            slots.default ??
+            (() => [h(LoongArkIcon, { icon: controlIcons.check, size: "sm" })]),
+        },
       );
   },
 });

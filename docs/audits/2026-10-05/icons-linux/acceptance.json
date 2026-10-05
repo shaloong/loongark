@@ -1,0 +1,117 @@
+{
+  "recordedAt": "2026-10-05T05:19:08.461630+00:00",
+  "branch": "develop",
+  "baseCommit": "e886e50ba33c622c0ef98fb7b247323ac5015abd",
+  "result": "passed",
+  "scope": [
+    "共享 Lucide 节点与四端 Icon",
+    "动态节点、尺寸/描边、固定描边、可访问名称、RTL 与引用",
+    "默认关闭、勾选/下拉、转移、排序、附件、快捷操作及示例统一"
+  ],
+  "coverage": {
+    "families": 115,
+    "stories": 294,
+    "publicValuesPerFramework": 790,
+    "examples": 175
+  },
+  "environment": {
+    "os": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "browser": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+    "playwright": "1.57.0"
+  },
+  "validation": {
+    "frozenInstall": "passed",
+    "verify": "passed",
+    "contracts": "passed",
+    "storybookBuild": "passed",
+    "coverage": "passed",
+    "publicationAndFourFrameworkSSR": "passed",
+    "svelte": {
+      "errors": 0,
+      "existingWarnings": 2
+    },
+    "frameworkConsumptionAndExamples": {
+      "passed": 8,
+      "examplesRun": 175
+    },
+    "browser": {
+      "firstFullRunPassed": 77,
+      "testReadinessFailures": 2,
+      "reason": "Icon 专项检查在 Story 渲染前直接读取数量；补充可见性等待后重新通过",
+      "finalAffectedTestsPassed": 2,
+      "uniqueBrowserCasesCovered": 79,
+      "frameworkCasesSkippedInStoryServer": 8,
+      "frameworkCasesSeparatelyPassed": 8
+    },
+    "visual": {
+      "passed": 74,
+      "existingComparisonThreshold": 0.01,
+      "thresholdChanged": false,
+      "firstRunMissingNewBaselines": 4,
+      "baselineSavedOnlyAfterReview": true
+    },
+    "allDefaultStories": {
+      "perTheme": 294,
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "wcagViolations": 0,
+      "narrowOverflow": 0,
+      "effectiveTransitionAll": 0
+    },
+    "pagesConfiguration": "YAML 与线上检查 Python 语法通过，增加实际上线的 Icon Story 存在校验"
+  },
+  "manualReview": {
+    "screenshots": 64,
+    "contacts": 12,
+    "originalsAlsoReviewed": "Icon 桌面/手机明暗原图及修正前 Solid 差异图",
+    "states": [
+      "default",
+      "changed",
+      "disabled",
+      "dialog-open",
+      "RTL"
+    ],
+    "evidenceStorage": ".artifacts/icons/",
+    "inGit": false,
+    "finding": "Solid 示例使用 camelCase style 导致 flex 行未垂直居中；改为原生 kebab-case 并补实际中心位置回归",
+    "beforeDifferentPixels": [
+      931,
+      933,
+      935
+    ],
+    "afterFrameworkComparisons": 24,
+    "afterDifferentPixels": 0
+  },
+  "baselines": {
+    "existingFiles": 72,
+    "existingHashChanges": 0,
+    "windowsFilesUnchanged": 2,
+    "newLinuxFiles": 4
+  },
+  "bundle": {
+    "scope": "内置图标数据独立 Vite ES 构建，不是组件库总大小",
+    "lucideModules": 17,
+    "minifiedBytes": 2021,
+    "fullRegistryOrDomFactoryIncluded": false
+  },
+  "license": {
+    "library": "MIT",
+    "lucide": "ISC 与 Feather 衍生 MIT",
+    "kitTarballIncludesLicenseAndThirdPartyNotices": true,
+    "storybookIncludesThirdPartyNotices": true
+  },
+  "limits": [
+    "实际浏览器为系统 Chromium 151，未声称等同 Playwright 固定浏览器",
+    "手机验收为375px浏览器视口，非真机触摸测试",
+    "现有视觉比较沿用1%像素容差，四端对照另做逐像素比较",
+    "Lucide 仅验证本批用到的节点，未逐项检查整库图标",
+    "问卷异步校验、表格编辑/虚拟化及图表高级交互仍按范围表分批实现",
+    "云端 Pages 域名访问受限制，实际线上检查由 GitHub Actions 执行",
+    "不发布 npm，不更新 main"
+  ],
+  "deployment": "awaiting automatic CI after develop push"
+}

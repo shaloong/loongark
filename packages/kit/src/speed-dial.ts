@@ -1,8 +1,10 @@
+import type { IconNode } from "./icon";
 export type SpeedDialDirection = "up" | "down" | "left" | "right";
 export interface SpeedDialAction {
   value: string;
   label: string;
-  icon?: string;
+  /** 字符串保留兼容，推荐按需导入的 Lucide 节点。 */
+  icon?: IconNode | string;
   disabled?: boolean;
 }
 export interface SpeedDialOptions {

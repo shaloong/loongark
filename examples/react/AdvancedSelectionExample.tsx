@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import { useState } from "react";
 import * as L from "@loongark/react";
 const choices = [
@@ -34,7 +36,7 @@ export function AdvancedSelectionExample() {
             <L.LoongArkSelectTrigger>
               <L.LoongArkSelectValueText placeholder="Choose frameworks" />
               <L.LoongArkSelectIndicator aria-hidden="true">
-                ⌄
+                <LoongArkIcon icon={controlIcons.chevronDown} size="sm" />
               </L.LoongArkSelectIndicator>
             </L.LoongArkSelectTrigger>
           </L.LoongArkSelectControl>

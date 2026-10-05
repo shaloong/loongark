@@ -1,3 +1,5 @@
+import { LoongArkIcon } from "@loongark/vue";
+import { controlIcons } from "@loongark/kit";
 import { defineComponent, h, ref, type PropType } from "vue";
 import {
   LoongArkRatingGroupRoot,
@@ -45,15 +47,10 @@ export const RatingGroupExample = defineComponent({
                     { index: item, key: item },
                     {
                       default: () =>
-                        h(
-                          "svg",
-                          { viewBox: "0 0 24 24", "aria-hidden": "true" },
-                          [
-                            h("path", {
-                              d: "m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.3-5.7-3-5.7 3 1.1-6.3-4.5-4.4 6.3-.9Z",
-                            }),
-                          ],
-                        ),
+                        h(LoongArkIcon, {
+                          icon: controlIcons.star,
+                          size: "lg",
+                        }),
                     },
                   ),
                 ),

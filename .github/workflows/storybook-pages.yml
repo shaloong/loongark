@@ -78,7 +78,8 @@ jobs:
                           assert response.status == 200
                           content = response.read()
                       if path == 'index.json':
-                          assert 'components-datatable--frozen' in json.loads(content)['entries']
+                          entries = json.loads(content)['entries']
+                          assert all(story in entries for story in ['components-datatable--frozen', 'components-icon--basic'])
                   print('Published Storybook homepage, iframe and Story index verified:', base)
                   break
               except Exception:

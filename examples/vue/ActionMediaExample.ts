@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/vue";
 import { defineComponent, h, ref } from "vue";
 import * as L from "@loongark/vue";
 import { quickActions, mediaDemoItems } from "../shared/mediaDemo";
@@ -35,7 +37,11 @@ export const ActionMediaExample = defineComponent({
                     "aria-label": "Create workspace",
                     onClick: () => (selected.value = "workspace"),
                   },
-                  h("span", { "aria-hidden": "true" }, "＋"),
+                  h(
+                    "span",
+                    { "aria-hidden": "true" },
+                    h(LoongArkIcon, { icon: controlIcons.plus, size: "sm" }),
+                  ),
                 ),
                 el(
                   L.LoongArkFloatingActionButton,
@@ -49,7 +55,11 @@ export const ActionMediaExample = defineComponent({
                 el(
                   L.LoongArkFloatingActionButton,
                   { disabled: true, "aria-label": "Unavailable action" },
-                  h("span", { "aria-hidden": "true" }, "−"),
+                  h(
+                    "span",
+                    { "aria-hidden": "true" },
+                    h(LoongArkIcon, { icon: controlIcons.minus, size: "sm" }),
+                  ),
                 ),
               ),
               h(

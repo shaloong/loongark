@@ -1,8 +1,14 @@
+import { controlIcons } from "@loongark/kit";
 import { viPalette } from "@loongark/tokens";
 export const quickActions = [
-  { value: "note", label: "New note", icon: "＋" },
-  { value: "share", label: "Share workspace", icon: "↗" },
-  { value: "archive", label: "Archive", icon: "−", disabled: true },
+  { value: "note", label: "New note", icon: controlIcons.plus },
+  { value: "share", label: "Share workspace", icon: controlIcons.externalLink },
+  {
+    value: "archive",
+    label: "Archive",
+    icon: controlIcons.minus,
+    disabled: true,
+  },
 ];
 export const mediaDemoItems = [240, 360, 280, 420, 260, 320].map(
   (height, i) => {

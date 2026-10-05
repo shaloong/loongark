@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/vue";
 import { defineComponent, h, ref } from "vue";
 import * as L from "@loongark/vue";
 const choices = [
@@ -40,38 +42,46 @@ export const AdvancedSelectionExample = defineComponent({
               },
             },
             [
-              h(L.LoongArkSelectRootProvider<(typeof choices)[number]>, { value: select.value }, () => [
-                h(L.LoongArkSelectLabel, {}, () => "Frameworks"),
-                h(L.LoongArkSelectControl, {}, () =>
-                  h(L.LoongArkSelectTrigger, {}, () => [
-                    h(L.LoongArkSelectValueText, {
-                      placeholder: "Choose frameworks",
-                    }),
-                    h(
-                      L.LoongArkSelectIndicator,
-                      { "aria-hidden": "true" },
-                      () => "⌄",
-                    ),
-                  ]),
-                ),
-                h(L.LoongArkSelectPositioner, {}, () =>
-                  h(L.LoongArkSelectContent, {}, () =>
-                    h(L.LoongArkSelectList, {}, () =>
-                      choices.map((item) =>
-                        h(
-                          L.LoongArkSelectItem,
-                          { item, key: item.value },
-                          () => [
-                            h(L.LoongArkSelectItemText, {}, () => item.label),
-                            h(L.LoongArkSelectItemIndicator),
-                          ],
+              h(
+                L.LoongArkSelectRootProvider<(typeof choices)[number]>,
+                { value: select.value },
+                () => [
+                  h(L.LoongArkSelectLabel, {}, () => "Frameworks"),
+                  h(L.LoongArkSelectControl, {}, () =>
+                    h(L.LoongArkSelectTrigger, {}, () => [
+                      h(L.LoongArkSelectValueText, {
+                        placeholder: "Choose frameworks",
+                      }),
+                      h(
+                        L.LoongArkSelectIndicator,
+                        { "aria-hidden": "true" },
+                        () =>
+                          h(LoongArkIcon, {
+                            icon: controlIcons.chevronDown,
+                            size: "sm",
+                          }),
+                      ),
+                    ]),
+                  ),
+                  h(L.LoongArkSelectPositioner, {}, () =>
+                    h(L.LoongArkSelectContent, {}, () =>
+                      h(L.LoongArkSelectList, {}, () =>
+                        choices.map((item) =>
+                          h(
+                            L.LoongArkSelectItem,
+                            { item, key: item.value },
+                            () => [
+                              h(L.LoongArkSelectItemText, {}, () => item.label),
+                              h(L.LoongArkSelectItemIndicator),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                h(L.LoongArkSelectHiddenSelect),
-              ]),
+                  h(L.LoongArkSelectHiddenSelect),
+                ],
+              ),
               h(
                 L.LoongArkStack,
                 {

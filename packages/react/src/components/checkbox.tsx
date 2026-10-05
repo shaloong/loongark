@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import React, { forwardRef } from "react";
 import { Checkbox } from "@ark-ui/react/checkbox";
 import type { CheckboxSize } from "@loongark/primitives";
@@ -99,16 +101,11 @@ export const LoongArkCheckboxIndicator = forwardRef<
       data-scope="checkbox"
       data-part="indicator"
     >
-      {children || (
-        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M11.6666 3.5L5.24992 9.91667L2.33325 7"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+      {children ?? (
+        <LoongArkIcon
+          icon={props.indeterminate ? controlIcons.minus : controlIcons.check}
+          size="sm"
+        />
       )}
     </Checkbox.Indicator>
   );

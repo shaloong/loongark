@@ -328,11 +328,6 @@ ${closeSelector}:hover {
   border-color: ${tokens.colors.border};
 }
 
-${closeSelector}:empty::before {
-  content: "\\00d7";
-  font-size: 20px;
-  line-height: 1;
-}
 
 `;
 };

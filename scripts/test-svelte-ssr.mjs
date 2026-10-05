@@ -101,3 +101,6 @@ assert.match(
 assert.match(html, /aria-label="Preview SSR actions.txt"/);
 assert.match(html, /aria-label="Cancel upload SSR upload.zip"/);
 assert.doesNotMatch(html, /data-part="action-feedback"/);
+
+assert.match(html, /aria-label="SSR search"/);
+assert.match(html, /non-scaling-stroke/);

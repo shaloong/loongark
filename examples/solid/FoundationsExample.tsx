@@ -1,4 +1,7 @@
 /** @jsxImportSource solid-js */
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/solid";
+
 import { createSignal } from "solid-js";
 import * as L from "@loongark/solid";
 export function FoundationsExample() {
@@ -47,7 +50,7 @@ export function FoundationsExample() {
                         aria-label="Remove Design"
                         onClick={() => setChip(false)}
                       >
-                        ×
+                        <LoongArkIcon icon={controlIcons.close} size="sm" />
                       </L.LoongArkChipRemoveTrigger>
                     </L.LoongArkChip>
                   ) : (

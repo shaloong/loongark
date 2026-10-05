@@ -890,3 +890,7 @@ export type { DataTableState, DataTableLabels, DataTableSummary, DataRow, DataCo
 export type { ChartOptions, ChartSeries, ChartLabels } from "@loongark/kit";
 
 export type {AttachmentOptions,MessageOptions,ConversationAction,ConversationActionContext,ConversationActionHandler,ConversationActionLabels,ConversationActionState} from "@loongark/kit";
+
+export {default as LoongArkIcon} from "./components/Icon.svelte";
+export type {LoongArkIconProps} from "./components/Icon.svelte";
+export type {IconOptions, IconNode} from "@loongark/kit";

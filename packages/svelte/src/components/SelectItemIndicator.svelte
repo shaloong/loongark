@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import Icon from "./Icon.svelte";
   import { Select } from "@ark-ui/svelte/select";
 </script>
 
@@ -7,5 +9,5 @@
   data-part="item-indicator"
   {...$$restProps}
 >
-  <slot />
+  <slot><Icon icon={controlIcons.check} size="sm" /></slot>
 </Select.ItemIndicator>

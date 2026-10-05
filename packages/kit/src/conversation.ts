@@ -1,10 +1,14 @@
+import { controlIcons } from "./icon";
 import type {
   ConversationActionHandler,
   ConversationActionLabels,
   ConversationAction,
 } from "./conversation-actions";
-export const attachmentIconPath =
-  "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M8 13h8 M8 17h5";
+/** @deprecated 请使用 controlIcons.file 节点；保留旧入口，不再维护独立路径。 */
+export const attachmentIconPath = controlIcons.file
+  .filter(([tag]) => tag === "path")
+  .map(([, attributes]) => attributes.d ?? "")
+  .join(" ");
 export interface ConversationActionOptions {
   /** 换成另一个消息或文件时重置反馈并取消旧动作。 */
   actionKey?: string | number;

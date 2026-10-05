@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import { LoongArkIcon } from "@loongark/svelte";
+
   import * as L from "@loongark/svelte";
   import { inspectionData } from "../shared/arkAdditionsDemo";
   let data = $state(inspectionData);
@@ -20,7 +23,8 @@
   >
   <L.LoongArkJsonTreeViewRoot {data} defaultExpandedDepth={1}
     ><L.LoongArkJsonTreeViewTree aria-label="Project data"
-      >{#snippet arrow()}<span aria-hidden="true">›</span
+      >{#snippet arrow()}<span aria-hidden="true"
+          ><LoongArkIcon icon={controlIcons.chevronRight} size="sm" /></span
         >{/snippet}</L.LoongArkJsonTreeViewTree
     ></L.LoongArkJsonTreeViewRoot
   >

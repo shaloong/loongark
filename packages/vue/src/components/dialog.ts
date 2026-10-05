@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import { renderPart } from "../render-part";
 import { LoongArkPortal } from "./portal";
 import { defineComponent, h } from "vue";
@@ -139,7 +141,9 @@ export const LoongArkDialogCloseTrigger = defineComponent({
           "data-scope": "dialog",
           "data-part": "close-trigger",
         },
-        slots.default ? slots.default() : undefined,
+        slots.default
+          ? slots.default()
+          : [h(LoongArkIcon, { icon: controlIcons.close })],
       );
   },
 });
