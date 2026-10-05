@@ -46,8 +46,13 @@ export const LoongArkChart = (props: ChartOptions) => {
     [internal, setInternal] = useState<readonly string[] | undefined>(() =>
       props.defaultSeriesKeys ? [...props.defaultSeriesKeys] : undefined,
     );
+  const [internalRange, setInternalRange] = useState<ChartOptions["range"]>(
+    () => props.defaultRange,
+  );
   const options = {
     ...props,
+    range: props.range ?? internalRange,
+    defaultRange: undefined,
     seriesKeys: props.seriesKeys ?? internal,
     defaultSeriesKeys: undefined,
     width: props.width ?? (measuredWidth || undefined),
@@ -65,6 +70,10 @@ export const LoongArkChart = (props: ChartOptions) => {
       (keys) => {
         if (latest.current.seriesKeys === undefined) setInternal(keys);
         latest.current.onSeriesKeysChange?.(keys);
+      },
+      (range) => {
+        if (latest.current.range === undefined) setInternalRange(range);
+        latest.current.onRangeChange?.(range);
       },
     );
     return () => {

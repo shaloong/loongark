@@ -896,3 +896,5 @@ export type {LoongArkIconProps} from "./components/Icon.svelte";
 export type {IconOptions, IconNode} from "@loongark/kit";
 
 export type { VirtualizationOptions, VirtualRenderDetails } from "@loongark/kit";
+
+export type {ChartRange} from "@loongark/kit";

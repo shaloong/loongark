@@ -122,3 +122,7 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 虚拟化已接入共享可变高度模型和四端 DataTable/MessageScroller：有界渲染、焦点行保留、阅读锚点、受控定位与有界 SSR。进入浏览器、视觉和生命周期专项验收；图表、复杂问卷与异步 Collection 接续实施。
 
 虚拟化验收：四端72项、受影响16项、Linux视觉106项通过；范围、短暂失败与平台限制见 [验收摘要](audits/2026-10-05/virtualization-linux/acceptance.json)。
+
+图表分类缩放/原生范围刷选、多序列指针提示/键盘检查与增量数据已同步四端和 ChartInteractionExample/ZoomAndBrush Story，进入专项验收。当前115族、303 Story、四端各790公开 LoongArk 值入口、199示例；API 见 [图表说明](chart.md#分类缩放刷选与交互提示)。
+
+图表缩放、刷选、交互提示和增量数据更新已完成四端专项验收，见 [图表窗口验收](audits/2026-10-05/chart-window-linux/acceptance.json)。覆盖为 115 个组件族、303 个 Story、四端各 790 个公开 LoongArk 值入口、199 个示例。复杂问卷和异步 Collection 契约继续实现。

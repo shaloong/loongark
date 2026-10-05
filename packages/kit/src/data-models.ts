@@ -1,4 +1,9 @@
 /// <reference lib="es2022.intl" />
+import {
+  chartWindow,
+  renderChartNavigation,
+  type ChartRange,
+} from "./chart-window";
 export type CellValue = string | number | boolean | null;
 export const observeChartWidth = (
   element: HTMLElement,
@@ -148,6 +153,14 @@ export interface ChartSeries {
   color?: string;
 }
 export interface ChartLabels {
+  brush: string;
+  rangeStart: string;
+  rangeEnd: string;
+  zoomIn: string;
+  zoomOut: string;
+  resetZoom: string;
+  inspect: string;
+  window: (range: ChartRange, total: number) => string;
   empty: string;
   series: string;
   dataTable: string;
@@ -155,6 +168,11 @@ export interface ChartLabels {
   range: (domain: readonly [number, number]) => string;
 }
 export interface ChartOptions {
+  zoomable?: boolean;
+  range?: ChartRange;
+  defaultRange?: ChartRange;
+  onRangeChange?: (range: ChartRange) => void;
+  tooltip?: boolean;
   data: readonly DataRow[];
   series: readonly ChartSeries[];
   labelKey: string;
@@ -273,7 +291,7 @@ function clipChartSegment(
 }
 
 /** 使用归一化坐标避免有限的大数相减溢出；缺失值形成折线断点。 */
-export const renderChartSVG = (options: ChartOptions): string => {
+const renderChartSVGCore = (options: ChartOptions): string => {
   const selectedKeys = new Set(chartSeriesKeys(options));
   const visibleSeries = options.series.filter((series) =>
     selectedKeys.has(series.key),
@@ -360,6 +378,7 @@ export const renderChartSVG = (options: ChartOptions): string => {
       return value === undefined
         ? undefined
         : {
+            index,
             x: x(index),
             y: y(Math.min(max, Math.max(min, value))),
             value,
@@ -376,7 +395,7 @@ export const renderChartSVG = (options: ChartOptions): string => {
         baseline = y(Math.min(max, Math.max(min, 0)));
       for (const point of points)
         if (point) {
-          svg += `<rect data-part="bar" x="${point.x + (seriesIndex - visibleSeries.length / 2) * barWidth}" y="${Math.min(baseline, point.y)}" width="${Math.max(0.1, barWidth - 2)}" height="${Math.abs(baseline - point.y)}" fill="${color}"><title>${pointTitle(point)}</title></rect>`;
+          svg += `<rect data-part="bar" data-chart-index="${point.index}" x="${point.x + (seriesIndex - visibleSeries.length / 2) * barWidth}" y="${Math.min(baseline, point.y)}" width="${Math.max(0.1, barWidth - 2)}" height="${Math.abs(baseline - point.y)}" fill="${color}"><title>${pointTitle(point)}</title></rect>`;
         }
     } else {
       let connected = false;
@@ -412,7 +431,7 @@ export const renderChartSVG = (options: ChartOptions): string => {
           point &&
           (!options.domain || (point.value >= min && point.value <= max))
         )
-          svg += `<circle data-part="point" cx="${point.x}" cy="${point.y}" r="3" fill="${color}"><title>${pointTitle(point)}</title></circle>`;
+          svg += `<circle data-part="point" data-chart-index="${point.index}" cx="${point.x}" cy="${point.y}" r="3" fill="${color}"><title>${pointTitle(point)}</title></circle>`;
     }
   });
   if (options.domain) svg += "</svg>";
@@ -447,8 +466,11 @@ export const renderChartSVG = (options: ChartOptions): string => {
   return svg + "</svg>";
 };
 /** 共享 HTML 图例保留完整序列名称并自然换行，SVG 输出仍可单独消费。 */
-export const renderChartMarkup = (options: ChartOptions): string => {
-  const svg = renderChartSVG(options),
+export const renderChartSVG = (options: ChartOptions): string =>
+  renderChartSVGCore(chartWindow(options));
+export const renderChartMarkup = (fullOptions: ChartOptions): string => {
+  const options = chartWindow(fullOptions);
+  const svg = renderChartSVGCore(options),
     keys = new Set(chartSeriesKeys(options));
   const hasValues = options.data.some((row) =>
     options.series.some((series) => chartValue(row[series.key]) !== undefined),
@@ -471,5 +493,5 @@ export const renderChartMarkup = (options: ChartOptions): string => {
   const table = options.showDataTable
     ? `<details data-part="data-table"><summary>${escapeXML(options.labels?.dataTable ?? "View chart data")}</summary><div data-part="data-region" role="region" aria-label="${title}" tabindex="0"><table><caption>${title}</caption><thead><tr><th scope="col">${escapeXML(options.labels?.category ?? "Category")}</th>${visible.map((series) => `<th scope="col">${escapeXML(series.label ?? series.key)}</th>`).join("")}</tr></thead><tbody>${options.data.map((row) => `<tr><th scope="row">${escapeXML(String(row[options.labelKey] ?? ""))}</th>${visible.map((series) => `<td>${escapeXML(String(chartValue(row[series.key]) ?? options.labels?.empty ?? "No data"))}</td>`).join("")}</tr>`).join("")}</tbody></table></div></details>`
     : "";
-  return svg + legendMarkup + table;
+  return svg + legendMarkup + renderChartNavigation(fullOptions) + table;
 };

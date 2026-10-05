@@ -155,6 +155,7 @@
     "DataTable text/number drafts, validation, cancellable commit, keyboard/focus and logical alignment",
     "DataTable select/textarea editors, option validation and multiline keyboard contracts",
     "DataTable atomic batch editor, shared validation, cancellable transaction and conflict-safe undo",
-    "DataTable and MessageScroller measured virtualization, stable reading anchors, pinned focus, bounded SSR and lifecycle"
+    "DataTable and MessageScroller measured virtualization, stable reading anchors, pinned focus, bounded SSR and lifecycle",
+    "Chart category zoom/brush, controlled rejection, keyboard/pointer inspection and incremental data"
   ]
 }

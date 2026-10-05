@@ -315,3 +315,15 @@
     throw Error("SSR must not emit virtual scroll");
   }}
 />
+
+<LoongArkChart
+  data={[{ label: "SSR window", value: 3 }]}
+  series={[{ key: "value", label: "SSR value" }]}
+  labelKey="label"
+  zoomable
+  tooltip
+  range={[0, 0]}
+  onRangeChange={() => {
+    throw Error("SSR must not change range");
+  }}
+/>

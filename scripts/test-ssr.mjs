@@ -51,7 +51,7 @@ for (const [framework, script] of [
         ? `console.log(renderToString(()=>h(L.LoongArkChart,${chartProps})));`
         : `console.log(renderToString(h(L.LoongArkChart,${chartProps})));`;
   const interactiveChartProps =
-    "{data:[{name:'Advanced SSR category',value:75,hidden:20}],series:[{key:'value',label:'Visible SSR series'},{key:'hidden',label:'Hidden SSR series'}],seriesKeys:['value'],labelKey:'name',title:'Advanced SSR chart',domain:[0,50],interactive:true,showDataTable:true,onSeriesKeysChange:()=>{throw Error('SSR must not toggle series')}}";
+    "{data:[{name:'Advanced SSR category',value:75,hidden:20}],series:[{key:'value',label:'Visible SSR series'},{key:'hidden',label:'Hidden SSR series'}],seriesKeys:['value'],labelKey:'name',title:'Advanced SSR chart',zoomable:true,tooltip:true,range:[0,0],onRangeChange:()=>{throw Error('SSR must not change range')},domain:[0,50],interactive:true,showDataTable:true,onSeriesKeysChange:()=>{throw Error('SSR must not toggle series')}}";
   const interactiveChartScript =
     framework === "Vue"
       ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkChart,${interactiveChartProps})})));`
@@ -131,6 +131,8 @@ for (const [framework, script] of [
     { encoding: "utf8", timeout: 60000 },
   );
   assert.match(result.stdout, /data-part="batch-trigger"/);
+  assert.match(result.stdout, /data-part="range-start"/);
+  assert.match(result.stdout, /data-part="inspect-category"/);
   assert.match(result.stdout, /aria-rowcount="1001"/);
   assert.match(result.stdout, /aria-setsize="500"/);
   const virtualKeys = [

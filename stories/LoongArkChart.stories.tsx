@@ -85,3 +85,8 @@ export const DisabledControls = {
     />
   ),
 };
+
+import { ChartInteractionExample } from "../examples/react/ChartInteractionExample";
+export const ZoomAndBrush: StoryObj = {
+  render: () => <ChartInteractionExample />,
+};

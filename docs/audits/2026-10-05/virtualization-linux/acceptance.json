@@ -139,5 +139,10 @@
     "消息虚拟化保留键与内部偏移；非虚拟模式的文字节点内部像素锚点不属于虚拟模式契约。卸载项的组件局部状态由调用方保存。",
     "验收使用系统 Chromium；不等同于固定 Playwright Chromium、Windows、真实手机或跨浏览器。"
   ],
-  "evidence": "临时截图、联系表、测量和日志保存在忽略目录 .artifacts/advanced-completion；Git仅存本摘要及回归基线。"
+  "evidence": "临时截图、联系表、测量和日志保存在忽略目录 .artifacts/advanced-completion；Git仅存本摘要及回归基线。",
+  "pages": {
+    "head": "a684dffce350b127d0802ec4f1b19f0292578774",
+    "run": "https://github.com/shaloong/loongark/actions/runs/37304621944",
+    "result": "success; build, deployment and published homepage/iframe/index verification"
+  }
 }

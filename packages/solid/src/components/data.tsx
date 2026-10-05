@@ -49,18 +49,31 @@ export const LoongArkChart = (props: ChartOptions) => {
     [internal, setInternal] = createSignal<readonly string[] | undefined>(
       props.defaultSeriesKeys ? [...props.defaultSeriesKeys] : undefined,
     );
+  const [internalRange, setInternalRange] = createSignal<ChartOptions["range"]>(
+    props.defaultRange,
+  );
   const options = () => ({
     ...props,
+    range: props.range ?? internalRange(),
+    defaultRange: undefined,
     seriesKeys: props.seriesKeys ?? internal(),
     defaultSeriesKeys: undefined,
     width: props.width ?? (measuredWidth() || undefined),
   });
   onMount(() => {
     const widthStop = observeChartWidth(element, setMeasuredWidth);
-    const controlsStop = mountChartControls(element, options, (keys) => {
-      if (props.seriesKeys === undefined) setInternal(keys);
-      props.onSeriesKeysChange?.(keys);
-    });
+    const controlsStop = mountChartControls(
+      element,
+      options,
+      (keys) => {
+        if (props.seriesKeys === undefined) setInternal(keys);
+        props.onSeriesKeysChange?.(keys);
+      },
+      (range) => {
+        if (props.range === undefined) setInternalRange(range);
+        props.onRangeChange?.(range);
+      },
+    );
     onCleanup(() => {
       widthStop();
       controlsStop();

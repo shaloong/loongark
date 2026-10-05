@@ -39,7 +39,7 @@ Svelte Frame 在写入文档前保存了旧 body，Portal 会挂到脱离文档�
 
 ## 高级能力仍需持续补齐
 
-公开 Ark 原生能力不代表所有 LoongArk 组合组件的高级场景已经全部交付。新版组件与原生 Drawer 已实现，继续处理组合模型的明确能力：Chart 缩放/刷选/增量数据、Questionnaire 复杂题型与异步 Collection；DataTable/MessageScroller 虚拟化见后续说明。具体交付必须同步四端示例、逻辑回归和桌面/手机明暗截图；不通过一个布尔“完整”字段掩盖未验收场景。
+公开 Ark 原生能力不代表所有 LoongArk 组合组件的高级场景已经全部交付。新版组件与原生 Drawer 已实现，继续处理组合模型的明确能力：Questionnaire 复杂题型与异步 Collection；DataTable/MessageScroller 虚拟化见后续说明。具体交付必须同步四端示例、逻辑回归和桌面/手机明暗截图；不通过一个布尔“完整”字段掩盖未验收场景。
 
 Linux 手工截图复核修正了裁剪图片顶对齐、手机默认裁剪框越出图片、拖拽命中区域被画成粗白条、分页首尾按钮高度不一致，以及 JSON 导航起点/装饰箭头错误显示焦点框。四端裁剪与 iframe 像素一致；JSON 分隔符空格和 Select 原生箭头有细微差异，保留实际像素对照，不声称四端完全逐像素相同。后续批次公开四端共同的 75 个 Context/ItemContext/Collection 控制 Hook，包括 useAsyncList、useListCollection、useListSelection。公开原生 Hook 仍不代表异步错误、取消、竞争请求等应用情景已经全部专项验收。
 
@@ -63,7 +63,7 @@ Drawer 的命名保持现有 Root/Trigger/Portal/Overlay/Positioner/Content/Titl
 
 表格 state、服务端分页和 columnKeys 列显示/顺序已同步四端；API 与证据见 [表格说明](data-table.md)。逻辑冻结列已同步四端（见 [冻结列 API](data-table.md#冻结列)）；虚拟化见后续批次；不将这些能力混入 Ark 原生部件覆盖结论。
 
-图表受控序列、数值范围与可访问数据表已同步四端，见 [图表说明](chart.md) 与 [验收](audits/2026-10-03/chart-advanced-linux/acceptance.json)。这属于 LoongArk 组合模型能力；缩放/刷选/实时流仍不算已完成。
+图表受控序列、数值范围与可访问数据表已同步四端，见 [图表说明](chart.md) 与 [验收](audits/2026-10-03/chart-advanced-linux/acceptance.json)。这属于 LoongArk 组合模型能力；分类缩放/刷选、工具提示与增量更新见 [窗口验收](audits/2026-10-05/chart-window-linux/acceptance.json)，数据获取仍由调用方负责。
 
 消息与附件操作已同步四端：异步互斥、失败反馈、actionKey 中止旧操作、预览/取消、原生下载和焦点恢复，详见 [会话说明](conversation.md)。这是 LoongArk 组合能力，并不改变原生 Ark 部件覆盖结论；实际服务上传与 Markdown 仍由业务处理；媒体加载锚定已在后续独立批次补齐。
 
@@ -79,7 +79,7 @@ Drawer 的命名保持现有 Root/Trigger/Portal/Overlay/Positioner/Content/Titl
 | MessageScroller      | 跟随、暂停、回到底部、媒体/可见文字锚点、复合历史插入及清理                 | 虚拟列表、被移除消息或替换文字节点的语义位置            |
 | Questionnaire        | 条件题、答案保留、受控拒绝、表单与同步/异步跨题校验、取消/过期结果与重试                              | 复杂输入题型、真机与多浏览器验收    |
 | DataTable            | 受控查询/排序/分页、服务器模式、跨页选择、列显示/顺序、逻辑冻结列、请求状态、草稿/选择/多行编辑、原子批量提交/校验与冲突安全撤销 | 虚拟化与列指针拖动                           |
-| Chart                | 受控图例、范围裁切、缺失值/极值、可访问数据表、重绘焦点                     | 缩放、刷选、增量数据渲染与交互工具提示                  |
+| Chart                | 受控图例、范围裁切、分类缩放/刷选、交互提示、增量更新、数据表、重绘焦点                     | 数据服务与独立实时引擎由调用方实现                  |
 | DateInput / Drawer   | 分段编辑/范围/真实表单；手势/吸附点/嵌套模态                                | 本地化文本解析/日期时间/国际化组合；真实触摸、RTL 与全部方向  |
 | Async Collection     | 已公开原生控制 Hook                                                         | 通用异步控制契约、分页边界与卸载清理回归                |
 

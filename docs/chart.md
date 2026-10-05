@@ -12,7 +12,7 @@ Chart 使用共享 SVG 模型和 HTML 图例，四端适配负责渲染、受控
 
 [ChartExample](../examples/react/ChartExample.tsx) 同步 React、Vue、Solid、Svelte，展示八个长分类、多系列、正负数据、柱线切换、清空/恢复与缺失值。独立 Story 补空数据、缺失值和极值；[Linux 验收](audits/2026-10-03/chart-linux/acceptance.json)保留实际截图、回归和环境限制。
 
-原生 title/desc 不等同于可交互工具提示。未提供缩放、刷选、实时流、统计插值或第三方 Chart 引擎兼容 API。三种默认颜色循环，超过三系列时可显式传入既有 Token 或合法颜色，不声称任意数量的颜色都会自动唯一。
+原生 title/desc 保留；可选交互提示、缩放与分类刷选见下文。数据流由调用方传入更新的 data；不提供统计插值或第三方 Chart 引擎兼容 API。三种默认颜色循环，超过三系列时可显式传入既有 Token 或合法颜色，不声称任意数量的颜色都会自动唯一。
 
 现代运行时通过 Intl.Segmenter 保留完整 grapheme；旧环境缺少该 API 时，超长轴标签只显示省略号，完整 title/desc 仍保留，组件不因 API 缺失而崩溃。共享模型通过标准 lib reference 声明 ES2022.Intl 类型，不更改 ES2020 编译目标或添加类型桩。
 
@@ -25,3 +25,13 @@ Chart 使用共享 SVG 模型和 HTML 图例，四端适配负责渲染、受控
 `showDataTable` 提供原生 details/summary 与按可见序列生成的 table。完整分类作行标题，caption 使用图表 title，缺失值采用 labels.empty，原始值不随图形裁切。`labels.dataTable` 翻译展开标题，`labels.category` 翻译分类列。展开区通过命名 region 局部横向滚动，不导致页面溢出。图例重绘保留键盘焦点、数据表展开和表区焦点；外部控件获得焦点时不抢回。卸载释放点击/焦点/toggle/指针监听及 MutationObserver 和 ResizeObserver，重新挂载不沿用已销毁实例的展开状态。
 
 四端 ChartAdvancedExample 与 Interactive/DisabledControls Story 展示受控接受/拒绝、全部隐藏、固定范围、原始数据更新和卸载。验收记录见 [图表高级能力 Linux 验收](audits/2026-10-03/chart-advanced-linux/acceptance.json)。
+
+## 分类缩放、刷选与交互提示
+
+`zoomable` 开启 Zoom in/out/Reset 和两端原生 range 刷选。`range={[start,end]}` 是包含两端的原始 data 索引，`defaultRange` 只初始化非受控窗口；`onRangeChange(range)` 通知变更，Vue 同时支持 `v-model:range`。索引取整、裁剪并按升序归一；空数据不发出通知，控件禁用。图像和可访问数据表使用同一分类窗口，数值 domain 继续独立控制数值轴。Tab、Home、End、方向键可操作刷选，滑块 aria-valuetext 保留完整分类名称。
+
+未设窗口时追加 data 自动展示完整分类；指定窗口后追加保留已有索引范围，数据收缩时裁剪，不在渲染中通知业务。需要滚动保留固定数量、删除头部或重新排序时，由调用方维护 range；组件不负责数据源和采样算法。ChartInteractionExample 演示真实追加、裁剪和可停止的模拟数据流，定时器在示例卸载时清理。
+
+`tooltip` 开启点/柱的多序列指针提示和原生分类选择器。检查输出保留所有可见序列的原始值与缺失说明，Escape 或离开点关闭浮动提示；键盘用户用分类选择器读取等价信息。重绘按稳定 row.id 保留被检查分类，无 id 时用索引；分类离开窗口则回到窗口首项。提示使用既有 popover/层级/阴影 Token，并限制在页面横向边界内。
+
+控件重绘保留所属焦点与数据表展开；受控拒绝恢复滑块值和可访问文本，外部控件获得焦点时不抢回。disabled 同时禁止图例、刷选与检查操作，图像与输出仍可阅读。新增 labels.brush/rangeStart/rangeEnd/zoomIn/zoomOut/resetZoom/inspect/window(range,total) 支持本地化，window 必须为纯函数。

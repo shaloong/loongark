@@ -20,6 +20,10 @@
         if (seriesKeys === undefined) internal = keys;
         onSeriesKeysChange?.(keys);
       },
+      (next) => {
+        if (range === undefined) internalRange = next;
+        onRangeChange?.(next);
+      },
     );
     return () => {
       widthStop();
@@ -35,6 +39,12 @@
   export let height: ChartOptions["height"] = undefined;
   export let labels: ChartOptions["labels"] = undefined;
   export let interactive = false;
+  export let zoomable = false;
+  export let tooltip = false;
+  export let range: ChartOptions["range"] = undefined;
+  export let defaultRange: ChartOptions["defaultRange"] = undefined;
+  export let onRangeChange: ChartOptions["onRangeChange"] = undefined;
+  let internalRange = defaultRange;
   export let seriesKeys: ChartOptions["seriesKeys"] = undefined;
   export let defaultSeriesKeys: ChartOptions["defaultSeriesKeys"] = undefined;
   export let onSeriesKeysChange: ChartOptions["onSeriesKeysChange"] = undefined;
@@ -52,6 +62,10 @@
     height,
     labels,
     interactive,
+    zoomable,
+    tooltip,
+    range: range ?? internalRange,
+    defaultRange: undefined,
     seriesKeys: seriesKeys ?? internal,
     defaultSeriesKeys: undefined,
     disabled,

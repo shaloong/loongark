@@ -59,6 +59,10 @@ export const LoongArkChart = defineComponent({
     height: Number,
     labels: Object as PropType<ChartOptions["labels"]>,
     interactive: Boolean,
+    zoomable: Boolean,
+    tooltip: Boolean,
+    range: Object as PropType<ChartOptions["range"]>,
+    defaultRange: Object as PropType<ChartOptions["defaultRange"]>,
     seriesKeys: Array as PropType<readonly string[]>,
     defaultSeriesKeys: Array as PropType<readonly string[]>,
     disabled: Boolean,
@@ -70,6 +74,10 @@ export const LoongArkChart = defineComponent({
     showDataTable: Boolean,
   },
   emits: {
+    rangeChange: (range: NonNullable<ChartOptions["range"]>) =>
+      Array.isArray(range),
+    "update:range": (range: NonNullable<ChartOptions["range"]>) =>
+      Array.isArray(range),
     seriesKeysChange: (keys: string[]) => Array.isArray(keys),
     "update:seriesKeys": (keys: string[]) => Array.isArray(keys),
   },
@@ -79,8 +87,11 @@ export const LoongArkChart = defineComponent({
       internal = ref<readonly string[] | undefined>(
         props.defaultSeriesKeys ? [...props.defaultSeriesKeys] : undefined,
       );
+    const internalRange = ref<ChartOptions["range"]>(props.defaultRange);
     const options = () => ({
       ...props,
+      range: props.range ?? internalRange.value,
+      defaultRange: undefined,
       seriesKeys: props.seriesKeys ?? internal.value,
       defaultSeriesKeys: undefined,
       width: props.width ?? (measuredWidth.value || undefined),
@@ -99,6 +110,11 @@ export const LoongArkChart = defineComponent({
           if (props.seriesKeys === undefined) internal.value = keys;
           emit("seriesKeysChange", keys);
           emit("update:seriesKeys", keys);
+        },
+        (range) => {
+          if (props.range === undefined) internalRange.value = range;
+          emit("rangeChange", range);
+          emit("update:range", range);
         },
       );
       stop = () => {

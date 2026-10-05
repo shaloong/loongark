@@ -166,3 +166,7 @@ Icon 提供四端共享 Lucide 节点、可访问名称、尺寸、固定描边�
 虚拟化批次同步 DataTable/MessageScroller、四端 VirtualizationExample 与两个 Virtualized Story：115族、302 Story、四端各790公开值入口、195示例。实际测量、焦点行保留、有界 SSR 与阅读锚点见 [表格](data-table.md#可变行高虚拟化) 与 [消息](conversation.md#消息虚拟化)。
 
 虚拟化验收：四端72项、受影响16项、Linux视觉106项通过；范围、短暂失败与平台限制见 [验收摘要](audits/2026-10-05/virtualization-linux/acceptance.json)。
+
+图表分类缩放/原生范围刷选、多序列指针提示/键盘检查与增量数据已同步四端和 ChartInteractionExample/ZoomAndBrush Story，进入专项验收。当前115族、303 Story、四端各790公开 LoongArk 值入口、199示例；API 见 [图表说明](chart.md#分类缩放刷选与交互提示)。
+
+图表缩放、刷选、交互提示和增量数据更新已完成四端专项验收，见 [图表窗口验收](audits/2026-10-05/chart-window-linux/acceptance.json)。覆盖为 115 个组件族、303 个 Story、四端各 790 个公开 LoongArk 值入口、199 个示例。复杂问卷和异步 Collection 契约继续实现。
