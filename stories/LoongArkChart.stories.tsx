@@ -90,3 +90,45 @@ import { ChartInteractionExample } from "../examples/react/ChartInteractionExamp
 export const ZoomAndBrush: StoryObj = {
   render: () => <ChartInteractionExample />,
 };
+
+import { ChartTypesExample } from "../examples/react/ChartTypesExample";
+import { chartTypeOptions } from "../examples/shared/chartTypesDemo";
+export const TypesAndAxes: StoryObj = {
+  decorators: [withArkExamplePage],
+  parameters: { pageWidth: 760, heading: "Chart types and axes" },
+  render: () => <ChartTypesExample />,
+};
+const typePreview = (mode: Parameters<typeof chartTypeOptions>[0]) => (
+  <div style={{ width: "min(100%,720px)" }}>
+    <L.LoongArkChart
+      {...chartTypeOptions(mode)}
+      tooltip={false}
+      zoomable={false}
+    />
+  </div>
+);
+export const StackedArea: StoryObj = {
+  decorators: [withArkExamplePage],
+  parameters: { pageWidth: 720, heading: "Stacked area" },
+  render: () => typePreview("stacked-area"),
+};
+export const Donut: StoryObj = {
+  decorators: [withArkExamplePage],
+  parameters: { pageWidth: 720, heading: "Category distribution" },
+  render: () => typePreview("donut"),
+};
+export const Scatter: StoryObj = {
+  decorators: [withArkExamplePage],
+  parameters: { pageWidth: 720, heading: "Independent coordinates" },
+  render: () => typePreview("scatter"),
+};
+export const TimeAxis: StoryObj = {
+  decorators: [withArkExamplePage],
+  parameters: { pageWidth: 720, heading: "Irregular time intervals" },
+  render: () => typePreview("time"),
+};
+export const LogAxis: StoryObj = {
+  decorators: [withArkExamplePage],
+  parameters: { pageWidth: 720, heading: "Logarithmic growth" },
+  render: () => typePreview("log"),
+};

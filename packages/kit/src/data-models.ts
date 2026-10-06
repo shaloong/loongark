@@ -16,6 +16,13 @@ import {
   type DataTableRowEntry,
   type DataTableStructureOptions,
 } from "./table-structure";
+import type { ChartAxis } from "./chart-axis";
+export type { ChartAxis } from "./chart-axis";
+import {
+  renderChartExtended,
+  chartSliceKey,
+  chartSliceKeys,
+} from "./chart-render";
 import type { DataColumnGeometry } from "./table-columns";
 export type CellValue = string | number | boolean | null;
 export const observeChartWidth = (
@@ -222,6 +229,7 @@ export interface ChartSeries {
   color?: string;
 }
 export interface ChartLabels {
+  notPlotted?: string;
   brush: string;
   rangeStart: string;
   rangeEnd: string;
@@ -245,7 +253,16 @@ export interface ChartOptions {
   data: readonly DataRow[];
   series: readonly ChartSeries[];
   labelKey: string;
-  type?: "line" | "bar";
+  type?: "line" | "bar" | "area" | "pie" | "donut" | "scatter";
+  stacked?: boolean;
+  xAxis?: ChartAxis;
+  yAxis?: Omit<ChartAxis, "type" | "key"> & { type?: "linear" | "log" };
+  innerRadius?: number;
+  sliceKey?: string;
+  sliceKeys?: readonly string[];
+  defaultSliceKeys?: readonly string[];
+  onSliceKeysChange?: (keys: string[]) => void;
+  sliceColors?: Readonly<Record<string, string>>;
   title?: string;
   width?: number;
   height?: number;
@@ -278,6 +295,19 @@ const chartColor = (value: string | undefined, index: number) =>
         "var(--lk-color-semantic-mutedforeground)",
         "var(--lk-color-vi-skyblue)",
       ][index % 3];
+const chartSliceColor = (value: string | undefined, index: number) => {
+  const resolved = chartColor(value, index);
+  return value === resolved
+    ? resolved
+    : [
+        "var(--lk-color-semantic-primary)",
+        "var(--lk-color-semantic-mutedforeground)",
+        "var(--lk-color-vi-deepblue)",
+        "var(--lk-color-vi-coral)",
+        "var(--lk-color-vi-skyblue)",
+        "var(--lk-color-vi-dawnblue)",
+      ][index % 6];
+};
 const chartValue = (value: CellValue | undefined): number | undefined =>
   typeof value === "number" && Number.isFinite(value) ? value : undefined;
 const compactNumber = new Intl.NumberFormat("en", {
@@ -295,18 +325,26 @@ const chartSegmenter =
   typeof Intl.Segmenter === "function"
     ? new Intl.Segmenter("en", { granularity: "grapheme" })
     : undefined;
-const chartCategory = (label: string, maxWidth: number) => {
-  const characters = chartSegmenter
+const chartCharacters = (label: string) =>
+  chartSegmenter
     ? Array.from(chartSegmenter.segment(label), ({ segment }) => segment)
     : Array.from(label);
-  const size = (segment: string) =>
-    /[^\x00-\x7f]/.test(segment)
-      ? Array.from(segment).length > 1
-        ? 16
-        : 12
-      : /[MWmw]/.test(segment)
-        ? 12
-        : 8;
+const chartCharacterWidth = (segment: string) =>
+  /[^\x00-\x7f]/.test(segment)
+    ? Array.from(segment).length > 1
+      ? 16
+      : 12
+    : /[MWmw]/.test(segment)
+      ? 12
+      : 8;
+const chartTextWidth = (label: string) =>
+  chartCharacters(label).reduce(
+    (width, segment) => width + chartCharacterWidth(segment),
+    0,
+  );
+const chartCategory = (label: string, maxWidth: number) => {
+  const characters = chartCharacters(label),
+    size = chartCharacterWidth;
   if (
     characters.reduce((width, segment) => width + size(segment), 0) <= maxWidth
   )
@@ -361,6 +399,20 @@ function clipChartSegment(
 
 /** 使用归一化坐标避免有限的大数相减溢出；缺失值形成折线断点。 */
 const renderChartSVGCore = (options: ChartOptions): string => {
+  if (
+    options.stacked ||
+    options.xAxis ||
+    options.yAxis ||
+    (options.type && !["line", "bar"].includes(options.type))
+  )
+    return renderChartExtended(options, {
+      escape: escapeXML,
+      color: chartColor,
+      number: chartNumber,
+      category: chartCategory,
+      textWidth: chartTextWidth,
+      keys: chartSeriesKeys,
+    });
   const selectedKeys = new Set(chartSeriesKeys(options));
   const visibleSeries = options.series.filter((series) =>
     selectedKeys.has(series.key),
@@ -535,32 +587,76 @@ const renderChartSVGCore = (options: ChartOptions): string => {
   return svg + "</svg>";
 };
 /** 共享 HTML 图例保留完整序列名称并自然换行，SVG 输出仍可单独消费。 */
-export const renderChartSVG = (options: ChartOptions): string =>
-  renderChartSVGCore(chartWindow(options));
-export const renderChartMarkup = (fullOptions: ChartOptions): string => {
+function chartRenderWindow(fullOptions: ChartOptions) {
   const options = chartWindow(fullOptions);
+  if (options.type === "pie" || options.type === "donut") {
+    options.sliceKeys = chartSliceKeys(fullOptions);
+    options.sliceColors = Object.fromEntries(
+      fullOptions.data.map((row, index) => [
+        chartSliceKey(fullOptions, row),
+        chartSliceColor(
+          fullOptions.sliceColors?.[chartSliceKey(fullOptions, row)],
+          index,
+        ),
+      ]),
+    );
+  }
+  return options;
+}
+export const renderChartSVG = (options: ChartOptions): string =>
+  renderChartSVGCore(chartRenderWindow(options));
+export const renderChartMarkup = (fullOptions: ChartOptions): string => {
+  const options = chartRenderWindow(fullOptions);
   const svg = renderChartSVGCore(options),
     keys = new Set(chartSeriesKeys(options));
   const hasValues = options.data.some((row) =>
     options.series.some((series) => chartValue(row[series.key]) !== undefined),
   );
-  const legend = options.series
-    .map((series, index) => {
-      if (!options.interactive && !keys.has(series.key)) return "";
-      const color = chartColor(series.color, index),
-        dash = options.type === "bar" ? "" : ["", "6 3", "2 3"][index % 3];
-      const content = `<svg aria-hidden="true" viewBox="0 0 24 12"><line x1="1" y1="6" x2="23" y2="6" stroke="${color}" stroke-width="${options.type === "bar" ? 8 : 2}" stroke-dasharray="${dash}"/></svg><span>${escapeXML(series.label ?? series.key)}</span>`;
-      return `<li data-part="legend-item">${options.interactive ? `<button type="button" data-part="legend-toggle" data-series-key="${escapeXML(series.key)}" aria-pressed="${keys.has(series.key)}"${options.disabled ? " disabled" : ""}>${content}</button>` : content}</li>`;
-    })
-    .join("");
+  const isPie = options.type === "pie" || options.type === "donut";
+  const sliceKeys = isPie ? new Set(chartSliceKeys(fullOptions)) : undefined;
+  const sliceIndices = isPie
+    ? new Map(
+        fullOptions.data.map((row, index) => [
+          chartSliceKey(fullOptions, row),
+          index,
+        ]),
+      )
+    : undefined;
+  const legend = isPie
+    ? options.data
+        .map((row) => {
+          const key = chartSliceKey(options, row),
+            index = sliceIndices!.get(key)!;
+          const plotted = (chartValue(row[options.series[0].key]) ?? 0) > 0;
+          const chosen =
+            plotted && sliceKeys!.has(key) && keys.has(options.series[0].key);
+          if (!options.interactive && !chosen) return "";
+          const content = `<svg aria-hidden="true" viewBox="0 0 24 12"><rect x="1" y="2" width="22" height="8" rx="2" fill="${chartColor(options.sliceColors?.[key], index)}"/></svg><span>${escapeXML(String(row[options.labelKey] ?? ""))}</span>`;
+          return `<li data-part="legend-item">${options.interactive ? `<button type="button" data-part="legend-toggle" data-slice-key="${escapeXML(key)}" aria-pressed="${chosen}"${!plotted ? ` aria-description="${escapeXML(options.labels?.notPlotted ?? "Only positive finite values are plotted.")}" title="${escapeXML(options.labels?.notPlotted ?? "Only positive finite values are plotted.")}"` : ""}${options.disabled || !plotted ? " disabled" : ""}>${content}</button>` : content}</li>`;
+        })
+        .join("")
+    : options.series
+        .map((series, index) => {
+          if (!options.interactive && !keys.has(series.key)) return "";
+          const color = chartColor(series.color, index),
+            dash = options.type === "bar" ? "" : ["", "6 3", "2 3"][index % 3];
+          const content = `<svg aria-hidden="true" viewBox="0 0 24 12">${options.type === "scatter" ? `<circle cx="12" cy="6" r="4" fill="${color}"/>` : `<line x1="1" y1="6" x2="23" y2="6" stroke="${color}" stroke-width="${options.type === "bar" ? 8 : 2}" stroke-dasharray="${dash}"/>`}</svg><span>${escapeXML(series.label ?? series.key)}</span>`;
+          return `<li data-part="legend-item">${options.interactive ? `<button type="button" data-part="legend-toggle" data-series-key="${escapeXML(series.key)}" aria-pressed="${keys.has(series.key)}"${options.disabled ? " disabled" : ""}>${content}</button>` : content}</li>`;
+        })
+        .join("");
   const legendMarkup =
-    options.series.length && (hasValues || options.interactive)
+    (isPie ? options.data.length : options.series.length) &&
+    (hasValues || options.interactive)
       ? `<ul data-part="legend" aria-label="${escapeXML(options.labels?.series ?? "Chart series")}">${legend}</ul>`
       : "";
   const visible = options.series.filter((series) => keys.has(series.key));
   const title = escapeXML(options.title ?? "Chart");
+  const axisKey =
+    options.xAxis?.key && options.xAxis.key !== options.labelKey
+      ? options.xAxis.key
+      : undefined;
   const table = options.showDataTable
-    ? `<details data-part="data-table"><summary>${escapeXML(options.labels?.dataTable ?? "View chart data")}</summary><div data-part="data-region" role="region" aria-label="${title}" tabindex="0"><table><caption>${title}</caption><thead><tr><th scope="col">${escapeXML(options.labels?.category ?? "Category")}</th>${visible.map((series) => `<th scope="col">${escapeXML(series.label ?? series.key)}</th>`).join("")}</tr></thead><tbody>${options.data.map((row) => `<tr><th scope="row">${escapeXML(String(row[options.labelKey] ?? ""))}</th>${visible.map((series) => `<td>${escapeXML(String(chartValue(row[series.key]) ?? options.labels?.empty ?? "No data"))}</td>`).join("")}</tr>`).join("")}</tbody></table></div></details>`
+    ? `<details data-part="data-table"><summary>${escapeXML(options.labels?.dataTable ?? "View chart data")}</summary><div data-part="data-region" role="region" aria-label="${title}" tabindex="0"><table><caption>${title}</caption><thead><tr><th scope="col">${escapeXML(options.labels?.category ?? "Category")}</th>${axisKey ? `<th scope="col">${escapeXML(axisKey)}</th>` : ""}${visible.map((series) => `<th scope="col">${escapeXML(series.label ?? series.key)}</th>`).join("")}</tr></thead><tbody>${options.data.map((row) => `<tr><th scope="row">${escapeXML(String(row[options.labelKey] ?? ""))}</th>${axisKey ? `<td>${escapeXML(String(row[axisKey] ?? options.labels?.empty ?? "No data"))}</td>` : ""}${visible.map((series) => `<td>${escapeXML(String(chartValue(row[series.key]) ?? options.labels?.empty ?? "No data"))}</td>`).join("")}</tr>`).join("")}</tbody></table></div></details>`
     : "";
   return svg + legendMarkup + renderChartNavigation(fullOptions) + table;
 };

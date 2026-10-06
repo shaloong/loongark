@@ -1,3 +1,4 @@
+import { chartSliceKeys, chartSliceKey } from "./chart-render";
 import { chartSeriesKeys, type ChartOptions } from "./data-models";
 import {
   chartRange,
@@ -12,16 +13,18 @@ export function mountChartControls(
   getOptions: () => ChartOptions,
   change: (keys: string[]) => void,
   changeRange?: (range: ChartRange) => void,
+  changeSlices?: (keys: string[]) => void,
 ) {
   const document = element.ownerDocument,
     view = document.defaultView;
   if (!view) return () => {};
   const ElementType = view.Element,
     HTMLElementType = view.HTMLElement;
+  let trackedDetails = element.querySelector<HTMLDetailsElement>(
+    '[data-part="data-table"]',
+  );
   let disposed = false,
-    open = !!element.querySelector<HTMLDetailsElement>(
-      '[data-part="data-table"]',
-    )?.open;
+    open = !!trackedDetails?.open;
   let focused: { node: HTMLElement; part: string; key?: string } | undefined;
   let inspectedKey: string | undefined;
   const keyFor = (options: ChartOptions, index: number) => {
@@ -114,6 +117,26 @@ export function mountChartControls(
       return;
     const part = button.dataset.part;
     if (part === "legend-toggle" && options.interactive) {
+      if (options.type === "pie" || options.type === "donut") {
+        const key = button.dataset.sliceKey;
+        if (
+          !key ||
+          !options.data.some((row) => chartSliceKey(options, row) === key)
+        )
+          return;
+        const selected = chartSliceKeys(options);
+        const seriesHidden = !chartSeriesKeys(options).length;
+        if (seriesHidden) change([options.series[0].key]);
+        const next = seriesHidden
+          ? [...new Set([...selected, key])]
+          : selected.includes(key)
+            ? selected.filter((item) => item !== key)
+            : [...selected, key];
+        const reconciled = chartSliceKeys({ ...options, sliceKeys: next });
+        if (changeSlices) changeSlices(reconciled);
+        else options.onSliceKeysChange?.(reconciled);
+        return;
+      }
       const key = button.dataset.seriesKey;
       if (!key || !options.series.some((series) => series.key === key)) return;
       const selected = chartSeriesKeys(options),
@@ -201,7 +224,11 @@ export function mountChartControls(
     const node = event.target;
     hideTooltip();
     if (node.matches('button[data-part="legend-toggle"]'))
-      focused = { node, part: "legend-toggle", key: node.dataset.seriesKey };
+      focused = {
+        node,
+        part: "legend-toggle",
+        key: node.dataset.sliceKey ?? node.dataset.seriesKey,
+      };
     else if (node.matches('[data-part="data-table"] > summary'))
       focused = { node, part: "summary" };
     else if (
@@ -232,6 +259,7 @@ export function mountChartControls(
     for (const record of records)
       for (const node of Array.from(record.removedNodes))
         if (
+          node === trackedDetails &&
           node instanceof HTMLElementType &&
           node.matches('details[data-part="data-table"]')
         )
@@ -241,6 +269,7 @@ export function mountChartControls(
       '[data-part="data-table"]',
     );
     if (details && details.open !== open) details.open = open;
+    trackedDetails = details;
     restoreControls();
     hideTooltip();
     if (!focused || focused.node.isConnected) return;
@@ -257,7 +286,11 @@ export function mountChartControls(
             element.querySelectorAll<HTMLButtonElement>(
               'button[data-part="legend-toggle"]',
             ),
-          ).find((button) => button.dataset.seriesKey === focused?.key)
+          ).find(
+            (button) =>
+              (button.dataset.sliceKey ?? button.dataset.seriesKey) ===
+              focused?.key,
+          )
         : element.querySelector<HTMLElement>(
             focused.part === "summary"
               ? '[data-part="data-table"] > summary'
@@ -281,6 +314,7 @@ export function mountChartControls(
     disposed = true;
     observer.disconnect();
     focused = undefined;
+    trackedDetails = null;
     hideTooltip();
     element.removeEventListener("click", click);
     element.removeEventListener("input", input);

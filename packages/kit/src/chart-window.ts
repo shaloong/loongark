@@ -1,3 +1,4 @@
+import { chartSliceKey, chartSliceKeys } from "./chart-render";
 import type { ChartOptions } from "./data-models";
 export type ChartRange = readonly [number, number];
 /** 分类窗口使用含两端的原始数据索引；数据收缩时裁剪，不在渲染中发出通知。 */
@@ -52,6 +53,11 @@ export function chartInspection(options: ChartOptions, index: number) {
   const current = chartWindow(options),
     row = current.data[index];
   if (!row) return options.labels?.empty ?? "No data";
+  if (
+    (options.type === "pie" || options.type === "donut") &&
+    !chartSliceKeys(options).includes(chartSliceKey(options, row))
+  )
+    return options.labels?.empty ?? "No data";
   const selected = new Set(
     options.seriesKeys ??
       options.defaultSeriesKeys ??
@@ -59,7 +65,12 @@ export function chartInspection(options: ChartOptions, index: number) {
   );
   if (!options.series.some((series) => selected.has(series.key)))
     return options.labels?.empty ?? "No data";
-  return `${String(row[options.labelKey] ?? "")} — ${options.series
+  const axisKey = options.xAxis?.key;
+  const coordinate =
+    axisKey && axisKey !== options.labelKey
+      ? `; ${axisKey}: ${String(row[axisKey] ?? options.labels?.empty ?? "No data")}`
+      : "";
+  return `${String(row[options.labelKey] ?? "")}${coordinate} — ${options.series
     .filter((series) => selected.has(series.key))
     .map(
       (series) =>

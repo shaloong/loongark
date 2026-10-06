@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05",
+  "updatedAt": "2026-10-06",
   "sources": [
     "https://ui.shadcn.com/docs/components",
     "https://mui.com/material-ui/all-components/",
@@ -167,6 +167,7 @@
     "DataTable multi-level grouping, finite aggregation, root paging, parent-ID tree rows, controlled expansion and filtered ancestor context",
     "DataTable stable cell ranges, keyboard/pointer selection, quoted TSV clipboard, atomic validated paste and shared multi-step history",
     "Independent CodeMirror editor with syntax, history, search, completion, controlled values, forms and cancellable language loading",
-    "Independent ProseMirror structured editor with formatting, lists, safe links, tables, plugins, node views, controlled values and forms"
+    "Independent ProseMirror structured editor with formatting, lists, safe links, tables, plugins, node views, controlled values and forms",
+    "Chart area and signed stacks, stable pie/donut slices, continuous scatter, strict ISO time and logarithmic axes"
   ]
 }

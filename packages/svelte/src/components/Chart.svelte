@@ -24,6 +24,10 @@
         if (range === undefined) internalRange = next;
         onRangeChange?.(next);
       },
+      (keys) => {
+        if (sliceKeys === undefined) internalSlices = keys;
+        onSliceKeysChange?.(keys);
+      },
     );
     return () => {
       widthStop();
@@ -34,6 +38,16 @@
   export let series: ChartOptions["series"];
   export let labelKey: string;
   export let type: ChartOptions["type"] = "line";
+  export let stacked = false;
+  export let xAxis: ChartOptions["xAxis"] = undefined;
+  export let yAxis: ChartOptions["yAxis"] = undefined;
+  export let innerRadius: ChartOptions["innerRadius"] = undefined;
+  export let sliceKey: ChartOptions["sliceKey"] = undefined;
+  export let sliceKeys: ChartOptions["sliceKeys"] = undefined;
+  export let defaultSliceKeys: ChartOptions["defaultSliceKeys"] = undefined;
+  export let onSliceKeysChange: ChartOptions["onSliceKeysChange"] = undefined;
+  export let sliceColors: ChartOptions["sliceColors"] = undefined;
+  let internalSlices = defaultSliceKeys ? [...defaultSliceKeys] : undefined;
   export let title: ChartOptions["title"] = undefined;
   export let width: ChartOptions["width"] = undefined;
   export let height: ChartOptions["height"] = undefined;
@@ -57,6 +71,14 @@
     series,
     labelKey,
     type,
+    stacked,
+    xAxis,
+    yAxis,
+    innerRadius,
+    sliceKey,
+    sliceColors,
+    sliceKeys: sliceKeys ?? internalSlices,
+    defaultSliceKeys: undefined,
     title,
     width: width ?? (measuredWidth || undefined),
     height,

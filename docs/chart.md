@@ -2,7 +2,7 @@
 
 Chart 使用共享 SVG 模型和 HTML 图例，四端适配负责渲染、受控状态和容器 ResizeObserver 的生命周期；图例监听与重绘状态恢复集中在 Kit。默认颜色依次消费 primary、mutedForeground 和 vi.skyBlue；第三个序列使用现有 Sky Blue 强调，未新增调色板。折线同时以实线、长虚线、短虚线辅助区分，完整系列名称在自然换行的图例中显示。
 
-`data/series/labelKey` 保持原 API。`type` 为 line 或 bar，`title` 提供图像名称，`width/height` 可指定几何尺寸；默认测量容器宽度，卸载释放观察器。`labels.empty` 覆盖空状态，`labels.series` 覆盖图例的无障碍名称，未提供字段时采用共享默认值。
+`data/series/labelKey` 保持原 API。`type` 为 line、bar、area、pie、donut 或 scatter，`title` 提供图像名称，`width/height` 可指定几何尺寸；默认测量容器宽度，卸载释放观察器。`labels.empty` 覆盖空状态，`labels.series` 覆盖图例的无障碍名称，未提供字段时采用共享默认值。
 
 数值轴使用紧凑数值，大于等于 1e15 或很小的非零值使用科学记数法。轴留白根据实际标签长度确定；分类轴依据容器宽度减少标签并截短显示，原生 title 保留完整分类名称。每个点/柱的提示包含完整分类、系列名称和原始数值，SVG desc 和显式 aria-description 提供完整数据说明，保持四端一致的无障碍描述。窄屏图例自然换行，不挤压标签。
 
@@ -35,3 +35,22 @@ Chart 使用共享 SVG 模型和 HTML 图例，四端适配负责渲染、受控
 `tooltip` 开启点/柱的多序列指针提示和原生分类选择器。检查输出保留所有可见序列的原始值与缺失说明，Escape 或离开点关闭浮动提示；键盘用户用分类选择器读取等价信息。重绘按稳定 row.id 保留被检查分类，无 id 时用索引；分类离开窗口则回到窗口首项。提示使用既有 popover/层级/阴影 Token，并限制在页面横向边界内。
 
 控件重绘保留所属焦点与数据表展开；受控拒绝恢复滑块值和可访问文本，外部控件获得焦点时不抢回。disabled 同时禁止图例、刷选与检查操作，图像与输出仍可阅读。新增 labels.brush/rangeStart/rangeEnd/zoomIn/zoomOut/resetZoom/inspect/window(range,total) 支持本地化，window 必须为纯函数。
+
+
+## 面积、堆叠与连续坐标轴
+
+`area` 沿用分类轴与系列控制，缺失位置断开面积和边界线。`stacked` 支持 area/bar：每行的正值和负值分别累计，隐藏系列后重新聚合。不是百分比堆叠；溢出有限数值范围的累计会报错。堆叠不与对数轴组合。
+
+`xAxis` 提供 type/category/linear/time/log、key、domain、locale、timeZone 和 format(value)。省略 xAxis 时使用原有分类轴；scatter 默认使用线性轴并读取 labelKey。配置连续轴时 key 默认 labelKey；scatter 不接受 category。`yAxis` 支持 linear/log、domain、locale 和 format。原有 domain 是 yAxis.domain 的兼容入口，显式 yAxis.domain 优先。所有域要求有限且递增，对数域要求正数；回调必须为纯函数。
+
+时间轴接受有限毫秒时间戳、ISO日期或带Z/明确偏移的ISO日期时间，拒绝本地格式与没有时区的日期时间，避免浏览器隐式解析差异。默认UTC、英文月日；locale/timeZone 可指定显示，format 可覆盖标签。日期有效性与时间戳范围受校验，不把2月30日归一到3月。连续轴按标签实际长度减少窄屏刻度，保留首尾及完整日期，完整自定义长标签仍通过title读取。域内边缘圆点完整显示，曲线/面积继续在域内裁剪。连续轴保留真实时间/数值间距；折线与面积按有效横轴值绘制，源数据和窗口索引仍保持原顺序。
+
+对数轴只绘制大于0的值；0、负值和缺失形成断点，不替换成任意小正数。对数柱形/面积以可见域下限为基线；其数值范围不表示从0开始。线性轴保留负数。域外折线/面积先在归一化域裁剪再转像素，避免极值生成NaN/Infinity；原始值和独立横轴字段保留在图像说明、检查输出及数据表。
+
+## 饼图与环形图
+
+pie/donut 使用一个数值系列，每行表示一个切片；只绘制正的有限数值，原始数据表仍保留0、负值和缺失。没有正值或全部隐藏时显示空状态。donut 的 innerRadius 是0至0.9之间的半径比例，默认0.6；pie 不使用内半径。只有一个切片时仍绘制完整圆/环。
+
+`sliceKey` 默认labelKey，分类键必须非空且唯一。`sliceKeys` 受控、`defaultSliceKeys` 初始化非受控选择，空数组表示全部隐藏；`onSliceKeysChange` 返回按完整data顺序归一化的键。Vue提供sliceKeysChange与update:sliceKeys；Svelte受控时在回调显式赋值。受控拒绝、禁用、键盘与焦点恢复使用现有图例契约。`sliceColors` 可按稳定键指定现有Token或合法颜色；分类窗口改变不重排颜色和窗口外选择。
+
+饼图使用sliceKeys控制分类；seriesKeys继续控制其单一数值系列，系列隐藏时所有分类按钮显示未选中，选择分类会请求恢复系列及该分类。饼图不接受Cartesian轴、domain或stacked。各切片title保留原始数值和比例，空间允许时在圆外以正文颜色显示百分比，保证浅深主题及亮色切片的文字对比；键盘用户通过图例和检查选择器读取数据。切片默认使用六种现有语义/VI颜色，不引入独立调色板；超过六分类可显式配置。非正数或缺失分类的按钮禁用并关联labels.notPlotted说明。四端ChartTypesExample实际切换全部新增类型、轴、受控拒绝、空态和卸载；验收范围以本批记录为准。

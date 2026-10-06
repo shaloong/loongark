@@ -77,6 +77,14 @@ export const LoongArkChart = defineComponent({
     width: Number,
     height: Number,
     labels: Object as PropType<ChartOptions["labels"]>,
+    stacked: Boolean,
+    xAxis: Object as PropType<ChartOptions["xAxis"]>,
+    yAxis: Object as PropType<ChartOptions["yAxis"]>,
+    innerRadius: Number,
+    sliceKey: String,
+    sliceKeys: Array as PropType<ChartOptions["sliceKeys"]>,
+    defaultSliceKeys: Array as PropType<ChartOptions["defaultSliceKeys"]>,
+    sliceColors: Object as PropType<ChartOptions["sliceColors"]>,
     interactive: Boolean,
     zoomable: Boolean,
     tooltip: Boolean,
@@ -93,6 +101,8 @@ export const LoongArkChart = defineComponent({
     showDataTable: Boolean,
   },
   emits: {
+    sliceKeysChange: (keys: string[]) => Array.isArray(keys),
+    "update:sliceKeys": (keys: string[]) => Array.isArray(keys),
     rangeChange: (range: NonNullable<ChartOptions["range"]>) =>
       Array.isArray(range),
     "update:range": (range: NonNullable<ChartOptions["range"]>) =>
@@ -106,9 +116,14 @@ export const LoongArkChart = defineComponent({
       internal = ref<readonly string[] | undefined>(
         props.defaultSeriesKeys ? [...props.defaultSeriesKeys] : undefined,
       );
+    const internalSlices = ref<ChartOptions["sliceKeys"]>(
+      props.defaultSliceKeys ? [...props.defaultSliceKeys] : undefined,
+    );
     const internalRange = ref<ChartOptions["range"]>(props.defaultRange);
     const options = () => ({
       ...props,
+      sliceKeys: props.sliceKeys ?? internalSlices.value,
+      defaultSliceKeys: undefined,
       range: props.range ?? internalRange.value,
       defaultRange: undefined,
       seriesKeys: props.seriesKeys ?? internal.value,
@@ -134,6 +149,11 @@ export const LoongArkChart = defineComponent({
           if (props.range === undefined) internalRange.value = range;
           emit("rangeChange", range);
           emit("update:range", range);
+        },
+        (keys) => {
+          if (props.sliceKeys === undefined) internalSlices.value = keys;
+          emit("sliceKeysChange", keys);
+          emit("update:sliceKeys", keys);
         },
       );
       stop = () => {

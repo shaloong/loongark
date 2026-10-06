@@ -444,3 +444,15 @@
 
 <L.LoongArkCodeEditor id="ssr-code" name="ssr-source" defaultValue={'SSR source <safe>\nnext line'} onReady={() => { throw Error("SSR must not mount editor"); }} onValueChange={() => { throw Error("SSR must not edit"); }} language={() => { throw Error("SSR must not load syntax"); }} />
 <L.LoongArkRichTextEditor id="ssr-rich" name="ssr-document" defaultValue={{ type:"doc", content:[{ type:"paragraph", content:[{type:"text",text:"SSR rich <safe>"}] }] }} onReady={() => { throw Error("SSR must not mount editor"); }} onValueChange={() => { throw Error("SSR must not edit"); }} />
+
+{#each ["area", "donut", "scatter", "time", "log"] as mode}
+  <LoongArkChart
+    data={[{ id:"a",name:"Axis <safe>",at:"2026-09-01T00:00:00Z",x:1,value:10 },{ id:"b",name:"Next",at:"2026-09-10T00:00:00Z",x:5,value:100 }]}
+    series={[{key:"value"}]} labelKey="name"
+    type={mode === "time" || mode === "log" ? "line" : mode === "area" ? "area" : mode === "scatter" ? "scatter" : "donut"}
+    xAxis={mode === "time" ? {type:"time",key:"at"} : mode === "scatter" ? {type:"linear",key:"x"} : undefined}
+    yAxis={mode === "log" ? {type:"log"} : undefined}
+    interactive showDataTable
+    onSliceKeysChange={() => { throw Error("SSR must not toggle slices"); }}
+  />
+{/each}

@@ -72,8 +72,13 @@ export const LoongArkChart = (props: ChartOptions) => {
   const [internalRange, setInternalRange] = createSignal<ChartOptions["range"]>(
     props.defaultRange,
   );
+  const [internalSlices, setInternalSlices] = createSignal<
+    ChartOptions["sliceKeys"]
+  >(props.defaultSliceKeys ? [...props.defaultSliceKeys] : undefined);
   const options = () => ({
     ...props,
+    sliceKeys: props.sliceKeys ?? internalSlices(),
+    defaultSliceKeys: undefined,
     range: props.range ?? internalRange(),
     defaultRange: undefined,
     seriesKeys: props.seriesKeys ?? internal(),
@@ -92,6 +97,10 @@ export const LoongArkChart = (props: ChartOptions) => {
       (range) => {
         if (props.range === undefined) setInternalRange(range);
         props.onRangeChange?.(range);
+      },
+      (keys) => {
+        if (props.sliceKeys === undefined) setInternalSlices(keys);
+        props.onSliceKeysChange?.(keys);
       },
     );
     onCleanup(() => {
