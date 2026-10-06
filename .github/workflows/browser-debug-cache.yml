@@ -7,7 +7,11 @@ on:
 permissions:
   contents: read
 jobs:
-  firefox:
+  browsers:
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [firefox, webkit]
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -20,65 +24,65 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install firefox
+      - run: pnpm exec playwright install ${{ matrix.browser }}
       - name: 打包同版本浏览器用于本地重现
         run: |
           mkdir -p .artifacts/browser-debug
-          tar -C "$HOME/.cache/ms-playwright" -czf .artifacts/browser-debug/firefox.tar.gz  .
-          split -b 16M -d .artifacts/browser-debug/firefox.tar.gz .artifacts/browser-debug/firefox-part-
-          rm .artifacts/browser-debug/firefox.tar.gz
-          test "$(ls .artifacts/browser-debug/firefox-part-* | wc -l)" -le 8
+          tar -C "$HOME/.cache/ms-playwright" -czf .artifacts/browser-debug/${{ matrix.browser }}.tar.gz  .
+          split -b 16M -d .artifacts/browser-debug/${{ matrix.browser }}.tar.gz .artifacts/browser-debug/${{ matrix.browser }}-part-
+          rm .artifacts/browser-debug/${{ matrix.browser }}.tar.gz
+          test "$(ls .artifacts/browser-debug/${{ matrix.browser }}-part-* | wc -l)" -le 8
           cd .artifacts/browser-debug
-          sha256sum firefox-part-* > checksums.txt
+          sha256sum ${{ matrix.browser }}-part-* > checksums.txt
       - uses: actions/upload-artifact@v4
         with:
-          name: firefox-part-0
-          path: .artifacts/browser-debug/firefox-part-00
+          name: ${{ matrix.browser }}-part-0
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-00
           retention-days: 14
       - uses: actions/upload-artifact@v4
         with:
-          name: firefox-part-1
-          path: .artifacts/browser-debug/firefox-part-01
-          retention-days: 14
-          if-no-files-found: ignore
-      - uses: actions/upload-artifact@v4
-        with:
-          name: firefox-part-2
-          path: .artifacts/browser-debug/firefox-part-02
+          name: ${{ matrix.browser }}-part-1
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-01
           retention-days: 14
           if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         with:
-          name: firefox-part-3
-          path: .artifacts/browser-debug/firefox-part-03
+          name: ${{ matrix.browser }}-part-2
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-02
           retention-days: 14
           if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         with:
-          name: firefox-part-4
-          path: .artifacts/browser-debug/firefox-part-04
+          name: ${{ matrix.browser }}-part-3
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-03
           retention-days: 14
           if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         with:
-          name: firefox-part-5
-          path: .artifacts/browser-debug/firefox-part-05
+          name: ${{ matrix.browser }}-part-4
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-04
           retention-days: 14
           if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         with:
-          name: firefox-part-6
-          path: .artifacts/browser-debug/firefox-part-06
+          name: ${{ matrix.browser }}-part-5
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-05
           retention-days: 14
           if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         with:
-          name: firefox-part-7
-          path: .artifacts/browser-debug/firefox-part-07
+          name: ${{ matrix.browser }}-part-6
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-06
           retention-days: 14
           if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         with:
-          name: firefox-debug-checksums
+          name: ${{ matrix.browser }}-part-7
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-07
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.browser }}-debug-checksums
           path: .artifacts/browser-debug/checksums.txt
           retention-days: 14
