@@ -130,3 +130,6 @@ export const RankingInteraction: StoryObj = {decorators:[withArkExamplePage], re
 
 import { QuestionnaireGroupsExample } from "../examples/react/QuestionnaireGroupsExample";
 export const RepeatedGroups: StoryObj = { decorators:[withArkExamplePage], render:()=> <QuestionnaireGroupsExample /> };
+
+import { QuestionnaireCustomExample } from "../examples/react/QuestionnaireCustomExample";
+export const CustomRenderer: StoryObj = { decorators:[withArkExamplePage], render:()=> <QuestionnaireCustomExample /> };

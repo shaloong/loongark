@@ -5,9 +5,12 @@
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { RatingGroup } from "@ark-ui/react/rating-group";
+import { useRatingGroup } from "./use-rating";
 import type { RatingGroupSize } from "@loongark/primitives";
 
-type ArkRatingGroupRootProps = ComponentPropsWithoutRef<typeof RatingGroup.Root>;
+type ArkRatingGroupRootProps = ComponentPropsWithoutRef<
+  typeof RatingGroup.Root
+>;
 type ArkRatingGroupLabelProps = ComponentPropsWithoutRef<
   typeof RatingGroup.Label
 >;
@@ -21,8 +24,10 @@ type ArkRatingGroupHiddenInputProps = ComponentPropsWithoutRef<
   typeof RatingGroup.HiddenInput
 >;
 
-export interface LoongArkRatingGroupRootProps
-  extends Omit<ArkRatingGroupRootProps, "asChild"> {
+export interface LoongArkRatingGroupRootProps extends Omit<
+  ArkRatingGroupRootProps,
+  "asChild"
+> {
   size?: RatingGroupSize;
   disabled?: boolean;
   children?: ReactNode;
@@ -32,18 +37,54 @@ export const LoongArkRatingGroupRoot = forwardRef<
   HTMLDivElement,
   LoongArkRatingGroupRootProps
 >(({ size = "md", disabled = false, children, ...props }, ref) => {
+  const {
+    allowHalf,
+    autoFocus,
+    count,
+    defaultValue,
+    dir,
+    form,
+    id,
+    ids,
+    name,
+    onHoverChange,
+    onValueChange,
+    readOnly,
+    required,
+    translations,
+    value,
+    ...dom
+  } = props;
+  const api = useRatingGroup({
+    allowHalf,
+    autoFocus,
+    count,
+    defaultValue,
+    form,
+    id,
+    ids,
+    name,
+    onHoverChange,
+    onValueChange,
+    readOnly,
+    required,
+    translations,
+    value,
+    disabled,
+  });
   return (
-    <RatingGroup.Root
-      {...props}
+    <RatingGroup.RootProvider
+      {...dom}
+      value={api}
+      dir={dir}
       ref={ref}
-      disabled={disabled}
       data-scope="rating-group"
       data-part="root"
       data-size={size}
       data-disabled={disabled ? "true" : undefined}
     >
       {children}
-    </RatingGroup.Root>
+    </RatingGroup.RootProvider>
   );
 });
 

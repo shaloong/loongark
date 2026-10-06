@@ -62,7 +62,7 @@ export function restoreQuestionGroups(
       restoreQuestionAnswers(field, local.question, local.value);
   }
 }
-function updateQuestionPath(
+export function updateQuestionPath(
   question: Question,
   value: QuestionnaireValue,
   path: readonly string[],
@@ -89,7 +89,7 @@ function updateQuestionPath(
     ),
   };
 }
-function nativeName(path: readonly string[]) {
+export function nativeQuestionName(path: readonly string[]) {
   return (
     path[0] +
     path
@@ -158,7 +158,7 @@ export function renderQuestionGroup(
                 ).replace(
                   /name="([^\"]*)"/g,
                   (_, name: string) =>
-                    `name="${escape(nativeName(childPath))}${name.slice(escape(child.id).length)}"`,
+                    `name="${escape(nativeQuestionName(childPath))}${name.slice(escape(child.id).length)}"`,
                 );
           return `<fieldset data-scope="questionnaire" data-part="group-question" data-question-type="${child.type}" data-question-path="${escape(key)}" aria-invalid="${!!error}" tabindex="-1"><legend>${escape(child.label)}${child.required ? ' <span aria-hidden="true">*</span>' : ""}</legend><p data-scope="questionnaire" data-part="description" id="${escape(id)}-description">${escape(child.description ?? "")}</p>${content}<p data-scope="questionnaire" data-part="error" id="${escape(id)}-error"${error ? ' role="alert"' : ""}>${escape(error)}</p></fieldset>`;
         })

@@ -8,6 +8,10 @@ import {
   type HTMLAttributes,
 } from "react";
 import {
+  createQuestionnaireCustomRegistry,
+  createQuestionnaireTreeRenderer,
+  questionHasCustom,
+  type QuestionnaireCustomState,
   questionIncludes,
   questionnaireFormEntries,
   createQuestionControlRenderer,
@@ -24,13 +28,18 @@ import {
   type QuestionnaireValue,
   type QuestionnaireOptions,
 } from "@loongark/kit";
+import {
+  QuestionnaireTree,
+  type LoongArkQuestionnaireRenderers,
+} from "./questionnaire-tree";
+export type { LoongArkQuestionnaireRenderers } from "./questionnaire-tree";
 import { LoongArkTextarea } from "./textarea";
 import { LoongArkButton } from "./button";
 export type LoongArkQuestionnaireProps = Omit<
   HTMLAttributes<HTMLFormElement>,
   "onSubmit" | "defaultValue"
 > &
-  QuestionnaireOptions;
+  QuestionnaireOptions & { renderers?: LoongArkQuestionnaireRenderers };
 export function LoongArkQuestionnaire({
   label,
   questions,
@@ -52,6 +61,7 @@ export function LoongArkQuestionnaire({
   validationErrorLabel,
   onValueChange,
   onComplete,
+  renderers = {},
   ...attrs
 }: LoongArkQuestionnaireProps) {
   const [internal, setInternal] = useState(defaultValue ?? {}),
@@ -64,7 +74,7 @@ export function LoongArkQuestionnaire({
   useLayoutEffect(() => {
     if (focusNext.current) {
       focusNext.current = false;
-      focusQuestion(root.current, true);
+      focusQuestion(root.current, true, customRegistry.focus);
     }
   }, [page]);
   // 异步结果经 React 提交后再定位；旧题组 HTML 被替换时不会丢掉错误焦点。
@@ -72,7 +82,7 @@ export function LoongArkQuestionnaire({
     if (focusValidation.current !== undefined) {
       const owned = focusValidation.current;
       focusValidation.current = undefined;
-      focusQuestion(root.current, owned);
+      focusQuestion(root.current, owned, customRegistry.focus);
     }
   });
   const current = () => questionnaireValue(questions, value ?? internal);
@@ -123,6 +133,36 @@ export function LoongArkQuestionnaire({
   );
   const changeRef = useRef(change);
   changeRef.current = change;
+  const customState = useRef<QuestionnaireCustomState>({
+    question: question(),
+    value: current(),
+    disabled: !!(blocked() || completed),
+    pending: validationState.pending,
+    showError,
+    errors: validationState.errors,
+    labels: { requiredLabel, invalidLabel },
+    renderers,
+  });
+  customState.current = {
+    question: question(),
+    value: current(),
+    disabled: !!(blocked() || completed),
+    pending: validationState.pending,
+    showError,
+    errors: validationState.errors,
+    labels: { requiredLabel, invalidLabel },
+    renderers,
+  };
+  const [customRegistry] = useState(() =>
+    createQuestionnaireCustomRegistry(
+      () => customState.current,
+      (next) => changeRef.current(next),
+    ),
+  );
+  const [renderTree] = useState(createQuestionnaireTreeRenderer);
+  useLayoutEffect(() => customRegistry.mount(root.current!), [customRegistry]);
+  useLayoutEffect(() => customRegistry.sync());
+
   useLayoutEffect(
     () =>
       mountQuestionControls(
@@ -180,16 +220,17 @@ export function LoongArkQuestionnaire({
           validationState.errors,
         )
       : "";
-  const controlHTML = question()
-    ? renderControl(
-        question(),
-        current(),
-        uid + "-description " + uid + "-error",
-        !!err(),
-        validationState.errors,
-        { requiredLabel, invalidLabel },
-      )
-    : "";
+  const controlHTML =
+    question() && !questionHasCustom(question())
+      ? renderControl(
+          question(),
+          current(),
+          uid + "-description " + uid + "-error",
+          !!err(),
+          validationState.errors,
+          { requiredLabel, invalidLabel },
+        )
+      : "";
   const controlMarkup = useMemo(() => ({ __html: controlHTML }), [controlHTML]);
   return (
     <form
@@ -226,7 +267,11 @@ export function LoongArkQuestionnaire({
             tabIndex={-1}
             aria-describedby={uid + "-description " + uid + "-error"}
           >
-            <legend data-scope="questionnaire" data-part="legend">
+            <legend
+              id={uid + "-label"}
+              data-scope="questionnaire"
+              data-part="legend"
+            >
               {question().label}
               {question().required ? " *" : ""}
             </legend>
@@ -237,7 +282,20 @@ export function LoongArkQuestionnaire({
             >
               {question().description}
             </p>
-            {question().type === "text" ? (
+            {questionHasCustom(question()) ? (
+              <QuestionnaireTree
+                node={renderTree(
+                  question(),
+                  current(),
+                  uid,
+                  !!err(),
+                  validationState.errors,
+                  { requiredLabel, invalidLabel },
+                  customRegistry,
+                )}
+                renderers={renderers}
+              />
+            ) : question().type === "text" ? (
               <LoongArkTextarea
                 aria-label={question().label}
                 aria-required={question().required}
@@ -352,7 +410,7 @@ export function LoongArkQuestionnaire({
                 disabled={blocked()}
                 onClick={() => {
                   validation.cancel();
-                  focusQuestion(root.current);
+                  focusQuestion(root.current, undefined, customRegistry.focus);
                 }}
               >
                 {cancelValidationLabel ?? "Cancel validation"}

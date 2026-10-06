@@ -228,3 +228,10 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 最终新构建、契约、发布类型/SSR和Svelte检查通过；Chromium/Firefox生产版本定向各112项通过，最终富文本共享回归另各16项通过；WebKit最终完整专项112项、Story32项及全量Linux视觉178项通过。三引擎144张实际截图及最终WebKit48张新图已查看，204张既有基线含Windows哈希未变。原生Safari基提交243默认示例和32交互通过、32截图已审阅，不代替本批新代码验收。范围及仍开放的平台失败见[验收记录](audits/2026-10-06/input-hover-platforms/acceptance.json)。重复题组、自定义渲染、虚拟化、日期、Drawer及真机继续实施。
 
 重复/嵌套题组的模型、稳定实例路径和表单契约见[问卷](questionnaire.md)，实际范围与限制见[Linux三引擎验收](audits/2026-10-06/questionnaire-groups-linux/acceptance.json)。
+
+
+## 自定义问卷渲染契约（2026-10-06）
+
+既有Questionnaire增加custom题型与四端原生renderers，以稳定实例路径管理答案、必填/错误语义、递归FormData、注册控件焦点、受控拒绝恢复和取消/卸载。支持string、strings、map答案；业务题目定义与第三方控件仍由调用方提供。共享RatingGroup修复悬停后的键盘操作、接受值与预览的语义区分，以及Svelte受控回退。目录117族、323Story、四端各792公开值、251示例；API见[问卷契约](questionnaire.md)。
+
+最终新构建、契约、发布类型/四端SSR和Svelte检查通过（0错误/4既有警告）。三引擎原生专项各27项通过；既有问卷Chromium100项、Firefox/WebKit各96项通过；Story47项及全量Linux视觉194项通过。144张四端截图与8张新Linux基线已实际审阅，212张旧基线含Windows哈希未变。验收范围、修正和限制见[验收记录](audits/2026-10-06/questionnaire-custom-linux/acceptance.json)。横向/二维/瀑布流虚拟化、日期、Drawer以及整库平台/真机验收继续实施。

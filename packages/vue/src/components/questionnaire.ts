@@ -10,6 +10,10 @@ import {
   onMounted,
 } from "vue";
 import {
+  createQuestionnaireCustomRegistry,
+  createQuestionnaireTreeRenderer,
+  questionHasCustom,
+  type QuestionnaireCustomState,
   questionIncludes,
   questionnaireFormEntries,
   createQuestionControlRenderer,
@@ -26,6 +30,11 @@ import {
   type QuestionnaireOptions,
   type QuestionnaireValue,
 } from "@loongark/kit";
+import {
+  renderQuestionnaireTree,
+  type LoongArkQuestionnaireRenderers,
+} from "./questionnaire-tree";
+export type { LoongArkQuestionnaireRenderers } from "./questionnaire-tree";
 import { LoongArkTextarea } from "./textarea";
 import { LoongArkButton } from "./button";
 const part = (name: string) => ({
@@ -59,6 +68,7 @@ export const LoongArkQuestionnaire = defineComponent({
     cancelValidationLabel: String,
     validationErrorLabel: String,
     onValueChange: Function as PropType<QuestionnaireOptions["onValueChange"]>,
+    renderers: Object as PropType<LoongArkQuestionnaireRenderers>,
     onComplete: Function as PropType<QuestionnaireOptions["onComplete"]>,
   },
   emits: ["update:modelValue"],
@@ -105,6 +115,38 @@ export const LoongArkQuestionnaire = defineComponent({
       nextTick(() => restoreQuestionAnswers(root.value, question(), current()));
       showError.value = false;
     };
+    const customRegistry = createQuestionnaireCustomRegistry(
+      () => ({
+        question: question(),
+        value: current(),
+        disabled: !!(blocked() || p.completed),
+        pending: validationState.value.pending,
+        showError: showError.value,
+        errors: validationState.value.errors,
+        labels: p,
+        renderers: p.renderers ?? {},
+      }),
+      change,
+    );
+    const renderTree = createQuestionnaireTreeRenderer();
+    let disposeCustom: (() => void) | undefined;
+    onMounted(() => {
+      disposeCustom = customRegistry.mount(root.value!);
+      customRegistry.sync();
+    });
+    onBeforeUnmount(() => disposeCustom?.());
+    watchEffect(() => {
+      const snapshot = customRegistry;
+      question();
+      current();
+      p.renderers;
+      p.disabled;
+      p.submitting;
+      p.completed;
+      showError.value;
+      validationState.value;
+      nextTick(() => snapshot.sync());
+    });
     const renderControl = createQuestionControlRenderer();
     watchEffect(() => {
       const q = question(),
@@ -128,7 +170,9 @@ export const LoongArkQuestionnaire = defineComponent({
       validation.cancel();
       page.value = next;
       showError.value = false;
-      nextTick(() => focusQuestion(root.value));
+      nextTick(() =>
+        focusQuestion(root.value, undefined, customRegistry.focus),
+      );
     };
     const submit = async (e: Event) => {
       e.preventDefault();
@@ -153,8 +197,10 @@ export const LoongArkQuestionnaire = defineComponent({
         const invalid = visible().findIndex((q) => q.id === result.invalidId);
         if (invalid !== index()) {
           page.value = invalid;
-          nextTick(() => focusQuestion(root.value, ownedAtStart));
-        } else focusQuestion(root.value, ownedAtStart);
+          nextTick(() =>
+            focusQuestion(root.value, ownedAtStart, customRegistry.focus),
+          );
+        } else focusQuestion(root.value, ownedAtStart, customRegistry.focus);
       } else if (!last) move(index() + 1);
       else p.onComplete?.({ value: result.value! });
     };
@@ -210,7 +256,7 @@ export const LoongArkQuestionnaire = defineComponent({
                     [
                       h(
                         "legend",
-                        part("legend"),
+                        { ...part("legend"), id: uid + "-label" },
                         q.label + (q.required ? " *" : ""),
                       ),
                       h(
@@ -218,83 +264,97 @@ export const LoongArkQuestionnaire = defineComponent({
                         { ...part("description"), id: uid + "-description" },
                         q.description,
                       ),
-                      q.type === "text"
-                        ? h(LoongArkTextarea, {
-                            "aria-label": q.label,
-                            "aria-required": q.required,
-                            "aria-invalid": err ? "true" : undefined,
-                            "aria-describedby":
-                              uid + "-description " + uid + "-error",
-                            value:
-                              typeof v[q.id] === "string"
-                                ? String(v[q.id])
-                                : "",
-                            maxlength: q.maxLength,
-                            onInput: (e: Event) =>
-                              change({
-                                ...v,
-                                [q.id]: (e.target as HTMLTextAreaElement).value,
-                              }),
-                          })
-                        : !["single", "multiple"].includes(q.type)
-                          ? h("div", {
-                              "data-part": "advanced-answer",
-                              innerHTML: renderControl(
-                                q,
-                                current(),
+                      questionHasCustom(q)
+                        ? renderQuestionnaireTree(
+                            renderTree(
+                              q,
+                              current(),
+                              uid,
+                              !!err,
+                              validationState.value.errors,
+                              p,
+                              customRegistry,
+                            ),
+                            p.renderers ?? {},
+                          )
+                        : q.type === "text"
+                          ? h(LoongArkTextarea, {
+                              "aria-label": q.label,
+                              "aria-required": q.required,
+                              "aria-invalid": err ? "true" : undefined,
+                              "aria-describedby":
                                 uid + "-description " + uid + "-error",
-                                !!err,
-                                validationState.value.errors,
-                                {
-                                  requiredLabel: p.requiredLabel,
-                                  invalidLabel: p.invalidLabel,
-                                },
-                              ),
+                              value:
+                                typeof v[q.id] === "string"
+                                  ? String(v[q.id])
+                                  : "",
+                              maxlength: q.maxLength,
+                              onInput: (e: Event) =>
+                                change({
+                                  ...v,
+                                  [q.id]: (e.target as HTMLTextAreaElement)
+                                    .value,
+                                }),
                             })
-                          : (q.options ?? []).map((o) =>
-                              h(
-                                "label",
-                                {
-                                  ...part("option"),
-                                  "data-selected": (
-                                    q.type === "multiple"
-                                      ? questionIncludes(v[q.id], o.value)
-                                      : v[q.id] === o.value
-                                  )
-                                    ? "true"
-                                    : undefined,
-                                },
-                                [
-                                  h("input", {
-                                    type:
-                                      q.type === "multiple"
-                                        ? "checkbox"
-                                        : "radio",
-                                    name: q.id,
-                                    value: o.value,
-                                    disabled: o.disabled,
-                                    checked:
+                          : !["single", "multiple"].includes(q.type)
+                            ? h("div", {
+                                "data-part": "advanced-answer",
+                                innerHTML: renderControl(
+                                  q,
+                                  current(),
+                                  uid + "-description " + uid + "-error",
+                                  !!err,
+                                  validationState.value.errors,
+                                  {
+                                    requiredLabel: p.requiredLabel,
+                                    invalidLabel: p.invalidLabel,
+                                  },
+                                ),
+                              })
+                            : (q.options ?? []).map((o) =>
+                                h(
+                                  "label",
+                                  {
+                                    ...part("option"),
+                                    "data-selected": (
                                       q.type === "multiple"
                                         ? questionIncludes(v[q.id], o.value)
-                                        : v[q.id] === o.value,
-                                    "aria-required": q.required,
-                                    "aria-invalid": err ? "true" : undefined,
-                                    "aria-describedby": uid + "-error",
-                                    onChange: (e: Event) =>
-                                      change(
-                                        toggleQuestionAnswer(
-                                          v,
-                                          q,
-                                          o.value,
-                                          (e.target as HTMLInputElement)
-                                            .checked,
+                                        : v[q.id] === o.value
+                                    )
+                                      ? "true"
+                                      : undefined,
+                                  },
+                                  [
+                                    h("input", {
+                                      type:
+                                        q.type === "multiple"
+                                          ? "checkbox"
+                                          : "radio",
+                                      name: q.id,
+                                      value: o.value,
+                                      disabled: o.disabled,
+                                      checked:
+                                        q.type === "multiple"
+                                          ? questionIncludes(v[q.id], o.value)
+                                          : v[q.id] === o.value,
+                                      "aria-required": q.required,
+                                      "aria-invalid": err ? "true" : undefined,
+                                      "aria-describedby": uid + "-error",
+                                      onChange: (e: Event) =>
+                                        change(
+                                          toggleQuestionAnswer(
+                                            v,
+                                            q,
+                                            o.value,
+                                            (e.target as HTMLInputElement)
+                                              .checked,
+                                          ),
                                         ),
-                                      ),
-                                  }),
-                                  h("span", {}, o.label),
-                                ],
+                                    }),
+                                    h("span", {}, o.label),
+                                  ],
+                                ),
                               ),
-                            ),
                       h(
                         "div",
                         { ...part("error"), id: uid + "-error", role: "alert" },
@@ -341,7 +401,11 @@ export const LoongArkQuestionnaire = defineComponent({
                           disabled: blocked(),
                           onClick: () => {
                             validation.cancel();
-                            focusQuestion(root.value);
+                            focusQuestion(
+                              root.value,
+                              undefined,
+                              customRegistry.focus,
+                            );
                           },
                         },
                         () => p.cancelValidationLabel ?? "Cancel validation",

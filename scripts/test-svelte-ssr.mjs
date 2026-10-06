@@ -182,3 +182,12 @@ assert.equal([...html.matchAll(/<input(?=[^>]*name="multiMatrix\[row\]")(?=[^>]*
 assert.ok(html.includes('data-part="rank-instructions"'));
 assert.equal([...html.matchAll(/data-question-control="rank-drag"/g)].length, 2);
 assert.ok(html.indexOf('name="rankSurvey" value="b"') < html.indexOf('name="rankSurvey" value="a"'));
+
+assert.match(html,/SSR custom &lt;safe(?:&gt;|>) 3/);
+assert.match(html,/SSR custom &lt;safe(?:&gt;|>) 4/);
+assert.match(html,/SSR ordinary &lt;safe&gt;/);
+assert.equal((html.match(/name="customPeople\[stable\]\[score\]"/g)??[]).length,1);
+assert.equal((html.match(/name="score"/g)??[]).length,1);
+assert.ok(!html.includes("hidden-custom-answer"));
+
+assert.match(html, /<input(?=[^>]*name="ssr-rating")(?=[^>]*value="3")[^>]*>/);

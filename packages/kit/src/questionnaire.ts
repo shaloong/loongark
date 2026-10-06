@@ -81,7 +81,11 @@ export interface Question {
     | "select"
     | "matrix"
     | "ranking"
-    | "group";
+    | "group"
+    | "custom";
+  /** 自定义渲染器的稳定名称；答案仍使用通用表单数据。 */
+  customKind?: string;
+  answerKind?: "string" | "strings" | "map";
   /** 重复题组内的题目；子题条件读取本实例的局部完整答案。 */
   questions?: readonly Question[];
   minGroups?: number;
@@ -206,6 +210,11 @@ export function questionnaireQuestions(
       throw Error(
         "Questionnaire nested questions and group bounds require group type",
       );
+    if (q.type === "custom") {
+      if (!q.customKind?.trim() || !["string", "strings", "map"].includes(q.answerKind ?? "string"))
+        throw Error("Questionnaire custom questions require a kind and valid answer shape");
+    } else if (q.customKind !== undefined || q.answerKind !== undefined)
+      throw Error("Questionnaire custom kind and answer shape require custom type");
     if (q.multiple !== undefined && q.type !== "matrix")
       throw Error("Questionnaire multiple applies only to matrix questions");
     if (
@@ -270,6 +279,16 @@ export function questionnaireValue(
             value: questionnaireValue(q.questions ?? [], instance.value),
           };
         });
+      } else if (q.type === "custom") {
+        normalized = q.answerKind === "strings"
+          ? [...new Set(questionStrings(answer).filter((item) => item.trim()))]
+          : q.answerKind === "map"
+            ? Object.fromEntries(Object.entries(matrixAnswers(answer)).flatMap(([key, item]) => {
+                if (!key) return [];
+                const normalized = typeof item === "string" ? item : [...new Set(item.filter((entry) => entry.trim()))];
+                return (typeof normalized === "string" ? normalized.trim().length : normalized.length) ? [[key, normalized]] : [];
+              }))
+            : typeof answer === "string" ? answer : "";
       } else if (["text", "number", "date"].includes(q.type))
         normalized = typeof answer === "string" ? answer : "";
       else if (q.type === "single" || q.type === "select")
@@ -552,6 +571,7 @@ export function restoreQuestionAnswers(
 export function focusQuestion(
   root?: HTMLElement | null,
   ownedAtStart?: boolean,
+  focusCustom?: (element: HTMLElement) => boolean,
 ) {
   if (!root?.isConnected) return;
   const owner = root.ownerDocument,
@@ -567,6 +587,9 @@ export function focusQuestion(
       !(ownedAtStart && active === owner.body)
     )
       return;
+    const bounds=root.querySelector<HTMLElement>('[data-part="groups"][data-group-bounds-invalid=true] > [data-question-group]:not(:disabled)');
+    const firstInvalid=root.querySelector<HTMLElement>('[data-part="group-question"][aria-invalid=true]:not([data-question-type="group"])') ?? root.querySelector<HTMLElement>('[data-part="group-question"]:not([data-question-type="group"])') ?? root.querySelector<HTMLElement>('[data-part="question"]');
+    if (!bounds && firstInvalid?.querySelector('[data-question-custom]') && focusCustom?.(firstInvalid)) return;
     const input =
       root.querySelector<HTMLElement>(
         '[data-part="groups"][data-group-bounds-invalid=true] > [data-question-group]:not(:disabled)',

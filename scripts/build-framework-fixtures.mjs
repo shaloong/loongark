@@ -175,3 +175,19 @@ h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()
 
 // 单独消费共享发布模块，验证四端调用之外的导出选项与 DOM 根节点契约。
 await copyFile(resolve("packages/kit/dist/cropper-export.js"), resolve("tests/consumer-dist/cropper-export.js"));
+
+// 独立消费真实 Kit 发布模块，在浏览器中验证第三方有内部状态的自定义控件契约。
+await build({
+  configFile: false,
+  logLevel: "error",
+  build: {
+    outDir: resolve("tests/consumer-dist"),
+    emptyOutDir: false,
+    lib: {
+      entry: resolve("packages/kit/dist/questionnaire-custom.js"),
+      formats: ["es"],
+      fileName: () => "questionnaire-custom.js",
+    },
+  },
+});
+console.log("自定义题型共享发布模块浏览器消费构建通过");

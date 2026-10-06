@@ -134,6 +134,19 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${rankSurveyProps})));`
         : `console.log(renderToString(h(L.LoongArkQuestionnaire,${rankSurveyProps})));`;
+  const customRenderer = framework === "Vue"
+    ? "context=>h(L.LoongArkButton,{id:context.controlId,'aria-labelledby':context.labelId},{default:()=> 'SSR custom <safe> '+context.answer})"
+    : framework === "Solid"
+      ? "context=>h(L.LoongArkButton,{id:context.controlId,'aria-labelledby':context.labelId,get children(){return 'SSR custom <safe> '+context.answer;}})"
+      : "context=>h(L.LoongArkButton,{id:context.controlId,'aria-labelledby':context.labelId},'SSR custom <safe> '+context.answer)";
+  const customDefinition="{id:'score',label:'Score',type:'custom',customKind:'widget',validateAsync:()=>{throw Error('SSR must not validate custom')}}";
+  const customProps=`{label:'SSR custom',questions:[${customDefinition}],defaultValue:{score:'3'},renderers:{widget:${customRenderer}},onValueChange:()=>{throw Error('SSR must not emit custom')}}`;
+  const customGroupProps=`{label:'SSR nested custom',questions:[{id:'customPeople',label:'People',type:'group',questions:[${customDefinition},{id:'ordinary',label:'Ordinary',type:'text'},{id:'hiddenCustom',label:'Hidden',type:'custom',customKind:'missing',when:()=>false}]}],defaultValue:{customPeople:[{id:'stable',value:{score:'4',ordinary:'SSR ordinary <safe>',hiddenCustom:'hidden-custom-answer'}}]},renderers:{widget:${customRenderer}},onValueChange:()=>{throw Error('SSR must not emit custom')}}`;
+  const customScript=[customProps,customGroupProps].map(props=>framework === "Vue"
+    ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${props})})));`
+    : framework === "Solid"
+      ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${props})));`
+      : `console.log(renderToString(h(L.LoongArkQuestionnaire,${props})));`).join("");
   const groupProps =
     "{label:'SSR repeated survey',questions:[{id:'contactsSSR',label:'Contacts',type:'group',questions:[{id:'name',label:'Name',type:'text',validateAsync:()=>{throw Error('SSR must not validate')}},{id:'hidden',label:'Hidden',type:'text',when:()=>false}]}],defaultValue:{contactsSSR:[{id:'stable',value:{name:'Group <safe>',hidden:'must-not-render-hidden'}}]},onValueChange:()=>{throw Error('SSR must not emit')}}";
   const groupScript =
@@ -181,6 +194,12 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkIcon,${iconProps})));`
         : `console.log(renderToString(h(L.LoongArkIcon,${iconProps})));`;
+  const ratingProps = "{name:'ssr-rating',defaultValue:3,onValueChange:()=>{throw Error('SSR must not change rating')}}";
+  const ratingScript = framework === "Vue"
+    ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkRatingGroupRoot,${ratingProps},()=>[h(L.LoongArkRatingGroupLabel,{},()=> 'SSR rating'),h(L.LoongArkRatingGroupControl,{},()=>[1,2,3,4,5].map(index=>h(L.LoongArkRatingGroupItem,{index},()=>String(index)))),h(L.LoongArkRatingGroupHiddenInput,{})])})));`
+    : framework === "Solid"
+      ? `console.log(renderToString(()=>h(L.LoongArkRatingGroupRoot,{...${ratingProps},get children(){return [h(L.LoongArkRatingGroupLabel,{children:'SSR rating'}),h(L.LoongArkRatingGroupControl,{get children(){return [1,2,3,4,5].map(index=>h(L.LoongArkRatingGroupItem,{index,children:String(index)}));}}),h(L.LoongArkRatingGroupHiddenInput,{})];}})));`
+      : `console.log(renderToString(h(L.LoongArkRatingGroupRoot,${ratingProps},h(L.LoongArkRatingGroupLabel,null,'SSR rating'),h(L.LoongArkRatingGroupControl,null,...[1,2,3,4,5].map(index=>h(L.LoongArkRatingGroupItem,{index,key:index},String(index)))),h(L.LoongArkRatingGroupHiddenInput))));`;
   const scriptWithIcon =
     "import {controlIcons} from './packages/kit/dist/index.js';" +
     script.replace("process.exit(0);", iconScript + "process.exit(0);");
@@ -191,7 +210,8 @@ for (const [framework, script] of [
       "-e",
       scriptWithIcon.replace(
         "process.exit(0);",
-        virtualScript +
+        ratingScript +
+          virtualScript +
           tableScript +
           queryScript +
           columnScript +
@@ -210,6 +230,7 @@ for (const [framework, script] of [
           multiMatrixScript +
           rankSurveyScript +
           groupScript +
+          customScript +
           asyncScript +
           serverScript +
           conversationScript +
@@ -218,6 +239,13 @@ for (const [framework, script] of [
     ],
     { encoding: "utf8", timeout: 60000 },
   );
+  assert.match(result.stdout, /<input(?=[^>]*name="ssr-rating")(?=[^>]*value="3")[^>]*>/);
+  assert.match(result.stdout, /SSR custom &lt;safe(?:&gt;|>) 3/);
+  assert.match(result.stdout, /SSR custom &lt;safe(?:&gt;|>) 4/);
+  assert.match(result.stdout, /SSR ordinary &lt;safe&gt;/);
+  assert.equal((result.stdout.match(/name="customPeople\[stable\]\[score\]"/g)??[]).length,1);
+  assert.equal((result.stdout.match(/name="score"/g)??[]).length,1);
+  assert.ok(!result.stdout.includes("hidden-custom-answer"));
   assert.match(result.stdout, /name="contactsSSR\[stable\]\[name\]"/);
   assert.match(result.stdout, /Group &lt;safe&gt;/);
   assert.ok(!result.stdout.includes("must-not-render-hidden"));

@@ -140,6 +140,7 @@
   },
   "pending": [],
   "latestEnhancements": [
+    "RatingGroup accepted-value semantics, hover keyboard focus and controlled updates",
     "Drawer gesture/snap points/stack",
     "DateInput segmented editing",
     "Toc controlled navigation and active-change payload",
@@ -174,6 +175,7 @@
     "Questionnaire native pointer and keyboard ranking previews, single-drop callbacks, cancellation, controlled rejection, live announcements and focus",
     "ImageCropper definite responsive viewport and shared SVG source-resolution PNG/Blob/JPEG export, output bounds, cancellation, explicit DOM roots and SSR guard",
     "CodeEditor applies latest extensions before native input; Chart Escape dismissal works outside chart focus and survives stationary-pointer SVG rebuilds; native column drag regression targets visible header intersection",
-    "Questionnaire stable-id repeated and nested groups, instance-local conditions and async validation, recursive native form paths, bounded add/remove and owned focus"
+    "Questionnaire stable-id repeated and nested groups, instance-local conditions and async validation, recursive native form paths, bounded add/remove and owned focus",
+    "Questionnaire framework-native custom renderer registry, immutable contexts, recursive semantic tree, native form ownership, controlled restore, cancellation and lifecycle guards"
   ]
 }

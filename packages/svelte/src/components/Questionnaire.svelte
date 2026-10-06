@@ -2,12 +2,15 @@
   import { tick, untrack, onDestroy, onMount } from "svelte";
   import type { HTMLFormAttributes } from "svelte/elements";
   import {
+    createQuestionnaireCustomRegistry,
+    createQuestionnaireTreeRenderer,
+    questionHasCustom,
     questionIncludes,
-  questionnaireFormEntries,
-  createQuestionControlRenderer,
-  mountQuestionControls,
-  questionnaireVisibleQuestions,
-  questionnaireSubmittedValue,
+    questionnaireFormEntries,
+    createQuestionControlRenderer,
+    mountQuestionControls,
+    questionnaireVisibleQuestions,
+    questionnaireSubmittedValue,
     questionnaireValue,
     questionError,
     createQuestionnaireValidationController,
@@ -18,6 +21,8 @@
     type QuestionnaireOptions,
     type QuestionnaireValue,
   } from "@loongark/kit";
+  import QuestionnaireTree from "./QuestionnaireTree.svelte";
+  import type { LoongArkQuestionnaireRenderers } from "./questionnaire-custom.types";
   import Textarea from "./Textarea.svelte";
   import Button from "./Button.svelte";
   let {
@@ -41,8 +46,12 @@
     validationErrorLabel,
     onValueChange,
     onComplete,
+    renderers = {},
     ...attrs
-  }: QuestionnaireOptions & HTMLFormAttributes = $props();
+  }: QuestionnaireOptions &
+    HTMLFormAttributes & {
+      renderers?: LoongArkQuestionnaireRenderers;
+    } = $props();
   const uid = $props.id();
   let root: HTMLFormElement;
   let internal = $state(untrack(() => defaultValue)),
@@ -105,15 +114,51 @@
     });
     showError = false;
   }
+  const customRegistry = createQuestionnaireCustomRegistry(
+    () => ({
+      question,
+      value: current,
+      disabled: !!(blocked || completed),
+      pending: validationState.pending,
+      showError,
+      errors: validationState.errors,
+      labels: { requiredLabel, invalidLabel },
+      renderers,
+    }),
+    change,
+  );
+  const renderTree = createQuestionnaireTreeRenderer();
+  onMount(() => customRegistry.mount(root));
+  $effect(() => {
+    question;
+    current;
+    renderers;
+    disabled;
+    submitting;
+    completed;
+    showError;
+    validationState;
+    tick().then(() => customRegistry.sync());
+  });
   const renderControl = createQuestionControlRenderer();
-  $effect(() => { const q = question, v = current; tick().then(() => restoreQuestionAnswers(root, q, v)); });
-  onMount(() => mountQuestionControls(root, () => ({ question, value: current, blocked: !!(blocked || completed) }), change));
+  $effect(() => {
+    const q = question,
+      v = current;
+    tick().then(() => restoreQuestionAnswers(root, q, v));
+  });
+  onMount(() =>
+    mountQuestionControls(
+      root,
+      () => ({ question, value: current, blocked: !!(blocked || completed) }),
+      change,
+    ),
+  );
   async function move(next: number) {
     validation.cancel();
     page = next;
     showError = false;
     await tick();
-    focusQuestion(root);
+    focusQuestion(root, undefined, customRegistry.focus);
   }
   async function submit(e: SubmitEvent) {
     e.preventDefault();
@@ -133,8 +178,8 @@
       if (invalid !== index) {
         page = invalid;
         await tick();
-        focusQuestion(root, ownedAtStart);
-      } else focusQuestion(root, ownedAtStart);
+        focusQuestion(root, ownedAtStart, customRegistry.focus);
+      } else focusQuestion(root, ownedAtStart, customRegistry.focus);
     } else if (!last) await move(index + 1);
     else onComplete?.({ value: result.value! });
   }
@@ -171,7 +216,10 @@
         tabindex="-1"
         aria-describedby={uid + "-description " + uid + "-error"}
       >
-        <legend data-scope="questionnaire" data-part="legend"
+        <legend
+          id={uid + "-label"}
+          data-scope="questionnaire"
+          data-part="legend"
           >{question.label}{question.required ? " *" : ""}</legend
         >
         <p
@@ -181,7 +229,19 @@
         >
           {question.description}
         </p>
-        {#if question.type === "text"}<Textarea
+        {#if questionHasCustom(question)}<QuestionnaireTree
+            node={renderTree(
+              question,
+              current,
+              uid,
+              !!err,
+              validationState.errors,
+              { requiredLabel, invalidLabel },
+              customRegistry,
+            )}
+            {renderers}
+          />
+        {:else if question.type === "text"}<Textarea
             aria-label={question.label}
             aria-required={question.required}
             aria-invalid={err ? "true" : undefined}
@@ -191,8 +251,17 @@
             oninput={(e) =>
               change({ ...current, [question.id]: e.currentTarget.value })}
           />{:else if !["single", "multiple"].includes(question.type)}
-          <div data-part="advanced-answer">{@html renderControl(question, current, uid + "-description " + uid + "-error", !!err, validationState.errors, { requiredLabel, invalidLabel })}</div>
-          {:else}
+          <div data-part="advanced-answer">
+            {@html renderControl(
+              question,
+              current,
+              uid + "-description " + uid + "-error",
+              !!err,
+              validationState.errors,
+              { requiredLabel, invalidLabel },
+            )}
+          </div>
+        {:else}
           {#each question.options ?? [] as o}<label
               data-scope="questionnaire"
               data-part="option"
@@ -236,7 +305,12 @@
         </div>
       </fieldset>
     {/key}
-    {#each questionnaireFormEntries(submittedValue, question.type === "text" ? undefined : question.id) as [name, answer]}<input type="hidden" {name} value={answer} disabled={blocked} />{/each}
+    {#each questionnaireFormEntries(submittedValue, question.type === "text" ? undefined : question.id) as [name, answer]}<input
+        type="hidden"
+        {name}
+        value={answer}
+        disabled={blocked}
+      />{/each}
     {#if error}<div data-scope="questionnaire" data-part="error" role="alert">
         {error}
       </div>{/if}
@@ -260,7 +334,7 @@
           disabled={blocked}
           onclick={() => {
             validation.cancel();
-            focusQuestion(root);
+            focusQuestion(root, undefined, customRegistry.focus);
           }}>{cancelValidationLabel ?? "Cancel validation"}</Button
         >{/if}
       <Button type="submit" disabled={blocked || validationState.pending}

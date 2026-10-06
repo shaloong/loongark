@@ -99,3 +99,6 @@ export * from "./rich-text";
 export * from "./rich-editor";
 
 export * from "./cropper-export";
+
+export * from "./questionnaire-custom";
+export * from "./rating-group";

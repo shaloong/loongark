@@ -253,7 +253,7 @@ export const LoongArkRatingGroupItemContext: typeof RatingGroup.ItemContext =
   RatingGroup.ItemContext;
 export const LoongArkRatingGroupRootProvider: typeof RatingGroup.RootProvider =
   RatingGroup.RootProvider;
-export { useRatingGroup } from "@ark-ui/solid/rating-group";
+export { useRatingGroup } from "./use-rating";
 export type {
   UseRatingGroupProps,
   UseRatingGroupReturn,

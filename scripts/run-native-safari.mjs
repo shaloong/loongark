@@ -627,6 +627,68 @@ try {
         case: "questionnaire-groups-native-keyboard-controlled-focus-form",
       });
     }
+  for (const framework of Object.keys(index))
+    for (const mode of ["light", "dark"]) {
+      await navigate(framework, "QuestionnaireCustomExample", mode);
+      await click("summary");
+      await clickText("Reject updates");
+      await click('[role="radiogroup"] [role="radio"]:nth-child(2)');
+      await waitFor(
+        () =>
+          execute(
+            'return document.querySelector(\'[role="radiogroup"] [role="radio"]:nth-child(3)\').getAttribute("aria-checked")==="true" && new FormData(document.querySelector("form")).getAll("rating").join(",")==="3"',
+          ),
+        "原生自定义受控拒绝",
+      );
+      await clickText("Accept updates");
+      await clickText("Use nested questions");
+      const rating =
+        '[data-group-instance="alpha"] [role="radio"][tabindex="0"]';
+      await execute("document.querySelector(arguments[0]).focus()", [rating]);
+      await session("POST", "/actions", {
+        actions: [
+          {
+            type: "key",
+            id: "custom-rating",
+            actions: [
+              { type: "keyDown", value: "\uE014" },
+              { type: "keyUp", value: "\uE014" },
+            ],
+          },
+        ],
+      });
+      await waitFor(
+        () =>
+          execute(
+            'const f=new FormData(document.querySelector("form"));return f.getAll("people[alpha][rating]").join(",")==="3" && f.getAll("people[beta][rating]").join(",")==="4" && document.activeElement?.getAttribute("aria-checked")==="true"',
+          ),
+        "嵌套自定义键盘、表单及独立状态",
+      );
+      await click(
+        '[data-group-instance="alpha"] [data-part="custom-answer"] button',
+      );
+      await clickText("Remove person 1");
+      await pause(600);
+      assert.equal(
+        await execute(
+          'return new FormData(document.querySelector("form")).getAll("people[beta][rating]").join(",")',
+        ),
+        "4",
+      );
+      assert.equal(
+        await execute(
+          "return document.querySelector('output[aria-label=\"Rating updates\"]').textContent.trim()",
+        ),
+        "2 callbacks",
+      );
+      await assertLayout();
+      await screenshot(`questionnaire-custom-${framework}-${mode}`);
+      report.interactions.push({
+        framework,
+        mode,
+        case: "questionnaire-custom-native-keyboard-controlled-stale-form",
+      });
+    }
   report.result = "passed";
   console.log(
     `Native Safari ${report.browser.browserVersion}: ${report.defaultExamples.length} default examples and ${report.interactions.length} interaction cases passed.`,

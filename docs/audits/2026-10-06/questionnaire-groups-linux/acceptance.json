@@ -11,7 +11,7 @@
     "install": "Node24.19.0/pnpm10.14.0冻结锁文件安装通过；无新增依赖",
     "ordered": "最终v5 verify、contracts、Storybook新构建、coverage、publication/四端SSR、Svelte、消费与示例新构建全部通过",
     "coverage": "117families /322Story /792公开值 per framework /247examples",
-    "svelte": "0errors /3existing warnings",
+    "svelte": "0errors /4existing warnings（以最终v5日志为准）",
     "initialFullChromium": "v2完整消费335passed /48skip，含247个默认示例；在后续焦点修正之前，不作最终全部消费结果",
     "questionnaireProduction": "v4完整问卷专项Chromium100passed /20skip、Firefox96passed /24skip、WebKit96passed /24skip；包含新题组及原有类型/矩阵/排序/条件/异步。v5 Kit与v4相同，仅示例折叠图标和对齐/键盘回归、文档/CI更新",
     "finalRepeatedGroups": "v5 Chromium/Firefox/WebKit各48passed /12Story-only skip，四框架×两主题×两视口×基本/嵌套/约束",

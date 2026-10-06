@@ -186,3 +186,10 @@ Icon 提供四端共享 Lucide 节点、可访问名称、尺寸、固定描边�
 全量高级缺口补齐第一批：表格有界多级批量撤销/重做、完整行快照冲突保护、拒绝/取消保留历史、原生文字撤销及键盘操作。四端同步，40项四端消费与示例场景通过，最终16项专项复验通过，13项表格Story场景通过，126项视觉比较通过；207个示例运行。只更新8张已审阅受影响Linux基线，其余120张及其中2张Windows基线不变。见 [验收](audits/2026-10-05/data-table-history-linux/acceptance.json) 与 [剩余清单](advanced-capabilities.md)。
 
 重复题组扩展既有Questionnaire，未增加组件别名；加入4端示例和RepeatedGroups Story，当前117族、322Story、四端各792个LoongArk前缀公开值、247示例。职责/API见[问卷](questionnaire.md)，验收见[记录](audits/2026-10-06/questionnaire-groups-linux/acceptance.json)。
+
+
+## 自定义问卷渲染契约（2026-10-06）
+
+既有Questionnaire增加custom题型与四端原生renderers，以稳定实例路径管理答案、必填/错误语义、递归FormData、注册控件焦点、受控拒绝恢复和取消/卸载。支持string、strings、map答案；业务题目定义与第三方控件仍由调用方提供。共享RatingGroup修复悬停后的键盘操作、接受值与预览的语义区分，以及Svelte受控回退。目录117族、323Story、四端各792公开值、251示例；API见[问卷契约](questionnaire.md)。
+
+最终新构建、契约、发布类型/四端SSR和Svelte检查通过（0错误/4既有警告）。三引擎原生专项各27项通过；既有问卷Chromium100项、Firefox/WebKit各96项通过；Story47项及全量Linux视觉194项通过。144张四端截图与8张新Linux基线已实际审阅，212张旧基线含Windows哈希未变。验收范围、修正和限制见[验收记录](audits/2026-10-06/questionnaire-custom-linux/acceptance.json)。横向/二维/瀑布流虚拟化、日期、Drawer以及整库平台/真机验收继续实施。

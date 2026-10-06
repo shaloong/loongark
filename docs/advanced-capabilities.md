@@ -28,7 +28,7 @@
 
 - [x] 矩阵多选（[三引擎四端与Linux视觉验收](audits/2026-10-06/questionnaire-matrix-linux/acceptance.json)）
 - [x] 重复/嵌套题组（[三引擎四端与Linux视觉验收](audits/2026-10-06/questionnaire-groups-linux/acceptance.json)）
-- [ ] 自定义题型渲染及生命周期契约
+- [x] 自定义题型渲染及生命周期契约（[三引擎四端与Linux视觉验收](audits/2026-10-06/questionnaire-custom-linux/acceptance.json)）
 - [x] 排序题拖动、边缘自动滚动与键盘操作（[三引擎四端及Linux视觉验收](audits/2026-10-06/questionnaire-ranking-linux/acceptance.json)）
 
 ## 虚拟化
@@ -62,3 +62,5 @@
 原生坐标修正7a8a781的[实际Safari任务](https://github.com/shaloong/loongark/actions/runs/37425177875)已通过：Safari26.6.1/macOS15.7.9（非模拟器）运行243个默认示例与32交互；树折叠和键盘清空筛选均通过，32张四端明暗交互图已实际审阅。验收范围为既有Safari runner，未覆盖所有编辑器/日期/问卷及真实手机；详见[原生验收追踪](audits/2026-10-06/native-safari-diagnostics/acceptance.json)。
 
 原生输入修正e372457的[真实CI](https://github.com/shaloong/loongark/actions/runs/37441474990)：Chromium四端319通过、Firefox315通过；两者Story任务因40分钟预算取消。WebKit298通过/17失败，涉及窄屏图表溢出、树折叠焦点及窄屏消费布局；平台项目保持开放。本批Linux引擎任务预算调整为60分钟，配置修改不算实际通过。Safari26.6.1/macOS15.7.9的243默认示例与32既有交互通过、32截图已下载并审阅；新增题组场景仍需实际执行。详见[追踪](audits/2026-10-06/input-hover-platforms/acceptance.json)。
+
+题组提交cae010c的[实际CI](https://github.com/shaloong/loongark/actions/runs/37451275443)：Chromium四端367项和Story162项通过；Firefox四端363项通过、Story161通过/1失败（remediation浮层场景）；WebKit四端347通过/16失败（窄屏图表8项、树折叠焦点7项、Vue窄屏消费1项），Story未执行。原生Safari完成247默认示例和32既有交互后，在React浅色新增题组的首字段焦点失败；已下载并实际查看失败图。该场景尚未通过，后续修复后继续复验，不关闭平台清单。

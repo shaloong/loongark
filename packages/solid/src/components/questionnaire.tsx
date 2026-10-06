@@ -10,6 +10,10 @@ import {
   type JSX,
 } from "solid-js";
 import {
+  createQuestionnaireCustomRegistry,
+  createQuestionnaireTreeRenderer,
+  questionHasCustom,
+  type QuestionnaireCustomState,
   questionIncludes,
   questionnaireFormEntries,
   createQuestionControlRenderer,
@@ -26,13 +30,18 @@ import {
   type QuestionnaireValue,
   type QuestionnaireOptions,
 } from "@loongark/kit";
+import {
+  QuestionnaireTree,
+  type LoongArkQuestionnaireRenderers,
+} from "./questionnaire-tree";
+export type { LoongArkQuestionnaireRenderers } from "./questionnaire-tree";
 import { LoongArkTextarea } from "./textarea";
 import { LoongArkButton } from "./button";
 export type LoongArkQuestionnaireProps = Omit<
   JSX.HTMLAttributes<HTMLFormElement>,
   "onSubmit" | "defaultValue"
 > &
-  QuestionnaireOptions;
+  QuestionnaireOptions & { renderers?: LoongArkQuestionnaireRenderers };
 export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
   const [p, attrs] = splitProps(props, [
     "label",
@@ -55,6 +64,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
     "validationErrorLabel",
     "onValueChange",
     "onComplete",
+    "renderers",
   ]);
   const [internal, setInternal] = createSignal<QuestionnaireValue>(
       p.defaultValue ?? {},
@@ -91,6 +101,22 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
     queueMicrotask(() => restoreQuestionAnswers(root, question(), current()));
     setShowError(false);
   };
+  const customRegistry = createQuestionnaireCustomRegistry(
+    () => ({
+      question: question(),
+      value: current(),
+      disabled: !!(blocked() || p.completed),
+      pending: validationState().pending,
+      showError: showError(),
+      errors: validationState().errors,
+      labels: p,
+      renderers: p.renderers ?? {},
+    }),
+    change,
+  );
+  const renderTree = createQuestionnaireTreeRenderer();
+  onMount(() => onCleanup(customRegistry.mount(root)));
+  createEffect(() => customRegistry.sync());
   const renderControl = createQuestionControlRenderer();
   createEffect(() => restoreQuestionAnswers(root, question(), current()));
   onMount(() => {
@@ -109,7 +135,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
     validation.cancel();
     setPage(next);
     setShowError(false);
-    queueMicrotask(() => focusQuestion(root));
+    queueMicrotask(() => focusQuestion(root, undefined, customRegistry.focus));
   };
   const submit = async (event: SubmitEvent) => {
     event.preventDefault();
@@ -134,8 +160,10 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
       const invalid = visible().findIndex((q) => q.id === result.invalidId);
       if (invalid !== index()) {
         setPage(invalid);
-        queueMicrotask(() => focusQuestion(root, ownedAtStart));
-      } else focusQuestion(root, ownedAtStart);
+        queueMicrotask(() =>
+          focusQuestion(root, ownedAtStart, customRegistry.focus),
+        );
+      } else focusQuestion(root, ownedAtStart, customRegistry.focus);
     } else if (!last) move(index() + 1);
     else p.onComplete?.({ value: result.value! });
   };
@@ -144,7 +172,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
       ? questionError(question(), current(), p, validationState().errors)
       : "";
   const controlHTML = createMemo(() =>
-    question()
+    question() && !questionHasCustom(question())
       ? renderControl(
           question(),
           current(),
@@ -189,7 +217,11 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
             tabIndex={-1}
             aria-describedby={uid + "-description " + uid + "-error"}
           >
-            <legend data-scope="questionnaire" data-part="legend">
+            <legend
+              id={uid + "-label"}
+              data-scope="questionnaire"
+              data-part="legend"
+            >
               {question().label}
               {question().required ? " *" : ""}
             </legend>
@@ -200,7 +232,22 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
             >
               {question().description}
             </p>
-            {question().type === "text" ? (
+            {questionHasCustom(question()) ? (
+              <QuestionnaireTree
+                node={() =>
+                  renderTree(
+                    question(),
+                    current(),
+                    uid,
+                    !!err(),
+                    validationState().errors,
+                    p,
+                    customRegistry,
+                  )
+                }
+                renderers={p.renderers ?? {}}
+              />
+            ) : question().type === "text" ? (
               <LoongArkTextarea
                 aria-label={question().label}
                 aria-required={question().required}
@@ -318,7 +365,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
                 disabled={blocked()}
                 onClick={() => {
                   validation.cancel();
-                  focusQuestion(root);
+                  focusQuestion(root, undefined, customRegistry.focus);
                 }}
               >
                 {p.cancelValidationLabel ?? "Cancel validation"}

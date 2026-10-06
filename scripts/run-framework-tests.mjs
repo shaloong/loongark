@@ -26,6 +26,8 @@ const child = spawn(
     "tests/questionnaire-groups.spec.ts",
     "tests/questionnaire-groups-nested.spec.ts",
     "tests/questionnaire-groups-constraints.spec.ts",
+    "tests/questionnaire-custom.spec.ts",
+    "tests/questionnaire-custom-mode.spec.ts",
     "tests/async-collection.spec.ts",
     `--project=${process.env.BROWSER_PROJECT ?? "chromium"}`,
     "--workers=2",

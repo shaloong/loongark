@@ -39,3 +39,8 @@ minuteStep 为 1–60 之间且能整除 60 的整数；步长从 min（未提�
 验收结果：累计 93 个组件族、229 个 Story、四端各 608 个公开 LoongArk 值入口（统计不含 Provider）；99 个框架示例通过。Storybook 浏览器回归 29 项通过，8 项四端消费测试另行运行并通过；既有视觉基线 2 项通过。明暗各 229 个默认 Story 的 WCAG 2 A/AA Axe 违规、375px 页面溢出和 transition: all 检出均为 0。九包构建、公开声明、四端 SSR、模型/VI/Token 契约通过，Svelte 为 0 错误、0 警告。浏览器验证使用 Chromium，未穷举所有参数、状态或浏览器。
 
 本批验收记录位于 [selection-inputs/acceptance.json](audits/2026-10-03/selection-inputs/acceptance.json)。历史批次记录保留；后续待补清单见 [component-coverage.json](component-coverage.json)。
+
+
+## RatingGroup 受控值与悬停
+
+星形悬停通过原生highlighted/half状态预览，radio的aria-checked和Tab入口始终对应调用方接受的value。鼠标进入后仍可用方向键、Home、End操作；受控值迟到时同步控件内焦点，用户已移到控件外时不会被延迟回调抢回。Root、RootProvider和useRatingGroup复用同一共享状态机；标签、HiddenInput、表单reset、Field及Locale环境保持Ark契约。Svelte在提供onValueChange时由调用方决定接受值；没有该回调时支持bind:value。自定义问卷评分示例只由Questionnaire提交隐藏字段，避免重复FormData，见[问卷契约](questionnaire.md)。

@@ -207,3 +207,10 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 ## 重复与嵌套题组（2026-10-06）
 
 四端Questionnaire新增group题型，以稳定实例id归属答案，支持增删、数量边界、局部条件、嵌套题组、矩阵/排序组合及递归表单提交。共享模型和生命周期集中在kit；受控拒绝恢复、异步取消、无效题焦点和输入光标保留同步四端。目录117族、322Story、四端各792个LoongArk前缀公开值、247示例。准确验证范围见[验收记录](audits/2026-10-06/questionnaire-groups-linux/acceptance.json)。自定义渲染、横向/二维/瀑布流虚拟化、日期、Drawer和整库平台/真机验收继续实施。
+
+
+## 自定义问卷渲染契约（2026-10-06）
+
+既有Questionnaire增加custom题型与四端原生renderers，以稳定实例路径管理答案、必填/错误语义、递归FormData、注册控件焦点、受控拒绝恢复和取消/卸载。支持string、strings、map答案；业务题目定义与第三方控件仍由调用方提供。共享RatingGroup修复悬停后的键盘操作、接受值与预览的语义区分，以及Svelte受控回退。目录117族、323Story、四端各792公开值、251示例；API见[问卷契约](questionnaire.md)。
+
+最终新构建、契约、发布类型/四端SSR和Svelte检查通过（0错误/4既有警告）。三引擎原生专项各27项通过；既有问卷Chromium100项、Firefox/WebKit各96项通过；Story47项及全量Linux视觉194项通过。144张四端截图与8张新Linux基线已实际审阅，212张旧基线含Windows哈希未变。验收范围、修正和限制见[验收记录](audits/2026-10-06/questionnaire-custom-linux/acceptance.json)。横向/二维/瀑布流虚拟化、日期、Drawer以及整库平台/真机验收继续实施。

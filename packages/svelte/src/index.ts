@@ -883,7 +883,7 @@ export * from "./components/ark-next";
 export * from "./components/drawer";
 export * from "./components/ark-controls";
 
-export type { Question, QuestionRow, QuestionGroupInstance, QuestionAnswer, QuestionOption, QuestionnaireOptions, QuestionnaireValue } from "@loongark/kit";
+export type { Question, QuestionRow, QuestionGroupInstance, QuestionnaireCustomContext, QuestionnaireCustomControl, QuestionAnswer, QuestionOption, QuestionnaireOptions, QuestionnaireValue } from "@loongark/kit";
 
 export type { DataTableState, DataTableLabels, DataTableSummary, DataRow, DataColumn, DataSort, DataFilter, DataFilterOperator, DataColumnFilter } from "@loongark/kit";
 
@@ -910,3 +910,5 @@ export type { CodeEditorProps, CodeEditorLabels, CodeEditorLanguage, CodeEditorL
 
 export { exportImageCropper } from "@loongark/kit";
 export type { ImageCropperExportModel, ImageCropperExportOptions } from "@loongark/kit";
+
+export type { LoongArkQuestionnaireRenderers } from "./components/questionnaire-custom.types";

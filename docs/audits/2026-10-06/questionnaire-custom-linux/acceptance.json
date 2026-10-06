@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-06",
+  "branch": "develop",
+  "base": "cae010cf242afb764c60d2dfadc3ad723eb12980",
+  "scope": [
+    "四端原生自定义问卷渲染、string/strings/map答案和嵌套稳定路径",
+    "注册控件、必填/错误/焦点、递归FormData、受控拒绝与取消/卸载",
+    "RatingGroup接受值与悬停预览分离、键盘及延迟焦点保护"
+  ],
+  "validation": {
+    "install": "Node24.19.0/pnpm10.14.0冻结锁文件安装通过；直接声明既有@zag-js/rating-group1.43.3，无新增解析版本",
+    "ordered": "最终v14 verify、contracts、Storybook新构建、coverage、publication/四端SSR、Svelte、消费/示例新构建全部通过",
+    "coverage": "117families /323Story /792公开值 per framework /251examples",
+    "svelte": "0errors /4existing warnings",
+    "native": "v14 Chromium/Firefox/WebKit各27passed /4Story-only skip；四端明暗/1280/375，含独立注册控件、React StrictMode、真实卸载重挂和既有RatingGroup表单/键盘",
+    "questionnaireRegression": "v14 Chromium100passed /20skip、Firefox96passed /24skip、WebKit96passed /24skip，类型/矩阵/排序及重复/嵌套题组",
+    "story": "v14 47passed /127consumer-only skip，包含323Story两主题8批间距/窄屏/动效扫描及既有条件/异步",
+    "visual": "最终完整Linux Chromium194passed，--update-snapshots=none；8张新基线先实际审阅后保存，212张旧基线含2张Windows SHA256不变",
+    "visualInitial": "8失败均因新Linux基线缺失，无超时；未计通过，未自动覆盖旧基线"
+  },
+  "manualReview": {
+    "native": "三引擎各48张默认/异步错误/嵌套×四端×明暗×1280/375，共144张实际查看。最终Chromiumv14与已查看v12逐PNG SHA256相同；Firefox/WebKit最终v14各12张联系表全部查看",
+    "result": "星形图标与控件居中、必填/错误字段、嵌套边界与按钮换行一致；浏览器字体存在正常换行差异，无页面溢出",
+    "visual": "8张Story基本/新增第三实例错误×1280/375×明暗候选全部实际查看后保存独立Linux基线，第三实例错误焦点和空评分正常"
+  },
+  "corrections": [
+    "真实卸载重挂回归证明旧注册方法可写入新生命周期；改为每次AbortController纪元捕获，过期回调/注册/清理全部失效",
+    "NormalizeProps是Proxy，展开复制丢失Label/HiddenInput分支；保留原生Proxy后四端SSR与既有表单回归通过",
+    "关闭异步模式时旧错误仍出现，四端失败回归证明；示例实际移除validateAsync并复验取消",
+    "悬停后点击/键盘受旧hoveredValue污染；共享机器以实际点击项和接受值驱动选中语义",
+    "v12受控React键盘焦点延迟及外部焦点抢占、v13框架排队动作问题，最终v14增加接受值观察与动作起始/RAF两阶段所有权检查，三引擎全部通过"
+  ],
+  "limitations": [
+    "375px模拟视口不是真实手机；Linux Playwright WebKit26.0不等同原生Safari",
+    "原生Safari新增8个自定义渲染场景仅本地语法检查，待macOS执行和截图审阅",
+    "本批为问卷及RatingGroup专项；整库Firefox浮层、WebKit图表窄屏/树焦点/消费布局、Safari新增题组焦点失败继续修复，平台清单保持开放",
+    "横向/二维/瀑布流虚拟化、本地化日期/时间组合、Drawer触摸/RTL/全部方向及真机继续实施",
+    "过程截图/联系表/日志仅.artifacts或CI Artifact；Git仅简短验收及实际比较的已审阅Linux基线，Windows保留"
+  ],
+  "environment": {
+    "platform": "Linux Debian13",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "chromium": "system151.0.7922.173",
+    "firefox": "Playwright144.0.2",
+    "webkit": "Playwright26.0",
+    "firefoxEnvironment": "仅此受限云端使用MOZ_DISABLE_CONTENT_SANDBOX/ RDD/ GMP和可写XDG_CACHE_HOME；默认启动在创建页面前因/proc/self/uid_map只读失败，外层文件系统约束仍在；CI未引入覆盖",
+    "safari": "Linux不可运行本批原生Safari"
+  }
+}

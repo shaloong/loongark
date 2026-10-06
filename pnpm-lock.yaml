@@ -160,6 +160,9 @@ importers:
       '@zag-js/json-tree-utils':
         specifier: 1.43.3
         version: 1.43.3
+      '@zag-js/rating-group':
+        specifier: 1.43.3
+        version: 1.43.3
       '@zag-js/toc':
         specifier: 1.43.3
         version: 1.43.3

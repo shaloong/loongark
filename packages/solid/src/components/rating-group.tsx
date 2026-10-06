@@ -11,6 +11,7 @@ import {
   type RatingGroupItemProps as ArkRatingGroupItemProps,
   type RatingGroupHiddenInputProps as ArkRatingGroupHiddenInputProps,
 } from "@ark-ui/solid/rating-group";
+import { useRatingGroup } from "./use-rating";
 import type { RatingGroupSize } from "@loongark/primitives";
 
 export interface LoongArkRatingGroupRootProps extends Omit<
@@ -31,17 +32,40 @@ export const LoongArkRatingGroupRoot: Component<
   );
   const [local, others] = splitProps(merged, ["children", "size", "disabled"]);
 
+  const [controls, dom] = splitProps(others, [
+    "allowHalf",
+    "autoFocus",
+    "count",
+    "defaultValue",
+    "form",
+    "id",
+    "ids",
+    "name",
+    "onHoverChange",
+    "onValueChange",
+    "readOnly",
+    "required",
+    "translations",
+    "value",
+  ]);
+  const api = useRatingGroup(
+    mergeProps(controls, {
+      get disabled() {
+        return local.disabled;
+      },
+    }),
+  );
   return (
-    <ArkRatingGroup.Root
-      {...others}
-      disabled={local.disabled}
+    <ArkRatingGroup.RootProvider
+      {...dom}
+      value={api}
       data-scope="rating-group"
       data-part="root"
       data-size={local.size}
       data-disabled={local.disabled ? "true" : undefined}
     >
       {local.children}
-    </ArkRatingGroup.Root>
+    </ArkRatingGroup.RootProvider>
   );
 };
 

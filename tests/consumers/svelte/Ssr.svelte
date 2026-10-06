@@ -462,3 +462,13 @@
 <LoongArkQuestionnaire label="SSR ranking" questions={[{id:"rankSurvey",label:"Ranking",type:"ranking",options:[{value:"a",label:"A"},{value:"b",label:"B"}],validateAsync:()=>{throw Error("SSR must not validate");}}]} defaultValue={{rankSurvey:["b","a"]}} onValueChange={()=>{throw Error("SSR must not emit");}} />
 
 <LoongArkQuestionnaire label="SSR repeated survey" questions={[{id:"contactsSSR",label:"Contacts",type:"group",questions:[{id:"name",label:"Name",type:"text",validateAsync:()=>{throw Error("SSR must not validate");}},{id:"hidden",label:"Hidden",type:"text",when:()=>false}]}]} defaultValue={{contactsSSR:[{id:"stable",value:{name:"Group <safe>",hidden:"must-not-render-hidden"}}]}} onValueChange={()=>{throw Error("SSR must not emit");}} />
+
+{#snippet customWidget(context:import("@loongark/kit").QuestionnaireCustomContext)}<L.LoongArkButton id={context.controlId} aria-labelledby={context.labelId}>SSR custom &lt;safe&gt; {context.answer}</L.LoongArkButton>{/snippet}
+<LoongArkQuestionnaire label="SSR custom" questions={[{id:"score",label:"Score",type:"custom",customKind:"widget",validateAsync:()=>{throw Error("SSR must not validate custom");}}]} defaultValue={{score:"3"}} renderers={{widget:customWidget}} onValueChange={()=>{throw Error("SSR must not emit custom");}}/>
+<LoongArkQuestionnaire label="SSR nested custom" questions={[{id:"customPeople",label:"People",type:"group",questions:[{id:"score",label:"Score",type:"custom",customKind:"widget"},{id:"ordinary",label:"Ordinary",type:"text"},{id:"hiddenCustom",label:"Hidden",type:"custom",customKind:"missing",when:()=>false}]}]} defaultValue={{customPeople:[{id:"stable",value:{score:"4",ordinary:"SSR ordinary <safe>",hiddenCustom:"hidden-custom-answer"}}]}} renderers={{widget:customWidget}} onValueChange={()=>{throw Error("SSR must not emit custom");}}/>
+
+<L.LoongArkRatingGroupRoot name="ssr-rating" defaultValue={3} onValueChange={()=>{throw Error("SSR must not change rating");}}>
+  <L.LoongArkRatingGroupLabel>SSR rating</L.LoongArkRatingGroupLabel>
+  <L.LoongArkRatingGroupControl>{#each [1,2,3,4,5] as index}<L.LoongArkRatingGroupItem {index}>{index}</L.LoongArkRatingGroupItem>{/each}</L.LoongArkRatingGroupControl>
+  <L.LoongArkRatingGroupHiddenInput/>
+</L.LoongArkRatingGroupRoot>
