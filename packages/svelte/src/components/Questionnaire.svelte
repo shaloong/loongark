@@ -151,6 +151,8 @@
       root,
       () => ({ question, value: current, blocked: !!(blocked || completed) }),
       change,
+      true,
+      customRegistry,
     ),
   );
   async function move(next: number) {

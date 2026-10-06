@@ -126,7 +126,10 @@
     "VirtualGrid",
     "VirtualMasonry"
   ],
-  "latestBatch": ["VirtualGrid", "VirtualMasonry"],
+  "latestBatch": [
+    "VirtualGrid",
+    "VirtualMasonry"
+  ],
   "equivalences": {
     "Input OTP": "PinInput",
     "Dropdown Menu": "Menu",
@@ -143,7 +146,7 @@
     "Drawer logical directions/RTL physical placement, reachable edge handles, native mouse/touch/cancel, snap points/stack and reduced-motion exit lifecycle",
     "DateInput segmented editing",
     "Toc controlled navigation and active-change payload",
-    "Questionnaire conditions, cross-field validation and controlled rejection",
+    "Questionnaire conditions, cross-field validation, controlled rejection and accepted group-operation focus ownership with delayed custom-control registration",
     "DataTable server state, column visibility/order and request states",
     "Swap lifecycle",
     "Context and collection control hooks",

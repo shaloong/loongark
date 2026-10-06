@@ -171,6 +171,11 @@ export function renderQuestionGroup(
     )}<button type="button" data-question-group="add" data-group-path="${encoded}"${groups.length >= (q.maxGroups ?? Infinity) ? " disabled" : ""}>${escape(q.groupLabels?.add ?? "Add group")}</button></div>`;
 }
 /** 每个叶题持有独立排序/控件生命周期；实例路径更新根答案，不依赖数组位置。 */
+/** 内部注册焦点桥；业务渲染继续由各框架负责。 */
+export type QuestionGroupFocus = {
+  focus(element: HTMLElement): boolean;
+  subscribeControl(listener: () => void): () => void;
+};
 export function mountQuestionGroups(
   root: HTMLElement,
   get: () => {
@@ -179,6 +184,7 @@ export function mountQuestionGroups(
     blocked: boolean;
   },
   change: (value: QuestionnaireValue) => void,
+  customFocus?: QuestionGroupFocus,
 ) {
   const win = root.ownerDocument.defaultView;
   if (!win) return () => {};
@@ -186,7 +192,17 @@ export function mountQuestionGroups(
     serial = 0;
   const used = new Set<string>(),
     controls = new Map<HTMLElement, () => void>();
-  let focusedPath: readonly string[] | undefined;
+  let focusIntent:
+    | {
+        path: readonly string[];
+        groupPath: readonly string[];
+        instanceId: string;
+        operation: "add" | "remove";
+        origin: Element | null;
+        trigger: HTMLElement;
+        accepted: boolean;
+      }
+    | undefined;
   let focusFrame = 0;
   let ownedFocus:
     | {
@@ -213,6 +229,15 @@ export function mountQuestionGroups(
   };
   const remember = (event: Event) => {
     if (!(event.target instanceof win.Element)) return;
+    if (focusIntent && event.type !== "focusin") focusIntent = undefined;
+    if (
+      focusIntent &&
+      event.target !== root.ownerDocument.body &&
+      event.target !== root.ownerDocument.documentElement &&
+      event.target !== focusIntent.origin &&
+      event.target !== focusIntent.trigger
+    )
+      focusIntent = undefined;
     const node = event.target.closest<HTMLElement>("[data-question-control]");
     const field = node?.closest<HTMLElement>('[data-part="group-question"]');
     const path = field && pathOf(field, "data-question-path");
@@ -300,25 +325,71 @@ export function mountQuestionGroups(
         ))
           used.add(instance.id);
     }
-    if (
-      focusedPath &&
-      root.ownerDocument.activeElement === root.ownerDocument.body
-    ) {
-      const fields = Array.from(
-        root.querySelectorAll<HTMLElement>('[data-part="group-question"]'),
+    if (focusIntent) {
+      const intent = focusIntent;
+      const group = resolveQuestionPath(
+        current.question,
+        current.value,
+        intent.groupPath,
       );
-      const target = fields.find(
-        (node) => node.dataset.questionPath === JSON.stringify(focusedPath),
-      );
-      (
-        target?.querySelector<HTMLElement>(
-          "input:not([type=hidden]):not(:disabled),textarea:not(:disabled),select:not(:disabled),button:not(:disabled)",
-        ) ??
-        root.querySelector<HTMLElement>(
-          '[data-question-group="add"]:not(:disabled)',
-        )
-      )?.focus({ preventScroll: true });
-      focusedPath = undefined;
+      if (!group || group.question.type !== "group" || current.blocked)
+        focusIntent = undefined;
+      else {
+        const exists = questionGroups(group.value[group.question.id]).some(
+          (instance) => instance.id === intent.instanceId,
+        );
+        if (intent.accepted && (intent.operation === "add" ? !exists : exists))
+          focusIntent = undefined;
+        intent.accepted = intent.operation === "add" ? exists : !exists;
+        const active = root.ownerDocument.activeElement;
+        const ownsFocus =
+          active === root.ownerDocument.body ||
+          active === root.ownerDocument.documentElement ||
+          active === intent.origin ||
+          active === intent.trigger;
+        if (!ownsFocus) focusIntent = undefined;
+        else if (intent.accepted && focusIntent) {
+          const fields = Array.from(
+            root.querySelectorAll<HTMLElement>('[data-part="group-question"]'),
+          );
+          const target = fields.find(
+            (node) => node.dataset.questionPath === JSON.stringify(intent.path),
+          );
+          const local = resolveQuestionPath(
+            current.question,
+            current.value,
+            intent.path,
+          );
+          if (!local) focusIntent = undefined;
+          else if (local.question.type === "custom") {
+            // 延迟注册只完成仍拥有焦点的已接受操作，避免装饰按钮或隐形表单字段。
+            if (target && customFocus?.focus(target)) {
+              focusIntent = undefined;
+              ownedFocus = undefined;
+            }
+          } else {
+            const container = Array.from(
+              root.querySelectorAll<HTMLElement>(
+                '[data-part="groups"][data-group-path]',
+              ),
+            ).find(
+              (node) => node.dataset.groupPath === JSON.stringify(intent.path),
+            );
+            const control =
+              target?.querySelector<HTMLElement>(
+                "input:not([type=hidden]):not(:disabled),textarea:not(:disabled),select:not(:disabled),button:not(:disabled)",
+              ) ??
+              container?.querySelector<HTMLElement>(
+                '[data-question-group="add"]:not(:disabled)',
+              );
+            if (control) {
+              focusIntent = undefined;
+              ownedFocus = undefined;
+              control.focus({ preventScroll: true });
+            }
+          }
+        }
+      }
     }
     // 叶题重绘会销毁旧生命周期；按实例路径恢复，避免相同题 id 的实例串位。
     if (
@@ -343,7 +414,16 @@ export function mountQuestionGroups(
           (node.dataset.direction ?? "") === saved.direction &&
           !node.matches(":disabled"),
       );
-      if (!node && saved.control === "rank") node = Array.from(field?.querySelectorAll<HTMLElement>('[data-question-control="rank"]') ?? []).find(candidate => candidate.dataset.key === saved.key && !candidate.matches(":disabled"));
+      if (!node && saved.control === "rank")
+        node = Array.from(
+          field?.querySelectorAll<HTMLElement>(
+            '[data-question-control="rank"]',
+          ) ?? [],
+        ).find(
+          (candidate) =>
+            candidate.dataset.key === saved.key &&
+            !candidate.matches(":disabled"),
+        );
       if (node) {
         node.focus({ preventScroll: true });
         if (
@@ -354,6 +434,23 @@ export function mountQuestionGroups(
           node.setSelectionRange(saved.start, saved.end);
       } else ownedFocus = undefined;
     }
+  };
+  const firstPath = (
+    question: Question,
+    value: QuestionnaireValue,
+    path: readonly string[],
+  ): readonly string[] => {
+    if (question.type !== "group") return path;
+    const instance = questionGroups(value[question.id])[0];
+    const first =
+      instance &&
+      questionnaireVisibleQuestions(
+        question.questions ?? [],
+        instance.value,
+      )[0];
+    return first
+      ? firstPath(first, instance.value, [...path, instance.id, first.id])
+      : path;
   };
   const click = (event: Event) => {
     if (!(event.target instanceof win.Element)) return;
@@ -377,6 +474,8 @@ export function mountQuestionGroups(
     const q = local.question,
       groups = questionGroups(local.value[q.id]);
     let next = [...groups];
+    let targetPath: readonly string[] = path!,
+      instanceId: string;
     if (button.dataset.questionGroup === "add") {
       if (groups.length >= (q.maxGroups ?? Infinity)) return;
       let id: string;
@@ -389,7 +488,14 @@ export function mountQuestionGroups(
         q.questions ?? [],
         next[next.length - 1].value,
       )[0];
-      if (first) focusedPath = [...path!, id, first.id];
+      instanceId = id;
+      targetPath = first
+        ? firstPath(first, next[next.length - 1].value, [
+            ...path!,
+            id,
+            first.id,
+          ])
+        : [...path!];
     } else {
       if (groups.length <= Math.max(q.required ? 1 : 0, q.minGroups ?? 0))
         return;
@@ -397,13 +503,29 @@ export function mountQuestionGroups(
         (instance) => instance.id === button.dataset.instanceId,
       );
       if (index < 0) return;
+      instanceId = groups[index].id;
       next.splice(index, 1);
       const neighbour = next[Math.min(index, next.length - 1)],
         first =
           neighbour &&
           questionnaireVisibleQuestions(q.questions ?? [], neighbour.value)[0];
-      focusedPath = first ? [...path!, neighbour.id, first.id] : [...path!];
+      targetPath = first
+        ? firstPath(first, neighbour!.value, [
+            ...path!,
+            neighbour!.id,
+            first.id,
+          ])
+        : [...path!];
     }
+    focusIntent = {
+      path: targetPath,
+      groupPath: path!,
+      instanceId,
+      operation: button.dataset.questionGroup === "add" ? "add" : "remove",
+      origin: root.ownerDocument.activeElement,
+      trigger: button,
+      accepted: false,
+    };
     change(
       updateQuestionPath(current.question!, current.value, path!, {
         ...local.value,
@@ -414,15 +536,17 @@ export function mountQuestionGroups(
     win.cancelAnimationFrame(focusFrame);
     focusFrame = win.requestAnimationFrame(() => {
       sync();
-      focusedPath = undefined;
+      if (focusIntent && !focusIntent.accepted) focusIntent = undefined;
     });
   };
   const outside = (event: Event) => {
+    focusIntent = undefined;
     if (event.target instanceof win.Node && !root.contains(event.target)) {
-      focusedPath = undefined;
+      focusIntent = undefined;
       ownedFocus = undefined;
     }
   };
+  const unsubscribeControl = customFocus?.subscribeControl(sync);
   const observer = new win.MutationObserver(sync);
   observer.observe(root, {
     childList: true,
@@ -439,6 +563,7 @@ export function mountQuestionGroups(
     disposed = true;
     win.cancelAnimationFrame(focusFrame);
     observer.disconnect();
+    unsubscribeControl?.();
     root.removeEventListener("click", click);
     root.removeEventListener("input", remember, true);
     root.removeEventListener("keydown", remember, true);
@@ -446,7 +571,7 @@ export function mountQuestionGroups(
     root.ownerDocument.removeEventListener("pointerdown", outside, true);
     for (const dispose of controls.values()) dispose();
     controls.clear();
-    focusedPath = undefined;
+    focusIntent = undefined;
     ownedFocus = undefined;
   };
 }

@@ -35,4 +35,6 @@ DOM 挂载后用 `registerControl({ element, restore?, focus?, dispose? })` 注�
 
 `signal` 在题目隐藏、实例删除、kind/答案形状/renderer 替换、禁用或根卸载后中止。上述旧上下文的答案回调会被忽略；第三方异步工作仍应监听 signal 自行释放资源。SSR 不注册 DOM、不启动交互，也不会执行提交回调；可见 customKind 缺少 renderer 时明确抛错，隐藏题不要求提前提供 renderer。同步/异步校验、取消及跨题依赖继续复用 Questionnaire 的既有契约。
 
+新增或删除题组仅在受控模型接受该操作后，把焦点移至目标实例的首个可见题；Safari 鼠标点击保留旧文本控件焦点时同样适用。首题是自定义控件时等待有效 `registerControl` 注册，使用其 `focus` 契约，不选择装饰按钮或隐藏字段。注册前若用户继续输入、导航、点击或转移焦点，或者目标实例失效、问卷禁用/卸载，则取消等待；受控拒绝不会回退到其他题组的添加按钮。删除后为空时，焦点留在对应题组的添加按钮。
+
 评分示例复用已有 RatingGroup。四端 Root 与 useRatingGroup 共享原生 Zag 状态机修正：悬停仅预览，不改变 aria-checked；快速点击使用实际条目；键盘导航清除过期悬停并保持焦点；程序化设置不受悬停影响。Svelte 与 Questionnaire 一样，在提供 onValueChange 时由调用方接受答案；不提供回调时支持 bind:value。共享层直接声明已有传递版本 @zag-js/rating-group 1.43.3，无新增版本或独立调色板。

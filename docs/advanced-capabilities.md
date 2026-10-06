@@ -71,3 +71,5 @@
 
 
 日期提交a97c85e的[实际CI](https://github.com/shaloong/loongark/actions/runs/37504582159)：Chromium四端462项、Story182项通过；Firefox四端458项通过、Story180通过/2失败（remediation菜单样式挂载前交互、全Story挂载扫描超时）；WebKit四端440通过/18失败（窄屏图表8项、树折叠焦点7项、Solid富文本删表1项、React/Solid窄屏消费布局2项），Story未执行。原生Safari26.6.1/macOS15.7.9完成267默认示例和32既有交互后，在React浅色新增题组首字段焦点失败；失败截图和WebKit富文本失败帧已实际查看。平台项目保持开放，专项通过不替代整库结果。
+
+2026-10-06 题组焦点修复补充：受控拒绝、延迟自定义首字段注册、用户转移焦点及卸载取消已通过三引擎四端专项；详见[记录](audits/2026-10-06/questionnaire-group-focus-linux/acceptance.json)。develop 07788f2 整库WebKit469通过/13失败（8窄屏图表、5树形收起焦点），原生Safari271默认示例及32既有交互后题组焦点失败，当前修复尚待macOS复验。Firefox本地全Story健康扫描及明暗质量通过，右键菜单未知pointerType仍失败，平台项目保持开放。

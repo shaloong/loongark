@@ -262,3 +262,11 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 既有Drawer修复RTL物理定位、上/侧边手柄和减弱动效退出，四端新增方向示例及Directions Story；共享滚动视口适应吸附后的可见范围，支持长文本、键盘和焦点恢复。复用原生手势与生命周期，无新增别名或依赖；API见[Drawer](drawer.md)。当前119族、328Story、四端各794个LoongArk公开值、271个框架示例。
 
 最终新构建、契约、发布类型/四端SSR和Svelte通过（0错误/4既有警告）。Chromium/Firefox/WebKit专项各24项、Story14项含328Story明暗质量扫描及完整Linux视觉262项通过。实际查看192张三引擎展开/紧凑抽样、64张Chromium触摸模拟、80张Story截图与32张新Linux基线；832张原生捕获并非逐张目视。256张旧基线含Windows哈希不变；过程文件不入Git。验收范围与限制见[记录](audits/2026-10-06/drawer-directions-linux/acceptance.json)。整库平台失败及真实手机验收继续实施，模拟触摸不算真机。
+
+## 问卷题组与异步自定义控件焦点（2026-10-06）
+
+共享题组按受控模型实际接受结果移交焦点，自定义首字段支持延迟注册；拒绝更新、外部焦点/指针、隐藏和卸载取消旧操作，空嵌套题组只定位自己的新增按钮。四端绑定同一注册及清理契约，不增加组件族或公开别名。Playwright与原生Safari复用真实dist的行为夹具。
+
+最终新构建、类型/SSR和三引擎各76项问卷回归通过；288张四端三引擎默认/错误/嵌套捕获已实际查看联系表，并复核窄屏复杂题型局部。全328Story健康扫描拆批后完成；Firefox仍有1项既有右键菜单指针类型失败，整库WebKit和原生Safari仍有待复验项目，详见[本批范围及限制](audits/2026-10-06/questionnaire-group-focus-linux/acceptance.json)。
+
+本批完整 Linux 视觉回归 262 项通过，288 张既有基线（含 Windows）哈希均未改变；另实际查看 Chromium/Firefox 桌面、窄屏、明暗主题的 48 张问卷 Story 状态截图，过程捕获仅存 `.artifacts/`。

@@ -192,6 +192,21 @@ await build({
 });
 console.log("自定义题型共享发布模块浏览器消费构建通过");
 
+// 直接消费共享题组焦点桥，覆盖延迟注册、受控拒绝与卸载。
+await build({
+  configFile: false,
+  logLevel: "error",
+  build: {
+    outDir: resolve("tests/consumer-dist"),
+    emptyOutDir: false,
+    lib: {
+      entry: resolve("packages/kit/dist/questionnaire-groups.js"),
+      formats: ["es"],
+      fileName: () => "questionnaire-groups.js",
+    },
+  },
+});
+
 // 单独消费共享横向窗口发布契约，验证初始定位与原生滚动事件的先后关系。
 await build({
  configFile: false, logLevel: "error",

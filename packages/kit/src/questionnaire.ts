@@ -944,9 +944,10 @@ export function mountQuestionControls(
   },
   change: (value: QuestionnaireValue) => void,
   groups = true,
+  customFocus?: import("./questionnaire-groups").QuestionGroupFocus,
 ) {
   const cleanupGroups = groups
-    ? mountQuestionGroups(root, get, change)
+    ? mountQuestionGroups(root, get, change, customFocus)
     : () => {};
   const cleanupRanking = mountQuestionRanking(root, get, change);
   let disposed = false;

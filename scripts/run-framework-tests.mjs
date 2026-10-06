@@ -29,6 +29,7 @@ const child = spawn(
     "tests/questionnaire-groups-nested.spec.ts",
     "tests/questionnaire-groups-constraints.spec.ts",
     "tests/questionnaire-custom.spec.ts",
+    "tests/questionnaire-group-focus.spec.ts",
     "tests/questionnaire-custom-mode.spec.ts",
     "tests/table-column-window.spec.ts",
     "tests/virtual-layout.spec.ts",

@@ -172,6 +172,8 @@ export function LoongArkQuestionnaire({
           blocked: !!(disabled || submitting || completed),
         }),
         (next) => changeRef.current(next),
+        true,
+        customRegistry,
       ),
     [disabled, submitting, completed],
   );

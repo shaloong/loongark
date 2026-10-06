@@ -38,6 +38,9 @@ test("中性展示页明暗、窄屏和无障碍", async ({ page }) => {
 
 test("新增表格、右键菜单、确认弹窗及底部面板可操作", async ({ page }) => {
   await page.goto("/iframe.html?id=components-datatable--basic&viewMode=story");
+  await page
+    .locator("#loongark-primitive-button")
+    .waitFor({ state: "attached" });
   await page.getByRole("button", { name: "Revenue", exact: true }).click();
   await expect(
     page.locator('[data-scope="data-table"] tbody tr').first(),
@@ -51,6 +54,9 @@ test("新增表格、右键菜单、确认弹窗及底部面板可操作", async
     "/iframe.html?id=components-contextmenu--basic&viewMode=story",
   );
   await page
+    .locator("#loongark-primitive-button")
+    .waitFor({ state: "attached" });
+  await page
     .getByText("Right-click here", { exact: true })
     .click({ button: "right" });
   await expect(page.getByRole("menuitem", { name: "Refresh" })).toBeVisible();
@@ -58,6 +64,9 @@ test("新增表格、右键菜单、确认弹窗及底部面板可操作", async
   await page.goto(
     "/iframe.html?id=components-alertdialog--basic&viewMode=story",
   );
+  await page
+    .locator("#loongark-primitive-button")
+    .waitFor({ state: "attached" });
   await page.getByRole("button", { name: "Delete workspace" }).click();
   await expect(page.getByRole("alertdialog")).toBeVisible();
   await page.mouse.click(4, 4);
@@ -68,6 +77,9 @@ test("新增表格、右键菜单、确认弹窗及底部面板可操作", async
     await page.goto(
       `/iframe.html?id=components-${family}--basic&viewMode=story`,
     );
+    await page
+      .locator("#loongark-primitive-button")
+      .waitFor({ state: "attached" });
     await page
       .getByRole("button", { name: `Open ${family}`, exact: true })
       .click();

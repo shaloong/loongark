@@ -164,6 +164,8 @@ export const LoongArkQuestionnaire = defineComponent({
           blocked: !!(blocked() || p.completed),
         }),
         change,
+        true,
+        customRegistry,
       );
     });
     const move = (next: number) => {

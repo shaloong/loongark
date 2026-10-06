@@ -128,6 +128,8 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
         blocked: !!(blocked() || p.completed),
       }),
       change,
+      true,
+      customRegistry,
     );
     onCleanup(dispose);
   });

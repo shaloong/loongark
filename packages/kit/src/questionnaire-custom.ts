@@ -106,6 +106,7 @@ export function createQuestionnaireCustomRegistry(
   };
   const entries = new Map<string, Entry>(),
     retired = new Set<Entry>();
+  const controlListeners = new Set<() => void>();
   let root: HTMLElement | undefined,
     active = false,
     restoring = false,
@@ -275,6 +276,16 @@ export function createQuestionnaireCustomRegistry(
               owned.control = control;
               if (previous !== control) previous?.dispose?.();
               restore();
+              queueMicrotask(() => {
+                if (
+                  active &&
+                  root?.isConnected &&
+                  root.contains(control.element) &&
+                  owned.control === control &&
+                  valid(owned)
+                )
+                  for (const listener of controlListeners) listener();
+              });
               return () => {
                 if (owned.control === control) {
                   owned.control = undefined;
@@ -336,6 +347,12 @@ export function createQuestionnaireCustomRegistry(
           entry.controller = new AbortController();
       }
       restore();
+    },
+    subscribeControl(listener: () => void) {
+      controlListeners.add(listener);
+      return () => {
+        controlListeners.delete(listener);
+      };
     },
     focus(element: HTMLElement) {
       for (const entry of entries.values())

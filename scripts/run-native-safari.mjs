@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { runNativeGroupFocus } from "./native-safari-group-focus.mjs";
 import { spawn } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -689,6 +690,16 @@ try {
         case: "questionnaire-custom-native-keyboard-controlled-stale-form",
       });
     }
+  await runNativeGroupFocus({
+    session,
+    execute,
+    click,
+    type,
+    waitFor,
+    screenshot,
+    assertLayout,
+    report,
+  });
   report.result = "passed";
   console.log(
     `Native Safari ${report.browser.browserVersion}: ${report.defaultExamples.length} default examples and ${report.interactions.length} interaction cases passed.`,
