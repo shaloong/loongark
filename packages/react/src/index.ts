@@ -643,3 +643,6 @@ export type {
   VirtualGridProps,
   VirtualMasonryProps,
 } from "./components/virtual";
+
+export { parseLocalizedDate, parseDateTime, parseZonedDateTime } from "@loongark/kit";
+export type { LocalizedDateOptions } from "@loongark/kit";

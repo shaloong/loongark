@@ -248,3 +248,10 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 新增四端LoongArkVirtualGrid与LoongArkVirtualMasonry，提供双轴窗口/键盘游标、可变卡片高度、稳定键与阅读锚点、焦点保留、完整ARIA位置及有界SSR。共享几何、控制器和样式集中实现，框架负责原生内容与生命周期；API见[虚拟布局](virtual-layout.md)。当前119族、326Story、四端各794个LoongArk公开值、263个框架示例。
 
 新构建、契约、发布类型/四端SSR和Svelte通过（0错误/4既有警告）。三引擎最终各51项通过，包含既有纵向窗口及嵌套部件回归；Story16项及全量Linux视觉218项通过。288张原生、24张Story操作截图及16张新Linux基线已实际核验，228张旧基线含Windows哈希不变。测量前估算布局、平台与真机限制见[验收记录](audits/2026-10-06/virtual-layout-linux/acceptance.json)。日期、Drawer及整库平台/真机验收继续实施。
+
+
+## 本地化日期与日期时间组合（2026-10-06）
+
+既有DateInput补充严格本地化自由文本解析、日期/时分秒组合和显式时区示例；四端同步原生表单、LocaleProvider/RTL键盘与状态。共享Input/Textarea修复根状态继承，同时保留控件覆盖；API见[日期契约](localized-date.md)。当前119族、327Story、四端各794个LoongArk公开值、267个框架示例。
+
+最终新构建、契约、发布类型/四端SSR及Svelte通过（0错误/4既有警告）；三引擎原生专项各32项、Story12项及完整Linux视觉230项通过。144张原生、12张Story截图与12张新Linux基线已实际审阅，244张旧基线含Windows哈希不变。范围及限制见[验收记录](audits/2026-10-06/localized-date-linux/acceptance.json)。Drawer、整库跨浏览器与真实手机验收继续实施。

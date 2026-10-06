@@ -39,8 +39,8 @@
 
 ## 日期与平台验收
 
-- [ ] 本地化自由文本日期解析
-- [ ] 日期与时间组合
+- [x] 本地化自由文本日期解析（[API](localized-date.md)及[三引擎验收](audits/2026-10-06/localized-date-linux/acceptance.json)）
+- [x] 日期与时间组合（原生DateInput日期/时分秒、显式时区与四端表单契约，同上）
 - [ ] Drawer 全部方向、RTL 与触摸回归
 - [ ] Firefox 实际运行、截图与焦点验收
 - [ ] Safari 实际运行、截图与焦点验收（WebKit 引擎验收不等同 Safari）

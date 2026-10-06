@@ -505,3 +505,20 @@
 >
   {#snippet renderItem(details)}SSR_masonry_{details.index}{/snippet}
 </L.LoongArkVirtualMasonry>
+
+<L.LoongArkDateInputRoot name="ssr-local-datetime" locale="ar-EG" dir="rtl" defaultValue={[L.parseDateTime("2026-10-06T14:35:20")]} granularity="second" hourCycle={24} format={(date) => date.toString()} onValueChange={() => { throw Error("SSR must not emit"); }}>
+  <L.LoongArkDateInputHiddenInput />
+</L.LoongArkDateInputRoot>
+<L.LoongArkDateInputRoot name="ssr-zoned-datetime" locale="ar-EG" dir="rtl" defaultValue={[L.parseZonedDateTime("2026-10-06T14:35:20[Asia/Shanghai]")]} granularity="second" hourCycle={24} format={(date) => date.toString()} onValueChange={() => { throw Error("SSR must not emit"); }}>
+  <L.LoongArkDateInputHiddenInput />
+</L.LoongArkDateInputRoot>
+<output aria-label="SSR localized date">{L.parseLocalizedDate("٦/١٠/٢٠٢٦", {locale:"ar-EG"})?.toString()}</output>
+
+<L.LoongArkInputRoot disabled readOnly required>
+  <L.LoongArkInputInput name="ssr-inherit-input" />
+  <L.LoongArkTextareaControl name="ssr-inherit-textarea" />
+</L.LoongArkInputRoot>
+<L.LoongArkInputRoot>
+  <L.LoongArkInputInput name="ssr-individual-input" disabled readOnly required />
+  <L.LoongArkTextareaControl name="ssr-individual-textarea" disabled readOnly required />
+</L.LoongArkInputRoot>

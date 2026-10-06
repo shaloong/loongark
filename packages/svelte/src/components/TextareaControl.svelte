@@ -5,9 +5,9 @@
   export let size: NonNullable<InputPrimitiveProps["size"]> = "md";
   export let state: NonNullable<InputPrimitiveProps["state"]> = "default";
   export let placeholder: string | undefined = undefined;
-  export let disabled: boolean = false;
-  export let readOnly: boolean = false;
-  export let required: boolean = false;
+  export let disabled: boolean | undefined = undefined;
+  export let readOnly: boolean | undefined = undefined;
+  export let required: boolean | undefined = undefined;
   export let name: string | undefined = undefined;
   export let value: string | undefined = undefined;
 </script>

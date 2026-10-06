@@ -176,6 +176,10 @@
     "CodeEditor applies latest extensions before native input; Chart Escape dismissal works outside chart focus and survives stationary-pointer SVG rebuilds; native column drag regression targets visible header intersection",
     "Questionnaire stable-id repeated and nested groups, instance-local conditions and async validation, recursive native form paths, bounded add/remove and owned focus",
     "Questionnaire framework-native custom renderer registry, immutable contexts, recursive semantic tree, native form ownership, controlled restore, cancellation and lifecycle guards",
-    "DataTable independent horizontal fixed-width column window, logical RTL scrolling, full-model ranges and clipboard, retained pins/editor/focus, bounded SSR and lifecycle cleanup"
+    "DataTable independent horizontal fixed-width column window, logical RTL scrolling, full-model ranges and clipboard, retained pins/editor/focus, bounded SSR and lifecycle cleanup",
+    "VirtualGrid independent two-axis windows, logical RTL scrolling, stable key anchors, keyboard and nested focus, bounded SSR and cleanup",
+    "VirtualMasonry measured shortest-column windows, responsive lane widths, stable key/reading anchors, owned focus and bounded SSR",
+    "Localized Gregorian date text parser with explicit locale order/month names/digits, strict invalid-date rejection; native segmented date-time and zoned ISO form serialization",
+    "Input and Textarea inherit unspecified root disabled/readOnly states; Vue native readOnly forwarding and Svelte required inheritance"
   ]
 }

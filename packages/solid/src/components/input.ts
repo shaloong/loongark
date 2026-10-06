@@ -31,7 +31,12 @@ const buildControlProps = <P extends BaseInput>(
   part: "root" | "control",
   props: P,
 ) => {
-  const merged = mergeProps(inputDefaults, props);
+  const defaults: Required<Pick<BaseInput, "size" | "state" | "multiline">> &
+    Pick<BaseInput, "disabled" | "readOnly"> =
+    part === "root"
+      ? inputDefaults
+      : { size: "md", state: "default", multiline: false };
+  const merged = mergeProps(defaults, props);
   const [local, rest] = splitProps(merged, [
     "size",
     "state",

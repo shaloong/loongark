@@ -44,7 +44,7 @@ export const LoongArkInputRoot = defineComponent({
           ...attrs,
           disabled: props.disabled,
           invalid: props.state === "invalid",
-          readonly: props.readOnly,
+          readOnly: props.readOnly,
           "data-scope": "input",
           "data-part": "root",
           "data-size": props.size,
@@ -65,8 +65,8 @@ export const LoongArkInputControl = defineComponent({
     modelValue: { type: {} as PropType<string | number | undefined> },
     size: sizeProp,
     state: stateProp,
-    disabled: boolProp(false),
-    readOnly: boolProp(false),
+    disabled: { type: {} as PropType<boolean>, default: undefined },
+    readOnly: { type: {} as PropType<boolean>, default: undefined },
     multiline: boolProp(false),
   },
   setup(props, { attrs, emit }) {
@@ -81,8 +81,8 @@ export const LoongArkInputControl = defineComponent({
           );
           if (typeof attrs.onInput === "function") attrs.onInput(event);
         },
-        disabled: props.disabled,
-        readonly: props.readOnly,
+        ...(props.disabled === undefined ? {} : { disabled: props.disabled }),
+        ...(props.readOnly === undefined ? {} : { readonly: props.readOnly }),
         "data-scope": "input",
         "data-part": "control",
         "data-size": props.size,
@@ -114,8 +114,8 @@ export const LoongArkTextareaControl = defineComponent({
     modelValue: { type: {} as PropType<string | undefined> },
     size: sizeProp,
     state: stateProp,
-    disabled: boolProp(false),
-    readOnly: boolProp(false),
+    disabled: { type: {} as PropType<boolean>, default: undefined },
+    readOnly: { type: {} as PropType<boolean>, default: undefined },
     multiline: boolProp(true),
   },
   setup(props, { attrs, emit }) {
@@ -130,8 +130,8 @@ export const LoongArkTextareaControl = defineComponent({
           );
           if (typeof attrs.onInput === "function") attrs.onInput(event);
         },
-        disabled: props.disabled,
-        readonly: props.readOnly,
+        ...(props.disabled === undefined ? {} : { disabled: props.disabled }),
+        ...(props.readOnly === undefined ? {} : { readonly: props.readOnly }),
         "data-scope": "input",
         "data-part": "control",
         "data-size": props.size,

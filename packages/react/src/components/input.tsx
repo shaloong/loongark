@@ -20,6 +20,7 @@ export interface LoongArkInputRootProps
   children?: ReactNode;
   variant?: "default" | "floating";
   hasValue?: boolean;
+  required?: boolean;
 }
 
 export const LoongArkInputRoot = forwardRef<
@@ -77,8 +78,8 @@ export const LoongArkInputControl = forwardRef<
     {
       size = "md",
       state = "default",
-      disabled = false,
-      readOnly = false,
+      disabled,
+      readOnly,
       multiline = false,
       ...rest
     },
@@ -116,8 +117,8 @@ export const LoongArkTextareaControl = forwardRef<
     {
       size = "md",
       state = "default",
-      disabled = false,
-      readOnly = false,
+      disabled,
+      readOnly,
       multiline = true,
       ...rest
     },

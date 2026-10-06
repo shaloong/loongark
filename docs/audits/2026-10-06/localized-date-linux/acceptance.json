@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-06",
+  "branch": "develop",
+  "base": "652f8f72c9ebf0133a80f93d114f6639865f80ed",
+  "scope": [
+    "严格本地化自由文本日期解析：Intl字段顺序、月份名称、数字体系及有效日期，复用Gregorian模型",
+    "既有DateInput组合日期/时分秒与显式IANA时区，四端LocaleProvider/RTL、原生表单、只读/禁用及Svelte绑定",
+    "修复四端Input/Textarea继承Root禁用、只读和必填状态；保留控件显式覆盖"
+  ],
+  "validation": {
+    "ordered": "最终v6 verify、contracts、Storybook构建、coverage、publication/四端类型与SSR、Svelte、消费与示例构建全部通过；冻结锁文件安装通过",
+    "coverage": "119families /327Story /794公开LoongArk值 per framework /267examples built",
+    "svelte": "0errors /4existing warnings",
+    "native": "v6 Chromium/Firefox/WebKit各32passed /4Story-only skip，包含16项日期时间与16项既有日期粘贴回归",
+    "story": "v6 12passed /16consumer-only skip，包含4项新Story交互及全部327Story明暗质量扫描8批",
+    "visual": "v6完整Linux Chromium230passed，--update-snapshots=none；12张新Linux基线实际审阅后保存；244张旧基线含Windows逐文件SHA256不变",
+    "initialVisual": "12项失败均为新Linux基线缺失；未自动更新既有基线"
+  },
+  "corrections": [
+    "真实回归发现Root状态被控件默认false/undefined覆盖，四端及SSR增加继承/显式覆盖断言",
+    "Svelte原生可绑定DateInput使用函数绑定同步外部状态，修复显示时间与提交ISO不一致",
+    "实际审阅v5截图发现Vue/Solid/Svelte内层日期段仍为LTR；v6四端使用LocaleProvider，补充内层方向、原生左右箭头和右边界对齐回归"
+  ],
+  "manualReview": {
+    "native": "v6三引擎共144张四端默认/错误/本地化截图，覆盖明暗与1280/375；全部实际查看，WebKit DPR2联系表按CSS尺寸归一化后重新核验",
+    "story": "v6 12张Story截图及12张新Linux基线全部实际查看"
+  },
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "platform": "Linux Debian13",
+    "chromium": "system151.0.7922.173",
+    "firefox": "Playwright144.0.2",
+    "webkit": "Playwright26.0",
+    "firefoxEnvironment": "仅受限本地启用MOZ_DISABLE_CONTENT_SANDBOX/RDD/GMP及可写XDG_CACHE_HOME；未更改CI"
+  },
+  "limitations": [
+    "自由文本解析限定Gregorian与明确的日期，拒绝相对时间/两位年份/无效日期；时区解析沿用原生显式格式",
+    "375px为模拟视口；Linux WebKit不等于原生Safari，剪贴板回归使用ClipboardEvent而非系统剪贴板",
+    "本批专项与完整视觉通过不替代整库平台或真实手机验收；Drawer及已记录跨浏览器焦点/布局问题继续处理",
+    "过程截图、联系表和日志仅存.artifacts或限期CI Artifact；Git只保留摘要及已审阅Linux基线，Windows不变"
+  ]
+}

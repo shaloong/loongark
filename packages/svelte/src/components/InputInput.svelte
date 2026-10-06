@@ -9,9 +9,9 @@
   export let multiline: boolean = false;
   export let type: string = "text";
   export let placeholder: string | undefined = undefined;
-  export let disabled: boolean = false;
-  export let readOnly: boolean = false;
-  export let required: boolean = false;
+  export let disabled: boolean | undefined = undefined;
+  export let readOnly: boolean | undefined = undefined;
+  export let required: boolean | undefined = undefined;
   export let name: string | undefined = undefined;
   export let value: string | undefined = undefined;
 </script>
@@ -26,9 +26,9 @@
     data-state={state !== "default" ? state : undefined}
     data-multiline="true"
     {placeholder}
-    {disabled}
-    readonly={readOnly}
-    {required}
+    {...disabled === undefined ? {} : { disabled }}
+    {...readOnly === undefined ? {} : { readonly: readOnly }}
+    {...required === undefined ? {} : { required }}
     {name}
     bind:value
     {...$$restProps}
@@ -43,9 +43,9 @@
     data-state={state !== "default" ? state : undefined}
     {type}
     {placeholder}
-    {disabled}
-    readonly={readOnly}
-    {required}
+    {...disabled === undefined ? {} : { disabled }}
+    {...readOnly === undefined ? {} : { readonly: readOnly }}
+    {...required === undefined ? {} : { required }}
     {name}
     bind:value
     {...$$restProps}

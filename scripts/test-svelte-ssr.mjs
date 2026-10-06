@@ -206,3 +206,17 @@ assert.equal((html.match(/name="score"/g)??[]).length,1);
 assert.ok(!html.includes("hidden-custom-answer"));
 
 assert.match(html, /<input(?=[^>]*name="ssr-rating")(?=[^>]*value="3")[^>]*>/);
+
+assert.match(html, /<input(?=[^>]*name="ssr-local-datetime")(?=[^>]*value="2026-10-06T14:35:20")[^>]*>/);
+assert.match(html, /<input(?=[^>]*name="ssr-zoned-datetime")(?=[^>]*value="2026-10-06T14:35:20\+08:00\[Asia\/Shanghai\]")[^>]*>/);
+assert.match(html, /aria-label="SSR localized date"[^>]*>2026-10-06/);
+console.log("Svelte 本地化解析及完整日期时间/时区表单值SSR无回调通过");
+
+for (const prefix of ["ssr-inherit", "ssr-individual"])
+  for (const kind of ["input", "textarea"]) {
+      const tag = html.match(new RegExp('<' + kind + '(?=[^>]*name="' + prefix + '-' + kind + '")[^>]*>'))?.[0];
+    assert.ok(tag, prefix + " " + kind);
+    for (const state of ["disabled", "readonly", "required"])
+      assert.match(tag, new RegExp("\\s" + state + "(?:\\s|=|>)", "i"));
+  }
+console.log("Svelte Input/Textarea 父级状态继承及独立状态SSR通过");

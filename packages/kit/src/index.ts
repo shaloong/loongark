@@ -106,3 +106,5 @@ export * from "./rating-group";
 export * from "./column-window";
 
 export * from "./virtual-layout";
+
+export * from "./localized-date";
