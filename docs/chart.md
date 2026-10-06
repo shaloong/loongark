@@ -54,3 +54,6 @@ pie/donut 使用一个数值系列，每行表示一个切片；只绘制正的�
 `sliceKey` 默认labelKey，分类键必须非空且唯一。`sliceKeys` 受控、`defaultSliceKeys` 初始化非受控选择，空数组表示全部隐藏；`onSliceKeysChange` 返回按完整data顺序归一化的键。Vue提供sliceKeysChange与update:sliceKeys；Svelte受控时在回调显式赋值。受控拒绝、禁用、键盘与焦点恢复使用现有图例契约。`sliceColors` 可按稳定键指定现有Token或合法颜色；分类窗口改变不重排颜色和窗口外选择。
 
 饼图使用sliceKeys控制分类；seriesKeys继续控制其单一数值系列，系列隐藏时所有分类按钮显示未选中，选择分类会请求恢复系列及该分类。饼图不接受Cartesian轴、domain或stacked。各切片title保留原始数值和比例，空间允许时在圆外以正文颜色显示百分比，保证浅深主题及亮色切片的文字对比；键盘用户通过图例和检查选择器读取数据。切片默认使用六种现有语义/VI颜色，不引入独立调色板；超过六分类可显式配置。非正数或缺失分类的按钮禁用并关联labels.notPlotted说明。四端ChartTypesExample实际切换全部新增类型、轴、受控拒绝、空态和卸载；验收范围以本批记录为准。
+
+
+悬停提示支持焦点位于图表外时使用 Escape 关闭。关闭提示或明确选择检查分类后，同一静止指针因 SVG 重建产生的边界事件不会重新打开提示或覆盖选择；真正移动指针后恢复悬停。文档级键盘与指针监听器随组件卸载清理。

@@ -153,6 +153,7 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
   let language: CodeEditorProps["language"],
     languageAbort: AbortController | undefined;
   let loadedLanguage: Extension = [];
+  let configuredExtensions = get().extensions;
   const options = (): Extension => {
     const props = get(),
       description = [
@@ -253,6 +254,19 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
   const create = (doc: string) =>
     EditorState.create({ doc, extensions: base() });
   const view = new EditorView({ state: create(initialValue), parent: host });
+  // 原生输入不能等待下一帧的配置更新；文档协调仍保留在 RAF，保护组合输入。
+  const refreshCustom = () => {
+    if (disposed || internal || view.composing) return;
+    const extensions = get().extensions;
+    if (extensions === configuredExtensions) return;
+    internal = true;
+    try {
+      view.dispatch({ effects: customSlot.reconfigure(extensions ?? []) });
+      configuredExtensions = extensions;
+    } finally {
+      internal = false;
+    }
+  };
   const bridge = mountEditorForm(
     root,
     get,
@@ -297,6 +311,7 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
           customSlot.reconfigure(props.extensions ?? []),
         ],
       });
+      configuredExtensions = props.extensions;
     } finally {
       internal = false;
     }
@@ -385,6 +400,8 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
   const press = (event: MouseEvent) => {
     if (event.button === 0) event.preventDefault();
   };
+  for (const event of ["keydown", "beforeinput", "paste"])
+    root.addEventListener(event, refreshCustom, true);
   toolbar.addEventListener("click", click);
   toolbar.addEventListener("mousedown", press);
   const handle: CodeEditorHandle = {
@@ -413,6 +430,8 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
     disposed = true;
     languageAbort?.abort();
     win?.cancelAnimationFrame(frame);
+    for (const event of ["keydown", "beforeinput", "paste"])
+      root.removeEventListener(event, refreshCustom, true);
     toolbarStop();
     toolbar.removeEventListener("click", click);
     toolbar.removeEventListener("mousedown", press);

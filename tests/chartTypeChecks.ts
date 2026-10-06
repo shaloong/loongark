@@ -177,6 +177,8 @@ export async function checkChartTypes(page: Page) {
     edge!.y + edge!.height / 2,
   );
   await expect(chart.getByRole("tooltip")).toContainText("Zeta");
+  // 边缘命中另行保留；在点中心关闭提示，复现重建后相同坐标的原生 pointerover。
+  await page.mouse.move(edge!.x + edge!.width / 2, edge!.y + edge!.height / 2);
   await page.keyboard.press("Escape");
   await expect(chart.getByRole("tooltip")).toHaveCount(0);
   await capture("scatter");
@@ -188,6 +190,11 @@ export async function checkChartTypes(page: Page) {
   await expect(
     chart.getByRole("columnheader", { name: "at", exact: true }),
   ).toBeVisible();
+  // SVG 重建后的原生边界事件发生在绘制时，静止指针不能覆盖明确选择的分类。
+  await page.evaluate(() => new Promise<void>((resolve) =>
+    requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+  ));
+  await expect(chart.getByRole("tooltip")).toHaveCount(0);
   await expect(chart.locator('[data-part="inspection"]')).toContainText(
     "2026-09-03T00:00:00Z",
   );

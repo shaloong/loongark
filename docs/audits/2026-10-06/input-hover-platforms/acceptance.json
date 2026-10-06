@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-06",
+  "branch": "develop",
+  "base": "6f34a63ce42074d7f184e6bb75ee82058c03883b",
+  "scope": [
+    "CodeEditor 原生 keydown/beforeinput/paste 前同步最新扩展配置；保留既有文档 RAF 合并与输入法组合保护",
+    "Chart 在焦点位于外部时也可用 Escape 关闭悬停提示；SVG 重建不重新打开提示或覆盖显式检查分类，真实指针移动恢复悬停",
+    "列拖动回归使用表头与实际滚动视口交集中心，并在放下前断言目标；保留原有边缘滚动、RTL、受控与回调次数检查"
+  ],
+  "validation": {
+    "ordered": "冻结锁文件安装及最终无诊断引用的 v3 verify → contracts → 新 Story 构建 → coverage → publication/SSR → Svelte → 四端与示例 fixture 构建均通过。117族 /321Story /四端各792个LoongArk前缀公开值 /243示例；没有新增依赖或组件别名。",
+    "before": "有效旧构建上，冻结 RAF 的 WebKit 原生快捷键回归失败（0 次而应为 1 次）；四端诊断均复现。新增图表 Story 两项在键盘焦点位于图表外时 Escape 关闭失败。旧 ChartTypes 的远端轴切换失败未在本地系统 Chromium 复现，未虚构本地复现。",
+    "remoteTrace": "7a8 远端 Firefox 可信拖动实际预览 Status 而测试期望 Owner；修正命中坐标并添加预览断言，产品列实现不变。6f 整库 Firefox 280通过/3失败与 WebKit 266通过/17失败仍作为后续完整验收证据，未计作本批关闭。",
+    "initial": "新构建初次 WebKit 16项编辑器通过、16项图表失败，原因是新增测试等待折叠数据表内的 at 表头；改为等待实际 Time axis SVG 后32项通过，保留关闭/分类/恢复断言，随后增加提示边界与运行时异常检查。",
+    "richPointer": "v3 Chromium/Firefox各112通过；WebKit111通过/1失败于原生列宽调整后的富文本删除。旧有效产物的六次独立诊断均通过，重复四端24项23通过/1失败且该次未收到Delete table目标click；新构建诊断24项富文本及12项宽度比较共36通过，但不以诊断版本计作发布验收。共享回归改为等待字体/两帧、原生滚动完成后重新定位、核对elementFromPoint按钮并发送真实鼠标点击，保留删除及撤销断言。未改变富文本选择或历史代码；最终重新构建去除诊断引用。",
+    "nativeSafariBase": "6f34原生Safari创建会话首次超时，单任务重跑成功：macOS15.7.9 /Safari26.6.1 /useSimulator=false，243默认示例自动检查与32桌面明暗原生交互通过。对应32张实际截图已以4张联系表全部查看；此结果对应本批基提交，不覆盖本批新编辑器/提示修正，也不包含裁剪导出专项交互。",
+    "native": "生产代码一致的v3 Chromium/Firefox完整定向各112通过；共享原生指针就绪修正后，v4 Chromium/Firefox富文本各16通过，WebKit最终完整定向112通过。各次Story专属skip未计入通过数。系统Chromium151.0.7922.173、Firefox144.0.2、Linux WebKit26.0。",
+    "story": "新构建Story32项通过，包含编辑器、图表关闭/类型、列布局、范围粘贴及321个Story的8批明暗质量扫描；96项消费专属skip不计入通过数。",
+    "review": "v3三引擎共144张编辑器快捷键/图表关闭/恢复实际PNG已按桌面1280与窄屏375、明暗及四端全部查看；v4最终WebKit同样48张新PNG已另行查看。没有把诊断图、桌面Safari或模拟视口当作真机证据。",
+    "visual": "最终全量Linux视觉178项通过，明确使用update-snapshots=none；204张既有回归基线SHA256全部未变，其中2张Windows基线保留。"
+  },
+  "limitations": [
+    "本批定向验证不等于整库跨平台全部通过；WebKit树行焦点、图表窄屏溢出和消费页问题继续实施，富文本共享回归的命中修正还需后续整库CI验证。",
+    "Linux WebKit 不等同原生Safari；本批新编辑器/提示修正尚待原生Safari。375视口不代表真实手机，系统剪贴板/真实IME未覆盖。"
+  ],
+  "evidence": "PNG、联系表、日志、trace与详细测量仅保存在忽略目录.artifacts或14天CI Artifact；Git只保留本摘要和实际回归基线。"
+}

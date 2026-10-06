@@ -111,10 +111,27 @@ export async function checkDataTableColumns(page: Page) {
     source.y + source.height / 2,
   );
   await page.mouse.down();
+  const region = await root
+    .locator('[data-scope="table"][data-part="root"]')
+    .evaluate((element: HTMLElement) => {
+      const box = element.getBoundingClientRect();
+      return {
+        left: box.left + element.clientLeft,
+        right: box.left + element.clientLeft + element.clientWidth,
+      };
+    });
+  // 目标取列与实际滚动区域的交集中心，避免误入边缘滚动后落在下一列。
+  const left = Math.max(target.x, region.left),
+    right = Math.min(target.x + target.width, region.right);
+  expect(right).toBeGreaterThan(left);
   await page.mouse.move(
-    Math.min(target.x + target.width / 2, page.viewportSize()!.width - 12),
+    (left + right) / 2,
     source.y + source.height / 2,
     { steps: 8 },
+  );
+  await expect(root.locator('th[data-column-drop="true"]')).toHaveAttribute(
+    "data-column-key",
+    "owner",
   );
   expect(await count()).toBe(0);
   await page.mouse.up();

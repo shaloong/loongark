@@ -27,3 +27,6 @@
 React/Solid 使用 onValueChange；Vue 同时提供 valueChange 和 update:value。Svelte 支持 bind:value；若同时提供 onValueChange，由调用方负责回写 value。SSR 不触发 onReady、变更回调或语法加载，客户端挂载后再创建引擎。
 
 验收覆盖以对应批次摘要为准；模拟手机视口不代表真实手机，Chromium 通过也不代表 Firefox 或 Safari 已验收。
+
+
+扩展 Props 的框架更新与文档协调可以合并到下一绘制帧，但真实 keydown、beforeinput 和 paste 在进入引擎前会应用当前扩展。启用或移除键绑定后立即输入使用最新配置，组合输入期间仍延后重配置；监听器随编辑器销毁清理。

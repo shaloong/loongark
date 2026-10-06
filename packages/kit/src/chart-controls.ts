@@ -27,6 +27,8 @@ export function mountChartControls(
     open = !!trackedDetails?.open;
   let focused: { node: HTMLElement; part: string; key?: string } | undefined;
   let inspectedKey: string | undefined;
+  let pointerPosition: { x: number; y: number } | undefined;
+  let hoverDismissed = false;
   const keyFor = (options: ChartOptions, index: number) => {
     const row = options.data[chartRange(options)[0] + index];
     return row?.id !== undefined
@@ -177,11 +179,17 @@ export function mountChartControls(
       !getOptions().disabled
     ) {
       inspect(Number(event.target.value));
+      hoverDismissed = true;
       hideTooltip();
     }
   };
   const pointerOver = (event: PointerEvent) => {
-    if (!(event.target instanceof ElementType)) return;
+    const moved = !pointerPosition ||
+      event.clientX !== pointerPosition.x || event.clientY !== pointerPosition.y;
+    pointerPosition = { x: event.clientX, y: event.clientY };
+    if (moved) hoverDismissed = false;
+    // SVG 重建产生同一坐标的边界事件；关闭后的提示等待真正的指针移动。
+    if (hoverDismissed || !(event.target instanceof ElementType)) return;
     const point = event.target.closest<SVGElement>("[data-chart-index]"),
       options = getOptions();
     if (
@@ -208,8 +216,19 @@ export function mountChartControls(
     )
       hideTooltip();
   };
+  const pointerMove = (event: PointerEvent) => {
+    if (pointerPosition && event.clientX === pointerPosition.x &&
+      event.clientY === pointerPosition.y) return;
+    pointerPosition = { x: event.clientX, y: event.clientY };
+    hoverDismissed = false;
+    if (event.target instanceof ElementType && element.contains(event.target))
+      pointerOver(event);
+  };
   const keydown = (event: KeyboardEvent) => {
-    if (event.key === "Escape") hideTooltip();
+    if (event.key === "Escape") {
+      hoverDismissed = true;
+      hideTooltip();
+    }
   };
   const toggle = (event: Event) => {
     if (
@@ -222,6 +241,7 @@ export function mountChartControls(
   const focus = (event: FocusEvent) => {
     if (!(event.target instanceof HTMLElementType)) return;
     const node = event.target;
+    hoverDismissed = true;
     hideTooltip();
     if (node.matches('button[data-part="legend-toggle"]'))
       focused = {
@@ -252,6 +272,7 @@ export function mountChartControls(
       !element.contains(event.target)
     ) {
       focused = undefined;
+      hoverDismissed = true;
       hideTooltip();
     }
   };
@@ -271,6 +292,7 @@ export function mountChartControls(
     if (details && details.open !== open) details.open = open;
     trackedDetails = details;
     restoreControls();
+    hoverDismissed = true;
     hideTooltip();
     if (!focused || focused.node.isConnected) return;
     const active = document.activeElement;
@@ -304,7 +326,8 @@ export function mountChartControls(
   element.addEventListener("change", changeInspection);
   element.addEventListener("pointerover", pointerOver);
   element.addEventListener("pointerout", pointerOut);
-  element.addEventListener("keydown", keydown);
+  document.addEventListener("keydown", keydown, true);
+  document.addEventListener("pointermove", pointerMove);
   element.addEventListener("toggle", toggle, true);
   element.addEventListener("focusin", focus);
   element.addEventListener("focusout", blur);
@@ -321,7 +344,8 @@ export function mountChartControls(
     element.removeEventListener("change", changeInspection);
     element.removeEventListener("pointerover", pointerOver);
     element.removeEventListener("pointerout", pointerOut);
-    element.removeEventListener("keydown", keydown);
+    document.removeEventListener("keydown", keydown, true);
+    document.removeEventListener("pointermove", pointerMove);
     element.removeEventListener("toggle", toggle, true);
     element.removeEventListener("focusin", focus);
     element.removeEventListener("focusout", blur);
