@@ -11,15 +11,15 @@ export async function checkDataTableRange(page: Page) {
     status = page.locator('[data-part="range-status"]');
   const paste = async (text: string) => {
     await cell(1, "name").evaluate((node, text) => {
-      const data = new DataTransfer();
-      data.setData("text/plain", text);
-      node.dispatchEvent(
-        new ClipboardEvent("paste", {
-          bubbles: true,
-          cancelable: true,
-          clipboardData: data,
-        }),
-      );
+      const event = new ClipboardEvent("paste", {
+        bubbles: true,
+        cancelable: true,
+        clipboardData: new DataTransfer(),
+      });
+      // Firefox 为合成事件创建独立数据对象，必须写入事件真正消费的值。
+      if (!event.clipboardData) throw Error("Paste event requires clipboard data");
+      event.clipboardData.setData("text/plain", text);
+      node.dispatchEvent(event);
     }, text);
   };
   await expect(grid).toBeVisible();
@@ -35,17 +35,16 @@ export async function checkDataTableRange(page: Page) {
   await page.keyboard.press("Shift+ArrowDown");
   await expect(selected()).toHaveCount(4);
   await expect(status).toContainText("4");
-  // 同一真实复制事件验证默认值而非展示格式；不会访问系统剪贴板。
+  // 合成复制事件验证默认值而非展示格式；不会访问系统剪贴板。
   const copied = await cell(2, "amount").evaluate((node) => {
-    const data = new DataTransfer();
-    node.dispatchEvent(
-      new ClipboardEvent("copy", {
-        bubbles: true,
-        cancelable: true,
-        clipboardData: data,
-      }),
-    );
-    return data.getData("text/plain");
+    const event = new ClipboardEvent("copy", {
+      bubbles: true,
+      cancelable: true,
+      clipboardData: new DataTransfer(),
+    });
+    if (!event.clipboardData) throw Error("Copy event requires clipboard data");
+    node.dispatchEvent(event);
+    return event.clipboardData.getData("text/plain");
   });
   expect(copied).toBe("Alpha release\t100\nBeta launch\t150");
   await paste("Alpha pasted\t210\nBeta pasted\t320");

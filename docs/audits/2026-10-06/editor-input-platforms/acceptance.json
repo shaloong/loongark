@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-06",
+  "branch": "develop",
+  "base": "a950b3189ca5f5846f9d1f53476a7d70e2ec5d0a",
+  "scope": [
+    "编辑器原生输入与框架受控提交时序",
+    "外部清空后原生焦点与段落位置",
+    "合成剪贴板事件跨引擎载荷语义"
+  ],
+  "validation": {
+    "ordered": "最终verify、contracts、Story新构建、coverage、publication/SSR、Svelte与两套新fixture均通过",
+    "coverage": "117families /319Story /792LoongArk values per framework /235examples",
+    "nativeReactProof": "4passed Firefox：原失败场景及新增单一段落断言",
+    "threeBrowserFinal": "Chromium、Firefox144.0.2、WebKit26.0各48passed/12Story-only skipped：四端编辑器32项与范围16项",
+    "story": "Chromium12passed/48consumer-only skipped，8编辑器与4范围Story",
+    "visual": "170项完整Linux Chromium视觉比较通过，--update-snapshots=none；196张既有基线含Windows均未修改。"
+  },
+  "findings": [
+    "初版Firefox编辑器28passed/4failed；代码替换输入修正通过，React富文本仍错误生成h1。",
+    "重复setProps缓存没有单独解决根因；第二版连范围回归44passed/4failed。",
+    "实际引擎updateState记录显示React尚未提交第二个字符的值时，同步误判为拒绝并回退文档；等待框架提交后再确认，同时恢复原生焦点的引擎选择。",
+    "实际Firefox ClipboardEvent数据对象与传入DataTransfer不同且初始为空；测试读写实际event.clipboardData，保留TSV及原子批量断言。"
+  ],
+  "limitations": [
+    "合成事件不代表Firefox/WebKit真实系统剪贴板；Chromium保留原有真实剪贴板用例。",
+    "375px模拟视口与键盘输入不代表真实手机或IME。",
+    "整库WebKit及原生Safari已知失败继续处理，不能用本批定向结果关闭整库平台清单。",
+    "本批运行全部契约、类型、SSR及定向浏览器回归，未重新运行整库234项消费交互；三引擎定向结果不代表整库通过。"
+  ],
+  "manualReview": "三引擎各64张编辑器默认/交互及16张范围截图，四端×明暗×1280/375，共240张；逐联系表实际查看。WebKit仅联系表按DPR归一，原图保留。工具栏换行、控件、RTL和范围边框正常。WebKit原生details箭头渲染橙色符号，记录为后续一致性修复，不宣称已解决。"
+}

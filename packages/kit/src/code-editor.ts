@@ -426,5 +426,6 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
       field.removeAttribute("tabindex");
     }
   }
-  return { sync, handle, destroy };
+  // 框架响应更新与原生输入共用一帧，避免同步重配置打断组合输入。
+  return { sync: schedule, handle, destroy };
 }

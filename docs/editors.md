@@ -22,7 +22,7 @@
 
 两者共用 `label`、`description`、`error`、`requiredMessage`、`name`、`form`、`required`、`disabled`、`readOnly`、`dir` 和 `minRows`。原生 textarea 桥接 FormData、required 与 reset；错误聚焦可见编辑区域。富文本提交 JSON，空段落按语义视为空；只读可提交，禁用不进入 FormData。Reset 恢复 defaultValue 并清空历史。
 
-省略 value 为非受控模式；提供 value 时，调用方必须在 onValueChange 中回写接受的值。不回写即拒绝该次编辑，恢复文档和选择，即使调用方没有重渲染。接受相同值保留历史；外部替换文档清空历史，避免撤销回到旧数据集。组合输入期间延后同步，避免中途重置正在输入的内容。不要原地修改富文本 JSON。
+省略 value 为非受控模式；提供 value 时，调用方必须在 onValueChange 中回写接受的值。不回写即拒绝该次编辑，恢复文档和选择，即使调用方没有重渲染。接受相同值保留历史；外部替换文档清空历史，避免撤销回到旧数据集。组合输入期间延后同步，避免中途重置正在输入的内容。框架配置更新与引擎输入合并调度，等待框架提交当前输入的值，避免Firefox原生替换选择文本时在beforeinput/input之间重配置；卸载取消待执行帧。不要原地修改富文本 JSON。
 
 React/Solid 使用 onValueChange；Vue 同时提供 valueChange 和 update:value。Svelte 支持 bind:value；若同时提供 onValueChange，由调用方负责回写 value。SSR 不触发 onReady、变更回调或语法加载，客户端挂载后再创建引擎。
 

@@ -466,11 +466,15 @@ export function mountRichTextEditor(
   const create = (doc: ReturnType<typeof richTextNode>) =>
     EditorState.create({ doc, plugins: basicPlugins() });
   const schedule = () => {
-    if (!disposed && !frame)
+    if (disposed) return;
+    win.cancelAnimationFrame(frame);
+    // DOM 观察产生的输入回调可能晚于当前帧；先让框架提交新值再确认拒绝。
+    frame = win.requestAnimationFrame(() => {
       frame = win.requestAnimationFrame(() => {
         frame = 0;
         sync();
       });
+    });
   };
   const view = new EditorView(host, {
     state: create(richTextNode(get().value ?? get().defaultValue)),
@@ -649,6 +653,13 @@ export function mountRichTextEditor(
   )!;
   field.tabIndex = -1;
   field.setAttribute("aria-hidden", "true");
+  let viewSettings: {
+    disabled: boolean;
+    readOnly: boolean;
+    required: boolean;
+    invalid: boolean;
+    nodeViews: RichTextEditorProps["nodeViews"];
+  } | undefined;
   const sync = () => {
     if (disposed) return;
     const props = get();
@@ -672,23 +683,41 @@ export function mountRichTextEditor(
       rules = props.inputRules;
       view.updateState(view.state.reconfigure({ plugins: basicPlugins() }));
     }
-    view.setProps({
-      editable: () => !get().disabled && !get().readOnly,
+    const settings = {
+      disabled: !!props.disabled,
+      readOnly: !!props.readOnly,
+      required: !!props.required,
+      invalid: !!props.error,
       nodeViews: props.nodeViews,
-      attributes: {
-        role: "textbox",
-        "aria-multiline": "true",
-        "aria-labelledby": root.id + "-label",
-        "aria-describedby": ["description", "error", "keyboard"]
-          .map((part) => root.id + "-" + part)
-          .join(" "),
-        "aria-required": String(!!props.required),
-        "aria-invalid": String(!!props.error),
-        "aria-readonly": String(!!props.readOnly),
-        "aria-disabled": String(!!props.disabled),
-        tabindex: props.disabled ? "-1" : "0",
-      },
-    });
+    };
+    // 重复 setProps 会在 Firefox 原生输入的 DOM 提交期间触发引擎重绘。
+    if (
+      !viewSettings ||
+      settings.disabled !== viewSettings.disabled ||
+      settings.readOnly !== viewSettings.readOnly ||
+      settings.required !== viewSettings.required ||
+      settings.invalid !== viewSettings.invalid ||
+      settings.nodeViews !== viewSettings.nodeViews
+    ) {
+      viewSettings = settings;
+      view.setProps({
+        editable: () => !get().disabled && !get().readOnly,
+        nodeViews: props.nodeViews,
+        attributes: {
+          role: "textbox",
+          "aria-multiline": "true",
+          "aria-labelledby": root.id + "-label",
+          "aria-describedby": ["description", "error", "keyboard"]
+            .map((part) => root.id + "-" + part)
+            .join(" "),
+          "aria-required": String(!!props.required),
+          "aria-invalid": String(!!props.error),
+          "aria-readonly": String(!!props.readOnly),
+          "aria-disabled": String(!!props.disabled),
+          tabindex: props.disabled ? "-1" : "0",
+        },
+      });
+    }
     form.sync(
       JSON.stringify(richTextDocument(view.state.doc)),
       richTextEmpty(view.state.doc),
@@ -779,6 +808,13 @@ export function mountRichTextEditor(
       linkDocument = undefined;
     }
   };
+  const focus = () => {
+    if (disposed) return;
+    if (!before && !view.composing) sync();
+    // 外部文档替换后，原生 focus 也应使用引擎选择，避免光标落在段落之外。
+    view.focus();
+  };
+  view.dom.addEventListener("focus", focus);
   sync();
   let readyStop: void | (() => void);
   try {
@@ -791,6 +827,7 @@ export function mountRichTextEditor(
     if (disposed) return;
     disposed = true;
     win?.cancelAnimationFrame(frame);
+    view.dom.removeEventListener("focus", focus);
     root.removeEventListener("click", click);
     root.removeEventListener("mousedown", press);
     linkEditor.removeEventListener("keydown", linkKeys);
@@ -805,5 +842,6 @@ export function mountRichTextEditor(
       field.removeAttribute("tabindex");
     }
   }
-  return { sync, handle, destroy };
+  // 合并框架配置更新，保留原生输入期间的待确认值。
+  return { sync: schedule, handle, destroy };
 }

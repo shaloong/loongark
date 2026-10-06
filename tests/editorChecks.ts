@@ -282,6 +282,8 @@ export async function checkRichTextEditor(page: Page) {
   await input.focus();
   await input.pressSequentially("## ");
   await expect(input.locator("h2")).toHaveCount(1);
+  // 外部清空后的原生聚焦必须把输入留在当前段落，不能产生额外空段落。
+  await expect(input.locator(":scope > *")).toHaveCount(1);
   await input.press("Backspace");
   await expect(input.locator("h2")).toHaveCount(0);
   await expect(input).toHaveText("## ");

@@ -168,6 +168,7 @@
     "DataTable stable cell ranges, keyboard/pointer selection, quoted TSV clipboard, atomic validated paste and shared multi-step history",
     "Independent CodeMirror editor with syntax, history, search, completion, controlled values, forms and cancellable language loading",
     "Independent ProseMirror structured editor with formatting, lists, safe links, tables, plugins, node views, controlled values and forms",
-    "Chart area and signed stacks, stable pie/donut slices, continuous scatter, strict ISO time and logarithmic axes"
+    "Chart area and signed stacks, stable pie/donut slices, continuous scatter, strict ISO time and logarithmic axes",
+    "CodeEditor and RichTextEditor native input reconciliation after framework commits, external-clear focus and cross-engine ClipboardEvent payload contracts"
   ]
 }
