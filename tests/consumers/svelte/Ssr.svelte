@@ -486,3 +486,22 @@
     throw Error("SSR must not measure columns");
   }}
 />
+
+<L.LoongArkVirtualGrid
+  rowKeys={Array.from({ length: 10000 }, (_, i) => `grid-row-${i}`)}
+  columnKeys={Array.from({ length: 80 }, (_, i) => `grid-column-${i}`)}
+  height={200}
+  width={320}
+>
+  {#snippet renderCell(
+    details,
+  )}SSR_grid_{details.rowIndex}_{details.columnIndex}{/snippet}
+</L.LoongArkVirtualGrid>
+<L.LoongArkVirtualMasonry
+  keys={Array.from({ length: 10000 }, (_, i) => `masonry-${i}`)}
+  height={200}
+  width={640}
+  estimateSize={100}
+>
+  {#snippet renderItem(details)}SSR_masonry_{details.index}{/snippet}
+</L.LoongArkVirtualMasonry>

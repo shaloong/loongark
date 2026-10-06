@@ -24,6 +24,16 @@ for (const [framework, script] of [
     `import {renderToString} from 'solid-js/web';import {createComponent as h} from 'solid-js';import * as L from './packages/solid/dist/server/index.js';console.log(renderToString(()=>h(L.LoongArkContainer,{children:[h(L.LoongArkButton,{children:'Hello'}),h(L.LoongArkTextarea,{name:'notes',value:'SSR notes',readOnly:true,autoSize:true,minRows:2,maxRows:5}),h(L.LoongArkChipRemoveTrigger,{children:'Remove'}),h(L.LoongArkTransferList,{items:[{value:'alpha',label:'Alpha'}],defaultValue:['alpha'],name:'assigned'}),h(L.LoongArkTimePicker,{defaultValue:'13:30',name:'meeting',minuteStep:15}),h(L.LoongArkFloatingActionButton,{'aria-label':'Create SSR',children:'＋'}),h(L.LoongArkSpeedDial,{label:'SSR actions',actions:[{value:'new',label:'New'}]}),h(L.LoongArkImageList,{columns:2,children:h(L.LoongArkImageListItem,{children:'Image SSR'})}),h(L.LoongArkMasonry,{columns:2,children:h(L.LoongArkMasonryItem,{children:'Media SSR'})}),h(L.LoongArkBottomNavigationItem,{href:'#home',active:true,children:'Home'})]})));console.log(renderToString(()=>h(L.LoongArkMessageScroller,{label:'SSR conversation',children:[h(L.LoongArkMessage,{author:'Lin',children:[h(L.LoongArkBubble,{children:'Conversation SSR'}),h(L.LoongArkAttachment,{name:'SSR.pdf',status:'uploading'})]}),h(L.LoongArkQuestionnaire,{label:'SSR feedback',questions:[{id:'answer',label:'Your answer',type:'text'}],defaultValue:{answer:'SSR answer'}})]})));process.exit(0);`,
   ],
 ]) {
+  const gridProps =
+    "{rowKeys:Array.from({length:10000},(_,i)=>'grid-row-'+i),columnKeys:Array.from({length:80},(_,i)=>'grid-column-'+i),height:200,width:320,renderCell:details=>'SSR_grid_'+details.rowIndex+'_'+details.columnIndex}";
+  const masonryProps =
+    "{keys:Array.from({length:10000},(_,i)=>'masonry-'+i),height:200,width:640,estimateSize:100,renderItem:details=>'SSR_masonry_'+details.index}";
+  const layoutScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h('div',{},[h(L.LoongArkVirtualGrid,${gridProps}),h(L.LoongArkVirtualMasonry,${masonryProps})])})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>[h(L.LoongArkVirtualGrid,${gridProps}),h(L.LoongArkVirtualMasonry,${masonryProps})]));`
+        : `console.log(renderToString(h('div',null,h(L.LoongArkVirtualGrid,${gridProps}),h(L.LoongArkVirtualMasonry,${masonryProps}))));`;
   const virtualProps =
     "{data:Array.from({length:1000},(_,i)=>({id:'v-'+i,name:'Virtual '+i})),columns:[{key:'name',label:'Virtual name'}],pageSize:1000,virtualization:{height:200,estimateSize:50,overscan:1},onCellCommit:()=>{throw Error('SSR must not edit virtual row')}}";
   const virtualMessageProps =
@@ -218,6 +228,7 @@ for (const [framework, script] of [
         "process.exit(0);",
         ratingScript +
           virtualScript +
+          layoutScript +
           tableScript +
           queryScript +
           columnScript +
@@ -246,6 +257,19 @@ for (const [framework, script] of [
     ],
     { encoding: "utf8", timeout: 60000 },
   );
+  assert.match(result.stdout, /aria-rowcount="10000"/);
+  assert.match(result.stdout, /aria-colcount="80"/);
+  assert.match(result.stdout, /SSR_grid_0_0/);
+  assert.doesNotMatch(result.stdout, /SSR_grid_5000_40|SSR_masonry_5000/);
+  assert.match(result.stdout, /aria-setsize="10000"/);
+  const gridCells = [
+    ...result.stdout.matchAll(/data-row-key="grid-row-[^"]+"/g),
+  ];
+  const masonryItems = [
+    ...result.stdout.matchAll(/data-virtual-key="masonry-[^"]+"/g),
+  ];
+  assert(gridCells.length > 0 && gridCells.length < 80);
+  assert(masonryItems.length > 0 && masonryItems.length < 30);
   assert.match(result.stdout, /aria-colcount="51"/);
   assert.match(result.stdout, /SSR_window_0/);
   assert.match(result.stdout, /SSR_window_49/);
@@ -309,7 +333,7 @@ for (const [framework, script] of [
   assert.match(result.stdout, /aria-rowcount="1001"/);
   assert.match(result.stdout, /aria-setsize="500"/);
   const virtualKeys = [
-    ...result.stdout.matchAll(/data-virtual-key="([^"]+)"/g),
+    ...result.stdout.matchAll(/data-virtual-key="(m-[^"]+)"/g),
   ].map((m) => m[1]);
   assert(
     virtualKeys.length > 0 && virtualKeys.length < 20,

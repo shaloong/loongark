@@ -199,3 +199,21 @@ await build({
  build: { outDir: resolve("tests/consumer-dist"), emptyOutDir: false, lib: { entry: resolve("tests/consumers/column-window.mjs"), formats: ["es"], fileName: () => "column-window.js" } },
 });
 console.log("横向列窗口共享发布模块浏览器消费构建通过");
+
+await build({
+  configFile: false,
+  logLevel: "error",
+  resolve: {
+    alias: { "@loongark/kit": resolve("packages/kit/dist/index.js") },
+  },
+  build: {
+    outDir: resolve("tests/consumer-dist"),
+    emptyOutDir: false,
+    lib: {
+      entry: resolve("tests/consumers/virtual-layout.mjs"),
+      formats: ["es"],
+      fileName: () => "virtual-layout.js",
+    },
+  },
+});
+console.log("二维网格/瀑布流共享发布模块浏览器消费构建通过");

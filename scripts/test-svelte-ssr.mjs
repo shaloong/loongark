@@ -29,6 +29,16 @@ const { default: component } = await import(
   pathToFileURL(resolve("tests/consumer-dist/svelte-ssr/index.mjs")).href
 );
 const html = render(component).body;
+assert.match(html, /aria-rowcount="10000"/);
+assert.match(html, /aria-colcount="80"/);
+assert.match(html, /SSR_grid_0_0/);
+assert.doesNotMatch(html, /SSR_grid_5000_40|SSR_masonry_5000/);
+assert.match(html, /aria-setsize="10000"/);
+const gridCells = [...html.matchAll(/data-row-key="grid-row-[^"]+"/g)];
+const masonryItems = [...html.matchAll(/data-virtual-key="masonry-[^"]+"/g)];
+assert(gridCells.length > 0 && gridCells.length < 80);
+assert(masonryItems.length > 0 && masonryItems.length < 30);
+
 assert.match(html, /aria-colcount="51"/);
 assert.match(html, /SSR_window_0/);
 assert.match(html, /SSR_window_49/);
@@ -48,7 +58,7 @@ assert.match(html, /data-part="range-start"/);
 assert.match(html, /data-part="inspect-category"/);
 assert.match(html, /aria-rowcount="1001"/);
 assert.match(html, /aria-setsize="500"/);
-const virtualKeys = [...html.matchAll(/data-virtual-key="([^"]+)"/g)].map(
+const virtualKeys = [...html.matchAll(/data-virtual-key="(m-[^"]+)"/g)].map(
   (m) => m[1],
 );
 assert(virtualKeys.length > 0 && virtualKeys.length < 20);

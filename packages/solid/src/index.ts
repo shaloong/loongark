@@ -512,3 +512,19 @@ export { exportImageCropper } from "@loongark/kit";
 export type { ImageCropperExportModel, ImageCropperExportOptions } from "@loongark/kit";
 
 export type { ColumnVirtualizationOptions } from "@loongark/kit";
+
+export {
+  LoongArkVirtualGrid,
+  LoongArkVirtualMasonry,
+} from "./components/virtual";
+export type {
+  VirtualGridOptions,
+  VirtualGridCellDetails,
+  VirtualMasonryOptions,
+  VirtualMasonryEntry,
+} from "@loongark/kit";
+
+export type {
+  VirtualGridProps,
+  VirtualMasonryProps,
+} from "./components/virtual";

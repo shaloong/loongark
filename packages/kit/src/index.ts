@@ -104,3 +104,5 @@ export * from "./questionnaire-custom";
 export * from "./rating-group";
 
 export * from "./column-window";
+
+export * from "./virtual-layout";

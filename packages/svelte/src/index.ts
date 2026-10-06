@@ -914,3 +914,18 @@ export type { ImageCropperExportModel, ImageCropperExportOptions } from "@loonga
 export type { LoongArkQuestionnaireRenderers } from "./components/questionnaire-custom.types";
 
 export type { ColumnVirtualizationOptions } from "@loongark/kit";
+
+export { default as LoongArkVirtualGrid } from "./components/VirtualGrid.svelte";
+
+export { default as LoongArkVirtualMasonry } from "./components/VirtualMasonry.svelte";
+
+export type {
+  VirtualGridOptions,
+  VirtualGridCellDetails,
+  VirtualMasonryOptions,
+  VirtualMasonryEntry,
+} from "@loongark/kit";
+
+export type { VirtualGridProps } from "./components/VirtualGrid.svelte";
+
+export type { VirtualMasonryProps } from "./components/VirtualMasonry.svelte";

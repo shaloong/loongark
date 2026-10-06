@@ -56,3 +56,5 @@ import "./icon";
 import "./editor";
 
 import "./questionnaire-ranking";
+
+import "./virtual-layout";

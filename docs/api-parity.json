@@ -791,7 +791,9 @@
     "LoongArkTreeViewRoot",
     "LoongArkTreeViewRootProvider",
     "LoongArkTreeViewTree",
-    "LoongArkTypography"
+    "LoongArkTypography",
+    "LoongArkVirtualGrid",
+    "LoongArkVirtualMasonry"
   ],
   "vue": [
     "LoongArkAccordionContext",
@@ -1585,7 +1587,9 @@
     "LoongArkTreeViewRoot",
     "LoongArkTreeViewRootProvider",
     "LoongArkTreeViewTree",
-    "LoongArkTypography"
+    "LoongArkTypography",
+    "LoongArkVirtualGrid",
+    "LoongArkVirtualMasonry"
   ],
   "solid": [
     "LoongArkAccordionContext",
@@ -2379,7 +2383,9 @@
     "LoongArkTreeViewRoot",
     "LoongArkTreeViewRootProvider",
     "LoongArkTreeViewTree",
-    "LoongArkTypography"
+    "LoongArkTypography",
+    "LoongArkVirtualGrid",
+    "LoongArkVirtualMasonry"
   ],
   "svelte": [
     "LoongArkAccordionContext",
@@ -3173,6 +3179,8 @@
     "LoongArkTreeViewRoot",
     "LoongArkTreeViewRootProvider",
     "LoongArkTreeViewTree",
-    "LoongArkTypography"
+    "LoongArkTypography",
+    "LoongArkVirtualGrid",
+    "LoongArkVirtualMasonry"
   ]
 }

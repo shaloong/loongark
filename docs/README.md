@@ -242,3 +242,9 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 既有DataTable增加横向窗口，与可变行高窗口独立启用或组合。排序、筛选、范围粘贴、编辑和历史继续使用完整模型；冻结列、编辑列和活动游标保留，ARIA暴露完整列计数和绝对位置。四端各增加TableColumnWindowExample及根类型入口，新增ColumnVirtualization Story；当前117族、324Story、四端各792个LoongArk公开值、255个示例。API见[表格](data-table.md#横向列虚拟化)。
 
 最终新构建、契约、发布类型/四端SSR及Svelte通过（0错误/4既有警告）；642个运行时文件与交互验收版本逐文件哈希相同。三引擎新增各17项、既有表格各96项通过；Story32项及完整Linux视觉202项通过。144张原生截图、4张Story范围截图与8张新Linux基线已实际查看，220张旧基线含Windows哈希不变。范围和平台限制见[验收记录](audits/2026-10-06/table-column-window-linux/acceptance.json)。二维网格、虚拟瀑布流、日期、Drawer及整库平台/真机验收继续实施。
+
+## 二维网格与虚拟瀑布流（2026-10-06）
+
+新增四端LoongArkVirtualGrid与LoongArkVirtualMasonry，提供双轴窗口/键盘游标、可变卡片高度、稳定键与阅读锚点、焦点保留、完整ARIA位置及有界SSR。共享几何、控制器和样式集中实现，框架负责原生内容与生命周期；API见[虚拟布局](virtual-layout.md)。当前119族、326Story、四端各794个LoongArk公开值、263个框架示例。
+
+新构建、契约、发布类型/四端SSR和Svelte通过（0错误/4既有警告）。三引擎最终各51项通过，包含既有纵向窗口及嵌套部件回归；Story16项及全量Linux视觉218项通过。288张原生、24张Story操作截图及16张新Linux基线已实际核验，228张旧基线含Windows哈希不变。测量前估算布局、平台与真机限制见[验收记录](audits/2026-10-06/virtual-layout-linux/acceptance.json)。日期、Drawer及整库平台/真机验收继续实施。

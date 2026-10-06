@@ -122,12 +122,11 @@
     "Tour",
     "TransferList",
     "TreeView",
-    "Typography"
+    "Typography",
+    "VirtualGrid",
+    "VirtualMasonry"
   ],
-  "latestBatch": [
-    "CodeEditor",
-    "RichTextEditor"
-  ],
+  "latestBatch": ["VirtualGrid", "VirtualMasonry"],
   "equivalences": {
     "Input OTP": "PinInput",
     "Dropdown Menu": "Menu",
