@@ -25,7 +25,7 @@ const css = `
 [data-scope=toc][data-part=link]:focus-visible { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring);outline-offset:calc(-1 * var(--lk-control-focuswidth)); }
 [data-scope=toc][data-part=indicator] { z-index:1;top:var(--top);left:var(--left);width:var(--lk-control-borderwidth);height:var(--height);background:var(--lk-color-semantic-foreground);pointer-events:none; }
 [data-scope=drawer][data-part=backdrop] { position:fixed;inset:0;z-index:calc(var(--lk-z-index-dialog) - 1);background:var(--lk-color-semantic-overlay);opacity:calc(1 - var(--drawer-swipe-progress,0));transition:opacity var(--lk-motion-duration-base) var(--lk-motion-easing-standard); }
-[data-scope=drawer][data-part=positioner] { position:fixed;inset:0;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;z-index:var(--lk-z-index-dialog); }
+[data-scope=drawer][data-part=positioner] { direction:ltr;position:fixed;inset:0;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;z-index:var(--lk-z-index-dialog); }
 [data-scope=drawer][data-part=content] { position:relative;width:min(100%,var(--lk-control-dialogwidth-lg));max-height:85dvh;min-width:0;overflow:auto;pointer-events:auto;display:grid;align-content:start;gap:var(--lk-space-component-md);padding:var(--lk-space-component-lg);background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-lg) var(--lk-radius-lg) 0 0;box-shadow:var(--lk-shadow-xl);translate:0 0;transition:transform var(--lk-motion-duration-base) var(--lk-motion-easing-standard),translate var(--lk-motion-duration-base) var(--lk-motion-easing-standard);--lk-drawer-slide-x:0%;--lk-drawer-slide-y:100%; }
 [data-scope=drawer][data-part=content][data-dragging] { user-select:none; }
 [data-scope=drawer][data-part=positioner][data-swipe-direction=up] { align-items:flex-start; }
@@ -38,8 +38,19 @@ const css = `
 @starting-style { [data-scope=drawer][data-part=content][data-state=open] { translate:var(--lk-drawer-slide-x) var(--lk-drawer-slide-y); } }
 [data-scope=drawer][data-part=content][data-state=closed] { animation:lk-drawer-out var(--lk-motion-duration-exit) var(--lk-motion-easing-exit) forwards;pointer-events:none; }
 @keyframes lk-drawer-out { to { translate:var(--lk-drawer-slide-x) var(--lk-drawer-slide-y); } }
+/* 极短退出动画可能早于原生Presence监听，减弱动效直接完成退出。 */
+@media(prefers-reduced-motion:reduce) { [data-lk-motion=auto] [data-scope=drawer][data-part=content]:not(:where([data-lk-motion=force],[data-lk-motion=force] *)) { animation-duration:0s !important; } }
 [data-scope=drawer][data-part=grabber] { min-height:var(--lk-control-height-sm);display:flex;align-items:center;justify-content:center;cursor:grab; }
 [data-scope=drawer][data-part=grabber-indicator] { width:var(--lk-control-height-lg);height:var(--lk-space-component-xs);border-radius:var(--lk-radius-pill);background:var(--lk-color-semantic-mutedforeground); }
+/* 物理边缘不随文字方向镜像；手柄留在半开面板的可见自由边。 */
+[data-scope=drawer][data-part=content][data-swipe-direction=up] { padding-bottom:calc(var(--lk-space-component-lg) + var(--lk-control-height-sm)); }
+[data-scope=drawer][data-part=content][data-swipe-direction=up] > [data-part=grabber] { position:absolute;inset:auto 0 0; }
+[data-scope=drawer][data-part=content]:is([data-swipe-direction=left],[data-swipe-direction=right]) > [data-part=grabber] { position:absolute;top:0;bottom:0;width:var(--lk-control-height-sm); }
+[data-scope=drawer][data-part=content][data-swipe-direction=left] { padding-right:calc(var(--lk-space-component-lg) + var(--lk-control-height-sm)); }
+[data-scope=drawer][data-part=content][data-swipe-direction=right] { padding-left:calc(var(--lk-space-component-lg) + var(--lk-control-height-sm)); }
+[data-scope=drawer][data-part=content][data-swipe-direction=left] > [data-part=grabber] { right:0; }
+[data-scope=drawer][data-part=content][data-swipe-direction=right] > [data-part=grabber] { left:0; }
+[data-scope=drawer][data-part=content]:is([data-swipe-direction=left],[data-swipe-direction=right]) > [data-part=grabber] > [data-part=grabber-indicator] { width:var(--lk-space-component-xs);height:var(--lk-control-height-lg); }
 [data-scope=drawer][data-part=title] { margin:0;font-size:var(--lk-typography-fontsize-lg);font-weight:var(--lk-typography-fontweight-semibold); }
 [data-scope=drawer][data-part=description] { margin:0;font-size:var(--lk-typography-fontsize-md);color:var(--lk-color-semantic-mutedforeground); }
 [data-scope=drawer][data-part=trigger] { min-height:var(--lk-field-height);padding:0 var(--lk-space-component-md);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md);background:var(--lk-color-semantic-primary);color:var(--lk-color-semantic-primaryforeground);font-size:var(--lk-typography-fontsize-md);cursor:pointer; }

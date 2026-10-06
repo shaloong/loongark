@@ -140,7 +140,7 @@
   "pending": [],
   "latestEnhancements": [
     "RatingGroup accepted-value semantics, hover keyboard focus and controlled updates",
-    "Drawer gesture/snap points/stack",
+    "Drawer logical directions/RTL physical placement, reachable edge handles, native mouse/touch/cancel, snap points/stack and reduced-motion exit lifecycle",
     "DateInput segmented editing",
     "Toc controlled navigation and active-change payload",
     "Questionnaire conditions, cross-field validation and controlled rejection",

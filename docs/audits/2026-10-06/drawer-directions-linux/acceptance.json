@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-06",
+  "branch": "develop",
+  "base": "a97c85e09fe4eab5c5e6e169f285c7afa06e7749",
+  "scope": [
+    "既有Drawer原生四方向与LocaleProvider/RTL、吸附点、可见自由边手柄和滚动视口；四端示例及Directions Story",
+    "修复RTL物理定位、上/侧边手柄及减弱动效退出；复用原生手势/Presence/焦点生命周期，无新别名或依赖"
+  ],
+  "validation": {
+    "ordered": "v9 verify、contracts、Storybook构建、coverage、publication/四端类型与SSR、Svelte、消费及示例构建全部通过",
+    "coverage": "119families /328Story /794公开LoongArk值 per framework /271examples built",
+    "svelte": "0errors /4existing warnings",
+    "native": "v9 Chromium/Firefox/WebKit各24passed /6Story-only skip：16项四端方向矩阵与8项既有嵌套；包含实际可见尺寸、键盘、吸附、取消、关闭恢复与aXe",
+    "story": "v9 Story14passed /24native-only skip；4方向矩阵、2既有嵌套及8批328Story明暗质量扫描",
+    "visual": "独占执行最终262passed；仅建立32张已审阅新Linux基线，256张旧基线含2张Windows SHA256全部不变"
+  },
+  "corrections": [
+    "初次aXe发现不可命名div手柄，改用有名称的group并提供吸附/关闭按钮作为键盘等效操作",
+    "原生吸附不重排内容；共享滚动视口按偏移适应可见范围，避免紧凑状态焦点落在屏幕外",
+    "目视发现Scroller裁切外部焦点框，使用既有Token在示例滚动视口内侧呈现焦点框",
+    "减弱动效极短退出早于Presence监听，Drawer退出使用零时长；普通/强制动效保留原契约",
+    "v8交互通过但目视发现一张展开截图处于过渡帧；v9增加实际可见长度与吸附点一致的断言后重新验收，未用截图更新掩盖问题",
+    "一次视觉执行器中断留下子进程，与重跑共用日志和服务造成连接拒绝；该混合日志不计通过，清理后独占执行完整视觉回归并检查最终退出状态。"
+  ],
+  "manualReview": {
+    "native": "v9实际查看三引擎各64张展开/紧凑抽样，共192张（React up、Vue end、Solid start、Svelte down，每组LTR/RTL×明暗×1280/375×两状态）；另查看Chromium全部64张375px原生触摸事件截图。全部832张原生捕获并非逐张目视；WebKit DPR2按CSS尺寸归一化后查看。",
+    "story": "v9全部64张Story展开/紧凑、16张原生触摸模拟截图及32张新增Linux视觉候选已实际查看。"
+  },
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "platform": "Linux Debian13",
+    "chromium": "system151.0.7922.173",
+    "firefox": "Playwright144.0.2",
+    "webkit": "Playwright26.0",
+    "firefoxEnvironment": "仅受限本地启用MOZ_DISABLE_CONTENT_SANDBOX/RDD/GMP及可写XDG_CACHE_HOME；CI不变"
+  },
+  "limitations": [
+    "375px模拟视口和Chromium CDP原生触摸事件不等同真实手机；Firefox/WebKit专项使用真实鼠标指针",
+    "Linux WebKit不等同原生Safari；本批专项通过不替代整库跨浏览器验收，已记录平台失败继续修复",
+    "紧凑纵向面板通过滚动访问内容，不承诺所有控件同时可见；原生非受控关闭恢复defaultSnapPoint",
+    "过程截图、联系表和日志仅留.artifacts或限期CI Artifact；Git只保留简短摘要及已审阅Linux基线，Windows不变"
+  ]
+}

@@ -50,7 +50,7 @@ const DrawerPanel = defineComponent({
                   () => [
                     h(
                       L.LoongArkDrawerGrabber,
-                      { "aria-label": "Drag drawer" },
+                      { role: "group", "aria-label": "Drag drawer" },
                       () => h(L.LoongArkDrawerGrabberIndicator),
                     ),
                     h(L.LoongArkDrawerTitle, {}, () => "Project details"),

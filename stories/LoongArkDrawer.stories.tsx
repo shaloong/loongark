@@ -1,3 +1,4 @@
+import { DrawerDirectionsExample } from "../examples/react/DrawerDirectionsExample";
 import React from "react";
 import { DrawerExample } from "../examples/react/DrawerExample";
 import { withArkExamplePage } from "./arkStory";
@@ -41,3 +42,7 @@ export const Basic: StoryObj = {
 };
 
 export const SnapPoints: StoryObj = { render: () => <DrawerExample /> };
+
+export const Directions: StoryObj = {
+  render: () => <DrawerDirectionsExample />,
+};

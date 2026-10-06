@@ -41,7 +41,7 @@
 
 - [x] 本地化自由文本日期解析（[API](localized-date.md)及[三引擎验收](audits/2026-10-06/localized-date-linux/acceptance.json)）
 - [x] 日期与时间组合（原生DateInput日期/时分秒、显式时区与四端表单契约，同上）
-- [ ] Drawer 全部方向、RTL 与触摸回归
+- [x] Drawer 全部方向、RTL 与触摸回归（[四端三引擎验收](audits/2026-10-06/drawer-directions-linux/acceptance.json)；原生触摸事件模拟，真实手机另行验收）
 - [ ] Firefox 实际运行、截图与焦点验收
 - [ ] Safari 实际运行、截图与焦点验收（WebKit 引擎验收不等同 Safari）
 - [ ] 真实手机验收（模拟视口和模拟触摸不等同真机）
@@ -68,3 +68,6 @@
 自定义题型提交e237fd8的[实际CI](https://github.com/shaloong/loongark/actions/runs/37467299209)：Chromium四端394项、Story166项通过；Firefox四端390项通过、Story164通过/2失败（富文本删表及remediation浮层）；WebKit四端373通过/17失败（窄屏图表8项、树折叠焦点6项、窄屏消费布局3项），Story未执行。原生Safari26.6.1/macOS15.7.9完成251默认示例和9项交互后，在Vue深色批量提交后的触发器焦点失败；失败截图已下载并实际查看，题组与自定义题型尚未执行。新增平台验收继续处理，未将CI配置或Linux定向通过计作平台清单完成。
 
 横向窗口提交b435507的[实际CI](https://github.com/shaloong/loongark/actions/runs/37486637681)：Chromium四端411项、Story170项通过；Firefox四端407项通过、Story168通过/2失败（remediation浮层、全Story挂载扫描超时）；WebKit四端392通过/15失败（窄屏图表8项、树折叠焦点5项、React/Vue窄屏消费布局2项），Story未执行。原生Safari26.6.1/macOS15.7.9完成255默认示例及32既有交互后，React浅色新增题组首字段焦点失败；32交互截图及失败图已下载并实际查看，新增题组显示但首字段未获得焦点。横向窗口专项未加入该版Safari runner，不将默认挂载视作高级行为通过；平台清单继续开放。
+
+
+日期提交a97c85e的[实际CI](https://github.com/shaloong/loongark/actions/runs/37504582159)：Chromium四端462项、Story182项通过；Firefox四端458项通过、Story180通过/2失败（remediation菜单样式挂载前交互、全Story挂载扫描超时）；WebKit四端440通过/18失败（窄屏图表8项、树折叠焦点7项、Solid富文本删表1项、React/Solid窄屏消费布局2项），Story未执行。原生Safari26.6.1/macOS15.7.9完成267默认示例和32既有交互后，在React浅色新增题组首字段焦点失败；失败截图和WebKit富文本失败帧已实际查看。平台项目保持开放，专项通过不替代整库结果。

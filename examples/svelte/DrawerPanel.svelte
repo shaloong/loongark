@@ -11,7 +11,7 @@
   ><L.LoongArkDrawerPortal
     ><L.LoongArkDrawerOverlay /><L.LoongArkDrawerPositioner
       ><L.LoongArkDrawerContent style="height:440px"
-        ><L.LoongArkDrawerGrabber aria-label="Drag drawer"
+        ><L.LoongArkDrawerGrabber role="group" aria-label="Drag drawer"
           ><L.LoongArkDrawerGrabberIndicator /></L.LoongArkDrawerGrabber
         ><L.LoongArkDrawerTitle>Project details</L.LoongArkDrawerTitle
         ><L.LoongArkDrawerDescription

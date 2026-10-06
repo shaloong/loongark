@@ -255,3 +255,10 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 既有DateInput补充严格本地化自由文本解析、日期/时分秒组合和显式时区示例；四端同步原生表单、LocaleProvider/RTL键盘与状态。共享Input/Textarea修复根状态继承，同时保留控件覆盖；API见[日期契约](localized-date.md)。当前119族、327Story、四端各794个LoongArk公开值、267个框架示例。
 
 最终新构建、契约、发布类型/四端SSR及Svelte通过（0错误/4既有警告）；三引擎原生专项各32项、Story12项及完整Linux视觉230项通过。144张原生、12张Story截图与12张新Linux基线已实际审阅，244张旧基线含Windows哈希不变。范围及限制见[验收记录](audits/2026-10-06/localized-date-linux/acceptance.json)。Drawer、整库跨浏览器与真实手机验收继续实施。
+
+
+## Drawer 四方向、RTL 与吸附交互（2026-10-06）
+
+既有Drawer修复RTL物理定位、上/侧边手柄和减弱动效退出，四端新增方向示例及Directions Story；共享滚动视口适应吸附后的可见范围，支持长文本、键盘和焦点恢复。复用原生手势与生命周期，无新增别名或依赖；API见[Drawer](drawer.md)。当前119族、328Story、四端各794个LoongArk公开值、271个框架示例。
+
+最终新构建、契约、发布类型/四端SSR和Svelte通过（0错误/4既有警告）。Chromium/Firefox/WebKit专项各24项、Story14项含328Story明暗质量扫描及完整Linux视觉262项通过。实际查看192张三引擎展开/紧凑抽样、64张Chromium触摸模拟、80张Story截图与32张新Linux基线；832张原生捕获并非逐张目视。256张旧基线含Windows哈希不变；过程文件不入Git。验收范围与限制见[记录](audits/2026-10-06/drawer-directions-linux/acceptance.json)。整库平台失败及真实手机验收继续实施，模拟触摸不算真机。
