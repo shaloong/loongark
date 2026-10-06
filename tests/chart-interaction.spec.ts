@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { captureWidthFailure } from "./width-diagnostics";
 import AxeBuilder from "@axe-core/playwright";
 for (const framework of ["react", "vue", "solid", "svelte"])
   for (const mode of ["light", "dark"])
@@ -167,11 +168,18 @@ for (const framework of ["react", "vue", "solid", "svelte"])
           .click();
         await expect(chart).toBeVisible();
         expect(errors).toEqual([]);
-        expect(
-          await page.evaluate(
-            () => document.documentElement.scrollWidth > innerWidth + 1,
-          ),
-        ).toBe(false);
+        const measured = await page.evaluate(() => ({
+          scroll: document.documentElement.scrollWidth,
+          viewport: innerWidth,
+        }));
+        if (measured.scroll > measured.viewport + 1)
+          await captureWidthFailure(
+            page,
+            test.info(),
+            measured.scroll,
+            measured.viewport,
+          );
+        expect(measured.scroll > measured.viewport + 1).toBe(false);
         expect((await new AxeBuilder({ page }).analyze()).violations).toEqual(
           [],
         );

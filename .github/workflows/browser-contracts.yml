@@ -43,7 +43,15 @@ jobs:
       - run: pnpm check:publication
       - run: pnpm check:svelte
       - run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
-      - run: pnpm test:frameworks
+      - run: node scripts/build-framework-fixtures.mjs
+      - run: node scripts/build-example-fixtures.mjs
+      # 先捕获已知WebKit宽度失败，避免完整四端运行后才取得诊断；断言保持原样。
+      - if: matrix.browser == 'webkit'
+        run: node scripts/run-playwright.mjs tests/chart-interaction.spec.ts tests/framework-consumers.spec.ts --project=webkit --workers=2 --grep='375|发布消费'
+        env:
+          STATIC_DIR: tests/consumer-dist
+          PORT: "6007"
+      - run: node scripts/run-framework-tests.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -53,6 +61,7 @@ jobs:
             .artifacts/browser-environment/
             test-results/**/*.png
             test-results/**/error-context.md
+            test-results/**/*.json
             !test-results/**/*react*/**/*.png
             !test-results/**/*vue*/**/*.png
             !test-results/**/*solid*/**/*.png

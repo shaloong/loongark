@@ -1,5 +1,6 @@
 import { auditDirectory } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
+import { captureWidthFailure } from "./width-diagnostics";
 import AxeBuilder from "@axe-core/playwright";
 for (const framework of ["react", "vue", "solid", "svelte"])
   test(`${framework} 发布消费、绑定、主题和浮层`, async ({ page }) => {
@@ -119,9 +120,12 @@ for (const framework of ["react", "vue", "solid", "svelte"])
         }),
       )
       .toBeLessThanOrEqual(1);
-    expect(
-      await page.evaluate(() => document.documentElement.scrollWidth),
-    ).toBeLessThanOrEqual(375);
+    const measuredWidth = await page.evaluate(
+      () => document.documentElement.scrollWidth,
+    );
+    if (measuredWidth > 375)
+      await captureWidthFailure(page, test.info(), measuredWidth);
+    expect(measuredWidth).toBeLessThanOrEqual(375);
     expect(errors).toEqual([]);
     await page.screenshot({
       path: `${auditDirectory("2026-10-02")}/after-${framework}-dark.png`,

@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-06",
+  "batch": "webkit-width-diagnostics",
+  "baseCommit": "cd2cb6a2e95b4c5097c58af032d36e7734a2d470",
+  "changes": [
+    "保留图表首次scrollWidth与innerWidth的原比较、消费页首次scrollWidth≤375的原断言",
+    "仅失败后附加实际布局、溢出节点和两帧后宽度，后续测量不改变原断言结果",
+    "CI先运行WebKit相关12项窄屏/消费场景，失败即停止；几何JSON、错误摘要和trace作为限期Artifact保存"
+  ],
+  "validation": {
+    "lint": "通过：仓库、验收保存、MIT许可",
+    "testDiscovery": "20项Chromium测试发现通过；未运行浏览器，不计交互验收",
+    "relatedSourceChecks": "当前工作区verify、contracts、Story构建、coverage、publication/SSR及Svelte检查均通过；这不代替该独立提交的干净CI新构建"
+  },
+  "observedRemote": {
+    "run": "https://github.com/shaloong/loongark/actions/runs/37535659858",
+    "testedCommit": "cd2cb6a2e95b4c5097c58af032d36e7734a2d470",
+    "chromium": {
+      "frameworkPassed": 507,
+      "storyPassed": 195,
+      "conclusion": "success"
+    },
+    "webkit": {
+      "passed": 484,
+      "failed": 15,
+      "skipped": 94,
+      "failures": "8项窄屏图表宽度与7项树形行焦点；已下载15份真实失败trace"
+    },
+    "nativeSafari": "275默认示例、18项交互后批量面板焦点断言失败；另一个修复批次处理"
+  },
+  "limitations": [
+    "本批是失败诊断，不宣称修复布局或平台通过",
+    "Linux专项正在另一个未提交的焦点修复工作区运行；未提交代码未包含在本批",
+    "实际几何仍等待新提交CI，不以已稳定的失败截图推断最初溢出原因",
+    "过程文件仅忽略目录或CI Artifact，不增加或更新视觉基线"
+  ]
+}
