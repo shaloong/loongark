@@ -173,3 +173,5 @@ assert.match(html, /data-slice-key="Axis &lt;safe&gt;"/);
 assert.match(html, /<th scope="col">at<\/th>/);
 assert.match(html, /<th scope="col">x<\/th>/);
 console.log("Svelte 图表新增类型与轴 SSR 转义、可访问原始数据及无回调通过");
+
+assert.equal([...html.matchAll(/<input(?=[^>]*name="multiMatrix\[row\]")(?=[^>]*checked)[^>]*>/g)].length, 2);

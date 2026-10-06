@@ -121,3 +121,6 @@ export const CallbackUpdates = {
 
 import { QuestionnaireTypesExample } from "../examples/react/QuestionnaireTypesExample";
 export const StructuredTypes: StoryObj = { render: () => <QuestionnaireTypesExample /> };
+
+import { QuestionnaireMatrixExample } from "../examples/react/QuestionnaireMatrixExample";
+export const MatrixMultiple: StoryObj = { decorators: [withArkExamplePage], render: () => <QuestionnaireMatrixExample /> };

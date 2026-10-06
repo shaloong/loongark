@@ -22,6 +22,10 @@ pnpm storybook
 
 [技术架构与验证](docs/README.md) · [组件覆盖](docs/component-coverage.md) · [开发约定](AGENTS.md)
 
-当前组件目录覆盖 115 个组件族、300 个 Story，React/Vue/Solid/Svelte 各 790 个公开值入口；Ark UI 独有部件和 Hook 的安装版本对照已补齐。图标统一采用 Lucide，四端节点与高级 Props 见 [图标说明](docs/icons.md)。高级场景仍逐批验收，范围与限制见 [Ark UI 核对](docs/ark-ui-coverage.md)。
+当前组件目录覆盖 117 个组件族、320 个 Story，React/Vue/Solid/Svelte 各 792 个公开值入口；Ark UI 独有部件和 Hook 的安装版本对照已补齐。图标统一采用 Lucide，四端节点与高级 Props 见 [图标说明](docs/icons.md)。高级场景仍逐批验收，范围与限制见 [Ark UI 核对](docs/ark-ui-coverage.md)。
 
 代码采用 [MIT License](LICENSE)。发布包包含相同许可；第三方依赖保留各自许可证。
+
+## 矩阵多选（2026-10-06）
+
+四端Questionnaire复用matrix题型补上逐行多选、数量边界、原生重复字段和首个无效行焦点；保留单选兼容、受控拒绝与嵌套异步快照隔离。当前117族、320Story、四端各792公开值入口、239框架示例。新构建、契约、发布类型/SSR与Svelte检查通过；完整Chromium四端250项、Firefox与WebKit定向各32项、Story27项及Linux视觉174项通过。三引擎96张四端截图和4张新增Linux基线已实际审阅；196张既有基线含Windows哈希未变。过程文件不入Git，准确范围与限制见[验收记录](docs/audits/2026-10-06/questionnaire-matrix-linux/acceptance.json)。排序拖动、重复题组与自定义渲染继续实施，整库平台与真机清单保持开放。

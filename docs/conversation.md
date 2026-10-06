@@ -10,7 +10,7 @@ React、Vue、Solid、Svelte 使用相同的五个公开名称。共享类型、
 - `LoongArkBubble`：内容容器，`side=incoming|outgoing` 控制中性背景。支持长文本与显式换行；无需消息作者或发送状态，适合消息内容与其它回复内容。
 - `LoongArkMessage`：原生 article，必需 `author`，支持 `side`、`dateTime`（机器时间）、`timeLabel`（展示时间）、`status=sent|sending|error`、`statusLabel`、`retryLabel`、`onRetry`。内容可组合 Bubble、Attachment 或其它基础组件。不会自行发送消息，也不解析 HTML/Markdown。
 - `LoongArkMessageScroller`：`label` 命名可聚焦滚动区域，`jumpLabel` 命名回到底部按钮，`onAtBottomChange({atBottom})` 报告跟随状态。初次挂载到最新消息；用户上翻后新消息不强制滚动，前插消息保持当前阅读位置；回到最新后恢复跟随。监听器、MutationObserver 和 ResizeObserver 在卸载时释放。高度可覆盖共享 viewport 的 CSS；默认使用已有控件高度 Token。容器不会获取消息数据或分页；可选虚拟化见下文。
-- `LoongArkQuestionnaire`：必需 `label/questions`；题型为 `text/single/multiple`。题目具有唯一 `id`、`label`、`description`、`required`，文本支持 `minLength/maxLength`，`when(value)` 控制条件可见性，`validate(answer, value)` 返回同步业务错误说明或 undefined；选项具有唯一 `value`、`label`、`disabled`。`value/defaultValue` 保存答案，`onValueChange({value})` 通知变化，`onComplete({value})` 只在全部题目有效时调用。`disabled/submitting` 阻止交互，`completed` 展示完成状态，`error` 展示提交错误。空题集有明确空状态，不提供提交按钮。显示文本支持 `emptyLabel/successLabel/nextLabel/backLabel/submitLabel/requiredLabel/invalidLabel`。
+- `LoongArkQuestionnaire`：必需 `label/questions`；题型为 `text/single/multiple/number/date/select/matrix/ranking`。题目具有唯一 `id`、`label`、`description`、`required`，文本支持 `minLength/maxLength`，`when(value)` 控制条件可见性，`validate(answer, value)` 返回同步业务错误说明或 undefined；选项具有唯一 `value`、`label`、`disabled`。`value/defaultValue` 保存答案，`onValueChange({value})` 通知变化，`onComplete({value})` 只在全部题目有效时调用。`disabled/submitting` 阻止交互，`completed` 展示完成状态，`error` 展示提交错误。空题集有明确空状态，不提供提交按钮。显示文本支持 `emptyLabel/successLabel/nextLabel/backLabel/submitLabel/requiredLabel/invalidLabel`。
 
 Questionnaire 在当前题内校验，前进与后退将焦点移动到第一项可用输入，校验失败保留当前题并聚焦。答案按题目与可用选项归一化，移除陈旧题目、无效或禁用选项，去重多选答案。原生 FormData 按题目 id 序列化；多选为同名多个值，未作答的多选无条目。答案长度按去除首尾空白后的字符数校验。题目变化时页码限制到合法范围；需要重新开始一个独立问卷时重新挂载组件。
 
@@ -22,7 +22,7 @@ Vue 支持 `v-model`（modelValue）；Svelte 支持 `bind:value`；React/Solid 
 
 本批 Linux 证据位于 [验收记录](audits/2026-10-03/conversation-linux/acceptance.json)。截图单独建立 Linux 基线，未覆盖 Windows。测试浏览器与验证范围以该记录为准。
 
-滚动组件支持稳定消息与文字节点的媒体高度锚定，但不提供虚拟列表；调用方仍建议为媒体预留尺寸以减少布局变化。Questionnaire 按可见题目导航，支持条件跳题与同步/异步业务校验；不提供文件题目或评分引擎。未测试全部 peer 版本与浏览器。
+原生消息滚动支持稳定消息与文字节点的媒体高度锚定；可通过 `virtualization` 开启后文说明的可变高度消息窗口。调用方仍建议为媒体预留尺寸以减少布局变化。Questionnaire 按可见题目导航，支持条件跳题与同步/异步业务校验；不提供文件题目或评分引擎。未测试全部 peer 版本与浏览器。
 
 本次目视修正：附件使用共享 SVG 文件图标，避免系统字体缺字；双操作按钮在窄屏独立成行，长文件名保持可读宽度。问卷题组按 id 维护渲染身份，避免跨题导航复用原生 radio 节点导致 checked 状态丢失。Linux 测试输出目录与既有 Windows 审查证据隔离。
 
@@ -82,3 +82,9 @@ Button 的 `loading` 会同时禁用交互并设置 `aria-busy=true`；其余情
 通过 `virtualization={{keys,height:360,estimateSize:96,overscan:3,scrollToIndex:250}}` 提供稳定且唯一的有序消息键。React/Solid 使用 `renderItem({key,index})`，Vue 使用 item 插槽，Svelte 使用 `item` Snippet；按键读取调用方的最新内容。索引从0开始，改变 scrollToIndex 发出定位命令。默认从最新消息开始，只有用户位于末尾时追加才自动跟随。前插历史、可见内容增高时保留消息边界与内部偏移；正在阅读的键删除后优先定位后一个合法键。
 
 真实测量包含每条消息的容器间距。内容使用原生 list/listitem 与 aria-posinset/aria-setsize；活动焦点消息额外保留，缓冲之外的其他消息卸载，消息组件的局部状态如需跨卸载保存由调用方管理。SSR 输出末尾的估算窗口，不触发 onAtBottomChange。观察器、滚动及焦点监听器在卸载时清理。此模式保证消息边界/内部偏移；原生非虚拟模式继续提供可见文字锚点，不承诺虚拟模式保持文字节点内部的像素位置。
+
+## 矩阵多选
+
+`Question.type: "matrix"` 默认保持每行单选；设置 `multiple: true` 后，答案为 `{questionId: {rowId: [optionValue, ...]}}`。`minSelections/maxSelections` 适用于普通多选及矩阵多选，每行独立校验；必须为非负安全整数且最小值不大于最大值。`required` 要求全部可用行有答案，可选行的空答案不触发最小数量限制。
+
+答案按选项顺序归一，去重并移除无效、禁用行与选项；单选与多选答案不会互相强制转换。原生 FormData 为每个已选项重复 `questionId[rowId]` 名称。矩阵行是原生 fieldset，数量错误关联到对应行，前进失败聚焦首个无效行。禁用选项在多选模式可见且不可操作。受控拒绝恢复勾选状态；异步校验收到独立且冻结的嵌套行数组，不能修改编辑答案。`questionMap` 继续返回单选字符串行；多选答案可按公开 `QuestionAnswer` 类型读取。四端 `QuestionnaireMatrixExample` 与 `MatrixMultiple` Story 展示同一 API。

@@ -26,7 +26,7 @@
 
 ## 问卷
 
-- [ ] 矩阵多选
+- [x] 矩阵多选（[三引擎四端与Linux视觉验收](audits/2026-10-06/questionnaire-matrix-linux/acceptance.json)）
 - [ ] 重复题组
 - [ ] 自定义题型渲染及生命周期契约
 - [ ] 排序题拖动与键盘操作
@@ -46,7 +46,7 @@
 - [ ] Safari 实际运行、截图与焦点验收（WebKit 引擎验收不等同 Safari）
 - [ ] 真实手机验收（模拟视口和模拟触摸不等同真机）
 
-当前本地云端为 Linux。Firefox144.0.2已能实际运行；图表四端定向回归通过；编辑器与范围回归三引擎各48项通过，实际四端截图已审阅，详见[输入与剪贴板平台验收](audits/2026-10-06/editor-input-platforms/acceptance.json)。WebKit26.0补齐本地运行依赖后，本批图表四端16项通过，实际截图已审阅。整库跨浏览器失败仍待修复，平台清单不关闭。范围批次adb2的[实际CI](https://github.com/shaloong/loongark/actions/runs/37382936739)：Chromium186四端通过、118Story通过/2质量扫描超时；Firefox168通过/18失败，WebKit163通过/23失败；原生Safari26.6.1/macOS15.7.9的223默认示例及24既有交互通过后树折叠失败。24张Safari实际截图及失败图已查看。编辑器批次已拆分完整质量扫描，其他实际失败继续处理，平台清单不关闭。真实手机需取得设备或设备云连接。过程文件仅保留在 `.artifacts/` 或有期限的CI Artifact；Git只保存简短摘要和已审阅回归基线。
+当前本地云端为 Linux。Firefox144.0.2已能实际运行；图表四端定向回归通过；编辑器与范围回归三引擎各48项通过，实际四端截图已审阅，详见[输入与剪贴板平台验收](audits/2026-10-06/editor-input-platforms/acceptance.json)。WebKit26.0补齐本地运行依赖后，本批图表四端16项通过，实际截图已审阅。整库跨浏览器失败仍待修复，平台清单不关闭。范围批次adb2的[实际CI](https://github.com/shaloong/loongark/actions/runs/37382936739)：Chromium186四端通过、118Story通过/2质量扫描超时；Firefox168通过/18失败，WebKit163通过/23失败；原生Safari26.6.1/macOS15.7.9的223默认示例及24既有交互通过后树折叠失败。24张Safari实际截图及失败图已查看。编辑器批次已拆分完整质量扫描，其他实际失败继续处理，平台清单不关闭。输入平台修复26e3280的[真实Safari任务](https://github.com/shaloong/loongark/actions/runs/37417089161)运行Safari26.6.1/macOS15.7.9：235默认示例与24既有交互通过后，在清空筛选恢复树展开状态时失败；24张交互图与失败图已实际查看。失败图中输入已空但筛选结果仍保留，事件原因待原生诊断，不能视作通过。同任务Firefox整库232通过/2失败，均为窄屏列拖动；不得以本批定向通过代替整库结果。真实手机需取得设备或设备云连接。过程文件仅保留在 `.artifacts/` 或有期限的CI Artifact；Git只保存简短摘要和已审阅回归基线。
 
 
 独立浏览器流水线及原生 Safari runner 已配置；[本地配置验证](audits/2026-10-05/browser-ci-setup/acceptance.json)不计作远端或真机验收，实际首轮结果和截图审阅已补入该记录；平台项目仍等待修复后的完整验收。

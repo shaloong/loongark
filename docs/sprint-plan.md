@@ -180,3 +180,7 @@ DateInput 提供分段日期、范围、键盘编辑与真实表单；Swap 提�
 ## 编辑器输入与剪贴板平台修复（2026-10-06）
 
 共享编辑器合并框架配置更新，修复Firefox原生替换输入丢失和React富文本误判受控拒绝；外部清空后恢复引擎选择，避免多余空段落。剪贴板测试读写实际ClipboardEvent的数据对象，保留原子粘贴与历史断言。新构建、契约、公开类型/SSR与Svelte检查通过；Chromium、Firefox和WebKit四端定向各48项，Story12项及整库Linux视觉170项通过。三引擎240张四端默认/交互截图已实际查看，196张既有回归基线含Windows未修改，过程文件不入Git。真实系统剪贴板、手机/IME及整库Safari限制详见[验收记录](audits/2026-10-06/editor-input-platforms/acceptance.json)；其余高级缺口继续实施，平台清单保持开放。
+
+## 矩阵多选（2026-10-06）
+
+四端Questionnaire复用matrix题型补上逐行多选、数量边界、原生重复字段和首个无效行焦点；保留单选兼容、受控拒绝与嵌套异步快照隔离。当前117族、320Story、四端各792公开值入口、239框架示例。新构建、契约、发布类型/SSR与Svelte检查通过；完整Chromium四端250项、Firefox与WebKit定向各32项、Story27项及Linux视觉174项通过。三引擎96张四端截图和4张新增Linux基线已实际审阅；196张既有基线含Windows哈希未变。过程文件不入Git，准确范围与限制见[验收记录](audits/2026-10-06/questionnaire-matrix-linux/acceptance.json)。排序拖动、重复题组与自定义渲染继续实施，整库平台与真机清单保持开放。

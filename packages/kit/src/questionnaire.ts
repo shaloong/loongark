@@ -1,4 +1,10 @@
-const escapeHtml = (value: string) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 export interface QuestionOption {
   value: string;
   label: string;
@@ -9,9 +15,20 @@ export interface QuestionRow {
   label: string;
   disabled?: boolean;
 }
-export type QuestionAnswer = string | readonly string[] | Readonly<Record<string, string>>;
-export function questionMap(answer: QuestionAnswer | undefined): Readonly<Record<string, string>> {
-  return answer && typeof answer === "object" && !Array.isArray(answer) ? Object.fromEntries(Object.entries(answer)) : {};
+export type QuestionAnswer =
+  | string
+  | readonly string[]
+  | Readonly<Record<string, string | readonly string[]>>;
+export function questionMap(
+  answer: QuestionAnswer | undefined,
+): Readonly<Record<string, string>> {
+  return answer && typeof answer === "object" && !Array.isArray(answer)
+    ? Object.fromEntries(
+        Object.entries(answer).filter(
+          (entry): entry is [string, string] => typeof entry[1] === "string",
+        ),
+      )
+    : {};
 }
 export function questionIncludes(answer: QuestionAnswer, value: string) {
   return Array.isArray(answer) && answer.includes(value);
@@ -20,8 +37,21 @@ export interface Question {
   id: string;
   label: string;
   description?: string;
-  type: "text" | "single" | "multiple" | "number" | "date" | "select" | "matrix" | "ranking";
+  type:
+    | "text"
+    | "single"
+    | "multiple"
+    | "number"
+    | "date"
+    | "select"
+    | "matrix"
+    | "ranking";
   required?: boolean;
+  /** 矩阵题的每一行允许多个选项；默认仍是独立单选组。 */
+  multiple?: boolean;
+  /** 多选题或矩阵多选的每行选项数量边界；空的可选答案不触发最小值。 */
+  minSelections?: number;
+  maxSelections?: number;
   min?: number | string;
   max?: number | string;
   step?: number;
@@ -69,20 +99,63 @@ export interface QuestionnaireOptions {
   onValueChange?: (details: { value: QuestionnaireValue }) => void;
   onComplete?: (details: { value: QuestionnaireValue }) => void;
 }
+function matrixAnswers(
+  answer: QuestionAnswer | undefined,
+): Readonly<Record<string, string | readonly string[]>> {
+  return answer && typeof answer === "object" && !Array.isArray(answer)
+    ? Object.fromEntries(Object.entries(answer))
+    : {};
+}
+function selectionError(
+  q: Question,
+  answer: readonly string[],
+  options: Pick<QuestionnaireOptions, "requiredLabel" | "invalidLabel">,
+) {
+  if (q.required && !answer.length)
+    return options.requiredLabel ?? "Please answer this question.";
+  if (
+    answer.length &&
+    (answer.length < (q.minSelections ?? 0) ||
+      answer.length > (q.maxSelections ?? Infinity))
+  )
+    return options.invalidLabel ?? "Check the number of selected options.";
+  return "";
+}
 export function questionnaireQuestions(questions: readonly Question[]) {
   const ids = new Set<string>();
   for (const q of questions) {
     if (!q.id || ids.has(q.id))
       throw Error("Questionnaire requires unique non-empty question ids");
     ids.add(q.id);
+    if (q.multiple !== undefined && q.type !== "matrix")
+      throw Error("Questionnaire multiple applies only to matrix questions");
+    if (
+      (q.minSelections !== undefined || q.maxSelections !== undefined) &&
+      q.type !== "multiple" &&
+      !(q.type === "matrix" && q.multiple)
+    )
+      throw Error("Questionnaire selection bounds require multiple selection");
+    for (const bound of [q.minSelections, q.maxSelections])
+      if (bound !== undefined && (!Number.isSafeInteger(bound) || bound < 0))
+        throw Error(
+          "Questionnaire selection bounds require non-negative safe integers",
+        );
+    if ((q.minSelections ?? 0) > (q.maxSelections ?? Infinity))
+      throw Error("Questionnaire selection bounds must be ascending");
     if (q.type === "matrix") {
       const rows = new Set<string>();
       for (const row of q.rows ?? []) {
-        if (!row.id || rows.has(row.id)) throw Error("Questionnaire requires unique non-empty matrix row ids");
+        if (!row.id || rows.has(row.id))
+          throw Error("Questionnaire requires unique non-empty matrix row ids");
         rows.add(row.id);
       }
     }
-    if (q.type === "number" && q.step !== undefined && (!Number.isFinite(q.step) || q.step <= 0)) throw Error("Questionnaire requires a finite positive number step");
+    if (
+      q.type === "number" &&
+      q.step !== undefined &&
+      (!Number.isFinite(q.step) || q.step <= 0)
+    )
+      throw Error("Questionnaire requires a finite positive number step");
     if (q.type !== "text") {
       const values = new Set<string>();
       for (const option of q.options ?? []) {
@@ -105,14 +178,36 @@ export function questionnaireValue(
         .filter((o) => !o.disabled)
         .map((o) => o.value);
       let normalized: QuestionAnswer;
-      if (["text", "number", "date"].includes(q.type)) normalized = typeof answer === "string" ? answer : "";
-      else if (q.type === "single" || q.type === "select") normalized = typeof answer === "string" && enabled.includes(answer) ? answer : "";
+      if (["text", "number", "date"].includes(q.type))
+        normalized = typeof answer === "string" ? answer : "";
+      else if (q.type === "single" || q.type === "select")
+        normalized =
+          typeof answer === "string" && enabled.includes(answer) ? answer : "";
       else if (q.type === "matrix") {
-        const map = questionMap(answer);
-        normalized = Object.fromEntries((q.rows ?? []).filter(r => !r.disabled && enabled.includes(map[r.id])).map(r => [r.id, map[r.id]]));
+        const map = matrixAnswers(answer);
+        normalized = Object.fromEntries(
+          (q.rows ?? [])
+            .filter((r) => !r.disabled)
+            .flatMap<[string, string | readonly string[]]>((r) => {
+              const entry = map[r.id];
+              if (!q.multiple)
+                return typeof entry === "string" && enabled.includes(entry)
+                  ? [[r.id, entry]]
+                  : [];
+              const selected = enabled.filter(
+                (key) => Array.isArray(entry) && entry.includes(key),
+              );
+              return selected.length ? [[r.id, selected]] : [];
+            }),
+        );
       } else {
-        const order = Array.isArray(answer) ? [...new Set(answer.filter(v => enabled.includes(v)))] : [];
-        normalized = q.type === "ranking" ? [...order, ...enabled.filter(v => !order.includes(v))] : order;
+        const order = Array.isArray(answer)
+          ? [...new Set(answer.filter((v) => enabled.includes(v)))]
+          : [];
+        normalized =
+          q.type === "ranking"
+            ? [...order, ...enabled.filter((v) => !order.includes(v))]
+            : order;
       }
       return [q.id, normalized];
     }),
@@ -138,9 +233,30 @@ export function questionError(
     return asyncErrors[q.id];
   const answer = questionnaireValue([q], value)[q.id];
   const length =
-    typeof answer === "string" ? answer.trim().length : Array.isArray(answer) ? answer.length : Object.keys(answer).length;
-  if (q.required && (q.type === "matrix" ? length < (q.rows ?? []).filter(r => !r.disabled).length : !length))
+    typeof answer === "string"
+      ? answer.trim().length
+      : Array.isArray(answer)
+        ? answer.length
+        : Object.keys(answer).length;
+  if (
+    q.required &&
+    (q.type === "matrix"
+      ? length < (q.rows ?? []).filter((r) => !r.disabled).length
+      : !length)
+  )
     return options.requiredLabel ?? "Please answer this question.";
+  if (q.type === "multiple" && Array.isArray(answer)) {
+    const error = selectionError(q, answer, options);
+    if (error) return error;
+  }
+  if (q.type === "matrix" && q.multiple) {
+    const map = matrixAnswers(answer);
+    for (const row of (q.rows ?? []).filter((row) => !row.disabled)) {
+      const entry = map[row.id],
+        error = selectionError(q, Array.isArray(entry) ? entry : [], options);
+      if (error) return error;
+    }
+  }
   if (
     q.type === "text" &&
     length &&
@@ -148,15 +264,35 @@ export function questionError(
   )
     return options.invalidLabel ?? "Check the answer length.";
   if (typeof answer === "string" && answer.trim() && q.type === "number") {
-    const number = Number(answer), base = typeof q.min === "number" ? q.min : 0;
+    const number = Number(answer),
+      base = typeof q.min === "number" ? q.min : 0;
     const distance = q.step ? (number - base) / q.step : 0;
-    if (!Number.isFinite(number) || !/^[+-]?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/i.test(answer.trim()) || (typeof q.min === "number" && number < q.min) || (typeof q.max === "number" && number > q.max) || (q.step && Math.abs(distance - Math.round(distance)) > 1e-8))
-      return options.invalidLabel ?? "Enter a number within the allowed range and step.";
+    if (
+      !Number.isFinite(number) ||
+      !/^[+-]?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/i.test(answer.trim()) ||
+      (typeof q.min === "number" && number < q.min) ||
+      (typeof q.max === "number" && number > q.max) ||
+      (q.step && Math.abs(distance - Math.round(distance)) > 1e-8)
+    )
+      return (
+        options.invalidLabel ??
+        "Enter a number within the allowed range and step."
+      );
   }
   if (typeof answer === "string" && answer && q.type === "date") {
-    const date = /^\d{4}-\d{2}-\d{2}$/.test(answer) ? new Date(answer + "T00:00:00Z") : undefined;
-    if (!date || !Number.isFinite(date.valueOf()) || date.toISOString().slice(0, 10) !== answer || (typeof q.min === "string" && answer < q.min) || (typeof q.max === "string" && answer > q.max))
-      return options.invalidLabel ?? "Enter a valid date within the allowed range.";
+    const date = /^\d{4}-\d{2}-\d{2}$/.test(answer)
+      ? new Date(answer + "T00:00:00Z")
+      : undefined;
+    if (
+      !date ||
+      !Number.isFinite(date.valueOf()) ||
+      date.toISOString().slice(0, 10) !== answer ||
+      (typeof q.min === "string" && answer < q.min) ||
+      (typeof q.max === "string" && answer > q.max)
+    )
+      return (
+        options.invalidLabel ?? "Enter a valid date within the allowed range."
+      );
   }
   return q.validate?.(answer, value) ?? "";
 }
@@ -187,7 +323,9 @@ export function restoreQuestionAnswers(
 ) {
   if (!root?.isConnected || !question) return;
   const answer = questionnaireValue([question], value)[question.id];
-  if (["number", "date", "select", "matrix", "ranking"].includes(question.type)) {
+  if (
+    ["number", "date", "select", "matrix", "ranking"].includes(question.type)
+  ) {
     restoreQuestionControl(root, question, value);
   } else if (question.type === "text") {
     const input = root.querySelector<HTMLTextAreaElement>(
@@ -212,19 +350,30 @@ export function focusQuestion(
   ownedAtStart?: boolean,
 ) {
   if (!root?.isConnected) return;
-  const active = root.ownerDocument.activeElement;
-  if (
-    ownedAtStart !== undefined &&
-    !root.contains(active) &&
-    !(ownedAtStart && active === root.ownerDocument.body)
-  )
-    return;
-  const input = root?.querySelector<HTMLElement>(
-    '[data-part="question"] input:not([type=hidden]):not(:disabled),[data-part="question"] textarea:not(:disabled),[data-part="question"] select:not(:disabled),[data-part="question"] button:not(:disabled)',
-  );
-  (
-    input ?? root?.querySelector<HTMLElement>('[data-part="question"]')
-  )?.focus();
+  const owner = root.ownerDocument,
+    win = owner.defaultView;
+  if (!win) return;
+  // 框架在校验结果之后提交错误状态，下一帧再定位首个无效矩阵行。
+  win.requestAnimationFrame(() => {
+    if (!root.isConnected) return;
+    const active = owner.activeElement;
+    if (
+      ownedAtStart !== undefined &&
+      !root.contains(active) &&
+      !(ownedAtStart && active === owner.body)
+    )
+      return;
+    const input =
+      root.querySelector<HTMLElement>(
+        '[data-part="matrix-row"][aria-invalid=true]:not(:disabled) input:not(:disabled)',
+      ) ??
+      root.querySelector<HTMLElement>(
+        '[data-part="question"] input:not([type=hidden]):not(:disabled),[data-part="question"] textarea:not(:disabled),[data-part="question"] select:not(:disabled),[data-part="question"] button:not(:disabled)',
+      );
+    (
+      input ?? root.querySelector<HTMLElement>('[data-part="question"]')
+    )?.focus();
+  });
 }
 export const questionnaireCSS = `
 [data-scope=questionnaire][data-part=root] { display:grid;gap:var(--lk-space-component-md);width:100%;min-width:0; }
@@ -332,7 +481,20 @@ export function createQuestionnaireValidationController(
       const snapshot = Object.fromEntries(
         Object.entries(value).map(([key, answer]) => [
           key,
-          typeof answer === "string" ? answer : Array.isArray(answer) ? Object.freeze([...answer]) : Object.freeze({ ...answer }),
+          typeof answer === "string"
+            ? answer
+            : Array.isArray(answer)
+              ? Object.freeze([...answer])
+              : Object.freeze(
+                  Object.fromEntries(
+                    Object.entries(answer).map(([row, entry]) => [
+                      row,
+                      typeof entry === "string"
+                        ? entry
+                        : Object.freeze([...entry]),
+                    ]),
+                  ),
+                ),
         ]),
       );
       Object.freeze(snapshot);
@@ -409,92 +571,300 @@ export function createQuestionnaireValidationController(
 }
 
 /** 使用真实表单名称；矩阵展开为 question[row]，排序按当前顺序重复名称。 */
-export function questionnaireFormEntries(value: QuestionnaireValue, exclude?: string): Array<[string, string]> {
-  return Object.entries(value).filter(([name]) => name !== exclude).flatMap(([name, answer]) =>
-    typeof answer === "string" ? [[name, answer] as [string, string]] : Array.isArray(answer) ? answer.map(text => [name, text] as [string, string]) : Object.entries(answer).map(([row, text]) => [`${name}[${row}]`, text] as [string, string]));
+export function questionnaireFormEntries(
+  value: QuestionnaireValue,
+  exclude?: string,
+): Array<[string, string]> {
+  return Object.entries(value)
+    .filter(([name]) => name !== exclude)
+    .flatMap(([name, answer]) =>
+      typeof answer === "string"
+        ? [[name, answer] as [string, string]]
+        : Array.isArray(answer)
+          ? answer.map((text) => [name, text] as [string, string])
+          : Object.entries(answer).flatMap(([row, entry]) =>
+              typeof entry === "string"
+                ? [[`${name}[${row}]`, entry] as [string, string]]
+                : entry.map(
+                    (text) => [`${name}[${row}]`, text] as [string, string],
+                  ),
+            ),
+    );
 }
-export function renderQuestionControl(q: Question, value: QuestionnaireValue, descriptionId: string, invalid: boolean) {
-  const answer = questionnaireValue([q], value)[q.id], e = escapeHtml;
+export function renderQuestionControl(
+  q: Question,
+  value: QuestionnaireValue,
+  descriptionId: string,
+  invalid: boolean,
+) {
+  const answer = questionnaireValue([q], value)[q.id],
+    e = escapeHtml;
   const common = `aria-describedby="${e(descriptionId)}" aria-required="${!!q.required}" aria-invalid="${invalid}"`;
-  const options = (q.options ?? []).filter(o => !o.disabled);
-  if (q.type === "number" || q.type === "date") return `<input data-question-control="value" data-part="answer" name="${e(q.id)}" type="${q.type}" aria-label="${e(q.label)}" value="${e(String(answer))}" ${common}${q.min !== undefined ? ` min="${e(String(q.min))}"` : ""}${q.max !== undefined ? ` max="${e(String(q.max))}"` : ""}${q.type === "number" ? ` step="${q.step ?? "any"}"` : ""}>`;
-  if (q.type === "select") return `<select data-question-control="value" data-part="answer" name="${e(q.id)}" aria-label="${e(q.label)}" ${common}><option value="">${e(q.placeholder ?? "Choose an option")}</option>${(q.options ?? []).map(o => `<option value="${e(o.value)}"${answer === o.value ? " selected" : ""}${o.disabled ? " disabled" : ""}>${e(o.label)}</option>`).join("")}</select>`;
-  if (q.type === "matrix") return `<div data-part="matrix">${(q.rows ?? []).map(row => `<fieldset data-part="matrix-row"${row.disabled ? " disabled" : ""}><legend>${e(row.label)}</legend>${options.map(o => `<label data-scope="questionnaire" data-part="option"${questionMap(answer)[row.id] === o.value ? ' data-selected="true"' : ""}><input data-question-control="matrix" data-key="${e(o.value)}" data-row="${e(row.id)}" type="radio" name="${e(q.id)}[${e(row.id)}]" value="${e(o.value)}" ${common}${questionMap(answer)[row.id] === o.value ? " checked" : ""}><span>${e(o.label)}</span></label>`).join("")}</fieldset>`).join("")}</div>`;
-  if (q.type === "ranking") return `<ol data-part="ranking">${(Array.isArray(answer) ? answer : []).map((key, index, order) => {
-    const label = options.find(o => o.value === key)?.label ?? key;
-    return `<li data-part="rank-row"><span>${e(label)}</span><input type="hidden" name="${e(q.id)}" value="${e(key)}"><div data-part="rank-actions">${[-1, 1].map(direction => `<button type="button" data-question-control="rank" data-key="${e(key)}" data-direction="${direction}" aria-label="${e((direction < 0 ? q.moveUpLabel ?? "Move up" : q.moveDownLabel ?? "Move down") + ": " + label)}"${index + direction < 0 || index + direction >= order.length ? " disabled" : ""}>${e(direction < 0 ? q.moveUpLabel ?? "Move up" : q.moveDownLabel ?? "Move down")}</button>`).join("")}</div></li>`;
-  }).join("")}</ol>`;
+  const options = (q.options ?? []).filter((o) => !o.disabled);
+  if (q.type === "number" || q.type === "date")
+    return `<input data-question-control="value" data-part="answer" name="${e(q.id)}" type="${q.type}" aria-label="${e(q.label)}" value="${e(String(answer))}" ${common}${q.min !== undefined ? ` min="${e(String(q.min))}"` : ""}${q.max !== undefined ? ` max="${e(String(q.max))}"` : ""}${q.type === "number" ? ` step="${q.step ?? "any"}"` : ""}>`;
+  if (q.type === "select")
+    return `<select data-question-control="value" data-part="answer" name="${e(q.id)}" aria-label="${e(q.label)}" ${common}><option value="">${e(q.placeholder ?? "Choose an option")}</option>${(q.options ?? []).map((o) => `<option value="${e(o.value)}"${answer === o.value ? " selected" : ""}${o.disabled ? " disabled" : ""}>${e(o.label)}</option>`).join("")}</select>`;
+  if (q.type === "matrix") {
+    const map = matrixAnswers(answer);
+    return `<div data-part="matrix">${(q.rows ?? [])
+      .map((row) => {
+        const entry = map[row.id],
+          selected = (key: string) =>
+            q.multiple
+              ? Array.isArray(entry) && entry.includes(key)
+              : entry === key;
+        const rowInvalid =
+          invalid &&
+          !row.disabled &&
+          (q.multiple
+            ? !!selectionError(q, Array.isArray(entry) ? entry : [], {})
+            : !!q.required && !entry);
+        const attributes = `aria-describedby="${e(descriptionId)}" aria-invalid="${rowInvalid}"${q.multiple ? "" : ` aria-required="${!!q.required}"`}`;
+        return `<fieldset data-part="matrix-row" data-row="${e(row.id)}" aria-invalid="${rowInvalid}"${row.disabled ? " disabled" : ""}><legend>${e(row.label)}${q.multiple && q.required && !row.disabled ? '<span aria-hidden="true"> *</span>' : ""}</legend>${(q.multiple ? (q.options ?? []) : options).map((o) => `<label data-scope="questionnaire" data-part="option"${selected(o.value) ? ' data-selected="true"' : ""}><input data-question-control="matrix" data-key="${e(o.value)}" data-row="${e(row.id)}" type="${q.multiple ? "checkbox" : "radio"}" name="${e(q.id)}[${e(row.id)}]" value="${e(o.value)}" ${attributes}${selected(o.value) ? " checked" : ""}${o.disabled ? " disabled" : ""}><span>${e(o.label)}</span></label>`).join("")}</fieldset>`;
+      })
+      .join("")}</div>`;
+  }
+  if (q.type === "ranking")
+    return `<ol data-part="ranking">${(Array.isArray(answer) ? answer : [])
+      .map((key, index, order) => {
+        const label = options.find((o) => o.value === key)?.label ?? key;
+        return `<li data-part="rank-row"><span>${e(label)}</span><input type="hidden" name="${e(q.id)}" value="${e(key)}"><div data-part="rank-actions">${[-1, 1].map((direction) => `<button type="button" data-question-control="rank" data-key="${e(key)}" data-direction="${direction}" aria-label="${e((direction < 0 ? (q.moveUpLabel ?? "Move up") : (q.moveDownLabel ?? "Move down")) + ": " + label)}"${index + direction < 0 || index + direction >= order.length ? " disabled" : ""}>${e(direction < 0 ? (q.moveUpLabel ?? "Move up") : (q.moveDownLabel ?? "Move down"))}</button>`).join("")}</div></li>`;
+      })
+      .join("")}</ol>`;
   return "";
 }
-function restoreQuestionControl(root: HTMLElement, q: Question, value: QuestionnaireValue) {
+function restoreQuestionControl(
+  root: HTMLElement,
+  q: Question,
+  value: QuestionnaireValue,
+) {
   const answer = questionnaireValue([q], value)[q.id];
-  for (const input of Array.from(root.querySelectorAll<HTMLInputElement | HTMLSelectElement>("[data-question-control]"))) {
-    if (input.dataset.questionControl === "value") input.setAttribute("aria-invalid", root.querySelector('[data-part="error"]')?.textContent?.trim() ? "true" : "false");
-    if (input.dataset.questionControl === "value" && typeof answer === "string" && input.value !== answer) input.value = answer;
-    if (input instanceof HTMLInputElement && input.dataset.questionControl === "matrix") {
-      input.checked = questionMap(answer)[input.dataset.row ?? ""] === input.value;
+  for (const input of Array.from(
+    root.querySelectorAll<HTMLInputElement | HTMLSelectElement>(
+      "[data-question-control]",
+    ),
+  )) {
+    if (input.dataset.questionControl === "value")
+      input.setAttribute(
+        "aria-invalid",
+        root.querySelector('[data-part="error"]')?.textContent?.trim()
+          ? "true"
+          : "false",
+      );
+    if (
+      input.dataset.questionControl === "value" &&
+      typeof answer === "string" &&
+      input.value !== answer
+    )
+      input.value = answer;
+    if (
+      input instanceof HTMLInputElement &&
+      input.dataset.questionControl === "matrix"
+    ) {
+      const entry = matrixAnswers(answer)[input.dataset.row ?? ""];
+      input.checked = q.multiple
+        ? Array.isArray(entry) && entry.includes(input.value)
+        : entry === input.value;
       input.closest("label")?.toggleAttribute("data-selected", input.checked);
-      if (input.checked) input.closest("label")?.setAttribute("data-selected", "true");
+      if (input.checked)
+        input.closest("label")?.setAttribute("data-selected", "true");
     }
   }
 }
 /** 只委托新增题型；捕获被替换的原生控件，恢复其逻辑焦点而不抢外部焦点。 */
-export function mountQuestionControls(root: HTMLElement, get: () => { question?: Question; value: QuestionnaireValue; blocked: boolean }, change: (value: QuestionnaireValue) => void) {
+export function mountQuestionControls(
+  root: HTMLElement,
+  get: () => {
+    question?: Question;
+    value: QuestionnaireValue;
+    blocked: boolean;
+  },
+  change: (value: QuestionnaireValue) => void,
+) {
   let disposed = false;
-  let focus: { id: string; part: string; key: string; row: string; direction: string; start: number | null; end: number | null; node: HTMLElement } | undefined;
+  let focus:
+    | {
+        id: string;
+        part: string;
+        key: string;
+        row: string;
+        direction: string;
+        start: number | null;
+        end: number | null;
+        node: HTMLElement;
+      }
+    | undefined;
   const capture = (node: HTMLElement) => {
     const q = get().question;
     if (!q || !node.dataset.questionControl) return;
-    focus = { id: q.id, part: node.dataset.questionControl, key: node.dataset.key ?? "", row: node.dataset.row ?? "", direction: node.dataset.direction ?? "", start: node instanceof HTMLInputElement ? node.selectionStart : null, end: node instanceof HTMLInputElement ? node.selectionEnd : null, node };
+    focus = {
+      id: q.id,
+      part: node.dataset.questionControl,
+      key: node.dataset.key ?? "",
+      row: node.dataset.row ?? "",
+      direction: node.dataset.direction ?? "",
+      start: node instanceof HTMLInputElement ? node.selectionStart : null,
+      end: node instanceof HTMLInputElement ? node.selectionEnd : null,
+      node,
+    };
   };
   const input = (event: Event) => {
     const node = event.target;
-    if (!(node instanceof HTMLInputElement || node instanceof HTMLSelectElement) || !node.dataset.questionControl) return;
+    if (
+      !(
+        node instanceof HTMLInputElement || node instanceof HTMLSelectElement
+      ) ||
+      !node.dataset.questionControl
+    )
+      return;
     const { question: q, value, blocked } = get();
     if (!q || blocked || node.disabled || node.closest(":disabled")) return;
     capture(node);
-    if (node.dataset.questionControl === "value" && event.type === "input") change({ ...value, [q.id]: node.value });
-    if (node.dataset.questionControl === "matrix" && event.type === "change" && node instanceof HTMLInputElement && node.checked) change({ ...value, [q.id]: { ...questionMap(value[q.id]), [node.dataset.row!]: node.value } });
+    if (node.dataset.questionControl === "value" && event.type === "input")
+      change({ ...value, [q.id]: node.value });
+    if (
+      node.dataset.questionControl === "matrix" &&
+      event.type === "change" &&
+      node instanceof HTMLInputElement &&
+      (q.multiple || node.checked)
+    ) {
+      if (
+        !(q.rows ?? []).some(
+          (row) => row.id === node.dataset.row && !row.disabled,
+        ) ||
+        !(q.options ?? []).some(
+          (option) => option.value === node.value && !option.disabled,
+        )
+      )
+        return;
+      const map = matrixAnswers(questionnaireValue([q], value)[q.id]),
+        entry = map[node.dataset.row!];
+      const next = q.multiple
+        ? node.checked
+          ? [...(Array.isArray(entry) ? entry : []), node.value]
+          : (Array.isArray(entry) ? entry : []).filter(
+              (key) => key !== node.value,
+            )
+        : node.value;
+      change({
+        ...value,
+        ...questionnaireValue([q], {
+          [q.id]: { ...map, [node.dataset.row!]: next },
+        }),
+      });
+    }
   };
   const click = (event: Event) => {
     const node = event.target;
     if (!(node instanceof HTMLElement)) return;
-    const button = node.closest<HTMLButtonElement>('button[data-question-control="rank"]');
+    const button = node.closest<HTMLButtonElement>(
+      'button[data-question-control="rank"]',
+    );
     const { question: q, value, blocked } = get();
-    if (!button || !q || blocked || button.disabled || button.closest(":disabled")) return;
+    if (
+      !button ||
+      !q ||
+      blocked ||
+      button.disabled ||
+      button.closest(":disabled")
+    )
+      return;
     const answer = questionnaireValue([q], value)[q.id];
     if (!Array.isArray(answer)) return;
-    const order = [...answer], from = order.indexOf(button.dataset.key!), to = from + Number(button.dataset.direction);
+    const order = [...answer],
+      from = order.indexOf(button.dataset.key!),
+      to = from + Number(button.dataset.direction);
     if (from < 0 || to < 0 || to >= order.length) return;
     capture(button);
     [order[from], order[to]] = [order[to], order[from]];
     change({ ...value, [q.id]: order });
   };
-  const focusin = (event: Event) => { if (event.target instanceof HTMLElement && root.contains(event.target) && event.target.dataset.questionControl) capture(event.target); else focus = undefined; };
-  const pointer = (event: Event) => { if (event.target instanceof Node && !root.contains(event.target)) focus = undefined; };
+  const focusin = (event: Event) => {
+    if (
+      event.target instanceof HTMLElement &&
+      root.contains(event.target) &&
+      event.target.dataset.questionControl
+    )
+      capture(event.target);
+    else focus = undefined;
+  };
+  const pointer = (event: Event) => {
+    if (event.target instanceof Node && !root.contains(event.target))
+      focus = undefined;
+  };
   const observer = new MutationObserver(() => {
     const { question, value } = get();
     if (question) restoreQuestionControl(root, question, value);
-    if (!focus || disposed || focus.node.isConnected || get().question?.id !== focus.id || get().blocked || root.ownerDocument.activeElement !== root.ownerDocument.body) return;
+    if (
+      !focus ||
+      disposed ||
+      focus.node.isConnected ||
+      get().question?.id !== focus.id ||
+      get().blocked ||
+      root.ownerDocument.activeElement !== root.ownerDocument.body
+    )
+      return;
     const descriptor = focus;
-    let node = Array.from(root.querySelectorAll<HTMLElement>("[data-question-control]")).find(n => n.dataset.questionControl === descriptor.part && (n.dataset.key ?? "") === descriptor.key && (n.dataset.row ?? "") === descriptor.row && (n.dataset.direction ?? "") === descriptor.direction);
-    if (node?.matches(":disabled") && descriptor.part === "rank") node = Array.from(root.querySelectorAll<HTMLElement>('[data-question-control="rank"]')).find(n => n.dataset.key === descriptor.key && !n.matches(":disabled"));
+    let node = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-question-control]"),
+    ).find(
+      (n) =>
+        n.dataset.questionControl === descriptor.part &&
+        (n.dataset.key ?? "") === descriptor.key &&
+        (n.dataset.row ?? "") === descriptor.row &&
+        (n.dataset.direction ?? "") === descriptor.direction,
+    );
+    if (node?.matches(":disabled") && descriptor.part === "rank")
+      node = Array.from(
+        root.querySelectorAll<HTMLElement>('[data-question-control="rank"]'),
+      ).find(
+        (n) => n.dataset.key === descriptor.key && !n.matches(":disabled"),
+      );
     if (!node || node.matches(":disabled")) return;
     node.focus();
-    if (node instanceof HTMLInputElement && descriptor.start !== null) node.setSelectionRange(descriptor.start, descriptor.end);
+    if (node instanceof HTMLInputElement && descriptor.start !== null)
+      node.setSelectionRange(descriptor.start, descriptor.end);
   });
-  observer.observe(root, { childList: true, subtree: true, characterData: true });
-  root.addEventListener("input", input);root.addEventListener("change", input);root.addEventListener("click", click);root.ownerDocument.addEventListener("focusin", focusin);root.ownerDocument.addEventListener("pointerdown", pointer);
-  return () => { disposed = true;observer.disconnect();root.removeEventListener("input", input);root.removeEventListener("change", input);root.removeEventListener("click", click);root.ownerDocument.removeEventListener("focusin", focusin);root.ownerDocument.removeEventListener("pointerdown", pointer);focus = undefined; };
+  observer.observe(root, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+  });
+  root.addEventListener("input", input);
+  root.addEventListener("change", input);
+  root.addEventListener("click", click);
+  root.ownerDocument.addEventListener("focusin", focusin);
+  root.ownerDocument.addEventListener("pointerdown", pointer);
+  return () => {
+    disposed = true;
+    observer.disconnect();
+    root.removeEventListener("input", input);
+    root.removeEventListener("change", input);
+    root.removeEventListener("click", click);
+    root.ownerDocument.removeEventListener("focusin", focusin);
+    root.ownerDocument.removeEventListener("pointerdown", pointer);
+    focus = undefined;
+  };
 }
 
 /** 标量控件保留原生节点与编辑中的光标/日期段；值由生命周期同步而非 HTML 重建。 */
 export function createQuestionControlRenderer() {
-  let signature = "", html = "";
-  return (q: Question, value: QuestionnaireValue, descriptionId: string, invalid: boolean) => {
-    if (!["number", "date", "select"].includes(q.type)) return renderQuestionControl(q, value, descriptionId, invalid);
+  let signature = "",
+    html = "";
+  return (
+    q: Question,
+    value: QuestionnaireValue,
+    descriptionId: string,
+    invalid: boolean,
+  ) => {
+    if (!["number", "date", "select"].includes(q.type))
+      return renderQuestionControl(q, value, descriptionId, invalid);
     const next = JSON.stringify([q, descriptionId]);
-    if (signature !== next) { signature = next;html = renderQuestionControl(q, value, descriptionId, invalid); }
+    if (signature !== next) {
+      signature = next;
+      html = renderQuestionControl(q, value, descriptionId, invalid);
+    }
     return html;
   };
 }

@@ -456,3 +456,5 @@
     onSliceKeysChange={() => { throw Error("SSR must not toggle slices"); }}
   />
 {/each}
+
+<LoongArkQuestionnaire label="SSR multi matrix" questions={[{id:"multiMatrix",label:"Multiple matrix",type:"matrix",multiple:true,minSelections:1,maxSelections:2,rows:[{id:"row",label:"Multiple row"}],options:[{value:"a",label:"A"},{value:"b",label:"B"}],validateAsync:()=>{throw Error("SSR must not validate");}}]} defaultValue={{multiMatrix:{row:["a","b"]}}} onValueChange={()=>{throw Error("SSR must not emit");}} />

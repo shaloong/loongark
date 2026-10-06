@@ -118,6 +118,12 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})));`
         : `console.log(renderToString(h(L.LoongArkQuestionnaire,${typedQuestionProps})));`;
+  const multiMatrixProps = "{label:'SSR multi matrix',questions:[{id:'multiMatrix',label:'Multiple matrix',type:'matrix',multiple:true,minSelections:1,maxSelections:2,rows:[{id:'row',label:'Multiple row'}],options:[{value:'a',label:'A'},{value:'b',label:'B'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{multiMatrix:{row:['a','b']}},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const multiMatrixScript = framework === "Vue"
+    ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${multiMatrixProps})})));`
+    : framework === "Solid"
+      ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${multiMatrixProps})));`
+      : `console.log(renderToString(h(L.LoongArkQuestionnaire,${multiMatrixProps})));`;
   const asyncLoaderSetup =
     "const asyncSSRLoader=L.createAsyncCollectionLoader({getKey:item=>item.id,load:()=>{throw Error('SSR must not request a collection')}});";
   const asyncProps =
@@ -183,6 +189,7 @@ for (const [framework, script] of [
           nextScript +
           questionnaireScript +
           typedQuestionScript +
+          multiMatrixScript +
           asyncScript +
           serverScript +
           conversationScript +
@@ -217,6 +224,7 @@ for (const [framework, script] of [
   assert.match(result.stdout, /tabindex="-1"[^>]*aria-disabled="true"/);
   assert.match(result.stdout, /SSR async idle 1/);
   assert.match(result.stdout, /name="typed\[row\]"/);
+  assert.equal([...result.stdout.matchAll(/<input(?=[^>]*name="multiMatrix\[row\]")(?=[^>]*checked)[^>]*>/g)].length, 2);
   assert.match(result.stdout, /data-part="range-start"/);
   assert.match(result.stdout, /data-part="inspect-category"/);
   assert.match(result.stdout, /aria-rowcount="1001"/);
