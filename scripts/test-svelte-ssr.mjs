@@ -29,6 +29,9 @@ const { default: component } = await import(
   pathToFileURL(resolve("tests/consumer-dist/svelte-ssr/index.mjs")).href
 );
 const html = render(component).body;
+assert.match(html, /name="contactsSSR\[stable\]\[name\]"/);
+assert.match(html, /Group &lt;safe&gt;/);
+assert.ok(!html.includes("must-not-render-hidden"));
 assert.match(html, /aria-label="Move Project &lt;safe&gt; column"/);
 assert.match(
   html,

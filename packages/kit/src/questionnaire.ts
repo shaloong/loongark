@@ -1,3 +1,9 @@
+import {
+  renderQuestionGroup,
+  mountQuestionGroups,
+  questionGroupShape,
+  restoreQuestionGroups,
+} from "./questionnaire-groups";
 import { GripVertical } from "lucide";
 import { decorativeIconMarkup } from "./icon-markup";
 import { mountQuestionRanking } from "./questionnaire-ranking";
@@ -18,9 +24,15 @@ export interface QuestionRow {
   label: string;
   disabled?: boolean;
 }
+/** 重复题组以稳定实例 id 识别答案；增删不会改变其他实例的路径。 */
+export interface QuestionGroupInstance {
+  id: string;
+  value: QuestionnaireValue;
+}
 export type QuestionAnswer =
   | string
   | readonly string[]
+  | readonly QuestionGroupInstance[]
   | Readonly<Record<string, string | readonly string[]>>;
 export function questionMap(
   answer: QuestionAnswer | undefined,
@@ -33,8 +45,28 @@ export function questionMap(
       )
     : {};
 }
+export function questionStrings(answer: QuestionAnswer | undefined): string[] {
+  return Array.isArray(answer)
+    ? answer.filter((entry): entry is string => typeof entry === "string")
+    : [];
+}
+export function questionGroups(
+  answer: QuestionAnswer | undefined,
+): readonly QuestionGroupInstance[] {
+  return Array.isArray(answer)
+    ? answer.filter(
+        (entry): entry is QuestionGroupInstance =>
+          !!entry &&
+          typeof entry === "object" &&
+          typeof entry.id === "string" &&
+          !!entry.value &&
+          typeof entry.value === "object" &&
+          !Array.isArray(entry.value),
+      )
+    : [];
+}
 export function questionIncludes(answer: QuestionAnswer, value: string) {
-  return Array.isArray(answer) && answer.includes(value);
+  return questionStrings(answer).includes(value);
 }
 export interface Question {
   id: string;
@@ -48,7 +80,14 @@ export interface Question {
     | "date"
     | "select"
     | "matrix"
-    | "ranking";
+    | "ranking"
+    | "group";
+  /** 重复题组内的题目；子题条件读取本实例的局部完整答案。 */
+  questions?: readonly Question[];
+  minGroups?: number;
+  maxGroups?: number;
+  groupLabels?: { add?: string; remove?: string; instance?: string };
+
   required?: boolean;
   /** 矩阵题的每一行允许多个选项；默认仍是独立单选组。 */
   multiple?: boolean;
@@ -134,12 +173,39 @@ function selectionError(
     return options.invalidLabel ?? "Check the number of selected options.";
   return "";
 }
-export function questionnaireQuestions(questions: readonly Question[]) {
+export function questionnaireQuestions(
+  questions: readonly Question[],
+  ancestors: readonly Question[] = [],
+) {
   const ids = new Set<string>();
   for (const q of questions) {
     if (!q.id || ids.has(q.id))
       throw Error("Questionnaire requires unique non-empty question ids");
     ids.add(q.id);
+    if (ancestors.includes(q))
+      throw Error("Questionnaire group schema cannot contain cycles");
+    if (q.type === "group") {
+      if (!q.questions?.length)
+        throw Error("Questionnaire group requires nested questions");
+      for (const bound of [q.minGroups, q.maxGroups])
+        if (bound !== undefined && (!Number.isSafeInteger(bound) || bound < 0))
+          throw Error(
+            "Questionnaire group bounds require non-negative safe integers",
+          );
+      if (
+        Math.max(q.required ? 1 : 0, q.minGroups ?? 0) >
+        (q.maxGroups ?? Infinity)
+      )
+        throw Error("Questionnaire group bounds must be ascending");
+      questionnaireQuestions(q.questions ?? [], [...ancestors, q]);
+    } else if (
+      q.questions !== undefined ||
+      q.minGroups !== undefined ||
+      q.maxGroups !== undefined
+    )
+      throw Error(
+        "Questionnaire nested questions and group bounds require group type",
+      );
     if (q.multiple !== undefined && q.type !== "matrix")
       throw Error("Questionnaire multiple applies only to matrix questions");
     if (
@@ -191,7 +257,20 @@ export function questionnaireValue(
         .filter((o) => !o.disabled)
         .map((o) => o.value);
       let normalized: QuestionAnswer;
-      if (["text", "number", "date"].includes(q.type))
+      if (q.type === "group") {
+        const ids = new Set<string>();
+        normalized = questionGroups(answer).map((instance) => {
+          if (!instance.id || ids.has(instance.id))
+            throw Error(
+              "Questionnaire requires unique non-empty group instance ids",
+            );
+          ids.add(instance.id);
+          return {
+            id: instance.id,
+            value: questionnaireValue(q.questions ?? [], instance.value),
+          };
+        });
+      } else if (["text", "number", "date"].includes(q.type))
         normalized = typeof answer === "string" ? answer : "";
       else if (q.type === "single" || q.type === "select")
         normalized =
@@ -214,9 +293,11 @@ export function questionnaireValue(
             }),
         );
       } else {
-        const order = Array.isArray(answer)
-          ? [...new Set(answer.filter((v) => enabled.includes(v)))]
-          : [];
+        const order = [
+          ...new Set(
+            questionStrings(answer).filter((v) => enabled.includes(v)),
+          ),
+        ];
         normalized =
           q.type === "ranking"
             ? [...order, ...enabled.filter((v) => !order.includes(v))]
@@ -236,15 +317,116 @@ export function questionnaireVisibleQuestions(
     (question) => !question.when || question.when(normalized),
   );
 }
+/** 隐藏子题仅保留在编辑状态；递归提交和 FormData 不泄漏其答案。 */
+export function questionnaireSubmittedValue(
+  questions: readonly Question[],
+  value: QuestionnaireValue,
+): QuestionnaireValue {
+  const current = questionnaireValue(questions, value);
+  return Object.fromEntries(
+    questionnaireVisibleQuestions(questions, current).map((q) => [
+      q.id,
+      q.type === "group"
+        ? questionGroups(current[q.id]).map((instance) => ({
+            id: instance.id,
+            value: questionnaireSubmittedValue(
+              q.questions ?? [],
+              instance.value,
+            ),
+          }))
+        : current[q.id],
+    ]),
+  );
+}
+export function questionnaireValidationEntries(
+  questions: readonly Question[],
+  value: QuestionnaireValue,
+  path: readonly string[] = [],
+  rootId?: string,
+): Array<{
+  question: Question;
+  value: QuestionnaireValue;
+  path: readonly string[];
+  rootId: string;
+}> {
+  return questionnaireVisibleQuestions(questions, value).flatMap((q) => {
+    const next = [...path, q.id],
+      root = rootId ?? q.id;
+    return [
+      { question: q, value, path: next, rootId: root },
+      ...(q.type === "group"
+        ? questionGroups(value[q.id]).flatMap((instance) =>
+            questionnaireValidationEntries(
+              q.questions ?? [],
+              instance.value,
+              [...next, instance.id],
+              root,
+            ),
+          )
+        : []),
+    ];
+  });
+}
+function freezeQuestionnaireValue(
+  value: QuestionnaireValue,
+): QuestionnaireValue {
+  return Object.freeze(
+    Object.fromEntries(
+      Object.entries(value).map(([key, answer]) => {
+        let frozen: QuestionAnswer;
+        if (typeof answer === "string") frozen = answer;
+        else if (Array.isArray(answer)) {
+          const groups = questionGroups(answer);
+          frozen = groups.length
+            ? Object.freeze(
+                groups.map((instance) =>
+                  Object.freeze({
+                    id: instance.id,
+                    value: freezeQuestionnaireValue(instance.value),
+                  }),
+                ),
+              )
+            : Object.freeze(questionStrings(answer));
+        } else
+          frozen = Object.freeze(
+            Object.fromEntries(
+              Object.entries(answer).map(([row, entry]) => [
+                row,
+                typeof entry === "string" ? entry : Object.freeze([...entry]),
+              ]),
+            ),
+          );
+        return [key, frozen];
+      }),
+    ),
+  );
+}
 export function questionError(
   q: Question,
   value: QuestionnaireValue,
   options: Pick<QuestionnaireOptions, "requiredLabel" | "invalidLabel"> = {},
   asyncErrors?: Record<string, string>,
-) {
+): string {
   if (asyncErrors && Object.prototype.hasOwnProperty.call(asyncErrors, q.id))
     return asyncErrors[q.id];
   const answer = questionnaireValue([q], value)[q.id];
+  if (q.type === "group") {
+    const groups = questionGroups(answer);
+    if (
+      groups.length < Math.max(q.required ? 1 : 0, q.minGroups ?? 0) ||
+      groups.length > (q.maxGroups ?? Infinity)
+    )
+      return options.invalidLabel ?? "Check the number of groups.";
+    for (const instance of groups)
+      for (const child of questionnaireVisibleQuestions(
+        q.questions ?? [],
+        instance.value,
+      )) {
+        const error = questionError(child, instance.value, options);
+        if (error) return error;
+      }
+    return q.validate?.(answer, value) ?? "";
+  }
   const length =
     typeof answer === "string"
       ? answer.trim().length
@@ -259,7 +441,7 @@ export function questionError(
   )
     return options.requiredLabel ?? "Please answer this question.";
   if (q.type === "multiple" && Array.isArray(answer)) {
-    const error = selectionError(q, answer, options);
+    const error = selectionError(q, questionStrings(answer), options);
     if (error) return error;
   }
   if (q.type === "matrix" && q.multiple) {
@@ -323,8 +505,8 @@ export function toggleQuestionAnswer(
     [q.id]:
       q.type === "multiple"
         ? checked
-          ? [...new Set([...(Array.isArray(current) ? current : []), option])]
-          : (Array.isArray(current) ? current : []).filter((v) => v !== option)
+          ? [...new Set([...questionStrings(current), option])]
+          : questionStrings(current).filter((v) => v !== option)
         : option,
   };
 }
@@ -335,25 +517,34 @@ export function restoreQuestionAnswers(
   value: QuestionnaireValue,
 ) {
   if (!root?.isConnected || !question) return;
+  if (question.type === "group") {
+    restoreQuestionGroups(root, question, value);
+    return;
+  }
+  const scope =
+    root.dataset.part === "group-question"
+      ? root
+      : root.querySelector<HTMLElement>('[data-part="question"]');
   const answer = questionnaireValue([question], value)[question.id];
   if (
     ["number", "date", "select", "matrix", "ranking"].includes(question.type)
   ) {
     restoreQuestionControl(root, question, value);
   } else if (question.type === "text") {
-    const input = root.querySelector<HTMLTextAreaElement>(
-      '[data-part="question"] textarea',
-    );
+    const input = scope?.querySelector<HTMLTextAreaElement>("textarea");
     if (input && typeof answer === "string" && input.value !== answer)
       input.value = answer;
   } else {
     for (const input of Array.from(
-      root.querySelectorAll<HTMLInputElement>('[data-part="question"] input'),
+      scope?.querySelectorAll<HTMLInputElement>("input") ?? [],
     )) {
       input.checked =
         question.type === "multiple"
           ? questionIncludes(answer, input.value)
           : answer === input.value;
+      input.closest("label")?.toggleAttribute("data-selected", input.checked);
+      if (input.checked)
+        input.closest("label")?.setAttribute("data-selected", "true");
     }
   }
 }
@@ -378,6 +569,12 @@ export function focusQuestion(
       return;
     const input =
       root.querySelector<HTMLElement>(
+        '[data-part="groups"][data-group-bounds-invalid=true] > [data-question-group]:not(:disabled)',
+      ) ??
+      root.querySelector<HTMLElement>(
+        '[data-part="group-question"][aria-invalid=true]:not([data-question-type="group"]) [data-part="matrix-row"][aria-invalid=true] input:not(:disabled),[data-part="group-question"][aria-invalid=true]:not([data-question-type="group"]) input:not([type=hidden]):not(:disabled),[data-part="group-question"][aria-invalid=true]:not([data-question-type="group"]) textarea:not(:disabled),[data-part="group-question"][aria-invalid=true]:not([data-question-type="group"]) select:not(:disabled),[data-part="group-question"][aria-invalid=true]:not([data-question-type="group"]) button:not(:disabled)',
+      ) ??
+      root.querySelector<HTMLElement>(
         '[data-part="matrix-row"][aria-invalid=true]:not(:disabled) input:not(:disabled)',
       ) ??
       root.querySelector<HTMLElement>(
@@ -390,6 +587,16 @@ export function focusQuestion(
 }
 export const questionnaireCSS = `
 [data-scope=questionnaire][data-part=root] { display:grid;gap:var(--lk-space-component-md);width:100%;min-width:0; }
+[data-scope=questionnaire] [data-part=groups] { display:grid;gap:var(--lk-space-component-md);min-width:0; }
+[data-scope=questionnaire] :is([data-part=group-instance],[data-part=group-question]) { display:grid;gap:var(--lk-space-component-sm);min-width:0;margin:0;padding:var(--lk-space-component-compact);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md); }
+[data-scope=questionnaire] [data-part=group-question] { padding:0;border:0;border-radius:0; }
+[data-scope=questionnaire] [data-part=group-question] textarea[data-part=answer] { height:auto;min-height:calc(2 * var(--lk-control-height-md));padding-block:var(--lk-space-component-sm);resize:vertical; }
+[data-scope=questionnaire] :is([data-part=group-instance],[data-part=group-question]) > legend { padding-inline:var(--lk-space-component-xs);font-weight:var(--lk-typography-fontweight-medium);overflow-wrap:anywhere; }
+[data-scope=questionnaire] [data-part=group-question] :is([data-part=description],[data-part=error]):empty { display:none; }
+[data-scope=questionnaire] [data-question-group] { justify-self:start;min-height:var(--lk-control-height-md);padding:var(--lk-space-component-xs) var(--lk-space-component-compact);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md);background:var(--lk-color-semantic-background);color:inherit;font:inherit;cursor:pointer; }
+[data-scope=questionnaire] [data-question-group]:hover:not(:disabled) { background:var(--lk-color-semantic-muted); }
+[data-scope=questionnaire] [data-question-group]:focus-visible { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring);outline-offset:var(--lk-control-focuswidth); }
+[data-scope=questionnaire] [data-question-group]:disabled { opacity:.5;cursor:not-allowed; }
 [data-scope=questionnaire][data-part=header] { display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--lk-space-component-sm); }
 [data-scope=questionnaire][data-part=title] { margin:0;font-size:var(--lk-typography-fontsize-lg);font-weight:var(--lk-typography-fontweight-semibold); }
 [data-scope=questionnaire][data-part=count] { font-size:var(--lk-typography-fontsize-sm);color:var(--lk-color-semantic-mutedforeground); }
@@ -463,11 +670,10 @@ export function createQuestionnaireValidationController(
       blocked: boolean,
     ) {
       const next = JSON.stringify([questions, value, blocked]);
-      const nextCallbacks = questions.flatMap((q) => [
-        q.validate,
-        q.validateAsync,
-        q.when,
-      ]);
+      const nextCallbacks = questionnaireValidationEntries(
+        questions,
+        value,
+      ).flatMap(({ question: q }) => [q.validate, q.validateAsync, q.when]);
       if (
         next !== signature ||
         nextCallbacks.length !== callbacks.length ||
@@ -491,26 +697,8 @@ export function createQuestionnaireValidationController(
       if (disposed || active || !questions.length) return;
       const request = new AbortController(),
         current = ++version;
-      const snapshot = Object.fromEntries(
-        Object.entries(value).map(([key, answer]) => [
-          key,
-          typeof answer === "string"
-            ? answer
-            : Array.isArray(answer)
-              ? Object.freeze([...answer])
-              : Object.freeze(
-                  Object.fromEntries(
-                    Object.entries(answer).map(([row, entry]) => [
-                      row,
-                      typeof entry === "string"
-                        ? entry
-                        : Object.freeze([...entry]),
-                    ]),
-                  ),
-                ),
-        ]),
-      );
-      Object.freeze(snapshot);
+      const snapshot = freezeQuestionnaireValue(value);
+      const entries = questionnaireValidationEntries(questions, snapshot);
       const valid = () =>
         !disposed && current === version && !request.signal.aborted;
       active = request;
@@ -531,13 +719,18 @@ export function createQuestionnaireValidationController(
             return { invalidId: q.id };
           }
         }
-        if (questions.some((q) => q.validateAsync))
+        if (entries.some(({ question: q }) => q.validateAsync))
           publish({ pending: true, errors: {} });
-        for (const q of questions) {
+        for (const {
+          question: q,
+          value: localValue,
+          rootId,
+          path,
+        } of entries) {
           if (!q.validateAsync) continue;
           let error: string | undefined;
           try {
-            const work = q.validateAsync(snapshot[q.id], snapshot, {
+            const work = q.validateAsync(localValue[q.id], localValue, {
               signal: request.signal,
             });
             error = await new Promise<string | undefined>((resolve, reject) => {
@@ -565,13 +758,19 @@ export function createQuestionnaireValidationController(
           }
           if (!valid()) return;
           if (error) {
-            publish({ pending: false, errors: { [q.id]: error } });
-            return { invalidId: q.id };
+            publish({
+              pending: false,
+              errors: {
+                [rootId]: error,
+                ...(path.length > 1 ? { [JSON.stringify(path)]: error } : {}),
+              },
+            });
+            return { invalidId: rootId };
           }
         }
         if (!valid()) return;
         publish({ pending: false, errors: {} });
-        return { value: questionnaireValue(questions, snapshot) };
+        return { value: questionnaireSubmittedValue(questions, snapshot) };
       } finally {
         if (current === version) active = undefined;
       }
@@ -588,21 +787,24 @@ export function questionnaireFormEntries(
   value: QuestionnaireValue,
   exclude?: string,
 ): Array<[string, string]> {
-  return Object.entries(value)
-    .filter(([name]) => name !== exclude)
-    .flatMap(([name, answer]) =>
-      typeof answer === "string"
-        ? [[name, answer] as [string, string]]
-        : Array.isArray(answer)
-          ? answer.map((text) => [name, text] as [string, string])
-          : Object.entries(answer).flatMap(([row, entry]) =>
-              typeof entry === "string"
-                ? [[`${name}[${row}]`, entry] as [string, string]]
-                : entry.map(
-                    (text) => [`${name}[${row}]`, text] as [string, string],
-                  ),
-            ),
-    );
+  const entries: Array<[string, string]> = [];
+  const visit = (name: string, answer: QuestionAnswer) => {
+    if (typeof answer === "string") entries.push([name, answer]);
+    else if (Array.isArray(answer)) {
+      const groups = questionGroups(answer);
+      if (groups.length)
+        for (const instance of groups)
+          for (const [key, child] of Object.entries(instance.value))
+            visit(`${name}[${instance.id}][${key}]`, child);
+      else
+        for (const text of questionStrings(answer)) entries.push([name, text]);
+    } else
+      for (const [row, entry] of Object.entries(answer))
+        visit(`${name}[${row}]`, entry);
+  };
+  for (const [name, answer] of Object.entries(value))
+    if (name !== exclude) visit(name, answer);
+  return entries;
 }
 export function renderQuestionControl(
   q: Question,
@@ -610,10 +812,26 @@ export function renderQuestionControl(
   descriptionId: string,
   invalid: boolean,
 ) {
+  if (q.type === "group")
+    return renderQuestionGroup(
+      q,
+      questionnaireValue([q], value),
+      descriptionId,
+      invalid,
+    );
   const answer = questionnaireValue([q], value)[q.id],
     e = escapeHtml;
   const common = `aria-describedby="${e(descriptionId)}" aria-required="${!!q.required}" aria-invalid="${invalid}"`;
   const options = (q.options ?? []).filter((o) => !o.disabled);
+  if (q.type === "text")
+    return `<textarea data-question-control="value" data-part="answer" name="${e(q.id)}" aria-label="${e(q.label)}" ${common}${q.minLength !== undefined ? ` minlength="${q.minLength}"` : ""}${q.maxLength !== undefined ? ` maxlength="${q.maxLength}"` : ""}>${e(typeof answer === "string" ? answer : "")}</textarea>`;
+  if (q.type === "single" || q.type === "multiple")
+    return (q.options ?? [])
+      .map(
+        (o) =>
+          `<label data-scope="questionnaire" data-part="option"${(q.type === "multiple" ? questionIncludes(answer, o.value) : answer === o.value) ? ' data-selected="true"' : ""}><input data-question-control="choice" data-key="${e(o.value)}" type="${q.type === "multiple" ? "checkbox" : "radio"}" name="${e(q.id)}" value="${e(o.value)}" ${common}${o.disabled ? " disabled" : ""}${(q.type === "multiple" ? questionIncludes(answer, o.value) : answer === o.value) ? " checked" : ""}><span>${e(o.label)}</span></label>`,
+      )
+      .join("");
   if (q.type === "number" || q.type === "date")
     return `<input data-question-control="value" data-part="answer" name="${e(q.id)}" type="${q.type}" aria-label="${e(q.label)}" value="${e(String(answer))}" ${common}${q.min !== undefined ? ` min="${e(String(q.min))}"` : ""}${q.max !== undefined ? ` max="${e(String(q.max))}"` : ""}${q.type === "number" ? ` step="${q.step ?? "any"}"` : ""}>`;
   if (q.type === "select")
@@ -641,11 +859,8 @@ export function renderQuestionControl(
   if (q.type === "ranking") {
     const description = descriptionId.split(/\s+/)[0];
     const instructions = description + "-rank-instructions";
-    return `<p data-part="rank-instructions" id="${e(instructions)}">${e(q.rankingLabels?.instructions ?? "Press Space to pick up, use arrow keys to move, Enter to drop, Escape to cancel.")}</p><ol data-part="ranking">${(Array.isArray(
+    return `<p data-part="rank-instructions" id="${e(instructions)}">${e(q.rankingLabels?.instructions ?? "Press Space to pick up, use arrow keys to move, Enter to drop, Escape to cancel.")}</p><ol data-part="ranking">${questionStrings(
       answer,
-    )
-      ? answer
-      : []
     )
       .map((key, index, order) => {
         const label = options.find((o) => o.value === key)?.label ?? key;
@@ -662,6 +877,7 @@ function restoreQuestionControl(
   q: Question,
   value: QuestionnaireValue,
 ) {
+  if (q.type === "group") return;
   const answer = questionnaireValue([q], value)[q.id];
   for (const input of Array.from(
     root.querySelectorAll<HTMLInputElement | HTMLSelectElement>(
@@ -704,7 +920,11 @@ export function mountQuestionControls(
     blocked: boolean;
   },
   change: (value: QuestionnaireValue) => void,
+  groups = true,
 ) {
+  const cleanupGroups = groups
+    ? mountQuestionGroups(root, get, change)
+    : () => {};
   const cleanupRanking = mountQuestionRanking(root, get, change);
   let disposed = false;
   let focus:
@@ -721,15 +941,21 @@ export function mountQuestionControls(
     | undefined;
   const capture = (node: HTMLElement) => {
     const q = get().question;
-    if (!q || !node.dataset.questionControl) return;
+    if (!q || q.type === "group" || !node.dataset.questionControl) return;
     focus = {
       id: q.id,
       part: node.dataset.questionControl,
       key: node.dataset.key ?? "",
       row: node.dataset.row ?? "",
       direction: node.dataset.direction ?? "",
-      start: node instanceof HTMLInputElement ? node.selectionStart : null,
-      end: node instanceof HTMLInputElement ? node.selectionEnd : null,
+      start:
+        node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement
+          ? node.selectionStart
+          : null,
+      end:
+        node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement
+          ? node.selectionEnd
+          : null,
       node,
     };
   };
@@ -737,14 +963,29 @@ export function mountQuestionControls(
     const node = event.target;
     if (
       !(
-        node instanceof HTMLInputElement || node instanceof HTMLSelectElement
+        node instanceof HTMLInputElement ||
+        node instanceof HTMLSelectElement ||
+        node instanceof HTMLTextAreaElement
       ) ||
       !node.dataset.questionControl
     )
       return;
     const { question: q, value, blocked } = get();
-    if (!q || blocked || node.disabled || node.closest(":disabled")) return;
+    if (
+      !q ||
+      q.type === "group" ||
+      blocked ||
+      node.disabled ||
+      node.closest(":disabled")
+    )
+      return;
     capture(node);
+    if (
+      node.dataset.questionControl === "choice" &&
+      event.type === "change" &&
+      node instanceof HTMLInputElement
+    )
+      change(toggleQuestionAnswer(value, q, node.value, node.checked));
     if (node.dataset.questionControl === "value" && event.type === "input")
       change({ ...value, [q.id]: node.value });
     if (
@@ -789,6 +1030,7 @@ export function mountQuestionControls(
     if (
       !button ||
       !q ||
+      q.type === "group" ||
       blocked ||
       button.disabled ||
       button.closest(":disabled")
@@ -796,7 +1038,7 @@ export function mountQuestionControls(
       return;
     const answer = questionnaireValue([q], value)[q.id];
     if (!Array.isArray(answer)) return;
-    const order = [...answer],
+    const order = questionStrings(answer),
       from = order.indexOf(button.dataset.key!),
       to = from + Number(button.dataset.direction);
     if (from < 0 || to < 0 || to >= order.length) return;
@@ -847,7 +1089,11 @@ export function mountQuestionControls(
       );
     if (!node || node.matches(":disabled")) return;
     node.focus();
-    if (node instanceof HTMLInputElement && descriptor.start !== null)
+    if (
+      (node instanceof HTMLInputElement ||
+        node instanceof HTMLTextAreaElement) &&
+      descriptor.start !== null
+    )
       node.setSelectionRange(descriptor.start, descriptor.end);
   });
   observer.observe(root, {
@@ -862,6 +1108,7 @@ export function mountQuestionControls(
   root.ownerDocument.addEventListener("pointerdown", pointer);
   return () => {
     disposed = true;
+    cleanupGroups();
     cleanupRanking();
     observer.disconnect();
     root.removeEventListener("input", input);
@@ -882,13 +1129,32 @@ export function createQuestionControlRenderer() {
     value: QuestionnaireValue,
     descriptionId: string,
     invalid: boolean,
+    errors: Record<string, string> = {},
+    labels: Pick<QuestionnaireOptions, "requiredLabel" | "invalidLabel"> = {},
   ) => {
-    if (!["number", "date", "select"].includes(q.type))
+    if (!["number", "date", "select", "group"].includes(q.type))
       return renderQuestionControl(q, value, descriptionId, invalid);
-    const next = JSON.stringify([q, descriptionId]);
+    const next = JSON.stringify([
+      q,
+      descriptionId,
+      q.type === "group"
+        ? [questionGroupShape(q, value), invalid, errors, labels]
+        : undefined,
+    ]);
     if (signature !== next) {
       signature = next;
-      html = renderQuestionControl(q, value, descriptionId, invalid);
+      html =
+        q.type === "group"
+          ? renderQuestionGroup(
+              q,
+              questionnaireValue([q], value),
+              descriptionId,
+              invalid,
+              [q.id],
+              errors,
+              labels,
+            )
+          : renderQuestionControl(q, value, descriptionId, invalid);
     }
     return html;
   };

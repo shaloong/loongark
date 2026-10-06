@@ -118,18 +118,30 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})));`
         : `console.log(renderToString(h(L.LoongArkQuestionnaire,${typedQuestionProps})));`;
-  const multiMatrixProps = "{label:'SSR multi matrix',questions:[{id:'multiMatrix',label:'Multiple matrix',type:'matrix',multiple:true,minSelections:1,maxSelections:2,rows:[{id:'row',label:'Multiple row'}],options:[{value:'a',label:'A'},{value:'b',label:'B'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{multiMatrix:{row:['a','b']}},onValueChange:()=>{throw Error('SSR must not emit')}}";
-  const multiMatrixScript = framework === "Vue"
-    ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${multiMatrixProps})})));`
-    : framework === "Solid"
-      ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${multiMatrixProps})));`
-      : `console.log(renderToString(h(L.LoongArkQuestionnaire,${multiMatrixProps})));`;
-  const rankSurveyProps = "{label:'SSR ranking',questions:[{id:'rankSurvey',label:'Ranking',type:'ranking',options:[{value:'a',label:'A'},{value:'b',label:'B'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{rankSurvey:['b','a']},onValueChange:()=>{throw Error('SSR must not emit')}}";
-  const rankSurveyScript = framework === "Vue"
-    ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${rankSurveyProps})})));`
-    : framework === "Solid"
-      ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${rankSurveyProps})));`
-      : `console.log(renderToString(h(L.LoongArkQuestionnaire,${rankSurveyProps})));`;
+  const multiMatrixProps =
+    "{label:'SSR multi matrix',questions:[{id:'multiMatrix',label:'Multiple matrix',type:'matrix',multiple:true,minSelections:1,maxSelections:2,rows:[{id:'row',label:'Multiple row'}],options:[{value:'a',label:'A'},{value:'b',label:'B'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{multiMatrix:{row:['a','b']}},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const multiMatrixScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${multiMatrixProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${multiMatrixProps})));`
+        : `console.log(renderToString(h(L.LoongArkQuestionnaire,${multiMatrixProps})));`;
+  const rankSurveyProps =
+    "{label:'SSR ranking',questions:[{id:'rankSurvey',label:'Ranking',type:'ranking',options:[{value:'a',label:'A'},{value:'b',label:'B'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{rankSurvey:['b','a']},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const rankSurveyScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${rankSurveyProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${rankSurveyProps})));`
+        : `console.log(renderToString(h(L.LoongArkQuestionnaire,${rankSurveyProps})));`;
+  const groupProps =
+    "{label:'SSR repeated survey',questions:[{id:'contactsSSR',label:'Contacts',type:'group',questions:[{id:'name',label:'Name',type:'text',validateAsync:()=>{throw Error('SSR must not validate')}},{id:'hidden',label:'Hidden',type:'text',when:()=>false}]}],defaultValue:{contactsSSR:[{id:'stable',value:{name:'Group <safe>',hidden:'must-not-render-hidden'}}]},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const groupScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${groupProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${groupProps})));`
+        : `console.log(renderToString(h(L.LoongArkQuestionnaire,${groupProps})));`;
   const asyncLoaderSetup =
     "const asyncSSRLoader=L.createAsyncCollectionLoader({getKey:item=>item.id,load:()=>{throw Error('SSR must not request a collection')}});";
   const asyncProps =
@@ -197,6 +209,7 @@ for (const [framework, script] of [
           typedQuestionScript +
           multiMatrixScript +
           rankSurveyScript +
+          groupScript +
           asyncScript +
           serverScript +
           conversationScript +
@@ -205,6 +218,9 @@ for (const [framework, script] of [
     ],
     { encoding: "utf8", timeout: 60000 },
   );
+  assert.match(result.stdout, /name="contactsSSR\[stable\]\[name\]"/);
+  assert.match(result.stdout, /Group &lt;safe&gt;/);
+  assert.ok(!result.stdout.includes("must-not-render-hidden"));
   assert.match(result.stdout, /role="grid"[^>]*aria-multiselectable="true"/);
   assert.match(
     result.stdout,
@@ -232,9 +248,22 @@ for (const [framework, script] of [
   assert.match(result.stdout, /SSR async idle 1/);
   assert.match(result.stdout, /name="typed\[row\]"/);
   assert.ok(result.stdout.includes('data-part="rank-instructions"'));
-  assert.equal([...result.stdout.matchAll(/data-question-control="rank-drag"/g)].length, 2);
-  assert.ok(result.stdout.indexOf('name="rankSurvey" value="b"') < result.stdout.indexOf('name="rankSurvey" value="a"'));
-  assert.equal([...result.stdout.matchAll(/<input(?=[^>]*name="multiMatrix\[row\]")(?=[^>]*checked)[^>]*>/g)].length, 2);
+  assert.equal(
+    [...result.stdout.matchAll(/data-question-control="rank-drag"/g)].length,
+    2,
+  );
+  assert.ok(
+    result.stdout.indexOf('name="rankSurvey" value="b"') <
+      result.stdout.indexOf('name="rankSurvey" value="a"'),
+  );
+  assert.equal(
+    [
+      ...result.stdout.matchAll(
+        /<input(?=[^>]*name="multiMatrix\[row\]")(?=[^>]*checked)[^>]*>/g,
+      ),
+    ].length,
+    2,
+  );
   assert.match(result.stdout, /data-part="range-start"/);
   assert.match(result.stdout, /data-part="inspect-category"/);
   assert.match(result.stdout, /aria-rowcount="1001"/);
@@ -432,7 +461,17 @@ for (const framework of ["react", "vue", "solid"]) {
 }
 
 // DOM 导出在 SSR 中不查询节点、不解码图像、不调用状态读取器。
-const { exportImageCropper } = await import("../packages/kit/dist/cropper-export.js");
-const cropperSSR = await exportImageCropper({ crop: { x: 0, y: 0, width: 100, height: 100 }, zoom: 1, rotation: 0, offset: { x: 0, y: 0 }, flip: { horizontal: false, vertical: false }, getRootProps() { throw new Error("SSR must not access cropper DOM state"); } });
+const { exportImageCropper } =
+  await import("../packages/kit/dist/cropper-export.js");
+const cropperSSR = await exportImageCropper({
+  crop: { x: 0, y: 0, width: 100, height: 100 },
+  zoom: 1,
+  rotation: 0,
+  offset: { x: 0, y: 0 },
+  flip: { horizontal: false, vertical: false },
+  getRootProps() {
+    throw new Error("SSR must not access cropper DOM state");
+  },
+});
 if (cropperSSR !== null) throw new Error("SSR cropper export must return null");
 console.log("ImageCropper共享导出SSR无DOM/解码/状态读取通过");

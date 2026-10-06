@@ -13,6 +13,7 @@ import {
   createQuestionControlRenderer,
   mountQuestionControls,
   questionnaireVisibleQuestions,
+  questionnaireSubmittedValue,
   questionnaireValue,
   questionError,
   createQuestionnaireValidationController,
@@ -58,16 +59,25 @@ export function LoongArkQuestionnaire({
     [showError, setShowError] = useState(false);
   const root = useRef<HTMLFormElement>(null),
     uid = useId(),
-    focusNext = useRef(false);
+    focusNext = useRef(false),
+    focusValidation = useRef<boolean | undefined>(undefined);
   useLayoutEffect(() => {
     if (focusNext.current) {
       focusNext.current = false;
       focusQuestion(root.current, true);
     }
   }, [page]);
+  // 异步结果经 React 提交后再定位；旧题组 HTML 被替换时不会丢掉错误焦点。
+  useLayoutEffect(() => {
+    if (focusValidation.current !== undefined) {
+      const owned = focusValidation.current;
+      focusValidation.current = undefined;
+      focusQuestion(root.current, owned);
+    }
+  });
   const current = () => questionnaireValue(questions, value ?? internal);
   const visible = () => questionnaireVisibleQuestions(questions, current());
-  const submitted = () => questionnaireValue(visible(), current());
+  const submitted = () => questionnaireSubmittedValue(questions, current());
   const index = () => Math.min(page, Math.max(0, visible().length - 1));
   const question = () => visible()[index()];
   const latest = useRef({ question: question(), value: current(), onComplete });
@@ -104,10 +114,27 @@ export function LoongArkQuestionnaire({
     setShowError(false);
   };
   const [renderControl] = useState(createQuestionControlRenderer);
-  useLayoutEffect(() => restoreQuestionAnswers(root.current, latest.current.question, latest.current.value));
+  useLayoutEffect(() =>
+    restoreQuestionAnswers(
+      root.current,
+      latest.current.question,
+      latest.current.value,
+    ),
+  );
   const changeRef = useRef(change);
   changeRef.current = change;
-  useLayoutEffect(() => mountQuestionControls(root.current!, () => ({ ...latest.current, blocked: !!(disabled || submitting || completed) }), next => changeRef.current(next)), [disabled, submitting, completed]);
+  useLayoutEffect(
+    () =>
+      mountQuestionControls(
+        root.current!,
+        () => ({
+          ...latest.current,
+          blocked: !!(disabled || submitting || completed),
+        }),
+        (next) => changeRef.current(next),
+      ),
+    [disabled, submitting, completed],
+  );
   const move = (next: number) => {
     validation.cancel();
     setPage(next);
@@ -133,12 +160,14 @@ export function LoongArkQuestionnaire({
     );
     if (!result) return;
     if (result.invalidId) {
+      focusValidation.current = ownedAtStart;
       setShowError(true);
       const invalid = visible().findIndex((q) => q.id === result.invalidId);
       if (invalid !== index()) {
         setPage(invalid);
         focusNext.current = ownedAtStart;
-      } else focusQuestion(root.current, ownedAtStart);
+        focusValidation.current = undefined;
+      }
     } else if (!last) move(index() + 1);
     else latest.current.onComplete?.({ value: result.value! });
   };
@@ -151,7 +180,16 @@ export function LoongArkQuestionnaire({
           validationState.errors,
         )
       : "";
-  const controlHTML = question() ? renderControl(question(), current(), uid + "-description " + uid + "-error", !!err()) : "";
+  const controlHTML = question()
+    ? renderControl(
+        question(),
+        current(),
+        uid + "-description " + uid + "-error",
+        !!err(),
+        validationState.errors,
+        { requiredLabel, invalidLabel },
+      )
+    : "";
   const controlMarkup = useMemo(() => ({ __html: controlHTML }), [controlHTML]);
   return (
     <form
@@ -219,7 +257,10 @@ export function LoongArkQuestionnaire({
                 }
               />
             ) : !["single", "multiple"].includes(question().type) ? (
-              <div data-part="advanced-answer" dangerouslySetInnerHTML={controlMarkup} />
+              <div
+                data-part="advanced-answer"
+                dangerouslySetInnerHTML={controlMarkup}
+              />
             ) : (
               (question().options ?? []).map((o) => (
                 <label
@@ -273,7 +314,18 @@ export function LoongArkQuestionnaire({
               {err()}
             </div>
           </fieldset>
-          {questionnaireFormEntries(submitted(), question().type === "text" ? undefined : question().id).map(([name, answer], i) => <input type="hidden" name={name} value={answer} disabled={blocked()} key={name + "-" + i} />)}
+          {questionnaireFormEntries(
+            submitted(),
+            question().type === "text" ? undefined : question().id,
+          ).map(([name, answer], i) => (
+            <input
+              type="hidden"
+              name={name}
+              value={answer}
+              disabled={blocked()}
+              key={name + "-" + i}
+            />
+          ))}
           {error && (
             <div data-scope="questionnaire" data-part="error" role="alert">
               {error}

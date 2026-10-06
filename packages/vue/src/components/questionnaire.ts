@@ -15,6 +15,7 @@ import {
   createQuestionControlRenderer,
   mountQuestionControls,
   questionnaireVisibleQuestions,
+  questionnaireSubmittedValue,
   questionnaireValue,
   questionError,
   createQuestionnaireValidationController,
@@ -73,7 +74,7 @@ export const LoongArkQuestionnaire = defineComponent({
           p.value ?? p.modelValue ?? internal.value,
         ),
       visible = () => questionnaireVisibleQuestions(p.questions, current()),
-      submitted = () => questionnaireValue(visible(), current()),
+      submitted = () => questionnaireSubmittedValue(p.questions, current()),
       index = () => Math.min(page.value, Math.max(0, visible().length - 1)),
       question = () => visible()[index()],
       blocked = () => p.disabled || p.submitting;
@@ -105,10 +106,24 @@ export const LoongArkQuestionnaire = defineComponent({
       showError.value = false;
     };
     const renderControl = createQuestionControlRenderer();
-    watchEffect(() => { const q = question(), v = current(); nextTick(() => restoreQuestionAnswers(root.value, q, v)); });
+    watchEffect(() => {
+      const q = question(),
+        v = current();
+      nextTick(() => restoreQuestionAnswers(root.value, q, v));
+    });
     let disposeControls: (() => void) | undefined;
     onBeforeUnmount(() => disposeControls?.());
-    onMounted(() => { disposeControls = mountQuestionControls(root.value!, () => ({ question: question(), value: current(), blocked: !!(blocked() || p.completed) }), change); });
+    onMounted(() => {
+      disposeControls = mountQuestionControls(
+        root.value!,
+        () => ({
+          question: question(),
+          value: current(),
+          blocked: !!(blocked() || p.completed),
+        }),
+        change,
+      );
+    });
     const move = (next: number) => {
       validation.cancel();
       page.value = next;
@@ -222,50 +237,64 @@ export const LoongArkQuestionnaire = defineComponent({
                               }),
                           })
                         : !["single", "multiple"].includes(q.type)
-                          ? h("div", { "data-part": "advanced-answer", innerHTML: renderControl(q, current(), uid + "-description " + uid + "-error", !!err) })
-                        : (q.options ?? []).map((o) =>
-                            h(
-                              "label",
-                              {
-                                ...part("option"),
-                                "data-selected": (
-                                  q.type === "multiple"
-                                    ? questionIncludes(v[q.id], o.value)
-                                    : v[q.id] === o.value
-                                )
-                                  ? "true"
-                                  : undefined,
-                              },
-                              [
-                                h("input", {
-                                  type:
-                                    q.type === "multiple"
-                                      ? "checkbox"
-                                      : "radio",
-                                  name: q.id,
-                                  value: o.value,
-                                  disabled: o.disabled,
-                                  checked:
+                          ? h("div", {
+                              "data-part": "advanced-answer",
+                              innerHTML: renderControl(
+                                q,
+                                current(),
+                                uid + "-description " + uid + "-error",
+                                !!err,
+                                validationState.value.errors,
+                                {
+                                  requiredLabel: p.requiredLabel,
+                                  invalidLabel: p.invalidLabel,
+                                },
+                              ),
+                            })
+                          : (q.options ?? []).map((o) =>
+                              h(
+                                "label",
+                                {
+                                  ...part("option"),
+                                  "data-selected": (
                                     q.type === "multiple"
                                       ? questionIncludes(v[q.id], o.value)
-                                      : v[q.id] === o.value,
-                                  "aria-required": q.required,
-                                  "aria-invalid": err ? "true" : undefined,
-                                  "aria-describedby": uid + "-error",
-                                  onChange: (e: Event) =>
-                                    change(
-                                      toggleQuestionAnswer(
-                                        v,
-                                        q,
-                                        o.value,
-                                        (e.target as HTMLInputElement).checked,
+                                      : v[q.id] === o.value
+                                  )
+                                    ? "true"
+                                    : undefined,
+                                },
+                                [
+                                  h("input", {
+                                    type:
+                                      q.type === "multiple"
+                                        ? "checkbox"
+                                        : "radio",
+                                    name: q.id,
+                                    value: o.value,
+                                    disabled: o.disabled,
+                                    checked:
+                                      q.type === "multiple"
+                                        ? questionIncludes(v[q.id], o.value)
+                                        : v[q.id] === o.value,
+                                    "aria-required": q.required,
+                                    "aria-invalid": err ? "true" : undefined,
+                                    "aria-describedby": uid + "-error",
+                                    onChange: (e: Event) =>
+                                      change(
+                                        toggleQuestionAnswer(
+                                          v,
+                                          q,
+                                          o.value,
+                                          (e.target as HTMLInputElement)
+                                            .checked,
+                                        ),
                                       ),
-                                    ),
-                                }),
-                                h("span", {}, o.label),
-                              ],
+                                  }),
+                                  h("span", {}, o.label),
+                                ],
+                              ),
                             ),
-                          ),
                       h(
                         "div",
                         { ...part("error"), id: uid + "-error", role: "alert" },
@@ -273,7 +302,17 @@ export const LoongArkQuestionnaire = defineComponent({
                       ),
                     ],
                   ),
-                  ...questionnaireFormEntries(submitted(), q.type === "text" ? undefined : q.id).map(([name, value]) => h("input", { type: "hidden", name, value, disabled: blocked() })),
+                  ...questionnaireFormEntries(
+                    submitted(),
+                    q.type === "text" ? undefined : q.id,
+                  ).map(([name, value]) =>
+                    h("input", {
+                      type: "hidden",
+                      name,
+                      value,
+                      disabled: blocked(),
+                    }),
+                  ),
                   p.error &&
                     h("div", { ...part("error"), role: "alert" }, p.error),
                   validationState.value.pending &&

@@ -15,6 +15,7 @@ import {
   createQuestionControlRenderer,
   mountQuestionControls,
   questionnaireVisibleQuestions,
+  questionnaireSubmittedValue,
   questionnaireValue,
   questionError,
   createQuestionnaireValidationController,
@@ -64,7 +65,7 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
   let root!: HTMLFormElement;
   const current = () => questionnaireValue(p.questions, p.value ?? internal());
   const visible = () => questionnaireVisibleQuestions(p.questions, current());
-  const submitted = () => questionnaireValue(visible(), current());
+  const submitted = () => questionnaireSubmittedValue(p.questions, current());
   const index = () => Math.min(page(), Math.max(0, visible().length - 1));
   const question = () => visible()[index()];
   const blocked = () => p.disabled || p.submitting;
@@ -92,7 +93,18 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
   };
   const renderControl = createQuestionControlRenderer();
   createEffect(() => restoreQuestionAnswers(root, question(), current()));
-  onMount(() => { const dispose = mountQuestionControls(root, () => ({ question: question(), value: current(), blocked: !!(blocked() || p.completed) }), change); onCleanup(dispose); });
+  onMount(() => {
+    const dispose = mountQuestionControls(
+      root,
+      () => ({
+        question: question(),
+        value: current(),
+        blocked: !!(blocked() || p.completed),
+      }),
+      change,
+    );
+    onCleanup(dispose);
+  });
   const move = (next: number) => {
     validation.cancel();
     setPage(next);
@@ -131,7 +143,18 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
     showError() && question()
       ? questionError(question(), current(), p, validationState().errors)
       : "";
-  const controlHTML = createMemo(() => question() ? renderControl(question(), current(), uid + "-description " + uid + "-error", !!err()) : "");
+  const controlHTML = createMemo(() =>
+    question()
+      ? renderControl(
+          question(),
+          current(),
+          uid + "-description " + uid + "-error",
+          !!err(),
+          validationState().errors,
+          { requiredLabel: p.requiredLabel, invalidLabel: p.invalidLabel },
+        )
+      : "",
+  );
   return (
     <form
       data-scope="questionnaire"
@@ -254,7 +277,21 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
               {err()}
             </div>
           </fieldset>
-          <For each={questionnaireFormEntries(submitted(), question().type === "text" ? undefined : question().id)}>{([name, answer]) => <input type="hidden" name={name} value={answer} disabled={blocked()} />}</For>
+          <For
+            each={questionnaireFormEntries(
+              submitted(),
+              question().type === "text" ? undefined : question().id,
+            )}
+          >
+            {([name, answer]) => (
+              <input
+                type="hidden"
+                name={name}
+                value={answer}
+                disabled={blocked()}
+              />
+            )}
+          </For>
           {p.error && (
             <div data-scope="questionnaire" data-part="error" role="alert">
               {p.error}

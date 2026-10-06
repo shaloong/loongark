@@ -127,3 +127,6 @@ export const MatrixMultiple: StoryObj = { decorators: [withArkExamplePage], rend
 
 import { QuestionnaireRankingExample } from "../examples/react/QuestionnaireRankingExample";
 export const RankingInteraction: StoryObj = {decorators:[withArkExamplePage], render:()=> <QuestionnaireRankingExample />};
+
+import { QuestionnaireGroupsExample } from "../examples/react/QuestionnaireGroupsExample";
+export const RepeatedGroups: StoryObj = { decorators:[withArkExamplePage], render:()=> <QuestionnaireGroupsExample /> };

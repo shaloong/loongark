@@ -1,5 +1,5 @@
 import type { Question, QuestionnaireValue } from "./questionnaire";
-import { questionnaireValue } from "./questionnaire";
+import { questionnaireValue, questionStrings } from "./questionnaire";
 
 /** 排序预览仅移动现有节点；放下后提交一次完整顺序，取消不发出答案。 */
 export function mountQuestionRanking(
@@ -30,9 +30,7 @@ export function mountQuestionRanking(
     const { question, value } = get();
     if (!question || question.type !== "ranking") return [];
     const answer = questionnaireValue([question], value)[question.id];
-    return Array.isArray(answer)
-      ? answer.filter((key): key is string => typeof key === "string")
-      : [];
+    return questionStrings(answer);
   };
   const rows = () =>
     Array.from(

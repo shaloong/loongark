@@ -22,7 +22,7 @@ pnpm storybook
 
 [技术架构与验证](docs/README.md) · [组件覆盖](docs/component-coverage.md) · [开发约定](AGENTS.md)
 
-当前组件目录覆盖 117 个组件族、321 个 Story，React/Vue/Solid/Svelte 各 792 个公开值入口；Ark UI 独有部件和 Hook 的安装版本对照已补齐。图标统一采用 Lucide，四端节点与高级 Props 见 [图标说明](docs/icons.md)。高级场景仍逐批验收，范围与限制见 [Ark UI 核对](docs/ark-ui-coverage.md)。
+当前组件目录覆盖 117 个组件族、322 个 Story，React/Vue/Solid/Svelte 各 792 个公开值入口；Ark UI 独有部件和 Hook 的安装版本对照已补齐。图标统一采用 Lucide，四端节点与高级 Props 见 [图标说明](docs/icons.md)。高级场景仍逐批验收，范围与限制见 [Ark UI 核对](docs/ark-ui-coverage.md)。
 
 代码采用 [MIT License](LICENSE)。发布包包含相同许可；第三方依赖保留各自许可证。
 
@@ -47,3 +47,5 @@ pnpm storybook
 CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部焦点下 Escape 关闭提示，并避免 SVG 重建覆盖显式检查分类；原生列拖动与富文本表格操作回归在滚动后重新核对真实命中目标。四端共享实现与示例保持一致，目录仍为117族、321Story、四端各792个LoongArk前缀公开值、243示例。
 
 最终新构建、契约、发布类型/SSR和Svelte检查通过；Chromium/Firefox生产版本定向各112项通过，最终富文本共享回归另各16项通过；WebKit最终完整专项112项、Story32项及全量Linux视觉178项通过。三引擎144张实际截图及最终WebKit48张新图已查看，204张既有基线含Windows哈希未变。原生Safari基提交243默认示例和32交互通过、32截图已审阅，不代替本批新代码验收。范围及仍开放的平台失败见[验收记录](docs/audits/2026-10-06/input-hover-platforms/acceptance.json)。重复题组、自定义渲染、虚拟化、日期、Drawer及真机继续实施。
+
+重复题组支持稳定实例、嵌套和递归表单提交，详见[问卷契约](docs/questionnaire.md)与[实际验收](docs/audits/2026-10-06/questionnaire-groups-linux/acceptance.json)。高级能力仍按[缺口清单](docs/advanced-capabilities.md)推进。

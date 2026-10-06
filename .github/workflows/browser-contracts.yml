@@ -16,7 +16,8 @@ jobs:
   engines:
     name: Four frameworks / ${{ matrix.browser }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    # 新构建、完整四端消费与全部 Story 均在同一任务运行；近期两引擎在40分钟时被取消。
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:

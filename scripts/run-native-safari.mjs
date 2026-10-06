@@ -536,6 +536,97 @@ try {
         case: "grouping-tree-expansion-filter-context",
       });
     }
+  for (const framework of Object.keys(index))
+    for (const mode of ["light", "dark"]) {
+      await navigate(framework, "QuestionnaireGroupsExample", mode);
+      await click("summary");
+      const alpha = '[data-group-instance="alpha"]';
+      await type(
+        alpha + ' textarea[aria-label="Contact name"]',
+        "Safari contact",
+      );
+      assert.equal(
+        await execute(
+          'return document.querySelector(\'[data-group-instance="beta"] textarea[aria-label="Contact name"]\').value',
+        ),
+        "Morgan Lee",
+      );
+      await click('[data-question-group="add"]');
+      await waitFor(
+        () =>
+          execute(
+            'return document.querySelectorAll(\'[data-part="group-instance"]\').length === 3 && document.activeElement?.getAttribute("aria-label") === "Contact name"',
+          ),
+        "新增实例焦点",
+      );
+      await clickText("Remove contact 3");
+      await waitFor(
+        () =>
+          execute(
+            'return document.querySelectorAll("[data-part=group-instance]").length===2',
+          ),
+        "删除新实例",
+      );
+      // 重新导航排除位置选择：通过稳定实例 id 检查受控拒绝，不依赖数组索引。
+      await navigate(framework, "QuestionnaireGroupsExample", mode);
+      await click("summary");
+      await clickText("Show advanced questions");
+      await clickText("Reject updates");
+      const mail =
+        alpha + ' input[data-question-control="choice"][value="email"]';
+      await click(mail);
+      await waitFor(
+        () =>
+          execute(
+            'const input=document.querySelector(arguments[0]);return input.checked && input.closest("label").getAttribute("data-selected")==="true"',
+            [mail],
+          ),
+        "受控拒绝恢复复选框",
+      );
+      await clickText("Accept updates");
+      const handle = alpha + ' button[aria-label="Reorder: Clarity"]';
+      await execute("document.querySelector(arguments[0]).focus()", [handle]);
+      await session("POST", "/actions", {
+        actions: [
+          {
+            type: "key",
+            id: "group-ranking",
+            actions: [
+              { type: "keyDown", value: " " },
+              { type: "keyUp", value: " " },
+              { type: "keyDown", value: "\uE015" },
+              { type: "keyUp", value: "\uE015" },
+              { type: "keyDown", value: "\uE007" },
+              { type: "keyUp", value: "\uE007" },
+            ],
+          },
+        ],
+      });
+      await waitFor(
+        () =>
+          execute(
+            'return new FormData(document.querySelector("form")).getAll("contacts[alpha][priorities]").join(",") === "speed,clarity,quality" && document.activeElement===document.querySelector(arguments[0])',
+            [handle],
+          ),
+        "嵌套排序键盘及稳定焦点",
+      );
+      await clickText("Require clarity first");
+      await click('form button[type="submit"]');
+      await waitFor(
+        () =>
+          execute(
+            'return document.activeElement?.getAttribute("aria-label")==="Reorder: Speed"',
+          ),
+        "排序子题错误焦点",
+      );
+      await assertLayout();
+      await screenshot(`questionnaire-groups-${framework}-${mode}`);
+      report.interactions.push({
+        framework,
+        mode,
+        case: "questionnaire-groups-native-keyboard-controlled-focus-form",
+      });
+    }
   report.result = "passed";
   console.log(
     `Native Safari ${report.browser.browserVersion}: ${report.defaultExamples.length} default examples and ${report.interactions.length} interaction cases passed.`,

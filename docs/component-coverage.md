@@ -1,11 +1,13 @@
 # LoongArk 组件覆盖
 
-更新时间：2026-10-05。按组件族计数，Progress 的线性/圆形属于同一族。
+更新时间：2026-10-06。按组件族计数，Progress 的线性/圆形属于同一族。
 
-目前 115 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐 Ark 裁剪、JSON 与辅助组件，并复核高级部件，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
+目前 117 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐 Ark 裁剪、JSON 与辅助组件，并复核高级部件，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
 
 | 组件族               | React | Vue | Solid | Svelte | 交付来源            |
 | -------------------- | ----- | --- | ----- | ------ | ------------------- |
+| RichTextEditor       | ✓     | ✓   | ✓     | ✓      | 2026-10-06 独立编辑器 |
+| CodeEditor           | ✓     | ✓   | ✓     | ✓      | 2026-10-06 独立编辑器 |
 | DateInput            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 新版 |
 | Swap                 | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 新版 |
 | Toc                  | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 新版 |
@@ -176,9 +178,11 @@ Icon 提供四端共享 Lucide 节点、可访问名称、尺寸、固定描边�
 异步 Collection 复用原生 useAsyncList，新增共享加载/接收确认契约、稳定键去重、游标循环、重试与取消；见 [异步 Collection](async-collection.md)。四端专项验收通过；见 [Linux 验收](audits/2026-10-05/async-collection-linux/acceptance.json)。
 
 
-本轮指定的六项高级能力已逐项实现并验收：复杂编辑器、原子批量编辑与撤销、可变高度虚拟化、图表缩放/刷选/提示与增量更新、复杂问卷、异步 Collection。当前 **115 个组件族、305 个 Story、四端各 790 个公开 LoongArk 值入口、207 个框架示例**。具体 API、平台限制和每批验收保留在上述链接；业务服务仍由调用方提供。过程截图和日志只存忽略目录，仓库仅保留简短摘要及实际回归使用的基线。
+2026-10-05该轮指定的六项高级能力已逐项实现并验收：复杂编辑器、原子批量编辑与撤销、可变高度虚拟化、图表缩放/刷选/提示与增量更新、复杂问卷、异步 Collection。当批 **115 个组件族、305 个 Story、四端各 790 个公开 LoongArk 值入口、207 个框架示例**。具体 API、平台限制和每批验收保留在上述链接；业务服务仍由调用方提供。过程截图和日志只存忽略目录，仓库仅保留简短摘要及实际回归使用的基线。
 
 最终异步 Collection 批次：四端回归 121 项、完整 Story 浏览器回归 95 项、视觉比较 126 项、Pages 子路径检查通过；207 个框架示例运行。121 个消费专用用例在 Story 服务中跳过，已由四端套件独立覆盖。详见 [最终验收](audits/2026-10-05/async-collection-linux/acceptance.json)。
 
 
 全量高级缺口补齐第一批：表格有界多级批量撤销/重做、完整行快照冲突保护、拒绝/取消保留历史、原生文字撤销及键盘操作。四端同步，40项四端消费与示例场景通过，最终16项专项复验通过，13项表格Story场景通过，126项视觉比较通过；207个示例运行。只更新8张已审阅受影响Linux基线，其余120张及其中2张Windows基线不变。见 [验收](audits/2026-10-05/data-table-history-linux/acceptance.json) 与 [剩余清单](advanced-capabilities.md)。
+
+重复题组扩展既有Questionnaire，未增加组件别名；加入4端示例和RepeatedGroups Story，当前117族、322Story、四端各792个LoongArk前缀公开值、247示例。职责/API见[问卷](questionnaire.md)，验收见[记录](audits/2026-10-06/questionnaire-groups-linux/acceptance.json)。

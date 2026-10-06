@@ -7,6 +7,7 @@
   createQuestionControlRenderer,
   mountQuestionControls,
   questionnaireVisibleQuestions,
+  questionnaireSubmittedValue,
     questionnaireValue,
     questionError,
     createQuestionnaireValidationController,
@@ -53,7 +54,7 @@
   });
   const current = $derived(questionnaireValue(questions, value ?? internal)),
     visible = $derived(questionnaireVisibleQuestions(questions, current)),
-    submittedValue = $derived(questionnaireValue(visible, current)),
+    submittedValue = $derived(questionnaireSubmittedValue(questions, current)),
     index = $derived(Math.min(page, Math.max(0, visible.length - 1))),
     question = $derived(visible[index]),
     blocked = $derived(disabled || submitting),
@@ -190,7 +191,7 @@
             oninput={(e) =>
               change({ ...current, [question.id]: e.currentTarget.value })}
           />{:else if !["single", "multiple"].includes(question.type)}
-          <div data-part="advanced-answer">{@html renderControl(question, current, uid + "-description " + uid + "-error", !!err)}</div>
+          <div data-part="advanced-answer">{@html renderControl(question, current, uid + "-description " + uid + "-error", !!err, validationState.errors, { requiredLabel, invalidLabel })}</div>
           {:else}
           {#each question.options ?? [] as o}<label
               data-scope="questionnaire"

@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-06",
+  "branch": "develop",
+  "base": "e372457dff3b37bb4ae7f94e0982a763678fc31d",
+  "scope": [
+    "重复/嵌套题组、稳定实例身份、数量边界与局部条件",
+    "递归FormData、矩阵多选/排序组合、受控接受/拒绝",
+    "同步/异步校验、冻结局部快照、取消与焦点/光标恢复、四端SSR"
+  ],
+  "validation": {
+    "install": "Node24.19.0/pnpm10.14.0冻结锁文件安装通过；无新增依赖",
+    "ordered": "最终v5 verify、contracts、Storybook新构建、coverage、publication/四端SSR、Svelte、消费与示例新构建全部通过",
+    "coverage": "117families /322Story /792公开值 per framework /247examples",
+    "svelte": "0errors /3existing warnings",
+    "initialFullChromium": "v2完整消费335passed /48skip，含247个默认示例；在后续焦点修正之前，不作最终全部消费结果",
+    "questionnaireProduction": "v4完整问卷专项Chromium100passed /20skip、Firefox96passed /24skip、WebKit96passed /24skip；包含新题组及原有类型/矩阵/排序/条件/异步。v5 Kit与v4相同，仅示例折叠图标和对齐/键盘回归、文档/CI更新",
+    "finalRepeatedGroups": "v5 Chromium/Firefox/WebKit各48passed /12Story-only skip，四框架×两主题×两视口×基本/嵌套/约束",
+    "finalStory": "43passed /100consumer-only skip，含8批全部322Story明暗间距/窄屏/动效扫描",
+    "visual": "最终完整Linux Chromium186passed，--update-snapshots=none；8张新基线先审阅后保存；204张旧基线含2张Windows SHA256保持不变",
+    "visualInitial": "8失败均因新Linux基线缺失；未当作通过，未自动覆盖旧基线"
+  },
+  "manualReview": {
+    "native": "最终v5三引擎各48张四端默认、交互后、嵌套题组截图，1280/375px、明暗，共144张通过36张联系表实际查看",
+    "result": "题组边框/间距、矩阵与排序组合及原生选择状态一致；375px矩阵纵向排列；WebKit原生summary曾显示彩色方块，改用现有Lucide chevron并通过真实Enter展开与垂直对齐断言",
+    "visual": "8张Story实际候选：基本/嵌套×1280/375×明暗，全部实际查看；嵌套新增backup的焦点环、矩阵换行、排序和禁用选项正常"
+  },
+  "corrections": [
+    "初次verify遇递归返回值TS7023，补显式string返回类型后重新按顺序构建，不消费失败产物",
+    "v2 Firefox四个React异步错误焦点失败、嵌套排序丢焦点，实看失败图；修正React提交后的定位与共享稳定路径焦点恢复，最终三引擎复验通过",
+    "新增数量边界与子题同时无效时Add优先、排序无效手柄定位和多选受控拒绝data-selected恢复",
+    "约束初测错误假定basic schema保留不在定义内的updates，修正测试显式勾选后再检查拒绝；未改变隐藏题答案保留模型"
+  ],
+  "limitations": [
+    "375px模拟视口、Chromium CDP模拟触摸不是实际手机",
+    "原生Safari新增8个题组情景仅本地语法/配置检查，须远端执行并下载审阅后计通过",
+    "整库Firefox/WebKit/Safari与真机仍开放；e372真实CI WebKit298通过17失败，Chromium/Firefox Story受40分钟任务限制取消；此批Linux引擎预算改60分钟，尚待实际执行",
+    "Windows及所有无关旧基线保留，过程截图/日志仅.artifacts/或限期CI Artifact",
+    "自定义题型渲染、横向/二维/瀑布流虚拟化、日期本地化/时间组合、Drawer方向/RTL/触摸继续实施"
+  ],
+  "environment": {
+    "platform": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "chromium": "system151",
+    "firefox": "Playwright144.0.2",
+    "webkit": "Playwright26.0",
+    "safari": "本批未在Linux运行"
+  }
+}
