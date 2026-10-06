@@ -1,3 +1,4 @@
+import LoongArkMenuContextTrigger from "./MenuContextTrigger.svelte";
 import DialogAction from "./DialogAction.svelte";
 import DialogCancel from "./DialogCancel.svelte";
 import { Dialog } from "@ark-ui/svelte/dialog";
@@ -72,7 +73,11 @@ export const LoongArkSheetCancel: typeof LoongArkSheet.Cancel =
   LoongArkSheet.Cancel;
 export const LoongArkCommand = Combobox;
 export { createListCollection as createCommandCollection };
-export const LoongArkContextMenu = { ...Menu, Trigger: Menu.ContextTrigger };
+export const LoongArkContextMenu = {
+  ...Menu,
+  Trigger: LoongArkMenuContextTrigger,
+  ContextTrigger: LoongArkMenuContextTrigger,
+};
 export const LoongArkCalendar = DatePicker;
 export const LoongArkSidebarProvider: typeof Collapsible.Root =
   Collapsible.Root;

@@ -183,6 +183,7 @@
     "VirtualGrid independent two-axis windows, logical RTL scrolling, stable key anchors, keyboard and nested focus, bounded SSR and cleanup",
     "VirtualMasonry measured shortest-column windows, responsive lane widths, stable key/reading anchors, owned focus and bounded SSR",
     "Localized Gregorian date text parser with explicit locale order/month names/digits, strict invalid-date rejection; native segmented date-time and zoned ISO form serialization",
-    "Input and Textarea inherit unspecified root disabled/readOnly states; Vue native readOnly forwarding and Svelte required inheritance"
+    "Input and Textarea inherit unspecified root disabled/readOnly states; Vue native readOnly forwarding and Svelte required inheritance",
+    "ContextMenu native unknown-pointer right click, touch/pen long-press cancellation and keyboard alternative; shared published handler guard"
   ]
 }

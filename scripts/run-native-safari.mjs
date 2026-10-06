@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { runNativeGroupFocus } from "./native-safari-group-focus.mjs";
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
+import { runNativeAdvanced } from "./native-safari-advanced.mjs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
@@ -33,7 +34,7 @@ const report = {
   limitations: [
     "Desktop native Safari; not a real iOS device.",
     "Default example smoke is not exhaustive interaction coverage for every component.",
-    "Keyboard/batch history and Chart range flows run in both themes across all four frameworks.",
+    "Advanced date, editors, table/clipboard, chart, questionnaire, virtual layouts, collection and Drawer flows run in both themes across all four frameworks.",
   ],
 };
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -700,6 +701,31 @@ try {
     assertLayout,
     report,
   });
+  for (const framework of Object.keys(index))
+    for (const mode of ["light", "dark"])
+      await runNativeAdvanced(
+        {
+          execute,
+          session,
+          click,
+          clickText,
+          type,
+          navigate,
+          waitFor,
+          screenshot,
+          assertLayout,
+          report,
+          writeClipboard(text) {
+            const copied = spawnSync("/usr/bin/pbcopy", [], {
+              input: text,
+              encoding: "utf8",
+            });
+            assert.equal(copied.status, 0, "原生剪贴板写入必须成功");
+          },
+        },
+        framework,
+        mode,
+      );
   report.result = "passed";
   console.log(
     `Native Safari ${report.browser.browserVersion}: ${report.defaultExamples.length} default examples and ${report.interactions.length} interaction cases passed.`,
@@ -709,6 +735,9 @@ try {
   report.error = error.stack ?? String(error);
   if (sessionId)
     try {
+      report.failureDOM = await execute(
+        'return {url:location.href,active:document.activeElement?.outerHTML,scroll:document.documentElement.scrollWidth,width:innerWidth,invalid:[...document.querySelectorAll("[aria-invalid=true]")].map(node=>({tag:node.tagName,part:node.dataset.part,path:node.getAttribute("data-question-path"),text:node.textContent?.slice(0,240)}))}',
+      );
       await screenshot("failure");
     } catch {}
   throw error;

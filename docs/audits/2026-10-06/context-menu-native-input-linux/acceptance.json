@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-06",
+  "batch": "context-menu-native-input-linux",
+  "baseCommit": "72acb356ac41caf1a126fc9ff5b2b91474434786",
+  "coverage": {
+    "componentFamilies": 119,
+    "stories": 329,
+    "publicValuesPerFramework": 794,
+    "frameworkExamples": 275
+  },
+  "changes": [
+    "四端命名与ContextMenu组合入口共享touch/pen长按过滤；空pointerType鼠标保留contextmenu行为，保留原生属性、ref、插槽与消费者事件",
+    "新增四端ContextMenuExample与NativeInput Story；键盘替代按钮、动作回调及中性Token布局",
+    "原生Safari runner加入152个高级场景，使用W3C鼠标/键盘与macOS剪贴板；捕获瀑布流前等待两帧稳定几何，Drawer按键前等待初始焦点",
+    "Firefox完整Story因60分钟预算取消，CI预算调整90分钟；扩展Safari场景预算60分钟"
+  ],
+  "validation": {
+    "ordered": "最终v16 verify → contracts → storybook:build → coverage → publication/四端类型与SSR → svelte → 框架及示例新构建全部退出0；冻结锁文件安装已完成，依赖未改变",
+    "native": "Chromium20passed/4skip，Firefox与WebKit各16passed/8skip；包含四端明暗1280/375、右键、未知pointerType、touch/pen取消/长按、键盘选择。Chromium另4项CDP触摸模拟",
+    "story": "三引擎各6passed/16skip；仅NativeInput与两项既有菜单/表格remediation专项，不代表全部329Story",
+    "visual": "262passed，--update-snapshots=none；288张既有基线含2张Windows SHA256全部不变，无新增基线",
+    "lint": "最终v17 pnpm lint退出0",
+    "nativeScript": "最终v17修订脚本Linux WebKit诊断76场景、退出0，四端浅色全部通过；不计真实Safari。前一次v16适配器错误被catch后返回0，已修正退出码并重新运行，不采用该结果"
+  },
+  "manualReview": {
+    "menu": "实际查看最终v16三引擎48张四端截图的12张联系表，以及12张Story截图的3张联系表；覆盖明暗1280/375。实际查看4张CDP模拟触摸截图联系表，Vue统一原生button后按下反馈一致",
+    "finding": "所查四端目标文字、按钮、菜单项对齐一致，窄屏未越界，默认中性色、主题层级与现有Token一致",
+    "advancedScript": "最终104张捕获中实际复核4张稳定瀑布流与32张Drawer方向/RTL联系表；此前v13已查看104张整体联系表，未把旧捕获算最终截图。上边Drawer部分框架捕获出现背景文本选中，继续核对手势与脚本原因，不将其标作视觉完成"
+  },
+  "remoteEvidence": {
+    "run": "https://github.com/shaloong/loongark/actions/runs/37525617853",
+    "testedCommit": "72acb356ac41caf1a126fc9ff5b2b91474434786",
+    "chromium": "success",
+    "firefox": "四端483passed；Story在60分钟总预算内未结束，job canceled，不计整库通过",
+    "webkit": "465passed/18failed：8窄屏图表、8树形焦点、1数值批量编辑、1消费页宽度；已下载真实trace，继续修复",
+    "safari": "Safari26.6.1/macOS15.7.9，271默认示例和32既有交互通过，随后排序子题错误焦点失败；高级扩展尚未真实macOS完成"
+  },
+  "limitations": [
+    "专项通过不等于整库平台通过；远端WebKit/Safari已知失败继续修复",
+    "Linux WebKit脚本诊断不代表原生Safari，Linux适配器不执行macOS pbcopy分支",
+    "CDP与375px均为模拟，真实手机仍缺可连接设备",
+    "过程截图和trace仅.artifacts或限期CI Artifact；Git只保存此紧凑记录，Windows基线未改变"
+  ]
+}

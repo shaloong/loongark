@@ -16,8 +16,8 @@ jobs:
   engines:
     name: Four frameworks / ${{ matrix.browser }}
     runs-on: ubuntu-24.04
-    # 新构建、完整四端消费与全部 Story 均在同一任务运行；近期两引擎在40分钟时被取消。
-    timeout-minutes: 60
+    # 新构建、完整四端消费与全部 Story 均在同一任务运行；Firefox 已完成四端483项，但全部 Story 在60分钟预算内未结束。
+    timeout-minutes: 90
     strategy:
       fail-fast: false
       matrix:
@@ -158,7 +158,7 @@ jobs:
   safari:
     name: Native Safari / macOS
     runs-on: macos-15
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

@@ -1,3 +1,6 @@
+import { ark } from "@ark-ui/solid/factory";
+import { mergeProps as mergeMenuProps } from "@zag-js/solid";
+import { contextMenuPointerHandler } from "@loongark/kit";
 /**
  * Menu component - Solid wrapper
  * Based on Ark UI Menu, injects data-scope/data-part attributes.
@@ -11,6 +14,7 @@ import {
 } from "solid-js";
 import {
   Menu as ArkMenu,
+  useMenuContext,
   type MenuRootProps as ArkMenuRootProps,
   type MenuTriggerProps as ArkMenuTriggerProps,
   type MenuContextTriggerProps as ArkMenuContextTriggerProps,
@@ -72,15 +76,36 @@ export const LoongArkMenuTrigger: Component<
 export const LoongArkMenuContextTrigger: Component<
   ArkMenuContextTriggerProps & { children?: JSX.Element }
 > = (props) => {
-  const merged = mergeProps({}, props);
+  const menu = useMenuContext();
+  const merged = () => {
+    const native = menu().getContextTriggerProps();
+    return mergeMenuProps(
+      {
+        ...native,
+        onPointerDown:
+          typeof native.onPointerDown === "function"
+            ? contextMenuPointerHandler(native.onPointerDown)
+            : native.onPointerDown,
+        onPointerUp:
+          typeof native.onPointerUp === "function"
+            ? contextMenuPointerHandler(native.onPointerUp)
+            : native.onPointerUp,
+        onPointerMove:
+          typeof native.onPointerMove === "function"
+            ? contextMenuPointerHandler(native.onPointerMove)
+            : native.onPointerMove,
+        onPointerCancel:
+          typeof native.onPointerCancel === "function"
+            ? contextMenuPointerHandler(native.onPointerCancel)
+            : native.onPointerCancel,
+      },
+      props,
+    );
+  };
   return (
-    <ArkMenu.ContextTrigger
-      {...merged}
-      data-scope="menu"
-      data-part="context-trigger"
-    >
+    <ark.button {...merged()} data-scope="menu" data-part="context-trigger">
       {props.children}
-    </ArkMenu.ContextTrigger>
+    </ark.button>
   );
 };
 

@@ -1,3 +1,4 @@
+import { LoongArkMenuContextTrigger } from "./menu";
 import { DialogAction, DialogCancel } from "./dialog-actions";
 import { Dialog } from "@ark-ui/solid/dialog";
 import { Menu } from "@ark-ui/solid/menu";
@@ -76,7 +77,11 @@ export const LoongArkSheetCancel: typeof LoongArkSheet.Cancel =
   LoongArkSheet.Cancel;
 export const LoongArkCommand = Combobox;
 export { createListCollection as createCommandCollection };
-export const LoongArkContextMenu = { ...Menu, Trigger: Menu.ContextTrigger };
+export const LoongArkContextMenu = {
+  ...Menu,
+  Trigger: LoongArkMenuContextTrigger,
+  ContextTrigger: LoongArkMenuContextTrigger,
+};
 export const LoongArkCalendar = DatePicker;
 export const LoongArkSidebarProvider: typeof Collapsible.Root =
   Collapsible.Root;

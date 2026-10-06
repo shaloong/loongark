@@ -200,3 +200,5 @@ Icon 提供四端共享 Lucide 节点、可访问名称、尺寸、固定描边�
 既有DataTable增加横向窗口，与可变行高窗口独立启用或组合。排序、筛选、范围粘贴、编辑和历史继续使用完整模型；冻结列、编辑列和活动游标保留，ARIA暴露完整列计数和绝对位置。四端各增加TableColumnWindowExample及根类型入口，新增ColumnVirtualization Story；当前117族、324Story、四端各792个LoongArk公开值、255个示例。API见[表格](data-table.md#横向列虚拟化)。
 
 最终新构建、契约、发布类型/四端SSR及Svelte通过（0错误/4既有警告）；642个运行时文件与交互验收版本逐文件哈希相同。三引擎新增各17项、既有表格各96项通过；Story32项及完整Linux视觉202项通过。144张原生截图、4张Story范围截图与8张新Linux基线已实际查看，220张旧基线含Windows哈希不变。范围和平台限制见[验收记录](audits/2026-10-06/table-column-window-linux/acceptance.json)。二维网格、虚拟瀑布流、日期、Drawer及整库平台/真机验收继续实施。
+
+右键菜单输入批次增加四端 ContextMenuExample 和 NativeInput Story：119 族、329 Story、四端各 794 个公开值入口、275 个框架示例。共享过滤仅允许 touch/pen 长按，未知类型鼠标保留原生右键；四端发布包交付，无仓库依赖补丁。示例的触发按钮和上下文表面通过共享 Token 样式统一。原生 Safari 高级 runner 扩展尚待 macOS 完整验收。

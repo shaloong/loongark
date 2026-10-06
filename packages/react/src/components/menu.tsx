@@ -1,3 +1,6 @@
+import { ark } from "@ark-ui/react/factory";
+import { mergeProps as mergeMenuProps } from "@zag-js/react";
+import { contextMenuPointerHandler } from "@loongark/kit";
 /**
  * Menu component - React wrapper
  * Based on Ark UI Menu, injects data-scope/data-part attributes.
@@ -12,6 +15,7 @@ import React, {
 } from "react";
 import {
   Menu as ArkMenu,
+  useMenuContext,
   type MenuRootProps as ArkMenuRootProps,
   type MenuTriggerProps as ArkMenuTriggerProps,
   type MenuContextTriggerProps as ArkMenuContextTriggerProps,
@@ -81,20 +85,35 @@ type ContextTriggerProps = ArkMenuContextTriggerProps & {
   children?: ReactNode;
 };
 
-export const LoongArkMenuContextTrigger = forwardRef<
-  HTMLButtonElement,
-  ContextTriggerProps
->(({ asChild = true, children, ...rest }, ref) => (
-  <ArkMenu.ContextTrigger
-    {...rest}
-    asChild={asChild}
-    ref={ref}
-    data-scope="menu"
-    data-part="context-trigger"
-  >
-    {children}
-  </ArkMenu.ContextTrigger>
-));
+export const createMenuContextTrigger = (defaultAsChild = true) =>
+  forwardRef<HTMLButtonElement, ContextTriggerProps>(
+    ({ asChild = defaultAsChild, children, ...rest }, ref) => {
+      const menu = useMenuContext();
+      const native = menu.getContextTriggerProps();
+      const merged = mergeMenuProps(
+        {
+          ...native,
+          onPointerDown: contextMenuPointerHandler(native.onPointerDown),
+          onPointerUp: contextMenuPointerHandler(native.onPointerUp),
+          onPointerMove: contextMenuPointerHandler(native.onPointerMove),
+          onPointerCancel: contextMenuPointerHandler(native.onPointerCancel),
+        },
+        rest,
+      );
+      return (
+        <ark.button
+          {...merged}
+          asChild={asChild}
+          ref={ref}
+          data-scope="menu"
+          data-part="context-trigger"
+        >
+          {children}
+        </ark.button>
+      );
+    },
+  );
+export const LoongArkMenuContextTrigger = createMenuContextTrigger();
 LoongArkMenuContextTrigger.displayName = "LoongArkMenuContextTrigger";
 
 export const LoongArkMenuPositioner = forwardRef<

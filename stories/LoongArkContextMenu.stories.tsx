@@ -1,3 +1,4 @@
+import { ContextMenuExample } from "../examples/react/ContextMenuExample";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import * as L from "@loongark/react";
@@ -27,3 +28,5 @@ export const Basic: StoryObj = {
     </div>
   ),
 };
+
+export const NativeInput: StoryObj = { render: () => <ContextMenuExample /> };

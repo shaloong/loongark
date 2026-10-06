@@ -270,3 +270,11 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 最终新构建、类型/SSR和三引擎各76项问卷回归通过；288张四端三引擎默认/错误/嵌套捕获已实际查看联系表，并复核窄屏复杂题型局部。全328Story健康扫描拆批后完成；Firefox仍有1项既有右键菜单指针类型失败，整库WebKit和原生Safari仍有待复验项目，详见[本批范围及限制](audits/2026-10-06/questionnaire-group-focus-linux/acceptance.json)。
 
 本批完整 Linux 视觉回归 262 项通过，288 张既有基线（含 Windows）哈希均未改变；另实际查看 Chromium/Firefox 桌面、窄屏、明暗主题的 48 张问卷 Story 状态截图，过程捕获仅存 `.artifacts/`。
+
+## 右键菜单输入与原生高级验收（2026-10-06）
+
+四端 ContextTrigger 使用 Ark 原生上下文和部件语义，共享行为只允许已知 touch/pen 启动长按，空 pointerType 的鼠标仍通过 contextmenu 打开。过滤随发布包交付，无需使用方安装仓库补丁；消费者事件仍合并执行。新增四端 ContextMenuExample 与 NativeInput Story，提供可见的键盘菜单按钮和操作结果。
+
+原生 Safari runner 扩展日期本地化/时间组合、虚拟网格/瀑布流、富文本/代码编辑器、八种图表、矩阵多选、异步集合、列窗口及原生剪贴板历史、多列排序/筛选、排序问卷和 Drawer 全方向/RTL。Linux WebKit 脚本诊断完成四端浅色 76 场景；真实 macOS 结果与截图审阅前，平台清单仍开放。
+
+最终三引擎菜单专项52项、Story专项18项和完整Linux视觉262项通过；实际查看64张菜单/Story/模拟触摸捕获，288张既有基线含Windows哈希不变。真实平台仍有失败，范围及限制见[验收记录](audits/2026-10-06/context-menu-native-input-linux/acceptance.json)。

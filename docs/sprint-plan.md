@@ -248,3 +248,9 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 - 全328Story健康扫描拆四批而不减少覆盖；Firefox鼠标事件pointerType为空导致上游ContextMenu长按状态取消，已稳定复现，继续修复。
 - develop 07788f2 远端WebKit469通过/13失败（8窄屏图表、5树形收起焦点）；原生Safari271默认/32既有交互通过后题组焦点失败，本批修复待实际macOS复验。整库平台清单保持开放。
 - 本批真实范围见[验收记录](audits/2026-10-06/questionnaire-group-focus-linux/acceptance.json)，专项不替代整库或真实手机结果。
+
+### 右键菜单与平台回归
+
+修复空 pointerType 的原生鼠标事件被错误识别为长按；四端共享发布行为与示例，验证触摸/触控笔取消和保留长按、键盘替代操作。原生 Safari 高级场景补入 runner，macOS 完整结果仍待验证；继续处理 WebKit 图表窄屏与树形焦点证据。
+
+本批菜单专项与视觉回归已通过，证据见[记录](audits/2026-10-06/context-menu-native-input-linux/acceptance.json)。72acb35远端WebKit465通过/18失败、Firefox四端483通过但Story预算取消；Safari排序错误焦点仍失败。已复现批量编辑延迟任务夺取数值字段焦点，下一批处理共享焦点归属并继续收集宽度证据。

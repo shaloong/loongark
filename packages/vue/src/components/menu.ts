@@ -1,3 +1,7 @@
+import { useForwardExpose } from "@ark-ui/vue/utils";
+import type { MenuContextTriggerProps } from "@ark-ui/vue/menu";
+import { ark } from "@ark-ui/vue/factory";
+import { contextMenuPointerHandler } from "@loongark/kit";
 import type { MenuRootEmits as NativeMenuRootEmits } from "@ark-ui/vue/menu";
 import type { MenuRootProps as NativeMenuRootProps } from "@ark-ui/vue/menu";
 import { renderPart } from "../render-part";
@@ -5,11 +9,19 @@ import { renderPart } from "../render-part";
  * Menu component - Vue wrapper
  * Based on Ark UI Menu, injects data-scope/data-part attributes.
  */
-import { defineComponent, h, inject, provide, toRef, type PropType } from "vue";
+import {
+  defineComponent,
+  h,
+  inject,
+  provide,
+  toRef,
+  mergeProps,
+  type PropType,
+} from "vue";
 import {
   MenuRoot as ArkMenuRoot,
   MenuTrigger as ArkMenuTrigger,
-  MenuContextTrigger as ArkMenuContextTrigger,
+  useMenuContext,
   MenuPositioner as ArkMenuPositioner,
   MenuContent as ArkMenuContent,
   MenuArrow as ArkMenuArrow,
@@ -148,22 +160,45 @@ export const LoongArkMenuTrigger = defineComponent({
   },
 });
 
-export const LoongArkMenuContextTrigger = defineComponent({
-  name: "LoongArkMenuContextTrigger",
-  setup(_, { slots, attrs }) {
-    return () =>
-      renderPart(
-        ArkMenuContextTrigger,
-        {
-          ...attrs,
-          asChild: true,
-          "data-scope": "menu",
-          "data-part": "context-trigger",
-        },
-        slots,
-      );
-  },
-});
+export const createMenuContextTrigger = (defaultAsChild = true) =>
+  defineComponent(
+    (props: MenuContextTriggerProps, { slots, attrs }) => {
+      const menu = useMenuContext();
+      useForwardExpose();
+      return () => {
+        const native = menu.value.getContextTriggerProps();
+        return renderPart(
+          ark.button,
+          mergeProps(
+            {
+              ...native,
+              onPointerdown: contextMenuPointerHandler(native.onPointerdown),
+              onPointerup: contextMenuPointerHandler(native.onPointerup),
+              onPointermove: contextMenuPointerHandler(native.onPointermove),
+              onPointercancel: contextMenuPointerHandler(
+                native.onPointercancel,
+              ),
+            },
+            { ...props },
+            attrs,
+            {
+              asChild: props.asChild ?? defaultAsChild,
+              "data-scope": "menu",
+              "data-part": "context-trigger",
+            },
+          ),
+          slots,
+        );
+      };
+    },
+    {
+      name: "LoongArkMenuContextTrigger",
+      props: { asChild: { type: Boolean, default: undefined } },
+      inheritAttrs: false,
+    },
+  );
+
+export const LoongArkMenuContextTrigger = createMenuContextTrigger();
 
 export const LoongArkMenuPositioner = defineComponent({
   name: "LoongArkMenuPositioner",
