@@ -15,8 +15,8 @@
 
 ## 独立编辑器
 
-- [ ] 富文本编辑器：结构化文档、格式、列表、链接、历史、受控更新及表单
-- [ ] 代码编辑器：语法、选择、缩进、历史、只读、受控更新及表单
+- [x] 富文本编辑器：结构化文档、格式、列表、链接、历史、受控更新及表单（[Linux四端验收](audits/2026-10-06/editors-linux/acceptance.json)）
+- [x] 代码编辑器：语法、选择、缩进、历史、只读、受控更新及表单（同上）
 
 ## 图表
 
@@ -46,7 +46,7 @@
 - [ ] Safari 实际运行、截图与焦点验收（WebKit 引擎验收不等同 Safari）
 - [ ] 真实手机验收（模拟视口和模拟触摸不等同真机）
 
-当前本地云端为 Linux，官方 Firefox/WebKit 下载被域名策略拒绝；独立 GitHub CI 已实际运行三个浏览器及原生桌面 Safari。最新结构行CI（bfa924f）中，Chromium170四端及116Story通过；Firefox取消，WebKit152通过/18失败；Safari219默认及24既有桌面专项通过后树折叠失败，24张实际PNG已审阅。见[本批平台限制](audits/2026-10-05/data-table-range-linux/acceptance.json)及[CI运行](https://github.com/shaloong/loongark/actions/runs/37373825724)，平台清单不关闭。真实手机需取得设备或设备云连接。其余实现继续推进。过程截图与日志仅保留在 `.artifacts/` 或有期限的 CI Artifact；Git 保存简短摘要及实际用于回归的已审阅基线。
+当前本地云端为 Linux。Firefox官方运行包已通过成功CI获取并校验，但本地启动握手受容器限制；不计交互通过。范围批次adb2的[实际CI](https://github.com/shaloong/loongark/actions/runs/37382936739)：Chromium186四端通过、118Story通过/2质量扫描超时；Firefox168通过/18失败，WebKit163通过/23失败；原生Safari26.6.1/macOS15.7.9的223默认示例及24既有交互通过后树折叠失败。24张Safari实际截图及失败图已查看。编辑器批次已拆分完整质量扫描，其他实际失败继续处理，平台清单不关闭。真实手机需取得设备或设备云连接。过程文件仅保留在 `.artifacts/` 或有期限的CI Artifact；Git只保存简短摘要和已审阅回归基线。
 
 
 独立浏览器流水线及原生 Safari runner 已配置；[本地配置验证](audits/2026-10-05/browser-ci-setup/acceptance.json)不计作远端或真机验收，实际首轮结果和截图审阅已补入该记录；平台项目仍等待修复后的完整验收。

@@ -339,3 +339,14 @@ for (const [framework, script] of [
   );
 }
 console.log("React、Vue、Solid SSR 与服务端主题样式收集通过");
+
+for (const framework of ["react","vue","solid"]) {
+  const imports=framework==="react"?"import {createElement as h} from 'react';import {renderToString} from 'react-dom/server';":framework==="vue"?"import {h,createSSRApp} from 'vue';import {renderToString} from 'vue/server-renderer';":"import {createComponent as h} from 'solid-js';import {renderToString} from 'solid-js/web';";
+  const script=imports+`import * as L from './packages/${framework}/dist/${framework==="solid"?"server/":""}index.js'; const quiet=()=>{throw Error('SSR editor callback must not run')}; const code={id:'ssr-code',name:'ssr-source',defaultValue:'SSR source <safe>\\nnext line',onReady:quiet,onValueChange:quiet,language:()=>{throw Error('SSR must not load syntax')}}; const rich={id:'ssr-rich',name:'ssr-document',defaultValue:{type:'doc',content:[{type:'paragraph',content:[{type:'text',text:'SSR rich <safe>'}]}]},onReady:quiet,onValueChange:quiet};`+["code","rich"].map(kind=>{
+    const component=kind==="code"?"LoongArkCodeEditor":"LoongArkRichTextEditor";
+    return framework==="vue"?`console.log(await renderToString(createSSRApp({render:()=>h(L.${component},${kind})})));`:framework==="solid"?`console.log(renderToString(()=>h(L.${component},${kind})));`:`console.log(renderToString(h(L.${component},${kind})));`;
+  }).join("");
+  const result=spawnSync(process.execPath,["--input-type=module","-e",script],{cwd:process.cwd(),encoding:"utf8"});assert.equal(result.status,0,result.stderr);
+  assert.match(result.stdout,/SSR source &lt;safe&gt;/);assert.match(result.stdout,/SSR rich &lt;safe&gt;/);assert.match(result.stdout,/name="ssr-source"/);assert.match(result.stdout,/name="ssr-document"/);assert.ok(!result.stdout.includes('contenteditable="true"'));
+  console.log(`${framework} 独立编辑器 SSR 转义、表单值、无 DOM/语法请求/回调通过`);
+}

@@ -441,3 +441,6 @@
 />
 
 <L.LoongArkDataTable label="SSR range selection" data={[{id:"range",name:"Range <safe>"}]} columns={[{key:"name",label:"Project",editor:true}]} cellSelection defaultCellRange={{anchor:{rowId:"range",columnKey:"name"},focus:{rowId:"range",columnKey:"name"}}} onCellRangeChange={()=>{throw Error("SSR must not select cells")}} onCellCommit={()=>{throw Error("SSR must not edit cells")}}/>
+
+<L.LoongArkCodeEditor id="ssr-code" name="ssr-source" defaultValue={'SSR source <safe>\nnext line'} onReady={() => { throw Error("SSR must not mount editor"); }} onValueChange={() => { throw Error("SSR must not edit"); }} language={() => { throw Error("SSR must not load syntax"); }} />
+<L.LoongArkRichTextEditor id="ssr-rich" name="ssr-document" defaultValue={{ type:"doc", content:[{ type:"paragraph", content:[{type:"text",text:"SSR rich <safe>"}] }] }} onReady={() => { throw Error("SSR must not mount editor"); }} onValueChange={() => { throw Error("SSR must not edit"); }} />

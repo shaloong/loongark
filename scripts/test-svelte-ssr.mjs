@@ -161,3 +161,6 @@ assert.match(
 );
 assert.match(html, /Range &lt;safe&gt;/);
 console.log("Svelte 范围选择 SSR 单一焦点、原生grid语义、转义及无回调通过");
+
+assert.match(html,/SSR source &lt;safe&gt;/);assert.match(html,/SSR rich &lt;safe&gt;/);assert.match(html,/name="ssr-source"/);assert.match(html,/name="ssr-document"/);
+console.log("Svelte 独立编辑器 SSR 转义、表单值、无 DOM/语法请求/回调通过");

@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-06",
+  "branch": "develop",
+  "base": "580ac6befc39a41d21ff87f6ac0e8e0f716bd091",
+  "scope": [
+    "独立CodeMirror代码编辑器：按需语法、搜索替换、选择/缩进、历史、受控拒绝及原生表单",
+    "独立ProseMirror富文本：结构化模型、格式/列表/链接、表格编辑与列宽、输入规则及真实插件/NodeView生命周期",
+    "四端适配、SSR、公开类型、MIT依赖许可及统一Token样式"
+  ],
+  "environment": {
+    "platform": "Debian13 Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "browser": "system Chromium151.0.7922.173",
+    "playwright": "1.57.0"
+  },
+  "validation": {
+    "verify": "最终新构建：lint、项目类型检查及9包构建通过",
+    "contracts": "全部通过；包含模型边界、安全链接、嵌套值隔离、SSR、语法取消和本地化标签",
+    "storybook": "新构建通过",
+    "coverage": "117families /313Story /792LoongArk values per framework /231examples",
+    "publicationAndSSR": "四端真实发布类型与SSR通过",
+    "svelte": "0errors /3existing warnings",
+    "frameworks": "218passed /28Story-only skipped；新构建两套fixture，231examples实际运行",
+    "story": "134passed /217consumer-only skipped；313Story明暗默认Axe、溢出、动画与运行健康检查",
+    "visual": "150passed；--update-snapshots=none",
+    "finalControlledRegression": "32passed /8Story-only skipped；额外断言拒绝后实际编辑文档恢复，不依赖父组件重渲染"
+  },
+  "manualReview": {
+    "frameworks": "64张四端默认/交互终态截图，通过8张明暗、1280/375联系表实际查看",
+    "story": "16张默认/搜索/表格操作候选图实际查看；桌面联系表裁剪校正后再次查看",
+    "baselines": "16张新增Linux基线实际查看；既有160张SHA256不变，包含2张Windows",
+    "result": "桌面与窄屏工具栏、正文、表格、搜索及状态对齐符合预期；中性色层次与VI强调一致，无页面横向溢出"
+  },
+  "findings": [
+    "修复React受控更新替换编辑器DOM、Solid响应式重挂与Svelte配置同步；受控拒绝不重渲染仍恢复选择与文档。",
+    "修复全选标题后列表转换，保留一次原生历史事务；实际拖动表格列宽、输入规则撤销、插件及NodeView卸载均通过。",
+    "Story全量质量扫描按组件族分四批，保留完整检查并避免实际CI的240秒超时。",
+    "初次缺少基线的8项报告失败并生成16图，只计作生成；实际审阅后禁止更新的全量150项比较通过。"
+  ],
+  "limitations": [
+    "本批通过范围为Linux Chromium与375px模拟视口；未计真实手机、真实IME、Firefox或Safari编辑器验收。",
+    "已由成功CI取得Firefox144.0.2官方包并校验SHA256，本地20秒启动握手仍超时；默认启动报告proc uid_map只读，关闭沙盒/进程fork后仍未建立页面，不能计作交互通过。",
+    "范围批次adb2的实际CI：Chromium186四端通过、118Story通过/2质量扫描超时；Firefox168通过/18失败；WebKit163通过/23失败；原生Safari26.6.1/macOS15.7.9的223默认及24既有交互通过后树折叠失败。24张Safari真实截图与失败图已查看，平台清单继续开放。",
+    "图片上传、协作和持久化属于应用服务；原生引擎扩展由调用方遵守只读和生命周期契约。",
+    "图表类型/轴、问卷扩展、二维虚拟化、日期与Drawer高级缺口继续实施。"
+  ],
+  "evidence": ".artifacts/gap-completion/editor-final-* /editor-accepted-* /editor-reviewed-chromium；临时过程文件忽略，CI Artifact14days"
+}

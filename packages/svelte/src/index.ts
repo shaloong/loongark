@@ -903,3 +903,7 @@ export { createAsyncCollectionLoader } from "@loongark/kit";
 export type { AsyncCollectionSort, AsyncCollectionRequest, AsyncCollectionLoadDetails, AsyncCollectionPage, AsyncCollectionLoaderOptions } from "@loongark/kit";
 
 export type { DataColumnGeometry, DataTableColumnLabels, DataTableColumnOptions } from "@loongark/kit";
+
+export { default as LoongArkCodeEditor } from "./components/CodeEditor.svelte";
+export { default as LoongArkRichTextEditor } from "./components/RichTextEditor.svelte";
+export type { CodeEditorProps, CodeEditorLabels, CodeEditorLanguage, CodeEditorLanguageLoader, CodeEditorHandle, RichTextEditorProps, RichTextEditorHandle, RichTextDocument, RichTextMark, RichTextAttribute, RichTextAction } from "@loongark/kit";

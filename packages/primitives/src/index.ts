@@ -52,3 +52,5 @@ import "./ark-additions";
 import "./ark-next";
 
 import "./icon";
+
+import "./editor";

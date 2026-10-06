@@ -30,6 +30,7 @@
     "Chip",
     "ClientOnly",
     "Clipboard",
+    "CodeEditor",
     "Collapsible",
     "ColorPicker",
     "Combobox",
@@ -89,6 +90,7 @@
     "Questionnaire",
     "RadioGroup",
     "RatingGroup",
+    "RichTextEditor",
     "ScrollArea",
     "Segment Group",
     "Select",
@@ -123,9 +125,8 @@
     "Typography"
   ],
   "latestBatch": [
-    "DateInput",
-    "Swap",
-    "Toc"
+    "CodeEditor",
+    "RichTextEditor"
   ],
   "equivalences": {
     "Input OTP": "PinInput",
@@ -164,6 +165,8 @@
     "DataTable pointer/keyboard column reordering, bounded interactive widths, RTL, controlled rejection, dynamic schema and SSR",
     "Four-framework keyboard multi-sort, async focus/scroll anchors and responsive browser consistency",
     "DataTable multi-level grouping, finite aggregation, root paging, parent-ID tree rows, controlled expansion and filtered ancestor context",
-    "DataTable stable cell ranges, keyboard/pointer selection, quoted TSV clipboard, atomic validated paste and shared multi-step history"
+    "DataTable stable cell ranges, keyboard/pointer selection, quoted TSV clipboard, atomic validated paste and shared multi-step history",
+    "Independent CodeMirror editor with syntax, history, search, completion, controlled values, forms and cancellable language loading",
+    "Independent ProseMirror structured editor with formatting, lists, safe links, tables, plugins, node views, controlled values and forms"
   ]
 }
