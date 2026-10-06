@@ -27,5 +27,15 @@
     "browser": "Safari26.6.1/macOS15.7.9，非模拟器；Node24.20.0",
     "result": "243默认示例与24交互通过后树折叠失败，平台不计通过",
     "review": "失败PNG与原生事件JSON已实际查看。点击前中心(121,521)命中row-expand SVG；实际可信pointerdown/click同坐标命中cell-trigger，后续矩形已移到x81..113，单元格因此进入编辑。清空输入尚未执行，不宣称键盘修改已获平台通过。"
+  },
+  "pointerFollowup": {
+    "commit": "7a8a781e48489e354d0b2caecfac5460bb9f2622",
+    "run": "https://github.com/shaloong/loongark/actions/runs/37425177875",
+    "job": 112143292797,
+    "artifact": 11394267988,
+    "browser": "原生Safari26.6.1/macOS15.7.9，safari:useSimulator=false；Node24.20.0",
+    "result": "243默认示例与32交互全部通过；此前树折叠和键盘清空筛选均实际执行通过。",
+    "review": "32张实际交互PNG已逐张在4组联系表查看；四端明暗的图表窗口、列宽/重排、批量历史、树层级/筛选恢复布局与焦点状态一致。",
+    "limits": "默认示例以桌面宽度验收；本runner的32交互范围不替代全部编辑器/日期/问卷测试或真实手机。该提交不含后续ImageCropper布局修复。"
   }
 }

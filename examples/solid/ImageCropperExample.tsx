@@ -11,7 +11,7 @@ export function ImageCropperExample() {
     setBusy(true);
     setError("");
     try {
-      const result = await cropper().getCroppedImage({ output: "dataUrl" });
+      const result = await L.exportImageCropper(cropper(), { output: "dataUrl" });
       if (typeof result === "string") setPreview(result);
       else setError("Image is not ready.");
     } catch {

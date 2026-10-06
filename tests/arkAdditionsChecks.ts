@@ -1,69 +1,39 @@
 import { expect, type Page } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 import { auditDirectory } from "./auditDirectory";
-export async function checkImageCropper(page: Page, framework?: string) {
-  const selection = page.locator(
-    "[data-scope=image-cropper][data-part=selection]",
-  );
-  await expect(selection).toBeVisible();
+/** 根区域必须包含实际裁剪 viewport，避免后续控件进入裁剪层的命中区域。 */
+export async function checkCropperGeometry(page: Page) {
   await expect
-    .poll(() =>
-      page
-        .locator("[data-scope=image-cropper][data-part=image]")
-        .evaluate(
-          (image: HTMLImageElement) =>
-            image.complete && image.naturalWidth > 0 && image.naturalHeight > 0,
-        ),
+    .poll(
+      () =>
+        page.evaluate(() => {
+          const root = document.querySelector(
+              "[data-scope=image-cropper][data-part=root]",
+            ),
+            viewport = document.querySelector(
+              "[data-scope=image-cropper][data-part=viewport]",
+            );
+          if (!root || !viewport) return false;
+          const outer = root.getBoundingClientRect(),
+            inner = viewport.getBoundingClientRect();
+          return (
+            inner.width > 0 &&
+            inner.height > 0 &&
+            outer.top <= inner.top + 1 &&
+            outer.bottom >= inner.bottom - 1
+          );
+        }),
+      { message: "Cropper viewport must fit within its root layout" },
     )
     .toBe(true);
-  await expect(selection).toHaveAttribute("aria-valuenow", /\d+/);
-  const initial = Number(await selection.getAttribute("aria-valuenow"));
-  await selection.focus();
-  await selection.press("ArrowRight");
-  await expect
-    .poll(async () => Number(await selection.getAttribute("aria-valuenow")))
-    .toBeGreaterThan(initial);
-  await page.getByRole("button", { name: "Zoom in", exact: true }).click();
-  await expect(page.getByLabel("Image transformations")).toContainText(
-    "Zoom 1.25",
-  );
-  await page.getByRole("button", { name: "Rotate", exact: true }).click();
-  await expect(page.getByLabel("Image transformations")).toContainText(
-    "Rotation 90°",
-  );
-  await page.getByRole("button", { name: "Flip", exact: true }).click();
-  await expect(page.getByLabel("Image transformations")).toContainText(
-    "Flipped true",
-  );
-  await page.getByRole("button", { name: "Export crop", exact: true }).click();
-  const preview = page.getByRole("img", { name: "Cropped preview" });
-  await expect(preview).toBeVisible();
-  await expect(preview).toHaveAttribute("src", /^data:image\/png;base64,/);
-  await expect
-    .poll(() =>
-      preview.evaluate((image: HTMLImageElement) => image.naturalWidth),
-    )
-    .toBeGreaterThan(0);
-  await page.getByRole("button", { name: "Reset", exact: true }).click();
-  await expect(preview).toHaveCount(0);
-  await expect(page.getByLabel("Image transformations")).toHaveText(
-    "Zoom 1.00 · Rotation 0° · Flipped false",
-  );
-  for (let i = 0; i < 8; i++)
-    await page.getByRole("button", { name: "Zoom in", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "Zoom in", exact: true }),
-  ).toBeDisabled();
-  await expect(page.getByLabel("Image transformations")).toContainText(
-    "Zoom 3.00",
-  );
-  await page.getByRole("button", { name: "Reset", exact: true }).click();
-  await page.setViewportSize({ width: 375, height: 1000 });
-  await expect
-    .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
-    .toBeLessThanOrEqual(375);
+}
+/** 图片完成解码后，Ark 仍需处理测量；等待真实布局而非固定延时。 */
+export async function checkCropperImageGeometry(page: Page) {
   const viewport = page.locator(
     "[data-scope=image-cropper][data-part=viewport]",
+  );
+  const selection = page.locator(
+    "[data-scope=image-cropper][data-part=selection]",
   );
   await expect
     .poll(async () => {
@@ -103,8 +73,9 @@ export async function checkImageCropper(page: Page, framework?: string) {
       imageBox.width <= viewBox.width &&
       imageBox.height <= viewBox.height,
   ).toBe(true);
-  await page.getByRole("button", { name: "Export crop", exact: true }).click();
-  await expect(preview).toBeVisible();
+}
+async function checkOpaqueCropPreview(page: Page) {
+  const preview = page.getByRole("img", { name: "Cropped preview" });
   await expect
     .poll(() =>
       preview.evaluate((image: HTMLImageElement) => {
@@ -124,6 +95,81 @@ export async function checkImageCropper(page: Page, framework?: string) {
       }),
     )
     .toBe(true);
+}
+export async function checkImageCropper(
+  page: Page,
+  framework?: string,
+  onExported?: () => Promise<void>,
+) {
+  const selection = page.locator(
+    "[data-scope=image-cropper][data-part=selection]",
+  );
+  await expect(selection).toBeVisible();
+  await expect
+    .poll(() =>
+      page
+        .locator("[data-scope=image-cropper][data-part=image]")
+        .evaluate(
+          (image: HTMLImageElement) =>
+            image.complete && image.naturalWidth > 0 && image.naturalHeight > 0,
+        ),
+    )
+    .toBe(true);
+  await checkCropperGeometry(page);
+  await expect(selection).toHaveAttribute("aria-valuenow", /\d+/);
+  const initial = Number(await selection.getAttribute("aria-valuenow"));
+  await selection.focus();
+  await selection.press("ArrowRight");
+  await expect
+    .poll(async () => Number(await selection.getAttribute("aria-valuenow")))
+    .toBeGreaterThan(initial);
+  await page.getByRole("button", { name: "Zoom in", exact: true }).click();
+  await expect(page.getByLabel("Image transformations")).toContainText(
+    "Zoom 1.25",
+  );
+  await checkCropperGeometry(page);
+  await page.getByRole("button", { name: "Rotate", exact: true }).click();
+  await expect(page.getByLabel("Image transformations")).toContainText(
+    "Rotation 90°",
+  );
+  await checkCropperGeometry(page);
+  await page.getByRole("button", { name: "Flip", exact: true }).click();
+  await expect(page.getByLabel("Image transformations")).toContainText(
+    "Flipped true",
+  );
+  await page.getByRole("button", { name: "Export crop", exact: true }).click();
+  const preview = page.getByRole("img", { name: "Cropped preview" });
+  await expect(preview).toBeVisible();
+  await expect(preview).toHaveAttribute("src", /^data:image\/png;base64,/);
+  await expect
+    .poll(() =>
+      preview.evaluate((image: HTMLImageElement) => image.naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  await checkOpaqueCropPreview(page);
+  await onExported?.();
+  await page.getByRole("button", { name: "Reset", exact: true }).click();
+  await expect(preview).toHaveCount(0);
+  await expect(page.getByLabel("Image transformations")).toHaveText(
+    "Zoom 1.00 · Rotation 0° · Flipped false",
+  );
+  for (let i = 0; i < 8; i++)
+    await page.getByRole("button", { name: "Zoom in", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Zoom in", exact: true }),
+  ).toBeDisabled();
+  await expect(page.getByLabel("Image transformations")).toContainText(
+    "Zoom 3.00",
+  );
+  await page.getByRole("button", { name: "Reset", exact: true }).click();
+  await page.setViewportSize({ width: 375, height: 1000 });
+  await expect
+    .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
+    .toBeLessThanOrEqual(375);
+  await checkCropperImageGeometry(page);
+  await page.getByRole("button", { name: "Export crop", exact: true }).click();
+  await expect(preview).toBeVisible();
+  await checkOpaqueCropPreview(page);
   await page.getByRole("button", { name: "Reset", exact: true }).click();
   if (framework)
     await page.locator("[data-example-content]").screenshot({

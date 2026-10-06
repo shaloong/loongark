@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { build } from "vite";
 import react from "@vitejs/plugin-react";
@@ -172,3 +172,6 @@ h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()
   });
   console.log(`${framework} 发布消费构建通过`);
 }
+
+// 单独消费共享发布模块，验证四端调用之外的导出选项与 DOM 根节点契约。
+await copyFile(resolve("packages/kit/dist/cropper-export.js"), resolve("tests/consumer-dist/cropper-export.js"));

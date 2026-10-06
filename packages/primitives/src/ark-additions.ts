@@ -1,8 +1,8 @@
 import { createPrimitive, registerPrimitive } from "./core";
 
 const css = `
-[data-scope=image-cropper][data-part=root] { min-width:0;display:grid;gap:var(--lk-space-component-md); }
-[data-scope=image-cropper][data-part=viewport] { width:100%;height:auto;aspect-ratio:2;max-height:320px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;border-radius:var(--lk-radius-lg);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);background:var(--lk-color-semantic-muted);touch-action:none; }
+[data-scope=image-cropper][data-part=root] { min-width:0;width:100%;container-type:inline-size;display:flex;flex-direction:column;gap:var(--lk-space-component-md); }
+[data-scope=image-cropper][data-part=viewport] { flex-shrink:0;width:100%;height:min(320px,50cqw);aspect-ratio:2;max-height:320px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;border-radius:var(--lk-radius-lg);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);background:var(--lk-color-semantic-muted);touch-action:none; }
 [data-scope=image-cropper][data-part=image] { display:block;max-width:100%;max-height:100%;width:auto;height:auto; }
 [data-scope=image-cropper][data-part=selection] { border:var(--lk-control-borderwidth) solid var(--lk-color-white);box-shadow:0 0 0 9999px var(--lk-color-semantic-overlay); }
 [data-scope=image-cropper][data-part=selection]:focus-visible { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring);outline-offset:var(--lk-space-component-xs); }

@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-06",
+  "branch": "develop",
+  "base": "7a8a781e48489e354d0b2caecfac5460bb9f2622",
+  "scope": [
+    "裁剪根节点包含真实视口；四端桌面/窄屏控件不再被裁剪手柄遮挡",
+    "exportImageCropper 共享公开导出：无样式源图解码、旋转/翻转/缩放、状态快照、PNG/JPEG、像素上限、取消、ShadowRoot 和 SSR",
+    "同步四端示例及既有 ImageCropper Story，保持原生 Ark getCroppedImage 契约"
+  ],
+  "validation": {
+    "ordered": "最终 v11 verify → contracts → 新 Story 构建 → coverage → publication/SSR → Svelte → 四端与示例 fixture 构建均通过。117族 /321Story /四端各792个LoongArk前缀公开值 /243示例；新增导出工具不增加组件族计数。",
+    "native": "v10 Chromium151.0.7922.173 /Firefox144.0.2 /WebKit26.0 各17项通过：16项四端明暗1280/375默认/交互/焦点/Axe及1项共享公开模块契约。最后小数像素上限修正只影响显式maxSize，默认图形不变；新构建后专项另行复验。",
+    "bounds": "最终v12在v11新构建上三引擎各1项通过；包含1.5px向下取整为1×1、低于1px拒绝、格式/取消/独立根与快照。初次Firefox复用已加载图片解码读到旧48px，改为独立新图片后通过；该初次失败不计通过。",
+    "story": "最终10项通过：ImageCropper明暗原生交互2项及覆盖全部321Story的8批质量扫描；不等同整库所有Story交互通过。",
+    "visual": "最终178项完整Linux Chromium视觉比较通过，--update-snapshots=none；未修改阈值或更新截图。",
+    "failures": "旧有效产物的根几何和可信点击回归失败。中间布局候选仍有 WebKit 图片超高、SVG 导出透明边及 Chromium 根占位问题；据实际测量修正。临时依赖补丁仅作诊断，已撤销并冻结安装；发布采用共享导出方法。文件命名 lint 与 Svelte 可空 id 类型失败后均停止旧产物消费，修正后重新按顺序构建。",
+    "captureIsolation": "新增变换导出不透明断言时，Chromium全页默认截图流程13失败/4通过；记录到临时2px容器测量。去除默认全页截图8次、使用实际视口截图8次均通过，最终v10三引擎各17通过。截图保留真实视口，真实窗口调整及全部像素断言保留；未改视觉阈值或基线。"
+  },
+  "manualReview": {
+    "native": "v10三引擎各48张实际截图共144张，全部以12张联系表目视复核：四框架×明暗×1280/375×默认/变换导出/重置。选区、控制栏及预览对齐一致；原图及过程文件仅在.artifacts。",
+    "baselines": "最终比较后204张既有回归基线（含2张Windows）SHA256均未变化。"
+  },
+  "limitations": [
+    "本批为裁剪专项，未将此前完整CI中的列拖动、编辑器和图表失败计作关闭。",
+    "Linux WebKit 不等同 macOS Safari；最新共享导出尚未获得原生Safari结果。375视口与模拟触摸不代表真实手机。",
+    "跨域源仍需有效CORS许可，解码或Canvas安全失败返回null；未测试真实跨域图片。"
+  ],
+  "evidence": "PNG、联系表、详细诊断、日志及trace仅保存在忽略目录.artifacts或14天CI Artifact；Git只保留本摘要和实际回归基线。"
+}

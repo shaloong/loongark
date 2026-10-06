@@ -11,7 +11,7 @@ export const ImageCropperExample = defineComponent({
       busy.value = true;
       error.value = "";
       try {
-        const result = await cropper.value.getCroppedImage({
+        const result = await L.exportImageCropper(cropper.value, {
           output: "dataUrl",
         });
         if (typeof result === "string") preview.value = result;

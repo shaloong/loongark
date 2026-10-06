@@ -430,3 +430,9 @@ for (const framework of ["react", "vue", "solid"]) {
     `${framework} 图表新增类型与轴 SSR 转义、可访问原始数据及无回调通过`,
   );
 }
+
+// DOM 导出在 SSR 中不查询节点、不解码图像、不调用状态读取器。
+const { exportImageCropper } = await import("../packages/kit/dist/cropper-export.js");
+const cropperSSR = await exportImageCropper({ crop: { x: 0, y: 0, width: 100, height: 100 }, zoom: 1, rotation: 0, offset: { x: 0, y: 0 }, flip: { horizontal: false, vertical: false }, getRootProps() { throw new Error("SSR must not access cropper DOM state"); } });
+if (cropperSSR !== null) throw new Error("SSR cropper export must return null");
+console.log("ImageCropper共享导出SSR无DOM/解码/状态读取通过");

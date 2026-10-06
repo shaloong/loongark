@@ -97,3 +97,5 @@ export * from "./code-language";
 export * from "./code-editor";
 export * from "./rich-text";
 export * from "./rich-editor";
+
+export * from "./cropper-export";

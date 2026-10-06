@@ -9,7 +9,7 @@
     busy = true;
     error = "";
     try {
-      const result = await cropper().getCroppedImage({ output: "dataUrl" });
+      const result = await L.exportImageCropper(cropper(), { output: "dataUrl" });
       if (typeof result === "string") preview = result;
       else error = "Image is not ready.";
     } catch {

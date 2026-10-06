@@ -907,3 +907,6 @@ export type { DataColumnGeometry, DataTableColumnLabels, DataTableColumnOptions 
 export { default as LoongArkCodeEditor } from "./components/CodeEditor.svelte";
 export { default as LoongArkRichTextEditor } from "./components/RichTextEditor.svelte";
 export type { CodeEditorProps, CodeEditorLabels, CodeEditorLanguage, CodeEditorLanguageLoader, CodeEditorHandle, RichTextEditorProps, RichTextEditorHandle, RichTextDocument, RichTextMark, RichTextAttribute, RichTextAction } from "@loongark/kit";
+
+export { exportImageCropper } from "@loongark/kit";
+export type { ImageCropperExportModel, ImageCropperExportOptions } from "@loongark/kit";

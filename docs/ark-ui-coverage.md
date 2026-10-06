@@ -95,3 +95,12 @@ DataTable/MessageScroller 的共享可变行高虚拟化已接入四端、有界
 复杂问卷的 number/date/select/matrix/ranking 已同步四端与真实表单契约；见 [问卷说明](questionnaire.md) 和 [验收](audits/2026-10-05/questionnaire-types-linux/acceptance.json)。
 
 六类高级能力的最后一批异步 Collection 见 [契约](async-collection.md) 和 [验收](audits/2026-10-05/async-collection-linux/acceptance.json)。服务端、真机和跨浏览器范围仍以各验收记录的限制为准。
+
+
+## ImageCropper 导出与布局
+
+默认视口按最近根容器宽度保持2:1并限制为320px，容器实际占位与图片最大尺寸在三引擎中一致。样式继续复用原有Token。
+
+四端均公开 `exportImageCropper(cropper, options)`：传入 `useImageCropper` 或 Context 的当前API（Vue使用 `.value`、Solid/Svelte使用访问器返回值）。它捕获裁剪/缩放/旋转/翻转状态，用无样式的源图解码后导出；SVG在WebKit中的渲染尺寸变化不会改变源图导出尺寸。原生Ark `getCroppedImage` 保留其契约；跨平台SVG导出使用这个共享函数。
+
+`output` 默认为Blob，可选 `dataUrl`；`type` 默认为PNG，`quality`控制有损格式，`maxSize`按比例限制输出，尺寸必须有限且至少1px，小数上限向下取整。`rootNode`支持Document、ShadowRoot或实际根HTMLElement，适用于 iframe/Shadow DOM；`signal`在解码/Blob完成前中止时返回null。SSR、未就绪/未找到根、解码或安全画布失败返回null。远程图片仍受浏览器CORS规则约束，源图沿用已有crossOrigin和referrerPolicy。

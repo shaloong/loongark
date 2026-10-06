@@ -58,3 +58,5 @@
 [原生Safari诊断配置](audits/2026-10-06/native-safari-diagnostics/acceptance.json)改为真实键盘清空输入，并记录树按钮可信事件、矩形和命中目标；Linux只完成语法/lint检查，等待macOS实际运行，不计平台通过。
 
 诊断提交e463345的[实际Safari任务](https://github.com/shaloong/loongark/actions/runs/37423827257)运行243个默认示例及24交互后仍在树折叠失败。失败图和原生事件已查看：旧中心坐标命中了编辑按钮，点击前后区域位置改变。runner现改为真实滚动、等待绘制、重新测量并发送W3C原生指针动作；新修改仍待macOS复验，筛选清空尚未执行。
+
+原生坐标修正7a8a781的[实际Safari任务](https://github.com/shaloong/loongark/actions/runs/37425177875)已通过：Safari26.6.1/macOS15.7.9（非模拟器）运行243个默认示例与32交互；树折叠和键盘清空筛选均通过，32张四端明暗交互图已实际审阅。验收范围为既有Safari runner，未覆盖所有编辑器/日期/问卷及真实手机；详见[原生验收追踪](audits/2026-10-06/native-safari-diagnostics/acceptance.json)。
