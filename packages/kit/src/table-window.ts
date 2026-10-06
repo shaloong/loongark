@@ -72,3 +72,31 @@ export function dataTableVirtualInset(viewport: HTMLElement) {
       )
     : 0;
 }
+
+/** 编辑结束时揭示仍存在于完整模型的窗口外地址；删除数据时保留原有回退。 */
+export function revealDataTableVirtualCell(
+  props: DataTableProps,
+  view: ReturnType<typeof dataTableView>,
+  rowId: string,
+  columnKey: string,
+  rows: ReturnType<typeof import("./virtual-window").createVirtualWindow>,
+  columns: ReturnType<typeof import("./virtual-window").createVirtualWindow>,
+) {
+  const row = view.rows.findIndex((entry) => entry.id === rowId),
+    column = view.columns.findIndex((entry) => entry.key === columnKey);
+  if (
+    row < 0 ||
+    column < 0 ||
+    !(props.virtualization || props.columnVirtualization)
+  )
+    return false;
+  if (props.virtualization) {
+    rows.focus(rowId);
+    rows.scrollToIndex(row);
+  }
+  if (props.columnVirtualization) {
+    columns.focus(columnKey);
+    columns.scrollToIndex(column);
+  }
+  return true;
+}

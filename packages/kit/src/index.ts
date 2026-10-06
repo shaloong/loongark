@@ -102,3 +102,5 @@ export * from "./cropper-export";
 
 export * from "./questionnaire-custom";
 export * from "./rating-group";
+
+export * from "./column-window";

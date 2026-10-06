@@ -52,6 +52,12 @@ for (const [framework, script] of [
       : framework === "Solid"
         ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${columnProps})));`
         : `console.log(renderToString(h(L.LoongArkDataTable,${columnProps})));`;
+  const columnWindowProps = "{label:'SSR column window',data:[{id:'ssr-window'}],columns:Array.from({length:50},(_,i)=>({key:'cw'+i,label:'SSR_window_'+i})),columnVirtualization:{width:320,overscan:1},pinnedColumns:{end:['cw49']},onColumnWidthsChange:()=>{throw Error('SSR must not measure columns')}}";
+  const columnWindowScript = framework === "Vue"
+    ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${columnWindowProps})})));`
+    : framework === "Solid"
+      ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${columnWindowProps})));`
+      : `console.log(renderToString(h(L.LoongArkDataTable,${columnWindowProps})));`;
   const rangeProps =
     "{label:'SSR range selection',data:[{id:'range',name:'Range <safe>'}],columns:[{key:'name',label:'Project',editor:true}],cellSelection:true,defaultCellRange:{anchor:{rowId:'range',columnKey:'name'},focus:{rowId:'range',columnKey:'name'}},onCellRangeChange:()=>{throw Error('SSR must not select cells')},onCellCommit:()=>{throw Error('SSR must not edit cells')}}";
   const rangeScript =
@@ -215,6 +221,7 @@ for (const [framework, script] of [
           tableScript +
           queryScript +
           columnScript +
+          columnWindowScript +
           rangeScript +
           structureScript +
           structureScript.replace(
@@ -239,6 +246,11 @@ for (const [framework, script] of [
     ],
     { encoding: "utf8", timeout: 60000 },
   );
+  assert.match(result.stdout, /aria-colcount="51"/);
+  assert.match(result.stdout, /SSR_window_0/);
+  assert.match(result.stdout, /SSR_window_49/);
+  assert.ok(!result.stdout.includes("SSR_window_26"));
+  assert.match(result.stdout, /data-part="column-spacer"/);
   assert.match(result.stdout, /<input(?=[^>]*name="ssr-rating")(?=[^>]*value="3")[^>]*>/);
   assert.match(result.stdout, /SSR custom &lt;safe(?:&gt;|>) 3/);
   assert.match(result.stdout, /SSR custom &lt;safe(?:&gt;|>) 4/);
@@ -325,7 +337,7 @@ for (const [framework, script] of [
   assert.doesNotMatch(result.stdout, /<th scope="col">Hidden SSR series/);
   assert.match(result.stdout, /SSR remote row/);
   assert.equal((result.stdout.match(/data-pinned="start"/g) ?? []).length, 4);
-  assert.equal((result.stdout.match(/data-pinned="end"/g) ?? []).length, 2);
+  assert.equal((result.stdout.match(/data-pinned="end"/g) ?? []).length, 4);
   assert.doesNotMatch(result.stdout, /style="[^"]*--lk-data-table-pin-offset/);
   assert.match(result.stdout, /Query SSR row/);
   assert.match(

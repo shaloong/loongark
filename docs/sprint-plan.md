@@ -214,3 +214,10 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 既有Questionnaire增加custom题型与四端原生renderers，以稳定实例路径管理答案、必填/错误语义、递归FormData、注册控件焦点、受控拒绝恢复和取消/卸载。支持string、strings、map答案；业务题目定义与第三方控件仍由调用方提供。共享RatingGroup修复悬停后的键盘操作、接受值与预览的语义区分，以及Svelte受控回退。目录117族、323Story、四端各792公开值、251示例；API见[问卷契约](questionnaire.md)。
 
 最终新构建、契约、发布类型/四端SSR和Svelte检查通过（0错误/4既有警告）。三引擎原生专项各27项通过；既有问卷Chromium100项、Firefox/WebKit各96项通过；Story47项及全量Linux视觉194项通过。144张四端截图与8张新Linux基线已实际审阅，212张旧基线含Windows哈希未变。验收范围、修正和限制见[验收记录](audits/2026-10-06/questionnaire-custom-linux/acceptance.json)。横向/二维/瀑布流虚拟化、日期、Drawer以及整库平台/真机验收继续实施。
+
+
+## DataTable 横向列虚拟化（2026-10-06）
+
+既有DataTable增加横向窗口，与可变行高窗口独立启用或组合。排序、筛选、范围粘贴、编辑和历史继续使用完整模型；冻结列、编辑列和活动游标保留，ARIA暴露完整列计数和绝对位置。四端各增加TableColumnWindowExample及根类型入口，新增ColumnVirtualization Story；当前117族、324Story、四端各792个LoongArk公开值、255个示例。API见[表格](data-table.md#横向列虚拟化)。
+
+最终新构建、契约、发布类型/四端SSR及Svelte通过（0错误/4既有警告）；642个运行时文件与交互验收版本逐文件哈希相同。三引擎新增各17项、既有表格各96项通过；Story32项及完整Linux视觉202项通过。144张原生截图、4张Story范围截图与8张新Linux基线已实际查看，220张旧基线含Windows哈希不变。范围和平台限制见[验收记录](audits/2026-10-06/table-column-window-linux/acceptance.json)。二维网格、虚拟瀑布流、日期、Drawer及整库平台/真机验收继续实施。

@@ -136,3 +136,11 @@ Firefox144.0.2的16项四端明暗、桌面/375px列交互用例及32张LTR/RTL�
 粘贴通过 `onBatchCommit` 提交一个不可变事务，复用有界多级 Undo/Redo；只有提供方接受并更新数据后才记入历史。Escape 或可见取消按钮中止提交，卸载、查询/页码/列结构变化也中止过期请求；提供方必须遵守 `signal`。外部已获得焦点时不抢回。纵向虚拟化使用共享窗口定位焦点格；触屏保持原生滚动并支持点击选择，真实手机交互另行验收。
 
 范围模式使用原生表格的 `grid`/`gridcell` 语义、`aria-selected` 与单一正文 Tab 入口；表头按钮和行 checkbox 继续保留原生操作，未宣称完整 APG treegrid。窄屏为正文和图标留出最小可读列宽，在表格视口内滚动。提示和错误沿用 `labels` 本地化接口。`DataTableRangeExample` 与 `CellRangeAndPaste` Story 展示这些能力；Linux四端验收及实际平台限制见[范围与粘贴验收](audits/2026-10-05/data-table-range-linux/acceptance.json)。
+
+## 横向列窗口
+
+四端根入口均导出 `ColumnVirtualizationOptions` 类型。`columnVirtualization` 独立于纵向 `virtualization`：可以分别或同时启用。`width` 是 SSR 首窗像素宽度（默认640），挂载后读取实际区域宽度；`overscan` 为两侧额外列数（默认2），`initialOffset` 为初始逻辑滚动距离，`scrollToIndex` 为完整可见列顺序中的绝对下标。变化的 `scrollToIndex` 发出滚动命令，同值不会在每次渲染时重置阅读位置。
+
+横向窗口复用 `columnWidths` 与原有80–1200px列宽边界，默认160px。真实 table 的占位列保留全部宽度，公开列数及 `aria-colindex` 仍对应完整模型；冻结列、结构首列、范围活动列和正在编辑的列保留挂载。冻结区超出窄屏宽度时沿用既有静态回退，避免相互遮挡。控件宽度调整、拖动、排序、筛选、树与聚合仍使用同一列模型。
+
+单元格方向键跨未渲染窗口时滚动后恢复绝对地址焦点，RTL沿逻辑顺序移动。范围选择、复制及原子粘贴读取完整数据，窗口外目标也参与校验和有界撤销/重做；编辑器在横向滚动期间保留。观察器、事件和动画帧由共享挂载函数清理；SSR只输出首窗及保留列，不读取DOM或调用更新事件。四端示例为 `TableColumnWindowExample`，Story为 `ColumnVirtualization`。本节说明当前实施契约；完整验收结果另行记录。

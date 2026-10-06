@@ -734,6 +734,7 @@ export function mountDataTableEditor(
   props: () => DataTableProps,
   view: () => ReturnType<typeof dataTableView>,
   blocked: () => boolean = () => false,
+  revealCell?: (rowId: string, columnKey: string) => boolean,
 ) {
   const win = region.ownerDocument.defaultView;
   if (!win) return () => {};
@@ -778,10 +779,31 @@ export function mountDataTableEditor(
           element.dataset.rowId === previous?.rowId &&
           element.dataset.columnKey === previous?.columnKey,
       );
-      intent = undefined;
       const cell = props().cellSelection
-        ? trigger?.closest<HTMLElement>("td")
+        ? Array.from(
+            region.querySelectorAll<HTMLElement>(
+              "td[data-cell-row][data-cell-column]",
+            ),
+          ).find(
+            (node) =>
+              node.dataset.cellRow === previous?.rowId &&
+              node.dataset.cellColumn === previous?.columnKey,
+          )
         : undefined;
+      const column = view().columns.find(
+        (item) => item.key === previous?.columnKey,
+      );
+      // 窗口外单元格仍存在于完整模型；先揭示目标，再等待框架提交，避免临时聚焦滚动区域。
+      if (
+        !cell &&
+        !trigger &&
+        previous &&
+        column &&
+        (props().cellSelection || editor.canEdit(props(), column)) &&
+        revealCell?.(previous.rowId, previous.columnKey)
+      )
+        return;
+      intent = undefined;
       (cell ?? trigger ?? region).focus();
     }
   };

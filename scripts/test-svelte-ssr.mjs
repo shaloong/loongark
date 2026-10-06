@@ -29,6 +29,11 @@ const { default: component } = await import(
   pathToFileURL(resolve("tests/consumer-dist/svelte-ssr/index.mjs")).href
 );
 const html = render(component).body;
+assert.match(html, /aria-colcount="51"/);
+assert.match(html, /SSR_window_0/);
+assert.match(html, /SSR_window_49/);
+assert.ok(!html.includes("SSR_window_26"));
+assert.match(html, /data-part="column-spacer"/);
 assert.match(html, /name="contactsSSR\[stable\]\[name\]"/);
 assert.match(html, /Group &lt;safe&gt;/);
 assert.ok(!html.includes("must-not-render-hidden"));
@@ -101,7 +106,7 @@ console.log("Svelte 发布产物 SSR 通过");
 
 assert.match(html, /SSR remote row/);
 assert.equal((html.match(/data-pinned="start"/g) ?? []).length, 4);
-assert.equal((html.match(/data-pinned="end"/g) ?? []).length, 2);
+assert.equal((html.match(/data-pinned="end"/g) ?? []).length, 4);
 assert.doesNotMatch(html, /style="[^"]*--lk-data-table-pin-offset/);
 assert.match(html, /SSR remote failure/);
 assert.match(html, /aria-busy="true"/);

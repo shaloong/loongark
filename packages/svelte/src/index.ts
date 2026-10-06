@@ -912,3 +912,5 @@ export { exportImageCropper } from "@loongark/kit";
 export type { ImageCropperExportModel, ImageCropperExportOptions } from "@loongark/kit";
 
 export type { LoongArkQuestionnaireRenderers } from "./components/questionnaire-custom.types";
+
+export type { ColumnVirtualizationOptions } from "@loongark/kit";

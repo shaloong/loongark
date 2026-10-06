@@ -292,6 +292,7 @@ export function mountDataTableCellSelection(
   editor: ReturnType<typeof createDataTableEditor>,
   batch: ReturnType<typeof createDataTableBatchEditor>,
   virtualizer: ReturnType<typeof createVirtualWindow>,
+  columnVirtualizer?: ReturnType<typeof createVirtualWindow>,
 ) {
   const root = region.parentElement ?? region;
   const doc = region.ownerDocument,
@@ -489,6 +490,15 @@ export function mountDataTableCellSelection(
     if (editor.state) return;
     const target = find(focusIntent);
     if (!target) {
+      if (props.columnVirtualization && columnVirtualizer) {
+        const index = view.columns.findIndex(
+          (column) => column.key === focusIntent!.columnKey,
+        );
+        if (index >= 0) {
+          columnVirtualizer.focus(focusIntent.columnKey);
+          columnVirtualizer.scrollToIndex(index);
+        }
+      }
       if (props.virtualization) {
         const index = view.rows.findIndex(
           (entry) => entry.id === focusIntent!.rowId,

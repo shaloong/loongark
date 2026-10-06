@@ -208,11 +208,12 @@ export function createVirtualWindow(
       emit();
     },
     measure(entries: readonly { key: string; size: number }[]) {
-      const reading = anchor();
+      const reading = anchor(),
+        available = new Set(options.keys);
       let changed = false;
       for (const entry of entries)
         if (
-          options.keys.includes(entry.key) &&
+          available.has(entry.key) &&
           Number.isFinite(entry.size) &&
           entry.size > 0 &&
           Math.abs(

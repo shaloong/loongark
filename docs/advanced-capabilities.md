@@ -33,7 +33,7 @@
 
 ## 虚拟化
 
-- [ ] 横向列虚拟化
+- [x] 横向列虚拟化（[三引擎四端与Linux视觉验收](audits/2026-10-06/table-column-window-linux/acceptance.json)）
 - [ ] 二维网格虚拟化
 - [ ] 可变高度虚拟瀑布流
 
@@ -64,3 +64,5 @@
 原生输入修正e372457的[真实CI](https://github.com/shaloong/loongark/actions/runs/37441474990)：Chromium四端319通过、Firefox315通过；两者Story任务因40分钟预算取消。WebKit298通过/17失败，涉及窄屏图表溢出、树折叠焦点及窄屏消费布局；平台项目保持开放。本批Linux引擎任务预算调整为60分钟，配置修改不算实际通过。Safari26.6.1/macOS15.7.9的243默认示例与32既有交互通过、32截图已下载并审阅；新增题组场景仍需实际执行。详见[追踪](audits/2026-10-06/input-hover-platforms/acceptance.json)。
 
 题组提交cae010c的[实际CI](https://github.com/shaloong/loongark/actions/runs/37451275443)：Chromium四端367项和Story162项通过；Firefox四端363项通过、Story161通过/1失败（remediation浮层场景）；WebKit四端347通过/16失败（窄屏图表8项、树折叠焦点7项、Vue窄屏消费1项），Story未执行。原生Safari完成247默认示例和32既有交互后，在React浅色新增题组的首字段焦点失败；已下载并实际查看失败图。该场景尚未通过，后续修复后继续复验，不关闭平台清单。
+
+自定义题型提交e237fd8的[实际CI](https://github.com/shaloong/loongark/actions/runs/37467299209)：Chromium四端394项、Story166项通过；Firefox四端390项通过、Story164通过/2失败（富文本删表及remediation浮层）；WebKit四端373通过/17失败（窄屏图表8项、树折叠焦点6项、窄屏消费布局3项），Story未执行。原生Safari26.6.1/macOS15.7.9完成251默认示例和9项交互后，在Vue深色批量提交后的触发器焦点失败；失败截图已下载并实际查看，题组与自定义题型尚未执行。新增平台验收继续处理，未将CI配置或Linux定向通过计作平台清单完成。

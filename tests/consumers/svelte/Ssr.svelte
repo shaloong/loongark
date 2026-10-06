@@ -472,3 +472,17 @@
   <L.LoongArkRatingGroupControl>{#each [1,2,3,4,5] as index}<L.LoongArkRatingGroupItem {index}>{index}</L.LoongArkRatingGroupItem>{/each}</L.LoongArkRatingGroupControl>
   <L.LoongArkRatingGroupHiddenInput/>
 </L.LoongArkRatingGroupRoot>
+
+<LoongArkDataTable
+  label="SSR column window"
+  data={[{ id: "ssr-window" }]}
+  columns={Array.from({ length: 50 }, (_, index) => ({
+    key: `cw${index}`,
+    label: `SSR_window_${index}`,
+  }))}
+  columnVirtualization={{ width: 320, overscan: 1 }}
+  pinnedColumns={{ end: ["cw49"] }}
+  onColumnWidthsChange={() => {
+    throw Error("SSR must not measure columns");
+  }}
+/>

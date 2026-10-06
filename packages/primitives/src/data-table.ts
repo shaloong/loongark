@@ -14,7 +14,9 @@ const css = `
 [data-scope=data-table] [data-virtualized=true]:has(tr[data-row-kind]) table:not([data-column-layout]) thead th:nth-child(2) { width:calc(var(--lk-control-height-md) * 6 + var(--lk-data-table-structure-depth) * var(--lk-space-component-lg)); }
 [data-scope=data-table] [data-virtualized=true] :is(th,td) { white-space:normal;overflow-wrap:anywhere; }
 [data-scope=data-table] [data-virtualized=true] thead th { position:sticky;top:0;z-index:3;background:var(--lk-color-semantic-background); }
+[data-scope=data-table] [data-virtualized=true] thead th[data-pinned] { z-index:4; }
 [data-scope=data-table] [data-virtualized=true] [data-part=cell-editor] { min-width:0;max-width:100%; }
+[data-scope=data-table] :is(th,td)[data-part=column-spacer] { padding:0;border-inline:0;pointer-events:none; }
 [data-scope=data-table] tr[data-part=virtual-spacer], [data-scope=data-table] tr[data-part=virtual-spacer] td { padding:0;border:0;line-height:0;background:transparent; }
 
 [data-scope=data-table] [data-part=batch-editor][hidden] { display:none; }

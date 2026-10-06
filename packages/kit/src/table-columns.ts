@@ -24,6 +24,7 @@ export interface DataTableColumnOptions {
   columnKeys?: readonly string[];
   pinnedColumns?: { start?: readonly string[]; end?: readonly string[] };
   columnWidths?: Readonly<Record<string, number>>;
+  columnVirtualization?: import("./column-window").ColumnVirtualizationOptions;
   columnReorderable?: boolean;
   columnResizable?: boolean;
   loading?: boolean;
@@ -185,7 +186,12 @@ export function renderDataColumnControls(
   );
 }
 export function dataColumnTableStyle(options: DataTableColumnOptions) {
-  if (!options.columnResizable && !options.columnWidths) return {};
+  if (
+    !options.columnResizable &&
+    !options.columnWidths &&
+    !options.columnVirtualization
+  )
+    return {};
   const keys = dataColumnOrder(options),
     widths = normalizeDataColumnWidths(options);
   return {

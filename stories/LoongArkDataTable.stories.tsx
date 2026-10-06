@@ -170,3 +170,8 @@ export const CellRangeAndPaste: StoryObj = {
   },
   render: () => <DataTableRangeExample />,
 };
+
+import { TableColumnWindowExample } from "../examples/react/TableColumnWindowExample";
+export const ColumnVirtualization: StoryObj = {
+  render: () => <TableColumnWindowExample />,
+};

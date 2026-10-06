@@ -191,3 +191,11 @@ await build({
   },
 });
 console.log("自定义题型共享发布模块浏览器消费构建通过");
+
+// 单独消费共享横向窗口发布契约，验证初始定位与原生滚动事件的先后关系。
+await build({
+ configFile: false, logLevel: "error",
+ resolve: { alias: { "@loongark/kit": resolve("packages/kit/dist/index.js") } },
+ build: { outDir: resolve("tests/consumer-dist"), emptyOutDir: false, lib: { entry: resolve("tests/consumers/column-window.mjs"), formats: ["es"], fileName: () => "column-window.js" } },
+});
+console.log("横向列窗口共享发布模块浏览器消费构建通过");
