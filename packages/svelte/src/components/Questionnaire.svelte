@@ -17,6 +17,7 @@
     type QuestionnaireValidationState,
     toggleQuestionAnswer,
     focusQuestion,
+  questionnaireSubmitOwned,
     restoreQuestionAnswers,
     type QuestionnaireOptions,
     type QuestionnaireValue,
@@ -166,7 +167,7 @@
     e.preventDefault();
     if (blocked || completed || validation.state.pending || !question) return;
     validation.sync(visible, current, question?.id, !!(blocked || completed));
-    const ownedAtStart = !!root?.contains(document.activeElement);
+    const ownedAtStart = questionnaireSubmitOwned(root, e);
     const last = index === visible.length - 1;
     const result = await validation.run(
       last ? visible : [question],

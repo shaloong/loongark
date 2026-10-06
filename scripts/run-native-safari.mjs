@@ -271,9 +271,13 @@ try {
             ),
           "提交面板关闭",
         );
-        assert.equal(
-          await execute("return document.activeElement?.dataset.part"),
-          "batch-trigger",
+        // 提交面板先关闭，框架提交后的RAF再恢复焦点；实际Safari已证明即时读取会提前。
+        await waitFor(
+          () =>
+            execute(
+              "const trigger=document.querySelector('[data-part=\"batch-trigger\"]');return !!trigger && document.activeElement===trigger",
+            ),
+          "批量提交后的入口焦点恢复",
         );
       }
       await click('[data-part="batch-undo"]');

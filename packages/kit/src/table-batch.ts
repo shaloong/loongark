@@ -553,14 +553,22 @@ export function mountDataTableBatch(
   const win = host.ownerDocument.defaultView;
   if (!win) return () => {};
   let frame = 0;
-  let intent: { focus: "field" | "trigger"; errorColumn?: string } | undefined;
+  let intent:
+    | {
+        focus: "field" | "trigger";
+        errorColumn?: string;
+        origin: Element | null;
+      }
+    | undefined;
   const restore = () => {
     frame = 0;
     if (!intent) return;
     const active = host.ownerDocument.activeElement;
     if (
       !host.isConnected ||
-      (!host.contains(active) && active !== host.ownerDocument.body)
+      (active !== host.ownerDocument.body &&
+        active !== host.ownerDocument.documentElement &&
+        active !== intent.origin)
     ) {
       intent = undefined;
       return;
@@ -610,7 +618,11 @@ export function mountDataTableBatch(
     win.cancelAnimationFrame(frame);
     frame = 0;
     // 原生 change/后续输入可以清掉模型错误；焦点请求使用通知时的快照。
-    intent = { focus, errorColumn: editor.state.errorColumn };
+    intent = {
+      focus,
+      errorColumn: editor.state.errorColumn,
+      origin: host.ownerDocument.activeElement,
+    };
     schedule();
   });
   const abandon = (event: Event) => {

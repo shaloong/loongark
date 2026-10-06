@@ -97,7 +97,9 @@ const css = `
 [data-scope=select][data-part=control] { height:var(--lk-field-height); min-height:0; }
 [data-scope=select][data-part=trigger], [data-scope=password-input][data-part=control] { padding-inline:var(--lk-space-component-compact); }
 [data-scope=select][data-part=trigger]:is(button) { justify-content:space-between; }
-:is([data-scope=select],[data-scope=combobox])[data-part=content] { min-width:var(--reference-width,220px); }
+/* 缩屏发生在退出动画期间时，旧触发器测量不能撑宽页面。 */
+:is([data-scope=select],[data-scope=combobox])[data-part=positioner] { max-width:calc(100vw - var(--lk-space-component-xl)); }
+:is([data-scope=select],[data-scope=combobox])[data-part=content] { min-width:min(var(--reference-width,220px),calc(100vw - var(--lk-space-component-xl))); }
 [data-scope=number-input][data-part=control] { grid-template-rows:minmax(0,1fr) minmax(0,1fr); }
 [data-scope=number-input] :is([data-part=increment-trigger],[data-part=decrement-trigger]) { min-height:0; min-width:var(--lk-control-height-xs); padding:0 var(--lk-space-component-xs); font-size:var(--lk-typography-fontsize-xs); line-height:1; }
 :is([data-scope=number-input],[data-scope=password-input]) [data-part=input] { min-height:0; height:100%; border:0; box-shadow:none; background:transparent; padding-block:0; }

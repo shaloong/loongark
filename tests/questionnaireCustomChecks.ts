@@ -67,27 +67,50 @@ export async function checkQuestionnaireCustom(
   await expect(count()).toHaveText("2 callbacks");
   await expect.poll(entries).toEqual([["rating", "4"]]);
   await click("Accept updates");
-  // 第三方延迟回调在类型替换、禁用和卸载后不能恢复旧答案。
+  // 控制回调的到期顺序，不依赖两次真实操作能否在400ms内完成。
   let before = await callbacks();
-  await click("Suggest five stars");
-  await click("Use compact renderer");
-  await page.waitForTimeout(550);
-  await expect(count()).toHaveText(`${before} callbacks`);
-  await expect(radio(0, 4)).toHaveAttribute("aria-checked", "true");
-  await click("Suggest five stars");
-  await click("Disable survey");
-  await expect(radio(0, 4)).toHaveAttribute("aria-disabled", "true");
-  await page.waitForTimeout(550);
-  await expect(count()).toHaveText(`${before} callbacks`);
-  await expect.poll(entries).toEqual([]);
-  await click("Enable survey");
-  await expect.poll(entries).toEqual([["rating", "4"]]);
-  await click("Suggest five stars");
-  await click("Hide survey");
-  await page.waitForTimeout(550);
-  await expect(count()).toHaveText(`${before} callbacks`);
-  await click("Show survey");
-  await expect(radio(0, 4)).toHaveAttribute("aria-checked", "true");
+  await page.clock.install();
+  const pauseCallbacks = async () =>
+    page.clock.pauseAt(new Date(await page.evaluate(() => Date.now() + 1000)));
+  const press = async (name: string) =>
+    page.getByRole("button", { name, exact: true }).press("Enter");
+  await pauseCallbacks();
+  try {
+    // 正向对照：仍有效的第三方回调必须实际到期并提交答案。
+    await press("Suggest five stars");
+    await page.clock.runFor(550);
+    await expect(count()).toHaveText(`${before + 1} callbacks`);
+    await expect(radio(0, 5)).toHaveAttribute("aria-checked", "true");
+    await radio(0, 5).focus();
+    await page.keyboard.press("ArrowLeft");
+    await expect(radio(0, 4)).toHaveAttribute("aria-checked", "true");
+    before = await callbacks();
+    await press("Suggest five stars");
+    await press("Use compact renderer");
+    await expect(
+      page.getByRole("button", { name: "Use standard renderer", exact: true }),
+    ).toBeVisible();
+    await page.clock.runFor(550);
+    await expect(count()).toHaveText(`${before} callbacks`);
+    await expect(radio(0, 4)).toHaveAttribute("aria-checked", "true");
+    await press("Suggest five stars");
+    await press("Disable survey");
+    await expect(radio(0, 4)).toHaveAttribute("aria-disabled", "true");
+    await page.clock.runFor(550);
+    await expect(count()).toHaveText(`${before} callbacks`);
+    await expect.poll(entries).toEqual([]);
+    await press("Enable survey");
+    await expect.poll(entries).toEqual([["rating", "4"]]);
+    await press("Suggest five stars");
+    await press("Hide survey");
+    await expect(form()).toHaveCount(0);
+    await page.clock.runFor(550);
+    await expect(count()).toHaveText(`${before} callbacks`);
+    await press("Show survey");
+    await expect(radio(0, 4)).toHaveAttribute("aria-checked", "true");
+  } finally {
+    await page.clock.resume();
+  }
   await click("Use async validation");
   await radio(0, 1).click();
   await click("Submit");
@@ -156,15 +179,20 @@ export async function checkQuestionnaireCustom(
   await click("Remove person 3");
   await expect(ratings()).toHaveCount(2);
   before = await callbacks();
-  await form()
-    .locator('[data-group-instance="alpha"]')
-    .getByRole("button", { name: "Suggest five stars", exact: true })
-    .click();
-  await click("Remove person 1");
-  await page.waitForTimeout(550);
-  await expect(count()).toHaveText(`${before + 1} callbacks`);
-  await expect(ratings()).toHaveCount(1);
-  await expect(radio(0, 4)).toHaveAttribute("aria-checked", "true");
+  await pauseCallbacks();
+  try {
+    await form()
+      .locator('[data-group-instance="alpha"]')
+      .getByRole("button", { name: "Suggest five stars", exact: true })
+      .press("Enter");
+    await press("Remove person 1");
+    await expect(ratings()).toHaveCount(1);
+    await page.clock.runFor(550);
+    await expect(count()).toHaveText(`${before + 1} callbacks`);
+    await expect(radio(0, 4)).toHaveAttribute("aria-checked", "true");
+  } finally {
+    await page.clock.resume();
+  }
   await click("Reset survey");
   await radio(0, 1).click();
   await click("Submit");

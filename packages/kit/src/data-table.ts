@@ -741,7 +741,11 @@ export function mountDataTableEditor(
   let frame = 0,
     pendingOwned = false;
   let intent:
-    | { focus: "input" | "trigger"; previous: DataTableEditState | undefined }
+    | {
+        focus: "input" | "trigger";
+        previous: DataTableEditState | undefined;
+        origin: Element | null;
+      }
     | undefined;
   const restore = () => {
     frame = 0;
@@ -750,7 +754,9 @@ export function mountDataTableEditor(
     const now = region.ownerDocument.activeElement;
     if (
       !region.isConnected ||
-      (now !== region.ownerDocument.body && !region.contains(now))
+      (now !== region.ownerDocument.body &&
+        now !== region.ownerDocument.documentElement &&
+        now !== intent.origin)
     ) {
       intent = undefined;
       return;
@@ -770,6 +776,10 @@ export function mountDataTableEditor(
       // React can commit after this frame. Keep the intent until the old editor
       // has actually been replaced, rather than focusing a temporary fallback.
       if (region.querySelector('[data-part="cell-editor"]')) return;
+      if (previous && !view().rows.some((row) => row.id === previous.rowId)) {
+        intent = undefined;
+        return;
+      }
       const trigger = Array.from(
         region.querySelectorAll<HTMLButtonElement>(
           '[data-part="cell-trigger"]',
@@ -829,7 +839,7 @@ export function mountDataTableEditor(
         active === region.ownerDocument.body);
     win.cancelAnimationFrame(frame);
     frame = 0;
-    intent = owned ? { focus, previous } : undefined;
+    intent = owned ? { focus, previous, origin: active } : undefined;
     schedule();
   });
   const click = (event: Event) => {

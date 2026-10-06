@@ -567,6 +567,24 @@ export function restoreQuestionAnswers(
     }
   }
 }
+/** 原生提交按钮即使不获得鼠标焦点，仍可确认 body 状态的提交归属。 */
+export function questionnaireSubmitOwned(
+  root: HTMLElement | null | undefined,
+  event: Event,
+): boolean {
+  if (!root?.isConnected) return false;
+  const owner = root.ownerDocument,
+    win = owner.defaultView,
+    active = owner.activeElement;
+  if (root.contains(active)) return true;
+  if (!win || (active !== owner.body && active !== owner.documentElement))
+    return false;
+  return (
+    event instanceof win.SubmitEvent &&
+    event.submitter instanceof win.HTMLElement &&
+    root.contains(event.submitter)
+  );
+}
 /** ownedAtStart 用于异步恢复：允许禁用触发器失焦到 body，但不抢外部控件焦点。 */
 export function focusQuestion(
   root?: HTMLElement | null,

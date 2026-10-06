@@ -44,3 +44,5 @@ minuteStep 为 1–60 之间且能整除 60 的整数；步长从 min（未提�
 ## RatingGroup 受控值与悬停
 
 星形悬停通过原生highlighted/half状态预览，radio的aria-checked和Tab入口始终对应调用方接受的value。鼠标进入后仍可用方向键、Home、End操作；受控值迟到时同步控件内焦点，用户已移到控件外时不会被延迟回调抢回。Root、RootProvider和useRatingGroup复用同一共享状态机；标签、HiddenInput、表单reset、Field及Locale环境保持Ark契约。Svelte在提供onValueChange时由调用方决定接受值；没有该回调时支持bind:value。自定义问卷评分示例只由Questionnaire提交隐藏字段，避免重复FormData，见[问卷契约](questionnaire.md)。
+
+Select 与 Combobox 的默认浮层宽度同时受触发器和当前视口约束；退出动画保留旧触发器测量时，缩窄窗口也不会扩大页面。Sheet 在 positioner 的绘制边界内播放滑出动画，保持原有返回焦点语义。

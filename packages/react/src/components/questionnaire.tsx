@@ -24,6 +24,7 @@ import {
   type QuestionnaireValidationState,
   toggleQuestionAnswer,
   focusQuestion,
+  questionnaireSubmitOwned,
   restoreQuestionAnswers,
   type QuestionnaireValue,
   type QuestionnaireOptions,
@@ -193,7 +194,10 @@ export function LoongArkQuestionnaire({
       question()?.id,
       !!(blocked() || completed),
     );
-    const ownedAtStart = !!root.current?.contains(document.activeElement);
+    const ownedAtStart = questionnaireSubmitOwned(
+      root.current,
+      event.nativeEvent,
+    );
     const last = index() === visible().length - 1;
     const result = await validation.run(
       last ? visible() : [question()],

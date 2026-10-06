@@ -811,7 +811,18 @@ export function mountDataTableCellSelection(
       interactive(event.target)
     )
       return;
-    const cell = address(event.target);
+    // 虚拟列尚未挂载时，连续方向键仍从已请求的位置推进，避免重复消费旧 DOM 游标。
+    const navigation = [
+      "ArrowDown",
+      "ArrowUp",
+      "ArrowRight",
+      "ArrowLeft",
+      "Home",
+      "End",
+    ].includes(event.key);
+    const cell = navigation
+      ? (focusIntent ?? address(event.target))
+      : address(event.target);
     if (!cell) return;
     if (event.key === "Escape" && batch.state.pending) {
       event.preventDefault();

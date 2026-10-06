@@ -89,15 +89,33 @@ export async function checkDataTableRange(page: Page) {
   await paste("Rejected name");
   await expect(page.getByRole("alert")).toContainText("batch was rejected");
   await expect(cell(1, "name")).toContainText("Saved single");
-  await paste("Canceled name");
-  await expect(page.locator('[data-part="range-cancel"]')).toBeVisible();
-  await page.keyboard.press("Escape");
-  await expect(result).toContainText("1 canceled");
-  await expect(cell(1, "name")).toContainText("Saved single");
-  await paste("Button canceled");
-  await page.locator('[data-part="range-cancel"]').click();
-  await expect(result).toContainText("2 canceled");
-  await expect(cell(1, "name")).toBeFocused();
+  // 保留真实键盘和指针取消；冻结提交时钟，避免定位按钮时 350ms 请求先完成。
+  await page.clock.install();
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
+  try {
+    await paste("Canceled name");
+    await page.clock.runFor(32);
+    const cancel = page.locator('[data-part="range-cancel"]');
+    await expect(cancel).toBeVisible();
+    await page.keyboard.press("Escape");
+    await page.clock.runFor(32);
+    await expect(result).toContainText("1 canceled");
+    await expect(cell(1, "name")).toContainText("Saved single");
+    await paste("Button canceled");
+    await page.clock.runFor(32);
+    await expect(cancel).toBeVisible();
+    await cancel.evaluate((node) => node.scrollIntoView({ block: "center" }));
+    await page.clock.runFor(32);
+    const box = await cancel.boundingBox();
+    expect(box).toBeTruthy();
+    await page.mouse.click(box!.x + box!.width / 2, box!.y + box!.height / 2);
+    await page.clock.runFor(400);
+    await expect(result).toContainText("2 canceled");
+    await expect(cell(1, "name")).toHaveText("Saved single");
+    await expect(cell(1, "name")).toBeFocused();
+  } finally {
+    await page.clock.resume();
+  }
   await paste("Outside focus");
   const outside = page.getByRole("button", { name: "Use RTL", exact: true });
   await outside.focus();
