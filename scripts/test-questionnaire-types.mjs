@@ -22,3 +22,12 @@ const q={...matrix,validateAsync:async (answer,value)=>{snapshot=value;assert.ok
 const controller=createQuestionnaireValidationController(()=>{});controller.sync([q],{m:{r1:"a",r2:"b"}},"m",false);
 assert.deepEqual(await controller.run([q],{m:{r1:"a",r2:"b"}}),{value:{m:{r1:"a",r2:"b"}}});assert.ok(snapshot);controller.dispose();
 console.log("复杂问卷数值/日期边界、矩阵归一化、排序协调、表单序列化及冻结异步快照通过。");
+
+const rankHtml=renderQuestionControl({...rank,rankingLabels:{handle:'Reorder "item"',instructions:'Press <Enter>'}},{rank:['b','a']},'desc error',true);
+assert.ok(rankHtml.includes('data-key="b"'));
+assert.ok(rankHtml.includes('aria-describedby="desc error desc-rank-instructions"'));
+assert.ok(rankHtml.includes('Reorder &quot;item&quot;: B'));
+assert.ok(rankHtml.includes('Press &lt;Enter&gt;'));
+assert.ok(rankHtml.includes('aria-live="polite"'));
+assert.equal((rankHtml.match(/data-question-control="rank-drag"/g)??[]).length,2);
+assert.equal((rankHtml.match(/name="rank"/g)??[]).length,2);

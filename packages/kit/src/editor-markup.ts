@@ -1,3 +1,4 @@
+import { decorativeIconMarkup } from "./icon-markup";
 import type { IconNode } from "lucide";
 import {
   escapeEditorText as escape,
@@ -10,14 +11,7 @@ export interface EditorToolbarAction {
   icon: IconNode;
 }
 export function editorIcon(icon: IconNode): string {
-  return `<svg data-scope="icon" data-part="root" style="--lk-icon-size:var(--lk-control-icon-sm)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${icon
-    .map(
-      ([tag, attrs]) =>
-        `<${tag} ${Object.entries(attrs)
-          .map(([key, value]) => `${key}="${escape(String(value))}"`)
-          .join(" ")}></${tag}>`,
-    )
-    .join("")}</svg>`;
+  return decorativeIconMarkup(icon, escape);
 }
 export function renderEditorMarkup(
   props: EditorFormOptions,

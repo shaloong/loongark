@@ -54,3 +54,5 @@ import "./ark-next";
 import "./icon";
 
 import "./editor";
+
+import "./questionnaire-ranking";

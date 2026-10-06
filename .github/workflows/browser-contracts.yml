@@ -67,6 +67,7 @@ jobs:
             .artifacts/browser-audits/${{ matrix.browser }}/**/*react*.png
             .artifacts/advanced-completion/*react*.png
             .artifacts/date-paste/*react*.png
+            .artifacts/gap-completion/*react*.png
             test-results/**/*react*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -79,6 +80,7 @@ jobs:
             .artifacts/browser-audits/${{ matrix.browser }}/**/*vue*.png
             .artifacts/advanced-completion/*vue*.png
             .artifacts/date-paste/*vue*.png
+            .artifacts/gap-completion/*vue*.png
             test-results/**/*vue*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -91,6 +93,7 @@ jobs:
             .artifacts/browser-audits/${{ matrix.browser }}/**/*solid*.png
             .artifacts/advanced-completion/*solid*.png
             .artifacts/date-paste/*solid*.png
+            .artifacts/gap-completion/*solid*.png
             test-results/**/*solid*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -103,6 +106,7 @@ jobs:
             .artifacts/browser-audits/${{ matrix.browser }}/**/*svelte*.png
             .artifacts/advanced-completion/*svelte*.png
             .artifacts/date-paste/*svelte*.png
+            .artifacts/gap-completion/*svelte*.png
             test-results/**/*svelte*/**/*.png
           include-hidden-files: true
           retention-days: 14

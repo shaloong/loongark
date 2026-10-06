@@ -103,7 +103,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
         await next();
         await expect(
           form.getByRole("button", {
-            name: "Move down: Accessibility and keyboard interaction",
+            name: "Reorder: Accessibility and keyboard interaction",
             exact: true,
           }),
         ).toBeFocused();

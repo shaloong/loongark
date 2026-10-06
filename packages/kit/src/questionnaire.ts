@@ -1,3 +1,6 @@
+import { GripVertical } from "lucide";
+import { decorativeIconMarkup } from "./icon-markup";
+import { mountQuestionRanking } from "./questionnaire-ranking";
 const escapeHtml = (value: string) =>
   value
     .replace(/&/g, "&amp;")
@@ -59,6 +62,16 @@ export interface Question {
   placeholder?: string;
   moveUpLabel?: string;
   moveDownLabel?: string;
+  /** 排序手柄的操作说明和实时播报；不改变答案数据。 */
+  rankingLabels?: {
+    handle?: string;
+    instructions?: string;
+    pickedUp?: string;
+    moved?: string;
+    dropped?: string;
+    cancelled?: string;
+    rejected?: string;
+  };
   minLength?: number;
   maxLength?: number;
   options?: readonly QuestionOption[];
@@ -625,13 +638,23 @@ export function renderQuestionControl(
       })
       .join("")}</div>`;
   }
-  if (q.type === "ranking")
-    return `<ol data-part="ranking">${(Array.isArray(answer) ? answer : [])
+  if (q.type === "ranking") {
+    const description = descriptionId.split(/\s+/)[0];
+    const instructions = description + "-rank-instructions";
+    return `<p data-part="rank-instructions" id="${e(instructions)}">${e(q.rankingLabels?.instructions ?? "Press Space to pick up, use arrow keys to move, Enter to drop, Escape to cancel.")}</p><ol data-part="ranking">${(Array.isArray(
+      answer,
+    )
+      ? answer
+      : []
+    )
       .map((key, index, order) => {
         const label = options.find((o) => o.value === key)?.label ?? key;
-        return `<li data-part="rank-row"><span>${e(label)}</span><input type="hidden" name="${e(q.id)}" value="${e(key)}"><div data-part="rank-actions">${[-1, 1].map((direction) => `<button type="button" data-question-control="rank" data-key="${e(key)}" data-direction="${direction}" aria-label="${e((direction < 0 ? (q.moveUpLabel ?? "Move up") : (q.moveDownLabel ?? "Move down")) + ": " + label)}"${index + direction < 0 || index + direction >= order.length ? " disabled" : ""}>${e(direction < 0 ? (q.moveUpLabel ?? "Move up") : (q.moveDownLabel ?? "Move down"))}</button>`).join("")}</div></li>`;
+        return `<li data-part="rank-row" data-key="${e(key)}"><button type="button" data-part="rank-handle" data-question-control="rank-drag" data-key="${e(key)}" aria-label="${e((q.rankingLabels?.handle ?? "Reorder") + ": " + label)}" aria-describedby="${e(descriptionId)} ${e(instructions)}" aria-pressed="false">${decorativeIconMarkup(GripVertical, e)}</button><span>${e(label)}</span><input type="hidden" name="${e(q.id)}" value="${e(key)}"><div data-part="rank-actions">${[-1, 1].map((direction) => `<button type="button" data-question-control="rank" data-key="${e(key)}" data-direction="${direction}" aria-label="${e((direction < 0 ? (q.moveUpLabel ?? "Move up") : (q.moveDownLabel ?? "Move down")) + ": " + label)}"${index + direction < 0 || index + direction >= order.length ? " disabled" : ""}>${e(direction < 0 ? (q.moveUpLabel ?? "Move up") : (q.moveDownLabel ?? "Move down"))}</button>`).join("")}</div></li>`;
       })
-      .join("")}</ol>`;
+      .join(
+        "",
+      )}</ol><p data-part="rank-status" aria-live="polite" aria-atomic="true"></p>`;
+  }
   return "";
 }
 function restoreQuestionControl(
@@ -682,6 +705,7 @@ export function mountQuestionControls(
   },
   change: (value: QuestionnaireValue) => void,
 ) {
+  const cleanupRanking = mountQuestionRanking(root, get, change);
   let disposed = false;
   let focus:
     | {
@@ -838,6 +862,7 @@ export function mountQuestionControls(
   root.ownerDocument.addEventListener("pointerdown", pointer);
   return () => {
     disposed = true;
+    cleanupRanking();
     observer.disconnect();
     root.removeEventListener("input", input);
     root.removeEventListener("change", input);

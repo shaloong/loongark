@@ -175,3 +175,7 @@ assert.match(html, /<th scope="col">x<\/th>/);
 console.log("Svelte 图表新增类型与轴 SSR 转义、可访问原始数据及无回调通过");
 
 assert.equal([...html.matchAll(/<input(?=[^>]*name="multiMatrix\[row\]")(?=[^>]*checked)[^>]*>/g)].length, 2);
+
+assert.ok(html.includes('data-part="rank-instructions"'));
+assert.equal([...html.matchAll(/data-question-control="rank-drag"/g)].length, 2);
+assert.ok(html.indexOf('name="rankSurvey" value="b"') < html.indexOf('name="rankSurvey" value="a"'));

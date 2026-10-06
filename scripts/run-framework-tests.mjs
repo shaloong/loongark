@@ -19,6 +19,7 @@ const child = spawn(
     "tests/chart-types.spec.ts",
     "tests/questionnaire-types.spec.ts",
     "tests/questionnaire-matrix.spec.ts",
+    "tests/questionnaire-ranking.spec.ts",
     "tests/async-collection.spec.ts",
     `--project=${process.env.BROWSER_PROJECT ?? "chromium"}`,
     "--workers=2",

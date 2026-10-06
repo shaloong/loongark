@@ -170,6 +170,7 @@
     "Independent ProseMirror structured editor with formatting, lists, safe links, tables, plugins, node views, controlled values and forms",
     "Chart area and signed stacks, stable pie/donut slices, continuous scatter, strict ISO time and logarithmic axes",
     "CodeEditor and RichTextEditor native input reconciliation after framework commits, external-clear focus and cross-engine ClipboardEvent payload contracts",
-    "Questionnaire matrix multiple answers with per-row selection bounds, invalid-row focus, repeated native names and isolated async snapshots"
+    "Questionnaire matrix multiple answers with per-row selection bounds, invalid-row focus, repeated native names and isolated async snapshots",
+    "Questionnaire native pointer and keyboard ranking previews, single-drop callbacks, cancellation, controlled rejection, live announcements and focus"
   ]
 }

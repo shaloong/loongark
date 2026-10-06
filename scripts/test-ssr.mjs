@@ -124,6 +124,12 @@ for (const [framework, script] of [
     : framework === "Solid"
       ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${multiMatrixProps})));`
       : `console.log(renderToString(h(L.LoongArkQuestionnaire,${multiMatrixProps})));`;
+  const rankSurveyProps = "{label:'SSR ranking',questions:[{id:'rankSurvey',label:'Ranking',type:'ranking',options:[{value:'a',label:'A'},{value:'b',label:'B'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{rankSurvey:['b','a']},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const rankSurveyScript = framework === "Vue"
+    ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${rankSurveyProps})})));`
+    : framework === "Solid"
+      ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${rankSurveyProps})));`
+      : `console.log(renderToString(h(L.LoongArkQuestionnaire,${rankSurveyProps})));`;
   const asyncLoaderSetup =
     "const asyncSSRLoader=L.createAsyncCollectionLoader({getKey:item=>item.id,load:()=>{throw Error('SSR must not request a collection')}});";
   const asyncProps =
@@ -190,6 +196,7 @@ for (const [framework, script] of [
           questionnaireScript +
           typedQuestionScript +
           multiMatrixScript +
+          rankSurveyScript +
           asyncScript +
           serverScript +
           conversationScript +
@@ -224,6 +231,9 @@ for (const [framework, script] of [
   assert.match(result.stdout, /tabindex="-1"[^>]*aria-disabled="true"/);
   assert.match(result.stdout, /SSR async idle 1/);
   assert.match(result.stdout, /name="typed\[row\]"/);
+  assert.ok(result.stdout.includes('data-part="rank-instructions"'));
+  assert.equal([...result.stdout.matchAll(/data-question-control="rank-drag"/g)].length, 2);
+  assert.ok(result.stdout.indexOf('name="rankSurvey" value="b"') < result.stdout.indexOf('name="rankSurvey" value="a"'));
   assert.equal([...result.stdout.matchAll(/<input(?=[^>]*name="multiMatrix\[row\]")(?=[^>]*checked)[^>]*>/g)].length, 2);
   assert.match(result.stdout, /data-part="range-start"/);
   assert.match(result.stdout, /data-part="inspect-category"/);

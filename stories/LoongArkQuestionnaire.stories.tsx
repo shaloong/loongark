@@ -124,3 +124,6 @@ export const StructuredTypes: StoryObj = { render: () => <QuestionnaireTypesExam
 
 import { QuestionnaireMatrixExample } from "../examples/react/QuestionnaireMatrixExample";
 export const MatrixMultiple: StoryObj = { decorators: [withArkExamplePage], render: () => <QuestionnaireMatrixExample /> };
+
+import { QuestionnaireRankingExample } from "../examples/react/QuestionnaireRankingExample";
+export const RankingInteraction: StoryObj = {decorators:[withArkExamplePage], render:()=> <QuestionnaireRankingExample />};

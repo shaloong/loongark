@@ -88,3 +88,5 @@ Button 的 `loading` 会同时禁用交互并设置 `aria-busy=true`；其余情
 `Question.type: "matrix"` 默认保持每行单选；设置 `multiple: true` 后，答案为 `{questionId: {rowId: [optionValue, ...]}}`。`minSelections/maxSelections` 适用于普通多选及矩阵多选，每行独立校验；必须为非负安全整数且最小值不大于最大值。`required` 要求全部可用行有答案，可选行的空答案不触发最小数量限制。
 
 答案按选项顺序归一，去重并移除无效、禁用行与选项；单选与多选答案不会互相强制转换。原生 FormData 为每个已选项重复 `questionId[rowId]` 名称。矩阵行是原生 fieldset，数量错误关联到对应行，前进失败聚焦首个无效行。禁用选项在多选模式可见且不可操作。受控拒绝恢复勾选状态；异步校验收到独立且冻结的嵌套行数组，不能修改编辑答案。`questionMap` 继续返回单选字符串行；多选答案可按公开 `QuestionAnswer` 类型读取。四端 `QuestionnaireMatrixExample` 与 `MatrixMultiple` Story 展示同一 API。
+
+排序题手柄、预览、取消、受控拒绝及本地化说明见[复杂问卷题型](questionnaire.md)。

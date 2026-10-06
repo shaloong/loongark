@@ -29,7 +29,7 @@
 - [x] 矩阵多选（[三引擎四端与Linux视觉验收](audits/2026-10-06/questionnaire-matrix-linux/acceptance.json)）
 - [ ] 重复题组
 - [ ] 自定义题型渲染及生命周期契约
-- [ ] 排序题拖动与键盘操作
+- [x] 排序题拖动、边缘自动滚动与键盘操作（[三引擎四端及Linux视觉验收](audits/2026-10-06/questionnaire-ranking-linux/acceptance.json)）
 
 ## 虚拟化
 
@@ -50,3 +50,7 @@
 
 
 独立浏览器流水线及原生 Safari runner 已配置；[本地配置验证](audits/2026-10-05/browser-ci-setup/acceptance.json)不计作远端或真机验收，实际首轮结果和截图审阅已补入该记录；平台项目仍等待修复后的完整验收。
+
+矩阵批次bce5310的原生Safari任务（[37419649189](https://github.com/shaloong/loongark/actions/runs/37419649189)）实际239个默认示例及24项既有交互通过后树折叠失败；失败截图已实际查看，显示展开操作后单元格进入编辑态，事件与命中位置仍需原生诊断。该失败不同于26e3280的清空筛选场景，平台项继续开放。
+
+同批WebKit完整四端结果为232通过、18失败、36项Story用例跳过；包含窄屏图表溢出、树展开焦点、裁剪示例，以及扩展快捷键与富文本删表。已下载React/Vue截图并查看对应失败场景，尚未完成修复与整库复验。
