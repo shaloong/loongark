@@ -56,3 +56,5 @@
 同批WebKit完整四端结果为232通过、18失败、36项Story用例跳过；包含窄屏图表溢出、树展开焦点、裁剪示例，以及扩展快捷键与富文本删表。已下载React/Vue截图并查看对应失败场景，尚未完成修复与整库复验。
 
 [原生Safari诊断配置](audits/2026-10-06/native-safari-diagnostics/acceptance.json)改为真实键盘清空输入，并记录树按钮可信事件、矩形和命中目标；Linux只完成语法/lint检查，等待macOS实际运行，不计平台通过。
+
+诊断提交e463345的[实际Safari任务](https://github.com/shaloong/loongark/actions/runs/37423827257)运行243个默认示例及24交互后仍在树折叠失败。失败图和原生事件已查看：旧中心坐标命中了编辑按钮，点击前后区域位置改变。runner现改为真实滚动、等待绘制、重新测量并发送W3C原生指针动作；新修改仍待macOS复验，筛选清空尚未执行。

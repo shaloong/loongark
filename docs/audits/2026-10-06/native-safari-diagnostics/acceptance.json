@@ -20,5 +20,12 @@
     "Linux无法运行Apple原生safaridriver，本批不宣称修复已获平台验收。",
     "不伪造click/input事件；只记录实际isTrusted及布局命中信息。",
     "桌面Safari不代表真实iOS设备。"
-  ]
+  ],
+  "remoteFollowup": {
+    "commit": "e463345cb39adeff090a6abb740ede9e507e6b9d",
+    "run": "https://github.com/shaloong/loongark/actions/runs/37423827257",
+    "browser": "Safari26.6.1/macOS15.7.9，非模拟器；Node24.20.0",
+    "result": "243默认示例与24交互通过后树折叠失败，平台不计通过",
+    "review": "失败PNG与原生事件JSON已实际查看。点击前中心(121,521)命中row-expand SVG；实际可信pointerdown/click同坐标命中cell-trigger，后续矩形已移到x81..113，单元格因此进入编辑。清空输入尚未执行，不宣称键盘修改已获平台通过。"
+  }
 }

@@ -76,8 +76,49 @@ async function find(selector) {
   });
   return node[elementKey];
 }
-const click = async (selector) =>
-  session("POST", `/element/${await find(selector)}/click`, {});
+async function click(selector) {
+  if (!selector.includes("row-expand"))
+    return session("POST", `/element/${await find(selector)}/click`, {});
+  // Safari 的 element/click 在滚动布局更新后可能使用旧中心点；先完成真实滚动与绘制。
+  await execute(
+    "document.querySelector(arguments[0]).scrollIntoView({block:'nearest',inline:'nearest'})",
+    [selector],
+  );
+  await session("POST", "/execute/async", {
+    script:
+      "const done=arguments[arguments.length-1];requestAnimationFrame(()=>requestAnimationFrame(()=>done()));",
+    args: [],
+  });
+  const point = await execute(
+    `
+    const button = document.querySelector(arguments[0]), rect = button.getBoundingClientRect();
+    const x=rect.x+rect.width/2, y=rect.y+rect.height/2;
+    return {x:Math.round(x), y:Math.round(y), hit:button.contains(document.elementFromPoint(x,y))};
+  `,
+    [selector],
+  );
+  assert(point.hit, `Safari 原生按钮中心被遮挡：${selector}`);
+  await session("POST", "/actions", {
+    actions: [
+      {
+        type: "pointer",
+        id: "table-click",
+        parameters: { pointerType: "mouse" },
+        actions: [
+          {
+            type: "pointerMove",
+            duration: 0,
+            origin: "viewport",
+            x: point.x,
+            y: point.y,
+          },
+          { type: "pointerDown", button: 0 },
+          { type: "pointerUp", button: 0 },
+        ],
+      },
+    ],
+  });
+}
 async function clickText(text) {
   const node = await execute(
     "return [...document.querySelectorAll('button')].find(node => node.textContent.trim() === arguments[0])",
