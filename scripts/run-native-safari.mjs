@@ -20,6 +20,7 @@ const driver = spawn("/usr/bin/safaridriver", ["--port", "4444"], {
   stdio: "inherit",
 });
 let startupError, sessionId;
+const eventEvidence = [];
 for (const child of [server, driver])
   child.on("error", (error) => (startupError = error));
 const report = {
@@ -86,9 +87,60 @@ async function clickText(text) {
   await session("POST", `/element/${node[elementKey]}/click`, {});
 }
 async function type(selector, text) {
-  const id = await find(selector);
-  await session("POST", `/element/${id}/clear`, {});
-  await session("POST", `/element/${id}/value`, { text, value: [...text] });
+  // /clear 不保证发出输入事件；真实键盘清空后重新定位可能被框架重绘的输入。
+  await click(selector);
+  await session("POST", "/actions", {
+    actions: [
+      {
+        type: "key",
+        id: "text-input",
+        actions: [
+          { type: "keyDown", value: "\uE03D" },
+          { type: "keyDown", value: "a" },
+          { type: "keyUp", value: "a" },
+          { type: "keyUp", value: "\uE03D" },
+          { type: "keyDown", value: "\uE003" },
+          { type: "keyUp", value: "\uE003" },
+        ],
+      },
+    ],
+  });
+  if (text) {
+    const id = await find(selector);
+    await session("POST", `/element/${id}/value`, { text, value: [...text] });
+  }
+}
+async function installTableProbe() {
+  // 只记录原生可信事件，不伪造点击、输入或浏览器选择。
+  await execute(`
+    window.__safariTableEvents = [];
+    for (const type of ["pointerdown", "mousedown", "mouseup", "click", "dblclick", "focusin", "input", "change"]) {
+      document.addEventListener(type, event => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const button = target.closest("button"), row = target.closest("tr[data-row-id]");
+        window.__safariTableEvents.push({type, trusted:event.isTrusted, time:event.timeStamp,
+          tag:target.tagName, part:target.getAttribute("data-part"), label:target.getAttribute("aria-label"),
+          button:button?.getAttribute("data-part"), buttonRow:button?.getAttribute("data-row-id"),
+          row:row?.getAttribute("data-row-id"), x:event.clientX, y:event.clientY,
+          value:target instanceof HTMLInputElement ? target.value : undefined });
+        if (window.__safariTableEvents.length > 300) window.__safariTableEvents.shift();
+      }, true);
+    }
+  `);
+}
+async function tableProbe(label) {
+  const scene = await execute(`
+    const button=document.querySelector('[data-part="row-expand"][data-row-id="atlas"]');
+    const rect=button?.getBoundingClientRect();
+    const hit=rect ? document.elementFromPoint(rect.x+rect.width/2, rect.y+rect.height/2) : null;
+    return {rect:rect?.toJSON(), clientRects:button ? [...button.getClientRects()].map(r=>r.toJSON()) : [],
+      hit:hit ? {tag:hit.tagName,part:hit.getAttribute("data-part"),button:hit.closest("button")?.getAttribute("data-part"),row:hit.closest("tr")?.getAttribute("data-row-id")} : null,
+      expanded:button?.getAttribute("aria-expanded"), editor:!!document.querySelector('[data-part="cell-editor"]'),
+      focus:{tag:document.activeElement?.tagName,part:document.activeElement?.getAttribute("data-part"),label:document.activeElement?.getAttribute("aria-label")},
+      events:window.__safariTableEvents ?? []};
+  `);
+  eventEvidence.push({ label, ...scene });
 }
 const text = (selector) =>
   execute("return document.querySelector(arguments[0])?.textContent ?? null", [
@@ -334,6 +386,7 @@ try {
   for (const framework of Object.keys(index))
     for (const mode of ["light", "dark"]) {
       await navigate(framework, "DataTableStructureExample", mode);
+      await installTableProbe();
       assert((await text('tr[data-row-kind="group"]')).includes("3000"));
       assert.equal(
         await execute(
@@ -392,7 +445,16 @@ try {
       );
       await clickText("Allow expansion");
       await clickText("Show tree rows");
+      await waitFor(
+        () =>
+          execute(
+            "return !document.querySelector('tr[data-row-kind=group]') && document.querySelector('[data-part=row-expand][data-row-id=atlas]')?.getAttribute('aria-expanded') === 'true'",
+          ),
+        "树模式渲染完成",
+      );
+      await tableProbe(`${framework}/${mode}/before-collapse`);
       await click('[data-part="row-expand"][data-row-id="atlas"]');
+      await tableProbe(`${framework}/${mode}/after-collapse-click`);
       await waitFor(
         () =>
           execute(
@@ -416,6 +478,7 @@ try {
         "筛选强制展开祖先上下文",
       );
       await type('input[aria-label="Filter Project"]', "");
+      await tableProbe(`${framework}/${mode}/after-clear-input`);
       await waitFor(
         () =>
           execute(
@@ -445,6 +508,10 @@ try {
     } catch {}
   throw error;
 } finally {
+  await writeFile(
+    resolve(evidence, "native-events.json"),
+    JSON.stringify(eventEvidence, null, 2),
+  );
   await writeFile(
     resolve(evidence, "results.json"),
     JSON.stringify(report, null, 2),

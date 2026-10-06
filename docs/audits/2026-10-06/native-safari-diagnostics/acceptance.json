@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-06",
+  "branch": "develop",
+  "base": "58d573f5e628bc50b4ff85d0646f9c61ff456405",
+  "scope": [
+    "原生Safari使用W3C键盘Meta+A/Backspace清空输入，重新定位后发送非空文本",
+    "树模式就绪断言、原生可信事件/按钮矩形/中心命中/焦点诊断，300事件上限"
+  ],
+  "validation": {
+    "syntax": "node --check scripts/run-native-safari.mjs通过",
+    "lint": "pnpm lint通过",
+    "nativeSafari": "尚未在macOS执行；本批只验收runner语法与仓库约定，不计组件或平台通过"
+  },
+  "evidence": {
+    "previousRun": "https://github.com/shaloong/loongark/actions/runs/37419649189",
+    "observed": "Safari26.6.1/macOS15.7.9：239默认示例与24交互后树折叠失败；失败图已查看，Atlas仍展开并进入单元格编辑态。此前26e3280清空筛选失败属于另一场景。",
+    "storage": ".artifacts/native-safari/native-events.json；既有Safari CI Artifact保留14天，原始事件与过程图不入Git。"
+  },
+  "limitations": [
+    "Linux无法运行Apple原生safaridriver，本批不宣称修复已获平台验收。",
+    "不伪造click/input事件；只记录实际isTrusted及布局命中信息。",
+    "桌面Safari不代表真实iOS设备。"
+  ]
+}
