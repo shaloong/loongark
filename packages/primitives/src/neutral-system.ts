@@ -25,6 +25,30 @@ const css = `
 [data-scope=checkbox] [data-part=control] { border-radius:var(--lk-space-component-xs); }
 [data-scope=checkbox][data-part=root], [data-scope=radio-group][data-part=item], [data-scope=switch][data-part=root] { min-height:var(--lk-control-height-xs); }
 [data-scope=radio-group] [data-part=item-control] { border-radius:50%; }
+/* 多行标签从首行对齐；控件不随长文本被压扁。 */
+:is([data-scope=checkbox],[data-scope=switch])[data-part=root] { align-items:flex-start; }
+:is([data-scope=checkbox],[data-scope=switch])[data-part=label] { min-width:0; overflow-wrap:anywhere; line-height:var(--lk-control-height-xs); }
+[data-scope=checkbox][data-part=control] { flex:none; margin-block-start:calc((var(--lk-control-height-xs) - var(--lk-control-icon-md)) / 2); }
+[data-scope=checkbox][data-part=root][data-size=sm] [data-part=control] { margin-block-start:calc((var(--lk-control-height-xs) - var(--lk-control-icon-sm)) / 2); }
+[data-scope=checkbox][data-part=root][data-size=lg] [data-part=control] { margin-block-start:calc((var(--lk-control-height-xs) - var(--lk-control-icon-lg)) / 2); }
+:is([data-scope=checkbox],[data-scope=switch])[data-part=root] { gap:var(--lk-space-component-sm); }
+[data-scope=checkbox][data-part=label] { margin-inline:0; }
+[data-scope=switch][data-part=control] { flex:none; }
+/* 原生输入负责键盘语义，可见选中控件负责显示焦点。Switch HiddenInput 没有 data-part。 */
+:is([data-scope=checkbox][data-part=root],[data-scope=radio-group][data-part=item],[data-scope=switch][data-part=root]):has(> input:focus-visible) > :is([data-part=control],[data-part=item-control]),
+:is([data-scope=checkbox][data-part=control],[data-scope=radio-group][data-part=item-control],[data-scope=switch][data-part=control]):focus-visible { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring); outline-offset:var(--lk-control-focuswidth); box-shadow:none; }
+[data-scope=radio-group][data-part=root][data-orientation=horizontal] { flex-wrap:wrap; gap:var(--lk-space-component-compact) var(--lk-space-component-md); }
+[data-scope=radio-group][data-part=root][data-orientation=horizontal] > [data-part=label] { flex-basis:100%; min-width:0; }
+[data-scope=radio-group][data-part=item] { min-width:0; max-width:100%; flex:0 1 auto; align-items:flex-start; }
+[data-scope=radio-group][data-part=item-text] { min-width:0; overflow-wrap:anywhere; line-height:var(--lk-control-height-xs); }
+[data-scope=radio-group][data-part=root][data-size] [data-scope=radio-group][data-part=item-text] { font-size:var(--lk-typography-fontsize-md); }
+[data-scope=radio-group][data-part=root][data-size=sm] [data-scope=radio-group][data-part=item-text] { font-size:var(--lk-typography-fontsize-sm); }
+[data-scope=radio-group][data-part=root][data-size=lg] [data-scope=radio-group][data-part=item-text] { font-size:var(--lk-typography-fontsize-lg); }
+
+[data-scope=radio-group][data-part=item-control] { flex:none; margin-block-start:calc((var(--lk-control-height-xs) - var(--lk-control-icon-md)) / 2); }
+[data-scope=radio-group][data-part=root][data-size=sm] [data-part=item-control] { margin-block-start:calc((var(--lk-control-height-xs) - var(--lk-control-icon-sm)) / 2); }
+[data-scope=radio-group][data-part=root][data-size=lg] [data-part=item-control] { margin-block-start:calc((var(--lk-control-height-xs) - var(--lk-control-icon-lg)) / 2); }
+
 [data-scope=rating-group][data-part=item] { min-width:var(--lk-control-height-xs); min-height:var(--lk-control-height-xs); }
 [data-scope=collapsible][data-part=trigger]:is(button) { border:0; background:transparent; border-radius:inherit; justify-content:space-between; }
 [data-scope=collapsible][data-part=content]:is([data-state=open],:not([data-state])) { height:auto; overflow:visible; }
@@ -104,8 +128,8 @@ const css = `
 [data-scope=number-input] :is([data-part=increment-trigger],[data-part=decrement-trigger]) { min-height:0; min-width:var(--lk-control-height-xs); padding:0 var(--lk-space-component-xs); font-size:var(--lk-typography-fontsize-xs); line-height:1; }
 :is([data-scope=number-input],[data-scope=password-input]) [data-part=input] { min-height:0; height:100%; border:0; box-shadow:none; background:transparent; padding-block:0; }
 /* 组合输入的可见边框属于 Control，焦点环不能画在内部文本区域。 */
-:is([data-scope=combobox],[data-scope=date-picker],[data-scope=number-input],[data-scope=password-input])[data-part=control]:has(> [data-part=input]:focus-visible) { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring); outline-offset:var(--lk-control-focuswidth); box-shadow:var(--lk-shadow-sm); }
-:is([data-scope=combobox],[data-scope=date-picker],[data-scope=number-input],[data-scope=password-input])[data-part=control] > [data-part=input]:focus-visible { outline:none; }
+:is([data-scope=combobox],[data-scope=date-picker],[data-scope=number-input],[data-scope=password-input],[data-scope=tags-input])[data-part=control]:has(> [data-part=input]:focus-visible) { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring); outline-offset:var(--lk-control-focuswidth); box-shadow:var(--lk-shadow-sm); }
+:is([data-scope=combobox],[data-scope=date-picker],[data-scope=number-input],[data-scope=password-input],[data-scope=tags-input])[data-part=control] > [data-part=input]:focus-visible { outline:none; }
 [data-scope=number-input] :is([data-part=increment-trigger],[data-part=decrement-trigger]):focus-visible { outline-offset:calc(-1 * var(--lk-control-focuswidth)); }
 [data-scope=number-input][data-part=increment-trigger] { border-left:0; border-inline-start:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input); border-start-end-radius:calc(var(--lk-radius-md) - var(--lk-control-borderwidth)); }
 [data-scope=number-input][data-part=decrement-trigger] { border-left:0; border-inline-start:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input); border-end-end-radius:calc(var(--lk-radius-md) - var(--lk-control-borderwidth)); }

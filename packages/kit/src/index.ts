@@ -111,3 +111,4 @@ export * from "./localized-date";
 
 export { contextMenuPointerHandler } from "./menu-pointer";
 export { preventDrawerGrabberSelection } from "./drawer-pointer";
+export { mountNativeSelection } from "./native-selection";

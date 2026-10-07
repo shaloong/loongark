@@ -1,4 +1,9 @@
 import { dataProps } from "../data-props";
+import { useNativeSelection } from "../native-selection";
+import {
+  useRadioGroupContext,
+  useRadioGroupItemContext,
+} from "@ark-ui/react/radio-group";
 import { RadioGroup } from "@ark-ui/react/radio-group";
 import { type ReactNode, forwardRef, createElement } from "react";
 import type { ComponentPropsWithoutRef } from "react";
@@ -246,14 +251,17 @@ export const LoongArkRadioGroupItemHiddenInput = forwardRef<
   HTMLInputElement,
   LoongArkRadioGroupItemHiddenInputProps
 >(({ className, ...props }, ref) => {
+  const item = useRadioGroupItemContext();
+  const input = useNativeSelection(useRadioGroupContext(), "radio", ref);
   return createElement(
     RadioGroup.ItemHiddenInput,
     dataProps({
-      ref,
+      ref: input,
       className,
       "data-scope": "radio-group",
       "data-part": "item-hidden-input",
       ...props,
+      disabled: item.disabled || !!props.disabled,
     }),
   );
 });

@@ -261,4 +261,6 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 2026-10-07 Drawer与图表视觉收尾：四端手柄防误选、吸附后焦点完整可见及重复挂载清理，原生图表展开统一Lucide箭头；示例标题改为可读词间距。最终三引擎各44项、Story各10项和Linux视觉262项通过；实际审阅320张Drawer抽样及240张图表/标题局部，288张既有基线含Windows未改。当前119族、329Story、四端各794公开值及275框架示例；原生Safari和整库结果继续复验，真机需设备连接。详见[验收范围](audits/2026-10-07/drawer-focus-and-disclosure-linux/acceptance.json)。
 
 
-2026-10-07 P0 原生布局与滚动：四端问卷、嵌套/自定义题组和矩阵使用直接 legend 与内部网格，连续缩至 320px 保持原生表单值；消息与虚拟窗口统一滚动锚定声明清理。最终三引擎自定义/焦点 114 项、Story/滚动 27 项、Linux 视觉 278 项通过；首次视觉发现的 88px 间距回归已修复，304 份原基线含 Windows 哈希未改。实际审阅 90 张最终自定义长标题截图，另有先前原生题组/焦点抽样；源码 381460e 的原生 Safari 已完成 275 默认/201 高级交互，新源码整库及真机仍待验收。详见[范围与限制](audits/2026-10-07/p0-native-layout-and-scroll/acceptance.json)。
+2026-10-07 P0 原生布局与滚动：四端问卷、嵌套/自定义题组和矩阵使用直接 legend 与内部网格，连续缩至 320px 保持原生表单值；消息与虚拟窗口统一滚动锚定声明清理。最终三引擎自定义/焦点 114 项、Story/滚动 27 项、Linux 视觉 278 项通过；首次视觉发现的 88px 间距回归已修复，304 份原基线含 Windows 哈希未改。实际审阅 90 张最终自定义长标题截图，另有先前原生题组/焦点抽样；源码 5a505b6 的远端 Chromium/Firefox/WebKit 整库及原生 Safari 已全部通过；Safari 275 默认/201 高级交互通过，本批相关 33 张问卷/焦点截图已实际审阅。真实手机仍缺少设备连接。详见[范围与限制](audits/2026-10-07/p0-native-layout-and-scroll/acceptance.json)。
+
+2026-10-07 P0 选择控件与表单：完成四端 Checkbox/Switch/RadioGroup/TagsInput 可见焦点、首行和 RTL 对齐、受控拒绝及 reset；修复 Svelte 初始 undefined 绑定、Vue 非受控 Checkbox 默认值及四种 HiddenInput asChild。279 示例新构建、公开类型和四端 SSR 通过，三引擎四端最终专项 78 项、Story 18 项通过。最终 Solid 原生 ref 与输入类型修正后，另有三引擎 39 项含全部 69 示例通过；原有 278 项及新增 8 项 Linux 视觉比较通过，304 份既有基线含 Windows 哈希不变。本批原生 Safari 待远端执行，真实手机仍缺少设备连接；详见[验收范围](audits/2026-10-07/p0-selection-focus-and-forms/acceptance.json)。

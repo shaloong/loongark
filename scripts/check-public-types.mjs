@@ -4,7 +4,18 @@ const frameworks = ["react", "vue", "solid", "svelte"];
 let failed = false;
 for (const framework of frameworks) {
   const program = ts.createProgram(
-    [resolve(`packages/${framework}/dist/index.d.ts`)],
+    [
+      resolve(`packages/${framework}/dist/index.d.ts`),
+      ...(framework === "vue"
+        ? [
+            resolve("tests/public-types/nativeSelectionProps.ts"),
+            resolve("tests/consumers/vue/NativeSelectionParts.ts"),
+          ]
+        : []),
+      ...(framework === "solid"
+        ? [resolve("tests/consumers/solid/NativeSelectionRefs.tsx")]
+        : []),
+    ],
     {
       noEmit: true,
       strict: true,
@@ -22,7 +33,7 @@ for (const framework of frameworks) {
       (diagnostic) =>
         diagnostic.file?.fileName
           .replaceAll("\\", "/")
-          .includes("/packages/") &&
+          .match(/\/(?:packages|tests\/(?:public-types|consumers))\//) &&
         !diagnostic.file.fileName.includes("node_modules"),
     );
   if (diagnostics.length) {

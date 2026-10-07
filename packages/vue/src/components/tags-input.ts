@@ -1,3 +1,6 @@
+import type { TagsInputHiddenInputProps } from "@ark-ui/vue/tags-input";
+import { nativeSelectionRef } from "../native-selection";
+import { useTagsInputContext } from "@ark-ui/vue/tags-input";
 import type { TagsInputRootProps as NativeTagsInputRootProps } from "@ark-ui/vue/tags-input";
 import { renderPart } from "../render-part";
 /**
@@ -166,25 +169,33 @@ export const LoongArkTagsInputInput = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { attrs }) {
-    return () =>
-      renderPart(ArkTagsInput.Input, {
+    const api = useTagsInputContext();
+    return () => {
+      const disabled =
+        props.disabled ?? !!api.value.getHiddenInputProps().disabled;
+      const readOnly =
+        props.readOnly ?? !!api.value.getHiddenInputProps().readonly;
+      return renderPart(ArkTagsInput.Input, {
         ...attrs,
         ...props,
+        disabled,
+        readOnly,
         "data-scope": "tags-input",
         "data-part": "input",
         "data-size": props.size,
         "data-state": props.state !== "default" ? props.state : undefined,
-        "data-disabled": props.disabled ? "true" : undefined,
-        "data-readonly": props.readOnly ? "true" : undefined,
+        "data-disabled": disabled ? "true" : undefined,
+        "data-readonly": readOnly ? "true" : undefined,
       });
+    };
   },
 });
 
@@ -293,14 +304,30 @@ export const LoongArkTagsInputClearTrigger = defineComponent({
   },
 });
 
-export const LoongArkTagsInputHiddenInput = defineComponent({
-  name: "LoongArkTagsInputHiddenInput",
-  setup(_, { attrs }) {
-    return () =>
-      renderPart(ArkTagsInput.HiddenInput, {
-        ...attrs,
-        "data-scope": "tags-input",
-        "data-part": "hidden-input",
-      });
-  },
-});
+export const LoongArkTagsInputHiddenInput =
+  defineComponent<TagsInputHiddenInputProps>(
+    (props, { attrs, slots }) => {
+      const api = useTagsInputContext();
+
+      const ref = nativeSelectionRef(() => ({
+        formValue: api.value.valueAsString,
+      }));
+      return () =>
+        renderPart(
+          ArkTagsInput.HiddenInput,
+          {
+            ...attrs,
+            ...props,
+            ref,
+            "data-scope": "tags-input",
+            "data-part": "hidden-input",
+          },
+          slots,
+        );
+    },
+    {
+      name: "LoongArkTagsInputHiddenInput",
+      props: ["asChild"],
+      inheritAttrs: false,
+    },
+  );

@@ -24,6 +24,8 @@ export const SwitchExample: React.FC<SwitchExampleProps> = ({
     <LoongArkSwitchRoot
       size={size}
       disabled={disabled}
+      checked={checked}
+      name="notifications"
       data-testid="switch-root"
       onCheckedChange={(detail: { checked: boolean }) =>
         setChecked(detail.checked)
@@ -33,7 +35,6 @@ export const SwitchExample: React.FC<SwitchExampleProps> = ({
         size={size}
         disabled={disabled}
         data-testid="switch-control"
-        checked={checked}
       >
         <LoongArkSwitchThumb size={size} data-testid="switch-thumb" />
       </LoongArkSwitchControl>

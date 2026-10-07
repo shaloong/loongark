@@ -52,6 +52,7 @@ const TagsInputDemo = ({
 
   return (
     <LoongArkTagsInputRoot
+      name="frameworks"
       size={size}
       state={state}
       disabled={disabled}

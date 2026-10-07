@@ -1,5 +1,14 @@
 <script lang="ts">
-  import { Switch } from "@ark-ui/svelte/switch";
+  import { onMount } from "svelte";
+  import { mountNativeSelection } from "@loongark/kit";
+  import { Switch, useSwitchContext } from "@ark-ui/svelte/switch";
+  export let ref: HTMLInputElement | null = null;
+  const api = useSwitchContext();
+  onMount(() =>
+    ref
+      ? mountNativeSelection(ref, () => ({ checked: api().checked }))
+      : undefined,
+  );
 </script>
 
-<Switch.HiddenInput {...$$restProps} />
+<Switch.HiddenInput bind:ref {...$$restProps} />

@@ -2,6 +2,11 @@ import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import type { JSX } from "solid-js";
 import { type Component, mergeProps, splitProps } from "solid-js";
+import { nativeSelectionRef } from "../native-selection";
+import {
+  useCheckboxContext,
+  type CheckboxHiddenInputProps,
+} from "@ark-ui/solid/checkbox";
 import { Checkbox } from "@ark-ui/solid/checkbox";
 import type { CheckboxSize } from "@loongark/primitives";
 import type { CheckboxRootProps as RootProps } from "@ark-ui/solid/checkbox";
@@ -80,10 +85,21 @@ export const LoongArkCheckboxIndicator: Component<
   );
 };
 
-export const LoongArkCheckboxHiddenInput: Component = (props) => {
+export const LoongArkCheckboxHiddenInput: Component<
+  CheckboxHiddenInputProps
+> = (props) => {
+  const api = useCheckboxContext();
+  const ref = nativeSelectionRef(
+    () => ({
+      checked: api().checked,
+      indeterminate: api().indeterminate,
+    }),
+    props.ref,
+  );
   return (
     <Checkbox.HiddenInput
       {...props}
+      ref={ref}
       data-scope="checkbox"
       data-part="hidden-input"
     />

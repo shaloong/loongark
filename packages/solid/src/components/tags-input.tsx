@@ -17,6 +17,8 @@ import {
   type TagsInputClearTriggerProps as ArkTagsInputClearTriggerProps,
   type TagsInputHiddenInputProps as ArkTagsInputHiddenInputProps,
 } from "@ark-ui/solid/tags-input";
+import { nativeSelectionRef } from "../native-selection";
+import { useTagsInputContext } from "@ark-ui/solid/tags-input";
 import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
 
 export interface LoongArkTagsInputRootProps extends Omit<
@@ -144,8 +146,6 @@ export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
     {
       size: "md" as TagsInputSize,
       state: "default" as TagsInputState,
-      disabled: false,
-      readOnly: false,
     },
     props,
   );
@@ -156,17 +156,22 @@ export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
     "readOnly",
   ]);
 
+  const api = useTagsInputContext();
+  const disabled = () =>
+    local.disabled ?? !!api().getHiddenInputProps().disabled;
+  const readOnly = () =>
+    local.readOnly ?? !!api().getHiddenInputProps().readOnly;
   return (
     <ArkTagsInput.Input
       {...others}
-      disabled={local.disabled}
-      readOnly={local.readOnly}
+      disabled={disabled()}
+      readOnly={readOnly()}
       data-scope="tags-input"
       data-part="input"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
-      data-readonly={local.readOnly ? "true" : undefined}
+      data-disabled={disabled() ? "true" : undefined}
+      data-readonly={readOnly() ? "true" : undefined}
     />
   );
 };
@@ -302,9 +307,17 @@ export interface LoongArkTagsInputHiddenInputProps extends Omit<
 export const LoongArkTagsInputHiddenInput: Component<
   LoongArkTagsInputHiddenInputProps
 > = (props) => {
+  const api = useTagsInputContext();
+  const ref = nativeSelectionRef(
+    () => ({
+      formValue: api().valueAsString,
+    }),
+    props.ref,
+  );
   return (
     <ArkTagsInput.HiddenInput
       {...props}
+      ref={ref}
       data-scope="tags-input"
       data-part="hidden-input"
     />

@@ -29,6 +29,7 @@
 </script>
 
 <LoongArkTagsInputRoot
+  name="frameworks"
   {size}
   {state}
   {disabled}

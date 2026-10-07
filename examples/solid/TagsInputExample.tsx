@@ -34,6 +34,7 @@ export const TagsInputExample: Component<TagsInputExampleProps> = (props) => {
 
   return (
     <LoongArkTagsInputRoot
+      name="frameworks"
       size={size()}
       state={state()}
       disabled={disabled()}

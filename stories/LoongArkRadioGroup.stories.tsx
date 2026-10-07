@@ -1,4 +1,5 @@
 import React from "react";
+import { SelectionControlsExample } from "../examples/react/SelectionControlsExample";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { RadioGroupExample } from "../examples/react/RadioGroupExample";
 
@@ -65,4 +66,8 @@ export const Disabled: Story = {
   args: {
     disabled: true,
   },
+};
+
+export const ResponsiveControls: Story = {
+  render: () => <SelectionControlsExample />,
 };

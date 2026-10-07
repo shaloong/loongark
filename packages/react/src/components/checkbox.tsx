@@ -1,6 +1,8 @@
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import React, { forwardRef } from "react";
+import { useNativeSelection } from "../native-selection";
+import { useCheckboxContext } from "@ark-ui/react/checkbox";
 import { Checkbox } from "@ark-ui/react/checkbox";
 import type { CheckboxSize } from "@loongark/primitives";
 import type {
@@ -117,9 +119,10 @@ export const LoongArkCheckboxHiddenInput = forwardRef<
   HTMLInputElement,
   LoongArkCheckboxHiddenInputProps
 >((props, ref) => {
+  const input = useNativeSelection(useCheckboxContext(), "checkbox", ref);
   return (
     <Checkbox.HiddenInput
-      ref={ref}
+      ref={input}
       {...props}
       data-scope="checkbox"
       data-part="hidden-input"

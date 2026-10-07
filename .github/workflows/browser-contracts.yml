@@ -93,6 +93,8 @@ jobs:
             .artifacts/advanced-completion/*react*.png
             .artifacts/date-paste/*react*.png
             .artifacts/gap-completion/*react*.png
+            .artifacts/p0-consistency/*react*.png
+            .artifacts/p0-selection/*react*.png
             test-results/**/*react*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -106,6 +108,8 @@ jobs:
             .artifacts/advanced-completion/*vue*.png
             .artifacts/date-paste/*vue*.png
             .artifacts/gap-completion/*vue*.png
+            .artifacts/p0-consistency/*vue*.png
+            .artifacts/p0-selection/*vue*.png
             test-results/**/*vue*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -119,6 +123,8 @@ jobs:
             .artifacts/advanced-completion/*solid*.png
             .artifacts/date-paste/*solid*.png
             .artifacts/gap-completion/*solid*.png
+            .artifacts/p0-consistency/*solid*.png
+            .artifacts/p0-selection/*solid*.png
             test-results/**/*solid*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -132,6 +138,8 @@ jobs:
             .artifacts/advanced-completion/*svelte*.png
             .artifacts/date-paste/*svelte*.png
             .artifacts/gap-completion/*svelte*.png
+            .artifacts/p0-consistency/*svelte*.png
+            .artifacts/p0-selection/*svelte*.png
             test-results/**/*svelte*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -157,6 +165,8 @@ jobs:
             .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-datatable--*.png
             .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-questionnaire--*.png
             .artifacts/advanced-completion/query-story-*.png
+            .artifacts/p0-consistency/*Story*.png
+            .artifacts/p0-selection/*Story*.png
             .artifacts/browser-environment/
             test-results/**/*.png
             test-results/**/error-context.md

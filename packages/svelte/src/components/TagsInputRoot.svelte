@@ -1,51 +1,105 @@
 <script lang="ts">
-  import { TagsInput } from "@ark-ui/svelte/tags-input";
-  import type { TagsInputRootProps } from "@ark-ui/svelte/tags-input";
+  import {
+    TagsInput,
+    useTagsInput,
+    type TagsInputRootProps,
+  } from "@ark-ui/svelte/tags-input";
   import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
-
-  export let size: TagsInputSize = "md";
-  export let state: TagsInputState = "default";
-  export let value: TagsInputRootProps["value"] = undefined;
-  export let defaultValue: TagsInputRootProps["defaultValue"] = undefined;
-  export let inputValue: TagsInputRootProps["inputValue"] = undefined;
-  export let defaultInputValue: TagsInputRootProps["defaultInputValue"] = undefined;
-  export let disabled: TagsInputRootProps["disabled"] = undefined;
-  export let readOnly: TagsInputRootProps["readOnly"] = undefined;
-  export let required: TagsInputRootProps["required"] = undefined;
-  export let invalid: TagsInputRootProps["invalid"] = undefined;
-  export let name: TagsInputRootProps["name"] = undefined;
-  export let form: TagsInputRootProps["form"] = undefined;
-  export let id: TagsInputRootProps["id"] = undefined;
-  export let ids: TagsInputRootProps["ids"] = undefined;
-  export let onValueChange: TagsInputRootProps["onValueChange"] = undefined;
-  export let onInputValueChange: TagsInputRootProps["onInputValueChange"] =
-    undefined;
-  export let onValueInvalid: TagsInputRootProps["onValueInvalid"] = undefined;
+  let {
+    children,
+    ref = $bindable(null),
+    value = $bindable(),
+    inputValue = $bindable(),
+    size = "md",
+    state = "default",
+    defaultValue,
+    defaultInputValue,
+    disabled,
+    readOnly,
+    required,
+    invalid,
+    name,
+    form,
+    id,
+    ids,
+    addOnPaste,
+    allowDuplicates,
+    allowOverflow,
+    autoFocus,
+    blurBehavior,
+    delimiter,
+    editable,
+    max,
+    maxLength,
+    placeholder,
+    sanitizeValue,
+    translations,
+    validate,
+    onValueChange,
+    onInputValueChange,
+    onValueInvalid,
+    onFocusOutside,
+    onHighlightChange,
+    onInteractOutside,
+    onPointerDownOutside,
+    ...dom
+  }: TagsInputRootProps & {
+    size?: TagsInputSize;
+    state?: TagsInputState;
+  } = $props();
+  const providedId = $props.id();
+  const api = useTagsInput(() => ({
+    id: id ?? providedId,
+    ids,
+    value,
+    inputValue,
+    defaultValue,
+    defaultInputValue,
+    disabled,
+    readOnly,
+    required,
+    invalid,
+    name,
+    form,
+    addOnPaste,
+    allowDuplicates,
+    allowOverflow,
+    autoFocus,
+    blurBehavior,
+    delimiter,
+    editable,
+    max,
+    maxLength,
+    placeholder,
+    sanitizeValue,
+    translations,
+    validate,
+    onValueInvalid,
+    onFocusOutside,
+    onHighlightChange,
+    onInteractOutside,
+    onPointerDownOutside,
+    onValueChange(details) {
+      if (!onValueChange) value = details.value;
+      onValueChange?.(details);
+    },
+    onInputValueChange(details) {
+      if (!onInputValueChange) inputValue = details.inputValue;
+      onInputValueChange?.(details);
+    },
+  }));
 </script>
 
-<TagsInput.Root
-  {value}
-  {defaultValue}
-  {inputValue}
-  {defaultInputValue}
-  {disabled}
-  {readOnly}
-  {required}
-  {invalid}
-  {name}
-  {form}
-  {id}
-  {ids}
-  {onValueChange}
-  {onInputValueChange}
-  {onValueInvalid}
+<TagsInput.RootProvider
+  value={api}
+  bind:ref
+  {...dom}
   data-scope="tags-input"
   data-part="root"
   data-size={size}
   data-state={state !== "default" ? state : undefined}
   data-disabled={disabled ? "true" : undefined}
   data-readonly={readOnly ? "true" : undefined}
-  {...$$restProps}
 >
-  <slot />
-</TagsInput.Root>
+  {@render children?.()}
+</TagsInput.RootProvider>

@@ -1,21 +1,39 @@
 <script lang="ts">
-  import { TagsInput } from "@ark-ui/svelte/tags-input";
+  import {
+    TagsInput,
+    useTagsInputContext,
+    type TagsInputInputProps,
+  } from "@ark-ui/svelte/tags-input";
   import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
-
-  export let size: TagsInputSize = "md";
-  export let state: TagsInputState = "default";
-  export let disabled: boolean = false;
-  export let readOnly: boolean = false;
+  let {
+    size = "md",
+    state = "default",
+    disabled,
+    readOnly,
+    readonly: nativeReadOnly,
+    ...props
+  }: Omit<TagsInputInputProps, "size"> & {
+    size?: TagsInputSize;
+    state?: TagsInputState;
+    readOnly?: boolean;
+  } = $props();
+  const api = useTagsInputContext();
+  const isDisabled = $derived(
+    disabled ?? !!api().getHiddenInputProps().disabled,
+  );
+  const isReadOnly = $derived(
+    readOnly ?? nativeReadOnly ?? !!api().getHiddenInputProps().readonly,
+  );
 </script>
 
 <TagsInput.Input
-  {disabled}
-  readonly={readOnly}
+  {...props}
+  disabled={isDisabled}
+  readonly={isReadOnly}
   data-scope="tags-input"
   data-part="input"
   data-size={size}
   data-state={state !== "default" ? state : undefined}
-  data-disabled={disabled ? "true" : undefined}
-  data-readonly={readOnly ? "true" : undefined}
-  {...$$restProps}
+  data-disabled={isDisabled ? "true" : undefined}
+  data-readonly={isReadOnly ? "true" : undefined}
 />

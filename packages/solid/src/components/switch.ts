@@ -1,3 +1,8 @@
+import { nativeSelectionRef } from "../native-selection";
+import {
+  useSwitchContext,
+  type SwitchHiddenInputProps,
+} from "@ark-ui/solid/switch";
 import type { JSX } from "solid-js";
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { ark } from "@ark-ui/solid";
@@ -13,6 +18,12 @@ export interface LoongArkSwitchProps
     Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
   children?: JSX.Element;
   disabled?: boolean;
+  name?: string;
+  form?: string;
+  value?: string;
+  readOnly?: boolean;
+  required?: boolean;
+  invalid?: boolean;
   checked?: boolean;
   defaultChecked?: boolean;
   onCheckedChange?: (details: { checked: boolean }) => void;
@@ -98,12 +109,17 @@ export const LoongArkSwitchLabel: Component<{
   );
 };
 
+export const LoongArkSwitchHiddenInput: Component<SwitchHiddenInputProps> = (
+  props,
+) => {
+  const api = useSwitchContext();
+  const ref = nativeSelectionRef(() => ({ checked: api().checked }), props.ref);
+  return ArkSwitch.HiddenInput(mergeProps(props, { ref }));
+};
 export const LoongArkSwitch = {
   Root: LoongArkSwitchRoot,
   Control: LoongArkSwitchControl,
   Thumb: LoongArkSwitchThumb,
   Label: LoongArkSwitchLabel,
-  HiddenInput: ArkSwitch.HiddenInput,
+  HiddenInput: LoongArkSwitchHiddenInput,
 };
-
-export const LoongArkSwitchHiddenInput = ArkSwitch.HiddenInput;

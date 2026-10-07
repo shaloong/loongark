@@ -1,3 +1,9 @@
+import { nativeSelectionRef } from "../native-selection";
+import {
+  useRadioGroupContext,
+  useRadioGroupItemContext,
+  type RadioGroupItemHiddenInputProps as NativeHiddenInputProps,
+} from "@ark-ui/solid/radio-group";
 import { RadioGroup as ArkRadioGroup } from "@ark-ui/solid/radio-group";
 import { ark } from "@ark-ui/solid";
 import type {
@@ -57,7 +63,7 @@ export interface RadioGroupIndicatorProps {
   class?: string;
 }
 
-export interface RadioGroupItemHiddenInputProps {
+export interface RadioGroupItemHiddenInputProps extends NativeHiddenInputProps {
   class?: string;
 }
 
@@ -142,5 +148,20 @@ export const LoongArkRadioGroupIndicator: Component<
 export const LoongArkRadioGroupItemHiddenInput: Component<
   RadioGroupItemHiddenInputProps
 > = (props) => {
-  return <ArkRadioGroup.ItemHiddenInput {...props} />;
+  const api = useRadioGroupContext();
+  const item = useRadioGroupItemContext();
+  const ref = nativeSelectionRef(
+    () => ({
+      radioValue: api().value,
+      readOnly: String(api().getRootProps()["aria-readonly"]) === "true",
+    }),
+    props.ref,
+  );
+  return (
+    <ArkRadioGroup.ItemHiddenInput
+      {...props}
+      ref={ref}
+      disabled={item().disabled || !!props.disabled}
+    />
+  );
 };

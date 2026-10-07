@@ -42,6 +42,7 @@ export const TagsInputExample = defineComponent({
       h(
         LoongArkTagsInputRoot,
         {
+          name: "frameworks",
           size: props.size,
           state: props.state,
           disabled: props.disabled,

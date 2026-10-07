@@ -1,3 +1,6 @@
+import type { SwitchHiddenInputProps } from "@ark-ui/vue/switch";
+import { nativeSelectionRef } from "../native-selection";
+import { useSwitchContext } from "@ark-ui/vue/switch";
 import { renderPart } from "../render-part";
 import { defineComponent, h } from "vue";
 import type { PropType } from "vue";
@@ -22,6 +25,17 @@ export const LoongArkSwitchRoot = defineComponent({
   props: {
     size: sizeProp,
     disabled: boolProp(false),
+    checked: { type: Boolean, default: undefined },
+    defaultChecked: { type: Boolean, default: undefined },
+    name: String,
+    form: String,
+    value: String,
+    readOnly: Boolean,
+    required: Boolean,
+    invalid: Boolean,
+    onCheckedChange: Function as PropType<
+      (details: { checked: boolean }) => void
+    >,
   },
   setup(props, { slots, attrs }) {
     return () =>
@@ -29,6 +43,15 @@ export const LoongArkSwitchRoot = defineComponent({
         ArkSwitch.Root,
         {
           ...attrs,
+          checked: props.checked,
+          defaultChecked: props.defaultChecked,
+          name: props.name,
+          form: props.form,
+          value: props.value,
+          readOnly: props.readOnly,
+          required: props.required,
+          invalid: props.invalid,
+          onCheckedChange: props.onCheckedChange,
           disabled: props.disabled,
           "data-scope": "switch",
           "data-part": "root",
@@ -99,8 +122,21 @@ export const LoongArkSwitchLabel = defineComponent({
   },
 });
 
-export const LoongArkSwitchHiddenInput: typeof ArkSwitch.HiddenInput =
-  ArkSwitch.HiddenInput;
+export const LoongArkSwitchHiddenInput =
+  defineComponent<SwitchHiddenInputProps>(
+    (props, { attrs, slots }) => {
+      const api = useSwitchContext();
+
+      const ref = nativeSelectionRef(() => ({ checked: api.value.checked }));
+      return () =>
+        renderPart(ArkSwitch.HiddenInput, { ...attrs, ...props, ref }, slots);
+    },
+    {
+      name: "LoongArkSwitchHiddenInput",
+      props: ["asChild"],
+      inheritAttrs: false,
+    },
+  );
 
 export const LoongArkSwitch: {
   Root: typeof LoongArkSwitchRoot;

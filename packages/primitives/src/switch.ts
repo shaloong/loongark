@@ -114,6 +114,7 @@ const buildSwitchStyles = (theme: LoongArkTheme): string => {
 ${control}[data-size='${size}'] {
   width: ${tokens.track.width[size]};
   height: ${tokens.track.height[size]};
+  margin-block-start: calc((var(--lk-control-height-xs) - ${tokens.track.height[size]}) / 2);
   padding: ${tokens.track.padding[size]};
 }
 
@@ -123,7 +124,11 @@ ${thumb}[data-size='${size}'] {
 }
 
 ${control}[data-size='${size}'][data-state='checked'] ${thumb} {
-  transform: translateX(calc(${tokens.track.width[size]} - ${tokens.thumb.size[size]} - (${tokens.track.padding[size]} * 2) - 2px));
+  transform: translateX(calc(${tokens.track.width[size]} - ${tokens.thumb.size[size]} - (${tokens.track.padding[size]} * 2)));
+}
+
+${control}[data-size='${size}'][data-state='checked']:dir(rtl) ${thumb} {
+  transform: translateX(calc(-1 * (${tokens.track.width[size]} - ${tokens.thumb.size[size]} - (${tokens.track.padding[size]} * 2))));
 }
 `;
 

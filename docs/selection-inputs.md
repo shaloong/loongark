@@ -46,3 +46,18 @@ minuteStep 为 1–60 之间且能整除 60 的整数；步长从 min（未提�
 星形悬停通过原生highlighted/half状态预览，radio的aria-checked和Tab入口始终对应调用方接受的value。鼠标进入后仍可用方向键、Home、End操作；受控值迟到时同步控件内焦点，用户已移到控件外时不会被延迟回调抢回。Root、RootProvider和useRatingGroup复用同一共享状态机；标签、HiddenInput、表单reset、Field及Locale环境保持Ark契约。Svelte在提供onValueChange时由调用方决定接受值；没有该回调时支持bind:value。自定义问卷评分示例只由Questionnaire提交隐藏字段，避免重复FormData，见[问卷契约](questionnaire.md)。
 
 Select 与 Combobox 的默认浮层宽度同时受触发器和当前视口约束；退出动画保留旧触发器测量时，缩窄窗口也不会扩大页面。Sheet 的 positioner 固定占满视口，在绘制边界内播放滑入和滑出动画；面板贴齐上下边缘，覆盖 Dialog 的居中面板高度与圆角限制，保存或 Escape 关闭后恢复触发器焦点。
+
+
+## 选择控件的原生表单与焦点
+
+Checkbox、RadioGroup、Switch 的键盘操作由原生输入负责；调用方拒绝更新或表单 reset 时，共享行为在框架提交后恢复当前已接受的原生状态，不重复发送 change，卸载取消等待任务。RadioGroup 的只读状态保持原生值参与提交与键盘焦点，并阻止方向键/空格修改；禁用状态仍排除提交。可见 Control/ItemControl 显示同一焦点环。TagsInput 文本输入的焦点环覆盖整个 Control，标签删除和清除按钮保留独立焦点。未指定输入自身状态时继承根节点 disabled/readOnly；文本输入保持原生禁用或只读语义。隐藏输入 reset 后恢复 Ark 当前 valueAsString，不自行重建标签序列化。
+
+Switch 的 `checked`、`defaultChecked`、`onCheckedChange` 应放在 Root。四端 Root 支持 `name`、`form`、`value`、`required`、`readOnly`、`invalid` 和 `disabled`；保持 Ark 原生提交规则：只有选中的开关提交值，禁用控件不提交，只读保留值并拒绝修改。不要用普通隐藏字段替代 HiddenInput，否则会失去键盘和原生表单语义。
+
+四端 `SelectionControlsExample` 与 RadioGroup 的 `ResponsiveControls` Story 演示可信 Tab/Space/方向键、原生表单、受控拒绝、只读/禁用、三种尺寸、水平/垂直布局、长标题和 RTL。水平 RadioGroup 标题占独立一行，选项可换行；长标签的控件对齐首行，Switch 滑块两端留白一致并随 RTL 镜像。现有 TagsInput 示例使用 `name="frameworks"`，支持原生提交、键盘增删和清除后的输入焦点恢复。
+
+Svelte 的 Checkbox、RadioGroup、Switch、TagsInput 在提供对应变更回调时，由调用方决定是否接受值；未提供回调时继续支持 `bind:checked`、`bind:value`、`bind:inputValue` 和非受控默认值；初始值为 `undefined` 的绑定也在首次交互及原生 reset 时回写父状态。拒绝更新时，可见状态与原生表单值保持一致，不将 Ark 内部绑定更新视为调用方接受。TagsInput 保留 Ark 默认的逗号加空格序列化，也保留自定义 delimiter 契约。
+
+Vue 的四种 HiddenInput 保留原生输入属性类型及 `asChild` 默认插槽；可使用调用方提供的 input，同时复用标签、表单、键盘和状态恢复。节点卸载或替换时清理原生监听。Checkbox 未指定 checked/defaultChecked 时保留 undefined，支持非受控交互及预选默认值；标签间距使用根节点逻辑方向无关的 gap，避免 RTL 文字贴边。
+
+Solid 的 Checkbox/RadioGroup HiddenInput 使用 Ark 原生输入 Props；调用方 ref 与内部同步行为共同绑定同一 input，原生属性和 ref 不会绕过受控恢复。卸载释放监听，重新挂载保留相同的表单契约。

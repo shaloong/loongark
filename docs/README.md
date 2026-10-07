@@ -299,4 +299,6 @@ macOS工作流补上共享发布夹具构建，真实Safari再次通过275个默
 2026-10-07 组合输入焦点整改：Combobox、Command、Date Picker 和数字输入的焦点环覆盖完整外框，数字步进按钮支持匹配圆角及默认 Lucide 图标，示例文字箭头统一；修复日期弹层头部边界和 Svelte 原生 hook 稳定 ID。四端/Drawer 44 项、最终输入专项 16 项、Story 焦点及动效 20 项、Linux 视觉 278 项通过；54 张场景截图及 16 张新基线实际查看，288 份旧基线含 Windows 哈希未变。验收范围和原生 Safari、Firefox、真机限制见[验收记录](audits/2026-10-07/compound-field-focus-linux/acceptance.json)。
 
 
-2026-10-07 P0 原生布局与滚动：四端问卷、嵌套/自定义题组和矩阵使用直接 legend 与内部网格，连续缩至 320px 保持原生表单值；消息与虚拟窗口统一滚动锚定声明清理。最终三引擎自定义/焦点 114 项、Story/滚动 27 项、Linux 视觉 278 项通过；首次视觉发现的 88px 间距回归已修复，304 份原基线含 Windows 哈希未改。实际审阅 90 张最终自定义长标题截图，另有先前原生题组/焦点抽样；源码 381460e 的原生 Safari 已完成 275 默认/201 高级交互，新源码整库及真机仍待验收。详见[范围与限制](audits/2026-10-07/p0-native-layout-and-scroll/acceptance.json)。
+2026-10-07 P0 原生布局与滚动：四端问卷、嵌套/自定义题组和矩阵使用直接 legend 与内部网格，连续缩至 320px 保持原生表单值；消息与虚拟窗口统一滚动锚定声明清理。最终三引擎自定义/焦点 114 项、Story/滚动 27 项、Linux 视觉 278 项通过；首次视觉发现的 88px 间距回归已修复，304 份原基线含 Windows 哈希未改。实际审阅 90 张最终自定义长标题截图，另有先前原生题组/焦点抽样；源码 5a505b6 的远端 Chromium/Firefox/WebKit 整库及原生 Safari 已全部通过；Safari 275 默认/201 高级交互通过，本批相关 33 张问卷/焦点截图已实际审阅。真实手机仍缺少设备连接。详见[范围与限制](audits/2026-10-07/p0-native-layout-and-scroll/acceptance.json)。
+
+2026-10-07 P0 选择控件：四端原生焦点映射可见控件，修正多行首行对齐、横向单选换行、Checkbox RTL 间距及 Switch 对称滑块；统一受控拒绝、只读与原生表单 reset，补齐 Svelte 初始 undefined 双向绑定和 Vue HiddenInput asChild/公开输入属性。新增四端交互示例与 Story，当前 119 族、330 Story、四端各 794 值入口、279 示例。本批范围、截图复核及平台限制见[选择控件验收](audits/2026-10-07/p0-selection-focus-and-forms/acceptance.json)。

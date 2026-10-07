@@ -32,6 +32,7 @@ export const TagsInputExample: React.FC<TagsInputExampleProps> = ({
 
   return (
     <LoongArkTagsInputRoot
+      name="frameworks"
       size={size}
       state={state}
       disabled={disabled}

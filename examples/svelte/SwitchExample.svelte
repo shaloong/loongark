@@ -18,8 +18,11 @@
     dispatch("change", details);
   }}
   data-testid="switch-root"
-  ><LoongArkSwitch.Control data-testid="switch-control"
-    ><LoongArkSwitch.Thumb data-testid="switch-thumb" /></LoongArkSwitch.Control
+  ><LoongArkSwitch.Control {size} data-testid="switch-control"
+    ><LoongArkSwitch.Thumb
+      {size}
+      data-testid="switch-thumb"
+    /></LoongArkSwitch.Control
   ><LoongArkSwitch.Label data-testid="switch-label"
     >{label}</LoongArkSwitch.Label
   ><LoongArkSwitch.HiddenInput /></LoongArkSwitch.Root

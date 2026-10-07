@@ -43,11 +43,7 @@ export const RadioGroupExample: React.FC<RadioGroupExampleProps> = ({
           setValue(details.value ?? "")
         }
       >
-        <LoongArkRadioGroupLabel
-          style={{ marginBottom: "12px", fontWeight: 500 }}
-        >
-          请选择一个选项
-        </LoongArkRadioGroupLabel>
+        <LoongArkRadioGroupLabel>请选择一个选项</LoongArkRadioGroupLabel>
 
         {options.map((option) => (
           <LoongArkRadioGroupItem key={option.value} value={option.value}>

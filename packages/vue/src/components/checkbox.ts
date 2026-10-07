@@ -1,3 +1,6 @@
+import type { CheckboxHiddenInputProps } from "@ark-ui/vue/checkbox";
+import { nativeSelectionRef } from "../native-selection";
+import { useCheckboxContext } from "@ark-ui/vue/checkbox";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import { renderPart } from "../render-part";
@@ -23,9 +26,11 @@ export const LoongArkCheckboxRoot = defineComponent({
     },
     checked: {
       type: [Boolean, String] as PropType<CheckedState>,
+      default: undefined,
     },
     defaultChecked: {
       type: [Boolean, String] as PropType<CheckedState>,
+      default: undefined,
     },
     disabled: {
       type: Boolean,
@@ -150,13 +155,31 @@ export const LoongArkCheckboxIndicator = defineComponent({
 });
 
 // ========== HiddenInput ==========
-export const LoongArkCheckboxHiddenInput = defineComponent({
-  name: "LoongArkCheckboxHiddenInput",
-  setup() {
-    return () =>
-      renderPart(CheckboxHiddenInput, {
-        "data-scope": "checkbox",
-        "data-part": "hidden-input",
-      });
-  },
-});
+export const LoongArkCheckboxHiddenInput =
+  defineComponent<CheckboxHiddenInputProps>(
+    (props, { attrs, slots }) => {
+      const api = useCheckboxContext();
+
+      const ref = nativeSelectionRef(() => ({
+        checked: api.value.checked,
+        indeterminate: api.value.indeterminate,
+      }));
+      return () =>
+        renderPart(
+          CheckboxHiddenInput,
+          {
+            ...attrs,
+            ...props,
+            ref,
+            "data-scope": "checkbox",
+            "data-part": "hidden-input",
+          },
+          slots,
+        );
+    },
+    {
+      name: "LoongArkCheckboxHiddenInput",
+      props: ["asChild"],
+      inheritAttrs: false,
+    },
+  );

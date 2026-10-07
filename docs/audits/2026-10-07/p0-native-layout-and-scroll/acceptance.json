@@ -77,10 +77,53 @@
     "webkit": "四端561通过；Story202通过/3失败（问卷缩屏和不支持的锚定属性）",
     "nativeSafari": "26.6.1/macOS15.7.9，275默认示例及201高级交互全部成功；实际下载并审阅257张截图及4张代表原图。"
   },
-  "evidenceStorage": "过程截图、联系表、日志留在忽略目录 .artifacts/p0-consistency；CI Artifact 保留14天，本批尚未产生远端新源码结果。",
+  "evidenceStorage": "过程截图、联系表、日志留在忽略目录 .artifacts/p0-consistency；CI Artifact 保留14天，推送后四个平台结果见 platformRevalidation。",
   "limitations": [
-    "最终本地专项及视觉不替代新提交的远端整库和原生 Safari；推送后继续复验。",
+    "本批最终源码 5a505b6 的远端整库三引擎及原生 Safari 已通过；该结果不包含下一批选择控件修改。",
     "320/375为模拟手机视口；没有真实手机设备连接，不计真机通过。",
     "下一批仍需修复选择控件可见焦点、水平单选布局、Switch绑定和RTL滑块，P0未全部关闭。"
-  ]
+  ],
+  "platformRevalidation": {
+    "source": "5a505b6f0b90dc32a6e0ab9f1f1a23d225ac07f5",
+    "run": "https://github.com/shaloong/loongark/actions/runs/37592998477",
+    "nativeSafari": "26.6.1 / macOS15.7.9，275默认示例、201高级交互全部通过；真实下载验收结果及257张截图，实际审阅本批相关的33张问卷/焦点截图。",
+    "artifact": {
+      "id": 11470226182,
+      "sha256": "077aef8da42df956028610d1a7787c83a66013d6bac7217e28a5abeb9f199d4f"
+    },
+    "linuxFullMatrix": "Chromium、Firefox、WebKit 全部四端消费/示例及全部 Story 交互通过，远端四个平台任务全部 success。",
+    "linuxArtifacts": {
+      "chromium": {
+        "browser": "143.0.7499.4",
+        "environmentArtifact": 11470474059,
+        "storyArtifact": 11471133201
+      },
+      "firefox": {
+        "browser": "144.0.2",
+        "environmentArtifact": 11471645471,
+        "storyArtifact": 11472890777
+      },
+      "webkit": {
+        "browser": "26.0",
+        "environmentArtifact": 11472042005,
+        "storyArtifact": 11473730640
+      }
+    },
+    "linuxManualReview": "真实下载三引擎环境/成功状态和 Story 证据；目视审阅本批相关的30张桌面/手机明暗问卷默认、重复组、自定义评分与矩阵截图，不声称逐张审阅全部远端截图。",
+    "linuxFullCounts": {
+      "chromium": {
+        "frameworks": 593,
+        "story": 212
+      },
+      "firefox": {
+        "frameworks": 585,
+        "story": 212
+      },
+      "webkit": {
+        "warmup": 12,
+        "frameworks": 585,
+        "story": 212
+      }
+    }
+  }
 }

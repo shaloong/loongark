@@ -4,6 +4,8 @@
  */
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import { useNativeSelection } from "../native-selection";
+import { useTagsInputContext } from "@ark-ui/react/tags-input";
 import { TagsInput } from "@ark-ui/react/tags-input";
 import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
 
@@ -197,33 +199,25 @@ LoongArkTagsInputControl.displayName = "LoongArkTagsInputControl";
 export const LoongArkTagsInputInput = forwardRef<
   HTMLInputElement,
   LoongArkTagsInputInputProps
->(
-  (
-    {
-      size = "md",
-      state = "default",
-      disabled = false,
-      readOnly = false,
-      ...props
-    },
-    ref,
-  ) => {
-    return (
-      <TagsInput.Input
-        {...props}
-        ref={ref}
-        disabled={disabled}
-        readOnly={readOnly}
-        data-scope="tags-input"
-        data-part="input"
-        data-size={size}
-        data-state={state !== "default" ? state : undefined}
-        data-disabled={disabled ? "true" : undefined}
-        data-readonly={readOnly ? "true" : undefined}
-      />
-    );
-  },
-);
+>(({ size = "md", state = "default", disabled, readOnly, ...props }, ref) => {
+  const api = useTagsInputContext();
+  const isDisabled = disabled ?? !!api.getHiddenInputProps().disabled;
+  const isReadOnly = readOnly ?? !!api.getHiddenInputProps().readOnly;
+  return (
+    <TagsInput.Input
+      {...props}
+      ref={ref}
+      disabled={isDisabled}
+      readOnly={isReadOnly}
+      data-scope="tags-input"
+      data-part="input"
+      data-size={size}
+      data-state={state !== "default" ? state : undefined}
+      data-disabled={isDisabled ? "true" : undefined}
+      data-readonly={isReadOnly ? "true" : undefined}
+    />
+  );
+});
 
 LoongArkTagsInputInput.displayName = "LoongArkTagsInputInput";
 
@@ -338,10 +332,11 @@ export const LoongArkTagsInputHiddenInput = forwardRef<
   HTMLInputElement,
   LoongArkTagsInputHiddenInputProps
 >((props, ref) => {
+  const input = useNativeSelection(useTagsInputContext(), "tags", ref);
   return (
     <TagsInput.HiddenInput
       {...props}
-      ref={ref}
+      ref={input}
       data-scope="tags-input"
       data-part="hidden-input"
     />

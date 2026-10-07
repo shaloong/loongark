@@ -5,6 +5,11 @@ import type {
   ButtonHTMLAttributes,
 } from "react";
 import { dataProps } from "../data-props";
+import { useNativeSelection } from "../native-selection";
+import {
+  useSwitchContext,
+  type SwitchHiddenInputProps,
+} from "@ark-ui/react/switch";
 import { Switch as ArkSwitch } from "@ark-ui/react/switch";
 import type { SwitchPrimitiveProps } from "@loongark/primitives";
 import { forwardRef, createElement } from "react";
@@ -20,6 +25,12 @@ export interface LoongArkSwitchProps
   extends Partial<SwitchPrimitiveProps>, HTMLAttributes<HTMLElement> {
   children?: ReactNode;
   disabled?: boolean;
+  name?: string;
+  form?: string;
+  value?: string;
+  readOnly?: boolean;
+  required?: boolean;
+  invalid?: boolean;
   checked?: boolean;
   defaultChecked?: boolean;
   onCheckedChange?: ArkSwitchRootProps["onCheckedChange"];
@@ -108,12 +119,19 @@ export const LoongArkSwitchLabel = ({
     children,
   );
 
+export const LoongArkSwitchHiddenInput = forwardRef<
+  HTMLInputElement,
+  SwitchHiddenInputProps
+>((props, ref) => {
+  const input = useNativeSelection(useSwitchContext(), "checkbox", ref);
+  return createElement(ArkSwitch.HiddenInput, { ...props, ref: input });
+});
+LoongArkSwitchHiddenInput.displayName = "LoongArkSwitchHiddenInput";
+
 export const LoongArkSwitch = {
   Root: LoongArkSwitchRoot,
   Control: LoongArkSwitchControl,
   Thumb: LoongArkSwitchThumb,
   Label: LoongArkSwitchLabel,
-  HiddenInput: ArkSwitch.HiddenInput,
+  HiddenInput: LoongArkSwitchHiddenInput,
 };
-
-export const LoongArkSwitchHiddenInput = ArkSwitch.HiddenInput;
