@@ -1,3 +1,9 @@
+import { useFieldContext } from "@ark-ui/vue/field";
+import { usePasswordInputContext } from "@ark-ui/vue/password-input";
+import {
+  nativeSelectionProps,
+  nativeSelectionFieldDescription,
+} from "@loongark/kit";
 import type { PasswordInputRootProps as NativePasswordInputRootProps } from "@ark-ui/vue/password-input";
 import { renderPart } from "../render-part";
 /**
@@ -83,13 +89,19 @@ export const LoongArkPasswordInputRoot = defineComponent({
         ArkPasswordInput.Root,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "password-input",
           "data-part": "root",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
-          "data-readonly": props.readOnly ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
+          ...nativeSelectionProps({
+            "data-readonly":
+              props.readOnly === undefined ? undefined : String(props.readOnly),
+          }),
         },
         slots,
       );
@@ -125,7 +137,7 @@ export const LoongArkPasswordInputControl = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
@@ -134,12 +146,15 @@ export const LoongArkPasswordInputControl = defineComponent({
         ArkPasswordInput.Control,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "password-input",
           "data-part": "control",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
         },
         slots,
       );
@@ -148,6 +163,7 @@ export const LoongArkPasswordInputControl = defineComponent({
 
 export const LoongArkPasswordInputInput = defineComponent({
   name: "LoongArkPasswordInputInput",
+  inheritAttrs: false,
   props: {
     size: {
       type: String as PropType<PasswordInputSize>,
@@ -159,24 +175,39 @@ export const LoongArkPasswordInputInput = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { attrs }) {
+    const field = useFieldContext();
+    const api = usePasswordInputContext();
     return () =>
       renderPart(ArkPasswordInput.Input, {
         ...attrs,
-        ...props,
+        ...nativeSelectionProps(props),
         "data-scope": "password-input",
         "data-part": "input",
+        "aria-describedby": nativeSelectionFieldDescription(
+          typeof attrs["aria-describedby"] === "string"
+            ? attrs["aria-describedby"]
+            : undefined,
+          field?.value,
+          api.value.getInputProps()["aria-invalid"],
+        ),
         "data-size": props.size,
         "data-state": props.state !== "default" ? props.state : undefined,
-        "data-disabled": props.disabled ? "true" : undefined,
-        "data-readonly": props.readOnly ? "true" : undefined,
+        ...nativeSelectionProps({
+          "data-disabled":
+            props.disabled === undefined ? undefined : String(props.disabled),
+        }),
+        ...nativeSelectionProps({
+          "data-readonly":
+            props.readOnly === undefined ? undefined : String(props.readOnly),
+        }),
       });
   },
 });
@@ -202,7 +233,7 @@ export const LoongArkPasswordInputVisibilityTrigger = defineComponent({
   props: {
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
@@ -211,10 +242,13 @@ export const LoongArkPasswordInputVisibilityTrigger = defineComponent({
         ArkPasswordInput.VisibilityTrigger,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "password-input",
           "data-part": "visibility-trigger",
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
         },
         slots,
       );

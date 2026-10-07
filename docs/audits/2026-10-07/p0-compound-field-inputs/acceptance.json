@@ -1,0 +1,144 @@
+{
+  "date": "2026-10-07",
+  "baseCommit": "74d3c6d077abb8bc7418a132ed3c9d5fbe48f692",
+  "branch": "develop",
+  "status": "最终本地验证与截图审阅通过；本次推送后整库平台验收单独记录。",
+  "scope": [
+    "NumberInput / PasswordInput 四端 Field 状态缺省继承、显式 false、原生表单及调用方/帮助/错误描述。",
+    "Solid 原生 readonly 动态更新；Svelte 数值接受/拒绝、初始 undefined 绑定、外部清空、ref 与卸载。",
+    "共享完整 Control 的禁用/错误样式，数字禁用边框不再与背景融合；桌面两列长标签通过共享行轨道对齐。",
+    "四端 CompoundFieldExample、CompoundInputs Story、覆盖清单、输入文档及原生 Safari 夹具。"
+  ],
+  "catalog": {
+    "families": 119,
+    "stories": 332,
+    "publicValuesPerFramework": 794,
+    "frameworkExamples": 287
+  },
+  "environment": {
+    "platform": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "dependencyInstall": "本会话已按冻结锁文件安装，无新增依赖或锁文件变化。",
+    "chromium": "系统 Chromium 151.0.7922.173",
+    "firefox": "Playwright Firefox 144.0.2",
+    "webkit": "Playwright WebKit 26.0 build 2227"
+  },
+  "observedCorrections": [
+    "基源码 SSR 显示 React/Vue/Solid 的 disabled 缺省覆盖 Field；React readOnly 丢失，Solid readonly=false 被错误序列化为存在的属性。",
+    "首轮浏览器定位 React 描述合并遗漏、Vue 属性 fallthrough 覆盖描述、Solid 密码按钮内联默认禁用 false，以及 Svelte 数值自行接受被拒绝的新值。",
+    "第二轮定位 Solid false→true readonly 没有更新原生属性；规范化器省略 false 的键，改为始终提供原生 readonly。",
+    "截图定位数字禁用边框与底色融合，移除覆盖并实际核验两种输入相同的中性边框。",
+    "扩大回归269项通过/1项失败：新增绑定夹具的普通按钮在 WebKit 深色对比度不足。复用 LoongArkButton 后，最终三引擎消费/绑定/组合输入63项通过。"
+  ],
+  "validation": {
+    "orderedProducers": {
+      "result": "passed",
+      "order": [
+        "verify",
+        "check:contracts",
+        "storybook:build",
+        "check:coverage",
+        "check:publication",
+        "check:svelte",
+        "build-framework-fixtures",
+        "build-example-fixtures"
+      ],
+      "logs": ".artifacts/p0-field/compound-border-*.log",
+      "svelte": {
+        "errors": 0,
+        "existingWarnings": 4
+      },
+      "publication": "四端声明、独立 SSR 与真实产物检查通过；复合输入继承/显式覆盖 SSR 新增实际用例。"
+    },
+    "frameworkRegressionBeforeLastVisualCorrection": {
+      "passed": 269,
+      "failed": 1,
+      "skipped": 51,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "failure": "WebKit Svelte 新增夹具普通按钮的深色对比度，已修正；产品逻辑与模型回归通过。",
+      "log": ".artifacts/p0-field/compound-final-frameworks.log"
+    },
+    "finalFrameworks": {
+      "passed": 63,
+      "skipped": 12,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "scope": "最终产物组合输入16场景/引擎、Svelte绑定/清空/只读/ref/卸载1项/引擎、完整基础发布消费/绑定/主题/浮层/Axe4项/引擎。",
+      "log": ".artifacts/p0-field/compound-border-frameworks.log"
+    },
+    "finalStory": {
+      "passed": 96,
+      "skipped": 252,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "log": ".artifacts/p0-field/compound-border-story.log"
+    },
+    "linuxNativeProtocolDiagnostic": {
+      "passed": 72,
+      "notNativeSafari": true,
+      "scope": "三引擎、四端、明暗：禁用表单、只读原生操作、错误描述/长文本RTL及提交/reset。",
+      "log": ".artifacts/p0-field/compound-border-native.log"
+    },
+    "storyQuality": {
+      "passed": 8,
+      "storiesPerTheme": 332,
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "log": ".artifacts/p0-field/compound-border-quality.log"
+    },
+    "defaultWCAG": {
+      "passed": 2,
+      "storiesPerTheme": 332,
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "violations": 0,
+      "tags": [
+        "wcag2a",
+        "wcag2aa"
+      ],
+      "log": ".artifacts/p0-field/compound-border-accessibility.log"
+    },
+    "visual": {
+      "passed": 306,
+      "updateSnapshots": "none",
+      "log": ".artifacts/p0-field/compound-border-visual.log"
+    },
+    "existingSnapshots": {
+      "files": 320,
+      "changed": 0,
+      "windowsUnchanged": 2
+    },
+    "newLinuxBaselines": 12,
+    "lint": "已暂存检查通过：验收保存约定、MIT许可和工作区结构；最终摘要完成后复验。"
+  },
+  "manualReview": {
+    "finalFrameworkScreenshots": 144,
+    "scope": "三引擎×四端×明暗×1280/320×禁用/只读/错误长文本RTL，18张联系表已实际查看；另查看 Chromium 只读和禁用边框原图。",
+    "newLinuxBaselines": "12张默认焦点/禁用/错误长文本RTL原图逐张查看后仅复制到新增目录；首次比较12项仅因缺少基线失败，未自动更新旧图。"
+  },
+  "remote": {
+    "currentBatch": "推送后运行完整矩阵与原生 Safari；本地协议诊断不代替平台验收。",
+    "previousBatch": "74d3c6d Chromium648四端/238 Story、Firefox640四端/238 Story通过；WebKit仍运行。原生 Safari26.6.1/macOS15.7.9完成283默认和132交互后在Vue深色富文本删除表格失败，failure.png已实际查看，详见上一批摘要。"
+  },
+  "limitations": [
+    "最终样式/夹具修正后只重复相关63项消费与表单回归，不把先前269项作为完全相同最终产物的全量通过。",
+    "整库跨浏览器及原生 Safari 需针对本次推送的新源码执行，不沿用旧版本通过记录。",
+    "320/375宽度与Linux键盘输入属于模拟视口/桌面浏览器；未连接真实手机、移动系统输入法或读屏，不声明全部P0已完成。"
+  ],
+  "evidenceStorage": "过程截图、联系表、trace、日志与失败归档仅存忽略的.artifacts/p0-field/及14天CI Artifact；Git保留此摘要和用于比较的12张新Linux基线。"
+}

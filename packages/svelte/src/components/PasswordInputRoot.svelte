@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { nativeSelectionProps } from "@loongark/kit";
   import { PasswordInput } from "@ark-ui/svelte/password-input";
   import type { PasswordInputRootProps } from "@ark-ui/svelte/password-input";
   import type {
@@ -25,8 +26,8 @@
 <PasswordInput.Root
   {visible}
   {defaultVisible}
-  {disabled}
-  {readOnly}
+  {...nativeSelectionProps({ disabled })}
+  {...nativeSelectionProps({ readOnly })}
   {required}
   {invalid}
   {name}
@@ -37,8 +38,12 @@
   data-part="root"
   data-size={size}
   data-state={state !== "default" ? state : undefined}
-  data-disabled={disabled ? "true" : undefined}
-  data-readonly={readOnly ? "true" : undefined}
+  {...nativeSelectionProps({
+    "data-disabled": disabled === undefined ? undefined : String(disabled),
+  })}
+  {...nativeSelectionProps({
+    "data-readonly": readOnly === undefined ? undefined : String(readOnly),
+  })}
   {...$$restProps}
 >
   <slot />

@@ -1,3 +1,9 @@
+import { useFieldContext } from "@ark-ui/solid/field";
+import { usePasswordInputContext } from "@ark-ui/solid/password-input";
+import {
+  nativeSelectionProps,
+  nativeSelectionFieldDescription,
+} from "@loongark/kit";
 /**
  * Password Input component - Solid wrapper.
  * Uses Ark UI Password Input with data attributes for styling.
@@ -35,8 +41,6 @@ export const LoongArkPasswordInputRoot: Component<
     {
       size: "md" as PasswordInputSize,
       state: "default" as PasswordInputState,
-      disabled: false,
-      readOnly: false,
     },
     props,
   );
@@ -51,14 +55,19 @@ export const LoongArkPasswordInputRoot: Component<
   return (
     <ArkPasswordInput.Root
       {...others}
-      disabled={local.disabled}
-      readOnly={local.readOnly}
+      {...nativeSelectionProps({
+        disabled: local.disabled,
+        readOnly: local.readOnly,
+        "data-disabled":
+          local.disabled === undefined ? undefined : String(local.disabled),
+        "data-readonly":
+          local.readOnly === undefined ? undefined : String(local.readOnly),
+      })}
+
       data-scope="password-input"
       data-part="root"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
-      data-readonly={local.readOnly ? "true" : undefined}
     >
       {local.children}
     </ArkPasswordInput.Root>
@@ -104,7 +113,6 @@ export const LoongArkPasswordInputControl: Component<
     {
       size: "md" as PasswordInputSize,
       state: "default" as PasswordInputState,
-      disabled: false,
     },
     props,
   );
@@ -122,7 +130,10 @@ export const LoongArkPasswordInputControl: Component<
       data-part="control"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
+      {...nativeSelectionProps({
+        "data-disabled":
+          local.disabled === undefined ? undefined : String(local.disabled),
+      })}
     >
       {local.children}
     </ArkPasswordInput.Control>
@@ -142,12 +153,12 @@ export interface LoongArkPasswordInputInputProps extends Omit<
 export const LoongArkPasswordInputInput: Component<
   LoongArkPasswordInputInputProps
 > = (props) => {
+  const field = useFieldContext();
+  const api = usePasswordInputContext();
   const merged = mergeProps(
     {
       size: "md" as PasswordInputSize,
       state: "default" as PasswordInputState,
-      disabled: false,
-      readOnly: false,
     },
     props,
   );
@@ -158,17 +169,37 @@ export const LoongArkPasswordInputInput: Component<
     "readOnly",
   ]);
 
+  // Solid 的原生属性使用 readonly；始终提供该键，覆盖规范化器省略 false 的动态路径。
+  const isReadOnly = () => {
+    const native = api().getInputProps();
+    return (
+      local.readOnly ??
+      props.readonly ??
+      native.readonly ??
+      ("readOnly" in native && native.readOnly === true)
+    );
+  };
   return (
     <ArkPasswordInput.Input
       {...others}
-      disabled={local.disabled}
-      readOnly={local.readOnly}
+      {...nativeSelectionProps({
+        disabled: local.disabled,
+        "data-disabled":
+          local.disabled === undefined ? undefined : String(local.disabled),
+        "data-readonly":
+          local.readOnly === undefined ? undefined : String(local.readOnly),
+      })}
+
       data-scope="password-input"
+      aria-describedby={nativeSelectionFieldDescription(
+        props["aria-describedby"],
+        field?.(),
+        api().getInputProps()["aria-invalid"],
+      )}
+      readonly={isReadOnly()}
       data-part="input"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
-      data-readonly={local.readOnly ? "true" : undefined}
     />
   );
 };
@@ -206,15 +237,17 @@ export interface LoongArkPasswordInputVisibilityTriggerProps extends Omit<
 export const LoongArkPasswordInputVisibilityTrigger: Component<
   LoongArkPasswordInputVisibilityTriggerProps
 > = (props) => {
-  const merged = mergeProps({ disabled: false }, props);
-  const [local, others] = splitProps(merged, ["children", "disabled"]);
+  const [local, others] = splitProps(props, ["children", "disabled"]);
   return (
     <ArkPasswordInput.VisibilityTrigger
       {...others}
-      disabled={local.disabled}
+      {...nativeSelectionProps({
+        disabled: local.disabled,
+        "data-disabled":
+          local.disabled === undefined ? undefined : String(local.disabled),
+      })}
       data-scope="password-input"
       data-part="visibility-trigger"
-      data-disabled={local.disabled ? "true" : undefined}
     >
       {local.children}
     </ArkPasswordInput.VisibilityTrigger>

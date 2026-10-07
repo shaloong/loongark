@@ -74,3 +74,12 @@ TagsInput 在删除等操作后可能有待运行的焦点恢复。用户随后�
 必填 TagsInput 的序列化字段仍参与原生约束校验；若它是首个无效字段，空值提交被阻止时聚焦可见输入，避免浏览器尝试聚焦隐藏字段。多个字段同时无效或约束在恢复帧前改变时保留原生首错顺序。调用方已取消 invalid 的默认行为时由调用方管理提示与焦点；卸载释放 invalid 监听。错误文本与 Field.invalid 仍按现有受控契约提供。
 
 禁用样式同时识别 Ark 的空值状态标记与 LoongArk 的显式 true 标记；Vue 未提供的部件状态不覆盖原生标记。Field 继承的禁用控件与直接声明 disabled 的控件使用同一套 Token 和交互提示。
+
+
+## NumberInput / PasswordInput 的 Field 组合
+
+四端根节点及输入部件省略 disabled / readOnly 时保留 Field 上下文；根节点显式 false 可取消对应状态，required / invalid 使用相同的 Ark 契约。原生 Fieldset 的 disabled 约束仍优先于子控件。实际输入的 aria-describedby 合并调用方描述、Field 帮助与已挂载错误，独立取消 invalid 后不引用父级错误。密码显示按钮与数字步进按钮保持原生禁用语义，禁用样式绘制在完整 Control；只读输入保留复制、选择和表单值。
+
+Svelte NumberInputRoot 支持初始 undefined 的 bind:value。未提供 onValueChange 时回写绑定；提供回调时由调用方决定是否接受值，原生显示和 FormData 恢复为当前接受的格式值。NumberInputInput / PasswordInputInput 支持 bind:ref；输入替换和卸载取消旧监听与待运行帧。SSR 保留原生属性与关联 ID，不安装 DOM 行为。
+
+四端 CompoundFieldExample 和 Field 的 CompoundInputs Story 展示动态状态、显式 false、必填首错聚焦、拒绝数值更新、原生提交/reset、长描述与 RTL。必填由浏览器约束校验，业务错误仍由调用方声明 Field.invalid 和 ErrorText，不在组件中引入业务校验规则。桌面示例采用共享行轨道，让两列标签换行时输入仍对齐；窄屏按阅读顺序单列展示。

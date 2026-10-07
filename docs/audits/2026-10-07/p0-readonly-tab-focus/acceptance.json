@@ -73,7 +73,40 @@
     "scope": "三引擎四端明暗，1280桌面及320窄屏，只读标签输入焦点；6张联系表与Firefox Vue桌面原图，检查整圈焦点、标签/控件首行与间距和窄屏换行。"
   },
   "remote": {
-    "status": "本次产品修复待推送后独立运行完整矩阵；旧源码平台结果保留在前批摘要。"
+    "sourceCommit": "74d3c6d077abb8bc7418a132ed3c9d5fbe48f692",
+    "workflowRun": "https://github.com/shaloong/loongark/actions/runs/37663212695",
+    "chromium": {
+      "job": 112935718799,
+      "result": "passed",
+      "frameworks": 648,
+      "frameworksSkipped": 115,
+      "stories": 238,
+      "storiesSkipped": 647
+    },
+    "pages": {
+      "run": "https://github.com/shaloong/loongark/actions/runs/37663212626",
+      "result": "passed"
+    },
+    "nativeSafari": {
+      "job": 112935718519,
+      "result": "failed",
+      "version": "26.6.1",
+      "macOS": "15.7.9",
+      "defaultsPassed": 283,
+      "interactionsCompleted": 132,
+      "failure": "Vue 深色富文本删除表格后仍存在表格；已下载并实际查看 failure.png。",
+      "artifact": "https://github.com/shaloong/loongark/actions/runs/37663212695/artifacts/11500789785",
+      "sha256": "7458e9c962135b2ec8dc1220e6073aee8a1d378615394c55474be62c5156cc6d"
+    },
+    "firefox": {
+      "job": 112935720207,
+      "result": "passed",
+      "frameworks": 640,
+      "frameworksSkipped": 123,
+      "stories": 238,
+      "storiesSkipped": 647
+    },
+    "webkit": "仍运行，完成后记录实际结果。"
   },
   "limitations": [
     "本批为共享行为修复，四端渲染/API/样式未增加，现有示例与Story同步覆盖新行为。",

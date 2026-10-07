@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { runNativeFieldSelection } from "./native-safari-field-selection.mjs";
 import { runNativeSelection } from "./native-safari-selection.mjs";
+import { runNativeCompoundField } from "./native-safari-compound-field.mjs";
 import { verifyNativeCodeHistory } from "../tests/nativeCodeHistoryChecks.ts";
 // 使用实际 Safari 的 W3C 输入、指针和系统剪贴板；验收记录以 macOS 任务为准。
 export async function runNativeAdvanced(h, framework, mode) {
@@ -59,6 +60,7 @@ export async function runNativeAdvanced(h, framework, mode) {
   };
   await runNativeSelection(h, framework, mode);
   await runNativeFieldSelection(h, framework, mode);
+  await runNativeCompoundField(h, framework, mode);
   await navigate(framework, "DateTimeExample", mode);
   const localized = '[data-scope="input"][data-part="control"]',
     current = 'output[aria-label="Current appointment"]';

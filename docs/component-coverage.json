@@ -126,10 +126,7 @@
     "VirtualGrid",
     "VirtualMasonry"
   ],
-  "latestBatch": [
-    "VirtualGrid",
-    "VirtualMasonry"
-  ],
+  "latestBatch": ["VirtualGrid", "VirtualMasonry"],
   "equivalences": {
     "Input OTP": "PinInput",
     "Dropdown Menu": "Menu",
@@ -190,6 +187,7 @@
     "组合输入的完整外框键盘焦点环、数字步进按钮逻辑圆角与默认 Lucide 图标；四端示例去除文字箭头；Svelte 原生 hook 使用 SSR 稳定 ID",
     "Questionnaire 顶层、嵌套题组与 matrix legend 桌面到 320px 窄屏缩放边界及四端长标签示例；共享滚动锚定声明的优先级、缺省状态及调用方接管恢复；Firefox 真实 Tab 焦点回归",
     "选择控件原生键盘焦点映射完整可见控件，TagsInput 外框焦点；水平单选换行、首行对齐及 Checkbox RTL Token 间距；Switch RTL 对称滑块及四端受控/表单/尺寸示例；Svelte 回调接受契约及初始 undefined 双向绑定、Vue 原生 HiddenInput asChild 与完整输入属性契约、TagsInput 原生 reset 与可见输入根状态继承",
-    "Field 选择控件缺省状态与 ID 继承、显式 false、TagsInput 可聚焦输入的帮助/错误描述、Field 样式独立作用域；单选组原生 Fieldset/直接 legend 与组自身必填只读契约，四端 SSR 和原生表单验证；必填空标签隐藏字段原生阻断与可见输入聚焦、补值提交及卸载回归"
+    "Field 选择控件缺省状态与 ID 继承、显式 false、TagsInput 可聚焦输入的帮助/错误描述、Field 样式独立作用域；单选组原生 Fieldset/直接 legend 与组自身必填只读契约，四端 SSR 和原生表单验证；必填空标签隐藏字段原生阻断与可见输入聚焦、补值提交及卸载回归",
+    "NumberInput/PasswordInput 四端 Field 禁用、只读、必填与错误状态继承和显式 false；复合输入提示/错误关联、响应式 Svelte 原生输入与节点引用；原生提交、受控数值拒绝和四端 SSR 场景"
   ]
 }

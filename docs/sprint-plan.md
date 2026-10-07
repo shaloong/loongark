@@ -277,3 +277,13 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 ## 2026-10-07 P0 只读控件与标签焦点竞争
 
 标签输入及外框的可信 Tab 离开统一保留实际目的地；外部只读选择控件拦截的按键不解除保护，其他有效按键同步解除，保留调用方主动聚焦。四端与 Story 增加冻结帧、真实 DOM Tab 顺序和卸载回归；公共入口、119族/331 Story/283示例不变。原 Field 批次Safari283默认/225高级和Firefox636四端/236 Story已通过，Chromium真实焦点失败由本批继续修正，不能算作整库全通过。验证范围与限制见[本批记录](audits/2026-10-07/p0-readonly-tab-focus/acceptance.json)。
+
+
+## 2026-10-07 P0 数字与密码输入的表单一致性
+
+四端 NumberInput / PasswordInput 保留未声明状态的 Field 继承与显式 false，真实输入合并调用方、帮助和错误描述。Svelte 数字输入统一回调接受与双向绑定契约，支持原生输入节点引用、外部清空和卸载清理；Solid 动态只读使用原生属性更新。禁用、只读与错误样式作用于完整输入外框，数字禁用边界继续使用统一中性色。四端 CompoundFieldExample 与 CompoundInputs Story 增加提交/reset、首错聚焦、长描述和 RTL 场景，桌面两列共用行轨道对齐。
+
+当前119族、332 Story、四端各794公开值、287框架示例；无新增依赖、组件别名或独立色板。实际验收和平台限制见[本批摘要](audits/2026-10-07/p0-compound-field-inputs/acceptance.json)，API见[输入说明](selection-inputs.md)。此前只读修复74d3c6d的远端Chromium整库648四端/238 Story已通过；原生Safari283默认后完成132交互，在Vue深色富文本删除表格失败，保持开放并继续修复。手机仍只有模拟视口，不计真机通过。
+
+
+本批最终本地验收：三引擎相关四端/消费63项、Story96项、Linux协议诊断72项通过；明暗各332个Story的质量扫描与默认WCAG2 A/AA扫描通过，违规0。完整Linux视觉306项以禁止更新基线运行通过，320份既有基线含Windows哈希不变；144张四端状态捕获与12张新Linux原图已实际审阅。准确范围与未完成的原生Safari/真机项目见本批摘要。

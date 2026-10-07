@@ -1,3 +1,9 @@
+import { useFieldContext } from "@ark-ui/vue/field";
+import { useNumberInputContext } from "@ark-ui/vue/number-input";
+import {
+  nativeSelectionProps,
+  nativeSelectionFieldDescription,
+} from "@loongark/kit";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import type { NumberInputRootProps as NativeNumberInputRootProps } from "@ark-ui/vue/number-input";
@@ -135,13 +141,19 @@ export const LoongArkNumberInputRoot = defineComponent({
         ArkNumberInput.Root,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "number-input",
           "data-part": "root",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
-          "data-readonly": props.readOnly ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
+          ...nativeSelectionProps({
+            "data-readonly":
+              props.readOnly === undefined ? undefined : String(props.readOnly),
+          }),
         },
         slots,
       );
@@ -177,7 +189,7 @@ export const LoongArkNumberInputControl = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
@@ -186,12 +198,15 @@ export const LoongArkNumberInputControl = defineComponent({
         ArkNumberInput.Control,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "number-input",
           "data-part": "control",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
         },
         slots,
       );
@@ -200,6 +215,7 @@ export const LoongArkNumberInputControl = defineComponent({
 
 export const LoongArkNumberInputInput = defineComponent({
   name: "LoongArkNumberInputInput",
+  inheritAttrs: false,
   props: {
     size: {
       type: String as PropType<NumberInputSize>,
@@ -211,24 +227,39 @@ export const LoongArkNumberInputInput = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { attrs }) {
+    const field = useFieldContext();
+    const api = useNumberInputContext();
     return () =>
       renderPart(ArkNumberInput.Input, {
         ...attrs,
-        ...props,
+        ...nativeSelectionProps(props),
         "data-scope": "number-input",
         "data-part": "input",
+        "aria-describedby": nativeSelectionFieldDescription(
+          typeof attrs["aria-describedby"] === "string"
+            ? attrs["aria-describedby"]
+            : undefined,
+          field?.value,
+          api.value.getInputProps()["aria-invalid"],
+        ),
         "data-size": props.size,
         "data-state": props.state !== "default" ? props.state : undefined,
-        "data-disabled": props.disabled ? "true" : undefined,
-        "data-readonly": props.readOnly ? "true" : undefined,
+        ...nativeSelectionProps({
+          "data-disabled":
+            props.disabled === undefined ? undefined : String(props.disabled),
+        }),
+        ...nativeSelectionProps({
+          "data-readonly":
+            props.readOnly === undefined ? undefined : String(props.readOnly),
+        }),
       });
   },
 });
@@ -246,7 +277,7 @@ export const LoongArkNumberInputIncrementTrigger = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
@@ -255,12 +286,15 @@ export const LoongArkNumberInputIncrementTrigger = defineComponent({
         ArkNumberInput.IncrementTrigger,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "number-input",
           "data-part": "increment-trigger",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
         },
         {
           ...slots,
@@ -285,7 +319,7 @@ export const LoongArkNumberInputDecrementTrigger = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
@@ -294,12 +328,15 @@ export const LoongArkNumberInputDecrementTrigger = defineComponent({
         ArkNumberInput.DecrementTrigger,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "number-input",
           "data-part": "decrement-trigger",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
         },
         {
           ...slots,
@@ -325,7 +362,7 @@ export const LoongArkNumberInputValueText = defineComponent({
         ArkNumberInput.ValueText,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "number-input",
           "data-part": "value-text",
           "data-size": props.size,

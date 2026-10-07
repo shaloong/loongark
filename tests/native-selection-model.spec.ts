@@ -432,3 +432,52 @@ test("首错约束在恢复帧前改变时，标签不覆盖新的首个错误",
   );
   await expect(page.locator("#ordinary")).toBeFocused();
 });
+
+test("文本输入提交后保留最新已接受的格式值，拒绝编辑与卸载不会复活旧任务", async ({
+  page,
+}) => {
+  await fixture(page);
+  await page.setContent(
+    '<form><input name="quantity" aria-label="Quantity" value="٣"></form>',
+  );
+  await page.evaluate(() => {
+    const input = document.querySelector("input")!;
+    const w = window as unknown as {
+      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      disposeText(): void;
+      events: number;
+    };
+    let accepted = "٣";
+    w.events = 0;
+    input.addEventListener("input", () => {
+      w.events++;
+      if (input.value === "4")
+        queueMicrotask(() => {
+          accepted = "٤";
+        });
+    });
+    w.disposeText = w.mountNativeSelection(
+      input,
+      () => ({ formValue: accepted }),
+      { syncOnInput: true },
+    );
+  });
+  const input = page.getByRole("textbox", { name: "Quantity" });
+  await input.fill("4");
+  await expect(input).toHaveValue("٤");
+  await input.fill("5");
+  await expect(input).toHaveValue("٤");
+  expect(
+    await page
+      .locator("form")
+      .evaluate((n) => new FormData(n as HTMLFormElement).get("quantity")),
+  ).toBe("٤");
+  await page.evaluate(() =>
+    (window as unknown as { disposeText(): void }).disposeText(),
+  );
+  await input.fill("6");
+  await expect(input).toHaveValue("6");
+  expect(
+    await page.evaluate(() => (window as unknown as { events: number }).events),
+  ).toBe(3);
+});

@@ -126,9 +126,9 @@ const buildNumberInputStyles = (theme: LoongArkTheme): string => {
   const decrementSelector = `${scopeSelector}[data-part="decrement-trigger"]`;
   const scrubberSelector = `${scopeSelector}[data-part="scrubber"]`;
   const valueTextSelector = `${scopeSelector}[data-part="value-text"]`;
-  const invalidSelector = `${controlSelector}[data-state='invalid']`;
+  const invalidSelector = `${controlSelector}:is([data-state='invalid'], [data-invalid=''], [data-invalid='true'])`;
   const successSelector = `${controlSelector}[data-state='success']`;
-  const disabledSelector = `${controlSelector}[data-disabled='true']`;
+  const disabledSelector = `${controlSelector}:is([data-disabled='true'], [data-disabled=''], :has(${inputSelector}:disabled))`;
 
   return `
 
@@ -290,7 +290,6 @@ ${successSelector} {
 ${disabledSelector} {
   background: ${tokens.disabled.bg};
   color: ${tokens.disabled.text};
-  border-color: ${tokens.disabled.bg};
   cursor: not-allowed;
   opacity: 0.85;
 }

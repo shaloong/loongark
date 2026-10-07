@@ -186,6 +186,7 @@ export function mountNativeSelection(
     indeterminate?: boolean;
     radioValue?: string | null;
   },
+  options: { syncOnInput?: boolean } = {},
 ): () => void {
   const win = input.ownerDocument.defaultView;
   if (!win) return () => {};
@@ -230,6 +231,7 @@ export function mountNativeSelection(
   input.ownerDocument.addEventListener("reset", reset, true);
   input.addEventListener("click", schedule);
   input.addEventListener("change", schedule);
+  if (options.syncOnInput) input.addEventListener("input", schedule);
   return () => {
     disposed = true;
     if (nativeSelectionReaders.get(input) === read)
@@ -240,5 +242,6 @@ export function mountNativeSelection(
     input.ownerDocument.removeEventListener("reset", reset, true);
     input.removeEventListener("click", schedule);
     input.removeEventListener("change", schedule);
+    if (options.syncOnInput) input.removeEventListener("input", schedule);
   };
 }

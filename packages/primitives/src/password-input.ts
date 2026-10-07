@@ -124,10 +124,9 @@ const buildPasswordInputStyles = (theme: LoongArkTheme): string => {
   const inputSelector = `${scopeSelector}[data-part="input"]`;
   const indicatorSelector = `${scopeSelector}[data-part="indicator"]`;
   const visibilityTriggerSelector = `${scopeSelector}[data-part="visibility-trigger"]`;
-  const invalidSelector = `${controlSelector}[data-state='invalid']`;
+  const invalidSelector = `${controlSelector}:is([data-state='invalid'], [data-invalid=''], [data-invalid='true'])`;
   const successSelector = `${controlSelector}[data-state='success']`;
-  const disabledSelector = `${controlSelector}[data-disabled='true']`;
-  const inputDisabledSelector = `${inputSelector}[disabled], ${inputSelector}[aria-disabled='true']`;
+  const disabledSelector = `${controlSelector}:is([data-disabled='true'], [data-disabled=''], :has(${inputSelector}:disabled))`;
   const readOnlySelector = `${inputSelector}[readonly]`;
 
   return `
@@ -236,13 +235,21 @@ ${successSelector} {
   box-shadow: 0 0 0 1px ${tokens.brand.accent};
 }
 
-${disabledSelector},
-${inputDisabledSelector},
-${readOnlySelector} {
+${disabledSelector} {
   background: ${tokens.disabled.bg};
   color: ${tokens.disabled.text};
   cursor: not-allowed;
   opacity: 0.85;
+}
+
+${disabledSelector} ${inputSelector} {
+  background: transparent;
+  color: inherit;
+  opacity: 1;
+}
+
+${readOnlySelector}:not(:disabled) {
+  cursor: text;
 }
 
 ${disabledSelector} ${visibilityTriggerSelector} {

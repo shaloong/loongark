@@ -97,7 +97,7 @@ h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()
   if (framework === "svelte") {
     await writeFile(
       resolve(folder, "App.svelte"),
-      `<script lang="ts">import UndefinedSelections from "./UndefinedSelections.svelte";import { ${imports}, LoongArkQuestionnaire as Questionnaire, type QuestionnaireValue } from '@loongark/svelte'; let email=''; let mode:'light'|'dark'='light';let freshNote:QuestionnaireValue|undefined;</script><Provider {mode}><section style="padding:24px;display:grid;gap:16px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)">${body.replace("value={email} onInput={(e) => setEmail(e.currentTarget.value)}", "bind:value={email}").replace('onClick={() => setMode(mode === "light" ? "dark" : "light")}', 'onclick={() => mode = mode === "light" ? "dark" : "light"}')}<Questionnaire label="Fresh feedback" questions={[{id:'note',label:'Fresh note',type:'text'}]} bind:value={freshNote}/><output aria-label="Bound fresh note">{freshNote?.note ?? ''}</output><UndefinedSelections /></section></Provider>`,
+      `<script lang="ts">import UndefinedSelections from "./UndefinedSelections.svelte";import BoundNumberInput from "./BoundNumberInput.svelte";import { ${imports}, LoongArkQuestionnaire as Questionnaire, type QuestionnaireValue } from '@loongark/svelte'; let email=''; let mode:'light'|'dark'='light';let freshNote:QuestionnaireValue|undefined;</script><Provider {mode}><section style="padding:24px;display:grid;gap:16px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)">${body.replace("value={email} onInput={(e) => setEmail(e.currentTarget.value)}", "bind:value={email}").replace('onClick={() => setMode(mode === "light" ? "dark" : "light")}', 'onclick={() => mode = mode === "light" ? "dark" : "light"}')}<Questionnaire label="Fresh feedback" questions={[{id:'note',label:'Fresh note',type:'text'}]} bind:value={freshNote}/><output aria-label="Bound fresh note">{freshNote?.note ?? ''}</output><UndefinedSelections /><BoundNumberInput /></section></Provider>`,
     );
     source = `import { mount } from 'svelte'; import App from './App.svelte'; mount(App,{target:document.getElementById('app')!});`;
   }
@@ -174,7 +174,10 @@ h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()
 }
 
 // 单独消费共享发布模块，验证四端调用之外的导出选项与 DOM 根节点契约。
-await copyFile(resolve("packages/kit/dist/cropper-export.js"), resolve("tests/consumer-dist/cropper-export.js"));
+await copyFile(
+  resolve("packages/kit/dist/cropper-export.js"),
+  resolve("tests/consumer-dist/cropper-export.js"),
+);
 
 // 独立消费真实 Kit 发布模块，在浏览器中验证第三方有内部状态的自定义控件契约。
 await build({
@@ -209,9 +212,20 @@ await build({
 
 // 单独消费共享横向窗口发布契约，验证初始定位与原生滚动事件的先后关系。
 await build({
- configFile: false, logLevel: "error",
- resolve: { alias: { "@loongark/kit": resolve("packages/kit/dist/index.js") } },
- build: { outDir: resolve("tests/consumer-dist"), emptyOutDir: false, lib: { entry: resolve("tests/consumers/column-window.mjs"), formats: ["es"], fileName: () => "column-window.js" } },
+  configFile: false,
+  logLevel: "error",
+  resolve: {
+    alias: { "@loongark/kit": resolve("packages/kit/dist/index.js") },
+  },
+  build: {
+    outDir: resolve("tests/consumer-dist"),
+    emptyOutDir: false,
+    lib: {
+      entry: resolve("tests/consumers/column-window.mjs"),
+      formats: ["es"],
+      fileName: () => "column-window.js",
+    },
+  },
 });
 console.log("横向列窗口共享发布模块浏览器消费构建通过");
 

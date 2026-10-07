@@ -110,7 +110,7 @@
   "remote": {
     "runtimeCommit": "4c0a01010d763db06b128c43cd0ee33166d97158",
     "browserRun": "https://github.com/shaloong/loongark/actions/runs/37652234213",
-    "status": "原生 Safari 通过且已审阅本批截图，Firefox完整矩阵通过；Chromium有一条只读焦点竞争失败，WebKit仍在执行。",
+    "status": "原生Safari、Firefox和WebKit完整矩阵通过；Chromium有一条只读焦点竞争失败，74d3c6d追加可信键盘与冻结帧修复并独立复验。",
     "nativeSafari": {
       "status": "success",
       "jobId": 112898240100,
@@ -142,8 +142,13 @@
         "storySkipped": 643
       },
       "webkit": {
-        "status": "in_progress",
-        "jobId": 112898240239
+        "status": "success",
+        "jobId": 112898240239,
+        "keyboardNavigationPreflightPassed": 12,
+        "frameworkPassed": 636,
+        "frameworkSkipped": 122,
+        "storyPassed": 236,
+        "storySkipped": 643
       }
     },
     "pages": {

@@ -1,3 +1,9 @@
+import { useFieldContext } from "@ark-ui/solid/field";
+import { useNumberInputContext } from "@ark-ui/solid/number-input";
+import {
+  nativeSelectionProps,
+  nativeSelectionFieldDescription,
+} from "@loongark/kit";
 /** @jsxImportSource solid-js */
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
@@ -35,8 +41,6 @@ export const LoongArkNumberInputRoot: Component<
     {
       size: "md" as NumberInputSize,
       state: "default" as NumberInputState,
-      disabled: false,
-      readOnly: false,
     },
     props,
   );
@@ -51,14 +55,19 @@ export const LoongArkNumberInputRoot: Component<
   return (
     <ArkNumberInput.Root
       {...others}
-      disabled={local.disabled}
-      readOnly={local.readOnly}
+      {...nativeSelectionProps({
+        disabled: local.disabled,
+        readOnly: local.readOnly,
+        "data-disabled":
+          local.disabled === undefined ? undefined : String(local.disabled),
+        "data-readonly":
+          local.readOnly === undefined ? undefined : String(local.readOnly),
+      })}
+
       data-scope="number-input"
       data-part="root"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
-      data-readonly={local.readOnly ? "true" : undefined}
     >
       {local.children}
     </ArkNumberInput.Root>
@@ -105,7 +114,6 @@ export const LoongArkNumberInputControl: Component<
     {
       size: "md" as NumberInputSize,
       state: "default" as NumberInputState,
-      disabled: false,
     },
     props,
   );
@@ -123,7 +131,10 @@ export const LoongArkNumberInputControl: Component<
       data-part="control"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
+      {...nativeSelectionProps({
+        "data-disabled":
+          local.disabled === undefined ? undefined : String(local.disabled),
+      })}
     >
       {local.children}
     </ArkNumberInput.Control>
@@ -143,12 +154,12 @@ export interface LoongArkNumberInputInputProps extends Omit<
 export const LoongArkNumberInputInput: Component<
   LoongArkNumberInputInputProps
 > = (props) => {
+  const field = useFieldContext();
+  const api = useNumberInputContext();
   const merged = mergeProps(
     {
       size: "md" as NumberInputSize,
       state: "default" as NumberInputState,
-      disabled: false,
-      readOnly: false,
     },
     props,
   );
@@ -159,17 +170,37 @@ export const LoongArkNumberInputInput: Component<
     "readOnly",
   ]);
 
+  // Solid 的原生属性使用 readonly；始终提供该键，覆盖规范化器省略 false 的动态路径。
+  const isReadOnly = () => {
+    const native = api().getInputProps();
+    return (
+      local.readOnly ??
+      props.readonly ??
+      native.readonly ??
+      ("readOnly" in native && native.readOnly === true)
+    );
+  };
   return (
     <ArkNumberInput.Input
       {...others}
-      disabled={local.disabled}
-      readOnly={local.readOnly}
+      {...nativeSelectionProps({
+        disabled: local.disabled,
+        "data-disabled":
+          local.disabled === undefined ? undefined : String(local.disabled),
+        "data-readonly":
+          local.readOnly === undefined ? undefined : String(local.readOnly),
+      })}
+
       data-scope="number-input"
+      aria-describedby={nativeSelectionFieldDescription(
+        props["aria-describedby"],
+        field?.(),
+        api().getInputProps()["aria-invalid"],
+      )}
+      readonly={isReadOnly()}
       data-part="input"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
-      data-readonly={local.readOnly ? "true" : undefined}
     />
   );
 };
@@ -191,7 +222,6 @@ export const LoongArkNumberInputIncrementTrigger: Component<
     {
       size: "md" as NumberInputSize,
       state: "default" as NumberInputState,
-      disabled: false,
     },
     props,
   );
@@ -205,12 +235,15 @@ export const LoongArkNumberInputIncrementTrigger: Component<
   return (
     <ArkNumberInput.IncrementTrigger
       {...others}
-      disabled={local.disabled}
+      {...nativeSelectionProps({
+        disabled: local.disabled,
+        "data-disabled":
+          local.disabled === undefined ? undefined : String(local.disabled),
+      })}
       data-scope="number-input"
       data-part="increment-trigger"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
     >
       {local.children ?? <LoongArkIcon icon={controlIcons.plus} size="sm" />}
     </ArkNumberInput.IncrementTrigger>
@@ -234,7 +267,6 @@ export const LoongArkNumberInputDecrementTrigger: Component<
     {
       size: "md" as NumberInputSize,
       state: "default" as NumberInputState,
-      disabled: false,
     },
     props,
   );
@@ -248,12 +280,15 @@ export const LoongArkNumberInputDecrementTrigger: Component<
   return (
     <ArkNumberInput.DecrementTrigger
       {...others}
-      disabled={local.disabled}
+      {...nativeSelectionProps({
+        disabled: local.disabled,
+        "data-disabled":
+          local.disabled === undefined ? undefined : String(local.disabled),
+      })}
       data-scope="number-input"
       data-part="decrement-trigger"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
     >
       {local.children ?? <LoongArkIcon icon={controlIcons.minus} size="sm" />}
     </ArkNumberInput.DecrementTrigger>

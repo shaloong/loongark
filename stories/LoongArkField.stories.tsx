@@ -1,3 +1,4 @@
+import { CompoundFieldExample } from "../examples/react/CompoundFieldExample";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { FieldSelectionExample } from "../examples/react/FieldSelectionExample";
@@ -26,4 +27,8 @@ export const Basic: StoryObj = {
 
 export const InheritedSelections: StoryObj = {
   render: () => <FieldSelectionExample />,
+};
+
+export const CompoundInputs: StoryObj = {
+  render: () => <CompoundFieldExample />,
 };
