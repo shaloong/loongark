@@ -12,6 +12,10 @@ export function createSelectionControlsDemo(notify: () => void) {
     notifications: false,
     density: "compact",
     tags: ["React", "Vue", "Solid"],
+    fieldRequired: false,
+    fieldInvalid: false,
+    overrideField: false,
+    submitted: {} as Record<string, FormDataEntryValue>,
   };
   return {
     get snapshot() {
@@ -24,7 +28,10 @@ export function createSelectionControlsDemo(notify: () => void) {
         | "longLabels"
         | "disabled"
         | "readOnly"
-        | "reject",
+        | "reject"
+        | "fieldRequired"
+        | "fieldInvalid"
+        | "overrideField",
     ) {
       state[key] = !state[key];
       notify();
@@ -49,6 +56,14 @@ export function createSelectionControlsDemo(notify: () => void) {
       if (!state.reject && value) state.density = value;
       notify();
     },
+    submit(form: HTMLFormElement) {
+      const submitted: Record<string, FormDataEntryValue> = {};
+      new FormData(form).forEach((value, name) => {
+        submitted[name] = value;
+      });
+      state.submitted = submitted;
+      notify();
+    },
   };
 }
 export const selectionOptions = ["compact", "comfortable", "spacious"] as const;
@@ -66,3 +81,59 @@ export const selectionControlLabels = {
   readOnly: "Read only",
   reject: "Reject updates",
 } as const;
+
+export const selectionFieldControls = {
+  fieldRequired: "Required",
+  fieldInvalid: "Invalid",
+  overrideField: "Override Field state",
+} as const;
+export const selectionFieldText = {
+  checkbox: {
+    hint: "Accept updates to these preferences.",
+    error: "Review the agreement.",
+  },
+  switch: {
+    hint: "Choose whether to receive notifications.",
+    error: "Review notifications.",
+  },
+  "radio-group": {
+    hint: "Choose how much detail is shown.",
+    error: "Choose a valid density.",
+  },
+  "tags-input": {
+    hint: "Enter a framework and press Enter.",
+    error: "Review the frameworks.",
+  },
+} as const;
+export type SelectionFieldKind = keyof typeof selectionFieldText;
+export function selectionOwnFlags(
+  state: { disabled: boolean; readOnly: boolean; overrideField: boolean },
+  field: boolean,
+) {
+  return field
+    ? state.overrideField
+      ? { disabled: false, readOnly: false, required: false, invalid: false }
+      : {}
+    : { disabled: state.disabled, readOnly: state.readOnly };
+}
+
+/** 单选组遵循 Ark 的 Fieldset 契约；只读与必填由组自身声明。 */
+export function selectionOwnRadioFlags(
+  state: {
+    disabled: boolean;
+    readOnly: boolean;
+    overrideField: boolean;
+    fieldRequired: boolean;
+  },
+  field: boolean,
+) {
+  return {
+    ...selectionOwnFlags(state, field),
+    ...(field
+      ? {
+          readOnly: state.overrideField ? false : state.readOnly,
+          required: state.overrideField ? false : state.fieldRequired,
+        }
+      : {}),
+  };
+}

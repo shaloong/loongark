@@ -2,6 +2,11 @@
  * Tags Input component - React wrapper.
  * Uses Ark UI Tags Input with data attributes for styling.
  */
+import { useFieldContext } from "@ark-ui/react/field";
+import {
+  nativeSelectionProps,
+  nativeSelectionFieldDescription,
+} from "@loongark/kit";
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { useNativeSelection } from "../native-selection";
@@ -121,22 +126,13 @@ export const LoongArkTagsInputRoot = forwardRef<
   LoongArkTagsInputRootProps
 >(
   (
-    {
-      children,
-      size = "md",
-      state = "default",
-      disabled = false,
-      readOnly = false,
-      ...props
-    },
+    { children, size = "md", state = "default", disabled, readOnly, ...props },
     ref,
   ) => {
     return (
       <TagsInput.Root
-        {...props}
+        {...nativeSelectionProps({ ...props, disabled, readOnly })}
         ref={ref}
-        disabled={disabled}
-        readOnly={readOnly}
         data-scope="tags-input"
         data-part="root"
         data-size={size}
@@ -173,26 +169,21 @@ LoongArkTagsInputLabel.displayName = "LoongArkTagsInputLabel";
 export const LoongArkTagsInputControl = forwardRef<
   HTMLDivElement,
   LoongArkTagsInputControlProps
->(
-  (
-    { children, size = "md", state = "default", disabled = false, ...props },
-    ref,
-  ) => {
-    return (
-      <TagsInput.Control
-        {...props}
-        ref={ref}
-        data-scope="tags-input"
-        data-part="control"
-        data-size={size}
-        data-state={state !== "default" ? state : undefined}
-        data-disabled={disabled ? "true" : undefined}
-      >
-        {children}
-      </TagsInput.Control>
-    );
-  },
-);
+>(({ children, size = "md", state = "default", disabled, ...props }, ref) => {
+  return (
+    <TagsInput.Control
+      {...props}
+      ref={ref}
+      data-scope="tags-input"
+      data-part="control"
+      data-size={size}
+      data-state={state !== "default" ? state : undefined}
+      data-disabled={disabled ? "true" : undefined}
+    >
+      {children}
+    </TagsInput.Control>
+  );
+});
 
 LoongArkTagsInputControl.displayName = "LoongArkTagsInputControl";
 
@@ -201,6 +192,7 @@ export const LoongArkTagsInputInput = forwardRef<
   LoongArkTagsInputInputProps
 >(({ size = "md", state = "default", disabled, readOnly, ...props }, ref) => {
   const api = useTagsInputContext();
+  const field = useFieldContext();
   const isDisabled = disabled ?? !!api.getHiddenInputProps().disabled;
   const isReadOnly = readOnly ?? !!api.getHiddenInputProps().readOnly;
   return (
@@ -209,6 +201,11 @@ export const LoongArkTagsInputInput = forwardRef<
       ref={ref}
       disabled={isDisabled}
       readOnly={isReadOnly}
+      aria-describedby={nativeSelectionFieldDescription(
+        props["aria-describedby"],
+        field,
+        api.getInputProps()["aria-invalid"],
+      )}
       data-scope="tags-input"
       data-part="input"
       data-size={size}

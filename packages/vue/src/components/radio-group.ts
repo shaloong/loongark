@@ -40,11 +40,11 @@ export const LoongArkRadioGroupRoot = defineComponent({
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     readOnly: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     name: {
       type: String,

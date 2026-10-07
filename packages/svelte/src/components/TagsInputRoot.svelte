@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { nativeSelectionProps } from "@loongark/kit";
   import {
     TagsInput,
     useTagsInput,
@@ -49,44 +50,54 @@
   } = $props();
   const providedId = $props.id();
   const api = useTagsInput(() => ({
+    ...nativeSelectionProps({
+      ids,
+      value,
+      inputValue,
+      defaultValue,
+      defaultInputValue,
+      disabled,
+      readOnly,
+      required,
+      invalid,
+      name,
+      form,
+      addOnPaste,
+      allowDuplicates,
+      allowOverflow,
+      autoFocus,
+      blurBehavior,
+      delimiter,
+      editable,
+      max,
+      maxLength,
+      placeholder,
+      sanitizeValue,
+      translations,
+      validate,
+      onValueInvalid,
+      onFocusOutside,
+      onHighlightChange,
+      onInteractOutside,
+      onPointerDownOutside,
+      onValueChange(
+        details: Parameters<
+          NonNullable<TagsInputRootProps["onValueChange"]>
+        >[0],
+      ) {
+        if (!onValueChange) value = details.value;
+        onValueChange?.(details);
+      },
+      onInputValueChange(
+        details: Parameters<
+          NonNullable<TagsInputRootProps["onInputValueChange"]>
+        >[0],
+      ) {
+        if (!onInputValueChange) inputValue = details.inputValue;
+        onInputValueChange?.(details);
+      },
+    }),
     id: id ?? providedId,
-    ids,
-    value,
-    inputValue,
-    defaultValue,
-    defaultInputValue,
-    disabled,
-    readOnly,
-    required,
-    invalid,
-    name,
-    form,
-    addOnPaste,
-    allowDuplicates,
-    allowOverflow,
-    autoFocus,
-    blurBehavior,
-    delimiter,
-    editable,
-    max,
-    maxLength,
-    placeholder,
-    sanitizeValue,
-    translations,
-    validate,
-    onValueInvalid,
-    onFocusOutside,
-    onHighlightChange,
-    onInteractOutside,
-    onPointerDownOutside,
-    onValueChange(details) {
-      if (!onValueChange) value = details.value;
-      onValueChange?.(details);
-    },
-    onInputValueChange(details) {
-      if (!onInputValueChange) inputValue = details.inputValue;
-      onInputValueChange?.(details);
-    },
   }));
 </script>
 

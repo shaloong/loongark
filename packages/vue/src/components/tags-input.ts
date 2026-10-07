@@ -1,3 +1,5 @@
+import { useFieldContext } from "@ark-ui/vue/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
 import type { TagsInputHiddenInputProps } from "@ark-ui/vue/tags-input";
 import { nativeSelectionRef } from "../native-selection";
 import { useTagsInputContext } from "@ark-ui/vue/tags-input";
@@ -98,7 +100,7 @@ export const LoongArkTagsInputRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...(props.disabled ? { "data-disabled": "true" } : {}),
           "data-readonly": props.readOnly ? "true" : undefined,
         },
         slots,
@@ -149,7 +151,7 @@ export const LoongArkTagsInputControl = defineComponent({
           "data-part": "control",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...(props.disabled ? { "data-disabled": "true" } : {}),
         },
         slots,
       );
@@ -177,6 +179,7 @@ export const LoongArkTagsInputInput = defineComponent({
     },
   },
   setup(props, { attrs }) {
+    const field = useFieldContext();
     const api = useTagsInputContext();
     return () => {
       const disabled =
@@ -188,11 +191,18 @@ export const LoongArkTagsInputInput = defineComponent({
         ...props,
         disabled,
         readOnly,
+        "aria-describedby": nativeSelectionFieldDescription(
+          typeof attrs["aria-describedby"] === "string"
+            ? attrs["aria-describedby"]
+            : undefined,
+          field?.value,
+          api.value.getInputProps()["aria-invalid"],
+        ),
         "data-scope": "tags-input",
         "data-part": "input",
         "data-size": props.size,
         "data-state": props.state !== "default" ? props.state : undefined,
-        "data-disabled": disabled ? "true" : undefined,
+        ...(disabled ? { "data-disabled": "true" } : {}),
         "data-readonly": readOnly ? "true" : undefined,
       });
     };

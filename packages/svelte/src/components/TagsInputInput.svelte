@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { useFieldContext } from "@ark-ui/svelte/field";
+  import { nativeSelectionFieldDescription } from "@loongark/kit";
   import {
     TagsInput,
     useTagsInputContext,
@@ -17,6 +19,7 @@
     state?: TagsInputState;
     readOnly?: boolean;
   } = $props();
+  const field = useFieldContext();
   const api = useTagsInputContext();
   const isDisabled = $derived(
     disabled ?? !!api().getHiddenInputProps().disabled,
@@ -30,6 +33,11 @@
   {...props}
   disabled={isDisabled}
   readonly={isReadOnly}
+  aria-describedby={nativeSelectionFieldDescription(
+    props["aria-describedby"],
+    field?.(),
+    api().getInputProps()["aria-invalid"],
+  )}
   data-scope="tags-input"
   data-part="input"
   data-size={size}

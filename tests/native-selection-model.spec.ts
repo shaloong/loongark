@@ -260,3 +260,132 @@ test("混合复选状态在拒绝交互和 reset 后保留语义，接受后提�
   await expect(input).toHaveJSProperty("indeterminate", false);
   await expect.poll(values).toBe("on");
 });
+
+test("隐藏标签原生无效事件尊重调用方取消与卸载，不抢走外部焦点", async ({
+  page,
+}) => {
+  await fixture(page);
+  await page.setContent(
+    '<button id="outside">Outside</button><div data-scope="tags-input" data-part="root"><input data-part="input"><input id="tags" data-scope="tags-input" data-part="hidden-input" hidden required type="text"></div>',
+  );
+  await page.evaluate(() => {
+    const hidden = document.getElementById("tags") as HTMLInputElement;
+    const outside = document.getElementById("outside") as HTMLButtonElement;
+    const w = window as unknown as {
+      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      disposeTags: () => void;
+    };
+    hidden.addEventListener("invalid", (event) => event.preventDefault(), {
+      once: true,
+    });
+    w.disposeTags = w.mountNativeSelection(hidden, () => ({
+      formValue: hidden.value,
+    }));
+    outside.focus();
+    if (hidden.checkValidity()) throw Error("调用方取消提示不能放行无效值");
+  });
+  await expect(page.locator("#outside")).toBeFocused();
+  await page.evaluate(() => {
+    (document.getElementById("tags") as HTMLInputElement).checkValidity();
+  });
+  await expect(page.locator("[data-part=input]")).toBeFocused();
+  await page.evaluate(() => {
+    (window as unknown as { disposeTags: () => void }).disposeTags();
+    document.getElementById("outside")!.focus();
+    (document.getElementById("tags") as HTMLInputElement).checkValidity();
+  });
+  await expect(page.locator("#outside")).toBeFocused();
+});
+
+for (const position of ["before", "after"])
+  test(`原生首错顺序保留，标签代理与普通输入 ${position}`, async ({ page }) => {
+    await fixture(page);
+    const ordinary = '<input id="ordinary" aria-label="Ordinary" required>';
+    const tags =
+      '<div data-scope="tags-input" data-part="root"><input id="visible-tags" data-part="input" aria-label="Tags"><input id="serialized-tags" data-scope="tags-input" data-part="hidden-input" hidden required type="text"></div>';
+    await page.setContent(
+      `<form>${position === "before" ? ordinary + tags : tags + ordinary}<button>Submit</button></form>`,
+    );
+    await page.evaluate(() => {
+      const hidden = document.getElementById(
+        "serialized-tags",
+      ) as HTMLInputElement;
+      (
+        window as unknown as {
+          mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+        }
+      ).mountNativeSelection(hidden, () => ({ formValue: hidden.value }));
+    });
+    await page.getByRole("button", { name: "Submit" }).click();
+    await page.evaluate(
+      () =>
+        new Promise((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(resolve)),
+        ),
+    );
+    await expect(
+      page.locator(position === "before" ? "#ordinary" : "#visible-tags"),
+    ).toBeFocused();
+  });
+
+test("标签无效事件不解除待运行 Tab 保护，首个错误仍保留焦点", async ({
+  page,
+}) => {
+  await fixture(page);
+  await page.clock.install();
+  await page.setContent(
+    '<form><input id="ordinary" aria-label="Ordinary" required><div data-scope="tags-input" data-part="root"><input id="visible-tags" data-part="input"><input id="serialized-tags" data-scope="tags-input" data-part="hidden-input" hidden required type="text"></div><button>Submit</button></form>',
+  );
+  await page.evaluate(() => {
+    const hidden = document.getElementById(
+      "serialized-tags",
+    ) as HTMLInputElement;
+    (
+      window as unknown as {
+        mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      }
+    ).mountNativeSelection(hidden, () => ({ formValue: hidden.value }));
+    document.getElementById("visible-tags")!.focus();
+  });
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
+  await page.evaluate(() =>
+    requestAnimationFrame(() =>
+      document.getElementById("visible-tags")!.focus(),
+    ),
+  );
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("button", { name: "Submit" })).toBeFocused();
+  // 异步原生提交没有新的用户按键；Enter 本身按契约解除此前的 Tab 保护。
+  await page.evaluate(() => document.querySelector("form")!.requestSubmit());
+  await expect(page.locator("#ordinary")).toBeFocused();
+  await page.clock.runFor(100);
+  await expect(page.locator("#ordinary")).toBeFocused();
+});
+
+test("首错约束在恢复帧前改变时，标签不覆盖新的首个错误", async ({ page }) => {
+  await fixture(page);
+  await page.setContent(
+    '<form><input id="ordinary" aria-label="Ordinary"><div data-scope="tags-input" data-part="root"><input id="visible-tags" data-part="input"><input id="serialized-tags" data-scope="tags-input" data-part="hidden-input" hidden required type="text"></div></form>',
+  );
+  await page.evaluate(() => {
+    const hidden = document.getElementById(
+      "serialized-tags",
+    ) as HTMLInputElement;
+    (
+      window as unknown as {
+        mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      }
+    ).mountNativeSelection(hidden, () => ({ formValue: hidden.value }));
+    hidden.reportValidity();
+    const ordinary = document.getElementById("ordinary") as HTMLInputElement;
+    ordinary.required = true;
+    ordinary.reportValidity();
+  });
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      ),
+  );
+  await expect(page.locator("#ordinary")).toBeFocused();
+});

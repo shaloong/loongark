@@ -1,3 +1,5 @@
+import { useFieldContext } from "@ark-ui/react/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import React, { forwardRef } from "react";
@@ -119,11 +121,18 @@ export const LoongArkCheckboxHiddenInput = forwardRef<
   HTMLInputElement,
   LoongArkCheckboxHiddenInputProps
 >((props, ref) => {
-  const input = useNativeSelection(useCheckboxContext(), "checkbox", ref);
+  const field = useFieldContext();
+  const api = useCheckboxContext();
+  const input = useNativeSelection(api, "checkbox", ref);
   return (
     <Checkbox.HiddenInput
       ref={input}
       {...props}
+      aria-describedby={nativeSelectionFieldDescription(
+        props["aria-describedby"],
+        field,
+        api.getHiddenInputProps()["aria-invalid"],
+      )}
       data-scope="checkbox"
       data-part="hidden-input"
     />

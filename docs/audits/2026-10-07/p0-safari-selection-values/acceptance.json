@@ -32,6 +32,18 @@
       ".artifacts/p0-selection/safari-order-after.log"
     ]
   },
-  "remoteFollowup": "推送后仅重跑原生 Safari；保持 6b2c38c 的 Linux 矩阵继续运行，未声称 Safari 已通过。",
+  "remoteFollowup": {
+    "commit": "544f7018fcbe4d8fe89fa9ad4a354c3b2cd942a8",
+    "run": "https://github.com/shaloong/loongark/actions/runs/37625145545",
+    "job": 112804899524,
+    "result": "passed",
+    "browser": "Safari 26.6.1 / macOS 15.7.9",
+    "defaultExamples": 279,
+    "interactions": 217,
+    "artifact": 11484732416,
+    "artifactSha256": "79d8b62cb543313d32f78af4e18ddc66ef039330901a2f13f1b5e797a2ca2f7d",
+    "manualReview": "实际下载 19,767,039 字节原生 Artifact，查看四端明暗共 8 张选择控件窄屏 RTL 截图及 8 张 TagsInput 清除/输入焦点截图（另制作原尺寸局部联系表）。窗口截图不代表真实手机或全页截屏。",
+    "linux": "6b2c38c Firefox 612 四端/225 Story 通过；Chromium 619 通过/1 只读单选焦点失败，WebKit 611 通过/1 TagsInput 删除后 Tab 焦点失败。整矩阵未通过，跟进 Field 与焦点时序批次。"
+  },
   "evidenceStorage": "原始 ZIP、截图、完整结果及复现日志均位于忽略的 .artifacts/p0-selection/；Git 只保存摘要。"
 }

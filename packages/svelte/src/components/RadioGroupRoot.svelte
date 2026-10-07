@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { nativeSelectionProps } from "@loongark/kit";
   import {
     RadioGroup,
     useRadioGroup,
@@ -15,9 +16,9 @@
     size = "md",
     orientation = "vertical",
     defaultValue,
-    disabled = false,
+    disabled,
     invalid,
-    readOnly = false,
+    readOnly,
     required,
     name,
     form,
@@ -31,21 +32,27 @@
   } = $props();
   const providedId = $props.id();
   const api = useRadioGroup(() => ({
+    ...nativeSelectionProps({
+      ids,
+      value,
+      defaultValue,
+      disabled,
+      invalid,
+      readOnly,
+      required,
+      name,
+      form,
+      orientation,
+      onValueChange(
+        details: Parameters<
+          NonNullable<RadioGroupRootProps["onValueChange"]>
+        >[0],
+      ) {
+        if (!onValueChange) value = details.value;
+        onValueChange?.(details);
+      },
+    }),
     id: id ?? providedId,
-    ids,
-    value,
-    defaultValue,
-    disabled,
-    invalid,
-    readOnly,
-    required,
-    name,
-    form,
-    orientation,
-    onValueChange(details) {
-      if (!onValueChange) value = details.value;
-      onValueChange?.(details);
-    },
   }));
 </script>
 

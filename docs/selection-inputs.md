@@ -61,3 +61,16 @@ Svelte 的 Checkbox、RadioGroup、Switch、TagsInput 在提供对应变更回�
 Vue 的四种 HiddenInput 保留原生输入属性类型及 `asChild` 默认插槽；可使用调用方提供的 input，同时复用标签、表单、键盘和状态恢复。节点卸载或替换时清理原生监听。Checkbox 未指定 checked/defaultChecked 时保留 undefined，支持非受控交互及预选默认值；标签间距使用根节点逻辑方向无关的 gap，避免 RTL 文字贴边。
 
 Solid 的 Checkbox/RadioGroup HiddenInput 使用 Ark 原生输入 Props；调用方 ref 与内部同步行为共同绑定同一 input，原生属性和 ref 不会绕过受控恢复。卸载释放监听，重新挂载保留相同的表单契约。
+
+
+## Field 与 Fieldset 的选择控件组合
+
+Checkbox、Switch 和 TagsInput 未声明的 `disabled`、`readOnly`、`required`、`invalid` 及关联 ID 继承 Field。`undefined` 保留父级默认值；显式 `false` 保留调用方覆盖。TagsInput 的实际文本输入与 Checkbox/Switch 的原生输入共同保留调用方描述、Field 帮助和已挂载错误的关联；子控件独立取消 invalid 时不会继续引用父级错误。Field 输入的外框样式只作用于 Field 自身的 Input/Select/Textarea，避免给嵌套复合输入增加第二层边框。
+
+RadioGroup 使用 Ark 的 Fieldset 契约：继承禁用和错误，直接 legend 为组提供标签，帮助/错误由原生 fieldset 关联；只读与必填由 RadioGroup 自身声明。原生 `fieldset disabled` 约束所有后代，不能用单选项或组的 `disabled={false}` 绕过它。四端 `FieldSelectionExample` 与 Field 的 `InheritedSelections` Story 演示动态继承、单字段覆盖、原生必填阻止提交及错误关联。
+
+TagsInput 在删除等操作后可能有待运行的焦点恢复。用户随后用 Tab 离开时，共享行为保留原生 Tab 已产生的目的地，并阻止过期焦点事件再次驱动状态机；后续键盘/指针操作、窗口失焦及卸载均解除保护。Solid 在 onMount 后安装原生行为，避免 ref 回调早于属性和父节点就绪；替换节点与卸载清理旧监听。
+
+必填 TagsInput 的序列化字段仍参与原生约束校验；若它是首个无效字段，空值提交被阻止时聚焦可见输入，避免浏览器尝试聚焦隐藏字段。多个字段同时无效或约束在恢复帧前改变时保留原生首错顺序。调用方已取消 invalid 的默认行为时由调用方管理提示与焦点；卸载释放 invalid 监听。错误文本与 Field.invalid 仍按现有受控契约提供。
+
+禁用样式同时识别 Ark 的空值状态标记与 LoongArk 的显式 true 标记；Vue 未提供的部件状态不覆盖原生标记。Field 继承的禁用控件与直接声明 disabled 的控件使用同一套 Token 和交互提示。

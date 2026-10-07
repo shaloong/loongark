@@ -1,9 +1,29 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { mountNativeSelection } from "@loongark/kit";
-  import { useCheckboxContext } from "@ark-ui/svelte/checkbox";
-  export let ref: HTMLInputElement | null = null;
+  import { useFieldContext } from "@ark-ui/svelte/field";
+  import {
+    mountNativeSelection,
+    nativeSelectionFieldDescription,
+  } from "@loongark/kit";
+  import {
+    Checkbox,
+    useCheckboxContext,
+    type CheckboxHiddenInputProps,
+  } from "@ark-ui/svelte/checkbox";
+  let {
+    ref = $bindable(null),
+    ...props
+  }: Omit<CheckboxHiddenInputProps, "ref"> & { ref?: HTMLInputElement | null } =
+    $props();
+  const field = useFieldContext();
   const api = useCheckboxContext();
+  const description = $derived(
+    nativeSelectionFieldDescription(
+      props["aria-describedby"],
+      field?.(),
+      api().getHiddenInputProps()["aria-invalid"],
+    ),
+  );
   onMount(() =>
     ref
       ? mountNativeSelection(ref, () => ({
@@ -12,10 +32,12 @@
         }))
       : undefined,
   );
-  import { CheckboxHiddenInput } from "@ark-ui/svelte/checkbox";
-  import { getDataAttrs } from "./utils";
-
-  $: dataAttrs = getDataAttrs("checkbox", "hidden-input");
 </script>
 
-<CheckboxHiddenInput bind:ref {...$$restProps} {...dataAttrs} />
+<Checkbox.HiddenInput
+  bind:ref
+  {...props}
+  aria-describedby={description}
+  data-scope="checkbox"
+  data-part="hidden-input"
+/>

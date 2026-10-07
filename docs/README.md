@@ -302,3 +302,11 @@ macOS工作流补上共享发布夹具构建，真实Safari再次通过275个默
 2026-10-07 P0 原生布局与滚动：四端问卷、嵌套/自定义题组和矩阵使用直接 legend 与内部网格，连续缩至 320px 保持原生表单值；消息与虚拟窗口统一滚动锚定声明清理。最终三引擎自定义/焦点 114 项、Story/滚动 27 项、Linux 视觉 278 项通过；首次视觉发现的 88px 间距回归已修复，304 份原基线含 Windows 哈希未改。实际审阅 90 张最终自定义长标题截图，另有先前原生题组/焦点抽样；源码 5a505b6 的远端 Chromium/Firefox/WebKit 整库及原生 Safari 已全部通过；Safari 275 默认/201 高级交互通过，本批相关 33 张问卷/焦点截图已实际审阅。真实手机仍缺少设备连接。详见[范围与限制](audits/2026-10-07/p0-native-layout-and-scroll/acceptance.json)。
 
 2026-10-07 P0 选择控件：四端原生焦点映射可见控件，修正多行首行对齐、横向单选换行、Checkbox RTL 间距及 Switch 对称滑块；统一受控拒绝、只读与原生表单 reset，补齐 Svelte 初始 undefined 双向绑定和 Vue HiddenInput asChild/公开输入属性。新增四端交互示例与 Story，当前 119 族、330 Story、四端各 794 值入口、279 示例。本批范围、截图复核及平台限制见[选择控件验收](audits/2026-10-07/p0-selection-focus-and-forms/acceptance.json)。
+
+## P0 表单上下文与焦点（2026-10-07）
+
+选择类控件按 Field / Fieldset 的现有职责继承状态；省略属性保留上下文，显式 false 保留调用方覆盖。Checkbox、Switch 与 TagsInput 的真实输入同时保留调用方、提示和已挂载错误描述。Radio 的禁用和错误使用原生 Fieldset，required / readOnly 仍由 RadioGroup 声明。Field 自身输入样式不再重复套入复合控件的内层输入。四端示例及 Story 展示状态切换、提交、原生验证、窄屏和 RTL。
+
+本批还处理 TagsInput 删除后延迟焦点覆盖 Tab 的竞争；回归冻结帧队列并使用真实键盘操作。结果与平台限制见 [独立验收摘要](audits/2026-10-07/p0-field-inheritance-and-focus/acceptance.json)。
+
+本批最终本地验收：三引擎四端201项、Story81项通过；Chromium明暗各331个Story质量与默认WCAG2 A/AA扫描通过。已有286项及新增8项视觉比较通过，原312份基线（含Windows）哈希不变；8张新Linux原图逐张审阅。当前Field源码原生Safari须在本批推送后实际执行，不沿用此前279/217作为当前结果。

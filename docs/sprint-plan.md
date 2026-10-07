@@ -263,4 +263,12 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 
 2026-10-07 P0 原生布局与滚动：四端问卷、嵌套/自定义题组和矩阵使用直接 legend 与内部网格，连续缩至 320px 保持原生表单值；消息与虚拟窗口统一滚动锚定声明清理。最终三引擎自定义/焦点 114 项、Story/滚动 27 项、Linux 视觉 278 项通过；首次视觉发现的 88px 间距回归已修复，304 份原基线含 Windows 哈希未改。实际审阅 90 张最终自定义长标题截图，另有先前原生题组/焦点抽样；源码 5a505b6 的远端 Chromium/Firefox/WebKit 整库及原生 Safari 已全部通过；Safari 275 默认/201 高级交互通过，本批相关 33 张问卷/焦点截图已实际审阅。真实手机仍缺少设备连接。详见[范围与限制](audits/2026-10-07/p0-native-layout-and-scroll/acceptance.json)。
 
-2026-10-07 P0 选择控件与表单：完成四端 Checkbox/Switch/RadioGroup/TagsInput 可见焦点、首行和 RTL 对齐、受控拒绝及 reset；修复 Svelte 初始 undefined 绑定、Vue 非受控 Checkbox 默认值及四种 HiddenInput asChild。279 示例新构建、公开类型和四端 SSR 通过，三引擎四端最终专项 78 项、Story 18 项通过。最终 Solid 原生 ref 与输入类型修正后，另有三引擎 39 项含全部 69 示例通过；原有 278 项及新增 8 项 Linux 视觉比较通过，304 份既有基线含 Windows 哈希不变。本批原生 Safari 待远端执行，真实手机仍缺少设备连接；详见[验收范围](audits/2026-10-07/p0-selection-focus-and-forms/acceptance.json)。
+2026-10-07 P0 选择控件与表单：完成四端 Checkbox/Switch/RadioGroup/TagsInput 可见焦点、首行和 RTL 对齐、受控拒绝及 reset；修复 Svelte 初始 undefined 绑定、Vue 非受控 Checkbox 默认值及四种 HiddenInput asChild。279 示例新构建、公开类型和四端 SSR 通过，三引擎四端最终专项 78 项、Story 18 项通过。最终 Solid 原生 ref 与输入类型修正后，另有三引擎 39 项含全部 69 示例通过；原有 278 项及新增 8 项 Linux 视觉比较通过，304 份既有基线含 Windows 哈希不变。选择批次后续原生 Safari 544f701 已通过279默认/217高级交互，真实手机仍缺少设备连接；详见[验收范围](audits/2026-10-07/p0-selection-focus-and-forms/acceptance.json)。
+
+## 2026-10-07 P0 Field 继承与焦点生命周期
+
+四端统一选择类控件的 Field 默认状态、显式覆盖、真实表单值及提示/错误关联；Radio 按原生 Fieldset 语义实现。修正复合 TagsInput 内层重复边框与手机提交结果溢出。共享焦点保护以 Tab 已产生的实际目的地为准，并在卸载时释放监听和待运行帧；Solid 在 ref 发生时节点尚未接入 DOM，事件处理时再解析所属控件。新增四端 SSR、实际键盘和冻结帧竞争回归。
+
+验收范围、真实 Safari 结果与待验证项见 [本批摘要](audits/2026-10-07/p0-field-inheritance-and-focus/acceptance.json)。日志和过程截图保留在忽略目录和 CI Artifact，Git 只保存已审阅的实际回归基线。
+
+本批最终本地验收：三引擎四端201项、Story81项通过；Chromium明暗各331个Story质量与默认WCAG2 A/AA扫描通过。已有286项及新增8项视觉比较通过，原312份基线（含Windows）哈希不变；8张新Linux原图逐张审阅。当前Field源码原生Safari须在本批推送后实际执行，不沿用此前279/217作为当前结果。

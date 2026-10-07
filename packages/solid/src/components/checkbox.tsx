@@ -1,3 +1,5 @@
+import { useFieldContext } from "@ark-ui/solid/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import type { JSX } from "solid-js";
@@ -88,6 +90,7 @@ export const LoongArkCheckboxIndicator: Component<
 export const LoongArkCheckboxHiddenInput: Component<
   CheckboxHiddenInputProps
 > = (props) => {
+  const field = useFieldContext();
   const api = useCheckboxContext();
   const ref = nativeSelectionRef(
     () => ({
@@ -99,6 +102,11 @@ export const LoongArkCheckboxHiddenInput: Component<
   return (
     <Checkbox.HiddenInput
       {...props}
+      aria-describedby={nativeSelectionFieldDescription(
+        props["aria-describedby"],
+        field?.(),
+        api().getHiddenInputProps()["aria-invalid"],
+      )}
       ref={ref}
       data-scope="checkbox"
       data-part="hidden-input"

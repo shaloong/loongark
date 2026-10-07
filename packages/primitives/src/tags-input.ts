@@ -133,7 +133,7 @@ const buildTagsInputStyles = (theme: LoongArkTheme): string => {
   const hiddenInputSelector = `${scopeSelector}[data-part="hidden-input"]`;
   const invalidSelector = `${controlSelector}[data-state='invalid']`;
   const successSelector = `${controlSelector}[data-state='success']`;
-  const disabledSelector = `${controlSelector}[data-disabled='true']`;
+  const disabledSelector = `${controlSelector}:is([data-disabled=''],[data-disabled='true'])`;
 
   return `
 
@@ -154,6 +154,7 @@ ${labelSelector} {
 }
 
 ${controlSelector} {
+  cursor: text;
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;

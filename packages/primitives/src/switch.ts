@@ -171,8 +171,8 @@ ${control}:focus-visible {
 }
 
 
-${root}[data-disabled='true'] ${control},
-${control}[data-disabled='true'] {
+${root}:is([data-disabled=''],[data-disabled='true']) ${control},
+${control}:is([data-disabled=''],[data-disabled='true']) {
   cursor: not-allowed;
   background: ${tokens.disabled.track};
   border-color: ${tokens.disabled.border};
@@ -190,17 +190,17 @@ ${control}[data-state='checked'] ${thumb} {
   background: ${tokens.thumb.bg};
 }
 
-${root}[data-disabled='true'] ${thumb},
-${control}[data-disabled='true'] ${thumb} {
+${root}:is([data-disabled=''],[data-disabled='true']) ${thumb},
+${control}:is([data-disabled=''],[data-disabled='true']) ${thumb} {
   background: ${tokens.disabled.thumb};
 }
 
-${control}[data-state='checked'][data-disabled='true'] {
+${control}[data-state='checked']:is([data-disabled=''],[data-disabled='true']) {
   background: ${tokens.disabled.track};
   border-color: ${tokens.disabled.border};
 }
 
-${label}[data-disabled='true'] {
+${label}:is([data-disabled=''],[data-disabled='true']) {
   color: ${tokens.disabled.thumb};
   cursor: not-allowed;
 }

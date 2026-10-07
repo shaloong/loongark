@@ -1,3 +1,5 @@
+import { useFieldContext } from "@ark-ui/solid/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
 import { nativeSelectionRef } from "../native-selection";
 import {
   useSwitchContext,
@@ -29,26 +31,22 @@ export interface LoongArkSwitchProps
   onCheckedChange?: (details: { checked: boolean }) => void;
 }
 
-const defaults: Required<Pick<LoongArkSwitchProps, "size" | "disabled">> = {
+const defaults: Required<Pick<LoongArkSwitchProps, "size">> = {
   size: "md",
-  disabled: false,
 };
 
 export const LoongArkSwitchRoot: Component<LoongArkSwitchProps> = (props) => {
   const merged = mergeProps(defaults, props);
-  const [local, rest] = splitProps(merged, ["size", "disabled"]);
+  const [local, rest] = splitProps(merged, ["size"]);
   return ArkSwitch.Root(
     mergeProps(rest, {
-      get disabled() {
-        return local.disabled;
-      },
       "data-scope": "switch",
       "data-part": "root",
       get "data-size"() {
         return local.size;
       },
       get "data-disabled"() {
-        return boolAttr(local.disabled);
+        return boolAttr(merged.disabled);
       },
     }),
   );
@@ -112,9 +110,21 @@ export const LoongArkSwitchLabel: Component<{
 export const LoongArkSwitchHiddenInput: Component<SwitchHiddenInputProps> = (
   props,
 ) => {
+  const field = useFieldContext();
   const api = useSwitchContext();
   const ref = nativeSelectionRef(() => ({ checked: api().checked }), props.ref);
-  return ArkSwitch.HiddenInput(mergeProps(props, { ref }));
+  return ArkSwitch.HiddenInput(
+    mergeProps(props, {
+      ref,
+      get "aria-describedby"() {
+        return nativeSelectionFieldDescription(
+          props["aria-describedby"],
+          field?.(),
+          api().getHiddenInputProps()["aria-invalid"],
+        );
+      },
+    }),
+  );
 };
 export const LoongArkSwitch = {
   Root: LoongArkSwitchRoot,

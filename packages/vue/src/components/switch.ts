@@ -1,3 +1,5 @@
+import { useFieldContext } from "@ark-ui/vue/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
 import type { SwitchHiddenInputProps } from "@ark-ui/vue/switch";
 import { nativeSelectionRef } from "../native-selection";
 import { useSwitchContext } from "@ark-ui/vue/switch";
@@ -15,24 +17,19 @@ const sizeProp = {
   default: "md" as SwitchSize,
 };
 
-const boolProp = (defaultValue = false) => ({
-  type: {} as PropType<boolean>,
-  default: defaultValue,
-});
-
 export const LoongArkSwitchRoot = defineComponent({
   name: "LoongArkSwitchRoot",
   props: {
     size: sizeProp,
-    disabled: boolProp(false),
+    disabled: { type: Boolean, default: undefined },
     checked: { type: Boolean, default: undefined },
     defaultChecked: { type: Boolean, default: undefined },
     name: String,
     form: String,
     value: String,
-    readOnly: Boolean,
-    required: Boolean,
-    invalid: Boolean,
+    readOnly: { type: Boolean, default: undefined },
+    required: { type: Boolean, default: undefined },
+    invalid: { type: Boolean, default: undefined },
     onCheckedChange: Function as PropType<
       (details: { checked: boolean }) => void
     >,
@@ -56,7 +53,7 @@ export const LoongArkSwitchRoot = defineComponent({
           "data-scope": "switch",
           "data-part": "root",
           "data-size": props.size,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...(props.disabled ? { "data-disabled": "true" } : {}),
         },
         slots.default ? slots.default() : undefined,
       );
@@ -67,7 +64,7 @@ export const LoongArkSwitchControl = defineComponent({
   name: "LoongArkSwitchControl",
   props: {
     size: sizeProp,
-    disabled: boolProp(false),
+    disabled: { type: Boolean, default: undefined },
   },
   setup(props, { attrs, slots }) {
     return () =>
@@ -79,7 +76,7 @@ export const LoongArkSwitchControl = defineComponent({
           "data-scope": "switch",
           "data-part": "control",
           "data-size": props.size,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...(props.disabled ? { "data-disabled": "true" } : {}),
         },
         slots,
       );
@@ -105,7 +102,7 @@ export const LoongArkSwitchThumb = defineComponent({
 export const LoongArkSwitchLabel = defineComponent({
   name: "LoongArkSwitchLabel",
   props: {
-    disabled: boolProp(false),
+    disabled: { type: Boolean, default: undefined },
   },
   setup(props, { slots, attrs }) {
     return () =>
@@ -115,7 +112,7 @@ export const LoongArkSwitchLabel = defineComponent({
           ...attrs,
           "data-scope": "switch",
           "data-part": "label",
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...(props.disabled ? { "data-disabled": "true" } : {}),
         },
         slots.default ? slots.default() : undefined,
       );
@@ -125,11 +122,27 @@ export const LoongArkSwitchLabel = defineComponent({
 export const LoongArkSwitchHiddenInput =
   defineComponent<SwitchHiddenInputProps>(
     (props, { attrs, slots }) => {
+      const field = useFieldContext();
       const api = useSwitchContext();
 
       const ref = nativeSelectionRef(() => ({ checked: api.value.checked }));
       return () =>
-        renderPart(ArkSwitch.HiddenInput, { ...attrs, ...props, ref }, slots);
+        renderPart(
+          ArkSwitch.HiddenInput,
+          {
+            ...attrs,
+            ...props,
+            ref,
+            "aria-describedby": nativeSelectionFieldDescription(
+              typeof attrs["aria-describedby"] === "string"
+                ? attrs["aria-describedby"]
+                : props["aria-describedby"],
+              field?.value,
+              api.value.getHiddenInputProps()["aria-invalid"],
+            ),
+          },
+          slots,
+        );
     },
     {
       name: "LoongArkSwitchHiddenInput",

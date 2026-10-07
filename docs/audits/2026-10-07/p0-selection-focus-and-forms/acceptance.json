@@ -128,16 +128,45 @@
   "remote": {
     "commit": "6b2c38cf6144c650a0f65dd1a7fdad9de3656f76",
     "run": "https://github.com/shaloong/loongark/actions/runs/37619904958",
-    "status": "Linux 三引擎整库矩阵运行中；原生 Safari 已运行但因选择脚本依赖对象键顺序而失败，脚本整改后单独复验，不能记作通过。",
+    "status": "远端矩阵已结束：Firefox 完整通过；Chromium 与 WebKit 各发现一项焦点失败，后续 Field 批次继续修复。原生 Safari 的对象键顺序问题已由独立脚本批次复验通过。",
     "nativeSafariActual": "279 默认示例、49 项既有交互通过，新增 React/light 表单值等待失败；已下载并审阅真实失败截图。",
     "nativeSafariExpectedScope": "279 默认示例、217 高级交互，其中新增 16 项选择/标签场景",
     "followup": "../p0-safari-selection-values/acceptance.json",
     "pages": "https://github.com/shaloong/loongark/actions/runs/37619904761（6b2c38c success）",
-    "previousBatch": "5a505b6 的三引擎整库及原生 Safari 已全部通过，见前一批验收摘要"
+    "previousBatch": "5a505b6 的三引擎整库及原生 Safari 已全部通过，见前一批验收摘要",
+    "linuxActual": {
+      "chromium": {
+        "frameworkPassed": 619,
+        "failed": 1,
+        "skipped": 108,
+        "failure": "readonly Radio 测试未等待组状态提交"
+      },
+      "firefox": {
+        "frameworkPassed": 612,
+        "frameworkSkipped": 116,
+        "storyPassed": 225,
+        "storySkipped": 619
+      },
+      "webkit": {
+        "warmupPassed": 12,
+        "frameworkPassed": 611,
+        "failed": 1,
+        "skipped": 116,
+        "failure": "Solid TagsInput 删除后的延迟焦点覆盖 Tab"
+      }
+    },
+    "nativeSafariFollowupActual": {
+      "commit": "544f7018fcbe4d8fe89fa9ad4a354c3b2cd942a8",
+      "run": "https://github.com/shaloong/loongark/actions/runs/37625145545",
+      "defaultPassed": 279,
+      "advancedPassed": 217,
+      "status": "success",
+      "platform": "Safari 26.6.1 / macOS 15.7.9"
+    }
   },
   "limitations": [
     "手机为 320/375 模拟视口；真实手机触摸、系统输入法及设备浏览器仍缺少设备连接。",
-    "本批的原生 Safari/macOS 结果待远端执行，Linux WebKit 或协议适配器结果不能替代。",
+    "本批源码 6b2c38c 的原生 Safari 脚本失败；544f701 的独立修正已在真实 macOS Safari 通过。当前 Field 批次的新场景需另行远端验收。",
     "RTL 本批验证布局、间距与滑块；没有声明所有组件的 RTL 键盘行为已完整覆盖。"
   ],
   "evidenceStorage": "日志、结果图、联系表及诊断位于忽略的 .artifacts/p0-selection/；Git 只保存摘要和实际审阅的 Linux 回归基线，CI 证据保留 14 天。",

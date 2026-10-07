@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-07",
+  "baseCommit": "544f7018fcbe4d8fe89fa9ad4a354c3b2cd942a8",
+  "scope": "P0：四端 Field/Fieldset 选择控件继承、真实表单与焦点生命周期",
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "platform": "Linux",
+    "chromium": "151.0.7922.173",
+    "firefox": "144.0.2",
+    "webkit": "26.0 / build 2227"
+  },
+  "changes": [
+    "省略属性保留 Field 默认状态，显式 false 允许控件覆盖；Radio 使用原生 Fieldset 禁用/错误语义。",
+    "Checkbox、Switch、TagsInput 的实际输入保留调用方描述并关联帮助及已挂载错误。",
+    "Field 输入选择器限定自身部件，消除嵌套 TagsInput 第二层边框；手机提交结果换行。",
+    "共享 Tab 焦点保护阻止过期 focus 继续进入状态机；Solid 原生行为在 onMount 后安装，替换与卸载清理。",
+    "四端示例、InheritedSelections Story、四端无 DOM SSR、状态覆盖/必填/错误描述和冻结帧竞争回归。",
+    "TagsInput 必填且为空时保留隐藏字段的原生提交阻断，将焦点转交可见输入；调用方取消无效提示及卸载后不抢走焦点。",
+    "Switch/TagsInput 禁用样式兼容 Ark 空值标记与显式 true；Vue 不以 undefined 覆盖继承的部件状态。"
+  ],
+  "regressionEvidence": [
+    "旧 6b2c38c 构建的四端标签删除后 Tab，在冻结帧回归中全部复现焦点抢回。",
+    "真实远端 6b2c38c：Chromium readonly Radio 回归未等待状态提交；WebKit Solid TagsInput 延迟焦点覆盖 Tab。Firefox 完整矩阵通过。",
+    "首轮新 Field 测试复现帮助/错误关联缺失、Vue 无 Field 上下文崩溃、Svelte 描述未响应、Solid 默认 disabled 遮蔽继承和窄屏提交文本溢出，逐项修正后复验。",
+    "Chromium 实际四端清空必填标签后复现隐藏字段无法聚焦的浏览器错误，提交被阻止但停留在按钮；补值与卸载分支继续回归。",
+    "禁用 Field 的四端真实输入已禁用，但 Switch/TagsInput 原生 data-disabled 空值未匹配旧样式；Vue 还覆盖为空缺失。补禁用鼠标提示与显式恢复状态回归。",
+    "禁用样式回归进一步发现：TagsInput 显式恢复可用后仍继承父 Field 的不可用光标；为可编辑外框明确文本光标，禁用选择器继续优先。",
+    "多个字段同时无效时，标签 invalid 聚焦后状态机会延迟抢回浏览器已选的首个错误；四端真实事件轨迹均复现。按原生 willValidate/validity 顺序只处理首个标签代理，并验证普通输入位于标签前后两种顺序。",
+    "动态原生约束回归在修正前失败：延迟恢复必须重查当前首错顺序。冻结帧补充验证无新按键的异步原生提交；Enter 会按既有契约取消 Tab 保护，初版测试错误地期望其继续保护，已修正场景。"
+  ],
+  "checks": {
+    "orderedBuilds": "最终源码按 verify → check:contracts → storybook:build → check:coverage → check:publication → check:svelte → 新构建四端消费/283示例，全部通过。",
+    "svelte": {
+      "errors": 0,
+      "existingWarnings": 4
+    },
+    "coverage": {
+      "families": 119,
+      "stories": 331,
+      "publicValuesPerFramework": 794,
+      "examples": 283
+    },
+    "finalFrameworks": {
+      "passed": 201,
+      "skipped": 36,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "scope": "最终源码：Field/Fieldset继承、原生提交及首错焦点、冻结帧保护、选择控件、Svelte绑定、Vue asChild、Solid ref及四端发布消费；36项为环境范围跳过。",
+      "log": ".artifacts/p0-field/accepted-frameworks.log"
+    },
+    "nativeProtocol": {
+      "passed": 72,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "scope": "最终产物与脚本，三引擎四端两主题，选择/标签/Field三种流程；原生必填清空、多字段错误顺序、可见焦点和补值提交。",
+      "notSafari": true,
+      "log": ".artifacts/p0-field/priority-native-protocol.log"
+    },
+    "logs": "最终构建 priority-{verify,check-*,storybook-build,fixtures}.log；最终交互/质量/视觉 accepted-*.log，均在 .artifacts/p0-field/。",
+    "storyInteractions": {
+      "passed": 81,
+      "skipped": 192,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "scope": "Field组合、焦点竞争、选择控件、Combobox/DatePicker/Command等复合焦点与步进器LTR/RTL边角、选择输入、修复展示页及默认挂载；四端消费场景跳过。",
+      "log": ".artifacts/p0-field/accepted-story-interaction.log"
+    },
+    "storyQuality": {
+      "passed": 10,
+      "storiesPerTheme": 331,
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "qualityBatches": 8,
+      "defaultWcag2AaaViolations": 0,
+      "scope": "Chromium 全 Story 默认状态；每主题331项桌面/375窄屏间距与动效属性，以及默认状态 WCAG2 A/AA 自动扫描，不替代所有交互状态或屏幕阅读器真机验收。",
+      "log": ".artifacts/p0-field/accepted-story-quality.log"
+    },
+    "visual": {
+      "existingPassed": 286,
+      "newPassed": 8,
+      "firstComparison": "8项仅缺少本批新场景基线；其他286项全部通过。逐张审阅后手工保存8张Linux基线并以禁止更新模式复验。",
+      "existingFilesUnchanged": 312,
+      "windowsFilesUnchanged": 2,
+      "logs": [
+        ".artifacts/p0-field/accepted-visual-initial.log",
+        ".artifacts/p0-field/accepted-visual-new.log"
+      ]
+    }
+  },
+  "previousNativeSafariActual": {
+    "commit": "544f7018fcbe4d8fe89fa9ad4a354c3b2cd942a8",
+    "run": "https://github.com/shaloong/loongark/actions/runs/37625145545",
+    "platform": "Safari 26.6.1 / macOS 15.7.9",
+    "defaultPassed": 279,
+    "advancedPassed": 217,
+    "status": "success"
+  },
+  "remote": {
+    "status": "本批尚未推送，当前源码原生 Safari 尚未执行",
+    "expectedNativeScope": {
+      "defaultExamples": 283,
+      "advancedInteractions": 225
+    },
+    "note": "预计范围不作为实际通过数量。"
+  },
+  "limitations": [
+    "手机为 320/375 模拟视口；尚无真实手机、系统输入法或设备浏览器连接。",
+    "Linux WebKit 与 W3C 流程的 Playwright 适配器不能替代 macOS Safari。",
+    "本批针对选择控件 Field 组合与焦点，不声明整库 P0 或所有高级能力已全部完成。"
+  ],
+  "evidenceStorage": "过程截图、联系表、trace、日志和协议结果在忽略的 .artifacts/p0-field/ 与 CI Artifact（14 天）；Git 仅保存简短摘要和实际用于回归的已审阅 Linux 基线。",
+  "manualReview": {
+    "finalSourceFieldScreenshots": 72,
+    "scope": "最终产物三引擎四端浅/深色，1280桌面、320窄屏及375长描述RTL；WebKit按DPR归一化，重新查看9张联系表，检查单层外框、标签/控件、提示/错误、焦点、按钮与提交文本换行。",
+    "visualBaselines": "8张新Linux原图已逐张审阅并比较通过：1280/320，浅/深色，默认与长文本RTL错误状态；原312份基线哈希保持不变。",
+    "disabledFinalScreenshots": 8,
+    "disabledScope": "Chromium 四端明暗375px，8张控制区联系表及Vue深色原图，禁用标记恢复、Switch轨道/滑块与TagsInput低对比背景一致。"
+  }
+}

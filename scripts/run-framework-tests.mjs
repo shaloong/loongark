@@ -37,6 +37,8 @@ const child = spawn(
     "tests/focus-ownership.spec.ts",
     "tests/compound-field-focus.spec.ts",
     "tests/selection-control-focus.spec.ts",
+    "tests/field-selection.spec.ts",
+    "tests/selection-focus-timing.spec.ts",
     "tests/svelte-selection-binding.spec.ts",
     "tests/vue-native-selection-parts.spec.ts",
     "tests/solid-native-selection-ref.spec.ts",

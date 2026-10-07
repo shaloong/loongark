@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { nativeSelectionProps } from "@loongark/kit";
   import {
     Switch,
     useSwitch,
@@ -11,10 +12,10 @@
     checked = $bindable(),
     size = "md",
     defaultChecked,
-    disabled = false,
-    invalid = false,
-    readOnly = false,
-    required = false,
+    disabled,
+    invalid,
+    readOnly,
+    required,
     name,
     value,
     form,
@@ -26,22 +27,26 @@
   }: SwitchRootProps & SwitchPrimitiveProps = $props();
   const providedId = $props.id();
   const api = useSwitch(() => ({
+    ...nativeSelectionProps({
+      ids,
+      checked,
+      defaultChecked,
+      disabled,
+      invalid,
+      readOnly,
+      required,
+      name,
+      value,
+      form,
+      label,
+      onCheckedChange(
+        details: Parameters<NonNullable<SwitchRootProps["onCheckedChange"]>>[0],
+      ) {
+        if (!onCheckedChange) checked = details.checked;
+        onCheckedChange?.(details);
+      },
+    }),
     id: id ?? providedId,
-    ids,
-    checked,
-    defaultChecked,
-    disabled,
-    invalid,
-    readOnly,
-    required,
-    name,
-    value,
-    form,
-    label,
-    onCheckedChange(details) {
-      if (!onCheckedChange) checked = details.checked;
-      onCheckedChange?.(details);
-    },
   }));
 </script>
 

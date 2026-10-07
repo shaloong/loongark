@@ -1,3 +1,5 @@
+import { useFieldContext } from "@ark-ui/solid/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
 /**
  * Tags Input component - Solid wrapper.
  * Uses Ark UI Tags Input with data attributes for styling.
@@ -39,30 +41,20 @@ export const LoongArkTagsInputRoot: Component<LoongArkTagsInputRootProps> = (
     {
       size: "md" as TagsInputSize,
       state: "default" as TagsInputState,
-      disabled: false,
-      readOnly: false,
     },
     props,
   );
-  const [local, others] = splitProps(merged, [
-    "children",
-    "size",
-    "state",
-    "disabled",
-    "readOnly",
-  ]);
+  const [local, others] = splitProps(merged, ["children", "size", "state"]);
 
   return (
     <ArkTagsInput.Root
       {...others}
-      disabled={local.disabled}
-      readOnly={local.readOnly}
       data-scope="tags-input"
       data-part="root"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
-      data-readonly={local.readOnly ? "true" : undefined}
+      data-disabled={merged.disabled ? "true" : undefined}
+      data-readonly={merged.readOnly ? "true" : undefined}
     >
       {local.children}
     </ArkTagsInput.Root>
@@ -156,6 +148,7 @@ export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
     "readOnly",
   ]);
 
+  const field = useFieldContext();
   const api = useTagsInputContext();
   const disabled = () =>
     local.disabled ?? !!api().getHiddenInputProps().disabled;
@@ -166,6 +159,11 @@ export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
       {...others}
       disabled={disabled()}
       readOnly={readOnly()}
+      aria-describedby={nativeSelectionFieldDescription(
+        others["aria-describedby"],
+        field?.(),
+        api().getInputProps()["aria-invalid"],
+      )}
       data-scope="tags-input"
       data-part="input"
       data-size={local.size}

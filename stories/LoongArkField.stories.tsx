@@ -1,5 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { FieldSelectionExample } from "../examples/react/FieldSelectionExample";
 import * as L from "@loongark/react";
 const meta = {
   title: "Components/Field",
@@ -21,4 +22,8 @@ export const Basic: StoryObj = {
       </L.LoongArkField.Root>
     </div>
   ),
+};
+
+export const InheritedSelections: StoryObj = {
+  render: () => <FieldSelectionExample />,
 };

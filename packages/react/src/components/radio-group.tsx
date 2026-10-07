@@ -1,3 +1,4 @@
+import { nativeSelectionProps } from "@loongark/kit";
 import { dataProps } from "../data-props";
 import { useNativeSelection } from "../native-selection";
 import {
@@ -109,23 +110,25 @@ export const LoongArkRadioGroupRoot = forwardRef<
   ) => {
     return createElement(
       RadioGroup.Root,
-      dataProps({
-        ref,
-        defaultValue,
-        value,
-        disabled,
-        readOnly,
-        name,
-        form,
-        orientation,
-        onValueChange,
-        className,
-        "data-scope": "radio-group",
-        "data-part": "root",
-        "data-size": size,
-        "data-orientation": orientation,
-        ...props,
-      }),
+      dataProps(
+        nativeSelectionProps({
+          ref,
+          defaultValue,
+          value,
+          disabled,
+          readOnly,
+          name,
+          form,
+          orientation,
+          onValueChange,
+          className,
+          "data-scope": "radio-group",
+          "data-part": "root",
+          "data-size": size,
+          "data-orientation": orientation,
+          ...props,
+        }),
+      ),
       children,
     );
   },

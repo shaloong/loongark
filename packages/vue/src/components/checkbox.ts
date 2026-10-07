@@ -1,3 +1,5 @@
+import { useFieldContext } from "@ark-ui/vue/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
 import type { CheckboxHiddenInputProps } from "@ark-ui/vue/checkbox";
 import { nativeSelectionRef } from "../native-selection";
 import { useCheckboxContext } from "@ark-ui/vue/checkbox";
@@ -34,19 +36,19 @@ export const LoongArkCheckboxRoot = defineComponent({
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     invalid: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     readOnly: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     required: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     name: {
       type: String,
@@ -158,6 +160,7 @@ export const LoongArkCheckboxIndicator = defineComponent({
 export const LoongArkCheckboxHiddenInput =
   defineComponent<CheckboxHiddenInputProps>(
     (props, { attrs, slots }) => {
+      const field = useFieldContext();
       const api = useCheckboxContext();
 
       const ref = nativeSelectionRef(() => ({
@@ -171,6 +174,13 @@ export const LoongArkCheckboxHiddenInput =
             ...attrs,
             ...props,
             ref,
+            "aria-describedby": nativeSelectionFieldDescription(
+              typeof attrs["aria-describedby"] === "string"
+                ? attrs["aria-describedby"]
+                : props["aria-describedby"],
+              field?.value,
+              api.value.getHiddenInputProps()["aria-invalid"],
+            ),
             "data-scope": "checkbox",
             "data-part": "hidden-input",
           },

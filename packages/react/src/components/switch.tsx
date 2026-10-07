@@ -1,9 +1,12 @@
+import { useFieldContext } from "@ark-ui/react/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
 import type {
   HTMLAttributes,
   InputHTMLAttributes,
   TextareaHTMLAttributes,
   ButtonHTMLAttributes,
 } from "react";
+import { nativeSelectionProps } from "@loongark/kit";
 import { dataProps } from "../data-props";
 import { useNativeSelection } from "../native-selection";
 import {
@@ -39,14 +42,11 @@ export interface LoongArkSwitchProps
 export const LoongArkSwitchRoot = forwardRef<
   HTMLLabelElement,
   LoongArkSwitchProps
->(
-  (
-    { children, size = "md", disabled = false, onCheckedChange, ...rest },
-    ref,
-  ) =>
-    createElement(
-      ArkSwitch.Root,
-      dataProps({
+>(({ children, size = "md", disabled, onCheckedChange, ...rest }, ref) =>
+  createElement(
+    ArkSwitch.Root,
+    dataProps(
+      nativeSelectionProps({
         ...rest,
         onCheckedChange,
         disabled,
@@ -56,8 +56,9 @@ export const LoongArkSwitchRoot = forwardRef<
         "data-size": size,
         "data-disabled": disabled ? "true" : undefined,
       }),
-      children,
     ),
+    children,
+  ),
 );
 
 LoongArkSwitchRoot.displayName = "LoongArkSwitchRoot";
@@ -65,7 +66,7 @@ LoongArkSwitchRoot.displayName = "LoongArkSwitchRoot";
 export const LoongArkSwitchControl = forwardRef<
   HTMLButtonElement,
   LoongArkSwitchProps
->(({ size = "md", disabled = false, ...rest }, ref) =>
+>(({ size = "md", disabled, ...rest }, ref) =>
   createElement(
     ArkSwitch.Control,
     dataProps({
@@ -123,8 +124,18 @@ export const LoongArkSwitchHiddenInput = forwardRef<
   HTMLInputElement,
   SwitchHiddenInputProps
 >((props, ref) => {
-  const input = useNativeSelection(useSwitchContext(), "checkbox", ref);
-  return createElement(ArkSwitch.HiddenInput, { ...props, ref: input });
+  const field = useFieldContext();
+  const api = useSwitchContext();
+  const input = useNativeSelection(api, "checkbox", ref);
+  return createElement(ArkSwitch.HiddenInput, {
+    ...props,
+    ref: input,
+    "aria-describedby": nativeSelectionFieldDescription(
+      props["aria-describedby"],
+      field,
+      api.getHiddenInputProps()["aria-invalid"],
+    ),
+  });
 });
 LoongArkSwitchHiddenInput.displayName = "LoongArkSwitchHiddenInput";
 

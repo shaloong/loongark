@@ -110,6 +110,9 @@ for (const framework of ["Story", "react", "vue", "solid", "svelte"])
         await button("Reject updates").click();
         await button("Read only").click();
         await expect(tags).toHaveJSProperty("readOnly", true);
+        await expect(
+          form.locator("[data-scope=radio-group][data-part=root]"),
+        ).toHaveAttribute("aria-readonly", "true");
         const readonlyText = await tags.inputValue();
         await tags.press("x");
         await expect(tags).toHaveValue(readonlyText);
