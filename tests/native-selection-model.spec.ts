@@ -36,6 +36,49 @@ const fixture = async (page: import("@playwright/test").Page) => {
   );
   await page.addScriptTag({ content: browserModule });
 };
+test("选择控件卸载后不再读取只读状态，新的按键允许同步聚焦标签输入", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await fixture(page);
+  await page.setContent(
+    '<input id="outside" type="checkbox"><div data-scope="tags-input" data-part="root"><input data-part="input"><input id="tags" data-scope="tags-input" data-part="hidden-input" hidden></div>',
+  );
+  await page.evaluate(() => {
+    const w = window as unknown as {
+      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      disposeSelection(): void;
+      reads: number;
+    };
+    w.reads = 0;
+    const outside = document.querySelector<HTMLInputElement>("#outside")!;
+    const tags = document.querySelector<HTMLInputElement>("[data-part=input]")!;
+    w.disposeSelection = w.mountNativeSelection(outside, () => {
+      w.reads++;
+      return { readOnly: true };
+    });
+    w.mountNativeSelection(
+      document.querySelector<HTMLInputElement>("#tags")!,
+      () => ({ formValue: "" }),
+    );
+    outside.addEventListener("keydown", () => tags.focus());
+  });
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
+  const tags = page.locator("[data-part=input]");
+  await tags.focus();
+  await page.keyboard.press("Shift+Tab");
+  await expect(page.locator("#outside")).toBeFocused();
+  await page.evaluate(() =>
+    (window as unknown as { disposeSelection(): void }).disposeSelection(),
+  );
+  await page.keyboard.press("ArrowRight");
+  await expect(tags).toBeFocused();
+  await page.clock.runFor(100);
+  await expect(tags).toBeFocused();
+  expect(
+    await page.evaluate(() => (window as unknown as { reads: number }).reads),
+  ).toBe(0);
+});
 test("拒绝点击与原生 reset 后表单值保持调用方已接受状态，不重复派发事件", async ({
   page,
 }) => {

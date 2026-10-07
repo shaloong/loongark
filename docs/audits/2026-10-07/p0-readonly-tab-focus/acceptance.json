@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-07",
+  "baseCommit": "4c0a01010d763db06b128c43cd0ee33166d97158",
+  "scope": "P0：标签外框 Tab 离开、只读选择键与主动焦点的竞争及卸载",
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "chromium": "151.0.7922.173",
+    "firefox": "144.0.2",
+    "webkit": "26.0 / build 2227"
+  },
+  "before": [
+    "4c0a010 真实 Chromium 完整四端 643通过/1失败/114跳过，Vue浅色320px只读单选焦点被标签延迟任务抢回；Story未执行。",
+    "冻结帧与可信连续 Shift+Tab 在旧产物复现同一竞争；只读标签外框也是实际 Tab 停靠点。"
+  ],
+  "changes": [
+    "共享保护覆盖标签组件所有部件的 Tab 离开，不预测焦点顺序。",
+    "使用控件当前状态与相同原生只读键契约识别被拦截的外部按键；其他有效按键同步取消保护，保留调用方处理器内的主动聚焦。",
+    "卸载删除输入状态读取器，保留替换节点和原有监听/动画清理。",
+    "四端及 Story 用可信 Tab 顺序检查原生只读值；冻结帧回归另验方向键竞争、有效 Enter 同步聚焦及卸载。"
+  ],
+  "checks": {
+    "orderedBuilds": "verify → check:contracts → storybook:build → check:coverage → check:publication → check:svelte → 四端消费与283示例新构建，全部通过。",
+    "coverage": {
+      "families": 119,
+      "stories": 331,
+      "publicValuesPerFramework": 794,
+      "examples": 283
+    },
+    "frameworks": {
+      "passed": 213,
+      "skipped": 39,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "log": ".artifacts/p0-field/readonly-final-frameworks.log"
+    },
+    "disposal": {
+      "passed": 3,
+      "log": ".artifacts/p0-field/readonly-final-disposal.log"
+    },
+    "nativeProtocol": {
+      "passed": 72,
+      "notNativeSafari": true,
+      "log": ".artifacts/p0-field/readonly-final-native.log"
+    },
+    "story": {
+      "passed": 84,
+      "skipped": 204,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "log": ".artifacts/p0-field/readonly-final-story.log"
+    },
+    "visual": {
+      "passed": 294,
+      "updateSnapshots": "none",
+      "log": ".artifacts/p0-field/readonly-final-visual.log"
+    },
+    "existingSnapshots": {
+      "files": 320,
+      "changed": 0,
+      "windowsUnchanged": 2
+    },
+    "lint": "通过；验收文件保存约定、MIT许可与覆盖复验通过。"
+  },
+  "manualReview": {
+    "screenshots": 48,
+    "scope": "三引擎四端明暗，1280桌面及320窄屏，只读标签输入焦点；6张联系表与Firefox Vue桌面原图，检查整圈焦点、标签/控件首行与间距和窄屏换行。"
+  },
+  "remote": {
+    "status": "本次产品修复待推送后独立运行完整矩阵；旧源码平台结果保留在前批摘要。"
+  },
+  "limitations": [
+    "本批为共享行为修复，四端渲染/API/样式未增加，现有示例与Story同步覆盖新行为。",
+    "旧源码原生Safari 283默认/225高级和Firefox整库通过不等于本次新源码完成远端验收。",
+    "手机仍为模拟视口，无真实手机或系统输入法连接；不声明整库所有P0方向完成。"
+  ],
+  "evidenceStorage": "原图、联系表、trace和日志仅保存在忽略的.artifacts/p0-field/及14天CI Artifact；Git只保存摘要。"
+}

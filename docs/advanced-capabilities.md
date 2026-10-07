@@ -4,7 +4,7 @@
 
 当前平台结果（2026-10-07）：develop `5a505b6` 的原生 Safari 26.6.1 / macOS 15.7.9 已通过 275 个默认示例和 201 项高级交互；本批相关的 33 张问卷/焦点截图已实际审阅，完整结果与 Artifact 见验收摘要。此前 `381460e` Chromium 整套成功，Firefox 有 16 个程序化聚焦断言失败，WebKit 有矩阵问卷缩屏和不支持的滚动锚定属性断言失败；5a505b6 的 Linux 三引擎整库矩阵现已全部通过。P0 本地已完成问卷缩屏、滚动锚定清理和可信 Tab 验收整改；最终三引擎专项及原基线视觉通过，本批远端四个平台整套已通过，选择控件后续批次仍单独验收，见[范围与限制](audits/2026-10-07/p0-native-layout-and-scroll/acceptance.json)。下文按时间保留的失败追踪是历史记录，不能替代此处当前结果；真实手机仍需设备连接。
 
-P0 选择控件后续批次已实现四端可见焦点、首行/RTL 间距、受控拒绝及原生 reset；补齐 Svelte 初始 undefined 绑定和 Vue 原生 asChild/输入属性。544f701 原生 Safari 26.6.1 / macOS 15.7.9 已通过 279 默认/217 高级交互，并实际审阅本批 16 张相关截图；6b2c38c Firefox 整套 612 四端/225 Story 通过，Chromium 和 WebKit 各有一条焦点失败，本批 Field/焦点时序定向回归已修正，并补齐空标签必填与禁用视觉继承，完整远端矩阵仍需本批推送后执行；不能将 Linux 矩阵记作全通过。具体新增契约与本地验证见[Field 与焦点验收](audits/2026-10-07/p0-field-inheritance-and-focus/acceptance.json)。见[选择控件验收](audits/2026-10-07/p0-selection-focus-and-forms/acceptance.json)及[Safari 复验](audits/2026-10-07/p0-safari-selection-values/acceptance.json)。
+P0 选择控件与 Field 已补齐四端可见焦点、首行/RTL、受控拒绝/reset、原生属性与描述继承及必填首错顺序。Field 源码 4c0a010 原生 Safari 26.6.1 / macOS 15.7.9 已通过283默认/225高级并审阅24张相关图；Firefox整库636四端/236 Story通过，Chromium有一条只读焦点竞争失败，WebKit继续运行。后续修复覆盖标签外框的可信 Tab 离开、被只读控件拦截的方向键和有效按键的同步主动聚焦；本地三引擎及整库远端结果分别保存，不能把前批平台通过算作新源码通过。见[Field验收](audits/2026-10-07/p0-field-inheritance-and-focus/acceptance.json)与[只读焦点复验](audits/2026-10-07/p0-readonly-tab-focus/acceptance.json)。
 
 ## 高级表格
 

@@ -113,16 +113,41 @@ for (const framework of ["Story", "react", "vue", "solid", "svelte"])
         await expect(
           form.locator("[data-scope=radio-group][data-part=root]"),
         ).toHaveAttribute("aria-readonly", "true");
-        const readonlyText = await tags.inputValue();
-        await tags.press("x");
-        await expect(tags).toHaveValue(readonlyText);
-        await checkbox.press("Space");
-        await toggle.press("Space");
+        // 按实际 DOM 的 Tab 顺序检查只读控件，避免程序化跳转留下标签输入的待运行焦点任务。
+        await form.evaluate((n) => {
+          const b = document.createElement("button");
+          b.textContent = "Focus start";
+          b.dataset.selectionStart = "";
+          n.before(b);
+        });
+        await start.focus();
+        await page.keyboard.press("Tab");
+        await expect(checkbox).toBeFocused();
+        await page.keyboard.press("Space");
+        await page.keyboard.press("Tab");
+        await expect(toggle).toBeFocused();
+        await page.keyboard.press("Space");
+        await page.keyboard.press("Tab");
         const readonlyRadio = form.locator(
           "[data-scope=radio-group] input:checked",
         );
-        await readonlyRadio.press("ArrowRight");
         await expect(readonlyRadio).toBeFocused();
+        await page.keyboard.press("ArrowRight");
+        await expect(readonlyRadio).toBeFocused();
+        await page.keyboard.press("Tab");
+        await expect(
+          form.locator("[data-scope=tags-input][data-part=control]"),
+        ).toBeFocused();
+        await page.keyboard.press("Tab");
+        await expect(tags).toBeFocused();
+        const readonlyText = await tags.inputValue();
+        await page.keyboard.press("x");
+        await expect(tags).toHaveValue(readonlyText);
+        await start.evaluate((n) => n.remove());
+        await page.screenshot({
+          path: `.artifacts/p0-field/readonly-${browserName}-${framework}-${mode}-${width}.png`,
+          fullPage: true,
+        });
         await expect.poll(entries).toEqual({
           agreement: "on",
           notifications: "on",

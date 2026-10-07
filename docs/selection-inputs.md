@@ -69,7 +69,7 @@ Checkbox、Switch 和 TagsInput 未声明的 `disabled`、`readOnly`、`required
 
 RadioGroup 使用 Ark 的 Fieldset 契约：继承禁用和错误，直接 legend 为组提供标签，帮助/错误由原生 fieldset 关联；只读与必填由 RadioGroup 自身声明。原生 `fieldset disabled` 约束所有后代，不能用单选项或组的 `disabled={false}` 绕过它。四端 `FieldSelectionExample` 与 Field 的 `InheritedSelections` Story 演示动态继承、单字段覆盖、原生必填阻止提交及错误关联。
 
-TagsInput 在删除等操作后可能有待运行的焦点恢复。用户随后用 Tab 离开时，共享行为保留原生 Tab 已产生的目的地，并阻止过期焦点事件再次驱动状态机；后续键盘/指针操作、窗口失焦及卸载均解除保护。Solid 在 onMount 后安装原生行为，避免 ref 回调早于属性和父节点就绪；替换节点与卸载清理旧监听。
+TagsInput 在删除等操作后可能有待运行的焦点恢复。用户随后用 Tab 离开时，共享行为保留原生 Tab 已产生的目的地，并阻止过期焦点事件再次驱动状态机；保护覆盖标签外框与输入的 Tab 离开路径。其他有效按键、指针操作、窗口失焦及卸载均同步解除保护，允许调用方在按键处理器内主动聚焦；外部只读选择控件拦截的方向键、空格与 Home/End 没有新的焦点请求，保留当前 Tab 目的地。Solid 在 onMount 后安装原生行为，避免 ref 回调早于属性和父节点就绪；替换节点与卸载清理旧监听。
 
 必填 TagsInput 的序列化字段仍参与原生约束校验；若它是首个无效字段，空值提交被阻止时聚焦可见输入，避免浏览器尝试聚焦隐藏字段。多个字段同时无效或约束在恢复帧前改变时保留原生首错顺序。调用方已取消 invalid 的默认行为时由调用方管理提示与焦点；卸载释放 invalid 监听。错误文本与 Field.invalid 仍按现有受控契约提供。
 

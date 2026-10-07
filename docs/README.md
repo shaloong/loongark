@@ -310,3 +310,8 @@ macOS工作流补上共享发布夹具构建，真实Safari再次通过275个默
 本批还处理 TagsInput 删除后延迟焦点覆盖 Tab 的竞争；回归冻结帧队列并使用真实键盘操作。结果与平台限制见 [独立验收摘要](audits/2026-10-07/p0-field-inheritance-and-focus/acceptance.json)。
 
 本批最终本地验收：三引擎四端201项、Story81项通过；Chromium明暗各331个Story质量与默认WCAG2 A/AA扫描通过。已有286项及新增8项视觉比较通过，原312份基线（含Windows）哈希不变；8张新Linux原图逐张审阅。当前Field源码原生Safari须在本批推送后实际执行，不沿用此前279/217作为当前结果。
+
+
+## 2026-10-07 P0 只读控件与标签焦点竞争
+
+标签输入及外框的可信 Tab 离开统一保留实际目的地；外部只读选择控件拦截的按键不解除保护，其他有效按键同步解除，保留调用方主动聚焦。四端与 Story 增加冻结帧、真实 DOM Tab 顺序和卸载回归；公共入口、119族/331 Story/283示例不变。原 Field 批次Safari283默认/225高级和Firefox636四端/236 Story已通过，Chromium真实焦点失败由本批继续修正，不能算作整库全通过。验证范围与限制见[本批记录](audits/2026-10-07/p0-readonly-tab-focus/acceptance.json)。

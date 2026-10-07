@@ -41,6 +41,20 @@ export function nativeSelectionProps<T extends object>(
   return defined;
 }
 
+const nativeSelectionReaders = new WeakMap<
+  HTMLInputElement,
+  () => { readOnly?: boolean }
+>();
+const nativeReadonlyKeys = new Set([
+  " ",
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowUp",
+  "ArrowDown",
+  "Home",
+  "End",
+]);
+
 /** 标签编辑的延迟焦点恢复不能覆盖随后一次原生 Tab 的目的地。 */
 function mountTagTabFocus(hiddenInput: HTMLInputElement): () => void {
   const doc = hiddenInput.ownerDocument,
@@ -52,7 +66,12 @@ function mountTagTabFocus(hiddenInput: HTMLInputElement): () => void {
     // Solid 的 ref 在节点接入树之前运行，事件发生时再读取所属控件。
     const root = hiddenInput.closest("[data-scope=tags-input][data-part=root]");
     const input = root?.querySelector<HTMLInputElement>("[data-part=input]");
-    if (!input || event.target !== input) return;
+    if (
+      !input ||
+      !(event.target instanceof win.Node) ||
+      !root?.contains(event.target)
+    )
+      return;
     stopPending?.();
     let destination: HTMLElement | undefined, frame: number;
     const cleanup = () => {
@@ -65,7 +84,18 @@ function mountTagTabFocus(hiddenInput: HTMLInputElement): () => void {
       if (stopPending === cleanup) stopPending = undefined;
     };
     const cancel = (next: KeyboardEvent) => {
-      if (next !== event) cleanup();
+      if (next === event) return;
+      // 原生只读选择控件拦截这些键，不产生新的焦点请求。
+      // 其他按键同步解除保护，允许调用方在处理器内主动聚焦。
+      const target = next.target;
+      if (
+        target instanceof win.HTMLInputElement &&
+        !root?.contains(target) &&
+        nativeReadonlyKeys.has(next.key) &&
+        nativeSelectionReaders.get(target)?.().readOnly
+      )
+        return;
+      cleanup();
     };
     const moved = (next: FocusEvent) => {
       const target = next.target;
@@ -159,6 +189,7 @@ export function mountNativeSelection(
 ): () => void {
   const win = input.ownerDocument.defaultView;
   if (!win) return () => {};
+  nativeSelectionReaders.set(input, read);
   const stopTagFocus =
     input.dataset.scope === "tags-input" ? mountTagTabFocus(input) : undefined;
   let frame: number | undefined,
@@ -192,18 +223,7 @@ export function mountNativeSelection(
     if (event.target === input.form) schedule();
   };
   const readonlyKey = (event: KeyboardEvent) => {
-    if (
-      read().readOnly &&
-      [
-        " ",
-        "ArrowLeft",
-        "ArrowRight",
-        "ArrowUp",
-        "ArrowDown",
-        "Home",
-        "End",
-      ].includes(event.key)
-    )
+    if (read().readOnly && nativeReadonlyKeys.has(event.key))
       event.preventDefault();
   };
   input.addEventListener("keydown", readonlyKey, true);
@@ -212,6 +232,8 @@ export function mountNativeSelection(
   input.addEventListener("change", schedule);
   return () => {
     disposed = true;
+    if (nativeSelectionReaders.get(input) === read)
+      nativeSelectionReaders.delete(input);
     stopTagFocus?.();
     if (frame !== undefined) win.cancelAnimationFrame(frame);
     input.removeEventListener("keydown", readonlyKey, true);

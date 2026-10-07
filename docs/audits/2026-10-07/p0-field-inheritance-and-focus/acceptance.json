@@ -108,12 +108,51 @@
     "status": "success"
   },
   "remote": {
-    "status": "本批尚未推送，当前源码原生 Safari 尚未执行",
-    "expectedNativeScope": {
-      "defaultExamples": 283,
-      "advancedInteractions": 225
+    "runtimeCommit": "4c0a01010d763db06b128c43cd0ee33166d97158",
+    "browserRun": "https://github.com/shaloong/loongark/actions/runs/37652234213",
+    "status": "原生 Safari 通过且已审阅本批截图，Firefox完整矩阵通过；Chromium有一条只读焦点竞争失败，WebKit仍在执行。",
+    "nativeSafari": {
+      "status": "success",
+      "jobId": 112898240100,
+      "platform": "Safari 26.6.1 / macOS 15.7.9",
+      "defaultPassed": 283,
+      "advancedPassed": 225,
+      "artifactId": 11497383642,
+      "artifactSha256": "52e580aed3a2807b594d3886e01ecff4a68379441ab114ab69192058f63a2374",
+      "artifactExpiresAt": "2026-10-21T16:46:44Z",
+      "manualReviewedScreenshots": 24,
+      "manualScope": "四端明暗：Field/选择控件375px长描述RTL各8张、TagsInput清空焦点1280px共8张；窗口截图含滚动位置，非整页或真机手机。"
     },
-    "note": "预计范围不作为实际通过数量。"
+    "linux": {
+      "chromium": {
+        "status": "failure",
+        "jobId": 112898240250,
+        "frameworkPassed": 643,
+        "frameworkFailed": 1,
+        "frameworkSkipped": 114,
+        "stories": "四端失败后未执行",
+        "failure": "Vue 浅色320px：只读 Radio 的方向键后被 TagsInput 延迟焦点抢回；追加可信 Tab 与冻结帧回归继续修复。"
+      },
+      "firefox": {
+        "status": "success",
+        "jobId": 112898240141,
+        "frameworkPassed": 636,
+        "frameworkSkipped": 122,
+        "storyPassed": 236,
+        "storySkipped": 643
+      },
+      "webkit": {
+        "status": "in_progress",
+        "jobId": 112898240239
+      }
+    },
+    "pages": {
+      "status": "success",
+      "run": "https://github.com/shaloong/loongark/actions/runs/37652234085",
+      "publicUrl": "https://shaloong.github.io/loongark/",
+      "scope": "当前源码部署成功；CI实际验证公开主页/iframe/Story索引，构建任务通过真实子路径浏览器烟雾测试。",
+      "localDirectCheck": "本云端网络出口403，未把本地直接访问计作线上浏览器通过。"
+    }
   },
   "limitations": [
     "手机为 320/375 模拟视口；尚无真实手机、系统输入法或设备浏览器连接。",
@@ -126,6 +165,7 @@
     "scope": "最终产物三引擎四端浅/深色，1280桌面、320窄屏及375长描述RTL；WebKit按DPR归一化，重新查看9张联系表，检查单层外框、标签/控件、提示/错误、焦点、按钮与提交文本换行。",
     "visualBaselines": "8张新Linux原图已逐张审阅并比较通过：1280/320，浅/深色，默认与长文本RTL错误状态；原312份基线哈希保持不变。",
     "disabledFinalScreenshots": 8,
-    "disabledScope": "Chromium 四端明暗375px，8张控制区联系表及Vue深色原图，禁用标记恢复、Switch轨道/滑块与TagsInput低对比背景一致。"
+    "disabledScope": "Chromium 四端明暗375px，8张控制区联系表及Vue深色原图，禁用标记恢复、Switch轨道/滑块与TagsInput低对比背景一致。",
+    "nativeSafariCurrentScreenshots": 24
   }
 }
