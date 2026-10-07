@@ -370,6 +370,18 @@ export async function runNativeAdvanced(h, framework, mode) {
   await navigate(framework, "RichTextEditorExample", mode);
   const rich = '[data-scope="editor"][data-kind="rich"]',
     documentInput = rich + " .ProseMirror";
+  const richAction = async (action) => {
+    const selector = rich + ' button[data-action="' + action + '"]';
+    await waitFor(
+      () =>
+        execute(
+          "return document.querySelector(arguments[0])?.disabled===false",
+          [selector],
+        ),
+      "富文本工具可操作：" + action,
+    );
+    await click(selector);
+  };
   await waitFor(
     () =>
       execute(
@@ -380,7 +392,7 @@ export async function runNativeAdvanced(h, framework, mode) {
   );
   await type(documentInput, "A native structured document");
   await key(documentInput, "a", ["\uE03D"]);
-  await click(rich + ' button[data-action="bold"]');
+  await richAction("bold");
   await waitFor(
     () =>
       execute(
@@ -389,7 +401,7 @@ export async function runNativeAdvanced(h, framework, mode) {
       ),
     "结构化加粗",
   );
-  await click(rich + ' button[data-action="undo"]');
+  await richAction("undo");
   await waitFor(
     () =>
       execute('return !document.querySelector(arguments[0]+" strong")', [
@@ -397,7 +409,7 @@ export async function runNativeAdvanced(h, framework, mode) {
       ]),
     "富文本撤销",
   );
-  await click(rich + ' button[data-action="redo"]');
+  await richAction("redo");
   await waitFor(
     () =>
       execute('return !!document.querySelector(arguments[0]+" strong")', [

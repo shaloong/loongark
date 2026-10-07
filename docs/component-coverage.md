@@ -127,7 +127,7 @@
 
 Ark 组件保持原生状态机、事件和键盘语义。布局组件通过统一部件元数据渲染语义 HTML；四端共用 CSS。Calendar 使用 DatePicker 的 inline 模式；ContextMenu 使用真正的右键触发器；InputGroup 与 Label 使用 Field/Input 语义。
 
-AlertDialog/Sheet/Drawer 复用 Dialog 的焦点锁、Escape、隐藏与恢复行为；Drawer 为底部模态抽屉，不承诺 Vaul 的弹簧拖拽、吸附点等第三方 API。Menubar 在多个 Ark Menu 根节点之间提供横向循环焦点。NavigationMenu 使用 Popover 与语义导航链接。Sidebar 使用 Collapsible 管理面板。
+AlertDialog/Sheet 复用 Dialog 的焦点锁、Escape、隐藏与恢复行为。Drawer 使用 Ark UI 原生 Drawer，支持手势、吸附点、Stack、Grabber、SwipeArea、Indent 与全方向/RTL；实际 API 和验收限制见 [Drawer 说明](drawer.md)。Menubar 在多个 Ark Menu 根节点之间提供横向循环焦点。NavigationMenu 使用 Popover 与语义导航链接。Sidebar 使用 Collapsible 管理面板。
 
 DataTable 支持列排序、筛选、分页、行选择和空结果；当前行模型为标量字段。Chart 支持柱状/折线、多序列、负值、语义颜色、安全 SVG、原生提示和容器自适应；不是 Recharts 的 API 兼容层。Command 提供搜索、过滤集合和 Combobox 键盘选择。
 

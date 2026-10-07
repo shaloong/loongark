@@ -38,6 +38,36 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
     });
   });
 
+  test(`sheet stays flush with viewport and saves ${framework}`, async ({
+    page,
+  }) => {
+    test.skip(!process.env.STATIC_DIR, "四端发布产物布局回归");
+    for (const width of [1280, 375]) {
+      await page.setViewportSize({ width, height: 812 });
+      for (const mode of ["light", "dark"]) {
+        await page.goto(`/${framework}/`);
+        if (mode === "dark") await page.getByTestId("mode").click();
+        const trigger = page.getByRole("button", {
+          name: "Open sheet",
+          exact: true,
+        });
+        await trigger.click();
+        const sheet = page.getByRole("dialog", { name: "Edit profile" });
+        await expect(sheet).toBeInViewport({ ratio: 1 });
+        const bounds = await sheet.boundingBox();
+        expect(bounds!.y).toBe(0);
+        expect(bounds!.height).toBe(812);
+        expect(bounds!.x + bounds!.width).toBe(width);
+        await page.screenshot({
+          path: `.artifacts/gap-completion/sheet-${framework}-${mode}-${width}.png`,
+        });
+        await page.getByRole("button", { name: "Save changes" }).click();
+        await expect(sheet).toBeHidden();
+        await expect(trigger).toBeFocused();
+      }
+    }
+  });
+
   for (const kind of ["select", "sheet"]) {
     test(`closing ${kind} survives viewport resize ${framework}`, async ({
       page,

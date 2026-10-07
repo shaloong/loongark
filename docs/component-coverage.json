@@ -185,6 +185,7 @@
     "Localized Gregorian date text parser with explicit locale order/month names/digits, strict invalid-date rejection; native segmented date-time and zoned ISO form serialization",
     "Input and Textarea inherit unspecified root disabled/readOnly states; Vue native readOnly forwarding and Svelte required inheritance",
     "ContextMenu native unknown-pointer right click, touch/pen long-press cancellation and keyboard alternative; shared published handler guard",
-    "Chart inspection grid remains bounded with enlarged category text; Select/Combobox constrain stale floating reference widths after viewport resize; Sheet paints slide-out motion within its positioner"
+    "Chart inspection grid remains bounded with enlarged category text; Select/Combobox constrain stale floating reference widths after viewport resize; Sheet paints slide-out motion within its positioner",
+    "Sheet viewport-sized paint containment preserves entry/exit clipping and flush edges; four-framework desktop/mobile, both-theme save and focus recovery regression"
   ]
 }

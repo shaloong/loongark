@@ -74,6 +74,19 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
+          name: browser-review-captures-${{ matrix.browser }}
+          path: |
+            .artifacts/gap-completion/chart-types-*-stack.png
+            .artifacts/gap-completion/drawer-directions-*-rtl-up-compact.png
+            .artifacts/gap-completion/editor-default-code-*.png
+            .artifacts/gap-completion/layout-grid-*-rtl.png
+            .artifacts/gap-completion/sheet-*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
           name: browser-captures-${{ matrix.browser }}-react
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*react*.png
