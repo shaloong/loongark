@@ -91,5 +91,18 @@
     "failure": "原生按钮Tab已通过，下一次跳过链接定位末尾输入；组件套件未执行，失败原图已实际查看。",
     "change": "补充当前WebKitPreferences.tabFocusesLinks及Safari容器偏好；记录域名避免同名偏好覆盖报告。",
     "ciScope": "本批只运行原生Safari复验，保留59dc6d8的Linux整库任务；产品与Linux测试代码未改。"
+  },
+  "drawerFocusFollowUp": {
+    "sourceCommit": "84af6d130a54829499d74995917c6888a764db71",
+    "runId": 37561174786,
+    "jobId": 112598533927,
+    "result": "failed",
+    "preflight": "三个可信Tab分别定位按钮、链接、末尾输入通过",
+    "defaultsPassed": 275,
+    "interactionsPassed": 64,
+    "failure": "Drawer焦点可见断言失败；实际failureDOM焦点在Dialog容器，失败截图已查看。",
+    "cause": "测试在键盘定位按钮后使用鼠标点击扩大吸附点；macOS Safari点击按钮不必使其获得焦点。",
+    "change": "扩大吸附点继续使用原生Enter，并在拖动前严格确认吸附按钮保持焦点；拖动后完整可见断言不变。",
+    "limitations": "等待真实Safari重新执行，不计本次为通过。"
   }
 }

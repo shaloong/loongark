@@ -567,9 +567,18 @@ export async function runNativeAdvanced(h, framework, mode) {
       await key(dialog + " button", "\uE007");
       await matches(snap, small + "px");
       await extent(vertical, small);
-      await clickText("Toggle snap point");
+      // Safari 鼠标点击按钮不必获得焦点；连续使用原生 Enter 保留
+      // 已经由可信 Tab 定位的控件，随后检查拖动是否保持其可见。
+      await key(dialog + " button", "\uE007");
       await matches(snap, large + "px");
       await extent(vertical, large);
+      await waitFor(
+        () =>
+          execute(
+            "return document.activeElement?.textContent.trim()==='Toggle snap point'",
+          ),
+        "原生Drawer拖动前保留键盘焦点",
+      );
       await drag(physical, vertical ? 240 : 64);
       await matches(snap, small + "px");
       await extent(vertical, small);
