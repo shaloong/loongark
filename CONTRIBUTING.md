@@ -77,6 +77,8 @@ CROSS_BROWSER=1 node scripts/run-playwright.mjs --project=webkit --workers=2
 
 矩阵不运行 Chromium 截图比较；它在四端测试后先保存对应浏览器实际交互截图、失败截图和环境信息，再运行 Story，避免测试结果目录被后续命令覆盖。四端截图按框架拆分归档，环境信息与错误摘要单独保存，避免单个证据ZIP过大。Story 摘要/代表场景、trace 与全部默认截图分别保存，CI Artifact 保留14天。首次验收仍须下载并目视检查实际截图，不因添加流水线就宣称通过。
 
+浏览器契约工作流保留已启动的完整验收，连续推送只合并最新待运行批次，避免 WebKit 在后续开发提交时持续被取消。完整 Linux 任务预算为120分钟：实际四端 WebKit51.1分钟、先前完整 Story33.8分钟，另计安装、构建和证据上传。验收摘要记录每项对应的源码提交；新推送的排队状态不算通过，GitHub Pages继续独立部署 develop。
+
 原生 Safari 任务在 macOS 15 使用 Apple `/usr/bin/safaridriver` 的 W3C WebDriver，检查全部四端默认示例、页面溢出、批量多级历史/键盘/焦点和图表窗口的明暗交互。它独立于 Playwright WebKit，报告实际 Safari 版本及每个场景。Linux 不能运行此任务，桌面 Safari 也不代表真实 iOS 手机；真机验收仍需单独取得设备连接。只有对应任务成功且截图审阅完成才关闭平台清单。
 
 原生 Safari 高级套件还检查本地化日期与时间、横向列窗口和二维/瀑布流窗口、富文本表格与代码历史、全部新增图表类型、矩阵多选/排序和异步集合、列级查询与 Drawer 全方向/RTL。批量粘贴通过 macOS 系统剪贴板和原生快捷键执行；协议脚本在 Linux 的诊断不能计作真实 Safari 或手机通过。

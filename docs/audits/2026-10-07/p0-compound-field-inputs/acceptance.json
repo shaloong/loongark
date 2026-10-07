@@ -132,13 +132,18 @@
     "newLinuxBaselines": "12张默认焦点/禁用/错误长文本RTL原图逐张查看后仅复制到新增目录；首次比较12项仅因缺少基线失败，未自动更新旧图。"
   },
   "remote": {
-    "currentBatch": "推送后运行完整矩阵与原生 Safari；本地协议诊断不代替平台验收。",
-    "previousBatch": "74d3c6d Chromium648四端/238 Story、Firefox640四端/238 Story通过；WebKit仍运行。原生 Safari26.6.1/macOS15.7.9完成283默认和132交互后在Vue深色富文本删除表格失败，failure.png已实际查看，详见上一批摘要。"
+    "currentBatch": {
+      "browserRun": "https://github.com/shaloong/loongark/actions/runs/37674922439",
+      "pagesRun": "https://github.com/shaloong/loongark/actions/runs/37674922470",
+      "status": "两项均已启动；完成与截图审阅前不计通过。"
+    },
+    "previousBatch": "74d3c6d Chromium648四端/238 Story、Firefox640四端/238 Story通过；WebKit12预检/640四端通过，Story运行后被取消，无完整通过。原生Safari26.6.1/macOS15.7.9完成283默认/132交互后在Vue深色富文本删除表格失败，failure.png已实际查看。"
   },
   "limitations": [
     "最终样式/夹具修正后只重复相关63项消费与表单回归，不把先前269项作为完全相同最终产物的全量通过。",
     "整库跨浏览器及原生 Safari 需针对本次推送的新源码执行，不沿用旧版本通过记录。",
     "320/375宽度与Linux键盘输入属于模拟视口/桌面浏览器；未连接真实手机、移动系统输入法或读屏，不声明全部P0已完成。"
   ],
-  "evidenceStorage": "过程截图、联系表、trace、日志与失败归档仅存忽略的.artifacts/p0-field/及14天CI Artifact；Git保留此摘要和用于比较的12张新Linux基线。"
+  "evidenceStorage": "过程截图、联系表、trace、日志与失败归档仅存忽略的.artifacts/p0-field/及14天CI Artifact；Git保留此摘要和用于比较的12张新Linux基线。",
+  "sourceCommit": "c532fc97ea2a017d77ce8eb9e37a22798a685707"
 }

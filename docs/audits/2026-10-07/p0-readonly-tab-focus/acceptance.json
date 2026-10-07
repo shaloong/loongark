@@ -106,7 +106,15 @@
       "stories": 238,
       "storiesSkipped": 647
     },
-    "webkit": "仍运行，完成后记录实际结果。"
+    "webkit": {
+      "job": 112935718188,
+      "result": "cancelled",
+      "warmupPassed": 12,
+      "frameworks": 640,
+      "frameworksSkipped": 123,
+      "frameworkMinutes": 51.1,
+      "story": "启动后26.7分钟取消，未完成整套Story，不计平台整库通过。"
+    }
   },
   "limitations": [
     "本批为共享行为修复，四端渲染/API/样式未增加，现有示例与Story同步覆盖新行为。",

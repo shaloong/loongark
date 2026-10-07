@@ -10,7 +10,8 @@ permissions:
 
 concurrency:
   group: "browser-contracts-${{ github.ref }}${{ contains(github.event.head_commit.message, 'CI-Scope: safari') && '-safari' || '' }}"
-  cancel-in-progress: true
+  # 保留已启动的完整验收；后续推送合并为最新待运行批次，避免开发持续取消慢引擎。
+  cancel-in-progress: false
 
 jobs:
   engines:
@@ -18,8 +19,8 @@ jobs:
     if: "${{ !contains(github.event.head_commit.message, 'CI-Scope: safari') }}"
     name: Four frameworks / ${{ matrix.browser }}
     runs-on: ubuntu-24.04
-    # 新构建、完整四端消费与全部 Story 均在同一任务运行；Firefox 已完成四端483项，但全部 Story 在60分钟预算内未结束。
-    timeout-minutes: 90
+    # WebKit 实测四端51.1分钟，之前完整 Story 33.8分钟，另需安装/构建与证据上传。
+    timeout-minutes: 120
     strategy:
       fail-fast: false
       matrix:
