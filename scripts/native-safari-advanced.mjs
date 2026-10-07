@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { verifyNativeCodeHistory } from "../tests/nativeCodeHistoryChecks.ts";
 // 使用实际 Safari 的 W3C 输入、指针和系统剪贴板；验收记录以 macOS 任务为准。
 export async function runNativeAdvanced(h, framework, mode) {
   const {
@@ -346,26 +347,22 @@ export async function runNativeAdvanced(h, framework, mode) {
       ),
     "代码表单值同步",
   );
-  await click(code + ' button[data-action="undo"]');
-  await waitFor(
-    () =>
-      execute(
-        "return document.querySelector(arguments[0]).value===arguments[1]",
-        [codeField, initialCode],
-      ),
-    "代码撤销",
-  );
-  await click(code + ' button[data-action="redo"]');
-  await waitFor(
-    () =>
-      execute(
-        "return document.querySelector(arguments[0]).value===arguments[1]",
-        [codeField, source],
-      ),
-    "代码重做",
-  );
+  const codeHistory = await verifyNativeCodeHistory({
+    initial: initialCode,
+    source,
+    read: () =>
+      execute("return document.querySelector(arguments[0]).value", [codeField]),
+    canUndo: () =>
+      execute("return !document.querySelector(arguments[0]).disabled", [
+        code + ' button[data-action="undo"]',
+      ]),
+    undo: () => click(code + ' button[data-action="undo"]'),
+    redo: () => click(code + ' button[data-action="redo"]'),
+    waitFor,
+  });
   await clickText("Submit document");
   await finish("code-editor-native-history-form");
+  report.interactions.at(-1).history = codeHistory;
 
   await navigate(framework, "RichTextEditorExample", mode);
   const rich = '[data-scope="editor"][data-kind="rich"]',
