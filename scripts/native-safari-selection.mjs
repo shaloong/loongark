@@ -58,14 +58,16 @@ export async function runNativeSelection(h, framework, mode) {
       "return Object.fromEntries(new FormData(document.querySelector('form')))",
     );
   await waitFor(
-    async () =>
-      JSON.stringify(await values()) ===
-      JSON.stringify({
+    async () => {
+      // W3C 返回对象的键顺序不保证与浏览器内部一致，比较完整字段和值。
+      assert.deepEqual(await values(), {
         agreement: "on",
         notifications: "on",
         density: "comfortable",
         frameworks: "React, Vue, Solid",
-      }),
+      });
+      return true;
+    },
     "原生选择表单值",
   );
   const events = await execute("return window.__selectionKeys");
@@ -79,7 +81,10 @@ export async function runNativeSelection(h, framework, mode) {
   };
   const assertValues = () =>
     waitFor(
-      async () => JSON.stringify(await values()) === JSON.stringify(preserved),
+      async () => {
+        assert.deepEqual(await values(), preserved);
+        return true;
+      },
       "原生受控值保持",
     );
   await clickText("Reject updates");

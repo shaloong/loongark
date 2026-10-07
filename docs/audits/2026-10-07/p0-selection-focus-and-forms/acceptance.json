@@ -126,8 +126,13 @@
     "result": "通过；Linux 适配器不等同于原生 Safari"
   },
   "remote": {
-    "status": "本批待推送后验证，未执行 macOS Safari",
+    "commit": "6b2c38cf6144c650a0f65dd1a7fdad9de3656f76",
+    "run": "https://github.com/shaloong/loongark/actions/runs/37619904958",
+    "status": "Linux 三引擎整库矩阵运行中；原生 Safari 已运行但因选择脚本依赖对象键顺序而失败，脚本整改后单独复验，不能记作通过。",
+    "nativeSafariActual": "279 默认示例、49 项既有交互通过，新增 React/light 表单值等待失败；已下载并审阅真实失败截图。",
     "nativeSafariExpectedScope": "279 默认示例、217 高级交互，其中新增 16 项选择/标签场景",
+    "followup": "../p0-safari-selection-values/acceptance.json",
+    "pages": "https://github.com/shaloong/loongark/actions/runs/37619904761（6b2c38c success）",
     "previousBatch": "5a505b6 的三引擎整库及原生 Safari 已全部通过，见前一批验收摘要"
   },
   "limitations": [

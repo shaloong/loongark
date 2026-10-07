@@ -4,7 +4,7 @@
 
 当前平台结果（2026-10-07）：develop `5a505b6` 的原生 Safari 26.6.1 / macOS 15.7.9 已通过 275 个默认示例和 201 项高级交互；本批相关的 33 张问卷/焦点截图已实际审阅，完整结果与 Artifact 见验收摘要。此前 `381460e` Chromium 整套成功，Firefox 有 16 个程序化聚焦断言失败，WebKit 有矩阵问卷缩屏和不支持的滚动锚定属性断言失败；5a505b6 的 Linux 三引擎整库矩阵现已全部通过。P0 本地已完成问卷缩屏、滚动锚定清理和可信 Tab 验收整改；最终三引擎专项及原基线视觉通过，本批远端四个平台整套已通过，选择控件后续批次仍单独验收，见[范围与限制](audits/2026-10-07/p0-native-layout-and-scroll/acceptance.json)。下文按时间保留的失败追踪是历史记录，不能替代此处当前结果；真实手机仍需设备连接。
 
-P0 选择控件后续批次已实现四端可见焦点、首行/RTL 间距、受控拒绝及原生 reset；补齐 Svelte 初始 undefined 绑定和 Vue 原生 asChild/输入属性。三引擎四端最终专项已通过，本批原生 Safari 仍待远端运行，不能沿用前一提交的 Safari 结果，见[选择控件验收](audits/2026-10-07/p0-selection-focus-and-forms/acceptance.json)。
+P0 选择控件后续批次已实现四端可见焦点、首行/RTL 间距、受控拒绝及原生 reset；补齐 Svelte 初始 undefined 绑定和 Vue 原生 asChild/输入属性。三引擎四端最终专项已通过，6b2c38c 原生 Safari 已完成 279 默认/49 项既有交互，但新增选择脚本受协议对象键顺序影响而失败；已整改并单独复验，不能记作通过或沿用前一提交的 Safari 结果，见[选择控件验收](audits/2026-10-07/p0-selection-focus-and-forms/acceptance.json)。
 
 ## 高级表格
 

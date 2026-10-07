@@ -774,7 +774,7 @@ try {
   if (sessionId)
     try {
       report.failureDOM = await execute(
-        'return {url:location.href,active:document.activeElement?.outerHTML,scroll:document.documentElement.scrollWidth,width:innerWidth,invalid:[...document.querySelectorAll("[aria-invalid=true]")].map(node=>({tag:node.tagName,part:node.dataset.part,path:node.getAttribute("data-question-path"),text:node.textContent?.slice(0,240)}))}',
+        'return {url:location.href,active:document.activeElement?.outerHTML,scroll:document.documentElement.scrollWidth,width:innerWidth,forms:[...document.forms].map(form=>({name:form.getAttribute("aria-label"),values:[...new FormData(form)]})),invalid:[...document.querySelectorAll("[aria-invalid=true]")].map(node=>({tag:node.tagName,part:node.dataset.part,path:node.getAttribute("data-question-path"),text:node.textContent?.slice(0,240)}))}',
       );
       await screenshot("failure");
     } catch {}
