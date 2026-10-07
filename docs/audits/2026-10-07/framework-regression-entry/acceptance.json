@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-07",
+  "batch": "framework-regression-entry",
+  "baseCommit": "088b5310d51d241ae21b78984d51d81c41654e86",
+  "changes": [
+    "整库四端入口显式列表补入Drawer重复挂载清理、真实逐键代码历史和问卷原生焦点协议；对应回归此前已在三个引擎定向通过。"
+  ],
+  "validation": {
+    "syntax": "Node语法检查通过",
+    "configuration": "37个显式测试文件存在且无重复，三个新增入口均包含",
+    "lint": "通过",
+    "previousActualRuns": "Drawer最终三引擎各44项包含4个清理回归；代码历史四端三引擎各4项；原生焦点协议三引擎各3项（含2个新增协议回归及既有夹具）已串行通过。"
+  },
+  "limitations": [
+    "入口配置更新不算远端整库通过；新提交继续触发实际整库与Safari验收。",
+    "产品及消费产物未改变，不重复更新截图或重新构建。"
+  ],
+  "references": [
+    "../drawer-focus-and-disclosure-linux/acceptance.json",
+    "../native-code-history-contract/acceptance.json",
+    "../native-safari-focus-contract/acceptance.json"
+  ]
+}
