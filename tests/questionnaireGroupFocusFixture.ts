@@ -1,3 +1,15 @@
+declare global {
+  interface Window {
+    groupFocusProbe: {
+      register(): void;
+      reject(value: boolean): void;
+      unmount(): void;
+      retainsOperationFocus(): boolean;
+      operationFocus(): string;
+    };
+  }
+}
+
 export async function setupQuestionGroupFocusFixture(
   retainPointerFocus: boolean,
 ) {
@@ -24,6 +36,15 @@ export async function setupQuestionGroupFocusFixture(
     add.addEventListener("mousedown", (event) => event.preventDefault());
   container.append(add);
   root.append(origin, container);
+  let operationFocus: Element | null = null;
+  // 在组件处理点击及重绘之前，记录浏览器实际选择的焦点，包含原生Safari的body焦点。
+  root.addEventListener(
+    "click",
+    (event) => {
+      if (event.target === add) operationFocus = document.activeElement;
+    },
+    true,
+  );
   const state: import("@loongark/kit").QuestionnaireCustomState = {
     question: {
       id: "people",
@@ -98,6 +119,8 @@ export async function setupQuestionGroupFocusFixture(
   );
   Object.assign(window, {
     groupFocusProbe: {
+      retainsOperationFocus: () => document.activeElement === operationFocus,
+      operationFocus: () => operationFocus?.tagName.toLowerCase() ?? "none",
       register: () => pending?.(),
       reject: (value: boolean) => {
         reject = value;

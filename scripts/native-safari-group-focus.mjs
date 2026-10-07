@@ -37,12 +37,13 @@ export async function runNativeGroupFocus(h) {
       value,
     ]);
   await type(origin, "Wait for the custom answer");
+  await waitFor(() => isFocused(origin), "原生输入结束后保留文本框焦点");
   await click(add);
+  const nativeClickFocus = await execute(
+    "return window.groupFocusProbe.operationFocus()",
+  );
   assert(
-    await execute(
-      "return document.activeElement===document.querySelector(arguments[0]) || document.activeElement===document.querySelector(arguments[1])",
-      [origin, add],
-    ),
+    await execute("return window.groupFocusProbe.retainsOperationFocus()"),
     "注册前保留当前操作的焦点",
   );
   await invoke("register");
@@ -57,10 +58,7 @@ export async function runNativeGroupFocus(h) {
   await invoke("reject", true);
   await click(add);
   assert(
-    await execute(
-      "return document.activeElement===document.querySelector(arguments[0]) || document.activeElement===document.querySelector(arguments[1])",
-      [origin, add],
-    ),
+    await execute("return window.groupFocusProbe.retainsOperationFocus()"),
     "受控拒绝不转移至其他字段",
   );
   assert.equal(
@@ -80,10 +78,7 @@ export async function runNativeGroupFocus(h) {
   await invoke("unmount");
   await invoke("register");
   assert(
-    await execute(
-      "return document.activeElement===document.querySelector(arguments[0]) || document.activeElement===document.querySelector(arguments[1])",
-      [origin, add],
-    ),
+    await execute("return window.groupFocusProbe.retainsOperationFocus()"),
     "卸载后延迟注册不抢焦点",
   );
   const layout = await assertLayout();
@@ -91,5 +86,6 @@ export async function runNativeGroupFocus(h) {
   report.interactions.push({
     case: "group-focus-custom-registration-controlled-outside-unmount",
     width: layout.width,
+    nativeClickFocus,
   });
 }

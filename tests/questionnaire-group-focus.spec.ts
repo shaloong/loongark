@@ -13,7 +13,9 @@ test("accepted group operations retain focus ownership until custom registration
   const invoke = (method: string, value?: boolean) =>
     page.evaluate(
       ({ method, value }) => {
-        (window as any).groupFocusProbe[method](value);
+        if (method === "reject") window.groupFocusProbe.reject(!!value);
+        else if (method === "register") window.groupFocusProbe.register();
+        else if (method === "unmount") window.groupFocusProbe.unmount();
       },
       { method, value },
     );

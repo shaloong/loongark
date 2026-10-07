@@ -9,25 +9,32 @@
     "os": "macOS 15.7.9",
     "defaultsPassed": 275,
     "interactionsPassed": 48,
-    "failure": "Group focus fixture at / returned a 404 page; macOS job omitted build-framework-fixtures.mjs, which creates the page and imported shared modules.",
-    "reviewed": "All 48 actual interaction images reviewed in six contact sheets; custom Vue dark and groups Svelte light viewed at original size; failure image reviewed."
+    "failure": "题组焦点夹具入口 / 返回404；macOS任务遗漏build-framework-fixtures.mjs，未生成入口页面及动态导入的共享模块。",
+    "reviewed": "已通过6张联系表实际查看48张原生交互截图；另查看Vue深色自定义题型、Svelte浅色题组原尺寸截图及404失败页。"
   },
   "changes": [
-    "Build shared framework fixtures before example fixtures in native Safari CI.",
-    "Keep application setup error text in WebDriver diagnostics."
+    "原生Safari CI在框架示例之前构建共享框架夹具。",
+    "WebDriver诊断保留应用夹具加载的具体错误。"
   ],
   "validation": {
-    "syntaxCheck": "node --check scripts/run-native-safari.mjs passed",
+    "syntaxCheck": "node --check scripts/run-native-safari.mjs通过",
     "freshFixtureHttpStatus": {
       "/": 200,
       "questionnaire-groups.js": 200,
       "questionnaire-custom.js": 200
     },
-    "orderedBuild": "verify, contracts, Storybook, coverage, publication/SSR, Svelte, framework fixtures and example fixtures completed successfully locally."
+    "orderedBuild": "本地verify、契约、Storybook构建、覆盖、发布/SSR、Svelte及两组消费构建按序通过；此本地构建也包含尚待提交的图表/Drawer改进。"
   },
   "limitations": [
-    "Native Safari rerun pending after push.",
-    "This infrastructure correction does not claim completion of all advanced Safari interactions or true mobile testing.",
-    "Screenshots, logs and traces remain ignored or in CI artifacts."
-  ]
+    "推送后的真实Safari复验仍待完成。",
+    "此基础设施修复不宣称全部高级Safari交互或真实手机验收已通过。",
+    "截图、日志和trace保存在忽略目录或CI Artifact。"
+  ],
+  "rerun": {
+    "runId": 37550923478,
+    "defaultExamplesPassed": 275,
+    "interactionsPassed": 48,
+    "sharedFixtureLoad": "已通过",
+    "remaining": "注册前焦点允许值断言失败；详见下一批native-safari-focus-contract验收。"
+  }
 }

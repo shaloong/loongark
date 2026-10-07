@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-07",
+  "batch": "native-safari-focus-contract",
+  "parentCommit": "b291b97da3117bc522416ad549f893ebbb015d01",
+  "problem": "真实Safari已加载共享夹具；点击新增后activeElement为body，原断言只允许输入框或按钮，尚未检查延迟注册。",
+  "changes": [
+    "夹具在组件处理点击之前记录浏览器实际焦点，验收比较相同节点，不能接受任意body回退。",
+    "原生输入后仍确认文本框焦点；延迟注册仍必须定位指定自定义控件，拒绝、外部焦点及卸载检查保留。",
+    "新增默认鼠标及受控body焦点回归；既有取消mousedown保留文本焦点回归继续运行；去掉测试中的any转换。"
+  ],
+  "validation": {
+    "chromium": {
+      "passed": 3,
+      "skipped": 0
+    },
+    "firefox": {
+      "passed": 3,
+      "skipped": 0
+    },
+    "webkit": {
+      "passed": 3,
+      "skipped": 0
+    },
+    "lint": "通过",
+    "types": "pnpm tsc通过",
+    "syntax": "原生Safari焦点脚本Node语法检查通过",
+    "runtime": "验证基于成功按序构建的发布消费产物；环境重启后280个消费/Storybook文件哈希全部一致。"
+  },
+  "nativeEvidence": {
+    "runId": 37550923478,
+    "jobId": 112566379273,
+    "browser": "Safari26.6.1/macOS15.7.9",
+    "defaultExamplesPassed": 275,
+    "interactionsPassed": 48,
+    "fixtureLoad": "通过",
+    "failure": "注册前焦点允许值断言；失败DOM实际activeElement为body，已目视检查原尺寸失败截图。",
+    "manualReview": "42张交互截图哈希与已查看的252941f原生截图相同；其余6张差异截图已另查看联系表。"
+  },
+  "limitations": [
+    "新的点击处理前焦点记录尚待真实Safari推送后复验，不预先推断它必为body。",
+    "本地body状态通过真实鼠标加受控失焦重现，不计为原生Safari或手机测试。",
+    "产品Questionnaire行为未在此批修改；本地消费构建含尚未提交的图表与Drawer视觉改进。",
+    "本批不关闭原生Safari整库或真实手机验收。",
+    "过程截图和日志只留在忽略目录及CI Artifact，既有视觉基线未改。"
+  ]
+}
