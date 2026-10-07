@@ -1,8 +1,10 @@
+import { DrawerGrabber } from "./drawer-grabber";
 import { DrawerRoot, DrawerRootProvider } from "./drawer-roots";
 import { Drawer } from "@ark-ui/vue/drawer";
 import { DrawerAction, DrawerCancel } from "./drawer-actions";
 import { LoongArkPortal } from "./portal";
-export const LoongArkDrawer: Omit<typeof Drawer, "Root" | "RootProvider"> & {
+export const LoongArkDrawer: Omit<typeof Drawer, "Root" | "RootProvider" | "Grabber"> & {
+  Grabber: typeof DrawerGrabber;
   Root: typeof DrawerRoot;
   RootProvider: typeof DrawerRootProvider;
   Portal: typeof LoongArkPortal;
@@ -11,6 +13,7 @@ export const LoongArkDrawer: Omit<typeof Drawer, "Root" | "RootProvider"> & {
   Cancel: typeof DrawerCancel;
 } = {
   ...Drawer,
+  Grabber: DrawerGrabber,
   Root: DrawerRoot,
   RootProvider: DrawerRootProvider,
   Portal: LoongArkPortal,

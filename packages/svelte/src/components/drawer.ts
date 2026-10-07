@@ -1,10 +1,12 @@
+import DrawerGrabber from "./DrawerGrabber.svelte";
 import DrawerRoot from "./DrawerRoot.svelte";
 import DrawerRootProvider from "./DrawerRootProvider.svelte";
 import { Drawer } from "@ark-ui/svelte/drawer";
 import DrawerAction from "./DrawerAction.svelte";
 import DrawerCancel from "./DrawerCancel.svelte";
 import LoongArkPortal from "./Portal.svelte";
-export const LoongArkDrawer: Omit<typeof Drawer, "Root" | "RootProvider"> & {
+export const LoongArkDrawer: Omit<typeof Drawer, "Root" | "RootProvider" | "Grabber"> & {
+  Grabber: typeof DrawerGrabber;
   Root: typeof DrawerRoot;
   RootProvider: typeof DrawerRootProvider;
   Portal: typeof LoongArkPortal;
@@ -13,6 +15,7 @@ export const LoongArkDrawer: Omit<typeof Drawer, "Root" | "RootProvider"> & {
   Cancel: typeof DrawerCancel;
 } = {
   ...Drawer,
+  Grabber: DrawerGrabber,
   Root: DrawerRoot,
   RootProvider: DrawerRootProvider,
   Portal: LoongArkPortal,

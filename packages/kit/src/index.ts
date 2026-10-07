@@ -110,3 +110,4 @@ export * from "./virtual-layout";
 export * from "./localized-date";
 
 export { contextMenuPointerHandler } from "./menu-pointer";
+export { preventDrawerGrabberSelection } from "./drawer-pointer";

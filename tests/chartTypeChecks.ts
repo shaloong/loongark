@@ -70,7 +70,15 @@ export async function checkChartTypes(page: Page) {
     chart.getByRole("button", { name: "Delta", exact: true }),
   ).toBeDisabled();
   await capture("pie");
-  await chart.getByText("View chart data", { exact: true }).click();
+  const disclosure = chart.locator("summary");
+  await disclosure.focus();
+  await disclosure.press("Space");
+  await expect(disclosure).toBeFocused();
+  await expect(chart.locator("details")).toHaveAttribute("open", "");
+  await disclosure.press("Enter");
+  await expect(chart.locator("details")).not.toHaveAttribute("open", "");
+  await disclosure.press("Enter");
+  await expect(disclosure).toBeFocused();
   await expect(chart.getByRole("row")).toHaveCount(7);
   const alpha = chart.getByRole("button", { name: "Alpha", exact: true });
   await alpha.click();

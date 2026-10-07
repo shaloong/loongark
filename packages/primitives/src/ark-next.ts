@@ -40,7 +40,7 @@ const css = `
 @keyframes lk-drawer-out { to { translate:var(--lk-drawer-slide-x) var(--lk-drawer-slide-y); } }
 /* 极短退出动画可能早于原生Presence监听，减弱动效直接完成退出。 */
 @media(prefers-reduced-motion:reduce) { [data-lk-motion=auto] [data-scope=drawer][data-part=content]:not(:where([data-lk-motion=force],[data-lk-motion=force] *)) { animation-duration:0s !important; } }
-[data-scope=drawer][data-part=grabber] { min-height:var(--lk-control-height-sm);display:flex;align-items:center;justify-content:center;cursor:grab; }
+[data-scope=drawer][data-part=grabber] { min-height:var(--lk-control-height-sm);display:flex;align-items:center;justify-content:center;cursor:grab;user-select:none;-webkit-user-select:none; }
 [data-scope=drawer][data-part=grabber-indicator] { width:var(--lk-control-height-lg);height:var(--lk-space-component-xs);border-radius:var(--lk-radius-pill);background:var(--lk-color-semantic-mutedforeground); }
 /* 物理边缘不随文字方向镜像；手柄留在半开面板的可见自由边。 */
 [data-scope=drawer][data-part=content][data-swipe-direction=up] { padding-bottom:calc(var(--lk-space-component-lg) + var(--lk-control-height-sm)); }

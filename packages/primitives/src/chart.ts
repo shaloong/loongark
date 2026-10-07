@@ -12,7 +12,12 @@ const css = `
 [data-scope=chart] [data-part=legend-toggle]:hover:not(:disabled) { background:var(--lk-color-semantic-accent); }
 [data-scope=chart] [data-part=legend-toggle]:disabled { opacity:.5;cursor:not-allowed; }
 [data-scope=chart] [data-part=data-table] { margin-top:var(--lk-space-component-md);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-lg); }
-[data-scope=chart] [data-part=data-table] summary { min-height:var(--lk-control-height-md);padding:var(--lk-space-component-sm) var(--lk-space-component-compact);font-size:var(--lk-typography-fontsize-sm);cursor:pointer;overflow-wrap:anywhere; }
+[data-scope=chart] [data-part=data-table] summary { display:flex;align-items:center;gap:var(--lk-space-component-sm);list-style:none;min-height:var(--lk-control-height-md);padding:var(--lk-space-component-sm) var(--lk-space-component-compact);font-size:var(--lk-typography-fontsize-sm);cursor:pointer;overflow-wrap:anywhere; }
+[data-scope=chart] [data-part=data-table] summary::-webkit-details-marker { display:none; }
+[data-scope=chart] [data-part=data-table] summary > svg { display:block;flex:none;width:var(--lk-control-icon-sm);height:var(--lk-control-icon-sm); }
+[data-scope=chart] [data-part=data-table] summary:dir(rtl) > svg { transform:rotate(180deg); }
+[data-scope=chart] [data-part=data-table][open] summary > svg { transform:rotate(90deg); }
+[data-scope=chart] [data-part=data-table] summary:focus-visible { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring);outline-offset:var(--lk-control-focuswidth);border-radius:var(--lk-radius-md); }
 [data-scope=chart] [data-part=data-region] { max-width:100%;overflow:auto;overscroll-behavior-inline:contain; }
 [data-scope=chart] [data-part=data-table] table { width:100%;border-collapse:collapse;font-size:var(--lk-typography-fontsize-sm); }
 [data-scope=chart] [data-part=data-table] :is(th,td) { padding:var(--lk-space-component-sm) var(--lk-space-component-compact);text-align:start;white-space:nowrap;border-top:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border); }

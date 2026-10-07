@@ -46,5 +46,13 @@
     "Linux不运行Apple原生驱动；配置后的真实Safari预检与全部高级场景仍需CI实际复验。",
     "不修改使用者机器偏好或组件tabindex；设置仅针对临时GitHub macOS runner。",
     "不关闭整库Firefox/Safari或真实手机清单；过程证据留忽略目录和14天CI Artifact。"
-  ]
+  ],
+  "followUp": {
+    "runId": 37558271708,
+    "jobId": 112589668262,
+    "sourceCommit": "3ea54bf55ccef73301f69bed04a3d0325f1397a2",
+    "result": "failed",
+    "stage": "创建Safari会话时连接实例超时",
+    "preflightAndComponentCases": "均未执行；无场景截图，不判断配置效果。"
+  }
 }

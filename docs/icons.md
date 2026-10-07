@@ -27,6 +27,8 @@ import { LoongArkIcon, LoongArkButton } from '@loongark/react'
 
 图标本身不承担按钮、加载反馈或焦点语义。图标按钮必须在按钮上命名；加载/错误状态继续由所属组件处理。图标不使用自动生成 title/id，避免多实例和 SSR 的重复引用。
 
+Chart 数据表的展开箭头使用共享 Lucide chevron，继承中性前景色和小号图标 Token，保持原生 summary 的操作语义；关闭方向遵循 RTL，展开时指向下方。
+
 Dialog 默认关闭、Checkbox/Select/Combobox 默认指示器、TransferList 方向、DataTable 排序、Attachment 文件、SpeedDial 默认和示例图标已统一。自定义 children/slot 继续优先；SpeedDialAction.icon 新增 IconNode，字符串继续兼容但不推荐。原生表单勾选、CSS 圆点/浮层箭头和示例图片不属于可替换图标。
 
 Lucide 是 ISC（部分 Feather 衍生图标使用 MIT），与本库 MIT 兼容；依赖自带 LICENSE，使用和再分发仍须保留上游版权说明。Kit 发布包与 Storybook 静态产物均附带完整上游许可说明，本库许可保持 MIT。

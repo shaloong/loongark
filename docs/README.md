@@ -291,3 +291,5 @@ macOS工作流补上共享发布夹具构建，真实Safari再次通过275个默
 原生Safari代码与富文本高级场景已通过React浅色；Drawer验收的WebDriver Tab编码已纠正，并补真实按键诊断。Linux四端浅色脚本诊断76场景、32次可信Tab通过，修正后的macOS套件仍需执行，见[协议验收](audits/2026-10-07/native-keyboard-protocol/acceptance.json)。
 
 2026-10-07 原生Safari已记录可信Tab但跳过按钮；临时macOS CI现在明确启用完整键盘导航，并先用无组件的输入/按钮/链接预检实际导航。配置后高级整套仍待macOS复验，见[环境与证据](audits/2026-10-07/native-keyboard-navigation/acceptance.json)。
+
+2026-10-07 Drawer与图表视觉收尾：四端手柄防误选、吸附后焦点完整可见及重复挂载清理，原生图表展开统一Lucide箭头；示例标题改为可读词间距。最终三引擎各44项、Story各10项和Linux视觉262项通过；实际审阅320张Drawer抽样及240张图表/标题局部，288张既有基线含Windows未改。当前119族、329Story、四端各794公开值及275框架示例；原生Safari和整库结果继续复验，真机需设备连接。详见[验收范围](audits/2026-10-07/drawer-focus-and-disclosure-linux/acceptance.json)。

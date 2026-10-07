@@ -48,7 +48,10 @@ for (const framework of ["react", "vue", "solid", "svelte"])
       current = name;
       await page.goto(`/examples-${framework}/?example=${name}`);
       try {
-        await expect(page.locator("[data-example-name]")).toHaveText(name);
+        await expect(page.locator("[data-example-name]")).toHaveAttribute(
+          "data-example-name",
+          name,
+        );
       } catch {
         failures.push(name + ": 页面未完成渲染");
         continue;

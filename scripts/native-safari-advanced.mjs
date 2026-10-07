@@ -437,6 +437,9 @@ export async function runNativeAdvanced(h, framework, mode) {
     '[data-scope="drawer"][data-part="content"][data-state="open"]';
   const snap = dialog + ' output[aria-label="Drawer snap point"]';
   const drag = async (physical, distance) => {
+    const selectionBeforeDrag = await execute(
+      "return window.getSelection()?.toString() ?? ''",
+    );
     const point = await execute(
       "const box=document.querySelector(arguments[0]).getBoundingClientRect();return {x:Math.round(box.x+box.width/2),y:Math.round(box.y+box.height/2),width:innerWidth,height:innerHeight}",
       [dialog + ' [data-part="grabber"]'],
@@ -480,6 +483,11 @@ export async function runNativeAdvanced(h, framework, mode) {
         },
       ],
     });
+    assert.equal(
+      await execute("return window.getSelection()?.toString() ?? ''"),
+      selectionBeforeDrag,
+      "Drawer手柄拖动不得改变页面文字选区",
+    );
   };
   const extent = async (vertical, pixels) =>
     waitFor(
@@ -565,6 +573,14 @@ export async function runNativeAdvanced(h, framework, mode) {
       await drag(physical, vertical ? 240 : 64);
       await matches(snap, small + "px");
       await extent(vertical, small);
+      await waitFor(
+        () =>
+          execute(
+            "const v=document.querySelector(arguments[0]+' [data-drawer-viewport]'),f=document.activeElement;if(!v?.contains(f))return false;const b=v.getBoundingClientRect(),t=f.getBoundingClientRect();return t.top>=Math.max(b.top,0)-1&&t.bottom<=Math.min(b.bottom,innerHeight)+1&&t.left>=Math.max(b.left,0)-1&&t.right<=Math.min(b.right,innerWidth)+1",
+            [dialog],
+          ),
+        "原生Drawer收起后焦点控件完整可见",
+      );
       await screenshot(`drawer-${direction}-${dir}-${framework}-${mode}`);
       await drag(physical, vertical ? 210 : 230);
       await waitFor(

@@ -201,7 +201,12 @@ async function navigate(framework, name, mode = "light") {
       ),
     `${framework}/${name} 渲染`,
   );
-  assert.equal(await text("[data-example-name]"), name);
+  assert.equal(
+    await execute(
+      "return document.querySelector('[data-example-name]')?.getAttribute('data-example-name')",
+    ),
+    name,
+  );
   await execute(
     "window.__safariErrors=[];window.addEventListener('error',event=>window.__safariErrors.push(event.message));window.addEventListener('unhandledrejection',event=>window.__safariErrors.push(String(event.reason)));",
   );

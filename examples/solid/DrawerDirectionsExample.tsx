@@ -1,12 +1,27 @@
 /** @jsxImportSource solid-js */
 import * as L from "@loongark/solid";
+import { onCleanup, onMount, type ParentProps } from "solid-js";
 import {
   drawerDirections,
   drawerDirectionsCSS,
   drawerSnapPoints,
+  mountDrawerViewportFocus,
   type DrawerDirection,
   type DrawerTextDirection,
 } from "../shared/drawerDirectionsDemo";
+function DrawerViewport(props: ParentProps) {
+  let viewport!: HTMLDivElement;
+  let cleanup = () => {};
+  onMount(() => {
+    cleanup = mountDrawerViewportFocus(viewport);
+  });
+  onCleanup(() => cleanup());
+  return (
+    <div data-drawer-viewport ref={viewport}>
+      {props.children}
+    </div>
+  );
+}
 function DirectionPanel({
   direction,
   dir,
@@ -44,7 +59,7 @@ function DirectionPanel({
             <L.LoongArkDrawerGrabber role="group" aria-label="Drag drawer">
               <L.LoongArkDrawerGrabberIndicator />
             </L.LoongArkDrawerGrabber>
-            <div data-drawer-viewport>
+            <DrawerViewport>
               <L.LoongArkDrawerTitle>
                 {direction} {dir} drawer
               </L.LoongArkDrawerTitle>
@@ -70,7 +85,7 @@ function DirectionPanel({
                 {String(drawer().snapPoint)}
               </output>
               <L.LoongArkDrawerCancel>Close drawer</L.LoongArkDrawerCancel>
-            </div>
+            </DrawerViewport>
           </L.LoongArkDrawerContent>
         </L.LoongArkDrawerPositioner>
       </L.LoongArkDrawerPortal>

@@ -41,18 +41,18 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
   const resolvedImports = imports;
   const dictionary =
     "{" + names.map((name, i) => `'${name}':E${i}`).join(",") + "}";
-  const choose = `const examples=${dictionary}; const name=new URLSearchParams(location.search).get('example') || '${names[0]}'; const Selected=examples[name]; const mode=new URLSearchParams(location.search).get('mode')==='dark'?'dark':'light';`;
+  const choose = `const examples=${dictionary}; const name=new URLSearchParams(location.search).get('example') || '${names[0]}'; const label=name.replace(/Example$/u,'').replace(/([a-z0-9])([A-Z])/gu,'$1 $2').replace(/([A-Z])([A-Z][a-z])/gu,'$1 $2'); const Selected=examples[name]; const mode=new URLSearchParams(location.search).get('mode')==='dark'?'dark':'light';`;
   let main;
   if (framework === "react")
-    main = `import React, {StrictMode,Fragment} from 'react'; import {createRoot} from 'react-dom/client'; import {LoongArkProvider as Provider} from '@loongark/react'; ${resolvedImports} ${choose} const Mode=new URLSearchParams(location.search).get('strict')==='true'?StrictMode:Fragment; createRoot(document.getElementById('app')).render(<Mode><Provider mode={mode}><section style={{padding:24,minHeight:'100dvh',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}}><h1 data-example-name>{name}</h1><div data-example-content><Selected/></div></section></Provider></Mode>);`;
+    main = `import React, {StrictMode,Fragment} from 'react'; import {createRoot} from 'react-dom/client'; import {LoongArkProvider as Provider} from '@loongark/react'; ${resolvedImports} ${choose} const Mode=new URLSearchParams(location.search).get('strict')==='true'?StrictMode:Fragment; createRoot(document.getElementById('app')).render(<Mode><Provider mode={mode}><section style={{padding:24,minHeight:'100dvh',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}}><h1 data-example-name={name}>{label}</h1><div data-example-content><Selected/></div></section></Provider></Mode>);`;
   if (framework === "vue")
-    main = `import {createApp,h} from 'vue'; import {LoongArkProvider as Provider} from '@loongark/vue'; ${resolvedImports} ${choose} createApp({render:()=>h(Provider,{mode},()=>h('section',{style:'padding:24px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)'},[h('h1',{'data-example-name':''},name),h('div',{'data-example-content':''},[h(Selected)])]))}).mount('#app');`;
+    main = `import {createApp,h} from 'vue'; import {LoongArkProvider as Provider} from '@loongark/vue'; ${resolvedImports} ${choose} createApp({render:()=>h(Provider,{mode},()=>h('section',{style:'padding:24px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)'},[h('h1',{'data-example-name':name},label),h('div',{'data-example-content':''},[h(Selected)])]))}).mount('#app');`;
   if (framework === "solid")
-    main = `import {render} from 'solid-js/web'; import {LoongArkProvider as Provider} from '@loongark/solid'; ${resolvedImports} ${choose} render(()=><Provider mode={mode}><section ${surface}><h1 data-example-name>{name}</h1><div data-example-content><Selected/></div></section></Provider>,document.getElementById('app'));`;
+    main = `import {render} from 'solid-js/web'; import {LoongArkProvider as Provider} from '@loongark/solid'; ${resolvedImports} ${choose} render(()=><Provider mode={mode}><section ${surface}><h1 data-example-name={name}>{label}</h1><div data-example-content><Selected/></div></section></Provider>,document.getElementById('app'));`;
   if (framework === "svelte") {
     await writeFile(
       resolve(folder, "App.svelte"),
-      `<script>import {LoongArkProvider as Provider} from '@loongark/svelte'; ${resolvedImports} ${choose}</script><Provider mode={mode}><section ${surface}><h1 data-example-name>{name}</h1><div data-example-content><Selected/></div></section></Provider>`,
+      `<script>import {LoongArkProvider as Provider} from '@loongark/svelte'; ${resolvedImports} ${choose}</script><Provider mode={mode}><section ${surface}><h1 data-example-name={name}>{label}</h1><div data-example-content><Selected/></div></section></Provider>`,
     );
     main =
       "import {mount} from 'svelte'; import App from './App.svelte'; mount(App,{target:document.getElementById('app')});";

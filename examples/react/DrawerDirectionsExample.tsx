@@ -1,8 +1,10 @@
 import * as L from "@loongark/react";
+import { useCallback } from "react";
 import {
   drawerDirections,
   drawerDirectionsCSS,
   drawerSnapPoints,
+  mountDrawerViewportFocus,
   type DrawerDirection,
   type DrawerTextDirection,
 } from "../shared/drawerDirectionsDemo";
@@ -14,6 +16,11 @@ function DirectionPanel({
   dir: DrawerTextDirection;
 }) {
   const points = drawerSnapPoints(direction);
+  const bindViewport = useCallback(
+    (node: HTMLDivElement | null) =>
+      node ? mountDrawerViewportFocus(node) : undefined,
+    [],
+  );
   const drawer = L.useDrawer({
     swipeDirection: direction,
     snapPoints: points,
@@ -39,7 +46,7 @@ function DirectionPanel({
             <L.LoongArkDrawerGrabber role="group" aria-label="Drag drawer">
               <L.LoongArkDrawerGrabberIndicator />
             </L.LoongArkDrawerGrabber>
-            <div data-drawer-viewport>
+            <div data-drawer-viewport ref={bindViewport}>
               <L.LoongArkDrawerTitle>
                 {direction} {dir} drawer
               </L.LoongArkDrawerTitle>

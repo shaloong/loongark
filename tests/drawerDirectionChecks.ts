@@ -185,11 +185,17 @@ export async function checkDrawerDirection(
   await page.evaluate(() => document.fonts.ready);
   await page.screenshot({ path: screenshot + "-expanded.png", fullPage: true });
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  const selectionBeforeDrag = await page.evaluate(
+    () => getSelection()?.toString() ?? "",
+  );
   await dragDrawer(
     page,
     dialog.getByLabel("Drag drawer", { exact: true }),
     physical,
     vertical ? 240 : 64,
+  );
+  expect(await page.evaluate(() => getSelection()?.toString() ?? "")).toBe(
+    selectionBeforeDrag,
   );
   await expect(point).toHaveText(small);
   await expectDrawerExtent(page, dialog, direction, parseInt(small));
@@ -265,6 +271,25 @@ export async function checkDrawerDirection(
     );
     await expect(point).toHaveText(small);
     await expectDrawerExtent(page, dialog, direction, parseInt(small));
+    await expect(text).toBeFocused();
+    await expect
+      .poll(
+        () =>
+          viewport.evaluate((node) => {
+            const focused = node.ownerDocument.activeElement;
+            if (!focused || !node.contains(focused)) return false;
+            const box = node.getBoundingClientRect(),
+              field = focused.getBoundingClientRect();
+            return (
+              field.top >= Math.max(box.top, 0) - 1 &&
+              field.bottom <= Math.min(box.bottom, innerHeight) + 1 &&
+              field.left >= Math.max(box.left, 0) - 1 &&
+              field.right <= Math.min(box.right, innerWidth) + 1
+            );
+          }),
+        { message: "触摸吸附后原有焦点控件完整留在可见滚动区域" },
+      )
+      .toBe(true);
     await page.screenshot({ path: screenshot + "-touch.png", fullPage: true });
   }
   await page.emulateMedia({ reducedMotion: "no-preference" });

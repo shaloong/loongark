@@ -1,9 +1,10 @@
-import { defineComponent, h, type PropType } from "vue";
+import { defineComponent, h, ref, watch, type PropType } from "vue";
 import * as L from "@loongark/vue";
 import {
   drawerDirections,
   drawerDirectionsCSS,
   drawerSnapPoints,
+  mountDrawerViewportFocus,
   type DrawerDirection,
   type DrawerTextDirection,
 } from "../shared/drawerDirectionsDemo";
@@ -13,6 +14,14 @@ const DirectionPanel = defineComponent({
     dir: { type: String as PropType<DrawerTextDirection>, required: true },
   },
   setup(props) {
+    const viewport = ref<HTMLDivElement>();
+    watch(
+      viewport,
+      (node, _, cleanup) => {
+        if (node) cleanup(mountDrawerViewportFocus(node));
+      },
+      { flush: "post" },
+    );
     const points = drawerSnapPoints(props.direction);
     const drawer = L.useDrawer({
       swipeDirection: props.direction,
@@ -48,7 +57,7 @@ const DirectionPanel = defineComponent({
                   { role: "group", "aria-label": "Drag drawer" },
                   () => h(L.LoongArkDrawerGrabberIndicator),
                 ),
-                h("div", { "data-drawer-viewport": "" }, [
+                h("div", { "data-drawer-viewport": "", ref: viewport }, [
                   h(
                     L.LoongArkDrawerTitle,
                     {},

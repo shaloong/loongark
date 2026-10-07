@@ -1,8 +1,10 @@
+import { DrawerGrabber } from "./drawer-grabber";
 import { DrawerRoot, DrawerRootProvider } from "./drawer-roots";
 import { Drawer } from "@ark-ui/solid/drawer";
 import { DrawerAction, DrawerCancel } from "./drawer-actions";
 import { DrawerPortal } from "./drawer-portal";
-export const LoongArkDrawer: Omit<typeof Drawer, "Root" | "RootProvider"> & {
+export const LoongArkDrawer: Omit<typeof Drawer, "Root" | "RootProvider" | "Grabber"> & {
+  Grabber: typeof DrawerGrabber;
   Root: typeof DrawerRoot;
   RootProvider: typeof DrawerRootProvider;
   Portal: typeof DrawerPortal;
@@ -11,6 +13,7 @@ export const LoongArkDrawer: Omit<typeof Drawer, "Root" | "RootProvider"> & {
   Cancel: typeof DrawerCancel;
 } = {
   ...Drawer,
+  Grabber: DrawerGrabber,
   Root: DrawerRoot,
   RootProvider: DrawerRootProvider,
   Portal: DrawerPortal,

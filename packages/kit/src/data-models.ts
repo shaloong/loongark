@@ -1,4 +1,6 @@
 /// <reference lib="es2022.intl" />
+import { controlIcons } from "./icon";
+import { decorativeIconMarkup } from "./icon-markup";
 import {
   chartWindow,
   renderChartNavigation,
@@ -656,7 +658,7 @@ export const renderChartMarkup = (fullOptions: ChartOptions): string => {
       ? options.xAxis.key
       : undefined;
   const table = options.showDataTable
-    ? `<details data-part="data-table"><summary>${escapeXML(options.labels?.dataTable ?? "View chart data")}</summary><div data-part="data-region" role="region" aria-label="${title}" tabindex="0"><table><caption>${title}</caption><thead><tr><th scope="col">${escapeXML(options.labels?.category ?? "Category")}</th>${axisKey ? `<th scope="col">${escapeXML(axisKey)}</th>` : ""}${visible.map((series) => `<th scope="col">${escapeXML(series.label ?? series.key)}</th>`).join("")}</tr></thead><tbody>${options.data.map((row) => `<tr><th scope="row">${escapeXML(String(row[options.labelKey] ?? ""))}</th>${axisKey ? `<td>${escapeXML(String(row[axisKey] ?? options.labels?.empty ?? "No data"))}</td>` : ""}${visible.map((series) => `<td>${escapeXML(String(chartValue(row[series.key]) ?? options.labels?.empty ?? "No data"))}</td>`).join("")}</tr>`).join("")}</tbody></table></div></details>`
+    ? `<details data-part="data-table"><summary>${decorativeIconMarkup(controlIcons.chevronRight, escapeXML)}${escapeXML(options.labels?.dataTable ?? "View chart data")}</summary><div data-part="data-region" role="region" aria-label="${title}" tabindex="0"><table><caption>${title}</caption><thead><tr><th scope="col">${escapeXML(options.labels?.category ?? "Category")}</th>${axisKey ? `<th scope="col">${escapeXML(axisKey)}</th>` : ""}${visible.map((series) => `<th scope="col">${escapeXML(series.label ?? series.key)}</th>`).join("")}</tr></thead><tbody>${options.data.map((row) => `<tr><th scope="row">${escapeXML(String(row[options.labelKey] ?? ""))}</th>${axisKey ? `<td>${escapeXML(String(row[axisKey] ?? options.labels?.empty ?? "No data"))}</td>` : ""}${visible.map((series) => `<td>${escapeXML(String(chartValue(row[series.key]) ?? options.labels?.empty ?? "No data"))}</td>`).join("")}</tr>`).join("")}</tbody></table></div></details>`
     : "";
   return svg + legendMarkup + renderChartNavigation(fullOptions) + table;
 };

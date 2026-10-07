@@ -2,6 +2,7 @@
   import * as L from "@loongark/svelte";
   import {
     drawerSnapPoints,
+    mountDrawerViewportFocus,
     type DrawerDirection,
     type DrawerTextDirection,
   } from "../shared/drawerDirectionsDemo";
@@ -10,6 +11,9 @@
     dir,
   }: { direction: DrawerDirection; dir: DrawerTextDirection } = $props();
   const points = $derived(drawerSnapPoints(direction));
+  const viewportFocus = (node: HTMLElement) => ({
+    destroy: mountDrawerViewportFocus(node),
+  });
   const drawer = L.useDrawer(() => ({
     swipeDirection: direction,
     snapPoints: points,
@@ -28,7 +32,7 @@
         <L.LoongArkDrawerGrabber role="group" aria-label="Drag drawer"
           ><L.LoongArkDrawerGrabberIndicator /></L.LoongArkDrawerGrabber
         >
-        <div data-drawer-viewport>
+        <div data-drawer-viewport use:viewportFocus>
           <L.LoongArkDrawerTitle>{direction} {dir} drawer</L.LoongArkDrawerTitle
           >
           <L.LoongArkDrawerDescription

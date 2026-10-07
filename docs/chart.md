@@ -1,5 +1,7 @@
 # Chart 的标签、缺失数据与系列说明
 
+数据表展开入口保留原生 `details/summary` 的 Enter、Space 和焦点语义；装饰箭头统一使用共享 Lucide 节点，随展开与 RTL 改变方向，使用现有图标尺寸及中性前景色。四端不依赖浏览器自带的彩色展开标记。
+
 Chart 使用共享 SVG 模型和 HTML 图例，四端适配负责渲染、受控状态和容器 ResizeObserver 的生命周期；图例监听与重绘状态恢复集中在 Kit。默认颜色依次消费 primary、mutedForeground 和 vi.skyBlue；第三个序列使用现有 Sky Blue 强调，未新增调色板。折线同时以实线、长虚线、短虚线辅助区分，完整系列名称在自然换行的图例中显示。
 
 `data/series/labelKey` 保持原 API。`type` 为 line、bar、area、pie、donut 或 scatter，`title` 提供图像名称，`width/height` 可指定几何尺寸；默认测量容器宽度，卸载释放观察器。`labels.empty` 覆盖空状态，`labels.series` 覆盖图例的无障碍名称，未提供字段时采用共享默认值。
