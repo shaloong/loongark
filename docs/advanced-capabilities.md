@@ -80,3 +80,5 @@
 2026-10-07 原生Safari共享夹具现已加载：真实平台仍在注册前焦点断言失败（275默认示例、48交互已通过）。新契约记录组件处理点击之前的实际焦点，检查原节点保持及指定自定义控件的延迟注册；三引擎各3项通过，不预先接受body回退。原生高级整套及真实手机清单继续开放，见[验收](audits/2026-10-07/native-safari-focus-contract/acceptance.json)。
 
 2026-10-07 Safari焦点契约已实际通过；高级套件随后暴露代码历史单次撤销假设。现改为有界逐级撤销与精确重做，四端三引擎各4项通过；修正后的Safari高级套件仍需实际执行，详见[记录](audits/2026-10-07/native-code-history-contract/acceptance.json)。
+
+原生Safari新增代码历史与富文本已通过React浅色。Drawer导航失败确认为验收脚本误发PageDown，现使用W3C Tab并记录真实按键；四端Linux脚本诊断76场景、32次可信Tab通过，不计Safari平台通过，见[范围与限制](audits/2026-10-07/native-keyboard-protocol/acceptance.json)。

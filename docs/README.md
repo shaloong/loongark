@@ -287,3 +287,5 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 macOS工作流补上共享发布夹具构建，真实Safari再次通过275个默认示例和48项既有交互后，在注册前焦点断言失败。夹具改为记录组件处理原生点击之前的焦点并比较相同节点，保留延迟注册目标、受控拒绝、外部聚焦和卸载检查；本地三引擎各3项通过，实际Safari仍待此改动复验。详见[验收](audits/2026-10-07/native-safari-focus-contract/acceptance.json)。
 
 2026-10-07 原生代码历史验收：真实逐键输入按编辑器实际历史组逐步撤销，并逐步精确重做；四端三个引擎各4项通过，Safari修正后复验仍待执行。详见[范围与限制](audits/2026-10-07/native-code-history-contract/acceptance.json)。
+
+原生Safari代码与富文本高级场景已通过React浅色；Drawer验收的WebDriver Tab编码已纠正，并补真实按键诊断。Linux四端浅色脚本诊断76场景、32次可信Tab通过，修正后的macOS套件仍需执行，见[协议验收](audits/2026-10-07/native-keyboard-protocol/acceptance.json)。

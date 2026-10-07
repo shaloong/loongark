@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-07",
+  "batch": "native-keyboard-protocol",
+  "parentCommit": "041895e932df4a02c87f931a3e24fadbf741ebfe",
+  "problem": "Safari原生Drawer导航脚本把WebDriver的E00F(PageDown)误用为Tab；输入框自然保留焦点。",
+  "changes": [
+    "改用W3C定义的E004(Tab)，并记录真实keydown的key/code/isTrusted及操作后焦点；指定吸附按钮的焦点检查保持严格。",
+    "复核其余原生按键编码；本地诊断适配器同步纠正错误映射，旧76场景诊断不证明Tab协议正确。"
+  ],
+  "validation": {
+    "lint": "通过",
+    "syntax": "Node语法检查通过",
+    "linuxDiagnostic": {
+      "engine": "WebKit26.0",
+      "frameworks": [
+        "React",
+        "Vue",
+        "Solid",
+        "Svelte"
+      ],
+      "theme": "浅色",
+      "casesPassed": 76,
+      "drawerTrustedTabChecks": 32,
+      "scope": "原生脚本选择器与断言诊断，串行插入其他浏览器套件之间；消费产物包含尚未提交的图表/Drawer视觉修正。",
+      "clipboard": "未提供macOS系统剪贴板，粘贴分支未执行。"
+    }
+  },
+  "nativeEvidence": {
+    "runId": 37555651187,
+    "jobId": 112581655508,
+    "sourceCommit": "041895e932df4a02c87f931a3e24fadbf741ebfe",
+    "browser": "Safari26.6.1/macOS15.7.9，非模拟器",
+    "defaultExamplesPassed": 275,
+    "interactionsPassed": 64,
+    "failure": "React浅色Drawer收到错误PageDown后仍聚焦Project name输入，未定位Toggle snap point；失败DOM及原尺寸截图已查看。",
+    "manualReview": "40张交互截图与此前已审阅截图哈希相同；另24张变化/新增截图已实际查看联系表，并查看代码、富文本和失败原图。"
+  },
+  "references": [
+    "https://www.w3.org/TR/webdriver/#keyboard-actions"
+  ],
+  "limitations": [
+    "本地协议诊断不计为原生Safari或真实手机通过。",
+    "修正后的macOS高级套件仍需实际运行；不改变用户的Safari或系统键盘偏好。",
+    "本批不关闭整库平台清单；截图、日志及ZIP留在忽略目录和有期限CI Artifact。"
+  ]
+}

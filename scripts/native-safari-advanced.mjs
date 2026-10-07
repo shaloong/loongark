@@ -531,10 +531,30 @@ export async function runNativeAdvanced(h, framework, mode) {
           ),
         "原生Drawer打开后初始焦点",
       );
-      await key(dialog + " input:not([type=hidden])", "\uE00F");
-      assert.equal(
-        await execute("return document.activeElement.textContent.trim()"),
-        "Toggle snap point",
+      // W3C WebDriver 的 Tab 为 E004；E00F 是 PageDown。
+      await execute(
+        "window.__safariDrawerKeys=[];document.querySelector(arguments[0]).addEventListener('keydown',event=>window.__safariDrawerKeys.push({key:event.key,code:event.code,trusted:event.isTrusted}),{once:true})",
+        [dialog + " input:not([type=hidden])"],
+      );
+      await key(dialog + " input:not([type=hidden])", "\uE004");
+      const navigation = await execute(
+        "return {events:window.__safariDrawerKeys,focused:document.activeElement?.outerHTML}",
+      );
+      (report.drawerKeyboardNavigation ??= []).push({
+        framework,
+        mode,
+        direction,
+        dir,
+        ...navigation,
+      });
+      assert.equal(navigation.events[0]?.key, "Tab", "Safari实际收到Tab按键");
+      assert.equal(navigation.events[0]?.trusted, true, "Tab由原生输入产生");
+      await waitFor(
+        () =>
+          execute(
+            "return document.activeElement.textContent.trim()==='Toggle snap point'",
+          ),
+        "原生Drawer Tab定位吸附按钮",
       );
       await key(dialog + " button", "\uE007");
       await matches(snap, small + "px");
