@@ -82,3 +82,5 @@
 2026-10-07 Safari焦点契约已实际通过；高级套件随后暴露代码历史单次撤销假设。现改为有界逐级撤销与精确重做，四端三引擎各4项通过；修正后的Safari高级套件仍需实际执行，详见[记录](audits/2026-10-07/native-code-history-contract/acceptance.json)。
 
 原生Safari新增代码历史与富文本已通过React浅色。Drawer导航失败确认为验收脚本误发PageDown，现使用W3C Tab并记录真实按键；四端Linux脚本诊断76场景、32次可信Tab通过，不计Safari平台通过，见[范围与限制](audits/2026-10-07/native-keyboard-protocol/acceptance.json)。
+
+2026-10-07 原生Safari已记录可信Tab但跳过按钮；临时macOS CI现在明确启用完整键盘导航，并先用无组件的输入/按钮/链接预检实际导航。配置后高级整套仍待macOS复验，见[环境与证据](audits/2026-10-07/native-keyboard-navigation/acceptance.json)。

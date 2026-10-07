@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-07",
+  "batch": "native-keyboard-navigation",
+  "parentCommit": "b85ccbb6068544527d50e9f7693f0df7dcf9b388",
+  "problem": "真实Safari已收到可信Tab但跳过原生按钮并回到输入；先明确临时CI的完整键盘导航环境，再进行严格组件验收。",
+  "changes": [
+    "临时macOS runner启用全控件及Safari链接Tab导航，启动新Safari会话之前配置。",
+    "新增无组件的原生输入/按钮/链接预检；真实W3C Tab逐项验证焦点，不用脚本聚焦替代导航。",
+    "报告实际defaults读取值与预检可信事件；组件原有严格Tab目标断言保留。"
+  ],
+  "nativeEvidence": {
+    "runId": 37557136622,
+    "jobId": 112586154342,
+    "browser": "Safari26.6.1/macOS15.7.9，非模拟器",
+    "defaultsPassed": 275,
+    "interactionsPassed": 64,
+    "navigation": [
+      {
+        "framework": "react",
+        "mode": "light",
+        "direction": "down",
+        "dir": "ltr",
+        "focused": "<input id=\"_r_9_\" data-scope=\"input\" data-part=\"control\" placeholder=\"Workspace\" data-size=\"md\">",
+        "events": [
+          {
+            "key": "Tab",
+            "trusted": true,
+            "code": "Tab"
+          }
+        ]
+      }
+    ],
+    "failure": "Drawer吸附按钮未获焦点；失败原图已实际查看。",
+    "manualReview": "43张与此前已审阅截图哈希相同；另21张交互截图已实际查看联系表，失败原图另行核验。"
+  },
+  "validation": {
+    "syntax": "新增预检与runner的Node语法检查通过",
+    "lint": "通过"
+  },
+  "references": [
+    "https://support.apple.com/guide/safari/keyboard-and-other-shortcuts-cpsh003/mac",
+    "https://www.a11yproject.com/posts/macos-browser-keyboard-navigation/",
+    "https://www.w3.org/TR/webdriver/#keyboard-actions"
+  ],
+  "limitations": [
+    "Linux不运行Apple原生驱动；配置后的真实Safari预检与全部高级场景仍需CI实际复验。",
+    "不修改使用者机器偏好或组件tabindex；设置仅针对临时GitHub macOS runner。",
+    "不关闭整库Firefox/Safari或真实手机清单；过程证据留忽略目录和14天CI Artifact。"
+  ]
+}

@@ -80,3 +80,5 @@ CROSS_BROWSER=1 node scripts/run-playwright.mjs --project=webkit --workers=2
 原生 Safari 任务在 macOS 15 使用 Apple `/usr/bin/safaridriver` 的 W3C WebDriver，检查全部四端默认示例、页面溢出、批量多级历史/键盘/焦点和图表窗口的明暗交互。它独立于 Playwright WebKit，报告实际 Safari 版本及每个场景。Linux 不能运行此任务，桌面 Safari 也不代表真实 iOS 手机；真机验收仍需单独取得设备连接。只有对应任务成功且截图审阅完成才关闭平台清单。
 
 原生 Safari 高级套件还检查本地化日期与时间、横向列窗口和二维/瀑布流窗口、富文本表格与代码历史、全部新增图表类型、矩阵多选/排序和异步集合、列级查询与 Drawer 全方向/RTL。批量粘贴通过 macOS 系统剪贴板和原生快捷键执行；协议脚本在 Linux 的诊断不能计作真实 Safari 或手机通过。
+
+原生 Safari 的 Tab 路径依赖 macOS/Safari 键盘导航偏好。CI 只在临时 macOS runner 启用完整控件及链接导航；runner 记录设置值，并在任何组件场景之前严格检查原生输入 → 按钮 → 链接 → 输入的可信 Tab 顺序。本地运行前请在系统键盘和 Safari 高级设置中启用对应选项；脚本不会修改开发者机器偏好。

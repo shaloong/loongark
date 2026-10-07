@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { runNativeGroupFocus } from "./native-safari-group-focus.mjs";
 import { spawn, spawnSync } from "node:child_process";
 import { runNativeAdvanced } from "./native-safari-advanced.mjs";
+import { runNativeKeyboardPreflight } from "./native-safari-keyboard.mjs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
@@ -242,6 +243,22 @@ try {
   assert.match(created.capabilities.browserName, /safari/i);
   report.browser = created.capabilities;
   await session("POST", "/window/rect", { width: 1280, height: 1100 });
+  report.keyboardNavigationPreferences = Object.fromEntries(
+    [
+      ["NSGlobalDomain", "AppleKeyboardUIMode"],
+      ["com.apple.Safari", "WebKitTabToLinksPreferenceKey"],
+      [
+        "com.apple.Safari",
+        "com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks",
+      ],
+    ].map(([domain, key]) => {
+      const read = spawnSync("defaults", ["read", domain, key], {
+        encoding: "utf8",
+      });
+      return [key, read.status === 0 ? read.stdout.trim() : null];
+    }),
+  );
+  await runNativeKeyboardPreflight({ session, execute, report });
   const index = JSON.parse(
     await readFile("tests/consumer-dist/examples-index.json", "utf8"),
   );

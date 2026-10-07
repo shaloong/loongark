@@ -186,6 +186,12 @@ jobs:
       - run: pnpm check:svelte
       - run: node scripts/build-framework-fixtures.mjs
       - run: node scripts/build-example-fixtures.mjs
+      # 只配置本次临时 macOS runner；先用无组件的原生控件严格预检，再验收组件。
+      - name: Enable native Safari keyboard navigation
+        run: |
+          defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+          defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
+          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
       - run: sudo /usr/bin/safaridriver --enable
       - run: node scripts/run-native-safari.mjs
       - uses: actions/upload-artifact@v4

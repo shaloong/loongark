@@ -289,3 +289,5 @@ macOS工作流补上共享发布夹具构建，真实Safari再次通过275个默
 2026-10-07 原生代码历史验收：真实逐键输入按编辑器实际历史组逐步撤销，并逐步精确重做；四端三个引擎各4项通过，Safari修正后复验仍待执行。详见[范围与限制](audits/2026-10-07/native-code-history-contract/acceptance.json)。
 
 原生Safari代码与富文本高级场景已通过React浅色；Drawer验收的WebDriver Tab编码已纠正，并补真实按键诊断。Linux四端浅色脚本诊断76场景、32次可信Tab通过，修正后的macOS套件仍需执行，见[协议验收](audits/2026-10-07/native-keyboard-protocol/acceptance.json)。
+
+2026-10-07 原生Safari已记录可信Tab但跳过按钮；临时macOS CI现在明确启用完整键盘导航，并先用无组件的输入/按钮/链接预检实际导航。配置后高级整套仍待macOS复验，见[环境与证据](audits/2026-10-07/native-keyboard-navigation/acceptance.json)。
