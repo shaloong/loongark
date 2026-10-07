@@ -2,7 +2,7 @@
   "date": "2026-10-07",
   "baseCommit": "74d3c6d077abb8bc7418a132ed3c9d5fbe48f692",
   "branch": "develop",
-  "status": "最终本地验证与截图审阅通过；本次推送后整库平台验收单独记录。",
+  "status": "最终本地验证、截图审阅及本批原生Safari整套通过；Linux整库矩阵仍运行，真实手机未连接。",
   "scope": [
     "NumberInput / PasswordInput 四端 Field 状态缺省继承、显式 false、原生表单及调用方/帮助/错误描述。",
     "Solid 原生 readonly 动态更新；Svelte 数值接受/拒绝、初始 undefined 绑定、外部清空、ref 与卸载。",
@@ -124,7 +124,19 @@
       "windowsUnchanged": 2
     },
     "newLinuxBaselines": 12,
-    "lint": "已暂存检查通过：验收保存约定、MIT许可和工作区结构；最终摘要完成后复验。"
+    "lint": "已暂存检查通过：验收保存约定、MIT许可和工作区结构；最终摘要完成后复验。",
+    "richTextNativeSequenceDiagnostic": {
+      "passed": 24,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "scope": "四端明暗，按Safari原序列逐键输入、格式/撤销/重做/插表/插行/删表，无产品或runner修改。",
+      "notNativeSafari": true,
+      "log": ".artifacts/p0-field/rich-protocol-native-keys.log",
+      "initialAdapterCorrection": "初始适配器fill导致首例格式断言失败，改为原生逐键输入后24通过；不是产品修复。"
+    }
   },
   "manualReview": {
     "finalFrameworkScreenshots": 144,
@@ -135,13 +147,31 @@
     "currentBatch": {
       "browserRun": "https://github.com/shaloong/loongark/actions/runs/37674922439",
       "pagesRun": "https://github.com/shaloong/loongark/actions/runs/37674922470",
-      "status": "两项均已启动；完成与截图审阅前不计通过。"
+      "status": "原生Safari通过并实际审阅32张相关截图；Linux三引擎整库仍运行。此产品批次Pages被后续推送替代，最新d9fc1e7部署成功。",
+      "nativeSafari": {
+        "job": 112975840729,
+        "sourceCommit": "c532fc97ea2a017d77ce8eb9e37a22798a685707",
+        "platform": "macOS15.7.9",
+        "browser": "Safari26.6.1",
+        "defaultExamplesPassed": 287,
+        "interactionsPassed": 249,
+        "artifact": "https://github.com/shaloong/loongark/actions/runs/37674922439/artifacts/11506849682",
+        "artifactSHA256": "d7a6c9df24c50a3614cc653495eb73d4be14990625607ae454c37a0474b32219",
+        "retentionDays": 14,
+        "reviewedScreenshots": 32,
+        "reviewScope": "四端明暗的禁用/只读1280px、错误长标签RTL375px24图，以及原生格式/历史/表格删除375px8图，8张联系表实际查看；四端边框、完整外环、行对齐与长文本换行一致。"
+      },
+      "latestPages": {
+        "sourceCommit": "d9fc1e7677df7e1b1c9d49d29be533c6c0f2e4ac",
+        "run": "https://github.com/shaloong/loongark/actions/runs/37675637471",
+        "result": "success"
+      }
     },
     "previousBatch": "74d3c6d Chromium648四端/238 Story、Firefox640四端/238 Story通过；WebKit12预检/640四端通过，Story运行后被取消，无完整通过。原生Safari26.6.1/macOS15.7.9完成283默认/132交互后在Vue深色富文本删除表格失败，failure.png已实际查看。"
   },
   "limitations": [
     "最终样式/夹具修正后只重复相关63项消费与表单回归，不把先前269项作为完全相同最终产物的全量通过。",
-    "整库跨浏览器及原生 Safari 需针对本次推送的新源码执行，不沿用旧版本通过记录。",
+    "本批原生Safari整套通过；Linux整库仍运行，不将本地专项当作远端全量通过。此前74d3c6d富文本删表失败本次未复现，保留失败证据，不声明已确定根因或专门修复。",
     "320/375宽度与Linux键盘输入属于模拟视口/桌面浏览器；未连接真实手机、移动系统输入法或读屏，不声明全部P0已完成。"
   ],
   "evidenceStorage": "过程截图、联系表、trace、日志与失败归档仅存忽略的.artifacts/p0-field/及14天CI Artifact；Git保留此摘要和用于比较的12张新Linux基线。",

@@ -32,7 +32,14 @@
   "limitations": [
     "排队、工作流配置存在及超时预算增加都不代表平台验收通过。",
     "c532fc9产品批次已推送并独立运行；本次调度配置在后续工作流生效。",
-    "Safari产品/交互失败与真实手机验收继续处理。"
+    "此前Safari富文本失败在c532fc9整套中未复现，保留旧失败证据；真实手机仍需设备连接。"
   ],
-  "evidenceStorage": "原始日志与截图保持忽略目录或14天CI Artifact；Git仅保存摘要。"
+  "evidenceStorage": "原始日志与截图保持忽略目录或14天CI Artifact；Git仅保存摘要。",
+  "observedAfterPush": {
+    "sourceCommit": "d9fc1e7677df7e1b1c9d49d29be533c6c0f2e4ac",
+    "runningProductRun": "https://github.com/shaloong/loongark/actions/runs/37674922439",
+    "pendingRun": "https://github.com/shaloong/loongark/actions/runs/37675637519",
+    "result": "推送后已确认c532fc9完整矩阵继续运行，d9fc1e7排队，未取消已启动任务；c532fc9原生Safari287默认/249交互已通过。",
+    "pages": "d9fc1e7独立Pages部署成功。"
+  }
 }
