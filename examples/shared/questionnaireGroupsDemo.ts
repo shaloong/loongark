@@ -42,6 +42,7 @@ export function createQuestionnaireGroupsDemo(notify: () => void) {
     disabled: false,
     shown: true,
     advanced: false,
+    longLabels: false,
     controlled: true,
     revision: 0,
     callbacks: 0,
@@ -193,6 +194,21 @@ export function createQuestionnaireGroupsDemo(notify: () => void) {
     Array.isArray(answer) && answer[0] === "clarity"
       ? undefined
       : "Put clarity first.";
+  const longLabels = (q: Question): Question => ({
+    ...q,
+    label: `${q.label} — review the details and preferences for this contact before completing your questionnaire`,
+    groupLabels: q.groupLabels
+      ? {
+          ...q.groupLabels,
+          instance: `${q.groupLabels.instance} — contact information and communication preferences`,
+        }
+      : undefined,
+    questions: q.questions?.map(longLabels),
+    rows: q.rows?.map((row) => ({
+      ...row,
+      label: `${row.label} — choose the days that work best for your regular schedule`,
+    })),
+  });
   const questions = (): readonly Question[] => [
     {
       ...schema,
@@ -210,7 +226,12 @@ export function createQuestionnaireGroupsDemo(notify: () => void) {
   ];
   return {
     get snapshot() {
-      return { ...state, value, saved, questions: questions() };
+      return {
+        ...state,
+        value,
+        saved,
+        questions: state.longLabels ? questions().map(longLabels) : questions(),
+      };
     },
     change(details: { value: QuestionnaireValue }) {
       state.callbacks++;
@@ -233,6 +254,10 @@ export function createQuestionnaireGroupsDemo(notify: () => void) {
     },
     toggleShown() {
       state.shown = !state.shown;
+      notify();
+    },
+    toggleLongLabels() {
+      state.longLabels = !state.longLabels;
       notify();
     },
     toggleAdvanced() {

@@ -1,3 +1,4 @@
+import { suspendScrollAnchoring } from "./scroll-anchoring";
 export interface VirtualizationOptions {
   /** 可视滚动高度与估算行高，单位 px；测量后按真实高度修正。 */
   height: number;
@@ -257,8 +258,7 @@ export function mountVirtualWindow(
 ) {
   const win = viewport.ownerDocument.defaultView;
   if (!win) return () => {};
-  const previous = viewport.style.overflowAnchor;
-  viewport.style.overflowAnchor = "none";
+  const restoreScrollAnchoring = suspendScrollAnchoring(viewport);
   let disposed = false,
     frame = 0,
     userScroll = false;
@@ -418,8 +418,7 @@ export function mountVirtualWindow(
     viewport.ownerDocument.removeEventListener("pointerdown", pointer, true);
     viewport.ownerDocument.removeEventListener("focusin", externalFocus, true);
     focusedNode = undefined;
-    if (viewport.style.overflowAnchor === "none")
-      viewport.style.overflowAnchor = previous;
+    restoreScrollAnchoring();
     model.dispose();
   };
 }

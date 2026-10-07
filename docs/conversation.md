@@ -55,7 +55,7 @@ Attachment 仅在 ready 提供 `onPreview`，uploading 提供 `onCancel`；既�
 
 MessageScroller 在用户暂停跟随后记录首条可见消息及可见文字位置。图片在视口上方加载、同条消息内媒体撑高、上方增高同时下方缩短、历史与新回复同时插入，都会按实际阅读锚点调整 scrollTop；不会使用整个列表的高度差替代前插位移。位于底部时继续跟随；用户主动滚动立即更新锚点，Jump to latest 保留键盘焦点语义。
 
-共享行为使用临时 Range 测量横排文字，不改变 Selection；ResizeObserver 同时观察内容、视口和直接消息行，MutationObserver 跟踪消息与文字变化，更新合并到动画帧。卸载取消帧、断开观察器、释放引用，恢复接管前的 overflow-anchor/跟随属性/跳转按钮状态，并保留调用方后续覆盖。嵌套滚动组件只接管自己直接所属的部件。
+共享行为使用临时 Range 测量横排文字，不改变 Selection；ResizeObserver 同时观察内容、视口和直接消息行，MutationObserver 跟踪消息与文字变化，更新合并到动画帧。卸载取消帧、断开观察器、释放引用，恢复接管前的 overflow-anchor/跟随属性/跳转按钮状态，并保留调用方后续覆盖。滚动锚定恢复保留内联声明的缺省状态和 `!important` 优先级；不支持该 CSS 属性的浏览器仍执行组件自己的阅读锚点逻辑，不创建伪造的样式属性。消息与表格纵向虚拟化共用这套声明恢复行为。嵌套滚动组件只接管自己直接所属的部件。
 
 四端 MessageScrollerAdvancedExample 与 Advanced Story 提供延迟预览、加载取消、历史和新回复同时插入、重置、隐藏与重新挂载。图片复用既有中性媒体示例，媒体真正解码并改变自然高度；示例500ms延迟仅模拟元数据，不假定后端协议。
 

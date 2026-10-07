@@ -42,3 +42,37 @@ for (const mode of ["light", "dark"])
       );
       await checkQuestionnaireMatrix(page);
     });
+
+for (const framework of ["Story", "react", "vue", "solid", "svelte"])
+  for (const mode of ["light", "dark"])
+    test(`matrix resize ${framework} ${mode}`, async ({ page }) => {
+      test.skip(
+        framework === "Story"
+          ? !!process.env.STATIC_DIR
+          : !process.env.STATIC_DIR,
+      );
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(
+        framework === "Story"
+          ? `/iframe.html?id=components-questionnaire--matrix-multiple&globals=mode:${mode}`
+          : `/examples-${framework}/?example=QuestionnaireMatrixExample&mode=${mode}`,
+      );
+      const form = page.getByRole("form", { name: "Matrix review" });
+      await expect(form).toBeVisible();
+      // 同一份表单由桌面缩到手机再展开，原生 legend 不能撑开页面。
+      for (const width of [375, 320, 1280]) {
+        await page.setViewportSize({ width, height: 900 });
+        await expect
+          .poll(() =>
+            page.evaluate(
+              () => document.documentElement.scrollWidth <= innerWidth,
+            ),
+          )
+          .toBe(true);
+        for (const legend of await form.locator("legend").all()) {
+          const bounds = await legend.boundingBox();
+          expect(bounds!.x).toBeGreaterThanOrEqual(0);
+          expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width);
+        }
+      }
+    });

@@ -39,6 +39,11 @@
       <L.LoongArkButton variant="outline" onclick={demo.reset}
         >Reset survey</L.LoongArkButton
       >
+      <L.LoongArkButton variant="outline" onclick={demo.toggleLongLabels}
+        >{snapshot.longLabels
+          ? "Use short labels"
+          : "Use long labels"}</L.LoongArkButton
+      >
       <L.LoongArkButton variant="outline" onclick={demo.toggleAdvanced}
         >{snapshot.advanced
           ? "Hide advanced questions"

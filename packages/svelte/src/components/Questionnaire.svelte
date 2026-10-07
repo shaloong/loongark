@@ -17,7 +17,7 @@
     type QuestionnaireValidationState,
     toggleQuestionAnswer,
     focusQuestion,
-  questionnaireSubmitOwned,
+    questionnaireSubmitOwned,
     restoreQuestionAnswers,
     type QuestionnaireOptions,
     type QuestionnaireValue,
@@ -225,86 +225,88 @@
           data-part="legend"
           >{question.label}{question.required ? " *" : ""}</legend
         >
-        <p
-          id={uid + "-description"}
-          data-scope="questionnaire"
-          data-part="description"
-        >
-          {question.description}
-        </p>
-        {#if questionHasCustom(question)}<QuestionnaireTree
-            node={renderTree(
-              question,
-              current,
-              uid,
-              !!err,
-              validationState.errors,
-              { requiredLabel, invalidLabel },
-              customRegistry,
-            )}
-            {renderers}
-          />
-        {:else if question.type === "text"}<Textarea
-            aria-label={question.label}
-            aria-required={question.required}
-            aria-invalid={err ? "true" : undefined}
-            aria-describedby={uid + "-description " + uid + "-error"}
-            bind:value={textAnswer}
-            maxlength={question.maxLength}
-            oninput={(e) =>
-              change({ ...current, [question.id]: e.currentTarget.value })}
-          />{:else if !["single", "multiple"].includes(question.type)}
-          <div data-part="advanced-answer">
-            {@html renderControl(
-              question,
-              current,
-              uid + "-description " + uid + "-error",
-              !!err,
-              validationState.errors,
-              { requiredLabel, invalidLabel },
-            )}
+        <div data-scope="questionnaire" data-part="question-content">
+          <p
+            id={uid + "-description"}
+            data-scope="questionnaire"
+            data-part="description"
+          >
+            {question.description}
+          </p>
+          {#if questionHasCustom(question)}<QuestionnaireTree
+              node={renderTree(
+                question,
+                current,
+                uid,
+                !!err,
+                validationState.errors,
+                { requiredLabel, invalidLabel },
+                customRegistry,
+              )}
+              {renderers}
+            />
+          {:else if question.type === "text"}<Textarea
+              aria-label={question.label}
+              aria-required={question.required}
+              aria-invalid={err ? "true" : undefined}
+              aria-describedby={uid + "-description " + uid + "-error"}
+              bind:value={textAnswer}
+              maxlength={question.maxLength}
+              oninput={(e) =>
+                change({ ...current, [question.id]: e.currentTarget.value })}
+            />{:else if !["single", "multiple"].includes(question.type)}
+            <div data-part="advanced-answer">
+              {@html renderControl(
+                question,
+                current,
+                uid + "-description " + uid + "-error",
+                !!err,
+                validationState.errors,
+                { requiredLabel, invalidLabel },
+              )}
+            </div>
+          {:else}
+            {#each question.options ?? [] as o}<label
+                data-scope="questionnaire"
+                data-part="option"
+                data-selected={(
+                  question.type === "multiple"
+                    ? questionIncludes(current[question.id], o.value)
+                    : current[question.id] === o.value
+                )
+                  ? "true"
+                  : undefined}
+              >
+                <input
+                  type={question.type === "multiple" ? "checkbox" : "radio"}
+                  name={question.id}
+                  value={o.value}
+                  disabled={o.disabled}
+                  checked={question.type === "multiple"
+                    ? questionIncludes(current[question.id], o.value)
+                    : current[question.id] === o.value}
+                  aria-required={question.required}
+                  aria-invalid={err ? "true" : undefined}
+                  aria-describedby={uid + "-error"}
+                  onchange={(e) =>
+                    change(
+                      toggleQuestionAnswer(
+                        current,
+                        question,
+                        o.value,
+                        e.currentTarget.checked,
+                      ),
+                    )}
+                /><span>{o.label}</span></label
+              >{/each}{/if}
+          <div
+            id={uid + "-error"}
+            data-scope="questionnaire"
+            data-part="error"
+            role="alert"
+          >
+            {err}
           </div>
-        {:else}
-          {#each question.options ?? [] as o}<label
-              data-scope="questionnaire"
-              data-part="option"
-              data-selected={(
-                question.type === "multiple"
-                  ? questionIncludes(current[question.id], o.value)
-                  : current[question.id] === o.value
-              )
-                ? "true"
-                : undefined}
-            >
-              <input
-                type={question.type === "multiple" ? "checkbox" : "radio"}
-                name={question.id}
-                value={o.value}
-                disabled={o.disabled}
-                checked={question.type === "multiple"
-                  ? questionIncludes(current[question.id], o.value)
-                  : current[question.id] === o.value}
-                aria-required={question.required}
-                aria-invalid={err ? "true" : undefined}
-                aria-describedby={uid + "-error"}
-                onchange={(e) =>
-                  change(
-                    toggleQuestionAnswer(
-                      current,
-                      question,
-                      o.value,
-                      e.currentTarget.checked,
-                    ),
-                  )}
-              /><span>{o.label}</span></label
-            >{/each}{/if}
-        <div
-          id={uid + "-error"}
-          data-scope="questionnaire"
-          data-part="error"
-          role="alert"
-        >
-          {err}
         </div>
       </fieldset>
     {/key}

@@ -1,3 +1,4 @@
+import { suspendScrollAnchoring } from "./scroll-anchoring";
 import {
   mountVirtualWindow,
   virtualViewportHeight,
@@ -29,7 +30,7 @@ export function mountMessageScroller(
   const document = root.ownerDocument,
     win = document.defaultView;
   if (!win) return () => {};
-  const previousOverflowAnchor = viewport.style.overflowAnchor,
+  const restoreScrollAnchoring = suspendScrollAnchoring(viewport),
     previousAtBottom = root.dataset.atBottom,
     previousHidden = jump.hidden;
   let atBottom = true,
@@ -178,7 +179,6 @@ export function mountMessageScroller(
     bottom();
     viewport.focus({ preventScroll: true });
   };
-  viewport.style.overflowAnchor = "none";
   bottom();
   viewport.addEventListener("scroll", scroll, { passive: true });
   jump.addEventListener("click", click);
@@ -199,8 +199,7 @@ export function mountMessageScroller(
     anchor = undefined;
     viewport.removeEventListener("scroll", scroll);
     jump.removeEventListener("click", click);
-    if (viewport.style.overflowAnchor === "none")
-      viewport.style.overflowAnchor = previousOverflowAnchor;
+    restoreScrollAnchoring();
     if (root.dataset.atBottom === String(atBottom)) {
       if (previousAtBottom === undefined) delete root.dataset.atBottom;
       else root.dataset.atBottom = previousAtBottom;

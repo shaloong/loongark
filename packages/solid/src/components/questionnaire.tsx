@@ -228,103 +228,111 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
               {question().label}
               {question().required ? " *" : ""}
             </legend>
-            <p
-              id={uid + "-description"}
-              data-scope="questionnaire"
-              data-part="description"
-            >
-              {question().description}
-            </p>
-            {questionHasCustom(question()) ? (
-              <QuestionnaireTree
-                node={() =>
-                  renderTree(
-                    question(),
-                    current(),
-                    uid,
-                    !!err(),
-                    validationState().errors,
-                    p,
-                    customRegistry,
-                  )
-                }
-                renderers={p.renderers ?? {}}
-              />
-            ) : question().type === "text" ? (
-              <LoongArkTextarea
-                aria-label={question().label}
-                aria-required={question().required}
-                aria-invalid={err() ? "true" : undefined}
-                aria-describedby={uid + "-description " + uid + "-error"}
-                value={
-                  typeof current()[question().id] === "string"
-                    ? String(current()[question().id])
-                    : ""
-                }
-                maxLength={question().maxLength}
-                onInput={(e) =>
-                  change({
-                    ...current(),
-                    [question().id]: e.currentTarget.value,
-                  })
-                }
-              />
-            ) : !["single", "multiple"].includes(question().type) ? (
-              <div data-part="advanced-answer" innerHTML={controlHTML()} />
-            ) : (
-              <For each={question().options ?? []}>
-                {(o) => (
-                  <label
-                    data-scope="questionnaire"
-                    data-part="option"
-                    data-selected={
-                      (
-                        question().type === "multiple"
-                          ? questionIncludes(current()[question().id], o.value)
-                          : current()[question().id] === o.value
-                      )
-                        ? "true"
-                        : undefined
-                    }
-                  >
-                    <input
-                      type={
-                        question().type === "multiple" ? "checkbox" : "radio"
-                      }
-                      name={question().id}
-                      value={o.value}
-                      disabled={o.disabled}
-                      checked={
-                        question().type === "multiple"
-                          ? questionIncludes(current()[question().id], o.value)
-                          : current()[question().id] === o.value
-                      }
-                      aria-required={question().required}
-                      aria-invalid={err() ? "true" : undefined}
-                      aria-describedby={uid + "-error"}
-                      onChange={(e) =>
-                        change(
-                          toggleQuestionAnswer(
-                            current(),
-                            question(),
-                            o.value,
-                            e.currentTarget.checked,
-                          ),
+            <div data-scope="questionnaire" data-part="question-content">
+              <p
+                id={uid + "-description"}
+                data-scope="questionnaire"
+                data-part="description"
+              >
+                {question().description}
+              </p>
+              {questionHasCustom(question()) ? (
+                <QuestionnaireTree
+                  node={() =>
+                    renderTree(
+                      question(),
+                      current(),
+                      uid,
+                      !!err(),
+                      validationState().errors,
+                      p,
+                      customRegistry,
+                    )
+                  }
+                  renderers={p.renderers ?? {}}
+                />
+              ) : question().type === "text" ? (
+                <LoongArkTextarea
+                  aria-label={question().label}
+                  aria-required={question().required}
+                  aria-invalid={err() ? "true" : undefined}
+                  aria-describedby={uid + "-description " + uid + "-error"}
+                  value={
+                    typeof current()[question().id] === "string"
+                      ? String(current()[question().id])
+                      : ""
+                  }
+                  maxLength={question().maxLength}
+                  onInput={(e) =>
+                    change({
+                      ...current(),
+                      [question().id]: e.currentTarget.value,
+                    })
+                  }
+                />
+              ) : !["single", "multiple"].includes(question().type) ? (
+                <div data-part="advanced-answer" innerHTML={controlHTML()} />
+              ) : (
+                <For each={question().options ?? []}>
+                  {(o) => (
+                    <label
+                      data-scope="questionnaire"
+                      data-part="option"
+                      data-selected={
+                        (
+                          question().type === "multiple"
+                            ? questionIncludes(
+                                current()[question().id],
+                                o.value,
+                              )
+                            : current()[question().id] === o.value
                         )
+                          ? "true"
+                          : undefined
                       }
-                    />
-                    <span>{o.label}</span>
-                  </label>
-                )}
-              </For>
-            )}
-            <div
-              id={uid + "-error"}
-              data-scope="questionnaire"
-              data-part="error"
-              role="alert"
-            >
-              {err()}
+                    >
+                      <input
+                        type={
+                          question().type === "multiple" ? "checkbox" : "radio"
+                        }
+                        name={question().id}
+                        value={o.value}
+                        disabled={o.disabled}
+                        checked={
+                          question().type === "multiple"
+                            ? questionIncludes(
+                                current()[question().id],
+                                o.value,
+                              )
+                            : current()[question().id] === o.value
+                        }
+                        aria-required={question().required}
+                        aria-invalid={err() ? "true" : undefined}
+                        aria-describedby={uid + "-error"}
+                        onChange={(e) =>
+                          change(
+                            toggleQuestionAnswer(
+                              current(),
+                              question(),
+                              o.value,
+                              e.currentTarget.checked,
+                            ),
+                          )
+                        }
+                      />
+                      <span>{o.label}</span>
+                    </label>
+                  )}
+                </For>
+              )}
+              <div
+                id={uid + "-error"}
+                data-scope="questionnaire"
+                data-part="error"
+                role="alert"
+              >
+                {err()}
+              </div>
             </div>
           </fieldset>
           <For

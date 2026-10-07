@@ -262,107 +262,115 @@ export const LoongArkQuestionnaire = defineComponent({
                         { ...part("legend"), id: uid + "-label" },
                         q.label + (q.required ? " *" : ""),
                       ),
-                      h(
-                        "p",
-                        { ...part("description"), id: uid + "-description" },
-                        q.description,
-                      ),
-                      questionHasCustom(q)
-                        ? renderQuestionnaireTree(
-                            renderTree(
-                              q,
-                              current(),
-                              uid,
-                              !!err,
-                              validationState.value.errors,
-                              p,
-                              customRegistry,
-                            ),
-                            p.renderers ?? {},
-                          )
-                        : q.type === "text"
-                          ? h(LoongArkTextarea, {
-                              "aria-label": q.label,
-                              "aria-required": q.required,
-                              "aria-invalid": err ? "true" : undefined,
-                              "aria-describedby":
-                                uid + "-description " + uid + "-error",
-                              value:
-                                typeof v[q.id] === "string"
-                                  ? String(v[q.id])
-                                  : "",
-                              maxlength: q.maxLength,
-                              onInput: (e: Event) =>
-                                change({
-                                  ...v,
-                                  [q.id]: (e.target as HTMLTextAreaElement)
-                                    .value,
-                                }),
-                            })
-                          : !["single", "multiple"].includes(q.type)
-                            ? h("div", {
-                                "data-part": "advanced-answer",
-                                innerHTML: renderControl(
-                                  q,
-                                  current(),
+                      h("div", part("question-content"), [
+                        h(
+                          "p",
+                          { ...part("description"), id: uid + "-description" },
+                          q.description,
+                        ),
+                        questionHasCustom(q)
+                          ? renderQuestionnaireTree(
+                              renderTree(
+                                q,
+                                current(),
+                                uid,
+                                !!err,
+                                validationState.value.errors,
+                                p,
+                                customRegistry,
+                              ),
+                              p.renderers ?? {},
+                            )
+                          : q.type === "text"
+                            ? h(LoongArkTextarea, {
+                                "aria-label": q.label,
+                                "aria-required": q.required,
+                                "aria-invalid": err ? "true" : undefined,
+                                "aria-describedby":
                                   uid + "-description " + uid + "-error",
-                                  !!err,
-                                  validationState.value.errors,
-                                  {
-                                    requiredLabel: p.requiredLabel,
-                                    invalidLabel: p.invalidLabel,
-                                  },
-                                ),
+                                value:
+                                  typeof v[q.id] === "string"
+                                    ? String(v[q.id])
+                                    : "",
+                                maxlength: q.maxLength,
+                                onInput: (e: Event) =>
+                                  change({
+                                    ...v,
+                                    [q.id]: (e.target as HTMLTextAreaElement)
+                                      .value,
+                                  }),
                               })
-                            : (q.options ?? []).map((o) =>
-                                h(
-                                  "label",
-                                  {
-                                    ...part("option"),
-                                    "data-selected": (
-                                      q.type === "multiple"
-                                        ? questionIncludes(v[q.id], o.value)
-                                        : v[q.id] === o.value
-                                    )
-                                      ? "true"
-                                      : undefined,
-                                  },
-                                  [
-                                    h("input", {
-                                      type:
-                                        q.type === "multiple"
-                                          ? "checkbox"
-                                          : "radio",
-                                      name: q.id,
-                                      value: o.value,
-                                      disabled: o.disabled,
-                                      checked:
+                            : !["single", "multiple"].includes(q.type)
+                              ? h("div", {
+                                  "data-part": "advanced-answer",
+                                  innerHTML: renderControl(
+                                    q,
+                                    current(),
+                                    uid + "-description " + uid + "-error",
+                                    !!err,
+                                    validationState.value.errors,
+                                    {
+                                      requiredLabel: p.requiredLabel,
+                                      invalidLabel: p.invalidLabel,
+                                    },
+                                  ),
+                                })
+                              : (q.options ?? []).map((o) =>
+                                  h(
+                                    "label",
+                                    {
+                                      ...part("option"),
+                                      "data-selected": (
                                         q.type === "multiple"
                                           ? questionIncludes(v[q.id], o.value)
-                                          : v[q.id] === o.value,
-                                      "aria-required": q.required,
-                                      "aria-invalid": err ? "true" : undefined,
-                                      "aria-describedby": uid + "-error",
-                                      onChange: (e: Event) =>
-                                        change(
-                                          toggleQuestionAnswer(
-                                            v,
-                                            q,
-                                            o.value,
-                                            (e.target as HTMLInputElement)
-                                              .checked,
+                                          : v[q.id] === o.value
+                                      )
+                                        ? "true"
+                                        : undefined,
+                                    },
+                                    [
+                                      h("input", {
+                                        type:
+                                          q.type === "multiple"
+                                            ? "checkbox"
+                                            : "radio",
+                                        name: q.id,
+                                        value: o.value,
+                                        disabled: o.disabled,
+                                        checked:
+                                          q.type === "multiple"
+                                            ? questionIncludes(v[q.id], o.value)
+                                            : v[q.id] === o.value,
+                                        "aria-required": q.required,
+                                        "aria-invalid": err
+                                          ? "true"
+                                          : undefined,
+                                        "aria-describedby": uid + "-error",
+                                        onChange: (e: Event) =>
+                                          change(
+                                            toggleQuestionAnswer(
+                                              v,
+                                              q,
+                                              o.value,
+                                              (e.target as HTMLInputElement)
+                                                .checked,
+                                            ),
                                           ),
-                                        ),
-                                    }),
-                                    h("span", {}, o.label),
-                                  ],
+                                      }),
+                                      h("span", {}, o.label),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                      h(
-                        "div",
-                        { ...part("error"), id: uid + "-error", role: "alert" },
-                        err,
-                      ),
+                        h(
+                          "div",
+                          {
+                            ...part("error"),
+                            id: uid + "-error",
+                            role: "alert",
+                          },
+                          err,
+                        ),
+                      ]),
                     ],
                   ),
                   ...questionnaireFormEntries(

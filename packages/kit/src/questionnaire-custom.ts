@@ -529,43 +529,51 @@ export function createQuestionnaireTreeRenderer() {
             },
             {
               kind: "element",
-              key: childKey + "desc",
-              tag: "p",
-              attrs: {
-                "data-scope": "questionnaire",
-                "data-part": "description",
-                id: id + "-description",
-              },
+              key: childKey + "content",
+              tag: "div",
+              attrs: { "data-part": "question-content" },
               children: [
                 {
-                  kind: "text",
-                  key: childKey + "desc-text",
-                  text: child.description ?? "",
+                  kind: "element",
+                  key: childKey + "desc",
+                  tag: "p",
+                  attrs: {
+                    "data-scope": "questionnaire",
+                    "data-part": "description",
+                    id: id + "-description",
+                  },
+                  children: [
+                    {
+                      kind: "text",
+                      key: childKey + "desc-text",
+                      text: child.description ?? "",
+                    },
+                  ],
                 },
-              ],
-            },
-            render(
-              child,
-              instance.value,
-              id,
-              !!error,
-              errors,
-              labels,
-              registry,
-              childPath,
-            ),
-            {
-              kind: "element",
-              key: childKey + "error",
-              tag: "p",
-              attrs: {
-                "data-scope": "questionnaire",
-                "data-part": "error",
-                id: id + "-error",
-                role: error ? "alert" : undefined,
-              },
-              children: [
-                { kind: "text", key: childKey + "error-text", text: error },
+                render(
+                  child,
+                  instance.value,
+                  id,
+                  !!error,
+                  errors,
+                  labels,
+                  registry,
+                  childPath,
+                ),
+                {
+                  kind: "element",
+                  key: childKey + "error",
+                  tag: "p",
+                  attrs: {
+                    "data-scope": "questionnaire",
+                    "data-part": "error",
+                    id: id + "-error",
+                    role: error ? "alert" : undefined,
+                  },
+                  children: [
+                    { kind: "text", key: childKey + "error-text", text: error },
+                  ],
+                },
               ],
             },
           ],
@@ -582,21 +590,30 @@ export function createQuestionnaireTreeRenderer() {
               (q.groupLabels?.instance ?? "Group") + " " + (index + 1),
             ),
           ]),
-          ...children,
           element(
-            instance.id + "remove",
-            "button",
-            {
-              type: "button",
-              "data-question-group": "remove",
-              "data-group-path": key,
-              "data-instance-id": instance.id,
-              disabled: groups.length <= minimum,
-            },
+            instance.id + "content",
+            "div",
+            { "data-part": "question-content" },
             [
-              text(
-                instance.id + "remove-label",
-                (q.groupLabels?.remove ?? "Remove group") + " " + (index + 1),
+              ...children,
+              element(
+                instance.id + "remove",
+                "button",
+                {
+                  type: "button",
+                  "data-question-group": "remove",
+                  "data-group-path": key,
+                  "data-instance-id": instance.id,
+                  disabled: groups.length <= minimum,
+                },
+                [
+                  text(
+                    instance.id + "remove-label",
+                    (q.groupLabels?.remove ?? "Remove group") +
+                      " " +
+                      (index + 1),
+                  ),
+                ],
               ),
             ],
           ),

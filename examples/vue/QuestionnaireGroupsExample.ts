@@ -44,6 +44,10 @@ export const QuestionnaireGroupsExample = defineComponent({
               ),
               button("Reset survey", demo.reset),
               button(
+                snapshot.longLabels ? "Use short labels" : "Use long labels",
+                demo.toggleLongLabels,
+              ),
+              button(
                 snapshot.advanced
                   ? "Hide advanced questions"
                   : "Show advanced questions",

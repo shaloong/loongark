@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06",
+  "updatedAt": "2026-10-07",
   "sources": [
     "https://ui.shadcn.com/docs/components",
     "https://mui.com/material-ui/all-components/",
@@ -187,6 +187,7 @@
     "ContextMenu native unknown-pointer right click, touch/pen long-press cancellation and keyboard alternative; shared published handler guard",
     "Chart inspection grid remains bounded with enlarged category text; Select/Combobox constrain stale floating reference widths after viewport resize; Sheet paints slide-out motion within its positioner",
     "Sheet viewport-sized paint containment preserves entry/exit clipping and flush edges; four-framework desktop/mobile, both-theme save and focus recovery regression",
-    "组合输入的完整外框键盘焦点环、数字步进按钮逻辑圆角与默认 Lucide 图标；四端示例去除文字箭头；Svelte 原生 hook 使用 SSR 稳定 ID"
+    "组合输入的完整外框键盘焦点环、数字步进按钮逻辑圆角与默认 Lucide 图标；四端示例去除文字箭头；Svelte 原生 hook 使用 SSR 稳定 ID",
+    "Questionnaire 顶层、嵌套题组与 matrix legend 桌面到 320px 窄屏缩放边界及四端长标签示例；共享滚动锚定声明的优先级、缺省状态及调用方接管恢复；Firefox 真实 Tab 焦点回归"
   ]
 }

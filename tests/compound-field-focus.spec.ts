@@ -91,10 +91,12 @@ for (const framework of ["Story", "react", "vue", "solid", "svelte"])
             await expect(increment.locator("svg")).toBeVisible();
             await increment.click();
             await expect(input).toHaveValue("25");
+            // Ark 默认仅让输入进入 Tab 顺序；模拟调用方显式启用按钮 tabIndex。
+            await increment.evaluate((node) =>
+              node.setAttribute("tabindex", "0"),
+            );
             await input.focus();
             await input.press("Tab");
-            // Ark 的步进按钮默认不进入 Tab 顺序；键盘模式下主动聚焦仍须可见。
-            await increment.focus();
             await expect(increment).toBeFocused();
             await expect
               .poll(() =>

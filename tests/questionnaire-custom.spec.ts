@@ -1,5 +1,80 @@
 import { expect, test } from "@playwright/test";
 import { checkQuestionnaireCustom } from "./questionnaireCustomChecks";
+for (const framework of ["Story", "react", "vue", "solid", "svelte"])
+  for (const mode of ["light", "dark"])
+    test(`custom group long legend resize ${framework} ${mode}`, async ({
+      page,
+      browserName,
+    }) => {
+      test.skip(
+        framework === "Story"
+          ? !!process.env.STATIC_DIR
+          : !process.env.STATIC_DIR,
+      );
+      await page.setViewportSize({ width: 1280, height: 1100 });
+      await page.goto(
+        framework === "Story"
+          ? `/iframe.html?id=components-questionnaire--custom-renderer&globals=mode:${mode}`
+          : `/examples-${framework}/?example=QuestionnaireCustomExample&mode=${mode}`,
+      );
+      const form = page.getByRole("form", { name: "Experience review" });
+      await expect(form).toBeVisible();
+      await page
+        .locator("summary")
+        .filter({ hasText: "More controls" })
+        .click();
+      await page
+        .getByRole("button", { name: "Use nested questions", exact: true })
+        .click();
+      await form
+        .getByRole("textbox", { name: "Person name", exact: true })
+        .first()
+        .fill("Layout review");
+      const entries = () =>
+        form.evaluate((node) =>
+          Array.from(new FormData(node as HTMLFormElement).entries()),
+        );
+      const before = await entries();
+      // 扩大可见标题，检查自定义语义树与第三方控件在缩屏后的排版和表单归属。
+      await form.locator("legend").evaluateAll((nodes) => {
+        for (const node of nodes)
+          node.textContent +=
+            " — review the full contact details and communication preferences before completing this questionnaire";
+      });
+      for (const width of [375, 320, 1280]) {
+        await page.setViewportSize({ width, height: 1100 });
+        await expect
+          .poll(() =>
+            page.evaluate(
+              () => document.documentElement.scrollWidth <= innerWidth,
+            ),
+          )
+          .toBe(true);
+        for (const legend of await form.locator("legend").all()) {
+          const box = await legend.boundingBox();
+          expect(box!.x).toBeGreaterThanOrEqual(0);
+          expect(box!.x + box!.width).toBeLessThanOrEqual(width);
+        }
+        expect(await entries()).toEqual(before);
+        await expect(
+          form
+            .getByRole("textbox", { name: "Person name", exact: true })
+            .first(),
+        ).toHaveValue("Layout review");
+        await page.evaluate(
+          () =>
+            new Promise<void>((resolve) =>
+              requestAnimationFrame(() =>
+                requestAnimationFrame(() => resolve()),
+              ),
+            ),
+        );
+        await page.screenshot({
+          path: `.artifacts/p0-consistency/custom-long-${browserName}-${framework}-${mode}-${width}.png`,
+          fullPage: true,
+        });
+      }
+    });
 for (const framework of ["react", "vue", "solid", "svelte"])
   for (const mode of ["light", "dark"])
     for (const width of [1280, 375])

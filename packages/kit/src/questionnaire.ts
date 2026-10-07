@@ -629,10 +629,10 @@ export function focusQuestion(
 export const questionnaireCSS = `
 [data-scope=questionnaire][data-part=root] { display:grid;gap:var(--lk-space-component-md);width:100%;min-width:0; }
 [data-scope=questionnaire] [data-part=groups] { display:grid;gap:var(--lk-space-component-md);min-width:0; }
-[data-scope=questionnaire] :is([data-part=group-instance],[data-part=group-question]) { display:grid;gap:var(--lk-space-component-sm);min-width:0;margin:0;padding:var(--lk-space-component-compact);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md); }
+[data-scope=questionnaire] :is([data-part=group-instance],[data-part=group-question]) { display:block;min-width:0;margin:0;padding:var(--lk-space-component-compact);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md); }
 [data-scope=questionnaire] [data-part=group-question] { padding:0;border:0;border-radius:0; }
 [data-scope=questionnaire] [data-part=group-question] textarea[data-part=answer] { height:auto;min-height:calc(2 * var(--lk-control-height-md));padding-block:var(--lk-space-component-sm);resize:vertical; }
-[data-scope=questionnaire] :is([data-part=group-instance],[data-part=group-question]) > legend { padding-inline:var(--lk-space-component-xs);font-weight:var(--lk-typography-fontweight-medium);overflow-wrap:anywhere; }
+[data-scope=questionnaire] :is([data-part=group-instance],[data-part=group-question]) > legend { max-inline-size:100%;box-sizing:border-box;padding-inline:var(--lk-space-component-xs);font-weight:var(--lk-typography-fontweight-medium);overflow-wrap:anywhere; }
 [data-scope=questionnaire] [data-part=group-question] :is([data-part=description],[data-part=error]):empty { display:none; }
 [data-scope=questionnaire] [data-question-group] { justify-self:start;min-height:var(--lk-control-height-md);padding:var(--lk-space-component-xs) var(--lk-space-component-compact);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md);background:var(--lk-color-semantic-background);color:inherit;font:inherit;cursor:pointer; }
 [data-scope=questionnaire] [data-question-group]:hover:not(:disabled) { background:var(--lk-color-semantic-muted); }
@@ -641,8 +641,10 @@ export const questionnaireCSS = `
 [data-scope=questionnaire][data-part=header] { display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--lk-space-component-sm); }
 [data-scope=questionnaire][data-part=title] { margin:0;font-size:var(--lk-typography-fontsize-lg);font-weight:var(--lk-typography-fontweight-semibold); }
 [data-scope=questionnaire][data-part=count] { font-size:var(--lk-typography-fontsize-sm);color:var(--lk-color-semantic-mutedforeground); }
-[data-scope=questionnaire][data-part=question] { min-width:0;margin:0;padding:var(--lk-space-component-md);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-lg);display:grid;gap:var(--lk-space-component-compact); }
-[data-scope=questionnaire][data-part=legend] { font-weight:var(--lk-typography-fontweight-medium);padding-inline:var(--lk-space-component-xs);overflow-wrap:anywhere; }
+[data-scope=questionnaire][data-part=question] { min-width:0;margin:0;padding:var(--lk-space-component-md);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-lg);display:block; }
+[data-scope=questionnaire] [data-part=question-content] { display:grid;gap:var(--lk-space-component-compact);min-width:0; }
+[data-scope=questionnaire] :is([data-part=group-instance],[data-part=group-question]) > [data-part=question-content] { gap:var(--lk-space-component-sm); }
+[data-scope=questionnaire][data-part=legend] { max-inline-size:100%;box-sizing:border-box;font-weight:var(--lk-typography-fontweight-medium);padding-inline:var(--lk-space-component-xs);overflow-wrap:anywhere; }
 [data-scope=questionnaire][data-part=description] { margin:0;font-size:var(--lk-typography-fontsize-sm);color:var(--lk-color-semantic-mutedforeground);overflow-wrap:anywhere; }
 [data-scope=questionnaire][data-part=option] { display:flex;align-items:flex-start;line-height:var(--lk-typography-lineheight-base);gap:var(--lk-space-component-sm);min-height:var(--lk-control-height-md);padding:var(--lk-space-component-sm);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md);cursor:pointer;overflow-wrap:anywhere; }
 [data-scope=questionnaire][data-part=option][data-selected=true] { background:var(--lk-color-semantic-muted);border-color:var(--lk-color-semantic-foreground); }
@@ -656,8 +658,9 @@ export const questionnaireCSS = `
 [data-scope=questionnaire] [data-part=advanced-answer] { min-width:0; }
 [data-scope=questionnaire] [data-part=answer] { box-sizing:border-box;width:100%;min-width:0;height:var(--lk-control-height-md);padding-inline:var(--lk-space-component-compact);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md);background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground);font:inherit; }
 [data-scope=questionnaire] [data-part=matrix] { display:grid;gap:var(--lk-space-component-md); }
-[data-scope=questionnaire] [data-part=matrix-row] { margin:0;padding:0;border:0;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10em),1fr));gap:var(--lk-space-component-sm); }
-[data-scope=questionnaire] [data-part=matrix-row] legend { margin-block-end:var(--lk-space-component-sm);font-weight:var(--lk-typography-fontweight-medium);overflow-wrap:anywhere; }
+[data-scope=questionnaire] [data-part=matrix-row] { margin:0;padding:0;border:0;min-width:0;display:block; }
+[data-scope=questionnaire] [data-part=matrix-options] { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10em),1fr));gap:var(--lk-space-component-sm);min-width:0; }
+[data-scope=questionnaire] [data-part=matrix-row] legend { max-inline-size:100%;box-sizing:border-box;margin-block-end:var(--lk-space-component-sm);font-weight:var(--lk-typography-fontweight-medium);overflow-wrap:anywhere; }
 [data-scope=questionnaire] [data-part=ranking] { margin:0;padding:0;list-style:none;counter-reset:rank;display:grid;gap:var(--lk-space-component-sm); }
 [data-scope=questionnaire] [data-part=rank-row] { counter-increment:rank;display:flex;align-items:center;flex-wrap:wrap;gap:var(--lk-space-component-sm);padding:var(--lk-space-component-sm);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-radius:var(--lk-radius-md); }
 [data-scope=questionnaire] [data-part=rank-row]::before { content:counter(rank);color:var(--lk-color-semantic-mutedforeground);font-variant-numeric:tabular-nums; }
@@ -893,7 +896,7 @@ export function renderQuestionControl(
             ? !!selectionError(q, Array.isArray(entry) ? entry : [], {})
             : !!q.required && !entry);
         const attributes = `aria-describedby="${e(descriptionId)}" aria-invalid="${rowInvalid}"${q.multiple ? "" : ` aria-required="${!!q.required}"`}`;
-        return `<fieldset data-part="matrix-row" data-row="${e(row.id)}" aria-invalid="${rowInvalid}"${row.disabled ? " disabled" : ""}><legend>${e(row.label)}${q.multiple && q.required && !row.disabled ? '<span aria-hidden="true"> *</span>' : ""}</legend>${(q.multiple ? (q.options ?? []) : options).map((o) => `<label data-scope="questionnaire" data-part="option"${selected(o.value) ? ' data-selected="true"' : ""}><input data-question-control="matrix" data-key="${e(o.value)}" data-row="${e(row.id)}" type="${q.multiple ? "checkbox" : "radio"}" name="${e(q.id)}[${e(row.id)}]" value="${e(o.value)}" ${attributes}${selected(o.value) ? " checked" : ""}${o.disabled ? " disabled" : ""}><span>${e(o.label)}</span></label>`).join("")}</fieldset>`;
+        return `<fieldset data-part="matrix-row" data-row="${e(row.id)}" aria-invalid="${rowInvalid}"${row.disabled ? " disabled" : ""}><legend>${e(row.label)}${q.multiple && q.required && !row.disabled ? '<span aria-hidden="true"> *</span>' : ""}</legend><div data-part="matrix-options">${(q.multiple ? (q.options ?? []) : options).map((o) => `<label data-scope="questionnaire" data-part="option"${selected(o.value) ? ' data-selected="true"' : ""}><input data-question-control="matrix" data-key="${e(o.value)}" data-row="${e(row.id)}" type="${q.multiple ? "checkbox" : "radio"}" name="${e(q.id)}[${e(row.id)}]" value="${e(o.value)}" ${attributes}${selected(o.value) ? " checked" : ""}${o.disabled ? " disabled" : ""}><span>${e(o.label)}</span></label>`).join("")}</div></fieldset>`;
       })
       .join("")}</div>`;
   }
