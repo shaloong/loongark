@@ -62,7 +62,7 @@ async function command(method, path, body) {
   const result = await response.json();
   if (!response.ok || result.value?.error)
     throw Error(
-      `Safari WebDriver ${path}: ${result.value?.message ?? response.status}`,
+      `Safari WebDriver ${path}: ${result.value?.message ?? result.value?.error ?? response.status}`,
     );
   return result.value;
 }

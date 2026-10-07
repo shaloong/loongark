@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-07",
+  "batch": "native-safari-fixture-build",
+  "sourceCommit": "252941f528bef2eec17fc62def5ee823ace6d066",
+  "evidence": {
+    "runId": 37549388060,
+    "jobId": 112560993418,
+    "browser": "Safari 26.6.1",
+    "os": "macOS 15.7.9",
+    "defaultsPassed": 275,
+    "interactionsPassed": 48,
+    "failure": "Group focus fixture at / returned a 404 page; macOS job omitted build-framework-fixtures.mjs, which creates the page and imported shared modules.",
+    "reviewed": "All 48 actual interaction images reviewed in six contact sheets; custom Vue dark and groups Svelte light viewed at original size; failure image reviewed."
+  },
+  "changes": [
+    "Build shared framework fixtures before example fixtures in native Safari CI.",
+    "Keep application setup error text in WebDriver diagnostics."
+  ],
+  "validation": {
+    "syntaxCheck": "node --check scripts/run-native-safari.mjs passed",
+    "freshFixtureHttpStatus": {
+      "/": 200,
+      "questionnaire-groups.js": 200,
+      "questionnaire-custom.js": 200
+    },
+    "orderedBuild": "verify, contracts, Storybook, coverage, publication/SSR, Svelte, framework fixtures and example fixtures completed successfully locally."
+  },
+  "limitations": [
+    "Native Safari rerun pending after push.",
+    "This infrastructure correction does not claim completion of all advanced Safari interactions or true mobile testing.",
+    "Screenshots, logs and traces remain ignored or in CI artifacts."
+  ]
+}

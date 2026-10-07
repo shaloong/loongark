@@ -184,6 +184,7 @@ jobs:
       - run: pnpm check:coverage
       - run: pnpm check:publication
       - run: pnpm check:svelte
+      - run: node scripts/build-framework-fixtures.mjs
       - run: node scripts/build-example-fixtures.mjs
       - run: sudo /usr/bin/safaridriver --enable
       - run: node scripts/run-native-safari.mjs
