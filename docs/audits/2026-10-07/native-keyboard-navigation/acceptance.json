@@ -103,6 +103,7 @@
     "failure": "Drawer焦点可见断言失败；实际failureDOM焦点在Dialog容器，失败截图已查看。",
     "cause": "测试在键盘定位按钮后使用鼠标点击扩大吸附点；macOS Safari点击按钮不必使其获得焦点。",
     "change": "扩大吸附点继续使用原生Enter，并在拖动前严格确认吸附按钮保持焦点；拖动后完整可见断言不变。",
-    "limitations": "等待真实Safari重新执行，不计本次为通过。"
+    "limitations": "等待真实Safari重新执行，不计本次为通过。",
+    "strictContinuity": "Drawer的Tab、两次Enter及重开后的Escape仅发送原生W3C按键，不在操作之间脚本重新聚焦；收起/扩大后分别严格验证吸附按钮焦点。"
   }
 }

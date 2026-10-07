@@ -14,8 +14,7 @@ export async function runNativeAdvanced(h, framework, mode) {
     assertLayout,
     report,
   } = h;
-  const key = async (selector, value, modifiers = []) => {
-    await execute("document.querySelector(arguments[0]).focus()", [selector]);
+  const press = async (value, modifiers = []) => {
     await session("POST", "/actions", {
       actions: [
         {
@@ -32,6 +31,10 @@ export async function runNativeAdvanced(h, framework, mode) {
         },
       ],
     });
+  };
+  const key = async (selector, value, modifiers = []) => {
+    await execute("document.querySelector(arguments[0]).focus()", [selector]);
+    await press(value, modifiers);
   };
   const text = (selector) =>
     execute("return document.querySelector(arguments[0])?.textContent.trim()", [
@@ -544,7 +547,7 @@ export async function runNativeAdvanced(h, framework, mode) {
         "window.__safariDrawerKeys=[];document.querySelector(arguments[0]).addEventListener('keydown',event=>window.__safariDrawerKeys.push({key:event.key,code:event.code,trusted:event.isTrusted}),{once:true})",
         [dialog + " input:not([type=hidden])"],
       );
-      await key(dialog + " input:not([type=hidden])", "\uE004");
+      await press("\uE004");
       const navigation = await execute(
         "return {events:window.__safariDrawerKeys,focused:document.activeElement?.outerHTML}",
       );
@@ -564,12 +567,19 @@ export async function runNativeAdvanced(h, framework, mode) {
           ),
         "原生Drawer Tab定位吸附按钮",
       );
-      await key(dialog + " button", "\uE007");
+      await press("\uE007");
       await matches(snap, small + "px");
       await extent(vertical, small);
+      await waitFor(
+        () =>
+          execute(
+            "return document.activeElement?.textContent.trim()==='Toggle snap point'",
+          ),
+        "原生Drawer键盘收起后保留焦点",
+      );
       // Safari 鼠标点击按钮不必获得焦点；连续使用原生 Enter 保留
       // 已经由可信 Tab 定位的控件，随后检查拖动是否保持其可见。
-      await key(dialog + " button", "\uE007");
+      await press("\uE007");
       await matches(snap, large + "px");
       await extent(vertical, large);
       await waitFor(
@@ -617,7 +627,7 @@ export async function runNativeAdvanced(h, framework, mode) {
           ),
         "原生Drawer重开后初始焦点",
       );
-      await key(dialog + " input:not([type=hidden])", "\uE00C");
+      await press("\uE00C");
       await waitFor(
         () =>
           execute("return !document.querySelector(arguments[0])", [
