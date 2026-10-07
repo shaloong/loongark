@@ -35,12 +35,8 @@
   <LoongArkNumberInputLabel>Amount</LoongArkNumberInputLabel>
   <LoongArkNumberInputControl {size} {state} {disabled}>
     <LoongArkNumberInputInput {size} {state} {disabled} />
-    <LoongArkNumberInputIncrementTrigger {size} {state} {disabled}>
-      +
-    </LoongArkNumberInputIncrementTrigger>
-    <LoongArkNumberInputDecrementTrigger {size} {state} {disabled}>
-      -
-    </LoongArkNumberInputDecrementTrigger>
+    <LoongArkNumberInputIncrementTrigger {size} {state} {disabled} />
+    <LoongArkNumberInputDecrementTrigger {size} {state} {disabled} />
   </LoongArkNumberInputControl>
   <LoongArkNumberInputScrubber>Drag to adjust</LoongArkNumberInputScrubber>
   <LoongArkNumberInputValueText {size}>

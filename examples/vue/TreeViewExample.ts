@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/vue";
 import { defineComponent, h, type PropType } from "vue";
 import {
   LoongArkTreeViewRoot,
@@ -69,7 +71,12 @@ export const TreeViewExample = defineComponent({
                         {},
                         {
                           default: () => [
-                            h(LoongArkTreeViewBranchIndicator, {}, () => ">"),
+                            h(LoongArkTreeViewBranchIndicator, {}, () =>
+                              h(LoongArkIcon, {
+                                icon: controlIcons.chevronRight,
+                                size: "sm",
+                              }),
+                            ),
                             h(LoongArkTreeViewBranchText, {}, () => node.name),
                           ],
                         },

@@ -1,7 +1,10 @@
 <script lang="ts">
   import { controlIcons } from "@loongark/kit";
   import * as L from "@loongark/svelte";
+  import DrawerDirectionsExample from "../../../examples/svelte/DrawerDirectionsExample.svelte";
+  const id = $props.id();
   const advancedSelect = L.useSelect(() => ({
+    id: `${id}-advanced-select`,
     collection: L.createListCollection({ items: ["react", "vue"] }),
     name: "ssr-framework",
     defaultValue: ["react"],
@@ -518,6 +521,8 @@
   <L.LoongArkInputInput name="ssr-inherit-input" />
   <L.LoongArkTextareaControl name="ssr-inherit-textarea" />
 </L.LoongArkInputRoot>
+<DrawerDirectionsExample />
+<DrawerDirectionsExample />
 <L.LoongArkInputRoot>
   <L.LoongArkInputInput name="ssr-individual-input" disabled readOnly required />
   <L.LoongArkTextareaControl name="ssr-individual-textarea" disabled readOnly required />

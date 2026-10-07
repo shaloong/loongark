@@ -52,7 +52,7 @@ export const SelectExample: React.FC<SelectExampleProps> = ({
         <LoongArkSelectControl>
           <LoongArkSelectTrigger>
             <LoongArkSelectValueText placeholder="请选择..." />
-            <LoongArkSelectIndicator>▼</LoongArkSelectIndicator>
+            <LoongArkSelectIndicator />
           </LoongArkSelectTrigger>
         </LoongArkSelectControl>
         <LoongArkSelectPositioner>

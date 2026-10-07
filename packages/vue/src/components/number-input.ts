@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 import type { NumberInputRootProps as NativeNumberInputRootProps } from "@ark-ui/vue/number-input";
 import { renderPart } from "../render-part";
 /**
@@ -260,7 +262,12 @@ export const LoongArkNumberInputIncrementTrigger = defineComponent({
           "data-state": props.state !== "default" ? props.state : undefined,
           "data-disabled": props.disabled ? "true" : undefined,
         },
-        slots,
+        {
+          ...slots,
+          default: () =>
+            slots.default?.() ??
+            h(LoongArkIcon, { icon: controlIcons.plus, size: "sm" }),
+        },
       );
   },
 });
@@ -294,7 +301,12 @@ export const LoongArkNumberInputDecrementTrigger = defineComponent({
           "data-state": props.state !== "default" ? props.state : undefined,
           "data-disabled": props.disabled ? "true" : undefined,
         },
-        slots,
+        {
+          ...slots,
+          default: () =>
+            slots.default?.() ??
+            h(LoongArkIcon, { icon: controlIcons.minus, size: "sm" }),
+        },
       );
   },
 });

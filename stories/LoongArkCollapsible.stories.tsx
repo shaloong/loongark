@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
@@ -37,7 +39,9 @@ const CollapsibleDemo = ({
   <LoongArkCollapsibleRoot defaultOpen={defaultOpen} size={size}>
     <LoongArkCollapsibleTrigger>
       <span>Release notes</span>
-      <LoongArkCollapsibleIndicator>&gt;</LoongArkCollapsibleIndicator>
+      <LoongArkCollapsibleIndicator>
+        <LoongArkIcon icon={controlIcons.chevronRight} size="sm" />
+      </LoongArkCollapsibleIndicator>
     </LoongArkCollapsibleTrigger>
     <LoongArkCollapsibleContent>
       <div style={panelStyle}>

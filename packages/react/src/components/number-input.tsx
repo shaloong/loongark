@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 /**
  * Number Input component - React wrapper.
  * Based on Ark UI Number Input with data-scope/data-part bindings.
@@ -204,7 +206,7 @@ export const LoongArkNumberInputIncrementTrigger = forwardRef<
         data-state={state !== "default" ? state : undefined}
         data-disabled={disabled ? "true" : undefined}
       >
-        {children}
+        {children ?? <LoongArkIcon icon={controlIcons.plus} size="sm" />}
       </ArkNumberInput.IncrementTrigger>
     );
   },
@@ -232,7 +234,7 @@ export const LoongArkNumberInputDecrementTrigger = forwardRef<
         data-state={state !== "default" ? state : undefined}
         data-disabled={disabled ? "true" : undefined}
       >
-        {children}
+        {children ?? <LoongArkIcon icon={controlIcons.minus} size="sm" />}
       </ArkNumberInput.DecrementTrigger>
     );
   },

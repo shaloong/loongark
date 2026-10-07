@@ -251,7 +251,7 @@ ${scrubberSelector} {
 
 ${controlSelector}[data-size='sm'] {
   font-size: ${tokens.fontSize.md};
-  border-radius: ${tokens.radius.sm};
+  border-radius: var(--lk-radius-md);
 }
 
 ${controlSelector}[data-size='sm'] ${inputSelector} {
@@ -265,7 +265,7 @@ ${controlSelector}[data-size='sm'] ${decrementSelector} {
 
 ${controlSelector}[data-size='lg'] {
   font-size: ${tokens.fontSize.md};
-  border-radius: ${tokens.radius.lg};
+  border-radius: var(--lk-radius-md);
 }
 
 ${controlSelector}[data-size='lg'] ${inputSelector} {

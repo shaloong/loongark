@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
@@ -52,15 +54,43 @@ const CalendarView = () => {
 
   return (
     <LoongArkDatePickerView view="day">
-      <LoongArkDatePickerViewControl>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <LoongArkDatePickerPrevTrigger>{"<"}</LoongArkDatePickerPrevTrigger>
+      <LoongArkDatePickerViewControl
+        style={{ flexDirection: "column", alignItems: "stretch" }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 8,
+          }}
+        >
+          <LoongArkDatePickerPrevTrigger>
+            <LoongArkIcon
+              icon={controlIcons.chevronLeft}
+              size="sm"
+              mirrorInRtl
+            />
+          </LoongArkDatePickerPrevTrigger>
           <LoongArkDatePickerViewTrigger>
             {datePicker.visibleRangeText?.formatted || "Calendar"}
           </LoongArkDatePickerViewTrigger>
-          <LoongArkDatePickerNextTrigger>{">"}</LoongArkDatePickerNextTrigger>
+          <LoongArkDatePickerNextTrigger>
+            <LoongArkIcon
+              icon={controlIcons.chevronRight}
+              size="sm"
+              mirrorInRtl
+            />
+          </LoongArkDatePickerNextTrigger>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 8,
+          }}
+        >
           <LoongArkDatePickerMonthSelect>
             {months.map((month: any) => (
               <option
@@ -164,8 +194,12 @@ const DatePickerDemo = ({
             <LoongArkDatePickerInput index={1} />
           </>
         )}
-        <LoongArkDatePickerClearTrigger>x</LoongArkDatePickerClearTrigger>
-        <LoongArkDatePickerTrigger>Open</LoongArkDatePickerTrigger>
+        <LoongArkDatePickerClearTrigger aria-label="Clear date">
+          <LoongArkIcon icon={controlIcons.close} size="sm" />
+        </LoongArkDatePickerClearTrigger>
+        <LoongArkDatePickerTrigger aria-label="Open calendar">
+          <LoongArkIcon icon={controlIcons.chevronDown} size="sm" />
+        </LoongArkDatePickerTrigger>
       </LoongArkDatePickerControl>
       {selectionMode === "range" && <RangeSummary />}
       {inline ? (

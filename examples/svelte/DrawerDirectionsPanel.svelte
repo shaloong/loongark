@@ -11,10 +11,12 @@
     dir,
   }: { direction: DrawerDirection; dir: DrawerTextDirection } = $props();
   const points = $derived(drawerSnapPoints(direction));
+  const id = $props.id();
   const viewportFocus = (node: HTMLElement) => ({
     destroy: mountDrawerViewportFocus(node),
   });
   const drawer = L.useDrawer(() => ({
+    id,
     swipeDirection: direction,
     snapPoints: points,
     defaultSnapPoint: points[1],

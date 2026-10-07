@@ -1,6 +1,8 @@
 <script lang="ts">
   import * as L from "@loongark/svelte";
+  const id = $props.id();
   const drawer = L.useDrawer(() => ({
+    id,
     snapPoints: ["220px", "440px"],
     defaultSnapPoint: "220px",
   }));

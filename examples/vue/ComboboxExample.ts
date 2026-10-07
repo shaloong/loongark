@@ -93,16 +93,8 @@ export const ComboboxExample = defineComponent({
                     h(LoongArkComboboxInput, {
                       placeholder: props.placeholder,
                     }),
-                    h(
-                      LoongArkComboboxClearTrigger,
-                      { "aria-label": "Clear" },
-                      { default: () => "x" },
-                    ),
-                    h(
-                      LoongArkComboboxTrigger,
-                      { "aria-label": "Toggle" },
-                      { default: () => "v" },
-                    ),
+                    h(LoongArkComboboxClearTrigger, { "aria-label": "Clear" }),
+                    h(LoongArkComboboxTrigger, { "aria-label": "Toggle" }),
                   ],
                 },
               ),
@@ -135,7 +127,7 @@ export const ComboboxExample = defineComponent({
                                         h(
                                           LoongArkComboboxItemIndicator,
                                           {},
-                                          { default: () => "Check" },
+                                          {},
                                         ),
                                       ],
                                     },

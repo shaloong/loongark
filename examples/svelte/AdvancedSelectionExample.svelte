@@ -3,6 +3,7 @@
   import { LoongArkIcon } from "@loongark/svelte";
 
   import * as L from "@loongark/svelte";
+  const id = $props.id();
   const choices = [
       { label: "React", value: "react" },
       { label: "Vue", value: "vue" },
@@ -11,6 +12,7 @@
     ],
     collection = L.createListCollection({ items: choices });
   const select = L.useSelect(() => ({
+      id: `${id}-select`,
       collection,
       multiple: true,
       name: "frameworks",
@@ -18,6 +20,7 @@
       closeOnSelect: false,
     })),
     pagination = L.usePagination(() => ({
+      id: `${id}-pagination`,
       count: 100,
       pageSize: 10,
       defaultPage: 5,

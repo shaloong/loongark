@@ -83,3 +83,6 @@
 复验：`pnpm verify`、`pnpm check:contracts`、`pnpm check:publication`、`pnpm check:svelte`、`pnpm test:frameworks`、`pnpm test:e2e`、`pnpm visual:test`。
 
 参考：[shadcn Button 默认样式](https://ui.shadcn.com/docs/components/base/button)、[MUI 间距体系](https://mui.com/material-ui/customization/spacing/)、[MUI 动效体系](https://mui.com/material-ui/customization/transitions/)。这些作为密度、层次和状态反馈参考；品牌色源由本项目 VI 决定。
+
+
+组合输入的可见边框由 Control 承载：Combobox、Command、Date Picker、NumberInput 与 PasswordInput 的文本输入获得键盘焦点时，焦点环覆盖整个 Control。内部文本区域不再重复描边；按钮保留自己的键盘焦点。数字步进按钮使用逻辑端圆角与内侧焦点偏移，避免右侧缺角并兼容 RTL。默认加减图标与示例的展开/清除/切换图标复用现有 Lucide，不使用文字字符代替。调用方仍可提供自定义 children；日期月份/年份的原生 select 保留浏览器语义和原生展开指示。

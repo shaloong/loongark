@@ -27,6 +27,23 @@ for (const framework of ["react", "vue", "solid", "svelte", "Story"])
             ? `/iframe.html?id=components-drawer--directions&globals=mode:${mode}`
             : `/examples-${framework}/?example=DrawerDirectionsExample&mode=${mode}`,
         );
+        await expect(
+          page.locator('[data-scope="drawer"][data-part="trigger"]'),
+        ).toHaveCount(8);
+        const triggerIds = await page
+          .locator('[data-scope="drawer"][data-part="trigger"]')
+          .evaluateAll((nodes) =>
+            nodes.map((node) => ({
+              id: node.id,
+              owner: node.getAttribute("data-ownedby"),
+            })),
+          );
+        expect(triggerIds).toHaveLength(8);
+        expect(new Set(triggerIds.map((node) => node.id)).size).toBe(8);
+        for (const trigger of triggerIds) {
+          expect(trigger.id).not.toContain("undefined");
+          expect(trigger.owner).toBeTruthy();
+        }
         for (const dir of ["ltr", "rtl"] as const)
           for (const direction of ["down", "up", "start", "end"] as const)
             await test.step(`${direction} ${dir}`, () =>

@@ -1,7 +1,8 @@
 <script lang="ts">
   import * as L from "@loongark/svelte";
   import { cropSource } from "../shared/arkAdditionsDemo";
-  const cropper = L.useImageCropper(() => ({ aspectRatio: 1, maxZoom: 3 }));
+  const id = $props.id();
+  const cropper = L.useImageCropper(() => ({ id, aspectRatio: 1, maxZoom: 3 }));
   let preview = $state<string>(),
     busy = $state(false),
     error = $state("");
@@ -9,7 +10,9 @@
     busy = true;
     error = "";
     try {
-      const result = await L.exportImageCropper(cropper(), { output: "dataUrl" });
+      const result = await L.exportImageCropper(cropper(), {
+        output: "dataUrl",
+      });
       if (typeof result === "string") preview = result;
       else error = "Image is not ready.";
     } catch {

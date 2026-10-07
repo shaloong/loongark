@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import { TreeView, createTreeCollection } from "@ark-ui/react/tree-view";
 import type { Meta, StoryObj } from "@storybook/react";
@@ -96,7 +98,7 @@ const TreeViewDemo = ({
             >
               <LoongArkTreeViewBranchTrigger>
                 <LoongArkTreeViewBranchIndicator>
-                  {">"}
+                  <LoongArkIcon icon={controlIcons.chevronRight} size="sm" />
                 </LoongArkTreeViewBranchIndicator>
                 <LoongArkTreeViewBranchText>src</LoongArkTreeViewBranchText>
               </LoongArkTreeViewBranchTrigger>

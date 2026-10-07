@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-07",
+  "batch": "compound-field-focus-linux",
+  "baseCommit": "ff487e9f324d9f3fd43be7e32c9c65a7689cc3b2",
+  "changes": [
+    "组合输入文本框的键盘焦点环覆盖完整 Control；Command 复用 Combobox；输入内部不重复描边，按钮保留独立焦点。",
+    "Date Picker 去除内部输入背景、阴影和多余内边距，三种尺寸分别保持 32/36/40px；示例月份/年份选择器留在弹层边界内。",
+    "数字步进按钮匹配外框逻辑端圆角、保留内侧键盘焦点，四端默认使用既有 Lucide 加减图标；示例展开、切换和清除图标统一复用现有图标。",
+    "Svelte 直接调用 Drawer、Select、Pagination 和 ImageCropper hook 时提供 $props.id() 稳定 ID；多实例 SSR 的 17 个 Drawer 触发器均有唯一 ID 和有效归属。"
+  ],
+  "environment": {
+    "platform": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "chromium": "151.0.7922.173 系统浏览器",
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1280,
+      375
+    ]
+  },
+  "orderedChecks": [
+    "verify",
+    "check:contracts",
+    "storybook:build",
+    "check:coverage",
+    "check:publication",
+    "check:svelte",
+    "fresh-framework-fixtures",
+    "fresh-example-fixtures"
+  ],
+  "buildResult": "构建、模型契约、发布声明和四端 SSR 通过；Svelte 0 错误、4 个既有警告；275 个示例新构建。最后的共享样式调整重新构建 primitives、运行契约，并重新构建 Storybook 后才消费产物。",
+  "coverage": {
+    "families": 119,
+    "stories": 329,
+    "publicValuesPerFramework": 794,
+    "frameworkExamples": 275
+  },
+  "regressions": {
+    "fourFrameworksAndDrawer": 44,
+    "finalFourFrameworkFocus": 16,
+    "storyFocusAndMotion": 20,
+    "visualNoUpdates": 278
+  },
+  "manualReview": {
+    "frameworkInputStates": 32,
+    "storyInputStates": 16,
+    "numberSizeDirectionScreens": 4,
+    "dateSizeScreens": 2,
+    "newLinuxBaselines": 16,
+    "result": "实际查看明暗、桌面和手机视口的完整外框焦点、默认图标、三种尺寸、RTL 圆角及日期选择器边界。"
+  },
+  "baselinePolicy": "新增 16 份已审阅 Linux 焦点基线；首次缺少基线时写出并报失败，人工审阅后以 --update-snapshots=none 复验 278 项通过。288 份既有基线（含 2 份 Windows）哈希全部未变。",
+  "evidenceStorage": "截图、联系表、日志和详细测量保存在忽略目录 .artifacts/focus-fields；Git 只保存此摘要和用于回归的基线。",
+  "priorPlatformEvidence": {
+    "run": "https://github.com/shaloong/loongark/actions/runs/37564928292",
+    "source": "ff487e9f324d9f3fd43be7e32c9c65a7689cc3b2",
+    "safari": "原生 Safari 26.6.1 / macOS 15.7.9 在 Svelte 浅色 Drawer 拖动关闭后焦点恢复失败；实际 DOM 的触发器 ID 为 drawer:undefined:trigger，归属为空。本批修复稳定 ID，macOS 复验仍待完成。",
+    "firefox": "Firefox 全量四端 544 通过、94 跳过、1 失败：React 浅色 375px 富文本外部清空后的 Markdown heading 输入规则。该编辑器问题不计作本批已修复。"
+  },
+  "limitations": [
+    "本批交互和视觉在系统 Chromium 151 验收，不能冒充固定版本 Chromium、Firefox 或原生 Safari 的通过。",
+    "跨浏览器全量及原生 Safari 需在本批提交后重新执行；上述整库失败仍有待验证或修复。",
+    "手机使用模拟视口，未取得真实手机设备连接。"
+  ]
+}

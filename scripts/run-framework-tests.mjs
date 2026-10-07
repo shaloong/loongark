@@ -35,6 +35,7 @@ const child = spawn(
     "tests/questionnaire-native-focus.spec.ts",
     "tests/context-menu-input.spec.ts",
     "tests/focus-ownership.spec.ts",
+    "tests/compound-field-focus.spec.ts",
     "tests/layout-boundaries.spec.ts",
     "tests/questionnaire-custom-mode.spec.ts",
     "tests/table-column-window.spec.ts",

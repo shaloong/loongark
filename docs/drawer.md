@@ -6,6 +6,8 @@
 
 `useDrawer` 必须在 DrawerStack 子组件中调用。React 直接传配置，Vue 传配置或 computed，Solid/Svelte 使用配置 getter；RootProvider 分别接收 React 返回值、Vue `.value`、Solid/Svelte accessor。滑动和焦点/浮层生命周期由原生实现负责，框架层负责部件渲染与事件绑定。
 
+Svelte 的底层 `useDrawer` 不自动分配组件 ID，直接调用时应在组件脚本中声明 `const id = $props.id()`，再传入 `useDrawer(() => ({ id, ...配置 }))`；同一组件内的多个 Hook 使用不同后缀。该 ID 在 SSR 与 hydration 中稳定，用于部件关联与关闭后的焦点恢复。`LoongArkDrawerRoot` 会自动提供 ID。直接使用 Svelte `useSelect`、`usePagination` 和 `useImageCropper` 时也显式传入稳定 ID；Root 组件仍负责自动分配。
+
 `snapPoints` 使用原生长度：大于 1 的数字表示像素，0–1 数字按视口计算，字符串支持原生 CSS 长度。不要把 `0.5` 误当成面板高度的一半。示例纵向使用 `240px/480px`，侧向使用 `256px/320px`。`setSnapPoint` 可提供等效按钮操作；允许用户只使用键盘而不拖动。非受控关闭完成后吸附点回到 defaultSnapPoint；需要跨次打开保留时由调用方控制 snapPoint。吸附改变可见长度，不会自动重排内容；方向示例用共享滚动视口适应原生吸附偏移，保证紧凑状态下内容可滚动。共享示例行为在吸附后的视口尺寸变化和拖动结束时，将已聚焦控件完整滚回可见区域；拖动中不干预，打开/关闭时由各框架挂载和释放观察器及帧任务。
 
 手柄使用可命名的 group 语义；指针拖动的等效操作由吸附与关闭按钮提供，不给装饰手柄增加无法操作的键盘角色。顶边与侧边的手柄放在可见自由边，半开后仍能继续拖动。

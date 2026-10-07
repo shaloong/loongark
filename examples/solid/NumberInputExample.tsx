@@ -53,16 +53,12 @@ export const NumberInputExample: Component<NumberInputExampleProps> = (
           size={size()}
           state={state()}
           disabled={disabled()}
-        >
-          +
-        </LoongArkNumberInputIncrementTrigger>
+        />
         <LoongArkNumberInputDecrementTrigger
           size={size()}
           state={state()}
           disabled={disabled()}
-        >
-          -
-        </LoongArkNumberInputDecrementTrigger>
+        />
       </LoongArkNumberInputControl>
       <LoongArkNumberInputScrubber>Drag to adjust</LoongArkNumberInputScrubber>
       <LoongArkNumberInputValueText size={size()}>

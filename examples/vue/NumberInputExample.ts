@@ -69,7 +69,7 @@ export const NumberInputExample = defineComponent({
                       state: props.state,
                       disabled: props.disabled,
                     },
-                    { default: () => "+" }
+                    {},
                   ),
                   h(
                     LoongArkNumberInputDecrementTrigger,
@@ -78,23 +78,21 @@ export const NumberInputExample = defineComponent({
                       state: props.state,
                       disabled: props.disabled,
                     },
-                    { default: () => "-" }
+                    {},
                   ),
                 ],
-              }
+              },
             ),
-            h(
-              LoongArkNumberInputScrubber,
-              null,
-              { default: () => "Drag to adjust" }
-            ),
+            h(LoongArkNumberInputScrubber, null, {
+              default: () => "Drag to adjust",
+            }),
             h(
               LoongArkNumberInputValueText,
               { size: props.size },
-              { default: () => `Value: ${value.value || "0"}` }
+              { default: () => `Value: ${value.value || "0"}` },
             ),
           ],
-        }
+        },
       );
   },
 });

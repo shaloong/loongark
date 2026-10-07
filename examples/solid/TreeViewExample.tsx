@@ -1,4 +1,6 @@
 /** @jsxImportSource solid-js */
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/solid";
 import type { Component } from "solid-js";
 import {
   createTreeCollection,
@@ -56,7 +58,7 @@ export const TreeViewExample: Component<TreeViewExampleProps> = (props) => {
             <LoongArkTreeViewBranchControl>
               <LoongArkTreeViewBranchTrigger>
                 <LoongArkTreeViewBranchIndicator>
-                  {">"}
+                  <LoongArkIcon icon={controlIcons.chevronRight} size="sm" />
                 </LoongArkTreeViewBranchIndicator>
                 <LoongArkTreeViewBranchText>src</LoongArkTreeViewBranchText>
               </LoongArkTreeViewBranchTrigger>

@@ -66,10 +66,8 @@
   <LoongArkComboboxLabel>{label}</LoongArkComboboxLabel>
   <LoongArkComboboxControl>
     <LoongArkComboboxInput {placeholder} />
-    <LoongArkComboboxClearTrigger aria-label="Clear"
-      >x</LoongArkComboboxClearTrigger
-    >
-    <LoongArkComboboxTrigger aria-label="Toggle">v</LoongArkComboboxTrigger>
+    <LoongArkComboboxClearTrigger aria-label="Clear" />
+    <LoongArkComboboxTrigger aria-label="Toggle" />
   </LoongArkComboboxControl>
   <LoongArkComboboxPositioner>
     <LoongArkComboboxContent>
@@ -77,7 +75,7 @@
         {#each filteredOptions as option}
           <LoongArkComboboxItem item={option}>
             <LoongArkComboboxItemText>{option.label}</LoongArkComboboxItemText>
-            <LoongArkComboboxItemIndicator>Check</LoongArkComboboxItemIndicator>
+            <LoongArkComboboxItemIndicator />
           </LoongArkComboboxItem>
         {/each}
       </LoongArkComboboxList>

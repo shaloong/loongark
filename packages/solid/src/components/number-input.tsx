@@ -1,3 +1,6 @@
+/** @jsxImportSource solid-js */
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 /**
  * Number Input component - Solid wrapper.
  * Uses Ark UI Number Input with data attributes for styling.
@@ -209,7 +212,7 @@ export const LoongArkNumberInputIncrementTrigger: Component<
       data-state={local.state !== "default" ? local.state : undefined}
       data-disabled={local.disabled ? "true" : undefined}
     >
-      {local.children}
+      {local.children ?? <LoongArkIcon icon={controlIcons.plus} size="sm" />}
     </ArkNumberInput.IncrementTrigger>
   );
 };
@@ -252,7 +255,7 @@ export const LoongArkNumberInputDecrementTrigger: Component<
       data-state={local.state !== "default" ? local.state : undefined}
       data-disabled={local.disabled ? "true" : undefined}
     >
-      {local.children}
+      {local.children ?? <LoongArkIcon icon={controlIcons.minus} size="sm" />}
     </ArkNumberInput.DecrementTrigger>
   );
 };

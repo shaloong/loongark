@@ -76,12 +76,8 @@ export const ComboboxExample: Component<ComboboxExampleProps> = (props) => {
         <LoongArkComboboxLabel>{label()}</LoongArkComboboxLabel>
         <LoongArkComboboxControl>
           <LoongArkComboboxInput placeholder={placeholder()} />
-          <LoongArkComboboxClearTrigger aria-label="Clear">
-            x
-          </LoongArkComboboxClearTrigger>
-          <LoongArkComboboxTrigger aria-label="Toggle">
-            v
-          </LoongArkComboboxTrigger>
+          <LoongArkComboboxClearTrigger aria-label="Clear" />
+          <LoongArkComboboxTrigger aria-label="Toggle" />
         </LoongArkComboboxControl>
         <LoongArkComboboxPositioner>
           <LoongArkComboboxContent>
@@ -91,9 +87,7 @@ export const ComboboxExample: Component<ComboboxExampleProps> = (props) => {
                   <LoongArkComboboxItemText>
                     {option.label}
                   </LoongArkComboboxItemText>
-                  <LoongArkComboboxItemIndicator>
-                    Check
-                  </LoongArkComboboxItemIndicator>
+                  <LoongArkComboboxItemIndicator />
                 </LoongArkComboboxItem>
               ))}
             </LoongArkComboboxList>

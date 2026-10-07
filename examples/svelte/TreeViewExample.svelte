@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import { LoongArkIcon } from "@loongark/svelte";
   import {
     LoongArkTreeViewRoot,
     LoongArkTreeViewLabel,
@@ -43,7 +45,11 @@
     <LoongArkTreeViewNodeProvider node={nodes[0]} indexPath={[0]}>
       <LoongArkTreeViewBranch>
         <LoongArkTreeViewBranchControl>
-          <LoongArkTreeViewBranchIndicator>&gt;</LoongArkTreeViewBranchIndicator
+          <LoongArkTreeViewBranchIndicator
+            ><LoongArkIcon
+              icon={controlIcons.chevronRight}
+              size="sm"
+            /></LoongArkTreeViewBranchIndicator
           >
           <LoongArkTreeViewBranchText>src</LoongArkTreeViewBranchText>
         </LoongArkTreeViewBranchControl>

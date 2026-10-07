@@ -29,6 +29,24 @@ const { default: component } = await import(
   pathToFileURL(resolve("tests/consumer-dist/svelte-ssr/index.mjs")).href
 );
 const html = render(component).body;
+const drawerTriggers = [
+  ...html.matchAll(
+    /<button(?=[^>]*data-scope="drawer")(?=[^>]*data-part="trigger")[^>]*>/g,
+  ),
+].map(([tag]) => ({
+  id: tag.match(/\bid="([^"]+)"/)?.[1],
+  owner: tag.match(/\bdata-ownedby="([^"]+)"/)?.[1],
+}));
+assert.equal(drawerTriggers.length, 17);
+assert.equal(new Set(drawerTriggers.map((trigger) => trigger.id)).size, 17);
+for (const trigger of drawerTriggers) {
+  assert.ok(trigger.id && !trigger.id.includes("undefined"));
+  assert.ok(trigger.owner);
+  assert.equal(trigger.id, `drawer:${trigger.owner}:trigger`);
+}
+console.log(
+  "Svelte SSR Drawer：原有触发器与两个全方向示例的 17 个触发器均保留唯一 ID 和所有权关联。",
+);
 assert.match(html, /aria-rowcount="10000"/);
 assert.match(html, /aria-colcount="80"/);
 assert.match(html, /SSR_grid_0_0/);

@@ -295,3 +295,5 @@ macOS工作流补上共享发布夹具构建，真实Safari再次通过275个默
 2026-10-07 Drawer与图表视觉收尾：四端手柄防误选、吸附后焦点完整可见及重复挂载清理，原生图表展开统一Lucide箭头；示例标题改为可读词间距。最终三引擎各44项、Story各10项和Linux视觉262项通过；实际审阅320张Drawer抽样及240张图表/标题局部，288张既有基线含Windows未改。当前119族、329Story、四端各794公开值及275框架示例；原生Safari和整库结果继续复验，真机需设备连接。详见[验收范围](audits/2026-10-07/drawer-focus-and-disclosure-linux/acceptance.json)。
 
 2026-10-07 整库CI发现并修复Sheet裁剪容器未占满视口导致保存按钮屏外的问题；共享样式恢复贴边完整高度，四端真实保存/焦点回归20项与Story7项通过，16张明暗/桌面/窄屏截图实际审阅。Safari实际完成275默认示例和158高级交互后在Solid深色富文本重做失败，继续复验，未计整套通过。详见[实际范围与限制](audits/2026-10-07/sheet-viewport-linux/acceptance.json)。
+
+2026-10-07 组合输入焦点整改：Combobox、Command、Date Picker 和数字输入的焦点环覆盖完整外框，数字步进按钮支持匹配圆角及默认 Lucide 图标，示例文字箭头统一；修复日期弹层头部边界和 Svelte 原生 hook 稳定 ID。四端/Drawer 44 项、最终输入专项 16 项、Story 焦点及动效 20 项、Linux 视觉 278 项通过；54 张场景截图及 16 张新基线实际查看，288 份旧基线含 Windows 哈希未变。验收范围和原生 Safari、Firefox、真机限制见[验收记录](audits/2026-10-07/compound-field-focus-linux/acceptance.json)。

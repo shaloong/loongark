@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { controlIcons } from "@loongark/kit";
+  import Icon from "./Icon.svelte";
   import { NumberInput } from "@ark-ui/svelte/number-input";
   import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
 
@@ -15,5 +17,5 @@
   data-disabled={disabled ? "true" : undefined}
   {...$$restProps}
 >
-  <slot />
+  <slot><Icon icon={controlIcons.plus} size="sm" /></slot>
 </NumberInput.IncrementTrigger>

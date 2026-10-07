@@ -86,13 +86,13 @@ const css = `
 [data-scope=pagination][data-part=root] [data-part=item] { padding:0; }
 [data-scope=pagination][data-part=root] [data-part=item]:is([data-selected=true],[aria-current=page],[data-state=checked]) { background:var(--lk-color-semantic-primary); color:var(--lk-color-semantic-primaryforeground); border-color:transparent; }
 [data-scope=pin-input][data-part=control], [data-scope=toggle-group][data-part=root], [data-scope=segment-group][data-part=root] { flex-wrap:wrap; max-width:100%; }
-[data-scope=date-picker][data-part=control] { min-width:0; }
-[data-scope=date-picker][data-part=input] { min-width:0; width:100%; }
+[data-scope=date-picker][data-part=control], [data-scope=date-picker][data-part=root][data-size] [data-scope=date-picker][data-part=control] { min-width:0; height:var(--lk-field-height); min-height:0; padding:0 var(--lk-space-component-compact); gap:var(--lk-space-component-xs); }
+[data-scope=date-picker][data-part=input] { min-width:0; width:100%; height:100%; min-height:0; padding:0; border:0; border-radius:0; box-shadow:none; background:transparent; }
 :is([data-scope=menu],[data-scope=select],[data-scope=combobox],[data-scope=listbox]) [data-part=content] { padding:var(--lk-space-component-xs); }
 [data-scope=color-picker][data-part=content], [data-scope=date-picker][data-part=content] { padding:var(--lk-space-component-sm); }
 [data-scope=combobox][data-part=control] { height:var(--lk-field-height); min-height:0; padding:0 var(--lk-space-component-compact); gap:var(--lk-space-component-xs); }
 [data-scope=combobox][data-part=input] { height:100%; min-height:0; padding:0; border:0; border-radius:0; box-shadow:none; background:transparent; font-size:var(--lk-typography-fontsize-md); }
-[data-scope=combobox][data-part=trigger]:is(button), [data-scope=combobox][data-part=clear-trigger]:is(button) { width:var(--lk-control-height-xs); height:var(--lk-control-height-xs); min-height:0; padding:0; border:0; box-shadow:none; background:transparent; flex:none; }
+:is([data-scope=combobox],[data-scope=date-picker]):is([data-part=trigger],[data-part=clear-trigger]):is(button) { width:var(--lk-control-height-xs); height:var(--lk-control-height-xs); min-height:0; padding:0; border:0; box-shadow:none; background:transparent; flex:none; }
 [data-scope=number-input][data-part=control], [data-scope=password-input][data-part=control], [data-scope=select][data-part=trigger] { height:var(--lk-field-height); min-height:0; font-size:var(--lk-typography-fontsize-md); padding-block:0; }
 [data-scope=select][data-part=control] { height:var(--lk-field-height); min-height:0; }
 [data-scope=select][data-part=trigger], [data-scope=password-input][data-part=control] { padding-inline:var(--lk-space-component-compact); }
@@ -103,6 +103,12 @@ const css = `
 [data-scope=number-input][data-part=control] { grid-template-rows:minmax(0,1fr) minmax(0,1fr); }
 [data-scope=number-input] :is([data-part=increment-trigger],[data-part=decrement-trigger]) { min-height:0; min-width:var(--lk-control-height-xs); padding:0 var(--lk-space-component-xs); font-size:var(--lk-typography-fontsize-xs); line-height:1; }
 :is([data-scope=number-input],[data-scope=password-input]) [data-part=input] { min-height:0; height:100%; border:0; box-shadow:none; background:transparent; padding-block:0; }
+/* 组合输入的可见边框属于 Control，焦点环不能画在内部文本区域。 */
+:is([data-scope=combobox],[data-scope=date-picker],[data-scope=number-input],[data-scope=password-input])[data-part=control]:has(> [data-part=input]:focus-visible) { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring); outline-offset:var(--lk-control-focuswidth); box-shadow:var(--lk-shadow-sm); }
+:is([data-scope=combobox],[data-scope=date-picker],[data-scope=number-input],[data-scope=password-input])[data-part=control] > [data-part=input]:focus-visible { outline:none; }
+[data-scope=number-input] :is([data-part=increment-trigger],[data-part=decrement-trigger]):focus-visible { outline-offset:calc(-1 * var(--lk-control-focuswidth)); }
+[data-scope=number-input][data-part=increment-trigger] { border-left:0; border-inline-start:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input); border-start-end-radius:calc(var(--lk-radius-md) - var(--lk-control-borderwidth)); }
+[data-scope=number-input][data-part=decrement-trigger] { border-left:0; border-inline-start:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input); border-end-end-radius:calc(var(--lk-radius-md) - var(--lk-control-borderwidth)); }
 @media(max-width:480px) { [data-scope=filter-bar][data-part=root] { flex-wrap:wrap; } [data-scope=filter-bar] [data-part=search] { min-width:0; width:100%; } }
 `;
 export const neutralSystem = createPrimitive(
