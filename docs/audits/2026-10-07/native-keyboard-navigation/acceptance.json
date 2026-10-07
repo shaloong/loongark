@@ -35,12 +35,15 @@
   },
   "validation": {
     "syntax": "新增预检与runner的Node语法检查通过",
-    "lint": "通过"
+    "lint": "通过",
+    "linuxPreflightDiagnostic": "环境重建前WebKit26.0三次可信Tab依次定位按钮、链接和末尾输入通过；不计Apple原生Safari通过。",
+    "modernPreferenceConfig": "YAML解析、Bash语法、Node语法、lint和CI-only文件范围检查通过。"
   },
   "references": [
     "https://support.apple.com/guide/safari/keyboard-and-other-shortcuts-cpsh003/mac",
     "https://www.a11yproject.com/posts/macos-browser-keyboard-navigation/",
-    "https://www.w3.org/TR/webdriver/#keyboard-actions"
+    "https://www.w3.org/TR/webdriver/#keyboard-actions",
+    "https://developer.apple.com/documentation/webkit/wkpreferences/tabfocuseslinks"
   ],
   "limitations": [
     "Linux不运行Apple原生驱动；配置后的真实Safari预检与全部高级场景仍需CI实际复验。",
@@ -54,5 +57,39 @@
     "result": "failed",
     "stage": "创建Safari会话时连接实例超时",
     "preflightAndComponentCases": "均未执行；无场景截图，不判断配置效果。"
+  },
+  "modernPreferenceFollowUp": {
+    "runId": 37559481785,
+    "jobId": 112593558004,
+    "sourceCommit": "59dc6d804df5304014d6f430248dd3c857fbde1d",
+    "browser": "Safari26.6.1/macOS15.7.9",
+    "preferences": {
+      "AppleKeyboardUIMode": "3",
+      "WebKitTabToLinksPreferenceKey": "1",
+      "com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks": "1"
+    },
+    "preflight": [
+      {
+        "expected": "button",
+        "focused": "button",
+        "event": {
+          "key": "Tab",
+          "trusted": true,
+          "code": "Tab"
+        }
+      },
+      {
+        "expected": "link",
+        "focused": "last",
+        "event": {
+          "key": "Tab",
+          "trusted": true,
+          "code": "Tab"
+        }
+      }
+    ],
+    "failure": "原生按钮Tab已通过，下一次跳过链接定位末尾输入；组件套件未执行，失败原图已实际查看。",
+    "change": "补充当前WebKitPreferences.tabFocusesLinks及Safari容器偏好；记录域名避免同名偏好覆盖报告。",
+    "ciScope": "本批只运行原生Safari复验，保留59dc6d8的Linux整库任务；产品与Linux测试代码未改。"
   }
 }

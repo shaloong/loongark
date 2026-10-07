@@ -9,11 +9,13 @@ permissions:
   contents: read
 
 concurrency:
-  group: browser-contracts-${{ github.ref }}
+  group: "browser-contracts-${{ github.ref }}${{ contains(github.event.head_commit.message, 'CI-Scope: safari') && '-safari' || '' }}"
   cancel-in-progress: true
 
 jobs:
   engines:
+    # Safari runner/偏好配置的独立复验保留已运行的 Linux 矩阵；产品批次仍运行全部引擎。
+    if: "${{ !contains(github.event.head_commit.message, 'CI-Scope: safari') }}"
     name: Four frameworks / ${{ matrix.browser }}
     runs-on: ubuntu-24.04
     # 新构建、完整四端消费与全部 Story 均在同一任务运行；Firefox 已完成四端483项，但全部 Story 在60分钟预算内未结束。
@@ -192,6 +194,10 @@ jobs:
           defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
           defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
           defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
+          defaults write com.apple.Safari WebKitPreferences.tabFocusesLinks -bool true
+          SAFARI_PREFS_PATH="$HOME/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari.plist"
+          mkdir -p "$(dirname "$SAFARI_PREFS_PATH")"
+          defaults write "$SAFARI_PREFS_PATH" WebKitPreferences.tabFocusesLinks -bool true
       - run: sudo /usr/bin/safaridriver --enable
       - run: node scripts/run-native-safari.mjs
       - uses: actions/upload-artifact@v4

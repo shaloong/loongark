@@ -5,6 +5,7 @@ import { runNativeAdvanced } from "./native-safari-advanced.mjs";
 import { runNativeKeyboardPreflight } from "./native-safari-keyboard.mjs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { homedir } from "node:os";
 
 // 使用 Apple 原生 WebDriver；不把 Playwright WebKit 标记为 Safari。
 if (process.platform !== "darwin") {
@@ -252,6 +253,14 @@ try {
     [
       ["NSGlobalDomain", "AppleKeyboardUIMode"],
       ["com.apple.Safari", "WebKitTabToLinksPreferenceKey"],
+      ["com.apple.Safari", "WebKitPreferences.tabFocusesLinks"],
+      [
+        resolve(
+          homedir(),
+          "Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari.plist",
+        ),
+        "WebKitPreferences.tabFocusesLinks",
+      ],
       [
         "com.apple.Safari",
         "com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks",
@@ -260,7 +269,10 @@ try {
       const read = spawnSync("defaults", ["read", domain, key], {
         encoding: "utf8",
       });
-      return [key, read.status === 0 ? read.stdout.trim() : null];
+      return [
+        `${domain}:${key}`,
+        read.status === 0 ? read.stdout.trim() : null,
+      ];
     }),
   );
   await runNativeKeyboardPreflight({ session, execute, report });

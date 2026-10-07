@@ -82,3 +82,5 @@ CROSS_BROWSER=1 node scripts/run-playwright.mjs --project=webkit --workers=2
 原生 Safari 高级套件还检查本地化日期与时间、横向列窗口和二维/瀑布流窗口、富文本表格与代码历史、全部新增图表类型、矩阵多选/排序和异步集合、列级查询与 Drawer 全方向/RTL。批量粘贴通过 macOS 系统剪贴板和原生快捷键执行；协议脚本在 Linux 的诊断不能计作真实 Safari 或手机通过。
 
 原生 Safari 的 Tab 路径依赖 macOS/Safari 键盘导航偏好。CI 只在临时 macOS runner 启用完整控件及链接导航；runner 记录设置值，并在任何组件场景之前严格检查原生输入 → 按钮 → 链接 → 输入的可信 Tab 顺序。本地运行前请在系统键盘和 Safari 高级设置中启用对应选项；脚本不会修改开发者机器偏好。
+
+仅修改 Safari runner、macOS 偏好或其验收说明时，可在提交正文使用 `CI-Scope: safari`，独立触发原生任务并保留已运行的 Linux 矩阵；该标记不用于产品、四端适配、共享模型或 Linux 回归变更。普通提交和手动工作流继续运行全部平台，验收须明确记录各平台实际源码提交。
