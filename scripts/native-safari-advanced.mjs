@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { runNativeFieldSelection } from "./native-safari-field-selection.mjs";
 import { runNativeSelection } from "./native-safari-selection.mjs";
+import { runNativeEditable } from "./native-safari-editable.mjs";
+import { runNativeInputAdornments } from "./native-safari-input-adornments.mjs";
 import { runNativeCompoundField } from "./native-safari-compound-field.mjs";
 import { verifyNativeCodeHistory } from "../tests/nativeCodeHistoryChecks.ts";
 // 使用实际 Safari 的 W3C 输入、指针和系统剪贴板；验收记录以 macOS 任务为准。
@@ -61,6 +63,8 @@ export async function runNativeAdvanced(h, framework, mode) {
   await runNativeSelection(h, framework, mode);
   await runNativeFieldSelection(h, framework, mode);
   await runNativeCompoundField(h, framework, mode);
+  await runNativeInputAdornments(h, framework, mode);
+  await runNativeEditable(h, framework, mode);
   await navigate(framework, "DateTimeExample", mode);
   const localized = '[data-scope="input"][data-part="control"]',
     current = 'output[aria-label="Current appointment"]';
@@ -342,6 +346,25 @@ export async function runNativeAdvanced(h, framework, mode) {
       ),
     "代码编辑器装载",
   );
+  const fontMetrics = await execute(
+    `
+    const node = document.querySelector(arguments[0]), style = getComputedStyle(node);
+    const sample = document.createElement('span');
+    sample.style.cssText='position:fixed;visibility:hidden;white-space:pre';
+    sample.style.fontFamily=style.fontFamily;sample.style.fontSize=style.fontSize;
+    sample.style.fontWeight=style.fontWeight;document.body.append(sample);
+    try {sample.textContent='iiii';const narrow=sample.getBoundingClientRect().width;
+      sample.textContent='WWWW';return {family:style.fontFamily,narrow,wide:sample.getBoundingClientRect().width};
+    } finally {sample.remove();}
+  `,
+    [codeInput],
+  );
+  assert(
+    fontMetrics.narrow > 0 &&
+      Math.abs(fontMetrics.narrow - fontMetrics.wide) < 0.05,
+    "Safari 代码字体必须实际等宽",
+  );
+  (report.fontMetrics ??= []).push({ framework, mode, ...fontMetrics });
   const initialCode = await execute(
     "return document.querySelector(arguments[0]).value",
     [codeField],
@@ -425,7 +448,7 @@ export async function runNativeAdvanced(h, framework, mode) {
   );
   await key(documentInput, "\uE010");
   await key(documentInput, "\uE007");
-  await click(rich + ' button[data-action="table"]');
+  await richAction("table");
   await waitFor(
     () =>
       execute(
@@ -435,7 +458,7 @@ export async function runNativeAdvanced(h, framework, mode) {
     "富文本表格",
   );
   await click(rich + ' [data-part="table-tools"] summary');
-  await click(rich + ' button[data-action="rowAfter"]');
+  await richAction("rowAfter");
   await waitFor(
     () =>
       execute(
@@ -444,7 +467,7 @@ export async function runNativeAdvanced(h, framework, mode) {
       ),
     "富文本插入行",
   );
-  await click(rich + ' button[data-action="deleteTable"]');
+  await richAction("deleteTable");
   await waitFor(
     () =>
       execute('return !document.querySelector(arguments[0]+" table")', [

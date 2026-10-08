@@ -117,3 +117,5 @@ export {
   nativeSelectionDescription,
   nativeSelectionFieldDescription,
 } from "./native-selection";
+
+export { inputSuffixDisabled } from "./input-adornment";

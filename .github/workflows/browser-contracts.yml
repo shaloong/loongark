@@ -82,6 +82,8 @@ jobs:
             .artifacts/gap-completion/editor-default-code-*.png
             .artifacts/gap-completion/layout-grid-*-rtl.png
             .artifacts/gap-completion/sheet-*.png
+            .artifacts/p0-close/default-corrections/*.png
+            .artifacts/p0-close/editable-*Story*.png
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore
@@ -97,6 +99,7 @@ jobs:
             .artifacts/p0-consistency/*react*.png
             .artifacts/p0-selection/*react*.png
             .artifacts/p0-field/*react*.png
+            .artifacts/p0-close/*react*.png
             test-results/**/*react*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -113,6 +116,7 @@ jobs:
             .artifacts/p0-consistency/*vue*.png
             .artifacts/p0-selection/*vue*.png
             .artifacts/p0-field/*vue*.png
+            .artifacts/p0-close/*vue*.png
             test-results/**/*vue*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -129,6 +133,7 @@ jobs:
             .artifacts/p0-consistency/*solid*.png
             .artifacts/p0-selection/*solid*.png
             .artifacts/p0-field/*solid*.png
+            .artifacts/p0-close/*solid*.png
             test-results/**/*solid*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -145,6 +150,7 @@ jobs:
             .artifacts/p0-consistency/*svelte*.png
             .artifacts/p0-selection/*svelte*.png
             .artifacts/p0-field/*svelte*.png
+            .artifacts/p0-close/*svelte*.png
             test-results/**/*svelte*/**/*.png
           include-hidden-files: true
           retention-days: 14
@@ -170,6 +176,8 @@ jobs:
             .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-datatable--*.png
             .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-questionnaire--*.png
             .artifacts/advanced-completion/query-story-*.png
+            .artifacts/p0-close/default-corrections/*.png
+            .artifacts/p0-close/editable-*Story*.png
             .artifacts/p0-consistency/*Story*.png
             .artifacts/p0-selection/*Story*.png
             .artifacts/p0-field/*Story*.png

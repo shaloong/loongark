@@ -6,7 +6,7 @@
 
 代码编辑器使用 MIT 的 CodeMirror 6，提供多行编辑、行号、折叠、缩进、括号匹配、补全、搜索/替换、矩形选择和多级撤销/重做。`language` 接受 plain/javascript/typescript/json/html/css/python/markdown，语法包在客户端按需加载；也可以提供 `(signal: AbortSignal) => Extension | Promise<Extension>`。切换语法或卸载会取消旧请求，迟到的结果不会覆盖新配置；失败保留可编辑的纯文本并通过 `onLanguageError` 报告。
 
-`lineNumbers`、`lineWrapping`、`tabSize` 控制显示，`extensions` 接受真实 CodeMirror Extension，`phrases` 本地化引擎内文案。`onReady(handle)` 可取得 `view`、`focus`、`replaceSelection`、`undo`、`redo` 和 `search`；返回的清理函数在卸载执行。Tab 默认缩进；Escape 后可以用 Tab 离开编辑器。
+`lineNumbers`、`lineWrapping`、`tabSize` 控制显示，`extensions` 接受真实 CodeMirror Extension，`phrases` 本地化引擎内文案。`onReady(handle)` 可取得 `view`、`focus`、`replaceSelection`、`undo`、`redo` 和 `search`；返回的清理函数在卸载执行。Tab 默认缩进；Escape 后可以用 Tab 离开编辑器。只读、禁用和扩展配置在原生按键/输入事件前读取最新 Props，避免框架已经提交状态而编辑器尚未到下一帧的竞争；文档协调继续在绘制帧执行，不打断组合输入。
 
 ## 富文本编辑器
 

@@ -154,6 +154,8 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
     languageAbort: AbortController | undefined;
   let loadedLanguage: Extension = [];
   let configuredExtensions = get().extensions;
+  let configuredReadOnly = !!get().readOnly,
+    configuredDisabled = !!get().disabled;
   const options = (): Extension => {
     const props = get(),
       description = [
@@ -255,14 +257,29 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
     EditorState.create({ doc, extensions: base() });
   const view = new EditorView({ state: create(initialValue), parent: host });
   // 原生输入不能等待下一帧的配置更新；文档协调仍保留在 RAF，保护组合输入。
-  const refreshCustom = () => {
+  const refreshNativeState = () => {
     if (disposed || internal || view.composing) return;
-    const extensions = get().extensions;
-    if (extensions === configuredExtensions) return;
+    const props = get(),
+      extensions = props.extensions,
+      readOnly = !!props.readOnly,
+      disabled = !!props.disabled;
+    if (
+      extensions === configuredExtensions &&
+      readOnly === configuredReadOnly &&
+      disabled === configuredDisabled
+    )
+      return;
     internal = true;
     try {
-      view.dispatch({ effects: customSlot.reconfigure(extensions ?? []) });
+      view.dispatch({
+        effects: [
+          customSlot.reconfigure(extensions ?? []),
+          optionsSlot.reconfigure(options()),
+        ],
+      });
       configuredExtensions = extensions;
+      configuredReadOnly = readOnly;
+      configuredDisabled = disabled;
     } finally {
       internal = false;
     }
@@ -312,6 +329,8 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
         ],
       });
       configuredExtensions = props.extensions;
+      configuredReadOnly = !!props.readOnly;
+      configuredDisabled = !!props.disabled;
     } finally {
       internal = false;
     }
@@ -401,7 +420,7 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
     if (event.button === 0) event.preventDefault();
   };
   for (const event of ["keydown", "beforeinput", "paste"])
-    root.addEventListener(event, refreshCustom, true);
+    root.addEventListener(event, refreshNativeState, true);
   toolbar.addEventListener("click", click);
   toolbar.addEventListener("mousedown", press);
   const handle: CodeEditorHandle = {
@@ -431,7 +450,7 @@ export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
     languageAbort?.abort();
     win?.cancelAnimationFrame(frame);
     for (const event of ["keydown", "beforeinput", "paste"])
-      root.removeEventListener(event, refreshCustom, true);
+      root.removeEventListener(event, refreshNativeState, true);
     toolbarStop();
     toolbar.removeEventListener("click", click);
     toolbar.removeEventListener("mousedown", press);

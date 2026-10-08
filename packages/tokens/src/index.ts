@@ -125,7 +125,7 @@ export const baseTokens = {
       heading:
         "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif",
       body: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif",
-      mono: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace",
+      mono: "monospace",
     },
     fontSize: {
       xs: "12px",

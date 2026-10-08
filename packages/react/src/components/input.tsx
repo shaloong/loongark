@@ -6,7 +6,8 @@ import type {
   ButtonHTMLAttributes,
 } from "react";
 import { dataProps } from "../data-props";
-import { Field } from "@ark-ui/react/field";
+import { Field, useFieldContext } from "@ark-ui/react/field";
+import { inputSuffixDisabled } from "@loongark/kit";
 import { ark } from "@ark-ui/react";
 import type { InputPrimitiveProps } from "@loongark/primitives";
 import { createElement, forwardRef } from "react";
@@ -225,6 +226,7 @@ export const LoongArkInputPrefix = ({
   );
 
 export interface LoongArkInputSuffixProps extends LoongArkInputAddonProps {
+  disabled?: boolean;
   action?: "clear" | "button" | "none" | "text";
   onClick?: () => void;
 }
@@ -233,8 +235,10 @@ export const LoongArkInputSuffix = ({
   children,
   action,
   onClick,
+  disabled,
   ...rest
 }: LoongArkInputSuffixProps) => {
+  const field = useFieldContext();
   const isAction =
     (action === "clear" || action === "button") && Boolean(onClick);
   const Element = isAction ? ark.button : ark.span;
@@ -245,9 +249,12 @@ export const LoongArkInputSuffix = ({
       ...rest,
       onClick,
       type: isAction ? ("button" as const) : undefined,
+      disabled: isAction
+        ? inputSuffixDisabled(action, disabled, field)
+        : undefined,
       "data-scope": "input",
       "data-part": "suffix",
-      "data-action": isAction ? "clear" : undefined,
+      "data-action": isAction ? action : undefined,
     }),
     children,
   );

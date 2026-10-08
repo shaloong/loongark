@@ -49,3 +49,5 @@ motionPreference 默认为 auto，遵循 prefers-reduced-motion；force 供明�
 ## 表单与浮层
 
 InputRoot 基于 Ark Field。Label 关联控件，ErrorText 自动关联错误，Group 包裹 Prefix/Control/Suffix；不要将可点击 Suffix 放在另一个 button 中。Switch/Checkbox/Select 在表单场景组合 HiddenInput/HiddenSelect。Dialog 关闭时隐藏于可访问树，打开后锁定焦点，Escape 关闭并恢复到触发器。
+
+代码等宽字体默认使用 CSS 通用 `monospace`，遵循浏览器/系统的等宽字体设置。Linux WebKit 对包含不可用平台字体的旧列表可能回退为比例字形；验收实际测量 `iiii` 与 `WWWW` 的等宽，而不只检查 font-family 文本。调用方仍可覆盖 `typography.fontFamily.mono`，应验证目标平台的字形回退。

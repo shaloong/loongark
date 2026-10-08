@@ -35,8 +35,6 @@ interface EditableDesignTokens {
   };
   brand: {
     primary: string;
-    accent: string;
-    warning: string;
   };
   motion: {
     duration: string;
@@ -102,8 +100,6 @@ const extractEditableTokens = (theme: LoongArkTheme): EditableDesignTokens => {
     },
     brand: {
       primary: toStringToken(brand.primary, "#006EFF"),
-      accent: toStringToken(brand.accent, "#5AC8FA"),
-      warning: toStringToken(brand.warning, "#F58220"),
     },
     motion: {
       duration: toStringToken(duration.base, "200ms"),
@@ -124,8 +120,10 @@ const buildEditableStyles = (theme: LoongArkTheme): string => {
   const editTriggerSelector = `${scopeSelector}[data-part="edit-trigger"]`;
   const submitTriggerSelector = `${scopeSelector}[data-part="submit-trigger"]`;
   const cancelTriggerSelector = `${scopeSelector}[data-part="cancel-trigger"]`;
-  const invalidSelector = `${controlSelector}[data-state='invalid']`;
-  const successSelector = `${controlSelector}[data-state='success']`;
+  // 状态属于可编辑值；Control 只是操作区，不能承载空的整行描边。
+  const valueSelector = `:is(${inputSelector},${previewSelector})`;
+  const invalidSelector = `:is(${rootSelector}[data-state='invalid'],${rootSelector}:has(${controlSelector}[data-state='invalid'])) ${valueSelector},${inputSelector}[data-state='invalid']`;
+  const successSelector = `:is(${rootSelector}[data-state='success'],${rootSelector}:has(${controlSelector}[data-state='success'])) ${valueSelector},${inputSelector}[data-state='success']`;
   const disabledSelector = `${rootSelector}[data-disabled='true']`;
 
   return `
@@ -220,13 +218,13 @@ ${rootSelector}[data-size='lg'] ${previewSelector} {
 }
 
 ${invalidSelector} {
-  border-color: ${tokens.brand.warning};
-  box-shadow: 0 0 0 1px ${tokens.brand.warning};
+  border-color: var(--lk-color-semantic-destructive);
+  box-shadow: 0 0 0 1px var(--lk-color-semantic-destructive);
 }
 
 ${successSelector} {
-  border-color: ${tokens.brand.accent};
-  box-shadow: 0 0 0 1px ${tokens.brand.accent};
+  border-color: var(--lk-color-semantic-success);
+  box-shadow: 0 0 0 1px var(--lk-color-semantic-success);
 }
 
 ${disabledSelector} {
@@ -255,8 +253,8 @@ const EDITABLE_CONTRACT: PrimitiveContract<EditablePrimitiveProps> = {
     "color.neutral.300",
     "color.neutral.700",
     "color.brand.primary",
-    "color.brand.accent",
-    "color.brand.warning",
+    "color.semantic.destructive",
+    "color.semantic.success",
     "typography.fontFamily.body",
     "typography.fontSize.sm",
     "typography.fontSize.md",

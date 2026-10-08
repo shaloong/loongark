@@ -5,6 +5,7 @@ import {
   LoongArkInputRoot,
   LoongArkInputControl,
   LoongArkInputLabel,
+  LoongArkInputGroup,
   LoongArkInputPrefix,
   LoongArkInputSuffix,
   LoongArkInputHelperText,
@@ -34,47 +35,59 @@ export function InputVariantsExample() {
       <h3>带 Prefix 的 Input</h3>
       <LoongArkInputRoot>
         <LoongArkInputLabel>搜索</LoongArkInputLabel>
-        <LoongArkInputPrefix>🔍</LoongArkInputPrefix>
-        <LoongArkInputControl
-          placeholder="搜索内容"
-          value={search}
-          onChange={(e: { target: { value: string } }) =>
-            setSearch(e.target.value)
-          }
-        />
+        <LoongArkInputGroup>
+          <LoongArkInputPrefix>
+            <LoongArkIcon icon={controlIcons.search} size="sm" />
+          </LoongArkInputPrefix>
+          <LoongArkInputControl
+            placeholder="搜索内容"
+            value={search}
+            onChange={(e: { target: { value: string } }) =>
+              setSearch(e.target.value)
+            }
+          />
+        </LoongArkInputGroup>
       </LoongArkInputRoot>
 
       <h3>带可选 Clear Suffix 的 Input</h3>
       <LoongArkInputRoot>
         <LoongArkInputLabel>邮箱</LoongArkInputLabel>
-        <LoongArkInputControl
-          placeholder="your@email.com"
-          value={email}
-          onChange={(e: { target: { value: string } }) =>
-            setEmail(e.target.value)
-          }
-        />
-        {email && (
-          <LoongArkInputSuffix action="clear" onClick={() => setEmail("")}>
-            <LoongArkIcon icon={controlIcons.close} size="sm" />
-          </LoongArkInputSuffix>
-        )}
+        <LoongArkInputGroup>
+          <LoongArkInputControl
+            placeholder="your@email.com"
+            value={email}
+            onChange={(e: { target: { value: string } }) =>
+              setEmail(e.target.value)
+            }
+          />
+          {email && (
+            <LoongArkInputSuffix
+              aria-label="清空邮箱"
+              action="clear"
+              onClick={() => setEmail("")}
+            >
+              <LoongArkIcon icon={controlIcons.close} size="sm" />
+            </LoongArkInputSuffix>
+          )}
+        </LoongArkInputGroup>
         <LoongArkInputHelperText>请输入有效的邮箱地址</LoongArkInputHelperText>
       </LoongArkInputRoot>
 
       <h3>带 Prefix 和 Suffix 的 Input</h3>
       <LoongArkInputRoot>
         <LoongArkInputLabel>金额</LoongArkInputLabel>
-        <LoongArkInputPrefix>¥</LoongArkInputPrefix>
-        <LoongArkInputControl
-          type="number"
-          placeholder="0.00"
-          value={amount}
-          onChange={(e: { target: { value: string } }) =>
-            setAmount(e.target.value)
-          }
-        />
-        <LoongArkInputSuffix>CNY</LoongArkInputSuffix>
+        <LoongArkInputGroup>
+          <LoongArkInputPrefix>¥</LoongArkInputPrefix>
+          <LoongArkInputControl
+            type="number"
+            placeholder="0.00"
+            value={amount}
+            onChange={(e: { target: { value: string } }) =>
+              setAmount(e.target.value)
+            }
+          />
+          <LoongArkInputSuffix>CNY</LoongArkInputSuffix>
+        </LoongArkInputGroup>
       </LoongArkInputRoot>
 
       <h3>Floating Label（Material 风格）</h3>

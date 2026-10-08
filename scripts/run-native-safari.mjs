@@ -81,7 +81,10 @@ async function find(selector) {
   return node[elementKey];
 }
 async function click(selector) {
-  if (!selector.includes("row-expand"))
+  const richToolbar =
+    selector.includes('[data-kind="rich"]') &&
+    (selector.includes("data-action") || selector.includes("table-tools"));
+  if (!selector.includes("row-expand") && !richToolbar)
     return session("POST", `/element/${await find(selector)}/click`, {});
   // Safari 的 element/click 在滚动布局更新后可能使用旧中心点；先完成真实滚动与绘制。
   await execute(
@@ -97,11 +100,18 @@ async function click(selector) {
     `
     const button = document.querySelector(arguments[0]), rect = button.getBoundingClientRect();
     const x=rect.x+rect.width/2, y=rect.y+rect.height/2;
-    return {x:Math.round(x), y:Math.round(y), hit:button.contains(document.elementFromPoint(x,y))};
+    if(arguments[1]) {
+      window.__safariRichClick=null;
+      document.addEventListener('click',event=>{
+        window.__safariRichClick={trusted:event.isTrusted,matched:button.contains(event.target),action:button.dataset.action??'table-tools'};
+      },{capture:true,once:true});
+    }
+    return {x:Math.round(x), y:Math.round(y), hit:button.contains(document.elementFromPoint(x,y)),disabled:button.disabled===true};
   `,
-    [selector],
+    [selector, richToolbar],
   );
   assert(point.hit, `Safari 原生按钮中心被遮挡：${selector}`);
+  assert(!point.disabled, `Safari 原生按钮已禁用：${selector}`);
   await session("POST", "/actions", {
     actions: [
       {
@@ -122,6 +132,14 @@ async function click(selector) {
       },
     ],
   });
+  if (richToolbar) {
+    const event = await execute("return window.__safariRichClick");
+    eventEvidence.push({ selector, point, event });
+    assert(
+      event?.trusted && event.matched,
+      `Safari 工具栏未收到可信点击：${selector}`,
+    );
+  }
 }
 async function clickText(text) {
   const node = await execute(

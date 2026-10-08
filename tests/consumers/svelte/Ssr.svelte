@@ -527,3 +527,15 @@
   <L.LoongArkInputInput name="ssr-individual-input" disabled readOnly required />
   <L.LoongArkTextareaControl name="ssr-individual-textarea" disabled readOnly required />
 </L.LoongArkInputRoot>
+
+<L.LoongArkEditableRoot defaultValue="Editable SSR &lt;value&gt;">
+  <L.LoongArkEditableArea>
+    <L.LoongArkEditablePreview data-testid="ssr-editable-value" />
+    <L.LoongArkEditableInput />
+  </L.LoongArkEditableArea>
+</L.LoongArkEditableRoot>
+<L.LoongArkEditableRoot defaultValue="Must not override custom preview">
+  <L.LoongArkEditableArea>
+    <L.LoongArkEditablePreview data-testid="ssr-editable-custom">Custom preview</L.LoongArkEditablePreview>
+  </L.LoongArkEditableArea>
+</L.LoongArkEditableRoot>

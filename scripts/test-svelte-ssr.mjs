@@ -238,3 +238,12 @@ for (const prefix of ["ssr-inherit", "ssr-individual"])
       assert.match(tag, new RegExp("\\s" + state + "(?:\\s|=|>)", "i"));
   }
 console.log("Svelte Input/Textarea 父级状态继承及独立状态SSR通过");
+
+const editablePreview = (id) => {
+  const content = html.match(new RegExp(`<span(?=[^>]*data-testid="${id}")[^>]*>([\\s\\S]*?)<\\/span>`))?.[1];
+  assert.notEqual(content, undefined);
+  return content.replace(/<!--[\s\S]*?-->/g, "").replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+};
+assert.equal(editablePreview("ssr-editable-value"), "Editable SSR <value>");
+assert.equal(editablePreview("ssr-editable-custom"), "Custom preview");
+console.log("Svelte Editable SSR 默认值及自定义预览内容通过");

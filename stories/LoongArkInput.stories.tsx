@@ -162,7 +162,9 @@ export const WithPrefix: Story = {
         >
           <LoongArkInputLabel>搜索</LoongArkInputLabel>
           <LoongArkInputGroup>
-            <LoongArkInputPrefix>🔍</LoongArkInputPrefix>
+            <LoongArkInputPrefix>
+              <LoongArkIcon icon={controlIcons.search} size="sm" />
+            </LoongArkInputPrefix>
             <LoongArkInputControl
               size={args.size}
               state={args.state}

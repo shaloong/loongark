@@ -1,7 +1,8 @@
 import { renderPart } from "../render-part";
 import { defineComponent, h } from "vue";
 import type { PropType } from "vue";
-import { Field } from "@ark-ui/vue/field";
+import { Field, useFieldContext } from "@ark-ui/vue/field";
+import { inputSuffixDisabled } from "@loongark/kit";
 import { ark } from "@ark-ui/vue";
 import type { InputPrimitiveProps } from "@loongark/primitives";
 
@@ -216,13 +217,16 @@ export const LoongArkInputPrefix = defineComponent({
 
 export const LoongArkInputSuffix = defineComponent({
   name: "LoongArkInputSuffix",
+  inheritAttrs: false,
   props: {
+    disabled: { type: Boolean, default: undefined },
     action: {
       type: {} as PropType<"clear" | "button" | "none" | "text">,
       default: "none" as const,
     },
   },
   setup(props, { slots, attrs }) {
+    const field = useFieldContext();
     const isAction = () =>
       (props.action === "clear" || props.action === "button") &&
       typeof attrs.onClick === "function";
@@ -232,9 +236,12 @@ export const LoongArkInputSuffix = defineComponent({
         {
           ...attrs,
           type: isAction() ? "button" : undefined,
+          disabled: isAction()
+            ? inputSuffixDisabled(props.action, props.disabled, field?.value)
+            : undefined,
           "data-scope": "input",
           "data-part": "suffix",
-          "data-action": isAction() ? "clear" : undefined,
+          "data-action": isAction() ? props.action : undefined,
         },
         slots.default ? slots.default() : undefined,
       );

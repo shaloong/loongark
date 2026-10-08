@@ -4,6 +4,8 @@ LoongArk 以 Ark UI 提供行为与无障碍基础，以共享 CSS 和 Token 提
 
 开发与发布分支约定见 [CONTRIBUTING.md](../CONTRIBUTING.md)：日常和云端开发进入 develop，稳定版本按发布节点合入 main。
 
+2026-10-08 P0 收尾批次：编辑器原生输入前同步只读/禁用，InputGroup 前后缀状态与对齐，Svelte 动态状态、Solid 动态标签和 WebKit 默认等宽字体，Field 必填标签行内布局、AngleSlider 角度定位和 Editable 状态描边；四端示例及 InputGroup States Story 已同步。当前验收与平台状态统一见[本批摘要](audits/2026-10-08/p0-browser-and-default-visual/acceptance.json)。
+
 ## 分层与职责
 
 | 层                 | 目录                            | 职责                                                                 |

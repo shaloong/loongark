@@ -83,3 +83,13 @@ TagsInput 在删除等操作后可能有待运行的焦点恢复。用户随后�
 Svelte NumberInputRoot 支持初始 undefined 的 bind:value。未提供 onValueChange 时回写绑定；提供回调时由调用方决定是否接受值，原生显示和 FormData 恢复为当前接受的格式值。NumberInputInput / PasswordInputInput 支持 bind:ref；输入替换和卸载取消旧监听与待运行帧。SSR 保留原生属性与关联 ID，不安装 DOM 行为。
 
 四端 CompoundFieldExample 和 Field 的 CompoundInputs Story 展示动态状态、显式 false、必填首错聚焦、拒绝数值更新、原生提交/reset、长描述与 RTL。必填由浏览器约束校验，业务错误仍由调用方声明 Field.invalid 和 ErrorText，不在组件中引入业务校验规则。桌面示例采用共享行轨道，让两列标签换行时输入仍对齐；窄屏按阅读顺序单列展示。
+
+## 前后缀输入
+
+`InputPrefix` 与 `InputSuffix` 放在 `InputGroup` 中，与可见输入共用外框、控件高度和焦点环；文本前后缀仍是不可交互的 span。`InputSuffix action="clear"` 是有可访问名称的原生按钮，默认继承 InputRoot/Field 的禁用及只读状态。`action="button"` 继承禁用，但只读仍允许复制、查看等非编辑操作；调用方负责具体操作。`disabled` 可显式覆盖继承值，包括 false。禁用输入的前后缀一起降弱，不重复降低内部文字透明度。
+
+四端 `InputAdornmentsExample` 和 InputGroup/States 展示三种尺寸、原生键盘清空、禁用、只读、错误、长标签和 RTL；样式与默认搜索图标复用现有 Token 和 Lucide。
+
+Editable 的 `state` 描边应用于 Preview/Input，Control 保持操作区布局；Root 状态或 Control 兼容状态均使用现有错误/成功语义 Token。四端 `EditableStatesExample` 演示默认、错误、成功和禁用，编辑与提交沿用 Ark 的焦点恢复。
+
+Svelte Editable Preview 未提供内容时显示 Ark 的当前值，提供内容时保留自定义预览；初始 SSR 与提交后的客户端预览采用相同契约。

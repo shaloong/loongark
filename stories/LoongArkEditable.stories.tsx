@@ -1,4 +1,5 @@
 import React from "react";
+import { EditableStatesExample } from "../examples/react/EditableStatesExample";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   LoongArkEditableRoot,
@@ -82,13 +83,7 @@ export const Variants: Story = {
 };
 
 export const States: Story = {
-  render: () => (
-    <div style={{ display: "grid", gap: 16 }}>
-      <EditableDemo state="default" />
-      <EditableDemo state="invalid" />
-      <EditableDemo state="success" />
-    </div>
-  ),
+  render: () => <EditableStatesExample />,
 };
 
 export const Sizes: Story = {

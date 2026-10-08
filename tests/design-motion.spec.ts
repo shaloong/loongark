@@ -1,6 +1,6 @@
 import { auditRoot as resolveAuditRoot } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
-import { mkdir } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 
 test("表单密度和浮动标签保持一致", async ({ page }) => {
   for (const [size, height] of [
@@ -217,11 +217,57 @@ for (const mode of ["light", "dark"] as const) {
             path: `${root}/${family}.png`,
             animations: "disabled",
           });
-        if (family === "sheet" || family === "drawer")
+        let drawerEvents: Array<Record<string, unknown>> = [];
+        if (family === "drawer") {
+          await content.evaluate((node) => {
+            const events: Array<Record<string, unknown>> = [];
+            (
+              window as unknown as { drawerEvents: typeof events }
+            ).drawerEvents = events;
+            for (const type of ["pointerdown", "pointerup", "click"])
+              node.addEventListener(
+                type,
+                (event) => {
+                  const target = event.target as HTMLElement;
+                  events.push({
+                    type,
+                    trusted: event.isTrusted,
+                    target: target.closest("button")?.textContent?.trim(),
+                    state: node.getAttribute("data-state"),
+                    defaultPrevented: event.defaultPrevented,
+                  });
+                },
+                true,
+              );
+          });
+        }
+        if (family === "sheet" || family === "drawer") {
           await page
             .getByRole("button", { name: "Save changes", exact: true })
             .click();
-        else if (family === "alertdialog")
+          if (family === "drawer") {
+            drawerEvents = await page.evaluate(
+              () =>
+                (
+                  window as unknown as {
+                    drawerEvents: Array<Record<string, unknown>>;
+                  }
+                ).drawerEvents,
+            );
+            await writeFile(
+              `${root}/drawer-${preference}-native-events.json`,
+              JSON.stringify(drawerEvents, null, 2),
+            );
+            expect(
+              drawerEvents.some(
+                (event) =>
+                  event.type === "click" &&
+                  event.trusted &&
+                  event.target === "Save changes",
+              ),
+            ).toBe(true);
+          }
+        } else if (family === "alertdialog")
           await page
             .getByRole("button", { name: "Cancel", exact: true })
             .click();

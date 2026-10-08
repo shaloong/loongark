@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-08",
+  "branch": "develop",
+  "baseCommit": "7d64b929422f9d88cf9db5a0d65e8a7b25dca6f9",
+  "status": "最终本地验证与截图审阅通过；完整 CI 与原生 Safari 待当前源码实际验收，两个 P0 尚不关闭。",
+  "scope": [
+    "关闭跨浏览器和默认视觉两个 P0 方向；P1 真机、屏幕阅读器及高级边界专项另行验收。",
+    "CodeEditor 在原生输入前同步最新只读/禁用和扩展，保留组合输入协调和清理。",
+    "InputGroup 三尺寸、完整外框、图标对齐、禁用/只读；四端 InputSuffix 原生按钮、状态继承及显式覆盖；Svelte 响应式上下文和 Solid 动态标签。",
+    "统一搜索图标及共享默认等宽字体；四端状态示例、Story、公开声明和 SSR。",
+    "原生 Safari 工具栏真实布局/命中/可信点击证据；Drawer 保留关闭及焦点断言并记录可信事件。",
+    "Field 必填符号行内、AngleSlider 实际角度位置、Editable 值区域语义状态与 Svelte 默认预览；原生 Safari 同步四端 Editable 值/提交/焦点契约。"
+  ],
+  "catalog": {
+    "families": 119,
+    "stories": 333,
+    "publicValuesPerFramework": 794,
+    "frameworkExamples": 295
+  },
+  "environment": {
+    "platform": "Linux",
+    "node": "24.19.0",
+    "pnpm": "10.14.0",
+    "install": "CI=1 pnpm install --frozen-lockfile 成功；未新增依赖或修改锁文件。",
+    "chromium": "系统 Chromium 151.0.7922.173",
+    "firefox": "Playwright Firefox 144.0.2",
+    "webkit": "Playwright WebKit 26.0 build 2227"
+  },
+  "observedCorrections": [
+    "WebKit 只读切换与 RAF 配置之间原生输入可插入 forbidden，冻结帧回归复现后修正。",
+    "Svelte 后缀 SSR 状态正确、客户端父级禁用切换未订阅；改用响应式派生。",
+    "截图发现 Solid 长标签切换仍显示旧文本；保留 Label Props getter 并补实际文本断言。",
+    "WebKit 真实 DOM：旧字体列表 iiii=13.453125px、WWWW=52.421875px；monospace 两者=33.71875px。回归测量 DOM 字形，避免 Canvas 初始化默认字体造成测试假设。",
+    "默认截图和实际 DOM：Field Label 被全域 grid 规则影响，必填符号比标签低 26px；仅 Root 应用网格布局。",
+    "默认截图和实际 DOM：AngleSlider 45° 拇指中心固定偏移 (-51,-51)px；共享样式以圆盘中心和 Ark 的 --angle 旋转，补键盘/原生指针值与位置回归。",
+    "扩大状态截图发现 Editable invalid/success 的描边作用于整行操作区；改为实际预览/输入，沿用错误/成功语义 Token，四端状态及真实提交/焦点回归。",
+    "四端状态回归复现 Svelte Editable 初始与提交预览均为空：封装无条件传空插槽遮蔽 Ark 值；仅转发实际 children，补初始/提交/焦点及默认值和自定义内容 SSR 回归。"
+  ],
+  "previousFullMatrix": {
+    "run": 37678197055,
+    "source": "7d64b929422f9d88cf9db5a0d65e8a7b25dca6f9",
+    "chromium": "648 四端、243 Story 通过",
+    "firefox": "640 四端、243 Story 通过；旧 16 项程序化聚焦假设已修正",
+    "webkit": "640 四端通过（含矩阵/滚动锚定），242 Story 通过、force Drawer 关闭一项失败",
+    "nativeSafari": "287 默认后 Svelte light 富文本插入表格失败；该失败 PNG、DOM 与 WebKit Drawer trace 已实际查看。"
+  },
+  "validation": {
+    "orderedProducers": {
+      "result": "passed",
+      "order": [
+        "verify",
+        "check:contracts",
+        "storybook:build",
+        "check:coverage",
+        "check:publication",
+        "check:svelte",
+        "build-framework-fixtures",
+        "build-example-fixtures"
+      ],
+      "svelte": "0 errors, 4 existing warnings",
+      "ssr": "四端各 27 后缀动作/继承/显式覆盖场景通过，无事件回调",
+      "scope": "最终源码全部 8 项顺序通过；发布检查包含 Svelte Editable 默认与自定义预览 SSR。"
+    },
+    "relatedBrowsers": {
+      "passed": 243,
+      "skipped": 30,
+      "duration": "4.2m",
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "scope": "四端原生状态、首帧编辑器扩展/只读/禁用、实际 DOM 等宽字体、Drawer 少量指针移动、动态前后缀/长标签及 Svelte 数值绑定。"
+    },
+    "stories": {
+      "chromium": {
+        "passed": 249,
+        "skipped": 712,
+        "duration": "19.4m",
+        "scope": "本批输入/编辑器修正整库；随后默认目视发现的 Field/AngleSlider 样式修正另做最终定向回归，并由当前完整 CI 再次覆盖。"
+      },
+      "firefoxWebkit": {
+        "passed": 120,
+        "skipped": 360,
+        "duration": "5.4m",
+        "scope": "两引擎共 13 个相关 Story 契约；含焦点、四端状态共享、矩阵缩屏、消息操作、编辑器、Drawer 可信点击与焦点恢复。"
+      }
+    },
+    "visual": {
+      "priorEditableCorrection": {
+        "passed": 310,
+        "duration": "3.4m",
+        "snapshotUpdates": 0
+      },
+      "currentSource": {
+        "passed": 310,
+        "duration": "3.4m",
+        "snapshotUpdates": 0
+      }
+    },
+    "nativeSafari": "pending",
+    "defaultScan": {
+      "storyModeRecords": 666,
+      "pageOverflow": 0,
+      "transitionAll": 0,
+      "a11y": "完整 Story 明暗扫描通过；详见整库 CI 的最终源码记录。"
+    },
+    "defaultFieldAngle": {
+      "passed": 93,
+      "skipped": 156,
+      "duration": "2.9m",
+      "scope": "三引擎标签行内/角度值位置、原生 Field/前后缀与动效焦点相关 Story；早于后续 Editable 修正。"
+    },
+    "editableStates": {
+      "frameworks": {
+        "passed": 48,
+        "skipped": 12,
+        "duration": "35.1s"
+      },
+      "relatedStories": {
+        "passed": 36,
+        "skipped": 48,
+        "duration": "32.1s"
+      },
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "scope": "四端初始值、原生编辑/提交、Edit 按钮焦点恢复、值区域错误/成功描边、禁用及缩屏边界；Story 同步 Field 必填符号和 AngleSlider 原生角度。"
+    }
+  },
+  "evidencePolicy": "临时原图、联系表、测量、日志和下载 ZIP 留在 .artifacts/ 或有保留期限的 CI Artifact；只提交摘要和实际审阅的回归基线。",
+  "limitations": [
+    "桌面 Safari 不等于真实 iOS；320/375px 视口不等于连接真实手机。",
+    "默认 Story 扫描及相关契约不代表全部业务组合和全部辅助技术通过。",
+    "历史间歇失败须按当前整库和可信输入证据验收，不以脚本就绪或 Linux 协议诊断冒充 Safari 成功。"
+  ],
+  "visualReview": {
+    "fourPortInputStates": 192,
+    "codeEditorReadonly": 48,
+    "newLinuxBaselinesReviewed": 16,
+    "scope": "三引擎/四端/明暗/1280 与 320 或 375px；前后缀状态和字形、长标签、RTL、帮助与错误、完整外框。16 张新基线原图逐张目视审阅后手动加入，未更新旧基线。",
+    "defaultFamilies": 119,
+    "defaultViewsReviewed": 476,
+    "commonStateViewsReviewed": 58,
+    "overlayViewsReviewed": 10,
+    "fieldAngleCorrectionViewsReviewed": 36,
+    "editableStateViewsReviewed": 60,
+    "existingBaselinesChanged": 0
+  }
+}

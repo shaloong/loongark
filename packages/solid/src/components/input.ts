@@ -1,9 +1,11 @@
 import { dataProps } from "../data-props";
 import type { JSX } from "solid-js";
-import { Field } from "@ark-ui/solid/field";
+import { Field, useFieldContext } from "@ark-ui/solid/field";
+import { inputSuffixDisabled } from "@loongark/kit";
 import { ark } from "@ark-ui/solid";
 import type { InputPrimitiveProps } from "@loongark/primitives";
-import { mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, createComponent } from "solid-js";
+import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 import { boolAttr, normalizeState } from "../utils";
 
@@ -130,8 +132,7 @@ export const LoongArkInputLabel: Component<
   Omit<JSX.HTMLAttributes<HTMLElement>, "ref">
 > = (props) =>
   Field.Label(
-    dataProps({
-      ...props,
+    mergeProps(props, {
       "data-scope": "input",
       "data-part": "label",
     }),
@@ -142,6 +143,7 @@ interface InputAddonProps extends Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
 }
 
 interface InputSuffixProps extends InputAddonProps {
+  disabled?: boolean;
   action?: "clear" | "button" | "none" | "text";
 }
 
@@ -155,19 +157,32 @@ export const LoongArkInputPrefix: Component<InputAddonProps> = (props) =>
   );
 
 export const LoongArkInputSuffix: Component<InputSuffixProps> = (props) => {
-  const { action = "none", ...rest } = props;
-  const isAction =
-    (action === "clear" || action === "button") &&
+  const field = useFieldContext();
+  const [local, rest] = splitProps(props, ["action", "disabled"]);
+  const isAction = () =>
+    (local.action === "clear" || local.action === "button") &&
     typeof props.onClick === "function";
-  const Element = isAction ? ark.button : ark.span;
-
-  return Element(
-    dataProps({
-      ...rest,
-      type: isAction ? "button" : undefined,
-      "data-scope": "input",
-      "data-part": "suffix",
-      "data-action": isAction ? "clear" : undefined,
+  const attributes = mergeProps(rest, {
+    get type() {
+      return isAction() ? ("button" as const) : undefined;
+    },
+    get disabled() {
+      return isAction()
+        ? inputSuffixDisabled(local.action, local.disabled, field?.())
+        : undefined;
+    },
+    "data-scope": "input",
+    "data-part": "suffix",
+    get "data-action"() {
+      return isAction() ? local.action : undefined;
+    },
+  });
+  return createComponent(
+    Dynamic,
+    mergeProps(attributes, {
+      get component() {
+        return isAction() ? ark.button : ark.span;
+      },
     }),
   );
 };

@@ -1,3 +1,4 @@
+import { InputAdornmentsExample } from "../examples/react/InputAdornmentsExample";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import * as L from "@loongark/react";
@@ -20,3 +21,5 @@ export const Basic: StoryObj = {
     </div>
   ),
 };
+
+export const States: StoryObj = { render: () => <InputAdornmentsExample /> };
