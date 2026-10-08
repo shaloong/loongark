@@ -321,8 +321,8 @@ importers:
         specifier: workspace:*
         version: link:../theme
       '@zag-js/vue':
-        specifier: 1.43.3
-        version: 1.43.3(vue@3.5.43(typescript@5.9.3))
+        specifier: 1.45.0
+        version: 1.45.0(vue@3.5.43(typescript@5.9.3))
       vue:
         specifier: 3.5.43
         version: 3.5.43(typescript@5.9.3)
@@ -472,8 +472,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
-  '@babel/runtime@7.28.4':
-    resolution: {integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==}
+  '@babel/runtime@7.29.10':
+    resolution: {integrity: sha512-NpugTzbKgGrNe45Ui32cN8vCFFMxVtP/9rtfwv0nP5FRDAjvYBxJcLVpYA9mr1jxP6cnIT7x9LUzuDTbWYYNRA==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.27.2':
@@ -1349,6 +1349,9 @@ packages:
   '@zag-js/core@1.43.3':
     resolution: {integrity: sha512-afREBcZWvPLHz/2AxJeuAP2o6+o3V7NZO/MutLhdclKaVSBlPzCr6qqP9k8hq1zOxk1jogKT5VVGielzWDY2Dw==}
 
+  '@zag-js/core@1.45.0':
+    resolution: {integrity: sha512-xDd+ezb1+jzGVf+85HgVuqBzCuX+x8/GH+FnPESsSU97Hzq6OYJbvd56YpN5gioqViuJkJUFkPBCYcq0Niw2LA==}
+
   '@zag-js/date-input@1.43.3':
     resolution: {integrity: sha512-jw1hEJg1yjoRUp2U//b57w/w0bolrTTTrzO89WeKU1P/UoW1G5j5zAw1TMnL6fp2IsRP/7QgjGR4HSkAgrOhkw==}
     peerDependencies:
@@ -1372,6 +1375,9 @@ packages:
 
   '@zag-js/dom-query@1.43.3':
     resolution: {integrity: sha512-kpTTYMemMmHxhp4gyOllK7/Lf86AySTO+AlGds9iQM21eUwi1jvc9q3VTxP+qD/KwHePGftfPwkwxifC3iSGbw==}
+
+  '@zag-js/dom-query@1.45.0':
+    resolution: {integrity: sha512-rJIESTiyzS6sfplDZxlO5WO0fTeHwL8RFylPDetpAtxhbADIV3kcP6qAd7pEMyXM5rdh7qTXOFm0PJOU2selyA==}
 
   '@zag-js/drawer@1.43.3':
     resolution: {integrity: sha512-/oWCjJZLxB4cNfrjjobVkrLdPgAO5uCLnpaDZ9p4ZmIY/ENO2QesboqdAK4WfypiMeYEoVpA3DFbGIVt4qzazA==}
@@ -1504,6 +1510,9 @@ packages:
   '@zag-js/store@1.43.3':
     resolution: {integrity: sha512-NL3Uxk5Rszjd+X+cPXw0N7Kn5TNMyrS6cTMazlBOcN2+J68mzXhNFvM/0H38m0X+3ybK3sE5Ta6NPlhOQADRqw==}
 
+  '@zag-js/store@1.45.0':
+    resolution: {integrity: sha512-zA5zfOXZsDEZxK7gzGF0dldZn3imxaxY8r7g+Zcs/Am0x5VAmVJx2uJHs1Vwx9agZ0XHtnqBVrjV+UhUzST5rg==}
+
   '@zag-js/svelte@1.43.3':
     resolution: {integrity: sha512-DrbiM8KHoUF3DLZha4cZxSafG4n/r/YLohol/sk3Tebu6yoqOLBBap9Rt1rT/Ap0WHBc13lNex08yBARt2PUBA==}
     peerDependencies:
@@ -1545,11 +1554,22 @@ packages:
   '@zag-js/types@1.43.3':
     resolution: {integrity: sha512-QokzUgkJ7a/TRE8SAXqlm1XfiNDbyM8y+mx0PpmzHa8bvmWXLEe/Zx2TRz8aYoGim75NluYzDy3x+WWileF7uA==}
 
+  '@zag-js/types@1.45.0':
+    resolution: {integrity: sha512-92xETOwIVWksA+wqZ/Dex/obbC5cgCCRCF7HQ7Cf8Wgv0jBKqUphccZRzmHic1qOthoW7ZAK2xkUtyXFmd2/SQ==}
+
   '@zag-js/utils@1.43.3':
     resolution: {integrity: sha512-9P9fvFFxuiDcLqX0BYgGNkf0/a/id32nHvQpwgv/Xv3b9n5yeyw2U8nKefpWr+1VfFsrpf2XMXiA2CDSWZgt2g==}
 
+  '@zag-js/utils@1.45.0':
+    resolution: {integrity: sha512-LyeGfTEojjhDcajCCGxvjrgFuPoMia1HKefdP6KqvJpC78+1awahBoZpYYZlbab2WPawgCaprcDevBJFlOe6Ag==}
+
   '@zag-js/vue@1.43.3':
     resolution: {integrity: sha512-xSiKiZxPLfPet/fUOS1McyxjMgxsWwPB++YAJG9ZPFyN3rs4CM0BXqUCJmnZS2GHLiGNn+jJ9q3JxeTW5D9s8Q==}
+    peerDependencies:
+      vue: 3.5.43
+
+  '@zag-js/vue@1.45.0':
+    resolution: {integrity: sha512-OV1ewYhunHb6KyLk2j/hME4pTh30AXESDBa65Q5XVqALK9yDptiq14K1mndi0UXDDyMTnyI5ppvhiZ8nv6/KoQ==}
     peerDependencies:
       vue: 3.5.43
 
@@ -2745,7 +2765,7 @@ snapshots:
       '@babel/core': 7.29.7
       '@babel/helper-plugin-utils': 7.27.1
 
-  '@babel/runtime@7.28.4': {}
+  '@babel/runtime@7.29.10': {}
 
   '@babel/template@7.27.2':
     dependencies:
@@ -3370,7 +3390,7 @@ snapshots:
   '@testing-library/dom@10.4.0':
     dependencies:
       '@babel/code-frame': 7.29.7
-      '@babel/runtime': 7.28.4
+      '@babel/runtime': 7.29.10
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       chalk: 4.1.2
@@ -3657,6 +3677,11 @@ snapshots:
       '@zag-js/dom-query': 1.43.3
       '@zag-js/utils': 1.43.3
 
+  '@zag-js/core@1.45.0':
+    dependencies:
+      '@zag-js/dom-query': 1.45.0
+      '@zag-js/utils': 1.45.0
+
   '@zag-js/date-input@1.43.3(@internationalized/date@3.12.4)':
     dependencies:
       '@internationalized/date': 3.12.4
@@ -3706,6 +3731,10 @@ snapshots:
   '@zag-js/dom-query@1.43.3':
     dependencies:
       '@zag-js/types': 1.43.3
+
+  '@zag-js/dom-query@1.45.0':
+    dependencies:
+      '@zag-js/types': 1.45.0
 
   '@zag-js/drawer@1.43.3':
     dependencies:
@@ -4013,6 +4042,10 @@ snapshots:
     dependencies:
       proxy-compare: 3.0.1
 
+  '@zag-js/store@1.45.0':
+    dependencies:
+      proxy-compare: 3.0.1
+
   '@zag-js/svelte@1.43.3(svelte@5.57.2)':
     dependencies:
       '@zag-js/core': 1.43.3
@@ -4124,7 +4157,13 @@ snapshots:
     dependencies:
       csstype: 3.2.3
 
+  '@zag-js/types@1.45.0':
+    dependencies:
+      csstype: 3.2.3
+
   '@zag-js/utils@1.43.3': {}
+
+  '@zag-js/utils@1.45.0': {}
 
   '@zag-js/vue@1.43.3(vue@3.5.43(typescript@5.9.3))':
     dependencies:
@@ -4132,6 +4171,14 @@ snapshots:
       '@zag-js/store': 1.43.3
       '@zag-js/types': 1.43.3
       '@zag-js/utils': 1.43.3
+      vue: 3.5.43(typescript@5.9.3)
+
+  '@zag-js/vue@1.45.0(vue@3.5.43(typescript@5.9.3))':
+    dependencies:
+      '@zag-js/core': 1.45.0
+      '@zag-js/store': 1.45.0
+      '@zag-js/types': 1.45.0
+      '@zag-js/utils': 1.45.0
       vue: 3.5.43(typescript@5.9.3)
 
   acorn@8.15.0: {}
