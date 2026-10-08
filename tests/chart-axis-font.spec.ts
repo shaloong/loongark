@@ -49,7 +49,7 @@ for (const framework of ["react", "vue", "solid", "svelte", "Story"])
         });
         await page.goto(
           framework === "Story"
-            ? `/iframe.html?id=components-chart--interactive&globals=mode:${mode}`
+            ? `/iframe.html?id=components-chart--zoom-and-brush&globals=mode:${mode}`
             : `/examples-${framework}/?example=ChartInteractionExample&mode=${mode}`,
         );
         const root = page.locator('[data-scope="chart"]').first();
