@@ -2,7 +2,7 @@
   "date": "2026-10-08",
   "branch": "develop",
   "baseCommit": "6fb59be2b248407eb021450e425902499ac1540e",
-  "source": "本记录所在提交；所有消费产物均来自本批成功构建。",
+  "source": "最终功能源码546a34d2a89c0ec63ff59381e9756845cf3d2f0d；远程树a4a50b53db1ae9ac255b8191898b3251c56e5ab4与本地验收后提交的树逐字节一致。本次追加只记录源码及真实CI链接。",
   "status": "closed：P1文档与P2性能/发布准备完成，追加默认样式与日期兼容修正通过；真实设备等按用户授权跳过。",
   "scope": [
     "P1文档与展示体验",
@@ -265,5 +265,25 @@
     "main未合并、npm未发布、标签未创建；新Pages策略需随正式develop→main发布PR进入main后才会更新正式展示。",
     "过程截图、日志与测量只留忽略目录/14天Artifact；仅已审阅自动回归基线可入Git，Windows不覆盖。"
   ],
-  "remoteCI": "本提交推送后启动Browser contracts、Storybook Pages开发预览和Release readiness；当前本地摘要不将尚未完成的远程任务计作通过。"
+  "remoteCI": {
+    "recordedState": "2026-10-08推送后实际查询：以下三个任务均in_progress，不能计作通过。",
+    "runs": [
+      {
+        "name": "Browser contracts",
+        "id": 37805666149,
+        "url": "https://github.com/shaloong/loongark/actions/runs/37805666149"
+      },
+      {
+        "name": "Release readiness",
+        "id": 37805666127,
+        "url": "https://github.com/shaloong/loongark/actions/runs/37805666127"
+      },
+      {
+        "name": "Storybook Pages（develop仅临时预览）",
+        "id": 37805666061,
+        "url": "https://github.com/shaloong/loongark/actions/runs/37805666061"
+      }
+    ],
+    "evidence": "本地原始截图/日志/报告保存忽略目录.artifacts；上述CI按14天Artifact规则保存，任务未完成时不声称已上传成功。"
+  }
 }
