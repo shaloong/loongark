@@ -2,7 +2,7 @@
   "date": "2026-10-08",
   "branch": "develop",
   "baseCommit": "7d64b929422f9d88cf9db5a0d65e8a7b25dca6f9",
-  "status": "最终本地验证与截图审阅通过；完整 CI 与原生 Safari 待当前源码实际验收，两个 P0 尚不关闭。",
+  "status": "最终本地构建、三引擎相关交互与310项视觉比较通过；此前主批次原生Safari通过，最新展开指示器修正的完整CI及原生Safari仍待实际验收，两个P0尚不关闭。",
   "scope": [
     "关闭跨浏览器和默认视觉两个 P0 方向；P1 真机、屏幕阅读器及高级边界专项另行验收。",
     "CodeEditor 在原生输入前同步最新只读/禁用和扩展，保留组合输入协调和清理。",
@@ -34,7 +34,8 @@
     "默认截图和实际 DOM：Field Label 被全域 grid 规则影响，必填符号比标签低 26px；仅 Root 应用网格布局。",
     "默认截图和实际 DOM：AngleSlider 45° 拇指中心固定偏移 (-51,-51)px；共享样式以圆盘中心和 Ark 的 --angle 旋转，补键盘/原生指针值与位置回归。",
     "扩大状态截图发现 Editable invalid/success 的描边作用于整行操作区；改为实际预览/输入，沿用错误/成功语义 Token，四端状态及真实提交/焦点回归。",
-    "四端状态回归复现 Svelte Editable 初始与提交预览均为空：封装无条件传空插槽遮蔽 Ark 值；仅转发实际 children，补初始/提交/焦点及默认值和自定义内容 SSR 回归。"
+    "四端状态回归复现 Svelte Editable 初始与提交预览均为空：封装无条件传空插槽遮蔽 Ark 值；仅转发实际 children，补初始/提交/焦点及默认值和自定义内容 SSR 回归。",
+    "WebKit Linux 编辑器和表格范围示例的原生 summary 标记呈橙色 emoji；共享富文本表格选项及四端示例统一已有 Lucide SVG，保留原生语义。 原生键盘回归发现同步标签会清空 SVG，改为独立标签节点，保证同步后图标保留。"
   ],
   "previousFullMatrix": {
     "run": 37678197055,
@@ -62,9 +63,9 @@
       "scope": "最终源码全部 8 项顺序通过；发布检查包含 Svelte Editable 默认与自定义预览 SSR。"
     },
     "relatedBrowsers": {
-      "passed": 243,
-      "skipped": 30,
-      "duration": "4.2m",
+      "passed": 291,
+      "skipped": 42,
+      "duration": "4.7m",
       "engines": [
         "chromium",
         "firefox",
@@ -94,11 +95,28 @@
       },
       "currentSource": {
         "passed": 310,
+        "duration": "2.9m",
+        "snapshotUpdates": 0,
+        "manualReviewedLinuxBaselineChanges": 24
+      },
+      "beforeDisclosureCorrection": {
+        "passed": 310,
         "duration": "3.4m",
         "snapshotUpdates": 0
       }
     },
-    "nativeSafari": "pending",
+    "nativeSafari": {
+      "source": "c4c22ea05c52db8ffef892834d3c7274a028172f",
+      "run": 37733943330,
+      "job": 113169135321,
+      "result": "passed",
+      "browser": "Safari 26.6.1",
+      "platform": "macOS 15.7.9",
+      "defaultExamples": 295,
+      "interactions": 273,
+      "fontMetrics": "四端明暗共8个实际DOM样本 iiii/WWWW=33.71875px",
+      "scope": "随后默认截图发现的原生展开标记视觉修正需再次验收。"
+    },
     "defaultScan": {
       "storyModeRecords": 666,
       "pageOverflow": 0,
@@ -128,6 +146,30 @@
         "webkit"
       ],
       "scope": "四端初始值、原生编辑/提交、Edit 按钮焦点恢复、值区域错误/成功描边、禁用及缩屏边界；Story 同步 Field 必填符号和 AngleSlider 原生角度。"
+    },
+    "editorDisclosures": {
+      "frameworks": {
+        "passed": 192,
+        "skipped": 36,
+        "duration": "10.0m"
+      },
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "scope": "四端编辑器/表格范围消费、原生 summary 鼠标与 Space/Enter、焦点保留、展开图标与真实文字垂直对齐、RTL 与缩屏；包含既有编辑/历史/表格操作。",
+      "stories": {
+        "passed": 36,
+        "skipped": 144,
+        "duration": "2.5m"
+      },
+      "initialVisualComparison": {
+        "passed": 298,
+        "failed": 12,
+        "duration": "3.0m",
+        "scope": "失败均为此批编辑器/表格范围的预期展开图标与控制行高度差异，未自动更新基线。"
+      }
     }
   },
   "evidencePolicy": "临时原图、联系表、测量、日志和下载 ZIP 留在 .artifacts/ 或有保留期限的 CI Artifact；只提交摘要和实际审阅的回归基线。",
@@ -147,6 +189,17 @@
     "overlayViewsReviewed": 10,
     "fieldAngleCorrectionViewsReviewed": 36,
     "editableStateViewsReviewed": 60,
-    "existingBaselinesChanged": 0
+    "existingBaselinesChanged": 24,
+    "defaultPlatformViewsReviewed": {
+      "chromium": 476,
+      "firefox": 476,
+      "webkit": 476
+    },
+    "resizeCaptureVerification": "Firefox/WebKit 瀑布流 900→375px 等待真实卡片与容器 clientWidth 同为341px 后重新截图并目视核验单列；未修改产品或基线。",
+    "nativeSafariRelatedViewsReviewed": 56,
+    "nativeSafariReviewSource": "c4c22ea05c52db8ffef892834d3c7274a028172f；四端明暗的 Editable、前后缀错误/禁用、代码与富文本编辑器、问卷矩阵和 Field；展开指示器后续修正还需再次验收。",
+    "editorDisclosureViewsReviewed": 240,
+    "editorDisclosureReviewScope": "三引擎四端明暗1280/375px：144个关闭视图、48个富文本表格选项展开、48个RTL；全部实际目视，过程文件不入库。",
+    "baselineChangeScope": "仅编辑器与表格范围24张既有Linux基线：旧图/当前图/差异图逐张目视，预期Lucide SVG及附加控制行高度修正后手动保存；Windows及其他既有基线均未改动。"
   }
 }

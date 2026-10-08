@@ -191,6 +191,7 @@
     "NumberInput/PasswordInput 四端 Field 禁用、只读、必填与错误状态继承和显式 false；复合输入提示/错误关联、响应式 Svelte 原生输入与节点引用；原生提交、受控数值拒绝和四端 SSR 场景",
     "InputGroup 三尺寸前后缀行内对齐、完整焦点外框和禁用/只读状态；清空按钮继承 Field 禁用/只读并支持显式 disabled 覆盖，Solid 动态 action 与四端状态示例；共享 monospace 字体保证实际代码等宽。",
     "Field RequiredIndicator 保持标签行内布局；AngleSlider 共享样式根据 Ark 角度定位，键盘和原生指针值与拇指一致。",
-    "Editable 状态描边作用于预览/输入值而非整行操作区，四端默认/错误/成功/禁用示例与真实提交、焦点回归；Svelte 缺省预览显示当前值并保留自定义内容，客户端与 SSR 一致。"
+    "Editable 状态描边作用于预览/输入值而非整行操作区，四端默认/错误/成功/禁用示例与真实提交、焦点回归；Svelte 缺省预览显示当前值并保留自定义内容，客户端与 SSR 一致。",
+    "编辑器表格选项和四端附加控制统一 Lucide SVG 展开指示器，保持原生 details 键盘语义、焦点与 RTL；实际 WebKit 截图排除彩色 emoji 标记。"
   ]
 }

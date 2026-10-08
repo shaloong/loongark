@@ -63,6 +63,7 @@ import {
   Combine,
   Split,
   PanelTop,
+  ChevronRight,
 } from "lucide";
 import {
   richTextSchema as schema,
@@ -288,7 +289,7 @@ export function renderRichTextEditorMarkup(
     label: label(props, key),
     icon: icons[key],
   }));
-  const tableTools = `<details data-part="table-tools"><summary>${escape(props.labels?.tableTools ?? "Table options")}</summary><div role="toolbar" data-part="table-toolbar" aria-label="${escape(props.labels?.tableTools ?? "Table options")}">${tableActions.map((key, index) => `<button type="button" data-action="${key}" aria-label="${escape(label(props, key))}" title="${escape(label(props, key))}" tabindex="${index === 0 ? 0 : -1}" disabled>${editorIcon(icons[key])}<span>${escape(label(props, key))}</span></button>`).join("")}</div></details>`;
+  const tableTools = `<details data-part="table-tools"><summary>${editorIcon(ChevronRight)}<span data-part="table-tools-label">${escape(props.labels?.tableTools ?? "Table options")}</span></summary><div role="toolbar" data-part="table-toolbar" aria-label="${escape(props.labels?.tableTools ?? "Table options")}">${tableActions.map((key, index) => `<button type="button" data-action="${key}" aria-label="${escape(label(props, key))}" title="${escape(label(props, key))}" tabindex="${index === 0 ? 0 : -1}" disabled>${editorIcon(icons[key])}<span>${escape(label(props, key))}</span></button>`).join("")}</div></details>`;
   const links = `<fieldset data-part="link-editor" hidden><legend>${escape(label(props, "link"))}</legend><label for="${escape(id)}-link">${escape(props.labels?.linkUrl ?? "Link URL")}</label><input id="${escape(id)}-link" type="text" inputmode="url" data-part="link-url" aria-describedby="${escape(id)}-link-error"><p data-part="link-error" id="${escape(id)}-link-error" role="alert" hidden></p><div data-part="link-actions"><button type="button" data-link="apply">${escape(props.labels?.applyLink ?? "Apply link")}</button><button type="button" data-link="remove">${escape(props.labels?.removeLink ?? "Remove link")}</button><button type="button" data-link="cancel">${escape(props.labels?.cancel ?? "Cancel")}</button></div></fieldset>`;
   return renderEditorMarkup(
     props,
@@ -653,13 +654,15 @@ export function mountRichTextEditor(
   )!;
   field.tabIndex = -1;
   field.setAttribute("aria-hidden", "true");
-  let viewSettings: {
-    disabled: boolean;
-    readOnly: boolean;
-    required: boolean;
-    invalid: boolean;
-    nodeViews: RichTextEditorProps["nodeViews"];
-  } | undefined;
+  let viewSettings:
+    | {
+        disabled: boolean;
+        readOnly: boolean;
+        required: boolean;
+        invalid: boolean;
+        nodeViews: RichTextEditorProps["nodeViews"];
+      }
+    | undefined;
   const sync = () => {
     if (disposed) return;
     const props = get();
@@ -780,7 +783,7 @@ export function mountRichTextEditor(
         props.labels?.keyboardHint ??
         "Use Ctrl/⌘ B or I for formatting; Ctrl/⌘ Z to undo.";
     const tableTools = root.querySelector<HTMLElement>(
-      '[data-part="table-tools"] summary',
+      '[data-part="table-tools-label"]',
     );
     if (tableTools)
       tableTools.textContent = props.labels?.tableTools ?? "Table options";

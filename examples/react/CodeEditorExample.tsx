@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import {
+  groupsDisclosureCSS,
+  groupsDisclosureIcon,
+} from "../shared/questionnaireGroupsDemo";
 import * as L from "@loongark/react";
 import { createCodeEditorDemo } from "../shared/editorDemo";
 export function CodeEditorExample() {
@@ -9,6 +13,7 @@ export function CodeEditorExample() {
   const snapshot = demo.snapshot();
   return (
     <L.LoongArkStack gap="md" style={{ width: "100%", maxWidth: "760px" }}>
+      <style>{groupsDisclosureCSS}</style>
       <L.LoongArkTypography as="h2">Code workspace</L.LoongArkTypography>
       <L.LoongArkStack orientation="horizontal" gap="sm">
         {demo.actions.slice(0, 3).map((action) => (
@@ -17,8 +22,11 @@ export function CodeEditorExample() {
           </L.LoongArkButton>
         ))}
       </L.LoongArkStack>
-      <details>
-        <summary>More controls</summary>
+      <details data-groups-demo-controls="">
+        <summary>
+          <L.LoongArkIcon icon={groupsDisclosureIcon} size="sm" />
+          More controls
+        </summary>
         <L.LoongArkStack orientation="horizontal" gap="sm">
           {demo.actions.slice(3).map((action) => (
             <L.LoongArkButton variant="outline" onClick={action.run}>

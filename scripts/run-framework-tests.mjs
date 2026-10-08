@@ -22,6 +22,7 @@ const child = spawn(
     "tests/code-editor-native-history.spec.ts",
     "tests/editor-timing.spec.ts",
     "tests/editor-font.spec.ts",
+    "tests/editor-disclosure.spec.ts",
     "tests/editable-states.spec.ts",
     "tests/virtualization.spec.ts",
     "tests/chart-interaction.spec.ts",

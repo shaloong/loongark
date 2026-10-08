@@ -1,5 +1,9 @@
 /** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
+import {
+  groupsDisclosureCSS,
+  groupsDisclosureIcon,
+} from "../shared/questionnaireGroupsDemo";
 import * as L from "@loongark/solid";
 import { createRichTextEditorDemo } from "../shared/editorDemo";
 export function RichTextEditorExample() {
@@ -11,6 +15,7 @@ export function RichTextEditorExample() {
   };
   return (
     <L.LoongArkStack gap="md" style={{ width: "100%", "max-width": "760px" }}>
+      <style>{groupsDisclosureCSS}</style>
       <L.LoongArkTypography as="h2">Write and revise</L.LoongArkTypography>
       <L.LoongArkStack orientation="horizontal" gap="sm">
         {demo.actions.slice(0, 3).map((action) => (
@@ -19,8 +24,11 @@ export function RichTextEditorExample() {
           </L.LoongArkButton>
         ))}
       </L.LoongArkStack>
-      <details>
-        <summary>More controls</summary>
+      <details data-groups-demo-controls="">
+        <summary>
+          <L.LoongArkIcon icon={groupsDisclosureIcon} size="sm" />
+          More controls
+        </summary>
         <L.LoongArkStack orientation="horizontal" gap="sm">
           {demo.actions.slice(3).map((action) => (
             <L.LoongArkButton variant="outline" onClick={action.run}>

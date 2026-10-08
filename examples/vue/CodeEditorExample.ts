@@ -1,3 +1,7 @@
+import {
+  groupsDisclosureCSS,
+  groupsDisclosureIcon,
+} from "../shared/questionnaireGroupsDemo";
 import { defineComponent, h, ref } from "vue";
 import * as L from "@loongark/vue";
 import { createCodeEditorDemo } from "../shared/editorDemo";
@@ -24,9 +28,16 @@ export const CodeEditorExample = defineComponent({
         L.LoongArkStack,
         { gap: "md", style: { width: "100%", maxWidth: "760px" } },
         () => [
+          h("style", groupsDisclosureCSS),
           h(L.LoongArkTypography, { as: "h2" }, () => "Code workspace"),
           buttons(0, 3),
-          h("details", [h("summary", "More controls"), buttons(3)]),
+          h("details", { "data-groups-demo-controls": "" }, [
+            h("summary", [
+              h(L.LoongArkIcon, { icon: groupsDisclosureIcon, size: "sm" }),
+              "More controls",
+            ]),
+            buttons(3),
+          ]),
           h("form", { onSubmit: demo.submit, "aria-label": "Editor form" }, [
             state.shown ? h(L.LoongArkCodeEditor, demo.props(state)) : null,
             h(

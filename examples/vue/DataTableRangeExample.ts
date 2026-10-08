@@ -1,3 +1,7 @@
+import {
+  groupsDisclosureCSS,
+  groupsDisclosureIcon,
+} from "../shared/questionnaireGroupsDemo";
 import { defineComponent, h, ref } from "vue";
 import * as L from "@loongark/vue";
 import { createRangeDemo } from "../shared/dataTableRangeDemo";
@@ -24,6 +28,7 @@ export const DataTableRangeExample = defineComponent({
         L.LoongArkStack,
         { gap: "md", style: { width: "100%", maxWidth: "850px" } },
         () => [
+          h("style", groupsDisclosureCSS),
           h(L.LoongArkTypography, { as: "h2" }, () => "Edit a range of cells"),
           h(
             L.LoongArkTypography,
@@ -32,7 +37,13 @@ export const DataTableRangeExample = defineComponent({
               "Select with the pointer or Shift + arrows. Copy a range, then paste tab-separated values. Each accepted paste is one undoable transaction.",
           ),
           buttons(0, 3),
-          h("details", [h("summary", "More test controls"), buttons(3)]),
+          h("details", { "data-groups-demo-controls": "" }, [
+            h("summary", [
+              h(L.LoongArkIcon, { icon: groupsDisclosureIcon, size: "sm" }),
+              "More test controls",
+            ]),
+            buttons(3),
+          ]),
           h(
             "div",
             { dir: snapshot.rtl ? "rtl" : "ltr" },

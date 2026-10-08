@@ -1,4 +1,8 @@
 <script lang="ts">
+  import {
+    groupsDisclosureCSS,
+    groupsDisclosureIcon,
+  } from "../shared/questionnaireGroupsDemo";
   import * as L from "@loongark/svelte";
   import { createRichTextEditorDemo } from "../shared/editorDemo";
   let version = $state(0);
@@ -17,6 +21,7 @@
 </script>
 
 <L.LoongArkStack gap="md" style="width:100%;max-width:760px">
+  <svelte:element this="style">{groupsDisclosureCSS}</svelte:element>
   <L.LoongArkTypography as="h2">Write and revise</L.LoongArkTypography>
   <L.LoongArkStack orientation="horizontal" gap="sm"
     >{#each actions.slice(0, 3) as action}<L.LoongArkButton
@@ -24,10 +29,10 @@
         on:click={action.run}>{action.label}</L.LoongArkButton
       >{/each}</L.LoongArkStack
   >
-  <details>
-    <summary>More controls</summary><L.LoongArkStack
-      orientation="horizontal"
-      gap="sm"
+  <details data-groups-demo-controls="">
+    <summary
+      ><L.LoongArkIcon icon={groupsDisclosureIcon} size="sm" />More controls</summary
+    ><L.LoongArkStack orientation="horizontal" gap="sm"
       >{#each actions.slice(3) as action}<L.LoongArkButton
           variant="outline"
           on:click={action.run}>{action.label}</L.LoongArkButton

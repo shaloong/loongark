@@ -1,4 +1,8 @@
 <script lang="ts">
+  import {
+    groupsDisclosureCSS,
+    groupsDisclosureIcon,
+  } from "../shared/questionnaireGroupsDemo";
   import * as L from "@loongark/svelte";
   import { createRangeDemo } from "../shared/dataTableRangeDemo";
   let version = $state(0);
@@ -18,6 +22,7 @@
 </script>
 
 <L.LoongArkStack gap="md" style="width:100%;max-width:850px">
+  <svelte:element this="style">{groupsDisclosureCSS}</svelte:element>
   <L.LoongArkTypography as="h2">Edit a range of cells</L.LoongArkTypography>
   <L.LoongArkTypography variant="muted"
     >Select with the pointer or Shift + arrows. Copy a range, then paste
@@ -29,10 +34,11 @@
         on:click={action.run}>{action.label}</L.LoongArkButton
       >{/each}</L.LoongArkStack
   >
-  <details>
-    <summary>More test controls</summary><L.LoongArkStack
-      orientation="horizontal"
-      gap="sm"
+  <details data-groups-demo-controls="">
+    <summary
+      ><L.LoongArkIcon icon={groupsDisclosureIcon} size="sm" />More test
+      controls</summary
+    ><L.LoongArkStack orientation="horizontal" gap="sm"
       >{#each actions.slice(3) as action}<L.LoongArkButton
           variant="outline"
           on:click={action.run}>{action.label}</L.LoongArkButton

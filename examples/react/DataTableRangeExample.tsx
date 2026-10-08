@@ -1,4 +1,8 @@
 import { useState } from "react";
+import {
+  groupsDisclosureCSS,
+  groupsDisclosureIcon,
+} from "../shared/questionnaireGroupsDemo";
 import * as L from "@loongark/react";
 import { createRangeDemo } from "../shared/dataTableRangeDemo";
 export function DataTableRangeExample() {
@@ -7,6 +11,7 @@ export function DataTableRangeExample() {
   const snapshot = demo.snapshot();
   return (
     <L.LoongArkStack gap="md" style={{ width: "100%", maxWidth: "850px" }}>
+      <style>{groupsDisclosureCSS}</style>
       <L.LoongArkTypography as="h2">Edit a range of cells</L.LoongArkTypography>
       <L.LoongArkTypography variant="muted">
         Select with the pointer or Shift + arrows. Copy a range, then paste
@@ -19,8 +24,11 @@ export function DataTableRangeExample() {
           </L.LoongArkButton>
         ))}
       </L.LoongArkStack>
-      <details>
-        <summary>More test controls</summary>
+      <details data-groups-demo-controls="">
+        <summary>
+          <L.LoongArkIcon icon={groupsDisclosureIcon} size="sm" />
+          More test controls
+        </summary>
         <L.LoongArkStack orientation="horizontal" gap="sm">
           {demo.actions.slice(3).map((action) => (
             <L.LoongArkButton variant="outline" onClick={action.run}>
