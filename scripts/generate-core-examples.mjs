@@ -61,7 +61,11 @@ function vueNode(node, file) {
         .map((child) => vueNode(child, file))
         .filter((value) => value !== '""')
     : [];
-  return `h(${tag.startsWith("L.") ? tag : JSON.stringify(tag)},{${props.join(",")}},${tag.startsWith("L.") ? `{default:()=>[${children.join(",")}]}` : `[${children.join(",")}]`})`;
+  const generic = {
+    "L.LoongArkAngleSlider.HiddenInput": "AngleSliderHiddenInputProps",
+    "L.LoongArkPinInputHiddenInput": "PinInputHiddenInputProps",
+  }[tag];
+  return `${generic ? "createVNode" : "h"}(${generic ? `resolveDynamicComponent(${tag})` : tag.startsWith("L.") ? tag : JSON.stringify(tag)},{${props.join(",")}}${generic ? ` satisfies ${generic}` : ""},${tag.startsWith("L.") ? `{default:()=>[${children.join(",")}]}` : `[${children.join(",")}]`})`;
 }
 const families = Object.keys(demos);
 for (const framework of ["react", "vue", "solid", "svelte"]) {
@@ -91,7 +95,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
   } else if (framework === "vue") {
     source =
       header +
-      `import {defineComponent,h,ref} from "vue";\nimport * as L from "@loongark/vue";\nexport const CoreComponentsExample=defineComponent({setup(){const family=ref("NativeSelect");return ()=>h("section",{style:{display:"grid",gap:"var(--lk-space-component-lg)","max-width":"40rem","min-width":0,width:"100%"}},[h("label",{style:{display:"grid",gap:"var(--lk-control-fieldgap)"}},["组件示例",h(L.LoongArkNativeSelect,{"aria-label":"组件示例",value:family.value,onChange:(event:Event)=>{if(event.target instanceof HTMLSelectElement)family.value=event.target.value;}},${JSON.stringify(families)}.map(name=>h("option",{},name)))]),`;
+      `import type {AngleSliderHiddenInputProps} from "@ark-ui/vue/angle-slider";\nimport type {PinInputHiddenInputProps} from "@ark-ui/vue/pin-input";\nimport {defineComponent,h,createVNode,resolveDynamicComponent,ref} from "vue";\nimport * as L from "@loongark/vue";\nexport const CoreComponentsExample=defineComponent({setup(){const family=ref("NativeSelect");return ()=>h("section",{style:{display:"grid",gap:"var(--lk-space-component-lg)","max-width":"40rem","min-width":0,width:"100%"}},[h("label",{style:{display:"grid",gap:"var(--lk-control-fieldgap)"}},["组件示例",h(L.LoongArkNativeSelect,{"aria-label":"组件示例",value:family.value,onChange:(event:Event)=>{if(event.target instanceof HTMLSelectElement)family.value=event.target.value;}},${JSON.stringify(families)}.map(name=>h("option",{},name)))]),`;
     source +=
       families
         .map((family) => {

@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "pnpm -r run build",
-    "lint": "node ./scripts/verify-workspace.mjs && node ./scripts/check-audit-hygiene.mjs && node ./scripts/check-licenses.mjs",
+    "lint": "node ./scripts/verify-workspace.mjs && node ./scripts/check-audit-hygiene.mjs && node ./scripts/check-licenses.mjs && node scripts/check-doc-links.mjs",
     "clean": "node ./scripts/clean.mjs",
     "tsc": "pnpm exec tsc -b",
     "verify": "pnpm run lint && pnpm run tsc && pnpm run build",
@@ -20,7 +20,7 @@
     "storybook:build": "storybook build --config-dir .storybook",
     "test:e2e": "pnpm storybook:build && node ./scripts/run-playwright.mjs",
     "visual:test": "pnpm storybook:build && node ./scripts/run-playwright.mjs --project=chromium-visual",
-    "check:contracts": "node scripts/test-theme.mjs && node scripts/check-css-variables.mjs && node scripts/check-api-parity.mjs && node scripts/test-data-models.mjs && node scripts/test-selection-models.mjs && node scripts/test-action-models.mjs && node scripts/test-conversation-models.mjs && node scripts/test-conversation-actions.mjs && node scripts/test-icon-models.mjs && node scripts/test-questionnaire-async.mjs && node scripts/test-questionnaire-types.mjs && node scripts/test-data-table-edit.mjs && node scripts/test-data-table-batch.mjs && node scripts/test-virtual-window.mjs && node scripts/test-chart-window.mjs && node scripts/test-async-collection.mjs && node scripts/test-table-query.mjs && node scripts/test-table-columns.mjs && node scripts/test-table-structure.mjs && node scripts/test-table-range.mjs && node scripts/test-editors.mjs && node scripts/test-chart-types.mjs && node scripts/test-questionnaire-matrix.mjs && node scripts/test-questionnaire-groups.mjs && node scripts/test-questionnaire-custom.mjs && node scripts/test-table-column-window.mjs && node scripts/test-virtual-layout.mjs && node scripts/test-localized-date.mjs",
+    "check:contracts": "node scripts/test-theme.mjs && node scripts/check-css-variables.mjs && node scripts/check-api-parity.mjs && node scripts/test-data-models.mjs && node scripts/test-selection-models.mjs && node scripts/test-action-models.mjs && node scripts/test-conversation-models.mjs && node scripts/test-conversation-actions.mjs && node scripts/test-icon-models.mjs && node scripts/test-questionnaire-async.mjs && node scripts/test-questionnaire-types.mjs && node scripts/test-data-table-edit.mjs && node scripts/test-data-table-batch.mjs && node scripts/test-virtual-window.mjs && node scripts/test-chart-window.mjs && node scripts/test-async-collection.mjs && node scripts/test-table-query.mjs && node scripts/test-table-columns.mjs && node scripts/test-table-structure.mjs && node scripts/test-table-range.mjs && node scripts/test-editors.mjs && node scripts/test-chart-types.mjs && node scripts/test-questionnaire-matrix.mjs && node scripts/test-questionnaire-groups.mjs && node scripts/test-questionnaire-custom.mjs && node scripts/test-table-column-window.mjs && node scripts/test-virtual-layout.mjs && node scripts/test-localized-date.mjs && pnpm check:security",
     "check:publication": "node scripts/verify-publication.mjs && node scripts/check-public-types.mjs && node scripts/test-ssr.mjs && node scripts/test-svelte-ssr.mjs && node scripts/test-date-time-ssr.mjs && node scripts/test-native-field-ssr.mjs && node scripts/test-compound-field-ssr.mjs && node scripts/test-input-adornment-ssr.mjs",
     "check:svelte": "node node_modules/svelte-check/bin/svelte-check --tsconfig packages/svelte/tsconfig.examples.json",
     "test:frameworks": "node scripts/build-framework-fixtures.mjs && node scripts/build-example-fixtures.mjs && node scripts/run-framework-tests.mjs",
@@ -30,12 +30,13 @@
     "measure:bundles": "node scripts/measure-bundles.mjs",
     "measure:ssr": "node scripts/measure-ssr.mjs",
     "check:release": "node scripts/check-release.mjs",
-    "check:versions": "node scripts/check-versions.mjs"
+    "check:versions": "node scripts/check-versions.mjs",
+    "check:security": "node scripts/check-security.mjs && node scripts/test-static-server-security.mjs"
   },
   "devDependencies": {
     "@ark-ui/react": "^5.39.2",
     "@axe-core/playwright": "^4.11.0",
-    "@babel/core": "^7.28.5",
+    "@babel/core": "^7.29.6",
     "@playwright/test": "^1.57.0",
     "@storybook/addon-docs": "^10.3.6",
     "@storybook/addon-vitest": "^10.3.6",
@@ -51,21 +52,33 @@
     "prettier-plugin-svelte": "^4.1.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "solid-js": "1.9.15",
+    "solid-js": "1.9.17",
     "storybook": "^10.3.6",
-    "svelte": "5.45.2",
+    "svelte": "5.57.2",
     "svelte-check": "^4.7.6",
     "typescript": "^5.9.3",
-    "vite": "^7.2.6",
+    "vite": "^7.3.7",
     "vite-plugin-solid": "^2.11.14",
-    "vue": "3.5.25",
+    "vue": "3.5.43",
     "@codemirror/view": "6.43.13",
-    "prosemirror-state": "1.4.4"
+    "prosemirror-state": "1.4.4",
+    "@ark-ui/vue": "5.39.2"
   },
   "pnpm": {
     "overrides": {
-      "vue": "3.5.25",
-      "solid-js": "1.9.15"
+      "vue": "3.5.43",
+      "solid-js": "1.9.17",
+      "seroval": "^1.6.3",
+      "devalue": "^5.9.3",
+      "rollup": "^4.59.0",
+      "picomatch@4": "^4.0.4",
+      "postcss": "^8.5.23",
+      "ws@8": "^8.21.0",
+      "brace-expansion@>=3": "^5.0.12",
+      "nanoid@3": "^3.3.18",
+      "browserslist": "^4.28.7",
+      "baseline-browser-mapping": "^2.11.0",
+      "source-map-js": "^1.2.2"
     }
   },
   "license": "MIT"

@@ -1,4 +1,12 @@
-import { defineComponent, h, ref, type PropType } from "vue";
+import type { SegmentGroupItemHiddenInputProps } from "@ark-ui/vue/segment-group";
+import {
+  defineComponent,
+  h,
+  createVNode,
+  resolveDynamicComponent,
+  ref,
+  type PropType,
+} from "vue";
 import {
   LoongArkButton,
   LoongArkSegmentGroupRoot,
@@ -62,7 +70,11 @@ export const SegmentGroupExample = defineComponent({
                     { value: option.value, key: option.value },
                     {
                       default: () => [
-                        h(LoongArkSegmentGroupItemHiddenInput),
+                        createVNode(
+                          resolveDynamicComponent(
+                            LoongArkSegmentGroupItemHiddenInput,
+                          ),
+                        ),
                         h(LoongArkSegmentGroupItemText, {}, () => option.label),
                       ],
                     },

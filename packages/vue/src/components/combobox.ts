@@ -8,7 +8,15 @@ import { renderPart } from "../render-part";
  * Combobox component - Vue wrapper.
  * Based on Ark UI Combobox with data attributes for styling.
  */
-import { defineComponent, h, provide, inject, toRef, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  provide,
+  inject,
+  toRef,
+  type PropType,
+} from "vue";
 import {
   ComboboxRoot as ArkComboboxRoot,
   ComboboxLabel as ArkComboboxLabel,
@@ -200,7 +208,7 @@ export const LoongArkComboboxInput = defineComponent({
   name: "LoongArkComboboxInput",
   setup(_, { attrs }) {
     return () =>
-      renderPart(ArkComboboxInput, {
+      renderPart(resolveDynamicComponent(ArkComboboxInput), {
         ...attrs,
         "data-scope": "combobox",
         "data-part": "input",

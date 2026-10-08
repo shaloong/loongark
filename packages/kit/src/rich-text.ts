@@ -108,42 +108,46 @@ const safeLink = {
 // 图片加载/上传属于外部契约，基础结构不接受未知 DOM 或节点。
 // Schema 构造只产生本地对象，不修改外部注册表；未消费编辑器时可消除。
 export const richTextSchema: Schema = /* @__PURE__ */ (() => {
-const nodes = addListNodes(
-  basicSchema.spec.nodes.remove("image"),
-  "paragraph block*",
-  "block",
-).append(
-  tableNodes({
-    tableGroup: "block",
-    cellContent: "block+",
-    cellAttributes: {},
-  }),
-);
-return new Schema({
-  nodes,
-  marks: basicSchema.spec.marks.update("link", safeLink).append({
-    underline: { parseDOM: [{ tag: "u" }], toDOM: () => ["u", 0] },
-    strike: {
-      parseDOM: [{ tag: "s" }, { tag: "del" }],
-      toDOM: () => ["s", 0],
-    },
-  }),
-});
+  const nodes = addListNodes(
+    basicSchema.spec.nodes.remove("image"),
+    "paragraph block*",
+    "block",
+  ).append(
+    tableNodes({
+      tableGroup: "block",
+      cellContent: "block+",
+      cellAttributes: {},
+    }),
+  );
+  return new Schema({
+    nodes,
+    marks: basicSchema.spec.marks.update("link", safeLink).append({
+      underline: { parseDOM: [{ tag: "u" }], toDOM: () => ["u", 0] },
+      strike: {
+        parseDOM: [{ tag: "s" }, { tag: "del" }],
+        toDOM: () => ["s", 0],
+      },
+    }),
+  });
 })();
-export const emptyRichTextDocument: RichTextDocument = /* @__PURE__ */ Object.freeze({
-  type: "doc",
-  content: /* @__PURE__ */ Object.freeze([/* @__PURE__ */ Object.freeze({ type: "paragraph" })]),
-});
+export const emptyRichTextDocument: RichTextDocument =
+  /* @__PURE__ */ Object.freeze({
+    type: "doc",
+    content: /* @__PURE__ */ Object.freeze([
+      /* @__PURE__ */ Object.freeze({ type: "paragraph" }),
+    ]),
+  });
 
 export function richTextNode(
   document: RichTextDocument = emptyRichTextDocument,
 ): ProseMirrorNode {
   let count = 0,
-    characters = 0;
+    characters = 0,
+    marks = 0;
   const visit = (node: RichTextDocument, depth: number): void => {
     if (++count > 10000 || depth > 100)
       throw new RangeError("Rich text document is too large");
-    if (!richTextSchema.nodes[node.type])
+    if (!Object.prototype.hasOwnProperty.call(richTextSchema.nodes, node.type))
       throw new TypeError(`Unsupported rich text node: ${node.type}`);
     if (
       node.type === "heading" &&
@@ -190,7 +194,9 @@ export function richTextNode(
     if (characters > 1048576)
       throw new RangeError("Rich text document is too large");
     for (const mark of node.marks ?? []) {
-      if (!richTextSchema.marks[mark.type])
+      if (++marks > 10000)
+        throw new RangeError("Rich text document has too many marks");
+      if (!Object.prototype.hasOwnProperty.call(richTextSchema.marks, mark.type))
         throw new TypeError(`Unsupported rich text mark: ${mark.type}`);
       if (
         mark.type === "link" &&

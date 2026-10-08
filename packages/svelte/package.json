@@ -27,7 +27,7 @@
     "@zag-js/svelte": "1.43.3"
   },
   "peerDependencies": {
-    "svelte": ">=5.29.0"
+    "svelte": ">=5.57.2"
   },
   "peerDependenciesMeta": {
     "svelte": {

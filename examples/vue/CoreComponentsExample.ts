@@ -1,5 +1,13 @@
+import type { AngleSliderHiddenInputProps } from "@ark-ui/vue/angle-slider";
+import type { PinInputHiddenInputProps } from "@ark-ui/vue/pin-input";
 // 本文件由 scripts/generate-core-examples.mjs 生成，并参与真实四端编译与浏览器验收。
-import { defineComponent, h, ref } from "vue";
+import {
+  defineComponent,
+  h,
+  createVNode,
+  resolveDynamicComponent,
+  ref,
+} from "vue";
 import * as L from "@loongark/vue";
 export const CoreComponentsExample = defineComponent({
   setup() {
@@ -247,9 +255,13 @@ export const CoreComponentsExample = defineComponent({
                           {},
                           { default: () => [] },
                         ),
-                        h(
-                          L.LoongArkAngleSlider.HiddenInput,
-                          { name: "rotation" },
+                        createVNode(
+                          resolveDynamicComponent(
+                            L.LoongArkAngleSlider.HiddenInput,
+                          ),
+                          {
+                            name: "rotation",
+                          } satisfies AngleSliderHiddenInputProps,
                           { default: () => [] },
                         ),
                       ],
@@ -903,9 +915,11 @@ export const CoreComponentsExample = defineComponent({
                             ],
                           },
                         ),
-                        h(
-                          L.LoongArkPinInputHiddenInput,
-                          { name: "code" },
+                        createVNode(
+                          resolveDynamicComponent(
+                            L.LoongArkPinInputHiddenInput,
+                          ),
+                          { name: "code" } satisfies PinInputHiddenInputProps,
                           { default: () => [] },
                         ),
                       ],

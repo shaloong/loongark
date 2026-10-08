@@ -3,7 +3,12 @@ import { renderPart } from "../render-part";
  * Clipboard component - Vue wrapper.
  * Uses Ark UI Clipboard with data attributes for styling.
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { Clipboard as ArkClipboard } from "@ark-ui/vue/clipboard";
 import type { ClipboardSize } from "@loongark/primitives";
 
@@ -72,7 +77,7 @@ export const LoongArkClipboardInput = defineComponent({
   name: "LoongArkClipboardInput",
   setup(_, { attrs }) {
     return () =>
-      renderPart(ArkClipboard.Input, {
+      renderPart(resolveDynamicComponent(ArkClipboard.Input), {
         ...attrs,
         "data-scope": "clipboard",
         "data-part": "input",

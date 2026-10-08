@@ -1,6 +1,6 @@
 # 浮动动作与媒体布局（2026-10-03）
 
-本批新增 FloatingActionButton、SpeedDial、ImageList、Masonry，四端共用 Kit 的模型、样式和键盘控制。颜色沿用 Shaloong VI 语义 Token，未添加新调色板。浮动动作参考 [MUI FAB](https://mui.com/material-ui/react-floating-action-button/) 与 [Speed Dial](https://mui.com/material-ui/react-speed-dial/)，媒体组合参考 [MUI Image List](https://mui.com/material-ui/react-image-list/)。
+FloatingActionButton、SpeedDial、ImageList、Masonry，四端共用 Kit 的模型、样式和键盘控制。颜色沿用 Shaloong VI 语义 Token，未添加新调色板。浮动动作参考 [MUI FAB](https://mui.com/material-ui/react-floating-action-button/) 与 [Speed Dial](https://mui.com/material-ui/react-speed-dial/)，媒体组合参考 [MUI Image List](https://mui.com/material-ui/react-image-list/)。
 
 ## FloatingActionButton
 
@@ -31,9 +31,5 @@ Item 是 figure，Caption 是 figcaption，Caption 应作为 Item 的直接子�
 ## 验证
 
 四端 ActionMediaExample 验证受控菜单开关、禁用与跳过、键盘选择、Escape/外部关闭、表单隔离、原生图片比例、跨行跨列和手机单列。服务端回归检查新按钮、隐藏菜单及媒体内容；共享模型回归检查数量边界、列数继承和动作键唯一性。
-
-当前覆盖与待补项见 [持续清单](component-coverage.json)，本批证据存于 [action-media/acceptance.json](audits/2026-10-03/action-media/acceptance.json)。默认展示与选定交互在 Chromium 验证，不代表穷举所有参数或浏览器。
-
-本批验收：97 个组件族、239 个 Story、四端各 615 个公开 LoongArk 值入口；103 个框架示例运行通过。浏览器回归覆盖 32 个唯一通过用例，四端消费/示例的 8 项另行通过，既有视觉基线 2 项通过。明暗各 239 个默认展示的 Axe 违规、稳定布局在 375px 的页面溢出和 transition:all 均为 0；共保存 672 张全量桌面/组件族手机截图。
 
 首次全量测量捕获日期范围浮层在缩小窗口后的异步定位中间态。测量现在等待浮层位置稳定后再断言宽度，并新增明暗反复缩放回归；受影响的全量布局检查重跑通过，初始失败记录和后续验证分别保留。九包构建、49 个 Token 契约、公开声明、四端 SSR、Svelte 检查和工作区规范校验通过；未执行 npm 发布。

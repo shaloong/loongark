@@ -6,7 +6,12 @@ import { useCheckboxContext } from "@ark-ui/vue/checkbox";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import { renderPart } from "../render-part";
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import {
   CheckboxRoot,
   CheckboxControl,
@@ -169,7 +174,7 @@ export const LoongArkCheckboxHiddenInput =
       }));
       return () =>
         renderPart(
-          CheckboxHiddenInput,
+          resolveDynamicComponent(CheckboxHiddenInput),
           {
             ...attrs,
             ...props,

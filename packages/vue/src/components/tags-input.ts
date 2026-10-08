@@ -9,7 +9,12 @@ import { renderPart } from "../render-part";
  * Tags Input component - Vue wrapper.
  * Uses Ark UI Tags Input with data attributes for styling.
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { TagsInput as ArkTagsInput } from "@ark-ui/vue/tags-input";
 import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
 
@@ -186,7 +191,7 @@ export const LoongArkTagsInputInput = defineComponent({
         props.disabled ?? !!api.value.getHiddenInputProps().disabled;
       const readOnly =
         props.readOnly ?? !!api.value.getHiddenInputProps().readonly;
-      return renderPart(ArkTagsInput.Input, {
+      return renderPart(resolveDynamicComponent(ArkTagsInput.Input), {
         ...attrs,
         ...props,
         disabled,
@@ -274,7 +279,7 @@ export const LoongArkTagsInputItemInput = defineComponent({
   name: "LoongArkTagsInputItemInput",
   setup(_, { attrs }) {
     return () =>
-      renderPart(ArkTagsInput.ItemInput, {
+      renderPart(resolveDynamicComponent(ArkTagsInput.ItemInput), {
         ...attrs,
         "data-scope": "tags-input",
         "data-part": "item-input",
@@ -324,7 +329,7 @@ export const LoongArkTagsInputHiddenInput =
       }));
       return () =>
         renderPart(
-          ArkTagsInput.HiddenInput,
+          resolveDynamicComponent(ArkTagsInput.HiddenInput),
           {
             ...attrs,
             ...props,

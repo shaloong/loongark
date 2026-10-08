@@ -1,5 +1,5 @@
 import { renderPart } from "../render-part";
-import { defineComponent, h } from "vue";
+import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import { PinInput as ArkPinInput } from "@ark-ui/vue/pin-input";
 import type { PinInputPrimitiveProps } from "@loongark/primitives";
@@ -111,7 +111,7 @@ export const LoongArkPinInputInput = defineComponent({
   },
   setup(props, { attrs }) {
     return () =>
-      renderPart(ArkPinInput.Input, {
+      renderPart(resolveDynamicComponent(ArkPinInput.Input), {
         ...attrs,
         index: props.index,
         "data-scope": "pin-input",

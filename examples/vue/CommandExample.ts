@@ -1,4 +1,11 @@
-import { defineComponent, h, ref } from "vue";
+import type { ComboboxInputProps } from "@ark-ui/vue/combobox";
+import {
+  defineComponent,
+  h,
+  createVNode,
+  resolveDynamicComponent,
+  ref,
+} from "vue";
 import * as L from "@loongark/vue";
 const rows = [
   { id: "overview", name: "组件概览" },
@@ -31,9 +38,9 @@ export const CommandExample = defineComponent({
         () => [
           h(L.LoongArkCommand.Label, {}, () => "搜索命令"),
           h(L.LoongArkCommand.Control, {}, () =>
-            h(L.LoongArkCommand.Input, {
+            createVNode(resolveDynamicComponent(L.LoongArkCommand.Input), {
               placeholder: "搜索组件、API 或发布说明",
-            }),
+            } satisfies ComboboxInputProps),
           ),
           h(L.LoongArkCommand.Content, {}, () =>
             items.map((item) =>

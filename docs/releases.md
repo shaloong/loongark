@@ -6,12 +6,12 @@ main 是默认分支和稳定版本，develop 是开发分支。Pages 只部署 
 
 | 项目 | 声明最低版本 | 当前完整回归版本 | 最低版本专项范围 |
 | --- | --- | --- | --- |
-| 开发/构建 Node.js | 22.12（工具下限） | 24.19.0；统一开发使用 .nvmrc 的24 | 本轮未把 Node22 记作实测通过 |
+| 开发/构建 Node.js | 22.12（工具下限） | 24.19.0；统一开发使用 .nvmrc 的24 | Node22 尚未实测 |
 | pnpm | 10.x | 10.14.0 | 仓库冻结锁文件；临时最低版本消费项目先生成自己的锁文件再冻结安装 |
 | React / react-dom | 18.0.0 | 19.2.1 | 真实发布 tarball 消费构建、Provider/Button SSR 和点击 |
-| Vue | 3.5.0 | 3.5.25 | 同上 |
-| Solid | 1.9.10 | 1.9.15 | 同上；node 条件使用真实 SSR 产物 |
-| Svelte | 5.29.0 | 5.45.2 | 同上；使用最低版本编译器编译发布的源码 |
+| Vue | 3.5.43 | 3.5.43 | 同上 |
+| Solid | 1.9.17 | 1.9.17 | 同上；node 条件使用真实 SSR 产物 |
+| Svelte | 5.57.2 | 5.57.2 | 同上；使用最低版本编译器编译发布的源码 |
 | Ark React / Vue / Solid | 依赖范围 ^5.39.2 | 5.39.2 | 最低 peer 探针锁定当前实际 Ark 版本 |
 | Ark Svelte | 依赖范围 ^5.24.2 | 5.24.2 | 同上；附件语法使 Svelte5.20 无法编译 |
 
@@ -32,7 +32,7 @@ node scripts/build-example-fixtures.mjs
 STATIC_DIR=tests/consumer-dist node scripts/run-playwright.mjs performance-contracts.spec.ts --project=chromium --workers=1
 ```
 
-Windows 在当前 shell 中设置 `STATIC_DIR`，不要直接复制 POSIX 环境变量前缀。系统 Chromium 通过 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` 显式选择；CI 使用 Playwright 安装版本。每次新测量写入 `.artifacts/performance/` 与 `.artifacts/releases/`，数字摘要见当前验收，不将逐次测量提交到 Git。
+Windows 在当前 shell 中设置 `STATIC_DIR`，不要直接复制 POSIX 环境变量前缀。系统 Chromium 通过 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` 显式选择；CI 使用 Playwright 安装版本。每次新测量写入 `.artifacts/performance/` 与 `.artifacts/releases/`，不将逐次测量提交到 Git。
 
 包体探针使用真实 dist 的 Vite production 应用构建，以 UTF-8 字节、逐块 gzip/Brotli 统计入口静态依赖与全部异步块；四端各测 Button、DataTable、CodeEditor 和延迟编辑器。Button/Table/延迟编辑器首包禁止保留 CodeMirror/ProseMirror 运行时代码；浏览器再核对首次请求编辑器块与重复加载缓存。
 
@@ -42,7 +42,7 @@ SSR 分别记录5个新进程的冷导入；每进程预热5次、每场景30次
 
 ## 发布演练
 
-`pnpm check:release` 对9个实际 tgz 检查：统一 SemVer、MIT/LICENSE、工作区依赖替换、每个条件导出与类型路径、排除过程文件。`pnpm check:versions` 在独立临时目录消费这些 tgz，使用实际最低编译器/运行时验证。演练不发布、不创建标签、不修改 main。
+`pnpm check:release` 对9个实际 tgz 检查：统一 SemVer、MIT/LICENSE、工作区依赖替换、每个条件导出与类型路径、排除过程文件。`pnpm check:versions` 在独立临时目录消费这些 tgz，使用实际最低编译器/运行时验证，并单独审计消费项目依赖，确认安全结果没有依赖工作区的传递覆盖。演练不发布、不创建标签、不修改 main。
 
 准备正式发布时：
 
@@ -53,4 +53,4 @@ SSR 分别记录5个新进程的冷导入；每进程预热5次、每场景30次
 5. 在 main 对已验证的同一提交创建 `v<version>` 标签，再按依赖顺序发布 tokens → theme → primitives → kit → 四端 → cli：`npm publish <已验收.tgz> --access public --provenance`。发布需要 npm 对应权限和 provenance 环境；本仓库的准备工作流不会自动发布 npm。
 6. 从 registry 安装发布版本，检查条件导出、类型和最低版本消费；更新 GitHub Release 与变更日志。版本已发布后不可覆盖，问题使用补丁版本修正。
 
-日常开发无需逐次审批；正式发布保持独立授权。本批不合并 main、不发布 npm、不创建标签，因此正式 Storybook 在下一次发布 PR 合入前保持原稳定内容。
+日常开发无需逐次审批；正式发布保持独立授权。正式展示在发布 PR 合入 main 后更新。

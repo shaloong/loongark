@@ -160,7 +160,7 @@ export function renderQuestionGroup(
                   (_, name: string) =>
                     `name="${escape(nativeQuestionName(childPath))}${name.slice(escape(child.id).length)}"`,
                 );
-          return `<fieldset data-scope="questionnaire" data-part="group-question" data-question-type="${child.type}" data-question-path="${escape(key)}" aria-invalid="${!!error}" tabindex="-1"><legend>${escape(child.label)}${child.required ? ' <span aria-hidden="true">*</span>' : ""}</legend><div data-part="question-content"><p data-scope="questionnaire" data-part="description" id="${escape(id)}-description">${escape(child.description ?? "")}</p>${content}<p data-scope="questionnaire" data-part="error" id="${escape(id)}-error"${error ? ' role="alert"' : ""}>${escape(error)}</p></div></fieldset>`;
+          return `<fieldset data-scope="questionnaire" data-part="group-question" data-question-type="${escape(child.type)}" data-question-path="${escape(key)}" aria-invalid="${!!error}" tabindex="-1"><legend>${escape(child.label)}${child.required ? ' <span aria-hidden="true">*</span>' : ""}</legend><div data-part="question-content"><p data-scope="questionnaire" data-part="description" id="${escape(id)}-description">${escape(child.description ?? "")}</p>${content}<p data-scope="questionnaire" data-part="error" id="${escape(id)}-error"${error ? ' role="alert"' : ""}>${escape(error)}</p></div></fieldset>`;
         })
         .join(
           "",

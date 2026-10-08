@@ -4,7 +4,12 @@ import { renderPart } from "../render-part";
  * File Upload component - Vue wrapper.
  * Uses Ark UI File Upload with data attributes for styling.
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { FileUpload as ArkFileUpload } from "@ark-ui/vue/file-upload";
 import type { FileUploadSize } from "@loongark/primitives";
 
@@ -138,7 +143,7 @@ export const LoongArkFileUploadHiddenInput = defineComponent({
   name: "LoongArkFileUploadHiddenInput",
   setup(_, { attrs }) {
     return () =>
-      renderPart(ArkFileUpload.HiddenInput, {
+      renderPart(resolveDynamicComponent(ArkFileUpload.HiddenInput), {
         ...attrs,
         "data-scope": "file-upload",
         "data-part": "hidden-input",

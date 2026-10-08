@@ -4,7 +4,12 @@ import { renderPart } from "../render-part";
  * Slider component - Vue wrapper
  * Based on Ark UI Slider with data-scope/data-part bindings
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { Slider as ArkSlider } from "@ark-ui/vue/slider";
 import type { SliderOrientation, SliderSize } from "@loongark/primitives";
 
@@ -278,7 +283,7 @@ export const LoongArkSliderHiddenInput = defineComponent({
   name: "LoongArkSliderHiddenInput",
   setup(_, { attrs }) {
     return () =>
-      renderPart(ArkSlider.HiddenInput, {
+      renderPart(resolveDynamicComponent(ArkSlider.HiddenInput), {
         ...attrs,
         "data-scope": "slider",
         "data-part": "hidden-input",

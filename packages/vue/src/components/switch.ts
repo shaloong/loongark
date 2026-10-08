@@ -4,7 +4,7 @@ import type { SwitchHiddenInputProps } from "@ark-ui/vue/switch";
 import { nativeSelectionRef } from "../native-selection";
 import { useSwitchContext } from "@ark-ui/vue/switch";
 import { renderPart } from "../render-part";
-import { defineComponent, h } from "vue";
+import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import { Switch as ArkSwitch } from "@ark-ui/vue/switch";
 import { ark } from "@ark-ui/vue";
@@ -128,7 +128,7 @@ export const LoongArkSwitchHiddenInput =
       const ref = nativeSelectionRef(() => ({ checked: api.value.checked }));
       return () =>
         renderPart(
-          ArkSwitch.HiddenInput,
+          resolveDynamicComponent(ArkSwitch.HiddenInput),
           {
             ...attrs,
             ...props,

@@ -1,7 +1,5 @@
-# LoongArk Storybook
+# Storybook
 
-Components 展示 78 个组件族；Examples 包含共享交互情景与 Neutral gallery 中性组合页面。工具栏支持浅色、深色、高对比、Shaloong VI 品牌覆盖与动效策略切换。
+`Components` 展示组件及状态，组合场景展示实际交互。Docs 根据公开类型与 `examples/` 生成四端代码和 API 默认值来源；工具栏可切换明暗、高对比、品牌与动效策略。
 
-pnpm storybook 启动预览；pnpm storybook:build 构建静态产物；pnpm run test:e2e 执行完整故事健康与交互验收；pnpm run visual:test 验证视觉基线与 Axe。
-
-新增或整理故事时保留公开导出。故事健康测试校验故事总数与组件族数量，避免代码清理降低展示覆盖。不得用全局 HTMLElement.prototype 补丁掩盖组件行为问题。
+使用 `pnpm storybook` 本地预览、`pnpm storybook:build` 构建静态站点。正式 GitHub Pages 由 main 更新；develop 保存临时 Actions 预览。新增 Story 保持可访问名称、真实交互和窄屏布局，同步覆盖清单；不得用全局 DOM 补丁掩盖组件问题。

@@ -5,7 +5,7 @@
 - 组件样式使用 theme.styleTokens 与 --lk-* CSS 变量；固定 VI、语义颜色、尺寸和间距来自 tokens。数据几何计算不属于外观 Token。
 - 保留 Ark 的键盘行为、标签、错误关联、隐藏表单控件和焦点管理。局部主题浮层使用 LoongArkPortal。
 - 共享样式放 primitives，部件元数据、组合数据模型与通用行为放 kit；框架包负责渲染和生命周期。
-- 新增依赖说明用途；功能变更同步 docs、sprint-plan 和示例；有逻辑分支的变更添加有意义的回归。
+- 新增依赖说明用途；功能变更同步使用文档、覆盖清单和示例；有逻辑分支的变更添加有意义的回归。
 - 动效优先 transform/opacity，遵循 prefers-reduced-motion。
 
 架构与公共 API 见 docs/README.md、docs/theme-system.md、docs/component-coverage.md。使用 pnpm workspace 与根项目引用。共享包采用 tsc；Solid 增加 DOM/SSR JSX 编译；Svelte 发布源码与声明。src 只保留源码，dist、构建缓存、Storybook 静态产物和消费测试产物不跟踪。

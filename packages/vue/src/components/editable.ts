@@ -3,7 +3,12 @@ import { renderPart } from "../render-part";
  * Editable component - Vue wrapper.
  * Uses Ark UI Editable with data attributes for styling.
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { Editable as ArkEditable } from "@ark-ui/vue/editable";
 import type { EditableSize, EditableState } from "@loongark/primitives";
 
@@ -106,7 +111,7 @@ export const LoongArkEditableInput = defineComponent({
   },
   setup(props, { attrs }) {
     return () =>
-      renderPart(ArkEditable.Input, {
+      renderPart(resolveDynamicComponent(ArkEditable.Input), {
         ...attrs,
         "data-scope": "editable",
         "data-part": "input",

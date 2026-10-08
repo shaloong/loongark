@@ -3,7 +3,13 @@ import { renderPart } from "../render-part";
  * Rating Group component - Vue wrapper.
  * Uses Ark UI Rating Group with data attributes for styling.
  */
-import { defineComponent, h, computed, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  computed,
+  type PropType,
+} from "vue";
 import { RatingGroup as ArkRatingGroup } from "@ark-ui/vue/rating-group";
 import { useRatingGroup } from "./use-rating";
 import type { UseRatingGroupProps } from "@ark-ui/vue/rating-group";
@@ -131,7 +137,7 @@ export const LoongArkRatingGroupHiddenInput = defineComponent({
   name: "LoongArkRatingGroupHiddenInput",
   setup(_, { attrs }) {
     return () =>
-      renderPart(ArkRatingGroup.HiddenInput, {
+      renderPart(resolveDynamicComponent(ArkRatingGroup.HiddenInput), {
         ...attrs,
         "data-scope": "rating-group",
         "data-part": "hidden-input",

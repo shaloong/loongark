@@ -2,6 +2,7 @@ import ts from "typescript";
 import fs from "node:fs";
 import path from "node:path";
 // 对照真实安装版本和成功构建的声明；不得按旧 .pnpm 目录猜测版本。
+fs.mkdirSync(".artifacts/ark-coverage", { recursive: true });
 const apiReport = {},
   partsReport = {};
 for (const framework of ["react", "vue", "solid", "svelte"]) {
@@ -148,6 +149,6 @@ for (const [name, report] of [
   ["parts", partsReport],
 ])
   fs.writeFileSync(
-    `docs/ark-ui-${name}-audit.json`,
+    `.artifacts/ark-coverage/${name}.json`,
     JSON.stringify(report, null, 2) + "\n",
   );

@@ -3,4 +3,4 @@ import capabilities from '../docs/capabilities.md?raw';
 
 <Meta title="Getting started/Capabilities" />
 
-<Markdown>{capabilities.replaceAll('](acceptance.md)', '](https://github.com/shaloong/loongark/blob/main/docs/acceptance.md)').replaceAll('](releases.md)', '](https://github.com/shaloong/loongark/blob/main/docs/releases.md)').replaceAll('](component-coverage.md)', '](https://github.com/shaloong/loongark/blob/main/docs/component-coverage.md)')}</Markdown>
+<Markdown>{capabilities.replace(/\]\(([\w-]+\.md)(#[^)]*)?\)/g, (_, file, anchor = '') => `](https://github.com/shaloong/loongark/blob/main/docs/${file}${anchor})`)}</Markdown>

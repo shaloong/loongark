@@ -102,6 +102,7 @@ test("能力概览在 Storybook 内直接可读", async ({ page }) => {
     page.getByRole("heading", { name: "当前能力与限制", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByText("用户已决定跳过真实屏幕阅读器", { exact: false }),
+    page.getByText("真实屏幕阅读器、iOS/Android 和原生系统输入法尚未验收", { exact: false }),
   ).toBeVisible();
+  await expect(page.getByRole("link", { name: "安全说明", exact: true })).toHaveAttribute("href", "https://github.com/shaloong/loongark/blob/main/docs/security.md");
 });

@@ -1,6 +1,6 @@
 # 当前能力与限制
 
-面向选型与接入的当前概览；历史失败和修正记录放在验收目录，不作为当前能力说明。日常开发在 develop，默认分支和正式 Storybook 为 main。开发提交不会自动发布 npm 或覆盖正式展示。
+面向选型与接入的当前概览；日常开发在 develop，默认分支和正式 Storybook 为 main。开发提交不会自动发布 npm 或覆盖正式展示。
 
 ## 组件与高级能力
 
@@ -29,10 +29,10 @@ Tour 保留 Ark 的结束契约，不强制选择业务流程的下一焦点。�
 
 | 项目 | 当前证据 | 限制 |
 | --- | --- | --- |
-| Linux Chromium / Firefox / WebKit | 四端消费、Story 交互、表单、焦点、窄屏明暗及专项回归 | 对应源码、项目数量和历史修正见验收摘要；WebKit 不等于原生 Safari。 |
+| Linux Chromium / Firefox / WebKit | 四端消费、Story 交互、表单、焦点、窄屏明暗及专项回归 | 实际结果以对应源码提交的 CI 为准；WebKit 不等于原生 Safari。 |
 | macOS Safari | 独立 safaridriver 工作流与既有 P0 验收 | Linux 无法代替当前提交的原生 Safari；以该提交的远程任务结果为准。 |
 | 视觉基线 | 已审阅 Linux 与 Windows 分开保存 | 不覆盖 Windows 截图，不使用更新基线掩盖回归。 |
-| 辅助使用 | Axe/语义树、键盘、强制颜色、两倍排版 Token、视口和组合事务模拟 | 用户已决定跳过真实屏幕阅读器、真实 iOS/Android 和原生系统输入法验收；不宣称这些实际通过。 |
+| 辅助使用 | Axe/语义树、键盘、强制颜色、两倍排版 Token、视口和组合事务模拟 | 真实屏幕阅读器、iOS/Android 和原生系统输入法尚未验收。 |
 | 性能 | 生产包体/压缩、编辑器延迟块、SSR、实际大数据滚动与20次重复挂载 | 数字属于所记录 Linux 环境；不是所有设备的 SLA，也不是完整堆泄漏证明。 |
 
-当前结果索引见 [验收总览](acceptance.md)；版本、性能复测与发布流程见 [发布准备](releases.md)。完整公开能力清单仍以源码类型、四端示例及 [组件覆盖表](component-coverage.md) 为准。
+支持版本见 [版本与发布](releases.md)，输入、扩展与 SSR 安全边界见 [安全说明](security.md)。

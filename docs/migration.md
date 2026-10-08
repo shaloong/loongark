@@ -2,7 +2,9 @@
 
 以下说明对应当前 develop 的待发布变更；以最终发布的 CHANGELOG 为准。仓库清单0.1.0不等于已经发布 npm。
 
-- Svelte 最低范围从5.20改为5.29。Ark Svelte5.24.2 实际包含 `{@attach}`，最低编译器探针证实5.20失败。使用5.20–5.28的应用需同时升级应用编译器和运行时；不要只升级运行时或忽略 peer 警告。
+- 安全升级后，Vue 最低3.5.43、Solid 最低1.9.17、Svelte 最低5.57.2。Svelte 应同时更新编译器与运行时，不能忽略 peer 警告。消费项目需刷新并审计自己的锁文件，根仓库 overrides 不会传递给下游。
+- Token 不再接受特殊原型键、非法属性名、非有限数值、循环/过深结构和 CSS/HTML 结构分隔符。复杂自定义 CSS 使用可信样式 API，不能通过 Token 注入新规则。
+- 问卷拒绝不支持的运行时题型和非法文本长度，题组深度限32；富文本累计标记限10000。来自服务端的数据需在应用边界校验并处理异常。
 - 可以使用 `@loongark/react/editors`、`@loongark/vue/editors`、`@loongark/solid/editors`、`@loongark/svelte/editors` 做路由级延迟加载；根组件入口及同步挂载函数保持兼容。Solid 的 node 条件会选择 SSR 文件，Svelte 入口需由应用编译。
 - 默认 Checkbox 选中 hover 改为语义中性色，修正了不存在的 `solidHover` Token 回退到蓝色的问题。显式品牌视觉应通过正式 Token 覆盖，避免依赖旧回退色。
 - `data-disabled="false"` 不再显示禁止 cursor；真正禁用保持禁止指针。应用自己的自定义控件应使用原生 disabled、空/true 的 data-disabled 或 aria-disabled=true 表达实际禁用。

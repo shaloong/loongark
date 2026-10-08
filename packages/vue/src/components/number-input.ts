@@ -12,7 +12,12 @@ import { renderPart } from "../render-part";
  * Number Input component - Vue wrapper.
  * Based on Ark UI Number Input with data-scope/data-part bindings.
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { NumberInput as ArkNumberInput } from "@ark-ui/vue/number-input";
 import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
 
@@ -238,7 +243,7 @@ export const LoongArkNumberInputInput = defineComponent({
     const field = useFieldContext();
     const api = useNumberInputContext();
     return () =>
-      renderPart(ArkNumberInput.Input, {
+      renderPart(resolveDynamicComponent(ArkNumberInput.Input), {
         ...attrs,
         ...nativeSelectionProps(props),
         "data-scope": "number-input",

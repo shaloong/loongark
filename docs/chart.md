@@ -12,8 +12,6 @@ Chart 使用共享 SVG 模型和 HTML 图例，四端适配负责渲染、受控
 
 `renderChartSVG` 保留单独 SVG 输出；`renderChartMarkup` 为四端提供 SVG 与共享图例，没有增加 Chart 的组件别名。共享 CSS 归入 Primitives，使用既有尺寸、排版与中性色 Token。
 
-[ChartExample](../examples/react/ChartExample.tsx) 同步 React、Vue、Solid、Svelte，展示八个长分类、多系列、正负数据、柱线切换、清空/恢复与缺失值。独立 Story 补空数据、缺失值和极值；[Linux 验收](audits/2026-10-03/chart-linux/acceptance.json)保留实际截图、回归和环境限制。
-
 原生 title/desc 保留；可选交互提示、缩放与分类刷选见下文。数据流由调用方传入更新的 data；不提供统计插值或第三方 Chart 引擎兼容 API。三种默认颜色循环，超过三系列时可显式传入既有 Token 或合法颜色，不声称任意数量的颜色都会自动唯一。
 
 现代运行时通过 Intl.Segmenter 保留完整 grapheme；旧环境缺少该 API 时，超长轴标签只显示省略号，完整 title/desc 仍保留，组件不因 API 缺失而崩溃。共享模型通过标准 lib reference 声明 ES2022.Intl 类型，不更改 ES2020 编译目标或添加类型桩。
@@ -25,8 +23,6 @@ Chart 使用共享 SVG 模型和 HTML 图例，四端适配负责渲染、受控
 `domain={[min,max]}` 固定数值轴，要求有限且递增。图形裁切到范围内，原始值仍保留于 SVG 说明和数据表；折线的跨边界段使用共享有限坐标插值，缺失值仍断开。`labels.range(domain)` 可翻译范围说明，必须为纯函数。未传 domain 时继续自动范围。范围裁切不是缩放或刷选。
 
 `showDataTable` 提供原生 details/summary 与按可见序列生成的 table。完整分类作行标题，caption 使用图表 title，缺失值采用 labels.empty，原始值不随图形裁切。`labels.dataTable` 翻译展开标题，`labels.category` 翻译分类列。展开区通过命名 region 局部横向滚动，不导致页面溢出。图例重绘保留键盘焦点、数据表展开和表区焦点；外部控件获得焦点时不抢回。卸载释放点击/焦点/toggle/指针监听及 MutationObserver 和 ResizeObserver，重新挂载不沿用已销毁实例的展开状态。
-
-四端 ChartAdvancedExample 与 Interactive/DisabledControls Story 展示受控接受/拒绝、全部隐藏、固定范围、原始数据更新和卸载。验收记录见 [图表高级能力 Linux 验收](audits/2026-10-03/chart-advanced-linux/acceptance.json)。
 
 ## 分类缩放、刷选与交互提示
 
@@ -55,7 +51,7 @@ pie/donut 使用一个数值系列，每行表示一个切片；只绘制正的�
 
 `sliceKey` 默认labelKey，分类键必须非空且唯一。`sliceKeys` 受控、`defaultSliceKeys` 初始化非受控选择，空数组表示全部隐藏；`onSliceKeysChange` 返回按完整data顺序归一化的键。Vue提供sliceKeysChange与update:sliceKeys；Svelte受控时在回调显式赋值。受控拒绝、禁用、键盘与焦点恢复使用现有图例契约。`sliceColors` 可按稳定键指定现有Token或合法颜色；分类窗口改变不重排颜色和窗口外选择。
 
-饼图使用sliceKeys控制分类；seriesKeys继续控制其单一数值系列，系列隐藏时所有分类按钮显示未选中，选择分类会请求恢复系列及该分类。饼图不接受Cartesian轴、domain或stacked。各切片title保留原始数值和比例，空间允许时在圆外以正文颜色显示百分比，保证浅深主题及亮色切片的文字对比；键盘用户通过图例和检查选择器读取数据。切片默认使用六种现有语义/VI颜色，不引入独立调色板；超过六分类可显式配置。非正数或缺失分类的按钮禁用并关联labels.notPlotted说明。四端ChartTypesExample实际切换全部新增类型、轴、受控拒绝、空态和卸载；验收范围以本批记录为准。
+饼图使用sliceKeys控制分类；seriesKeys继续控制其单一数值系列，系列隐藏时所有分类按钮显示未选中，选择分类会请求恢复系列及该分类。饼图不接受Cartesian轴、domain或stacked。各切片title保留原始数值和比例，空间允许时在圆外以正文颜色显示百分比，保证浅深主题及亮色切片的文字对比；键盘用户通过图例和检查选择器读取数据。切片默认使用六种现有语义/VI颜色，不引入独立调色板；超过六分类可显式配置。非正数或缺失分类的按钮禁用并关联labels.notPlotted说明。四端ChartTypesExample实际切换全部新增类型、轴、受控拒绝、空态和卸载；
 
 
 悬停提示支持焦点位于图表外时使用 Escape 关闭。关闭提示或明确选择检查分类后，同一静止指针因 SVG 重建产生的边界事件不会重新打开提示或覆盖选择；真正移动指针后恢复悬停。文档级键盘与指针监听器随组件卸载清理。

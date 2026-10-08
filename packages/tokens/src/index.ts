@@ -312,6 +312,33 @@ export const DEFAULT_TOKENS = baseTokens;
 
 export type TokenOverrides = Partial<TokenRegistry>;
 
+// Token 可以用于 SSR 的 style 标签；不允许数据逃逸为 HTML 或额外 CSS 规则。
+const validateTokenTree = (
+  tree: TokenTree,
+  depth = 0,
+  seen = new Set<object>(),
+): void => {
+  if (depth > 32 || seen.has(tree))
+    throw new TypeError("Invalid token tree depth or cycle");
+  seen.add(tree);
+  for (const [key, value] of Object.entries(tree)) {
+    if (
+      !/^[a-zA-Z0-9_-]+$/.test(key) ||
+      ["__proto__", "constructor", "prototype"].includes(key)
+    )
+      throw new TypeError("Invalid token key");
+    if (typeof value === "object" && value !== null && !Array.isArray(value))
+      validateTokenTree(value, depth + 1, seen);
+    else if (
+      typeof value === "number"
+        ? !Number.isFinite(value)
+        : typeof value !== "string" || /[;{}<>\u0000]/u.test(value)
+    )
+      throw new TypeError("Invalid token value");
+  }
+  seen.delete(tree);
+};
+
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
@@ -319,6 +346,10 @@ export const mergeTokens = (
   base: TokenRegistry,
   overrides?: TokenOverrides,
 ): TokenRegistry => {
+  for (const tree of Object.values(base)) validateTokenTree(tree);
+  if (overrides)
+    for (const tree of Object.values(overrides))
+      if (tree !== undefined) validateTokenTree(tree);
   if (!overrides) {
     return JSON.parse(JSON.stringify(base));
   }
@@ -327,14 +358,17 @@ export const mergeTokens = (
     target: TokenTree,
     source: TokenTree | undefined,
   ): TokenTree => {
-    if (!source) {
-      return target;
-    }
+    // 未覆盖分支也复制，防止结果修改污染基础 Token 或另一请求的主题。
+    source ??= {};
 
     return Object.keys({ ...target, ...source }).reduce<TokenTree>(
       (acc, key) => {
-        const targetValue = target[key];
-        const sourceValue = source[key];
+        const targetValue = Object.prototype.hasOwnProperty.call(target, key)
+          ? target[key]
+          : undefined;
+        const sourceValue = Object.prototype.hasOwnProperty.call(source, key)
+          ? source[key]
+          : undefined;
 
         if (isPlainObject(targetValue) || isPlainObject(sourceValue)) {
           acc[key] = deepMerge(
@@ -405,6 +439,9 @@ export const tokensToCssVariables = (
   tokens: TokenRegistry,
   prefix = "--lk",
 ): string => {
+  if (!/^--[a-zA-Z0-9_-]+$/.test(prefix))
+    throw new TypeError("Invalid token prefix");
+  for (const tree of Object.values(tokens)) validateTokenTree(tree);
   const merged = {
     color: flattenTokens(tokens.color, ["color"], { prefix: `${prefix}-` }),
     typography: flattenTokens(tokens.typography, ["typography"], {

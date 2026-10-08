@@ -13,9 +13,9 @@ const packs = JSON.parse(
 const versions = {
   react: "18.0.0",
   "react-dom": "18.0.0",
-  vue: "3.5.0",
-  "solid-js": "1.9.10",
-  svelte: "5.29.0",
+  vue: "3.5.43",
+  "solid-js": "1.9.17",
+  svelte: "5.57.2",
 };
 const ark = Object.fromEntries(
   await Promise.all(
@@ -43,7 +43,7 @@ await writeFile(
       dependencies: {
         ...packed,
         ...versions,
-        vite: "7.2.6",
+        vite: "7.3.7",
         "@sveltejs/vite-plugin-svelte": "6.2.1",
       },
       pnpm: { overrides: { ...packed, ...versions, ...ark } },
@@ -63,6 +63,23 @@ for (const args of [
   );
   assert.equal(result.status, 0, result.stderr || result.stdout);
 }
+// 在真实 tarball 消费项目审计，避免只依赖工作区 overrides 的安全结果。
+const dependencyAudit = spawnSync("pnpm", ["audit", "--json"], {
+  cwd: root,
+  encoding: "utf8",
+  timeout: 240000,
+});
+await mkdir(".artifacts/releases/minimum", { recursive: true });
+await writeFile(
+  ".artifacts/releases/minimum/dependencies.json",
+  dependencyAudit.stdout,
+);
+assert.equal(
+  dependencyAudit.status,
+  0,
+  dependencyAudit.stderr || dependencyAudit.stdout,
+);
+const dependencyMetadata = JSON.parse(dependencyAudit.stdout).metadata;
 await writeFile(
   resolve(root, "index.html"),
   '<!doctype html><meta charset="utf-8"><div id="react"></div><div id="vue"></div><div id="solid"></div><div id="svelte"></div><script type="module" src="/main.js"></script>',
@@ -150,6 +167,7 @@ await writeFile(
     {
       versions,
       ark,
+      dependencyAudit: dependencyMetadata,
       scope:
         "9个真实tarball；四端原生消费构建、Provider/Button SSR与点击。最低版本未执行完整高级交互矩阵。",
       ...measurements,

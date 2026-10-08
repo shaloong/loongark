@@ -1,6 +1,6 @@
 # 高级组件边界与辅助使用
 
-本批验证组件侧契约：组合输入、连续操作、受控拒绝、异步失效、数据变化与生命周期。业务持久化、权限、表单内容和远程数据仍由调用方实现。
+组件侧契约包括：组合输入、连续操作、受控拒绝、异步失效、数据变化与生命周期。业务持久化、权限、表单内容和远程数据仍由调用方实现。
 
 | 组件 | 契约与回归 |
 | --- | --- |
@@ -14,7 +14,6 @@
 
 ## 字体、颜色与窄屏
 
-七个实际四端示例接受排版 Token 两倍放大，分别在桌面/375px、明暗主题核验正常配色 Axe 和强制颜色语义。强制颜色由用户代理映射到系统色；自动对比度检查在普通配色执行，因为 Axe 对 CSS 原始值的测量不能代表强制颜色实际使用值。强制颜色另外保存实际截图并目视检查。WebKit 的强制颜色媒体模拟不等于操作系统强制色覆盖，本批检查实际输出和 SVG 系统色。图表 SVG 背景使用 Canvas，轴文字、曲线和数据标记使用 CanvasText，饼图边界使用 Canvas，辅助网格线使用 GrayText，选中图例增加轮廓，编辑器的实际输入外框增加 outline 焦点指示以替代强制颜色下被移除的 box-shadow，避免深色主题值被系统浅色背景覆盖后失去对比。挂载后按 SVG 实际字宽缩短越界分类标签，保留完整 title，字号和字体变化重新测量并在卸载时清理观察器。系列虚线与数据表继续提供替代信息，不能等同于测试全部 Windows 高对比主题。
 
 VirtualGrid 的固定行高内移除上下 padding，保留垂直居中与水平间距，避免字体仍能容纳时人为挤出内部滚动区。`rowSize` / `columnSize` 是调用方的尺寸契约，默认 48 / 160；多行、超大字号或复杂内容必须提供足够尺寸，并保留内容可访问性。库不会把内容高度自动回写成网格行高。
 
@@ -22,12 +21,10 @@ Drawer 在四方向 RTL 下聚焦输入、输入中文，将布局视口从 375�
 
 ## 对照依据与限制
 
-- 本地 ProseMirror View 1.42.6 的 input.ts：组合期间避免强制刷新；Safari 组合结束与 keydown 顺序需要保护。链接面板属于库自己的快捷键处理。
-- 本地 CodeMirror View 6.43.13：组合 DOM 的复用、引擎历史和只读契约；已有挂载同步在组合期间避免重建编辑区。
-- 本地 Zag dom-query 1.43.3 的 trackVisualViewport：优先监听 visualViewport，缺失时回退 window，并返回取消监听函数。Drawer 继续复用 Ark/Zag 的行为，模拟不能证明系统键盘实际定位。
-- 已读取 W3C aria-practices 的 Grid 源文档及 MDN content 的 forced-colors 源文档；站点直连在当前网络返回403，使用公开 GitHub 源文件核对。
+- ProseMirror View 的 input.ts：组合期间避免强制刷新；Safari 组合结束与 keydown 顺序需要保护。链接面板属于库自己的快捷键处理。
+- CodeMirror View：组合 DOM 的复用、引擎历史和只读契约；已有挂载同步在组合期间避免重建编辑区。
+- Zag dom-query 的 trackVisualViewport：优先监听 visualViewport，缺失时回退 window，并返回取消监听函数。Drawer 继续复用 Ark/Zag 的行为，模拟不能证明系统键盘实际定位。
 - [WAI-ARIA Grid Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/)：网格的导航/编辑状态、单一 Tab 游标和内部方向键导航，嵌入控件保留自身输入语义；语义快照保存名称、状态和绝对索引，不等于屏幕阅读器朗读结果。
 
-用户已明确要求跳过真实验收。本批不使用真实 iOS/Android、VoiceOver/TalkBack/NVDA，不把模拟手机视口、CDP 组合事务、浏览器触摸协议或 DOM 语义快照记作这些平台通过。字体 Token 放大不是系统字体设置或浏览器原生 200% 缩放；视口缩小不是软键盘。上述项目按用户决定跳过，不作为等待设备访问的阻塞项。
 
-实际数字和验证范围见[验收摘要](audits/2026-10-08/p1-advanced-and-accessibility/acceptance.json)。过程截图和日志留在忽略目录或保留14天的 CI Artifact，Git 只保存此说明、回归和简短摘要。组件数量没有变化：119 族、333 Story、四端各794公开值、295示例。
+真实 iOS/Android、VoiceOver/TalkBack/NVDA 和原生系统输入法尚未验收。字体 Token 放大不等于系统字体设置或浏览器原生200%缩放，缩小视口不等于软键盘，CDP 组合事务不等于原生输入法。

@@ -1,5 +1,5 @@
 import { renderPart } from "../render-part";
-import { defineComponent, h } from "vue";
+import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import { Field, useFieldContext } from "@ark-ui/vue/field";
 import { inputSuffixDisabled } from "@loongark/kit";
@@ -72,7 +72,7 @@ export const LoongArkInputControl = defineComponent({
   },
   setup(props, { attrs, emit }) {
     return () =>
-      renderPart(Field.Input, {
+      renderPart(resolveDynamicComponent(Field.Input), {
         ...attrs,
         value: props.modelValue ?? attrs.value,
         onInput: (event: Event) => {

@@ -3,7 +3,12 @@ import { renderPart } from "../render-part";
  * Tree View component - Vue wrapper.
  * Uses Ark UI Tree View with data attributes for styling.
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { TreeView as ArkTreeView } from "@ark-ui/vue/tree-view";
 import type { TreeViewSize } from "@loongark/primitives";
 
@@ -259,7 +264,7 @@ export const LoongArkTreeViewNodeRenameInput = defineComponent({
   name: "LoongArkTreeViewNodeRenameInput",
   setup(_, { attrs }) {
     return () =>
-      renderPart(ArkTreeView.NodeRenameInput, {
+      renderPart(resolveDynamicComponent(ArkTreeView.NodeRenameInput), {
         ...attrs,
         "data-scope": "tree-view",
         "data-part": "node-rename-input",

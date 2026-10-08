@@ -20,8 +20,6 @@ Vue 支持 `v-model:selectedIds` 和 `selectionChange`；React、Solid、Svelte 
 
 DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部清空、拒绝选择更新、删除源数据、切换列和恢复数据。非受控 Live queue 单独验证删除后的选择清理、回调次数与页码保持。独立 Story 补充空结果、长单元格和中文标签。
 
-[本批 Linux 验收](audits/2026-10-03/data-table-linux/acceptance.json)记录实际命令、浏览器版本、桌面/375px 和浅深色截图。Windows 证据保留。默认所有 Story 的布局与无障碍检查仍执行，不仅检查表格。
-
 ## 边界
 
 现支持客户端与服务端标量数据、列显示及顺序控制。已提供逻辑冻结列；已提供文字/数值单元格编辑；虚拟化见下文；列交互见下文；数据请求、取消与竞争处理由调用方负责，不假定业务接口协议。它是已有能力的完善，不声称兼容 MUI Data Grid、Ant Design Table 或第三方表格引擎的全部 API。
@@ -36,8 +34,6 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 
 `loading` 设置 aria-busy 与状态说明，禁用过滤、排序、分页和选择；`error` 提供 alert，`onRetry` 提供真实重试按钮。Retry 激活后先把焦点放到稳定的表格滚动区域，避免按钮消失后丢失键盘位置。`labels.loading/retry` 可本地化。加载中保留或清空旧数据由调用方决定，组件不会自行发请求。
 
-四端 DataTableAdvancedExample 使用同一模拟服务端，展示列显示/顺序、受控拒绝、跨页选择、异步加载、错误重试、旧请求取消与卸载清理；模拟服务仅用于示例。新增 Server/Loading Story，当前总数为 114 族、287 Story、155 个四端示例。验收见 [服务端表格 Linux 记录](audits/2026-10-03/data-table-advanced-linux/acceptance.json)。
-
 ## 冻结列
 
 `pinnedColumns={{ start: ["name"], end: ["amount"] }}` 将可见列冻结到逻辑起始和结束边。方向继承原生 `dir`，RTL 下起始边位于右侧。起始冻结组之前的选择列自动一起冻结；只有结束冻结列时，选择列仍普通滚动。重复或未知 key 忽略，隐藏列不会被重新显示，两边指定同一 key 时 start 优先。
@@ -47,8 +43,6 @@ DataTableExample 展示当前页全选、跨页保留、过滤后选择、外部
 共享 Kit 行为在挂载后测量真实列宽；列显示/重排、文本和内容宽度变化及容器缩放后重新测量。冻结区使用现有背景、选中/悬停色和细边框；中间列的排序按钮得到焦点时，将其滚入冻结区之间。冻结表格的空结果提示按可视滚动区域居中，横向滚动后继续可见。SSR 只输出列语义，不读窗口或布局；卸载取消帧、断开观察器、移除事件并恢复接管属性。
 
 窄屏至少给中间列保留一个选择单元格宽度的阅读空间（普通列更窄时采用该列宽度），且不小于普通列排序按钮的实际宽度。冻结组过宽时暂停吸附，保留可聚焦的原生横向滚动；可用空间恢复后自动吸附。它不是裁切长列或隐藏数据的替代方式。
-
-四端 DataTableFrozenExample 展示两边冻结、追加/隐藏 Owner、重排列、RTL、横向滚动、选择/排序、空结果和隐藏重挂。独立 Frozen Story 与 Linux 基线见 [冻结列验收](audits/2026-10-04/data-table-frozen-linux/acceptance.json)。虚拟化见下文；仍未提供指针拖动列；不声称全部高级表格能力已交付。
 
 ## 单元格编辑与逻辑对齐
 
@@ -110,10 +104,6 @@ textarea 可设置原生 `rows`（默认3），Enter 换行，Ctrl/Command+Enter
 
 拖动手柄使用 ArrowLeft/ArrowRight 移动，Home/End 到当前冻结区域边界；方向继承原生 `dir`。Enter/Space 开始或结束键盘移动，`aria-pressed` 表示状态，Escape 请求恢复起始顺序；受控调用方仍可拒绝恢复。separator 使用方向键调整10像素、Shift调整50像素、Home/End达到最小/最大值，双击恢复160像素（仍限制边界）。原生 `aria-valuemin/max/now`、加载禁用和局部直播状态同步；重排后的焦点只恢复同一手柄并滚动表格区域，避免重排保持旧 DOM 焦点却把手柄移出窄屏。
 
-手动列宽使用原生 `colgroup` 和固定布局，长正文换行，窄屏局部横向滚动。四端 DataTableColumnsExample 及 ColumnLayout Story 展示真实拖动、键盘、RTL、冻结、受控拒绝、动态列和卸载。SSR 输出列宽与控件语义，不调用更新回调、不读取浏览器 DOM。原生 Safari 已完成四端明暗桌面 W3C 指针调整与键盘排序，8张实际列交互截图已审阅；见[专项验收](audits/2026-10-05/data-table-columns-safari/acceptance.json)。完整RTL、窄屏与真机验收仍开放。
-
-Firefox144.0.2的16项四端明暗、桌面/375px列交互用例及32张LTR/RTL实际截图已验收，见[列交互专项](audits/2026-10-05/data-table-columns-firefox/acceptance.json)。完整Firefox套件的排序键盘和既有焦点/阅读锚点仍有失败，专项通过不关闭平台清单。
-
 ## 分组聚合与树形行
 
 `groupBy` 按字段形成客户端多级分组，`aggregations` 为列选择 `sum | average | min | max | count`。数值聚合忽略空值、字符串和非有限值；没有数值或结果溢出时为 `null`，`count` 计匹配数据行。先筛选再聚合，排序分别作用于组和同级数据行，聚合值参与组排序。分页按最外层组计算，组的可见子行不被拆到另页。分组字段可隐藏，仍按完整列声明校验；界面只显示明确配置的聚合结果；聚合列被移动到首列时，组标签同时包含该列结果。隐藏全部列仍在选择列提供展开控制和组标签。合成组行不可选择或编辑。
@@ -124,9 +114,6 @@ Firefox144.0.2的16项四端明暗、桌面/375px列交互用例及32张LTR/RTL�
 
 原生表格保留表头、checkbox 和编辑语义；展开按钮支持 Enter/Space，不宣称完整 ARIA treegrid 导航。选择当前页只作用于当前可见数据行，折叠不会清除选择，也不级联选择整组。首列显示逻辑方向缩进与 Lucide 展开图标，数值沿用列对齐。结构行参与既有可变高度纵向虚拟化；虚拟表格的行索引按当前结构页计算。折叠或结构更新移除焦点行时，恢复最近可见祖先或表格区域；外部已获得焦点时不会抢回。示例 `DataTableStructureExample` / Story `GroupingAndTree` 展示受控拒绝、动态数据、RTL、加载、编辑和卸载重建。
 
-
-结构行Linux验收范围与限制见[分组和树行验收](audits/2026-10-05/data-table-structure-linux/acceptance.json)。虚拟结构表格首列按有界深度为缩进和编辑图标留出空间，其他列维持原有密度，手动列宽仍遵守显式列宽配置。
-
 ## 单元格范围与批量粘贴
 
 `cellSelection` 启用基于稳定 `rowKey` / 列键的矩形选择；`cellRange`、`defaultCellRange` 与 `onCellRangeChange` 使用 `{ anchor: { rowId, columnKey }, focus: { rowId, columnKey } }`，受控 `null` 明确清空。Vue 同时支持 `v-model:cellRange`。范围按当前页可见数据行和列顺序解析，合成分组行排除；不存在的端点不复活到别的行。正文点击、指针拖动和 Shift + 方向键扩展选择；Home/End 与 Ctrl/Cmd + Home/End 定位，RTL 尊重视觉方向。Enter/F2、双击正文或 Lucide 铅笔进入既有编辑器。输入框保留自己的复制粘贴和撤销行为。
@@ -134,8 +121,6 @@ Firefox144.0.2的16项四端明暗、桌面/375px列交互用例及32张LTR/RTL�
 原生剪贴板处理 `text/plain` TSV，支持引号、引号转义和字段内换行；不解析或插入 HTML。单一单元格范围向右下扩展矩阵；已有多格范围只接受可整除的矩形平铺。越界、错误引号、超过 10,000 格或 1,048,576 UTF-16 码元整批拒绝；不自动创建行或截断数据。只读列、行键、禁用选项、重复地址和任意单元格校验失败均不会调用提交回调。数字和选项使用既有编辑器校验。
 
 粘贴通过 `onBatchCommit` 提交一个不可变事务，复用有界多级 Undo/Redo；只有提供方接受并更新数据后才记入历史。Escape 或可见取消按钮中止提交，卸载、查询/页码/列结构变化也中止过期请求；提供方必须遵守 `signal`。外部已获得焦点时不抢回。纵向虚拟化使用共享窗口定位焦点格；触屏保持原生滚动并支持点击选择，真实手机交互另行验收。
-
-范围模式使用原生表格的 `grid`/`gridcell` 语义、`aria-selected` 与单一正文 Tab 入口；表头按钮和行 checkbox 继续保留原生操作，未宣称完整 APG treegrid。窄屏为正文和图标留出最小可读列宽，在表格视口内滚动。提示和错误沿用 `labels` 本地化接口。`DataTableRangeExample` 与 `CellRangeAndPaste` Story 展示这些能力；Linux四端验收及实际平台限制见[范围与粘贴验收](audits/2026-10-05/data-table-range-linux/acceptance.json)。
 
 ## 横向列窗口
 

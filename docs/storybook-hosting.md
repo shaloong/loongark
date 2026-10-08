@@ -1,26 +1,19 @@
-# Storybook 展示与公开范围
+# Storybook 部署
 
-Storybook 构建输出 `storybook-static/`，直接部署到 GitHub Pages，无需另做展示站。仓库已选择 MIT 许可并核验为 public，根目录与9个发布包包含 LICENSE。展示使用 `.github/workflows/storybook-pages.yml`，在线地址为 [shaloong.github.io/loongark](https://shaloong.github.io/loongark/)；已于2026-10-04部署并检查线上首页、iframe和Story索引，验收见 [摘要](audits/2026-10-04/mit-pages/acceptance.json)；后续状态见 [工作流](https://github.com/shaloong/loongark/actions/workflows/storybook-pages.yml)。
+Storybook 是静态站点，可使用 GitHub Pages，无需另建展示应用。正式站点位于 [shaloong.github.io/loongark](https://shaloong.github.io/loongark/)，部署产物不提交到源码分支。
 
-每次 main/develop 推送及手动触发时，冻结安装依赖，验证构建/契约/覆盖/发布/SSR/Svelte，构建 Storybook，再在真实 `/loongark/` 子路径检查首页、iframe、手机明暗场景、键盘交互与资源加载。构建或验证失败不会进入部署。main 上传 Pages 并部署；develop 仅保存14天的 `storybook-development-preview` Artifact，可下载后用 `node scripts/serve-static.mjs <解压目录> 6006` 查看，绝不部署正式站点。只上传 `storybook-static/`；过程截图和日志留在 Actions，烟雾验收 Artifact 保留14天，不进源码分支。
+## main 与 develop
 
-首次需在 Settings → Pages 将 Source 设为 GitHub Actions，github-pages 环境仅允许 main 部署。官方 `configure-pages` 的自动开通需要额外管理员 Token，工作流采用标准读取配置与 OIDC 部署，不要求用户提供该 Token。部署后从 Actions runner 实际检查线上首页、iframe 与 Story 索引。首次开通已完成，工作流部署及线上 HTTP 检查通过。云端浏览器访问 Pages 域名仍受网络策略限制；桌面/手机明暗截图已对部署产物实际目视核验，线上检查由 Actions runner 执行。
+`.github/workflows/storybook-pages.yml` 对 main/develop 冻结安装并构建共享包、Storybook，验证覆盖、发布入口、SSR、Svelte 和 `/loongark/` 子路径的资源与交互。失败时不部署。
 
-## 平台选择
+- main 上传并部署 GitHub Pages；deploy 任务只获得 Pages 写入和身份令牌权限。
+- develop 保存14天 `storybook-development-preview` Artifact，不覆盖正式站点。下载解压后运行 `node scripts/serve-static.mjs <目录> 6006` 查看。
+- 手动触发遵守相同分支限制；稳定更新通过 develop → main PR。
 
-| 平台         | 适用场景                                     | 需要确认的限制                                                                                                                            |
-| ------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| GitHub Pages | 公开组件库的稳定文档和 Storybook，优先选择   | GitHub Free 通常支持公开仓库；私有仓库 Pages 依赖账号套餐。私有源码不表示展示站点也私有。项目站点要核对 `/loongark/` 子路径下资源和导航。 |
-| Vercel       | 分支和 PR 预览、自定义域名、快速产品体验迭代 | Hobby 通常限个人非商业用途；组织/商业项目不要默认把 Hobby 当免费生产方案。预览访问控制、Git 组织集成及额度须按实际套餐确认。              |
+GitHub Settings → Pages 的 Source 应为 GitHub Actions，环境分支限制应只允许 main。CI 上传后核对线上首页、iframe 和 Story 索引。本地 smoke 检查不等同于线上发布成功。
 
-以上套餐信息为通常规则；2026-10-04 当前云端网络无法访问官方文档，不能声称已核实当天条款或当前账号权益。开通前核对 [Pages 条件](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) 与 [Vercel Hobby](https://vercel.com/docs/plans/hobby)。
+## 公开与托管
 
-部署准备按仓库验证顺序完成，再执行 `pnpm storybook:build`。仅发布 `storybook-static/`，不发布审查归档、运行日志或测试报告。GitHub Pages 可由 Actions 上传静态产物，Pages 构建不需要把产物提交到 `gh-pages`；部署需核验首页、iframe、资源、子路径和手机明暗场景。Vercel 需要先构建工作区共享包，再构建 Storybook；使用 Node 24、pnpm 10.14.0 和冻结锁文件安装。
+仓库采用 MIT 并公开；工作区根 `package.json` 的 `private: true` 只防止误发布根包，不表示 GitHub 仓库私有。部署前确保示例与静态文件不含真实凭据或个人数据。
 
-正式站点只跟随 main。用户明确发布并完成 develop → main PR 后更新；开发预览仅使用 Actions Artifact 或本地 Storybook。默认分支为 main，日常开发仍选择 develop。工作流的分支条件同时限制手动触发，不允许手动选择 develop 来覆盖正式站点。
-
-## 是否公开
-
-用户已授权采用 MIT 并公开仓库；当前 GitHub 返回 public。历史文本与ZIP内文本已执行基础凭据模式检查，未发现匹配项；这不等同于完整安全或权属审查。第三方依赖继续遵守各自许可。公开源码、部署 Storybook 和发布 npm 是三个独立动作，本批不发布 npm。
-
-根 `package.json` 的 `private: true` 用于防止将工作区根包误发到 npm，不代表 GitHub 仓库 private。后续稳定发布仍遵守 develop → main PR；Pages 仅部署 main；develop 的临时预览不更新正式站点。
+Vercel 可用于独立 PR 预览，但组织/商业用途需要核对套餐条款，不默认使用 Hobby。相关平台规则见 [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) 与 [Vercel Hobby](https://vercel.com/docs/plans/hobby)。当前稳定展示使用 Pages。

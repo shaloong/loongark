@@ -7,7 +7,15 @@ import { renderPart } from "../render-part";
  * Date Picker component - Vue wrapper.
  * Wraps Ark UI Date Picker with data-scope/data-part bindings.
  */
-import { defineComponent, h, provide, inject, toRef, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  provide,
+  inject,
+  toRef,
+  type PropType,
+} from "vue";
 import {
   DatePickerRoot as ArkDatePickerRoot,
   DatePickerLabel as ArkDatePickerLabel,
@@ -245,7 +253,7 @@ export const LoongArkDatePickerInput = defineComponent({
   },
   setup(props, { attrs }) {
     return () =>
-      renderPart(ArkDatePickerInput, {
+      renderPart(resolveDynamicComponent(ArkDatePickerInput), {
         ...attrs,
         index: props.index,
         fixOnBlur: props.fixOnBlur,

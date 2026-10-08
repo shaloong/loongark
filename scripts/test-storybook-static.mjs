@@ -8,34 +8,49 @@ import { chromium } from "@playwright/test";
 // 挂到真实项目子路径，不提供根路径资源回退，防止部署后资源和 iframe 失效。
 const mount = await mkdtemp(join(tmpdir(), "loongark-pages-"));
 const evidence = process.env.DESIGN_AUDIT_DIR ?? ".artifacts/pages-smoke";
-const port = 6018;
-const origin = `http://127.0.0.1:${port}`;
-const base = `${origin}/loongark/`;
+let origin, base;
 let server, browser;
 const errors = [],
   results = [];
 try {
   await cp("storybook-static", join(mount, "loongark"), { recursive: true });
   await mkdir(evidence, { recursive: true });
-  server = spawn(
-    process.execPath,
-    ["scripts/serve-static.mjs", mount, String(port)],
-    {
-      stdio: "ignore",
-      env: { ...process.env, PORT: String(port) },
-    },
-  );
-  const deadline = Date.now() + 10000;
-  while (true) {
-    try {
-      if ((await fetch(base)).ok) break;
-    } catch {}
-    assert(
-      Date.now() < deadline && server.exitCode === null,
-      "子路径服务器启动失败",
+  server = spawn(process.execPath, ["scripts/serve-static.mjs", mount, "0"], {
+    stdio: ["ignore", "pipe", "inherit"],
+    env: { ...process.env, HOST: "127.0.0.1", PORT: "0" },
+  });
+  origin = await new Promise((resolve, reject) => {
+    let output = "";
+    const finish = (error, address) => {
+      clearTimeout(timer);
+      server.stdout.off("data", ready);
+      server.off("exit", exited);
+      server.off("error", failed);
+      if (error) reject(error);
+      else resolve(address);
+    };
+    const ready = (chunk) => {
+      output += String(chunk);
+      const match = output.match(
+        /\[serve-static\].* on (http:\/\/127\.0\.0\.1:\d+)/,
+      );
+      if (match) finish(null, match[1]);
+    };
+    const exited = (code) => finish(new Error(`子路径服务器启动失败: ${code}`));
+    const failed = (error) => finish(error);
+    const timer = setTimeout(
+      () => finish(new Error("子路径服务器启动超时")),
+      10000,
     );
-    await new Promise((resolve) => setTimeout(resolve, 100));
-  }
+    server.stdout.on("data", ready);
+    server.once("exit", exited);
+    server.once("error", failed);
+  });
+  base = `${origin}/loongark/`;
+  assert.equal(
+    (await fetch(base, { signal: AbortSignal.timeout(5000) })).status,
+    200,
+  );
   assert.equal((await fetch(`${origin}/index.json`)).status, 404);
   const index = await (await fetch(`${base}index.json`)).json();
   assert(

@@ -6,7 +6,7 @@ import {
 } from "@ark-ui/vue/radio-group";
 import { renderPart } from "../render-part";
 import { RadioGroup } from "@ark-ui/vue/radio-group";
-import { defineComponent, h } from "vue";
+import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import type {
   RadioGroupSize,
@@ -159,7 +159,7 @@ export const LoongArkRadioGroupItemHiddenInput =
       }));
       return () =>
         renderPart(
-          RadioGroup.ItemHiddenInput,
+          resolveDynamicComponent(RadioGroup.ItemHiddenInput),
           {
             ...attrs,
             ...props,

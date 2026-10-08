@@ -1,4 +1,11 @@
-import { defineComponent, h, ref } from "vue";
+import type { DateInputHiddenInputProps } from "@ark-ui/vue/date-input";
+import {
+  defineComponent,
+  h,
+  createVNode,
+  resolveDynamicComponent,
+  ref,
+} from "vue";
 import * as L from "@loongark/vue";
 import type { DateInputDateValue, DateInputSegmentProps } from "@loongark/vue";
 import { createDateTimeDemo } from "../shared/dateTimeDemo";
@@ -148,7 +155,9 @@ export const DateTimeExample = defineComponent({
                           ),
                         ),
                       ),
-                      h(L.LoongArkDateInputHiddenInput),
+                      createVNode(
+                        resolveDynamicComponent(L.LoongArkDateInputHiddenInput),
+                      ),
                     ],
                   ),
                 ),

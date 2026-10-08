@@ -182,7 +182,29 @@ export function questionnaireQuestions(
   ancestors: readonly Question[] = [],
 ) {
   const ids = new Set<string>();
+  if (ancestors.length > 32)
+    throw new RangeError("Questionnaire group schema is too deep");
   for (const q of questions) {
+    if (
+      ![
+        "text",
+        "single",
+        "multiple",
+        "number",
+        "date",
+        "select",
+        "matrix",
+        "ranking",
+        "group",
+        "custom",
+      ].includes(q.type)
+    )
+      throw new TypeError("Unsupported question type");
+    for (const length of [q.minLength, q.maxLength])
+      if (length !== undefined && (!Number.isSafeInteger(length) || length < 0))
+        throw new TypeError(
+          "Question text length must be a non-negative safe integer",
+        );
     if (!q.id || ids.has(q.id))
       throw Error("Questionnaire requires unique non-empty question ids");
     ids.add(q.id);
@@ -211,10 +233,17 @@ export function questionnaireQuestions(
         "Questionnaire nested questions and group bounds require group type",
       );
     if (q.type === "custom") {
-      if (!q.customKind?.trim() || !["string", "strings", "map"].includes(q.answerKind ?? "string"))
-        throw Error("Questionnaire custom questions require a kind and valid answer shape");
+      if (
+        !q.customKind?.trim() ||
+        !["string", "strings", "map"].includes(q.answerKind ?? "string")
+      )
+        throw Error(
+          "Questionnaire custom questions require a kind and valid answer shape",
+        );
     } else if (q.customKind !== undefined || q.answerKind !== undefined)
-      throw Error("Questionnaire custom kind and answer shape require custom type");
+      throw Error(
+        "Questionnaire custom kind and answer shape require custom type",
+      );
     if (q.multiple !== undefined && q.type !== "matrix")
       throw Error("Questionnaire multiple applies only to matrix questions");
     if (
@@ -280,15 +309,35 @@ export function questionnaireValue(
           };
         });
       } else if (q.type === "custom") {
-        normalized = q.answerKind === "strings"
-          ? [...new Set(questionStrings(answer).filter((item) => item.trim()))]
-          : q.answerKind === "map"
-            ? Object.fromEntries(Object.entries(matrixAnswers(answer)).flatMap(([key, item]) => {
-                if (!key) return [];
-                const normalized = typeof item === "string" ? item : [...new Set(item.filter((entry) => entry.trim()))];
-                return (typeof normalized === "string" ? normalized.trim().length : normalized.length) ? [[key, normalized]] : [];
-              }))
-            : typeof answer === "string" ? answer : "";
+        normalized =
+          q.answerKind === "strings"
+            ? [
+                ...new Set(
+                  questionStrings(answer).filter((item) => item.trim()),
+                ),
+              ]
+            : q.answerKind === "map"
+              ? Object.fromEntries(
+                  Object.entries(matrixAnswers(answer)).flatMap(
+                    ([key, item]) => {
+                      if (!key) return [];
+                      const normalized =
+                        typeof item === "string"
+                          ? item
+                          : [...new Set(item.filter((entry) => entry.trim()))];
+                      return (
+                        typeof normalized === "string"
+                          ? normalized.trim().length
+                          : normalized.length
+                      )
+                        ? [[key, normalized]]
+                        : [];
+                    },
+                  ),
+                )
+              : typeof answer === "string"
+                ? answer
+                : "";
       } else if (["text", "number", "date"].includes(q.type))
         normalized = typeof answer === "string" ? answer : "";
       else if (q.type === "single" || q.type === "select")
@@ -605,9 +654,23 @@ export function focusQuestion(
       !(ownedAtStart && active === owner.body)
     )
       return;
-    const bounds=root.querySelector<HTMLElement>('[data-part="groups"][data-group-bounds-invalid=true] > [data-question-group]:not(:disabled)');
-    const firstInvalid=root.querySelector<HTMLElement>('[data-part="group-question"][aria-invalid=true]:not([data-question-type="group"])') ?? root.querySelector<HTMLElement>('[data-part="group-question"]:not([data-question-type="group"])') ?? root.querySelector<HTMLElement>('[data-part="question"]');
-    if (!bounds && firstInvalid?.querySelector('[data-question-custom]') && focusCustom?.(firstInvalid)) return;
+    const bounds = root.querySelector<HTMLElement>(
+      '[data-part="groups"][data-group-bounds-invalid=true] > [data-question-group]:not(:disabled)',
+    );
+    const firstInvalid =
+      root.querySelector<HTMLElement>(
+        '[data-part="group-question"][aria-invalid=true]:not([data-question-type="group"])',
+      ) ??
+      root.querySelector<HTMLElement>(
+        '[data-part="group-question"]:not([data-question-type="group"])',
+      ) ??
+      root.querySelector<HTMLElement>('[data-part="question"]');
+    if (
+      !bounds &&
+      firstInvalid?.querySelector("[data-question-custom]") &&
+      focusCustom?.(firstInvalid)
+    )
+      return;
     const input =
       root.querySelector<HTMLElement>(
         '[data-part="groups"][data-group-bounds-invalid=true] > [data-question-group]:not(:disabled)',
@@ -868,7 +931,7 @@ export function renderQuestionControl(
   const common = `aria-describedby="${e(descriptionId)}" aria-required="${!!q.required}" aria-invalid="${invalid}"`;
   const options = (q.options ?? []).filter((o) => !o.disabled);
   if (q.type === "text")
-    return `<textarea data-question-control="value" data-part="answer" name="${e(q.id)}" aria-label="${e(q.label)}" ${common}${q.minLength !== undefined ? ` minlength="${q.minLength}"` : ""}${q.maxLength !== undefined ? ` maxlength="${q.maxLength}"` : ""}>${e(typeof answer === "string" ? answer : "")}</textarea>`;
+    return `<textarea data-question-control="value" data-part="answer" name="${e(q.id)}" aria-label="${e(q.label)}" ${common}${q.minLength !== undefined ? ` minlength="${e(String(q.minLength))}"` : ""}${q.maxLength !== undefined ? ` maxlength="${e(String(q.maxLength))}"` : ""}>${e(typeof answer === "string" ? answer : "")}</textarea>`;
   if (q.type === "single" || q.type === "multiple")
     return (q.options ?? [])
       .map(
@@ -877,7 +940,7 @@ export function renderQuestionControl(
       )
       .join("");
   if (q.type === "number" || q.type === "date")
-    return `<input data-question-control="value" data-part="answer" name="${e(q.id)}" type="${q.type}" aria-label="${e(q.label)}" value="${e(String(answer))}" ${common}${q.min !== undefined ? ` min="${e(String(q.min))}"` : ""}${q.max !== undefined ? ` max="${e(String(q.max))}"` : ""}${q.type === "number" ? ` step="${q.step ?? "any"}"` : ""}>`;
+    return `<input data-question-control="value" data-part="answer" name="${e(q.id)}" type="${q.type}" aria-label="${e(q.label)}" value="${e(String(answer))}" ${common}${q.min !== undefined ? ` min="${e(String(q.min))}"` : ""}${q.max !== undefined ? ` max="${e(String(q.max))}"` : ""}${q.type === "number" ? ` step="${e(String(q.step ?? "any"))}"` : ""}>`;
   if (q.type === "select")
     return `<select data-question-control="value" data-part="answer" name="${e(q.id)}" aria-label="${e(q.label)}" ${common}><option value="">${e(q.placeholder ?? "Choose an option")}</option>${(q.options ?? []).map((o) => `<option value="${e(o.value)}"${answer === o.value ? " selected" : ""}${o.disabled ? " disabled" : ""}>${e(o.label)}</option>`).join("")}</select>`;
   if (q.type === "matrix") {

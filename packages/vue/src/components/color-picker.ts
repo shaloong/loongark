@@ -3,7 +3,12 @@ import { renderPart } from "../render-part";
  * Color Picker component - Vue wrapper.
  * Uses Ark UI Color Picker with data attributes for styling.
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { ColorPicker as ArkColorPicker } from "@ark-ui/vue/color-picker";
 import type { ColorPickerSize } from "@loongark/primitives";
 
@@ -259,7 +264,7 @@ export const LoongArkColorPickerChannelInput = defineComponent({
   name: "LoongArkColorPickerChannelInput",
   setup(_, { attrs }) {
     return () =>
-      renderPart(ArkColorPicker.ChannelInput, {
+      renderPart(resolveDynamicComponent(ArkColorPicker.ChannelInput), {
         ...attrs,
         "data-scope": "color-picker",
         "data-part": "channel-input",
@@ -431,7 +436,7 @@ export const LoongArkColorPickerHiddenInput = defineComponent({
   name: "LoongArkColorPickerHiddenInput",
   setup(_, { attrs }) {
     return () =>
-      renderPart(ArkColorPicker.HiddenInput, {
+      renderPart(resolveDynamicComponent(ArkColorPicker.HiddenInput), {
         ...attrs,
         "data-scope": "color-picker",
         "data-part": "hidden-input",
