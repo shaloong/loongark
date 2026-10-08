@@ -210,8 +210,8 @@ const checkboxPrimitive = createPrimitive(
 
       [data-scope="checkbox"][data-part="control"][data-state="checked"]:hover,
       [data-scope="checkbox"][data-part="control"][data-state="indeterminate"]:hover {
-        background: ${toStringToken(brand.solidHover, "#2563eb")};
-        border-color: ${toStringToken(brand.solidHover, "#2563eb")};
+        background: var(--lk-color-semantic-primary);
+        border-color: var(--lk-color-semantic-primary);
       }
 
       [data-scope="checkbox"][data-part="control"]:not([data-disabled]):not([data-state="checked"]):not([data-state="indeterminate"]):hover {

@@ -1,15 +1,12 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "paths": { "@loongark/react": ["packages/react/dist/index.d.ts"] },
     "noEmit": true,
+    "declaration": false,
     "jsx": "react-jsx",
-    "paths": { "*": ["./../*"] }
+    "types": ["node"],
+    "typeRoots": ["../node_modules/@types"]
   },
-  "include": [
-    "./**/*.ts",
-    "./**/*.tsx",
-    "../stories/**/*.ts",
-    "../stories/**/*.tsx"
-  ],
-  "exclude": ["../node_modules", "../dist"]
+  "include": ["*.ts", "*.tsx"]
 }

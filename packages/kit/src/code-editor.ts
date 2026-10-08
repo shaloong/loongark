@@ -116,29 +116,30 @@ export function renderCodeEditorMarkup(
     labels.keyboardHint,
   );
 }
-const codeHighlight = HighlightStyle.define([
-  {
-    tag: tags.keyword,
-    color: "var(--lk-color-semantic-foreground)",
-    fontWeight: "var(--lk-typography-fontweight-semibold)",
-  },
-  {
-    tag: [tags.string, tags.number, tags.bool],
-    color: "var(--lk-color-semantic-foreground)",
-    fontStyle: "italic",
-  },
-  {
-    tag: [tags.comment, tags.meta],
-    color: "var(--lk-color-semantic-mutedforeground)",
-  },
-  {
-    tag: tags.invalid,
-    color: "var(--lk-color-semantic-destructive)",
-    textDecoration: "underline",
-  },
-]);
+
 
 export function mountCodeEditor(root: HTMLElement, get: () => CodeEditorProps) {
+  const codeHighlight = HighlightStyle.define([
+    {
+      tag: tags.keyword,
+      color: "var(--lk-color-semantic-foreground)",
+      fontWeight: "var(--lk-typography-fontweight-semibold)",
+    },
+    {
+      tag: [tags.string, tags.number, tags.bool],
+      color: "var(--lk-color-semantic-foreground)",
+      fontStyle: "italic",
+    },
+    {
+      tag: [tags.comment, tags.meta],
+      color: "var(--lk-color-semantic-mutedforeground)",
+    },
+    {
+      tag: tags.invalid,
+      color: "var(--lk-color-semantic-destructive)",
+      textDecoration: "underline",
+    },
+  ]);
   const win = root.ownerDocument.defaultView;
   const host = root.querySelector<HTMLElement>('[data-part="engine"]');
   if (!win || !host) throw new Error("Code editor mount missing");

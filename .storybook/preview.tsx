@@ -3,6 +3,7 @@ import React from "react";
 import type { Preview } from "@storybook/react";
 import { LoongArkProvider } from "@loongark/react";
 import "./preview.css";
+import { ReferenceDocs, ReferenceDocsContainer } from "./reference";
 
 const preview: Preview = {
   globalTypes: {
@@ -66,6 +67,7 @@ const preview: Preview = {
   },
 
   parameters: {
+    docs: { page: ReferenceDocs, container: ReferenceDocsContainer },
     layout: "fullscreen",
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {

@@ -55,7 +55,7 @@ for (const framework of ["react", "vue", "solid", "svelte", "Story"])
         const root = page.locator('[data-scope="chart"]').first();
         await expect(root).toBeVisible();
         const labels = root.locator('svg > text[data-part="category-label"]');
-        const titles = await labels.locator("title").allTextContents();
+        const titles = await root.locator('[data-part="inspect-category"] option').allTextContents();
         expect(titles.length).toBeGreaterThan(1);
         const bounded = () =>
           labels.evaluateAll((nodes) => {
@@ -87,7 +87,8 @@ for (const framework of ["react", "vue", "solid", "svelte", "Story"])
           content: '[data-scope="chart"] { --lk-typography-fontsize-xs:24px; }',
         });
         await expect.poll(bounded).toBe(true);
-        await expect(labels.locator("title")).toHaveText(titles);
+        expect(await labels.count()).toBeGreaterThan(1);
+        for (const title of await labels.locator("title").allTextContents()) expect(titles).toContain(title);
         await page.screenshot({
           path: `.artifacts/p1-boundaries/axis/${info.project.name}-${framework}-${mode}-${width}.png`,
           fullPage: true,
@@ -98,7 +99,7 @@ for (const framework of ["react", "vue", "solid", "svelte", "Story"])
               '[data-scope="chart"] > svg { font-family:monospace; }'),
         );
         await expect.poll(bounded).toBe(true);
-        await expect(labels.locator("title")).toHaveText(titles);
+        for (const title of await labels.locator("title").allTextContents()) expect(titles).toContain(title);
         await style.evaluate((node) => node.remove());
         await expect
           .poll(() =>

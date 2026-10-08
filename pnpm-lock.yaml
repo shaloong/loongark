@@ -160,6 +160,9 @@ importers:
       '@loongark/theme':
         specifier: workspace:*
         version: link:../theme
+      '@loongark/tokens':
+        specifier: workspace:*
+        version: link:../tokens
       '@zag-js/json-tree-utils':
         specifier: 1.43.3
         version: 1.43.3
@@ -278,7 +281,7 @@ importers:
         specifier: 1.43.3
         version: 1.43.3(svelte@5.45.2)
       svelte:
-        specifier: '>=5.20.0'
+        specifier: '>=5.29.0'
         version: 5.45.2
 
   packages/theme:

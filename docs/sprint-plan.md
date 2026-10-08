@@ -308,3 +308,7 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 三引擎最终网格/字体专项96项与 Storybook 对应场景120项通过；普通/强制色各336场景保存截图及语义快照，普通配色完整 Axe 规则保留。更早的表格、编辑器、虚拟化、图表、问卷、异步 Collection 和 Drawer 边界回归及初次失败修正统一见[本批验收](audits/2026-10-08/p1-advanced-and-accessibility/acceptance.json)，310项Linux视觉比较通过，两项P1按用户授权的模拟范围关闭。
 
 真实 iOS/Android 与屏幕阅读器按用户决定跳过，使用文档/成熟源码对照及浏览器模拟，不声明真机、系统输入法或辅助技术通过。过程截图、日志与联系表继续忽略，CI 新增14天证据上传配置，Windows基线未修改。
+
+## 2026-10-08 P1 文档与 P2 发布准备
+
+119族同场景四端代码与引用文件、真实 API 默认值来源、状态 Story 和组合场景进入 Docs；缺少调用代码的基础部件补真实四端示例，整理能力/限制与当前验收索引。实测生产包体、编辑器延迟加载、SSR、大数据滚动/20次重复挂载、最低 peer 和9个 tarball；修正 Svelte 最低范围与公开原生类型。补 cursor、Checkbox hover、NativeSelect 逻辑留白；默认 main，正式 Pages仅 main，develop保留临时预览。结果以 [本批摘要](audits/2026-10-08/p1-p2-readiness/acceptance.json) 为准，未授权发布 main/npm。

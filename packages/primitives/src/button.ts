@@ -25,11 +25,11 @@ const css = `
 ${root} {
   --lk-button-height:var(--lk-control-height-md);
   appearance:none; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;
-  height:var(--lk-button-height); min-height:0; gap:var(--lk-space-component-sm);
-  padding:0 var(--lk-space-component-md); border:var(--lk-control-borderwidth) solid transparent;
+  height:auto; min-height:var(--lk-button-height); max-width:100%; box-sizing:border-box; gap:var(--lk-space-component-sm);
+  padding:max(0px,calc((var(--lk-button-height) - 1lh) / 2 - var(--lk-control-borderwidth))) var(--lk-space-component-md); border:var(--lk-control-borderwidth) solid transparent;
   border-radius:var(--lk-radius-md); background:var(--lk-color-semantic-primary); color:var(--lk-color-semantic-primaryforeground);
   font:inherit; font-size:var(--lk-typography-fontsize-sm); font-weight:var(--lk-typography-fontweight-medium);
-  line-height:var(--lk-typography-lineheight-base); white-space:nowrap; text-decoration:none; cursor:pointer;
+  line-height:var(--lk-typography-lineheight-base); white-space:normal; overflow-wrap:anywhere; text-decoration:none; cursor:pointer;
   transition:background-color var(--lk-motion-duration-fast) var(--lk-motion-easing-standard), color var(--lk-motion-duration-fast) var(--lk-motion-easing-standard), border-color var(--lk-motion-duration-fast) var(--lk-motion-easing-standard), box-shadow var(--lk-motion-duration-fast) var(--lk-motion-easing-standard);
 }
 ${root}[data-block=true] { width:100%; }

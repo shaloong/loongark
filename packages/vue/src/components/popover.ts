@@ -30,7 +30,7 @@ export const LoongArkPopoverTrigger = defineComponent({
         ArkPopover.Trigger,
         {
           ...attrs,
-          asChild: true,
+          asChild: attrs.asChild ?? true,
           "data-scope": "popover",
           "data-part": "trigger",
         },

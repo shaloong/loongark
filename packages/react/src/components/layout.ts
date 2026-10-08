@@ -5,6 +5,7 @@ import {
   forwardRef,
   type HTMLAttributes,
   type AllHTMLAttributes,
+  type SelectHTMLAttributes,
 } from "react";
 import {
   layoutParts,
@@ -124,7 +125,14 @@ export const LoongArkItemHeader = make("ItemHeader");
 export const LoongArkItemFooter = make("ItemFooter");
 export const LoongArkKbd = make("Kbd");
 export const LoongArkKbdGroup = make("KbdGroup");
-export const LoongArkNativeSelect = make("NativeSelect");
+export const LoongArkNativeSelect = forwardRef<HTMLSelectElement,
+  Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> & LayoutOptions & { as?: keyof typeof layoutElements }
+>(({ as, variant, size, orientation, ratio, side, gap, padding, columns, active, style, ...props }, ref) =>
+  createElement(as ?? "select", {
+    ...layoutAttributes("NativeSelect", { variant, size, orientation, ratio, side, active }),
+    ...props, ref, style: { ...layoutStyles({ gap, padding, columns, ratio }), ...style },
+  }),
+);
 export const LoongArkSeparator = make("Separator");
 export const LoongArkSkeleton = make("Skeleton");
 export const LoongArkSpinner = make("Spinner");

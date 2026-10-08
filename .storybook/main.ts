@@ -2,10 +2,13 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+// 开发预览和静态构建都使用当前真实源码生成参考资料，失败时停止构建。
+execFileSync(process.execPath, [resolve(__dirname, "../scripts/generate-reference.mjs")], { cwd: resolve(__dirname, ".."), stdio: "inherit" });
 
 const workspaceAlias: Record<string, string> = {
   "@loongark/tokens": resolve(__dirname, "../packages/tokens/src"),
@@ -20,8 +23,8 @@ const workspaceAlias: Record<string, string> = {
 };
 
 const config: StorybookConfig = {
-  staticDirs: ["./public"],
-  stories: ["../stories/**/*.stories.@(ts|tsx|mdx)"],
+  staticDirs: ["./public", { from: "../.artifacts/storybook-reference", to: "/reference" }],
+  stories: ["../stories/**/*.stories.@(ts|tsx)", "../stories/**/*.mdx"],
   addons: [getAbsolutePath("@storybook/addon-docs")],
 
   framework: {

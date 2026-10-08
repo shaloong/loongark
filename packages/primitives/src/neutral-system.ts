@@ -13,7 +13,7 @@ const css = `
 [data-scope] :where(button,input,textarea,select) { font:inherit; }
 [data-scope] :where(button,[role=button],[role=option],[role=tab],[role=menuitem]) { touch-action:manipulation; }
 [data-scope] :where(button,input,textarea,select,[tabindex]):focus-visible { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring); outline-offset:var(--lk-control-focuswidth); }
-[data-scope] :where([data-disabled],[disabled]) { cursor:not-allowed; }
+[data-scope] :where([data-disabled=""],[data-disabled=true],:disabled,[aria-disabled=true]) { cursor:not-allowed; }
 [data-scope] :where(input,select,textarea) { min-width:0; max-width:100%; }
 [data-scope] :where([data-part=helper-text],[data-part=error-text],[data-part=description]) { overflow-wrap:anywhere; }
 :is([data-scope=select],[data-scope=combobox],[data-scope=date-picker],[data-scope=number-input],[data-scope=password-input]) :is([data-part=trigger],[data-part=input],[data-part=control]) { min-height:var(--lk-control-height-md); border-radius:var(--lk-radius-md); border-color:var(--lk-color-semantic-input); background:var(--lk-color-semantic-background); color:var(--lk-color-semantic-foreground); box-shadow:var(--lk-shadow-sm); }

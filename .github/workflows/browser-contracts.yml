@@ -2,7 +2,7 @@ name: Browser contracts
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, main]
   workflow_dispatch:
 
 permissions:

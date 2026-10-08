@@ -45,6 +45,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
           // 只放大排版 Token，保持控件尺寸 Token，暴露文字裁切；不是设备字体设置。
           await page.addStyleTag({
             content: `* {
+            font-family:"DejaVu Sans",sans-serif !important;
             --lk-typography-fontsize-xs:24px !important;
             --lk-typography-fontsize-sm:28px !important;
             --lk-typography-fontsize-md:28px !important;
@@ -113,6 +114,10 @@ for (const framework of ["react", "vue", "solid", "svelte"])
             .withTags(["wcag2a", "wcag2aa"])
             .analyze();
           await page.emulateMedia({ forcedColors: "active" });
+          await expect.poll(() => root.evaluate((node) => {
+            const svg = node.querySelector(":scope > svg");
+            return !svg || getComputedStyle(svg).backgroundColor !== "rgba(0, 0, 0, 0)";
+          })).toBe(true);
           const metrics = await page.evaluate(() => ({
             width: innerWidth,
             scroll: document.documentElement.scrollWidth,

@@ -3,6 +3,15 @@ import {
   foundationCSS,
   type FoundationOptions,
 } from "./foundations";
+import { baseTokens } from "@loongark/tokens";
+import { controlIcons } from "./icon";
+import { decorativeIconMarkup } from "./icon-markup";
+// 原生 select 的浏览器箭头忽略 padding；复用统一图标并保留原生菜单/表单语义。
+const selectArrow = encodeURIComponent(
+  decorativeIconMarkup(controlIcons.chevronDown, (value) => value)
+    .replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ')
+    .replace('stroke="currentColor"', `stroke="${baseTokens.color.vi.leadGray}"`),
+);
 export { layoutStyles } from "./foundations";
 export const layoutParts = {
   ...foundationParts,
@@ -169,7 +178,12 @@ export const layoutCSS =
 [data-scope=item] [data-part=actions], [data-scope=item] [data-part=header], [data-scope=item] [data-part=footer] { display:flex; align-items:center; gap:var(--lk-space-component-sm); }
 [data-scope=kbd] { display:inline-flex; align-items:center; justify-content:center; border-radius:var(--lk-radius-sm); background:var(--lk-color-semantic-muted); color:var(--lk-color-semantic-mutedforeground); padding:var(--lk-control-focuswidth) var(--lk-control-fieldgap); font-family:inherit; font-size:var(--lk-typography-fontsize-xs); line-height:var(--lk-space-component-md); }
 [data-scope=kbd][data-part=group] { background:transparent; gap:var(--lk-space-component-xs); padding:0; }
-[data-scope=native-select] { width:100%; height:var(--lk-control-height-md); border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input); border-radius:var(--lk-radius-md); background:var(--lk-color-semantic-background); color:var(--lk-color-semantic-foreground); padding:0 var(--lk-space-component-compact); font:inherit; box-shadow:var(--lk-shadow-sm); }
+[data-scope=native-select] { width:100%; height:var(--lk-field-height,var(--lk-control-height-md)); border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input); border-radius:var(--lk-radius-md); background:var(--lk-color-semantic-background); color:var(--lk-color-semantic-foreground); padding:0 var(--lk-space-component-compact); font:inherit; box-shadow:var(--lk-shadow-sm); cursor:pointer; }
+[data-scope=native-select]:not([multiple]) { appearance:none; padding-inline-end:calc(var(--lk-space-component-compact) * 2 + var(--lk-control-icon-sm)); background-image:url("data:image/svg+xml,${selectArrow}"); background-repeat:no-repeat; background-size:var(--lk-control-icon-sm); background-position:right var(--lk-space-component-compact) center; }
+[data-scope=native-select]:not([multiple]):dir(rtl) { background-position:left var(--lk-space-component-compact) center; }
+[data-scope=native-select][multiple] { height:auto; min-height:var(--lk-control-height-md); padding-block:var(--lk-space-component-sm); }
+[data-scope=native-select]:disabled { cursor:not-allowed; opacity:.5; }
+@media (forced-colors:active) { [data-scope=native-select]:not([multiple]) { appearance:auto; background-image:none; } }
 [data-scope=separator] { border:0; margin:0; background:var(--lk-color-semantic-border); height:var(--lk-control-borderwidth); width:100%; }
 [data-scope=separator][data-orientation=vertical] { width:var(--lk-control-borderwidth); height:100%; align-self:stretch; }
 [data-scope=skeleton] { min-height:var(--lk-space-component-md); border-radius:var(--lk-radius-md); background:var(--lk-color-semantic-border); animation:lk-pulse var(--lk-motion-duration-pulse) ease-in-out infinite; }

@@ -47,10 +47,14 @@
     "prosemirror-tables": "1.8.5",
     "@lezer/highlight": "1.2.5",
     "@zag-js/rating-group": "1.43.3",
-    "@internationalized/date": "3.12.4"
+    "@internationalized/date": "3.12.4",
+    "@loongark/tokens": "workspace:*"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json && node ../../scripts/fix-dist-imports.mjs dist"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "sideEffects": [
+    "./dist/index.js"
+  ]
 }

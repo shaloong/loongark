@@ -31,13 +31,14 @@ pnpm exec playwright install --with-deps chromium
 
 已有检出应先确认工作区状态，再切换到 `develop` 并同步；不要自动 reset、清理或覆盖未提交改动。Windows 也使用同一套 pnpm 命令，浏览器系统依赖由所在环境处理。
 
-GitHub 的仓库默认分支设为 `develop`，云端任务创建时仍应明确选中 `develop`。发布目标保持为 `main`。
+GitHub 的仓库默认分支应设为 `main`，云端开发任务创建时明确选中 `develop`。默认分支用于稳定版本展示，不改变日常开发目标或将开发提交自动合入 `main`。
 
 ## 验证顺序
 
 ```sh
 pnpm verify
 pnpm check:contracts
+pnpm check:storybook
 pnpm storybook:build
 pnpm check:coverage
 pnpm check:publication
@@ -49,9 +50,11 @@ pnpm visual:test
 
 先构建成功，再验证真实发布产物。覆盖检查读取 `storybook-static/index.json`，必须先成功构建 Storybook，不能依赖工作区里的旧索引；Pages 工作流和干净检出也遵守此依赖顺序。不要并行运行多个 Playwright 命令，它们共用测试结果目录。运行 Storybook 开发预览使用 `pnpm storybook`。
 
-当前验收在 Windows/Chromium 完成，仓库中的既有视觉基线带 win32 标记。云端 Linux 首次执行视觉测试需要建立并人工审阅对应平台的基线；不得将缺少基线视为通过，也不得自动覆盖 Windows 基线。修改样式后应查看截图再确认基线变化。
+既有视觉基线包含 Windows/Chromium 的 win32 文件，云端验收使用独立 Linux 基线。首次覆盖新平台或场景时应建立并人工审阅对应基线；不得将缺少基线视为通过，也不得覆盖其他平台的基线。修改样式后应查看截图再确认变化。
 
 验证记录见 [docs/README.md](docs/README.md) 和 [组件覆盖清单](docs/component-coverage.json)。合入 `main` 不等于发布 npm；正式包发布和版本标签按实际发布任务执行。
+
+发布准备还需执行 [性能与打包探针](docs/releases.md#性能复测)，验证生产按需导入、SSR、滚动与重复挂载、真实 tarball 和最低 peer 版本。过程产物只保存为临时 Artifact。
 
 若环境已提供系统 Chromium，可使用 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium pnpm test:e2e`；验收必须记录实际浏览器版本，不声称等同于 Playwright 固定版本。相同变量适用于四端和视觉回归。Linux 基线仍独立审阅与保存。
 
@@ -61,7 +64,7 @@ pnpm visual:test
 
 Storybook 可以静态部署到 GitHub Pages 或 Vercel；平台、商业用途和仓库可见性须分别考虑，见 [展示与公开范围](docs/storybook-hosting.md)。部署产物不提交到源码分支。
 
-本库采用 MIT，根目录及全部发布包必须包含 LICENSE，`pnpm lint` 校验许可一致性。Pages 自动跟随 develop；工作流在子路径烟雾验收通过后部署 Storybook，截图 Artifact 保留14天。稳定发布和 npm 发布仍按单独发布指令执行。
+本库采用 MIT，根目录及全部发布包必须包含 LICENSE，`pnpm lint` 校验许可一致性。Pages 只部署 main，develop 仅保存临时预览产物；工作流在子路径烟雾验收通过后部署 Storybook，截图 Artifact 保留14天。稳定发布和 npm 发布仍按单独发布指令执行。
 
 ## 多浏览器与原生 Safari
 
@@ -77,7 +80,7 @@ CROSS_BROWSER=1 node scripts/run-playwright.mjs --project=webkit --workers=2
 
 矩阵不运行 Chromium 截图比较；它在四端测试后先保存对应浏览器实际交互截图、失败截图和环境信息，再运行 Story，避免测试结果目录被后续命令覆盖。四端截图按框架拆分归档，环境信息与错误摘要单独保存，避免单个证据ZIP过大。Story 摘要/代表场景、trace 与全部默认截图分别保存，CI Artifact 保留14天。首次验收仍须下载并目视检查实际截图，不因添加流水线就宣称通过。
 
-浏览器契约工作流保留已启动的完整验收，连续推送只合并最新待运行批次，避免 WebKit 在后续开发提交时持续被取消。完整 Linux 任务预算为120分钟：实际四端 WebKit51.1分钟、先前完整 Story33.8分钟，另计安装、构建和证据上传。验收摘要记录每项对应的源码提交；新推送的排队状态不算通过，GitHub Pages继续独立部署 develop。
+浏览器契约工作流保留已启动的完整验收，连续推送只合并最新待运行批次，避免 WebKit 在后续开发提交时持续被取消。完整 Linux 任务预算为120分钟：实际四端 WebKit51.1分钟、先前完整 Story33.8分钟，另计安装、构建和证据上传。验收摘要记录每项对应的源码提交；新推送的排队状态不算通过，GitHub Pages仅部署 main。
 
 原生 Safari 任务在 macOS 15 使用 Apple `/usr/bin/safaridriver` 的 W3C WebDriver，检查全部四端默认示例、页面溢出、批量多级历史/键盘/焦点和图表窗口的明暗交互。它独立于 Playwright WebKit，报告实际 Safari 版本及每个场景。Linux 不能运行此任务，桌面 Safari 也不代表真实 iOS 手机；真机验收仍需单独取得设备连接。只有对应任务成功且截图审阅完成才关闭平台清单。
 

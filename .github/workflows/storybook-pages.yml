@@ -2,14 +2,14 @@ name: Storybook Pages
 
 on:
   push:
-    branches: [develop]
+    branches: [main, develop]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: storybook-pages
+  group: storybook-pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -44,12 +44,21 @@ jobs:
           path: .artifacts/pages-smoke/
           retention-days: 14
           if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/develop'
+        with:
+          name: storybook-development-preview
+          path: storybook-static/
+          retention-days: 14
       - uses: actions/configure-pages@v5
+        if: github.ref == 'refs/heads/main'
       - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
         with:
           path: storybook-static
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-24.04
     timeout-minutes: 10

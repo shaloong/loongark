@@ -11,7 +11,13 @@
       "node": "./dist/server/index.js",
       "import": "./dist/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./editors": {
+      "types": "./dist/components/editors.d.ts",
+      "node": "./dist/server/editors.js",
+      "import": "./dist/components/editors.js",
+      "browser": "./dist/components/editors.js"
+    }
   },
   "files": [
     "dist",
@@ -35,5 +41,6 @@
   "scripts": {
     "build": "node ../../scripts/reset-build-info.mjs tsconfig.tsbuildinfo && tsc -p tsconfig.json && node ../../scripts/compile-solid.mjs dist && node ../../scripts/fix-dist-imports.mjs dist && node ../../scripts/build-solid-ssr.mjs"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "sideEffects": false
 }

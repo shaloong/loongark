@@ -1,11 +1,13 @@
 # LoongArk 组件覆盖
 
-更新时间：2026-10-06。按组件族计数，Progress 的线性/圆形属于同一族。
+更新时间：2026-10-08。按组件族计数，Progress 的线性/圆形属于同一族。
 
-目前 117 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐 Ark 裁剪、JSON 与辅助组件，并复核高级部件，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
+目前 119 个组件族具有 React、Vue、Solid、Svelte 对应入口。最近批次补齐 Ark 裁剪、JSON 与辅助组件，并复核高级部件，详见 [附件、消息与问卷](conversation.md)、 [选择与输入组件](selection-inputs.md)、[浮动动作与媒体布局](action-media.md) 和 [持续清单](component-coverage.json)。
 
 | 组件族               | React | Vue | Solid | Svelte | 交付来源            |
 | -------------------- | ----- | --- | ----- | ------ | ------------------- |
+| VirtualGrid          | ✓     | ✓   | ✓     | ✓      | 2026-10-07 二维虚拟布局 |
+| VirtualMasonry       | ✓     | ✓   | ✓     | ✓      | 2026-10-07 虚拟瀑布流 |
 | RichTextEditor       | ✓     | ✓   | ✓     | ✓      | 2026-10-06 独立编辑器 |
 | CodeEditor           | ✓     | ✓   | ✓     | ✓      | 2026-10-06 独立编辑器 |
 | DateInput            | ✓     | ✓   | ✓     | ✓      | 2026-10-03 Ark 新版 |
@@ -208,3 +210,7 @@ Icon 提供四端共享 Lucide 节点、可访问名称、尺寸、固定描边�
 共享图表检查器与浮层补齐窄屏边界：放大类别字体、退出中的旧触发器宽度及 Sheet 滑出绘制均纳入回归；公开入口与 Story 数量不增加。
 
 Drawer 手柄同步四端的原生指针默认行为保护，避免拖动误选正文；Chart 数据表的原生展开入口同步 Lucide 箭头、RTL 与焦点样式。示例预览标题显示可读名称，原始示例标识继续用于四端自动化。
+
+Storybook Docs 从真实四端源码和公开类型生成参考资料，包含API缺省值来源、状态链接和同场景组合代码。当前能力/限制与验证范围见 [能力概览](capabilities.md) 和 [验收索引](acceptance.md)。
+
+日期状态补充识别 Ark 空属性与 true，修复选中悬停对比度和 WebKit/Svelte 系统按钮外观；最终四端三引擎语义、Docs、表单专项与310项Linux视觉通过，详见当前验收。

@@ -1,7 +1,7 @@
 import type { SvelteComponent } from "svelte";
-import type { HTMLAttributes } from "svelte/elements";
+import type { HTMLSelectAttributes } from "svelte/elements";
 import type { LayoutOptions } from "@loongark/kit";
 export default class NativeSelect extends SvelteComponent<
-  HTMLAttributes<HTMLElement> &
-    LayoutOptions & { as?: string; href?: string; value?: string; for?: string }
+  Omit<HTMLSelectAttributes, "size"> &
+    LayoutOptions & { as?: string }
 > {}

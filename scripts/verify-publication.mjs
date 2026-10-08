@@ -30,5 +30,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
   );
   for (const entry of [manifest.main, manifest.types])
     await access(`packages/${framework}/${entry}`);
+  for (const target of Object.values(manifest.exports["./editors"] ?? {}))
+    await access(`packages/${framework}/${target}`);
 }
 console.log("发布入口、Svelte 声明与清单文件验证通过");

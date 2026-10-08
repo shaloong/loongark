@@ -25,6 +25,10 @@ export type LoongArkLayoutProps = Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> &
     hreflang?: string;
     referrerpolicy?: JSX.AnchorHTMLAttributes<HTMLAnchorElement>["referrerpolicy"];
     value?: string;
+    name?: string;
+    form?: string;
+    multiple?: boolean;
+    required?: boolean;
     htmlFor?: string;
     disabled?: boolean;
     type?: "button" | "reset" | "submit";
@@ -101,7 +105,17 @@ export const LoongArkItemHeader = make("ItemHeader");
 export const LoongArkItemFooter = make("ItemFooter");
 export const LoongArkKbd = make("Kbd");
 export const LoongArkKbdGroup = make("KbdGroup");
-export const LoongArkNativeSelect = make("NativeSelect");
+/** 原生选择框保留完整 Select 属性和事件目标类型，包括多选 value。 */
+export type LoongArkNativeSelectProps = Omit<
+  JSX.SelectHTMLAttributes<HTMLSelectElement>, "size"
+> & LayoutOptions & { as?: LoongArkLayoutProps["as"] };
+export const LoongArkNativeSelect = (props: LoongArkNativeSelectProps) => {
+  const [local, rest] = splitProps(props, ["as", "variant", "size", "orientation", "ratio", "side", "gap", "padding", "columns", "active", "style"]);
+  return <Dynamic component={local.as ?? "select"} {...layoutAttributes("NativeSelect", local)} {...rest} style={{
+    ...layoutStyles(local),
+    ...(typeof local.style === "object" ? local.style : {}),
+  }} />;
+};
 export const LoongArkSeparator = make("Separator");
 export const LoongArkSkeleton = make("Skeleton");
 export const LoongArkSpinner = make("Spinner");

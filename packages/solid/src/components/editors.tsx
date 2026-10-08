@@ -47,12 +47,12 @@ function makeEditor<P extends EditorFormOptions>(
     );
   };
 }
-export const LoongArkCodeEditor = makeEditor<CodeEditorProps>(
+export const LoongArkCodeEditor = /* @__PURE__ */ makeEditor<CodeEditorProps>(
   "code",
   renderCodeEditorMarkup,
   mountCodeEditor,
 );
-export const LoongArkRichTextEditor = makeEditor<RichTextEditorProps>(
+export const LoongArkRichTextEditor = /* @__PURE__ */ makeEditor<RichTextEditorProps>(
   "rich",
   renderRichTextEditorMarkup,
   mountRichTextEditor,

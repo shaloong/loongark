@@ -27,7 +27,7 @@ export const LoongArkTooltipTrigger = defineComponent({
         ArkTooltip.Trigger,
         {
           ...attrs,
-          asChild: true,
+          asChild: attrs.asChild ?? true,
           "data-scope": "tooltip",
           "data-part": "trigger",
         },

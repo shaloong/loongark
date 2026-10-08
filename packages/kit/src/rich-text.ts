@@ -106,6 +106,8 @@ const safeLink = {
     ] as const,
 };
 // 图片加载/上传属于外部契约，基础结构不接受未知 DOM 或节点。
+// Schema 构造只产生本地对象，不修改外部注册表；未消费编辑器时可消除。
+export const richTextSchema: Schema = /* @__PURE__ */ (() => {
 const nodes = addListNodes(
   basicSchema.spec.nodes.remove("image"),
   "paragraph block*",
@@ -117,7 +119,7 @@ const nodes = addListNodes(
     cellAttributes: {},
   }),
 );
-export const richTextSchema: Schema = new Schema({
+return new Schema({
   nodes,
   marks: basicSchema.spec.marks.update("link", safeLink).append({
     underline: { parseDOM: [{ tag: "u" }], toDOM: () => ["u", 0] },
@@ -127,9 +129,10 @@ export const richTextSchema: Schema = new Schema({
     },
   }),
 });
-export const emptyRichTextDocument: RichTextDocument = Object.freeze({
+})();
+export const emptyRichTextDocument: RichTextDocument = /* @__PURE__ */ Object.freeze({
   type: "doc",
-  content: Object.freeze([Object.freeze({ type: "paragraph" })]),
+  content: /* @__PURE__ */ Object.freeze([/* @__PURE__ */ Object.freeze({ type: "paragraph" })]),
 });
 
 export function richTextNode(

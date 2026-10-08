@@ -25,7 +25,12 @@
     "check:svelte": "node node_modules/svelte-check/bin/svelte-check --tsconfig packages/svelte/tsconfig.examples.json",
     "test:frameworks": "node scripts/build-framework-fixtures.mjs && node scripts/build-example-fixtures.mjs && node scripts/run-framework-tests.mjs",
     "check:coverage": "node scripts/check-api-parity.mjs && node scripts/check-component-coverage.mjs",
-    "test:storybook-static": "node ./scripts/test-storybook-static.mjs"
+    "test:storybook-static": "node ./scripts/test-storybook-static.mjs",
+    "check:storybook": "pnpm exec tsc -p .storybook/tsconfig.json",
+    "measure:bundles": "node scripts/measure-bundles.mjs",
+    "measure:ssr": "node scripts/measure-ssr.mjs",
+    "check:release": "node scripts/check-release.mjs",
+    "check:versions": "node scripts/check-versions.mjs"
   },
   "devDependencies": {
     "@ark-ui/react": "^5.39.2",

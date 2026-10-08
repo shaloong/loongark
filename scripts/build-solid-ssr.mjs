@@ -34,15 +34,19 @@ await build({
     resolve: { conditions: ["solid", "node"] },
   },
   build: {
-    ssr: resolve(workspace, "packages/solid/dist/ssr/index.js"),
+    ssr: true,
     outDir: resolve(workspace, "packages/solid/dist/server"),
     minify: false,
     rollupOptions: {
+      input: {
+        index: resolve(workspace, "packages/solid/dist/ssr/index.js"),
+        editors: resolve(workspace, "packages/solid/dist/ssr/components/editors.js"),
+      },
       external: (id) =>
         id === "solid-js" ||
         id.startsWith("solid-js/") ||
         id.startsWith("@loongark/"),
-      output: { entryFileNames: "index.js" },
+      output: { entryFileNames: "[name].js" },
     },
   },
   logLevel: "error",

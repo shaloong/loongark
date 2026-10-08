@@ -3,9 +3,9 @@
   import type { DatePickerTableCellProps } from "@ark-ui/svelte/date-picker";
 
   export let value: DatePickerTableCellProps["value"];
-  export let disabled: DatePickerTableCellProps["disabled"];
-  export let columns: DatePickerTableCellProps["columns"];
-  export let visibleRange: DatePickerTableCellProps["visibleRange"];
+  export let disabled: DatePickerTableCellProps["disabled"] = undefined;
+  export let columns: DatePickerTableCellProps["columns"] = undefined;
+  export let visibleRange: DatePickerTableCellProps["visibleRange"] = undefined;
 </script>
 
 <DatePicker.TableCell

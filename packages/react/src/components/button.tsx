@@ -1,5 +1,5 @@
 import { dataProps } from "../data-props";
-import { ark } from "@ark-ui/react";
+import { ark } from "@ark-ui/react/factory";
 import type { ButtonPrimitiveProps } from "@loongark/primitives";
 import { createElement, forwardRef } from "react";
 import type { ReactNode, ButtonHTMLAttributes } from "react";

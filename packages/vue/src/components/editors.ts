@@ -65,7 +65,7 @@ function useEditor<P extends EditorFormOptions>(
       innerHTML: markup,
     });
 }
-export const LoongArkCodeEditor = defineComponent({
+export const LoongArkCodeEditor = /* @__PURE__ */ defineComponent({
   name: "LoongArkCodeEditor",
   inheritAttrs: false,
   props: {
@@ -106,7 +106,7 @@ export const LoongArkCodeEditor = defineComponent({
     );
   },
 });
-export const LoongArkRichTextEditor = defineComponent({
+export const LoongArkRichTextEditor = /* @__PURE__ */ defineComponent({
   name: "LoongArkRichTextEditor",
   inheritAttrs: false,
   props: {

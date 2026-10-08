@@ -9,7 +9,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./editors": {
+      "types": "./dist/components/editors.d.ts",
+      "import": "./dist/components/editors.js"
+    }
   },
   "files": [
     "dist",
@@ -23,7 +27,7 @@
     "@zag-js/svelte": "1.43.3"
   },
   "peerDependencies": {
-    "svelte": ">=5.20.0"
+    "svelte": ">=5.29.0"
   },
   "peerDependenciesMeta": {
     "svelte": {
@@ -33,5 +37,6 @@
   "scripts": {
     "build": "tsc -p tsconfig.json && node ../../scripts/copy-assets.mjs src dist .svelte .d.ts && node ../../scripts/fix-dist-imports.mjs dist"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "sideEffects": false
 }

@@ -8,9 +8,9 @@ export default class LoongArkDatePickerTableCell extends SvelteComponent<
     "children" | "value" | "disabled" | "columns" | "visibleRange"
   > & {
     value: DatePickerTableCellProps["value"];
-    disabled: DatePickerTableCellProps["disabled"];
-    columns: DatePickerTableCellProps["columns"];
-    visibleRange: DatePickerTableCellProps["visibleRange"];
+    disabled?: DatePickerTableCellProps["disabled"];
+    columns?: DatePickerTableCellProps["columns"];
+    visibleRange?: DatePickerTableCellProps["visibleRange"];
   },
   Record<string, never>,
   { default: Record<string, never> }

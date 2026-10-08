@@ -9,7 +9,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./editors": {
+      "types": "./dist/components/editors.d.ts",
+      "import": "./dist/components/editors.js"
+    }
   },
   "files": [
     "dist",
@@ -33,5 +37,6 @@
   "scripts": {
     "build": "tsc -p tsconfig.json && node ../../scripts/fix-dist-imports.mjs dist"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "sideEffects": false
 }
