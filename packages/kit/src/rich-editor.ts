@@ -1,3 +1,4 @@
+import { isCompositionKey } from "./composition-key";
 import {
   EditorState,
   TextSelection,
@@ -625,6 +626,7 @@ export function mountRichTextEditor(
     schedule();
   };
   const linkKeys = (event: KeyboardEvent) => {
+    if (isCompositionKey(event)) return;
     if (event.key === "Escape") {
       event.preventDefault();
       closeLink();

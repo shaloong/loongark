@@ -41,6 +41,16 @@ const css = `
 [data-scope=chart] [data-part=zoom-actions] button:hover:not(:disabled) { background:var(--lk-color-semantic-accent); }
 [data-scope=chart] [data-part=tooltip][hidden] { display:none; }
 @media(max-width:480px) { [data-scope=chart] [data-part=brush] { grid-template-columns:minmax(0,1fr); } }
+@media(forced-colors:active) {
+  [data-scope=chart] > svg, [data-scope=chart] [data-part=legend-item] svg { background:Canvas; }
+  [data-scope=chart] svg text { fill:CanvasText; }
+  [data-scope=chart] svg > line { stroke:GrayText; }
+  [data-scope=chart] [data-part=line], [data-scope=chart] [data-part=legend-item] svg line { stroke:CanvasText; }
+  [data-scope=chart] :is([data-part=point],[data-part=bar],[data-part=area],[data-part=slice]) { fill:CanvasText; }
+  [data-scope=chart] [data-part=legend-item] svg :is(rect,circle) { fill:CanvasText; }
+  [data-scope=chart] [data-part=slice] { stroke:Canvas; }
+  [data-scope=chart] [data-part=legend-toggle][aria-pressed=true] { outline:var(--lk-control-focuswidth) solid Highlight;outline-offset:var(--lk-control-focuswidth); }
+}
 `;
 registerPrimitive(
   createPrimitive(

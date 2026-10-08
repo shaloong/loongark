@@ -1,4 +1,5 @@
 import { createVirtualWindow } from "./virtual-window";
+import { isCompositionKey } from "./composition-key";
 
 export interface VirtualGridOptions {
   rowKeys: readonly string[];
@@ -392,7 +393,34 @@ export function mountVirtualGrid(
   const win = root.ownerDocument.defaultView!;
   let activeRow = model.rows.state.entries[0]?.key,
     activeColumn = model.columns.state.entries[0]?.key,
-    pending = false;
+    pending = false,
+    interacting = false,
+    enterRequested = false;
+  const nativeControls = new Map<HTMLElement, string | null>();
+  let ownedFocus: { node: Element; row: string; column: string } | undefined;
+  const controls = (cell: HTMLElement) =>
+    Array.from(
+      cell.querySelectorAll<HTMLElement>(
+        'input,textarea,select,button,a[href],[contenteditable="true"]',
+      ),
+    ).filter((node) => {
+      // 自定义复合控件负责自己的内部游标，不能改写其子控件的键盘契约。
+      const composite = node.closest(
+        '[role="grid"],[role="tree"],[role="listbox"],[role="menu"]',
+      );
+      return !composite || composite === root;
+    });
+  const restoreNative = (node: HTMLElement, original: string | null) => {
+    if (original === null) node.removeAttribute("tabindex");
+    else node.setAttribute("tabindex", original);
+  };
+  const editable = (cell: HTMLElement) =>
+    controls(cell).find(
+      (node) =>
+        nativeControls.has(node) &&
+        !node.matches(":disabled,[hidden]") &&
+        node.getClientRects().length,
+    );
   const cells = () =>
     Array.from(
       root.querySelectorAll<HTMLElement>(
@@ -400,27 +428,111 @@ export function mountVirtualGrid(
       ),
     );
   const restore = () => {
+    const actual = root.ownerDocument.activeElement;
+    if (
+      ownedFocus &&
+      !ownedFocus.node.isConnected &&
+      (!actual ||
+        actual === root.ownerDocument.body ||
+        actual === root.ownerDocument.documentElement)
+    ) {
+      enterRequested =
+        interacting &&
+        model.options.rowKeys.includes(ownedFocus.row) &&
+        model.options.columnKeys.includes(ownedFocus.column);
+      interacting = false;
+      pending = true;
+      ownedFocus = undefined;
+    }
     if (!model.options.rowKeys.includes(activeRow))
       activeRow = model.rows.state.entries[0]?.key;
     if (!model.options.columnKeys.includes(activeColumn))
       activeColumn = model.columns.state.entries[0]?.key;
     model.setCursor(activeRow, activeColumn);
-    for (const cell of cells())
-      cell.tabIndex =
+    for (const [node, original] of nativeControls) {
+      if (!root.contains(node)) {
+        restoreNative(node, original);
+        nativeControls.delete(node);
+      }
+    }
+    for (const cell of cells()) {
+      const active =
         cell.dataset.rowKey === activeRow &&
-        cell.dataset.columnKey === activeColumn
-          ? 0
-          : -1;
+        cell.dataset.columnKey === activeColumn;
+      cell.tabIndex = active && !interacting ? 0 : -1;
+      for (const node of controls(cell)) {
+        if (!nativeControls.has(node)) {
+          const original = node.getAttribute("tabindex");
+          if (original !== null && Number(original) < 0) continue;
+          nativeControls.set(node, original);
+        }
+        if (active && interacting)
+          restoreNative(node, nativeControls.get(node)!);
+        else node.tabIndex = -1;
+      }
+    }
     if (pending) {
       const target = cells().find((cell) => cell.tabIndex === 0);
       if (target) {
         pending = false;
-        target.focus({ preventScroll: true });
+        const field = enterRequested ? editable(target) : undefined;
+        enterRequested = false;
+        if (field) {
+          interacting = true;
+          restore();
+        }
+        (field ?? target).focus({ preventScroll: true });
       }
     }
   };
   const keydown = (event: KeyboardEvent) => {
     const target = event.target as HTMLElement;
+    if (isCompositionKey(event) || event.defaultPrevented) return;
+    const owner = cells().find((cell) => cell.contains(target));
+    if (
+      pending &&
+      enterRequested &&
+      owner === target &&
+      event.key === "Escape"
+    ) {
+      event.preventDefault();
+      enterRequested = false;
+      return;
+    }
+    if (
+      interacting &&
+      owner &&
+      nativeControls.has(target) &&
+      ["Escape", "F2"].includes(event.key)
+    ) {
+      event.preventDefault();
+      interacting = false;
+      owner.focus({ preventScroll: true });
+      return;
+    }
+    if (
+      owner === target &&
+      ["Enter", "F2"].includes(event.key) &&
+      !event.altKey &&
+      !event.ctrlKey &&
+      !event.metaKey &&
+      !event.shiftKey
+    ) {
+      if (pending) {
+        event.preventDefault();
+        enterRequested = true;
+        schedule();
+        return;
+      }
+      const field = editable(owner);
+      if (field) {
+        event.preventDefault();
+        interacting = true;
+        restore();
+        field.focus({ preventScroll: true });
+      }
+      return;
+    }
     if (
       target.dataset.part !== "cell" ||
       !cells().includes(target) ||
@@ -429,8 +541,11 @@ export function mountVirtualGrid(
     )
       return;
     const props = model.options,
-      row = props.rowKeys.indexOf(target.dataset.rowKey!),
-      column = props.columnKeys.indexOf(target.dataset.columnKey!);
+      // 目标尚未渲染或聚焦时，从已请求位置累计，而不是反复消费旧 DOM 游标。
+      row = props.rowKeys.indexOf(pending ? activeRow : target.dataset.rowKey!),
+      column = props.columnKeys.indexOf(
+        pending ? activeColumn : target.dataset.columnKey!,
+      );
     let nextRow = row,
       nextColumn = column;
     const rtl = win.getComputedStyle(root).direction === "rtl";
@@ -476,9 +591,10 @@ export function mountVirtualGrid(
     activeRow = props.rowKeys[nextRow];
     activeColumn = props.columnKeys[nextColumn];
     pending = true;
+    enterRequested = false;
     model.setCursor(activeRow, activeColumn);
-    model.rows.focus(activeRow);
-    model.columns.focus(activeColumn);
+    // 继续保留当前实际聚焦单元格，直到新游标接管焦点；否则跨窗口时节点
+    // 被移除，后续可信按键落到 body，连按序列会在窗口边缘提前结束。
     const reveal = (axis: typeof model.rows, index: number) => {
       const entry = axis.state.entries.find((item) => item.index === index);
       if (!entry || entry.offset < axis.state.offset) axis.scrollToIndex(index);
@@ -499,6 +615,18 @@ export function mountVirtualGrid(
         ? (cells().find((cell) => cell.contains(target)) ?? null)
         : null;
     if (cell) {
+      pending = false;
+      enterRequested = false;
+      interacting =
+        target !== cell &&
+        target instanceof win.HTMLElement &&
+        (nativeControls.has(target) ||
+          (controls(cell).includes(target) && target.tabIndex >= 0));
+      ownedFocus = {
+        node: target!,
+        row: cell.dataset.rowKey!,
+        column: cell.dataset.columnKey!,
+      };
       activeRow = cell.dataset.rowKey!;
       activeColumn = cell.dataset.columnKey!;
       model.setCursor(activeRow, activeColumn);
@@ -514,6 +642,10 @@ export function mountVirtualGrid(
       event.target !== root.ownerDocument.body
     ) {
       pending = false;
+      interacting = false;
+      enterRequested = false;
+      ownedFocus = undefined;
+      restore();
       model.rows.focus(activeRow);
       model.columns.focus(activeColumn);
     }
@@ -619,6 +751,10 @@ export function mountVirtualGrid(
     root.removeEventListener("focusin", focus);
     root.ownerDocument.removeEventListener("focusin", external, true);
     root.ownerDocument.removeEventListener("pointerdown", external, true);
+    for (const [node, original] of nativeControls)
+      restoreNative(node, original);
+    nativeControls.clear();
+    ownedFocus = undefined;
     model.dispose();
   };
 }

@@ -15,7 +15,17 @@ const meta = {
   decorators: [withArkExamplePage],
 } satisfies Meta;
 export default meta;
-export const Basic: StoryObj = { render: () => <RichTextEditorExample /> };
+export const Basic: StoryObj = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "中文组合输入不提前触发链接面板确认或取消；受控拒绝恢复已接受文档。链接确认完成后恢复编辑区焦点，卸载释放插件与监听。",
+      },
+    },
+  },
+  render: () => <RichTextEditorExample />,
+};
 export const ReadOnly: StoryObj = {
   render: () => (
     <L.LoongArkRichTextEditor

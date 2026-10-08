@@ -53,7 +53,7 @@ export function LoongArkVirtualGrid(props: VirtualGridProps) {
       aria-rowcount={props.rowKeys.length}
       aria-colcount={props.columnKeys.length}
       dir={props.dir}
-      tabIndex={rows().count && columns().count ? undefined : 0}
+      tabIndex={rows().count && columns().count ? -1 : 0}
       style={{ height: `${props.height ?? 320}px` }}
     >
       <div

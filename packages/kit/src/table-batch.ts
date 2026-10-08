@@ -1,3 +1,4 @@
+import { isCompositionKey } from "./composition-key";
 import {
   dataTableLabels,
   validateDataTableDraft,
@@ -664,7 +665,7 @@ export function mountDataTableBatch(
     void editor.save(props());
   };
   const keydown = (event: KeyboardEvent) => {
-    if (event.isComposing) return;
+    if (isCompositionKey(event)) return;
     // 保留输入控件自己的撤销历史，表格操作区使用平台惯例。
     const target = event.target;
     const typing =

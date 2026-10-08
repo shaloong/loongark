@@ -1,4 +1,5 @@
 import type { DataColumn } from "./data-models";
+import { isCompositionKey } from "./composition-key";
 import { GripVertical, MoveHorizontal } from "lucide";
 import type { IconNode } from "lucide";
 
@@ -566,6 +567,7 @@ export function mountDataColumnControls(
     if (gesture?.pointer === event.pointerId) end();
   };
   const keydown = (event: KeyboardEvent) => {
+    if (isCompositionKey(event)) return;
     if (event.key === "Escape" && gesture) {
       event.preventDefault();
       event.stopPropagation();
@@ -583,7 +585,6 @@ export function mountDataColumnControls(
     if (
       !handle ||
       opts.loading ||
-      event.isComposing ||
       !["ArrowLeft", "ArrowRight", "Home", "End", "Enter", " "].includes(
         event.key,
       )

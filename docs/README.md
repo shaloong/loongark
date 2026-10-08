@@ -4,7 +4,13 @@ LoongArk 以 Ark UI 提供行为与无障碍基础，以共享 CSS 和 Token 提
 
 开发与发布分支约定见 [CONTRIBUTING.md](../CONTRIBUTING.md)：日常和云端开发进入 develop，稳定版本按发布节点合入 main。
 
-2026-10-08 两项 P0 已关闭：跨浏览器焦点、问卷缩屏和滚动兼容问题已复验；默认视觉扩大至 119 族三引擎桌面/窄屏明暗，并修正前后缀状态、必填标签、角度定位、Editable 预览与统一 Lucide 展开指示器。最终源码 Chromium/Firefox/WebKit 完整四端与 Storybook、原生 Safari 均通过，310 项 Linux 视觉比较通过。验收数字、历史失败修正与范围限制统一见[本批摘要](audits/2026-10-08/p0-browser-and-default-visual/acceptance.json)；在线展示见 [Storybook](https://shaloong.github.io/loongark/)。真实 iOS/Android、屏幕阅读器和 P1 高级边界仍需独立验收。
+2026-10-08 两项 P0 已关闭：跨浏览器焦点、问卷缩屏和滚动兼容问题已复验；默认视觉扩大至 119 族三引擎桌面/窄屏明暗，并修正前后缀状态、必填标签、角度定位、Editable 预览与统一 Lucide 展开指示器。最终源码 Chromium/Firefox/WebKit 完整四端与 Storybook、原生 Safari 均通过，310 项 Linux 视觉比较通过。验收数字、历史失败修正与范围限制统一见[本批摘要](audits/2026-10-08/p0-browser-and-default-visual/acceptance.json)；在线展示见 [Storybook](https://shaloong.github.io/loongark/)。此 P0 记录不包含真实 iOS/Android、屏幕阅读器或 P1 高级边界；后续 P1 范围见下文。
+
+## P1 高级边界与辅助使用（2026-10-08）
+
+高级组件补组合快捷键保护、网格连续导航与原生输入编辑模式、删行焦点恢复，图表按真实字体适配标签，并补图表/编辑器强制颜色表现。四端桌面/窄屏明暗的三引擎专项及120项 Storybook 对应场景通过；详细契约见[高级边界说明](advanced-boundaries.md)，验证阶段与限制见[本批摘要](audits/2026-10-08/p1-advanced-and-accessibility/acceptance.json)。310项Linux视觉比较通过，未修改Linux/Windows基线。这两项P1按用户授权的模拟范围关闭。
+
+真实手机和真实屏幕阅读器按用户决定跳过，改用语义检查、两倍排版 Token、强制颜色、组合事务和视口变化模拟，并对照 APG/MDN 与 CodeMirror/ProseMirror/Zag 源码。上述模拟不记作真机、系统输入法或辅助技术实际通过；其他文档展示和发布准备项目保持独立。
 
 ## 分层与职责
 

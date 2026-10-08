@@ -77,7 +77,7 @@ export const LoongArkVirtualGrid = defineComponent({
           "aria-rowcount": props.rowKeys.length,
           "aria-colcount": props.columnKeys.length,
           dir: props.dir,
-          tabindex: rows.count && columns.count ? undefined : 0,
+          tabindex: rows.count && columns.count ? -1 : 0,
           style: { height: `${props.height ?? 320}px` },
         },
         [

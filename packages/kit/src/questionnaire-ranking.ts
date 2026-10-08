@@ -1,4 +1,5 @@
 import type { Question, QuestionnaireValue } from "./questionnaire";
+import { isCompositionKey } from "./composition-key";
 import { questionnaireValue, questionStrings } from "./questionnaire";
 
 /** 排序预览仅移动现有节点；放下后提交一次完整顺序，取消不发出答案。 */
@@ -288,6 +289,7 @@ export function mountQuestionRanking(
     if (session?.pointer === event.pointerId) cancel();
   };
   const keydown = (event: KeyboardEvent) => {
+    if (isCompositionKey(event)) return;
     const target = event.target;
     if (!(target instanceof win.Element)) return;
     const button = target.closest<HTMLButtonElement>(

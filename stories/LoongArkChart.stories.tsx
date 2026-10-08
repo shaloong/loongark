@@ -68,6 +68,14 @@ export const ExtremeValues: StoryObj = {
 import { ChartAdvancedExample } from "../examples/react/ChartAdvancedExample";
 import { withArkExamplePage } from "./arkStory";
 export const Interactive = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "交互包含键盘数据浏览、受控拒绝、数据变化后的焦点修复与数据表替代。中文组合取消键不关闭提示；正常 Escape 仍关闭提示。",
+      },
+    },
+  },
   decorators: [withArkExamplePage],
   render: () => <ChartAdvancedExample />,
 };

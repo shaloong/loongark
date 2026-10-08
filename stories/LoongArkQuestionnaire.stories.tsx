@@ -120,16 +120,38 @@ export const CallbackUpdates = {
 };
 
 import { QuestionnaireTypesExample } from "../examples/react/QuestionnaireTypesExample";
-export const StructuredTypes: StoryObj = { render: () => <QuestionnaireTypesExample /> };
+export const StructuredTypes: StoryObj = {
+  render: () => <QuestionnaireTypesExample />,
+};
 
 import { QuestionnaireMatrixExample } from "../examples/react/QuestionnaireMatrixExample";
-export const MatrixMultiple: StoryObj = { decorators: [withArkExamplePage], render: () => <QuestionnaireMatrixExample /> };
+export const MatrixMultiple: StoryObj = {
+  decorators: [withArkExamplePage],
+  render: () => <QuestionnaireMatrixExample />,
+};
 
 import { QuestionnaireRankingExample } from "../examples/react/QuestionnaireRankingExample";
-export const RankingInteraction: StoryObj = {decorators:[withArkExamplePage], render:()=> <QuestionnaireRankingExample />};
+export const RankingInteraction: StoryObj = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "排序支持键盘和指针；中文组合确认键不启动、提交或取消排序。受控拒绝恢复已接受顺序，候选预览不提前发出答案。",
+      },
+    },
+  },
+  decorators: [withArkExamplePage],
+  render: () => <QuestionnaireRankingExample />,
+};
 
 import { QuestionnaireGroupsExample } from "../examples/react/QuestionnaireGroupsExample";
-export const RepeatedGroups: StoryObj = { decorators:[withArkExamplePage], render:()=> <QuestionnaireGroupsExample /> };
+export const RepeatedGroups: StoryObj = {
+  decorators: [withArkExamplePage],
+  render: () => <QuestionnaireGroupsExample />,
+};
 
 import { QuestionnaireCustomExample } from "../examples/react/QuestionnaireCustomExample";
-export const CustomRenderer: StoryObj = { decorators:[withArkExamplePage], render:()=> <QuestionnaireCustomExample /> };
+export const CustomRenderer: StoryObj = {
+  decorators: [withArkExamplePage],
+  render: () => <QuestionnaireCustomExample />,
+};

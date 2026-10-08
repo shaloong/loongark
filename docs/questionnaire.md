@@ -42,3 +42,6 @@ DOM 挂载后用 `registerControl({ element, restore?, focus?, dispose? })` 注�
 评分示例复用已有 RatingGroup。四端 Root 与 useRatingGroup 共享原生 Zag 状态机修正：悬停仅预览，不改变 aria-checked；快速点击使用实际条目；键盘导航清除过期悬停并保持焦点；程序化设置不受悬停影响。Svelte 与 Questionnaire 一样，在提供 onValueChange 时由调用方接受答案；不提供回调时支持 bind:value。共享层直接声明已有传递版本 @zag-js/rating-group 1.43.3，无新增版本或独立调色板。
 
 原生提交按钮没有获得鼠标焦点且焦点仍为 body 时，组件依据原生 SubmitEvent.submitter 确认提交归属并定位首个错误。外部控件发起 requestSubmit 时保持该控件焦点，异步完成后也不覆盖用户后续取得的外部焦点。
+
+
+组合输入、连续操作、受控拒绝、生命周期及放大文字的当前契约与验收限制，见[高级边界说明](advanced-boundaries.md)。

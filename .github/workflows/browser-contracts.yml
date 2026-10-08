@@ -58,6 +58,17 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
+          name: p1-simulated-boundaries-${{ matrix.browser }}
+          path: |
+            .artifacts/p1-boundaries/accessibility/${{ matrix.browser }}/
+            .artifacts/p1-boundaries/mobile/${{ matrix.browser }}-*.png
+            .artifacts/p1-boundaries/axis/${{ matrix.browser }}-*.png
+            .artifacts/p1-boundaries/grid/${{ matrix.browser }}-*.png
+          include-hidden-files: true
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
           name: browser-evidence-${{ matrix.browser }}
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*.json

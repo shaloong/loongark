@@ -34,3 +34,6 @@ React/Solid 使用 onValueChange；Vue 同时提供 valueChange 和 update:value
 编辑器的 Table options 保留原生 details/summary 键盘展开语义，使用统一 Lucide 线条指示器，继承主题颜色；关闭时随 RTL 镜像，展开时朝下。四端编辑器及表格范围示例的附加控制也复用已有 SVG 展开样式，避免 WebKit 将原生标记渲染为彩色 emoji。
 
 富文本表格选项的自定义标签更新仅修改文本节点，保留装饰图标与展开状态。
+
+
+组合输入、连续操作、受控拒绝、生命周期及放大文字的当前契约与验收限制，见[高级边界说明](advanced-boundaries.md)。

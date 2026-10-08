@@ -1,3 +1,4 @@
+import { isCompositionKey } from "./composition-key";
 import {
   dataTableLabels,
   dataTableCellText,
@@ -806,7 +807,7 @@ export function mountDataTableCellSelection(
   const keydown = (event: KeyboardEvent) => {
     if (
       !get().props.cellSelection ||
-      event.isComposing ||
+      isCompositionKey(event) ||
       !(event.target instanceof win.Element) ||
       interactive(event.target)
     )

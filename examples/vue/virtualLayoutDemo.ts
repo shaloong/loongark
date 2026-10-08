@@ -33,7 +33,7 @@ export const VirtualLayoutDemo = defineComponent({
           ),
           h(L.LoongArkTypography, { variant: "muted" }, () =>
             props.kind === "grid"
-              ? "Use arrow keys, Home, End or Page Down. Inputs keep their own editing keys."
+              ? "Arrow keys navigate. Enter/F2 edits; Escape returns. Home/End and Page Up/Down jump."
               : "Scroll, resize and expand a card. Stable keys preserve the reading position.",
           ),
           h(

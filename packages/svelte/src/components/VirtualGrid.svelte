@@ -46,7 +46,7 @@
   aria-rowcount={rest.rowKeys.length}
   aria-colcount={rest.columnKeys.length}
   dir={rest.dir}
-  tabindex={rows.count && columns.count ? undefined : 0}
+  tabindex={rows.count && columns.count ? -1 : 0}
   style:height="{rest.height ?? 320}px"
 >
   <div

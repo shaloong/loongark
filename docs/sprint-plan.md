@@ -300,3 +300,11 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 保留前一轮 WebKit 字体测试失败证据：异步高亮使旧 ElementHandle 脱离 DOM；活动节点在同一页面任务内取字体和测量，保持 0.05px 阈值，并新增比例字体负例。三引擎四端明暗重复 120 项和当前整库通过。明暗各 333 Story 的 Axe 违规、有效 transition: all 均为 0；375px 扫描沿用原 1px 容差，5 个 Combobox Story 的空白包装区为 376px，未宣称逐像素零溢出。Svelte 检查 0 错误、7 项既有警告。
 
 [验收摘要](audits/2026-10-08/p0-browser-and-default-visual/acceptance.json)统一记录实际范围与限制。过程截图、日志和 ZIP 不入 Git，CI Artifact 保留 14 天；[Storybook Pages](https://shaloong.github.io/loongark/)最新部署成功。P1 高级边界、屏幕阅读器和真实手机、展示文档，以及 P2 性能与发布准备保持独立开放；桌面 Safari 与模拟窄屏不算真实 iOS/Android 验收。
+
+## 2026-10-08 P1 高级边界与辅助使用
+
+补共享组合快捷键保护、网格连续导航/原生输入编辑/删行与外部焦点契约；四端显式退出有数据滚动容器的 Tab 顺序，空网格保留入口。图表按实际字宽与字素缩短标签并清理字体观察器，强制颜色下使用系统色；编辑器补 outline 焦点提示，网格移除固定行内上下 padding。同步四端示例、六族 Story 说明及覆盖清单，不增加组件、公开别名或依赖。
+
+三引擎最终网格/字体专项96项与 Storybook 对应场景120项通过；普通/强制色各336场景保存截图及语义快照，普通配色完整 Axe 规则保留。更早的表格、编辑器、虚拟化、图表、问卷、异步 Collection 和 Drawer 边界回归及初次失败修正统一见[本批验收](audits/2026-10-08/p1-advanced-and-accessibility/acceptance.json)，310项Linux视觉比较通过，两项P1按用户授权的模拟范围关闭。
+
+真实 iOS/Android 与屏幕阅读器按用户决定跳过，使用文档/成熟源码对照及浏览器模拟，不声明真机、系统输入法或辅助技术通过。过程截图、日志与联系表继续忽略，CI 新增14天证据上传配置，Windows基线未修改。

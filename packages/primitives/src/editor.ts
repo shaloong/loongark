@@ -1,6 +1,7 @@
 import { createPrimitive, registerPrimitive } from "./core";
 
 const css = `
+@media(forced-colors:active) { [data-scope=editor] [data-part=surface]:focus-within { outline:var(--lk-control-focuswidth) solid Highlight;outline-offset:var(--lk-control-focuswidth); } }
 [data-scope=editor] { --lk-editor-rows:6;min-width:0;max-width:100%;color:var(--lk-color-semantic-foreground);font-family:var(--lk-typography-fontfamily-body);font-size:var(--lk-typography-fontsize-sm);line-height:var(--lk-typography-lineheight-base); }
 [data-scope=editor] [data-part=label] { margin-bottom:var(--lk-space-component-sm);font-weight:var(--lk-typography-fontweight-medium);overflow-wrap:anywhere; }
 [data-scope=editor] [data-part=toolbar] { display:flex;flex-wrap:wrap;align-items:center;gap:var(--lk-space-component-xs);padding:var(--lk-space-component-sm);border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border);border-bottom:0;border-radius:var(--lk-radius-lg) var(--lk-radius-lg) 0 0;background:var(--lk-color-semantic-muted); }

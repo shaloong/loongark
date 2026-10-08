@@ -1,4 +1,6 @@
 import { chartSliceKeys, chartSliceKey } from "./chart-render";
+import { isCompositionKey } from "./composition-key";
+import { mountChartAxisLabels } from "./chart-labels";
 import { chartSeriesKeys, type ChartOptions } from "./data-models";
 import {
   chartRange,
@@ -18,6 +20,7 @@ export function mountChartControls(
   const document = element.ownerDocument,
     view = document.defaultView;
   if (!view) return () => {};
+  const axisLabels = mountChartAxisLabels(element);
   const ElementType = view.Element,
     HTMLElementType = view.HTMLElement;
   let trackedDetails = element.querySelector<HTMLDetailsElement>(
@@ -184,8 +187,10 @@ export function mountChartControls(
     }
   };
   const pointerOver = (event: PointerEvent) => {
-    const moved = !pointerPosition ||
-      event.clientX !== pointerPosition.x || event.clientY !== pointerPosition.y;
+    const moved =
+      !pointerPosition ||
+      event.clientX !== pointerPosition.x ||
+      event.clientY !== pointerPosition.y;
     pointerPosition = { x: event.clientX, y: event.clientY };
     if (moved) hoverDismissed = false;
     // SVG 重建产生同一坐标的边界事件；关闭后的提示等待真正的指针移动。
@@ -217,14 +222,19 @@ export function mountChartControls(
       hideTooltip();
   };
   const pointerMove = (event: PointerEvent) => {
-    if (pointerPosition && event.clientX === pointerPosition.x &&
-      event.clientY === pointerPosition.y) return;
+    if (
+      pointerPosition &&
+      event.clientX === pointerPosition.x &&
+      event.clientY === pointerPosition.y
+    )
+      return;
     pointerPosition = { x: event.clientX, y: event.clientY };
     hoverDismissed = false;
     if (event.target instanceof ElementType && element.contains(event.target))
       pointerOver(event);
   };
   const keydown = (event: KeyboardEvent) => {
+    if (isCompositionKey(event)) return;
     if (event.key === "Escape") {
       hoverDismissed = true;
       hideTooltip();
@@ -291,6 +301,7 @@ export function mountChartControls(
     );
     if (details && details.open !== open) details.open = open;
     trackedDetails = details;
+    axisLabels.refresh();
     restoreControls();
     hoverDismissed = true;
     hideTooltip();
@@ -336,6 +347,7 @@ export function mountChartControls(
   return () => {
     disposed = true;
     observer.disconnect();
+    axisLabels.dispose();
     focused = undefined;
     trackedDetails = null;
     hideTooltip();

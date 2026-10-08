@@ -1,3 +1,4 @@
+import { isCompositionKey } from "./composition-key";
 import {
   dataColumnLabels,
   type DataTableColumnLabels,
@@ -870,7 +871,7 @@ export function mountDataTableEditor(
   const keydown = (event: KeyboardEvent) => {
     if (
       blocked() ||
-      event.isComposing ||
+      isCompositionKey(event) ||
       !(event.target instanceof win.Element) ||
       !event.target.closest('[data-part="cell-editor"]')
     )

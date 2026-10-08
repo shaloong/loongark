@@ -101,6 +101,14 @@ import { DataTableEditExample } from "../examples/react/DataTableEditExample";
 export const Editing: StoryObj = { render: () => <DataTableEditExample /> };
 
 export const ComplexEditors: StoryObj = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "多行编辑中的中文组合确认不触发保存或取消；完成组合后 Ctrl/Command+Enter 保存，Escape 取消。异步保存支持取消和失败恢复，状态与描述关联到真实输入。",
+      },
+    },
+  },
   render: () => <DataTableComplexEditorsExample />,
 };
 

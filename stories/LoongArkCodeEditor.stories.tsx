@@ -11,7 +11,17 @@ const meta = {
   decorators: [withArkExamplePage],
 } satisfies Meta;
 export default meta;
-export const Basic: StoryObj = { render: () => <CodeEditorExample /> };
+export const Basic: StoryObj = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "支持中文组合输入、受控拒绝回退、只读即时阻断与卸载清理。Tab 缩进，Escape 后 Tab 离开编辑器；控制面板可切换受控和拒绝更新。",
+      },
+    },
+  },
+  render: () => <CodeEditorExample />,
+};
 export const ReadOnly: StoryObj = {
   render: () => (
     <L.LoongArkCodeEditor
