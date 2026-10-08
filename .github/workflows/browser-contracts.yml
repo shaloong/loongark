@@ -57,7 +57,7 @@ jobs:
           STATIC_DIR: tests/consumer-dist
           PORT: "6007"
       - run: node scripts/run-framework-tests.mjs
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: p1-simulated-boundaries-${{ matrix.browser }}
@@ -68,7 +68,7 @@ jobs:
             .artifacts/p1-boundaries/grid/${{ matrix.browser }}-*.png
           include-hidden-files: true
           retention-days: 14
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: browser-evidence-${{ matrix.browser }}
@@ -85,7 +85,7 @@ jobs:
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: browser-review-captures-${{ matrix.browser }}
@@ -100,7 +100,7 @@ jobs:
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: browser-captures-${{ matrix.browser }}-react
@@ -117,7 +117,7 @@ jobs:
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: browser-captures-${{ matrix.browser }}-vue
@@ -134,7 +134,7 @@ jobs:
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: browser-captures-${{ matrix.browser }}-solid
@@ -151,7 +151,7 @@ jobs:
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: browser-captures-${{ matrix.browser }}-svelte
@@ -168,7 +168,7 @@ jobs:
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: browser-traces-${{ matrix.browser }}
@@ -178,7 +178,7 @@ jobs:
 
       - id: stories
         run: node scripts/run-playwright.mjs --project=${{ matrix.browser }} --workers=2
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always() && steps.stories.outcome != 'skipped'
         with:
           name: story-evidence-${{ matrix.browser }}
@@ -200,14 +200,14 @@ jobs:
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always() && steps.stories.outcome != 'skipped'
         with:
           name: story-traces-${{ matrix.browser }}
           path: test-results/**/trace.zip
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always() && steps.stories.outcome != 'skipped'
         with:
           name: story-default-captures-${{ matrix.browser }}
@@ -252,7 +252,7 @@ jobs:
           defaults write "$SAFARI_PREFS_PATH" WebKitPreferences.tabFocusesLinks -bool true
       - run: sudo /usr/bin/safaridriver --enable
       - run: node scripts/run-native-safari.mjs
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: native-safari

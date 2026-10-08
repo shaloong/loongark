@@ -46,54 +46,54 @@ jobs:
           test "$(ls .artifacts/browser-debug/${{ matrix.browser }}-part-* | wc -l)" -le 8
           cd .artifacts/browser-debug
           sha256sum ${{ matrix.browser }}-part-* > checksums.txt
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ matrix.browser }}-part-0
           path: .artifacts/browser-debug/${{ matrix.browser }}-part-00
           retention-days: 14
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ matrix.browser }}-part-1
           path: .artifacts/browser-debug/${{ matrix.browser }}-part-01
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ matrix.browser }}-part-2
           path: .artifacts/browser-debug/${{ matrix.browser }}-part-02
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ matrix.browser }}-part-3
           path: .artifacts/browser-debug/${{ matrix.browser }}-part-03
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ matrix.browser }}-part-4
           path: .artifacts/browser-debug/${{ matrix.browser }}-part-04
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ matrix.browser }}-part-5
           path: .artifacts/browser-debug/${{ matrix.browser }}-part-05
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ matrix.browser }}-part-6
           path: .artifacts/browser-debug/${{ matrix.browser }}-part-06
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ matrix.browser }}-part-7
           path: .artifacts/browser-debug/${{ matrix.browser }}-part-07
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ${{ matrix.browser }}-debug-checksums
           path: .artifacts/browser-debug/checksums.txt
