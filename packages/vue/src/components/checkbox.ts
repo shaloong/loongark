@@ -1,12 +1,25 @@
-import { defineComponent, h, type PropType } from "vue";
+import { useFieldContext } from "@ark-ui/vue/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
+import type { CheckboxHiddenInputProps } from "@ark-ui/vue/checkbox";
+import { nativeSelectionRef } from "../native-selection";
+import { useCheckboxContext } from "@ark-ui/vue/checkbox";
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
+import { renderPart } from "../render-part";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import {
   CheckboxRoot,
   CheckboxControl,
   CheckboxLabel,
   CheckboxIndicator,
   CheckboxHiddenInput,
-  type CheckedState,
-  type CheckedChangeDetails,
+  type CheckboxCheckedState as CheckedState,
+  type CheckboxCheckedChangeDetails as CheckedChangeDetails,
 } from "@ark-ui/vue/checkbox";
 import type { CheckboxSize } from "@loongark/primitives";
 
@@ -20,25 +33,27 @@ export const LoongArkCheckboxRoot = defineComponent({
     },
     checked: {
       type: [Boolean, String] as PropType<CheckedState>,
+      default: undefined,
     },
     defaultChecked: {
       type: [Boolean, String] as PropType<CheckedState>,
+      default: undefined,
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     invalid: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     readOnly: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     required: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     name: {
       type: String,
@@ -52,7 +67,7 @@ export const LoongArkCheckboxRoot = defineComponent({
   },
   setup(props, { slots }) {
     return () =>
-      h(
+      renderPart(
         CheckboxRoot,
         {
           checked: props.checked as CheckedState | undefined,
@@ -67,8 +82,8 @@ export const LoongArkCheckboxRoot = defineComponent({
           "data-scope": "checkbox",
           "data-part": "root",
           "data-size": props.size,
-        } as any,
-        slots.default ? { default: slots.default } : undefined
+        },
+        slots.default ? { default: slots.default } : undefined,
       );
   },
 });
@@ -84,14 +99,14 @@ export const LoongArkCheckboxControl = defineComponent({
   },
   setup(props, { slots }) {
     return () =>
-      h(
+      renderPart(
         CheckboxControl,
         {
           "data-scope": "checkbox",
           "data-part": "control",
           "data-size": props.size,
         },
-        slots.default ? { default: slots.default } : undefined
+        slots.default ? { default: slots.default } : undefined,
       );
   },
 });
@@ -101,13 +116,13 @@ export const LoongArkCheckboxLabel = defineComponent({
   name: "LoongArkCheckboxLabel",
   setup(props, { slots }) {
     return () =>
-      h(
+      renderPart(
         CheckboxLabel,
         {
           "data-scope": "checkbox",
           "data-part": "label",
         },
-        slots.default ? { default: slots.default } : undefined
+        slots.default ? { default: slots.default } : undefined,
       );
   },
 });
@@ -123,26 +138,63 @@ export const LoongArkCheckboxIndicator = defineComponent({
   },
   setup(props, { slots }) {
     return () =>
-      h(
+      renderPart(
         CheckboxIndicator,
         {
           indeterminate: props.indeterminate,
           "data-scope": "checkbox",
           "data-part": "indicator",
         },
-        slots.default ? { default: slots.default } : undefined
+        {
+          default:
+            slots.default ??
+            (() => [
+              h(LoongArkIcon, {
+                icon: props.indeterminate
+                  ? controlIcons.minus
+                  : controlIcons.check,
+                size: "sm",
+              }),
+            ]),
+        },
       );
   },
 });
 
 // ========== HiddenInput ==========
-export const LoongArkCheckboxHiddenInput = defineComponent({
-  name: "LoongArkCheckboxHiddenInput",
-  setup() {
-    return () =>
-      h(CheckboxHiddenInput, {
-        "data-scope": "checkbox",
-        "data-part": "hidden-input",
-      });
-  },
-});
+export const LoongArkCheckboxHiddenInput =
+  defineComponent<CheckboxHiddenInputProps>(
+    (props, { attrs, slots }) => {
+      const field = useFieldContext();
+      const api = useCheckboxContext();
+
+      const ref = nativeSelectionRef(() => ({
+        checked: api.value.checked,
+        indeterminate: api.value.indeterminate,
+      }));
+      return () =>
+        renderPart(
+          resolveDynamicComponent(CheckboxHiddenInput),
+          {
+            ...attrs,
+            ...props,
+            ref,
+            "aria-describedby": nativeSelectionFieldDescription(
+              typeof attrs["aria-describedby"] === "string"
+                ? attrs["aria-describedby"]
+                : props["aria-describedby"],
+              field?.value,
+              api.value.getHiddenInputProps()["aria-invalid"],
+            ),
+            "data-scope": "checkbox",
+            "data-part": "hidden-input",
+          },
+          slots,
+        );
+    },
+    {
+      name: "LoongArkCheckboxHiddenInput",
+      props: ["asChild"],
+      inheritAttrs: false,
+    },
+  );

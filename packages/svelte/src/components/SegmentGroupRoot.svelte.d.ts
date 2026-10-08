@@ -1,3 +1,4 @@
-import type { SvelteComponent } from "svelte";
-import type { ToggleGroupRootProps } from "@ark-ui/svelte/toggle-group";
-export default class SegmentGroupRoot extends SvelteComponent<ToggleGroupRootProps> {}
+import type { Component } from "svelte";
+import type { SegmentGroupRootProps } from "./segment-group";
+declare const SegmentGroupRoot: Component<SegmentGroupRootProps, {}, "value" | "ref">;
+export default SegmentGroupRoot;

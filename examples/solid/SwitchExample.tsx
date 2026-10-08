@@ -1,7 +1,7 @@
 /** @jsxImportSource solid-js */
 import { createSignal, Component } from "solid-js";
 import {
-  LoongArkProvider,
+  LoongArkSwitchHiddenInput,
   LoongArkSwitchRoot,
   LoongArkSwitchControl,
   LoongArkSwitchThumb,
@@ -21,23 +21,20 @@ export const SwitchExample: Component<SwitchExampleProps> = (props) => {
   const [checked, setChecked] = createSignal(false);
 
   return (
-    <LoongArkProvider>
-      <LoongArkSwitchRoot size={size()} disabled={disabled()}>
-        <LoongArkSwitchControl
-          size={size()}
-          disabled={disabled()}
-          checked={checked()}
-          onCheckedChange={(detail: { checked: boolean }) =>
-            setChecked(detail.checked)
-          }
-        >
-          <LoongArkSwitchThumb size={size()} />
-        </LoongArkSwitchControl>
-        <LoongArkSwitchLabel disabled={disabled()}>
-          {label()}
-        </LoongArkSwitchLabel>
-        <input type="hidden" value={checked() ? "on" : "off"} />
-      </LoongArkSwitchRoot>
-    </LoongArkProvider>
+    <LoongArkSwitchRoot
+      size={size()}
+      disabled={disabled()}
+      checked={checked()}
+      name="notifications"
+      onCheckedChange={(detail: { checked: boolean }) =>
+        setChecked(detail.checked)
+      }
+    >
+      <LoongArkSwitchControl size={size()} disabled={disabled()}>
+        <LoongArkSwitchThumb size={size()} />
+      </LoongArkSwitchControl>
+      <LoongArkSwitchLabel disabled={disabled()}>{label()}</LoongArkSwitchLabel>
+      <LoongArkSwitchHiddenInput />
+    </LoongArkSwitchRoot>
   );
 };

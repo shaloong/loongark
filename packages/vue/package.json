@@ -4,14 +4,30 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json",
+    "./editors": {
+      "types": "./dist/components/editors.d.ts",
+      "import": "./dist/components/editors.js"
+    }
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "dependencies": {
-    "@ark-ui/vue": "^5.30.0",
+    "@ark-ui/vue": "^5.39.2",
     "@loongark/kit": "workspace:*",
     "@loongark/primitives": "workspace:*",
-    "@loongark/theme": "workspace:*"
+    "@loongark/theme": "workspace:*",
+    "@zag-js/vue": "1.43.3"
   },
   "peerDependencies": {
-    "vue": ">=3.3.0"
+    "vue": ">=3.5.43"
   },
   "peerDependenciesMeta": {
     "vue": {
@@ -19,6 +35,8 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json"
-  }
+    "build": "tsc -p tsconfig.json && node ../../scripts/fix-dist-imports.mjs dist"
+  },
+  "license": "MIT",
+  "sideEffects": false
 }

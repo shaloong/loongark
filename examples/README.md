@@ -1,28 +1,11 @@
-# LoongArk Examples
+# 四端使用示例
 
-> 本目录聚焦“跨框架同一交互场景”，所有示例共享一套文案/测试 ID，方便 Storybook 与 Playwright 直接复用。
+这些文件是可运行的接入与组合示例，不是独立业务应用：
 
-## 结构
+- `react/` 用于 Storybook 场景，也提供 React 参考代码。
+- `vue/`、`solid/`、`svelte/` 提供同场景的原生绑定和生命周期示例。
+- `shared/` 复用场景数据、文案和测试标识。
 
-```text
-examples/
-  shared/          # 统一的 props、文案、data-testid 定义
-  react/           # React + @loongark/react 组件示例
-  vue/             # Vue + @loongark/vue 组件示例
-  svelte/          # Svelte actions 示例
-  solid/           # Solid 组件示例
-```
+Storybook Docs 从这里读取四端代码；消费夹具从实际发布产物构建并运行这些示例，检查类型、SSR、绑定与交互。因此不能把目录当作临时演示删掉。复制示例时，在应用中显式声明代码使用的额外类型或插件依赖。仓库新增示例应服务组件接入、组合或行为验证；业务后端、真实凭据和过程截图不放在这里。
 
-每个框架的入口文件都实现同一场景：包含带前后缀的输入框、错误提示以及带按钮的对话框触发链路。`data-testid` 与 props 均来自 `shared/demoScenario.ts`，这样：
-
-- Storybook 只需导入 React 版本即可实时展示；
-- Playwright 用同一批测试 ID（`input-prefix`、`primary-button` 等）在不同框架下复用断言；
-- 未来扩展更多组件时，可在 `shared/` 追加新的情境对象。
-
-> 示例文件不会在构建中参与打包，只提供团队在 Storybook/Playwright/文档中复用的源代码片段。
-
-## 使用方式
-
-1. 启动 Storybook：`pnpm storybook`（或 `pnpm storybook --ci` 供 Playwright 复用）。
-2. 运行可视化/可访问性测试：`pnpm visual:test`（底层调用 Playwright，自动访问 Storybook story）。
-3. 若只想在本地查看 React 示例，可直接在 `stories/ButtonInputDialog.stories.tsx` 中引入其它情境，保持 `data-testid` 不变即可被测试脚本捕获。
+本地展示使用 `pnpm storybook`；四端验证使用 `pnpm test:frameworks`。详细顺序见 [贡献指南](../CONTRIBUTING.md)，组件边界见 [能力概览](../docs/capabilities.md)。

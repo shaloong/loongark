@@ -14,7 +14,6 @@
   export let boundaryCount: PaginationRootProps["boundaryCount"] = undefined;
   export let page: PaginationRootProps["page"] = undefined;
   export let defaultPage: PaginationRootProps["defaultPage"] = undefined;
-  export let disabled: PaginationRootProps["disabled"] = undefined;
   export let id: PaginationRootProps["id"] = undefined;
   export let onPageChange: PaginationRootProps["onPageChange"] = undefined;
 </script>
@@ -26,7 +25,6 @@
   {boundaryCount}
   {page}
   {defaultPage}
-  {disabled}
   {id}
   {onPageChange}
   data-scope="pagination"

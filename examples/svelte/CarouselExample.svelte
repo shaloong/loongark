@@ -20,7 +20,11 @@
   ];
 </script>
 
-<LoongArkCarouselRoot {size} style="max-width: 420px;">
+<LoongArkCarouselRoot
+  slideCount={slides.length}
+  {size}
+  style="max-width: 420px;"
+>
   <LoongArkCarouselItemGroup>
     {#each slides as slide, index (slide.title)}
       <LoongArkCarouselItem {index}>

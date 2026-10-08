@@ -21,7 +21,6 @@
   export let onFileAccept: FileUploadRootProps["onFileAccept"] = undefined;
   export let onFileChange: FileUploadRootProps["onFileChange"] = undefined;
   export let onFileReject: FileUploadRootProps["onFileReject"] = undefined;
-  export let onFileValidate: FileUploadRootProps["onFileValidate"] = undefined;
 </script>
 
 <FileUpload.Root
@@ -41,7 +40,6 @@
   {onFileAccept}
   {onFileChange}
   {onFileReject}
-  {onFileValidate}
   data-scope="file-upload"
   data-part="root"
   data-size={size}

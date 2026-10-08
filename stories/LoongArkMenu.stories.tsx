@@ -1,5 +1,5 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkMenuRoot,
   LoongArkMenuTrigger,
@@ -13,6 +13,7 @@ import {
   LoongArkMenuRadioItemGroup,
   LoongArkMenuItemIndicator,
   LoongArkMenuItemGroupLabel,
+  LoongArkMenuItemGroup,
 } from "@loongark/react";
 import { LoongArkButton } from "@loongark/react";
 
@@ -21,7 +22,8 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: "LoongArkMenu wraps Ark UI Menu with size variants and shared menu styling.",
+        component:
+          "LoongArkMenu wraps Ark UI Menu with size variants and shared menu styling.",
       },
     },
   },
@@ -91,21 +93,23 @@ export const Options: Story = {
               <LoongArkMenuItemIndicator>x</LoongArkMenuItemIndicator>
             </LoongArkMenuCheckboxItem>
             <LoongArkMenuSeparator />
-            <LoongArkMenuItemGroupLabel htmlFor="density">Density</LoongArkMenuItemGroupLabel>
-            <LoongArkMenuRadioItemGroup
-              id="density"
-              value={density}
-              onValueChange={(details) => setDensity(details.value)}
-            >
-              <LoongArkMenuRadioItem value="comfortable">
-                <LoongArkMenuItemText>Comfortable</LoongArkMenuItemText>
-                <LoongArkMenuItemIndicator>x</LoongArkMenuItemIndicator>
-              </LoongArkMenuRadioItem>
-              <LoongArkMenuRadioItem value="compact">
-                <LoongArkMenuItemText>Compact</LoongArkMenuItemText>
-                <LoongArkMenuItemIndicator>x</LoongArkMenuItemIndicator>
-              </LoongArkMenuRadioItem>
-            </LoongArkMenuRadioItemGroup>
+            <LoongArkMenuItemGroup>
+              <LoongArkMenuItemGroupLabel>Density</LoongArkMenuItemGroupLabel>
+              <LoongArkMenuRadioItemGroup
+                id="density"
+                value={density}
+                onValueChange={(details) => setDensity(details.value)}
+              >
+                <LoongArkMenuRadioItem value="comfortable">
+                  <LoongArkMenuItemText>Comfortable</LoongArkMenuItemText>
+                  <LoongArkMenuItemIndicator>x</LoongArkMenuItemIndicator>
+                </LoongArkMenuRadioItem>
+                <LoongArkMenuRadioItem value="compact">
+                  <LoongArkMenuItemText>Compact</LoongArkMenuItemText>
+                  <LoongArkMenuItemIndicator>x</LoongArkMenuItemIndicator>
+                </LoongArkMenuRadioItem>
+              </LoongArkMenuRadioItemGroup>
+            </LoongArkMenuItemGroup>
           </LoongArkMenuContent>
         </LoongArkMenuPositioner>
       </LoongArkMenuRoot>

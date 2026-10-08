@@ -7,57 +7,79 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Listbox } from "@ark-ui/react/listbox";
 import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
 
-type ArkListboxRootProps<
-  T extends Record<string, any> = Record<string, any>
-> = ComponentPropsWithoutRef<typeof Listbox.Root>;
+type ArkListboxRootProps<T = object> =
+  import("@ark-ui/react/listbox").ListboxRootProps<T>;
 type ArkListboxLabelProps = ComponentPropsWithoutRef<typeof Listbox.Label>;
-type ArkListboxListProps = ComponentPropsWithoutRef<typeof Listbox.List>;
-type ArkListboxItemGroupProps = ComponentPropsWithoutRef<typeof Listbox.ItemGroup>;
-type ArkListboxItemGroupLabelProps = ComponentPropsWithoutRef<typeof Listbox.ItemGroupLabel>;
+type ArkListboxListProps = ComponentPropsWithoutRef<typeof Listbox.Content>;
+type ArkListboxItemGroupProps = ComponentPropsWithoutRef<
+  typeof Listbox.ItemGroup
+>;
+type ArkListboxItemGroupLabelProps = ComponentPropsWithoutRef<
+  typeof Listbox.ItemGroupLabel
+>;
 type ArkListboxItemProps = ComponentPropsWithoutRef<typeof Listbox.Item>;
-type ArkListboxItemTextProps = ComponentPropsWithoutRef<typeof Listbox.ItemText>;
-type ArkListboxItemIndicatorProps = ComponentPropsWithoutRef<typeof Listbox.ItemIndicator>;
+type ArkListboxItemTextProps = ComponentPropsWithoutRef<
+  typeof Listbox.ItemText
+>;
+type ArkListboxItemIndicatorProps = ComponentPropsWithoutRef<
+  typeof Listbox.ItemIndicator
+>;
 
-export interface LoongArkListboxRootProps<
-  T extends Record<string, any> = Record<string, any>
-> extends Omit<ArkListboxRootProps<T>, "asChild"> {
+export interface LoongArkListboxRootProps<T = object> extends Omit<
+  ArkListboxRootProps<T>,
+  "asChild"
+> {
   size?: ListboxSize;
   orientation?: ListboxOrientation;
   children?: ReactNode;
 }
 
-export interface LoongArkListboxLabelProps
-  extends Omit<ArkListboxLabelProps, "asChild"> {
+export interface LoongArkListboxLabelProps extends Omit<
+  ArkListboxLabelProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkListboxListProps
-  extends Omit<ArkListboxListProps, "asChild"> {
+export interface LoongArkListboxListProps extends Omit<
+  ArkListboxListProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkListboxItemGroupProps
-  extends Omit<ArkListboxItemGroupProps, "asChild"> {
+export interface LoongArkListboxItemGroupProps extends Omit<
+  ArkListboxItemGroupProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkListboxItemGroupLabelProps
-  extends Omit<ArkListboxItemGroupLabelProps, "asChild"> {
+export interface LoongArkListboxItemGroupLabelProps extends Omit<
+  ArkListboxItemGroupLabelProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkListboxItemProps
-  extends Omit<ArkListboxItemProps, "asChild"> {
+export interface LoongArkListboxItemProps extends Omit<
+  ArkListboxItemProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkListboxItemTextProps
-  extends Omit<ArkListboxItemTextProps, "asChild"> {
+export interface LoongArkListboxItemTextProps extends Omit<
+  ArkListboxItemTextProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkListboxItemIndicatorProps
-  extends Omit<ArkListboxItemIndicatorProps, "asChild"> {
+export interface LoongArkListboxItemIndicatorProps extends Omit<
+  ArkListboxItemIndicatorProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
@@ -78,7 +100,10 @@ export const LoongArkListboxRoot = forwardRef<
       {children}
     </Listbox.Root>
   );
-});
+}) as (<T>(
+  props: LoongArkListboxRootProps<T> &
+    import("react").RefAttributes<HTMLDivElement>,
+) => import("react").ReactElement | null) & { displayName?: string };
 
 LoongArkListboxRoot.displayName = "LoongArkListboxRoot";
 
@@ -87,12 +112,7 @@ export const LoongArkListboxLabel = forwardRef<
   LoongArkListboxLabelProps
 >(({ children, ...props }, ref) => {
   return (
-    <Listbox.Label
-      {...props}
-      ref={ref}
-      data-scope="listbox"
-      data-part="label"
-    >
+    <Listbox.Label {...props} ref={ref} data-scope="listbox" data-part="label">
       {children}
     </Listbox.Label>
   );
@@ -105,14 +125,9 @@ export const LoongArkListboxList = forwardRef<
   LoongArkListboxListProps
 >(({ children, ...props }, ref) => {
   return (
-    <Listbox.List
-      {...props}
-      ref={ref}
-      data-scope="listbox"
-      data-part="list"
-    >
+    <Listbox.Content {...props} ref={ref} data-scope="listbox" data-part="list">
       {children}
-    </Listbox.List>
+    </Listbox.Content>
   );
 });
 
@@ -159,12 +174,7 @@ export const LoongArkListboxItem = forwardRef<
   LoongArkListboxItemProps
 >(({ children, ...props }, ref) => {
   return (
-    <Listbox.Item
-      {...props}
-      ref={ref}
-      data-scope="listbox"
-      data-part="item"
-    >
+    <Listbox.Item {...props} ref={ref} data-scope="listbox" data-part="item">
       {children}
     </Listbox.Item>
   );

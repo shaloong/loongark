@@ -1,3 +1,5 @@
+import type { AccordionRootProps as NativeAccordionRootProps } from "@ark-ui/vue/accordion";
+import { renderPart } from "../render-part";
 /**
  * Accordion component - Vue wrapper.
  * Based on Ark UI Accordion.
@@ -33,29 +35,36 @@ export const LoongArkAccordionRoot = defineComponent({
     },
     multiple: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     collapsible: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     id: {
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<Record<string, unknown>>,
+      type: Object as PropType<NativeAccordionRootProps["ids"]>,
     },
     onValueChange: {
-      type: Function as PropType<(details: AccordionValueChangeDetails) => void>,
+      type: Function as PropType<
+        (details: AccordionValueChangeDetails) => void
+      >,
     },
     onFocusChange: {
-      type: Function as PropType<(details: AccordionFocusChangeDetails) => void>,
+      type: Function as PropType<
+        (details: AccordionFocusChangeDetails) => void
+      >,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkAccordion.Root,
         {
           ...attrs,
@@ -66,7 +75,7 @@ export const LoongArkAccordionRoot = defineComponent({
           "data-size": props.size,
           "data-orientation": props.orientation,
         },
-        slots
+        slots,
       );
   },
 });
@@ -80,11 +89,12 @@ export const LoongArkAccordionItem = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkAccordion.Item,
         {
           ...attrs,
@@ -93,7 +103,7 @@ export const LoongArkAccordionItem = defineComponent({
           "data-scope": "accordion",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -102,14 +112,14 @@ export const LoongArkAccordionItemTrigger = defineComponent({
   name: "LoongArkAccordionItemTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkAccordion.ItemTrigger,
         {
           ...attrs,
           "data-scope": "accordion",
           "data-part": "item-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -118,14 +128,14 @@ export const LoongArkAccordionItemContent = defineComponent({
   name: "LoongArkAccordionItemContent",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkAccordion.ItemContent,
         {
           ...attrs,
           "data-scope": "accordion",
           "data-part": "item-content",
         },
-        slots
+        slots,
       );
   },
 });
@@ -134,14 +144,14 @@ export const LoongArkAccordionItemIndicator = defineComponent({
   name: "LoongArkAccordionItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkAccordion.ItemIndicator,
         {
           ...attrs,
           "data-scope": "accordion",
           "data-part": "item-indicator",
         },
-        slots
+        slots,
       );
   },
 });

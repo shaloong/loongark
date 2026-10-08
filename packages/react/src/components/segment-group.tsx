@@ -1,27 +1,27 @@
 /**
  * Segment Group component - React wrapper.
- * Uses Ark UI Toggle Group under the hood.
+ * 使用 Ark UI SegmentGroup，保留单选语义和隐藏表单输入。
  */
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
-import { ToggleGroup } from "@ark-ui/react/toggle-group";
+import { SegmentGroup } from "@ark-ui/react/segment-group";
 import type {
   SegmentGroupOrientation,
   SegmentGroupSize,
 } from "@loongark/primitives";
 
-type ArkToggleGroupRootProps = ComponentPropsWithoutRef<typeof ToggleGroup.Root>;
-type ArkToggleGroupItemProps = ComponentPropsWithoutRef<typeof ToggleGroup.Item>;
+type ArkSegmentGroupRootProps = ComponentPropsWithoutRef<typeof SegmentGroup.Root>;
+type ArkSegmentGroupItemProps = ComponentPropsWithoutRef<typeof SegmentGroup.Item>;
 
 export interface LoongArkSegmentGroupRootProps
-  extends Omit<ArkToggleGroupRootProps, "asChild"> {
+  extends Omit<ArkSegmentGroupRootProps, "asChild"> {
   size?: SegmentGroupSize;
   orientation?: SegmentGroupOrientation;
   children?: ReactNode;
 }
 
 export interface LoongArkSegmentGroupItemProps
-  extends Omit<ArkToggleGroupItemProps, "asChild"> {
+  extends Omit<ArkSegmentGroupItemProps, "asChild"> {
   children?: ReactNode;
 }
 
@@ -30,7 +30,7 @@ export const LoongArkSegmentGroupRoot = forwardRef<
   LoongArkSegmentGroupRootProps
 >(({ children, size = "md", orientation = "horizontal", ...props }, ref) => {
   return (
-    <ToggleGroup.Root
+    <SegmentGroup.Root
       {...props}
       ref={ref}
       data-scope="segment-group"
@@ -39,25 +39,25 @@ export const LoongArkSegmentGroupRoot = forwardRef<
       data-orientation={orientation}
     >
       {children}
-    </ToggleGroup.Root>
+    </SegmentGroup.Root>
   );
 });
 
 LoongArkSegmentGroupRoot.displayName = "LoongArkSegmentGroupRoot";
 
 export const LoongArkSegmentGroupItem = forwardRef<
-  HTMLButtonElement,
+  HTMLLabelElement,
   LoongArkSegmentGroupItemProps
 >(({ children, ...props }, ref) => {
   return (
-    <ToggleGroup.Item
+    <SegmentGroup.Item
       {...props}
       ref={ref}
       data-scope="segment-group"
       data-part="item"
     >
       {children}
-    </ToggleGroup.Item>
+    </SegmentGroup.Item>
   );
 });
 

@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { ComboboxItemGroupLabelProps } from "@ark-ui/svelte/combobox";
-export default class ComboboxItemGroupLabel extends SvelteComponent<ComboboxItemGroupLabelProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Combobox } from "@ark-ui/svelte/combobox";
+
+export default class LoongArkComboboxItemGroupLabel extends SvelteComponent<
+  Omit<ComponentProps<typeof Combobox.ItemGroupLabel>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

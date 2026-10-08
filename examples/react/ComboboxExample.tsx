@@ -44,13 +44,13 @@ export const ComboboxExample: React.FC<ComboboxExampleProps> = ({
     const query = inputValue.trim().toLowerCase();
     if (!query) return options;
     return options.filter((option) =>
-      option.label.toLowerCase().includes(query)
+      option.label.toLowerCase().includes(query),
     );
   }, [inputValue]);
 
   const collection = useMemo(
     () => createListCollection({ items: filteredOptions }),
-    [filteredOptions]
+    [filteredOptions],
   );
 
   const handleValueChange = (details: { value: string[] }) => {
@@ -76,10 +76,8 @@ export const ComboboxExample: React.FC<ComboboxExampleProps> = ({
         <LoongArkComboboxLabel>{label}</LoongArkComboboxLabel>
         <LoongArkComboboxControl>
           <LoongArkComboboxInput placeholder={placeholder} />
-          <LoongArkComboboxClearTrigger aria-label="Clear">
-            x
-          </LoongArkComboboxClearTrigger>
-          <LoongArkComboboxTrigger aria-label="Toggle">v</LoongArkComboboxTrigger>
+          <LoongArkComboboxClearTrigger aria-label="Clear" />
+          <LoongArkComboboxTrigger aria-label="Toggle" />
         </LoongArkComboboxControl>
         <LoongArkComboboxPositioner>
           <LoongArkComboboxContent>
@@ -89,16 +87,20 @@ export const ComboboxExample: React.FC<ComboboxExampleProps> = ({
                   <LoongArkComboboxItemText>
                     {option.label}
                   </LoongArkComboboxItemText>
-                  <LoongArkComboboxItemIndicator>
-                    Check
-                  </LoongArkComboboxItemIndicator>
+                  <LoongArkComboboxItemIndicator />
                 </LoongArkComboboxItem>
               ))}
             </LoongArkComboboxList>
           </LoongArkComboboxContent>
         </LoongArkComboboxPositioner>
       </LoongArkComboboxRoot>
-      <p style={{ marginTop: "16px", fontSize: "14px", color: "#666" }}>
+      <p
+        style={{
+          marginTop: "16px",
+          fontSize: "14px",
+          color: "var(--lk-color-semantic-mutedforeground)",
+        }}
+      >
         Selected: {value.length > 0 ? value.join(", ") : "None"}
       </p>
     </div>

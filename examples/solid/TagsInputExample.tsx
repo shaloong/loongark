@@ -1,3 +1,7 @@
+/** @jsxImportSource solid-js */
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/solid";
+
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 import {
@@ -30,14 +34,13 @@ export const TagsInputExample: Component<TagsInputExampleProps> = (props) => {
 
   return (
     <LoongArkTagsInputRoot
+      name="frameworks"
       size={size()}
       state={state()}
       disabled={disabled()}
       readOnly={readOnly()}
       value={value()}
-      onValueChange={(details: { value: string[] }) =>
-        setValue(details.value)
-      }
+      onValueChange={(details: { value: string[] }) => setValue(details.value)}
     >
       <LoongArkTagsInputLabel>Frameworks</LoongArkTagsInputLabel>
       <LoongArkTagsInputControl
@@ -50,7 +53,7 @@ export const TagsInputExample: Component<TagsInputExampleProps> = (props) => {
             <LoongArkTagsInputItemPreview>
               <LoongArkTagsInputItemText>{tag}</LoongArkTagsInputItemText>
               <LoongArkTagsInputItemDeleteTrigger>
-                ×
+                <LoongArkIcon icon={controlIcons.close} size="sm" />
               </LoongArkTagsInputItemDeleteTrigger>
             </LoongArkTagsInputItemPreview>
           </LoongArkTagsInputItem>

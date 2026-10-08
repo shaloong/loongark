@@ -1,5 +1,7 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkDatePickerRoot,
   LoongArkDatePickerLabel,
@@ -52,15 +54,43 @@ const CalendarView = () => {
 
   return (
     <LoongArkDatePickerView view="day">
-      <LoongArkDatePickerViewControl>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <LoongArkDatePickerPrevTrigger>{"<"}</LoongArkDatePickerPrevTrigger>
+      <LoongArkDatePickerViewControl
+        style={{ flexDirection: "column", alignItems: "stretch" }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 8,
+          }}
+        >
+          <LoongArkDatePickerPrevTrigger>
+            <LoongArkIcon
+              icon={controlIcons.chevronLeft}
+              size="sm"
+              mirrorInRtl
+            />
+          </LoongArkDatePickerPrevTrigger>
           <LoongArkDatePickerViewTrigger>
             {datePicker.visibleRangeText?.formatted || "Calendar"}
           </LoongArkDatePickerViewTrigger>
-          <LoongArkDatePickerNextTrigger>{">"}</LoongArkDatePickerNextTrigger>
+          <LoongArkDatePickerNextTrigger>
+            <LoongArkIcon
+              icon={controlIcons.chevronRight}
+              size="sm"
+              mirrorInRtl
+            />
+          </LoongArkDatePickerNextTrigger>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 8,
+          }}
+        >
           <LoongArkDatePickerMonthSelect>
             {months.map((month: any) => (
               <option
@@ -153,12 +183,23 @@ const DatePickerDemo = ({
         <LoongArkDatePickerInput index={0} />
         {selectionMode === "range" && (
           <>
-            <span style={{ color: "#767680", padding: "0 4px" }}>-</span>
+            <span
+              style={{
+                color: "var(--lk-color-semantic-mutedforeground)",
+                padding: "0 4px",
+              }}
+            >
+              -
+            </span>
             <LoongArkDatePickerInput index={1} />
           </>
         )}
-        <LoongArkDatePickerClearTrigger>x</LoongArkDatePickerClearTrigger>
-        <LoongArkDatePickerTrigger>Open</LoongArkDatePickerTrigger>
+        <LoongArkDatePickerClearTrigger aria-label="Clear date">
+          <LoongArkIcon icon={controlIcons.close} size="sm" />
+        </LoongArkDatePickerClearTrigger>
+        <LoongArkDatePickerTrigger aria-label="Open calendar">
+          <LoongArkIcon icon={controlIcons.chevronDown} size="sm" />
+        </LoongArkDatePickerTrigger>
       </LoongArkDatePickerControl>
       {selectionMode === "range" && <RangeSummary />}
       {inline ? (
@@ -177,9 +218,7 @@ const DatePickerDemo = ({
 };
 
 export const Basic: Story = {
-  render: () => (
-    <DatePickerDemo defaultValue={[parseDate("2026-01-12")]} />
-  ),
+  render: () => <DatePickerDemo defaultValue={[parseDate("2026-01-12")]} />,
 };
 
 export const Range: Story = {

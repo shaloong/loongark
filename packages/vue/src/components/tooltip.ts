@@ -1,19 +1,20 @@
+import { renderPart } from "../render-part";
 import { h, defineComponent } from "vue";
 import { Tooltip as ArkTooltip } from "@ark-ui/vue/tooltip";
-import { Portal as ArkPortal } from "@ark-ui/vue/portal";
+import { LoongArkPortal as ArkPortal } from "./portal";
 
 export const LoongArkTooltipRoot = defineComponent({
   name: "LoongArkTooltipRoot",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTooltip.Root,
         {
           ...attrs,
           "data-scope": "tooltip",
           "data-part": "root",
         },
-        slots
+        slots,
       );
   },
 });
@@ -22,15 +23,15 @@ export const LoongArkTooltipTrigger = defineComponent({
   name: "LoongArkTooltipTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTooltip.Trigger,
         {
           ...attrs,
-          asChild: true,
+          asChild: attrs.asChild ?? true,
           "data-scope": "tooltip",
           "data-part": "trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -39,21 +40,21 @@ export const LoongArkTooltipPositioner = defineComponent({
   name: "LoongArkTooltipPositioner",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPortal,
         {},
         {
           default: () =>
-            h(
+            renderPart(
               ArkTooltip.Positioner,
               {
                 ...attrs,
                 "data-scope": "tooltip",
                 "data-part": "positioner",
               },
-              slots
+              slots,
             ),
-        }
+        },
       );
   },
 });
@@ -62,7 +63,7 @@ export const LoongArkTooltipContent = defineComponent({
   name: "LoongArkTooltipContent",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTooltip.Content,
         {
           ...attrs,
@@ -70,7 +71,7 @@ export const LoongArkTooltipContent = defineComponent({
           "data-part": "content",
           "data-interactive": attrs.interactive ? "true" : undefined,
         },
-        slots
+        slots,
       );
   },
 });
@@ -79,14 +80,14 @@ export const LoongArkTooltipArrow = defineComponent({
   name: "LoongArkTooltipArrow",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTooltip.Arrow,
         {
           ...attrs,
           "data-scope": "tooltip",
           "data-part": "arrow",
         },
-        slots
+        slots,
       );
   },
 });
@@ -95,15 +96,14 @@ export const LoongArkTooltipArrowTip = defineComponent({
   name: "LoongArkTooltipArrowTip",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTooltip.ArrowTip,
         {
           ...attrs,
           "data-scope": "tooltip",
           "data-part": "arrow-tip",
         },
-        slots
+        slots,
       );
   },
 });
-

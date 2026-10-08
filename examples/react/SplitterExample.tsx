@@ -1,38 +1,47 @@
 import React from "react";
+
 import {
   LoongArkSplitterRoot,
   LoongArkSplitterPanel,
   LoongArkSplitterResizeTrigger,
   LoongArkSplitterResizeTriggerIndicator,
 } from "@loongark/react";
-import type { SplitterSize } from "@loongark/primitives";
 
-interface SplitterExampleProps {
-  size?: SplitterSize;
+interface SplitterDemoProps {
+  size?: "sm" | "md" | "lg";
   orientation?: "horizontal" | "vertical";
+  locked?: boolean;
 }
 
-export const SplitterExample: React.FC<SplitterExampleProps> = ({
+const SplitterDemo = ({
   size = "md",
   orientation = "horizontal",
-}) => {
+  locked = false,
+}: SplitterDemoProps) => {
   const height = orientation === "vertical" ? 240 : 160;
 
   return (
     <LoongArkSplitterRoot
+      panels={[
+        { id: "notes", minSize: 20 },
+        { id: "preview", minSize: 20 },
+      ]}
+      defaultSize={[50, 50]}
       size={size}
       orientation={orientation}
       style={{ height }}
     >
-      <LoongArkSplitterPanel minSize={20}>
+      <LoongArkSplitterPanel id="notes">
         <div style={{ padding: 12 }}>Notes</div>
       </LoongArkSplitterPanel>
-      <LoongArkSplitterResizeTrigger>
+      <LoongArkSplitterResizeTrigger id="notes:preview" disabled={locked}>
         <LoongArkSplitterResizeTriggerIndicator />
       </LoongArkSplitterResizeTrigger>
-      <LoongArkSplitterPanel minSize={20}>
+      <LoongArkSplitterPanel id="preview">
         <div style={{ padding: 12 }}>Preview</div>
       </LoongArkSplitterPanel>
     </LoongArkSplitterRoot>
   );
 };
+export const SplitterExample = SplitterDemo;
+export type SplitterExampleProps = Parameters<typeof SplitterDemo>[0];

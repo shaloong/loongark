@@ -1,37 +1,57 @@
+import { createComponent } from "solid-js";
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
+import { dataProps } from "../data-props";
+import type { JSX } from "solid-js";
+import { LoongArkPortal } from "./portal";
 import { Dialog as ArkDialog } from "@ark-ui/solid/dialog";
 import { ark } from "@ark-ui/solid";
 import type { DialogPrimitiveProps } from "@loongark/primitives";
 import type { Component } from "solid-js";
-import { mergeProps } from "solid-js";
+import { mergeProps, splitProps } from "solid-js";
 import { boolAttr } from "../utils";
 
 export type DialogSize = NonNullable<DialogPrimitiveProps["size"]>;
 export type DialogPlacement = NonNullable<DialogPrimitiveProps["placement"]>;
 export type DialogMotion = NonNullable<DialogPrimitiveProps["motion"]>;
 
-export interface LoongArkDialogOverlayProps {
+export interface LoongArkDialogOverlayProps extends Omit<
+  JSX.HTMLAttributes<HTMLElement>,
+  "ref"
+> {
   blur?: boolean;
-  children?: unknown;
-  [key: string]: unknown;
+  children?: JSX.Element;
 }
 
 export const LoongArkDialogOverlay: Component<LoongArkDialogOverlayProps> = (
-  props
+  props,
 ) => {
-  const { blur = true, children, ...rest } = props;
-  return ArkDialog.Backdrop({
-    ...rest,
-    children,
-    "data-scope": "dialog",
-    "data-part": "backdrop",
-    "data-blur": boolAttr(blur),
-  });
+  const [local, rest] = splitProps(mergeProps({ blur: true }, props), [
+    "blur",
+    "children",
+  ]);
+  return ArkDialog.Backdrop(
+    dataProps(
+      mergeProps(rest, {
+        get children() {
+          return local.children;
+        },
+        "data-scope": "dialog",
+        "data-part": "backdrop",
+        get "data-blur"() {
+          return boolAttr(local.blur);
+        },
+      }),
+    ),
+  );
 };
 
-interface DialogContentProps extends Partial<DialogPrimitiveProps> {
+interface DialogContentProps
+  extends
+    Partial<DialogPrimitiveProps>,
+    Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
   overlayBlur?: boolean;
-  children?: unknown;
-  [key: string]: unknown;
+  children?: JSX.Element;
 }
 
 const dialogContentDefaults: Required<
@@ -44,74 +64,116 @@ const dialogContentDefaults: Required<
 };
 
 export const LoongArkDialogContent: Component<DialogContentProps> = (props) => {
-  const { children, size, motion, placement, overlayBlur, ...rest } =
-    mergeProps(dialogContentDefaults, props);
+  const [local, rest] = splitProps(mergeProps(dialogContentDefaults, props), [
+    "children",
+    "size",
+    "motion",
+    "placement",
+    "overlayBlur",
+  ]);
 
-  return ArkDialog.Content({
-    ...rest,
-    children,
-    "data-scope": "dialog",
-    "data-part": "content",
-    "data-size": size,
-    "data-motion": motion,
-    "data-placement": placement,
-    "data-overlay-blur": boolAttr(overlayBlur),
-  });
+  return ArkDialog.Content(
+    dataProps(
+      mergeProps(rest, {
+        get children() {
+          return local.children;
+        },
+        "data-scope": "dialog",
+        "data-part": "content",
+        get "data-size"() {
+          return local.size;
+        },
+        get "data-motion"() {
+          return local.motion;
+        },
+        get "data-placement"() {
+          return local.placement;
+        },
+        get "data-overlay-blur"() {
+          return boolAttr(local.overlayBlur);
+        },
+      }),
+    ),
+  );
 };
 
-interface DialogTextProps {
-  children?: unknown;
-  [key: string]: unknown;
+interface DialogTextProps extends Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
+  children?: JSX.Element;
 }
 
 export const LoongArkDialogTitle: Component<DialogTextProps> = (props) => {
-  const { children, ...rest } = props;
-  return ArkDialog.Title({
-    ...rest,
-    children,
-    "data-scope": "dialog",
-    "data-part": "title",
-  });
+  const [local, rest] = splitProps(props, ["children"]);
+  return ArkDialog.Title(
+    dataProps(
+      mergeProps(rest, {
+        get children() {
+          return local.children;
+        },
+        "data-scope": "dialog",
+        "data-part": "title",
+      }),
+    ),
+  );
 };
 
 export const LoongArkDialogDescription: Component<DialogTextProps> = (
-  props
+  props,
 ) => {
-  const { children, ...rest } = props;
-  return ArkDialog.Description({
-    ...rest,
-    children,
-    "data-scope": "dialog",
-    "data-part": "description",
-  });
+  const [local, rest] = splitProps(props, ["children"]);
+  return ArkDialog.Description(
+    dataProps(
+      mergeProps(rest, {
+        get children() {
+          return local.children;
+        },
+        "data-scope": "dialog",
+        "data-part": "description",
+      }),
+    ),
+  );
 };
 
 export const LoongArkDialogFooter: Component<DialogTextProps> = (props) => {
-  const { children, ...rest } = props;
-  return ark.footer({
-    ...rest,
-    children,
-    "data-scope": "dialog",
-    "data-part": "footer",
-  });
+  const [local, rest] = splitProps(props, ["children"]);
+  return ark.footer(
+    dataProps(
+      mergeProps(rest, {
+        get children() {
+          return local.children;
+        },
+        "data-scope": "dialog",
+        "data-part": "footer",
+      }),
+    ),
+  );
 };
 
 export const LoongArkDialogCloseTrigger: Component<DialogTextProps> = (
-  props
+  props,
 ) => {
-  const { children, ...rest } = props;
-  return ArkDialog.CloseTrigger({
-    ...rest,
-    children,
-    "data-scope": "dialog",
-    "data-part": "close-trigger",
-  });
+  const [local, rest] = splitProps(props, ["children"]);
+  return ArkDialog.CloseTrigger(
+    dataProps(
+      mergeProps(rest, {
+        get children() {
+          return (
+            local.children ??
+            createComponent(LoongArkIcon, { icon: controlIcons.close })
+          );
+        },
+        "aria-label": rest["aria-label"] ?? "Close dialog",
+        "data-scope": "dialog",
+        "data-part": "close-trigger",
+      }),
+    ),
+  );
 };
 
 export const LoongArkDialog = {
   Root: ArkDialog.Root,
   Trigger: ArkDialog.Trigger,
   Positioner: ArkDialog.Positioner,
+  Portal: LoongArkPortal,
   Overlay: LoongArkDialogOverlay,
   Content: LoongArkDialogContent,
   Title: LoongArkDialogTitle,
@@ -119,3 +181,9 @@ export const LoongArkDialog = {
   Footer: LoongArkDialogFooter,
   CloseTrigger: LoongArkDialogCloseTrigger,
 };
+
+export const LoongArkDialogRoot = ArkDialog.Root;
+export const LoongArkDialogTrigger = ArkDialog.Trigger;
+
+export const LoongArkDialogPositioner = ArkDialog.Positioner;
+export const LoongArkDialogPortal = LoongArkPortal;

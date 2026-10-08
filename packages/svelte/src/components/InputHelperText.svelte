@@ -4,11 +4,12 @@
   export let variant: "default" | "error" | "success" = "default";
 </script>
 
-<Field.HelperText
+<svelte:component
+  this={variant === "error" ? Field.ErrorText : Field.HelperText}
   data-scope="input"
   data-part="helper-text"
   data-variant={variant === "default" ? undefined : variant}
   {...$$restProps}
 >
   <slot />
-</Field.HelperText>
+</svelte:component>

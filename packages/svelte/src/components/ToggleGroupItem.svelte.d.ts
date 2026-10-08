@@ -1,3 +1,15 @@
-import type { SvelteComponent } from "svelte";
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { ToggleGroup } from "@ark-ui/svelte/toggle-group";
 import type { ToggleGroupItemProps } from "@ark-ui/svelte/toggle-group";
-export default class ToggleGroupItem extends SvelteComponent<ToggleGroupItemProps> {}
+
+export default class LoongArkToggleGroupItem extends SvelteComponent<
+  Omit<
+    ComponentProps<typeof ToggleGroup.Item>,
+    "children" | "value" | "disabled"
+  > & {
+    value: ToggleGroupItemProps["value"];
+    disabled?: ToggleGroupItemProps["disabled"];
+  },
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

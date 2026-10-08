@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createListCollection } from "@ark-ui/svelte";
+  import { createListCollection } from "@loongark/svelte";
   import {
     LoongArkListboxRoot,
     LoongArkListboxLabel,

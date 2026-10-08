@@ -1,16 +1,46 @@
 import { writable } from "svelte/store";
 import { createLoongArkTheme } from "@loongark/theme";
 import { bootstrapKit } from "@loongark/kit";
+export { default as LoongArkProvider } from "./components/Provider.svelte";
+export { default as LoongArkPortal } from "./components/Portal.svelte";
+import LoongArkDialogRootComponent from "./components/DialogRoot.svelte";
+import LoongArkDialogPositionerComponent from "./components/DialogPositioner.svelte";
+import LoongArkDialogPortalComponent from "./components/Portal.svelte";
+export { default as LoongArkDialogPositioner } from "./components/DialogPositioner.svelte";
+export { default as LoongArkDialogPortal } from "./components/Portal.svelte";
+import LoongArkDialogTriggerComponent from "./components/DialogTrigger.svelte";
+import LoongArkDialogOverlayComponent from "./components/DialogOverlay.svelte";
+import LoongArkDialogContentComponent from "./components/DialogContent.svelte";
+import LoongArkDialogTitleComponent from "./components/DialogTitle.svelte";
+import LoongArkDialogDescriptionComponent from "./components/DialogDescription.svelte";
+import LoongArkDialogCloseTriggerComponent from "./components/DialogCloseTrigger.svelte";
+import LoongArkDialogFooterComponent from "./components/DialogFooter.svelte";
+import LoongArkPinInputRootComponent from "./components/PinInputRoot.svelte";
+import LoongArkPinInputControlComponent from "./components/PinInputControl.svelte";
+import LoongArkPinInputInputComponent from "./components/PinInputInput.svelte";
+import LoongArkPinInputLabelComponent from "./components/PinInputLabel.svelte";
+import LoongArkPinInputHiddenInputComponent from "./components/PinInputHiddenInput.svelte";
+import LoongArkSwitchRootComponent from "./components/SwitchRoot.svelte";
+import LoongArkSwitchHiddenInputComponent from "./components/SwitchHiddenInput.svelte";
+export { default as LoongArkSwitchHiddenInput } from "./components/SwitchHiddenInput.svelte";
+import LoongArkSwitchControlComponent from "./components/SwitchControl.svelte";
+import LoongArkSwitchThumbComponent from "./components/SwitchThumb.svelte";
+import LoongArkSwitchLabelComponent from "./components/SwitchLabel.svelte";
 
 // Button
 export { default as LoongArkButton } from "./components/Button.svelte";
 
 // Input
 export { default as LoongArkInputRoot } from "./components/InputRoot.svelte";
+export { default as LoongArkInputGroup } from "./components/InputGroup.svelte";
 export { default as LoongArkInputLabel } from "./components/InputLabel.svelte";
 export { default as LoongArkInputInput } from "./components/InputInput.svelte";
+export { default as LoongArkInputControl } from "./components/InputInput.svelte";
+export { default as LoongArkTextareaControl } from "./components/TextareaControl.svelte";
 export { default as LoongArkInputHelperText } from "./components/InputHelperText.svelte";
 export { default as LoongArkInputErrorText } from "./components/InputErrorText.svelte";
+export { default as LoongArkInputPrefix } from "./components/InputPrefix.svelte";
+export { default as LoongArkInputSuffix } from "./components/InputSuffix.svelte";
 
 // Dialog
 export { default as LoongArkDialogRoot } from "./components/DialogRoot.svelte";
@@ -19,6 +49,7 @@ export { default as LoongArkDialogOverlay } from "./components/DialogOverlay.sve
 export { default as LoongArkDialogContent } from "./components/DialogContent.svelte";
 export { default as LoongArkDialogTitle } from "./components/DialogTitle.svelte";
 export { default as LoongArkDialogDescription } from "./components/DialogDescription.svelte";
+export { default as LoongArkDialogFooter } from "./components/DialogFooter.svelte";
 export { default as LoongArkDialogCloseTrigger } from "./components/DialogCloseTrigger.svelte";
 
 // Filter Bar
@@ -133,7 +164,6 @@ export type {
   FileUploadItemDeleteTriggerProps,
   FileUploadClearTriggerProps,
 } from "./components/file-upload.d";
-
 
 // Checkbox
 export { default as LoongArkCheckboxRoot } from "./components/CheckboxRoot.svelte";
@@ -518,7 +548,6 @@ export type {
   ToastStatus,
 } from "./components/toast.d";
 
-
 // Carousel
 export { default as LoongArkCarouselRoot } from "./components/CarouselRoot.svelte";
 export { default as LoongArkCarouselItemGroup } from "./components/CarouselItemGroup.svelte";
@@ -744,12 +773,162 @@ export interface ThemeStoreOptions {
 }
 
 export const createThemeStore = (options: ThemeStoreOptions = {}) => {
-  const theme = createLoongArkTheme({
+  let theme = createLoongArkTheme({
     mode: options.mode,
     brand: options.brand,
     accent: options.accent,
   });
   bootstrapKit(theme);
   theme.mount();
-  return writable(theme);
+  const store = writable(theme);
+  const set = (next: typeof theme) => {
+    if (next !== theme) {
+      theme.unmount();
+      next.mount();
+      bootstrapKit(next);
+      theme = next;
+    }
+    store.set(next);
+  };
+  return {
+    subscribe: store.subscribe,
+    set,
+    update(change: (current: typeof theme) => typeof theme) {
+      set(change(theme));
+    },
+    destroy() {
+      theme.unmount();
+    },
+  };
 };
+
+export const LoongArkDialog = {
+  Portal: LoongArkDialogPortalComponent,
+  Positioner: LoongArkDialogPositionerComponent,
+  Root: LoongArkDialogRootComponent,
+  Trigger: LoongArkDialogTriggerComponent,
+  Overlay: LoongArkDialogOverlayComponent,
+  Content: LoongArkDialogContentComponent,
+  Title: LoongArkDialogTitleComponent,
+  Description: LoongArkDialogDescriptionComponent,
+  Footer: LoongArkDialogFooterComponent,
+  CloseTrigger: LoongArkDialogCloseTriggerComponent,
+};
+
+export const LoongArkPinInput = {
+  Root: LoongArkPinInputRootComponent,
+  Control: LoongArkPinInputControlComponent,
+  Input: LoongArkPinInputInputComponent,
+  Label: LoongArkPinInputLabelComponent,
+  HiddenInput: LoongArkPinInputHiddenInputComponent,
+};
+
+export const LoongArkSwitch = {
+  HiddenInput: LoongArkSwitchHiddenInputComponent,
+  Root: LoongArkSwitchRootComponent,
+  Control: LoongArkSwitchControlComponent,
+  Thumb: LoongArkSwitchThumbComponent,
+  Label: LoongArkSwitchLabelComponent,
+};
+
+export * from "./components/extended";
+
+export * from "./components/layout";
+
+export * from "./components/composed";
+
+export { default as LoongArkDataTable } from "./components/DataTable.svelte";
+export { default as LoongArkChart } from "./components/Chart.svelte";
+
+export { createListCollection } from "@ark-ui/svelte/collection";
+export { createTreeCollection } from "@ark-ui/svelte/collection";
+export { parseDate } from "@ark-ui/svelte/date-picker";
+export { parseColor } from "@ark-ui/svelte/color-picker";
+export { TreeViewNodeProvider as LoongArkTreeViewNodeProvider } from "@ark-ui/svelte/tree-view";
+
+export { default as LoongArkTextarea } from "./components/Textarea.svelte";
+
+export { default as LoongArkTransferList } from "./components/TransferList.svelte";
+export { default as LoongArkTimePicker } from "./components/TimePicker.svelte";
+
+export { default as LoongArkImageList } from "./components/ImageList.svelte";
+
+export { default as LoongArkImageListItem } from "./components/ImageListItem.svelte";
+
+export { default as LoongArkImageListCaption } from "./components/ImageListCaption.svelte";
+
+export { default as LoongArkMasonry } from "./components/Masonry.svelte";
+
+export { default as LoongArkMasonryItem } from "./components/MasonryItem.svelte";
+
+export { default as LoongArkFloatingActionButton } from "./components/FloatingActionButton.svelte";
+
+export { default as LoongArkSpeedDial } from "./components/SpeedDial.svelte";
+
+export { default as LoongArkAttachment } from "./components/Attachment.svelte";
+
+export { default as LoongArkBubble } from "./components/Bubble.svelte";
+
+export { default as LoongArkMessage } from "./components/Message.svelte";
+
+export {default as LoongArkMessageScroller} from "./components/MessageScroller.svelte";
+
+export {default as LoongArkQuestionnaire} from "./components/Questionnaire.svelte";
+
+export * from "./components/ark-additions";
+
+export * from "./components/ark-advanced";
+
+export * from "./components/ark-next";
+export * from "./components/drawer";
+export * from "./components/ark-controls";
+
+export type { Question, QuestionRow, QuestionGroupInstance, QuestionnaireCustomContext, QuestionnaireCustomControl, QuestionAnswer, QuestionOption, QuestionnaireOptions, QuestionnaireValue } from "@loongark/kit";
+
+export type { DataTableState, DataTableLabels, DataTableSummary, DataRow, DataColumn, DataSort, DataFilter, DataFilterOperator, DataColumnFilter } from "@loongark/kit";
+
+export type { ChartOptions, ChartSeries, ChartLabels, ChartAxis } from "@loongark/kit";
+
+export type {AttachmentOptions,MessageOptions,ConversationAction,ConversationActionContext,ConversationActionHandler,ConversationActionLabels,ConversationActionState} from "@loongark/kit";
+
+export {default as LoongArkIcon} from "./components/Icon.svelte";
+export type {LoongArkIconProps} from "./components/Icon.svelte";
+export type {IconOptions, IconNode} from "@loongark/kit";
+
+export type { VirtualizationOptions, VirtualRenderDetails } from "@loongark/kit";
+
+export type {ChartRange} from "@loongark/kit";
+
+export { createAsyncCollectionLoader } from "@loongark/kit";
+export type { AsyncCollectionSort, AsyncCollectionRequest, AsyncCollectionLoadDetails, AsyncCollectionPage, AsyncCollectionLoaderOptions } from "@loongark/kit";
+
+export type { DataColumnGeometry, DataTableColumnLabels, DataTableColumnOptions } from "@loongark/kit";
+
+export { default as LoongArkCodeEditor } from "./components/CodeEditor.svelte";
+export { default as LoongArkRichTextEditor } from "./components/RichTextEditor.svelte";
+export type { CodeEditorProps, CodeEditorLabels, CodeEditorLanguage, CodeEditorLanguageLoader, CodeEditorHandle, RichTextEditorProps, RichTextEditorHandle, RichTextDocument, RichTextMark, RichTextAttribute, RichTextAction } from "@loongark/kit";
+
+export { exportImageCropper } from "@loongark/kit";
+export type { ImageCropperExportModel, ImageCropperExportOptions } from "@loongark/kit";
+
+export type { LoongArkQuestionnaireRenderers } from "./components/questionnaire-custom.types";
+
+export type { ColumnVirtualizationOptions } from "@loongark/kit";
+
+export { default as LoongArkVirtualGrid } from "./components/VirtualGrid.svelte";
+
+export { default as LoongArkVirtualMasonry } from "./components/VirtualMasonry.svelte";
+
+export type {
+  VirtualGridOptions,
+  VirtualGridCellDetails,
+  VirtualMasonryOptions,
+  VirtualMasonryEntry,
+} from "@loongark/kit";
+
+export type { VirtualGridProps } from "./components/VirtualGrid.svelte";
+
+export type { VirtualMasonryProps } from "./components/VirtualMasonry.svelte";
+
+export { parseLocalizedDate, parseDateTime, parseZonedDateTime } from "@loongark/kit";
+export type { LocalizedDateOptions } from "@loongark/kit";

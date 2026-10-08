@@ -36,7 +36,11 @@ const HoverCardDemo = ({
   subtitle = "Design-ready UI primitives.",
 }: HoverCardDemoProps) => {
   return (
-    <LoongArkHoverCardRoot size={size} defaultOpen={defaultOpen} openDelay={200}>
+    <LoongArkHoverCardRoot
+      size={size}
+      defaultOpen={defaultOpen}
+      openDelay={200}
+    >
       <LoongArkHoverCardTrigger>Hover details</LoongArkHoverCardTrigger>
       <LoongArkHoverCardPositioner>
         <LoongArkHoverCardContent>

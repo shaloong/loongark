@@ -7,7 +7,8 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { TreeView } from "@ark-ui/react/tree-view";
 import type { TreeViewSize } from "@loongark/primitives";
 
-type ArkTreeViewRootProps = ComponentPropsWithoutRef<typeof TreeView.Root>;
+type ArkTreeViewRootProps<T = object> =
+  import("@ark-ui/react/tree-view").TreeViewRootProps<T>;
 type ArkTreeViewLabelProps = ComponentPropsWithoutRef<typeof TreeView.Label>;
 type ArkTreeViewTreeProps = ComponentPropsWithoutRef<typeof TreeView.Tree>;
 type ArkTreeViewItemProps = ComponentPropsWithoutRef<typeof TreeView.Item>;
@@ -46,8 +47,10 @@ type ArkTreeViewNodeRenameInputProps = ComponentPropsWithoutRef<
   typeof TreeView.NodeRenameInput
 >;
 
-export interface LoongArkTreeViewRootProps
-  extends Omit<ArkTreeViewRootProps, "asChild"> {
+export interface LoongArkTreeViewRootProps<T = object> extends Omit<
+  ArkTreeViewRootProps<T>,
+  "asChild"
+> {
   size?: TreeViewSize;
   children?: ReactNode;
 }
@@ -67,12 +70,15 @@ export const LoongArkTreeViewRoot = forwardRef<
       {children}
     </TreeView.Root>
   );
-});
+}) as (<T>(
+  props: LoongArkTreeViewRootProps<T> &
+    import("react").RefAttributes<HTMLDivElement>,
+) => import("react").ReactElement | null) & { displayName?: string };
 
 LoongArkTreeViewRoot.displayName = "LoongArkTreeViewRoot";
 
 export const LoongArkTreeViewLabel = forwardRef<
-  HTMLLabelElement,
+  HTMLHeadingElement,
   ArkTreeViewLabelProps
 >((props, ref) => {
   return (
@@ -120,7 +126,7 @@ export const LoongArkTreeViewItem = forwardRef<
 LoongArkTreeViewItem.displayName = "LoongArkTreeViewItem";
 
 export const LoongArkTreeViewItemIndicator = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   ArkTreeViewItemIndicatorProps
 >((props, ref) => {
   return (
@@ -200,7 +206,7 @@ export const LoongArkTreeViewBranchControl = forwardRef<
 LoongArkTreeViewBranchControl.displayName = "LoongArkTreeViewBranchControl";
 
 export const LoongArkTreeViewBranchTrigger = forwardRef<
-  HTMLButtonElement,
+  HTMLDivElement,
   ArkTreeViewBranchTriggerProps
 >((props, ref) => {
   return (
@@ -216,7 +222,7 @@ export const LoongArkTreeViewBranchTrigger = forwardRef<
 LoongArkTreeViewBranchTrigger.displayName = "LoongArkTreeViewBranchTrigger";
 
 export const LoongArkTreeViewBranchIndicator = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   ArkTreeViewBranchIndicatorProps
 >((props, ref) => {
   return (
@@ -229,8 +235,7 @@ export const LoongArkTreeViewBranchIndicator = forwardRef<
   );
 });
 
-LoongArkTreeViewBranchIndicator.displayName =
-  "LoongArkTreeViewBranchIndicator";
+LoongArkTreeViewBranchIndicator.displayName = "LoongArkTreeViewBranchIndicator";
 
 export const LoongArkTreeViewBranchText = forwardRef<
   HTMLSpanElement,
@@ -288,7 +293,6 @@ export const LoongArkTreeViewNodeCheckboxIndicator = forwardRef<
   return (
     <TreeView.NodeCheckboxIndicator
       {...props}
-      ref={ref}
       data-scope="tree-view"
       data-part="node-checkbox-indicator"
     />
@@ -312,5 +316,4 @@ export const LoongArkTreeViewNodeRenameInput = forwardRef<
   );
 });
 
-LoongArkTreeViewNodeRenameInput.displayName =
-  "LoongArkTreeViewNodeRenameInput";
+LoongArkTreeViewNodeRenameInput.displayName = "LoongArkTreeViewNodeRenameInput";

@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toStringToken } from "./tokenUtils";
 
 export type SplitterSize = "sm" | "md" | "lg";
@@ -23,10 +22,10 @@ interface SplitterDesignTokens {
 }
 
 const extractSplitterTokens = (theme: LoongArkTheme): SplitterDesignTokens => {
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
-  const color = theme.tokens.color as TokenTree;
+  const radius = asTokenTree(theme.styleTokens.radius);
+  const color = theme.styleTokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
 
   return {
@@ -146,8 +145,8 @@ const splitterPrimitive = createPrimitive<SplitterPrimitiveProps>(
   SPLITTER_CONTRACT,
   (theme) => {
     const css = buildSplitterStyles(theme);
-    mountPrimitiveStyles(`splitter-${theme.mode}`, css);
-  }
+    theme.mountStyles(`splitter-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(splitterPrimitive);

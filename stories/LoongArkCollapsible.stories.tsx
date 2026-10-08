@@ -1,5 +1,7 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkCollapsibleRoot,
   LoongArkCollapsibleTrigger,
@@ -28,7 +30,7 @@ interface CollapsibleDemoProps {
   defaultOpen?: boolean;
 }
 
-const panelStyle = { color: "#3A3A3C" };
+const panelStyle = { color: "var(--lk-color-semantic-foreground)" };
 
 const CollapsibleDemo = ({
   size = "md",
@@ -37,7 +39,9 @@ const CollapsibleDemo = ({
   <LoongArkCollapsibleRoot defaultOpen={defaultOpen} size={size}>
     <LoongArkCollapsibleTrigger>
       <span>Release notes</span>
-      <LoongArkCollapsibleIndicator>&gt;</LoongArkCollapsibleIndicator>
+      <LoongArkCollapsibleIndicator>
+        <LoongArkIcon icon={controlIcons.chevronRight} size="sm" />
+      </LoongArkCollapsibleIndicator>
     </LoongArkCollapsibleTrigger>
     <LoongArkCollapsibleContent>
       <div style={panelStyle}>

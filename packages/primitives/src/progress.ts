@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type ProgressSize = "sm" | "md" | "lg";
@@ -35,20 +34,20 @@ interface ProgressDesignTokens {
 }
 
 const extractProgressTokens = (theme: LoongArkTheme): ProgressDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -101,13 +100,6 @@ const buildProgressStyles = (theme: LoongArkTheme): string => {
   const circleRangeSelector = `${scopeSelector}[data-part="circle-range"]`;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${rootSelector} {
   display: inline-flex;
@@ -226,8 +218,8 @@ const progressPrimitive = createPrimitive<ProgressPrimitiveProps>(
   PROGRESS_CONTRACT,
   (theme) => {
     const css = buildProgressStyles(theme);
-    mountPrimitiveStyles(`progress-${theme.mode}`, css);
-  }
+    theme.mountStyles(`progress-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(progressPrimitive);

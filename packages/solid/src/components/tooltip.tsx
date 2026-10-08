@@ -9,32 +9,43 @@ import {
   type TooltipArrowTipProps as ArkTooltipArrowTipProps,
 } from "@ark-ui/solid/tooltip";
 
-// 简易 Portal 占位，避免对 solid-js/web 依赖
-const NoopPortal = (props: { children?: JSX.Element }) => <>{props.children}</>;
+import { LoongArkPortal } from "./portal";
 
-export const LoongArkTooltipRoot = (props: ArkTooltipRootProps): JSX.Element => (
+export const LoongArkTooltipRoot = (
+  props: ArkTooltipRootProps,
+): JSX.Element => (
   <ArkTooltip.Root {...props} data-scope="tooltip" data-part="root" />
 );
 
 export const LoongArkTooltipTrigger = (
-  props: ArkTooltipTriggerProps
+  props: ArkTooltipTriggerProps,
 ): JSX.Element => {
-  const merged = createMemo(() => ({ asChild: true, ...props }));
-  return <ArkTooltip.Trigger {...merged()} data-scope="tooltip" data-part="trigger" />;
+  const merged = createMemo(() => ({ ...props }));
+  return (
+    <ArkTooltip.Trigger
+      {...merged()}
+      data-scope="tooltip"
+      data-part="trigger"
+    />
+  );
 };
 
 export const LoongArkTooltipPositioner = (
-  props: ArkTooltipPositionerProps & { children?: JSX.Element }
+  props: ArkTooltipPositionerProps & { children?: JSX.Element },
 ): JSX.Element => {
   return (
-    <NoopPortal>
-      <ArkTooltip.Positioner {...props} data-scope="tooltip" data-part="positioner" />
-    </NoopPortal>
+    <LoongArkPortal>
+      <ArkTooltip.Positioner
+        {...props}
+        data-scope="tooltip"
+        data-part="positioner"
+      />
+    </LoongArkPortal>
   );
 };
 
 export const LoongArkTooltipContent = (
-  props: ArkTooltipContentProps & { interactive?: boolean }
+  props: ArkTooltipContentProps & { interactive?: boolean },
 ): JSX.Element => {
   const interactive = props.interactive ? "true" : undefined;
   return (
@@ -47,10 +58,14 @@ export const LoongArkTooltipContent = (
   );
 };
 
-export const LoongArkTooltipArrow = (props: ArkTooltipArrowProps): JSX.Element => (
+export const LoongArkTooltipArrow = (
+  props: ArkTooltipArrowProps,
+): JSX.Element => (
   <ArkTooltip.Arrow {...props} data-scope="tooltip" data-part="arrow" />
 );
 
-export const LoongArkTooltipArrowTip = (props: ArkTooltipArrowTipProps): JSX.Element => (
+export const LoongArkTooltipArrowTip = (
+  props: ArkTooltipArrowTipProps,
+): JSX.Element => (
   <ArkTooltip.ArrowTip {...props} data-scope="tooltip" data-part="arrow-tip" />
 );

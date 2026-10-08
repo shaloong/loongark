@@ -1,8 +1,15 @@
+import type { SliderRootProps as NativeSliderRootProps } from "@ark-ui/vue/slider";
+import { renderPart } from "../render-part";
 /**
  * Slider component - Vue wrapper
  * Based on Ark UI Slider with data-scope/data-part bindings
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { Slider as ArkSlider } from "@ark-ui/vue/slider";
 import type { SliderOrientation, SliderSize } from "@loongark/primitives";
 
@@ -46,12 +53,15 @@ export const LoongArkSliderRoot = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     invalid: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     name: {
       type: String as PropType<string>,
@@ -63,7 +73,7 @@ export const LoongArkSliderRoot = defineComponent({
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeSliderRootProps["ids"]>,
     },
     origin: {
       type: String as PropType<"start" | "center" | "end">,
@@ -84,12 +94,14 @@ export const LoongArkSliderRoot = defineComponent({
       type: Function as PropType<(details: SliderFocusChangeDetails) => void>,
     },
     getAriaValueText: {
-      type: Function as PropType<(details: { value: number; index: number }) => string>,
+      type: Function as PropType<
+        (details: { value: number; index: number }) => string
+      >,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSlider.Root,
         {
           ...attrs,
@@ -100,7 +112,7 @@ export const LoongArkSliderRoot = defineComponent({
           "data-size": props.size,
           "data-orientation": props.orientation,
         },
-        slots
+        slots,
       );
   },
 });
@@ -109,14 +121,14 @@ export const LoongArkSliderLabel = defineComponent({
   name: "LoongArkSliderLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSlider.Label,
         {
           ...attrs,
           "data-scope": "slider",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -125,14 +137,14 @@ export const LoongArkSliderValueText = defineComponent({
   name: "LoongArkSliderValueText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSlider.ValueText,
         {
           ...attrs,
           "data-scope": "slider",
           "data-part": "value-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -141,14 +153,14 @@ export const LoongArkSliderControl = defineComponent({
   name: "LoongArkSliderControl",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSlider.Control,
         {
           ...attrs,
           "data-scope": "slider",
           "data-part": "control",
         },
-        slots
+        slots,
       );
   },
 });
@@ -157,14 +169,14 @@ export const LoongArkSliderTrack = defineComponent({
   name: "LoongArkSliderTrack",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSlider.Track,
         {
           ...attrs,
           "data-scope": "slider",
           "data-part": "track",
         },
-        slots
+        slots,
       );
   },
 });
@@ -173,14 +185,14 @@ export const LoongArkSliderRange = defineComponent({
   name: "LoongArkSliderRange",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSlider.Range,
         {
           ...attrs,
           "data-scope": "slider",
           "data-part": "range",
         },
-        slots
+        slots,
       );
   },
 });
@@ -198,7 +210,7 @@ export const LoongArkSliderThumb = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSlider.Thumb,
         {
           ...attrs,
@@ -207,7 +219,7 @@ export const LoongArkSliderThumb = defineComponent({
           "data-scope": "slider",
           "data-part": "thumb",
         },
-        slots
+        slots,
       );
   },
 });
@@ -216,14 +228,14 @@ export const LoongArkSliderMarkerGroup = defineComponent({
   name: "LoongArkSliderMarkerGroup",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSlider.MarkerGroup,
         {
           ...attrs,
           "data-scope": "slider",
           "data-part": "marker-group",
         },
-        slots
+        slots,
       );
   },
 });
@@ -238,7 +250,7 @@ export const LoongArkSliderMarker = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSlider.Marker,
         {
           ...attrs,
@@ -246,7 +258,7 @@ export const LoongArkSliderMarker = defineComponent({
           "data-scope": "slider",
           "data-part": "marker",
         },
-        slots
+        slots,
       );
   },
 });
@@ -255,14 +267,14 @@ export const LoongArkSliderDraggingIndicator = defineComponent({
   name: "LoongArkSliderDraggingIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSlider.DraggingIndicator,
         {
           ...attrs,
           "data-scope": "slider",
           "data-part": "dragging-indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -271,7 +283,7 @@ export const LoongArkSliderHiddenInput = defineComponent({
   name: "LoongArkSliderHiddenInput",
   setup(_, { attrs }) {
     return () =>
-      h(ArkSlider.HiddenInput, {
+      renderPart(resolveDynamicComponent(ArkSlider.HiddenInput), {
         ...attrs,
         "data-scope": "slider",
         "data-part": "hidden-input",

@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Avatar component - Vue wrapper.
  * Based on Ark UI Avatar.
@@ -16,7 +17,7 @@ export const LoongArkAvatarRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkAvatar.Root,
         {
           ...attrs,
@@ -25,7 +26,7 @@ export const LoongArkAvatarRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -34,14 +35,14 @@ export const LoongArkAvatarImage = defineComponent({
   name: "LoongArkAvatarImage",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkAvatar.Image,
         {
           ...attrs,
           "data-scope": "avatar",
           "data-part": "image",
         },
-        slots
+        slots,
       );
   },
 });
@@ -50,14 +51,14 @@ export const LoongArkAvatarFallback = defineComponent({
   name: "LoongArkAvatarFallback",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkAvatar.Fallback,
         {
           ...attrs,
           "data-scope": "avatar",
           "data-part": "fallback",
         },
-        slots
+        slots,
       );
   },
 });

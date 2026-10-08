@@ -26,7 +26,7 @@
     <LoongArkProgressValueText />
   </LoongArkProgressRoot>
   <LoongArkProgressRoot {value} {size}>
-    <LoongArkProgressView>
+    <LoongArkProgressView state="loading">
       <LoongArkProgressCircle>
         <LoongArkProgressCircleTrack />
         <LoongArkProgressCircleRange />

@@ -19,60 +19,82 @@ import {
 } from "@ark-ui/react/slider";
 import type { SliderOrientation, SliderSize } from "@loongark/primitives";
 
-export interface LoongArkSliderRootProps
-  extends Omit<ArkSliderRootProps, "asChild"> {
+export interface LoongArkSliderRootProps extends Omit<
+  ArkSliderRootProps,
+  "asChild"
+> {
   size?: SliderSize;
   orientation?: SliderOrientation;
   children?: ReactNode;
 }
 
-export interface LoongArkSliderLabelProps
-  extends Omit<ArkSliderLabelProps, "asChild"> {
+export interface LoongArkSliderLabelProps extends Omit<
+  ArkSliderLabelProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkSliderValueTextProps
-  extends Omit<ArkSliderValueTextProps, "asChild"> {
+export interface LoongArkSliderValueTextProps extends Omit<
+  ArkSliderValueTextProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkSliderControlProps
-  extends Omit<ArkSliderControlProps, "asChild"> {
+export interface LoongArkSliderControlProps extends Omit<
+  ArkSliderControlProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkSliderTrackProps
-  extends Omit<ArkSliderTrackProps, "asChild"> {
+export interface LoongArkSliderTrackProps extends Omit<
+  ArkSliderTrackProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkSliderRangeProps
-  extends Omit<ArkSliderRangeProps, "asChild"> {
+export interface LoongArkSliderRangeProps extends Omit<
+  ArkSliderRangeProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkSliderThumbProps
-  extends Omit<ArkSliderThumbProps, "asChild"> {
+export interface LoongArkSliderThumbProps extends Omit<
+  ArkSliderThumbProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkSliderMarkerGroupProps
-  extends Omit<ArkSliderMarkerGroupProps, "asChild"> {
+export interface LoongArkSliderMarkerGroupProps extends Omit<
+  ArkSliderMarkerGroupProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkSliderMarkerProps
-  extends Omit<ArkSliderMarkerProps, "asChild"> {
+export interface LoongArkSliderMarkerProps extends Omit<
+  ArkSliderMarkerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkSliderDraggingIndicatorProps
-  extends Omit<ArkSliderDraggingIndicatorProps, "asChild"> {
+export interface LoongArkSliderDraggingIndicatorProps extends Omit<
+  ArkSliderDraggingIndicatorProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkSliderHiddenInputProps
-  extends Omit<ArkSliderHiddenInputProps, "asChild"> {}
+export interface LoongArkSliderHiddenInputProps extends Omit<
+  ArkSliderHiddenInputProps,
+  "asChild"
+> {}
 
 export const LoongArkSliderRoot = forwardRef<
   HTMLDivElement,
@@ -110,7 +132,7 @@ export const LoongArkSliderLabel = forwardRef<
 LoongArkSliderLabel.displayName = "LoongArkSliderLabel";
 
 export const LoongArkSliderValueText = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   LoongArkSliderValueTextProps
 >((props, ref) => {
   return (

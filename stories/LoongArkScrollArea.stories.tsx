@@ -14,7 +14,8 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: "LoongArkScrollArea provides styled scrollbars for long content.",
+        component:
+          "LoongArkScrollArea provides styled scrollbars for long content.",
       },
     },
   },
@@ -24,7 +25,10 @@ export default meta;
 
 type Story = StoryObj;
 
-const items = Array.from({ length: 12 }, (_, index) => `Release note ${index + 1}`);
+const items = Array.from(
+  { length: 12 },
+  (_, index) => `Release note ${index + 1}`,
+);
 
 interface ScrollAreaDemoProps {
   size?: "sm" | "md" | "lg";

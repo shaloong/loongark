@@ -15,8 +15,6 @@
   export let onFocusChange: TabsRootProps["onFocusChange"] = undefined;
   export let lazyMount: TabsRootProps["lazyMount"] = undefined;
   export let unmountOnExit: TabsRootProps["unmountOnExit"] = undefined;
-  export let present: TabsRootProps["present"] = undefined;
-  export let skipAnimationOnMount: TabsRootProps["skipAnimationOnMount"] = undefined;
 </script>
 
 <Tabs.Root
@@ -31,8 +29,6 @@
   {onFocusChange}
   {lazyMount}
   {unmountOnExit}
-  {present}
-  {skipAnimationOnMount}
   data-scope="tabs"
   data-part="root"
   data-size={size}

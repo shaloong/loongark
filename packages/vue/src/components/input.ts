@@ -1,6 +1,8 @@
-import { defineComponent, h } from "vue";
+import { renderPart } from "../render-part";
+import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
-import { Field } from "@ark-ui/vue/field";
+import { Field, useFieldContext } from "@ark-ui/vue/field";
+import { inputSuffixDisabled } from "@loongark/kit";
 import { ark } from "@ark-ui/vue";
 import type { InputPrimitiveProps } from "@loongark/primitives";
 
@@ -37,12 +39,13 @@ export const LoongArkInputRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         Field.Root,
         {
           ...attrs,
           disabled: props.disabled,
-          readonly: props.readOnly,
+          invalid: props.state === "invalid",
+          readOnly: props.readOnly,
           "data-scope": "input",
           "data-part": "root",
           "data-size": props.size,
@@ -50,26 +53,37 @@ export const LoongArkInputRoot = defineComponent({
           "data-disabled": boolAttr(props.disabled),
           "data-multiline": boolAttr(props.multiline),
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
 
 export const LoongArkInputControl = defineComponent({
   name: "LoongArkInputControl",
+  emits: ["update:modelValue"],
+  inheritAttrs: false,
   props: {
+    modelValue: { type: {} as PropType<string | number | undefined> },
     size: sizeProp,
     state: stateProp,
-    disabled: boolProp(false),
-    readOnly: boolProp(false),
+    disabled: { type: {} as PropType<boolean>, default: undefined },
+    readOnly: { type: {} as PropType<boolean>, default: undefined },
     multiline: boolProp(false),
   },
-  setup(props, { attrs }) {
+  setup(props, { attrs, emit }) {
     return () =>
-      h(Field.Input, {
+      renderPart(resolveDynamicComponent(Field.Input), {
         ...attrs,
-        disabled: props.disabled,
-        readonly: props.readOnly,
+        value: props.modelValue ?? attrs.value,
+        onInput: (event: Event) => {
+          emit(
+            "update:modelValue",
+            (event.currentTarget as HTMLInputElement).value,
+          );
+          if (typeof attrs.onInput === "function") attrs.onInput(event);
+        },
+        ...(props.disabled === undefined ? {} : { disabled: props.disabled }),
+        ...(props.readOnly === undefined ? {} : { readonly: props.readOnly }),
         "data-scope": "input",
         "data-part": "control",
         "data-size": props.size,
@@ -79,21 +93,46 @@ export const LoongArkInputControl = defineComponent({
   },
 });
 
+export const LoongArkInputInput = LoongArkInputControl;
+
+export const LoongArkInputGroup = defineComponent({
+  name: "LoongArkInputGroup",
+  setup(_, { slots, attrs }) {
+    return () =>
+      renderPart(
+        "div",
+        { ...attrs, "data-scope": "input", "data-part": "group" },
+        slots.default?.(),
+      );
+  },
+});
+
 export const LoongArkTextareaControl = defineComponent({
   name: "LoongArkTextareaControl",
+  emits: ["update:modelValue"],
+  inheritAttrs: false,
   props: {
+    modelValue: { type: {} as PropType<string | undefined> },
     size: sizeProp,
     state: stateProp,
-    disabled: boolProp(false),
-    readOnly: boolProp(false),
+    disabled: { type: {} as PropType<boolean>, default: undefined },
+    readOnly: { type: {} as PropType<boolean>, default: undefined },
     multiline: boolProp(true),
   },
-  setup(props, { attrs }) {
+  setup(props, { attrs, emit }) {
     return () =>
-      h(Field.Textarea, {
+      renderPart(Field.Textarea, {
         ...attrs,
-        disabled: props.disabled,
-        readonly: props.readOnly,
+        value: props.modelValue ?? attrs.value,
+        onInput: (event: Event) => {
+          emit(
+            "update:modelValue",
+            (event.currentTarget as HTMLTextAreaElement).value,
+          );
+          if (typeof attrs.onInput === "function") attrs.onInput(event);
+        },
+        ...(props.disabled === undefined ? {} : { disabled: props.disabled }),
+        ...(props.readOnly === undefined ? {} : { readonly: props.readOnly }),
         "data-scope": "input",
         "data-part": "control",
         "data-size": props.size,
@@ -113,8 +152,8 @@ export const LoongArkInputHelperText = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
-        Field.HelperText,
+      renderPart(
+        props.variant === "error" ? Field.ErrorText : Field.HelperText,
         {
           ...attrs,
           "data-scope": "input",
@@ -122,7 +161,24 @@ export const LoongArkInputHelperText = defineComponent({
           "data-variant":
             props.variant === "default" ? undefined : props.variant,
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
+      );
+  },
+});
+
+export const LoongArkInputErrorText = defineComponent({
+  name: "LoongArkInputErrorText",
+  setup(_, { slots, attrs }) {
+    return () =>
+      renderPart(
+        Field.ErrorText,
+        {
+          ...attrs,
+          "data-scope": "input",
+          "data-part": "helper-text",
+          "data-variant": "error",
+        },
+        slots.default ? slots.default() : undefined,
       );
   },
 });
@@ -131,14 +187,14 @@ export const LoongArkInputLabel = defineComponent({
   name: "LoongArkInputLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         Field.Label,
         {
           ...attrs,
           "data-scope": "input",
           "data-part": "label",
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
@@ -147,39 +203,47 @@ export const LoongArkInputPrefix = defineComponent({
   name: "LoongArkInputPrefix",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ark.span,
         {
           ...attrs,
           "data-scope": "input",
           "data-part": "prefix",
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });
 
 export const LoongArkInputSuffix = defineComponent({
   name: "LoongArkInputSuffix",
+  inheritAttrs: false,
   props: {
+    disabled: { type: Boolean, default: undefined },
     action: {
       type: {} as PropType<"clear" | "button" | "none" | "text">,
       default: "none" as const,
     },
   },
   setup(props, { slots, attrs }) {
-    const isAction = () => props.action === "clear" || props.action === "button";
+    const field = useFieldContext();
+    const isAction = () =>
+      (props.action === "clear" || props.action === "button") &&
+      typeof attrs.onClick === "function";
     return () =>
-      h(
+      renderPart(
         isAction() ? ark.button : ark.span,
         {
           ...attrs,
           type: isAction() ? "button" : undefined,
+          disabled: isAction()
+            ? inputSuffixDisabled(props.action, props.disabled, field?.value)
+            : undefined,
           "data-scope": "input",
           "data-part": "suffix",
-          "data-action": isAction() ? "clear" : undefined,
+          "data-action": isAction() ? props.action : undefined,
         },
-        slots.default ? slots.default() : undefined
+        slots.default ? slots.default() : undefined,
       );
   },
 });

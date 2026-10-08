@@ -1,6 +1,7 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import { createMemo, createSignal } from "solid-js";
-import { createListCollection } from "@ark-ui/solid";
+import { createListCollection } from "@loongark/solid";
 import {
   LoongArkComboboxRoot,
   LoongArkComboboxLabel,
@@ -44,12 +45,12 @@ export const ComboboxExample: Component<ComboboxExampleProps> = (props) => {
     const query = inputValue().trim().toLowerCase();
     if (!query) return options;
     return options.filter((option) =>
-      option.label.toLowerCase().includes(query)
+      option.label.toLowerCase().includes(query),
     );
   });
 
   const collection = createMemo(() =>
-    createListCollection({ items: filteredOptions() })
+    createListCollection({ items: filteredOptions() }),
   );
 
   const handleValueChange = (details: { value: string[] }) => {
@@ -75,27 +76,31 @@ export const ComboboxExample: Component<ComboboxExampleProps> = (props) => {
         <LoongArkComboboxLabel>{label()}</LoongArkComboboxLabel>
         <LoongArkComboboxControl>
           <LoongArkComboboxInput placeholder={placeholder()} />
-          <LoongArkComboboxClearTrigger aria-label="Clear">
-            x
-          </LoongArkComboboxClearTrigger>
-          <LoongArkComboboxTrigger aria-label="Toggle">v</LoongArkComboboxTrigger>
+          <LoongArkComboboxClearTrigger aria-label="Clear" />
+          <LoongArkComboboxTrigger aria-label="Toggle" />
         </LoongArkComboboxControl>
         <LoongArkComboboxPositioner>
           <LoongArkComboboxContent>
             <LoongArkComboboxList>
               {filteredOptions().map((option) => (
                 <LoongArkComboboxItem item={option}>
-                  <LoongArkComboboxItemText>{option.label}</LoongArkComboboxItemText>
-                  <LoongArkComboboxItemIndicator>
-                    Check
-                  </LoongArkComboboxItemIndicator>
+                  <LoongArkComboboxItemText>
+                    {option.label}
+                  </LoongArkComboboxItemText>
+                  <LoongArkComboboxItemIndicator />
                 </LoongArkComboboxItem>
               ))}
             </LoongArkComboboxList>
           </LoongArkComboboxContent>
         </LoongArkComboboxPositioner>
       </LoongArkComboboxRoot>
-      <p style={{ marginTop: "16px", "font-size": "14px", color: "#666" }}>
+      <p
+        style={{
+          "margin-top": "16px",
+          "font-size": "14px",
+          color: "var(--lk-color-semantic-mutedforeground)",
+        }}
+      >
         Selected: {value().length > 0 ? value().join(", ") : "None"}
       </p>
     </div>

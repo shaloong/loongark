@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { TagsInputItemTextProps } from "@ark-ui/svelte/tags-input";
-export default class TagsInputItemText extends SvelteComponent<TagsInputItemTextProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { TagsInput } from "@ark-ui/svelte/tags-input";
+
+export default class LoongArkTagsInputItemText extends SvelteComponent<
+  Omit<ComponentProps<typeof TagsInput.ItemText>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Field } from "@ark-ui/svelte/field";
-  import { ark } from "@ark-ui/svelte";
   import type { InputPrimitiveProps } from "@loongark/primitives";
 
   export let size: NonNullable<InputPrimitiveProps["size"]> = "md";
@@ -13,6 +12,7 @@
 </script>
 
 <Field.Root
+  invalid={state === "invalid"}
   {disabled}
   {readOnly}
   data-scope="input"

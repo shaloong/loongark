@@ -1,25 +1,27 @@
-import { type Component, type JSX } from "solid-js";
+import { type Component, type JSX, splitProps, mergeProps } from "solid-js";
 import { boolAttr } from "../utils";
 
-export interface LoongArkFilterBarProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+export interface LoongArkFilterBarProps extends JSX.HTMLAttributes<HTMLDivElement> {
   dense?: boolean;
   align?: "start" | "center";
   children?: JSX.Element;
 }
 
 export const LoongArkFilterBar: Component<LoongArkFilterBarProps> = (props) => {
-  const { dense, align = "start", children, ...rest } = props;
+  const [local, rest] = splitProps(
+    mergeProps({ align: "start" as const }, props),
+    ["dense", "align", "children"],
+  );
 
   return (
     <div
       {...rest}
       data-scope="filter-bar"
       data-part="root"
-      data-dense={boolAttr(!!dense)}
-      data-align={align === "center" ? "center" : undefined}
+      data-dense={boolAttr(!!local.dense)}
+      data-align={local.align === "center" ? "center" : undefined}
     >
-      {children}
+      {local.children}
     </div>
   );
 };
@@ -27,13 +29,13 @@ export const LoongArkFilterBar: Component<LoongArkFilterBarProps> = (props) => {
 export type LoongArkFilterSectionProps = JSX.HTMLAttributes<HTMLDivElement>;
 
 const createFilterSection = (
-  part: "search" | "filters" | "actions"
+  part: "search" | "filters" | "actions",
 ): Component<LoongArkFilterSectionProps> => {
   const Section: Component<LoongArkFilterSectionProps> = (props) => {
-    const { children, ...rest } = props;
+    const [local, rest] = splitProps(props, ["children"]);
     return (
       <div {...rest} data-scope="filter-bar" data-part={part}>
-        {children}
+        {local.children}
       </div>
     );
   };
@@ -59,28 +61,30 @@ export const LoongArkFilterDivider: Component<
   );
 };
 
-export interface LoongArkFilterChipProps
-  extends JSX.HTMLAttributes<HTMLButtonElement> {
+export interface LoongArkFilterChipProps extends JSX.HTMLAttributes<HTMLButtonElement> {
   active?: boolean;
   type?: "button" | "submit" | "reset";
   children?: JSX.Element;
 }
 
 export const LoongArkFilterChip: Component<LoongArkFilterChipProps> = (
-  props
+  props,
 ) => {
-  const { active, type = "button", children, ...rest } = props;
+  const [local, rest] = splitProps(
+    mergeProps({ type: "button" as const }, props),
+    ["active", "type", "children"],
+  );
 
   return (
     <button
       {...rest}
-      type={type}
+      type={local.type}
       data-scope="filter-bar"
       data-part="chip"
-      data-active={boolAttr(!!active)}
-      aria-pressed={active ? "true" : "false"}
+      data-active={boolAttr(!!local.active)}
+      aria-pressed={local.active ? "true" : "false"}
     >
-      {children}
+      {local.children}
     </button>
   );
 };

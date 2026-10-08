@@ -1,3 +1,18 @@
+import { useFieldContext } from "@ark-ui/react/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
+import type {
+  HTMLAttributes,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  ButtonHTMLAttributes,
+} from "react";
+import { nativeSelectionProps } from "@loongark/kit";
+import { dataProps } from "../data-props";
+import { useNativeSelection } from "../native-selection";
+import {
+  useSwitchContext,
+  type SwitchHiddenInputProps,
+} from "@ark-ui/react/switch";
 import { Switch as ArkSwitch } from "@ark-ui/react/switch";
 import type { SwitchPrimitiveProps } from "@loongark/primitives";
 import { forwardRef, createElement } from "react";
@@ -9,31 +24,41 @@ type ArkSwitchRootProps = {
   onCheckedChange?: (details: { checked: boolean }) => void;
 };
 
-export interface LoongArkSwitchProps extends Partial<SwitchPrimitiveProps> {
+export interface LoongArkSwitchProps
+  extends Partial<SwitchPrimitiveProps>, HTMLAttributes<HTMLElement> {
   children?: ReactNode;
   disabled?: boolean;
+  name?: string;
+  form?: string;
+  value?: string;
+  readOnly?: boolean;
+  required?: boolean;
+  invalid?: boolean;
+  checked?: boolean;
+  defaultChecked?: boolean;
   onCheckedChange?: ArkSwitchRootProps["onCheckedChange"];
-  [key: string]: unknown;
 }
 
 export const LoongArkSwitchRoot = forwardRef<
   HTMLLabelElement,
   LoongArkSwitchProps
->(({ children, size = "md", disabled = false, onCheckedChange, ...rest }, ref) =>
+>(({ children, size = "md", disabled, onCheckedChange, ...rest }, ref) =>
   createElement(
     ArkSwitch.Root,
-    {
-      ...rest,
-      onCheckedChange,
-      disabled,
-      ref,
-      "data-scope": "switch",
-      "data-part": "root",
-      "data-size": size,
-      "data-disabled": disabled ? "true" : undefined,
-    },
-    children
-  )
+    dataProps(
+      nativeSelectionProps({
+        ...rest,
+        onCheckedChange,
+        disabled,
+        ref,
+        "data-scope": "switch",
+        "data-part": "root",
+        "data-size": size,
+        "data-disabled": disabled ? "true" : undefined,
+      }),
+    ),
+    children,
+  ),
 );
 
 LoongArkSwitchRoot.displayName = "LoongArkSwitchRoot";
@@ -41,16 +66,19 @@ LoongArkSwitchRoot.displayName = "LoongArkSwitchRoot";
 export const LoongArkSwitchControl = forwardRef<
   HTMLButtonElement,
   LoongArkSwitchProps
->(({ size = "md", disabled = false, ...rest }, ref) =>
-  createElement(ArkSwitch.Control, {
-    ...rest,
-    disabled,
-    ref,
-    "data-scope": "switch",
-    "data-part": "control",
-    "data-size": size,
-    "data-disabled": disabled ? "true" : undefined,
-  })
+>(({ size = "md", disabled, ...rest }, ref) =>
+  createElement(
+    ArkSwitch.Control,
+    dataProps({
+      ...rest,
+      disabled,
+      ref,
+      "data-scope": "switch",
+      "data-part": "control",
+      "data-size": size,
+      "data-disabled": disabled ? "true" : undefined,
+    }),
+  ),
 );
 
 LoongArkSwitchControl.displayName = "LoongArkSwitchControl";
@@ -59,13 +87,16 @@ export const LoongArkSwitchThumb = forwardRef<
   HTMLSpanElement,
   Partial<SwitchPrimitiveProps>
 >(({ size = "md", ...rest }, ref) =>
-  createElement(ArkSwitch.Thumb, {
-    ...rest,
-    ref,
-    "data-scope": "switch",
-    "data-part": "thumb",
-    "data-size": size,
-  })
+  createElement(
+    ArkSwitch.Thumb,
+    dataProps({
+      ...rest,
+      ref,
+      "data-scope": "switch",
+      "data-part": "thumb",
+      "data-size": size,
+    }),
+  ),
 );
 
 LoongArkSwitchThumb.displayName = "LoongArkSwitchThumb";
@@ -77,23 +108,41 @@ export const LoongArkSwitchLabel = ({
 }: {
   children?: ReactNode;
   disabled?: boolean;
-  [key: string]: unknown;
 }) =>
   createElement(
     ArkSwitch.Label,
-    {
+    dataProps({
       ...rest,
       "data-scope": "switch",
       "data-part": "label",
       "data-disabled": disabled ? "true" : undefined,
-    },
-    children
+    }),
+    children,
   );
+
+export const LoongArkSwitchHiddenInput = forwardRef<
+  HTMLInputElement,
+  SwitchHiddenInputProps
+>((props, ref) => {
+  const field = useFieldContext();
+  const api = useSwitchContext();
+  const input = useNativeSelection(api, "checkbox", ref);
+  return createElement(ArkSwitch.HiddenInput, {
+    ...props,
+    ref: input,
+    "aria-describedby": nativeSelectionFieldDescription(
+      props["aria-describedby"],
+      field,
+      api.getHiddenInputProps()["aria-invalid"],
+    ),
+  });
+});
+LoongArkSwitchHiddenInput.displayName = "LoongArkSwitchHiddenInput";
 
 export const LoongArkSwitch = {
   Root: LoongArkSwitchRoot,
   Control: LoongArkSwitchControl,
   Thumb: LoongArkSwitchThumb,
   Label: LoongArkSwitchLabel,
-  HiddenInput: ArkSwitch.HiddenInput,
+  HiddenInput: LoongArkSwitchHiddenInput,
 };

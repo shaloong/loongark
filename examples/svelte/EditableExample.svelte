@@ -23,13 +23,19 @@
   };
 </script>
 
-<LoongArkEditableRoot {size} {state} {disabled} {value} onValueChange={handleValueChange}>
+<LoongArkEditableRoot
+  {size}
+  {state}
+  {disabled}
+  {value}
+  onValueChange={handleValueChange}
+>
   <LoongArkEditableLabel>Project name</LoongArkEditableLabel>
   <LoongArkEditableArea>
     <LoongArkEditablePreview />
-    <LoongArkEditableInput {state} />
+    <LoongArkEditableInput />
   </LoongArkEditableArea>
-  <LoongArkEditableControl {state} style="display: flex; gap: 8px;">
+  <LoongArkEditableControl style="display: flex; gap: 8px;">
     <LoongArkEditableEditTrigger>Edit</LoongArkEditableEditTrigger>
     <LoongArkEditableSubmitTrigger>Save</LoongArkEditableSubmitTrigger>
     <LoongArkEditableCancelTrigger>Cancel</LoongArkEditableCancelTrigger>

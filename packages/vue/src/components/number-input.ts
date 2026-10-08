@@ -1,8 +1,23 @@
+import { useFieldContext } from "@ark-ui/vue/field";
+import { useNumberInputContext } from "@ark-ui/vue/number-input";
+import {
+  nativeSelectionProps,
+  nativeSelectionFieldDescription,
+} from "@loongark/kit";
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
+import type { NumberInputRootProps as NativeNumberInputRootProps } from "@ark-ui/vue/number-input";
+import { renderPart } from "../render-part";
 /**
  * Number Input component - Vue wrapper.
  * Based on Ark UI Number Input with data-scope/data-part bindings.
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { NumberInput as ArkNumberInput } from "@ark-ui/vue/number-input";
 import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
 
@@ -48,15 +63,19 @@ export const LoongArkNumberInputRoot = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     required: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     invalid: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     name: {
       type: String as PropType<string>,
@@ -68,7 +87,7 @@ export const LoongArkNumberInputRoot = defineComponent({
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeNumberInputRootProps["ids"]>,
     },
     inputMode: {
       type: String as PropType<"text" | "tel" | "numeric" | "decimal">,
@@ -77,34 +96,45 @@ export const LoongArkNumberInputRoot = defineComponent({
       type: String as PropType<string>,
     },
     formatOptions: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeNumberInputRootProps["formatOptions"]>,
     },
     translations: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeNumberInputRootProps["translations"]>,
     },
     allowMouseWheel: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     allowOverflow: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     clampValueOnBlur: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     focusInputOnChange: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     spinOnPress: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     onValueChange: {
-      type: Function as PropType<(details: NumberInputValueChangeDetails) => void>,
+      type: Function as PropType<
+        (details: NumberInputValueChangeDetails) => void
+      >,
     },
     onValueInvalid: {
-      type: Function as PropType<(details: NumberInputValueInvalidDetails) => void>,
+      type: Function as PropType<
+        (details: NumberInputValueInvalidDetails) => void
+      >,
     },
     onFocusChange: {
-      type: Function as PropType<(details: NumberInputFocusChangeDetails) => void>,
+      type: Function as PropType<
+        (details: NumberInputFocusChangeDetails) => void
+      >,
     },
     "onUpdate:modelValue": {
       type: Function as PropType<(value: string) => void>,
@@ -112,19 +142,25 @@ export const LoongArkNumberInputRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkNumberInput.Root,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "number-input",
           "data-part": "root",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
-          "data-readonly": props.readOnly ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
+          ...nativeSelectionProps({
+            "data-readonly":
+              props.readOnly === undefined ? undefined : String(props.readOnly),
+          }),
         },
-        slots
+        slots,
       );
   },
 });
@@ -133,14 +169,14 @@ export const LoongArkNumberInputLabel = defineComponent({
   name: "LoongArkNumberInputLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkNumberInput.Label,
         {
           ...attrs,
           "data-scope": "number-input",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -158,29 +194,33 @@ export const LoongArkNumberInputControl = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkNumberInput.Control,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "number-input",
           "data-part": "control",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
         },
-        slots
+        slots,
       );
   },
 });
 
 export const LoongArkNumberInputInput = defineComponent({
   name: "LoongArkNumberInputInput",
+  inheritAttrs: false,
   props: {
     size: {
       type: String as PropType<NumberInputSize>,
@@ -192,24 +232,39 @@ export const LoongArkNumberInputInput = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { attrs }) {
+    const field = useFieldContext();
+    const api = useNumberInputContext();
     return () =>
-      h(ArkNumberInput.Input, {
+      renderPart(resolveDynamicComponent(ArkNumberInput.Input), {
         ...attrs,
-        ...props,
+        ...nativeSelectionProps(props),
         "data-scope": "number-input",
         "data-part": "input",
+        "aria-describedby": nativeSelectionFieldDescription(
+          typeof attrs["aria-describedby"] === "string"
+            ? attrs["aria-describedby"]
+            : undefined,
+          field?.value,
+          api.value.getInputProps()["aria-invalid"],
+        ),
         "data-size": props.size,
         "data-state": props.state !== "default" ? props.state : undefined,
-        "data-disabled": props.disabled ? "true" : undefined,
-        "data-readonly": props.readOnly ? "true" : undefined,
+        ...nativeSelectionProps({
+          "data-disabled":
+            props.disabled === undefined ? undefined : String(props.disabled),
+        }),
+        ...nativeSelectionProps({
+          "data-readonly":
+            props.readOnly === undefined ? undefined : String(props.readOnly),
+        }),
       });
   },
 });
@@ -227,23 +282,31 @@ export const LoongArkNumberInputIncrementTrigger = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkNumberInput.IncrementTrigger,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "number-input",
           "data-part": "increment-trigger",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
         },
-        slots
+        {
+          ...slots,
+          default: () =>
+            slots.default?.() ??
+            h(LoongArkIcon, { icon: controlIcons.plus, size: "sm" }),
+        },
       );
   },
 });
@@ -261,23 +324,31 @@ export const LoongArkNumberInputDecrementTrigger = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkNumberInput.DecrementTrigger,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "number-input",
           "data-part": "decrement-trigger",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...nativeSelectionProps({
+            "data-disabled":
+              props.disabled === undefined ? undefined : String(props.disabled),
+          }),
         },
-        slots
+        {
+          ...slots,
+          default: () =>
+            slots.default?.() ??
+            h(LoongArkIcon, { icon: controlIcons.minus, size: "sm" }),
+        },
       );
   },
 });
@@ -292,16 +363,16 @@ export const LoongArkNumberInputValueText = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkNumberInput.ValueText,
         {
           ...attrs,
-          ...props,
+          ...nativeSelectionProps(props),
           "data-scope": "number-input",
           "data-part": "value-text",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -310,14 +381,14 @@ export const LoongArkNumberInputScrubber = defineComponent({
   name: "LoongArkNumberInputScrubber",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkNumberInput.Scrubber,
         {
           ...attrs,
           "data-scope": "number-input",
           "data-part": "scrubber",
         },
-        slots
+        slots,
       );
   },
 });

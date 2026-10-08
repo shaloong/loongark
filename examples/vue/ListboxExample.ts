@@ -1,5 +1,5 @@
 import { defineComponent, h, ref, type PropType } from "vue";
-import { createListCollection } from "@ark-ui/vue";
+import { createListCollection } from "@loongark/vue";
 import {
   LoongArkListboxRoot,
   LoongArkListboxLabel,
@@ -63,21 +63,21 @@ export const ListboxExample = defineComponent({
                           h(
                             LoongArkListboxItemText,
                             {},
-                            { default: () => option.label }
+                            { default: () => option.label },
                           ),
                           h(
                             LoongArkListboxItemIndicator,
                             {},
-                            { default: () => "Check" }
+                            { default: () => "Check" },
                           ),
                         ],
-                      }
-                    )
+                      },
+                    ),
                   ),
-              }
+              },
             ),
           ],
-        }
+        },
       );
   },
 });

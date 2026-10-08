@@ -17,13 +17,17 @@ type ArkScrollAreaContentProps = ComponentPropsWithoutRef<
 type ArkScrollAreaScrollbarProps = ComponentPropsWithoutRef<
   typeof ScrollArea.Scrollbar
 >;
-type ArkScrollAreaThumbProps = ComponentPropsWithoutRef<typeof ScrollArea.Thumb>;
+type ArkScrollAreaThumbProps = ComponentPropsWithoutRef<
+  typeof ScrollArea.Thumb
+>;
 type ArkScrollAreaCornerProps = ComponentPropsWithoutRef<
   typeof ScrollArea.Corner
 >;
 
-export interface LoongArkScrollAreaRootProps
-  extends Omit<ArkScrollAreaRootProps, "asChild"> {
+export interface LoongArkScrollAreaRootProps extends Omit<
+  ArkScrollAreaRootProps,
+  "asChild"
+> {
   size?: ScrollAreaSize;
   children?: ReactNode;
 }
@@ -53,6 +57,7 @@ export const LoongArkScrollAreaViewport = forwardRef<
 >((props, ref) => {
   return (
     <ScrollArea.Viewport
+      tabIndex={0}
       {...props}
       ref={ref}
       data-scope="scroll-area"

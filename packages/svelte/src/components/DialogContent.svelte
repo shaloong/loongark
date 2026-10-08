@@ -4,21 +4,17 @@
 
   export let size: NonNullable<DialogPrimitiveProps["size"]> = "md";
   export let motion: NonNullable<DialogPrimitiveProps["motion"]> = "scale";
-  export let placement: NonNullable<DialogPrimitiveProps["placement"]> = "center";
+  export let placement: NonNullable<DialogPrimitiveProps["placement"]> =
+    "center";
 </script>
 
-<Dialog.Positioner
-  data-scope="dialog"
-  data-part="positioner"
-  data-placement={placement}
+<Dialog.Content
   {...$$restProps}
+  data-scope="dialog"
+  data-part="content"
+  data-size={size}
+  data-motion={motion}
+  data-placement={placement}
 >
-  <Dialog.Content
-    data-scope="dialog"
-    data-part="content"
-    data-size={size}
-    data-motion={motion}
-  >
-    <slot />
-  </Dialog.Content>
-</Dialog.Positioner>
+  <slot />
+</Dialog.Content>

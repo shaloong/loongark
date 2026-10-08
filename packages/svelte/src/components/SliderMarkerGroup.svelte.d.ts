@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { SliderMarkerGroupProps } from "@ark-ui/svelte/slider";
-export default class SliderMarkerGroup extends SvelteComponent<SliderMarkerGroupProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Slider } from "@ark-ui/svelte/slider";
+
+export default class LoongArkSliderMarkerGroup extends SvelteComponent<
+  Omit<ComponentProps<typeof Slider.MarkerGroup>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

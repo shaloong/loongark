@@ -3,12 +3,19 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
-    "composite": true
+    "composite": true,
+    "typeRoots": ["../../node_modules/@types"]
   },
   "include": ["src"],
   "references": [
-    { "path": "../kit" },
-    { "path": "../theme" },
-    { "path": "../primitives" }
+    {
+      "path": "../kit"
+    },
+    {
+      "path": "../theme"
+    },
+    {
+      "path": "../primitives"
+    }
   ]
 }

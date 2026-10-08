@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 import {
@@ -42,8 +43,8 @@ export const FileUploadExample: Component<FileUploadExampleProps> = (props) => {
       <LoongArkFileUploadLabel>Upload files</LoongArkFileUploadLabel>
       <LoongArkFileUploadDropzone>
         <p style={{ margin: 0 }}>Drag files here</p>
-        <LoongArkFileUploadTrigger>Browse</LoongArkFileUploadTrigger>
       </LoongArkFileUploadDropzone>
+      <LoongArkFileUploadTrigger>Browse</LoongArkFileUploadTrigger>
       <LoongArkFileUploadHiddenInput />
       <LoongArkFileUploadItemGroup>
         {files().map((file) => (
@@ -62,7 +63,9 @@ export const FileUploadExample: Component<FileUploadExampleProps> = (props) => {
         ))}
       </LoongArkFileUploadItemGroup>
       {files().length > 0 && (
-        <LoongArkFileUploadClearTrigger>Clear all</LoongArkFileUploadClearTrigger>
+        <LoongArkFileUploadClearTrigger>
+          Clear all
+        </LoongArkFileUploadClearTrigger>
       )}
     </LoongArkFileUploadRoot>
   );

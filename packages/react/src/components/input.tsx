@@ -1,4 +1,13 @@
-import { Field } from "@ark-ui/react/field";
+import type {
+  HTMLAttributes,
+  LabelHTMLAttributes,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  ButtonHTMLAttributes,
+} from "react";
+import { dataProps } from "../data-props";
+import { Field, useFieldContext } from "@ark-ui/react/field";
+import { inputSuffixDisabled } from "@loongark/kit";
 import { ark } from "@ark-ui/react";
 import type { InputPrimitiveProps } from "@loongark/primitives";
 import { createElement, forwardRef } from "react";
@@ -7,11 +16,12 @@ import type { ReactNode } from "react";
 export type InputSize = NonNullable<InputPrimitiveProps["size"]>;
 export type InputState = NonNullable<InputPrimitiveProps["state"]>;
 
-export interface LoongArkInputRootProps extends Partial<InputPrimitiveProps> {
+export interface LoongArkInputRootProps
+  extends Partial<InputPrimitiveProps>, HTMLAttributes<HTMLElement> {
   children?: ReactNode;
   variant?: "default" | "floating";
   hasValue?: boolean;
-  [key: string]: unknown;
+  required?: boolean;
 }
 
 export const LoongArkInputRoot = forwardRef<
@@ -30,35 +40,36 @@ export const LoongArkInputRoot = forwardRef<
       hasValue = false,
       ...rest
     },
-    ref
+    ref,
   ) =>
     createElement(
       Field.Root,
-      {
-      ...rest,
-      ref,
-      disabled,
-      readOnly,
-      "data-scope": "input",
-      "data-part": "root",
-      "data-size": size,
-      "data-state": state !== "default" ? state : undefined,
-      "data-disabled": disabled ? "true" : undefined,
+      dataProps({
+        ...rest,
+        ref,
+        disabled,
+        readOnly,
+        invalid: state === "invalid",
+        "data-scope": "input",
+        "data-part": "root",
+        "data-size": size,
+        "data-state": state !== "default" ? state : undefined,
+        "data-disabled": disabled ? "true" : undefined,
         "data-multiline": multiline ? "true" : undefined,
         "data-variant": variant === "floating" ? "floating" : undefined,
         "data-has-value":
           variant === "floating" && hasValue ? "true" : undefined,
-      },
-      children
-    )
+      }),
+      children,
+    ),
 );
 
 LoongArkInputRoot.displayName = "LoongArkInputRoot";
 
 export interface LoongArkInputControlProps
-  extends Partial<InputPrimitiveProps> {
-  [key: string]: unknown;
-}
+  extends
+    Partial<InputPrimitiveProps>,
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {}
 
 export const LoongArkInputControl = forwardRef<
   HTMLInputElement,
@@ -68,32 +79,36 @@ export const LoongArkInputControl = forwardRef<
     {
       size = "md",
       state = "default",
-      disabled = false,
-      readOnly = false,
+      disabled,
+      readOnly,
       multiline = false,
       ...rest
     },
-    ref
+    ref,
   ) =>
-    createElement(Field.Input, {
-      ...rest,
-      ref,
-      disabled,
-      readOnly,
-      "data-scope": "input",
-      "data-part": "control",
-      "data-size": size,
-      "data-state": state !== "default" ? state : undefined,
-      "data-multiline": multiline ? "true" : undefined,
-    })
+    createElement(
+      Field.Input,
+      dataProps({
+        ...rest,
+        ref,
+        disabled,
+        readOnly,
+        "data-scope": "input",
+        "data-part": "control",
+        "data-size": size,
+        "data-state": state !== "default" ? state : undefined,
+        "data-multiline": multiline ? "true" : undefined,
+      }),
+    ),
 );
 
 LoongArkInputControl.displayName = "LoongArkInputControl";
+export const LoongArkInputInput = LoongArkInputControl;
 
 export interface LoongArkTextareaControlProps
-  extends Partial<InputPrimitiveProps> {
-  [key: string]: unknown;
-}
+  extends
+    Partial<InputPrimitiveProps>,
+    TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 export const LoongArkTextareaControl = forwardRef<
   HTMLTextAreaElement,
@@ -103,32 +118,34 @@ export const LoongArkTextareaControl = forwardRef<
     {
       size = "md",
       state = "default",
-      disabled = false,
-      readOnly = false,
+      disabled,
+      readOnly,
       multiline = true,
       ...rest
     },
-    ref
+    ref,
   ) =>
-    createElement(Field.Textarea, {
-      ...rest,
-      ref,
-      disabled,
-      readOnly,
-      "data-scope": "input",
-      "data-part": "control",
-      "data-size": size,
-      "data-state": state !== "default" ? state : undefined,
-      "data-multiline": multiline ? "true" : undefined,
-    })
+    createElement(
+      Field.Textarea,
+      dataProps({
+        ...rest,
+        ref,
+        disabled,
+        readOnly,
+        "data-scope": "input",
+        "data-part": "control",
+        "data-size": size,
+        "data-state": state !== "default" ? state : undefined,
+        "data-multiline": multiline ? "true" : undefined,
+      }),
+    ),
 );
 
 LoongArkTextareaControl.displayName = "LoongArkTextareaControl";
 
-export interface LoongArkInputHelperTextProps {
+export interface LoongArkInputHelperTextProps extends HTMLAttributes<HTMLElement> {
   children?: ReactNode;
   variant?: "default" | "error" | "success";
-  [key: string]: unknown;
 }
 
 export const LoongArkInputHelperText = ({
@@ -137,19 +154,18 @@ export const LoongArkInputHelperText = ({
   ...rest
 }: LoongArkInputHelperTextProps) =>
   createElement(
-    Field.HelperText,
-    {
+    variant === "error" ? Field.ErrorText : Field.HelperText,
+    dataProps({
       ...rest,
       "data-scope": "input",
       "data-part": "helper-text",
       "data-variant": variant === "default" ? undefined : variant,
-    },
-    children
+    }),
+    children,
   );
 
-export interface LoongArkInputLabelProps {
+export interface LoongArkInputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   children?: ReactNode;
-  [key: string]: unknown;
 }
 
 export const LoongArkInputLabel = ({
@@ -158,18 +174,42 @@ export const LoongArkInputLabel = ({
 }: LoongArkInputLabelProps) =>
   createElement(
     Field.Label,
-    {
+    dataProps({
       ...rest,
       "data-scope": "input",
       "data-part": "label",
-    },
-    children
+    }),
+    children,
   );
 
-export interface LoongArkInputAddonProps {
+export const LoongArkInputErrorText = ({
+  children,
+  ...rest
+}: Omit<LoongArkInputHelperTextProps, "variant">) =>
+  createElement(
+    Field.ErrorText,
+    dataProps({
+      ...rest,
+      "data-scope": "input",
+      "data-part": "helper-text",
+      "data-variant": "error",
+    }),
+    children,
+  );
+
+export interface LoongArkInputAddonProps extends HTMLAttributes<HTMLElement> {
   children?: ReactNode;
-  [key: string]: unknown;
 }
+
+export const LoongArkInputGroup = ({
+  children,
+  ...rest
+}: LoongArkInputAddonProps) =>
+  createElement(
+    ark.div,
+    dataProps({ ...rest, "data-scope": "input", "data-part": "group" }),
+    children,
+  );
 
 export const LoongArkInputPrefix = ({
   children,
@@ -177,15 +217,16 @@ export const LoongArkInputPrefix = ({
 }: LoongArkInputAddonProps) =>
   createElement(
     ark.span,
-    {
+    dataProps({
       ...rest,
       "data-scope": "input",
       "data-part": "prefix",
-    },
-    children
+    }),
+    children,
   );
 
 export interface LoongArkInputSuffixProps extends LoongArkInputAddonProps {
+  disabled?: boolean;
   action?: "clear" | "button" | "none" | "text";
   onClick?: () => void;
 }
@@ -194,21 +235,27 @@ export const LoongArkInputSuffix = ({
   children,
   action,
   onClick,
+  disabled,
   ...rest
 }: LoongArkInputSuffixProps) => {
-  const isAction = action === "clear" || action === "button";
+  const field = useFieldContext();
+  const isAction =
+    (action === "clear" || action === "button") && Boolean(onClick);
   const Element = isAction ? ark.button : ark.span;
 
   return createElement(
     Element,
-    {
+    dataProps({
       ...rest,
       onClick,
-      type: isAction ? "button" : undefined,
+      type: isAction ? ("button" as const) : undefined,
+      disabled: isAction
+        ? inputSuffixDisabled(action, disabled, field)
+        : undefined,
       "data-scope": "input",
       "data-part": "suffix",
-      "data-action": isAction ? "clear" : undefined,
-    },
-    children
+      "data-action": isAction ? action : undefined,
+    }),
+    children,
   );
 };

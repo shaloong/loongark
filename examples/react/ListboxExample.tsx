@@ -28,7 +28,10 @@ export const ListboxExample: React.FC<ListboxExampleProps> = ({
   orientation = "vertical",
 }) => {
   const [value, setValue] = useState<string[]>(["beijing"]);
-  const collection = useMemo(() => createListCollection({ items: options }), []);
+  const collection = useMemo(
+    () => createListCollection({ items: options }),
+    [],
+  );
 
   return (
     <LoongArkListboxRoot

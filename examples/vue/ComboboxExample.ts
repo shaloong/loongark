@@ -1,5 +1,5 @@
 import { defineComponent, h, ref, computed, type PropType } from "vue";
-import { createListCollection } from "@ark-ui/vue";
+import { createListCollection } from "@loongark/vue";
 import {
   LoongArkComboboxRoot,
   LoongArkComboboxLabel,
@@ -52,12 +52,12 @@ export const ComboboxExample = defineComponent({
       const query = inputValue.value.trim().toLowerCase();
       if (!query) return options;
       return options.filter((option) =>
-        option.label.toLowerCase().includes(query)
+        option.label.toLowerCase().includes(query),
       );
     });
 
     const collection = computed(() =>
-      createListCollection({ items: filteredOptions.value })
+      createListCollection({ items: filteredOptions.value }),
     );
 
     const handleValueChange = (details: { value: string[] }) => {
@@ -68,97 +68,85 @@ export const ComboboxExample = defineComponent({
     };
 
     return () =>
-      h(
-        "div",
-        { style: { padding: "20px", width: "320px" } },
-        [
-          h(
-            LoongArkComboboxRoot,
-            {
-              size: props.size,
-              disabled: props.disabled,
-              collection: collection.value,
-              value: value.value,
-              inputValue: inputValue.value,
-              onInputValueChange: (details: { inputValue: string }) => {
-                inputValue.value = details.inputValue;
-              },
-              onValueChange: handleValueChange,
+      h("div", { style: { padding: "20px", width: "320px" } }, [
+        h(
+          LoongArkComboboxRoot,
+          {
+            size: props.size,
+            disabled: props.disabled,
+            collection: collection.value,
+            value: value.value,
+            inputValue: inputValue.value,
+            onInputValueChange: (details: { inputValue: string }) => {
+              inputValue.value = details.inputValue;
             },
-            {
-              default: () => [
-                h(LoongArkComboboxLabel, {}, { default: () => props.label }),
-                h(
-                  LoongArkComboboxControl,
-                  {},
-                  {
-                    default: () => [
-                      h(LoongArkComboboxInput, {
-                        placeholder: props.placeholder,
-                      }),
-                      h(
-                        LoongArkComboboxClearTrigger,
-                        { "aria-label": "Clear" },
-                        { default: () => "x" }
-                      ),
-                      h(
-                        LoongArkComboboxTrigger,
-                        { "aria-label": "Toggle" },
-                        { default: () => "v" }
-                      ),
-                    ],
-                  }
-                ),
-                h(
-                  LoongArkComboboxPositioner,
-                  {},
-                  {
-                    default: () =>
-                      h(
-                        LoongArkComboboxContent,
-                        {},
-                        {
-                          default: () =>
-                            h(
-                              LoongArkComboboxList,
-                              {},
-                              {
-                                default: () =>
-                                  filteredOptions.value.map((option) =>
-                                    h(
-                                      LoongArkComboboxItem,
-                                      { key: option.value, item: option },
-                                      {
-                                        default: () => [
-                                          h(
-                                            LoongArkComboboxItemText,
-                                            {},
-                                            { default: () => option.label }
-                                          ),
-                                          h(
-                                            LoongArkComboboxItemIndicator,
-                                            {},
-                                            { default: () => "Check" }
-                                          ),
-                                        ],
-                                      }
-                                    )
+            onValueChange: handleValueChange,
+          },
+          {
+            default: () => [
+              h(LoongArkComboboxLabel, {}, { default: () => props.label }),
+              h(
+                LoongArkComboboxControl,
+                {},
+                {
+                  default: () => [
+                    h(LoongArkComboboxInput, {
+                      placeholder: props.placeholder,
+                    }),
+                    h(LoongArkComboboxClearTrigger, { "aria-label": "Clear" }),
+                    h(LoongArkComboboxTrigger, { "aria-label": "Toggle" }),
+                  ],
+                },
+              ),
+              h(
+                LoongArkComboboxPositioner,
+                {},
+                {
+                  default: () =>
+                    h(
+                      LoongArkComboboxContent,
+                      {},
+                      {
+                        default: () =>
+                          h(
+                            LoongArkComboboxList,
+                            {},
+                            {
+                              default: () =>
+                                filteredOptions.value.map((option) =>
+                                  h(
+                                    LoongArkComboboxItem,
+                                    { key: option.value, item: option },
+                                    {
+                                      default: () => [
+                                        h(
+                                          LoongArkComboboxItemText,
+                                          {},
+                                          { default: () => option.label },
+                                        ),
+                                        h(
+                                          LoongArkComboboxItemIndicator,
+                                          {},
+                                          {},
+                                        ),
+                                      ],
+                                    },
                                   ),
-                              }
-                            ),
-                        }
-                      ),
-                  }
-                ),
-              ],
-            }
-          ),
-          h(
-            "p",
-            { style: { marginTop: "16px", fontSize: "14px", color: "#666" } },
-            `Selected: ${value.value.length > 0 ? value.value.join(", ") : "None"}`
-          ),
-        ]
-      );
+                                ),
+                            },
+                          ),
+                      },
+                    ),
+                },
+              ),
+            ],
+          },
+        ),
+        h(
+          "p",
+          { style: { "margin-top": "16px", fontSize: "14px", color: "#666" } },
+          `Selected: ${value.value.length > 0 ? value.value.join(", ") : "None"}`,
+        ),
+      ]);
   },
 });

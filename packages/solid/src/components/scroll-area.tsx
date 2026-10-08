@@ -14,21 +14,23 @@ import {
 } from "@ark-ui/solid/scroll-area";
 import type { ScrollAreaSize } from "@loongark/primitives";
 
-export interface LoongArkScrollAreaRootProps
-  extends Omit<ArkScrollAreaRootProps, "asChild"> {
+export interface LoongArkScrollAreaRootProps extends Omit<
+  ArkScrollAreaRootProps,
+  "asChild"
+> {
   size?: ScrollAreaSize;
   children?: JSX.Element;
 }
 
 export const LoongArkScrollAreaRoot: Component<LoongArkScrollAreaRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps({ size: "md" as ScrollAreaSize }, props);
   const [local, others] = splitProps(merged, ["children", "size"]);
 
   return (
     <ArkScrollArea.Root
-      {...(others as any)}
+      {...others}
       data-scope="scroll-area"
       data-part="root"
       data-size={local.size}
@@ -38,8 +40,10 @@ export const LoongArkScrollAreaRoot: Component<LoongArkScrollAreaRootProps> = (
   );
 };
 
-export interface LoongArkScrollAreaViewportProps
-  extends Omit<ArkScrollAreaViewportProps, "asChild"> {
+export interface LoongArkScrollAreaViewportProps extends Omit<
+  ArkScrollAreaViewportProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -49,6 +53,7 @@ export const LoongArkScrollAreaViewport: Component<
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkScrollArea.Viewport
+      tabIndex={0}
       {...others}
       data-scope="scroll-area"
       data-part="viewport"
@@ -58,8 +63,10 @@ export const LoongArkScrollAreaViewport: Component<
   );
 };
 
-export interface LoongArkScrollAreaContentProps
-  extends Omit<ArkScrollAreaContentProps, "asChild"> {
+export interface LoongArkScrollAreaContentProps extends Omit<
+  ArkScrollAreaContentProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -78,8 +85,10 @@ export const LoongArkScrollAreaContent: Component<
   );
 };
 
-export interface LoongArkScrollAreaScrollbarProps
-  extends Omit<ArkScrollAreaScrollbarProps, "asChild"> {
+export interface LoongArkScrollAreaScrollbarProps extends Omit<
+  ArkScrollAreaScrollbarProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -98,8 +107,10 @@ export const LoongArkScrollAreaScrollbar: Component<
   );
 };
 
-export interface LoongArkScrollAreaThumbProps
-  extends Omit<ArkScrollAreaThumbProps, "asChild"> {
+export interface LoongArkScrollAreaThumbProps extends Omit<
+  ArkScrollAreaThumbProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -108,18 +119,16 @@ export const LoongArkScrollAreaThumb: Component<
 > = (props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkScrollArea.Thumb
-      {...others}
-      data-scope="scroll-area"
-      data-part="thumb"
-    >
+    <ArkScrollArea.Thumb {...others} data-scope="scroll-area" data-part="thumb">
       {local.children}
     </ArkScrollArea.Thumb>
   );
 };
 
-export interface LoongArkScrollAreaCornerProps
-  extends Omit<ArkScrollAreaCornerProps, "asChild"> {
+export interface LoongArkScrollAreaCornerProps extends Omit<
+  ArkScrollAreaCornerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 

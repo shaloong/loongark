@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { ark } from "@ark-ui/svelte";
   import type { ButtonPrimitiveProps } from "@loongark/primitives";
 
   export let variant: NonNullable<ButtonPrimitiveProps["variant"]> = "solid";
@@ -12,11 +11,11 @@
   $: isInteractiveDisabled = disabled || loading;
 </script>
 
-<ark.button
+<button
+  on:click
   {type}
   disabled={isInteractiveDisabled}
   aria-disabled={isInteractiveDisabled || undefined}
-  aria-busy={loading || undefined}
   data-scope="button"
   data-part="root"
   data-variant={variant}
@@ -25,6 +24,7 @@
   data-loading={loading || undefined}
   data-disabled={isInteractiveDisabled || undefined}
   {...$$restProps}
+  aria-busy={loading || $$restProps["aria-busy"]}
 >
   <slot />
-</ark.button>
+</button>

@@ -3,3 +3,10 @@ dist/
 packages/*/dist/
 *.log
 *.tsbuildinfo
+test-results/
+playwright-report/
+blob-report/
+storybook-static/
+tests/consumer-dist/
+.artifacts/
+docs/audits/

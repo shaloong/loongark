@@ -1,8 +1,20 @@
+import { useFieldContext } from "@ark-ui/vue/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
+import type { TagsInputHiddenInputProps } from "@ark-ui/vue/tags-input";
+import { nativeSelectionRef } from "../native-selection";
+import { useTagsInputContext } from "@ark-ui/vue/tags-input";
+import type { TagsInputRootProps as NativeTagsInputRootProps } from "@ark-ui/vue/tags-input";
+import { renderPart } from "../render-part";
 /**
  * Tags Input component - Vue wrapper.
  * Uses Ark UI Tags Input with data attributes for styling.
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { TagsInput as ArkTagsInput } from "@ark-ui/vue/tags-input";
 import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
 
@@ -39,15 +51,19 @@ export const LoongArkTagsInputRoot = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     required: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     invalid: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     name: {
       type: String as PropType<string>,
@@ -59,10 +75,12 @@ export const LoongArkTagsInputRoot = defineComponent({
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeTagsInputRootProps["ids"]>,
     },
     onValueChange: {
-      type: Function as PropType<(details: TagsInputValueChangeDetails) => void>,
+      type: Function as PropType<
+        (details: TagsInputValueChangeDetails) => void
+      >,
     },
     onInputValueChange: {
       type: Function as PropType<
@@ -78,7 +96,7 @@ export const LoongArkTagsInputRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTagsInput.Root,
         {
           ...attrs,
@@ -87,10 +105,10 @@ export const LoongArkTagsInputRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...(props.disabled ? { "data-disabled": "true" } : {}),
           "data-readonly": props.readOnly ? "true" : undefined,
         },
-        slots
+        slots,
       );
   },
 });
@@ -99,14 +117,14 @@ export const LoongArkTagsInputLabel = defineComponent({
   name: "LoongArkTagsInputLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTagsInput.Label,
         {
           ...attrs,
           "data-scope": "tags-input",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -129,7 +147,7 @@ export const LoongArkTagsInputControl = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTagsInput.Control,
         {
           ...attrs,
@@ -138,9 +156,9 @@ export const LoongArkTagsInputControl = defineComponent({
           "data-part": "control",
           "data-size": props.size,
           "data-state": props.state !== "default" ? props.state : undefined,
-          "data-disabled": props.disabled ? "true" : undefined,
+          ...(props.disabled ? { "data-disabled": "true" } : {}),
         },
-        slots
+        slots,
       );
   },
 });
@@ -158,25 +176,41 @@ export const LoongArkTagsInputInput = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
-      default: false,
+      default: undefined,
     },
   },
   setup(props, { attrs }) {
-    return () =>
-      h(ArkTagsInput.Input, {
+    const field = useFieldContext();
+    const api = useTagsInputContext();
+    return () => {
+      const disabled =
+        props.disabled ?? !!api.value.getHiddenInputProps().disabled;
+      const readOnly =
+        props.readOnly ?? !!api.value.getHiddenInputProps().readonly;
+      return renderPart(resolveDynamicComponent(ArkTagsInput.Input), {
         ...attrs,
         ...props,
+        disabled,
+        readOnly,
+        "aria-describedby": nativeSelectionFieldDescription(
+          typeof attrs["aria-describedby"] === "string"
+            ? attrs["aria-describedby"]
+            : undefined,
+          field?.value,
+          api.value.getInputProps()["aria-invalid"],
+        ),
         "data-scope": "tags-input",
         "data-part": "input",
         "data-size": props.size,
         "data-state": props.state !== "default" ? props.state : undefined,
-        "data-disabled": props.disabled ? "true" : undefined,
-        "data-readonly": props.readOnly ? "true" : undefined,
+        ...(disabled ? { "data-disabled": "true" } : {}),
+        "data-readonly": readOnly ? "true" : undefined,
       });
+    };
   },
 });
 
@@ -191,11 +225,12 @@ export const LoongArkTagsInputItem = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTagsInput.Item,
         {
           ...attrs,
@@ -203,7 +238,7 @@ export const LoongArkTagsInputItem = defineComponent({
           "data-scope": "tags-input",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -212,14 +247,14 @@ export const LoongArkTagsInputItemPreview = defineComponent({
   name: "LoongArkTagsInputItemPreview",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTagsInput.ItemPreview,
         {
           ...attrs,
           "data-scope": "tags-input",
           "data-part": "item-preview",
         },
-        slots
+        slots,
       );
   },
 });
@@ -228,14 +263,14 @@ export const LoongArkTagsInputItemText = defineComponent({
   name: "LoongArkTagsInputItemText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTagsInput.ItemText,
         {
           ...attrs,
           "data-scope": "tags-input",
           "data-part": "item-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -244,7 +279,7 @@ export const LoongArkTagsInputItemInput = defineComponent({
   name: "LoongArkTagsInputItemInput",
   setup(_, { attrs }) {
     return () =>
-      h(ArkTagsInput.ItemInput, {
+      renderPart(resolveDynamicComponent(ArkTagsInput.ItemInput), {
         ...attrs,
         "data-scope": "tags-input",
         "data-part": "item-input",
@@ -256,14 +291,14 @@ export const LoongArkTagsInputItemDeleteTrigger = defineComponent({
   name: "LoongArkTagsInputItemDeleteTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTagsInput.ItemDeleteTrigger,
         {
           ...attrs,
           "data-scope": "tags-input",
           "data-part": "item-delete-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -272,26 +307,42 @@ export const LoongArkTagsInputClearTrigger = defineComponent({
   name: "LoongArkTagsInputClearTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkTagsInput.ClearTrigger,
         {
           ...attrs,
           "data-scope": "tags-input",
           "data-part": "clear-trigger",
         },
-        slots
+        slots,
       );
   },
 });
 
-export const LoongArkTagsInputHiddenInput = defineComponent({
-  name: "LoongArkTagsInputHiddenInput",
-  setup(_, { attrs }) {
-    return () =>
-      h(ArkTagsInput.HiddenInput, {
-        ...attrs,
-        "data-scope": "tags-input",
-        "data-part": "hidden-input",
-      });
-  },
-});
+export const LoongArkTagsInputHiddenInput =
+  defineComponent<TagsInputHiddenInputProps>(
+    (props, { attrs, slots }) => {
+      const api = useTagsInputContext();
+
+      const ref = nativeSelectionRef(() => ({
+        formValue: api.value.valueAsString,
+      }));
+      return () =>
+        renderPart(
+          resolveDynamicComponent(ArkTagsInput.HiddenInput),
+          {
+            ...attrs,
+            ...props,
+            ref,
+            "data-scope": "tags-input",
+            "data-part": "hidden-input",
+          },
+          slots,
+        );
+    },
+    {
+      name: "LoongArkTagsInputHiddenInput",
+      props: ["asChild"],
+      inheritAttrs: false,
+    },
+  );

@@ -1,0 +1,541 @@
+import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import { createLoongArkTheme } from "../packages/theme/dist/index.js";
+import { bootstrapKit } from "../packages/kit/dist/index.js";
+const theme = createLoongArkTheme({ mode: "dark" });
+assert.match(
+  createLoongArkTheme({ targetId: "workspace" }).toCSS(),
+  /data-lk-theme='workspace'/,
+);
+bootstrapKit(theme);
+assert.match(theme.toStyleSheet(), /data-scope="button"/);
+assert.match(theme.toStyleSheet(), /--lk-color-semantic-background: #121212/);
+for (const [framework, script] of [
+  [
+    "React",
+    `import {createElement as h} from 'react';import {renderToString} from 'react-dom/server';import * as L from './packages/react/dist/index.js';console.log(renderToString(h(L.LoongArkContainer,null,h(L.LoongArkButton,null,'Hello'),h(L.LoongArkTextarea,{name:'notes',value:'SSR notes',readOnly:true,autoSize:true,minRows:2,maxRows:5}),h(L.LoongArkChipRemoveTrigger,null,'Remove'),h(L.LoongArkTransferList,{items:[{value:'alpha',label:'Alpha'}],defaultValue:['alpha'],name:'assigned'}),h(L.LoongArkTimePicker,{defaultValue:'13:30',name:'meeting',minuteStep:15}),h(L.LoongArkFloatingActionButton,{'aria-label':'Create SSR'},'＋'),h(L.LoongArkSpeedDial,{label:'SSR actions',actions:[{value:'new',label:'New'}]}),h(L.LoongArkImageList,{columns:2},h(L.LoongArkImageListItem,null,'Image SSR')),h(L.LoongArkMasonry,{columns:2},h(L.LoongArkMasonryItem,null,'Media SSR')),h(L.LoongArkBottomNavigationItem,{href:'#home',active:true},'Home'))));console.log(renderToString(h("div",null,h(L.LoongArkMessageScroller,{label:'SSR conversation'},h(L.LoongArkMessage,{author:'Lin'},h(L.LoongArkBubble,null,'Conversation SSR'),h(L.LoongArkAttachment,{name:'SSR.pdf',status:'uploading'}))),h(L.LoongArkQuestionnaire,{label:'SSR feedback',questions:[{id:'answer',label:'Your answer',type:'text'}],defaultValue:{answer:'SSR answer'}}))));process.exit(0);`,
+  ],
+  [
+    "Vue",
+    `import {createSSRApp,h} from 'vue';import {renderToString} from 'vue/server-renderer';import * as L from './packages/vue/dist/index.js';console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkContainer,{},()=>[h(L.LoongArkButton,{},()=> 'Hello'),h(L.LoongArkTextarea,{name:'notes',modelValue:'SSR notes',readonly:true,autoSize:true,minRows:2,maxRows:5}),h(L.LoongArkChipRemoveTrigger,{},()=> 'Remove'),h(L.LoongArkTransferList,{items:[{value:'alpha',label:'Alpha'}],defaultValue:['alpha'],name:'assigned'}),h(L.LoongArkTimePicker,{defaultValue:'13:30',name:'meeting',minuteStep:15}),h(L.LoongArkFloatingActionButton,{'aria-label':'Create SSR'},()=> '＋'),h(L.LoongArkSpeedDial,{label:'SSR actions',actions:[{value:'new',label:'New'}]}),h(L.LoongArkImageList,{columns:2},()=>h(L.LoongArkImageListItem,{},()=> 'Image SSR')),h(L.LoongArkMasonry,{columns:2},()=>h(L.LoongArkMasonryItem,{},()=> 'Media SSR')),h(L.LoongArkBottomNavigationItem,{href:'#home',active:true},()=> 'Home')])})));console.log(await renderToString(createSSRApp({render:()=>h('div',{},[h(L.LoongArkMessageScroller,{label:'SSR conversation'},()=>h(L.LoongArkMessage,{author:'Lin'},()=>[h(L.LoongArkBubble,{},()=> 'Conversation SSR'),h(L.LoongArkAttachment,{name:'SSR.pdf',status:'uploading'})])),h(L.LoongArkQuestionnaire,{label:'SSR feedback',questions:[{id:'answer',label:'Your answer',type:'text'}],defaultValue:{answer:'SSR answer'}})])})));process.exit(0);`,
+  ],
+  [
+    "Solid",
+    `import {renderToString} from 'solid-js/web';import {createComponent as h} from 'solid-js';import * as L from './packages/solid/dist/server/index.js';console.log(renderToString(()=>h(L.LoongArkContainer,{children:[h(L.LoongArkButton,{children:'Hello'}),h(L.LoongArkTextarea,{name:'notes',value:'SSR notes',readOnly:true,autoSize:true,minRows:2,maxRows:5}),h(L.LoongArkChipRemoveTrigger,{children:'Remove'}),h(L.LoongArkTransferList,{items:[{value:'alpha',label:'Alpha'}],defaultValue:['alpha'],name:'assigned'}),h(L.LoongArkTimePicker,{defaultValue:'13:30',name:'meeting',minuteStep:15}),h(L.LoongArkFloatingActionButton,{'aria-label':'Create SSR',children:'＋'}),h(L.LoongArkSpeedDial,{label:'SSR actions',actions:[{value:'new',label:'New'}]}),h(L.LoongArkImageList,{columns:2,children:h(L.LoongArkImageListItem,{children:'Image SSR'})}),h(L.LoongArkMasonry,{columns:2,children:h(L.LoongArkMasonryItem,{children:'Media SSR'})}),h(L.LoongArkBottomNavigationItem,{href:'#home',active:true,children:'Home'})]})));console.log(renderToString(()=>h(L.LoongArkMessageScroller,{label:'SSR conversation',children:[h(L.LoongArkMessage,{author:'Lin',children:[h(L.LoongArkBubble,{children:'Conversation SSR'}),h(L.LoongArkAttachment,{name:'SSR.pdf',status:'uploading'})]}),h(L.LoongArkQuestionnaire,{label:'SSR feedback',questions:[{id:'answer',label:'Your answer',type:'text'}],defaultValue:{answer:'SSR answer'}})]})));process.exit(0);`,
+  ],
+]) {
+  const gridProps =
+    "{rowKeys:Array.from({length:10000},(_,i)=>'grid-row-'+i),columnKeys:Array.from({length:80},(_,i)=>'grid-column-'+i),height:200,width:320,renderCell:details=>'SSR_grid_'+details.rowIndex+'_'+details.columnIndex}";
+  const masonryProps =
+    "{keys:Array.from({length:10000},(_,i)=>'masonry-'+i),height:200,width:640,estimateSize:100,renderItem:details=>'SSR_masonry_'+details.index}";
+  const layoutScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h('div',{},[h(L.LoongArkVirtualGrid,${gridProps}),h(L.LoongArkVirtualMasonry,${masonryProps})])})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>[h(L.LoongArkVirtualGrid,${gridProps}),h(L.LoongArkVirtualMasonry,${masonryProps})]));`
+        : `console.log(renderToString(h('div',null,h(L.LoongArkVirtualGrid,${gridProps}),h(L.LoongArkVirtualMasonry,${masonryProps}))));`;
+  const virtualProps =
+    "{data:Array.from({length:1000},(_,i)=>({id:'v-'+i,name:'Virtual '+i})),columns:[{key:'name',label:'Virtual name'}],pageSize:1000,virtualization:{height:200,estimateSize:50,overscan:1},onCellCommit:()=>{throw Error('SSR must not edit virtual row')}}";
+  const virtualMessageProps =
+    "{virtualization:{keys:Array.from({length:500},(_,i)=>'m-'+i),height:200,estimateSize:50,overscan:1},onAtBottomChange:()=>{throw Error('SSR must not emit virtual scroll')}}";
+  const virtualScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h('div',{},[h(L.LoongArkDataTable,${virtualProps}),h(L.LoongArkMessageScroller,${virtualMessageProps})])})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>[h(L.LoongArkDataTable,${virtualProps}),h(L.LoongArkMessageScroller,${virtualMessageProps})]));`
+        : `console.log(renderToString(h('div',null,h(L.LoongArkDataTable,${virtualProps}),h(L.LoongArkMessageScroller,${virtualMessageProps}))));`;
+  const tableProps =
+    "{data:[{id:'a',name:'Alpha'}],columns:[{key:'name',label:'Name',editor:{validate:()=>{throw Error('SSR must not validate edit')}}}],onCellCommit:()=>{throw Error('SSR must not save edit')},onBatchCommit:()=>{throw Error('SSR must not save batch')},defaultSelectedIds:['a','missing'],onSelectionChange:()=>{throw Error('SSR must not emit selection updates')}}";
+  const tableScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${tableProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${tableProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${tableProps})));`;
+  const queryProps =
+    "{label:'SSR query table',data:[{id:'q',name:'Query SSR row',amount:9,team:''}],columns:[{key:'name',label:'Project',filter:{type:'text'}},{key:'amount',label:'Revenue',filter:{type:'number'}},{key:'team',label:'Team',filter:{type:'select',options:[{value:'',label:'Unassigned'}]}}],state:{query:'',page:1,sorts:[{key:'name',direction:'asc'},{key:'amount',direction:'desc'}],filters:[{key:'amount',operator:'gte',value:'-'},{key:'team',operator:'equals',value:''}]},onStateChange:()=>{throw Error('SSR must not change query')}}";
+  const columnProps =
+    "{label:'SSR column layout',data:[{id:'column',name:'Column SSR row'}],columns:[{key:'name',label:'Project <safe>',minWidth:120,maxWidth:480}],columnReorderable:true,columnResizable:true,columnWidths:{name:220},loading:true,onColumnKeysChange:()=>{throw Error('SSR must not change columns')},onColumnWidthsChange:()=>{throw Error('SSR must not resize columns')}}";
+  const columnScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${columnProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${columnProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${columnProps})));`;
+  const columnWindowProps = "{label:'SSR column window',data:[{id:'ssr-window'}],columns:Array.from({length:50},(_,i)=>({key:'cw'+i,label:'SSR_window_'+i})),columnVirtualization:{width:320,overscan:1},pinnedColumns:{end:['cw49']},onColumnWidthsChange:()=>{throw Error('SSR must not measure columns')}}";
+  const columnWindowScript = framework === "Vue"
+    ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${columnWindowProps})})));`
+    : framework === "Solid"
+      ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${columnWindowProps})));`
+      : `console.log(renderToString(h(L.LoongArkDataTable,${columnWindowProps})));`;
+  const rangeProps =
+    "{label:'SSR range selection',data:[{id:'range',name:'Range <safe>'}],columns:[{key:'name',label:'Project',editor:true}],cellSelection:true,defaultCellRange:{anchor:{rowId:'range',columnKey:'name'},focus:{rowId:'range',columnKey:'name'}},onCellRangeChange:()=>{throw Error('SSR must not select cells')},onCellCommit:()=>{throw Error('SSR must not edit cells')}}";
+  const rangeScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${rangeProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${rangeProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${rangeProps})));`;
+  const structureProps =
+    "{label:'SSR groups',data:[{id:'sr1',name:'SSR grouped row',team:'Team <safe>',budget:2},{id:'sr2',name:'SSR second grouped row',team:'Team <safe>',budget:3}],columns:[{key:'name',label:'Project'},{key:'team',label:'Team'},{key:'budget',label:'Budget'}],groupBy:['team'],aggregations:{budget:'sum'},onExpandedRowIdsChange:()=>{throw Error('SSR must not expand rows')}}";
+  const structureScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${structureProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${structureProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${structureProps})));`;
+  const queryScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${queryProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${queryProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${queryProps})));`;
+  const chartProps =
+    "{data:[{name:'SSR category',value:1e308},{name:'Missing',value:null}],series:[{key:'value',label:'SSR series'}],labelKey:'name',title:'SSR chart',labels:{series:'SSR legend'}}";
+  const chartScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkChart,${chartProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkChart,${chartProps})));`
+        : `console.log(renderToString(h(L.LoongArkChart,${chartProps})));`;
+  const interactiveChartProps =
+    "{data:[{name:'Advanced SSR category',value:75,hidden:20}],series:[{key:'value',label:'Visible SSR series'},{key:'hidden',label:'Hidden SSR series'}],seriesKeys:['value'],labelKey:'name',title:'Advanced SSR chart',zoomable:true,tooltip:true,range:[0,0],onRangeChange:()=>{throw Error('SSR must not change range')},domain:[0,50],interactive:true,showDataTable:true,onSeriesKeysChange:()=>{throw Error('SSR must not toggle series')}}";
+  const interactiveChartScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkChart,${interactiveChartProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkChart,${interactiveChartProps})));`
+        : `console.log(renderToString(h(L.LoongArkChart,${interactiveChartProps})));`;
+  const arkScript =
+    framework === "Vue"
+      ? `function AdvancedSSR(){const select=L.useSelect({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']});const crop=L.useImageCropper();return ()=>h('div',{},[h(L.LoongArkSelectRootProvider,{value:select.value},()=>h(L.LoongArkSelectHiddenSelect)),h(L.LoongArkImageCropperRootProvider,{value:crop.value},()=>h(L.LoongArkImageCropperViewport)),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1},()=>h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})),h(L.LoongArkClientOnly,{}, {default:()=> 'Client-only secret',fallback:()=> 'SSR client fallback'}),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'})]);}console.log(await renderToString(createSSRApp({setup:AdvancedSSR})));`
+      : framework === "Solid"
+        ? `function AdvancedSSR(){const select=L.useSelect(()=>({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']})),crop=L.useImageCropper();return [h(L.LoongArkSelectRootProvider,{value:select,get children(){return h(L.LoongArkSelectHiddenSelect,{})}}),h(L.LoongArkImageCropperRootProvider,{value:crop,get children(){return h(L.LoongArkImageCropperViewport,{})}}),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1,get children(){return h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})}}),h(L.LoongArkClientOnly,{children:'Client-only secret',fallback:'SSR client fallback'}),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'})];}console.log(renderToString(()=>h(AdvancedSSR,{})));`
+        : `function AdvancedSSR(){const select=L.useSelect({collection:L.createListCollection({items:['react','vue']}),name:'ssr-framework',defaultValue:['react']}),crop=L.useImageCropper();return h('div',null,h(L.LoongArkSelectRootProvider,{value:select},h(L.LoongArkSelectHiddenSelect)),h(L.LoongArkImageCropperRootProvider,{value:crop},h(L.LoongArkImageCropperViewport)),h(L.LoongArkJsonTreeViewRoot,{data:{project:'SSR JSON'},defaultExpandedDepth:1},h(L.LoongArkJsonTreeViewTree,{'aria-label':'SSR structured data'})),h(L.LoongArkClientOnly,{fallback:'SSR client fallback'},'Client-only secret'),h(L.LoongArkHighlight,{text:'SSR highlighted text',query:'highlighted'}),h(L.LoongArkFormatByte,{value:2048,unitSystem:'binary'}));}console.log(renderToString(h(AdvancedSSR)));`;
+  const nextScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h('div',{},[h(L.LoongArkDateInputRoot,{name:'ssr-date',locale:'en-US',defaultValue:[L.parseDate('2026-10-03')]},()=>[h(L.LoongArkDateInputLabel,{},()=> 'SSR date'),h(L.LoongArkDateInputHiddenInput)]),h(L.LoongArkTocRoot,{id:'ssr-outline',items:[]},()=>h(L.LoongArkTocNav,{},()=>h(L.LoongArkTocTitle,{},()=> 'SSR outline'))),h(L.LoongArkSwapRoot,{swapped:false},()=>h(L.LoongArkSwapIndicator,{type:'off'},()=> 'SSR swap off')),h(L.LoongArkDrawerRoot,{},()=>h(L.LoongArkDrawerTrigger,{},()=> 'SSR drawer trigger'))])})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>[h(L.LoongArkDateInputRoot,{name:'ssr-date',locale:'en-US',defaultValue:[L.parseDate('2026-10-03')],get children(){return [h(L.LoongArkDateInputLabel,{children:'SSR date'}),h(L.LoongArkDateInputHiddenInput,{})]}}),h(L.LoongArkTocRoot,{id:'ssr-outline',items:[],get children(){return h(L.LoongArkTocNav,{get children(){return h(L.LoongArkTocTitle,{children:'SSR outline'})}})}}),h(L.LoongArkSwapRoot,{swapped:false,get children(){return h(L.LoongArkSwapIndicator,{type:'off',children:'SSR swap off'})}}),h(L.LoongArkDrawerRoot,{get children(){return h(L.LoongArkDrawerTrigger,{children:'SSR drawer trigger'})}})]));`
+        : `console.log(renderToString(h('div',null,h(L.LoongArkDateInputRoot,{name:'ssr-date',locale:'en-US',defaultValue:[L.parseDate('2026-10-03')]},h(L.LoongArkDateInputLabel,null,'SSR date'),h(L.LoongArkDateInputHiddenInput)),h(L.LoongArkTocRoot,{id:'ssr-outline',items:[]},h(L.LoongArkTocNav,null,h(L.LoongArkTocTitle,null,'SSR outline'))),h(L.LoongArkSwapRoot,{swapped:false},h(L.LoongArkSwapIndicator,{type:'off'},'SSR swap off')),h(L.LoongArkDrawerRoot,null,h(L.LoongArkDrawerTrigger,null,'SSR drawer trigger')))));`;
+  const questionnaireProps =
+    "{label:'Conditional SSR',questions:[{id:'hiddenSSR',label:'Hidden SSR',type:'text',required:true,when:()=>false,validate:()=>{throw Error('SSR must not validate')},validateAsync:()=>{throw Error('SSR must not request async validation')}},{id:'visibleSSR',label:'Visible SSR',type:'text',validate:()=>{throw Error('SSR must not validate')},validateAsync:()=>{throw Error('SSR must not request async validation')}}],defaultValue:{hiddenSSR:'Hidden answer must not leak',visibleSSR:'Visible conditional SSR answer'},onValueChange:()=>{throw Error('SSR must not emit')},onComplete:()=>{throw Error('SSR must not complete')}}";
+  const questionnaireScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${questionnaireProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${questionnaireProps})));`
+        : `console.log(renderToString(h(L.LoongArkQuestionnaire,${questionnaireProps})));`;
+  const typedQuestionProps =
+    "{label:'SSR typed survey',questions:[{id:'typed',label:'SSR matrix',type:'matrix',rows:[{id:'row',label:'SSR row'}],options:[{value:'yes',label:'Yes'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{typed:{row:'yes'}},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const typedQuestionScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${typedQuestionProps})));`
+        : `console.log(renderToString(h(L.LoongArkQuestionnaire,${typedQuestionProps})));`;
+  const multiMatrixProps =
+    "{label:'SSR multi matrix',questions:[{id:'multiMatrix',label:'Multiple matrix',type:'matrix',multiple:true,minSelections:1,maxSelections:2,rows:[{id:'row',label:'Multiple row'}],options:[{value:'a',label:'A'},{value:'b',label:'B'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{multiMatrix:{row:['a','b']}},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const multiMatrixScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${multiMatrixProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${multiMatrixProps})));`
+        : `console.log(renderToString(h(L.LoongArkQuestionnaire,${multiMatrixProps})));`;
+  const rankSurveyProps =
+    "{label:'SSR ranking',questions:[{id:'rankSurvey',label:'Ranking',type:'ranking',options:[{value:'a',label:'A'},{value:'b',label:'B'}],validateAsync:()=>{throw Error('SSR must not validate')}}],defaultValue:{rankSurvey:['b','a']},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const rankSurveyScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${rankSurveyProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${rankSurveyProps})));`
+        : `console.log(renderToString(h(L.LoongArkQuestionnaire,${rankSurveyProps})));`;
+  const customRenderer = framework === "Vue"
+    ? "context=>h(L.LoongArkButton,{id:context.controlId,'aria-labelledby':context.labelId},{default:()=> 'SSR custom <safe> '+context.answer})"
+    : framework === "Solid"
+      ? "context=>h(L.LoongArkButton,{id:context.controlId,'aria-labelledby':context.labelId,get children(){return 'SSR custom <safe> '+context.answer;}})"
+      : "context=>h(L.LoongArkButton,{id:context.controlId,'aria-labelledby':context.labelId},'SSR custom <safe> '+context.answer)";
+  const customDefinition="{id:'score',label:'Score',type:'custom',customKind:'widget',validateAsync:()=>{throw Error('SSR must not validate custom')}}";
+  const customProps=`{label:'SSR custom',questions:[${customDefinition}],defaultValue:{score:'3'},renderers:{widget:${customRenderer}},onValueChange:()=>{throw Error('SSR must not emit custom')}}`;
+  const customGroupProps=`{label:'SSR nested custom',questions:[{id:'customPeople',label:'People',type:'group',questions:[${customDefinition},{id:'ordinary',label:'Ordinary',type:'text'},{id:'hiddenCustom',label:'Hidden',type:'custom',customKind:'missing',when:()=>false}]}],defaultValue:{customPeople:[{id:'stable',value:{score:'4',ordinary:'SSR ordinary <safe>',hiddenCustom:'hidden-custom-answer'}}]},renderers:{widget:${customRenderer}},onValueChange:()=>{throw Error('SSR must not emit custom')}}`;
+  const customScript=[customProps,customGroupProps].map(props=>framework === "Vue"
+    ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${props})})));`
+    : framework === "Solid"
+      ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${props})));`
+      : `console.log(renderToString(h(L.LoongArkQuestionnaire,${props})));`).join("");
+  const groupProps =
+    "{label:'SSR repeated survey',questions:[{id:'contactsSSR',label:'Contacts',type:'group',questions:[{id:'name',label:'Name',type:'text',validateAsync:()=>{throw Error('SSR must not validate')}},{id:'hidden',label:'Hidden',type:'text',when:()=>false}]}],defaultValue:{contactsSSR:[{id:'stable',value:{name:'Group <safe>',hidden:'must-not-render-hidden'}}]},onValueChange:()=>{throw Error('SSR must not emit')}}";
+  const groupScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkQuestionnaire,${groupProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkQuestionnaire,${groupProps})));`
+        : `console.log(renderToString(h(L.LoongArkQuestionnaire,${groupProps})));`;
+  const asyncLoaderSetup =
+    "const asyncSSRLoader=L.createAsyncCollectionLoader({getKey:item=>item.id,load:()=>{throw Error('SSR must not request a collection')}});";
+  const asyncProps =
+    "{load:asyncSSRLoader.load,autoReload:false,initialItems:[{id:'initial'}],onSuccess:()=>{throw Error('SSR must not complete a load')}}";
+  const asyncScript =
+    asyncLoaderSetup +
+    (framework === "Vue"
+      ? `const AsyncSSR={setup(){const list=L.useAsyncList(${asyncProps});return()=>h('p',{},'SSR async idle '+list.value.items.length)}};console.log(await renderToString(createSSRApp(AsyncSSR)));`
+      : framework === "Solid"
+        ? `function AsyncSSR(){const list=L.useAsyncList(()=>(${asyncProps}));return 'SSR async idle '+list().items.length;}console.log(renderToString(()=>h(AsyncSSR,{})));`
+        : `function AsyncSSR(){const list=L.useAsyncList(${asyncProps});return h('p',null,'SSR async idle '+list.items.length);}console.log(renderToString(h(AsyncSSR)));`);
+  const serverProps =
+    "{label:'SSR remote table',data:[{id:'remoteSSR',name:'SSR remote row',value:9}],columns:[{key:'name',label:'Remote project'},{key:'value',label:'Remote revenue'}],columnKeys:['value','name'],pinnedColumns:{start:['value'],end:['name']},mode:'server',totalRows:21,pageSize:2,state:{query:'not-matching',page:3,sort:{key:'value',direction:'asc'}},selectedIds:['off-page'],loading:true,error:'SSR remote failure',onRetry:()=>{throw Error('SSR must not retry')},onStateChange:()=>{throw Error('SSR must not change table state')},onSelectionChange:()=>{throw Error('SSR must not select')}}";
+  const serverScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkDataTable,${serverProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkDataTable,${serverProps})));`
+        : `console.log(renderToString(h(L.LoongArkDataTable,${serverProps})));`;
+  const conversationProps =
+    "{author:'Async SSR',status:'error',onRetry:()=>{throw Error('SSR must not retry')},actions:[{id:'save',label:'Save SSR',onAction:()=>{throw Error('SSR must not execute')}},{id:'archive',label:'Archive SSR',disabled:true,onAction:()=>{throw Error('SSR must not execute')}}]}";
+  const attachmentProps =
+    "{name:'SSR actions.txt',onPreview:()=>{throw Error('SSR must not preview')},onRemove:()=>{throw Error('SSR must not remove')}}";
+  const uploadingProps =
+    "{name:'SSR upload.zip',status:'uploading',progress:42,onCancel:()=>{throw Error('SSR must not cancel')}}";
+  const conversationScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h('div',{},[h(L.LoongArkMessage,${conversationProps}),h(L.LoongArkAttachment,${attachmentProps}),h(L.LoongArkAttachment,${uploadingProps})])})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>[h(L.LoongArkMessage,${conversationProps}),h(L.LoongArkAttachment,${attachmentProps}),h(L.LoongArkAttachment,${uploadingProps})]));`
+        : `console.log(renderToString(h('div',null,h(L.LoongArkMessage,${conversationProps}),h(L.LoongArkAttachment,${attachmentProps}),h(L.LoongArkAttachment,${uploadingProps}))));`;
+  const iconProps =
+    "{icon:controlIcons.search,label:'SSR search',absoluteStrokeWidth:true,size:32}";
+  const iconScript =
+    framework === "Vue"
+      ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkIcon,${iconProps})})));`
+      : framework === "Solid"
+        ? `console.log(renderToString(()=>h(L.LoongArkIcon,${iconProps})));`
+        : `console.log(renderToString(h(L.LoongArkIcon,${iconProps})));`;
+  const ratingProps = "{name:'ssr-rating',defaultValue:3,onValueChange:()=>{throw Error('SSR must not change rating')}}";
+  const ratingScript = framework === "Vue"
+    ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkRatingGroupRoot,${ratingProps},()=>[h(L.LoongArkRatingGroupLabel,{},()=> 'SSR rating'),h(L.LoongArkRatingGroupControl,{},()=>[1,2,3,4,5].map(index=>h(L.LoongArkRatingGroupItem,{index},()=>String(index)))),h(L.LoongArkRatingGroupHiddenInput,{})])})));`
+    : framework === "Solid"
+      ? `console.log(renderToString(()=>h(L.LoongArkRatingGroupRoot,{...${ratingProps},get children(){return [h(L.LoongArkRatingGroupLabel,{children:'SSR rating'}),h(L.LoongArkRatingGroupControl,{get children(){return [1,2,3,4,5].map(index=>h(L.LoongArkRatingGroupItem,{index,children:String(index)}));}}),h(L.LoongArkRatingGroupHiddenInput,{})];}})));`
+      : `console.log(renderToString(h(L.LoongArkRatingGroupRoot,${ratingProps},h(L.LoongArkRatingGroupLabel,null,'SSR rating'),h(L.LoongArkRatingGroupControl,null,...[1,2,3,4,5].map(index=>h(L.LoongArkRatingGroupItem,{index,key:index},String(index)))),h(L.LoongArkRatingGroupHiddenInput))));`;
+  const scriptWithIcon =
+    "import {controlIcons} from './packages/kit/dist/index.js';" +
+    script.replace("process.exit(0);", iconScript + "process.exit(0);");
+  const result = spawnSync(
+    process.execPath,
+    [
+      "--input-type=module",
+      "-e",
+      scriptWithIcon.replace(
+        "process.exit(0);",
+        ratingScript +
+          virtualScript +
+          layoutScript +
+          tableScript +
+          queryScript +
+          columnScript +
+          columnWindowScript +
+          rangeScript +
+          structureScript +
+          structureScript.replace(
+            "label:'SSR groups'",
+            "label:'SSR hidden columns',columnKeys:[]",
+          ) +
+          chartScript +
+          interactiveChartScript +
+          arkScript +
+          nextScript +
+          questionnaireScript +
+          typedQuestionScript +
+          multiMatrixScript +
+          rankSurveyScript +
+          groupScript +
+          customScript +
+          asyncScript +
+          serverScript +
+          conversationScript +
+          "process.exit(0);",
+      ),
+    ],
+    { encoding: "utf8", timeout: 60000 },
+  );
+  assert.match(result.stdout, /aria-rowcount="10000"/);
+  assert.match(result.stdout, /aria-colcount="80"/);
+  assert.match(result.stdout, /SSR_grid_0_0/);
+  assert.doesNotMatch(result.stdout, /SSR_grid_5000_40|SSR_masonry_5000/);
+  assert.match(result.stdout, /aria-setsize="10000"/);
+  const gridCells = [
+    ...result.stdout.matchAll(/data-row-key="grid-row-[^"]+"/g),
+  ];
+  const masonryItems = [
+    ...result.stdout.matchAll(/data-virtual-key="masonry-[^"]+"/g),
+  ];
+  assert(gridCells.length > 0 && gridCells.length < 80);
+  assert(masonryItems.length > 0 && masonryItems.length < 30);
+  assert.match(result.stdout, /aria-colcount="51"/);
+  assert.match(result.stdout, /SSR_window_0/);
+  assert.match(result.stdout, /SSR_window_49/);
+  assert.ok(!result.stdout.includes("SSR_window_26"));
+  assert.match(result.stdout, /data-part="column-spacer"/);
+  assert.match(result.stdout, /<input(?=[^>]*name="ssr-rating")(?=[^>]*value="3")[^>]*>/);
+  assert.match(result.stdout, /SSR custom &lt;safe(?:&gt;|>) 3/);
+  assert.match(result.stdout, /SSR custom &lt;safe(?:&gt;|>) 4/);
+  assert.match(result.stdout, /SSR ordinary &lt;safe&gt;/);
+  assert.equal((result.stdout.match(/name="customPeople\[stable\]\[score\]"/g)??[]).length,1);
+  assert.equal((result.stdout.match(/name="score"/g)??[]).length,1);
+  assert.ok(!result.stdout.includes("hidden-custom-answer"));
+  assert.match(result.stdout, /name="contactsSSR\[stable\]\[name\]"/);
+  assert.match(result.stdout, /Group &lt;safe&gt;/);
+  assert.ok(!result.stdout.includes("must-not-render-hidden"));
+  assert.match(result.stdout, /role="grid"[^>]*aria-multiselectable="true"/);
+  assert.match(
+    result.stdout,
+    /role="gridcell"[^>]*data-cell-row="range"[^>]*aria-selected="true"/,
+  );
+  assert.match(result.stdout, /Range &lt;safe&gt;/);
+  assert.match(result.stdout, /data-part="batch-trigger"/);
+  assert.match(result.stdout, /Team: Team &lt;safe&gt; · 2 rows/);
+  assert.match(result.stdout, /data-row-kind="group"/);
+  assert.match(
+    result.stdout,
+    /data-part="row-expand"[^>]*aria-expanded="true"/,
+  );
+  assert.match(result.stdout, /SSR grouped row/);
+  assert.match(
+    result.stdout,
+    /aria-label="SSR hidden columns"[\s\S]*data-part="row-expand"/,
+  );
+  assert.match(result.stdout, /aria-label="Move Project &lt;safe&gt; column"/);
+  assert.match(
+    result.stdout,
+    /aria-valuemin="120"[^>]*aria-valuemax="480"[^>]*aria-valuenow="220"/,
+  );
+  assert.match(result.stdout, /tabindex="-1"[^>]*aria-disabled="true"/);
+  assert.match(result.stdout, /SSR async idle 1/);
+  assert.match(result.stdout, /name="typed\[row\]"/);
+  assert.ok(result.stdout.includes('data-part="rank-instructions"'));
+  assert.equal(
+    [...result.stdout.matchAll(/data-question-control="rank-drag"/g)].length,
+    2,
+  );
+  assert.ok(
+    result.stdout.indexOf('name="rankSurvey" value="b"') <
+      result.stdout.indexOf('name="rankSurvey" value="a"'),
+  );
+  assert.equal(
+    [
+      ...result.stdout.matchAll(
+        /<input(?=[^>]*name="multiMatrix\[row\]")(?=[^>]*checked)[^>]*>/g,
+      ),
+    ].length,
+    2,
+  );
+  assert.match(result.stdout, /data-part="range-start"/);
+  assert.match(result.stdout, /data-part="inspect-category"/);
+  assert.match(result.stdout, /aria-rowcount="1001"/);
+  assert.match(result.stdout, /aria-setsize="500"/);
+  const virtualKeys = [
+    ...result.stdout.matchAll(/data-virtual-key="(m-[^"]+)"/g),
+  ].map((m) => m[1]);
+  assert(
+    virtualKeys.length > 0 && virtualKeys.length < 20,
+    `${framework}: SSR window must be bounded`,
+  );
+  assert(virtualKeys.includes("m-499"));
+  assert(!virtualKeys.includes("v-500"));
+  assert.equal(
+    result.status,
+    0,
+    `${framework}: ${result.stderr} ${result.error ?? ""}`,
+  );
+  assert.match(
+    result.stdout,
+    /<input(?=[^>]*name="ssr-date")(?=[^>]*value="10\/3\/2026")[^>]*>/,
+  );
+  for (const text of ["SSR outline", "SSR swap off", "SSR drawer trigger"])
+    assert.ok(result.stdout.includes(text));
+  assert.equal((result.stdout.match(/id="toc:ssr-outline"/g) ?? []).length, 1);
+  assert.match(result.stdout, /id="toc:ssr-outline-nav"/);
+  assert.match(result.stdout, /Advanced SSR category — Visible SSR series: 75/);
+  assert.match(result.stdout, /Visible range: 0 to 50/);
+  assert.match(result.stdout, /<caption>Advanced SSR chart<\/caption>/);
+  assert.match(result.stdout, /aria-pressed="false"/);
+  assert.doesNotMatch(result.stdout, /<th scope="col">Hidden SSR series/);
+  assert.match(result.stdout, /SSR remote row/);
+  assert.equal((result.stdout.match(/data-pinned="start"/g) ?? []).length, 4);
+  assert.equal((result.stdout.match(/data-pinned="end"/g) ?? []).length, 4);
+  assert.doesNotMatch(result.stdout, /style="[^"]*--lk-data-table-pin-offset/);
+  assert.match(result.stdout, /Query SSR row/);
+  assert.match(
+    result.stdout,
+    /aria-label="Filter Revenue"[^>]*aria-invalid="true"/,
+  );
+  assert.match(result.stdout, /Enter a finite number/);
+  assert.match(result.stdout, /data-part="sort-priority"/);
+  assert.match(
+    result.stdout,
+    /<option(?=[^>]*value="0")(?=[^>]*selected)[^>]*>Unassigned/,
+  );
+  assert.match(result.stdout, /SSR remote failure/);
+  assert.match(result.stdout, /aria-busy="true"/);
+  assert.match(
+    result.stdout.replace(/<[^>]*>/g, ""),
+    /21 rows · 1 selected · 3 \/ 11/,
+  );
+  assert.match(result.stdout, /Visible conditional SSR answer/);
+  assert.doesNotMatch(
+    result.stdout,
+    /Hidden answer must not leak|name="hiddenSSR"/,
+  );
+  assert.match(result.stdout, /name="visibleSSR"/);
+  assert.match(result.stdout, /Hello/);
+  assert.match(result.stdout, /SSR client fallback/);
+  assert.doesNotMatch(result.stdout, /Client-only secret/);
+  assert.match(result.stdout, /SSR JSON/);
+  assert.match(result.stdout, /data-scope="image-cropper"/);
+  assert.match(result.stdout, /name="ssr-framework"/);
+  assert.match(result.stdout, /<mark[^>]*>highlighted<\/mark>/);
+
+  assert.match(result.stdout, /aria-label="SSR legend"/);
+  assert.match(result.stdout, /SSR category — SSR series: 1e\+308/);
+  assert.match(result.stdout.replace(/<[^>]*>/g, ""), /1 rows · 1 selected/);
+  for (const scope of [
+    "attachment",
+    "bubble",
+    "message",
+    "message-scroller",
+    "questionnaire",
+  ])
+    assert.match(result.stdout, new RegExp(`data-scope="${scope}"`));
+  assert.match(result.stdout, /Conversation SSR/);
+  assert.match(result.stdout, /Save SSR/);
+  assert.match(
+    result.stdout,
+    /<button(?=[^>]*data-action-id="archive")(?=[^>]*disabled)[^>]*>/,
+  );
+  assert.match(result.stdout, /aria-label="Preview SSR actions.txt"/);
+  assert.match(result.stdout, /aria-label="Cancel upload SSR upload.zip"/);
+  assert.doesNotMatch(result.stdout, /data-part="action-feedback"/);
+  assert.match(result.stdout, /SSR answer/);
+  assert.match(result.stdout, /aria-label="SSR search"/);
+  assert.match(result.stdout, /non-scaling-stroke/);
+  assert.match(
+    result.stdout,
+    /<button(?=[^>]*data-scope="floating-action-button")(?=[^>]*type="button")[^>]*>/,
+  );
+  assert.match(result.stdout, /data-scope="speed-dial"/);
+  assert.match(result.stdout, /Image SSR/);
+  assert.match(result.stdout, /Media SSR/);
+  assert.match(
+    result.stdout,
+    /<input(?=[^>]*name="assigned")(?=[^>]*value="alpha")[^>]*>/,
+  );
+  assert.match(
+    result.stdout,
+    /<input(?=[^>]*name="meeting")(?=[^>]*value="13:30")[^>]*>/,
+  );
+  assert.match(
+    result.stdout,
+    /<textarea(?=[^>]*data-autosize="true")(?=[^>]*rows="2")[^>]*>/,
+  );
+  assert.match(
+    result.stdout,
+    /<textarea[^>]*name="notes"[^>]*>SSR notes<\/textarea>/,
+  );
+  assert.match(
+    result.stdout,
+    /<button[^>]*type="button"[^>]*>Remove<\/button>/,
+  );
+  assert.match(result.stdout, /<a[^>]*aria-current="page"[^>]*>Home<\/a>/);
+  console.log(
+    `${framework} SSR: Button、Textarea、Container、ChipRemoveTrigger、BottomNavigationItem、TransferList、TimePicker、自动行数通过`,
+  );
+}
+console.log("React、Vue、Solid SSR 与服务端主题样式收集通过");
+
+for (const framework of ["react", "vue", "solid"]) {
+  const imports =
+    framework === "react"
+      ? "import {createElement as h} from 'react';import {renderToString} from 'react-dom/server';"
+      : framework === "vue"
+        ? "import {h,createSSRApp} from 'vue';import {renderToString} from 'vue/server-renderer';"
+        : "import {createComponent as h} from 'solid-js';import {renderToString} from 'solid-js/web';";
+  const script =
+    imports +
+    `import * as L from './packages/${framework}/dist/${framework === "solid" ? "server/" : ""}index.js'; const quiet=()=>{throw Error('SSR editor callback must not run')}; const code={id:'ssr-code',name:'ssr-source',defaultValue:'SSR source <safe>\\nnext line',onReady:quiet,onValueChange:quiet,language:()=>{throw Error('SSR must not load syntax')}}; const rich={id:'ssr-rich',name:'ssr-document',defaultValue:{type:'doc',content:[{type:'paragraph',content:[{type:'text',text:'SSR rich <safe>'}]}]},onReady:quiet,onValueChange:quiet};` +
+    ["code", "rich"]
+      .map((kind) => {
+        const component =
+          kind === "code" ? "LoongArkCodeEditor" : "LoongArkRichTextEditor";
+        return framework === "vue"
+          ? `console.log(await renderToString(createSSRApp({render:()=>h(L.${component},${kind})})));`
+          : framework === "solid"
+            ? `console.log(renderToString(()=>h(L.${component},${kind})));`
+            : `console.log(renderToString(h(L.${component},${kind})));`;
+      })
+      .join("");
+  const result = spawnSync(
+    process.execPath,
+    ["--input-type=module", "-e", script],
+    { cwd: process.cwd(), encoding: "utf8" },
+  );
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /SSR source &lt;safe&gt;/);
+  assert.match(result.stdout, /SSR rich &lt;safe&gt;/);
+  assert.match(result.stdout, /name="ssr-source"/);
+  assert.match(result.stdout, /name="ssr-document"/);
+  assert.ok(!result.stdout.includes('contenteditable="true"'));
+  console.log(
+    `${framework} 独立编辑器 SSR 转义、表单值、无 DOM/语法请求/回调通过`,
+  );
+}
+for (const framework of ["react", "vue", "solid"]) {
+  const imports =
+    framework === "react"
+      ? "import {createElement as h} from 'react';import {renderToString} from 'react-dom/server';"
+      : framework === "vue"
+        ? "import {h,createSSRApp} from 'vue';import {renderToString} from 'vue/server-renderer';"
+        : "import {createComponent as h} from 'solid-js';import {renderToString} from 'solid-js/web';";
+  const script =
+    imports +
+    `import * as L from './packages/${framework}/dist/${framework === "solid" ? "server/" : ""}index.js'; const quiet=()=>{throw Error('SSR chart must not emit')};const base={data:[{id:'a',name:'Axis <safe>',at:'2026-09-01T00:00:00Z',x:1,value:10},{id:'b',name:'Next',at:'2026-09-10T00:00:00Z',x:5,value:100}],series:[{key:'value'}],labelKey:'name',interactive:true,showDataTable:true,onSliceKeysChange:quiet,onSeriesKeysChange:quiet,onRangeChange:quiet};` +
+    ["area", "donut", "scatter", "time", "log"]
+      .map((mode) => {
+        const props = `{...base,type:'${mode === "time" || mode === "log" ? "line" : mode}',${mode === "time" ? "xAxis:{type:'time',key:'at'}," : mode === "log" ? "yAxis:{type:'log'}," : mode === "scatter" ? "xAxis:{type:'linear',key:'x'}," : ""}}`;
+        return framework === "vue"
+          ? `console.log(await renderToString(createSSRApp({render:()=>h(L.LoongArkChart,${props})})));`
+          : framework === "solid"
+            ? `console.log(renderToString(()=>h(L.LoongArkChart,${props})));`
+            : `console.log(renderToString(h(L.LoongArkChart,${props})));`;
+      })
+      .join("");
+  const result = spawnSync(
+    process.execPath,
+    ["--input-type=module", "-e", script],
+    { cwd: process.cwd(), encoding: "utf8" },
+  );
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /data-part="area"/);
+  assert.match(result.stdout, /data-part="slice"/);
+  assert.match(result.stdout, /data-slice-key="Axis &lt;safe&gt;"/);
+  assert.match(result.stdout, /<th scope="col">at<\/th>/);
+  assert.match(result.stdout, /<th scope="col">x<\/th>/);
+  assert.doesNotMatch(result.stdout, /NaN|Infinity/);
+  console.log(
+    `${framework} 图表新增类型与轴 SSR 转义、可访问原始数据及无回调通过`,
+  );
+}
+
+// DOM 导出在 SSR 中不查询节点、不解码图像、不调用状态读取器。
+const { exportImageCropper } =
+  await import("../packages/kit/dist/cropper-export.js");
+const cropperSSR = await exportImageCropper({
+  crop: { x: 0, y: 0, width: 100, height: 100 },
+  zoom: 1,
+  rotation: 0,
+  offset: { x: 0, y: 0 },
+  flip: { horizontal: false, vertical: false },
+  getRootProps() {
+    throw new Error("SSR must not access cropper DOM state");
+  },
+});
+if (cropperSSR !== null) throw new Error("SSR cropper export must return null");
+console.log("ImageCropper共享导出SSR无DOM/解码/状态读取通过");

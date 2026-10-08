@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import {
   LoongArkPasswordInputRoot,
@@ -7,7 +8,10 @@ import {
   LoongArkPasswordInputIndicator,
   LoongArkPasswordInputVisibilityTrigger,
 } from "@loongark/solid";
-import type { PasswordInputSize, PasswordInputState } from "@loongark/primitives";
+import type {
+  PasswordInputSize,
+  PasswordInputState,
+} from "@loongark/primitives";
 
 export interface PasswordInputExampleProps {
   size?: PasswordInputSize;
@@ -17,7 +21,7 @@ export interface PasswordInputExampleProps {
 }
 
 export const PasswordInputExample: Component<PasswordInputExampleProps> = (
-  props
+  props,
 ) => {
   const size = () => props.size ?? "md";
   const state = () => props.state ?? "default";

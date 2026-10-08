@@ -2,7 +2,12 @@
  * Tooltip 组件 - React 封装
  * 基于 Ark UI Tooltip，注入 data-scope/data-part 与 interactive 映射
  */
-import React, { forwardRef, createElement, type FC, type ReactNode } from "react";
+import React, {
+  forwardRef,
+  createElement,
+  type FC,
+  type ReactNode,
+} from "react";
 import {
   Tooltip as ArkTooltip,
   type TooltipRootProps as ArkTooltipRootProps,
@@ -12,19 +17,22 @@ import {
   type TooltipArrowProps as ArkTooltipArrowProps,
   type TooltipArrowTipProps as ArkTooltipArrowTipProps,
 } from "@ark-ui/react/tooltip";
-import { Portal as ArkPortal } from "@ark-ui/react/portal";
+import { Portal as ArkPortal } from "./portal";
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
-  createElement(ArkPortal as unknown as FC<{ children?: ReactNode }>, null, children);
+  createElement(ArkPortal, null, children);
 
-export interface LoongArkTooltipRootProps extends Omit<ArkTooltipRootProps, "asChild"> {}
+export interface LoongArkTooltipRootProps extends Omit<
+  ArkTooltipRootProps,
+  "asChild"
+> {}
 
 export const LoongArkTooltipRoot = (props: LoongArkTooltipRootProps) => {
   return <ArkTooltip.Root {...props} data-scope="tooltip" data-part="root" />;
 };
 
 export const LoongArkTooltipTrigger = forwardRef<
-  HTMLElement,
+  HTMLButtonElement,
   ArkTooltipTriggerProps
 >(({ asChild = true, children, ...rest }, ref) => {
   return (
@@ -60,7 +68,7 @@ LoongArkTooltipPositioner.displayName = "LoongArkTooltipPositioner";
 
 export const LoongArkTooltipContent = forwardRef<
   HTMLDivElement,
-  Omit<ArkTooltipContentProps, "asChild">
+  Omit<ArkTooltipContentProps, "asChild"> & { interactive?: boolean }
 >(({ children, interactive, ...rest }, ref) => {
   return (
     <ArkTooltip.Content
@@ -105,4 +113,3 @@ export const LoongArkTooltipArrowTip = forwardRef<
   );
 });
 LoongArkTooltipArrowTip.displayName = "LoongArkTooltipArrowTip";
-

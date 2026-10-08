@@ -1,3 +1,4 @@
-import type { SvelteComponent } from "svelte";
-import type { ToggleGroupItemProps } from "@ark-ui/svelte/toggle-group";
-export default class SegmentGroupItem extends SvelteComponent<ToggleGroupItemProps> {}
+import type { Component } from "svelte";
+import type { SegmentGroupItemProps } from "./segment-group";
+declare const SegmentGroupItem: Component<SegmentGroupItemProps, {}, "ref">;
+export default SegmentGroupItem;

@@ -1,12 +1,7 @@
-import { LoongArkTheme } from "@loongark/theme";
-import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
-import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type InputSize = "sm" | "md" | "lg";
 export type InputState = "default" | "invalid" | "success";
-
 export interface InputPrimitiveProps {
   size?: InputSize;
   state?: InputState;
@@ -15,460 +10,63 @@ export interface InputPrimitiveProps {
   multiline?: boolean;
 }
 
-interface InputDesignTokens {
-  fontFamily: string;
-  fontSize: Record<InputSize, string>;
-  lineHeight: number;
-  fontWeight: number;
-  paddingY: Record<InputSize, string>;
-  paddingX: Record<InputSize, string>;
-  radius: Record<InputSize, string>;
-  gap: string;
-  neutral: {
-    surface: string;
-    surfaceRaised: string;
-    border: string;
-    borderHover: string;
-    text: string;
-    placeholder: string;
-  };
-  disabled: {
-    bg: string;
-    text: string;
-  };
-  brand: {
-    primary: string;
-    accent: string;
-    warning: string;
-  };
-  motion: {
-    duration: string;
-    easing: string;
-  };
-  shadow: string;
-}
-
-const extractInputTokens = (theme: LoongArkTheme): InputDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
-  const fontFamily = asTokenTree(typography.fontFamily);
-  const fontSize = asTokenTree(typography.fontSize);
-  const lineHeight = asTokenTree(typography.lineHeight);
-  const fontWeight = asTokenTree(typography.fontWeight);
-
-  const space = asTokenTree(theme.tokens.space);
-  const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
-
-  const color = theme.tokens.color as TokenTree;
-  const brand = asTokenTree(color.brand);
-  const neutral = asTokenTree(color.neutral);
-
-  const motion = theme.tokens.motion as TokenTree;
-  const duration = asTokenTree(motion.duration);
-  const easing = asTokenTree(motion.easing);
-
-  return {
-    fontFamily: toStringToken(fontFamily.body, "sans-serif"),
-    fontSize: {
-      sm: toStringToken(fontSize.sm, "14px"),
-      md: toStringToken(fontSize.md, "16px"),
-      lg: toStringToken(fontSize.lg, "20px"),
-    },
-    lineHeight: toNumberToken(lineHeight.base, 1.5),
-    fontWeight: toNumberToken(fontWeight.regular, 400),
-    paddingY: {
-      sm: toStringToken(componentSpace.xs, "4px"),
-      md: toStringToken(componentSpace.sm, "8px"),
-      lg: toStringToken(componentSpace.md, "12px"),
-    },
-    paddingX: {
-      sm: toStringToken(componentSpace.sm, "12px"),
-      md: toStringToken(componentSpace.md, "16px"),
-      lg: toStringToken(componentSpace.lg, "20px"),
-    },
-    radius: {
-      sm: toStringToken(radius.sm, "4px"),
-      md: toStringToken(radius.md, "6px"),
-      lg: toStringToken(radius.md, "8px"),
-    },
-    gap: toStringToken(componentSpace.xs, "4px"),
-    neutral: {
-      surface: toStringToken(neutral["50"], "#FFFFFF"),
-      surfaceRaised: toStringToken(neutral["100"], "#F2F2F2"),
-      border: toStringToken(neutral["100"], "#E5E6EB"),
-      borderHover: toStringToken(neutral["300"], "#B3B4BD"),
-      text: toStringToken(neutral["700"], "#232325"),
-      placeholder: toStringToken(neutral["300"], "#B3B4BD"),
-    },
-    disabled: {
-      bg: toStringToken(neutral["100"], "#E5E6EB"),
-      text: toStringToken(neutral["300"], "#B3B4BD"),
-    },
-    brand: {
-      primary: toStringToken(brand.primary, "#006EFF"),
-      accent: toStringToken(brand.accent, "#5AC8FA"),
-      warning: toStringToken(brand.warning, "#F58220"),
-    },
-    motion: {
-      duration: toStringToken(duration.base, "200ms"),
-      easing: toStringToken(easing.standard, "cubic-bezier(0.2, 0, 0, 1)"),
-    },
-    shadow: "0 8px 40px rgba(0, 0, 0, 0.08)",
-  };
-};
-
-const buildInputStyles = (theme: LoongArkTheme): string => {
-  const tokens = extractInputTokens(theme);
-  const scopeSelector = `[data-scope="input"]`;
-  const wrapperSelector = `${scopeSelector}[data-part="root"]`;
-  const controlSelector = `${scopeSelector}[data-part="control"]`;
-  const controlInsideWrapperSelector = `${wrapperSelector} ${controlSelector}`;
-  const prefixSelector = `${scopeSelector}[data-part="prefix"]`;
-  const suffixSelector = `${scopeSelector}[data-part="suffix"]`;
-  const labelSelector = `${scopeSelector}[data-part="label"]`;
-  const helperSelector = `${scopeSelector}[data-part="helper-text"]`;
-  const invalidSelectors = `${controlSelector}[data-state='invalid'], ${controlSelector}[aria-invalid='true']`;
-  const successSelector = `${controlSelector}[data-state='success']`;
-  const disabledSelector = `${controlSelector}[disabled], ${controlSelector}[aria-disabled='true']`;
-  const readOnlySelector = `${controlSelector}[readonly]`;
-  const stateAttributeSelectors = `${controlSelector}[data-state], ${wrapperSelector}[data-state]`;
-
-  return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-${controlSelector} {
-  width: 100%;
-  border: 1px solid ${tokens.neutral.border};
-  border-radius: ${tokens.radius.md};
-  background: ${tokens.neutral.surface};
-  color: ${tokens.neutral.text};
-  font-family: ${tokens.fontFamily};
-  font-size: ${tokens.fontSize.md};
-  font-weight: ${tokens.fontWeight};
-  line-height: ${tokens.lineHeight};
-  padding: ${tokens.paddingY.md} ${tokens.paddingX.md};
-  transition:
-    border-color ${tokens.motion.duration} ${tokens.motion.easing},
-    box-shadow ${tokens.motion.duration} ${tokens.motion.easing},
-    background ${tokens.motion.duration} ${tokens.motion.easing};
-}
-
-${controlSelector}:hover {
-  border-color: ${tokens.neutral.borderHover};
-}
-
-${controlSelector}:focus-visible {
-  outline: none;
-  border-color: ${tokens.brand.primary};
-}
-
-${controlSelector}::placeholder {
-  color: ${tokens.neutral.placeholder};
-  opacity: 1;
-}
-
-${controlSelector}[data-size='sm'] {
-  font-size: ${tokens.fontSize.sm};
-  padding: ${tokens.paddingY.sm} ${tokens.paddingX.sm};
-  border-radius: ${tokens.radius.sm};
-}
-
-${controlSelector}[data-size='lg'] {
-  font-size: ${tokens.fontSize.lg};
-  padding: ${tokens.paddingY.lg} ${tokens.paddingX.lg};
-  border-radius: ${tokens.radius.lg};
-}
-
-${invalidSelectors} {
-  border-color: ${tokens.brand.warning};
-  box-shadow: 0 0 0 1px ${tokens.brand.warning};
-}
-
-${successSelector} {
-  border-color: ${tokens.brand.accent};
-  box-shadow: 0 0 0 1px ${tokens.brand.accent};
-}
-
-${disabledSelector},
-${readOnlySelector} {
-  background: ${tokens.disabled.bg};
-  color: ${tokens.disabled.text};
-  cursor: not-allowed;
-  opacity: 0.85;
-}
-
-textarea${controlSelector},
-${controlSelector}[data-multiline='true'] {
-  min-height: 120px;
-  resize: vertical;
-}
-
-${controlInsideWrapperSelector} {
-  border: none;
-  box-shadow: none;
-  background: transparent;
-  border-radius: 0;
-  padding: 0;
-}
-
-${controlInsideWrapperSelector}:focus-visible {
-  box-shadow: none;
-  border-color: transparent;
-}
-
-${wrapperSelector} {
-  width: 100%;
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid ${tokens.neutral.border};
-  border-radius: ${tokens.radius.md};
-  background: ${tokens.neutral.surface};
-  color: ${tokens.neutral.text};
-  font-family: ${tokens.fontFamily};
-  padding: ${tokens.paddingY.md} ${tokens.paddingX.md};
-  gap: ${tokens.paddingX.sm};
-  box-sizing: border-box;
-  transition:
-    border-color ${tokens.motion.duration} ${tokens.motion.easing},
-    box-shadow ${tokens.motion.duration} ${tokens.motion.easing},
-    background ${tokens.motion.duration} ${tokens.motion.easing};
-}
-
-${wrapperSelector}:hover {
-  border-color: ${tokens.neutral.borderHover};
-}
-
-${wrapperSelector}:focus-within {
-  border-color: ${tokens.brand.primary};
-}
-
-${wrapperSelector}[data-size='sm'] {
-  padding: ${tokens.paddingY.sm} ${tokens.paddingX.sm};
-  border-radius: ${tokens.radius.sm};
-  font-size: ${tokens.fontSize.sm};
-}
-
-${wrapperSelector}[data-size='lg'] {
-  padding: ${tokens.paddingY.lg} ${tokens.paddingX.lg};
-  border-radius: ${tokens.radius.lg};
-  font-size: ${tokens.fontSize.lg};
-}
-
-${wrapperSelector}[data-state='invalid'] {
-  border-color: ${tokens.brand.warning};
-}
-
-${wrapperSelector}[data-state='success'] {
-  border-color: ${tokens.brand.accent};
-}
-
-${wrapperSelector}[data-disabled='true'] {
-  background: ${tokens.disabled.bg};
-  color: ${tokens.disabled.text};
-  cursor: not-allowed;
-  opacity: 0.85;
-}
-
-${wrapperSelector}[data-disabled='true'] ${labelSelector} {
-  color: ${tokens.disabled.text};
-}
-
-${wrapperSelector}[data-variant='floating'][data-disabled='true'] ${labelSelector} {
-  background: transparent;
-  color: ${tokens.disabled.text};
-}
-
-${wrapperSelector} input,
-${wrapperSelector} textarea {
-  flex: 1;
-  min-width: 0;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: inherit;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: ${tokens.lineHeight};
-  padding: 0;
-}
-
-${wrapperSelector} input::placeholder,
-${wrapperSelector} textarea::placeholder {
-  color: ${tokens.neutral.placeholder};
-}
-
-${prefixSelector},
-${suffixSelector} {
-  display: inline-flex;
-  align-items: center;
-  color: ${tokens.neutral.placeholder};
-  font-size: inherit;
-  line-height: ${tokens.lineHeight};
-  flex-shrink: 0;
-}
-
-${suffixSelector} {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-}
-
-${suffixSelector}[data-action='clear'] {
-  color: ${tokens.neutral.placeholder};
-  cursor: pointer;
-  transition: color ${tokens.motion.duration} ${tokens.motion.easing};
-}
-
-${suffixSelector}[data-action='clear']:hover {
-  color: ${tokens.neutral.text};
-}
-
-${labelSelector} {
-  display: inline-block;
-  width: fit-content;
-  font-family: ${tokens.fontFamily};
-  font-size: ${tokens.fontSize.sm};
-  font-weight: ${tokens.fontWeight};
-  line-height: ${tokens.lineHeight};
-  color: ${tokens.neutral.text};
-  margin: 0 0 ${tokens.gap} 0;
-  flex-shrink: 0;
-}
-
-${wrapperSelector} ${labelSelector} {
-  margin: 0;
-}
-
-${wrapperSelector}:not([data-variant='floating']) ${labelSelector} {
-  font-size: inherit;
-}
-
-${wrapperSelector}[data-variant='floating'] {
-  position: relative;
-  align-items: center;
-  --lk-input-floating-translate: calc(-100% - ${tokens.paddingY.md}/2 - ${tokens.gap});
-  --lk-input-floating-scale: calc(${tokens.fontSize.sm} / ${tokens.fontSize.md});
-}
-
-${wrapperSelector}[data-variant='floating'] ${labelSelector} {
-  position: absolute;
-  left: ${tokens.paddingX.md};
-  top: 50%;
-  transform-origin: top left;
-  transform: translateY(-50%) scale(1);
-  pointer-events: none;
-  transition:
-    transform ${tokens.motion.duration} ${tokens.motion.easing},
-    color ${tokens.motion.duration} ${tokens.motion.easing};
-  will-change: transform;
-  margin: 0;
-  color: ${tokens.neutral.placeholder};
-  font-size: ${tokens.fontSize.md};
-  line-height: ${tokens.lineHeight};
-  background: ${tokens.neutral.surface};
-  padding: 0 ${tokens.gap};
-  z-index: 1;
-}
-
-${wrapperSelector}[data-variant='floating'][data-size='sm'] ${labelSelector} {
-  left: ${tokens.paddingX.sm};
-  font-size: ${tokens.fontSize.sm};
-}
-
-${wrapperSelector}[data-variant='floating'][data-size='lg'] ${labelSelector} {
-  left: ${tokens.paddingX.lg};
-  font-size: ${tokens.fontSize.lg};
-}
-
-${wrapperSelector}[data-variant='floating'][data-size='sm'] {
-  --lk-input-floating-translate: calc(-100% - ${tokens.paddingY.sm}/2 - ${tokens.gap});
-  --lk-input-floating-scale: calc(${tokens.fontSize.sm} / ${tokens.fontSize.sm});
-}
-
-${wrapperSelector}[data-variant='floating'][data-size='lg'] {
-  --lk-input-floating-translate: calc(-100% - ${tokens.paddingY.lg}/2 - ${tokens.gap});
-  --lk-input-floating-scale: calc(${tokens.fontSize.sm} / ${tokens.fontSize.lg});
-}
-
-${wrapperSelector}[data-variant='floating']:focus-within ${labelSelector},
-${wrapperSelector}[data-variant='floating'][data-has-value='true'] ${labelSelector} {
-  transform: translateY(var(--lk-input-floating-translate)) scale(var(--lk-input-floating-scale));
-  color: ${tokens.brand.primary};
-}
-
-${wrapperSelector}[data-variant='floating'][data-state='invalid']:focus-within ${labelSelector},
-${wrapperSelector}[data-variant='floating'][data-state='invalid'][data-has-value='true'] ${labelSelector} {
-  transform: translateY(var(--lk-input-floating-translate)) scale(var(--lk-input-floating-scale));
-  color: ${tokens.brand.warning};
-}
-
-${wrapperSelector}[data-variant='floating'][data-state='success']:focus-within ${labelSelector},
-${wrapperSelector}[data-variant='floating'][data-state='success'][data-has-value='true'] ${labelSelector} {
-  transform: translateY(var(--lk-input-floating-translate)) scale(var(--lk-input-floating-scale));
-  color: ${tokens.brand.accent};
-}
-
-${wrapperSelector} ~ ${helperSelector},
-${controlSelector} ~ ${helperSelector} {
-  display: block;
-  font-family: ${tokens.fontFamily};
-  font-size: ${tokens.fontSize.sm};
-  line-height: ${tokens.lineHeight};
-  color: ${tokens.neutral.placeholder};
-}
-
-${wrapperSelector} ~ ${helperSelector}[data-variant='error'],
-${controlSelector} ~ ${helperSelector}[data-variant='error'] {
-  color: ${tokens.brand.warning};
-}
-
-${wrapperSelector} ~ ${helperSelector}[data-variant='success'],
-${controlSelector} ~ ${helperSelector}[data-variant='success'] {
-  color: ${tokens.brand.accent};
-}
-
-${stateAttributeSelectors}[data-state='invalid'] ~ ${helperSelector} {
-  color: ${tokens.brand.warning};
-}
-
-${stateAttributeSelectors}[data-state='success'] + ${helperSelector} {
-  color: ${tokens.brand.accent};
-}
+const root = '[data-scope="input"][data-part="root"]';
+const control = '[data-scope="input"][data-part="control"]';
+const group = '[data-scope="input"][data-part="group"]';
+const label = '[data-scope="input"][data-part="label"]';
+const helper = '[data-scope="input"][data-part="helper-text"]';
+const css = `
+${root} { display:grid; width:100%; min-width:0; gap:var(--lk-control-fieldgap); padding:0; border:0; background:transparent; color:var(--lk-color-semantic-foreground); --lk-field-height:var(--lk-control-height-md); }
+${root}[data-size=sm] { --lk-field-height:var(--lk-control-height-sm); }
+${root}[data-size=lg] { --lk-field-height:var(--lk-control-height-lg); }
+${control}, ${group} { width:100%; min-width:0; height:var(--lk-field-height,var(--lk-control-height-md)); padding:0 var(--lk-space-component-compact); border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input); border-radius:var(--lk-radius-md); background:var(--lk-color-semantic-background); color:var(--lk-color-semantic-foreground); box-shadow:var(--lk-shadow-sm); font:inherit; font-size:var(--lk-typography-fontsize-md); line-height:var(--lk-typography-lineheight-base); transition:border-color var(--lk-motion-duration-fast) var(--lk-motion-easing-standard), box-shadow var(--lk-motion-duration-fast) var(--lk-motion-easing-standard); }
+${control}[data-size=sm] { height:var(--lk-control-height-sm); }
+${control}[data-size=lg] { height:var(--lk-control-height-lg); }
+${control}::placeholder { color:var(--lk-color-semantic-mutedforeground); opacity:1; }
+${control}:hover:not(:disabled), ${group}:hover:not(:has(${control}:disabled)) { border-color:var(--lk-color-border-hover); }
+${control}:focus-visible, ${group}:focus-within { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring); outline-offset:var(--lk-control-focuswidth); }
+${group} { display:flex; align-items:center; gap:var(--lk-space-component-sm); }
+${group} ${control} { height:100%; flex:1; border:0; padding:0; background:transparent; box-shadow:none; }
+${group} ${control}:focus-visible { outline:none; }
+${group}:has(${control}:disabled) { opacity:.5;cursor:not-allowed; }
+${group} ${control}:disabled { opacity:1; }
+${group}:has(${control}[readonly]) { background:var(--lk-color-semantic-muted); }
+${root} :is([data-part=prefix],[data-part=suffix]) { display:inline-flex; align-items:center; flex:none; color:var(--lk-color-semantic-mutedforeground); font:inherit; }
+${root} button[data-part=suffix] { align-self:stretch;min-width:var(--lk-control-height-sm);border:0;padding:0 var(--lk-space-component-xs);background:transparent;cursor:pointer; }
+${group} button[data-part=suffix] { margin-inline-end:calc(-1 * var(--lk-space-component-compact));border-start-end-radius:var(--lk-radius-md);border-end-end-radius:var(--lk-radius-md); }
+${root} button[data-part=suffix]:hover:not(:disabled) { background:var(--lk-color-semantic-accent);color:var(--lk-color-semantic-foreground); }
+${root} button[data-part=suffix]:focus-visible { outline-offset:calc(-1 * var(--lk-control-focuswidth)); }
+${root} button[data-part=suffix]:disabled { cursor:not-allowed; }
+textarea${control}, ${control}[data-multiline=true] { height:auto; min-height:calc(var(--lk-field-height,var(--lk-control-height-md)) * 2); padding-block:var(--lk-space-component-sm); resize:vertical; }
+${label} { width:fit-content; margin:0; color:var(--lk-color-semantic-foreground); font-size:var(--lk-typography-fontsize-sm); font-weight:var(--lk-typography-fontweight-medium); line-height:var(--lk-typography-lineheight-base); }
+${helper} { margin:0; color:var(--lk-color-semantic-mutedforeground); font-size:var(--lk-typography-fontsize-xs); line-height:var(--lk-typography-lineheight-base); overflow-wrap:anywhere; }
+${helper}[data-variant=error] { color:var(--lk-color-semantic-destructive); }
+${helper}[data-variant=success] { color:var(--lk-color-semantic-success); }
+${control}:disabled, ${root}[data-disabled=true] ${control} { opacity:.5; cursor:not-allowed; }
+${control}[readonly] { background:var(--lk-color-semantic-muted); cursor:default; }
+${root}[data-state=invalid] :is(${control},${group}), ${control}:is([aria-invalid=true],[data-state=invalid]) { border-color:var(--lk-color-semantic-destructive); }
+${root}[data-state=invalid] :is(${control},${group}), ${control}[aria-invalid=true] { outline-color:var(--lk-color-semantic-destructive); }
+${root}[data-state=success] :is(${control},${group}), ${control}[data-state=success] { border-color:var(--lk-color-semantic-success); }
+${root}[data-variant=floating] { position:relative; }
+${root}[data-variant=floating] ${label} { position:absolute; inset-inline-start:var(--lk-space-component-sm); top:calc(var(--lk-field-height) / 2); transform:translateY(-50%); transform-origin:left center; pointer-events:none; padding:0 var(--lk-space-component-xs); background:var(--lk-color-semantic-background); color:var(--lk-color-semantic-mutedforeground); transition:transform var(--lk-motion-duration-fast) var(--lk-motion-easing-standard), color var(--lk-motion-duration-fast) var(--lk-motion-easing-standard); }
+${root}[data-variant=floating]:is(:focus-within,[data-has-value=true]) ${label} { transform:translateY(calc(-50% - var(--lk-field-height) / 2)) scale(.85); color:var(--lk-color-semantic-foreground); }
+${root}[data-variant=floating][data-state=invalid] ${label} { color:var(--lk-color-semantic-destructive); }
 `;
-};
-
-const INPUT_CONTRACT: PrimitiveContract<InputPrimitiveProps> = {
+const contract: PrimitiveContract<InputPrimitiveProps> = {
   name: "input",
   tokens: [
-    "color.neutral.50",
-    "color.neutral.100",
-    "color.neutral.300",
-    "color.neutral.700",
-    "color.brand.primary",
-    "color.brand.accent",
-    "color.brand.warning",
-    "typography.fontFamily.body",
-    "typography.fontSize.sm",
-    "typography.fontSize.md",
-    "typography.fontSize.lg",
-    "typography.lineHeight.base",
-    "typography.fontWeight.regular",
-    "space.component.xs",
+    "color.semantic.background",
+    "color.semantic.foreground",
+    "color.semantic.input",
+    "color.semantic.ring",
+    "color.semantic.destructive",
+    "color.semantic.success",
+    "control.height.md",
+    "control.fieldGap",
+    "space.component.compact",
     "space.component.sm",
-    "space.component.md",
-    "space.component.lg",
-    "radius.sm",
     "radius.md",
-    "radius.lg",
-    "motion.duration.base",
+    "motion.duration.fast",
     "motion.easing.standard",
   ],
   defaults: {
@@ -479,15 +77,8 @@ const INPUT_CONTRACT: PrimitiveContract<InputPrimitiveProps> = {
     multiline: false,
   },
 };
-
-const inputPrimitive = createPrimitive<InputPrimitiveProps>(
-  INPUT_CONTRACT,
-  (theme) => {
-    const css = buildInputStyles(theme);
-    mountPrimitiveStyles(`input-${theme.mode}`, css);
-  }
+export const inputPrimitive = createPrimitive<InputPrimitiveProps>(
+  contract,
+  (theme) => theme.mountStyles(`input-${theme.mode}`, css),
 );
-
 registerPrimitive(inputPrimitive);
-
-export { inputPrimitive };

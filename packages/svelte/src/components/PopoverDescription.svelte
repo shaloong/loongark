@@ -5,6 +5,11 @@
   export let id: PopoverDescriptionProps["id"] = undefined;
 </script>
 
-<Popover.Description {...{ asChild, id }} data-scope="popover" data-part="description">
+<Popover.Description
+  {...{ asChild, id }}
+  data-scope="popover"
+  data-part="description"
+  {...$$restProps}
+>
   <slot />
 </Popover.Description>

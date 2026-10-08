@@ -1,3 +1,5 @@
+import { useFieldContext } from "@ark-ui/solid/field";
+import { nativeSelectionFieldDescription } from "@loongark/kit";
 /**
  * Tags Input component - Solid wrapper.
  * Uses Ark UI Tags Input with data attributes for styling.
@@ -17,10 +19,14 @@ import {
   type TagsInputClearTriggerProps as ArkTagsInputClearTriggerProps,
   type TagsInputHiddenInputProps as ArkTagsInputHiddenInputProps,
 } from "@ark-ui/solid/tags-input";
+import { nativeSelectionRef } from "../native-selection";
+import { useTagsInputContext } from "@ark-ui/solid/tags-input";
 import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
 
-export interface LoongArkTagsInputRootProps
-  extends Omit<ArkTagsInputRootProps, "asChild"> {
+export interface LoongArkTagsInputRootProps extends Omit<
+  ArkTagsInputRootProps,
+  "asChild"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   disabled?: boolean;
@@ -29,64 +35,54 @@ export interface LoongArkTagsInputRootProps
 }
 
 export const LoongArkTagsInputRoot: Component<LoongArkTagsInputRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps(
     {
       size: "md" as TagsInputSize,
       state: "default" as TagsInputState,
-      disabled: false,
-      readOnly: false,
     },
-    props
+    props,
   );
-  const [local, others] = splitProps(merged, [
-    "children",
-    "size",
-    "state",
-    "disabled",
-    "readOnly",
-  ]);
+  const [local, others] = splitProps(merged, ["children", "size", "state"]);
 
   return (
     <ArkTagsInput.Root
-      {...(others as any)}
-      disabled={local.disabled}
-      readOnly={local.readOnly}
+      {...others}
       data-scope="tags-input"
       data-part="root"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
-      data-readonly={local.readOnly ? "true" : undefined}
+      data-disabled={merged.disabled ? "true" : undefined}
+      data-readonly={merged.readOnly ? "true" : undefined}
     >
       {local.children}
     </ArkTagsInput.Root>
   );
 };
 
-export interface LoongArkTagsInputLabelProps
-  extends Omit<ArkTagsInputLabelProps, "asChild"> {
+export interface LoongArkTagsInputLabelProps extends Omit<
+  ArkTagsInputLabelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkTagsInputLabel: Component<LoongArkTagsInputLabelProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkTagsInput.Label
-      {...others}
-      data-scope="tags-input"
-      data-part="label"
-    >
+    <ArkTagsInput.Label {...others} data-scope="tags-input" data-part="label">
       {local.children}
     </ArkTagsInput.Label>
   );
 };
 
-export interface LoongArkTagsInputControlProps
-  extends Omit<ArkTagsInputControlProps, "asChild"> {
+export interface LoongArkTagsInputControlProps extends Omit<
+  ArkTagsInputControlProps,
+  "asChild"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   disabled?: boolean;
@@ -102,7 +98,7 @@ export const LoongArkTagsInputControl: Component<
       state: "default" as TagsInputState,
       disabled: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -125,8 +121,10 @@ export const LoongArkTagsInputControl: Component<
   );
 };
 
-export interface LoongArkTagsInputInputProps
-  extends Omit<ArkTagsInputInputProps, "asChild"> {
+export interface LoongArkTagsInputInputProps extends Omit<
+  ArkTagsInputInputProps,
+  "asChild"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   disabled?: boolean;
@@ -134,16 +132,14 @@ export interface LoongArkTagsInputInputProps
 }
 
 export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps(
     {
       size: "md" as TagsInputSize,
       state: "default" as TagsInputState,
-      disabled: false,
-      readOnly: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "size",
@@ -152,28 +148,41 @@ export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
     "readOnly",
   ]);
 
+  const field = useFieldContext();
+  const api = useTagsInputContext();
+  const disabled = () =>
+    local.disabled ?? !!api().getHiddenInputProps().disabled;
+  const readOnly = () =>
+    local.readOnly ?? !!api().getHiddenInputProps().readOnly;
   return (
     <ArkTagsInput.Input
       {...others}
-      disabled={local.disabled}
-      readOnly={local.readOnly}
+      disabled={disabled()}
+      readOnly={readOnly()}
+      aria-describedby={nativeSelectionFieldDescription(
+        others["aria-describedby"],
+        field?.(),
+        api().getInputProps()["aria-invalid"],
+      )}
       data-scope="tags-input"
       data-part="input"
       data-size={local.size}
       data-state={local.state !== "default" ? local.state : undefined}
-      data-disabled={local.disabled ? "true" : undefined}
-      data-readonly={local.readOnly ? "true" : undefined}
+      data-disabled={disabled() ? "true" : undefined}
+      data-readonly={readOnly() ? "true" : undefined}
     />
   );
 };
 
-export interface LoongArkTagsInputItemProps
-  extends Omit<ArkTagsInputItemProps, "asChild"> {
+export interface LoongArkTagsInputItemProps extends Omit<
+  ArkTagsInputItemProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkTagsInputItem: Component<LoongArkTagsInputItemProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
@@ -183,8 +192,10 @@ export const LoongArkTagsInputItem: Component<LoongArkTagsInputItemProps> = (
   );
 };
 
-export interface LoongArkTagsInputItemPreviewProps
-  extends Omit<ArkTagsInputItemPreviewProps, "asChild"> {
+export interface LoongArkTagsInputItemPreviewProps extends Omit<
+  ArkTagsInputItemPreviewProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -203,8 +214,10 @@ export const LoongArkTagsInputItemPreview: Component<
   );
 };
 
-export interface LoongArkTagsInputItemTextProps
-  extends Omit<ArkTagsInputItemTextProps, "asChild"> {
+export interface LoongArkTagsInputItemTextProps extends Omit<
+  ArkTagsInputItemTextProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -223,8 +236,10 @@ export const LoongArkTagsInputItemText: Component<
   );
 };
 
-export interface LoongArkTagsInputItemInputProps
-  extends Omit<ArkTagsInputItemInputProps, "asChild"> {}
+export interface LoongArkTagsInputItemInputProps extends Omit<
+  ArkTagsInputItemInputProps,
+  "asChild"
+> {}
 
 export const LoongArkTagsInputItemInput: Component<
   LoongArkTagsInputItemInputProps
@@ -238,8 +253,10 @@ export const LoongArkTagsInputItemInput: Component<
   );
 };
 
-export interface LoongArkTagsInputItemDeleteTriggerProps
-  extends Omit<ArkTagsInputItemDeleteTriggerProps, "asChild"> {
+export interface LoongArkTagsInputItemDeleteTriggerProps extends Omit<
+  ArkTagsInputItemDeleteTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -258,8 +275,10 @@ export const LoongArkTagsInputItemDeleteTrigger: Component<
   );
 };
 
-export interface LoongArkTagsInputClearTriggerProps
-  extends Omit<ArkTagsInputClearTriggerProps, "asChild"> {
+export interface LoongArkTagsInputClearTriggerProps extends Omit<
+  ArkTagsInputClearTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -278,15 +297,25 @@ export const LoongArkTagsInputClearTrigger: Component<
   );
 };
 
-export interface LoongArkTagsInputHiddenInputProps
-  extends Omit<ArkTagsInputHiddenInputProps, "asChild"> {}
+export interface LoongArkTagsInputHiddenInputProps extends Omit<
+  ArkTagsInputHiddenInputProps,
+  "asChild"
+> {}
 
 export const LoongArkTagsInputHiddenInput: Component<
   LoongArkTagsInputHiddenInputProps
 > = (props) => {
+  const api = useTagsInputContext();
+  const ref = nativeSelectionRef(
+    () => ({
+      formValue: api().valueAsString,
+    }),
+    props.ref,
+  );
   return (
     <ArkTagsInput.HiddenInput
       {...props}
+      ref={ref}
       data-scope="tags-input"
       data-part="hidden-input"
     />

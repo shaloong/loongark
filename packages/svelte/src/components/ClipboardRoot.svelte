@@ -4,15 +4,12 @@
   import type { ClipboardSize } from "@loongark/primitives";
 
   export let size: ClipboardSize = "md";
-  export let disabled: ClipboardRootProps["disabled"] = undefined;
 </script>
 
 <Clipboard.Root
-  {disabled}
   data-scope="clipboard"
   data-part="root"
   data-size={size}
-  data-disabled={disabled ? "true" : undefined}
   {...$$restProps}
 >
   <slot />

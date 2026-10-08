@@ -39,13 +39,11 @@ export const RadioGroupExample: React.FC<RadioGroupExampleProps> = ({
         orientation={orientation}
         disabled={disabled}
         value={value}
-        onValueChange={(details: { value: string }) => setValue(details.value)}
+        onValueChange={(details: { value: string | null }) =>
+          setValue(details.value ?? "")
+        }
       >
-        <LoongArkRadioGroupLabel
-          style={{ marginBottom: "12px", fontWeight: 500 }}
-        >
-          请选择一个选项
-        </LoongArkRadioGroupLabel>
+        <LoongArkRadioGroupLabel>请选择一个选项</LoongArkRadioGroupLabel>
 
         {options.map((option) => (
           <LoongArkRadioGroupItem key={option.value} value={option.value}>
@@ -58,7 +56,13 @@ export const RadioGroupExample: React.FC<RadioGroupExampleProps> = ({
         ))}
       </LoongArkRadioGroupRoot>
 
-      <p style={{ marginTop: "16px", fontSize: "14px", color: "#666" }}>
+      <p
+        style={{
+          marginTop: "16px",
+          fontSize: "14px",
+          color: "var(--lk-color-semantic-mutedforeground)",
+        }}
+      >
         当前选择: {value}
       </p>
     </div>

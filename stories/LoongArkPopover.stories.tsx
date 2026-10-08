@@ -1,5 +1,5 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkPopoverRoot,
   LoongArkPopoverTrigger,
@@ -17,7 +17,8 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: "LoongArkPopover 基于 Ark UI Popover，支持标题、描述和关闭按钮，样式由 primitives 驱动。",
+        component:
+          "LoongArkPopover 基于 Ark UI Popover，支持标题、描述和关闭按钮，样式由 primitives 驱动。",
       },
     },
   },
@@ -37,9 +38,7 @@ export const Basic: Story = {
         <LoongArkPopoverContent>
           这是一段提示内容
           <LoongArkPopoverArrow />
-          <LoongArkPopoverCloseTrigger>
-            关闭
-          </LoongArkPopoverCloseTrigger>
+          <LoongArkPopoverCloseTrigger>关闭</LoongArkPopoverCloseTrigger>
         </LoongArkPopoverContent>
       </LoongArkPopoverPositioner>
     </LoongArkPopoverRoot>
@@ -59,9 +58,7 @@ export const WithTitle: Story = {
             设置角色后点击关闭即可完成。
           </LoongArkPopoverDescription>
           <LoongArkPopoverArrow />
-          <LoongArkPopoverCloseTrigger>
-            关闭
-          </LoongArkPopoverCloseTrigger>
+          <LoongArkPopoverCloseTrigger>关闭</LoongArkPopoverCloseTrigger>
         </LoongArkPopoverContent>
       </LoongArkPopoverPositioner>
     </LoongArkPopoverRoot>
@@ -77,7 +74,9 @@ export const WithArrow: Story = {
       <LoongArkPopoverPositioner>
         <LoongArkPopoverContent showArrow>
           <LoongArkPopoverTitle>标题</LoongArkPopoverTitle>
-          <LoongArkPopoverDescription>这是带箭头的内容。</LoongArkPopoverDescription>
+          <LoongArkPopoverDescription>
+            这是带箭头的内容。
+          </LoongArkPopoverDescription>
           <LoongArkPopoverCloseTrigger>关闭</LoongArkPopoverCloseTrigger>
         </LoongArkPopoverContent>
       </LoongArkPopoverPositioner>

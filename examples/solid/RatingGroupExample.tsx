@@ -1,3 +1,7 @@
+/** @jsxImportSource solid-js */
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/solid";
+
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 import {
@@ -14,7 +18,9 @@ interface RatingGroupExampleProps {
   disabled?: boolean;
 }
 
-export const RatingGroupExample: Component<RatingGroupExampleProps> = (props) => {
+export const RatingGroupExample: Component<RatingGroupExampleProps> = (
+  props,
+) => {
   const size = () => props.size ?? "md";
   const disabled = () => props.disabled ?? false;
   const [value, setValue] = createSignal(3);
@@ -29,8 +35,8 @@ export const RatingGroupExample: Component<RatingGroupExampleProps> = (props) =>
       <LoongArkRatingGroupLabel>Rating</LoongArkRatingGroupLabel>
       <LoongArkRatingGroupControl>
         {[1, 2, 3, 4, 5].map((item) => (
-          <LoongArkRatingGroupItem value={item}>
-            {item <= value() ? "*" : "-"}
+          <LoongArkRatingGroupItem index={item}>
+            <LoongArkIcon icon={controlIcons.star} size="lg" />
           </LoongArkRatingGroupItem>
         ))}
       </LoongArkRatingGroupControl>

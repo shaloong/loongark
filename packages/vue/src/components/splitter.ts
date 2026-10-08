@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Splitter component - Vue wrapper.
  * Uses Ark UI Splitter with data attributes for styling.
@@ -16,7 +17,7 @@ export const LoongArkSplitterRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSplitter.Root,
         {
           ...attrs,
@@ -25,7 +26,7 @@ export const LoongArkSplitterRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -34,14 +35,14 @@ export const LoongArkSplitterPanel = defineComponent({
   name: "LoongArkSplitterPanel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSplitter.Panel,
         {
           ...attrs,
           "data-scope": "splitter",
           "data-part": "panel",
         },
-        slots
+        slots,
       );
   },
 });
@@ -50,14 +51,15 @@ export const LoongArkSplitterResizeTrigger = defineComponent({
   name: "LoongArkSplitterResizeTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSplitter.ResizeTrigger,
         {
+          "aria-label": "Resize panels",
           ...attrs,
           "data-scope": "splitter",
           "data-part": "resize-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -66,14 +68,14 @@ export const LoongArkSplitterResizeTriggerIndicator = defineComponent({
   name: "LoongArkSplitterResizeTriggerIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkSplitter.ResizeTriggerIndicator,
         {
           ...attrs,
           "data-scope": "splitter",
           "data-part": "resize-trigger-indicator",
         },
-        slots
+        slots,
       );
   },
 });

@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type EditableSize = "sm" | "md" | "lg";
@@ -36,8 +35,6 @@ interface EditableDesignTokens {
   };
   brand: {
     primary: string;
-    accent: string;
-    warning: string;
   };
   motion: {
     duration: string;
@@ -46,21 +43,21 @@ interface EditableDesignTokens {
 }
 
 const extractEditableTokens = (theme: LoongArkTheme): EditableDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -103,8 +100,6 @@ const extractEditableTokens = (theme: LoongArkTheme): EditableDesignTokens => {
     },
     brand: {
       primary: toStringToken(brand.primary, "#006EFF"),
-      accent: toStringToken(brand.accent, "#5AC8FA"),
-      warning: toStringToken(brand.warning, "#F58220"),
     },
     motion: {
       duration: toStringToken(duration.base, "200ms"),
@@ -125,18 +120,13 @@ const buildEditableStyles = (theme: LoongArkTheme): string => {
   const editTriggerSelector = `${scopeSelector}[data-part="edit-trigger"]`;
   const submitTriggerSelector = `${scopeSelector}[data-part="submit-trigger"]`;
   const cancelTriggerSelector = `${scopeSelector}[data-part="cancel-trigger"]`;
-  const invalidSelector = `${controlSelector}[data-state='invalid']`;
-  const successSelector = `${controlSelector}[data-state='success']`;
+  // 状态属于可编辑值；Control 只是操作区，不能承载空的整行描边。
+  const valueSelector = `:is(${inputSelector},${previewSelector})`;
+  const invalidSelector = `:is(${rootSelector}[data-state='invalid'],${rootSelector}:has(${controlSelector}[data-state='invalid'])) ${valueSelector},${inputSelector}[data-state='invalid']`;
+  const successSelector = `:is(${rootSelector}[data-state='success'],${rootSelector}:has(${controlSelector}[data-state='success'])) ${valueSelector},${inputSelector}[data-state='success']`;
   const disabledSelector = `${rootSelector}[data-disabled='true']`;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${rootSelector} {
   display: flex;
@@ -228,13 +218,13 @@ ${rootSelector}[data-size='lg'] ${previewSelector} {
 }
 
 ${invalidSelector} {
-  border-color: ${tokens.brand.warning};
-  box-shadow: 0 0 0 1px ${tokens.brand.warning};
+  border-color: var(--lk-color-semantic-destructive);
+  box-shadow: 0 0 0 1px var(--lk-color-semantic-destructive);
 }
 
 ${successSelector} {
-  border-color: ${tokens.brand.accent};
-  box-shadow: 0 0 0 1px ${tokens.brand.accent};
+  border-color: var(--lk-color-semantic-success);
+  box-shadow: 0 0 0 1px var(--lk-color-semantic-success);
 }
 
 ${disabledSelector} {
@@ -263,8 +253,8 @@ const EDITABLE_CONTRACT: PrimitiveContract<EditablePrimitiveProps> = {
     "color.neutral.300",
     "color.neutral.700",
     "color.brand.primary",
-    "color.brand.accent",
-    "color.brand.warning",
+    "color.semantic.destructive",
+    "color.semantic.success",
     "typography.fontFamily.body",
     "typography.fontSize.sm",
     "typography.fontSize.md",
@@ -292,8 +282,8 @@ const editablePrimitive = createPrimitive<EditablePrimitiveProps>(
   EDITABLE_CONTRACT,
   (theme) => {
     const css = buildEditableStyles(theme);
-    mountPrimitiveStyles(`editable-${theme.mode}`, css);
-  }
+    theme.mountStyles(`editable-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(editablePrimitive);

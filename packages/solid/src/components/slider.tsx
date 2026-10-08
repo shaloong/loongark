@@ -19,22 +19,29 @@ import {
 } from "@ark-ui/solid/slider";
 import type { SliderOrientation, SliderSize } from "@loongark/primitives";
 
-export interface LoongArkSliderRootProps
-  extends Omit<ArkSliderRootProps, "asChild"> {
+export interface LoongArkSliderRootProps extends Omit<
+  ArkSliderRootProps,
+  "asChild"
+> {
   size?: SliderSize;
   orientation?: SliderOrientation;
   children?: JSX.Element;
 }
 
-export const LoongArkSliderRoot: Component<LoongArkSliderRootProps> = (props) => {
+export const LoongArkSliderRoot: Component<LoongArkSliderRootProps> = (
+  props,
+) => {
   const merged = mergeProps(
-    { size: "md" as SliderSize, orientation: "horizontal" as SliderOrientation },
-    props
+    {
+      size: "md" as SliderSize,
+      orientation: "horizontal" as SliderOrientation,
+    },
+    props,
   );
 
   return (
     <ArkSlider.Root
-      {...(props as any)}
+      {...props}
       orientation={merged.orientation}
       data-scope="slider"
       data-part="root"
@@ -145,7 +152,7 @@ export const LoongArkSliderDraggingIndicator: Component<
 };
 
 export const LoongArkSliderHiddenInput: Component<ArkSliderHiddenInputProps> = (
-  props
+  props,
 ) => {
   return (
     <ArkSlider.HiddenInput

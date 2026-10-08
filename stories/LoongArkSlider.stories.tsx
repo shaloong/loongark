@@ -1,5 +1,5 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkSliderRoot,
   LoongArkSliderLabel,
@@ -35,7 +35,10 @@ interface SliderDemoProps {
   orientation?: "horizontal" | "vertical";
 }
 
-const SliderDemo = ({ size = "md", orientation = "horizontal" }: SliderDemoProps) => {
+const SliderDemo = ({
+  size = "md",
+  orientation = "horizontal",
+}: SliderDemoProps) => {
   const [value, setValue] = React.useState<number[]>([32]);
   return (
     <LoongArkSliderRoot
@@ -106,7 +109,14 @@ export const Range: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 24,
+        width: "min(100%, 560px)",
+      }}
+    >
       <SliderDemo size="sm" />
       <SliderDemo size="md" />
       <SliderDemo size="lg" />
@@ -116,7 +126,7 @@ export const Sizes: Story = {
 
 export const Vertical: Story = {
   render: () => (
-    <div style={{ height: 220 }}>
+    <div style={{ minHeight: 260, width: "min(100%, 160px)" }}>
       <SliderDemo orientation="vertical" />
     </div>
   ),

@@ -1,7 +1,4 @@
-import type {
-  ToggleGroupRootProps,
-  ToggleGroupItemProps,
-} from "@ark-ui/svelte/toggle-group";
-
-export type SegmentGroupRootProps = ToggleGroupRootProps;
-export type SegmentGroupItemProps = ToggleGroupItemProps;
+import type { SegmentGroupRootProps as ArkRootProps, SegmentGroupItemProps as ArkItemProps } from "@ark-ui/svelte/segment-group";
+import type { SegmentGroupSize } from "@loongark/primitives";
+export interface SegmentGroupRootProps extends ArkRootProps { size?: SegmentGroupSize; }
+export type SegmentGroupItemProps = ArkItemProps;

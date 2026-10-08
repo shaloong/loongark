@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
@@ -50,14 +52,13 @@ const TagsInputDemo = ({
 
   return (
     <LoongArkTagsInputRoot
+      name="frameworks"
       size={size}
       state={state}
       disabled={disabled}
       readOnly={readOnly}
       value={value}
-      onValueChange={(details: { value: string[] }) =>
-        setValue(details.value)
-      }
+      onValueChange={(details: { value: string[] }) => setValue(details.value)}
     >
       <LoongArkTagsInputLabel>Frameworks</LoongArkTagsInputLabel>
       <LoongArkTagsInputControl size={size} state={state} disabled={disabled}>
@@ -66,7 +67,7 @@ const TagsInputDemo = ({
             <LoongArkTagsInputItemPreview>
               <LoongArkTagsInputItemText>{tag}</LoongArkTagsInputItemText>
               <LoongArkTagsInputItemDeleteTrigger>
-                ×
+                <LoongArkIcon icon={controlIcons.close} size="sm" />
               </LoongArkTagsInputItemDeleteTrigger>
             </LoongArkTagsInputItemPreview>
           </LoongArkTagsInputItem>

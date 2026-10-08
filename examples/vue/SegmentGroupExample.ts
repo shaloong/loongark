@@ -1,7 +1,18 @@
-import { defineComponent, h, ref, type PropType } from "vue";
+import type { SegmentGroupItemHiddenInputProps } from "@ark-ui/vue/segment-group";
 import {
+  defineComponent,
+  h,
+  createVNode,
+  resolveDynamicComponent,
+  ref,
+  type PropType,
+} from "vue";
+import {
+  LoongArkButton,
   LoongArkSegmentGroupRoot,
   LoongArkSegmentGroupItem,
+  LoongArkSegmentGroupItemHiddenInput,
+  LoongArkSegmentGroupItemText,
 } from "@loongark/vue";
 import type {
   SegmentGroupOrientation,
@@ -31,22 +42,24 @@ export const SegmentGroupExample = defineComponent({
     },
   },
   setup(props) {
-    const value = ref<string[]>(["overview"]);
+    const value = ref<string | null>("overview");
 
     return () =>
       h(
-        "div",
+        "form",
         { style: "display: flex; flex-direction: column; gap: 12px;" },
         [
           h(
             LoongArkSegmentGroupRoot,
             {
               size: props.size,
+              "aria-label": "View",
+              name: "view",
               orientation: props.orientation,
               disabled: props.disabled,
               value: value.value,
-              onValueChange: (details: { value: string[] }) => {
-                value.value = details.value;
+              "onUpdate:value": (next: string | null) => {
+                value.value = next;
               },
             },
             {
@@ -55,17 +68,40 @@ export const SegmentGroupExample = defineComponent({
                   h(
                     LoongArkSegmentGroupItem,
                     { value: option.value, key: option.value },
-                    { default: () => option.label }
-                  )
+                    {
+                      default: () => [
+                        createVNode(
+                          resolveDynamicComponent(
+                            LoongArkSegmentGroupItemHiddenInput,
+                          ),
+                        ),
+                        h(LoongArkSegmentGroupItemText, {}, () => option.label),
+                      ],
+                    },
+                  ),
                 ),
-            }
+            },
           ),
           h(
             "span",
-            { style: "font-size: 14px; color: #666;" },
-            `Selected: ${value.value[0] || "None"}`
+            {
+              style:
+                "font-size: 14px; color: var(--lk-color-semantic-mutedforeground);",
+            },
+            `Selected: ${value.value || "None"}`,
           ),
-        ]
+          h(
+            LoongArkButton,
+            {
+              type: "button",
+              variant: "outline",
+              onClick: () => {
+                value.value = "overview";
+              },
+            },
+            () => "Reset view",
+          ),
+        ],
       );
   },
 });

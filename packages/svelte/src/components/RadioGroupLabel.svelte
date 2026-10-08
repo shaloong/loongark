@@ -2,6 +2,6 @@
   import { RadioGroup } from "@ark-ui/svelte/radio-group";
 </script>
 
-<RadioGroup.Label>
+<RadioGroup.Label {...$$restProps}>
   <slot />
 </RadioGroup.Label>

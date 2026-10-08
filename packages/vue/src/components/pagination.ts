@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Pagination component - Vue wrapper.
  * Uses Ark UI Pagination with data attributes for styling.
@@ -40,6 +41,7 @@ export const LoongArkPaginationRoot = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     id: {
       type: String as PropType<string>,
@@ -50,7 +52,7 @@ export const LoongArkPaginationRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPagination.Root,
         {
           ...attrs,
@@ -60,7 +62,7 @@ export const LoongArkPaginationRoot = defineComponent({
           "data-size": props.size,
           "data-orientation": props.orientation,
         },
-        slots
+        slots,
       );
   },
 });
@@ -69,14 +71,14 @@ export const LoongArkPaginationList = defineComponent({
   name: "LoongArkPaginationList",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         "div",
         {
           ...attrs,
           "data-scope": "pagination",
           "data-part": "list",
         },
-        slots
+        slots,
       );
   },
 });
@@ -95,11 +97,12 @@ export const LoongArkPaginationItem = defineComponent({
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPagination.Item,
         {
           ...attrs,
@@ -107,7 +110,7 @@ export const LoongArkPaginationItem = defineComponent({
           "data-scope": "pagination",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -116,14 +119,14 @@ export const LoongArkPaginationPrevTrigger = defineComponent({
   name: "LoongArkPaginationPrevTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPagination.PrevTrigger,
         {
           ...attrs,
           "data-scope": "pagination",
           "data-part": "prev-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -132,14 +135,14 @@ export const LoongArkPaginationNextTrigger = defineComponent({
   name: "LoongArkPaginationNextTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPagination.NextTrigger,
         {
           ...attrs,
           "data-scope": "pagination",
           "data-part": "next-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -153,7 +156,7 @@ export const LoongArkPaginationEllipsis = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkPagination.Ellipsis,
         {
           ...attrs,
@@ -161,7 +164,7 @@ export const LoongArkPaginationEllipsis = defineComponent({
           "data-scope": "pagination",
           "data-part": "ellipsis",
         },
-        slots
+        slots,
       );
   },
 });

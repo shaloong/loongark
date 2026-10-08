@@ -2,6 +2,6 @@
   import { Tooltip } from "@ark-ui/svelte/tooltip";
 </script>
 
-<Tooltip.Trigger asChild data-scope="tooltip" data-part="trigger">
+<Tooltip.Trigger data-scope="tooltip" data-part="trigger" {...$$restProps}>
   <slot />
 </Tooltip.Trigger>

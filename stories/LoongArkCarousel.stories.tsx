@@ -18,7 +18,8 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: "LoongArkCarousel composes Ark UI carousel parts with size styling.",
+        component:
+          "LoongArkCarousel composes Ark UI carousel parts with size styling.",
       },
     },
   },
@@ -45,8 +46,9 @@ const CarouselDemo = ({
 }: CarouselDemoProps) => {
   return (
     <LoongArkCarouselRoot
+      slideCount={slides.length}
       size={size}
-      dragDisabled={dragDisabled}
+      allowMouseDrag={!dragDisabled}
       style={{ maxWidth: 420 }}
     >
       <LoongArkCarouselItemGroup>
@@ -71,7 +73,9 @@ const CarouselDemo = ({
         <LoongArkCarouselNextTrigger>Next</LoongArkCarouselNextTrigger>
         {showAutoplay && (
           <>
-            <LoongArkCarouselAutoplayTrigger>Auto</LoongArkCarouselAutoplayTrigger>
+            <LoongArkCarouselAutoplayTrigger>
+              Auto
+            </LoongArkCarouselAutoplayTrigger>
             <LoongArkCarouselAutoplayIndicator />
           </>
         )}

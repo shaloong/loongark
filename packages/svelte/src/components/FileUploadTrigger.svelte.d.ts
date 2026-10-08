@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { FileUploadTriggerProps } from "@ark-ui/svelte/file-upload";
-export default class FileUploadTrigger extends SvelteComponent<FileUploadTriggerProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { FileUpload } from "@ark-ui/svelte/file-upload";
+
+export default class LoongArkFileUploadTrigger extends SvelteComponent<
+  Omit<ComponentProps<typeof FileUpload.Trigger>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

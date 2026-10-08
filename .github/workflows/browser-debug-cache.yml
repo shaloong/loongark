@@ -1,0 +1,100 @@
+name: Browser debug cache
+on:
+  push:
+    branches: [develop]
+    paths: [.github/workflows/browser-debug-cache.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browsers:
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [firefox, webkit]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
+      - name: 为 WebKit 诊断包补齐实际 ABI 版本依赖
+        if: matrix.browser == 'webkit'
+        run: |
+          runtime=$(find "$HOME/.cache/ms-playwright" -maxdepth 1 -type d -name 'webkit-*' -print -quit)
+          test -n "$runtime"
+          for lib in libicudata.so.74 libicui18n.so.74 libicuuc.so.74 libwoff2dec.so.1.0.2 libwoff2common.so.1.0.2 libharfbuzz-icu.so.0 libjpeg.so.8; do
+            source=$(ldconfig -p | awk -v lib="$lib" '$1 == lib { print $NF; exit }')
+            test -n "$source"
+            cp -L "$source" "$runtime/minibrowser-wpe/sys/lib/$lib"
+          done
+      - name: 打包同版本浏览器用于本地重现
+        run: |
+          mkdir -p .artifacts/browser-debug
+          tar -C "$HOME/.cache/ms-playwright" -czf .artifacts/browser-debug/${{ matrix.browser }}.tar.gz  .
+          split -b 16M -d .artifacts/browser-debug/${{ matrix.browser }}.tar.gz .artifacts/browser-debug/${{ matrix.browser }}-part-
+          rm .artifacts/browser-debug/${{ matrix.browser }}.tar.gz
+          test "$(ls .artifacts/browser-debug/${{ matrix.browser }}-part-* | wc -l)" -le 8
+          cd .artifacts/browser-debug
+          sha256sum ${{ matrix.browser }}-part-* > checksums.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ matrix.browser }}-part-0
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-00
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ matrix.browser }}-part-1
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-01
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ matrix.browser }}-part-2
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-02
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ matrix.browser }}-part-3
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-03
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ matrix.browser }}-part-4
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-04
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ matrix.browser }}-part-5
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-05
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ matrix.browser }}-part-6
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-06
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ matrix.browser }}-part-7
+          path: .artifacts/browser-debug/${{ matrix.browser }}-part-07
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ matrix.browser }}-debug-checksums
+          path: .artifacts/browser-debug/checksums.txt
+          retention-days: 14

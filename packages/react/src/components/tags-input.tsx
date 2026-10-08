@@ -2,8 +2,15 @@
  * Tags Input component - React wrapper.
  * Uses Ark UI Tags Input with data attributes for styling.
  */
+import { useFieldContext } from "@ark-ui/react/field";
+import {
+  nativeSelectionProps,
+  nativeSelectionFieldDescription,
+} from "@loongark/kit";
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import { useNativeSelection } from "../native-selection";
+import { useTagsInputContext } from "@ark-ui/react/tags-input";
 import { TagsInput } from "@ark-ui/react/tags-input";
 import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
 
@@ -33,86 +40,99 @@ type ArkTagsInputHiddenInputProps = ComponentPropsWithoutRef<
   typeof TagsInput.HiddenInput
 >;
 
-export interface LoongArkTagsInputRootProps
-  extends Omit<ArkTagsInputRootProps, "asChild"> {
+export interface LoongArkTagsInputRootProps extends Omit<
+  ArkTagsInputRootProps,
+  "asChild"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputLabelProps
-  extends Omit<ArkTagsInputLabelProps, "asChild"> {
+export interface LoongArkTagsInputLabelProps extends Omit<
+  ArkTagsInputLabelProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputControlProps
-  extends Omit<ArkTagsInputControlProps, "asChild"> {
+export interface LoongArkTagsInputControlProps extends Omit<
+  ArkTagsInputControlProps,
+  "asChild"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   disabled?: boolean;
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputInputProps
-  extends Omit<ArkTagsInputInputProps, "asChild"> {
+export interface LoongArkTagsInputInputProps extends Omit<
+  ArkTagsInputInputProps,
+  "asChild" | "size"
+> {
   size?: TagsInputSize;
   state?: TagsInputState;
   disabled?: boolean;
   readOnly?: boolean;
 }
 
-export interface LoongArkTagsInputItemProps
-  extends Omit<ArkTagsInputItemProps, "asChild"> {
+export interface LoongArkTagsInputItemProps extends Omit<
+  ArkTagsInputItemProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputItemPreviewProps
-  extends Omit<ArkTagsInputItemPreviewProps, "asChild"> {
+export interface LoongArkTagsInputItemPreviewProps extends Omit<
+  ArkTagsInputItemPreviewProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputItemTextProps
-  extends Omit<ArkTagsInputItemTextProps, "asChild"> {
+export interface LoongArkTagsInputItemTextProps extends Omit<
+  ArkTagsInputItemTextProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputItemInputProps
-  extends Omit<ArkTagsInputItemInputProps, "asChild"> {}
+export interface LoongArkTagsInputItemInputProps extends Omit<
+  ArkTagsInputItemInputProps,
+  "asChild" | "size"
+> {}
 
-export interface LoongArkTagsInputItemDeleteTriggerProps
-  extends Omit<ArkTagsInputItemDeleteTriggerProps, "asChild"> {
+export interface LoongArkTagsInputItemDeleteTriggerProps extends Omit<
+  ArkTagsInputItemDeleteTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputClearTriggerProps
-  extends Omit<ArkTagsInputClearTriggerProps, "asChild"> {
+export interface LoongArkTagsInputClearTriggerProps extends Omit<
+  ArkTagsInputClearTriggerProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkTagsInputHiddenInputProps
-  extends Omit<ArkTagsInputHiddenInputProps, "asChild"> {}
+export interface LoongArkTagsInputHiddenInputProps extends Omit<
+  ArkTagsInputHiddenInputProps,
+  "asChild" | "size"
+> {}
 
 export const LoongArkTagsInputRoot = forwardRef<
   HTMLDivElement,
   LoongArkTagsInputRootProps
 >(
   (
-    {
-      children,
-      size = "md",
-      state = "default",
-      disabled = false,
-      readOnly = false,
-      ...props
-    },
-    ref
+    { children, size = "md", state = "default", disabled, readOnly, ...props },
+    ref,
   ) => {
     return (
       <TagsInput.Root
-        {...props}
+        {...nativeSelectionProps({ ...props, disabled, readOnly })}
         ref={ref}
-        disabled={disabled}
-        readOnly={readOnly}
         data-scope="tags-input"
         data-part="root"
         data-size={size}
@@ -123,7 +143,7 @@ export const LoongArkTagsInputRoot = forwardRef<
         {children}
       </TagsInput.Root>
     );
-  }
+  },
 );
 
 LoongArkTagsInputRoot.displayName = "LoongArkTagsInputRoot";
@@ -149,59 +169,52 @@ LoongArkTagsInputLabel.displayName = "LoongArkTagsInputLabel";
 export const LoongArkTagsInputControl = forwardRef<
   HTMLDivElement,
   LoongArkTagsInputControlProps
->(
-  (
-    { children, size = "md", state = "default", disabled = false, ...props },
-    ref
-  ) => {
-    return (
-      <TagsInput.Control
-        {...props}
-        ref={ref}
-        data-scope="tags-input"
-        data-part="control"
-        data-size={size}
-        data-state={state !== "default" ? state : undefined}
-        data-disabled={disabled ? "true" : undefined}
-      >
-        {children}
-      </TagsInput.Control>
-    );
-  }
-);
+>(({ children, size = "md", state = "default", disabled, ...props }, ref) => {
+  return (
+    <TagsInput.Control
+      {...props}
+      ref={ref}
+      data-scope="tags-input"
+      data-part="control"
+      data-size={size}
+      data-state={state !== "default" ? state : undefined}
+      data-disabled={disabled ? "true" : undefined}
+    >
+      {children}
+    </TagsInput.Control>
+  );
+});
 
 LoongArkTagsInputControl.displayName = "LoongArkTagsInputControl";
 
 export const LoongArkTagsInputInput = forwardRef<
   HTMLInputElement,
   LoongArkTagsInputInputProps
->(
-  (
-    {
-      size = "md",
-      state = "default",
-      disabled = false,
-      readOnly = false,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <TagsInput.Input
-        {...props}
-        ref={ref}
-        disabled={disabled}
-        readOnly={readOnly}
-        data-scope="tags-input"
-        data-part="input"
-        data-size={size}
-        data-state={state !== "default" ? state : undefined}
-        data-disabled={disabled ? "true" : undefined}
-        data-readonly={readOnly ? "true" : undefined}
-      />
-    );
-  }
-);
+>(({ size = "md", state = "default", disabled, readOnly, ...props }, ref) => {
+  const api = useTagsInputContext();
+  const field = useFieldContext();
+  const isDisabled = disabled ?? !!api.getHiddenInputProps().disabled;
+  const isReadOnly = readOnly ?? !!api.getHiddenInputProps().readOnly;
+  return (
+    <TagsInput.Input
+      {...props}
+      ref={ref}
+      disabled={isDisabled}
+      readOnly={isReadOnly}
+      aria-describedby={nativeSelectionFieldDescription(
+        props["aria-describedby"],
+        field,
+        api.getInputProps()["aria-invalid"],
+      )}
+      data-scope="tags-input"
+      data-part="input"
+      data-size={size}
+      data-state={state !== "default" ? state : undefined}
+      data-disabled={isDisabled ? "true" : undefined}
+      data-readonly={isReadOnly ? "true" : undefined}
+    />
+  );
+});
 
 LoongArkTagsInputInput.displayName = "LoongArkTagsInputInput";
 
@@ -316,10 +329,11 @@ export const LoongArkTagsInputHiddenInput = forwardRef<
   HTMLInputElement,
   LoongArkTagsInputHiddenInputProps
 >((props, ref) => {
+  const input = useNativeSelection(useTagsInputContext(), "tags", ref);
   return (
     <TagsInput.HiddenInput
       {...props}
-      ref={ref}
+      ref={input}
       data-scope="tags-input"
       data-part="hidden-input"
     />

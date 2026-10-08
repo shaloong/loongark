@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type NumberInputSize = "sm" | "md" | "lg";
@@ -46,22 +45,24 @@ interface NumberInputDesignTokens {
   };
 }
 
-const extractNumberInputTokens = (theme: LoongArkTheme): NumberInputDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+const extractNumberInputTokens = (
+  theme: LoongArkTheme,
+): NumberInputDesignTokens => {
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -125,18 +126,11 @@ const buildNumberInputStyles = (theme: LoongArkTheme): string => {
   const decrementSelector = `${scopeSelector}[data-part="decrement-trigger"]`;
   const scrubberSelector = `${scopeSelector}[data-part="scrubber"]`;
   const valueTextSelector = `${scopeSelector}[data-part="value-text"]`;
-  const invalidSelector = `${controlSelector}[data-state='invalid']`;
+  const invalidSelector = `${controlSelector}:is([data-state='invalid'], [data-invalid=''], [data-invalid='true'])`;
   const successSelector = `${controlSelector}[data-state='success']`;
-  const disabledSelector = `${controlSelector}[data-disabled='true']`;
+  const disabledSelector = `${controlSelector}:is([data-disabled='true'], [data-disabled=''], :has(${inputSelector}:disabled))`;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${rootSelector} {
   display: inline-flex;
@@ -192,12 +186,12 @@ ${inputSelector} {
   font-size: inherit;
   font-weight: inherit;
   line-height: ${tokens.lineHeight};
-  padding: ${tokens.paddingY.md} ${tokens.paddingX.md};
+  padding: 0 var(--lk-space-component-compact);
   outline: none;
 }
 
 ${inputSelector}::placeholder {
-  color: ${tokens.neutral.placeholder};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
 ${inputSelector}[type='number'] {
@@ -256,12 +250,12 @@ ${scrubberSelector} {
 }
 
 ${controlSelector}[data-size='sm'] {
-  font-size: ${tokens.fontSize.sm};
-  border-radius: ${tokens.radius.sm};
+  font-size: ${tokens.fontSize.md};
+  border-radius: var(--lk-radius-md);
 }
 
 ${controlSelector}[data-size='sm'] ${inputSelector} {
-  padding: ${tokens.paddingY.sm} ${tokens.paddingX.sm};
+  padding: 0 var(--lk-space-component-compact);
 }
 
 ${controlSelector}[data-size='sm'] ${incrementSelector},
@@ -270,12 +264,12 @@ ${controlSelector}[data-size='sm'] ${decrementSelector} {
 }
 
 ${controlSelector}[data-size='lg'] {
-  font-size: ${tokens.fontSize.lg};
-  border-radius: ${tokens.radius.lg};
+  font-size: ${tokens.fontSize.md};
+  border-radius: var(--lk-radius-md);
 }
 
 ${controlSelector}[data-size='lg'] ${inputSelector} {
-  padding: ${tokens.paddingY.lg} ${tokens.paddingX.lg};
+  padding: 0 var(--lk-space-component-compact);
 }
 
 ${controlSelector}[data-size='lg'] ${incrementSelector},
@@ -296,7 +290,6 @@ ${successSelector} {
 ${disabledSelector} {
   background: ${tokens.disabled.bg};
   color: ${tokens.disabled.text};
-  border-color: ${tokens.disabled.bg};
   cursor: not-allowed;
   opacity: 0.85;
 }
@@ -349,8 +342,8 @@ const numberInputPrimitive = createPrimitive<NumberInputPrimitiveProps>(
   NUMBER_INPUT_CONTRACT,
   (theme) => {
     const css = buildNumberInputStyles(theme);
-    mountPrimitiveStyles(`number-input-${theme.mode}`, css);
-  }
+    theme.mountStyles(`number-input-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(numberInputPrimitive);

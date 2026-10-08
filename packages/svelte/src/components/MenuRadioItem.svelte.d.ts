@@ -1,3 +1,11 @@
-import type { SvelteComponent } from "svelte";
+import { SvelteComponent, type ComponentProps } from "svelte";
 import type { MenuRadioItemProps } from "@ark-ui/svelte/menu";
-export default class MenuRadioItem extends SvelteComponent<MenuRadioItemProps> {}
+import { Menu } from "@ark-ui/svelte/menu";
+
+export default class LoongArkMenuRadioItem extends SvelteComponent<
+  Omit<ComponentProps<typeof Menu.RadioItem>, "children" | "value"> & {
+    value: MenuRadioItemProps["value"];
+  },
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

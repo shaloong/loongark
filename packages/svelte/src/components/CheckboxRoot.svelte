@@ -1,6 +1,6 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
   import type { CheckboxSize } from "@loongark/primitives";
-  import type { CheckedState } from "@ark-ui/svelte/checkbox";
+  type CheckedState = boolean | "indeterminate";
 
   export interface CheckboxRootProps {
     size?: CheckboxSize;
@@ -25,38 +25,61 @@
 </script>
 
 <script lang="ts">
-  import { CheckboxRoot } from "@ark-ui/svelte/checkbox";
-  import { getDataAttrs } from "./utils";
-
-  type $$Props = CheckboxRootProps;
-
-  export let size: CheckboxSize = "md";
-  export let checked: CheckedState | undefined = undefined;
-  export let defaultChecked: CheckedState | undefined = undefined;
-  export let disabled: boolean = false;
-  export let invalid: boolean = false;
-  export let readOnly: boolean = false;
-  export let required: boolean = false;
-  export let name: string | undefined = undefined;
-  export let value: string | undefined = undefined;
-  export let onCheckedChange:
-    | ((details: { checked: CheckedState }) => void)
-    | undefined = undefined;
-
-  $: dataAttrs = getDataAttrs("checkbox", "root", { size });
+  import { nativeSelectionProps } from "@loongark/kit";
+  import {
+    Checkbox,
+    useCheckbox,
+    type CheckboxRootProps as NativeRootProps,
+  } from "@ark-ui/svelte/checkbox";
+  let {
+    children,
+    ref = $bindable(null),
+    checked = $bindable(),
+    size = "md",
+    defaultChecked,
+    disabled,
+    invalid,
+    readOnly,
+    required,
+    name,
+    value,
+    form,
+    id,
+    ids,
+    onCheckedChange,
+    ...dom
+  }: NativeRootProps & { size?: CheckboxSize } = $props();
+  const providedId = $props.id();
+  const api = useCheckbox(() => ({
+    ...nativeSelectionProps({
+      ids,
+      checked,
+      defaultChecked,
+      disabled,
+      invalid,
+      readOnly,
+      required,
+      name,
+      value,
+      form,
+      onCheckedChange(
+        details: Parameters<NonNullable<NativeRootProps["onCheckedChange"]>>[0],
+      ) {
+        if (!onCheckedChange) checked = details.checked;
+        onCheckedChange?.(details);
+      },
+    }),
+    id: id ?? providedId,
+  }));
 </script>
 
-<CheckboxRoot
-  {checked}
-  {defaultChecked}
-  {disabled}
-  {invalid}
-  {readOnly}
-  {required}
-  {name}
-  {value}
-  {onCheckedChange}
-  {...dataAttrs}
+<Checkbox.RootProvider
+  value={api}
+  bind:ref
+  {...dom}
+  data-scope="checkbox"
+  data-part="root"
+  data-size={size}
 >
-  <slot />
-</CheckboxRoot>
+  {@render children?.()}
+</Checkbox.RootProvider>

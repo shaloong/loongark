@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Field } from "@ark-ui/svelte/field";
 
-export default class InputLabel extends SvelteComponent<{}> {}
+export default class LoongArkInputLabel extends SvelteComponent<
+  Omit<ComponentProps<typeof Field.Label>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

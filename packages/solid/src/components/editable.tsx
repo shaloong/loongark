@@ -17,8 +17,10 @@ import {
 } from "@ark-ui/solid/editable";
 import type { EditableSize, EditableState } from "@loongark/primitives";
 
-export interface LoongArkEditableRootProps
-  extends Omit<ArkEditableRootProps, "asChild"> {
+export interface LoongArkEditableRootProps extends Omit<
+  ArkEditableRootProps,
+  "asChild"
+> {
   size?: EditableSize;
   state?: EditableState;
   disabled?: boolean;
@@ -26,7 +28,7 @@ export interface LoongArkEditableRootProps
 }
 
 export const LoongArkEditableRoot: Component<LoongArkEditableRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps(
     {
@@ -34,7 +36,7 @@ export const LoongArkEditableRoot: Component<LoongArkEditableRootProps> = (
       state: "default" as EditableState,
       disabled: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -45,7 +47,7 @@ export const LoongArkEditableRoot: Component<LoongArkEditableRootProps> = (
 
   return (
     <ArkEditable.Root
-      {...(others as any)}
+      {...others}
       disabled={local.disabled}
       data-scope="editable"
       data-part="root"
@@ -58,48 +60,46 @@ export const LoongArkEditableRoot: Component<LoongArkEditableRootProps> = (
   );
 };
 
-export interface LoongArkEditableLabelProps
-  extends Omit<ArkEditableLabelProps, "asChild"> {
+export interface LoongArkEditableLabelProps extends Omit<
+  ArkEditableLabelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkEditableLabel: Component<LoongArkEditableLabelProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkEditable.Label
-      {...others}
-      data-scope="editable"
-      data-part="label"
-    >
+    <ArkEditable.Label {...others} data-scope="editable" data-part="label">
       {local.children}
     </ArkEditable.Label>
   );
 };
 
-export interface LoongArkEditableAreaProps
-  extends Omit<ArkEditableAreaProps, "asChild"> {
+export interface LoongArkEditableAreaProps extends Omit<
+  ArkEditableAreaProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkEditableArea: Component<LoongArkEditableAreaProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkEditable.Area
-      {...others}
-      data-scope="editable"
-      data-part="area"
-    >
+    <ArkEditable.Area {...others} data-scope="editable" data-part="area">
       {local.children}
     </ArkEditable.Area>
   );
 };
 
-export interface LoongArkEditableControlProps
-  extends Omit<ArkEditableControlProps, "asChild"> {
+export interface LoongArkEditableControlProps extends Omit<
+  ArkEditableControlProps,
+  "asChild"
+> {
   state?: EditableState;
   children?: JSX.Element;
 }
@@ -121,13 +121,15 @@ export const LoongArkEditableControl: Component<
   );
 };
 
-export interface LoongArkEditableInputProps
-  extends Omit<ArkEditableInputProps, "asChild"> {
+export interface LoongArkEditableInputProps extends Omit<
+  ArkEditableInputProps,
+  "asChild"
+> {
   state?: EditableState;
 }
 
 export const LoongArkEditableInput: Component<LoongArkEditableInputProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps({ state: "default" as EditableState }, props);
   const [local, others] = splitProps(merged, ["state"]);
@@ -141,28 +143,28 @@ export const LoongArkEditableInput: Component<LoongArkEditableInputProps> = (
   );
 };
 
-export interface LoongArkEditablePreviewProps
-  extends Omit<ArkEditablePreviewProps, "asChild"> {
+export interface LoongArkEditablePreviewProps extends Omit<
+  ArkEditablePreviewProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
-export const LoongArkEditablePreview: Component<LoongArkEditablePreviewProps> = (
-  props
-) => {
+export const LoongArkEditablePreview: Component<
+  LoongArkEditablePreviewProps
+> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkEditable.Preview
-      {...others}
-      data-scope="editable"
-      data-part="preview"
-    >
+    <ArkEditable.Preview {...others} data-scope="editable" data-part="preview">
       {local.children}
     </ArkEditable.Preview>
   );
 };
 
-export interface LoongArkEditableEditTriggerProps
-  extends Omit<ArkEditableEditTriggerProps, "asChild"> {
+export interface LoongArkEditableEditTriggerProps extends Omit<
+  ArkEditableEditTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -181,8 +183,10 @@ export const LoongArkEditableEditTrigger: Component<
   );
 };
 
-export interface LoongArkEditableSubmitTriggerProps
-  extends Omit<ArkEditableSubmitTriggerProps, "asChild"> {
+export interface LoongArkEditableSubmitTriggerProps extends Omit<
+  ArkEditableSubmitTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -201,8 +205,10 @@ export const LoongArkEditableSubmitTrigger: Component<
   );
 };
 
-export interface LoongArkEditableCancelTriggerProps
-  extends Omit<ArkEditableCancelTriggerProps, "asChild"> {
+export interface LoongArkEditableCancelTriggerProps extends Omit<
+  ArkEditableCancelTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 

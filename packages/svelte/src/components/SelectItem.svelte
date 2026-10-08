@@ -1,10 +1,9 @@
 <script lang="ts">
   import { Select } from "@ark-ui/svelte/select";
 
-  export let item: any = undefined;
-  export let persistFocus: boolean | undefined = undefined;
+  export let item: object;
 </script>
 
-<Select.Item {item} {persistFocus} data-scope="select" data-part="item">
+<Select.Item {item} data-scope="select" data-part="item" {...$$restProps}>
   <slot />
 </Select.Item>

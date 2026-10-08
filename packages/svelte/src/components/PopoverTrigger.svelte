@@ -7,9 +7,10 @@
 </script>
 
 <Popover.Trigger
-  {...{ asChild: asChild ?? true, id, disabled }}
+  {...{ asChild, id, disabled }}
   data-scope="popover"
   data-part="trigger"
+  {...$$restProps}
 >
   <slot />
 </Popover.Trigger>

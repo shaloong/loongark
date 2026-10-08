@@ -1,7 +1,11 @@
-import { Field } from "@ark-ui/solid/field";
+import { dataProps } from "../data-props";
+import type { JSX } from "solid-js";
+import { Field, useFieldContext } from "@ark-ui/solid/field";
+import { inputSuffixDisabled } from "@loongark/kit";
 import { ark } from "@ark-ui/solid";
 import type { InputPrimitiveProps } from "@loongark/primitives";
-import { mergeProps } from "solid-js";
+import { mergeProps, splitProps, createComponent } from "solid-js";
+import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 import { boolAttr, normalizeState } from "../utils";
 
@@ -12,8 +16,7 @@ type BaseInput = Partial<InputPrimitiveProps> & {
   disabled?: boolean;
   readOnly?: boolean;
   multiline?: boolean;
-  children?: unknown;
-  [key: string]: unknown;
+  children?: JSX.Element;
 };
 
 const inputDefaults: Required<
@@ -26,89 +29,160 @@ const inputDefaults: Required<
   multiline: false,
 };
 
-const buildControlProps = (
+const buildControlProps = <P extends BaseInput>(
   part: "root" | "control",
-  props: BaseInput
+  props: P,
 ) => {
-  const merged = mergeProps(inputDefaults, props);
-  const { size, state, disabled, readOnly, multiline, children, ...rest } =
-    merged;
-
-  return {
-    ...rest,
-    disabled,
-    readonly: readOnly,
-    children,
+  const defaults: Required<Pick<BaseInput, "size" | "state" | "multiline">> &
+    Pick<BaseInput, "disabled" | "readOnly"> =
+    part === "root"
+      ? inputDefaults
+      : { size: "md", state: "default", multiline: false };
+  const merged = mergeProps(defaults, props);
+  const [local, rest] = splitProps(merged, [
+    "size",
+    "state",
+    "disabled",
+    "readOnly",
+    "multiline",
+  ]);
+  return mergeProps(rest, {
+    get disabled() {
+      return local.disabled;
+    },
+    get invalid() {
+      return local.state === "invalid";
+    },
+    get readOnly() {
+      return local.readOnly;
+    },
     "data-scope": "input",
     "data-part": part,
-    "data-size": size,
-    "data-state": normalizeState(state),
-    "data-multiline": boolAttr(multiline),
-  };
+    get "data-size"() {
+      return local.size;
+    },
+    get "data-state"() {
+      return normalizeState(local.state);
+    },
+    get "data-multiline"() {
+      return boolAttr(local.multiline);
+    },
+  });
 };
 
-export const LoongArkInputRoot: Component<BaseInput> = (props) =>
-  Field.Root({
-    ...buildControlProps("root", props),
-    "data-disabled": boolAttr(props.disabled),
-  });
+export const LoongArkInputRoot: Component<
+  BaseInput & import("@ark-ui/solid/field").FieldRootProps
+> = (props) =>
+  Field.Root(
+    mergeProps(buildControlProps("root", props), {
+      get "data-disabled"() {
+        return boolAttr(props.disabled);
+      },
+    }),
+  );
 
-export const LoongArkInputControl: Component<BaseInput> = (props) =>
-  Field.Input(buildControlProps("control", props));
+export const LoongArkInputControl: Component<
+  BaseInput & Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "size">
+> = (props) => Field.Input(buildControlProps("control", props));
 
-export const LoongArkTextareaControl: Component<BaseInput> = (props) =>
-  Field.Textarea(buildControlProps("control", { ...props, multiline: true }));
+export const LoongArkInputInput = LoongArkInputControl;
 
-interface HelperProps {
+export const LoongArkInputGroup: Component<
+  BaseInput & JSX.HTMLAttributes<HTMLDivElement>
+> = (props) =>
+  ark.div(mergeProps(props, { "data-scope": "input", "data-part": "group" }));
+
+export const LoongArkTextareaControl: Component<
+  BaseInput & JSX.TextareaHTMLAttributes<HTMLTextAreaElement>
+> = (props) =>
+  Field.Textarea(
+    buildControlProps("control", mergeProps(props, { multiline: true })),
+  );
+
+interface HelperProps extends Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
   variant?: "default" | "error" | "success";
-  children?: unknown;
-  [key: string]: unknown;
+  children?: JSX.Element;
 }
 
 export const LoongArkInputHelperText: Component<HelperProps> = (props) => {
   const { variant = "default", children, ...rest } = props;
-  return Field.HelperText({
-    ...rest,
-    children,
-    "data-scope": "input",
-    "data-part": "helper-text",
-    "data-variant": variant === "default" ? undefined : variant,
-  });
+  return (props.variant === "error" ? Field.ErrorText : Field.HelperText)(
+    dataProps({
+      ...rest,
+      children,
+      "data-scope": "input",
+      "data-part": "helper-text",
+      "data-variant": variant === "default" ? undefined : variant,
+    }),
+  );
 };
 
-export const LoongArkInputLabel: Component<{ children?: unknown }> = (props) =>
-  Field.Label({
-    ...props,
-    "data-scope": "input",
-    "data-part": "label",
-  });
+export const LoongArkInputErrorText: Component<Omit<HelperProps, "variant">> = (
+  props,
+) =>
+  Field.ErrorText(
+    mergeProps(props, {
+      "data-scope": "input",
+      "data-part": "helper-text",
+      "data-variant": "error",
+    }),
+  );
 
-interface InputAddonProps {
-  children?: unknown;
-  [key: string]: unknown;
+export const LoongArkInputLabel: Component<
+  Omit<JSX.HTMLAttributes<HTMLElement>, "ref">
+> = (props) =>
+  Field.Label(
+    mergeProps(props, {
+      "data-scope": "input",
+      "data-part": "label",
+    }),
+  );
+
+interface InputAddonProps extends Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
+  children?: JSX.Element;
 }
 
 interface InputSuffixProps extends InputAddonProps {
+  disabled?: boolean;
   action?: "clear" | "button" | "none" | "text";
 }
 
 export const LoongArkInputPrefix: Component<InputAddonProps> = (props) =>
-  ark.span({
-    ...props,
-    "data-scope": "input",
-    "data-part": "prefix",
-  });
+  ark.span(
+    dataProps({
+      ...props,
+      "data-scope": "input",
+      "data-part": "prefix",
+    }),
+  );
 
 export const LoongArkInputSuffix: Component<InputSuffixProps> = (props) => {
-  const { action = "none", ...rest } = props;
-  const isAction = action === "clear" || action === "button";
-  const Element = isAction ? ark.button : ark.span;
-
-  return Element({
-    ...rest,
-    type: isAction ? "button" : undefined,
+  const field = useFieldContext();
+  const [local, rest] = splitProps(props, ["action", "disabled"]);
+  const isAction = () =>
+    (local.action === "clear" || local.action === "button") &&
+    typeof props.onClick === "function";
+  const attributes = mergeProps(rest, {
+    get type() {
+      return isAction() ? ("button" as const) : undefined;
+    },
+    get disabled() {
+      return isAction()
+        ? inputSuffixDisabled(local.action, local.disabled, field?.())
+        : undefined;
+    },
     "data-scope": "input",
     "data-part": "suffix",
-    "data-action": isAction ? "clear" : undefined,
+    get "data-action"() {
+      return isAction() ? local.action : undefined;
+    },
   });
+  return createComponent(
+    Dynamic,
+    mergeProps(attributes, {
+      get component() {
+        return isAction() ? ark.button : ark.span;
+      },
+    }),
+  );
 };

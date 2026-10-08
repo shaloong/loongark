@@ -1,0 +1,76 @@
+name: Release readiness
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '可选：检查9个包与目标版本一致；不执行发布'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-readiness-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --audit-level=low
+      - run: pnpm verify
+      - run: pnpm check:contracts
+      - run: pnpm check:storybook
+      - run: pnpm storybook:build
+      - run: pnpm check:coverage
+      - run: pnpm check:publication
+      - run: pnpm check:svelte
+      - run: node scripts/build-framework-fixtures.mjs
+      - run: node scripts/build-example-fixtures.mjs
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm measure:bundles
+      - run: pnpm measure:ssr
+      - run: pnpm check:release
+      - name: Check requested version
+        if: inputs.version != ''
+        env:
+          EXPECTED_RELEASE_VERSION: ${{ inputs.version }}
+        run: node --input-type=module -e 'import fs from "node:fs";const reports=JSON.parse(fs.readFileSync(".artifacts/releases/packages/report.json"));if(reports.some(r=>r.version!==process.env.EXPECTED_RELEASE_VERSION))throw Error("Requested version mismatch");'
+      - run: pnpm check:versions
+      - run: node scripts/check-reference.mjs
+      - run: node scripts/run-playwright.mjs reference-docs.spec.ts interaction-styles.spec.ts --project=chromium --workers=2
+      - run: node scripts/run-playwright.mjs performance-contracts.spec.ts interaction-styles.spec.ts reference-examples.spec.ts --project=chromium --workers=1
+        env:
+          STATIC_DIR: tests/consumer-dist
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: release-readiness-evidence
+          path: |
+            .artifacts/performance/
+            .artifacts/interaction-styles/
+            .artifacts/reference-docs/
+            .artifacts/reference-examples/
+            .artifacts/releases/packages/
+            .artifacts/releases/minimum/report.json
+            .artifacts/releases/minimum/dependencies.json
+          retention-days: 14
+          if-no-files-found: ignore

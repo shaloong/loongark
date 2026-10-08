@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createListCollection } from "@ark-ui/svelte";
+  import { createListCollection } from "@loongark/svelte";
   import {
     LoongArkComboboxRoot,
     LoongArkComboboxLabel,
@@ -36,7 +36,7 @@
     const query = inputValue.trim().toLowerCase();
     if (!query) return options;
     return options.filter((option) =>
-      option.label.toLowerCase().includes(query)
+      option.label.toLowerCase().includes(query),
     );
   })();
 
@@ -66,8 +66,8 @@
   <LoongArkComboboxLabel>{label}</LoongArkComboboxLabel>
   <LoongArkComboboxControl>
     <LoongArkComboboxInput {placeholder} />
-    <LoongArkComboboxClearTrigger aria-label="Clear">x</LoongArkComboboxClearTrigger>
-    <LoongArkComboboxTrigger aria-label="Toggle">v</LoongArkComboboxTrigger>
+    <LoongArkComboboxClearTrigger aria-label="Clear" />
+    <LoongArkComboboxTrigger aria-label="Toggle" />
   </LoongArkComboboxControl>
   <LoongArkComboboxPositioner>
     <LoongArkComboboxContent>
@@ -75,7 +75,7 @@
         {#each filteredOptions as option}
           <LoongArkComboboxItem item={option}>
             <LoongArkComboboxItemText>{option.label}</LoongArkComboboxItemText>
-            <LoongArkComboboxItemIndicator>Check</LoongArkComboboxItemIndicator>
+            <LoongArkComboboxItemIndicator />
           </LoongArkComboboxItem>
         {/each}
       </LoongArkComboboxList>
@@ -83,6 +83,8 @@
   </LoongArkComboboxPositioner>
 </LoongArkComboboxRoot>
 
-<p style="margin-top: 16px; font-size: 14px; color: #666;">
+<p
+  style="margin-top: 16px; font-size: 14px; color: var(--lk-color-semantic-mutedforeground);"
+>
   Selected: {value.length > 0 ? value.join(", ") : "None"}
 </p>

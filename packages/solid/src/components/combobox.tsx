@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 /**
  * Combobox component - Solid wrapper.
  * Uses Ark UI Combobox with data attributes for styling.
@@ -31,21 +33,21 @@ import type { ComboboxSize } from "@loongark/primitives";
 const ComboboxContext = createContext<{ size: ComboboxSize }>({ size: "md" });
 
 export interface LoongArkComboboxRootProps<
-  T extends Record<string, any> = Record<string, any>
+  T extends object = object,
 > extends Omit<ArkComboboxRootProps<T>, "asChild"> {
   size?: ComboboxSize;
   children?: JSX.Element;
 }
 
-export const LoongArkComboboxRoot: Component<LoongArkComboboxRootProps> = (
-  props
-) => {
+export const LoongArkComboboxRoot = <T extends object>(
+  props: LoongArkComboboxRootProps<T>,
+): JSX.Element => {
   const merged = mergeProps({ size: "md" as ComboboxSize }, props);
 
   return (
     <ComboboxContext.Provider value={{ size: merged.size }}>
       <ArkCombobox.Root
-        {...(props as any)}
+        {...props}
         data-scope="combobox"
         data-part="root"
         data-size={merged.size}
@@ -77,7 +79,7 @@ export const LoongArkComboboxControl: Component<
 };
 
 export const LoongArkComboboxInput: Component<ArkComboboxInputProps> = (
-  props
+  props,
 ) => {
   return (
     <ArkCombobox.Input {...props} data-scope="combobox" data-part="input" />
@@ -89,7 +91,9 @@ export const LoongArkComboboxTrigger: Component<
 > = (props) => {
   return (
     <ArkCombobox.Trigger {...props} data-scope="combobox" data-part="trigger">
-      {props.children}
+      {props.children ?? (
+        <LoongArkIcon icon={controlIcons.chevronDown} size="sm" />
+      )}
     </ArkCombobox.Trigger>
   );
 };
@@ -190,7 +194,11 @@ export const LoongArkComboboxItemText: Component<
   ArkComboboxItemTextProps & { children?: JSX.Element }
 > = (props) => {
   return (
-    <ArkCombobox.ItemText {...props} data-scope="combobox" data-part="item-text">
+    <ArkCombobox.ItemText
+      {...props}
+      data-scope="combobox"
+      data-part="item-text"
+    >
       {props.children}
     </ArkCombobox.ItemText>
   );
@@ -205,7 +213,7 @@ export const LoongArkComboboxItemIndicator: Component<
       data-scope="combobox"
       data-part="item-indicator"
     >
-      {props.children}
+      {props.children ?? <LoongArkIcon icon={controlIcons.check} size="sm" />}
     </ArkCombobox.ItemIndicator>
   );
 };

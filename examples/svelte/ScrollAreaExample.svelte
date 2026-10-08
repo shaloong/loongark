@@ -11,8 +11,9 @@
 
   export let size: ScrollAreaSize = "md";
 
-  const items = Array.from({ length: 12 }, (_, index) =>
-    `Release note ${index + 1}`
+  const items = Array.from(
+    { length: 12 },
+    (_, index) => `Release note ${index + 1}`,
   );
 </script>
 

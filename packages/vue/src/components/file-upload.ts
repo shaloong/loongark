@@ -1,8 +1,15 @@
+import type { FileUploadRootProps as NativeFileUploadRootProps } from "@ark-ui/vue/file-upload";
+import { renderPart } from "../render-part";
 /**
  * File Upload component - Vue wrapper.
  * Uses Ark UI File Upload with data attributes for styling.
  */
-import { defineComponent, h, type PropType } from "vue";
+import {
+  resolveDynamicComponent,
+  defineComponent,
+  h,
+  type PropType,
+} from "vue";
 import { FileUpload as ArkFileUpload } from "@ark-ui/vue/file-upload";
 import type { FileUploadSize } from "@loongark/primitives";
 
@@ -37,15 +44,19 @@ export const LoongArkFileUploadRoot = defineComponent({
     },
     multiple: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     directory: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     required: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     name: {
       type: String as PropType<string>,
@@ -54,7 +65,7 @@ export const LoongArkFileUploadRoot = defineComponent({
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeFileUploadRootProps["ids"]>,
     },
     onFileChange: {
       type: Function as PropType<(details: FileUploadChangeDetails) => void>,
@@ -65,7 +76,7 @@ export const LoongArkFileUploadRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.Root,
         {
           ...attrs,
@@ -75,7 +86,7 @@ export const LoongArkFileUploadRoot = defineComponent({
           "data-size": props.size,
           "data-disabled": props.disabled ? "true" : undefined,
         },
-        slots
+        slots,
       );
   },
 });
@@ -84,14 +95,14 @@ export const LoongArkFileUploadLabel = defineComponent({
   name: "LoongArkFileUploadLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.Label,
         {
           ...attrs,
           "data-scope": "file-upload",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -100,14 +111,14 @@ export const LoongArkFileUploadDropzone = defineComponent({
   name: "LoongArkFileUploadDropzone",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.Dropzone,
         {
           ...attrs,
           "data-scope": "file-upload",
           "data-part": "dropzone",
         },
-        slots
+        slots,
       );
   },
 });
@@ -116,14 +127,14 @@ export const LoongArkFileUploadTrigger = defineComponent({
   name: "LoongArkFileUploadTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.Trigger,
         {
           ...attrs,
           "data-scope": "file-upload",
           "data-part": "trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -132,7 +143,7 @@ export const LoongArkFileUploadHiddenInput = defineComponent({
   name: "LoongArkFileUploadHiddenInput",
   setup(_, { attrs }) {
     return () =>
-      h(ArkFileUpload.HiddenInput, {
+      renderPart(resolveDynamicComponent(ArkFileUpload.HiddenInput), {
         ...attrs,
         "data-scope": "file-upload",
         "data-part": "hidden-input",
@@ -144,14 +155,14 @@ export const LoongArkFileUploadItemGroup = defineComponent({
   name: "LoongArkFileUploadItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.ItemGroup,
         {
           ...attrs,
           "data-scope": "file-upload",
           "data-part": "item-group",
         },
-        slots
+        slots,
       );
   },
 });
@@ -165,7 +176,7 @@ export const LoongArkFileUploadItem = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.Item,
         {
           ...attrs,
@@ -173,7 +184,7 @@ export const LoongArkFileUploadItem = defineComponent({
           "data-scope": "file-upload",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -182,14 +193,14 @@ export const LoongArkFileUploadItemPreview = defineComponent({
   name: "LoongArkFileUploadItemPreview",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.ItemPreview,
         {
           ...attrs,
           "data-scope": "file-upload",
           "data-part": "item-preview",
         },
-        slots
+        slots,
       );
   },
 });
@@ -198,7 +209,7 @@ export const LoongArkFileUploadItemPreviewImage = defineComponent({
   name: "LoongArkFileUploadItemPreviewImage",
   setup(_, { attrs }) {
     return () =>
-      h(ArkFileUpload.ItemPreviewImage, {
+      renderPart(ArkFileUpload.ItemPreviewImage, {
         ...attrs,
         "data-scope": "file-upload",
         "data-part": "item-preview-image",
@@ -210,14 +221,14 @@ export const LoongArkFileUploadItemName = defineComponent({
   name: "LoongArkFileUploadItemName",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.ItemName,
         {
           ...attrs,
           "data-scope": "file-upload",
           "data-part": "item-name",
         },
-        slots
+        slots,
       );
   },
 });
@@ -226,14 +237,14 @@ export const LoongArkFileUploadItemSizeText = defineComponent({
   name: "LoongArkFileUploadItemSizeText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.ItemSizeText,
         {
           ...attrs,
           "data-scope": "file-upload",
           "data-part": "item-size-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -242,14 +253,14 @@ export const LoongArkFileUploadItemDeleteTrigger = defineComponent({
   name: "LoongArkFileUploadItemDeleteTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.ItemDeleteTrigger,
         {
           ...attrs,
           "data-scope": "file-upload",
           "data-part": "item-delete-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -258,14 +269,14 @@ export const LoongArkFileUploadClearTrigger = defineComponent({
   name: "LoongArkFileUploadClearTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkFileUpload.ClearTrigger,
         {
           ...attrs,
           "data-scope": "file-upload",
           "data-part": "clear-trigger",
         },
-        slots
+        slots,
       );
   },
 });

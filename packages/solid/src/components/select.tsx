@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
 /**
  * Select 组件 - Solid 实现
  * 基于 Ark UI Select 的下拉选择器
@@ -37,7 +39,7 @@ const SelectContext = createContext<{ size: SelectSize }>({ size: "md" });
  * Select Root Props
  */
 export interface LoongArkSelectRootProps<
-  T extends Record<string, any> = Record<string, any>
+  T extends object = object,
 > extends Omit<ArkSelectRootProps<T>, "asChild"> {
   size?: SelectSize;
   children?: JSX.Element;
@@ -46,15 +48,15 @@ export interface LoongArkSelectRootProps<
 /**
  * Select Root 组件
  */
-export const LoongArkSelectRoot: Component<LoongArkSelectRootProps> = (
-  props
-) => {
+export const LoongArkSelectRoot = <T extends object>(
+  props: LoongArkSelectRootProps<T>,
+): JSX.Element => {
   const merged = mergeProps({ size: "md" as SelectSize }, props);
 
   return (
     <SelectContext.Provider value={{ size: merged.size }}>
       <ArkSelect.Root
-        {...(props as any)}
+        {...props}
         data-scope="select"
         data-part="root"
         data-size={merged.size}
@@ -125,7 +127,9 @@ export const LoongArkSelectIndicator: Component<
 > = (props) => {
   return (
     <ArkSelect.Indicator {...props} data-scope="select" data-part="indicator">
-      {props.children}
+      {props.children ?? (
+        <LoongArkIcon icon={controlIcons.chevronDown} size="sm" />
+      )}
     </ArkSelect.Indicator>
   );
 };
@@ -260,7 +264,7 @@ export const LoongArkSelectItemIndicator: Component<
       data-scope="select"
       data-part="item-indicator"
     >
-      {props.children}
+      {props.children ?? <LoongArkIcon icon={controlIcons.check} size="sm" />}
     </ArkSelect.ItemIndicator>
   );
 };

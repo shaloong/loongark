@@ -1,5 +1,12 @@
+import type { RadioGroupItemHiddenInputProps } from "@ark-ui/vue/radio-group";
+import { nativeSelectionRef } from "../native-selection";
+import {
+  useRadioGroupContext,
+  useRadioGroupItemContext,
+} from "@ark-ui/vue/radio-group";
+import { renderPart } from "../render-part";
 import { RadioGroup } from "@ark-ui/vue/radio-group";
-import { defineComponent, h } from "vue";
+import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import type {
   RadioGroupSize,
@@ -33,11 +40,11 @@ export const LoongArkRadioGroupRoot = defineComponent({
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     readOnly: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
     name: {
       type: String,
@@ -51,8 +58,8 @@ export const LoongArkRadioGroupRoot = defineComponent({
   },
   setup(props, { slots }) {
     return () =>
-      h(
-        RadioGroup.Root as any,
+      renderPart(
+        RadioGroup.Root,
         {
           defaultValue: props.defaultValue,
           value: props.value,
@@ -62,10 +69,12 @@ export const LoongArkRadioGroupRoot = defineComponent({
           form: props.form,
           orientation: props.orientation,
           onValueChange: props.onValueChange,
+          "data-scope": "radio-group",
+          "data-part": "root",
           "data-size": props.size,
           "data-orientation": props.orientation,
         },
-        slots
+        slots,
       );
   },
 });
@@ -75,7 +84,7 @@ export const LoongArkRadioGroupRoot = defineComponent({
 export const LoongArkRadioGroupLabel = defineComponent({
   name: "LoongArkRadioGroupLabel",
   setup(_, { slots }) {
-    return () => h(RadioGroup.Label as any, {}, slots);
+    return () => renderPart(RadioGroup.Label, {}, slots);
   },
 });
 
@@ -98,14 +107,14 @@ export const LoongArkRadioGroupItem = defineComponent({
   },
   setup(props, { slots }) {
     return () =>
-      h(
-        RadioGroup.Item as any,
+      renderPart(
+        RadioGroup.Item,
         {
           value: props.value,
           disabled: props.disabled,
           invalid: props.invalid,
         },
-        slots
+        slots,
       );
   },
 });
@@ -115,7 +124,7 @@ export const LoongArkRadioGroupItem = defineComponent({
 export const LoongArkRadioGroupItemControl = defineComponent({
   name: "LoongArkRadioGroupItemControl",
   setup(_, { slots }) {
-    return () => h(RadioGroup.ItemControl as any, {}, slots);
+    return () => renderPart(RadioGroup.ItemControl, {}, slots);
   },
 });
 
@@ -124,7 +133,7 @@ export const LoongArkRadioGroupItemControl = defineComponent({
 export const LoongArkRadioGroupItemText = defineComponent({
   name: "LoongArkRadioGroupItemText",
   setup(_, { slots }) {
-    return () => h(RadioGroup.ItemText as any, {}, slots);
+    return () => renderPart(RadioGroup.ItemText, {}, slots);
   },
 });
 
@@ -133,15 +142,36 @@ export const LoongArkRadioGroupItemText = defineComponent({
 export const LoongArkRadioGroupIndicator = defineComponent({
   name: "LoongArkRadioGroupIndicator",
   setup(_, { slots }) {
-    return () => h(RadioGroup.Indicator as any, {}, slots);
+    return () => renderPart(RadioGroup.Indicator, {}, slots);
   },
 });
 
 // ============ ItemHiddenInput 组件 ============
 
-export const LoongArkRadioGroupItemHiddenInput = defineComponent({
-  name: "LoongArkRadioGroupItemHiddenInput",
-  setup() {
-    return () => h(RadioGroup.ItemHiddenInput as any);
-  },
-});
+export const LoongArkRadioGroupItemHiddenInput =
+  defineComponent<RadioGroupItemHiddenInputProps>(
+    (props, { attrs, slots }) => {
+      const api = useRadioGroupContext();
+      const item = useRadioGroupItemContext();
+      const ref = nativeSelectionRef(() => ({
+        radioValue: api.value.value,
+        readOnly: String(api.value.getRootProps()["aria-readonly"]) === "true",
+      }));
+      return () =>
+        renderPart(
+          resolveDynamicComponent(RadioGroup.ItemHiddenInput),
+          {
+            ...attrs,
+            ...props,
+            ref,
+            disabled: item.value.disabled || !!attrs.disabled,
+          },
+          slots,
+        );
+    },
+    {
+      name: "LoongArkRadioGroupItemHiddenInput",
+      props: ["asChild"],
+      inheritAttrs: false,
+    },
+  );

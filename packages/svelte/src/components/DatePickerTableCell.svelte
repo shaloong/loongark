@@ -2,7 +2,7 @@
   import { DatePicker } from "@ark-ui/svelte/date-picker";
   import type { DatePickerTableCellProps } from "@ark-ui/svelte/date-picker";
 
-  export let value: DatePickerTableCellProps["value"] = undefined;
+  export let value: DatePickerTableCellProps["value"];
   export let disabled: DatePickerTableCellProps["disabled"] = undefined;
   export let columns: DatePickerTableCellProps["columns"] = undefined;
   export let visibleRange: DatePickerTableCellProps["visibleRange"] = undefined;

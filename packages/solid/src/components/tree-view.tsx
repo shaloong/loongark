@@ -24,21 +24,22 @@ import {
 } from "@ark-ui/solid/tree-view";
 import type { TreeViewSize } from "@loongark/primitives";
 
-export interface LoongArkTreeViewRootProps
-  extends Omit<ArkTreeViewRootProps, "asChild"> {
+export interface LoongArkTreeViewRootProps<
+  T extends object = object,
+> extends Omit<ArkTreeViewRootProps<T>, "asChild"> {
   size?: TreeViewSize;
   children?: JSX.Element;
 }
 
-export const LoongArkTreeViewRoot: Component<LoongArkTreeViewRootProps> = (
-  props
-) => {
+export const LoongArkTreeViewRoot = <T extends object>(
+  props: LoongArkTreeViewRootProps<T>,
+): JSX.Element => {
   const merged = mergeProps({ size: "md" as TreeViewSize }, props);
   const [local, others] = splitProps(merged, ["children", "size"]);
 
   return (
     <ArkTreeView.Root
-      {...(others as any)}
+      {...others}
       data-scope="tree-view"
       data-part="root"
       data-size={local.size}
@@ -48,53 +49,51 @@ export const LoongArkTreeViewRoot: Component<LoongArkTreeViewRootProps> = (
   );
 };
 
-export interface LoongArkTreeViewLabelProps
-  extends Omit<ArkTreeViewLabelProps, "asChild"> {
+export interface LoongArkTreeViewLabelProps extends Omit<
+  ArkTreeViewLabelProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkTreeViewLabel: Component<LoongArkTreeViewLabelProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkTreeView.Label
-      {...others}
-      data-scope="tree-view"
-      data-part="label"
-    >
+    <ArkTreeView.Label {...others} data-scope="tree-view" data-part="label">
       {local.children}
     </ArkTreeView.Label>
   );
 };
 
-export interface LoongArkTreeViewTreeProps
-  extends Omit<ArkTreeViewTreeProps, "asChild"> {
+export interface LoongArkTreeViewTreeProps extends Omit<
+  ArkTreeViewTreeProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkTreeViewTree: Component<LoongArkTreeViewTreeProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkTreeView.Tree
-      {...others}
-      data-scope="tree-view"
-      data-part="tree"
-    >
+    <ArkTreeView.Tree {...others} data-scope="tree-view" data-part="tree">
       {local.children}
     </ArkTreeView.Tree>
   );
 };
 
-export interface LoongArkTreeViewItemProps
-  extends Omit<ArkTreeViewItemProps, "asChild"> {
+export interface LoongArkTreeViewItemProps extends Omit<
+  ArkTreeViewItemProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkTreeViewItem: Component<LoongArkTreeViewItemProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
@@ -104,8 +103,10 @@ export const LoongArkTreeViewItem: Component<LoongArkTreeViewItemProps> = (
   );
 };
 
-export interface LoongArkTreeViewItemIndicatorProps
-  extends Omit<ArkTreeViewItemIndicatorProps, "asChild"> {
+export interface LoongArkTreeViewItemIndicatorProps extends Omit<
+  ArkTreeViewItemIndicatorProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -124,14 +125,16 @@ export const LoongArkTreeViewItemIndicator: Component<
   );
 };
 
-export interface LoongArkTreeViewItemTextProps
-  extends Omit<ArkTreeViewItemTextProps, "asChild"> {
+export interface LoongArkTreeViewItemTextProps extends Omit<
+  ArkTreeViewItemTextProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
-export const LoongArkTreeViewItemText: Component<LoongArkTreeViewItemTextProps> = (
-  props
-) => {
+export const LoongArkTreeViewItemText: Component<
+  LoongArkTreeViewItemTextProps
+> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.ItemText
@@ -144,28 +147,28 @@ export const LoongArkTreeViewItemText: Component<LoongArkTreeViewItemTextProps> 
   );
 };
 
-export interface LoongArkTreeViewBranchProps
-  extends Omit<ArkTreeViewBranchProps, "asChild"> {
+export interface LoongArkTreeViewBranchProps extends Omit<
+  ArkTreeViewBranchProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
 export const LoongArkTreeViewBranch: Component<LoongArkTreeViewBranchProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
-    <ArkTreeView.Branch
-      {...others}
-      data-scope="tree-view"
-      data-part="branch"
-    >
+    <ArkTreeView.Branch {...others} data-scope="tree-view" data-part="branch">
       {local.children}
     </ArkTreeView.Branch>
   );
 };
 
-export interface LoongArkTreeViewBranchContentProps
-  extends Omit<ArkTreeViewBranchContentProps, "asChild"> {
+export interface LoongArkTreeViewBranchContentProps extends Omit<
+  ArkTreeViewBranchContentProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -184,8 +187,10 @@ export const LoongArkTreeViewBranchContent: Component<
   );
 };
 
-export interface LoongArkTreeViewBranchControlProps
-  extends Omit<ArkTreeViewBranchControlProps, "asChild"> {
+export interface LoongArkTreeViewBranchControlProps extends Omit<
+  ArkTreeViewBranchControlProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -204,8 +209,10 @@ export const LoongArkTreeViewBranchControl: Component<
   );
 };
 
-export interface LoongArkTreeViewBranchTriggerProps
-  extends Omit<ArkTreeViewBranchTriggerProps, "asChild"> {
+export interface LoongArkTreeViewBranchTriggerProps extends Omit<
+  ArkTreeViewBranchTriggerProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -224,8 +231,10 @@ export const LoongArkTreeViewBranchTrigger: Component<
   );
 };
 
-export interface LoongArkTreeViewBranchIndicatorProps
-  extends Omit<ArkTreeViewBranchIndicatorProps, "asChild"> {
+export interface LoongArkTreeViewBranchIndicatorProps extends Omit<
+  ArkTreeViewBranchIndicatorProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -244,27 +253,32 @@ export const LoongArkTreeViewBranchIndicator: Component<
   );
 };
 
-export interface LoongArkTreeViewBranchTextProps
-  extends Omit<ArkTreeViewBranchTextProps, "asChild"> {
+export interface LoongArkTreeViewBranchTextProps extends Omit<
+  ArkTreeViewBranchTextProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
-export const LoongArkTreeViewBranchText: Component<LoongArkTreeViewBranchTextProps> =
-  (props) => {
-    const [local, others] = splitProps(props, ["children"]);
-    return (
-      <ArkTreeView.BranchText
-        {...others}
-        data-scope="tree-view"
-        data-part="branch-text"
-      >
-        {local.children}
-      </ArkTreeView.BranchText>
-    );
-  };
+export const LoongArkTreeViewBranchText: Component<
+  LoongArkTreeViewBranchTextProps
+> = (props) => {
+  const [local, others] = splitProps(props, ["children"]);
+  return (
+    <ArkTreeView.BranchText
+      {...others}
+      data-scope="tree-view"
+      data-part="branch-text"
+    >
+      {local.children}
+    </ArkTreeView.BranchText>
+  );
+};
 
-export interface LoongArkTreeViewBranchIndentGuideProps
-  extends Omit<ArkTreeViewBranchIndentGuideProps, "asChild"> {
+export interface LoongArkTreeViewBranchIndentGuideProps extends Omit<
+  ArkTreeViewBranchIndentGuideProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -283,8 +297,10 @@ export const LoongArkTreeViewBranchIndentGuide: Component<
   );
 };
 
-export interface LoongArkTreeViewNodeCheckboxProps
-  extends Omit<ArkTreeViewNodeCheckboxProps, "asChild"> {
+export interface LoongArkTreeViewNodeCheckboxProps extends Omit<
+  ArkTreeViewNodeCheckboxProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -303,8 +319,10 @@ export const LoongArkTreeViewNodeCheckbox: Component<
   );
 };
 
-export interface LoongArkTreeViewNodeCheckboxIndicatorProps
-  extends Omit<ArkTreeViewNodeCheckboxIndicatorProps, "asChild"> {
+export interface LoongArkTreeViewNodeCheckboxIndicatorProps extends Omit<
+  ArkTreeViewNodeCheckboxIndicatorProps,
+  "asChild"
+> {
   children?: JSX.Element;
 }
 
@@ -323,8 +341,10 @@ export const LoongArkTreeViewNodeCheckboxIndicator: Component<
   );
 };
 
-export interface LoongArkTreeViewNodeRenameInputProps
-  extends Omit<ArkTreeViewNodeRenameInputProps, "asChild"> {}
+export interface LoongArkTreeViewNodeRenameInputProps extends Omit<
+  ArkTreeViewNodeRenameInputProps,
+  "asChild"
+> {}
 
 export const LoongArkTreeViewNodeRenameInput: Component<
   LoongArkTreeViewNodeRenameInputProps

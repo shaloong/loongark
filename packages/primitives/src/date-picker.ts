@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type DatePickerSize = "sm" | "md" | "lg";
@@ -33,7 +32,6 @@ interface DatePickerDesignTokens {
     text: string;
     textMuted: string;
     placeholder: string;
-    inverse: string;
   };
   disabled: {
     bg: string;
@@ -43,8 +41,6 @@ interface DatePickerDesignTokens {
   brand: {
     primary: string;
     accent: string;
-    subtle: string;
-    warning: string;
   };
   motion: {
     duration: string;
@@ -53,23 +49,25 @@ interface DatePickerDesignTokens {
   shadow: string;
 }
 
-const extractDatePickerTokens = (theme: LoongArkTheme): DatePickerDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+const extractDatePickerTokens = (
+  theme: LoongArkTheme,
+): DatePickerDesignTokens => {
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
-  const shadow = asTokenTree(theme.tokens.shadow);
+  const radius = asTokenTree(theme.styleTokens.radius);
+  const shadow = asTokenTree(theme.styleTokens.shadow);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -116,7 +114,6 @@ const extractDatePickerTokens = (theme: LoongArkTheme): DatePickerDesignTokens =
       text: toStringToken(neutral["700"], "#232325"),
       textMuted: toStringToken(neutral["500"], "#767680"),
       placeholder: toStringToken(neutral["300"], "#B3B4BD"),
-      inverse: toStringToken(neutral["50"], "#FFFFFF"),
     },
     disabled: {
       bg: toStringToken(neutral["100"], "#E5E6EB"),
@@ -126,23 +123,18 @@ const extractDatePickerTokens = (theme: LoongArkTheme): DatePickerDesignTokens =
     brand: {
       primary: toStringToken(brand.primary, "#006EFF"),
       accent: toStringToken(brand.accent, "#5AC8FA"),
-      subtle: toStringToken(brand.subtle, "#EFF6FF"),
-      warning: toStringToken(brand.warning, "#F58220"),
     },
     motion: {
       duration: toStringToken(duration.base, "200ms"),
       easing: toStringToken(easing.standard, "cubic-bezier(0.2, 0, 0, 1)"),
     },
-    shadow: toStringToken(
-      shadow.popover,
-      "0 8px 40px rgba(0, 0, 0, 0.08)"
-    ),
+    shadow: toStringToken(shadow.popover, "0 8px 40px rgba(0, 0, 0, 0.08)"),
   };
 };
 
 const buildDatePickerStyles = (theme: LoongArkTheme): string => {
   const tokens = extractDatePickerTokens(theme);
-  const zIndex = (theme.tokens as any).zIndex || {};
+  const zIndex = (theme.styleTokens as any).zIndex || {};
   const scopeSelector = `[data-scope="date-picker"]`;
   const rootSelector = `${scopeSelector}[data-part="root"]`;
   const labelSelector = `${scopeSelector}[data-part="label"]`;
@@ -170,13 +162,6 @@ const buildDatePickerStyles = (theme: LoongArkTheme): string => {
   const tableCellTriggerSelector = `${scopeSelector}[data-part="table-cell-trigger"]`;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) [data-scope="date-picker"] * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${rootSelector} {
   display: flex;
@@ -233,13 +218,13 @@ ${inputSelector} {
 }
 
 ${inputSelector}::placeholder {
-  color: ${tokens.neutral.placeholder};
+  color: var(--lk-color-semantic-mutedforeground);
   opacity: 1;
 }
 
-${inputSelector}[data-invalid="true"],
+${inputSelector}:is([data-invalid=""],[data-invalid="true"]),
 ${inputSelector}[aria-invalid="true"] {
-  color: ${tokens.brand.warning};
+  color: var(--lk-color-semantic-foreground);
 }
 
 ${triggerSelector},
@@ -252,7 +237,7 @@ ${clearTriggerSelector} {
   border: none;
   border-radius: ${tokens.radius.sm};
   background: transparent;
-  color: ${tokens.neutral.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
   cursor: pointer;
   transition:
     background ${tokens.motion.duration} ${tokens.motion.easing},
@@ -274,10 +259,10 @@ ${clearTriggerSelector}:focus-visible {
 ${rangeTextSelector} {
   font-size: ${tokens.fontSize.sm};
   line-height: ${tokens.lineHeight};
-  color: ${tokens.neutral.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
-${controlSelector}[data-disabled="true"] {
+${controlSelector}:is([data-disabled=""],[data-disabled="true"]) {
   background: ${tokens.disabled.bg};
   border-color: ${tokens.disabled.border};
   color: ${tokens.disabled.text};
@@ -285,12 +270,12 @@ ${controlSelector}[data-disabled="true"] {
   opacity: 0.85;
 }
 
-${controlSelector}[data-disabled="true"] ${inputSelector} {
+${controlSelector}:is([data-disabled=""],[data-disabled="true"]) ${inputSelector} {
   color: ${tokens.disabled.text};
 }
 
-${controlSelector}[data-disabled="true"] ${triggerSelector},
-${controlSelector}[data-disabled="true"] ${clearTriggerSelector} {
+${controlSelector}:is([data-disabled=""],[data-disabled="true"]) ${triggerSelector},
+${controlSelector}:is([data-disabled=""],[data-disabled="true"]) ${clearTriggerSelector} {
   color: ${tokens.disabled.text};
   cursor: not-allowed;
 }
@@ -330,6 +315,8 @@ ${positionerSelector} {
 }
 
 ${contentSelector} {
+  width: var(--lk-control-calendarwidth);
+  max-width: calc(100vw - var(--lk-space-component-lg));
   background: ${tokens.neutral.surface};
   border: 1px solid ${tokens.neutral.border};
   border-radius: ${tokens.radius.md};
@@ -361,7 +348,7 @@ ${contentSelector}[data-state="closed"] {
   transform: translateY(-2px) scale(0.98);
 }
 
-${contentSelector}[data-inline="true"] {
+${contentSelector}:is([data-inline=""],[data-inline="true"]) {
   border: none;
   box-shadow: none;
   padding: 0;
@@ -380,8 +367,8 @@ ${contentSelector}[data-size="lg"] {
   border-radius: ${tokens.radius.lg};
 }
 
-${contentSelector}[data-inline="true"][data-size="sm"],
-${contentSelector}[data-inline="true"][data-size="lg"] {
+${contentSelector}:is([data-inline=""],[data-inline="true"])[data-size="sm"],
+${contentSelector}:is([data-inline=""],[data-inline="true"])[data-size="lg"] {
   padding: 0;
   border-radius: 0;
 }
@@ -442,8 +429,8 @@ ${nextTriggerSelector}:hover {
   border-color: ${tokens.neutral.borderHover};
 }
 
-${prevTriggerSelector}[data-disabled="true"],
-${nextTriggerSelector}[data-disabled="true"] {
+${prevTriggerSelector}:is([data-disabled=""],[data-disabled="true"]),
+${nextTriggerSelector}:is([data-disabled=""],[data-disabled="true"]) {
   background: ${tokens.disabled.bg};
   border-color: ${tokens.disabled.border};
   color: ${tokens.disabled.text};
@@ -508,7 +495,7 @@ ${tableSelector} {
 }
 
 ${tableHeadSelector} {
-  color: ${tokens.neutral.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
   font-size: ${tokens.fontSize.sm};
   font-weight: ${tokens.fontWeight};
 }
@@ -529,6 +516,11 @@ ${tableCellSelector} {
 }
 
 ${tableCellTriggerSelector} {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: inherit;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -549,49 +541,50 @@ ${tableCellTriggerSelector}[data-view="year"] {
   padding: 0 ${tokens.gap};
 }
 
-${tableCellTriggerSelector}:not([data-disabled="true"]):not([data-selected="true"]):not([data-range-start="true"]):not([data-range-end="true"]):hover {
+${tableCellTriggerSelector}:not(:is([data-disabled=""],[data-disabled="true"])):not(:is([data-selected=""],[data-selected="true"])):not(:is([data-range-start=""],[data-range-start="true"])):not(:is([data-range-end=""],[data-range-end="true"])):hover {
   background: ${tokens.neutral.surfaceRaised};
 }
 
-${tableCellTriggerSelector}[data-disabled="true"] {
+${tableCellTriggerSelector}:is([data-disabled=""],[data-disabled="true"]) {
   cursor: not-allowed;
   color: ${tokens.disabled.text};
   opacity: 0.7;
 }
 
-${tableCellTriggerSelector}[data-unavailable="true"] {
+${tableCellTriggerSelector}:is([data-unavailable=""],[data-unavailable="true"]) {
   text-decoration: line-through;
-  color: ${tokens.neutral.textMuted};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
-${tableCellTriggerSelector}[data-outside-range="true"] {
-  color: ${tokens.neutral.textMuted};
+${tableCellTriggerSelector}:is([data-outside-range=""],[data-outside-range="true"]) {
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
-${tableCellTriggerSelector}[data-in-hover-range="true"]:not([data-selected="true"]) {
+${tableCellTriggerSelector}:is([data-in-hover-range=""],[data-in-hover-range="true"]):not(:is([data-selected=""],[data-selected="true"])) {
   background: ${tokens.neutral.surfaceRaised};
 }
 
-${tableCellTriggerSelector}[data-in-range="true"]:not([data-selected="true"]) {
-  background: ${tokens.brand.subtle};
-  color: ${tokens.brand.primary};
+${tableCellTriggerSelector}:is([data-in-range=""],[data-in-range="true"]):not(:is([data-selected=""],[data-selected="true"])) {
+  background: var(--lk-color-semantic-accent);
+  color: var(--lk-color-semantic-accentforeground);
 }
 
-${tableCellTriggerSelector}[data-selected="true"],
-${tableCellTriggerSelector}[data-range-start="true"],
-${tableCellTriggerSelector}[data-range-end="true"] {
-  background: ${tokens.brand.primary};
-  color: ${tokens.neutral.inverse};
+${tableCellTriggerSelector}:is([data-selected=""],[data-selected="true"]),
+${tableCellTriggerSelector}:is([data-range-start=""],[data-range-start="true"]),
+${tableCellTriggerSelector}:is([data-range-end=""],[data-range-end="true"]) {
+  background: var(--lk-color-semantic-primary);
+  color: var(--lk-color-semantic-primaryforeground);
 }
 
-${tableCellTriggerSelector}[data-focus="true"],
+${tableCellTriggerSelector}:is([data-focus=""],[data-focus="true"]),
 ${tableCellTriggerSelector}:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px ${tokens.brand.accent};
+  outline: var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring);
+  outline-offset: var(--lk-control-focuswidth);
+  box-shadow: none;
 }
 
-${tableCellTriggerSelector}[data-today="true"]:not([data-selected="true"]) {
-  box-shadow: inset 0 0 0 1px ${tokens.brand.accent};
+${tableCellTriggerSelector}:is([data-today=""],[data-today="true"]):not(:is([data-selected=""],[data-selected="true"])) {
+  box-shadow: inset 0 0 0 var(--lk-control-borderwidth) var(--lk-color-semantic-ring);
 }
 
 ${contentSelector}[data-size="sm"] ${tableCellTriggerSelector} {
@@ -656,7 +649,7 @@ const datePickerContract: PrimitiveContract<DatePickerPrimitiveProps> = {
 
 const DatePickerPrimitive = createPrimitive(datePickerContract, (theme) => {
   const css = buildDatePickerStyles(theme);
-  mountPrimitiveStyles(`date-picker-${theme.mode}`, css);
+  theme.mountStyles(`date-picker-${theme.mode}`, css);
 });
 
 registerPrimitive(DatePickerPrimitive);

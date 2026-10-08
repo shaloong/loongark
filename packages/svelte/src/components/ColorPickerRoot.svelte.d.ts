@@ -1,3 +1,12 @@
-﻿import type { SvelteComponent } from "svelte";
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { ColorPicker } from "@ark-ui/svelte/color-picker";
 import type { ColorPickerRootProps } from "@ark-ui/svelte/color-picker";
-export default class ColorPickerRoot extends SvelteComponent<ColorPickerRootProps> {}
+import type { ColorPickerSize } from "@loongark/primitives";
+
+export default class LoongArkColorPickerRoot extends SvelteComponent<
+  Omit<ComponentProps<typeof ColorPicker.Root>, "children" | "size"> & {
+    size?: ColorPickerSize;
+  },
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

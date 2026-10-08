@@ -56,8 +56,8 @@ const FileUploadDemo = ({
       <LoongArkFileUploadLabel>Upload files</LoongArkFileUploadLabel>
       <LoongArkFileUploadDropzone>
         <p style={{ margin: 0 }}>{helperText}</p>
-        <LoongArkFileUploadTrigger>Browse</LoongArkFileUploadTrigger>
       </LoongArkFileUploadDropzone>
+      <LoongArkFileUploadTrigger>Browse</LoongArkFileUploadTrigger>
       <LoongArkFileUploadHiddenInput />
       <FileUpload.Context>
         {(context) => {

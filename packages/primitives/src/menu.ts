@@ -4,8 +4,11 @@
  */
 import { type LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
-import { createPrimitive, type PrimitiveContract, registerPrimitive } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
+import {
+  createPrimitive,
+  type PrimitiveContract,
+  registerPrimitive,
+} from "./core";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type MenuSize = "sm" | "md" | "lg";
@@ -46,26 +49,26 @@ interface MenuDesignTokens {
 }
 
 const extractMenuTokens = (theme: LoongArkTheme): MenuDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
-  const shadow = asTokenTree(theme.tokens.shadow);
-  const zIndex = asTokenTree(theme.tokens.zIndex);
+  const shadow = asTokenTree(theme.styleTokens.shadow);
+  const zIndex = asTokenTree(theme.styleTokens.zIndex);
 
   return {
     fontFamily: toStringToken(fontFamily.body, "sans-serif"),
@@ -129,13 +132,6 @@ const buildMenuStyles = (theme: LoongArkTheme): string => {
     to { opacity: 0; transform: translateY(-4px) scale(0.98); }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    :root:not([data-lk-motion="force"]) [data-scope="menu"] * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 
   [data-scope="menu"][data-part="positioner"] {
     z-index: ${tokens.zIndex};
@@ -211,7 +207,7 @@ const buildMenuStyles = (theme: LoongArkTheme): string => {
   }
 
   [data-scope="menu"][data-part="item-text"][data-disabled] {
-    color: ${tokens.neutral.textMuted};
+    color: var(--lk-color-semantic-mutedforeground);
   }
 
   [data-scope="menu"][data-part="item-indicator"] {
@@ -231,7 +227,7 @@ const buildMenuStyles = (theme: LoongArkTheme): string => {
   [data-scope="menu"][data-part="indicator"] {
     display: inline-flex;
     align-items: center;
-    color: ${tokens.neutral.textMuted};
+    color: var(--lk-color-semantic-mutedforeground);
     transition: transform ${tokens.motion.duration} ${tokens.motion.easing};
   }
 
@@ -254,7 +250,7 @@ const buildMenuStyles = (theme: LoongArkTheme): string => {
   [data-scope="menu"][data-part="item-group-label"] {
     padding: ${tokens.paddingY.sm} ${tokens.paddingX.md};
     font-size: ${tokens.fontSize.sm};
-    color: ${tokens.neutral.textMuted};
+    color: var(--lk-color-semantic-mutedforeground);
   }
 
   [data-scope="menu"][data-part="arrow"] {
@@ -343,7 +339,7 @@ const menuContract: PrimitiveContract<MenuPrimitiveProps> = {
 
 const MenuPrimitive = createPrimitive(menuContract, (theme) => {
   const css = buildMenuStyles(theme);
-  mountPrimitiveStyles(`menu-${theme.mode}`, css);
+  theme.mountStyles(`menu-${theme.mode}`, css);
 });
 
 registerPrimitive(MenuPrimitive);

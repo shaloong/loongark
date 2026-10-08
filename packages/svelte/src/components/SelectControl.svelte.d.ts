@@ -1,4 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { SelectControlProps } from "@ark-ui/svelte/select";
-export default class SelectControl extends SvelteComponent<SelectControlProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Select } from "@ark-ui/svelte/select";
 
+export default class LoongArkSelectControl extends SvelteComponent<
+  Omit<ComponentProps<typeof Select.Control>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

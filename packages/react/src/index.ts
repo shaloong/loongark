@@ -1,21 +1,31 @@
 import {
-  createContext,
   useContext,
   useMemo,
   useEffect,
+  useLayoutEffect,
+  useRef,
+  useId,
   createElement,
   ReactNode,
   FC,
 } from "react";
-import { createLoongArkTheme, LoongArkTheme } from "@loongark/theme";
+import {
+  createLoongArkTheme,
+  LoongArkTheme,
+  type CreateThemeOptions,
+} from "@loongark/theme";
 import { bootstrapKit } from "@loongark/kit";
 
-const ThemeContext = createContext<LoongArkTheme | null>(null);
+import { ThemeContext } from "./theme-context";
+const useThemeEffect =
+  typeof document === "undefined" ? useEffect : useLayoutEffect;
+export { LoongArkPortal } from "./components/portal";
 
-export interface LoongArkProviderProps {
+export interface LoongArkProviderProps extends CreateThemeOptions {
   mode?: "light" | "dark" | "high-contrast";
   brand?: string;
   accent?: string;
+  overrides?: CreateThemeOptions["overrides"];
   children?: ReactNode;
 }
 
@@ -24,18 +34,40 @@ export const LoongArkProvider: FC<LoongArkProviderProps> = ({
   mode,
   brand,
   accent,
+  overrides,
+  targetId,
+  motionPreference,
 }) => {
+  const scopeId = useId();
   const theme = useMemo(() => {
-    const instance = createLoongArkTheme({ mode, brand, accent });
+    const instance = createLoongArkTheme({
+      mode,
+      brand,
+      accent,
+      overrides,
+      targetId: targetId ?? scopeId,
+      motionPreference,
+    });
     return instance;
-  }, [mode, brand, accent]);
+  }, [mode, brand, accent, overrides, targetId, scopeId, motionPreference]);
+  const scope = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useThemeEffect(() => {
+    if (!scope.current) return;
+    theme.mount(scope.current);
     bootstrapKit(theme);
-    theme.mount();
+    return () => theme.unmount();
   }, [theme]);
 
-  return createElement(ThemeContext.Provider, { value: theme }, children);
+  return createElement(
+    ThemeContext.Provider,
+    { value: theme },
+    createElement(
+      "div",
+      { ref: scope, "data-lk-theme": theme.id, style: { display: "contents" } },
+      children,
+    ),
+  );
 };
 
 export const useLoongArkTheme = () => {
@@ -49,15 +81,22 @@ export const useLoongArkTheme = () => {
 export { LoongArkButton } from "./components/button";
 export {
   LoongArkInputRoot,
+  LoongArkInputGroup,
+  LoongArkInputInput,
   LoongArkInputControl,
   LoongArkTextareaControl,
   LoongArkInputHelperText,
+  LoongArkInputErrorText,
   LoongArkInputLabel,
   LoongArkInputPrefix,
   LoongArkInputSuffix,
 } from "./components/input";
 export {
   LoongArkDialog,
+  LoongArkDialogRoot,
+  LoongArkDialogPositioner,
+  LoongArkDialogPortal,
+  LoongArkDialogTrigger,
   LoongArkDialogOverlay,
   LoongArkDialogContent,
   LoongArkDialogTitle,
@@ -76,6 +115,7 @@ export {
 export {
   LoongArkSwitch,
   LoongArkSwitchRoot,
+  LoongArkSwitchHiddenInput,
   LoongArkSwitchControl,
   LoongArkSwitchThumb,
   LoongArkSwitchLabel,
@@ -521,3 +561,88 @@ export type {
   SplitterSize,
   TreeViewSize,
 } from "@loongark/primitives";
+
+export * from "./components/extended";
+
+export * from "./components/layout";
+
+export * from "./components/composed";
+
+export * from "./components/data";
+
+export { createListCollection } from "@ark-ui/react/collection";
+export { createTreeCollection } from "@ark-ui/react/collection";
+export { parseDate } from "@ark-ui/react/date-picker";
+export { parseColor } from "@ark-ui/react/color-picker";
+export { TreeViewNodeProvider as LoongArkTreeViewNodeProvider } from "@ark-ui/react/tree-view";
+
+export { LoongArkTextarea } from "./components/textarea";
+export type { LoongArkTextareaProps } from "./components/textarea";
+
+export { LoongArkTransferList } from "./components/transfer-list";
+export { LoongArkTimePicker } from "./components/time-picker";
+export type { LoongArkTransferListProps } from "./components/transfer-list";
+export type { LoongArkTimePickerProps } from "./components/time-picker";
+
+export * from "./components/action-media";
+
+export * from "./components/conversation";
+
+export * from "./components/message-scroller";
+
+export * from "./components/questionnaire";
+
+export * from "./components/ark-additions";
+
+export * from "./components/ark-advanced";
+
+export * from "./components/ark-next";
+export * from "./components/drawer";
+export * from "./components/ark-controls";
+
+export type { Question, QuestionRow, QuestionGroupInstance, QuestionnaireCustomContext, QuestionnaireCustomControl, QuestionAnswer, QuestionOption, QuestionnaireOptions, QuestionnaireValue } from "@loongark/kit";
+
+export type { DataTableState, DataTableLabels, DataTableSummary, DataRow, DataColumn, DataSort, DataFilter, DataFilterOperator, DataColumnFilter } from "@loongark/kit";
+
+export type { ChartOptions, ChartSeries, ChartLabels, ChartAxis } from "@loongark/kit";
+
+export type {AttachmentOptions,MessageOptions,ConversationAction,ConversationActionContext,ConversationActionHandler,ConversationActionLabels,ConversationActionState} from "@loongark/kit";
+
+export * from "./components/icon";
+export type {IconOptions, IconNode} from "@loongark/kit";
+
+export type { VirtualizationOptions, VirtualRenderDetails } from "@loongark/kit";
+
+export type {ChartRange} from "@loongark/kit";
+
+export { createAsyncCollectionLoader } from "@loongark/kit";
+export type { AsyncCollectionSort, AsyncCollectionRequest, AsyncCollectionLoadDetails, AsyncCollectionPage, AsyncCollectionLoaderOptions } from "@loongark/kit";
+
+export type { DataColumnGeometry, DataTableColumnLabels, DataTableColumnOptions } from "@loongark/kit";
+
+export { LoongArkCodeEditor, LoongArkRichTextEditor } from "./components/editors";
+export type { CodeEditorProps, CodeEditorLabels, CodeEditorLanguage, CodeEditorLanguageLoader, CodeEditorHandle, RichTextEditorProps, RichTextEditorHandle, RichTextDocument, RichTextMark, RichTextAttribute, RichTextAction } from "@loongark/kit";
+
+export { exportImageCropper } from "@loongark/kit";
+export type { ImageCropperExportModel, ImageCropperExportOptions } from "@loongark/kit";
+
+export type { ColumnVirtualizationOptions } from "@loongark/kit";
+
+export {
+  LoongArkVirtualGrid,
+  LoongArkVirtualMasonry,
+} from "./components/virtual";
+export type {
+  VirtualGridOptions,
+  VirtualGridCellDetails,
+  VirtualMasonryOptions,
+  VirtualMasonryEntry,
+} from "@loongark/kit";
+
+export type {
+  VirtualGridProps,
+  VirtualMasonryProps,
+} from "./components/virtual";
+
+export { parseLocalizedDate, parseDateTime, parseZonedDateTime } from "@loongark/kit";
+export type { LocalizedDateOptions } from "@loongark/kit";

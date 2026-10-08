@@ -4,9 +4,11 @@
   import type { SplitterSize } from "@loongark/primitives";
 
   export let size: SplitterSize = "md";
+  export let panels: SplitterRootProps["panels"];
 </script>
 
 <Splitter.Root
+  {panels}
   data-scope="splitter"
   data-part="root"
   data-size={size}

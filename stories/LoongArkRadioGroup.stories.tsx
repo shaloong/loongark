@@ -1,5 +1,6 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import { SelectionControlsExample } from "../examples/react/SelectionControlsExample";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { RadioGroupExample } from "../examples/react/RadioGroupExample";
 
 const meta: Meta<typeof RadioGroupExample> = {
@@ -65,4 +66,8 @@ export const Disabled: Story = {
   args: {
     disabled: true,
   },
+};
+
+export const ResponsiveControls: Story = {
+  render: () => <SelectionControlsExample />,
 };

@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type TreeViewSize = "sm" | "md" | "lg";
@@ -27,16 +26,16 @@ interface TreeViewDesignTokens {
 }
 
 const extractTreeViewTokens = (theme: LoongArkTheme): TreeViewDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
 
   return {
@@ -143,7 +142,7 @@ ${itemTextSelector}:hover {
 
 ${branchIndicatorSelector},
 ${itemIndicatorSelector} {
-  color: ${tokens.neutral.muted};
+  color: var(--lk-color-semantic-mutedforeground);
   font-size: ${tokens.fontSize.sm};
 }
 
@@ -223,8 +222,8 @@ const treeViewPrimitive = createPrimitive<TreeViewPrimitiveProps>(
   TREE_VIEW_CONTRACT,
   (theme) => {
     const css = buildTreeViewStyles(theme);
-    mountPrimitiveStyles(`tree-view-${theme.mode}`, css);
-  }
+    theme.mountStyles(`tree-view-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(treeViewPrimitive);

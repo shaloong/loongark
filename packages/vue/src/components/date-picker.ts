@@ -1,8 +1,14 @@
+import type { DatePickerRootEmits as NativeDatePickerRootEmits } from "@ark-ui/vue/date-picker";
+import type { DatePickerRootProps as NativeDatePickerRootProps } from "@ark-ui/vue/date-picker";
+import type { DatePickerPresetTriggerProps as NativeDatePickerPresetTriggerProps } from "@ark-ui/vue/date-picker";
+import type { DatePickerTableCellProps as NativeDatePickerTableCellProps } from "@ark-ui/vue/date-picker";
+import { renderPart } from "../render-part";
 /**
  * Date Picker component - Vue wrapper.
  * Wraps Ark UI Date Picker with data-scope/data-part bindings.
  */
 import {
+  resolveDynamicComponent,
   defineComponent,
   h,
   provide,
@@ -49,57 +55,67 @@ export const LoongArkDatePickerRoot = defineComponent({
     },
     closeOnSelect: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     defaultFocusedValue: {
-      type: Object as PropType<any>,
+      type: Object as PropType<
+        NativeDatePickerRootProps["defaultFocusedValue"]
+      >,
     },
     defaultOpen: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     defaultValue: {
-      type: Array as PropType<any[]>,
+      type: Array as PropType<NativeDatePickerRootProps["defaultValue"]>,
     },
     defaultView: {
       type: String as PropType<"day" | "month" | "year">,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     fixedWeeks: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     focusedValue: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeDatePickerRootProps["focusedValue"]>,
     },
     format: {
-      type: Function as PropType<(value: any, details: any) => string>,
+      type: Function as PropType<NativeDatePickerRootProps["format"]>,
     },
     id: {
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeDatePickerRootProps["ids"]>,
     },
     inline: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     invalid: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     isDateUnavailable: {
-      type: Function as PropType<(value: any) => boolean>,
+      type: Function as PropType<
+        NativeDatePickerRootProps["isDateUnavailable"]
+      >,
     },
     locale: {
       type: String as PropType<string>,
     },
     max: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeDatePickerRootProps["max"]>,
     },
     maxView: {
       type: String as PropType<"day" | "month" | "year">,
     },
     min: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeDatePickerRootProps["min"]>,
     },
     minView: {
       type: String as PropType<"day" | "month" | "year">,
@@ -111,37 +127,49 @@ export const LoongArkDatePickerRoot = defineComponent({
       type: Number as PropType<number>,
     },
     onFocusChange: {
-      type: Function as PropType<(details: any) => void>,
+      type: Function as PropType<
+        (...args: NativeDatePickerRootEmits["focusChange"]) => void
+      >,
     },
     onOpenChange: {
-      type: Function as PropType<(details: any) => void>,
+      type: Function as PropType<
+        (...args: NativeDatePickerRootEmits["openChange"]) => void
+      >,
     },
     onValueChange: {
-      type: Function as PropType<(details: any) => void>,
+      type: Function as PropType<
+        (...args: NativeDatePickerRootEmits["valueChange"]) => void
+      >,
     },
     onViewChange: {
-      type: Function as PropType<(details: any) => void>,
+      type: Function as PropType<
+        (...args: NativeDatePickerRootEmits["viewChange"]) => void
+      >,
     },
     open: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     outsideDaySelectable: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     parse: {
-      type: Function as PropType<(value: string, details: any) => any>,
+      type: Function as PropType<NativeDatePickerRootProps["parse"]>,
     },
     placeholder: {
       type: String as PropType<string>,
     },
     positioning: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeDatePickerRootProps["positioning"]>,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     required: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     selectionMode: {
       type: String as PropType<"single" | "multiple" | "range">,
@@ -153,10 +181,10 @@ export const LoongArkDatePickerRoot = defineComponent({
       type: String as PropType<string>,
     },
     translations: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeDatePickerRootProps["translations"]>,
     },
     value: {
-      type: Array as PropType<any[]>,
+      type: Array as PropType<NativeDatePickerRootProps["modelValue"]>,
     },
     view: {
       type: String as PropType<"day" | "month" | "year">,
@@ -165,7 +193,7 @@ export const LoongArkDatePickerRoot = defineComponent({
   setup(props, { slots, attrs }) {
     provide(datePickerSizeKey, toRef(props, "size"));
     return () =>
-      h(
+      renderPart(
         ArkDatePickerRoot,
         {
           ...attrs,
@@ -174,7 +202,7 @@ export const LoongArkDatePickerRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -183,14 +211,14 @@ export const LoongArkDatePickerLabel = defineComponent({
   name: "LoongArkDatePickerLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerLabel,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -199,14 +227,14 @@ export const LoongArkDatePickerControl = defineComponent({
   name: "LoongArkDatePickerControl",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerControl,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "control",
         },
-        slots
+        slots,
       );
   },
 });
@@ -220,11 +248,12 @@ export const LoongArkDatePickerInput = defineComponent({
     },
     fixOnBlur: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
   },
   setup(props, { attrs }) {
     return () =>
-      h(ArkDatePickerInput, {
+      renderPart(resolveDynamicComponent(ArkDatePickerInput), {
         ...attrs,
         index: props.index,
         fixOnBlur: props.fixOnBlur,
@@ -238,14 +267,14 @@ export const LoongArkDatePickerTrigger = defineComponent({
   name: "LoongArkDatePickerTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerTrigger,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -254,14 +283,14 @@ export const LoongArkDatePickerClearTrigger = defineComponent({
   name: "LoongArkDatePickerClearTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerClearTrigger,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "clear-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -270,14 +299,14 @@ export const LoongArkDatePickerPositioner = defineComponent({
   name: "LoongArkDatePickerPositioner",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerPositioner,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "positioner",
         },
-        slots
+        slots,
       );
   },
 });
@@ -287,7 +316,7 @@ export const LoongArkDatePickerContent = defineComponent({
   setup(_, { slots, attrs }) {
     const size = inject(datePickerSizeKey, { value: "md" as DatePickerSize });
     return () =>
-      h(
+      renderPart(
         ArkDatePickerContent,
         {
           ...attrs,
@@ -295,7 +324,7 @@ export const LoongArkDatePickerContent = defineComponent({
           "data-part": "content",
           "data-size": size.value,
         },
-        slots
+        slots,
       );
   },
 });
@@ -310,7 +339,7 @@ export const LoongArkDatePickerView = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerView,
         {
           ...attrs,
@@ -318,7 +347,7 @@ export const LoongArkDatePickerView = defineComponent({
           "data-scope": "date-picker",
           "data-part": "view",
         },
-        slots
+        slots,
       );
   },
 });
@@ -327,14 +356,14 @@ export const LoongArkDatePickerViewControl = defineComponent({
   name: "LoongArkDatePickerViewControl",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerViewControl,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "view-control",
         },
-        slots
+        slots,
       );
   },
 });
@@ -343,14 +372,14 @@ export const LoongArkDatePickerViewTrigger = defineComponent({
   name: "LoongArkDatePickerViewTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerViewTrigger,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "view-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -359,14 +388,14 @@ export const LoongArkDatePickerPrevTrigger = defineComponent({
   name: "LoongArkDatePickerPrevTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerPrevTrigger,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "prev-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -375,14 +404,14 @@ export const LoongArkDatePickerNextTrigger = defineComponent({
   name: "LoongArkDatePickerNextTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerNextTrigger,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "next-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -391,14 +420,14 @@ export const LoongArkDatePickerMonthSelect = defineComponent({
   name: "LoongArkDatePickerMonthSelect",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerMonthSelect,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "month-select",
         },
-        slots
+        slots,
       );
   },
 });
@@ -407,14 +436,14 @@ export const LoongArkDatePickerYearSelect = defineComponent({
   name: "LoongArkDatePickerYearSelect",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerYearSelect,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "year-select",
         },
-        slots
+        slots,
       );
   },
 });
@@ -423,14 +452,14 @@ export const LoongArkDatePickerRangeText = defineComponent({
   name: "LoongArkDatePickerRangeText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerRangeText,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "range-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -439,12 +468,14 @@ export const LoongArkDatePickerPresetTrigger = defineComponent({
   name: "LoongArkDatePickerPresetTrigger",
   props: {
     value: {
-      type: [String, Array, Object] as PropType<any>,
+      type: [String, Array, Object] as PropType<
+        NativeDatePickerPresetTriggerProps["value"]
+      >,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerPresetTrigger,
         {
           ...attrs,
@@ -452,7 +483,7 @@ export const LoongArkDatePickerPresetTrigger = defineComponent({
           "data-scope": "date-picker",
           "data-part": "preset-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -469,7 +500,7 @@ export const LoongArkDatePickerTable = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerTable,
         {
           ...attrs,
@@ -478,7 +509,7 @@ export const LoongArkDatePickerTable = defineComponent({
           "data-scope": "date-picker",
           "data-part": "table",
         },
-        slots
+        slots,
       );
   },
 });
@@ -487,14 +518,14 @@ export const LoongArkDatePickerTableHead = defineComponent({
   name: "LoongArkDatePickerTableHead",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerTableHead,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "table-head",
         },
-        slots
+        slots,
       );
   },
 });
@@ -503,14 +534,14 @@ export const LoongArkDatePickerTableBody = defineComponent({
   name: "LoongArkDatePickerTableBody",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerTableBody,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "table-body",
         },
-        slots
+        slots,
       );
   },
 });
@@ -519,14 +550,14 @@ export const LoongArkDatePickerTableRow = defineComponent({
   name: "LoongArkDatePickerTableRow",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerTableRow,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "table-row",
         },
-        slots
+        slots,
       );
   },
 });
@@ -535,14 +566,14 @@ export const LoongArkDatePickerTableHeader = defineComponent({
   name: "LoongArkDatePickerTableHeader",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerTableHeader,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "table-header",
         },
-        slots
+        slots,
       );
   },
 });
@@ -551,21 +582,22 @@ export const LoongArkDatePickerTableCell = defineComponent({
   name: "LoongArkDatePickerTableCell",
   props: {
     value: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeDatePickerTableCellProps["value"]>,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     columns: {
       type: Number as PropType<number>,
     },
     visibleRange: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeDatePickerTableCellProps["visibleRange"]>,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerTableCell,
         {
           ...attrs,
@@ -576,7 +608,7 @@ export const LoongArkDatePickerTableCell = defineComponent({
           "data-scope": "date-picker",
           "data-part": "table-cell",
         },
-        slots
+        slots,
       );
   },
 });
@@ -585,14 +617,14 @@ export const LoongArkDatePickerTableCellTrigger = defineComponent({
   name: "LoongArkDatePickerTableCellTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkDatePickerTableCellTrigger,
         {
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "table-cell-trigger",
         },
-        slots
+        slots,
       );
   },
 });

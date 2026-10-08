@@ -14,9 +14,30 @@ export default defineConfig({
   fullyParallel: true,
   use: {
     baseURL: storybookUrl,
-    trace: "on-first-retry",
+    launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
+      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH }
+      : undefined,
+    trace:
+      process.env.CROSS_BROWSER === "1"
+        ? "retain-on-failure"
+        : "on-first-retry",
+    screenshot: "only-on-failure",
   },
   projects: [
+    ...(process.env.CROSS_BROWSER === "1"
+      ? [
+          {
+            name: "firefox",
+            testIgnore: ["**/*.visual.spec.ts"],
+            use: { ...devices["Desktop Firefox"], launchOptions: {} },
+          },
+          {
+            name: "webkit",
+            testIgnore: ["**/*.visual.spec.ts"],
+            use: { ...devices["Desktop Safari"], launchOptions: {} },
+          },
+        ]
+      : []),
     {
       name: "chromium",
       testIgnore: ["**/*.visual.spec.ts"],
@@ -32,11 +53,4 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: "pnpm storybook --ci",
-    url: storybookUrl,
-    reuseExistingServer: !process.env.CI,
-    stdout: "pipe",
-    stderr: "pipe",
-  },
 });

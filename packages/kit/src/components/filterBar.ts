@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import type { KitComponentRegistration } from "../index";
-import { mountKitStyles } from "../styleSheet";
 import { asTokenTree, toStringToken } from "@loongark/primitives";
 
 interface FilterBarDesignTokens {
@@ -49,86 +48,54 @@ interface FilterBarDesignTokens {
 }
 
 const extractFilterBarTokens = (
-  theme: LoongArkTheme
+  theme: LoongArkTheme,
 ): FilterBarDesignTokens => {
-  const color = theme.tokens.color as TokenTree;
-  const brand = asTokenTree(color.brand);
-  const neutral = asTokenTree(color.neutral);
+  const color = theme.styleTokens.color as TokenTree;
+  const semantic = asTokenTree(color.semantic);
 
-  const space = theme.tokens.space as TokenTree;
+  const space = theme.styleTokens.space as TokenTree;
   const componentSpace = asTokenTree(space.component);
 
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontSize = asTokenTree(typography.fontSize);
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
-  const isDark = theme.mode === "dark";
-  const surface = isDark
-    ? toStringToken(neutral["900"], "#121212")
-    : toStringToken(neutral["50"], "#F5F6FA");
-  const border = isDark
-    ? toStringToken(neutral["700"], "#232325")
-    : toStringToken(neutral["100"], "#E5E6EB");
-  const chipSurface = isDark
-    ? toStringToken(neutral["700"], "#232325")
-    : toStringToken(neutral["75"] ?? neutral["100"], "#F9FAFC");
-  const chipBorder = isDark
-    ? toStringToken(neutral["650"] ?? neutral["600"], "#2F2F31")
-    : toStringToken(neutral["200"], "#D5D7DE");
-  const chipHoverSurface = isDark
-    ? toStringToken(neutral["650"] ?? neutral["700"], "#1F1F22")
-    : toStringToken(neutral["50"], "#FFFFFF");
-  const chipHoverBorder = isDark
-    ? toStringToken(neutral["550"] ?? neutral["600"], "#373741")
-    : toStringToken(neutral["300"], "#C6C8D2");
-  const chipText = isDark
-    ? toStringToken(neutral["100"], "#F5F6FA")
-    : toStringToken(neutral["500"], "#3A3A3C");
-
   return {
     fontFamily: toStringToken(fontFamily.body, "sans-serif"),
-    surface,
-    border,
-    text: isDark
-      ? toStringToken(neutral["50"], "#F5F6FA")
-      : toStringToken(neutral["500"], "#3A3A3C"),
-    subtleText: toStringToken(neutral["300"], "#B3B4BD"),
-    chipSurface,
-    chipBorder,
-    chipHoverSurface,
-    chipHoverBorder,
-    chipText,
-    chipRadius: toStringToken(radius.md, "8px"),
+    surface: toStringToken(semantic.background, "#FFFFFF"),
+    border: toStringToken(semantic.border, "#D9D9DB"),
+    text: toStringToken(semantic.foreground, "#121212"),
+    subtleText: toStringToken(semantic.mutedForeground, "#6E6E77"),
+    chipSurface: toStringToken(semantic.card, "#FFFFFF"),
+    chipBorder: toStringToken(semantic.border, "#D9D9DB"),
+    chipHoverSurface: toStringToken(semantic.accent, "#F2F2F2"),
+    chipHoverBorder: toStringToken(semantic.input, "#898991"),
+    chipText: toStringToken(semantic.mutedForeground, "#6E6E77"),
+    chipRadius: toStringToken(radius.md, "6px"),
     chipGap: toStringToken(componentSpace.xs, "4px"),
     chipPaddingY: toStringToken(componentSpace.xs, "4px"),
     chipPaddingX: toStringToken(componentSpace.sm, "8px"),
-    chipFontSize: toStringToken(fontSize.sm, "14px"),
-    chipFontWeight: toStringToken(
-      fontWeight.medium ?? fontWeight.semibold ?? fontWeight.regular,
-      "500"
+    chipFontSize: toStringToken(fontSize.md, "14px"),
+    chipFontWeight: toStringToken(fontWeight.medium, "500"),
+    chipHeight: toStringToken(
+      asTokenTree(theme.styleTokens.control.height).sm,
+      "32px",
     ),
-    chipHeight: toStringToken(componentSpace.lg, "36px"),
-    chipBadgeBackground: isDark
-      ? toStringToken(neutral["600"], "#2F2F31")
-      : toStringToken(neutral["100"], "#E5E6EB"),
-    chipBadgeText: toStringToken(neutral["500"], "#3A3A3C"),
-    chipBadgeRadius: toStringToken(radius.pill ?? radius.md, "999px"),
-    chipBadgeActiveBackground: toStringToken(brand.primary, "#006EFF"),
-    chipBadgeActiveText: surface,
-    accent: toStringToken(brand.primary, "#006EFF"),
-    accentSurface: isDark
-      ? toStringToken(neutral["700"], "#232325")
-      : toStringToken(neutral["50"], "#F5F6FA"),
-    accentText: isDark
-      ? toStringToken(neutral["50"], "#F5F6FA")
-      : toStringToken(brand.secondary, "#0A3565"),
+    chipBadgeBackground: toStringToken(semantic.muted, "#F2F2F2"),
+    chipBadgeText: toStringToken(semantic.mutedForeground, "#6E6E77"),
+    chipBadgeRadius: toStringToken(radius.pill, "9999px"),
+    chipBadgeActiveBackground: toStringToken(semantic.secondary, "#F2F2F2"),
+    chipBadgeActiveText: toStringToken(semantic.secondaryForeground, "#121212"),
+    accent: toStringToken(semantic.primary, "#121212"),
+    accentSurface: toStringToken(semantic.primary, "#121212"),
+    accentText: toStringToken(semantic.primaryForeground, "#FFFFFF"),
     paddingInline: toStringToken(componentSpace.lg, "24px"),
     paddingBlock: toStringToken(componentSpace.md, "16px"),
     densePadding: toStringToken(componentSpace.sm, "8px"),
@@ -139,14 +106,13 @@ const extractFilterBarTokens = (
     rowGap: toStringToken(componentSpace.md, "16px"),
     actionGap: toStringToken(componentSpace.md, "16px"),
     dividerInset: toStringToken(componentSpace.xs, "8px"),
-    searchMinWidth: "280px",
+    searchMinWidth: toStringToken(
+      theme.styleTokens.control.searchMinWidth,
+      "240px",
+    ),
     radius: toStringToken(radius.lg, "16px"),
-    shadow: isDark
-      ? "0 8px 24px rgba(0, 0, 0, 0.65)"
-      : "0 8px 24px rgba(7, 33, 66, 0.08)",
-    dividerBackground: isDark
-      ? toStringToken(neutral["500"], "#3A3A3C")
-      : border,
+    shadow: toStringToken(theme.styleTokens.shadow.sm, "none"),
+    dividerBackground: toStringToken(semantic.border, "#D9D9DB"),
     motionDuration: toStringToken(duration.base, "200ms"),
     motionEasing: toStringToken(easing.standard, "cubic-bezier(0.2, 0, 0, 1)"),
   };
@@ -247,7 +213,7 @@ ${chip} {
   border-radius: ${tokens.chipRadius};
   border: 1px solid ${tokens.chipBorder};
   background: ${tokens.chipSurface};
-  color: ${tokens.chipText};
+  color: var(--lk-color-semantic-mutedforeground);
   font-size: ${tokens.chipFontSize};
   font-family: ${tokens.fontFamily};
   font-weight: ${tokens.chipFontWeight};
@@ -287,7 +253,7 @@ ${chipBadge} {
   font-size: 12px;
   border-radius: ${tokens.chipBadgeRadius};
   background: ${tokens.chipBadgeBackground};
-  color: ${tokens.chipBadgeText};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
 ${chip}[data-active='true'] ${chipBadge} {
@@ -317,6 +283,6 @@ export const filterBarKitComponent: KitComponentRegistration = {
   name: "filter-bar",
   mount(theme) {
     const css = buildFilterBarStyles(theme);
-    mountKitStyles(`filter-bar-${theme.mode}`, css);
+    theme.mountStyles(`filter-bar-${theme.mode}`, css, "kit");
   },
 };

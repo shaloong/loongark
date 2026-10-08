@@ -7,12 +7,12 @@ import { TokenTree } from "@loongark/tokens";
  */
 export const asTokenTree = (
   value: unknown,
-  path: string = "root"
+  path: string = "root",
 ): TokenTree => {
   if (value === null || value === undefined) {
     if (typeof window !== "undefined" && typeof console !== "undefined") {
       console.warn(
-        `[LoongArk] Token at path "${path}" is null/undefined, using empty object as fallback`
+        `[LoongArk] Token at path "${path}" is null/undefined, using empty object as fallback`,
       );
     }
     return {};
@@ -20,7 +20,7 @@ export const asTokenTree = (
   if (typeof value !== "object" || Array.isArray(value)) {
     if (typeof window !== "undefined" && typeof console !== "undefined") {
       console.warn(
-        `[LoongArk] Token at path "${path}" is not an object, got ${typeof value}, using empty object as fallback`
+        `[LoongArk] Token at path "${path}" is not an object, got ${typeof value}, using empty object as fallback`,
       );
     }
     return {};

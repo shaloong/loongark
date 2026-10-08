@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   LoongArkCarouselRoot,
   LoongArkCarouselItemGroup,
@@ -8,43 +9,63 @@ import {
   LoongArkCarouselNextTrigger,
   LoongArkCarouselIndicatorGroup,
   LoongArkCarouselIndicator,
+  LoongArkCarouselAutoplayTrigger,
+  LoongArkCarouselAutoplayIndicator,
 } from "@loongark/react";
-import type { CarouselSize } from "@loongark/primitives";
 
-interface CarouselExampleProps {
-  size?: CarouselSize;
+const slides = ["Aurora", "Nebula", "Orbit"];
+
+interface CarouselDemoProps {
+  size?: "sm" | "md" | "lg";
+  showAutoplay?: boolean;
+  showIndicators?: boolean;
+  dragDisabled?: boolean;
 }
 
-const slides = [
-  { title: "Aurora", description: "Soft gradients in motion." },
-  { title: "Nebula", description: "Deep space color fields." },
-  { title: "Orbit", description: "Precision alignment for teams." },
-];
-
-export const CarouselExample: React.FC<CarouselExampleProps> = ({
+const CarouselDemo = ({
   size = "md",
-}) => {
+  showAutoplay = false,
+  showIndicators = true,
+  dragDisabled = false,
+}: CarouselDemoProps) => {
   return (
-    <LoongArkCarouselRoot size={size} style={{ maxWidth: 420 }}>
+    <LoongArkCarouselRoot
+      slideCount={slides.length}
+      size={size}
+      allowMouseDrag={!dragDisabled}
+      style={{ maxWidth: 420 }}
+    >
       <LoongArkCarouselItemGroup>
         {slides.map((slide, index) => (
-          <LoongArkCarouselItem key={slide.title} index={index}>
+          <LoongArkCarouselItem key={slide} index={index}>
             <div style={{ display: "grid", gap: 4 }}>
-              <strong>{slide.title}</strong>
-              <span style={{ opacity: 0.7 }}>{slide.description}</span>
+              <strong>{slide}</strong>
+              <span style={{ opacity: 0.7 }}>Slide {index + 1}</span>
             </div>
           </LoongArkCarouselItem>
         ))}
       </LoongArkCarouselItemGroup>
       <LoongArkCarouselControl>
         <LoongArkCarouselPrevTrigger>Prev</LoongArkCarouselPrevTrigger>
-        <LoongArkCarouselIndicatorGroup>
-          {slides.map((_, index) => (
-            <LoongArkCarouselIndicator key={index} index={index} />
-          ))}
-        </LoongArkCarouselIndicatorGroup>
+        {showIndicators && (
+          <LoongArkCarouselIndicatorGroup>
+            {slides.map((_, index) => (
+              <LoongArkCarouselIndicator key={index} index={index} />
+            ))}
+          </LoongArkCarouselIndicatorGroup>
+        )}
         <LoongArkCarouselNextTrigger>Next</LoongArkCarouselNextTrigger>
+        {showAutoplay && (
+          <>
+            <LoongArkCarouselAutoplayTrigger>
+              Auto
+            </LoongArkCarouselAutoplayTrigger>
+            <LoongArkCarouselAutoplayIndicator />
+          </>
+        )}
       </LoongArkCarouselControl>
     </LoongArkCarouselRoot>
   );
 };
+export const CarouselExample = CarouselDemo;
+export type CarouselExampleProps = Parameters<typeof CarouselDemo>[0];

@@ -1,0 +1,261 @@
+name: Browser contracts
+
+on:
+  push:
+    branches: [develop, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "browser-contracts-${{ github.ref }}${{ contains(github.event.head_commit.message, 'CI-Scope: safari') && '-safari' || '' }}"
+  # 保留已启动的完整验收；后续推送合并为最新待运行批次，避免开发持续取消慢引擎。
+  cancel-in-progress: false
+
+jobs:
+  engines:
+    # Safari runner/偏好配置的独立复验保留已运行的 Linux 矩阵；产品批次仍运行全部引擎。
+    if: "${{ !contains(github.event.head_commit.message, 'CI-Scope: safari') }}"
+    name: Four frameworks / ${{ matrix.browser }}
+    runs-on: ubuntu-24.04
+    # WebKit 实测四端51.1分钟，之前完整 Story 33.8分钟，另需安装/构建与证据上传。
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    env:
+      CROSS_BROWSER: "1"
+      BROWSER_PROJECT: ${{ matrix.browser }}
+      DESIGN_AUDIT_DIR: .artifacts/browser-audits/${{ matrix.browser }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm verify
+      - run: pnpm check:contracts
+      - run: pnpm storybook:build
+      - run: pnpm check:coverage
+      - run: pnpm check:publication
+      - run: pnpm check:svelte
+      - run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
+      - run: node scripts/build-framework-fixtures.mjs
+      - run: node scripts/build-example-fixtures.mjs
+      # 先捕获已知WebKit宽度失败，避免完整四端运行后才取得诊断；断言保持原样。
+      - if: matrix.browser == 'webkit'
+        run: node scripts/run-playwright.mjs tests/chart-interaction.spec.ts tests/framework-consumers.spec.ts --project=webkit --workers=2 --grep='375|发布消费'
+        env:
+          STATIC_DIR: tests/consumer-dist
+          PORT: "6007"
+      - run: node scripts/run-framework-tests.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: p1-simulated-boundaries-${{ matrix.browser }}
+          path: |
+            .artifacts/p1-boundaries/accessibility/${{ matrix.browser }}/
+            .artifacts/p1-boundaries/mobile/${{ matrix.browser }}-*.png
+            .artifacts/p1-boundaries/axis/${{ matrix.browser }}-*.png
+            .artifacts/p1-boundaries/grid/${{ matrix.browser }}-*.png
+          include-hidden-files: true
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: browser-evidence-${{ matrix.browser }}
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*.json
+            .artifacts/browser-environment/
+            test-results/**/*.png
+            test-results/**/error-context.md
+            test-results/**/*.json
+            !test-results/**/*react*/**/*.png
+            !test-results/**/*vue*/**/*.png
+            !test-results/**/*solid*/**/*.png
+            !test-results/**/*svelte*/**/*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: browser-review-captures-${{ matrix.browser }}
+          path: |
+            .artifacts/gap-completion/chart-types-*-stack.png
+            .artifacts/gap-completion/drawer-directions-*-rtl-up-compact.png
+            .artifacts/gap-completion/editor-default-code-*.png
+            .artifacts/gap-completion/layout-grid-*-rtl.png
+            .artifacts/gap-completion/sheet-*.png
+            .artifacts/p0-close/default-corrections/*.png
+            .artifacts/p0-close/editable-*Story*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: browser-captures-${{ matrix.browser }}-react
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*react*.png
+            .artifacts/advanced-completion/*react*.png
+            .artifacts/date-paste/*react*.png
+            .artifacts/gap-completion/*react*.png
+            .artifacts/p0-consistency/*react*.png
+            .artifacts/p0-selection/*react*.png
+            .artifacts/p0-field/*react*.png
+            .artifacts/p0-close/*react*.png
+            test-results/**/*react*/**/*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: browser-captures-${{ matrix.browser }}-vue
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*vue*.png
+            .artifacts/advanced-completion/*vue*.png
+            .artifacts/date-paste/*vue*.png
+            .artifacts/gap-completion/*vue*.png
+            .artifacts/p0-consistency/*vue*.png
+            .artifacts/p0-selection/*vue*.png
+            .artifacts/p0-field/*vue*.png
+            .artifacts/p0-close/*vue*.png
+            test-results/**/*vue*/**/*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: browser-captures-${{ matrix.browser }}-solid
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*solid*.png
+            .artifacts/advanced-completion/*solid*.png
+            .artifacts/date-paste/*solid*.png
+            .artifacts/gap-completion/*solid*.png
+            .artifacts/p0-consistency/*solid*.png
+            .artifacts/p0-selection/*solid*.png
+            .artifacts/p0-field/*solid*.png
+            .artifacts/p0-close/*solid*.png
+            test-results/**/*solid*/**/*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: browser-captures-${{ matrix.browser }}-svelte
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*svelte*.png
+            .artifacts/advanced-completion/*svelte*.png
+            .artifacts/date-paste/*svelte*.png
+            .artifacts/gap-completion/*svelte*.png
+            .artifacts/p0-consistency/*svelte*.png
+            .artifacts/p0-selection/*svelte*.png
+            .artifacts/p0-field/*svelte*.png
+            .artifacts/p0-close/*svelte*.png
+            test-results/**/*svelte*/**/*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: browser-traces-${{ matrix.browser }}
+          path: test-results/**/trace.zip
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - id: stories
+        run: node scripts/run-playwright.mjs --project=${{ matrix.browser }} --workers=2
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always() && steps.stories.outcome != 'skipped'
+        with:
+          name: story-evidence-${{ matrix.browser }}
+          path: |
+            .artifacts/browser-audits/${{ matrix.browser }}/**/*.json
+            .artifacts/browser-audits/${{ matrix.browser }}/regressions/
+            .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-chart--*.png
+            .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-datatable--*.png
+            .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-questionnaire--*.png
+            .artifacts/advanced-completion/query-story-*.png
+            .artifacts/p0-close/default-corrections/*.png
+            .artifacts/p0-close/editable-*Story*.png
+            .artifacts/p0-consistency/*Story*.png
+            .artifacts/p0-selection/*Story*.png
+            .artifacts/p0-field/*Story*.png
+            .artifacts/browser-environment/
+            test-results/**/*.png
+            test-results/**/error-context.md
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always() && steps.stories.outcome != 'skipped'
+        with:
+          name: story-traces-${{ matrix.browser }}
+          path: test-results/**/trace.zip
+          retention-days: 14
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always() && steps.stories.outcome != 'skipped'
+        with:
+          name: story-default-captures-${{ matrix.browser }}
+          path: .artifacts/browser-audits/${{ matrix.browser }}/after/**/*.png
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: ignore
+
+  safari:
+    name: Native Safari / macOS
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm verify
+      - run: pnpm check:contracts
+      - run: pnpm storybook:build
+      - run: pnpm check:coverage
+      - run: pnpm check:publication
+      - run: pnpm check:svelte
+      - run: node scripts/build-framework-fixtures.mjs
+      - run: node scripts/build-example-fixtures.mjs
+      # 只配置本次临时 macOS runner；先用无组件的原生控件严格预检，再验收组件。
+      - name: Enable native Safari keyboard navigation
+        run: |
+          defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+          defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
+          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
+          defaults write com.apple.Safari WebKitPreferences.tabFocusesLinks -bool true
+          SAFARI_PREFS_PATH="$HOME/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari.plist"
+          mkdir -p "$(dirname "$SAFARI_PREFS_PATH")"
+          defaults write "$SAFARI_PREFS_PATH" WebKitPreferences.tabFocusesLinks -bool true
+      - run: sudo /usr/bin/safaridriver --enable
+      - run: node scripts/run-native-safari.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: native-safari
+          path: .artifacts/native-safari/
+          retention-days: 14
+          if-no-files-found: ignore

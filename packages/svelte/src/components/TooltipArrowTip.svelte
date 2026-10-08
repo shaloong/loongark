@@ -4,6 +4,11 @@
   const props: Partial<TooltipArrowTipProps> = {};
 </script>
 
-<Tooltip.ArrowTip {...props} data-scope="tooltip" data-part="arrow-tip">
+<Tooltip.ArrowTip
+  {...props}
+  data-scope="tooltip"
+  data-part="arrow-tip"
+  {...$$restProps}
+>
   <slot />
 </Tooltip.ArrowTip>

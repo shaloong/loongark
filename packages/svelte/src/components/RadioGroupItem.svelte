@@ -6,6 +6,6 @@
   export let invalid: boolean = false;
 </script>
 
-<RadioGroup.Item {value} {disabled} {invalid}>
+<RadioGroup.Item {value} {disabled} {invalid} {...$$restProps}>
   <slot />
 </RadioGroup.Item>

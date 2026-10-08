@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type ClipboardSize = "sm" | "md" | "lg";
@@ -42,22 +41,24 @@ interface ClipboardDesignTokens {
   };
 }
 
-const extractClipboardTokens = (theme: LoongArkTheme): ClipboardDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+const extractClipboardTokens = (
+  theme: LoongArkTheme,
+): ClipboardDesignTokens => {
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -122,13 +123,6 @@ const buildClipboardStyles = (theme: LoongArkTheme): string => {
   const disabledSelector = `${rootSelector}[data-disabled='true']`;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${rootSelector} {
   display: flex;
@@ -194,7 +188,7 @@ ${triggerSelector}:hover {
 ${indicatorSelector},
 ${valueTextSelector} {
   font-size: ${tokens.fontSize.sm};
-  color: ${tokens.neutral.placeholder};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
 ${rootSelector}[data-size='sm'] ${inputSelector} {
@@ -210,7 +204,7 @@ ${rootSelector}[data-size='lg'] ${inputSelector} {
 }
 
 ${disabledSelector} {
-  opacity: 0.85;
+  opacity: 1;
   cursor: not-allowed;
 }
 
@@ -218,7 +212,7 @@ ${disabledSelector} ${inputSelector},
 ${disabledSelector} ${triggerSelector} {
   background: ${tokens.disabled.bg};
   border-color: ${tokens.disabled.bg};
-  color: ${tokens.disabled.text};
+  color: var(--lk-color-semantic-foreground);
   cursor: not-allowed;
 }
 `;
@@ -259,8 +253,8 @@ const clipboardPrimitive = createPrimitive<ClipboardPrimitiveProps>(
   CLIPBOARD_CONTRACT,
   (theme) => {
     const css = buildClipboardStyles(theme);
-    mountPrimitiveStyles(`clipboard-${theme.mode}`, css);
-  }
+    theme.mountStyles(`clipboard-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(clipboardPrimitive);

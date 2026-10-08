@@ -4,14 +4,34 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "browser": "./dist/index.js",
+      "node": "./dist/server/index.js",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json",
+    "./editors": {
+      "types": "./dist/components/editors.d.ts",
+      "node": "./dist/server/editors.js",
+      "import": "./dist/components/editors.js",
+      "browser": "./dist/components/editors.js"
+    }
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "dependencies": {
-    "@ark-ui/solid": "^5.30.0",
+    "@ark-ui/solid": "^5.39.2",
     "@loongark/kit": "workspace:*",
     "@loongark/primitives": "workspace:*",
-    "@loongark/theme": "workspace:*"
+    "@loongark/theme": "workspace:*",
+    "@zag-js/solid": "1.43.3"
   },
   "peerDependencies": {
-    "solid-js": ">=1.8.0"
+    "solid-js": ">=1.9.17"
   },
   "peerDependenciesMeta": {
     "solid-js": {
@@ -19,6 +39,8 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json"
-  }
+    "build": "node ../../scripts/reset-build-info.mjs tsconfig.tsbuildinfo && tsc -p tsconfig.json && node ../../scripts/compile-solid.mjs dist && node ../../scripts/fix-dist-imports.mjs dist && node ../../scripts/build-solid-ssr.mjs"
+  },
+  "license": "MIT",
+  "sideEffects": false
 }

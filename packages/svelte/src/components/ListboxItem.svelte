@@ -1,16 +1,9 @@
 <script lang="ts">
   import { Listbox } from "@ark-ui/svelte/listbox";
 
-  export let item: any = undefined;
-  export let disabled: boolean | undefined = undefined;
+  export let item: object;
 </script>
 
-<Listbox.Item
-  {item}
-  {disabled}
-  data-scope="listbox"
-  data-part="item"
-  {...$$restProps}
->
+<Listbox.Item {item} data-scope="listbox" data-part="item" {...$$restProps}>
   <slot />
 </Listbox.Item>

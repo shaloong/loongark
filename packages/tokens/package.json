@@ -4,7 +4,19 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json"
-  }
+    "build": "tsc -p tsconfig.json && node ../../scripts/fix-dist-imports.mjs dist"
+  },
+  "license": "MIT"
 }

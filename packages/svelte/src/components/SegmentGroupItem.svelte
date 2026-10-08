@@ -1,17 +1,5 @@
 <script lang="ts">
-  import { ToggleGroup } from "@ark-ui/svelte/toggle-group";
-  import type { ToggleGroupItemProps } from "@ark-ui/svelte/toggle-group";
-
-  export let value: ToggleGroupItemProps["value"];
-  export let disabled: ToggleGroupItemProps["disabled"] = undefined;
+ import { SegmentGroup, type SegmentGroupItemProps } from "@ark-ui/svelte/segment-group";
+ let { ref=$bindable(null),children,...props }: SegmentGroupItemProps=$props();
 </script>
-
-<ToggleGroup.Item
-  {value}
-  {disabled}
-  data-scope="segment-group"
-  data-part="item"
-  {...$$restProps}
->
-  <slot />
-</ToggleGroup.Item>
+<SegmentGroup.Item {...props} bind:ref data-scope="segment-group" data-part="item">{@render children?.()}</SegmentGroup.Item>

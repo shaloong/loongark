@@ -1,3 +1,5 @@
+import type { ProgressRootProps as NativeProgressRootProps } from "@ark-ui/vue/progress";
+import { renderPart } from "../render-part";
 /**
  * Progress component - Vue wrapper.
  * Uses Ark UI Progress with data attributes for styling.
@@ -34,7 +36,7 @@ export const LoongArkProgressRoot = defineComponent({
       type: Number as PropType<number>,
     },
     translations: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeProgressRootProps["translations"]>,
     },
     onValueChange: {
       type: Function as PropType<(details: ProgressValueChangeDetails) => void>,
@@ -42,7 +44,7 @@ export const LoongArkProgressRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkProgress.Root,
         {
           ...attrs,
@@ -52,7 +54,7 @@ export const LoongArkProgressRoot = defineComponent({
           "data-size": props.size,
           "data-orientation": props.orientation,
         },
-        slots
+        slots,
       );
   },
 });
@@ -61,14 +63,14 @@ export const LoongArkProgressLabel = defineComponent({
   name: "LoongArkProgressLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkProgress.Label,
         {
           ...attrs,
           "data-scope": "progress",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -77,14 +79,14 @@ export const LoongArkProgressTrack = defineComponent({
   name: "LoongArkProgressTrack",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkProgress.Track,
         {
           ...attrs,
           "data-scope": "progress",
           "data-part": "track",
         },
-        slots
+        slots,
       );
   },
 });
@@ -93,14 +95,14 @@ export const LoongArkProgressRange = defineComponent({
   name: "LoongArkProgressRange",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkProgress.Range,
         {
           ...attrs,
           "data-scope": "progress",
           "data-part": "range",
         },
-        slots
+        slots,
       );
   },
 });
@@ -109,14 +111,14 @@ export const LoongArkProgressValueText = defineComponent({
   name: "LoongArkProgressValueText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkProgress.ValueText,
         {
           ...attrs,
           "data-scope": "progress",
           "data-part": "value-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -125,14 +127,14 @@ export const LoongArkProgressView = defineComponent({
   name: "LoongArkProgressView",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkProgress.View,
         {
           ...attrs,
           "data-scope": "progress",
           "data-part": "view",
         },
-        slots
+        slots,
       );
   },
 });
@@ -141,14 +143,14 @@ export const LoongArkProgressCircle = defineComponent({
   name: "LoongArkProgressCircle",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkProgress.Circle,
         {
           ...attrs,
           "data-scope": "progress",
           "data-part": "circle",
         },
-        slots
+        slots,
       );
   },
 });
@@ -157,14 +159,14 @@ export const LoongArkProgressCircleTrack = defineComponent({
   name: "LoongArkProgressCircleTrack",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkProgress.CircleTrack,
         {
           ...attrs,
           "data-scope": "progress",
           "data-part": "circle-track",
         },
-        slots
+        slots,
       );
   },
 });
@@ -173,14 +175,14 @@ export const LoongArkProgressCircleRange = defineComponent({
   name: "LoongArkProgressCircleRange",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkProgress.CircleRange,
         {
           ...attrs,
           "data-scope": "progress",
           "data-part": "circle-range",
         },
-        slots
+        slots,
       );
   },
 });

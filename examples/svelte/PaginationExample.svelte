@@ -23,7 +23,14 @@
   };
 </script>
 
-<LoongArkPaginationRoot {size} {orientation}>
+<LoongArkPaginationRoot
+  {size}
+  {orientation}
+  {page}
+  count={totalPages * 10}
+  pageSize={10}
+  onPageChange={(details) => (page = details.page)}
+>
   <LoongArkPaginationPrevTrigger
     disabled={page === 1}
     on:click={() => selectPage(Math.max(1, page - 1))}
@@ -33,6 +40,8 @@
   <LoongArkPaginationList>
     {#each pages as value}
       <LoongArkPaginationItem
+        type="page"
+        {value}
         aria-current={page === value ? "page" : undefined}
         data-selected={page === value ? "true" : undefined}
         on:click={() => selectPage(value)}

@@ -2,7 +2,7 @@
   import { Pagination } from "@ark-ui/svelte/pagination";
   import type { PaginationEllipsisProps } from "@ark-ui/svelte/pagination";
 
-  export let index: PaginationEllipsisProps["index"] = undefined;
+  export let index: PaginationEllipsisProps["index"];
 </script>
 
 <Pagination.Ellipsis

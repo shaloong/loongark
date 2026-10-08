@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { StepsPrevTriggerProps } from "@ark-ui/svelte/steps";
-export default class StepsPrevTrigger extends SvelteComponent<StepsPrevTriggerProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Steps } from "@ark-ui/svelte/steps";
+
+export default class LoongArkStepsPrevTrigger extends SvelteComponent<
+  Omit<ComponentProps<typeof Steps.PrevTrigger>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

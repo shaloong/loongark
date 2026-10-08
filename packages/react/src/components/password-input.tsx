@@ -1,3 +1,9 @@
+import { useFieldContext } from "@ark-ui/react/field";
+import { usePasswordInputContext } from "@ark-ui/react/password-input";
+import {
+  nativeSelectionProps,
+  nativeSelectionFieldDescription,
+} from "@loongark/kit";
 /**
  * Password Input component - React wrapper.
  * Uses Ark UI Password Input with data attributes for styling.
@@ -5,7 +11,10 @@
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { PasswordInput } from "@ark-ui/react/password-input";
-import type { PasswordInputSize, PasswordInputState } from "@loongark/primitives";
+import type {
+  PasswordInputSize,
+  PasswordInputState,
+} from "@loongark/primitives";
 
 type ArkPasswordInputRootProps = ComponentPropsWithoutRef<
   typeof PasswordInput.Root
@@ -26,41 +35,53 @@ type ArkPasswordInputVisibilityTriggerProps = ComponentPropsWithoutRef<
   typeof PasswordInput.VisibilityTrigger
 >;
 
-export interface LoongArkPasswordInputRootProps
-  extends Omit<ArkPasswordInputRootProps, "asChild"> {
+export interface LoongArkPasswordInputRootProps extends Omit<
+  ArkPasswordInputRootProps,
+  "asChild"
+> {
   size?: PasswordInputSize;
   state?: PasswordInputState;
   children?: ReactNode;
 }
 
-export interface LoongArkPasswordInputLabelProps
-  extends Omit<ArkPasswordInputLabelProps, "asChild"> {
+export interface LoongArkPasswordInputLabelProps extends Omit<
+  ArkPasswordInputLabelProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkPasswordInputControlProps
-  extends Omit<ArkPasswordInputControlProps, "asChild"> {
+export interface LoongArkPasswordInputControlProps extends Omit<
+  ArkPasswordInputControlProps,
+  "asChild"
+> {
   size?: PasswordInputSize;
   state?: PasswordInputState;
   disabled?: boolean;
   children?: ReactNode;
 }
 
-export interface LoongArkPasswordInputInputProps
-  extends Omit<ArkPasswordInputInputProps, "asChild"> {
+export interface LoongArkPasswordInputInputProps extends Omit<
+  ArkPasswordInputInputProps,
+  "asChild" | "size"
+> {
   size?: PasswordInputSize;
   state?: PasswordInputState;
   disabled?: boolean;
   readOnly?: boolean;
 }
 
-export interface LoongArkPasswordInputIndicatorProps
-  extends Omit<ArkPasswordInputIndicatorProps, "asChild"> {
+export interface LoongArkPasswordInputIndicatorProps extends Omit<
+  ArkPasswordInputIndicatorProps,
+  "asChild"
+> {
   children?: ReactNode;
 }
 
-export interface LoongArkPasswordInputVisibilityTriggerProps
-  extends Omit<ArkPasswordInputVisibilityTriggerProps, "asChild"> {
+export interface LoongArkPasswordInputVisibilityTriggerProps extends Omit<
+  ArkPasswordInputVisibilityTriggerProps,
+  "asChild"
+> {
   disabled?: boolean;
   children?: ReactNode;
 }
@@ -70,33 +91,31 @@ export const LoongArkPasswordInputRoot = forwardRef<
   LoongArkPasswordInputRootProps
 >(
   (
-    {
-      children,
-      size = "md",
-      state = "default",
-      disabled = false,
-      readOnly = false,
-      ...props
-    },
-    ref
+    { children, size = "md", state = "default", disabled, readOnly, ...props },
+    ref,
   ) => {
     return (
       <PasswordInput.Root
         {...props}
         ref={ref}
-        disabled={disabled}
-        readOnly={readOnly}
+        {...nativeSelectionProps({
+          disabled,
+          readOnly,
+          "data-disabled":
+            disabled === undefined ? undefined : String(disabled),
+          "data-readonly":
+            readOnly === undefined ? undefined : String(readOnly),
+        })}
+
         data-scope="password-input"
         data-part="root"
         data-size={size}
         data-state={state !== "default" ? state : undefined}
-        data-disabled={disabled ? "true" : undefined}
-        data-readonly={readOnly ? "true" : undefined}
       >
         {children}
       </PasswordInput.Root>
     );
-  }
+  },
 );
 
 LoongArkPasswordInputRoot.displayName = "LoongArkPasswordInputRoot";
@@ -122,59 +141,55 @@ LoongArkPasswordInputLabel.displayName = "LoongArkPasswordInputLabel";
 export const LoongArkPasswordInputControl = forwardRef<
   HTMLDivElement,
   LoongArkPasswordInputControlProps
->(
-  (
-    { children, size = "md", state = "default", disabled = false, ...props },
-    ref
-  ) => {
-    return (
-      <PasswordInput.Control
-        {...props}
-        ref={ref}
-        data-scope="password-input"
-        data-part="control"
-        data-size={size}
-        data-state={state !== "default" ? state : undefined}
-        data-disabled={disabled ? "true" : undefined}
-      >
-        {children}
-      </PasswordInput.Control>
-    );
-  }
-);
+>(({ children, size = "md", state = "default", disabled, ...props }, ref) => {
+  return (
+    <PasswordInput.Control
+      {...props}
+      ref={ref}
+      data-scope="password-input"
+      data-part="control"
+      data-size={size}
+      data-state={state !== "default" ? state : undefined}
+      {...nativeSelectionProps({
+        "data-disabled": disabled === undefined ? undefined : String(disabled),
+      })}
+    >
+      {children}
+    </PasswordInput.Control>
+  );
+});
 
 LoongArkPasswordInputControl.displayName = "LoongArkPasswordInputControl";
 
 export const LoongArkPasswordInputInput = forwardRef<
   HTMLInputElement,
   LoongArkPasswordInputInputProps
->(
-  (
-    {
-      size = "md",
-      state = "default",
-      disabled = false,
-      readOnly = false,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <PasswordInput.Input
-        {...props}
-        ref={ref}
-        disabled={disabled}
-        readOnly={readOnly}
-        data-scope="password-input"
-        data-part="input"
-        data-size={size}
-        data-state={state !== "default" ? state : undefined}
-        data-disabled={disabled ? "true" : undefined}
-        data-readonly={readOnly ? "true" : undefined}
-      />
-    );
-  }
-);
+>(({ size = "md", state = "default", disabled, readOnly, ...props }, ref) => {
+  const field = useFieldContext();
+  const api = usePasswordInputContext();
+  return (
+    <PasswordInput.Input
+      {...props}
+      ref={ref}
+      {...nativeSelectionProps({
+        disabled,
+        readOnly,
+        "data-disabled": disabled === undefined ? undefined : String(disabled),
+        "data-readonly": readOnly === undefined ? undefined : String(readOnly),
+      })}
+
+      data-scope="password-input"
+      aria-describedby={nativeSelectionFieldDescription(
+        props["aria-describedby"],
+        field,
+        api.getInputProps()["aria-invalid"],
+      )}
+      data-part="input"
+      data-size={size}
+      data-state={state !== "default" ? state : undefined}
+    />
+  );
+});
 
 LoongArkPasswordInputInput.displayName = "LoongArkPasswordInputInput";
 
@@ -199,15 +214,17 @@ LoongArkPasswordInputIndicator.displayName = "LoongArkPasswordInputIndicator";
 export const LoongArkPasswordInputVisibilityTrigger = forwardRef<
   HTMLButtonElement,
   LoongArkPasswordInputVisibilityTriggerProps
->(({ children, disabled = false, ...props }, ref) => {
+>(({ children, disabled, ...props }, ref) => {
   return (
     <PasswordInput.VisibilityTrigger
       {...props}
       ref={ref}
-      disabled={disabled}
+      {...nativeSelectionProps({
+        disabled,
+        "data-disabled": disabled === undefined ? undefined : String(disabled),
+      })}
       data-scope="password-input"
       data-part="visibility-trigger"
-      data-disabled={disabled ? "true" : undefined}
     >
       {children}
     </PasswordInput.VisibilityTrigger>

@@ -14,9 +14,9 @@ import {
 type ToastVariant = "info" | "success" | "warning" | "error";
 
 const createToast = (
-  toaster: ReturnType<typeof createToaster>,
+  toaster: ReturnType<typeof createToaster<React.ReactNode>>,
   type: ToastVariant,
-  title: string
+  title: string,
 ) => {
   const actionLabel = type === "success" ? "Undo" : "Details";
   toaster[type]({
@@ -36,10 +36,14 @@ export const ToastExample = () => {
   return (
     <LoongArkProvider mode="light">
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        <LoongArkButton onClick={() => createToast(toaster, "info", "Toast created")}>
+        <LoongArkButton
+          onClick={() => createToast(toaster, "info", "Toast created")}
+        >
           Create toast
         </LoongArkButton>
-        <LoongArkButton onClick={() => createToast(toaster, "success", "Saved successfully")}>
+        <LoongArkButton
+          onClick={() => createToast(toaster, "success", "Saved successfully")}
+        >
           Success
         </LoongArkButton>
       </div>
@@ -47,9 +51,13 @@ export const ToastExample = () => {
       <LoongArkToaster toaster={toaster}>
         {(toast) => (
           <LoongArkToastRoot>
-            {toast.title ? <LoongArkToastTitle>{toast.title}</LoongArkToastTitle> : null}
+            {toast.title ? (
+              <LoongArkToastTitle>{toast.title}</LoongArkToastTitle>
+            ) : null}
             {toast.description ? (
-              <LoongArkToastDescription>{toast.description}</LoongArkToastDescription>
+              <LoongArkToastDescription>
+                {toast.description}
+              </LoongArkToastDescription>
             ) : null}
             {toast.action ? (
               <LoongArkToastActionTrigger>

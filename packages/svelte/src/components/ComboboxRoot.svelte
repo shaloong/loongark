@@ -1,23 +1,24 @@
-<script lang="ts">
+<script lang="ts" generics="T extends object">
+  import type { ComboboxRootProps } from "@ark-ui/svelte/combobox";
   import { Combobox } from "@ark-ui/svelte/combobox";
   import type { ComboboxSize } from "@loongark/primitives";
   import { createComboboxSizeContext } from "./comboboxContext";
 
   export let size: ComboboxSize = "md";
 
-  export let collection: any;
+  export let collection: ComboboxRootProps<T>["collection"];
   export let closeOnSelect: boolean = true;
   export let composite: boolean = true;
   export let defaultHighlightedValue: string | undefined = undefined;
   export let defaultOpen: boolean | undefined = undefined;
   export let defaultValue: string[] | undefined = undefined;
   export let defaultInputValue: string | undefined = undefined;
-  export let deselectable: boolean | undefined = undefined;
+  export let unselectable: "on" | "off" | undefined = undefined;
   export let disabled: boolean | undefined = undefined;
   export let form: string | undefined = undefined;
   export let highlightedValue: string | undefined = undefined;
   export let id: string | undefined = undefined;
-  export let ids: any = undefined;
+  export let ids: ComboboxRootProps<T>["ids"] = undefined;
   export let immediate: boolean | undefined = undefined;
   export let inputValue: string | undefined = undefined;
   export let invalid: boolean | undefined = undefined;
@@ -26,13 +27,11 @@
   export let multiple: boolean | undefined = undefined;
   export let name: string | undefined = undefined;
   export let onInputValueChange:
-    | ((details: { inputValue: string }) => void)
-    | undefined = undefined;
+    ((details: { inputValue: string }) => void) | undefined = undefined;
   export let onValueChange:
-    | ((details: { value: string[] }) => void)
-    | undefined = undefined;
+    ((details: { value: string[] }) => void) | undefined = undefined;
   export let open: boolean | undefined = undefined;
-  export let positioning: any = undefined;
+  export let positioning: ComboboxRootProps<T>["positioning"] = undefined;
   export let present: boolean | undefined = undefined;
   export let readOnly: boolean | undefined = undefined;
   export let required: boolean | undefined = undefined;
@@ -53,7 +52,7 @@
   {defaultOpen}
   {defaultValue}
   {defaultInputValue}
-  {deselectable}
+  {unselectable}
   {disabled}
   {form}
   {highlightedValue}

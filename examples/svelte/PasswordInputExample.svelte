@@ -7,7 +7,10 @@
     LoongArkPasswordInputIndicator,
     LoongArkPasswordInputVisibilityTrigger,
   } from "@loongark/svelte";
-  import type { PasswordInputSize, PasswordInputState } from "@loongark/primitives";
+  import type {
+    PasswordInputSize,
+    PasswordInputState,
+  } from "@loongark/primitives";
 
   export let size: PasswordInputSize = "md";
   export let state: PasswordInputState = "default";

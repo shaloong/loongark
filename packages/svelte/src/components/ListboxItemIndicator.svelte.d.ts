@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { ListboxItemIndicatorProps } from "@ark-ui/svelte/listbox";
-export default class ListboxItemIndicator extends SvelteComponent<ListboxItemIndicatorProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Listbox } from "@ark-ui/svelte/listbox";
+
+export default class LoongArkListboxItemIndicator extends SvelteComponent<
+  Omit<ComponentProps<typeof Listbox.ItemIndicator>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

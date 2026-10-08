@@ -41,15 +41,16 @@ const listOptions = [
   { label: "Osaka", value: "osaka", group: "Japan" },
 ];
 
-const ListboxDemo = ({ size = "md", orientation = "vertical" }: ListboxDemoProps) => {
+const ListboxDemo = ({
+  size = "md",
+  orientation = "vertical",
+}: ListboxDemoProps) => {
   const [value, setValue] = useState<string[]>(["beijing"]);
   const collection = useMemo(
     () => createListCollection({ items: listOptions }),
-    []
+    [],
   );
-  const groups = Array.from(
-    new Set(listOptions.map((option) => option.group))
-  );
+  const groups = Array.from(new Set(listOptions.map((option) => option.group)));
 
   return (
     <LoongArkListboxRoot
@@ -63,13 +64,19 @@ const ListboxDemo = ({ size = "md", orientation = "vertical" }: ListboxDemoProps
       <LoongArkListboxList>
         {groups.map((group) => (
           <LoongArkListboxItemGroup key={group}>
-            <LoongArkListboxItemGroupLabel>{group}</LoongArkListboxItemGroupLabel>
+            <LoongArkListboxItemGroupLabel>
+              {group}
+            </LoongArkListboxItemGroupLabel>
             {listOptions
               .filter((option) => option.group === group)
               .map((option) => (
                 <LoongArkListboxItem key={option.value} item={option}>
-                  <LoongArkListboxItemText>{option.label}</LoongArkListboxItemText>
-                  <LoongArkListboxItemIndicator>Check</LoongArkListboxItemIndicator>
+                  <LoongArkListboxItemText>
+                    {option.label}
+                  </LoongArkListboxItemText>
+                  <LoongArkListboxItemIndicator>
+                    Check
+                  </LoongArkListboxItemIndicator>
                 </LoongArkListboxItem>
               ))}
           </LoongArkListboxItemGroup>

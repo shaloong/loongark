@@ -28,7 +28,7 @@ export const ButtonInputDialogExample: Component = () => {
             placeholder={defaultScenario.emailPlaceholder}
             value={email()}
             onInput={(
-              event: InputEvent & { currentTarget: HTMLInputElement }
+              event: InputEvent & { currentTarget: HTMLInputElement },
             ) => setEmail(event.currentTarget.value)}
           />
           <LoongArkInputSuffix

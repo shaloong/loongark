@@ -2,6 +2,6 @@
   import { Select } from "@ark-ui/svelte/select";
 </script>
 
-<Select.Positioner data-scope="select" data-part="positioner">
+<Select.Positioner data-scope="select" data-part="positioner" {...$$restProps}>
   <slot />
 </Select.Positioner>

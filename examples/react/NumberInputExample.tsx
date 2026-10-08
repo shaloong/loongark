@@ -36,11 +36,7 @@ export const NumberInputExample: React.FC<NumberInputExampleProps> = ({
       onValueChange={(details: { value: string }) => setValue(details.value)}
     >
       <LoongArkNumberInputLabel>Amount</LoongArkNumberInputLabel>
-      <LoongArkNumberInputControl
-        size={size}
-        state={state}
-        disabled={disabled}
-      >
+      <LoongArkNumberInputControl size={size} state={state} disabled={disabled}>
         <LoongArkNumberInputInput
           size={size}
           state={state}
@@ -50,16 +46,12 @@ export const NumberInputExample: React.FC<NumberInputExampleProps> = ({
           size={size}
           state={state}
           disabled={disabled}
-        >
-          +
-        </LoongArkNumberInputIncrementTrigger>
+        />
         <LoongArkNumberInputDecrementTrigger
           size={size}
           state={state}
           disabled={disabled}
-        >
-          -
-        </LoongArkNumberInputDecrementTrigger>
+        />
       </LoongArkNumberInputControl>
       <LoongArkNumberInputScrubber>Drag to adjust</LoongArkNumberInputScrubber>
       <LoongArkNumberInputValueText size={size}>

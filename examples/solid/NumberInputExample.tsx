@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 import {
@@ -18,7 +19,9 @@ export interface NumberInputExampleProps {
   disabled?: boolean;
 }
 
-export const NumberInputExample: Component<NumberInputExampleProps> = (props) => {
+export const NumberInputExample: Component<NumberInputExampleProps> = (
+  props,
+) => {
   const size = () => props.size ?? "md";
   const state = () => props.state ?? "default";
   const disabled = () => props.disabled ?? false;
@@ -50,16 +53,12 @@ export const NumberInputExample: Component<NumberInputExampleProps> = (props) =>
           size={size()}
           state={state()}
           disabled={disabled()}
-        >
-          +
-        </LoongArkNumberInputIncrementTrigger>
+        />
         <LoongArkNumberInputDecrementTrigger
           size={size()}
           state={state()}
           disabled={disabled()}
-        >
-          -
-        </LoongArkNumberInputDecrementTrigger>
+        />
       </LoongArkNumberInputControl>
       <LoongArkNumberInputScrubber>Drag to adjust</LoongArkNumberInputScrubber>
       <LoongArkNumberInputValueText size={size()}>

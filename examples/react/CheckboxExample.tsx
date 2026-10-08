@@ -38,7 +38,13 @@ export const CheckboxExample: React.FC<CheckboxExampleProps> = ({
         <LoongArkCheckboxHiddenInput />
       </LoongArkCheckboxRoot>
 
-      <p style={{ marginTop: "12px", fontSize: "14px", color: "#666" }}>
+      <p
+        style={{
+          marginTop: "12px",
+          fontSize: "14px",
+          color: "var(--lk-color-semantic-mutedforeground)",
+        }}
+      >
         状态: {checked ? "已选中" : "未选中"}
       </p>
     </div>

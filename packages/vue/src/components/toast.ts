@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Toast component - Vue wrapper
  * Based on Ark UI Toast, injects data-scope/data-part.
@@ -13,14 +14,14 @@ export const LoongArkToaster = defineComponent({
   name: "LoongArkToaster",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToaster,
         {
           ...attrs,
           "data-scope": "toast",
           "data-part": "group",
         },
-        slots
+        slots,
       );
   },
 });
@@ -29,14 +30,14 @@ export const LoongArkToastRoot = defineComponent({
   name: "LoongArkToastRoot",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToast.Root,
         {
           ...attrs,
           "data-scope": "toast",
           "data-part": "root",
         },
-        slots
+        slots,
       );
   },
 });
@@ -45,14 +46,14 @@ export const LoongArkToastTitle = defineComponent({
   name: "LoongArkToastTitle",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToast.Title,
         {
           ...attrs,
           "data-scope": "toast",
           "data-part": "title",
         },
-        slots
+        slots,
       );
   },
 });
@@ -61,14 +62,14 @@ export const LoongArkToastDescription = defineComponent({
   name: "LoongArkToastDescription",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToast.Description,
         {
           ...attrs,
           "data-scope": "toast",
           "data-part": "description",
         },
-        slots
+        slots,
       );
   },
 });
@@ -77,14 +78,14 @@ export const LoongArkToastActionTrigger = defineComponent({
   name: "LoongArkToastActionTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToast.ActionTrigger,
         {
           ...attrs,
           "data-scope": "toast",
           "data-part": "action-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -93,14 +94,14 @@ export const LoongArkToastCloseTrigger = defineComponent({
   name: "LoongArkToastCloseTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToast.CloseTrigger,
         {
           ...attrs,
           "data-scope": "toast",
           "data-part": "close-trigger",
         },
-        slots
+        slots,
       );
   },
 });

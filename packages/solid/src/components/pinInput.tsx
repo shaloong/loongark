@@ -24,11 +24,11 @@ export interface LoongArkPinInputRootProps {
   autoFocus?: boolean;
   selectOnFocus?: boolean;
   blurOnComplete?: boolean;
-  autoCapitalize?: boolean;
+  autoCapitalize?: JSX.HTMLAutocapitalize;
 }
 
 export const LoongArkPinInputRoot: Component<LoongArkPinInputRootProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps(
     {
@@ -36,7 +36,7 @@ export const LoongArkPinInputRoot: Component<LoongArkPinInputRootProps> = (
       state: "default" as PinInputState,
       disabled: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "children",
@@ -91,7 +91,7 @@ export interface LoongArkPinInputInputProps {
 }
 
 export const LoongArkPinInputInput: Component<LoongArkPinInputInputProps> = (
-  props
+  props,
 ) => {
   const merged = mergeProps(
     {
@@ -99,7 +99,7 @@ export const LoongArkPinInputInput: Component<LoongArkPinInputInputProps> = (
       state: "default" as PinInputState,
       autoCapitalize: false,
     },
-    props
+    props,
   );
   const [local, others] = splitProps(merged, [
     "size",
@@ -126,7 +126,7 @@ export interface LoongArkPinInputLabelProps {
 }
 
 export const LoongArkPinInputLabel: Component<LoongArkPinInputLabelProps> = (
-  props
+  props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
 

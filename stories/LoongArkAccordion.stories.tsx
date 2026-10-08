@@ -1,5 +1,7 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkAccordionRoot,
   LoongArkAccordionItem,
@@ -29,7 +31,7 @@ interface AccordionDemoProps {
   orientation?: "horizontal" | "vertical";
 }
 
-const panelStyle = { color: "#3A3A3C" };
+const panelStyle = { color: "var(--lk-color-semantic-foreground)" };
 
 const AccordionDemo = ({
   size = "md",
@@ -44,7 +46,9 @@ const AccordionDemo = ({
     <LoongArkAccordionItem value="item-1">
       <LoongArkAccordionItemTrigger>
         <span>Account settings</span>
-        <LoongArkAccordionItemIndicator>&gt;</LoongArkAccordionItemIndicator>
+        <LoongArkAccordionItemIndicator>
+          <LoongArkIcon icon={controlIcons.chevronRight} size="sm" />
+        </LoongArkAccordionItemIndicator>
       </LoongArkAccordionItemTrigger>
       <LoongArkAccordionItemContent>
         <div style={panelStyle}>
@@ -55,7 +59,9 @@ const AccordionDemo = ({
     <LoongArkAccordionItem value="item-2">
       <LoongArkAccordionItemTrigger>
         <span>Billing</span>
-        <LoongArkAccordionItemIndicator>&gt;</LoongArkAccordionItemIndicator>
+        <LoongArkAccordionItemIndicator>
+          <LoongArkIcon icon={controlIcons.chevronRight} size="sm" />
+        </LoongArkAccordionItemIndicator>
       </LoongArkAccordionItemTrigger>
       <LoongArkAccordionItemContent>
         <div style={panelStyle}>
@@ -66,7 +72,9 @@ const AccordionDemo = ({
     <LoongArkAccordionItem value="item-3">
       <LoongArkAccordionItemTrigger>
         <span>Integrations</span>
-        <LoongArkAccordionItemIndicator>&gt;</LoongArkAccordionItemIndicator>
+        <LoongArkAccordionItemIndicator>
+          <LoongArkIcon icon={controlIcons.chevronRight} size="sm" />
+        </LoongArkAccordionItemIndicator>
       </LoongArkAccordionItemTrigger>
       <LoongArkAccordionItemContent>
         <div style={panelStyle}>

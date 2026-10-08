@@ -1,8 +1,15 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "./icon";
+import type { CollectionItem } from "@ark-ui/vue/collection";
+import type { ComboboxRootProps as NativeComboboxRootProps } from "@ark-ui/vue/combobox";
+import type { ComboboxItemProps as NativeComboboxItemProps } from "@ark-ui/vue/combobox";
+import { renderPart } from "../render-part";
 /**
  * Combobox component - Vue wrapper.
  * Based on Ark UI Combobox with data attributes for styling.
  */
 import {
+  resolveDynamicComponent,
   defineComponent,
   h,
   provide,
@@ -38,7 +45,9 @@ export const LoongArkComboboxRoot = defineComponent({
       default: "md",
     },
     collection: {
-      type: Object as PropType<any>,
+      type: Object as PropType<
+        NativeComboboxRootProps<CollectionItem>["collection"]
+      >,
     },
     closeOnSelect: {
       type: Boolean as PropType<boolean>,
@@ -53,6 +62,7 @@ export const LoongArkComboboxRoot = defineComponent({
     },
     defaultOpen: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     defaultValue: {
       type: Array as PropType<string[]>,
@@ -62,9 +72,11 @@ export const LoongArkComboboxRoot = defineComponent({
     },
     deselectable: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     form: {
       type: String as PropType<string>,
@@ -76,16 +88,18 @@ export const LoongArkComboboxRoot = defineComponent({
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeComboboxRootProps<CollectionItem>["ids"]>,
     },
     immediate: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     inputValue: {
       type: String as PropType<string>,
     },
     invalid: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     lazyMount: {
       type: Boolean as PropType<boolean>,
@@ -97,6 +111,7 @@ export const LoongArkComboboxRoot = defineComponent({
     },
     multiple: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     name: {
       type: String as PropType<string>,
@@ -109,18 +124,24 @@ export const LoongArkComboboxRoot = defineComponent({
     },
     open: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     positioning: {
-      type: Object as PropType<any>,
+      type: Object as PropType<
+        NativeComboboxRootProps<CollectionItem>["positioning"]
+      >,
     },
     present: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     readOnly: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     required: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     skipAnimationOnMount: {
       type: Boolean as PropType<boolean>,
@@ -137,7 +158,7 @@ export const LoongArkComboboxRoot = defineComponent({
   setup(props, { slots, attrs }) {
     provide(comboboxSizeKey, toRef(props, "size"));
     return () =>
-      h(
+      renderPart(
         ArkComboboxRoot,
         {
           ...attrs,
@@ -146,7 +167,7 @@ export const LoongArkComboboxRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -155,14 +176,14 @@ export const LoongArkComboboxLabel = defineComponent({
   name: "LoongArkComboboxLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxLabel,
         {
           ...attrs,
           "data-scope": "combobox",
           "data-part": "label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -171,14 +192,14 @@ export const LoongArkComboboxControl = defineComponent({
   name: "LoongArkComboboxControl",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxControl,
         {
           ...attrs,
           "data-scope": "combobox",
           "data-part": "control",
         },
-        slots
+        slots,
       );
   },
 });
@@ -187,7 +208,7 @@ export const LoongArkComboboxInput = defineComponent({
   name: "LoongArkComboboxInput",
   setup(_, { attrs }) {
     return () =>
-      h(ArkComboboxInput, {
+      renderPart(resolveDynamicComponent(ArkComboboxInput), {
         ...attrs,
         "data-scope": "combobox",
         "data-part": "input",
@@ -199,14 +220,20 @@ export const LoongArkComboboxTrigger = defineComponent({
   name: "LoongArkComboboxTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxTrigger,
         {
           ...attrs,
           "data-scope": "combobox",
           "data-part": "trigger",
         },
-        slots
+        {
+          default:
+            slots.default ??
+            (() => [
+              h(LoongArkIcon, { icon: controlIcons.chevronDown, size: "sm" }),
+            ]),
+        },
       );
   },
 });
@@ -215,14 +242,14 @@ export const LoongArkComboboxClearTrigger = defineComponent({
   name: "LoongArkComboboxClearTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxClearTrigger,
         {
           ...attrs,
           "data-scope": "combobox",
           "data-part": "clear-trigger",
         },
-        slots
+        slots,
       );
   },
 });
@@ -231,14 +258,14 @@ export const LoongArkComboboxPositioner = defineComponent({
   name: "LoongArkComboboxPositioner",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxPositioner,
         {
           ...attrs,
           "data-scope": "combobox",
           "data-part": "positioner",
         },
-        slots
+        slots,
       );
   },
 });
@@ -248,7 +275,7 @@ export const LoongArkComboboxContent = defineComponent({
   setup(_, { slots, attrs }) {
     const size = inject(comboboxSizeKey, { value: "md" as ComboboxSize });
     return () =>
-      h(
+      renderPart(
         ArkComboboxContent,
         {
           ...attrs,
@@ -256,7 +283,7 @@ export const LoongArkComboboxContent = defineComponent({
           "data-part": "content",
           "data-size": size.value,
         },
-        slots
+        slots,
       );
   },
 });
@@ -265,14 +292,14 @@ export const LoongArkComboboxList = defineComponent({
   name: "LoongArkComboboxList",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxList,
         {
           ...attrs,
           "data-scope": "combobox",
           "data-part": "list",
         },
-        slots
+        slots,
       );
   },
 });
@@ -281,14 +308,14 @@ export const LoongArkComboboxItemGroup = defineComponent({
   name: "LoongArkComboboxItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxItemGroup,
         {
           ...attrs,
           "data-scope": "combobox",
           "data-part": "item-group",
         },
-        slots
+        slots,
       );
   },
 });
@@ -297,14 +324,14 @@ export const LoongArkComboboxItemGroupLabel = defineComponent({
   name: "LoongArkComboboxItemGroupLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxItemGroupLabel,
         {
           ...attrs,
           "data-scope": "combobox",
           "data-part": "item-group-label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -313,18 +340,20 @@ export const LoongArkComboboxItem = defineComponent({
   name: "LoongArkComboboxItem",
   props: {
     item: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeComboboxItemProps["item"]>,
     },
     persistFocus: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxItem,
         {
           ...attrs,
@@ -334,7 +363,7 @@ export const LoongArkComboboxItem = defineComponent({
           "data-scope": "combobox",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -343,14 +372,14 @@ export const LoongArkComboboxItemText = defineComponent({
   name: "LoongArkComboboxItemText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxItemText,
         {
           ...attrs,
           "data-scope": "combobox",
           "data-part": "item-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -359,14 +388,18 @@ export const LoongArkComboboxItemIndicator = defineComponent({
   name: "LoongArkComboboxItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkComboboxItemIndicator,
         {
           ...attrs,
           "data-scope": "combobox",
           "data-part": "item-indicator",
         },
-        slots
+        {
+          default:
+            slots.default ??
+            (() => [h(LoongArkIcon, { icon: controlIcons.check, size: "sm" })]),
+        },
       );
   },
 });

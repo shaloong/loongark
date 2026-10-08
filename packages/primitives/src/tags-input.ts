@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type TagsInputSize = "sm" | "md" | "lg";
@@ -47,22 +46,24 @@ interface TagsInputDesignTokens {
   };
 }
 
-const extractTagsInputTokens = (theme: LoongArkTheme): TagsInputDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+const extractTagsInputTokens = (
+  theme: LoongArkTheme,
+): TagsInputDesignTokens => {
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -132,16 +133,9 @@ const buildTagsInputStyles = (theme: LoongArkTheme): string => {
   const hiddenInputSelector = `${scopeSelector}[data-part="hidden-input"]`;
   const invalidSelector = `${controlSelector}[data-state='invalid']`;
   const successSelector = `${controlSelector}[data-state='success']`;
-  const disabledSelector = `${controlSelector}[data-disabled='true']`;
+  const disabledSelector = `${controlSelector}:is([data-disabled=''],[data-disabled='true'])`;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${rootSelector} {
   display: inline-flex;
@@ -160,6 +154,7 @@ ${labelSelector} {
 }
 
 ${controlSelector} {
+  cursor: text;
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
@@ -200,7 +195,7 @@ ${itemInputSelector} {
 }
 
 ${inputSelector}::placeholder {
-  color: ${tokens.neutral.placeholder};
+  color: var(--lk-color-semantic-mutedforeground);
 }
 
 ${itemSelector} {
@@ -232,7 +227,7 @@ ${clearTriggerSelector} {
   justify-content: center;
   border: none;
   background: none;
-  color: ${tokens.neutral.placeholder};
+  color: var(--lk-color-semantic-mutedforeground);
   cursor: pointer;
   padding: 0;
   font: inherit;
@@ -275,7 +270,7 @@ ${disabledSelector} {
 
 ${disabledSelector} ${itemSelector} {
   background: ${tokens.disabled.bg};
-  color: ${tokens.disabled.text};
+  color: var(--lk-color-semantic-foreground);
 }
 
 ${disabledSelector} ${itemDeleteSelector},
@@ -328,8 +323,8 @@ const tagsInputPrimitive = createPrimitive<TagsInputPrimitiveProps>(
   TAGS_INPUT_CONTRACT,
   (theme) => {
     const css = buildTagsInputStyles(theme);
-    mountPrimitiveStyles(`tags-input-${theme.mode}`, css);
-  }
+    theme.mountStyles(`tags-input-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(tagsInputPrimitive);

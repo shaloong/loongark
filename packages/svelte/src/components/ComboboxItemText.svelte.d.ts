@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { ComboboxItemTextProps } from "@ark-ui/svelte/combobox";
-export default class ComboboxItemText extends SvelteComponent<ComboboxItemTextProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { Combobox } from "@ark-ui/svelte/combobox";
+
+export default class LoongArkComboboxItemText extends SvelteComponent<
+  Omit<ComponentProps<typeof Combobox.ItemText>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

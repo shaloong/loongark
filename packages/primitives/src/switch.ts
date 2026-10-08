@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toStringToken } from "./tokenUtils";
 
 export type SwitchSize = "sm" | "md" | "lg";
@@ -42,13 +41,13 @@ interface SwitchDesignTokens {
 }
 
 const extractSwitchTokens = (theme: LoongArkTheme): SwitchDesignTokens => {
-  const space = theme.tokens.space as TokenTree;
+  const space = theme.styleTokens.space as TokenTree;
   const componentSpace = asTokenTree(space.component);
-  const radius = theme.tokens.radius as TokenTree;
-  const color = theme.tokens.color as TokenTree;
+  const radius = theme.styleTokens.radius as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -115,6 +114,7 @@ const buildSwitchStyles = (theme: LoongArkTheme): string => {
 ${control}[data-size='${size}'] {
   width: ${tokens.track.width[size]};
   height: ${tokens.track.height[size]};
+  margin-block-start: calc((var(--lk-control-height-xs) - ${tokens.track.height[size]}) / 2);
   padding: ${tokens.track.padding[size]};
 }
 
@@ -124,18 +124,15 @@ ${thumb}[data-size='${size}'] {
 }
 
 ${control}[data-size='${size}'][data-state='checked'] ${thumb} {
-  transform: translateX(calc(${tokens.track.width[size]} - ${tokens.thumb.size[size]} - (${tokens.track.padding[size]} * 2) - 2px));
+  transform: translateX(calc(${tokens.track.width[size]} - ${tokens.thumb.size[size]} - (${tokens.track.padding[size]} * 2)));
+}
+
+${control}[data-size='${size}'][data-state='checked']:dir(rtl) ${thumb} {
+  transform: translateX(calc(-1 * (${tokens.track.width[size]} - ${tokens.thumb.size[size]} - (${tokens.track.padding[size]} * 2))));
 }
 `;
 
   return `
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-lk-motion="force"]) * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 ${root} {
   display: inline-flex;
@@ -145,7 +142,7 @@ ${root} {
 
 ${label} {
   cursor: pointer;
-  color: ${tokens.track.borderHover};
+  color: var(--lk-color-semantic-mutedforeground);
   user-select: none;
 }
 
@@ -174,8 +171,8 @@ ${control}:focus-visible {
 }
 
 
-${root}[data-disabled='true'] ${control},
-${control}[data-disabled='true'] {
+${root}:is([data-disabled=''],[data-disabled='true']) ${control},
+${control}:is([data-disabled=''],[data-disabled='true']) {
   cursor: not-allowed;
   background: ${tokens.disabled.track};
   border-color: ${tokens.disabled.border};
@@ -193,17 +190,17 @@ ${control}[data-state='checked'] ${thumb} {
   background: ${tokens.thumb.bg};
 }
 
-${root}[data-disabled='true'] ${thumb},
-${control}[data-disabled='true'] ${thumb} {
+${root}:is([data-disabled=''],[data-disabled='true']) ${thumb},
+${control}:is([data-disabled=''],[data-disabled='true']) ${thumb} {
   background: ${tokens.disabled.thumb};
 }
 
-${control}[data-state='checked'][data-disabled='true'] {
+${control}[data-state='checked']:is([data-disabled=''],[data-disabled='true']) {
   background: ${tokens.disabled.track};
   border-color: ${tokens.disabled.border};
 }
 
-${label}[data-disabled='true'] {
+${label}:is([data-disabled=''],[data-disabled='true']) {
   color: ${tokens.disabled.thumb};
   cursor: not-allowed;
 }
@@ -245,8 +242,8 @@ const switchPrimitive = createPrimitive<SwitchPrimitiveProps>(
   SWITCH_CONTRACT,
   (theme) => {
     const css = buildSwitchStyles(theme);
-    mountPrimitiveStyles(`switch-${theme.mode}`, css);
-  }
+    theme.mountStyles(`switch-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(switchPrimitive);

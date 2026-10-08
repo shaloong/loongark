@@ -4,6 +4,11 @@
   export let id: PopoverPositionerProps["id"] = undefined;
 </script>
 
-<Popover.Positioner {...{ id }} data-scope="popover" data-part="positioner">
+<Popover.Positioner
+  {...{ id }}
+  data-scope="popover"
+  data-part="positioner"
+  {...$$restProps}
+>
   <slot />
 </Popover.Positioner>

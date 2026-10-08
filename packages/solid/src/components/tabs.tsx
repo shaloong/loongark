@@ -6,15 +6,17 @@ import { type Component, type JSX, mergeProps } from "solid-js";
 import {
   Tabs as ArkTabs,
   type TabsRootProps as ArkTabsRootProps,
-  type TabsListProps as ArkTabsListProps,
-  type TabsTriggerProps as ArkTabsTriggerProps,
-  type TabsContentProps as ArkTabsContentProps,
-  type TabsIndicatorProps as ArkTabsIndicatorProps,
+  type TabListProps as ArkTabListProps,
+  type TabTriggerProps as ArkTabTriggerProps,
+  type TabContentProps as ArkTabContentProps,
+  type TabIndicatorProps as ArkTabIndicatorProps,
 } from "@ark-ui/solid/tabs";
 import type { TabsOrientation, TabsSize } from "@loongark/primitives";
 
-export interface LoongArkTabsRootProps
-  extends Omit<ArkTabsRootProps, "asChild"> {
+export interface LoongArkTabsRootProps extends Omit<
+  ArkTabsRootProps,
+  "asChild"
+> {
   size?: TabsSize;
   orientation?: TabsOrientation;
   children?: JSX.Element;
@@ -23,12 +25,12 @@ export interface LoongArkTabsRootProps
 export const LoongArkTabsRoot: Component<LoongArkTabsRootProps> = (props) => {
   const merged = mergeProps(
     { size: "md" as TabsSize, orientation: "horizontal" as TabsOrientation },
-    props
+    props,
   );
 
   return (
     <ArkTabs.Root
-      {...(props as any)}
+      {...props}
       orientation={merged.orientation}
       data-scope="tabs"
       data-part="root"
@@ -41,7 +43,7 @@ export const LoongArkTabsRoot: Component<LoongArkTabsRootProps> = (props) => {
 };
 
 export const LoongArkTabsList: Component<
-  ArkTabsListProps & { children?: JSX.Element }
+  ArkTabListProps & { children?: JSX.Element }
 > = (props) => {
   return (
     <ArkTabs.List {...props} data-scope="tabs" data-part="list">
@@ -51,7 +53,7 @@ export const LoongArkTabsList: Component<
 };
 
 export const LoongArkTabsTrigger: Component<
-  ArkTabsTriggerProps & { children?: JSX.Element }
+  ArkTabTriggerProps & { children?: JSX.Element }
 > = (props) => {
   return (
     <ArkTabs.Trigger {...props} data-scope="tabs" data-part="trigger">
@@ -61,7 +63,7 @@ export const LoongArkTabsTrigger: Component<
 };
 
 export const LoongArkTabsContent: Component<
-  ArkTabsContentProps & { children?: JSX.Element }
+  ArkTabContentProps & { children?: JSX.Element }
 > = (props) => {
   return (
     <ArkTabs.Content {...props} data-scope="tabs" data-part="content">
@@ -71,7 +73,7 @@ export const LoongArkTabsContent: Component<
 };
 
 export const LoongArkTabsIndicator: Component<
-  ArkTabsIndicatorProps & { children?: JSX.Element }
+  ArkTabIndicatorProps & { children?: JSX.Element }
 > = (props) => {
   return (
     <ArkTabs.Indicator {...props} data-scope="tabs" data-part="indicator">

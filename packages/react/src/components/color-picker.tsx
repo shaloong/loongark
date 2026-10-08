@@ -5,11 +5,15 @@
 import React, { forwardRef, createElement } from "react";
 import type { ComponentPropsWithoutRef, FC, ReactNode } from "react";
 import { ColorPicker } from "@ark-ui/react/color-picker";
-import { Portal as ArkPortal } from "@ark-ui/react/portal";
+import { Portal as ArkPortal } from "./portal";
 import type { ColorPickerSize } from "@loongark/primitives";
 
-type ArkColorPickerRootProps = ComponentPropsWithoutRef<typeof ColorPicker.Root>;
-type ArkColorPickerLabelProps = ComponentPropsWithoutRef<typeof ColorPicker.Label>;
+type ArkColorPickerRootProps = ComponentPropsWithoutRef<
+  typeof ColorPicker.Root
+>;
+type ArkColorPickerLabelProps = ComponentPropsWithoutRef<
+  typeof ColorPicker.Label
+>;
 type ArkColorPickerControlProps = ComponentPropsWithoutRef<
   typeof ColorPicker.Control
 >;
@@ -22,8 +26,12 @@ type ArkColorPickerPositionerProps = ComponentPropsWithoutRef<
 type ArkColorPickerContentProps = ComponentPropsWithoutRef<
   typeof ColorPicker.Content
 >;
-type ArkColorPickerViewProps = ComponentPropsWithoutRef<typeof ColorPicker.View>;
-type ArkColorPickerAreaProps = ComponentPropsWithoutRef<typeof ColorPicker.Area>;
+type ArkColorPickerViewProps = ComponentPropsWithoutRef<
+  typeof ColorPicker.View
+>;
+type ArkColorPickerAreaProps = ComponentPropsWithoutRef<
+  typeof ColorPicker.Area
+>;
 type ArkColorPickerAreaBackgroundProps = ComponentPropsWithoutRef<
   typeof ColorPicker.AreaBackground
 >;
@@ -83,10 +91,12 @@ type ArkColorPickerHiddenInputProps = ComponentPropsWithoutRef<
 >;
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
-  createElement(ArkPortal as unknown as FC<{ children?: ReactNode }>, null, children);
+  createElement(ArkPortal, null, children);
 
-export interface LoongArkColorPickerRootProps
-  extends Omit<ArkColorPickerRootProps, "asChild"> {
+export interface LoongArkColorPickerRootProps extends Omit<
+  ArkColorPickerRootProps,
+  "asChild"
+> {
   size?: ColorPickerSize;
   children?: ReactNode;
 }
@@ -392,7 +402,7 @@ LoongArkColorPickerSwatchTrigger.displayName =
   "LoongArkColorPickerSwatchTrigger";
 
 export const LoongArkColorPickerSwatchIndicator = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   ArkColorPickerSwatchIndicatorProps
 >((props, ref) => {
   return (
@@ -442,7 +452,7 @@ LoongArkColorPickerTransparencyGrid.displayName =
   "LoongArkColorPickerTransparencyGrid";
 
 export const LoongArkColorPickerValueText = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   ArkColorPickerValueTextProps
 >((props, ref) => {
   return (
@@ -458,7 +468,7 @@ export const LoongArkColorPickerValueText = forwardRef<
 LoongArkColorPickerValueText.displayName = "LoongArkColorPickerValueText";
 
 export const LoongArkColorPickerValueSwatch = forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   ArkColorPickerValueSwatchProps
 >((props, ref) => {
   return (
@@ -521,8 +531,7 @@ export const LoongArkColorPickerFormatSelect = forwardRef<
   );
 });
 
-LoongArkColorPickerFormatSelect.displayName =
-  "LoongArkColorPickerFormatSelect";
+LoongArkColorPickerFormatSelect.displayName = "LoongArkColorPickerFormatSelect";
 
 export const LoongArkColorPickerHiddenInput = forwardRef<
   HTMLInputElement,
@@ -538,5 +547,4 @@ export const LoongArkColorPickerHiddenInput = forwardRef<
   );
 });
 
-LoongArkColorPickerHiddenInput.displayName =
-  "LoongArkColorPickerHiddenInput";
+LoongArkColorPickerHiddenInput.displayName = "LoongArkColorPickerHiddenInput";

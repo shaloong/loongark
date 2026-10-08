@@ -1,29 +1,69 @@
 <script lang="ts">
-  import { RadioGroup } from "@ark-ui/svelte/radio-group";
-  import type { RadioGroupSize, RadioGroupOrientation } from "@loongark/primitives";
-
-  export let size: RadioGroupSize = "md";
-  export let orientation: RadioGroupOrientation = "vertical";
-  export let defaultValue: string | undefined = undefined;
-  export let value: string | undefined = undefined;
-  export let disabled: boolean = false;
-  export let readOnly: boolean = false;
-  export let name: string | undefined = undefined;
-  export let form: string | undefined = undefined;
-  export let onValueChange: ((details: { value: string }) => void) | undefined = undefined;
+  import { nativeSelectionProps } from "@loongark/kit";
+  import {
+    RadioGroup,
+    useRadioGroup,
+    type RadioGroupRootProps,
+  } from "@ark-ui/svelte/radio-group";
+  import type {
+    RadioGroupSize,
+    RadioGroupOrientation,
+  } from "@loongark/primitives";
+  let {
+    children,
+    ref = $bindable(null),
+    value = $bindable(),
+    size = "md",
+    orientation = "vertical",
+    defaultValue,
+    disabled,
+    invalid,
+    readOnly,
+    required,
+    name,
+    form,
+    id,
+    ids,
+    onValueChange,
+    ...dom
+  }: RadioGroupRootProps & {
+    size?: RadioGroupSize;
+    orientation?: RadioGroupOrientation;
+  } = $props();
+  const providedId = $props.id();
+  const api = useRadioGroup(() => ({
+    ...nativeSelectionProps({
+      ids,
+      value,
+      defaultValue,
+      disabled,
+      invalid,
+      readOnly,
+      required,
+      name,
+      form,
+      orientation,
+      onValueChange(
+        details: Parameters<
+          NonNullable<RadioGroupRootProps["onValueChange"]>
+        >[0],
+      ) {
+        if (!onValueChange) value = details.value;
+        onValueChange?.(details);
+      },
+    }),
+    id: id ?? providedId,
+  }));
 </script>
 
-<RadioGroup.Root
-  {defaultValue}
-  {value}
-  {disabled}
-  {readOnly}
-  {name}
-  {form}
-  {orientation}
-  {onValueChange}
+<RadioGroup.RootProvider
+  value={api}
+  bind:ref
+  {...dom}
+  data-scope="radio-group"
+  data-part="root"
   data-size={size}
   data-orientation={orientation}
 >
-  <slot />
-</RadioGroup.Root>
+  {@render children?.()}
+</RadioGroup.RootProvider>

@@ -15,7 +15,8 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: "LoongArkClipboard provides copy-friendly input styling and states.",
+        component:
+          "LoongArkClipboard provides copy-friendly input styling and states.",
       },
     },
   },
@@ -47,7 +48,9 @@ const ClipboardDemo = ({
           onChange={(event) => setValue(event.target.value)}
           readOnly={disabled}
         />
-        <LoongArkClipboardTrigger disabled={disabled}>Copy</LoongArkClipboardTrigger>
+        <LoongArkClipboardTrigger disabled={disabled}>
+          Copy
+        </LoongArkClipboardTrigger>
       </LoongArkClipboardControl>
       {showIndicator && (
         <LoongArkClipboardIndicator>Copied</LoongArkClipboardIndicator>

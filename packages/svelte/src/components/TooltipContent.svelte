@@ -8,7 +8,7 @@
   {...props}
   data-scope="tooltip"
   data-part="content"
-  data-interactive={props.interactive ? "true" : undefined}
+  {...$$restProps}
 >
   <slot />
 </Tooltip.Content>

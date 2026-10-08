@@ -1,4 +1,5 @@
 import React from "react";
+import { EditableStatesExample } from "../examples/react/EditableStatesExample";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   LoongArkEditableRoot,
@@ -17,7 +18,8 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: "LoongArkEditable provides inline editing with control states.",
+        component:
+          "LoongArkEditable provides inline editing with control states.",
       },
     },
   },
@@ -50,9 +52,7 @@ const EditableDemo = ({
       value={value}
       onValueChange={(details: { value: string }) => setValue(details.value)}
     >
-      {showLabel && (
-        <LoongArkEditableLabel>Project name</LoongArkEditableLabel>
-      )}
+      {showLabel && <LoongArkEditableLabel>Project name</LoongArkEditableLabel>}
       <LoongArkEditableArea>
         <LoongArkEditablePreview />
         <LoongArkEditableInput state={state} />
@@ -83,13 +83,7 @@ export const Variants: Story = {
 };
 
 export const States: Story = {
-  render: () => (
-    <div style={{ display: "grid", gap: 16 }}>
-      <EditableDemo state="default" />
-      <EditableDemo state="invalid" />
-      <EditableDemo state="success" />
-    </div>
-  ),
+  render: () => <EditableStatesExample />,
 };
 
 export const Sizes: Story = {

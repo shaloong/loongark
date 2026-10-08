@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Scroll Area component - Vue wrapper.
  * Uses Ark UI Scroll Area with data attributes for styling.
@@ -16,7 +17,7 @@ export const LoongArkScrollAreaRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkScrollArea.Root,
         {
           ...attrs,
@@ -25,7 +26,7 @@ export const LoongArkScrollAreaRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -34,14 +35,15 @@ export const LoongArkScrollAreaViewport = defineComponent({
   name: "LoongArkScrollAreaViewport",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkScrollArea.Viewport,
         {
+          tabindex: 0,
           ...attrs,
           "data-scope": "scroll-area",
           "data-part": "viewport",
         },
-        slots
+        slots,
       );
   },
 });
@@ -50,14 +52,14 @@ export const LoongArkScrollAreaContent = defineComponent({
   name: "LoongArkScrollAreaContent",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkScrollArea.Content,
         {
           ...attrs,
           "data-scope": "scroll-area",
           "data-part": "content",
         },
-        slots
+        slots,
       );
   },
 });
@@ -66,14 +68,14 @@ export const LoongArkScrollAreaScrollbar = defineComponent({
   name: "LoongArkScrollAreaScrollbar",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkScrollArea.Scrollbar,
         {
           ...attrs,
           "data-scope": "scroll-area",
           "data-part": "scrollbar",
         },
-        slots
+        slots,
       );
   },
 });
@@ -82,14 +84,14 @@ export const LoongArkScrollAreaThumb = defineComponent({
   name: "LoongArkScrollAreaThumb",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkScrollArea.Thumb,
         {
           ...attrs,
           "data-scope": "scroll-area",
           "data-part": "thumb",
         },
-        slots
+        slots,
       );
   },
 });
@@ -98,14 +100,14 @@ export const LoongArkScrollAreaCorner = defineComponent({
   name: "LoongArkScrollAreaCorner",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkScrollArea.Corner,
         {
           ...attrs,
           "data-scope": "scroll-area",
           "data-part": "corner",
         },
-        slots
+        slots,
       );
   },
 });

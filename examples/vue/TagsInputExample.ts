@@ -1,3 +1,5 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/vue";
 import { defineComponent, h, ref, type PropType } from "vue";
 import {
   LoongArkTagsInputRoot,
@@ -40,6 +42,7 @@ export const TagsInputExample = defineComponent({
       h(
         LoongArkTagsInputRoot,
         {
+          name: "frameworks",
           size: props.size,
           state: props.state,
           disabled: props.disabled,
@@ -75,12 +78,16 @@ export const TagsInputExample = defineComponent({
                                 default: () => tag,
                               }),
                               h(LoongArkTagsInputItemDeleteTrigger, null, {
-                                default: () => "×",
+                                default: () =>
+                                  h(LoongArkIcon, {
+                                    icon: controlIcons.close,
+                                    size: "sm",
+                                  }),
                               }),
                             ],
                           }),
-                      }
-                    )
+                      },
+                    ),
                   ),
                   h(LoongArkTagsInputInput, {
                     size: props.size,
@@ -93,11 +100,11 @@ export const TagsInputExample = defineComponent({
                     default: () => "Clear",
                   }),
                 ],
-              }
+              },
             ),
             h(LoongArkTagsInputHiddenInput),
           ],
-        }
+        },
       );
   },
 });

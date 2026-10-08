@@ -1,14 +1,17 @@
 <script lang="ts">
+  import { nativeSelectionProps } from "@loongark/kit";
   import { PasswordInput } from "@ark-ui/svelte/password-input";
 
-  export let disabled: boolean = false;
+  export let disabled: boolean | undefined = undefined;
 </script>
 
 <PasswordInput.VisibilityTrigger
-  {disabled}
+  {...nativeSelectionProps({ disabled })}
   data-scope="password-input"
   data-part="visibility-trigger"
-  data-disabled={disabled ? "true" : undefined}
+  {...nativeSelectionProps({
+    "data-disabled": disabled === undefined ? undefined : String(disabled),
+  })}
   {...$$restProps}
 >
   <slot />

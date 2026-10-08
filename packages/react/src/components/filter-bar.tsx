@@ -1,7 +1,13 @@
+import type {
+  HTMLAttributes,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  ButtonHTMLAttributes,
+} from "react";
 import { ark } from "@ark-ui/react";
 import { forwardRef, ReactNode } from "react";
 
-export interface LoongArkFilterBarProps extends Record<string, unknown> {
+export interface LoongArkFilterBarProps extends HTMLAttributes<HTMLDivElement> {
   dense?: boolean;
   align?: "start" | "center";
   children?: ReactNode;
@@ -25,7 +31,7 @@ export const LoongArkFilterBar = forwardRef<
 
 LoongArkFilterBar.displayName = "LoongArkFilterBar";
 
-export interface LoongArkFilterSectionProps extends Record<string, unknown> {
+export interface LoongArkFilterSectionProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
@@ -64,7 +70,7 @@ LoongArkFilterBarActions.displayName = "LoongArkFilterBarActions";
 
 export const LoongArkFilterDivider = forwardRef<
   HTMLSpanElement,
-  Record<string, unknown>
+  React.ComponentPropsWithoutRef<"span">
 >((props, ref) => (
   <ark.span
     {...props}
@@ -78,7 +84,7 @@ export const LoongArkFilterDivider = forwardRef<
 
 LoongArkFilterDivider.displayName = "LoongArkFilterDivider";
 
-export interface LoongArkFilterChipProps extends Record<string, unknown> {
+export interface LoongArkFilterChipProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean;
   children?: ReactNode;
   type?: "button" | "submit" | "reset";

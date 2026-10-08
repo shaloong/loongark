@@ -20,15 +20,23 @@ export const LoongArkPopoverRoot = (props: ArkPopoverRootProps) => (
 );
 
 export const LoongArkPopoverTrigger = (props: ArkPopoverTriggerProps) => {
-  const merged = mergeProps({ asChild: true }, props);
-  return <ArkPopover.Trigger {...merged} data-scope="popover" data-part="trigger" />;
+  const merged = mergeProps({}, props);
+  return (
+    <ArkPopover.Trigger {...merged} data-scope="popover" data-part="trigger" />
+  );
 };
 
 export const LoongArkPopoverPositioner = (props: ArkPopoverPositionerProps) => (
-  <ArkPopover.Positioner {...props} data-scope="popover" data-part="positioner" />
+  <ArkPopover.Positioner
+    {...props}
+    data-scope="popover"
+    data-part="positioner"
+  />
 );
 
-export const LoongArkPopoverContent = (props: ArkPopoverContentProps & { showArrow?: boolean }) => (
+export const LoongArkPopoverContent = (
+  props: ArkPopoverContentProps & { showArrow?: boolean },
+) => (
   <ArkPopover.Content
     {...props}
     data-scope="popover"
@@ -45,10 +53,22 @@ export const LoongArkPopoverTitle = (props: ArkPopoverTitleProps) => (
   <ArkPopover.Title {...props} data-scope="popover" data-part="title" />
 );
 
-export const LoongArkPopoverDescription = (props: ArkPopoverDescriptionProps) => (
-  <ArkPopover.Description {...props} data-scope="popover" data-part="description" />
+export const LoongArkPopoverDescription = (
+  props: ArkPopoverDescriptionProps,
+) => (
+  <ArkPopover.Description
+    {...props}
+    data-scope="popover"
+    data-part="description"
+  />
 );
 
-export const LoongArkPopoverCloseTrigger = (props: ArkPopoverCloseTriggerProps) => (
-  <ArkPopover.CloseTrigger {...props} data-scope="popover" data-part="close-trigger" />
+export const LoongArkPopoverCloseTrigger = (
+  props: ArkPopoverCloseTriggerProps,
+) => (
+  <ArkPopover.CloseTrigger
+    {...props}
+    data-scope="popover"
+    data-part="close-trigger"
+  />
 );

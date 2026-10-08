@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    parseColor,
     LoongArkColorPickerRoot,
     LoongArkColorPickerLabel,
     LoongArkColorPickerControl,
@@ -25,15 +26,22 @@
 
   export let size: ColorPickerSize = "md";
 
-  let value = "#6366F1";
-  const swatches = ["#0EA5E9", "#8B5CF6", "#F97316", "#10B981"];
+  let value = parseColor("#006EFF");
+  const swatches = ["#006EFF", "#0A3565", "#5AC8FA", "#F58220"];
 
-  const handleValueChange = (details: { value: string }) => {
+  const handleValueChange = (details: {
+    value: ReturnType<typeof parseColor>;
+  }) => {
     value = details.value;
   };
 </script>
 
-<LoongArkColorPickerRoot {size} {value} onValueChange={handleValueChange}>
+<LoongArkColorPickerRoot
+  defaultFormat="hsla"
+  {size}
+  {value}
+  onValueChange={handleValueChange}
+>
   <LoongArkColorPickerLabel>Brand color</LoongArkColorPickerLabel>
   <LoongArkColorPickerControl>
     <LoongArkColorPickerTrigger>
@@ -42,14 +50,14 @@
     </LoongArkColorPickerTrigger>
   </LoongArkColorPickerControl>
   <LoongArkColorPickerPositioner>
-    <LoongArkColorPickerContent>
+    <LoongArkColorPickerContent aria-label="Choose brand color">
       <div style="display: grid; gap: 12px;">
-        <LoongArkColorPickerView>
+        <LoongArkColorPickerView format="hsla">
           <LoongArkColorPickerArea>
             <LoongArkColorPickerAreaBackground />
             <LoongArkColorPickerAreaThumb />
           </LoongArkColorPickerArea>
-          <LoongArkColorPickerChannelSlider channel="h">
+          <LoongArkColorPickerChannelSlider channel="hue">
             <LoongArkColorPickerChannelSliderTrack />
             <LoongArkColorPickerChannelSliderThumb />
           </LoongArkColorPickerChannelSlider>
@@ -58,8 +66,10 @@
         <LoongArkColorPickerSwatchGroup>
           {#each swatches as swatch}
             <LoongArkColorPickerSwatchTrigger value={swatch}>
-              <LoongArkColorPickerSwatch value={swatch} />
-              <LoongArkColorPickerSwatchIndicator />
+              <LoongArkColorPickerSwatch value={swatch}
+                ><LoongArkColorPickerSwatchIndicator
+                /></LoongArkColorPickerSwatch
+              >
             </LoongArkColorPickerSwatchTrigger>
           {/each}
         </LoongArkColorPickerSwatchGroup>

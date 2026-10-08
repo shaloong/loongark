@@ -1,10 +1,13 @@
+import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@loongark/react";
 import React, { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkInputRoot,
   LoongArkInputControl,
   LoongArkInputLabel,
   LoongArkInputHelperText,
+  LoongArkInputGroup,
   LoongArkInputPrefix,
   LoongArkInputSuffix,
 } from "@loongark/react";
@@ -13,7 +16,7 @@ const meta = {
   title: "Components/Input",
   component: LoongArkInputRoot,
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
   },
   tags: ["autodocs"],
   argTypes: {
@@ -55,17 +58,21 @@ const meta = {
     variant: "default",
     inputType: "text",
   },
-} satisfies Meta<typeof LoongArkInputRoot>;
+} satisfies Meta<
+  React.ComponentProps<typeof LoongArkInputRoot> & { inputType?: string }
+>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<
+  React.ComponentProps<typeof LoongArkInputRoot> & { inputType?: string }
+>;
 
-const inputContainerStyle = { width: "360px" };
-const inputStackStyle = {
+const inputContainerStyle: React.CSSProperties = { width: "min(100%, 360px)" };
+const inputStackStyle: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   gap: "16px",
-  width: "360px",
+  width: "min(100%, 360px)",
 };
 
 // 交互式演示
@@ -154,16 +161,20 @@ export const WithPrefix: Story = {
           variant={args.variant}
         >
           <LoongArkInputLabel>搜索</LoongArkInputLabel>
-          <LoongArkInputPrefix>🔍</LoongArkInputPrefix>
-          <LoongArkInputControl
-            size={args.size}
-            state={args.state}
-            disabled={args.disabled}
-            readOnly={args.readOnly}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder={args.variant === "floating" ? "" : "搜索内容"}
-          />
+          <LoongArkInputGroup>
+            <LoongArkInputPrefix>
+              <LoongArkIcon icon={controlIcons.search} size="sm" />
+            </LoongArkInputPrefix>
+            <LoongArkInputControl
+              size={args.size}
+              state={args.state}
+              disabled={args.disabled}
+              readOnly={args.readOnly}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              placeholder={args.variant === "floating" ? "" : "搜索内容"}
+            />
+          </LoongArkInputGroup>
         </LoongArkInputRoot>
       </div>
     );
@@ -184,20 +195,26 @@ export const WithSuffix: Story = {
           variant={args.variant}
         >
           <LoongArkInputLabel>邮箱</LoongArkInputLabel>
-          <LoongArkInputControl
-            size={args.size}
-            state={args.state}
-            disabled={args.disabled}
-            readOnly={args.readOnly}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder={args.variant === "floating" ? "" : "your@email.com"}
-          />
-          {value && (
-            <LoongArkInputSuffix action="clear" onClick={() => setValue("")}>
-              ✕
-            </LoongArkInputSuffix>
-          )}
+          <LoongArkInputGroup>
+            <LoongArkInputControl
+              size={args.size}
+              state={args.state}
+              disabled={args.disabled}
+              readOnly={args.readOnly}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              placeholder={args.variant === "floating" ? "" : "your@email.com"}
+            />
+            {value && (
+              <LoongArkInputSuffix
+                aria-label="清空输入"
+                action="clear"
+                onClick={() => setValue("")}
+              >
+                <LoongArkIcon icon={controlIcons.close} size="sm" />
+              </LoongArkInputSuffix>
+            )}
+          </LoongArkInputGroup>
           <LoongArkInputHelperText>
             请输入有效的邮箱地址
           </LoongArkInputHelperText>
@@ -221,18 +238,20 @@ export const WithPrefixAndSuffix: Story = {
           variant={args.variant}
         >
           <LoongArkInputLabel>金额</LoongArkInputLabel>
-          <LoongArkInputPrefix>￥</LoongArkInputPrefix>
-          <LoongArkInputControl
-            size={args.size}
-            state={args.state}
-            disabled={args.disabled}
-            readOnly={args.readOnly}
-            type="number"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder={args.variant === "floating" ? "" : "0.00"}
-          />
-          <LoongArkInputSuffix>CNY</LoongArkInputSuffix>
+          <LoongArkInputGroup>
+            <LoongArkInputPrefix>￥</LoongArkInputPrefix>
+            <LoongArkInputControl
+              size={args.size}
+              state={args.state}
+              disabled={args.disabled}
+              readOnly={args.readOnly}
+              type="number"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              placeholder={args.variant === "floating" ? "" : "0.00"}
+            />
+            <LoongArkInputSuffix>CNY</LoongArkInputSuffix>
+          </LoongArkInputGroup>
         </LoongArkInputRoot>
       </div>
     );

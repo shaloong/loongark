@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export interface PopoverPrimitiveProps {
@@ -33,21 +32,21 @@ interface PopoverDesignTokens {
 }
 
 const extractPopoverTokens = (theme: LoongArkTheme): PopoverDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
-  const shadow = asTokenTree(theme.tokens.shadow);
-  const zIndex = asTokenTree(theme.tokens.zIndex);
+  const radius = asTokenTree(theme.styleTokens.radius);
+  const shadow = asTokenTree(theme.styleTokens.shadow);
+  const zIndex = asTokenTree(theme.styleTokens.zIndex);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -75,13 +74,6 @@ const extractPopoverTokens = (theme: LoongArkTheme): PopoverDesignTokens => {
 const buildPopoverStyles = (theme: LoongArkTheme): string => {
   const tokens = extractPopoverTokens(theme);
   return `
-  @media (prefers-reduced-motion: reduce) {
-    :root:not([data-lk-motion="force"]) [data-scope="popover"] * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 
   [data-scope="popover"][data-part="positioner"] {
     z-index: ${tokens.zIndex};
@@ -228,7 +220,7 @@ const popoverContract: PrimitiveContract<PopoverPrimitiveProps> = {
 
 const PopoverPrimitive = createPrimitive(popoverContract, (theme) => {
   const css = buildPopoverStyles(theme);
-  mountPrimitiveStyles(`popover-${theme.mode}`, css);
+  theme.mountStyles(`popover-${theme.mode}`, css);
 });
 
 registerPrimitive(PopoverPrimitive);

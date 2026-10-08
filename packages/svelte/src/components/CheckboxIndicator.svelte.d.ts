@@ -1,8 +1,11 @@
-import type { SvelteComponent } from "svelte";
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { CheckboxIndicator } from "@ark-ui/svelte/checkbox";
 
-export interface CheckboxIndicatorProps {
-  indeterminate?: boolean;
-}
-
-declare class CheckboxIndicatorComponent extends SvelteComponent<CheckboxIndicatorProps> {}
-export default CheckboxIndicatorComponent;
+export default class LoongArkCheckboxIndicator extends SvelteComponent<
+  Omit<
+    ComponentProps<typeof CheckboxIndicator>,
+    "children" | "indeterminate"
+  > & { indeterminate?: boolean },
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}

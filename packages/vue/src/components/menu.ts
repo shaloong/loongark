@@ -1,3 +1,10 @@
+import { useForwardExpose } from "@ark-ui/vue/utils";
+import type { MenuContextTriggerProps } from "@ark-ui/vue/menu";
+import { ark } from "@ark-ui/vue/factory";
+import { contextMenuPointerHandler } from "@loongark/kit";
+import type { MenuRootEmits as NativeMenuRootEmits } from "@ark-ui/vue/menu";
+import type { MenuRootProps as NativeMenuRootProps } from "@ark-ui/vue/menu";
+import { renderPart } from "../render-part";
 /**
  * Menu component - Vue wrapper
  * Based on Ark UI Menu, injects data-scope/data-part attributes.
@@ -8,12 +15,13 @@ import {
   inject,
   provide,
   toRef,
+  mergeProps,
   type PropType,
 } from "vue";
 import {
   MenuRoot as ArkMenuRoot,
   MenuTrigger as ArkMenuTrigger,
-  MenuContextTrigger as ArkMenuContextTrigger,
+  useMenuContext,
   MenuPositioner as ArkMenuPositioner,
   MenuContent as ArkMenuContent,
   MenuArrow as ArkMenuArrow,
@@ -45,19 +53,25 @@ export const LoongArkMenuRoot = defineComponent({
       type: String as PropType<string>,
     },
     ids: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeMenuRootProps["ids"]>,
     },
     open: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     defaultOpen: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     onOpenChange: {
-      type: Function as PropType<any>,
+      type: Function as PropType<
+        (...args: NativeMenuRootEmits["openChange"]) => void
+      >,
     },
     onSelect: {
-      type: Function as PropType<any>,
+      type: Function as PropType<
+        (...args: NativeMenuRootEmits["select"]) => void
+      >,
     },
     highlightedValue: {
       type: String as PropType<string>,
@@ -66,46 +80,56 @@ export const LoongArkMenuRoot = defineComponent({
       type: String as PropType<string>,
     },
     onHighlightChange: {
-      type: Function as PropType<any>,
+      type: Function as PropType<
+        (...args: NativeMenuRootEmits["highlightChange"]) => void
+      >,
     },
     anchorPoint: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeMenuRootProps["anchorPoint"]>,
     },
     positioning: {
-      type: Object as PropType<any>,
+      type: Object as PropType<NativeMenuRootProps["positioning"]>,
     },
     closeOnSelect: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     loopFocus: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     typeahead: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     composite: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     navigate: {
-      type: Function as PropType<any>,
+      type: Function as PropType<NativeMenuRootProps["navigate"]>,
     },
     lazyMount: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     unmountOnExit: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     present: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     skipAnimationOnMount: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
   },
   setup(props, { slots, attrs }) {
     provide(menuSizeKey, toRef(props, "size"));
     return () =>
-      h(
+      renderPart(
         ArkMenuRoot,
         {
           ...attrs,
@@ -114,7 +138,7 @@ export const LoongArkMenuRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -123,7 +147,7 @@ export const LoongArkMenuTrigger = defineComponent({
   name: "LoongArkMenuTrigger",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuTrigger,
         {
           ...attrs,
@@ -131,40 +155,63 @@ export const LoongArkMenuTrigger = defineComponent({
           "data-scope": "menu",
           "data-part": "trigger",
         },
-        slots
+        slots,
       );
   },
 });
 
-export const LoongArkMenuContextTrigger = defineComponent({
-  name: "LoongArkMenuContextTrigger",
-  setup(_, { slots, attrs }) {
-    return () =>
-      h(
-        ArkMenuContextTrigger,
-        {
-          ...attrs,
-          asChild: true,
-          "data-scope": "menu",
-          "data-part": "context-trigger",
-        },
-        slots
-      );
-  },
-});
+export const createMenuContextTrigger = (defaultAsChild = true) =>
+  defineComponent(
+    (props: MenuContextTriggerProps, { slots, attrs }) => {
+      const menu = useMenuContext();
+      useForwardExpose();
+      return () => {
+        const native = menu.value.getContextTriggerProps();
+        return renderPart(
+          ark.button,
+          mergeProps(
+            {
+              ...native,
+              onPointerdown: contextMenuPointerHandler(native.onPointerdown),
+              onPointerup: contextMenuPointerHandler(native.onPointerup),
+              onPointermove: contextMenuPointerHandler(native.onPointermove),
+              onPointercancel: contextMenuPointerHandler(
+                native.onPointercancel,
+              ),
+            },
+            { ...props },
+            attrs,
+            {
+              asChild: props.asChild ?? defaultAsChild,
+              "data-scope": "menu",
+              "data-part": "context-trigger",
+            },
+          ),
+          slots,
+        );
+      };
+    },
+    {
+      name: "LoongArkMenuContextTrigger",
+      props: { asChild: { type: Boolean, default: undefined } },
+      inheritAttrs: false,
+    },
+  );
+
+export const LoongArkMenuContextTrigger = createMenuContextTrigger();
 
 export const LoongArkMenuPositioner = defineComponent({
   name: "LoongArkMenuPositioner",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuPositioner,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "positioner",
         },
-        slots
+        slots,
       );
   },
 });
@@ -174,7 +221,7 @@ export const LoongArkMenuContent = defineComponent({
   setup(_, { slots, attrs }) {
     const size = inject(menuSizeKey, { value: "md" as MenuSize });
     return () =>
-      h(
+      renderPart(
         ArkMenuContent,
         {
           ...attrs,
@@ -182,7 +229,7 @@ export const LoongArkMenuContent = defineComponent({
           "data-part": "content",
           "data-size": size.value,
         },
-        slots
+        slots,
       );
   },
 });
@@ -191,14 +238,14 @@ export const LoongArkMenuArrow = defineComponent({
   name: "LoongArkMenuArrow",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuArrow,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "arrow",
         },
-        slots
+        slots,
       );
   },
 });
@@ -207,14 +254,14 @@ export const LoongArkMenuArrowTip = defineComponent({
   name: "LoongArkMenuArrowTip",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuArrowTip,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "arrow-tip",
         },
-        slots
+        slots,
       );
   },
 });
@@ -223,14 +270,14 @@ export const LoongArkMenuItem = defineComponent({
   name: "LoongArkMenuItem",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuItem,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -239,14 +286,14 @@ export const LoongArkMenuTriggerItem = defineComponent({
   name: "LoongArkMenuTriggerItem",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuTriggerItem,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "trigger-item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -255,14 +302,14 @@ export const LoongArkMenuCheckboxItem = defineComponent({
   name: "LoongArkMenuCheckboxItem",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuCheckboxItem,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -271,14 +318,14 @@ export const LoongArkMenuRadioItem = defineComponent({
   name: "LoongArkMenuRadioItem",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuRadioItem,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "item",
         },
-        slots
+        slots,
       );
   },
 });
@@ -287,14 +334,14 @@ export const LoongArkMenuRadioItemGroup = defineComponent({
   name: "LoongArkMenuRadioItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuRadioItemGroup,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "item-group",
         },
-        slots
+        slots,
       );
   },
 });
@@ -303,14 +350,14 @@ export const LoongArkMenuItemGroup = defineComponent({
   name: "LoongArkMenuItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuItemGroup,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "item-group",
         },
-        slots
+        slots,
       );
   },
 });
@@ -319,14 +366,14 @@ export const LoongArkMenuItemGroupLabel = defineComponent({
   name: "LoongArkMenuItemGroupLabel",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuItemGroupLabel,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "item-group-label",
         },
-        slots
+        slots,
       );
   },
 });
@@ -335,14 +382,14 @@ export const LoongArkMenuItemText = defineComponent({
   name: "LoongArkMenuItemText",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuItemText,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "item-text",
         },
-        slots
+        slots,
       );
   },
 });
@@ -351,14 +398,14 @@ export const LoongArkMenuItemIndicator = defineComponent({
   name: "LoongArkMenuItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuItemIndicator,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "item-indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -367,14 +414,14 @@ export const LoongArkMenuIndicator = defineComponent({
   name: "LoongArkMenuIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuIndicator,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "indicator",
         },
-        slots
+        slots,
       );
   },
 });
@@ -383,14 +430,14 @@ export const LoongArkMenuSeparator = defineComponent({
   name: "LoongArkMenuSeparator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkMenuSeparator,
         {
           ...attrs,
           "data-scope": "menu",
           "data-part": "separator",
         },
-        slots
+        slots,
       );
   },
 });

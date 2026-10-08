@@ -1,3 +1,4 @@
+import { renderPart } from "../render-part";
 /**
  * Toggle component - Vue wrapper.
  * Based on Ark UI Toggle.
@@ -15,12 +16,15 @@ export const LoongArkToggleRoot = defineComponent({
     },
     pressed: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     defaultPressed: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     disabled: {
       type: Boolean as PropType<boolean>,
+      default: undefined,
     },
     onPressedChange: {
       type: Function as PropType<(pressed: boolean) => void>,
@@ -28,7 +32,7 @@ export const LoongArkToggleRoot = defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToggle.Root,
         {
           ...attrs,
@@ -37,7 +41,7 @@ export const LoongArkToggleRoot = defineComponent({
           "data-part": "root",
           "data-size": props.size,
         },
-        slots
+        slots,
       );
   },
 });
@@ -46,14 +50,14 @@ export const LoongArkToggleIndicator = defineComponent({
   name: "LoongArkToggleIndicator",
   setup(_, { slots, attrs }) {
     return () =>
-      h(
+      renderPart(
         ArkToggle.Indicator,
         {
           ...attrs,
           "data-scope": "toggle",
           "data-part": "indicator",
         },
-        slots
+        slots,
       );
   },
 });

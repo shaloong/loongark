@@ -5,7 +5,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type PaginationSize = "sm" | "md" | "lg";
@@ -45,23 +44,23 @@ interface PaginationDesignTokens {
 }
 
 const extractPaginationTokens = (
-  theme: LoongArkTheme
+  theme: LoongArkTheme,
 ): PaginationDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
   const fontWeight = asTokenTree(typography.fontWeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const brand = asTokenTree(color.brand);
   const neutral = asTokenTree(color.neutral);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -118,18 +117,12 @@ const buildPaginationStyles = (theme: LoongArkTheme): string => {
   const prev = `[data-scope="pagination"][data-part="prev-trigger"]`;
   const next = `[data-scope="pagination"][data-part="next-trigger"]`;
   const ellipsis = `[data-scope="pagination"][data-part="ellipsis"]`;
-  const button = `${item}, ${prev}, ${next}`;
-  const interactiveButton =
-    `${button}:not([disabled]):not([data-disabled='true'])`;
+  const first = `[data-scope="pagination"][data-part="first-trigger"]`;
+  const last = `[data-scope="pagination"][data-part="last-trigger"]`;
+  const button = `:is(${item}, ${prev}, ${next}, ${first}, ${last})`;
+  const interactiveButton = `${button}:not([disabled]):not([data-disabled='true'])`;
 
   return `
-  @media (prefers-reduced-motion: reduce) {
-    :root:not([data-lk-motion="force"]) [data-scope="pagination"] * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 
   ${root} {
     display: inline-flex;
@@ -201,7 +194,7 @@ const buildPaginationStyles = (theme: LoongArkTheme): string => {
   }
 
   ${ellipsis} {
-    color: ${tokens.neutral.textMuted};
+    color: var(--lk-color-semantic-mutedforeground);
     font-family: ${tokens.fontFamily};
     font-size: ${tokens.fontSize.md};
     padding: ${tokens.paddingY.md} ${tokens.paddingX.sm};
@@ -264,7 +257,7 @@ const paginationContract: PrimitiveContract<PaginationPrimitiveProps> = {
 
 const PaginationPrimitive = createPrimitive(paginationContract, (theme) => {
   const css = buildPaginationStyles(theme);
-  mountPrimitiveStyles(`pagination-${theme.mode}`, css);
+  theme.mountStyles(`pagination-${theme.mode}`, css);
 });
 
 registerPrimitive(PaginationPrimitive);

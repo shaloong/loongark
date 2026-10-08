@@ -5,6 +5,11 @@
   export let id: PopoverArrowProps["id"] = undefined;
 </script>
 
-<Popover.Arrow {...{ asChild, id }} data-scope="popover" data-part="arrow">
+<Popover.Arrow
+  {...{ asChild, id }}
+  data-scope="popover"
+  data-part="arrow"
+  {...$$restProps}
+>
   <slot />
 </Popover.Arrow>

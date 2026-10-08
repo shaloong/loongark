@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { LoongArkIcon } from "@loongark/svelte";
+  import { controlIcons } from "@loongark/kit";
   import {
     LoongArkRatingGroupRoot,
     LoongArkRatingGroupLabel,
@@ -18,12 +20,17 @@
   };
 </script>
 
-<LoongArkRatingGroupRoot {size} {disabled} {value} onValueChange={handleValueChange}>
+<LoongArkRatingGroupRoot
+  {size}
+  {disabled}
+  {value}
+  onValueChange={handleValueChange}
+>
   <LoongArkRatingGroupLabel>Rating</LoongArkRatingGroupLabel>
   <LoongArkRatingGroupControl>
     {#each [1, 2, 3, 4, 5] as item}
-      <LoongArkRatingGroupItem value={item}>
-        {item <= value ? "*" : "-"}
+      <LoongArkRatingGroupItem index={item}>
+        <LoongArkIcon icon={controlIcons.star} size="lg" />
       </LoongArkRatingGroupItem>
     {/each}
   </LoongArkRatingGroupControl>

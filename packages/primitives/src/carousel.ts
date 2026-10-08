@@ -1,7 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import { mountPrimitiveStyles } from "./styleSheet";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
 export type CarouselSize = "sm" | "md" | "lg";
@@ -33,20 +32,20 @@ interface CarouselDesignTokens {
 }
 
 const extractCarouselTokens = (theme: LoongArkTheme): CarouselDesignTokens => {
-  const typography = theme.tokens.typography as TokenTree;
+  const typography = theme.styleTokens.typography as TokenTree;
   const fontFamily = asTokenTree(typography.fontFamily);
   const fontSize = asTokenTree(typography.fontSize);
   const lineHeight = asTokenTree(typography.lineHeight);
 
-  const space = asTokenTree(theme.tokens.space);
+  const space = asTokenTree(theme.styleTokens.space);
   const componentSpace = asTokenTree(space.component);
-  const radius = asTokenTree(theme.tokens.radius);
+  const radius = asTokenTree(theme.styleTokens.radius);
 
-  const color = theme.tokens.color as TokenTree;
+  const color = theme.styleTokens.color as TokenTree;
   const neutral = asTokenTree(color.neutral);
   const brand = asTokenTree(color.brand);
 
-  const motion = theme.tokens.motion as TokenTree;
+  const motion = theme.styleTokens.motion as TokenTree;
   const duration = asTokenTree(motion.duration);
   const easing = asTokenTree(motion.easing);
 
@@ -221,8 +220,8 @@ const carouselPrimitive = createPrimitive<CarouselPrimitiveProps>(
   CAROUSEL_CONTRACT,
   (theme) => {
     const css = buildCarouselStyles(theme);
-    mountPrimitiveStyles(`carousel-${theme.mode}`, css);
-  }
+    theme.mountStyles(`carousel-${theme.mode}`, css);
+  },
 );
 
 registerPrimitive(carouselPrimitive);

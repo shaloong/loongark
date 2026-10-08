@@ -1,3 +1,8 @@
-import type { SvelteComponent } from "svelte";
-import type { DatePickerTriggerProps } from "@ark-ui/svelte/date-picker";
-export default class DatePickerTrigger extends SvelteComponent<DatePickerTriggerProps> {}
+import { SvelteComponent, type ComponentProps } from "svelte";
+import { DatePicker } from "@ark-ui/svelte/date-picker";
+
+export default class LoongArkDatePickerTrigger extends SvelteComponent<
+  Omit<ComponentProps<typeof DatePicker.Trigger>, "children"> & {},
+  Record<string, never>,
+  { default: Record<string, never> }
+> {}
