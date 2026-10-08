@@ -2,7 +2,7 @@
   "date": "2026-10-08",
   "branch": "develop",
   "baseCommit": "7d64b929422f9d88cf9db5a0d65e8a7b25dca6f9",
-  "status": "产品修正、310项视觉比较、原生Safari295默认/273交互与56张相关截图审阅、Chromium745四端/261Story通过；WebKit736四端通过/1项已脱离DOM字体采样失败已复现并修正，120项三引擎重复回归通过。最新完整CI尚待验收，两个P0暂不关闭。",
+  "status": "closed：表中跨浏览器一致性与默认视觉一致性两项P0已按当前完整CI、平台截图和本地视觉比较验收关闭。P1真实设备与辅助技术不计为本批通过。",
   "catalog": {
     "families": 119,
     "stories": 333,
@@ -33,7 +33,7 @@
   "p0Items": [
     {
       "direction": "跨浏览器一致性",
-      "status": "pending",
+      "status": "closed",
       "acceptance": "最终源码三个Linux引擎完整四端/Story与原生Safari实际通过，相关平台截图已审阅。",
       "resolution": [
         "Firefox旧16项为对原生步进按钮程序化聚焦即应显示键盘ring的假设；保持Ark默认Tab策略，回归显式启用tabIndex并使用可信Tab，再检查焦点与可见outline。",
@@ -43,7 +43,7 @@
     },
     {
       "direction": "默认视觉一致性",
-      "status": "pending",
+      "status": "closed",
       "acceptance": "119族默认桌面/窄屏明暗目视，常用状态/对齐、修正后四端交互与310项视觉比较通过。",
       "resolution": [
         "扩大至119组件族三引擎桌面/窄屏明暗默认图，另外检查焦点、禁用、只读、错误/成功、加载、长标签、RTL和组合对齐。",
@@ -52,10 +52,43 @@
     }
   ],
   "completeMatrix": {
-    "run": 37739740445,
-    "source": "30a8716b7fb0d24657e7c843fd02c31fa0a2148b",
-    "status": "30a WebKit736通过/1字体采样失败；本次活动DOM测量修正已在三引擎120项回归通过，需新完整CI。",
-    "url": "https://github.com/shaloong/loongark/actions/runs/37739740445"
+    "run": 37751219709,
+    "source": "3cd01e0b3d65b73881d986c0b80993938f65d902",
+    "status": "passed",
+    "url": "https://github.com/shaloong/loongark/actions/runs/37751219709",
+    "chromium": {
+      "job": 113224636842,
+      "frameworksPassed": 745,
+      "frameworksSkipped": 129,
+      "storiesPassed": 261,
+      "storiesSkipped": 744,
+      "version": "143.0.7499.4"
+    },
+    "firefox": {
+      "job": 113224636881,
+      "frameworksPassed": 737,
+      "frameworksSkipped": 137,
+      "storiesPassed": 261,
+      "storiesSkipped": 744,
+      "version": "144.0.2"
+    },
+    "webkit": {
+      "job": 113224636744,
+      "precheckPassed": 12,
+      "frameworksPassed": 737,
+      "frameworksSkipped": 137,
+      "storiesPassed": 261,
+      "storiesSkipped": 744,
+      "version": "26.0"
+    },
+    "nativeSafari": {
+      "job": 113224636515,
+      "defaultExamples": 295,
+      "interactions": 273,
+      "version": "26.6.1",
+      "platform": "macOS15.7.9"
+    },
+    "skipScope": "跳过数为同次跨项目/平台适用性配置；未通过删测、失败重跑或放宽字体阈值取得通过。"
   },
   "validation": {
     "orderedProducers": {
@@ -86,15 +119,33 @@
       "scope": "最终源码完整Linux比较，24张预期变更旧/当前/差异图逐张审阅后手动保存，仅编辑器与表格范围；Windows基线未改。"
     },
     "nativeSafari": {
-      "source": "30a8716b7fb0d24657e7c843fd02c31fa0a2148b",
-      "run": 37739740445,
-      "job": 113196734252,
+      "source": "3cd01e0b3d65b73881d986c0b80993938f65d902",
+      "run": 37751219709,
+      "job": 113224636515,
       "result": "passed",
       "browser": "Safari26.6.1",
       "platform": "macOS15.7.9",
       "defaultExamples": 295,
       "interactions": 273,
       "fontMetrics": "四端明暗8个实际DOM样本 iiii/WWWW=33.71875px"
+    },
+    "quality": {
+      "source": "3cd01e0b3d65b73881d986c0b80993938f65d902",
+      "result": "passed",
+      "recordsPerEngine": 666,
+      "accessibilityStoriesPerMode": 333,
+      "axeViolations": 0,
+      "activeTransitionAll": 0,
+      "overflowBeyondExistingContract": 0,
+      "contract": "375px视口、scrollWidth<=376px；三个引擎明暗各5个Combobox Story包装区为376px，实际控件未越界。此处不宣称逐像素零溢出。",
+      "verification": "三个引擎当前Story Artifact下载后校验SHA256，逐份检查实际JSON及来源提交。"
+    },
+    "pages": {
+      "run": 37751219662,
+      "source": "3cd01e0b3d65b73881d986c0b80993938f65d902",
+      "result": "passed",
+      "url": "https://shaloong.github.io/loongark/",
+      "scope": "GitHub Actions构建、子路径smoke与部署成功；云端未直接访问公网Pages。"
     }
   },
   "visualReview": {
@@ -124,30 +175,40 @@
     "previousNativeSafari": {
       "source": "c4c22ea05c52db8ffef892834d3c7274a028172f",
       "views": 56,
-      "scope": "四端明暗的相关56张已查看；最终源码原生Safari截图尚待验收。"
+      "scope": "历史c4c批次四端明暗相关56张已实际查看；不替代当前提交的Safari结果。"
     },
     "finalNativeSafari": {
-      "source": "30a8716b7fb0d24657e7c843fd02c31fa0a2148b",
+      "source": "3cd01e0b3d65b73881d986c0b80993938f65d902",
       "views": 56,
-      "scope": "四端明暗编辑器及展开表格选项、Editable值状态、输入前后缀错误长标签RTL/禁用、问卷矩阵和Field，下载后全部实际目视；截图保留在CI Artifact及忽略目录。"
+      "scope": "当前完整CI四端明暗相关56张下载后全部实际目视：代码/富文本及展开表格选项、Editable值状态、前后缀错误长标签RTL/禁用、问卷矩阵与Field。Safari295默认示例不逐项截图，273高级交互截图亦非全部目视。"
     },
     "finalCIEditorViewsReviewed": {
       "source": "30a8716b7fb0d24657e7c843fd02c31fa0a2148b",
       "chromium": 20,
       "scope": "React代表场景，固定CIChromium143：代码/富文本/范围表格桌面窄屏明暗关闭图、富文本展开及RTL；已实际查看，另复核375px富文本原图。四端三引擎本地240个最新视图及原生Safari56个视图另记。"
+    },
+    "currentCIWebkitViewsReviewed": {
+      "source": "3cd01e0b3d65b73881d986c0b80993938f65d902",
+      "views": 48,
+      "scope": "四端明暗1280/375px的Sheet、RTL二维网格和RTL向上紧凑Drawer；当前CI原图经12张联系表全部实际查看。"
     }
   },
-  "evidencePolicy": "临时原图、联系表、测量、日志和下载 ZIP 留在 .artifacts/ 或有保留期限的 CI Artifact；只提交摘要和实际审阅的回归基线。",
+  "evidencePolicy": "过程原图、联系表、测量、日志和下载ZIP留在忽略目录或14天CI Artifact。相对7d64仅新增16张、修改24张已实际审阅Linux回归基线；Windows基线和过程文件未入Git。",
   "limitations": [
     "桌面 Safari 不等于真实 iOS；320/375px 视口不等于连接真实手机。",
     "默认 Story 扫描及相关契约不代表全部业务组合和全部辅助技术通过。",
     "历史间歇失败须按当前整库和可信输入证据验收，不以脚本就绪或 Linux 协议诊断冒充 Safari 成功。"
   ],
   "evidenceStorage": {
-    "runtimeCI": "https://github.com/shaloong/loongark/actions/runs/37739740445",
+    "runtimeCI": "https://github.com/shaloong/loongark/actions/runs/37751219709",
     "retentionDays": 14,
     "repository": "仅简短验收摘要、文档及实际比较的已审阅回归基线；过程图片与日志不入Git。",
-    "nativeSafariArtifact": "https://github.com/shaloong/loongark/actions/runs/37739740445/artifacts/11534439892"
+    "nativeSafariArtifact": "https://github.com/shaloong/loongark/actions/runs/37751219709/artifacts/11539115231",
+    "storyArtifacts": {
+      "chromium": 11541375414,
+      "firefox": 11540214410,
+      "webkit": 11541553433
+    }
   },
   "previousFullMatrix": {
     "source": "c4c22ea05c52db8ffef892834d3c7274a028172f",
@@ -157,16 +218,18 @@
     "firefox": "721四端、261Story",
     "webkit": "721四端、261Story",
     "nativeSafari": "295默认、273交互；Safari26.6.1/macOS15.7.9",
-    "quality": "各引擎333个Story明暗666份记录：页面溢出0、Axe违规0。",
-    "limitation": "最新展开指示器修正的完整CI运行中，尚不能将前一提交算作最新通过。"
+    "quality": "各引擎333个Story明暗扫描通过；严格容差及当前原始记录以validation.quality为准。",
+    "limitation": "仅历史通过记录；当前最终完整通过另记completeMatrix。"
   },
   "fontSamplingCorrection": {
     "failedSource": "30a8716b7fb0d24657e7c843fd02c31fa0a2148b",
     "failedRun": 37739740445,
     "failedJob": 113196733793,
-    "failure": "WebKit React light字体采样差45.5px，736四端通过、1失败；原生Safari、Chromium整库通过，Firefox仍在运行。",
-    "evidence": "失败截图代码为等宽；本地40次初始加载16次旧ElementHandle已脱离DOM，计算字体/字号为空，样本回退默认字体。活动行font-family=monospace、font-size=14px，iiii/WWWW各33.71875px。",
+    "failure": "30a WebKit736四端通过、1项React light字体采样差45.5px失败，Story步骤未运行；同批Chromium745/261、Firefox737/261、原生Safari295/273通过。",
+    "evidence": "失败截图代码为等宽；本地40次初始加载16次旧ElementHandle已脱离DOM，字体/字号为空，样本回退默认字体，本地差44.53125px（不等同CI45.5px）。活动行monospace/14px，iiii与WWWW各33.71875px。",
     "fix": "在同一页面任务内选取当前活动内容行并测量，检查连接与非空字体；保留0.05px严格断言，不重试、不延时、不放宽阈值，并加入比例字体负例。",
-    "verification": "8项顺序新构建通过；三引擎四端明暗各5次，共120项通过（1.3m），含比例字体负例。产品样式/模型/适配/示例未改动，既有视觉验收仍对应30a产品源码；完整CI须以本次测试修正提交再次执行。"
-  }
+    "verification": "8项顺序新构建通过；三引擎四端明暗各5次共120项通过（1.3m），含比例字体负例。3cd仅修改采样测试与摘要，产品源码保持30a，310项最终视觉比较仍对应同一产品；当前完整CI三个引擎及原生Safari全部通过。",
+    "correctedSource": "3cd01e0b3d65b73881d986c0b80993938f65d902"
+  },
+  "acceptedSourceCommit": "3cd01e0b3d65b73881d986c0b80993938f65d902"
 }

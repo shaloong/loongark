@@ -289,3 +289,14 @@ CodeEditor 在真实输入事件前应用最新扩展配置，Chart 支持外部
 本批最终本地验收：三引擎相关四端/消费63项、Story96项、Linux协议诊断72项通过；明暗各332个Story的质量扫描与默认WCAG2 A/AA扫描通过，违规0。完整Linux视觉306项以禁止更新基线运行通过，320份既有基线含Windows哈希不变；144张四端状态捕获与12张新Linux原图已实际审阅。准确范围与未完成的原生Safari/真机项目见本批摘要。
 
 2026-10-07 后续实测：c532fc9 的原生 Safari26.6.1/macOS15.7.9 整套通过287默认示例、249交互；四端明暗24张复合输入状态图及8张富文本历史/表格截图已实际审阅。此前Vue深色删除表格失败本次未复现，保留原证据，不声明根因已解决。d9fc1e7 的 Pages 部署通过，完整矩阵调度保留在运行批次；Linux整库仍在运行，真机仍缺设备。见[本批准确结果](audits/2026-10-07/p0-compound-field-inputs/acceptance.json)。
+
+
+## 2026-10-08 两项 P0 关闭
+
+跨浏览器一致性与默认视觉一致性按源码 3cd01e0 的[完整 CI](https://github.com/shaloong/loongark/actions/runs/37751219709)关闭：Chromium 745、Firefox 737、WebKit 737 项四端测试及各 261 项 Storybook 通过；原生 Safari26.6.1/macOS15.7.9 的 295 默认示例与 273 项交互通过。Firefox 旧程序化聚焦假设已用真实 Tab 验证；问卷原生布局、滚动锚定兼容、延迟焦点竞争及只读输入事件均有实际回归。
+
+119 族三引擎共 1428 个默认桌面/窄屏明暗视图已实际查看；另外审阅前后缀、长标签、RTL、焦点、禁用、错误/成功、加载及编辑器状态。修正 Field 必填符号、AngleSlider 角度位置、四端后缀继承、Svelte Editable 空预览及共享 Lucide 展开图标。最终 310 项 Linux 视觉比较通过，当前 Safari 相关 56 张和 WebKit 布局/弹层 48 张实际 CI 图已目视核验，Windows 基线未改。
+
+保留前一轮 WebKit 字体测试失败证据：异步高亮使旧 ElementHandle 脱离 DOM；活动节点在同一页面任务内取字体和测量，保持 0.05px 阈值，并新增比例字体负例。三引擎四端明暗重复 120 项和当前整库通过。明暗各 333 Story 的 Axe 违规、有效 transition: all 均为 0；375px 扫描沿用原 1px 容差，5 个 Combobox Story 的空白包装区为 376px，未宣称逐像素零溢出。Svelte 检查 0 错误、7 项既有警告。
+
+[验收摘要](audits/2026-10-08/p0-browser-and-default-visual/acceptance.json)统一记录实际范围与限制。过程截图、日志和 ZIP 不入 Git，CI Artifact 保留 14 天；[Storybook Pages](https://shaloong.github.io/loongark/)最新部署成功。P1 高级边界、屏幕阅读器和真实手机、展示文档，以及 P2 性能与发布准备保持独立开放；桌面 Safari 与模拟窄屏不算真实 iOS/Android 验收。

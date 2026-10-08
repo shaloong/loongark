@@ -4,7 +4,7 @@ LoongArk 以 Ark UI 提供行为与无障碍基础，以共享 CSS 和 Token 提
 
 开发与发布分支约定见 [CONTRIBUTING.md](../CONTRIBUTING.md)：日常和云端开发进入 develop，稳定版本按发布节点合入 main。
 
-2026-10-08 P0 收尾批次：编辑器原生输入前同步只读/禁用，InputGroup 前后缀状态与对齐，Svelte 动态状态、Solid 动态标签和 WebKit 默认等宽字体，Field 必填标签行内布局、AngleSlider 角度定位和 Editable 状态描边；四端示例及 InputGroup States Story 已同步。当前验收与平台状态统一见[本批摘要](audits/2026-10-08/p0-browser-and-default-visual/acceptance.json)。
+2026-10-08 两项 P0 已关闭：跨浏览器焦点、问卷缩屏和滚动兼容问题已复验；默认视觉扩大至 119 族三引擎桌面/窄屏明暗，并修正前后缀状态、必填标签、角度定位、Editable 预览与统一 Lucide 展开指示器。最终源码 Chromium/Firefox/WebKit 完整四端与 Storybook、原生 Safari 均通过，310 项 Linux 视觉比较通过。验收数字、历史失败修正与范围限制统一见[本批摘要](audits/2026-10-08/p0-browser-and-default-visual/acceptance.json)；在线展示见 [Storybook](https://shaloong.github.io/loongark/)。真实 iOS/Android、屏幕阅读器和 P1 高级边界仍需独立验收。
 
 ## 分层与职责
 
