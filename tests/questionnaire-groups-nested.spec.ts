@@ -102,17 +102,28 @@ async function checkNested(page: Page) {
   await page
     .getByRole("button", { name: "Use async validation", exact: true })
     .click();
-  await form.getByRole("button", { name: "Submit", exact: true }).click();
-  await expect(
-    form.getByRole("button", { name: "Cancel validation", exact: true }),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "Hide survey", exact: true }).click();
-  await expect(form).toHaveCount(0);
+  // 固定校验到期顺序，避免原生操作和滚动超过示例的 300ms 延迟。
+  await page.clock.install();
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
+  const saved = page.getByRole("status", { name: "Saved contact answers" });
+  try {
+    await form.getByRole("button", { name: "Submit", exact: true }).press("Enter");
+    await expect(
+      form.getByRole("button", { name: "Cancel validation", exact: true }),
+    ).toBeVisible();
+    await page.getByRole("button", { name: "Hide survey", exact: true }).press("Enter");
+    await expect(form).toHaveCount(0);
+    await page.clock.runFor(1000);
+    await expect(saved).toHaveText("No answers saved");
+  } finally {
+    await page.clock.resume();
+  }
   await page.getByRole("button", { name: "Show survey", exact: true }).click();
   await expect(form).toBeVisible();
-  await expect(
-    page.getByRole("status", { name: "Saved contact answers" }),
-  ).toHaveText("No answers saved");
+  await expect(saved).toHaveText("No answers saved");
+  // 正向对照：重新挂载后，未取消的真实校验仍必须完成并保存答案。
+  await form.getByRole("button", { name: "Submit", exact: true }).click();
+  await expect(saved).toContainText('"name":"AlexXYZ Chen"');
 }
 for (const framework of ["react", "vue", "solid", "svelte"])
   for (const mode of ["light", "dark"])

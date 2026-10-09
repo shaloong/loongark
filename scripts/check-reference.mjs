@@ -4,6 +4,8 @@ const read = async (file) => JSON.parse(await readFile(file, "utf8"));
 const coverage = await read("docs/component-coverage.json");
 const index = await read("storybook-static/index.json");
 const references = await read("storybook-static/reference/index.json");
+const mappings = await read("examples/reference-examples.json");
+assert.deepEqual(Object.keys(mappings).sort(), [...coverage.families].sort());
 assert.deepEqual(
   references.map((entry) => entry.family).sort(),
   [...coverage.families].sort(),
@@ -13,6 +15,8 @@ for (const entry of references) {
   const reference = await read(`storybook-static/reference/${entry.key}.json`);
   assert.ok(reference.apis.length > 0, `${entry.family} 缺少真实 API 签名`);
   assert.ok(reference.variants.length > 0);
+  assert.equal(reference.variants[0].name, "基础用法");
+  assert.equal(reference.variants[0].id, mappings[entry.family].basic.toLowerCase());
   variants += reference.variants.length;
   for (const variant of reference.variants) {
     const keys = [];
@@ -48,6 +52,7 @@ for (const entry of references) {
   );
 }
 const button = await read("storybook-static/reference/button.json");
+assert.equal(button.variants.length, 1, "Button 基础文档不应混入组合场景");
 const api = button.apis.find((entry) => entry.name === "LoongArkButton");
 for (const [name, value] of Object.entries({
   size: '"md"',

@@ -38,11 +38,9 @@ for (const mode of ["light", "dark", "high-contrast"])
         .selectOption("LoongArkButton");
       const table = reference.getByRole("region", { name: "API 属性表" });
       await expect(
-        table
-          .getByRole("row")
-          .filter({
-            has: page.getByRole("rowheader", { name: "type", exact: true }),
-          }),
+        table.getByRole("row").filter({
+          has: page.getByRole("rowheader", { name: "type", exact: true }),
+        }),
       ).toContainText('"button"');
       await expect(
         reference
@@ -63,9 +61,9 @@ for (const mode of ["light", "dark", "high-contrast"])
         `/iframe.html?id=components-datatable--docs&viewMode=docs&globals=mode:${mode}`,
       );
       const data = page.locator('[data-reference-family="DataTable"]');
-      await expect(data.getByLabel("四端组合用法")).toBeVisible();
+      await expect(data.getByLabel("用法示例")).toBeVisible();
       await data
-        .getByLabel("四端组合用法")
+        .getByLabel("用法示例")
         .selectOption("datatablecomplexeditorsexample");
       await data.getByRole("tab", { name: "Solid", exact: true }).click();
       await expect(data.getByRole("tabpanel")).toContainText(
@@ -81,7 +79,7 @@ for (const mode of ["light", "dark", "high-contrast"])
       await expect(
         data.getByRole("tabpanel").locator("details").first(),
       ).toBeVisible();
-      await data.getByLabel("四端组合用法").scrollIntoViewIfNeeded();
+      await data.getByLabel("用法示例").scrollIntoViewIfNeeded();
       await page.screenshot({
         path: `.artifacts/reference-docs/${info.project.name}-table-${mode}-${width}.png`,
       });
@@ -102,7 +100,14 @@ test("能力概览在 Storybook 内直接可读", async ({ page }) => {
     page.getByRole("heading", { name: "当前能力与限制", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByText("真实屏幕阅读器、iOS/Android 和原生系统输入法尚未验收", { exact: false }),
+    page.getByText("真实屏幕阅读器、iOS/Android 和原生系统输入法尚未验收", {
+      exact: false,
+    }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: "安全说明", exact: true })).toHaveAttribute("href", "https://github.com/shaloong/loongark/blob/main/docs/security.md");
+  await expect(
+    page.getByRole("link", { name: "安全说明", exact: true }),
+  ).toHaveAttribute(
+    "href",
+    "https://github.com/shaloong/loongark/blob/main/docs/security.md",
+  );
 });

@@ -177,7 +177,7 @@ try {
       await reference.getByRole("tab", { name: "Svelte", exact: true }).click();
       await reference
         .getByRole("tabpanel")
-        .getByText("examples/svelte/ButtonInputDialog.svelte", { exact: true })
+        .getByText("examples/svelte/ButtonBasicExample.svelte", { exact: true })
         .waitFor();
       await reference.getByRole("region", { name: "API 属性表" }).waitFor();
       assert(

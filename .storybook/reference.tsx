@@ -118,20 +118,6 @@ export function ReferenceDocs() {
         <main className="loongark-reference" data-reference-family={family}>
           <Title />
           <Description />
-          <p>
-            正式展示跟随 main；开发预览来自 develop。
-            <a
-              href={`https://github.com/shaloong/loongark/blob/${reference?.branch ?? "main"}/docs/capabilities.md`}
-            >
-              当前能力与限制
-            </a>{" "}
-            ·{" "}
-            <a
-              href={`https://github.com/shaloong/loongark/blob/${reference?.branch ?? "main"}/docs/releases.md`}
-            >
-              支持版本与发布流程
-            </a>
-          </p>
           <Primary />
           <div
             className="loongark-reference-controls"
@@ -164,28 +150,32 @@ export function ReferenceDocs() {
             <section aria-label="四端对应代码">
               <h2>四端对应代码</h2>
               <p>
-                示例假设应用根已挂载同一框架的
-                LoongArkProvider。以下四端代码来自同一个组合场景；事件、受控绑定和生命周期以对应代码为准，引用的模型与组件文件也需一并使用。
+                以下是本组件的基础用法。应用根需挂载对应框架的
+                LoongArkProvider；切换框架查看各自的调用与绑定语法。
               </p>
               {error && <p role="alert">{error}</p>}
               {!reference && !error && <p role="status">正在读取参考资料…</p>}
               {reference && (
                 <>
-                  <label htmlFor={`${id}-variant`}>四端组合用法</label>
-                  <LoongArkNativeSelect
-                    id={`${id}-variant`}
-                    value={variant}
-                    onChange={(event) => {
-                      setVariant(event.currentTarget.value);
-                      setCopied(false);
-                    }}
-                  >
-                    {reference.variants.map((entry) => (
-                      <option key={entry.id} value={entry.id}>
-                        {entry.name}
-                      </option>
-                    ))}
-                  </LoongArkNativeSelect>
+                  {reference.variants.length > 1 && (
+                    <>
+                      <label htmlFor={`${id}-variant`}>用法示例</label>
+                      <LoongArkNativeSelect
+                        id={`${id}-variant`}
+                        value={variant}
+                        onChange={(event) => {
+                          setVariant(event.currentTarget.value);
+                          setCopied(false);
+                        }}
+                      >
+                        {reference.variants.map((entry) => (
+                          <option key={entry.id} value={entry.id}>
+                            {entry.name}
+                          </option>
+                        ))}
+                      </LoongArkNativeSelect>
+                    </>
+                  )}
                   <div role="tablist" aria-label="示例框架">
                     {frameworks.map((name, index) => (
                       <button

@@ -42,5 +42,9 @@
     "build": "tsc -p tsconfig.json && node ../../scripts/fix-dist-imports.mjs dist"
   },
   "license": "MIT",
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  }
 }
