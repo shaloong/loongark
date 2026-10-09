@@ -520,11 +520,11 @@
     "package.json"
   ],
   "dependencies": {
-    "@ark-ui/react": "^5.39.2",
+    "@ark-ui/react": "^5.39.3",
     "@loongark/kit": "workspace:*",
     "@loongark/primitives": "workspace:*",
     "@loongark/theme": "workspace:*",
-    "@zag-js/react": "1.43.3"
+    "@zag-js/react": "1.45.0"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
