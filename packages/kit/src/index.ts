@@ -119,3 +119,5 @@ export {
 } from "./native-selection";
 
 export { inputSuffixDisabled } from "./input-adornment";
+
+export { recoverClosedMenuFocus } from "./menu-focus";

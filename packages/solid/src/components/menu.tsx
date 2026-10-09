@@ -1,6 +1,6 @@
 import { ark } from "@ark-ui/solid/factory";
 import { mergeProps as mergeMenuProps } from "@zag-js/solid";
-import { contextMenuPointerHandler } from "@loongark/kit";
+import { contextMenuPointerHandler, recoverClosedMenuFocus } from "@loongark/kit";
 /**
  * Menu component - Solid wrapper
  * Based on Ark UI Menu, injects data-scope/data-part attributes.
@@ -123,7 +123,9 @@ export const LoongArkMenuContent: Component<
   const { size } = useContext(MenuContext);
   return (
     <ArkMenu.Content
-      {...props}
+      {...mergeMenuProps(props, {
+        onFocus: (event: FocusEvent) => recoverClosedMenuFocus(event.currentTarget, event.relatedTarget),
+      })}
       data-scope="menu"
       data-part="content"
       data-size={size}

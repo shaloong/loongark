@@ -69,6 +69,63 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
     }
     expect(failures).toEqual([]);
   });
+  test(`${framework} 菜单退出期间的延迟聚焦与焦点所有权`, async ({ page }) => {
+    test.skip(!process.env.STATIC_DIR);
+    await page.goto(`/examples-${framework}/?example=${mappings.Menu.basic}`);
+    const trigger = page.getByRole("button", { name: "操作" });
+    await trigger.focus();
+    await trigger.press("ArrowDown");
+    await expect(page.getByRole("menu")).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(trigger).toBeFocused();
+    const content = page.locator('[data-scope="menu"][data-part="content"]');
+    // 退出动效期间节点仍可能可聚焦；模拟已排队的上游展开聚焦抵达。
+    await content.evaluate((node) => {
+      if (!(node instanceof HTMLElement))
+        throw new Error("Menu content must be an HTML element");
+      node.hidden = false;
+      node.focus();
+      if (document.activeElement !== node)
+        throw new Error("Delayed menu focus was not exercised");
+    });
+    await expect(trigger).toBeFocused();
+    // 用户先转到外部控件，随后过期任务到达，也应保留该控件的焦点。
+    await page.evaluate(() => {
+      const outside = document.createElement("button");
+      outside.id = "outside-menu-focus";
+      outside.textContent = "外部控件";
+      document.body.append(outside);
+      outside.focus();
+    });
+    await content.evaluate((node) => {
+      if (!(node instanceof HTMLElement))
+        throw new Error("Menu content must be an HTML element");
+      node.focus();
+      if (document.activeElement !== node)
+        throw new Error("Delayed menu focus was not exercised");
+    });
+    await expect(page.locator("#outside-menu-focus")).toBeFocused();
+    // 同一任务内用户转到外部控件，排队的修复不得覆盖新的焦点。
+    await content.evaluate((node) => {
+      if (!(node instanceof HTMLElement))
+        throw new Error("Menu content must be an HTML element");
+      node.focus();
+      if (document.activeElement !== node)
+        throw new Error("Delayed menu focus was not exercised");
+      document.getElementById("outside-menu-focus")?.focus();
+    });
+    await expect(page.locator("#outside-menu-focus")).toBeFocused();
+    // 卸载优先于排队的恢复；不再跳回旧触发器。
+    await content.evaluate((node) => {
+      if (!(node instanceof HTMLElement))
+        throw new Error("Menu content must be an HTML element");
+      node.focus();
+      if (document.activeElement !== node)
+        throw new Error("Delayed menu focus was not exercised");
+      node.remove();
+    });
+    await expect(trigger).not.toBeFocused();
+  });
   test(`${framework} 基础代码实际绑定与表单交互`, async ({ page }) => {
     test.skip(!process.env.STATIC_DIR);
     const open = async (family: string) =>

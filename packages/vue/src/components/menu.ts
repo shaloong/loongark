@@ -1,3 +1,4 @@
+import { recoverClosedMenuFocus } from "@loongark/kit";
 import { useForwardExpose } from "@ark-ui/vue/utils";
 import type { MenuContextTriggerProps } from "@ark-ui/vue/menu";
 import { ark } from "@ark-ui/vue/factory";
@@ -223,12 +224,12 @@ export const LoongArkMenuContent = defineComponent({
     return () =>
       renderPart(
         ArkMenuContent,
-        {
-          ...attrs,
+        mergeProps(attrs, {
+          onFocusin: (event: FocusEvent) => recoverClosedMenuFocus(event.currentTarget, event.relatedTarget),
           "data-scope": "menu",
           "data-part": "content",
           "data-size": size.value,
-        },
+        }),
         slots,
       );
   },
