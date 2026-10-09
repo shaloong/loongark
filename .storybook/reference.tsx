@@ -118,20 +118,6 @@ export function ReferenceDocs() {
         <main className="loongark-reference" data-reference-family={family}>
           <Title />
           <Description />
-          <p>
-            正式展示跟随 main；开发预览来自 develop。
-            <a
-              href={`https://github.com/shaloong/loongark/blob/${reference?.branch ?? "main"}/docs/capabilities.md`}
-            >
-              当前能力与限制
-            </a>{" "}
-            ·{" "}
-            <a
-              href={`https://github.com/shaloong/loongark/blob/${reference?.branch ?? "main"}/docs/releases.md`}
-            >
-              支持版本与发布流程
-            </a>
-          </p>
           <Primary />
           <div
             className="loongark-reference-controls"
