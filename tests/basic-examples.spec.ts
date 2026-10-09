@@ -32,11 +32,16 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
         !(await page.locator("[data-example-content]").innerText()) &&
         !(await page
           .locator(
-            "[data-example-content] input, [data-example-content] svg, [data-example-content] iframe, [data-example-content] img",
+            "[data-example-content] select, [data-example-content] input, [data-example-content] svg, [data-example-content] iframe, [data-example-content] img",
           )
           .count())
       )
         failures.push(`${name}: 内容未渲染`);
+      if (["Tooltip", "Popover", "Menu", "Menubar"].includes(name)) {
+        const trigger = page.locator("[data-part=trigger]").first();
+        await expect(trigger, `${name}: 实际触发器`).toBeVisible();
+        await expect(trigger).toHaveJSProperty("tabIndex", 0);
+      }
       if (await page.locator("button button").count())
         failures.push(`${name}: 嵌套按钮`);
       if (
@@ -68,6 +73,35 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
     test.skip(!process.env.STATIC_DIR);
     const open = async (family: string) =>
       page.goto(`/examples-${framework}/?example=${mappings[family].basic}`);
+    await open("NativeSelect");
+    const nativeSelect = page.getByRole("combobox", { name: "方案" });
+    await expect(nativeSelect).toHaveValue("free");
+    await nativeSelect.selectOption("pro");
+    await expect(nativeSelect).toHaveValue("pro");
+    await open("Direction");
+    const rtlSelect = page.getByRole("combobox", { name: "从右向左的选项" });
+    await expect(rtlSelect).toHaveCSS("direction", "rtl");
+    await open("Tooltip");
+    const tooltipTrigger = page.locator(
+      '[data-scope="tooltip"][data-part="trigger"]',
+    );
+    await tooltipTrigger.focus();
+    await expect(page.getByRole("tooltip")).toContainText("支持键盘聚焦");
+    await tooltipTrigger.press("Escape");
+    await expect(page.getByRole("tooltip")).toBeHidden();
+    await open("Popover");
+    await page.getByRole("button", { name: "打开详情" }).click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await page.getByRole("button", { name: "关闭" }).click();
+    await expect(page.getByRole("dialog")).toBeHidden();
+    await expect(page.getByRole("button", { name: "打开详情" })).toBeFocused();
+    await open("Menu");
+    const menuTrigger = page.getByRole("button", { name: "操作" });
+    await menuTrigger.focus();
+    await menuTrigger.press("ArrowDown");
+    await expect(page.getByRole("menuitem", { name: "复制" })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(menuTrigger).toBeFocused();
     await open("Combobox");
     await page.getByRole("combobox").fill("北京");
     await expect(page.getByRole("option", { name: "北京" })).toBeVisible();

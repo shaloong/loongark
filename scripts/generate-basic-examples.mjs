@@ -166,7 +166,20 @@ for (const [family, value] of Object.entries(recipes)) {
         ? "(details: {inputValue: string}) =>"
         : "(details: {value: string[]}) =>",
     );
-    if (framework !== "react") jsx = jsx.replaceAll(" asChild={false}", "");
+    // Vue MenuTrigger 始终克隆子元素；提供原生按钮，而非文字节点。
+    if (framework === "vue")
+      jsx = jsx.replace(
+        /<L\.LoongArkMenuTrigger asChild=\{false\}>([^<]+)<\/L\.LoongArkMenuTrigger>/g,
+        '<L.LoongArkMenuTrigger><button type="button">$1</button></L.LoongArkMenuTrigger>',
+      );
+    if (framework !== "react")
+      jsx = jsx.replace(
+        /(<L\.LoongArk(\w+)Trigger) asChild=\{false\}/g,
+        (match, tag, kind) =>
+          framework === "vue" && ["Tooltip", "Popover"].includes(kind)
+            ? match
+            : tag,
+      );
     if (framework === "solid")
       jsx = jsx
         .replace(/ key=\{[^}]+\}/g, "")

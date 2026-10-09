@@ -16,7 +16,11 @@ export const PopoverBasicExample = defineComponent({
         {},
         {
           default: () => [
-            h(LoongArkPopoverTrigger, {}, { default: () => ["打开详情"] }),
+            h(
+              LoongArkPopoverTrigger,
+              { asChild: false },
+              { default: () => ["打开详情"] },
+            ),
             h(
               LoongArkPopoverPositioner,
               {},
@@ -39,7 +43,7 @@ export const PopoverBasicExample = defineComponent({
                         ),
                         h(
                           LoongArkPopoverCloseTrigger,
-                          {},
+                          { "aria-label": "关闭" },
                           { default: () => ["关闭"] },
                         ),
                       ],

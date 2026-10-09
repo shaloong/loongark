@@ -18,7 +18,9 @@
       <LoongArkPopoverDescription>
         浮层继承当前主题。
       </LoongArkPopoverDescription>
-      <LoongArkPopoverCloseTrigger>关闭</LoongArkPopoverCloseTrigger>
+      <LoongArkPopoverCloseTrigger aria-label="关闭">
+        关闭
+      </LoongArkPopoverCloseTrigger>
     </LoongArkPopoverContent>
   </LoongArkPopoverPositioner>
 </LoongArkPopoverRoot>

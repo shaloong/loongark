@@ -14,7 +14,11 @@ export const MenuBasicExample = defineComponent({
         {},
         {
           default: () => [
-            h(LoongArkMenuTrigger, {}, { default: () => ["操作"] }),
+            h(
+              LoongArkMenuTrigger,
+              {},
+              { default: () => [h("button", { type: "button" }, ["操作"])] },
+            ),
             h(
               LoongArkMenuPositioner,
               {},

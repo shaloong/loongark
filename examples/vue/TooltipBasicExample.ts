@@ -13,7 +13,11 @@ export const TooltipBasicExample = defineComponent({
         {},
         {
           default: () => [
-            h(LoongArkTooltipTrigger, {}, { default: () => ["查看提示"] }),
+            h(
+              LoongArkTooltipTrigger,
+              { asChild: false },
+              { default: () => ["查看提示"] },
+            ),
             h(
               LoongArkTooltipPositioner,
               {},

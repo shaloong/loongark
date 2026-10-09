@@ -20,7 +20,15 @@ export const MenubarBasicExample = defineComponent({
               {},
               {
                 default: () => [
-                  h(LoongArkMenuTrigger, {}, { default: () => ["文件"] }),
+                  h(
+                    LoongArkMenuTrigger,
+                    {},
+                    {
+                      default: () => [
+                        h("button", { type: "button" }, ["文件"]),
+                      ],
+                    },
+                  ),
                   h(
                     LoongArkMenuPositioner,
                     {},

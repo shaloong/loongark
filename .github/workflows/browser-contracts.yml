@@ -50,6 +50,12 @@ jobs:
       - run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
       - run: node scripts/build-framework-fixtures.mjs
       - run: node scripts/build-example-fixtures.mjs
+      # 独立用法先验证真实触发器与原生控件，失败时无需等待完整回归。
+      - name: Component basic examples
+        run: node scripts/run-playwright.mjs tests/basic-examples.spec.ts --project=${{ matrix.browser }} --workers=2
+        env:
+          STATIC_DIR: tests/consumer-dist
+          PORT: "6007"
       # 先捕获已知WebKit宽度失败，避免完整四端运行后才取得诊断；断言保持原样。
       - if: matrix.browser == 'webkit'
         run: node scripts/run-playwright.mjs tests/chart-interaction.spec.ts tests/framework-consumers.spec.ts --project=webkit --workers=2 --grep='375|发布消费'
