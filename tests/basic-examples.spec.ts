@@ -85,8 +85,18 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
       node.hidden = false;
+      // WebKit 可以在 focus() 返回前执行恢复任务；记录真实事件而非瞬时 activeElement。
+      let receivedFocus = false;
+      const recordFocus = () => {
+        receivedFocus = true;
+      };
+      node.addEventListener("focusin", recordFocus, {
+        capture: true,
+        once: true,
+      });
       node.focus();
-      if (document.activeElement !== node)
+      node.removeEventListener("focusin", recordFocus, true);
+      if (!receivedFocus)
         throw new Error("Delayed menu focus was not exercised");
     });
     await expect(trigger).toBeFocused();
@@ -102,8 +112,18 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
       node.hidden = false;
+      // WebKit 可以在 focus() 返回前执行恢复任务；记录真实事件而非瞬时 activeElement。
+      let receivedFocus = false;
+      const recordFocus = () => {
+        receivedFocus = true;
+      };
+      node.addEventListener("focusin", recordFocus, {
+        capture: true,
+        once: true,
+      });
       node.focus();
-      if (document.activeElement !== node)
+      node.removeEventListener("focusin", recordFocus, true);
+      if (!receivedFocus)
         throw new Error("Delayed menu focus was not exercised");
     });
     await expect(page.locator("#outside-menu-focus")).toBeFocused();
@@ -112,8 +132,18 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
       node.hidden = false;
+      // WebKit 可以在 focus() 返回前执行恢复任务；记录真实事件而非瞬时 activeElement。
+      let receivedFocus = false;
+      const recordFocus = () => {
+        receivedFocus = true;
+      };
+      node.addEventListener("focusin", recordFocus, {
+        capture: true,
+        once: true,
+      });
       node.focus();
-      if (document.activeElement !== node)
+      node.removeEventListener("focusin", recordFocus, true);
+      if (!receivedFocus)
         throw new Error("Delayed menu focus was not exercised");
       document.getElementById("outside-menu-focus")?.focus();
     });
@@ -123,8 +153,18 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
       node.hidden = false;
+      // WebKit 可以在 focus() 返回前执行恢复任务；记录真实事件而非瞬时 activeElement。
+      let receivedFocus = false;
+      const recordFocus = () => {
+        receivedFocus = true;
+      };
+      node.addEventListener("focusin", recordFocus, {
+        capture: true,
+        once: true,
+      });
       node.focus();
-      if (document.activeElement !== node)
+      node.removeEventListener("focusin", recordFocus, true);
+      if (!receivedFocus)
         throw new Error("Delayed menu focus was not exercised");
       node.remove();
     });
