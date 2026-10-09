@@ -1,6 +1,15 @@
 # 变更日志
 
-## Unreleased（当前包清单0.1.0）
+## Unreleased（当前包清单 0.1.0）
+
+### 按需接入
+
+- 虚拟网格的数据更新在绘制前同步，清空数据时可立即通过 Tab 进入空网格，不再短暂跳过键盘入口。
+- 四端新增119个组件族、Provider 与 Collection 子路径，保留根入口和延迟编辑器入口；Solid 条件导出支持各子路径 SSR。
+- Provider 使用独立共享样式启动入口，移除基础页面中的无关高级行为依赖。
+- Storybook 增加四端快速开始与组件对应引入代码；发布演练覆盖全部子路径类型和真实外部消费。
+
+### 组件与维护
 
 - 联动升级 React/react-dom 至19.3.0、Storybook及addons至10.6.1，更新React/Svelte构建插件与固定SHA的Actions；Dependabot按运行时与展示工具分组，并为develop PR启用完整验证。
 

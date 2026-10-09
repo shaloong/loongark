@@ -1,0 +1,25 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkComboboxClearTrigger } from "../components/combobox";
+export { LoongArkComboboxContent } from "../components/combobox";
+export { LoongArkComboboxContext } from "../components/ark-advanced";
+export { LoongArkComboboxControl } from "../components/combobox";
+export { LoongArkComboboxEmpty } from "../components/ark-advanced";
+export { LoongArkComboboxInput } from "../components/combobox";
+export { LoongArkComboboxItem } from "../components/combobox";
+export { LoongArkComboboxItemContext } from "../components/ark-advanced";
+export { LoongArkComboboxItemGroup } from "../components/combobox";
+export { LoongArkComboboxItemGroupLabel } from "../components/combobox";
+export { LoongArkComboboxItemIndicator } from "../components/combobox";
+export { LoongArkComboboxItemText } from "../components/combobox";
+export { LoongArkComboboxLabel } from "../components/combobox";
+export { LoongArkComboboxList } from "../components/combobox";
+export { LoongArkComboboxPositioner } from "../components/combobox";
+export { LoongArkComboboxRoot } from "../components/combobox";
+export type { LoongArkComboboxRootProps } from "../components/combobox";
+export { LoongArkComboboxRootProvider } from "../components/ark-advanced";
+export { LoongArkComboboxTrigger } from "../components/combobox";
+export { useCombobox } from "@ark-ui/solid/combobox";
+export { useComboboxContext } from "@ark-ui/solid/combobox";
+export { useComboboxItemContext } from "@ark-ui/solid/combobox";
+export type { UseComboboxProps } from "@ark-ui/solid/combobox";
+export type { UseComboboxReturn } from "@ark-ui/solid/combobox";

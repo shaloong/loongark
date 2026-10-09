@@ -34,7 +34,7 @@
     revision;
     return model.cursor;
   });
-  $effect(() => model.sync(rest));
+  $effect.pre(() => model.sync(rest));
   onMount(() => mountVirtualGrid(root, model));
 </script>
 

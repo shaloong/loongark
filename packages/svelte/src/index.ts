@@ -1,31 +1,8 @@
-import { writable } from "svelte/store";
-import { createLoongArkTheme } from "@loongark/theme";
-import { bootstrapKit } from "@loongark/kit";
 export { default as LoongArkProvider } from "./components/Provider.svelte";
 export { default as LoongArkPortal } from "./components/Portal.svelte";
-import LoongArkDialogRootComponent from "./components/DialogRoot.svelte";
-import LoongArkDialogPositionerComponent from "./components/DialogPositioner.svelte";
-import LoongArkDialogPortalComponent from "./components/Portal.svelte";
 export { default as LoongArkDialogPositioner } from "./components/DialogPositioner.svelte";
 export { default as LoongArkDialogPortal } from "./components/Portal.svelte";
-import LoongArkDialogTriggerComponent from "./components/DialogTrigger.svelte";
-import LoongArkDialogOverlayComponent from "./components/DialogOverlay.svelte";
-import LoongArkDialogContentComponent from "./components/DialogContent.svelte";
-import LoongArkDialogTitleComponent from "./components/DialogTitle.svelte";
-import LoongArkDialogDescriptionComponent from "./components/DialogDescription.svelte";
-import LoongArkDialogCloseTriggerComponent from "./components/DialogCloseTrigger.svelte";
-import LoongArkDialogFooterComponent from "./components/DialogFooter.svelte";
-import LoongArkPinInputRootComponent from "./components/PinInputRoot.svelte";
-import LoongArkPinInputControlComponent from "./components/PinInputControl.svelte";
-import LoongArkPinInputInputComponent from "./components/PinInputInput.svelte";
-import LoongArkPinInputLabelComponent from "./components/PinInputLabel.svelte";
-import LoongArkPinInputHiddenInputComponent from "./components/PinInputHiddenInput.svelte";
-import LoongArkSwitchRootComponent from "./components/SwitchRoot.svelte";
-import LoongArkSwitchHiddenInputComponent from "./components/SwitchHiddenInput.svelte";
 export { default as LoongArkSwitchHiddenInput } from "./components/SwitchHiddenInput.svelte";
-import LoongArkSwitchControlComponent from "./components/SwitchControl.svelte";
-import LoongArkSwitchThumbComponent from "./components/SwitchThumb.svelte";
-import LoongArkSwitchLabelComponent from "./components/SwitchLabel.svelte";
 
 // Button
 export { default as LoongArkButton } from "./components/Button.svelte";
@@ -766,70 +743,9 @@ export type {
   TreeViewNodeRenameInputProps,
 } from "./components/tree-view.d";
 
-export interface ThemeStoreOptions {
-  mode?: "light" | "dark" | "high-contrast";
-  brand?: string;
-  accent?: string;
-}
+export { createThemeStore, type ThemeStoreOptions } from "./theme-store";
 
-export const createThemeStore = (options: ThemeStoreOptions = {}) => {
-  let theme = createLoongArkTheme({
-    mode: options.mode,
-    brand: options.brand,
-    accent: options.accent,
-  });
-  bootstrapKit(theme);
-  theme.mount();
-  const store = writable(theme);
-  const set = (next: typeof theme) => {
-    if (next !== theme) {
-      theme.unmount();
-      next.mount();
-      bootstrapKit(next);
-      theme = next;
-    }
-    store.set(next);
-  };
-  return {
-    subscribe: store.subscribe,
-    set,
-    update(change: (current: typeof theme) => typeof theme) {
-      set(change(theme));
-    },
-    destroy() {
-      theme.unmount();
-    },
-  };
-};
-
-export const LoongArkDialog = {
-  Portal: LoongArkDialogPortalComponent,
-  Positioner: LoongArkDialogPositionerComponent,
-  Root: LoongArkDialogRootComponent,
-  Trigger: LoongArkDialogTriggerComponent,
-  Overlay: LoongArkDialogOverlayComponent,
-  Content: LoongArkDialogContentComponent,
-  Title: LoongArkDialogTitleComponent,
-  Description: LoongArkDialogDescriptionComponent,
-  Footer: LoongArkDialogFooterComponent,
-  CloseTrigger: LoongArkDialogCloseTriggerComponent,
-};
-
-export const LoongArkPinInput = {
-  Root: LoongArkPinInputRootComponent,
-  Control: LoongArkPinInputControlComponent,
-  Input: LoongArkPinInputInputComponent,
-  Label: LoongArkPinInputLabelComponent,
-  HiddenInput: LoongArkPinInputHiddenInputComponent,
-};
-
-export const LoongArkSwitch = {
-  HiddenInput: LoongArkSwitchHiddenInputComponent,
-  Root: LoongArkSwitchRootComponent,
-  Control: LoongArkSwitchControlComponent,
-  Thumb: LoongArkSwitchThumbComponent,
-  Label: LoongArkSwitchLabelComponent,
-};
+export { LoongArkDialog, LoongArkPinInput, LoongArkSwitch } from "./compound";
 
 export * from "./components/extended";
 

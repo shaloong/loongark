@@ -2,6 +2,9 @@
 
 main 是默认分支和稳定版本，develop 是开发分支。Pages 只部署 main；develop 的 Storybook 作为14天的 Actions 预览 Artifact。手动触发也执行相同分支限制。合并 main、创建版本标签、发布 npm 是独立动作，必须有明确发布指令。
 
+
+包提供 ESM 与 node/browser 条件入口，不提供独立 CommonJS 构建；CommonJS 应用使用动态 `import()`。React Server Components 的客户端边界由应用划分，Provider 和带 hooks 的交互组件放在客户端模块。
+
 ## 支持与实测矩阵
 
 | 项目 | 声明最低版本 | 当前完整回归版本 | 最低版本专项范围 |
@@ -36,7 +39,7 @@ STATIC_DIR=tests/consumer-dist node scripts/run-playwright.mjs performance-contr
 
 Windows 在当前 shell 中设置 `STATIC_DIR`，不要直接复制 POSIX 环境变量前缀。系统 Chromium 通过 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` 显式选择；CI 使用 Playwright 安装版本。每次新测量写入 `.artifacts/performance/` 与 `.artifacts/releases/`，不将逐次测量提交到 Git。
 
-包体探针使用真实 dist 的 Vite production 应用构建，以 UTF-8 字节、逐块 gzip/Brotli 统计入口静态依赖与全部异步块；四端各测 Button、DataTable、CodeEditor 和延迟编辑器。Button/Table/延迟编辑器首包禁止保留 CodeMirror/ProseMirror 运行时代码；浏览器再核对首次请求编辑器块与重复加载缓存。
+包体探针使用真实 dist 的 Vite production 应用构建，以 UTF-8 字节、逐块 gzip/Brotli 统计入口静态依赖与全部异步块；四端各测根入口 Button、子路径 Button、实际挂载 Provider + Button 的最小应用、DataTable、CodeEditor 和延迟编辑器。组件探针保留模块导出，最小应用同时包含宿主渲染器；不把不同测量范围混作组件自身成本。共享 CSS 序列化另记字节与压缩成本。Button（含 Provider）首包禁止保留表格、图表、问卷运行时；Button/Table/延迟编辑器首包禁止保留 CodeMirror/ProseMirror 运行时代码；浏览器再核对首次请求编辑器块与重复加载缓存。
 
 四端均可 `import('@loongark/<framework>/editors')` 延迟路由加载。根入口与直接 Kit 同步挂载 API 不变，语言扩展仍单独异步加载。页面在模块加载完成之前应显示应用自己的 loading/error 状态；模块下载不等于编辑器已经完成挂载。Provider 引入共享视觉规则，编辑器延迟加载不意味着全部主题样式也按组件拆分。
 
@@ -44,7 +47,7 @@ SSR 分别记录5个新进程的冷导入；每进程预热5次、每场景30次
 
 ## 发布演练
 
-`pnpm check:release` 对9个实际 tgz 检查：统一 SemVer、MIT/LICENSE、工作区依赖替换、每个条件导出与类型路径、排除过程文件。`pnpm check:versions` 在独立临时目录消费这些 tgz，使用实际最低编译器/运行时验证，并单独审计消费项目依赖，确认安全结果没有依赖工作区的传递覆盖。演练不发布、不创建标签、不修改 main。
+`pnpm check:release` 对9个实际 tgz 检查：统一 SemVer、MIT/LICENSE、工作区依赖替换、每个条件导出与类型路径、排除过程文件。`pnpm check:versions` 在独立临时目录消费这些 tgz，解析全部公开子路径声明，并使用实际最低编译器/运行时验证子路径 Provider/Button 的浏览器与 SSR，并单独审计消费项目依赖，确认安全结果没有依赖工作区的传递覆盖。演练不发布、不创建标签、不修改 main。
 
 准备正式发布时：
 

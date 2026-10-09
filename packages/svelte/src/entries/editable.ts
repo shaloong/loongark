@@ -1,0 +1,25 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export type { EditableAreaProps } from "../components/editable.d";
+export type { EditableCancelTriggerProps } from "../components/editable.d";
+export type { EditableControlProps } from "../components/editable.d";
+export type { EditableEditTriggerProps } from "../components/editable.d";
+export type { EditableInputProps } from "../components/editable.d";
+export type { EditableLabelProps } from "../components/editable.d";
+export type { EditablePreviewProps } from "../components/editable.d";
+export type { EditableRootProps } from "../components/editable.d";
+export type { EditableSubmitTriggerProps } from "../components/editable.d";
+export { default as LoongArkEditableArea } from "../components/EditableArea.svelte";
+export { default as LoongArkEditableCancelTrigger } from "../components/EditableCancelTrigger.svelte";
+export { LoongArkEditableContext } from "../components/ark-advanced";
+export { default as LoongArkEditableControl } from "../components/EditableControl.svelte";
+export { default as LoongArkEditableEditTrigger } from "../components/EditableEditTrigger.svelte";
+export { default as LoongArkEditableInput } from "../components/EditableInput.svelte";
+export { default as LoongArkEditableLabel } from "../components/EditableLabel.svelte";
+export { default as LoongArkEditablePreview } from "../components/EditablePreview.svelte";
+export { default as LoongArkEditableRoot } from "../components/EditableRoot.svelte";
+export { LoongArkEditableRootProvider } from "../components/ark-advanced";
+export { default as LoongArkEditableSubmitTrigger } from "../components/EditableSubmitTrigger.svelte";
+export { useEditable } from "@ark-ui/svelte/editable";
+export { useEditableContext } from "@ark-ui/svelte/editable";
+export type { UseEditableProps } from "@ark-ui/svelte/editable";
+export type { UseEditableReturn } from "@ark-ui/svelte/editable";

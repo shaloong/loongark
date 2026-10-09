@@ -1,0 +1,19 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkTour } from "../components/extended";
+export { LoongArkTourActions } from "../components/extended";
+export { LoongArkTourActionTrigger } from "../components/extended";
+export { LoongArkTourArrow } from "../components/extended";
+export { LoongArkTourArrowTip } from "../components/extended";
+export { LoongArkTourBackdrop } from "../components/extended";
+export { LoongArkTourCloseTrigger } from "../components/extended";
+export { LoongArkTourContent } from "../components/extended";
+export { LoongArkTourContext } from "../components/extended";
+export { LoongArkTourControl } from "../components/extended";
+export { LoongArkTourDescription } from "../components/extended";
+export { LoongArkTourPositioner } from "../components/extended";
+export { LoongArkTourProgressText } from "../components/extended";
+export { LoongArkTourRoot } from "../components/extended";
+export { LoongArkTourSpotlight } from "../components/extended";
+export { LoongArkTourTitle } from "../components/extended";
+export { useTour } from "@ark-ui/react/tour";
+export { useTourContext } from "@ark-ui/react/tour";

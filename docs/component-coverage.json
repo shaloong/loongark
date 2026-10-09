@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08",
+  "updatedAt": "2026-10-09",
   "sources": [
     "https://ui.shadcn.com/docs/components",
     "https://mui.com/material-ui/all-components/",
@@ -202,6 +202,26 @@
     "编辑器表格选项和四端附加控制统一 Lucide SVG 展开指示器，保持原生 details 键盘语义、焦点与 RTL；实际 WebKit 截图排除彩色 emoji 标记。",
     "P1：共享组合输入确认保护；VirtualGrid 导航/编辑键盘状态、连续操作与删行焦点恢复；图表实际字体测量及 SVG 系统色；放大文字、手机视口收缩和四端异步/生命周期回归。真机与实际屏幕阅读器按用户要求跳过",
     "P1 Docs：119族一对一的四端基础用法与显式命名高级场景、必要引用文件、真实API默认值来源、状态与组合；P2生产包体/编辑器加载/SSR/大数据/重复挂载/最低peer/打包演练；修正cursor、选中hover与NativeSelect留白；main正式Pages，develop临时预览。",
-    "DatePicker empty/true Ark states, readable selected hover and range colors, semantic focus/today markers, and native Svelte/WebKit day-button appearance"
-  ]
+    "DatePicker empty/true Ark states, readable selected hover and range colors, semantic focus/today markers, and native Svelte/WebKit day-button appearance",
+    "Four-framework component-family subpaths and Props types, conditional Solid SSR, isolated Provider bootstrap, verified production import boundaries and Storybook onboarding"
+  ],
+  "publicSubpaths": {
+    "componentFamilies": 119,
+    "shared": [
+      "provider",
+      "collection",
+      "editors",
+      "portal",
+      "toolbar",
+      "locale",
+      "environment"
+    ],
+    "naming": "kebab-case",
+    "frameworks": [
+      "react",
+      "vue",
+      "solid",
+      "svelte"
+    ]
+  }
 }

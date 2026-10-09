@@ -13,7 +13,7 @@ const alias = Object.fromEntries(
 await build({
   configFile: false,
   plugins: [svelte()],
-  resolve: { alias, dedupe: ["svelte"] },
+  resolve: { alias: { "@loongark/kit/bootstrap": resolve("packages/kit/dist/bootstrap.js"), ...alias }, dedupe: ["svelte"] },
   ssr: { noExternal: ["@loongark/svelte", "@ark-ui/svelte"] },
   build: {
     ssr: "tests/consumers/svelte/Ssr.svelte",

@@ -148,7 +148,7 @@ h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()
     root: folder,
     base: `/${framework}/`,
     resolve: {
-      alias,
+      alias: { "@loongark/kit/bootstrap": resolve("packages/kit/dist/bootstrap.js"), ...alias },
       dedupe: ["react", "react-dom", "solid-js", "svelte", "vue"],
     },
     plugins:

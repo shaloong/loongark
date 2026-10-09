@@ -56,7 +56,7 @@ jobs:
         run: node --input-type=module -e 'import fs from "node:fs";const reports=JSON.parse(fs.readFileSync(".artifacts/releases/packages/report.json"));if(reports.some(r=>r.version!==process.env.EXPECTED_RELEASE_VERSION))throw Error("Requested version mismatch");'
       - run: pnpm check:versions
       - run: node scripts/check-reference.mjs
-      - run: node scripts/run-playwright.mjs reference-docs.spec.ts interaction-styles.spec.ts --project=chromium --workers=2
+      - run: node scripts/run-playwright.mjs reference-docs.spec.ts getting-started.spec.ts interaction-styles.spec.ts --project=chromium --workers=2
       - run: node scripts/run-playwright.mjs performance-contracts.spec.ts interaction-styles.spec.ts reference-examples.spec.ts --project=chromium --workers=1
         env:
           STATIC_DIR: tests/consumer-dist
@@ -68,6 +68,7 @@ jobs:
             .artifacts/performance/
             .artifacts/interaction-styles/
             .artifacts/reference-docs/
+            .artifacts/getting-started/
             .artifacts/reference-examples/
             .artifacts/releases/packages/
             .artifacts/releases/minimum/report.json

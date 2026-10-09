@@ -67,7 +67,7 @@ const child = spawn(
   ],
   {
     stdio: "inherit",
-    env: { ...process.env, STATIC_DIR: "tests/consumer-dist", PORT: "6007" },
+    env: { ...process.env, STATIC_DIR: "tests/consumer-dist", PORT: process.env.PORT ?? "6007" },
     windowsHide: true,
   },
 );

@@ -5,7 +5,7 @@
     createLoongArkTheme,
     type CreateThemeOptions,
   } from "@loongark/theme";
-  import { bootstrapKit } from "@loongark/kit";
+  import { bootstrapKit } from "@loongark/kit/bootstrap";
   const scopeId = $props.id();
   let {
     mode = "light",

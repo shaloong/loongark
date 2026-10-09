@@ -1,0 +1,21 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkClipboardContext } from "../components/ark-advanced";
+export { LoongArkClipboardControl } from "../components/clipboard";
+export type { LoongArkClipboardControlProps } from "../components/clipboard";
+export { LoongArkClipboardIndicator } from "../components/clipboard";
+export type { LoongArkClipboardIndicatorProps } from "../components/clipboard";
+export { LoongArkClipboardInput } from "../components/clipboard";
+export type { LoongArkClipboardInputProps } from "../components/clipboard";
+export { LoongArkClipboardLabel } from "../components/clipboard";
+export type { LoongArkClipboardLabelProps } from "../components/clipboard";
+export { LoongArkClipboardRoot } from "../components/clipboard";
+export type { LoongArkClipboardRootProps } from "../components/clipboard";
+export { LoongArkClipboardRootProvider } from "../components/ark-advanced";
+export { LoongArkClipboardTrigger } from "../components/clipboard";
+export type { LoongArkClipboardTriggerProps } from "../components/clipboard";
+export { LoongArkClipboardValueText } from "../components/clipboard";
+export type { LoongArkClipboardValueTextProps } from "../components/clipboard";
+export { useClipboard } from "@ark-ui/solid/clipboard";
+export { useClipboardContext } from "@ark-ui/solid/clipboard";
+export type { UseClipboardProps } from "@ark-ui/solid/clipboard";
+export type { UseClipboardReturn } from "@ark-ui/solid/clipboard";

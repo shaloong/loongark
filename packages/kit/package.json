@@ -9,7 +9,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./bootstrap": {
+      "types": "./dist/bootstrap.d.ts",
+      "import": "./dist/bootstrap.js"
+    }
   },
   "files": [
     "dist",
@@ -55,6 +59,6 @@
   },
   "license": "MIT",
   "sideEffects": [
-    "./dist/index.js"
+    "./dist/bootstrap.js"
   ]
 }

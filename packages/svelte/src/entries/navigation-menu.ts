@@ -1,0 +1,21 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { default as LoongArkNavigationMenu } from "../components/NavigationMenu.svelte";
+export { LoongArkNavigationMenuArrow } from "../components/ark-advanced";
+export { LoongArkNavigationMenuCloseTrigger } from "../components/composed";
+export { LoongArkNavigationMenuContent } from "../components/composed";
+export { LoongArkNavigationMenuContext } from "../components/ark-advanced";
+export { LoongArkNavigationMenuIndicator } from "../components/ark-advanced";
+export { default as LoongArkNavigationMenuItem } from "../components/NavigationMenuItem.svelte";
+export { LoongArkNavigationMenuItemIndicator } from "../components/ark-advanced";
+export { default as LoongArkNavigationMenuLink } from "../components/NavigationMenuLink.svelte";
+export { default as LoongArkNavigationMenuList } from "../components/NavigationMenuList.svelte";
+export { LoongArkNavigationMenuPositioner } from "../components/composed";
+export { LoongArkNavigationMenuRoot } from "../components/composed";
+export { LoongArkNavigationMenuRootProvider } from "../components/ark-advanced";
+export { LoongArkNavigationMenuTrigger } from "../components/composed";
+export { LoongArkNavigationMenuViewport } from "../components/ark-advanced";
+export { LoongArkNavigationMenuViewportPositioner } from "../components/ark-advanced";
+export { useNavigationMenu } from "@ark-ui/svelte/navigation-menu";
+export { useNavigationMenuContext } from "@ark-ui/svelte/navigation-menu";
+export type { UseNavigationMenuProps } from "@ark-ui/svelte/navigation-menu";
+export type { UseNavigationMenuReturn } from "@ark-ui/svelte/navigation-menu";

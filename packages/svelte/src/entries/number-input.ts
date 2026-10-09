@@ -1,0 +1,23 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkNumberInputContext } from "../components/ark-advanced";
+export { default as LoongArkNumberInputControl } from "../components/NumberInputControl.svelte";
+export { default as LoongArkNumberInputDecrementTrigger } from "../components/NumberInputDecrementTrigger.svelte";
+export { default as LoongArkNumberInputIncrementTrigger } from "../components/NumberInputIncrementTrigger.svelte";
+export { default as LoongArkNumberInputInput } from "../components/NumberInputInput.svelte";
+export { default as LoongArkNumberInputLabel } from "../components/NumberInputLabel.svelte";
+export { default as LoongArkNumberInputRoot } from "../components/NumberInputRoot.svelte";
+export { LoongArkNumberInputRootProvider } from "../components/ark-advanced";
+export { default as LoongArkNumberInputScrubber } from "../components/NumberInputScrubber.svelte";
+export { default as LoongArkNumberInputValueText } from "../components/NumberInputValueText.svelte";
+export type { NumberInputControlProps } from "../components/number-input.d";
+export type { NumberInputDecrementTriggerProps } from "../components/number-input.d";
+export type { NumberInputIncrementTriggerProps } from "../components/number-input.d";
+export type { NumberInputInputProps } from "../components/number-input.d";
+export type { NumberInputLabelProps } from "../components/number-input.d";
+export type { NumberInputRootProps } from "../components/number-input.d";
+export type { NumberInputScrubberProps } from "../components/number-input.d";
+export type { NumberInputValueTextProps } from "../components/number-input.d";
+export { useNumberInput } from "@ark-ui/svelte/number-input";
+export { useNumberInputContext } from "@ark-ui/svelte/number-input";
+export type { UseNumberInputProps } from "@ark-ui/svelte/number-input";
+export type { UseNumberInputReturn } from "@ark-ui/svelte/number-input";

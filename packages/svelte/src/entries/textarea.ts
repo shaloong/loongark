@@ -1,0 +1,3 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { default as LoongArkTextarea } from "../components/Textarea.svelte";
+export { default as LoongArkTextareaControl } from "../components/TextareaControl.svelte";

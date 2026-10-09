@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, type ReactNode } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import {
   createVirtualGrid,
   createVirtualMasonry,
@@ -9,6 +9,8 @@ import {
   type VirtualMasonryOptions,
   type VirtualMasonryEntry,
 } from "@loongark/kit";
+// 数据与 Tab 入口在绘制前同步，不能先更新 aria 计数再等待下一帧修复键盘入口。
+const useGridLayoutEffect = typeof document === "undefined" ? useEffect : useLayoutEffect;
 export interface VirtualGridProps extends VirtualGridOptions {
   renderCell(details: VirtualGridCellDetails): ReactNode;
 }
@@ -21,7 +23,7 @@ export function LoongArkVirtualGrid(props: VirtualGridProps) {
   useEffect(() => {
     if (root.current) return mountVirtualGrid(root.current, model);
   }, [model]);
-  useEffect(
+  useGridLayoutEffect(
     () => model.sync(props),
     [
       model,
