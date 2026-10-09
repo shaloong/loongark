@@ -79,7 +79,8 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
     await page.keyboard.press("Escape");
     await expect(trigger).toBeFocused();
     const content = page.locator('[data-scope="menu"][data-part="content"]');
-    // 退出动效期间节点仍可能可聚焦；模拟已排队的上游展开聚焦抵达。
+    // 每次模拟都保留可聚焦的退出窗口；不依赖实际动画在跨浏览器调用间结束的时刻。
+    // data-state 仍为 closed，模拟排队的上游展开聚焦抵达。
     await content.evaluate((node) => {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
@@ -100,6 +101,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
     await content.evaluate((node) => {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
+      node.hidden = false;
       node.focus();
       if (document.activeElement !== node)
         throw new Error("Delayed menu focus was not exercised");
@@ -109,6 +111,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
     await content.evaluate((node) => {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
+      node.hidden = false;
       node.focus();
       if (document.activeElement !== node)
         throw new Error("Delayed menu focus was not exercised");
@@ -119,6 +122,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
     await content.evaluate((node) => {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
+      node.hidden = false;
       node.focus();
       if (document.activeElement !== node)
         throw new Error("Delayed menu focus was not exercised");
