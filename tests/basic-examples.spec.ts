@@ -79,13 +79,15 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
     await page.keyboard.press("Escape");
     await expect(trigger).toBeFocused();
     const content = page.locator('[data-scope="menu"][data-part="content"]');
-    // 每次模拟都保留可聚焦的退出窗口；不依赖实际动画在跨浏览器调用间结束的时刻。
+    // 保留可聚焦的退出窗口：退出动画最终帧的 visibility:hidden 也会阻止聚焦。
     // data-state 仍为 closed，模拟排队的上游展开聚焦抵达。
     await content.evaluate((node) => {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
       node.hidden = false;
-      // WebKit 可以在 focus() 返回前执行恢复任务；记录真实事件而非瞬时 activeElement。
+      node.style.animation = "none";
+      node.style.visibility = "visible";
+      // 必须实际收到聚焦事件，避免把无法聚焦的模拟当成回归通过。
       let receivedFocus = false;
       const recordFocus = () => {
         receivedFocus = true;
@@ -112,7 +114,9 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
       node.hidden = false;
-      // WebKit 可以在 focus() 返回前执行恢复任务；记录真实事件而非瞬时 activeElement。
+      node.style.animation = "none";
+      node.style.visibility = "visible";
+      // 必须实际收到聚焦事件，避免把无法聚焦的模拟当成回归通过。
       let receivedFocus = false;
       const recordFocus = () => {
         receivedFocus = true;
@@ -132,7 +136,9 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
       node.hidden = false;
-      // WebKit 可以在 focus() 返回前执行恢复任务；记录真实事件而非瞬时 activeElement。
+      node.style.animation = "none";
+      node.style.visibility = "visible";
+      // 必须实际收到聚焦事件，避免把无法聚焦的模拟当成回归通过。
       let receivedFocus = false;
       const recordFocus = () => {
         receivedFocus = true;
@@ -153,7 +159,9 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       if (!(node instanceof HTMLElement))
         throw new Error("Menu content must be an HTML element");
       node.hidden = false;
-      // WebKit 可以在 focus() 返回前执行恢复任务；记录真实事件而非瞬时 activeElement。
+      node.style.animation = "none";
+      node.style.visibility = "visible";
+      // 必须实际收到聚焦事件，避免把无法聚焦的模拟当成回归通过。
       let receivedFocus = false;
       const recordFocus = () => {
         receivedFocus = true;
