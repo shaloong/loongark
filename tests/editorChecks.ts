@@ -251,16 +251,15 @@ export async function checkRichTextEditor(page: Page) {
     .toBeGreaterThan(box.width + 15);
   await expect(field).toHaveValue(/"colwidth":\[[1-9]/);
   const removeTable = root.getByRole("button", { name: "Delete table", exact: true });
-  await removeTable.scrollIntoViewIfNeeded();
-  await page.evaluate(async () => {
-    await document.fonts.ready;
-    await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+  await expect(removeTable).toBeEnabled();
+  await removeTable.evaluate(button => {
+    button.addEventListener("click", event => {
+      button.setAttribute("data-test-trusted-click", String(event.isTrusted));
+    }, { once: true, capture: true });
   });
-  const removeBox = (await removeTable.boundingBox())!,
-    removePoint = { x: removeBox.x + removeBox.width / 2, y: removeBox.y + removeBox.height / 2 };
-  expect(await page.evaluate(({ x, y }) => document.elementFromPoint(x, y)?.closest("button")?.getAttribute("data-action"), removePoint)).toBe("deleteTable");
-  // 列宽更新和原生滚动完成后重新定位，使用真实指针；不以合成 click 替代操作。
-  await page.mouse.click(removePoint.x, removePoint.y);
+  // 列宽和滚动可能继续更新；由定位器在派发真实指针时检查稳定性、可用性和命中。
+  await removeTable.click();
+  await expect(removeTable).toHaveAttribute("data-test-trusted-click", "true");
   await expect(input.locator("table")).toHaveCount(0);
   await root.getByRole("button", { name: "Undo", exact: true }).click();
   await expect(input.locator("table")).toHaveCount(1);
