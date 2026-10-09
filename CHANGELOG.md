@@ -2,6 +2,8 @@
 
 ## Unreleased（当前包清单0.1.0）
 
+- 联动升级 React/react-dom 至19.3.0、Storybook及addons至10.6.1，更新React/Svelte构建插件与固定SHA的Actions；Dependabot按运行时与展示工具分组，并为develop PR启用完整验证。
+
 - 修复菜单快速关闭后的过期聚焦任务，四端统一保留关闭后触发器焦点，同时尊重用户移走焦点与卸载。
 
 - 修复 Token 合并的嵌套引用共享、原型键、CSS/HTML 逃逸与循环输入；修复问卷嵌套类型和属性转义，补充富文本标记资源限额与安全回归。
