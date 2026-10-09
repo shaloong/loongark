@@ -1,0 +1,20 @@
+import React from "react";
+import {
+  LoongArkFileUploadRoot,
+  LoongArkFileUploadLabel,
+  LoongArkFileUploadDropzone,
+  LoongArkFileUploadTrigger,
+  LoongArkFileUploadHiddenInput,
+} from "@loongark/react";
+export function FileUploadBasicExample() {
+  return (
+    <LoongArkFileUploadRoot maxFiles={1}>
+      <LoongArkFileUploadLabel>上传文件</LoongArkFileUploadLabel>
+      <LoongArkFileUploadDropzone>
+        将文件拖到这里
+        <LoongArkFileUploadTrigger>选择文件</LoongArkFileUploadTrigger>
+      </LoongArkFileUploadDropzone>
+      <LoongArkFileUploadHiddenInput />
+    </LoongArkFileUploadRoot>
+  );
+}

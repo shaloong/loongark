@@ -18,6 +18,9 @@ const exports = checker.getExportsOfModule(checker.getSymbolAtLocation(module));
 const branch = process.env.GITHUB_REF_NAME || "develop";
 const link = (path) =>
   `https://github.com/shaloong/loongark/blob/${encodeURIComponent(branch)}/${path}`;
+const referenceExamples = JSON.parse(
+  await readFile("examples/reference-examples.json", "utf8"),
+);
 const allExamples = {};
 for (const framework of ["react", "vue", "solid", "svelte"]) {
   allExamples[framework] = await Promise.all(
@@ -173,63 +176,23 @@ for (const family of coverage.families) {
   });
   const fileKey = (file) =>
     normalize(basename(file.path).replace(/\.(tsx?|svelte|vue)$/, ""));
-  const candidates = Object.fromEntries(
-    Object.entries(allExamples).map(([framework, files]) => [
-      framework,
-      files.filter(
-        (file) =>
-          normalize(file.code).includes(`loongark${key}`) ||
-          fileKey(file).startsWith(key),
-      ),
-    ]),
-  );
-  const paired = [...new Set(candidates.react.map(fileKey))].filter((name) =>
-    Object.values(candidates).every((files) =>
-      files.some((file) => fileKey(file) === name),
-    ),
-  );
-  const rank = (name) =>
-    name === `${key}example`
-      ? 0
-      : name.startsWith(key)
-        ? 1
-        : name === "corecomponentsexample"
-          ? 3
-          : 2;
-  paired.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
-  if (!paired.length)
-    throw new Error(
-      `${family} 缺少同场景四端真实调用示例；不能用实现源码或不对应的文件补位。`,
-    );
-  const names = paired.filter(
-    (name, index) =>
-      index === 0 ||
-      name.startsWith(key) ||
-      [
-        "corecomponentsexample",
-        "foundationsExample".toLowerCase(),
-        "compoundfieldexample",
-        "inputadornmentsexample",
-        "virtualizationexample",
-      ].includes(name),
-  );
+  const mapping = referenceExamples[family];
+  if (!mapping) throw new Error(`${family} 缺少显式基础用法映射`);
   const variants = [];
-  for (const name of names) {
+  for (const entry of [
+    { file: mapping.basic, label: "基础用法" },
+    ...mapping.advanced,
+  ]) {
     const examples = {};
     for (const framework of ["react", "vue", "solid", "svelte"]) {
-      const selected = candidates[framework]
-        .filter((file) => fileKey(file) === name)
-        .sort(
-          (a, b) =>
-            Number(a.path.endsWith(".vue")) - Number(b.path.endsWith(".vue")),
-        )[0];
+      const selected = allExamples[framework].find(
+        (file) => fileKey(file) === normalize(entry.file),
+      );
+      if (!selected)
+        throw new Error(`${family}/${framework} 缺少指定示例 ${entry.file}`);
       examples[framework] = await sourceFiles(selected);
     }
-    variants.push({
-      id: name,
-      name: basename(examples.react[0].path).replace(/\.(tsx?|svelte)$/, ""),
-      examples,
-    });
+    variants.push({ id: normalize(entry.file), name: entry.label, examples });
   }
   const examples = variants[0].examples;
   await writeFile(

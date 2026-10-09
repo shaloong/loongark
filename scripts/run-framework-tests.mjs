@@ -6,6 +6,7 @@ const child = spawn(
     "tests/browser-environment.spec.ts",
     "tests/framework-consumers.spec.ts",
     "tests/framework-examples.spec.ts",
+    "tests/basic-examples.spec.ts",
     "tests/date-input-paste.spec.ts",
     "tests/date-time.spec.ts",
     "tests/drawer-directions.spec.ts",

@@ -36,9 +36,10 @@ for (const framework of ["react", "vue", "solid", "svelte"])
   test(`${framework} 全部现有组件示例运行`, async ({ page, request }) => {
     test.skip(!process.env.STATIC_DIR, "通过四端消费服务器运行");
     test.setTimeout(180000);
-    const names = (await (await request.get("/examples-index.json")).json())[
+    const names = ((await (await request.get("/examples-index.json")).json())[
       framework
-    ] as string[];
+    ] as string[]).filter((name) => !name.endsWith("BasicExample"));
+    // 基础文档用法由 basic-examples.spec.ts 按显式映射完整验证。
     const failures: string[] = [];
     let current = "";
     page.on("pageerror", (error) =>
