@@ -11,7 +11,7 @@ permissions:
 concurrency:
   group: "browser-contracts-${{ github.ref }}${{ contains(github.event.head_commit.message, 'CI-Scope: safari') && '-safari' || '' }}"
   # 常规开发保留完整验收；已确认失败的批次可由带明确修复标记的提交替代。
-  cancel-in-progress: ${{ contains(github.event.head_commit.message, 'CI-Supersedes: failed') }}
+  cancel-in-progress: "${{ contains(github.event.head_commit.message, 'CI-Supersedes: failed') }}"
 
 jobs:
   engines:
