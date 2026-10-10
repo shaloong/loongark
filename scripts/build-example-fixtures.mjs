@@ -68,7 +68,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
     root: folder,
     base: `/examples-${framework}/`,
     resolve: {
-      alias,
+      alias: { "@loongark/kit/bootstrap": resolve("packages/kit/dist/bootstrap.js"), ...alias },
       dedupe: ["react", "react-dom", "vue", "solid-js", "svelte"],
     },
     plugins:

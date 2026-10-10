@@ -1,0 +1,16 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkCheckboxContext } from "../components/ark-advanced";
+export { LoongArkCheckboxControl } from "../components/checkbox";
+export { LoongArkCheckboxGroup } from "../components/ark-advanced";
+export { LoongArkCheckboxGroupProvider } from "../components/ark-advanced";
+export { LoongArkCheckboxHiddenInput } from "../components/checkbox";
+export { LoongArkCheckboxIndicator } from "../components/checkbox";
+export { LoongArkCheckboxLabel } from "../components/checkbox";
+export { LoongArkCheckboxRoot } from "../components/checkbox";
+export { LoongArkCheckboxRootProvider } from "../components/ark-advanced";
+export { useCheckbox } from "@ark-ui/vue/checkbox";
+export { useCheckboxContext } from "@ark-ui/vue/checkbox";
+export { useCheckboxGroup } from "@ark-ui/vue/checkbox";
+export { useCheckboxGroupContext } from "@ark-ui/vue/checkbox";
+export type { UseCheckboxProps } from "@ark-ui/vue/checkbox";
+export type { UseCheckboxReturn } from "@ark-ui/vue/checkbox";

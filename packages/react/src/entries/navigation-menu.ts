@@ -1,0 +1,21 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkNavigationMenu } from "../components/layout";
+export { LoongArkNavigationMenuArrow } from "../components/ark-advanced";
+export { LoongArkNavigationMenuCloseTrigger } from "../components/composed";
+export { LoongArkNavigationMenuContent } from "../components/composed";
+export { LoongArkNavigationMenuContext } from "../components/ark-advanced";
+export { LoongArkNavigationMenuIndicator } from "../components/ark-advanced";
+export { LoongArkNavigationMenuItem } from "../components/layout";
+export { LoongArkNavigationMenuItemIndicator } from "../components/ark-advanced";
+export { LoongArkNavigationMenuLink } from "../components/layout";
+export { LoongArkNavigationMenuList } from "../components/layout";
+export { LoongArkNavigationMenuPositioner } from "../components/composed";
+export { LoongArkNavigationMenuRoot } from "../components/composed";
+export { LoongArkNavigationMenuRootProvider } from "../components/ark-advanced";
+export { LoongArkNavigationMenuTrigger } from "../components/composed";
+export { LoongArkNavigationMenuViewport } from "../components/ark-advanced";
+export { LoongArkNavigationMenuViewportPositioner } from "../components/ark-advanced";
+export { useNavigationMenu } from "@ark-ui/react/navigation-menu";
+export { useNavigationMenuContext } from "@ark-ui/react/navigation-menu";
+export type { UseNavigationMenuProps } from "@ark-ui/react/navigation-menu";
+export type { UseNavigationMenuReturn } from "@ark-ui/react/navigation-menu";

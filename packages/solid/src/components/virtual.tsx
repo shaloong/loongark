@@ -1,6 +1,7 @@
 import {
   createSignal,
   createEffect,
+  createRenderEffect,
   createMemo,
   onMount,
   onCleanup,
@@ -39,7 +40,7 @@ export function LoongArkVirtualGrid(props: VirtualGridProps) {
     return model.cursor;
   });
   let root!: HTMLDivElement;
-  createEffect(() => model.sync({ ...props }));
+  createRenderEffect(() => model.sync({ ...props }));
   onMount(() => {
     const stop = mountVirtualGrid(root, model);
     onCleanup(stop);

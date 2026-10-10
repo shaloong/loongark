@@ -11,12 +11,10 @@ test.beforeAll(async () => {
     configFile: false,
     logLevel: "silent",
     resolve: {
-      alias: Object.fromEntries(
-        ["solid", "kit", "theme", "primitives", "tokens"].map((p) => [
-          "@loongark/" + p,
-          resolve("packages", p, "dist/index.js"),
-        ]),
-      ),
+      alias: ["solid", "kit", "theme", "primitives", "tokens"].map(name => ({
+        find: new RegExp(`^@loongark/${name}$`),
+        replacement: resolve("packages", name, "dist/index.js"),
+      })),
       dedupe: ["solid-js"],
     },
     plugins: [

@@ -1,0 +1,21 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkStepsCompletedContent } from "../components/steps";
+export { LoongArkStepsContent } from "../components/steps";
+export { LoongArkStepsContext } from "../components/ark-advanced";
+export { LoongArkStepsIndicator } from "../components/steps";
+export { LoongArkStepsItem } from "../components/steps";
+export { LoongArkStepsItemContext } from "../components/ark-advanced";
+export { LoongArkStepsList } from "../components/steps";
+export { LoongArkStepsNextTrigger } from "../components/steps";
+export { LoongArkStepsPrevTrigger } from "../components/steps";
+export { LoongArkStepsProgress } from "../components/steps";
+export { LoongArkStepsRoot } from "../components/steps";
+export { LoongArkStepsRootProvider } from "../components/ark-advanced";
+export { LoongArkStepsSeparator } from "../components/steps";
+export { LoongArkStepsTrigger } from "../components/steps";
+export type { StepsChangeDetails } from "../components/steps";
+export { useSteps } from "@ark-ui/vue/steps";
+export { useStepsContext } from "@ark-ui/vue/steps";
+export { useStepsItemContext } from "@ark-ui/vue/steps";
+export type { UseStepsProps } from "@ark-ui/vue/steps";
+export type { UseStepsReturn } from "@ark-ui/vue/steps";

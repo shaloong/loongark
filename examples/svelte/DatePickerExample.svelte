@@ -27,9 +27,9 @@
 
 <Calendar.Root defaultValue={[L.parseDate("2026-10-08")]}
   ><Calendar.Label>选择日期</Calendar.Label><Calendar.Control
-    ><Calendar.Input /><Calendar.Trigger
-      aria-label="打开日历"
-    /></Calendar.Control
+    ><Calendar.Input /><Calendar.Trigger aria-label="打开日历"
+      ><L.LoongArkIcon icon={controlIcons.chevronDown} size="sm" /></Calendar.Trigger
+    ></Calendar.Control
   ><L.LoongArkPortal
     ><Calendar.Positioner
       ><Calendar.Content

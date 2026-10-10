@@ -1,0 +1,26 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkSelectClearTrigger } from "../components/select";
+export { LoongArkSelectContent } from "../components/select";
+export { LoongArkSelectContext } from "../components/ark-advanced";
+export { LoongArkSelectControl } from "../components/select";
+export { LoongArkSelectHiddenSelect } from "../components/select";
+export { LoongArkSelectIndicator } from "../components/select";
+export { LoongArkSelectItem } from "../components/select";
+export { LoongArkSelectItemContext } from "../components/ark-advanced";
+export { LoongArkSelectItemGroup } from "../components/select";
+export { LoongArkSelectItemGroupLabel } from "../components/select";
+export { LoongArkSelectItemIndicator } from "../components/select";
+export { LoongArkSelectItemText } from "../components/select";
+export { LoongArkSelectLabel } from "../components/select";
+export { LoongArkSelectList } from "../components/select";
+export { LoongArkSelectPositioner } from "../components/select";
+export { LoongArkSelectRoot } from "../components/select";
+export type { LoongArkSelectRootProps } from "../components/select";
+export { LoongArkSelectRootProvider } from "../components/ark-advanced";
+export { LoongArkSelectTrigger } from "../components/select";
+export { LoongArkSelectValueText } from "../components/select";
+export { useSelect } from "@ark-ui/solid/select";
+export { useSelectContext } from "@ark-ui/solid/select";
+export { useSelectItemContext } from "@ark-ui/solid/select";
+export type { UseSelectProps } from "@ark-ui/solid/select";
+export type { UseSelectReturn } from "@ark-ui/solid/select";

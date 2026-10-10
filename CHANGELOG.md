@@ -1,6 +1,20 @@
 # 变更日志
 
-## Unreleased（当前包清单0.1.0）
+## Unreleased（当前包清单 0.1.0）
+
+### 按需接入
+
+- 虚拟网格的数据更新在绘制前同步，清空数据时可立即通过 Tab 进入空网格，不再短暂跳过键盘入口。
+- 四端新增119个组件族、Provider 与 Collection 子路径，保留根入口和延迟编辑器入口；Solid 条件导出支持各子路径 SSR。
+- Provider 使用独立共享样式启动入口，移除基础页面中的无关高级行为依赖。
+- Storybook 增加四端快速开始与组件对应引入代码；发布演练覆盖全部子路径类型和真实外部消费。
+
+### 组件与维护
+
+- 四端 DatePicker 默认以 left/top 布局定位，修复 WebKit 缩屏与入场动画重叠时保留旧滚动范围的问题，并保留自定义 transform 契约；ColorPicker 对比度验收等待实际淡入完成，保留最终状态的 WCAG AA 检查，并将 Vue 颜色示例的色板与其余三端 VI 对齐，补齐四端日期示例的打开图标。
+
+- 联动升级 Ark React/Vue/Solid 至 5.39.3、Ark Svelte 至 5.24.3 及 Zag 至 1.45.0；兼容 Field 错误提示从 aria-errormessage 合并到 aria-describedby 的契约，保留复合输入的提示关联，显式 invalid=false 不再继承父级错误描述。
+- 升级 TypeScript 至 6.0.3 并迁移弃用的 baseUrl 和 Node10 模块解析配置；更新 Playwright、Axe 及固定 SHA 的 Pages/Node Actions。Node 类型保留在实际使用的 24 系列，未采用 Node 26 类型。
 
 - 联动升级 React/react-dom 至19.3.0、Storybook及addons至10.6.1，更新React/Svelte构建插件与固定SHA的Actions；Dependabot按运行时与展示工具分组，并为develop PR启用完整验证。
 

@@ -119,6 +119,8 @@ for (const framework of ["react", "vue", "solid", "svelte", "Story"])
           .getByRole("button", { name: "Clear data", exact: true })
           .click();
         await expect(root).toHaveAttribute("aria-rowcount", "0");
+        // 空状态的语义与 Tab 入口必须同一次提交可用，不能依赖后续 RAF。
+        await expect(root).toHaveAttribute("tabindex", "0");
         await before.focus();
         await page.keyboard.press("Tab");
         await expect(root).toBeFocused();

@@ -1,6 +1,6 @@
 import { LoongArkTheme } from "@loongark/theme";
 import { TokenTree } from "@loongark/tokens";
-import type { KitComponentRegistration } from "../index";
+import type { KitComponentRegistration } from "../bootstrap";
 import { asTokenTree, toStringToken } from "@loongark/primitives";
 
 interface FilterBarDesignTokens {

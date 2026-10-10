@@ -1,0 +1,21 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export type { DialogMotion } from "../components/dialog";
+export type { DialogPlacement } from "../components/dialog";
+export type { DialogSize } from "../components/dialog";
+export { LoongArkDialog } from "../components/dialog";
+export { LoongArkDialogCloseTrigger } from "../components/dialog";
+export { LoongArkDialogContent } from "../components/dialog";
+export { LoongArkDialogContext } from "../components/ark-advanced";
+export { LoongArkDialogDescription } from "../components/dialog";
+export { LoongArkDialogFooter } from "../components/dialog";
+export { LoongArkDialogOverlay } from "../components/dialog";
+export { LoongArkDialogPortal } from "../components/dialog";
+export { LoongArkDialogPositioner } from "../components/dialog";
+export { LoongArkDialogRoot } from "../components/dialog";
+export { LoongArkDialogRootProvider } from "../components/ark-advanced";
+export { LoongArkDialogTitle } from "../components/dialog";
+export { LoongArkDialogTrigger } from "../components/dialog";
+export { useDialog } from "@ark-ui/vue/dialog";
+export { useDialogContext } from "@ark-ui/vue/dialog";
+export type { UseDialogProps } from "@ark-ui/vue/dialog";
+export type { UseDialogReturn } from "@ark-ui/vue/dialog";

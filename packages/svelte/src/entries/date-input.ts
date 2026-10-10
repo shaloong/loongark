@@ -1,0 +1,21 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export type { DateInputDateValue } from "@ark-ui/svelte/date-input";
+export type { DateInputFocusChangeDetails } from "@ark-ui/svelte/date-input";
+export type { DateInputRootProps } from "@ark-ui/svelte/date-input";
+export type { DateInputSegmentProps } from "@ark-ui/svelte/date-input";
+export type { DateInputSelectionMode } from "@ark-ui/svelte/date-input";
+export type { DateInputValueChangeDetails } from "@ark-ui/svelte/date-input";
+export { LoongArkDateInput } from "../components/ark-next";
+export { LoongArkDateInputContext } from "../components/ark-next";
+export { LoongArkDateInputControl } from "../components/ark-next";
+export { LoongArkDateInputHiddenInput } from "../components/ark-next";
+export { LoongArkDateInputLabel } from "../components/ark-next";
+export { LoongArkDateInputRoot } from "../components/ark-next";
+export { LoongArkDateInputRootProvider } from "../components/ark-next";
+export { LoongArkDateInputSegment } from "../components/ark-next";
+export { LoongArkDateInputSegmentContext } from "../components/ark-next";
+export { LoongArkDateInputSegmentGroup } from "../components/ark-next";
+export { useDateInput } from "@ark-ui/svelte/date-input";
+export { useDateInputContext } from "@ark-ui/svelte/date-input";
+export type { UseDateInputProps } from "@ark-ui/svelte/date-input";
+export type { UseDateInputReturn } from "@ark-ui/svelte/date-input";

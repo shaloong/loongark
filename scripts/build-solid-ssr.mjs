@@ -1,4 +1,5 @@
 import { build } from "vite";
+import { readdir } from "node:fs/promises";
 import solid from "vite-plugin-solid";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -41,6 +42,7 @@ await build({
       input: {
         index: resolve(workspace, "packages/solid/dist/ssr/index.js"),
         editors: resolve(workspace, "packages/solid/dist/ssr/components/editors.js"),
+        ...Object.fromEntries((await readdir(resolve(workspace, "packages/solid/dist/ssr/entries"))).filter(name => name.endsWith(".js")).map(name => [`entries/${name.slice(0,-3)}`, resolve(workspace, "packages/solid/dist/ssr/entries", name)])),
       },
       external: (id) =>
         id === "solid-js" ||

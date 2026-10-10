@@ -14,7 +14,7 @@ import {
   type LoongArkTheme,
   type CreateThemeOptions,
 } from "@loongark/theme";
-import { bootstrapKit } from "@loongark/kit";
+import { bootstrapKit } from "@loongark/kit/bootstrap";
 export const themeKey = "loongark-theme-scope";
 export const LoongArkProvider = defineComponent<CreateThemeOptions>({
   name: "LoongArkProvider",

@@ -1,0 +1,29 @@
+name: Main PR source
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  source:
+    name: Main PR source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      # 不检出或执行 PR 的代码，只核对 GitHub 提供的分支与仓库信息。
+      - name: Require same-repository develop
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          BASE_REF: ${{ github.base_ref }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          if [[ "$BASE_REF" != "main" || "$HEAD_REF" != "develop" || "$HEAD_REPOSITORY" != "$REPOSITORY" ]]; then
+            echo "::error::main 只接受同一仓库的 develop 分支通过 PR 合并。"
+            exit 1
+          fi
+          echo "来源检查通过：同仓库 develop → main。"

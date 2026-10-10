@@ -1,0 +1,22 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { exportImageCropper } from "@loongark/kit";
+export type { ImageCropperCropChangeDetails } from "@ark-ui/react/image-cropper";
+export type { ImageCropperExportModel } from "@loongark/kit";
+export type { ImageCropperExportOptions } from "@loongark/kit";
+export type { ImageCropperFlipChangeDetails } from "@ark-ui/react/image-cropper";
+export type { ImageCropperRootProps } from "@ark-ui/react/image-cropper";
+export type { ImageCropperRotationChangeDetails } from "@ark-ui/react/image-cropper";
+export type { ImageCropperZoomChangeDetails } from "@ark-ui/react/image-cropper";
+export { LoongArkImageCropper } from "../components/ark-additions";
+export { LoongArkImageCropperContext } from "../components/ark-additions";
+export { LoongArkImageCropperGrid } from "../components/ark-additions";
+export { LoongArkImageCropperHandle } from "../components/ark-additions";
+export { LoongArkImageCropperImage } from "../components/ark-additions";
+export { LoongArkImageCropperRoot } from "../components/ark-additions";
+export { LoongArkImageCropperRootProvider } from "../components/ark-additions";
+export { LoongArkImageCropperSelection } from "../components/ark-additions";
+export { LoongArkImageCropperViewport } from "../components/ark-additions";
+export { useImageCropper } from "@ark-ui/react/image-cropper";
+export { useImageCropperContext } from "@ark-ui/react/image-cropper";
+export type { UseImageCropperProps } from "@ark-ui/react/image-cropper";
+export type { UseImageCropperReturn } from "@ark-ui/react/image-cropper";

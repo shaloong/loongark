@@ -10,21 +10,69 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "outDir": "dist",
-    "lib": ["ES2020", "DOM"],
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
     "types": [],
-    "typeRoots": ["./node_modules/@types"],
-    "baseUrl": ".",
     "paths": {
-      "@loongark/tokens": ["packages/tokens/src"],
-      "@loongark/theme": ["packages/theme/src"],
-      "@loongark/primitives": ["packages/primitives/src"],
-      "@loongark/kit": ["packages/kit/src"],
-      "@loongark/vue": ["packages/vue/src"],
-      "@loongark/react": ["packages/react/src"],
-      "@loongark/svelte": ["packages/svelte/src"],
-      "@loongark/solid": ["packages/solid/src"],
-      "@loongark/cli": ["packages/cli/src"],
-      "@examples": ["examples"]
+      "@loongark/tokens": [
+        "./packages/tokens/src"
+      ],
+      "@loongark/theme": [
+        "./packages/theme/src"
+      ],
+      "@loongark/primitives": [
+        "./packages/primitives/src"
+      ],
+      "@loongark/kit": [
+        "./packages/kit/src"
+      ],
+      "@loongark/vue": [
+        "./packages/vue/src"
+      ],
+      "@loongark/react": [
+        "./packages/react/src"
+      ],
+      "@loongark/svelte": [
+        "./packages/svelte/src"
+      ],
+      "@loongark/solid": [
+        "./packages/solid/src"
+      ],
+      "@loongark/cli": [
+        "./packages/cli/src"
+      ],
+      "@examples": [
+        "./examples"
+      ],
+      "@loongark/kit/bootstrap": [
+        "./packages/kit/src/bootstrap.ts"
+      ],
+      "@loongark/react/*": [
+        "./packages/react/src/entries/*"
+      ],
+      "@loongark/vue/*": [
+        "./packages/vue/src/entries/*"
+      ],
+      "@loongark/solid/*": [
+        "./packages/solid/src/entries/*"
+      ],
+      "@loongark/svelte/*": [
+        "./packages/svelte/src/entries/*"
+      ],
+      "@loongark/react/editors": [
+        "./packages/react/src/components/editors"
+      ],
+      "@loongark/vue/editors": [
+        "./packages/vue/src/components/editors"
+      ],
+      "@loongark/solid/editors": [
+        "./packages/solid/src/components/editors"
+      ],
+      "@loongark/svelte/editors": [
+        "./packages/svelte/src/components/editors"
+      ]
     }
   }
 }

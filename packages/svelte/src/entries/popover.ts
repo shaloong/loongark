@@ -1,0 +1,26 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkPopoverAnchor } from "../components/ark-advanced";
+export { default as LoongArkPopoverArrow } from "../components/PopoverArrow.svelte";
+export { LoongArkPopoverArrowTip } from "../components/ark-advanced";
+export { default as LoongArkPopoverCloseTrigger } from "../components/PopoverCloseTrigger.svelte";
+export { default as LoongArkPopoverContent } from "../components/PopoverContent.svelte";
+export { LoongArkPopoverContext } from "../components/ark-advanced";
+export { default as LoongArkPopoverDescription } from "../components/PopoverDescription.svelte";
+export { LoongArkPopoverIndicator } from "../components/ark-advanced";
+export { default as LoongArkPopoverPositioner } from "../components/PopoverPositioner.svelte";
+export { default as LoongArkPopoverRoot } from "../components/PopoverRoot.svelte";
+export { LoongArkPopoverRootProvider } from "../components/ark-advanced";
+export { default as LoongArkPopoverTitle } from "../components/PopoverTitle.svelte";
+export { default as LoongArkPopoverTrigger } from "../components/PopoverTrigger.svelte";
+export type { PopoverArrowProps } from "../components/popover.d";
+export type { PopoverCloseTriggerProps } from "../components/popover.d";
+export type { PopoverContentProps } from "../components/popover.d";
+export type { PopoverDescriptionProps } from "../components/popover.d";
+export type { PopoverPositionerProps } from "../components/popover.d";
+export type { PopoverRootProps } from "../components/popover.d";
+export type { PopoverTitleProps } from "../components/popover.d";
+export type { PopoverTriggerProps } from "../components/popover.d";
+export { usePopover } from "@ark-ui/svelte/popover";
+export { usePopoverContext } from "@ark-ui/svelte/popover";
+export type { UsePopoverProps } from "@ark-ui/svelte/popover";
+export type { UsePopoverReturn } from "@ark-ui/svelte/popover";

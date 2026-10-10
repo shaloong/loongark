@@ -36,6 +36,7 @@ interface CodeFile {
 }
 interface Reference {
   family: string;
+  subpath: string;
   branch: string;
   variants: Array<{
     id: string;
@@ -118,6 +119,7 @@ export function ReferenceDocs() {
         <main className="loongark-reference" data-reference-family={family}>
           <Title />
           <Description />
+          {reference && <Source dark={mode === "dark"} code={`import { ${api?.name.split(".")[0] ?? reference.apis[0]?.name.split(".")[0] ?? "LoongArk" + reference.family.replace(/ /g, "")} } from "@loongark/${framework}/${reference.subpath}";`} language="typescript" />}
           <Primary />
           <div
             className="loongark-reference-controls"

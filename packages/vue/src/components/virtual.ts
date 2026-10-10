@@ -58,7 +58,7 @@ export const LoongArkVirtualGrid = defineComponent({
         revision.value = ++revisionNumber;
       });
     let stop: (() => void) | undefined;
-    watchEffect(() => model.sync({ ...props }));
+    watchEffect(() => model.sync({ ...props }), { flush: "pre" });
     onMounted(() => {
       stop = mountVirtualGrid(root.value!, model);
     });

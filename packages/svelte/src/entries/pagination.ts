@@ -1,0 +1,20 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkPaginationContext } from "../components/ark-advanced";
+export { default as LoongArkPaginationEllipsis } from "../components/PaginationEllipsis.svelte";
+export { LoongArkPaginationFirstTrigger } from "../components/ark-advanced";
+export { default as LoongArkPaginationItem } from "../components/PaginationItem.svelte";
+export { LoongArkPaginationLastTrigger } from "../components/ark-advanced";
+export { default as LoongArkPaginationList } from "../components/PaginationList.svelte";
+export { default as LoongArkPaginationNextTrigger } from "../components/PaginationNextTrigger.svelte";
+export { default as LoongArkPaginationPrevTrigger } from "../components/PaginationPrevTrigger.svelte";
+export { default as LoongArkPaginationRoot } from "../components/PaginationRoot.svelte";
+export { LoongArkPaginationRootProvider } from "../components/ark-advanced";
+export type { PaginationEllipsisProps } from "../components/pagination.d";
+export type { PaginationItemProps } from "../components/pagination.d";
+export type { PaginationNextTriggerProps } from "../components/pagination.d";
+export type { PaginationPrevTriggerProps } from "../components/pagination.d";
+export type { PaginationRootProps } from "../components/pagination.d";
+export { usePagination } from "@ark-ui/svelte/pagination";
+export { usePaginationContext } from "@ark-ui/svelte/pagination";
+export type { UsePaginationProps } from "@ark-ui/svelte/pagination";
+export type { UsePaginationReturn } from "@ark-ui/svelte/pagination";

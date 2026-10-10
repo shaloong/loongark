@@ -1,3 +1,4 @@
+import { datePickerPositionerStyle } from "@loongark/primitives";
 import type { DatePickerRootEmits as NativeDatePickerRootEmits } from "@ark-ui/vue/date-picker";
 import type { DatePickerRootProps as NativeDatePickerRootProps } from "@ark-ui/vue/date-picker";
 import type { DatePickerPresetTriggerProps as NativeDatePickerPresetTriggerProps } from "@ark-ui/vue/date-picker";
@@ -9,6 +10,7 @@ import { renderPart } from "../render-part";
  */
 import {
   resolveDynamicComponent,
+  normalizeStyle,
   defineComponent,
   h,
   provide,
@@ -305,6 +307,10 @@ export const LoongArkDatePickerPositioner = defineComponent({
           ...attrs,
           "data-scope": "date-picker",
           "data-part": "positioner",
+          style: [
+            datePickerPositionerStyle(normalizeStyle(attrs.style)),
+            attrs.style,
+          ],
         },
         slots,
       );

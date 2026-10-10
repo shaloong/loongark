@@ -6,6 +6,8 @@
 
 main 是默认及稳定分支；所有日常开发进入 develop。已有检出先检查并保留工作区改动，再同步 develop；不 reset、强推或改写共享历史。提交采用 Conventional Commits，例如 `fix(questionnaire): escape nested type attributes`。只有明确发布任务才通过 develop → main PR 更新稳定分支，合并不等于发布 npm。
 
+main 仅接受同仓库 develop 的 PR，包含配置维护。`.github/workflows/main-pr-source.yml` 检查来源；仓库管理员需将 `Main PR source` 设置为 main 的必需检查，并要求 PR、禁止强推与删除、禁止绕过规则。工作流本身不会启用服务器端分支保护；配置步骤见 [发布指南](docs/releases.md#main-分支保护)。
+
 ## 代码与示例
 
 共享样式位于 Primitives，共享模型与通用行为位于 Kit；四端适配负责渲染、绑定与生命周期。使用真实框架/Ark 类型，不添加本地类型桩或用强制转换掩盖错误。外观复用 Token 和 Lucide 图标，保留原生表单、标签、键盘与焦点行为，支持减弱动效。

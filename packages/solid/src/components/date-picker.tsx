@@ -36,7 +36,10 @@ import {
   type DatePickerTableCellProps as ArkDatePickerTableCellProps,
   type DatePickerTableCellTriggerProps as ArkDatePickerTableCellTriggerProps,
 } from "@ark-ui/solid/date-picker";
-import type { DatePickerSize } from "@loongark/primitives";
+import {
+  datePickerPositionerStyle,
+  type DatePickerSize,
+} from "@loongark/primitives";
 
 const DatePickerContext = createContext<{ size: DatePickerSize }>({
   size: "md",
@@ -138,6 +141,13 @@ export const LoongArkDatePickerPositioner: Component<
       {...props}
       data-scope="date-picker"
       data-part="positioner"
+      style={
+        typeof props.style === "string"
+          ? `${Object.entries(datePickerPositionerStyle(props.style))
+              .map(([key, value]) => `${key}:${value}`)
+              .join(";")};${props.style}`
+          : { ...datePickerPositionerStyle(props.style), ...props.style }
+      }
     >
       {props.children}
     </ArkDatePicker.Positioner>

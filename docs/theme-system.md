@@ -25,7 +25,7 @@ React/Vue/Solid 使用 LoongArkProvider；Svelte 使用同名组件。四端均�
 
 ```ts
 import { createLoongArkTheme } from "@loongark/theme";
-import { bootstrapKit } from "@loongark/kit";
+import { bootstrapKit } from "@loongark/kit/bootstrap";
 const theme = createLoongArkTheme({ mode: "dark" });
 theme.mount(document.querySelector<HTMLElement>("#app")!);
 bootstrapKit(theme);

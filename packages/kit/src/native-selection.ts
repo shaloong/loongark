@@ -8,24 +8,35 @@ export function nativeSelectionDescription(
   return ids.length ? [...new Set(ids)].join(" ") : undefined;
 }
 
-/** Field 用 aria-errormessage 管理已挂载错误；复合控件的实际输入也需读到它。 */
+/** 合并 Field 的提示与错误关联，兼容 Ark 将错误纳入 aria-describedby 的契约。 */
 export function nativeSelectionFieldDescription(
   own: string | null | undefined,
   field:
     | {
         ariaDescribedby?: string;
-        getInputProps: () => { "aria-errormessage"?: unknown };
+        ids?: { errorText?: string };
+        getInputProps: () => {
+          "aria-describedby"?: string | null;
+          "aria-errormessage"?: unknown;
+        };
       }
     | undefined,
   invalid: unknown,
 ): string | undefined {
+  const input = field?.getInputProps();
+  const invalidControl = invalid === true || invalid === "true";
+  const described = nativeSelectionDescription(field?.ariaDescribedby, input?.["aria-describedby"]);
+  // 子控件显式覆盖 invalid=false 时，只移除父级自动关联的错误，保留调用方描述。
+  const description = !invalidControl && field?.ids?.errorText
+    ? described?.split(/\s+/).filter(id => id !== field.ids?.errorText).join(" ")
+    : described;
   const error =
-    invalid === true || invalid === "true"
-      ? field?.getInputProps()["aria-errormessage"]
+    invalidControl
+      ? input?.["aria-errormessage"]
       : undefined;
   return nativeSelectionDescription(
     own,
-    field?.ariaDescribedby,
+    description,
     typeof error === "string" ? error : undefined,
   );
 }

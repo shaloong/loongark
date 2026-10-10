@@ -6,7 +6,7 @@ import {
   type ParentComponent,
 } from "solid-js";
 import { createLoongArkTheme, type CreateThemeOptions } from "@loongark/theme";
-import { bootstrapKit } from "@loongark/kit";
+import { bootstrapKit } from "@loongark/kit/bootstrap";
 import { ThemeContext } from "./theme-context";
 export type LoongArkProviderProps = CreateThemeOptions;
 export const LoongArkProvider: ParentComponent<LoongArkProviderProps> = (

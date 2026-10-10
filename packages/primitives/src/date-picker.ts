@@ -7,6 +7,24 @@ import { TokenTree } from "@loongark/tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 
+// 坐标参与布局，避免 WebKit 在缩屏与入场动画重叠时缓存变换前的滚动范围。
+// 显式 transform 由调用方管理，保持原有自定义定位契约。
+export const datePickerPositionerStyle = (
+  style?: { transform?: unknown } | string | null,
+) => {
+  const customTransform =
+    typeof style === "string"
+      ? /(?:^|;)\s*transform\s*:/i.test(style)
+      : style?.transform !== undefined;
+  return customTransform
+    ? {}
+    : {
+        transform: "none",
+        left: "var(--x, 0px)",
+        top: "var(--y, -100vh)",
+      };
+};
+
 export type DatePickerSize = "sm" | "md" | "lg";
 
 export interface DatePickerPrimitiveProps {

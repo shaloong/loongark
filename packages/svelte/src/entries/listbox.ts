@@ -1,0 +1,28 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export type { ListboxItemGroupLabelProps } from "../components/listbox.d";
+export type { ListboxItemGroupProps } from "../components/listbox.d";
+export type { ListboxItemIndicatorProps } from "../components/listbox.d";
+export type { ListboxItemProps } from "../components/listbox.d";
+export type { ListboxItemTextProps } from "../components/listbox.d";
+export type { ListboxLabelProps } from "../components/listbox.d";
+export type { ListboxListProps } from "../components/listbox.d";
+export type { ListboxRootProps } from "../components/listbox.d";
+export { LoongArkListboxContext } from "../components/ark-advanced";
+export { LoongArkListboxEmpty } from "../components/ark-advanced";
+export { LoongArkListboxInput } from "../components/ark-advanced";
+export { default as LoongArkListboxItem } from "../components/ListboxItem.svelte";
+export { LoongArkListboxItemContext } from "../components/ark-advanced";
+export { default as LoongArkListboxItemGroup } from "../components/ListboxItemGroup.svelte";
+export { default as LoongArkListboxItemGroupLabel } from "../components/ListboxItemGroupLabel.svelte";
+export { default as LoongArkListboxItemIndicator } from "../components/ListboxItemIndicator.svelte";
+export { default as LoongArkListboxItemText } from "../components/ListboxItemText.svelte";
+export { default as LoongArkListboxLabel } from "../components/ListboxLabel.svelte";
+export { default as LoongArkListboxList } from "../components/ListboxList.svelte";
+export { default as LoongArkListboxRoot } from "../components/ListboxRoot.svelte";
+export { LoongArkListboxRootProvider } from "../components/ark-advanced";
+export { LoongArkListboxValueText } from "../components/ark-advanced";
+export { useListbox } from "@ark-ui/svelte/listbox";
+export { useListboxContext } from "@ark-ui/svelte/listbox";
+export { useListboxItemContext } from "@ark-ui/svelte/listbox";
+export type { UseListboxProps } from "@ark-ui/svelte/listbox";
+export type { UseListboxReturn } from "@ark-ui/svelte/listbox";

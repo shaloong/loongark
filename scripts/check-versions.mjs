@@ -63,6 +63,16 @@ for (const args of [
   );
   assert.equal(result.status, 0, result.stderr || result.stdout);
 }
+// 使用真实安装包解析每个子路径声明，不能依赖工作区 aliases。
+const ts = (await import('typescript')).default;
+const typeFixture = resolve(root, 'entries.ts');
+const imports = packs.filter(entry => ['@loongark/react','@loongark/vue','@loongark/solid','@loongark/svelte'].includes(entry.name)).flatMap(entry => Object.keys(entry.exports).filter(key => key !== './package.json').map(key => entry.name + (key === '.' ? '' : key.slice(1))));
+await writeFile(typeFixture, imports.map((id,index) => `import * as E${index} from ${JSON.stringify(id)}; void E${index};`).join('\n'));
+const typeOptions = { noEmit:true, strict:true, skipLibCheck:true, module:ts.ModuleKind.ESNext, moduleResolution:ts.ModuleResolutionKind.Bundler, target:ts.ScriptTarget.ES2022, jsx:ts.JsxEmit.Preserve };
+for (const id of imports) assert.ok(ts.resolveModuleName(id,typeFixture,typeOptions,ts.sys).resolvedModule?.resolvedFileName.endsWith('.d.ts'), `消费声明缺失：${id}`);
+const types = ts.createProgram([typeFixture],typeOptions);
+const diagnostics = ts.getPreEmitDiagnostics(types);
+assert.equal(diagnostics.length, 0, ts.formatDiagnosticsWithColorAndContext(diagnostics,{getCanonicalFileName:file=>file,getCurrentDirectory:()=>root,getNewLine:()=> '\n'}));
 // 在真实 tarball 消费项目审计，避免只依赖工作区 overrides 的安全结果。
 const dependencyAudit = spawnSync("pnpm", ["audit", "--json"], {
   cwd: root,
@@ -86,15 +96,15 @@ await writeFile(
 );
 await writeFile(
   resolve(root, "App.svelte"),
-  `<script>import {LoongArkProvider,LoongArkButton} from '@loongark/svelte';</script><LoongArkProvider><LoongArkButton onclick={()=>window.activations.svelte++}>Svelte minimum</LoongArkButton></LoongArkProvider>`,
+  `<script>import {LoongArkButton} from '@loongark/svelte/button';import {LoongArkProvider} from '@loongark/svelte/provider';</script><LoongArkProvider><LoongArkButton onclick={()=>window.activations.svelte++}>Svelte minimum</LoongArkButton></LoongArkProvider>`,
 );
 await writeFile(
   resolve(root, "main.js"),
-  `import React from 'react';import {createRoot} from 'react-dom/client';import {createApp,h} from 'vue';import {createComponent} from 'solid-js';import {render as renderSolid} from 'solid-js/web';import {mount} from 'svelte';import App from './App.svelte';import * as R from '@loongark/react';import * as V from '@loongark/vue';import * as O from '@loongark/solid';window.activations={react:0,vue:0,solid:0,svelte:0};createRoot(document.getElementById('react')).render(React.createElement(R.LoongArkProvider,{},React.createElement(R.LoongArkButton,{onClick:()=>window.activations.react++},'React minimum')));createApp({render:()=>h(V.LoongArkProvider,{},()=>h(V.LoongArkButton,{onClick:()=>window.activations.vue++},()=> 'Vue minimum'))}).mount('#vue');renderSolid(()=>createComponent(O.LoongArkProvider,{get children(){return createComponent(O.LoongArkButton,{onClick:()=>window.activations.solid++,children:'Solid minimum'});}}),document.getElementById('solid'));mount(App,{target:document.getElementById('svelte')});`,
+  `import React from 'react';import {createRoot} from 'react-dom/client';import {createApp,h} from 'vue';import {createComponent} from 'solid-js';import {render as renderSolid} from 'solid-js/web';import {mount} from 'svelte';import App from './App.svelte';import {LoongArkProvider as RProvider} from '@loongark/react/provider';import {LoongArkButton as RButton} from '@loongark/react/button';import {LoongArkProvider as VProvider} from '@loongark/vue/provider';import {LoongArkButton as VButton} from '@loongark/vue/button';import {LoongArkProvider as OProvider} from '@loongark/solid/provider';import {LoongArkButton as OButton} from '@loongark/solid/button';window.activations={react:0,vue:0,solid:0,svelte:0};createRoot(document.getElementById('react')).render(React.createElement(RProvider,{},React.createElement(RButton,{onClick:()=>window.activations.react++},'React minimum')));createApp({render:()=>h(VProvider,{},()=>h(VButton,{onClick:()=>window.activations.vue++},()=> 'Vue minimum'))}).mount('#vue');renderSolid(()=>createComponent(OProvider,{get children(){return createComponent(OButton,{onClick:()=>window.activations.solid++,children:'Solid minimum'});}}),document.getElementById('solid'));mount(App,{target:document.getElementById('svelte')});`,
 );
 await writeFile(
   resolve(root, "ssr.js"),
-  `import React from 'react';import {renderToString as reactSSR} from 'react-dom/server';import {createSSRApp,h} from 'vue';import {renderToString as vueSSR} from 'vue/server-renderer';import {createComponent} from 'solid-js';import {renderToString as solidSSR} from 'solid-js/web';import {render as svelteSSR} from 'svelte/server';import * as R from '@loongark/react';import * as V from '@loongark/vue';import * as O from '@loongark/solid';import App from './App.svelte';export const output=[reactSSR(React.createElement(R.LoongArkProvider,{},React.createElement(R.LoongArkButton,{},'React minimum'))),await vueSSR(createSSRApp({render:()=>h(V.LoongArkProvider,{},()=>h(V.LoongArkButton,{},()=> 'Vue minimum'))})),solidSSR(()=>createComponent(O.LoongArkProvider,{get children(){return createComponent(O.LoongArkButton,{children:'Solid minimum'});}})),svelteSSR(App).body];`,
+  `import React from 'react';import {renderToString as reactSSR} from 'react-dom/server';import {createSSRApp,h} from 'vue';import {renderToString as vueSSR} from 'vue/server-renderer';import {createComponent} from 'solid-js';import {renderToString as solidSSR} from 'solid-js/web';import {render as svelteSSR} from 'svelte/server';import {LoongArkProvider as RProvider} from '@loongark/react/provider';import {LoongArkButton as RButton} from '@loongark/react/button';import {LoongArkProvider as VProvider} from '@loongark/vue/provider';import {LoongArkButton as VButton} from '@loongark/vue/button';import {LoongArkProvider as OProvider} from '@loongark/solid/provider';import {LoongArkButton as OButton} from '@loongark/solid/button';import App from './App.svelte';export const output=[reactSSR(React.createElement(RProvider,{},React.createElement(RButton,{},'React minimum'))),await vueSSR(createSSRApp({render:()=>h(VProvider,{},()=>h(VButton,{},()=> 'Vue minimum'))})),solidSSR(()=>createComponent(OProvider,{get children(){return createComponent(OButton,{children:'Solid minimum'});}})),svelteSSR(App).body];`,
 );
 await writeFile(
   resolve(root, "build.mjs"),
@@ -148,6 +158,10 @@ try {
   await page.goto(`http://127.0.0.1:${server.address().port}`);
   for (const framework of ["React", "Vue", "Solid", "Svelte"])
     await page.getByRole("button", { name: `${framework} minimum` }).click();
+  for (const framework of ['React','Vue','Solid','Svelte']) {
+    const height = await page.getByRole('button', {name:`${framework} minimum`}).evaluate(node => node.getBoundingClientRect().height);
+    assert.ok(height >= 36, `${framework} 子路径 Provider 未自动应用共享控件样式：${height}`);
+  }
   assert.deepEqual(await page.evaluate(() => window.activations), {
     react: 1,
     vue: 1,
@@ -169,7 +183,7 @@ await writeFile(
       ark,
       dependencyAudit: dependencyMetadata,
       scope:
-        "9个真实tarball；四端原生消费构建、Provider/Button SSR与点击。最低版本未执行完整高级交互矩阵。",
+        "9个真实tarball；四端全部子路径声明解析、子路径 Provider/Button 原生消费构建、SSR与点击。最低版本未执行完整高级交互矩阵。",
       ...measurements,
     },
     null,
