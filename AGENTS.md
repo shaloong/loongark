@@ -5,6 +5,7 @@
 - 所有日常开发和云端开发以 `develop` 为目标分支。开始修改前确认当前分支；若停在 `main`，先切换到 `develop`，保留工作区已有改动。
 - `develop` 是频繁提交、持续集成的开发主线。`main` 保留稳定版本，仅在合适的发布节点从 `develop` 合并更新。
 - 不直接在 `main` 开发，不自动将每次开发提交合入 `main`。用户明确要求发布时，先完成验证，再通过 `develop → main` 的 PR 合并。
+- `main` 只接受同一仓库的 `develop` PR；配置维护也不得从其他分支直接合入或直接推送。分支保护必须要求 PR 与 `Main PR source` 检查，禁止强推、删除和绕过规则。
 - 提交使用 Conventional Commits：`type(scope): summary`。提交应有明确目的；禁止强推、改写共享历史或丢弃他人的改动。
 - 云端检出 `develop`；具体环境、命令和发布流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 

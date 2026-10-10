@@ -5,6 +5,14 @@ main 是默认分支和稳定版本，develop 是开发分支。Pages 只部署 
 
 包提供 ESM 与 node/browser 条件入口，不提供独立 CommonJS 构建；CommonJS 应用使用动态 `import()`。React Server Components 的客户端边界由应用划分，Provider 和带 hooks 的交互组件放在客户端模块。
 
+## main 分支保护
+
+在 GitHub Settings → Rules → Rulesets 创建分支规则，名称可用 `main-protection`，目标为 main，状态设为 Active，不添加 bypass 角色。启用 Require a pull request before merging、Block force pushes 和 Restrict deletions。再启用 Require status checks to pass，并要求分支保持最新。
+
+必需检查包括 `Main PR source`、`verify`、`Four frameworks / chromium`、`Four frameworks / firefox`、`Four frameworks / webkit` 和 `Native Safari / macOS`。`Main PR source` 校验来源必须为本仓库 develop；仅要求 PR 并不能限制来源分支。新检查需先在 PR 上实际运行，才能在设置列表中选择。
+
+上述规则需有仓库管理权限才能在 GitHub 启用，提交工作流不等于保护已生效。所有维护从 develop 发起，包括 Dependabot 配置；Dependabot 仅读取默认分支的配置，停用配置合入 main 后才生效。安全告警与安全更新 PR 在 Settings → Security → Advanced Security 中独立控制；需要完全停止机器人 PR 时禁用 Dependabot security updates，仍可保留 Dependabot alerts。
+
 ## 支持与实测矩阵
 
 | 项目 | 声明最低版本 | 当前完整回归版本 | 最低版本专项范围 |
