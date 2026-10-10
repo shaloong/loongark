@@ -208,6 +208,14 @@ for (const framework of ["react", "vue", "solid", "svelte"])
               .evaluate((el) => el.getBoundingClientRect().height),
           )
           .toBeGreaterThan(100);
+        // 对比度属于稳定状态；淡入中的透明文字会与背景混合，不能按最终颜色验收。
+        await expect
+          .poll(() =>
+            page
+              .locator("[data-scope=color-picker][data-part=content]")
+              .evaluate((el) => getComputedStyle(el).opacity),
+          )
+          .toBe("1");
         expect(
           (
             await new AxeBuilder({ page })

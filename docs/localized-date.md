@@ -17,3 +17,5 @@ React/Solid 以 `value` 与 `onValueChange` 接入受控状态；Vue 使用 `mod
 Input/Textarea 子控件未指定 disabled/readOnly 时继承 Root 状态，显式指定时保留原生覆盖契约；Svelte 的 required 同样继承父级。Vue Root 使用原生 readOnly 属性，四端均提供真实只读 DOM 语义。
 
 设置 locale 的同时，在日期控件外使用已有 `LoongArkLocaleProvider locale={locale}`，让原生内部 Control、SegmentGroup 和键盘方向一起继承 RTL；只给 DOM Root 添加 dir 属性不足以配置所有框架的原生状态机。
+
+DatePicker 浮层支持打开时切换桌面与窄屏尺寸；定位器默认使用 Ark 的坐标进行 left/top 布局，避免 WebKit 保留旧滚动范围。调用方传入的 Positioner style 优先于默认布局样式，显式 transform 保留原有变换定位方式，完全自定义定位时仍需自行保证视口边界。

@@ -37,7 +37,10 @@ import {
   type DatePickerTableCellProps as ArkDatePickerTableCellProps,
   type DatePickerTableCellTriggerProps as ArkDatePickerTableCellTriggerProps,
 } from "@ark-ui/react/date-picker";
-import type { DatePickerSize } from "@loongark/primitives";
+import {
+  datePickerPositionerStyle,
+  type DatePickerSize,
+} from "@loongark/primitives";
 import { Portal as ArkPortal } from "./portal";
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
@@ -165,6 +168,7 @@ export const LoongArkDatePickerPositioner = forwardRef<
       <DatePicker.Positioner
         {...props}
         ref={ref}
+        style={{ ...datePickerPositionerStyle(props.style), ...props.style }}
         data-scope="date-picker"
         data-part="positioner"
       />

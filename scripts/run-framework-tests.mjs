@@ -8,6 +8,7 @@ const child = spawn(
     "tests/framework-examples.spec.ts",
     "tests/basic-examples.spec.ts",
     "tests/date-input-paste.spec.ts",
+    "tests/picker-overlays.spec.ts",
     "tests/date-time.spec.ts",
     "tests/drawer-directions.spec.ts",
     "tests/drawer-action-input.spec.ts",
