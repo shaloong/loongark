@@ -35,16 +35,16 @@
     "generate:entries": "node scripts/generate-entries.mjs"
   },
   "devDependencies": {
-    "@ark-ui/react": "^5.39.2",
-    "@axe-core/playwright": "^4.11.0",
+    "@ark-ui/react": "^5.39.3",
+    "@axe-core/playwright": "^4.13.0",
     "@babel/core": "^7.29.6",
-    "@playwright/test": "^1.57.0",
+    "@playwright/test": "^1.63.0",
     "@storybook/addon-docs": "^10.6.1",
     "@storybook/addon-vitest": "^10.6.1",
     "@storybook/react": "10.6.1",
     "@storybook/react-vite": "^10.6.1",
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^5.2.0",
@@ -57,13 +57,13 @@
     "storybook": "^10.6.1",
     "svelte": "5.57.2",
     "svelte-check": "^4.7.6",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vite": "^7.3.7",
     "vite-plugin-solid": "^2.11.14",
     "vue": "3.5.43",
     "@codemirror/view": "6.43.13",
     "prosemirror-state": "1.4.4",
-    "@ark-ui/vue": "5.39.2"
+    "@ark-ui/vue": "5.39.3"
   },
   "pnpm": {
     "overrides": {

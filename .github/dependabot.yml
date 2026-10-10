@@ -14,10 +14,6 @@ updates:
         patterns: ["react", "react-dom"]
       ark-zag:
         patterns: ["@ark-ui/*", "@zag-js/*"]
-    ignore:
-      # 1.45.0 与当前 Kit/Ark 的 1.43.3 Machine/Service 类型不兼容；后续需联动升级。
-      - dependency-name: "@zag-js/vue"
-        versions: ["1.45.0"]
   - package-ecosystem: github-actions
     directory: /
     target-branch: develop

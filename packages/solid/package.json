@@ -775,11 +775,11 @@
     "package.json"
   ],
   "dependencies": {
-    "@ark-ui/solid": "^5.39.2",
+    "@ark-ui/solid": "^5.39.3",
     "@loongark/kit": "workspace:*",
     "@loongark/primitives": "workspace:*",
     "@loongark/theme": "workspace:*",
-    "@zag-js/solid": "1.43.3"
+    "@zag-js/solid": "1.45.0"
   },
   "peerDependencies": {
     "solid-js": ">=1.9.17"

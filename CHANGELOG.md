@@ -11,6 +11,9 @@
 
 ### 组件与维护
 
+- 联动升级 Ark React/Vue/Solid 至 5.39.3、Ark Svelte 至 5.24.3 及 Zag 至 1.45.0；兼容 Field 错误提示从 aria-errormessage 合并到 aria-describedby 的契约，保留复合输入的提示关联，显式 invalid=false 不再继承父级错误描述。
+- 升级 TypeScript 至 6.0.3 并迁移弃用的 baseUrl 和 Node10 模块解析配置；更新 Playwright、Axe 及固定 SHA 的 Pages/Node Actions。Node 类型保留在实际使用的 24 系列，未采用 Node 26 类型。
+
 - 联动升级 React/react-dom 至19.3.0、Storybook及addons至10.6.1，更新React/Svelte构建插件与固定SHA的Actions；Dependabot按运行时与展示工具分组，并为develop PR启用完整验证。
 
 - 修复菜单快速关闭后的过期聚焦任务，四端统一保留关闭后触发器焦点，同时尊重用户移走焦点与卸载。

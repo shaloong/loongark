@@ -15,67 +15,63 @@
       "DOM"
     ],
     "types": [],
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
-    "baseUrl": ".",
     "paths": {
       "@loongark/tokens": [
-        "packages/tokens/src"
+        "./packages/tokens/src"
       ],
       "@loongark/theme": [
-        "packages/theme/src"
+        "./packages/theme/src"
       ],
       "@loongark/primitives": [
-        "packages/primitives/src"
+        "./packages/primitives/src"
       ],
       "@loongark/kit": [
-        "packages/kit/src"
+        "./packages/kit/src"
       ],
       "@loongark/vue": [
-        "packages/vue/src"
+        "./packages/vue/src"
       ],
       "@loongark/react": [
-        "packages/react/src"
+        "./packages/react/src"
       ],
       "@loongark/svelte": [
-        "packages/svelte/src"
+        "./packages/svelte/src"
       ],
       "@loongark/solid": [
-        "packages/solid/src"
+        "./packages/solid/src"
       ],
       "@loongark/cli": [
-        "packages/cli/src"
+        "./packages/cli/src"
       ],
       "@examples": [
-        "examples"
+        "./examples"
       ],
       "@loongark/kit/bootstrap": [
-        "packages/kit/src/bootstrap.ts"
+        "./packages/kit/src/bootstrap.ts"
       ],
       "@loongark/react/*": [
-        "packages/react/src/entries/*"
+        "./packages/react/src/entries/*"
       ],
       "@loongark/vue/*": [
-        "packages/vue/src/entries/*"
+        "./packages/vue/src/entries/*"
       ],
       "@loongark/solid/*": [
-        "packages/solid/src/entries/*"
+        "./packages/solid/src/entries/*"
       ],
       "@loongark/svelte/*": [
-        "packages/svelte/src/entries/*"
+        "./packages/svelte/src/entries/*"
       ],
       "@loongark/react/editors": [
-        "packages/react/src/components/editors"
+        "./packages/react/src/components/editors"
       ],
       "@loongark/vue/editors": [
-        "packages/vue/src/components/editors"
+        "./packages/vue/src/components/editors"
       ],
       "@loongark/solid/editors": [
-        "packages/solid/src/components/editors"
+        "./packages/solid/src/components/editors"
       ],
       "@loongark/svelte/editors": [
-        "packages/svelte/src/components/editors"
+        "./packages/svelte/src/components/editors"
       ]
     }
   }

@@ -23,8 +23,8 @@ main 是默认分支和稳定版本，develop 是开发分支。Pages 只部署 
 | Vue | 3.5.43 | 3.5.43 | 同上 |
 | Solid | 1.9.17 | 1.9.17 | 同上；node 条件使用真实 SSR 产物 |
 | Svelte | 5.57.2 | 5.57.2 | 同上；使用最低版本编译器编译发布的源码 |
-| Ark React / Vue / Solid | 依赖范围 ^5.39.2 | 5.39.2 | 最低 peer 探针锁定当前实际 Ark 版本 |
-| Ark Svelte | 依赖范围 ^5.24.2 | 5.24.2 | 同上；附件语法使 Svelte5.20 无法编译 |
+| Ark React / Vue / Solid | 依赖范围 ^5.39.3 | 5.39.3 | 最低 peer 探针锁定当前实际 Ark 版本 |
+| Ark Svelte | 依赖范围 ^5.24.3 | 5.24.3 | 同上；附件语法使 Svelte5.20 无法编译 |
 
 依赖升级时，React与react-dom需保持同版本，React组件包的开发依赖也要同步；对外peer下限仍独立通过发布包消费验证。Storybook的核心、renderer、builder与addons需联动更新。Ark与直接使用的Zag绑定/状态机必须核对类型和生命周期兼容性，不能因为单包版本较新就直接合入。Dependabot 常规版本升级 PR 已暂停（npm 与 GitHub Actions 的 open-pull-requests-limit 均为 0），改为手动升级并通过 develop PR 验证；安全告警与安全更新 PR 由仓库安全设置独立控制。
 

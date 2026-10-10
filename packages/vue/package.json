@@ -520,11 +520,11 @@
     "package.json"
   ],
   "dependencies": {
-    "@ark-ui/vue": "^5.39.2",
+    "@ark-ui/vue": "^5.39.3",
     "@loongark/kit": "workspace:*",
     "@loongark/primitives": "workspace:*",
     "@loongark/theme": "workspace:*",
-    "@zag-js/vue": "1.43.3"
+    "@zag-js/vue": "1.45.0"
   },
   "peerDependencies": {
     "vue": ">=3.5.43"

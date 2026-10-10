@@ -520,11 +520,11 @@
     "package.json"
   ],
   "dependencies": {
-    "@ark-ui/svelte": "^5.24.2",
+    "@ark-ui/svelte": "^5.24.3",
     "@loongark/kit": "workspace:*",
     "@loongark/primitives": "workspace:*",
     "@loongark/theme": "workspace:*",
-    "@zag-js/svelte": "1.43.3"
+    "@zag-js/svelte": "1.45.0"
   },
   "peerDependencies": {
     "svelte": ">=5.57.2"
