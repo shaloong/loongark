@@ -5,7 +5,8 @@ updates:
     target-branch: develop
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    # 暂停常规版本升级 PR；保留依赖告警与手动升级验证。
+    open-pull-requests-limit: 0
     groups:
       storybook:
         patterns: ["storybook", "@storybook/*"]
@@ -22,4 +23,4 @@ updates:
     target-branch: develop
     schedule:
       interval: weekly
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 0
