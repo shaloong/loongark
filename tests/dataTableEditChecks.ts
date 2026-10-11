@@ -1,5 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, type Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 export async function checkDataTableEditing(page: Page) {
   const table = page.getByRole("table", { name: "Editable projects" });
   const cell = (column: string, row = "alpha") =>
@@ -7,6 +7,28 @@ export async function checkDataTableEditing(page: Page) {
       name: new RegExp(`^Edit ${column} for ${row}: `),
     });
   const input = page.locator('[data-part="cell-input"]');
+  let clockInstalled = false;
+  const interruptPendingSave = async (action: Locator) => {
+    if (!clockInstalled) {
+      await page.clock.install();
+      clockInstalled = true;
+    }
+    // 保持真实保存回调处于进行中；不能假定两个浏览器操作总在 700ms 内完成。
+    await page.clock.pauseAt((await page.evaluate(() => Date.now())) + 60_000);
+    try {
+      await input.press("Enter");
+      await page.clock.runFor(50);
+      await expect(page.locator('[data-part="cell-status"]')).toHaveText(
+        "Saving…",
+      );
+      await expect(input).toBeDisabled();
+      await action.click();
+      await page.clock.runFor(50);
+      await expect(input).toHaveCount(0);
+    } finally {
+      await page.clock.resume();
+    }
+  };
   await expect(table).toBeVisible();
   const semantics = await new AxeBuilder({ page })
     .include('[data-scope="data-table"]')
@@ -57,10 +79,9 @@ export async function checkDataTableEditing(page: Page) {
     "3 characters",
   );
   await input.fill("reserved");
-  await input.press("Enter");
-  await expect(page.locator('[data-part="cell-status"]')).toHaveText("Saving…");
-  await expect(input).toBeDisabled();
-  await page.getByRole("button", { name: "Cancel", exact: true }).click();
+  await interruptPendingSave(
+    page.getByRole("button", { name: "Cancel", exact: true }),
+  );
   await expect(cell("Project")).toBeFocused();
   await expect(
     page.getByText("Cancelled saves: 1", { exact: true }),
@@ -107,8 +128,9 @@ export async function checkDataTableEditing(page: Page) {
   await expect(cell("Revenue")).toBeFocused();
   await cell("Revenue").click();
   await input.fill("99");
-  await input.press("Enter");
-  await page.getByRole("button", { name: "Hide revenue", exact: true }).click();
+  await interruptPendingSave(
+    page.getByRole("button", { name: "Hide revenue", exact: true }),
+  );
   await expect(input).toHaveCount(0);
   await expect(
     page.getByText("Cancelled saves: 2", { exact: true }),
@@ -120,18 +142,18 @@ export async function checkDataTableEditing(page: Page) {
   await expect(cell("Revenue")).toHaveText("44.5");
   await cell("Project").click();
   await input.fill("Never saved");
-  await input.press("Enter");
-  await page
-    .getByRole("button", { name: "Remove first row", exact: true })
-    .click();
+  await interruptPendingSave(
+    page.getByRole("button", { name: "Remove first row", exact: true }),
+  );
   await expect(cell("Project")).toHaveCount(0);
   await expect(
     page.getByText("Cancelled saves: 3", { exact: true }),
   ).toBeVisible();
   await cell("Project", "beta").click();
   await input.fill("Never mounted");
-  await input.press("Enter");
-  await page.getByRole("button", { name: "Hide table", exact: true }).click();
+  await interruptPendingSave(
+    page.getByRole("button", { name: "Hide table", exact: true }),
+  );
   await expect(table).toHaveCount(0);
   await expect(
     page.getByText("Cancelled saves: 4", { exact: true }),
@@ -172,8 +194,9 @@ export async function checkDataTableEditing(page: Page) {
   await expect(cell("Revenue", "beta")).toBeFocused();
   await cell("Revenue", "beta").click();
   await input.fill("88");
-  await input.press("Enter");
-  await page.getByRole("button", { name: "Set loading", exact: true }).click();
+  await interruptPendingSave(
+    page.getByRole("button", { name: "Set loading", exact: true }),
+  );
   await expect(input).toHaveCount(0);
   await expect(
     page.getByText("Cancelled saves: 5", { exact: true }),
@@ -194,4 +217,6 @@ export async function checkDataTableEditing(page: Page) {
     page.getByText("Cancelled saves: 5", { exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Stop loading", exact: true }).click();
+  // 四端示例验收会复用此页面继续导航，不把模拟时间留给后续日期示例。
+  if (clockInstalled) await page.clock.setSystemTime(Date.now());
 }
