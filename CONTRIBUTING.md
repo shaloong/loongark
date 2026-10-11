@@ -20,6 +20,7 @@ main 仅接受同仓库 develop 的 PR，包含配置维护。`.github/workflows
 
 ```sh
 pnpm verify
+pnpm check:playwright
 pnpm check:contracts
 pnpm check:storybook
 pnpm storybook:build
@@ -30,6 +31,8 @@ pnpm test:frameworks
 pnpm test:e2e
 pnpm visual:test
 ```
+
+`check:playwright` 完整检查浏览器测试、辅助模块与四端消费入口；React/Solid 分别使用自身 JSX 配置，Svelte 另经 svelte-check 检查真实组件。该检查消费刚构建的发布声明，已纳入 CI。
 
 必须先成功构建生产者，再消费 dist 与 Story 索引；构建失败立即停止，不读取旧产物。多个 Playwright 命令共用结果目录，不能同时运行。默认本地使用 Chromium，需先 `pnpm exec playwright install --with-deps chromium`；如指定系统 Chromium，设置 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` 并记录实际版本。
 

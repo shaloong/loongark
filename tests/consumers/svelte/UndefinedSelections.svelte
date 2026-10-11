@@ -2,7 +2,7 @@
   import * as L from "@loongark/svelte";
   let agreement = $state<boolean | "indeterminate" | undefined>();
   let notifications = $state<boolean | undefined>();
-  let density = $state<string | null | undefined>();
+  let density = $state<string | undefined>();
   let frameworks = $state<string[] | undefined>();
 </script>
 

@@ -1,3 +1,4 @@
+import type {} from "./consumers/runtime";
 import { auditDirectory } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import { captureWidthFailure } from "./width-diagnostics";

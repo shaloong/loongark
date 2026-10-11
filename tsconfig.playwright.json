@@ -2,9 +2,21 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "noEmit": true,
-    "types": ["@playwright/test"],
-    "module": "CommonJS"
+    "types": ["node", "@playwright/test"],
+    "module": "ESNext",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"]
   },
-  "include": ["tests/**/*.ts", "examples/shared/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "tests/**/*.ts",
+    "examples/shared/**/*.ts",
+    "tests/consumers/runtime.ts",
+    "playwright.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "tests/consumers",
+    "tests/solid-native-selection-ref.spec.ts"
+  ]
 }

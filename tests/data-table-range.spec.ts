@@ -11,7 +11,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
         await page.goto(
           `/examples-${framework}/?example=DataTableRangeExample&mode=${mode}`,
         );
-        await checkDataTableRange(page, `${framework}-${mode}-${width}`);
+        await checkDataTableRange(page);
         expect(errors).toEqual([]);
         await page.screenshot({
           path: `.artifacts/advanced-completion/range-${framework}-${mode}-${width}.png`,
@@ -26,7 +26,7 @@ for (const mode of ["light", "dark"])
       await page.goto(
         `/iframe.html?id=components-datatable--cell-range-and-paste&globals=mode:${mode}`,
       );
-      await checkDataTableRange(page, `story-${mode}-${width}`);
+      await checkDataTableRange(page);
       await page.screenshot({
         path: `.artifacts/advanced-completion/range-story-${mode}-${width}.png`,
         fullPage: true,

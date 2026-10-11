@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.playwright.json",
+  "compilerOptions": {
+    "paths": {
+      "@loongark/tokens": ["./packages/tokens/dist/index.d.ts"],
+      "@loongark/theme": ["./packages/theme/dist/index.d.ts"],
+      "@loongark/primitives": ["./packages/primitives/dist/index.d.ts"],
+      "@loongark/kit": ["./packages/kit/dist/index.d.ts"],
+      "@loongark/react": ["./packages/react/dist/index.d.ts"],
+      "@loongark/vue": ["./packages/vue/dist/index.d.ts"],
+      "@loongark/solid": ["./packages/solid/dist/index.d.ts"],
+      "@loongark/svelte": ["./packages/svelte/dist/index.d.ts"]
+    },
+    "allowImportingTsExtensions": true,
+    "types": ["node", "vite/client"],
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "tests/consumers/react/**/*",
+    "tests/consumers/examples-react/**/*"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

@@ -73,7 +73,7 @@ for (const mode of ["light", "dark"]) {
       expect(geometry.rightDelta).toBeLessThanOrEqual(0.5);
       expect(geometry.wrapped).toBe(width === 375);
       const rtl = await form.evaluate((el) => {
-        el.dir = "rtl";
+        el.setAttribute("dir", "rtl");
         const f = el.getBoundingClientRect(),
           buttons = el.querySelectorAll("[data-part=actions] button"),
           a = buttons[0].getBoundingClientRect(),

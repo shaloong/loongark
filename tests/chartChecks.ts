@@ -23,7 +23,13 @@ export async function checkChart(page: Page, framework?: string) {
   expect(fills).toHaveLength(3);
   await page.setViewportSize({ width: 375, height: 1100 });
   await expect
-    .poll(() => svg.evaluate((el) => el.viewBox.baseVal.width))
+    .poll(() =>
+      svg.evaluate((el) => {
+        if (!(el instanceof SVGSVGElement))
+          throw new Error("图表根节点必须是 SVG");
+        return el.viewBox.baseVal.width;
+      }),
+    )
     .toBeLessThan(376);
   for (const container of await page.locator("[data-scope=chart]").all()) {
     const bounds = await container.evaluate((el) => {
@@ -47,7 +53,10 @@ export async function checkChart(page: Page, framework?: string) {
       };
     }),
   );
-  const width = await svg.evaluate((el) => el.viewBox.baseVal.width);
+  const width = await svg.evaluate((el) => {
+    if (!(el instanceof SVGSVGElement)) throw new Error("图表根节点必须是 SVG");
+    return el.viewBox.baseVal.width;
+  });
   for (const label of labels) {
     expect(label.x).toBeGreaterThanOrEqual(-1);
     expect(label.x + label.width).toBeLessThanOrEqual(width + 1);
@@ -111,6 +120,12 @@ export async function checkChart(page: Page, framework?: string) {
   await expect(chart.locator("[data-part=bar]")).toHaveCount(24);
   await page.setViewportSize({ width: 1280, height: 1100 });
   await expect
-    .poll(() => svg.evaluate((el) => el.viewBox.baseVal.width))
+    .poll(() =>
+      svg.evaluate((el) => {
+        if (!(el instanceof SVGSVGElement))
+          throw new Error("图表根节点必须是 SVG");
+        return el.viewBox.baseVal.width;
+      }),
+    )
     .toBeGreaterThan(500);
 }

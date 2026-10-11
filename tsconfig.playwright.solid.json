@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.playwright.json",
+  "compilerOptions": {
+    "paths": {
+      "@loongark/tokens": ["./packages/tokens/dist/index.d.ts"],
+      "@loongark/theme": ["./packages/theme/dist/index.d.ts"],
+      "@loongark/primitives": ["./packages/primitives/dist/index.d.ts"],
+      "@loongark/kit": ["./packages/kit/dist/index.d.ts"],
+      "@loongark/react": ["./packages/react/dist/index.d.ts"],
+      "@loongark/vue": ["./packages/vue/dist/index.d.ts"],
+      "@loongark/solid": ["./packages/solid/dist/index.d.ts"],
+      "@loongark/svelte": ["./packages/svelte/dist/index.d.ts"]
+    },
+    "allowImportingTsExtensions": true,
+    "types": ["node", "vite/client", "@playwright/test"],
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  },
+  "include": [
+    "tests/consumers/solid/**/*",
+    "tests/consumers/examples-solid/**/*",
+    "tests/solid-native-selection-ref.spec.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

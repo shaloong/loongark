@@ -37,6 +37,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm audit --audit-level=low
       - run: pnpm verify
+      - run: pnpm check:playwright
       - run: pnpm check:contracts
       - run: pnpm check:storybook
       - run: pnpm storybook:build
