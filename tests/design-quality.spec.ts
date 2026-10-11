@@ -2,9 +2,10 @@ import { auditRoot as resolveAuditRoot } from "./auditDirectory";
 import { test, expect } from "@playwright/test";
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 
+const batchCount = 8;
 for (const mode of ["light", "dark"] as const) {
-  for (const batch of [0, 1, 2, 3]) {
-    test(`Story 批次 ${batch + 1}/4 的 ${mode} 间距、窄屏与动效属性`, async ({
+  for (let batch = 0; batch < batchCount; batch++) {
+    test(`Story 批次 ${batch + 1}/${batchCount} 的 ${mode} 间距、窄屏与动效属性`, async ({
       page,
       request,
     }) => {
@@ -35,7 +36,7 @@ for (const mode of ["light", "dark"] as const) {
       ).toEqual([...expectedFamilies.families].sort());
       // 同一组件族只属于一个批次，截图与测量路径不会被并行用例覆盖。
       const selectedTitles = new Set(
-        titles.filter((_, index) => index % 4 === batch),
+        titles.filter((_, index) => index % batchCount === batch),
       );
       const stories = allStories.filter((story) =>
         selectedTitles.has(story.title),
