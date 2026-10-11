@@ -49,3 +49,5 @@ motionPreference 默认为 auto，遵循 prefers-reduced-motion；force 供明�
 InputRoot 基于 Ark Field。Label 关联控件，ErrorText 自动关联错误，Group 包裹 Prefix/Control/Suffix；不要将可点击 Suffix 放在另一个 button 中。Switch/Checkbox/Select 在表单场景组合 HiddenInput/HiddenSelect。Dialog 关闭时隐藏于可访问树，打开后锁定焦点，Escape 关闭并恢复到触发器。
 
 代码等宽字体默认使用 CSS 通用 `monospace`，遵循浏览器/系统的等宽字体设置。Linux WebKit 对包含不可用平台字体的旧列表可能回退为比例字形；验收实际测量 `iiii` 与 `WWWW` 的等宽，而不只检查 font-family 文本。调用方仍可覆盖 `typography.fontFamily.mono`，应验证目标平台的字形回退。
+
+ColorPicker 的面积/通道滑块与选中色块使用固定 `color.white` / `color.vi.inkNight` 双色轮廓，避免深色主题表面色与任意选色混合。键盘焦点保留独立语义环及明暗外圈；面积允许边缘拇指和焦点完整绘制，渐变背景保持圆角。高对比主题使用相同轮廓，系统强制颜色模式改用 CanvasText / Canvas / Highlight。自定义覆盖这些 Token 时应重新验证选色与焦点对比；Axe 不会自动验收渐变上的非文本标记。

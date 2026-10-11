@@ -23,6 +23,7 @@ interface ColorPickerDesignTokens {
     text: string;
     muted: string;
   };
+  marker: { light: string; dark: string };
   brand: {
     primary: string;
   };
@@ -69,6 +70,11 @@ const extractColorPickerTokens = (
       border: toStringToken(neutral["100"], "#E5E6EB"),
       text: toStringToken(neutral["700"], "#232325"),
       muted: toStringToken(neutral["300"], "#B3B4BD"),
+    },
+    // 选色背景不受主题控制；固定明暗 Token 的双色轮廓覆盖整个亮度范围。
+    marker: {
+      light: toStringToken(color.white, "#FFFFFF"),
+      dark: toStringToken(asTokenTree(color.vi).inkNight, "#121212"),
     },
     brand: {
       primary: toStringToken(brand.primary, "#006EFF"),
@@ -153,13 +159,14 @@ ${areaSelector} {
   width: 220px;
   height: 140px;
   border-radius: ${tokens.radius.sm};
-  overflow: hidden;
+  overflow: visible;
 }
 
 ${areaBackgroundSelector},
 ${transparencyGridSelector} {
   position: absolute;
   inset: 0;
+  border-radius: inherit;
 }
 
 ${areaThumbSelector} {
@@ -167,8 +174,8 @@ ${areaThumbSelector} {
   width: 14px;
   height: 14px;
   border-radius: 999px;
-  border: 2px solid ${tokens.neutral.surface};
-  box-shadow: 0 0 0 1px ${tokens.neutral.border};
+  border: 2px solid ${tokens.marker.light};
+  box-shadow: 0 0 0 1px ${tokens.marker.dark};
 }
 
 ${channelSliderSelector} {
@@ -188,8 +195,8 @@ ${channelSliderThumbSelector} {
   width: 12px;
   height: 12px;
   border-radius: 999px;
-  border: 2px solid ${tokens.neutral.surface};
-  box-shadow: 0 0 0 1px ${tokens.neutral.border};
+  border: 2px solid ${tokens.marker.light};
+  box-shadow: 0 0 0 1px ${tokens.marker.dark};
 }
 
 ${channelInputSelector},
@@ -223,7 +230,32 @@ ${swatchIndicatorSelector} {
   position: absolute;
   inset: 3px;
   border-radius: inherit;
-  border: 2px solid ${tokens.neutral.surface};
+  border: 2px solid ${tokens.marker.light};
+  box-shadow: 0 0 0 1px ${tokens.marker.dark};
+}
+
+${areaThumbSelector}:focus-visible,
+${channelSliderThumbSelector}:focus-visible {
+  outline: var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring);
+  outline-offset: var(--lk-control-focuswidth);
+  box-shadow: 0 0 0 1px ${tokens.marker.dark},
+    0 0 0 calc(2 * var(--lk-control-focuswidth) + 1px) ${tokens.marker.light},
+    0 0 0 calc(2 * var(--lk-control-focuswidth) + 2px) ${tokens.marker.dark};
+}
+
+@media (forced-colors: active) {
+  ${areaThumbSelector},
+  ${channelSliderThumbSelector},
+  ${swatchIndicatorSelector} {
+    border-color: CanvasText;
+    outline: 1px solid Canvas;
+    box-shadow: none;
+  }
+  ${areaThumbSelector}:focus-visible,
+  ${channelSliderThumbSelector}:focus-visible {
+    outline: var(--lk-control-focuswidth) solid Highlight;
+    outline-offset: var(--lk-control-focuswidth);
+  }
 }
 
 ${valueTextSelector} {
@@ -255,6 +287,10 @@ ${rootSelector}[data-size='lg'] ${contentSelector} {
 const COLOR_PICKER_CONTRACT: PrimitiveContract<ColorPickerPrimitiveProps> = {
   name: "color-picker",
   tokens: [
+    "color.white",
+    "color.vi.inkNight",
+    "color.semantic.ring",
+    "control.focusWidth",
     "color.neutral.50",
     "color.neutral.100",
     "color.neutral.300",

@@ -30,7 +30,7 @@ const meta: Meta = {
     docs: {
       description: {
         component:
-          "LoongArkColorPicker wraps Ark UI color picker with panel styling.",
+          "四端共用颜色面板与明暗双色选中轮廓；键盘焦点保留独立外环，支持深色、高对比主题和系统强制颜色。",
       },
     },
   },

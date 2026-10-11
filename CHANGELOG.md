@@ -11,6 +11,10 @@
 
 ### 组件与维护
 
+- ColorPicker 四端复用固定明暗 Token 的双色选中轮廓，修复深色 Deep Blue 标记低对比；保留独立键盘焦点及边缘完整绘制，增加高对比主题、系统强制颜色和桌面/模拟手机回归。
+
+- 完整检查 Playwright 浏览器测试与四端消费源码，独立解析 React/Solid JSX 和 Svelte 组件；修正 DOM 类型、测试参数与生成示例的挂载/选择边界，并纳入 CI。
+
 - 四端 DatePicker 默认以 left/top 布局定位，修复 WebKit 缩屏与入场动画重叠时保留旧滚动范围的问题，并保留自定义 transform 契约；ColorPicker 对比度验收等待实际淡入完成，保留最终状态的 WCAG AA 检查，并将 Vue 颜色示例的色板与其余三端 VI 对齐，补齐四端日期示例的打开图标。
 
 - 联动升级 Ark React/Vue/Solid 至 5.39.3、Ark Svelte 至 5.24.3 及 Zag 至 1.45.0；兼容 Field 错误提示从 aria-errormessage 合并到 aria-describedby 的契约，保留复合输入的提示关联，显式 invalid=false 不再继承父级错误描述。
