@@ -8,7 +8,8 @@ import {
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { basename, resolve } from "node:path";
-import { spawn, spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
+import { runRscCommand } from "./run-rsc-command.mjs";
 import { createServer } from "node:net";
 import { once } from "node:events";
 import { chromium } from "@playwright/test";
@@ -94,28 +95,8 @@ export default function Page(){const date=parseLocalizedDate('12/10/2026',{local
 }
 const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1" };
 let installRetries = 0;
-function run(args, name) {
-  const result = spawnSync("pnpm", args, {
-    cwd: root,
-    env,
-    encoding: "utf8",
-    timeout: 300_000,
-    maxBuffer: 16 * 1024 * 1024,
-  });
-  const log = (result.stdout ?? "") + (result.stderr ?? "");
-  return writeFile(resolve(artifacts, `${name}.log`), log).then(() => {
-    // 已观察到 CI 下载停在最后一个依赖；只重试安装进程超时，不重试构建或断言。
-    if (name === "install" && result.error?.code === "ETIMEDOUT") {
-      installRetries++;
-      console.log("冻结安装超时，使用同一锁文件重试一次；首次日志已保留");
-      return run(args, "install-retry");
-    }
-    assert.equal(
-      result.status,
-      0,
-      `${name} 失败：${result.error ?? log.slice(-8000)}`,
-    );
-  });
+async function run(args, name) {
+  installRetries += await runRscCommand({ args, name, cwd: root, env, artifacts });
 }
 const store = resolve(".artifacts/releases/store");
 await run(
