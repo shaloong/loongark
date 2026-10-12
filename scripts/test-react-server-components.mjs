@@ -93,6 +93,7 @@ export default function Page(){const date=parseLocalizedDate('12/10/2026',{local
   );
 }
 const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1" };
+let installRetries = 0;
 function run(args, name) {
   const result = spawnSync("pnpm", args, {
     cwd: root,
@@ -103,6 +104,12 @@ function run(args, name) {
   });
   const log = (result.stdout ?? "") + (result.stderr ?? "");
   return writeFile(resolve(artifacts, `${name}.log`), log).then(() => {
+    // 已观察到 CI 下载停在最后一个依赖；只重试安装进程超时，不重试构建或断言。
+    if (name === "install" && result.error?.code === "ETIMEDOUT") {
+      installRetries++;
+      console.log("冻结安装超时，使用同一锁文件重试一次；首次日志已保留");
+      return run(args, "install-retry");
+    }
     assert.equal(
       result.status,
       0,
@@ -218,7 +225,7 @@ try {
   assert.deepEqual(errors, [], "RSC 水合或客户端运行错误");
   await writeFile(
     resolve(artifacts, "report.json"),
-    JSON.stringify({ next, react, results }, null, 2),
+    JSON.stringify({ next, react, installRetries, results }, null, 2),
   );
   console.log(
     `Next.js ${next} 实际 tarball：根入口/按需入口服务端导入、SSR 样式、纯工具与水合交互通过`,
