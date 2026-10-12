@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
 import { useFieldContext } from "@ark-ui/solid/field";
 import { nativeSelectionFieldDescription } from "@loongark/kit";
 /**
@@ -34,7 +37,7 @@ export interface LoongArkTagsInputRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkTagsInputRoot: Component<LoongArkTagsInputRootProps> = (
+export const LoongArkTagsInputRoot: Component<LoongArkTagsInputRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(
@@ -59,7 +62,7 @@ export const LoongArkTagsInputRoot: Component<LoongArkTagsInputRootProps> = (
       {local.children}
     </ArkTagsInput.Root>
   );
-};
+}, lkAutomaticTagsInputStyles);
 
 export interface LoongArkTagsInputLabelProps extends Omit<
   ArkTagsInputLabelProps,
@@ -68,7 +71,7 @@ export interface LoongArkTagsInputLabelProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkTagsInputLabel: Component<LoongArkTagsInputLabelProps> = (
+export const LoongArkTagsInputLabel: Component<LoongArkTagsInputLabelProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -77,7 +80,7 @@ export const LoongArkTagsInputLabel: Component<LoongArkTagsInputLabelProps> = (
       {local.children}
     </ArkTagsInput.Label>
   );
-};
+}, lkAutomaticTagsInputStyles);
 
 export interface LoongArkTagsInputControlProps extends Omit<
   ArkTagsInputControlProps,
@@ -91,7 +94,7 @@ export interface LoongArkTagsInputControlProps extends Omit<
 
 export const LoongArkTagsInputControl: Component<
   LoongArkTagsInputControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     {
       size: "md" as TagsInputSize,
@@ -119,7 +122,7 @@ export const LoongArkTagsInputControl: Component<
       {local.children}
     </ArkTagsInput.Control>
   );
-};
+}, lkAutomaticTagsInputStyles);
 
 export interface LoongArkTagsInputInputProps extends Omit<
   ArkTagsInputInputProps,
@@ -131,7 +134,7 @@ export interface LoongArkTagsInputInputProps extends Omit<
   readOnly?: boolean;
 }
 
-export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
+export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(
@@ -172,7 +175,7 @@ export const LoongArkTagsInputInput: Component<LoongArkTagsInputInputProps> = (
       data-readonly={readOnly() ? "true" : undefined}
     />
   );
-};
+}, lkAutomaticTagsInputStyles);
 
 export interface LoongArkTagsInputItemProps extends Omit<
   ArkTagsInputItemProps,
@@ -181,7 +184,7 @@ export interface LoongArkTagsInputItemProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkTagsInputItem: Component<LoongArkTagsInputItemProps> = (
+export const LoongArkTagsInputItem: Component<LoongArkTagsInputItemProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -190,7 +193,7 @@ export const LoongArkTagsInputItem: Component<LoongArkTagsInputItemProps> = (
       {local.children}
     </ArkTagsInput.Item>
   );
-};
+}, lkAutomaticTagsInputStyles);
 
 export interface LoongArkTagsInputItemPreviewProps extends Omit<
   ArkTagsInputItemPreviewProps,
@@ -201,7 +204,7 @@ export interface LoongArkTagsInputItemPreviewProps extends Omit<
 
 export const LoongArkTagsInputItemPreview: Component<
   LoongArkTagsInputItemPreviewProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTagsInput.ItemPreview
@@ -212,7 +215,7 @@ export const LoongArkTagsInputItemPreview: Component<
       {local.children}
     </ArkTagsInput.ItemPreview>
   );
-};
+}, lkAutomaticTagsInputStyles);
 
 export interface LoongArkTagsInputItemTextProps extends Omit<
   ArkTagsInputItemTextProps,
@@ -223,7 +226,7 @@ export interface LoongArkTagsInputItemTextProps extends Omit<
 
 export const LoongArkTagsInputItemText: Component<
   LoongArkTagsInputItemTextProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTagsInput.ItemText
@@ -234,7 +237,7 @@ export const LoongArkTagsInputItemText: Component<
       {local.children}
     </ArkTagsInput.ItemText>
   );
-};
+}, lkAutomaticTagsInputStyles);
 
 export interface LoongArkTagsInputItemInputProps extends Omit<
   ArkTagsInputItemInputProps,
@@ -243,7 +246,7 @@ export interface LoongArkTagsInputItemInputProps extends Omit<
 
 export const LoongArkTagsInputItemInput: Component<
   LoongArkTagsInputItemInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkTagsInput.ItemInput
       {...props}
@@ -251,7 +254,7 @@ export const LoongArkTagsInputItemInput: Component<
       data-part="item-input"
     />
   );
-};
+}, lkAutomaticTagsInputStyles);
 
 export interface LoongArkTagsInputItemDeleteTriggerProps extends Omit<
   ArkTagsInputItemDeleteTriggerProps,
@@ -262,7 +265,7 @@ export interface LoongArkTagsInputItemDeleteTriggerProps extends Omit<
 
 export const LoongArkTagsInputItemDeleteTrigger: Component<
   LoongArkTagsInputItemDeleteTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTagsInput.ItemDeleteTrigger
@@ -273,7 +276,7 @@ export const LoongArkTagsInputItemDeleteTrigger: Component<
       {local.children}
     </ArkTagsInput.ItemDeleteTrigger>
   );
-};
+}, lkAutomaticTagsInputStyles);
 
 export interface LoongArkTagsInputClearTriggerProps extends Omit<
   ArkTagsInputClearTriggerProps,
@@ -284,7 +287,7 @@ export interface LoongArkTagsInputClearTriggerProps extends Omit<
 
 export const LoongArkTagsInputClearTrigger: Component<
   LoongArkTagsInputClearTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTagsInput.ClearTrigger
@@ -295,7 +298,7 @@ export const LoongArkTagsInputClearTrigger: Component<
       {local.children}
     </ArkTagsInput.ClearTrigger>
   );
-};
+}, lkAutomaticTagsInputStyles);
 
 export interface LoongArkTagsInputHiddenInputProps extends Omit<
   ArkTagsInputHiddenInputProps,
@@ -304,7 +307,7 @@ export interface LoongArkTagsInputHiddenInputProps extends Omit<
 
 export const LoongArkTagsInputHiddenInput: Component<
   LoongArkTagsInputHiddenInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const api = useTagsInputContext();
   const ref = nativeSelectionRef(
     () => ({
@@ -320,4 +323,4 @@ export const LoongArkTagsInputHiddenInput: Component<
       data-part="hidden-input"
     />
   );
-};
+}, lkAutomaticTagsInputStyles);

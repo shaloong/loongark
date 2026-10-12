@@ -10,6 +10,10 @@
 </script>
 
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticVirtualGridStyles } from "@loongark/primitives/automatic-styles/virtual-grid";
+  registerAutomaticStyles(lkAutomaticVirtualGridStyles);
+
   import { onMount, untrack } from "svelte";
   import { createVirtualGrid, mountVirtualGrid } from "@loongark/kit";
   let {

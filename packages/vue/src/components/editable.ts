@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticEditableStyles } from "@loongark/primitives/automatic-styles/editable";
 import { renderPart } from "../render-part";
 /**
  * Editable component - Vue wrapper.
@@ -12,7 +15,7 @@ import {
 import { Editable as ArkEditable } from "@ark-ui/vue/editable";
 import type { EditableSize, EditableState } from "@loongark/primitives";
 
-export const LoongArkEditableRoot = defineComponent({
+export const LoongArkEditableRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkEditableRoot",
   props: {
     size: {
@@ -45,9 +48,9 @@ export const LoongArkEditableRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticEditableStyles);
 
-export const LoongArkEditableLabel = defineComponent({
+export const LoongArkEditableLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkEditableLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -61,9 +64,9 @@ export const LoongArkEditableLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticEditableStyles);
 
-export const LoongArkEditableArea = defineComponent({
+export const LoongArkEditableArea = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkEditableArea",
   setup(_, { slots, attrs }) {
     return () =>
@@ -77,9 +80,9 @@ export const LoongArkEditableArea = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticEditableStyles);
 
-export const LoongArkEditableControl = defineComponent({
+export const LoongArkEditableControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkEditableControl",
   props: {
     state: {
@@ -100,9 +103,9 @@ export const LoongArkEditableControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticEditableStyles);
 
-export const LoongArkEditableInput = defineComponent({
+export const LoongArkEditableInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkEditableInput",
   props: {
     state: {
@@ -119,9 +122,9 @@ export const LoongArkEditableInput = defineComponent({
           props.state && props.state !== "default" ? props.state : undefined,
       });
   },
-});
+}), lkAutomaticEditableStyles);
 
-export const LoongArkEditablePreview = defineComponent({
+export const LoongArkEditablePreview = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkEditablePreview",
   setup(_, { slots, attrs }) {
     return () =>
@@ -135,9 +138,9 @@ export const LoongArkEditablePreview = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticEditableStyles);
 
-export const LoongArkEditableEditTrigger = defineComponent({
+export const LoongArkEditableEditTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkEditableEditTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -151,9 +154,9 @@ export const LoongArkEditableEditTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticEditableStyles);
 
-export const LoongArkEditableSubmitTrigger = defineComponent({
+export const LoongArkEditableSubmitTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkEditableSubmitTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -167,9 +170,9 @@ export const LoongArkEditableSubmitTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticEditableStyles);
 
-export const LoongArkEditableCancelTrigger = defineComponent({
+export const LoongArkEditableCancelTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkEditableCancelTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -183,4 +186,4 @@ export const LoongArkEditableCancelTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticEditableStyles);

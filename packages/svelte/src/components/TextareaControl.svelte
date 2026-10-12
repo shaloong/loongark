@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticTextareaStyles } from "@loongark/primitives/automatic-styles/input";
+  registerAutomaticStyles(lkAutomaticTextareaStyles);
+
   import InputInput from "./InputInput.svelte";
   import type { InputPrimitiveProps } from "@loongark/primitives";
 

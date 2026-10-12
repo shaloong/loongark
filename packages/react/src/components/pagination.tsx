@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPaginationStyles } from "@loongark/primitives/automatic-styles/pagination";
+
 
 /**
  * Pagination component - React wrapper.
@@ -65,7 +68,7 @@ export interface LoongArkPaginationEllipsisProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkPaginationRoot = forwardRef<
+export const LoongArkPaginationRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkPaginationRootProps
 >(({ children, size = "md", orientation = "horizontal", ...props }, ref) => {
@@ -81,11 +84,11 @@ export const LoongArkPaginationRoot = forwardRef<
       {children}
     </Pagination.Root>
   );
-});
+}), lkAutomaticPaginationStyles);
 
 LoongArkPaginationRoot.displayName = "LoongArkPaginationRoot";
 
-export const LoongArkPaginationList = forwardRef<
+export const LoongArkPaginationList = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkPaginationListProps
 >(({ children, ...props }, ref) => {
@@ -94,11 +97,11 @@ export const LoongArkPaginationList = forwardRef<
       {children}
     </div>
   );
-});
+}), lkAutomaticPaginationStyles);
 
 LoongArkPaginationList.displayName = "LoongArkPaginationList";
 
-export const LoongArkPaginationItem = forwardRef<
+export const LoongArkPaginationItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkPaginationItemProps
 >(({ children, ...props }, ref) => {
@@ -112,11 +115,11 @@ export const LoongArkPaginationItem = forwardRef<
       {children}
     </Pagination.Item>
   );
-});
+}), lkAutomaticPaginationStyles);
 
 LoongArkPaginationItem.displayName = "LoongArkPaginationItem";
 
-export const LoongArkPaginationPrevTrigger = forwardRef<
+export const LoongArkPaginationPrevTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkPaginationPrevTriggerProps
 >(({ children, ...props }, ref) => {
@@ -130,11 +133,11 @@ export const LoongArkPaginationPrevTrigger = forwardRef<
       {children}
     </Pagination.PrevTrigger>
   );
-});
+}), lkAutomaticPaginationStyles);
 
 LoongArkPaginationPrevTrigger.displayName = "LoongArkPaginationPrevTrigger";
 
-export const LoongArkPaginationNextTrigger = forwardRef<
+export const LoongArkPaginationNextTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkPaginationNextTriggerProps
 >(({ children, ...props }, ref) => {
@@ -148,11 +151,11 @@ export const LoongArkPaginationNextTrigger = forwardRef<
       {children}
     </Pagination.NextTrigger>
   );
-});
+}), lkAutomaticPaginationStyles);
 
 LoongArkPaginationNextTrigger.displayName = "LoongArkPaginationNextTrigger";
 
-export const LoongArkPaginationEllipsis = forwardRef<
+export const LoongArkPaginationEllipsis = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkPaginationEllipsisProps
 >(({ children, ...props }, ref) => {
@@ -166,6 +169,6 @@ export const LoongArkPaginationEllipsis = forwardRef<
       {children}
     </Pagination.Ellipsis>
   );
-});
+}), lkAutomaticPaginationStyles);
 
 LoongArkPaginationEllipsis.displayName = "LoongArkPaginationEllipsis";

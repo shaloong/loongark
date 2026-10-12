@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticButtonStyles } from "@loongark/primitives/automatic-styles/button";
 import { renderPart } from "../render-part";
 import { defineComponent, h } from "vue";
 import { ark } from "@ark-ui/vue";
@@ -9,7 +12,7 @@ export type ButtonSize = NonNullable<ButtonPrimitiveProps["size"]>;
 
 const truthy = (value: boolean) => (value ? "true" : undefined);
 
-export const LoongArkButton = defineComponent({
+export const LoongArkButton = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkButton",
   inheritAttrs: false,
   props: {
@@ -58,4 +61,4 @@ export const LoongArkButton = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticButtonStyles);

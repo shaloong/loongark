@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticMasonryStyles } from "@loongark/primitives/automatic-styles/masonry";
+  registerAutomaticStyles(lkAutomaticMasonryStyles);
+
   import {
     mediaAttributes,
     mediaStyles,

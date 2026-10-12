@@ -1,3 +1,4 @@
+import { publishedWorkspacePlugin } from "./published-workspace-plugin.mjs";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import { build } from "vite";
@@ -64,22 +65,10 @@ for (const framework of ["react", "vue", "solid"]) {
   check(result.stdout, framework);
 }
 
-const alias = Object.fromEntries(
-  ["tokens", "theme", "primitives", "kit", "svelte"].map((n) => [
-    "@loongark/" + n,
-    resolve(`packages/${n}/dist/index.js`),
-  ]),
-);
 await build({
   configFile: false,
-  plugins: [svelte()],
-  resolve: {
-    alias: {
-      "@loongark/primitives/styles": resolve("packages/primitives/dist/styles.js"), "@loongark/kit/bootstrap": resolve("packages/kit/dist/bootstrap.js"),
-      ...alias,
-    },
-    dedupe: ["svelte"],
-  },
+  plugins: [await publishedWorkspacePlugin("node"), svelte()],
+  resolve: { dedupe: ["svelte"] },
   ssr: { noExternal: ["@loongark/svelte", "@ark-ui/svelte"] },
   logLevel: "error",
   build: {

@@ -1,4 +1,8 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticVirtualGridStyles } from "@loongark/primitives/automatic-styles/virtual-grid";
+import { styles as lkAutomaticVirtualMasonryStyles } from "@loongark/primitives/automatic-styles/virtual-masonry";
+
 
 import React, { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import {
@@ -16,7 +20,7 @@ const useGridLayoutEffect = typeof document === "undefined" ? useEffect : useLay
 export interface VirtualGridProps extends VirtualGridOptions {
   renderCell(details: VirtualGridCellDetails): ReactNode;
 }
-export function LoongArkVirtualGrid(props: VirtualGridProps) {
+function LoongArkVirtualGrid(props: VirtualGridProps) {
   const [, redraw] = useState(0),
     [model] = useState(() =>
       createVirtualGrid(props, () => redraw((value) => value + 1)),
@@ -103,7 +107,7 @@ export function LoongArkVirtualGrid(props: VirtualGridProps) {
 export interface VirtualMasonryProps extends VirtualMasonryOptions {
   renderItem(details: VirtualMasonryEntry): ReactNode;
 }
-export function LoongArkVirtualMasonry(props: VirtualMasonryProps) {
+function LoongArkVirtualMasonry(props: VirtualMasonryProps) {
   const [, redraw] = useState(0),
     [model] = useState(() =>
       createVirtualMasonry(props, () => redraw((value) => value + 1)),
@@ -160,3 +164,8 @@ export function LoongArkVirtualMasonry(props: VirtualMasonryProps) {
     </div>
   );
 }
+
+const lkStyledLoongArkVirtualGrid = /*#__PURE__*/ withAutomaticStyles(LoongArkVirtualGrid, lkAutomaticVirtualGridStyles);
+export { lkStyledLoongArkVirtualGrid as LoongArkVirtualGrid };
+const lkStyledLoongArkVirtualMasonry = /*#__PURE__*/ withAutomaticStyles(LoongArkVirtualMasonry, lkAutomaticVirtualMasonryStyles);
+export { lkStyledLoongArkVirtualMasonry as LoongArkVirtualMasonry };

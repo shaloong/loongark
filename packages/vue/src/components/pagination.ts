@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPaginationStyles } from "@loongark/primitives/automatic-styles/pagination";
 import { renderPart } from "../render-part";
 /**
  * Pagination component - Vue wrapper.
@@ -10,7 +13,7 @@ import type {
   PaginationSize,
 } from "@loongark/primitives";
 
-export const LoongArkPaginationRoot = defineComponent({
+export const LoongArkPaginationRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPaginationRoot",
   props: {
     size: {
@@ -65,9 +68,9 @@ export const LoongArkPaginationRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPaginationStyles);
 
-export const LoongArkPaginationList = defineComponent({
+export const LoongArkPaginationList = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPaginationList",
   setup(_, { slots, attrs }) {
     return () =>
@@ -81,9 +84,9 @@ export const LoongArkPaginationList = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPaginationStyles);
 
-export const LoongArkPaginationItem = defineComponent({
+export const LoongArkPaginationItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPaginationItem",
   props: {
     page: {
@@ -113,9 +116,9 @@ export const LoongArkPaginationItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPaginationStyles);
 
-export const LoongArkPaginationPrevTrigger = defineComponent({
+export const LoongArkPaginationPrevTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPaginationPrevTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -129,9 +132,9 @@ export const LoongArkPaginationPrevTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPaginationStyles);
 
-export const LoongArkPaginationNextTrigger = defineComponent({
+export const LoongArkPaginationNextTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPaginationNextTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -145,9 +148,9 @@ export const LoongArkPaginationNextTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPaginationStyles);
 
-export const LoongArkPaginationEllipsis = defineComponent({
+export const LoongArkPaginationEllipsis = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPaginationEllipsis",
   props: {
     index: {
@@ -167,4 +170,4 @@ export const LoongArkPaginationEllipsis = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPaginationStyles);

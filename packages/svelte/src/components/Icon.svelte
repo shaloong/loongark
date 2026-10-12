@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticIconStyles } from "@loongark/primitives/automatic-styles/icon";
+  registerAutomaticStyles(lkAutomaticIconStyles);
+
   import type { SVGAttributes } from "svelte/elements";
   import { iconAttributes, iconStyles, type IconOptions } from "@loongark/kit";
   let {

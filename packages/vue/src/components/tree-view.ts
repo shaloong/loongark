@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTreeViewStyles } from "@loongark/primitives/automatic-styles/tree-view";
 import { renderPart } from "../render-part";
 /**
  * Tree View component - Vue wrapper.
@@ -12,7 +15,7 @@ import {
 import { TreeView as ArkTreeView } from "@ark-ui/vue/tree-view";
 import type { TreeViewSize } from "@loongark/primitives";
 
-export const LoongArkTreeViewRoot = defineComponent({
+export const LoongArkTreeViewRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewRoot",
   props: {
     size: {
@@ -34,9 +37,9 @@ export const LoongArkTreeViewRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewLabel = defineComponent({
+export const LoongArkTreeViewLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -50,9 +53,9 @@ export const LoongArkTreeViewLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewTree = defineComponent({
+export const LoongArkTreeViewTree = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewTree",
   setup(_, { slots, attrs }) {
     return () =>
@@ -66,9 +69,9 @@ export const LoongArkTreeViewTree = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewItem = defineComponent({
+export const LoongArkTreeViewItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewItem",
   setup(_, { slots, attrs }) {
     return () =>
@@ -82,9 +85,9 @@ export const LoongArkTreeViewItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewItemIndicator = defineComponent({
+export const LoongArkTreeViewItemIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -98,9 +101,9 @@ export const LoongArkTreeViewItemIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewItemText = defineComponent({
+export const LoongArkTreeViewItemText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewItemText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -114,9 +117,9 @@ export const LoongArkTreeViewItemText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewBranch = defineComponent({
+export const LoongArkTreeViewBranch = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewBranch",
   setup(_, { slots, attrs }) {
     return () =>
@@ -130,9 +133,9 @@ export const LoongArkTreeViewBranch = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewBranchContent = defineComponent({
+export const LoongArkTreeViewBranchContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewBranchContent",
   setup(_, { slots, attrs }) {
     return () =>
@@ -146,9 +149,9 @@ export const LoongArkTreeViewBranchContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewBranchControl = defineComponent({
+export const LoongArkTreeViewBranchControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewBranchControl",
   setup(_, { slots, attrs }) {
     return () =>
@@ -162,9 +165,9 @@ export const LoongArkTreeViewBranchControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewBranchTrigger = defineComponent({
+export const LoongArkTreeViewBranchTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewBranchTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -178,9 +181,9 @@ export const LoongArkTreeViewBranchTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewBranchIndicator = defineComponent({
+export const LoongArkTreeViewBranchIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewBranchIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -194,9 +197,9 @@ export const LoongArkTreeViewBranchIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewBranchText = defineComponent({
+export const LoongArkTreeViewBranchText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewBranchText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -210,9 +213,9 @@ export const LoongArkTreeViewBranchText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewBranchIndentGuide = defineComponent({
+export const LoongArkTreeViewBranchIndentGuide = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewBranchIndentGuide",
   setup(_, { slots, attrs }) {
     return () =>
@@ -226,9 +229,9 @@ export const LoongArkTreeViewBranchIndentGuide = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewNodeCheckbox = defineComponent({
+export const LoongArkTreeViewNodeCheckbox = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewNodeCheckbox",
   setup(_, { slots, attrs }) {
     return () =>
@@ -242,9 +245,9 @@ export const LoongArkTreeViewNodeCheckbox = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewNodeCheckboxIndicator = defineComponent({
+export const LoongArkTreeViewNodeCheckboxIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewNodeCheckboxIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -258,9 +261,9 @@ export const LoongArkTreeViewNodeCheckboxIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTreeViewStyles);
 
-export const LoongArkTreeViewNodeRenameInput = defineComponent({
+export const LoongArkTreeViewNodeRenameInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewNodeRenameInput",
   setup(_, { attrs }) {
     return () =>
@@ -270,4 +273,4 @@ export const LoongArkTreeViewNodeRenameInput = defineComponent({
         "data-part": "node-rename-input",
       });
   },
-});
+}), lkAutomaticTreeViewStyles);

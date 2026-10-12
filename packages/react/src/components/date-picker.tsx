@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticDatePickerStyles } from "@loongark/primitives/automatic-styles/date-picker";
+
 
 /**
  * Date Picker component - React wrapper.
@@ -60,7 +63,7 @@ export interface LoongArkDatePickerRootProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkDatePickerRoot = forwardRef<
+export const LoongArkDatePickerRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkDatePickerRootProps
 >(({ size = "md", children, ...props }, ref) => {
@@ -77,11 +80,11 @@ export const LoongArkDatePickerRoot = forwardRef<
       </DatePicker.Root>
     </DatePickerSizeContext.Provider>
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerRoot.displayName = "LoongArkDatePickerRoot";
 
-export const LoongArkDatePickerLabel = forwardRef<
+export const LoongArkDatePickerLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   ArkDatePickerLabelProps
 >((props, ref) => {
@@ -93,11 +96,11 @@ export const LoongArkDatePickerLabel = forwardRef<
       data-part="label"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerLabel.displayName = "LoongArkDatePickerLabel";
 
-export const LoongArkDatePickerControl = forwardRef<
+export const LoongArkDatePickerControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkDatePickerControlProps
 >((props, ref) => {
@@ -109,11 +112,11 @@ export const LoongArkDatePickerControl = forwardRef<
       data-part="control"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerControl.displayName = "LoongArkDatePickerControl";
 
-export const LoongArkDatePickerInput = forwardRef<
+export const LoongArkDatePickerInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   ArkDatePickerInputProps
 >((props, ref) => {
@@ -125,11 +128,11 @@ export const LoongArkDatePickerInput = forwardRef<
       data-part="input"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerInput.displayName = "LoongArkDatePickerInput";
 
-export const LoongArkDatePickerTrigger = forwardRef<
+export const LoongArkDatePickerTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkDatePickerTriggerProps
 >((props, ref) => {
@@ -141,11 +144,11 @@ export const LoongArkDatePickerTrigger = forwardRef<
       data-part="trigger"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerTrigger.displayName = "LoongArkDatePickerTrigger";
 
-export const LoongArkDatePickerClearTrigger = forwardRef<
+export const LoongArkDatePickerClearTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkDatePickerClearTriggerProps
 >((props, ref) => {
@@ -157,11 +160,11 @@ export const LoongArkDatePickerClearTrigger = forwardRef<
       data-part="clear-trigger"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerClearTrigger.displayName = "LoongArkDatePickerClearTrigger";
 
-export const LoongArkDatePickerPositioner = forwardRef<
+export const LoongArkDatePickerPositioner = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkDatePickerPositionerProps
 >((props, ref) => {
@@ -176,11 +179,11 @@ export const LoongArkDatePickerPositioner = forwardRef<
       />
     </SafePortal>
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerPositioner.displayName = "LoongArkDatePickerPositioner";
 
-export const LoongArkDatePickerContent = forwardRef<
+export const LoongArkDatePickerContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkDatePickerContentProps
 >((props, ref) => {
@@ -194,11 +197,11 @@ export const LoongArkDatePickerContent = forwardRef<
       data-size={size}
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerContent.displayName = "LoongArkDatePickerContent";
 
-export const LoongArkDatePickerView = forwardRef<
+export const LoongArkDatePickerView = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkDatePickerViewProps
 >((props, ref) => {
@@ -210,11 +213,11 @@ export const LoongArkDatePickerView = forwardRef<
       data-part="view"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerView.displayName = "LoongArkDatePickerView";
 
-export const LoongArkDatePickerViewControl = forwardRef<
+export const LoongArkDatePickerViewControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkDatePickerViewControlProps
 >((props, ref) => {
@@ -226,11 +229,11 @@ export const LoongArkDatePickerViewControl = forwardRef<
       data-part="view-control"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerViewControl.displayName = "LoongArkDatePickerViewControl";
 
-export const LoongArkDatePickerViewTrigger = forwardRef<
+export const LoongArkDatePickerViewTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkDatePickerViewTriggerProps
 >((props, ref) => {
@@ -242,11 +245,11 @@ export const LoongArkDatePickerViewTrigger = forwardRef<
       data-part="view-trigger"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerViewTrigger.displayName = "LoongArkDatePickerViewTrigger";
 
-export const LoongArkDatePickerPrevTrigger = forwardRef<
+export const LoongArkDatePickerPrevTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkDatePickerPrevTriggerProps
 >((props, ref) => {
@@ -258,11 +261,11 @@ export const LoongArkDatePickerPrevTrigger = forwardRef<
       data-part="prev-trigger"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerPrevTrigger.displayName = "LoongArkDatePickerPrevTrigger";
 
-export const LoongArkDatePickerNextTrigger = forwardRef<
+export const LoongArkDatePickerNextTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkDatePickerNextTriggerProps
 >((props, ref) => {
@@ -274,11 +277,11 @@ export const LoongArkDatePickerNextTrigger = forwardRef<
       data-part="next-trigger"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerNextTrigger.displayName = "LoongArkDatePickerNextTrigger";
 
-export const LoongArkDatePickerMonthSelect = forwardRef<
+export const LoongArkDatePickerMonthSelect = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSelectElement,
   ArkDatePickerMonthSelectProps
 >((props, ref) => {
@@ -290,11 +293,11 @@ export const LoongArkDatePickerMonthSelect = forwardRef<
       data-part="month-select"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerMonthSelect.displayName = "LoongArkDatePickerMonthSelect";
 
-export const LoongArkDatePickerYearSelect = forwardRef<
+export const LoongArkDatePickerYearSelect = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSelectElement,
   ArkDatePickerYearSelectProps
 >((props, ref) => {
@@ -306,11 +309,11 @@ export const LoongArkDatePickerYearSelect = forwardRef<
       data-part="year-select"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerYearSelect.displayName = "LoongArkDatePickerYearSelect";
 
-export const LoongArkDatePickerRangeText = forwardRef<
+export const LoongArkDatePickerRangeText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkDatePickerRangeTextProps
 >((props, ref) => {
@@ -322,11 +325,11 @@ export const LoongArkDatePickerRangeText = forwardRef<
       data-part="range-text"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerRangeText.displayName = "LoongArkDatePickerRangeText";
 
-export const LoongArkDatePickerPresetTrigger = forwardRef<
+export const LoongArkDatePickerPresetTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkDatePickerPresetTriggerProps
 >((props, ref) => {
@@ -338,11 +341,11 @@ export const LoongArkDatePickerPresetTrigger = forwardRef<
       data-part="preset-trigger"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerPresetTrigger.displayName = "LoongArkDatePickerPresetTrigger";
 
-export const LoongArkDatePickerTable = forwardRef<
+export const LoongArkDatePickerTable = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLTableElement,
   ArkDatePickerTableProps
 >((props, ref) => {
@@ -354,11 +357,11 @@ export const LoongArkDatePickerTable = forwardRef<
       data-part="table"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerTable.displayName = "LoongArkDatePickerTable";
 
-export const LoongArkDatePickerTableHead = forwardRef<
+export const LoongArkDatePickerTableHead = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLTableSectionElement,
   ArkDatePickerTableHeadProps
 >((props, ref) => {
@@ -370,11 +373,11 @@ export const LoongArkDatePickerTableHead = forwardRef<
       data-part="table-head"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerTableHead.displayName = "LoongArkDatePickerTableHead";
 
-export const LoongArkDatePickerTableBody = forwardRef<
+export const LoongArkDatePickerTableBody = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLTableSectionElement,
   ArkDatePickerTableBodyProps
 >((props, ref) => {
@@ -386,11 +389,11 @@ export const LoongArkDatePickerTableBody = forwardRef<
       data-part="table-body"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerTableBody.displayName = "LoongArkDatePickerTableBody";
 
-export const LoongArkDatePickerTableRow = forwardRef<
+export const LoongArkDatePickerTableRow = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLTableRowElement,
   ArkDatePickerTableRowProps
 >((props, ref) => {
@@ -402,11 +405,11 @@ export const LoongArkDatePickerTableRow = forwardRef<
       data-part="table-row"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerTableRow.displayName = "LoongArkDatePickerTableRow";
 
-export const LoongArkDatePickerTableHeader = forwardRef<
+export const LoongArkDatePickerTableHeader = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLTableCellElement,
   ArkDatePickerTableHeaderProps
 >((props, ref) => {
@@ -418,11 +421,11 @@ export const LoongArkDatePickerTableHeader = forwardRef<
       data-part="table-header"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerTableHeader.displayName = "LoongArkDatePickerTableHeader";
 
-export const LoongArkDatePickerTableCell = forwardRef<
+export const LoongArkDatePickerTableCell = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLTableCellElement,
   ArkDatePickerTableCellProps
 >((props, ref) => {
@@ -434,11 +437,11 @@ export const LoongArkDatePickerTableCell = forwardRef<
       data-part="table-cell"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerTableCell.displayName = "LoongArkDatePickerTableCell";
 
-export const LoongArkDatePickerTableCellTrigger = forwardRef<
+export const LoongArkDatePickerTableCellTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkDatePickerTableCellTriggerProps
 >((props, ref) => {
@@ -450,7 +453,7 @@ export const LoongArkDatePickerTableCellTrigger = forwardRef<
       data-part="table-cell-trigger"
     />
   );
-});
+}), lkAutomaticDatePickerStyles);
 
 LoongArkDatePickerTableCellTrigger.displayName =
   "LoongArkDatePickerTableCellTrigger";

@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticEditableStyles } from "@loongark/primitives/automatic-styles/editable";
+
 
 /**
  * Editable component - React wrapper.
@@ -33,7 +36,7 @@ export interface LoongArkEditableRootProps
   children?: ReactNode;
 }
 
-export const LoongArkEditableRoot = forwardRef<
+export const LoongArkEditableRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkEditableRootProps
 >(
@@ -62,11 +65,11 @@ export const LoongArkEditableRoot = forwardRef<
       </Editable.Root>
     );
   }
-);
+), lkAutomaticEditableStyles);
 
 LoongArkEditableRoot.displayName = "LoongArkEditableRoot";
 
-export const LoongArkEditableLabel = forwardRef<
+export const LoongArkEditableLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   ArkEditableLabelProps
 >((props, ref) => {
@@ -78,11 +81,11 @@ export const LoongArkEditableLabel = forwardRef<
       data-part="label"
     />
   );
-});
+}), lkAutomaticEditableStyles);
 
 LoongArkEditableLabel.displayName = "LoongArkEditableLabel";
 
-export const LoongArkEditableArea = forwardRef<
+export const LoongArkEditableArea = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkEditableAreaProps
 >((props, ref) => {
@@ -94,11 +97,11 @@ export const LoongArkEditableArea = forwardRef<
       data-part="area"
     />
   );
-});
+}), lkAutomaticEditableStyles);
 
 LoongArkEditableArea.displayName = "LoongArkEditableArea";
 
-export const LoongArkEditableControl = forwardRef<
+export const LoongArkEditableControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkEditableControlProps & { state?: EditableState }
 >(({ state, ...props }, ref) => {
@@ -111,11 +114,11 @@ export const LoongArkEditableControl = forwardRef<
       data-state={state && state !== "default" ? state : undefined}
     />
   );
-});
+}), lkAutomaticEditableStyles);
 
 LoongArkEditableControl.displayName = "LoongArkEditableControl";
 
-export const LoongArkEditableInput = forwardRef<
+export const LoongArkEditableInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   ArkEditableInputProps & { state?: EditableState }
 >(({ state, ...props }, ref) => {
@@ -128,11 +131,11 @@ export const LoongArkEditableInput = forwardRef<
       data-state={state && state !== "default" ? state : undefined}
     />
   );
-});
+}), lkAutomaticEditableStyles);
 
 LoongArkEditableInput.displayName = "LoongArkEditableInput";
 
-export const LoongArkEditablePreview = forwardRef<
+export const LoongArkEditablePreview = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   ArkEditablePreviewProps
 >((props, ref) => {
@@ -144,11 +147,11 @@ export const LoongArkEditablePreview = forwardRef<
       data-part="preview"
     />
   );
-});
+}), lkAutomaticEditableStyles);
 
 LoongArkEditablePreview.displayName = "LoongArkEditablePreview";
 
-export const LoongArkEditableEditTrigger = forwardRef<
+export const LoongArkEditableEditTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkEditableEditTriggerProps
 >((props, ref) => {
@@ -160,11 +163,11 @@ export const LoongArkEditableEditTrigger = forwardRef<
       data-part="edit-trigger"
     />
   );
-});
+}), lkAutomaticEditableStyles);
 
 LoongArkEditableEditTrigger.displayName = "LoongArkEditableEditTrigger";
 
-export const LoongArkEditableSubmitTrigger = forwardRef<
+export const LoongArkEditableSubmitTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkEditableSubmitTriggerProps
 >((props, ref) => {
@@ -176,11 +179,11 @@ export const LoongArkEditableSubmitTrigger = forwardRef<
       data-part="submit-trigger"
     />
   );
-});
+}), lkAutomaticEditableStyles);
 
 LoongArkEditableSubmitTrigger.displayName = "LoongArkEditableSubmitTrigger";
 
-export const LoongArkEditableCancelTrigger = forwardRef<
+export const LoongArkEditableCancelTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkEditableCancelTriggerProps
 >((props, ref) => {
@@ -192,6 +195,6 @@ export const LoongArkEditableCancelTrigger = forwardRef<
       data-part="cancel-trigger"
     />
   );
-});
+}), lkAutomaticEditableStyles);
 
 LoongArkEditableCancelTrigger.displayName = "LoongArkEditableCancelTrigger";

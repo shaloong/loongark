@@ -1,3 +1,7 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticChartStyles } from "@loongark/primitives/automatic-styles/chart";
+import { styles as lkAutomaticDataTableStyles } from "@loongark/primitives/automatic-styles/data-table";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
@@ -72,7 +76,7 @@ import {
   onBeforeUnmount,
   type PropType,
 } from "vue";
-export const LoongArkChart = defineComponent({
+export const LoongArkChart = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   props: {
     data: { type: Array as PropType<ChartOptions["data"]>, required: true },
     series: { type: Array as PropType<ChartOptions["series"]>, required: true },
@@ -174,8 +178,8 @@ export const LoongArkChart = defineComponent({
         innerHTML: renderChartMarkup(options()),
       });
   },
-});
-export const LoongArkDataTable = defineComponent({
+}), lkAutomaticChartStyles);
+export const LoongArkDataTable = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   props: {
     data: { type: Array as PropType<readonly DataRow[]>, required: true },
     columns: { type: Array as PropType<readonly DataColumn[]>, required: true },
@@ -1500,4 +1504,4 @@ export const LoongArkDataTable = defineComponent({
       );
     };
   },
-});
+}), lkAutomaticDataTableStyles);

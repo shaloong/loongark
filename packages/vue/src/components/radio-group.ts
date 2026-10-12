@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticRadioGroupStyles } from "@loongark/primitives/automatic-styles/radio-group";
 import type { RadioGroupItemHiddenInputProps } from "@ark-ui/vue/radio-group";
 import { nativeSelectionRef } from "../native-selection";
 import {
@@ -21,7 +24,7 @@ export interface ValueChangeDetails {
 
 // ============ Root 组件 ============
 
-export const LoongArkRadioGroupRoot = defineComponent({
+export const LoongArkRadioGroupRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRadioGroupRoot",
   props: {
     size: {
@@ -77,20 +80,20 @@ export const LoongArkRadioGroupRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticRadioGroupStyles);
 
 // ============ Label 组件 ============
 
-export const LoongArkRadioGroupLabel = defineComponent({
+export const LoongArkRadioGroupLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRadioGroupLabel",
   setup(_, { slots }) {
     return () => renderPart(RadioGroup.Label, {}, slots);
   },
-});
+}), lkAutomaticRadioGroupStyles);
 
 // ============ Item 组件 ============
 
-export const LoongArkRadioGroupItem = defineComponent({
+export const LoongArkRadioGroupItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRadioGroupItem",
   props: {
     value: {
@@ -117,39 +120,39 @@ export const LoongArkRadioGroupItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticRadioGroupStyles);
 
 // ============ ItemControl 组件 ============
 
-export const LoongArkRadioGroupItemControl = defineComponent({
+export const LoongArkRadioGroupItemControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRadioGroupItemControl",
   setup(_, { slots }) {
     return () => renderPart(RadioGroup.ItemControl, {}, slots);
   },
-});
+}), lkAutomaticRadioGroupStyles);
 
 // ============ ItemText 组件 ============
 
-export const LoongArkRadioGroupItemText = defineComponent({
+export const LoongArkRadioGroupItemText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRadioGroupItemText",
   setup(_, { slots }) {
     return () => renderPart(RadioGroup.ItemText, {}, slots);
   },
-});
+}), lkAutomaticRadioGroupStyles);
 
 // ============ Indicator 组件 ============
 
-export const LoongArkRadioGroupIndicator = defineComponent({
+export const LoongArkRadioGroupIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRadioGroupIndicator",
   setup(_, { slots }) {
     return () => renderPart(RadioGroup.Indicator, {}, slots);
   },
-});
+}), lkAutomaticRadioGroupStyles);
 
 // ============ ItemHiddenInput 组件 ============
 
 export const LoongArkRadioGroupItemHiddenInput =
-  defineComponent<RadioGroupItemHiddenInputProps>(
+  /*#__PURE__*/ withAutomaticStyles(defineComponent<RadioGroupItemHiddenInputProps>(
     (props, { attrs, slots }) => {
       const api = useRadioGroupContext();
       const item = useRadioGroupItemContext();
@@ -174,4 +177,4 @@ export const LoongArkRadioGroupItemHiddenInput =
       props: ["asChild"],
       inheritAttrs: false,
     },
-  );
+  ), lkAutomaticRadioGroupStyles);

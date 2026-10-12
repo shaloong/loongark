@@ -1,4 +1,8 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCodeEditorStyles } from "@loongark/primitives/automatic-styles/code-editor";
+import { styles as lkAutomaticRichTextEditorStyles } from "@loongark/primitives/automatic-styles/rich-text-editor";
+
 
 import React, { useId, useRef, useState, useEffect } from "react";
 import {
@@ -46,13 +50,13 @@ function makeEditor<P extends EditorFormOptions>(
     );
   };
 }
-export const LoongArkCodeEditor = /* @__PURE__ */ makeEditor<CodeEditorProps>(
+export const LoongArkCodeEditor = /* @__PURE__ */ /*#__PURE__*/ withAutomaticStyles(makeEditor<CodeEditorProps>(
   "code",
   renderCodeEditorMarkup,
   mountCodeEditor,
-);
-export const LoongArkRichTextEditor = /* @__PURE__ */ makeEditor<RichTextEditorProps>(
+), lkAutomaticCodeEditorStyles);
+export const LoongArkRichTextEditor = /* @__PURE__ */ /*#__PURE__*/ withAutomaticStyles(makeEditor<RichTextEditorProps>(
   "rich",
   renderRichTextEditorMarkup,
   mountRichTextEditor,
-);
+), lkAutomaticRichTextEditorStyles);

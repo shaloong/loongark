@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticDatePickerStyles } from "@loongark/primitives/automatic-styles/date-picker";
 /**
  * Date Picker component - Solid wrapper.
  * Injects data-scope/data-part and size mapping.
@@ -53,7 +56,7 @@ export interface LoongArkDatePickerRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkDatePickerRoot: Component<LoongArkDatePickerRootProps> = (
+export const LoongArkDatePickerRoot: Component<LoongArkDatePickerRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps({ size: "md" as DatePickerSize }, props);
@@ -69,21 +72,21 @@ export const LoongArkDatePickerRoot: Component<LoongArkDatePickerRootProps> = (
       </ArkDatePicker.Root>
     </DatePickerContext.Provider>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerLabel: Component<
   ArkDatePickerLabelProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.Label {...props} data-scope="date-picker" data-part="label">
       {props.children}
     </ArkDatePicker.Label>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerControl: Component<
   ArkDatePickerControlProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.Control
       {...props}
@@ -93,21 +96,21 @@ export const LoongArkDatePickerControl: Component<
       {props.children}
     </ArkDatePicker.Control>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerInput: Component<
   ArkDatePickerInputProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.Input {...props} data-scope="date-picker" data-part="input">
       {props.children}
     </ArkDatePicker.Input>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerTrigger: Component<
   ArkDatePickerTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.Trigger
       {...props}
@@ -117,11 +120,11 @@ export const LoongArkDatePickerTrigger: Component<
       {props.children}
     </ArkDatePicker.Trigger>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerClearTrigger: Component<
   ArkDatePickerClearTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.ClearTrigger
       {...props}
@@ -131,11 +134,11 @@ export const LoongArkDatePickerClearTrigger: Component<
       {props.children}
     </ArkDatePicker.ClearTrigger>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerPositioner: Component<
   ArkDatePickerPositionerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.Positioner
       {...props}
@@ -152,11 +155,11 @@ export const LoongArkDatePickerPositioner: Component<
       {props.children}
     </ArkDatePicker.Positioner>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerContent: Component<
   ArkDatePickerContentProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const { size } = useContext(DatePickerContext);
   return (
     <ArkDatePicker.Content
@@ -168,21 +171,21 @@ export const LoongArkDatePickerContent: Component<
       {props.children}
     </ArkDatePicker.Content>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerView: Component<
   ArkDatePickerViewProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.View {...props} data-scope="date-picker" data-part="view">
       {props.children}
     </ArkDatePicker.View>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerViewControl: Component<
   ArkDatePickerViewControlProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.ViewControl
       {...props}
@@ -192,11 +195,11 @@ export const LoongArkDatePickerViewControl: Component<
       {props.children}
     </ArkDatePicker.ViewControl>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerViewTrigger: Component<
   ArkDatePickerViewTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.ViewTrigger
       {...props}
@@ -206,11 +209,11 @@ export const LoongArkDatePickerViewTrigger: Component<
       {props.children}
     </ArkDatePicker.ViewTrigger>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerPrevTrigger: Component<
   ArkDatePickerPrevTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.PrevTrigger
       {...props}
@@ -220,11 +223,11 @@ export const LoongArkDatePickerPrevTrigger: Component<
       {props.children}
     </ArkDatePicker.PrevTrigger>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerNextTrigger: Component<
   ArkDatePickerNextTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.NextTrigger
       {...props}
@@ -234,11 +237,11 @@ export const LoongArkDatePickerNextTrigger: Component<
       {props.children}
     </ArkDatePicker.NextTrigger>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerMonthSelect: Component<
   ArkDatePickerMonthSelectProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.MonthSelect
       {...props}
@@ -248,11 +251,11 @@ export const LoongArkDatePickerMonthSelect: Component<
       {props.children}
     </ArkDatePicker.MonthSelect>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerYearSelect: Component<
   ArkDatePickerYearSelectProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.YearSelect
       {...props}
@@ -262,11 +265,11 @@ export const LoongArkDatePickerYearSelect: Component<
       {props.children}
     </ArkDatePicker.YearSelect>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerRangeText: Component<
   ArkDatePickerRangeTextProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.RangeText
       {...props}
@@ -276,11 +279,11 @@ export const LoongArkDatePickerRangeText: Component<
       {props.children}
     </ArkDatePicker.RangeText>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerPresetTrigger: Component<
   ArkDatePickerPresetTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.PresetTrigger
       {...props}
@@ -290,21 +293,21 @@ export const LoongArkDatePickerPresetTrigger: Component<
       {props.children}
     </ArkDatePicker.PresetTrigger>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerTable: Component<
   ArkDatePickerTableProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.Table {...props} data-scope="date-picker" data-part="table">
       {props.children}
     </ArkDatePicker.Table>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerTableHead: Component<
   ArkDatePickerTableHeadProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.TableHead
       {...props}
@@ -314,11 +317,11 @@ export const LoongArkDatePickerTableHead: Component<
       {props.children}
     </ArkDatePicker.TableHead>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerTableBody: Component<
   ArkDatePickerTableBodyProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.TableBody
       {...props}
@@ -328,11 +331,11 @@ export const LoongArkDatePickerTableBody: Component<
       {props.children}
     </ArkDatePicker.TableBody>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerTableRow: Component<
   ArkDatePickerTableRowProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.TableRow
       {...props}
@@ -342,11 +345,11 @@ export const LoongArkDatePickerTableRow: Component<
       {props.children}
     </ArkDatePicker.TableRow>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerTableHeader: Component<
   ArkDatePickerTableHeaderProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.TableHeader
       {...props}
@@ -356,11 +359,11 @@ export const LoongArkDatePickerTableHeader: Component<
       {props.children}
     </ArkDatePicker.TableHeader>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerTableCell: Component<
   ArkDatePickerTableCellProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.TableCell
       {...props}
@@ -370,11 +373,11 @@ export const LoongArkDatePickerTableCell: Component<
       {props.children}
     </ArkDatePicker.TableCell>
   );
-};
+}, lkAutomaticDatePickerStyles);
 
 export const LoongArkDatePickerTableCellTrigger: Component<
   ArkDatePickerTableCellTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkDatePicker.TableCellTrigger
       {...props}
@@ -384,4 +387,4 @@ export const LoongArkDatePickerTableCellTrigger: Component<
       {props.children}
     </ArkDatePicker.TableCellTrigger>
   );
-};
+}, lkAutomaticDatePickerStyles);

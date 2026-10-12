@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTabsStyles } from "@loongark/primitives/automatic-styles/tabs";
+
 
 /**
  * Tabs 组件 - React 封装
@@ -42,7 +45,7 @@ export interface LoongArkTabsIndicatorProps
   children?: ReactNode;
 }
 
-export const LoongArkTabsRoot = forwardRef<
+export const LoongArkTabsRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkTabsRootProps
 >(({ children, size = "md", orientation = "horizontal", ...props }, ref) => {
@@ -59,11 +62,11 @@ export const LoongArkTabsRoot = forwardRef<
       {children}
     </Tabs.Root>
   );
-});
+}), lkAutomaticTabsStyles);
 
 LoongArkTabsRoot.displayName = "LoongArkTabsRoot";
 
-export const LoongArkTabsList = forwardRef<
+export const LoongArkTabsList = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkTabsListProps
 >(({ children, ...props }, ref) => {
@@ -77,11 +80,11 @@ export const LoongArkTabsList = forwardRef<
       {children}
     </Tabs.List>
   );
-});
+}), lkAutomaticTabsStyles);
 
 LoongArkTabsList.displayName = "LoongArkTabsList";
 
-export const LoongArkTabsTrigger = forwardRef<
+export const LoongArkTabsTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkTabsTriggerProps
 >(({ children, ...props }, ref) => {
@@ -95,11 +98,11 @@ export const LoongArkTabsTrigger = forwardRef<
       {children}
     </Tabs.Trigger>
   );
-});
+}), lkAutomaticTabsStyles);
 
 LoongArkTabsTrigger.displayName = "LoongArkTabsTrigger";
 
-export const LoongArkTabsContent = forwardRef<
+export const LoongArkTabsContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkTabsContentProps
 >(({ children, ...props }, ref) => {
@@ -113,11 +116,11 @@ export const LoongArkTabsContent = forwardRef<
       {children}
     </Tabs.Content>
   );
-});
+}), lkAutomaticTabsStyles);
 
 LoongArkTabsContent.displayName = "LoongArkTabsContent";
 
-export const LoongArkTabsIndicator = forwardRef<
+export const LoongArkTabsIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkTabsIndicatorProps
 >(({ children, ...props }, ref) => {
@@ -131,6 +134,6 @@ export const LoongArkTabsIndicator = forwardRef<
       {children}
     </Tabs.Indicator>
   );
-});
+}), lkAutomaticTabsStyles);
 
 LoongArkTabsIndicator.displayName = "LoongArkTabsIndicator";

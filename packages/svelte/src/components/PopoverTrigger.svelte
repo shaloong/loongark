@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticPopoverStyles } from "@loongark/primitives/automatic-styles/popover";
+  registerAutomaticStyles(lkAutomaticPopoverStyles);
+
   import { Popover } from "@ark-ui/svelte/popover";
   import type { PopoverTriggerProps } from "@ark-ui/svelte/popover";
   export let asChild: PopoverTriggerProps["asChild"] | undefined = undefined;

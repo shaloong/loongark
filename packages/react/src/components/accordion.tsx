@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticAccordionStyles } from "@loongark/primitives/automatic-styles/accordion";
+
 
 /**
  * Accordion component - React wrapper.
@@ -48,7 +51,7 @@ export interface LoongArkAccordionItemIndicatorProps
   children?: ReactNode;
 }
 
-export const LoongArkAccordionRoot = forwardRef<
+export const LoongArkAccordionRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkAccordionRootProps
 >(({ children, size = "md", orientation = "vertical", ...props }, ref) => {
@@ -65,11 +68,11 @@ export const LoongArkAccordionRoot = forwardRef<
       {children}
     </Accordion.Root>
   );
-});
+}), lkAutomaticAccordionStyles);
 
 LoongArkAccordionRoot.displayName = "LoongArkAccordionRoot";
 
-export const LoongArkAccordionItem = forwardRef<
+export const LoongArkAccordionItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkAccordionItemProps
 >(({ children, ...props }, ref) => {
@@ -78,11 +81,11 @@ export const LoongArkAccordionItem = forwardRef<
       {children}
     </Accordion.Item>
   );
-});
+}), lkAutomaticAccordionStyles);
 
 LoongArkAccordionItem.displayName = "LoongArkAccordionItem";
 
-export const LoongArkAccordionItemTrigger = forwardRef<
+export const LoongArkAccordionItemTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkAccordionItemTriggerProps
 >(({ children, ...props }, ref) => {
@@ -96,11 +99,11 @@ export const LoongArkAccordionItemTrigger = forwardRef<
       {children}
     </Accordion.ItemTrigger>
   );
-});
+}), lkAutomaticAccordionStyles);
 
 LoongArkAccordionItemTrigger.displayName = "LoongArkAccordionItemTrigger";
 
-export const LoongArkAccordionItemContent = forwardRef<
+export const LoongArkAccordionItemContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkAccordionItemContentProps
 >(({ children, ...props }, ref) => {
@@ -114,11 +117,11 @@ export const LoongArkAccordionItemContent = forwardRef<
       {children}
     </Accordion.ItemContent>
   );
-});
+}), lkAutomaticAccordionStyles);
 
 LoongArkAccordionItemContent.displayName = "LoongArkAccordionItemContent";
 
-export const LoongArkAccordionItemIndicator = forwardRef<
+export const LoongArkAccordionItemIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkAccordionItemIndicatorProps
 >(({ children, ...props }, ref) => {
@@ -132,6 +135,6 @@ export const LoongArkAccordionItemIndicator = forwardRef<
       {children}
     </Accordion.ItemIndicator>
   );
-});
+}), lkAutomaticAccordionStyles);
 
 LoongArkAccordionItemIndicator.displayName = "LoongArkAccordionItemIndicator";

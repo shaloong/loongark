@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticPaperStyles } from "@loongark/primitives/automatic-styles/paper";
+  registerAutomaticStyles(lkAutomaticPaperStyles);
+
   import {
     layoutAttributes,
     layoutStyles,

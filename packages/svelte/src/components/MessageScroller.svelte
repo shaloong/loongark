@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticMessageScrollerStyles } from "@loongark/primitives/automatic-styles/message-scroller";
+  registerAutomaticStyles(lkAutomaticMessageScrollerStyles);
+
   import { onMount, type Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import {

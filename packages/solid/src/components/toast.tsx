@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticToastStyles } from "@loongark/primitives/automatic-styles/toast";
 /**
  * Toast component - Solid wrapper
  * Based on Ark UI Toast, injects data-scope/data-part.
@@ -20,41 +23,41 @@ import {
   type ToastStatus,
 } from "@ark-ui/solid/toast";
 
-export const LoongArkToaster = (props: ArkToasterProps) => (
+export const LoongArkToaster = /*#__PURE__*/ withAutomaticStyles((props: ArkToasterProps) => (
   <ArkToaster {...props} data-scope="toast" data-part="group" />
-);
+), lkAutomaticToastStyles);
 
-export const LoongArkToastRoot = (props: ArkToastRootProps) => (
+export const LoongArkToastRoot = /*#__PURE__*/ withAutomaticStyles((props: ArkToastRootProps) => (
   <ArkToast.Root {...props} data-scope="toast" data-part="root" />
-);
+), lkAutomaticToastStyles);
 
-export const LoongArkToastTitle = (props: ArkToastTitleProps) => (
+export const LoongArkToastTitle = /*#__PURE__*/ withAutomaticStyles((props: ArkToastTitleProps) => (
   <ArkToast.Title {...props} data-scope="toast" data-part="title" />
-);
+), lkAutomaticToastStyles);
 
-export const LoongArkToastDescription = (props: ArkToastDescriptionProps) => (
+export const LoongArkToastDescription = /*#__PURE__*/ withAutomaticStyles((props: ArkToastDescriptionProps) => (
   <ArkToast.Description
     {...props}
     data-scope="toast"
     data-part="description"
   />
-);
+), lkAutomaticToastStyles);
 
-export const LoongArkToastActionTrigger = (props: ArkToastActionTriggerProps) => (
+export const LoongArkToastActionTrigger = /*#__PURE__*/ withAutomaticStyles((props: ArkToastActionTriggerProps) => (
   <ArkToast.ActionTrigger
     {...props}
     data-scope="toast"
     data-part="action-trigger"
   />
-);
+), lkAutomaticToastStyles);
 
-export const LoongArkToastCloseTrigger = (props: ArkToastCloseTriggerProps) => (
+export const LoongArkToastCloseTrigger = /*#__PURE__*/ withAutomaticStyles((props: ArkToastCloseTriggerProps) => (
   <ArkToast.CloseTrigger
     {...props}
     data-scope="toast"
     data-part="close-trigger"
   />
-);
+), lkAutomaticToastStyles);
 
 export { createToaster };
 export type {

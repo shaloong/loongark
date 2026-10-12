@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticNativeSelectStyles } from "@loongark/primitives/automatic-styles/native-select";
+  registerAutomaticStyles(lkAutomaticNativeSelectStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "select";
   export let variant: LayoutOptions["variant"] = "default";

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticProgressStyles } from "@loongark/primitives/automatic-styles/progress";
 import type { ProgressRootProps as NativeProgressRootProps } from "@ark-ui/vue/progress";
 import { renderPart } from "../render-part";
 /**
@@ -12,7 +15,7 @@ export interface ProgressValueChangeDetails {
   value: number;
 }
 
-export const LoongArkProgressRoot = defineComponent({
+export const LoongArkProgressRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkProgressRoot",
   props: {
     size: {
@@ -57,9 +60,9 @@ export const LoongArkProgressRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticProgressStyles);
 
-export const LoongArkProgressLabel = defineComponent({
+export const LoongArkProgressLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkProgressLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -73,9 +76,9 @@ export const LoongArkProgressLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticProgressStyles);
 
-export const LoongArkProgressTrack = defineComponent({
+export const LoongArkProgressTrack = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkProgressTrack",
   setup(_, { slots, attrs }) {
     return () =>
@@ -89,9 +92,9 @@ export const LoongArkProgressTrack = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticProgressStyles);
 
-export const LoongArkProgressRange = defineComponent({
+export const LoongArkProgressRange = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkProgressRange",
   setup(_, { slots, attrs }) {
     return () =>
@@ -105,9 +108,9 @@ export const LoongArkProgressRange = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticProgressStyles);
 
-export const LoongArkProgressValueText = defineComponent({
+export const LoongArkProgressValueText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkProgressValueText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -121,9 +124,9 @@ export const LoongArkProgressValueText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticProgressStyles);
 
-export const LoongArkProgressView = defineComponent({
+export const LoongArkProgressView = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkProgressView",
   setup(_, { slots, attrs }) {
     return () =>
@@ -137,9 +140,9 @@ export const LoongArkProgressView = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticProgressStyles);
 
-export const LoongArkProgressCircle = defineComponent({
+export const LoongArkProgressCircle = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkProgressCircle",
   setup(_, { slots, attrs }) {
     return () =>
@@ -153,9 +156,9 @@ export const LoongArkProgressCircle = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticProgressStyles);
 
-export const LoongArkProgressCircleTrack = defineComponent({
+export const LoongArkProgressCircleTrack = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkProgressCircleTrack",
   setup(_, { slots, attrs }) {
     return () =>
@@ -169,9 +172,9 @@ export const LoongArkProgressCircleTrack = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticProgressStyles);
 
-export const LoongArkProgressCircleRange = defineComponent({
+export const LoongArkProgressCircleRange = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkProgressCircleRange",
   setup(_, { slots, attrs }) {
     return () =>
@@ -185,4 +188,4 @@ export const LoongArkProgressCircleRange = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticProgressStyles);

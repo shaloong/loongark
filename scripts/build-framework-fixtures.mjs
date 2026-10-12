@@ -1,9 +1,11 @@
+import { publishedWorkspacePlugin } from "./published-workspace-plugin.mjs";
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { build } from "vite";
 import react from "@vitejs/plugin-react";
 import solid from "vite-plugin-solid";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+const workspacePlugin = await publishedWorkspacePlugin();
 const root = resolve("tests/consumers");
 await mkdir(root, { recursive: true });
 await mkdir(resolve("tests/consumer-dist"), { recursive: true });
@@ -131,34 +133,14 @@ h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()
     ),
     source,
   );
-  const alias = Object.fromEntries(
-    [
-      "react",
-      "vue",
-      "solid",
-      "svelte",
-      "theme",
-      "primitives",
-      "kit",
-      "tokens",
-    ].map((p) => ["@loongark/" + p, resolve("packages", p, "dist/index.js")]),
-  );
   await build({
     configFile: false,
     root: folder,
     base: `/${framework}/`,
     resolve: {
-      alias: { "@loongark/primitives/styles": resolve("packages/primitives/dist/styles.js"), "@loongark/kit/bootstrap": resolve("packages/kit/dist/bootstrap.js"), ...alias },
       dedupe: ["react", "react-dom", "solid-js", "svelte", "vue"],
     },
-    plugins:
-      framework === "react"
-        ? [react()]
-        : framework === "solid"
-          ? [solid()]
-          : framework === "svelte"
-            ? [svelte()]
-            : [],
+    plugins: [workspacePlugin, ...(framework === "react" ? [react()] : framework === "solid" ? [solid()] : framework === "svelte" ? [svelte()] : [])],
     logLevel: "error",
     build: {
       outDir: resolve("tests/consumer-dist", framework),
@@ -214,9 +196,7 @@ await build({
 await build({
   configFile: false,
   logLevel: "error",
-  resolve: {
-    alias: { "@loongark/kit": resolve("packages/kit/dist/index.js") },
-  },
+  plugins: [workspacePlugin],
   build: {
     outDir: resolve("tests/consumer-dist"),
     emptyOutDir: false,
@@ -232,9 +212,7 @@ console.log("横向列窗口共享发布模块浏览器消费构建通过");
 await build({
   configFile: false,
   logLevel: "error",
-  resolve: {
-    alias: { "@loongark/kit": resolve("packages/kit/dist/index.js") },
-  },
+  plugins: [workspacePlugin],
   build: {
     outDir: resolve("tests/consumer-dist"),
     emptyOutDir: false,
@@ -248,3 +226,5 @@ await build({
 console.log("二维网格/瀑布流共享发布模块浏览器消费构建通过");
 
 await import('./build-core-fixtures.mjs');
+
+await import("./build-automatic-style-fixtures.mjs");

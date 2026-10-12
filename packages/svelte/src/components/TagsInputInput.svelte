@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+  registerAutomaticStyles(lkAutomaticTagsInputStyles);
+
   import { useFieldContext } from "@ark-ui/svelte/field";
   import { nativeSelectionFieldDescription } from "@loongark/kit";
   import {

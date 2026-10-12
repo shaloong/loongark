@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticAppBarStyles } from "@loongark/primitives/automatic-styles/app-bar";
+  registerAutomaticStyles(lkAutomaticAppBarStyles);
+
   import {
     layoutAttributes,
     layoutStyles,

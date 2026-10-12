@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticTimelineStyles } from "@loongark/primitives/automatic-styles/timeline";
+  registerAutomaticStyles(lkAutomaticTimelineStyles);
+
   import {
     layoutAttributes,
     layoutStyles,

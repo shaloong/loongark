@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSwitchStyles } from "@loongark/primitives/automatic-styles/switch";
 import { useFieldContext } from "@ark-ui/vue/field";
 import { nativeSelectionFieldDescription } from "@loongark/kit";
 import type { SwitchHiddenInputProps } from "@ark-ui/vue/switch";
@@ -17,7 +20,7 @@ const sizeProp = {
   default: "md" as SwitchSize,
 };
 
-export const LoongArkSwitchRoot = defineComponent({
+export const LoongArkSwitchRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSwitchRoot",
   props: {
     size: sizeProp,
@@ -58,9 +61,9 @@ export const LoongArkSwitchRoot = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticSwitchStyles);
 
-export const LoongArkSwitchControl = defineComponent({
+export const LoongArkSwitchControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSwitchControl",
   props: {
     size: sizeProp,
@@ -81,9 +84,9 @@ export const LoongArkSwitchControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSwitchStyles);
 
-export const LoongArkSwitchThumb = defineComponent({
+export const LoongArkSwitchThumb = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSwitchThumb",
   props: {
     size: sizeProp,
@@ -97,9 +100,9 @@ export const LoongArkSwitchThumb = defineComponent({
         "data-size": props.size,
       });
   },
-});
+}), lkAutomaticSwitchStyles);
 
-export const LoongArkSwitchLabel = defineComponent({
+export const LoongArkSwitchLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSwitchLabel",
   props: {
     disabled: { type: Boolean, default: undefined },
@@ -117,10 +120,10 @@ export const LoongArkSwitchLabel = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticSwitchStyles);
 
 export const LoongArkSwitchHiddenInput =
-  defineComponent<SwitchHiddenInputProps>(
+  /*#__PURE__*/ withAutomaticStyles(defineComponent<SwitchHiddenInputProps>(
     (props, { attrs, slots }) => {
       const field = useFieldContext();
       const api = useSwitchContext();
@@ -149,7 +152,7 @@ export const LoongArkSwitchHiddenInput =
       props: ["asChild"],
       inheritAttrs: false,
     },
-  );
+  ), lkAutomaticSwitchStyles);
 
 export const LoongArkSwitch: {
   Root: typeof LoongArkSwitchRoot;
@@ -157,10 +160,10 @@ export const LoongArkSwitch: {
   Thumb: typeof LoongArkSwitchThumb;
   Label: typeof LoongArkSwitchLabel;
   HiddenInput: typeof LoongArkSwitchHiddenInput;
-} = {
+} = /*#__PURE__*/ withAutomaticStyles({
   Root: LoongArkSwitchRoot,
   Control: LoongArkSwitchControl,
   Thumb: LoongArkSwitchThumb,
   Label: LoongArkSwitchLabel,
   HiddenInput: LoongArkSwitchHiddenInput,
-};
+}, lkAutomaticSwitchStyles);

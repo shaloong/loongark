@@ -71,6 +71,9 @@ importers:
       babel-preset-solid:
         specifier: ^1.9.15
         version: 1.9.15(@babel/core@7.29.7)(solid-js@1.9.17)
+      postcss:
+        specifier: ^8.5.23
+        version: 8.5.29
       prettier:
         specifier: ^3.9.9
         version: 3.9.9

@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticMenubarStyles } from "@loongark/primitives/automatic-styles/menubar";
+  registerAutomaticStyles(lkAutomaticMenubarStyles);
+
   import { onMount } from "svelte";
   import {
     layoutAttributes,

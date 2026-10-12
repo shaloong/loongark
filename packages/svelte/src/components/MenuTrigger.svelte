@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticMenuStyles } from "@loongark/primitives/automatic-styles/menu";
+  registerAutomaticStyles(lkAutomaticMenuStyles);
+
   import { Menu } from "@ark-ui/svelte/menu";
   import type { MenuTriggerProps } from "@ark-ui/svelte/menu";
   export let asChild: MenuTriggerProps["asChild"] | undefined = undefined;

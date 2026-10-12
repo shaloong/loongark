@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticHoverCardStyles } from "@loongark/primitives/automatic-styles/hover-card";
 /**
  * Hover Card component - Solid wrapper.
  * Uses Ark UI Hover Card with data attributes for styling.
@@ -22,7 +25,7 @@ export interface LoongArkHoverCardRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkHoverCardRoot: Component<LoongArkHoverCardRootProps> = (
+export const LoongArkHoverCardRoot: Component<LoongArkHoverCardRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps({ size: "md" as HoverCardSize }, props);
@@ -38,7 +41,7 @@ export const LoongArkHoverCardRoot: Component<LoongArkHoverCardRootProps> = (
       {local.children}
     </ArkHoverCard.Root>
   );
-};
+}, lkAutomaticHoverCardStyles);
 
 export interface LoongArkHoverCardTriggerProps extends Omit<
   ArkHoverCardTriggerProps,
@@ -49,7 +52,7 @@ export interface LoongArkHoverCardTriggerProps extends Omit<
 
 export const LoongArkHoverCardTrigger: Component<
   LoongArkHoverCardTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkHoverCard.Trigger
@@ -60,7 +63,7 @@ export const LoongArkHoverCardTrigger: Component<
       {local.children}
     </ArkHoverCard.Trigger>
   );
-};
+}, lkAutomaticHoverCardStyles);
 
 export interface LoongArkHoverCardPositionerProps extends Omit<
   ArkHoverCardPositionerProps,
@@ -71,7 +74,7 @@ export interface LoongArkHoverCardPositionerProps extends Omit<
 
 export const LoongArkHoverCardPositioner: Component<
   LoongArkHoverCardPositionerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkHoverCard.Positioner
@@ -82,7 +85,7 @@ export const LoongArkHoverCardPositioner: Component<
       {local.children}
     </ArkHoverCard.Positioner>
   );
-};
+}, lkAutomaticHoverCardStyles);
 
 export interface LoongArkHoverCardContentProps extends Omit<
   ArkHoverCardContentProps,
@@ -93,7 +96,7 @@ export interface LoongArkHoverCardContentProps extends Omit<
 
 export const LoongArkHoverCardContent: Component<
   LoongArkHoverCardContentProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkHoverCard.Content
@@ -104,7 +107,7 @@ export const LoongArkHoverCardContent: Component<
       {local.children}
     </ArkHoverCard.Content>
   );
-};
+}, lkAutomaticHoverCardStyles);
 
 export interface LoongArkHoverCardArrowProps extends Omit<
   ArkHoverCardArrowProps,
@@ -113,7 +116,7 @@ export interface LoongArkHoverCardArrowProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkHoverCardArrow: Component<LoongArkHoverCardArrowProps> = (
+export const LoongArkHoverCardArrow: Component<LoongArkHoverCardArrowProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -122,7 +125,7 @@ export const LoongArkHoverCardArrow: Component<LoongArkHoverCardArrowProps> = (
       {local.children}
     </ArkHoverCard.Arrow>
   );
-};
+}, lkAutomaticHoverCardStyles);
 
 export interface LoongArkHoverCardArrowTipProps extends Omit<
   ArkHoverCardArrowTipProps,
@@ -133,7 +136,7 @@ export interface LoongArkHoverCardArrowTipProps extends Omit<
 
 export const LoongArkHoverCardArrowTip: Component<
   LoongArkHoverCardArrowTipProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkHoverCard.ArrowTip
@@ -144,4 +147,4 @@ export const LoongArkHoverCardArrowTip: Component<
       {local.children}
     </ArkHoverCard.ArrowTip>
   );
-};
+}, lkAutomaticHoverCardStyles);

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticRadioGroupStyles } from "@loongark/primitives/automatic-styles/radio-group";
 import { nativeSelectionRef } from "../native-selection";
 import {
   useRadioGroupContext,
@@ -72,7 +75,7 @@ export interface RadioGroupItemHiddenInputProps extends NativeHiddenInputProps {
 /**
  * Radio Group Root - 单选按钮组根容器
  */
-export const LoongArkRadioGroupRoot: Component<RadioGroupRootProps> = (
+export const LoongArkRadioGroupRoot: Component<RadioGroupRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   return (
@@ -85,69 +88,69 @@ export const LoongArkRadioGroupRoot: Component<RadioGroupRootProps> = (
       {props.children}
     </ArkRadioGroup.Root>
   );
-};
+}, lkAutomaticRadioGroupStyles);
 
 /**
  * Radio Group Label - 单选按钮组标签
  */
-export const LoongArkRadioGroupLabel: Component<RadioGroupLabelProps> = (
+export const LoongArkRadioGroupLabel: Component<RadioGroupLabelProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   return <ArkRadioGroup.Label {...props}>{props.children}</ArkRadioGroup.Label>;
-};
+}, lkAutomaticRadioGroupStyles);
 
 /**
  * Radio Group Item - 单选按钮项
  */
-export const LoongArkRadioGroupItem: Component<RadioGroupItemProps> = (
+export const LoongArkRadioGroupItem: Component<RadioGroupItemProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   return <ArkRadioGroup.Item {...props}>{props.children}</ArkRadioGroup.Item>;
-};
+}, lkAutomaticRadioGroupStyles);
 
 /**
  * Radio Group Item Control - 单选按钮控件（圆圈）
  */
 export const LoongArkRadioGroupItemControl: Component<
   RadioGroupItemControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkRadioGroup.ItemControl {...props}>
       {props.children}
     </ArkRadioGroup.ItemControl>
   );
-};
+}, lkAutomaticRadioGroupStyles);
 
 /**
  * Radio Group Item Text - 单选按钮文本
  */
-export const LoongArkRadioGroupItemText: Component<RadioGroupItemTextProps> = (
+export const LoongArkRadioGroupItemText: Component<RadioGroupItemTextProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   return (
     <ArkRadioGroup.ItemText {...props}>{props.children}</ArkRadioGroup.ItemText>
   );
-};
+}, lkAutomaticRadioGroupStyles);
 
 /**
  * Radio Group Indicator - 单选按钮选中指示器（内部圆点）
  */
 export const LoongArkRadioGroupIndicator: Component<
   RadioGroupIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkRadioGroup.Indicator {...props}>
       {props.children}
     </ArkRadioGroup.Indicator>
   );
-};
+}, lkAutomaticRadioGroupStyles);
 
 /**
  * Radio Group Item Hidden Input - 隐藏的原生 radio input
  */
 export const LoongArkRadioGroupItemHiddenInput: Component<
   RadioGroupItemHiddenInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const api = useRadioGroupContext();
   const item = useRadioGroupItemContext();
   const ref = nativeSelectionRef(
@@ -164,4 +167,4 @@ export const LoongArkRadioGroupItemHiddenInput: Component<
       disabled={item().disabled || !!props.disabled}
     />
   );
-};
+}, lkAutomaticRadioGroupStyles);

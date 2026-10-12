@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticRatingGroupStyles } from "@loongark/primitives/automatic-styles/rating-group";
 /**
  * Rating Group component - Solid wrapper.
  * Uses Ark UI Rating Group with data attributes for styling.
@@ -25,7 +28,7 @@ export interface LoongArkRatingGroupRootProps extends Omit<
 
 export const LoongArkRatingGroupRoot: Component<
   LoongArkRatingGroupRootProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     { size: "md" as RatingGroupSize, disabled: false },
     props,
@@ -67,7 +70,7 @@ export const LoongArkRatingGroupRoot: Component<
       {local.children}
     </ArkRatingGroup.RootProvider>
   );
-};
+}, lkAutomaticRatingGroupStyles);
 
 export interface LoongArkRatingGroupLabelProps extends Omit<
   ArkRatingGroupLabelProps,
@@ -78,7 +81,7 @@ export interface LoongArkRatingGroupLabelProps extends Omit<
 
 export const LoongArkRatingGroupLabel: Component<
   LoongArkRatingGroupLabelProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkRatingGroup.Label
@@ -89,7 +92,7 @@ export const LoongArkRatingGroupLabel: Component<
       {local.children}
     </ArkRatingGroup.Label>
   );
-};
+}, lkAutomaticRatingGroupStyles);
 
 export interface LoongArkRatingGroupControlProps extends Omit<
   ArkRatingGroupControlProps,
@@ -100,7 +103,7 @@ export interface LoongArkRatingGroupControlProps extends Omit<
 
 export const LoongArkRatingGroupControl: Component<
   LoongArkRatingGroupControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkRatingGroup.Control
@@ -111,7 +114,7 @@ export const LoongArkRatingGroupControl: Component<
       {local.children}
     </ArkRatingGroup.Control>
   );
-};
+}, lkAutomaticRatingGroupStyles);
 
 export interface LoongArkRatingGroupItemProps extends Omit<
   ArkRatingGroupItemProps,
@@ -122,14 +125,14 @@ export interface LoongArkRatingGroupItemProps extends Omit<
 
 export const LoongArkRatingGroupItem: Component<
   LoongArkRatingGroupItemProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkRatingGroup.Item {...others} data-scope="rating-group" data-part="item">
       {local.children}
     </ArkRatingGroup.Item>
   );
-};
+}, lkAutomaticRatingGroupStyles);
 
 export interface LoongArkRatingGroupHiddenInputProps extends Omit<
   ArkRatingGroupHiddenInputProps,
@@ -138,7 +141,7 @@ export interface LoongArkRatingGroupHiddenInputProps extends Omit<
 
 export const LoongArkRatingGroupHiddenInput: Component<
   LoongArkRatingGroupHiddenInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkRatingGroup.HiddenInput
       {...props}
@@ -146,4 +149,4 @@ export const LoongArkRatingGroupHiddenInput: Component<
       data-part="hidden-input"
     />
   );
-};
+}, lkAutomaticRatingGroupStyles);

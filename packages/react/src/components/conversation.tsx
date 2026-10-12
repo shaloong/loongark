@@ -1,4 +1,9 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticAttachmentStyles } from "@loongark/primitives/automatic-styles/attachment";
+import { styles as lkAutomaticBubbleStyles } from "@loongark/primitives/automatic-styles/bubble";
+import { styles as lkAutomaticMessageStyles } from "@loongark/primitives/automatic-styles/message";
+
 
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
@@ -19,7 +24,7 @@ export type LoongArkAttachmentProps = HTMLAttributes<HTMLDivElement> &
 export type LoongArkBubbleProps = HTMLAttributes<HTMLDivElement> &
   BubbleOptions;
 export type LoongArkMessageProps = HTMLAttributes<HTMLElement> & MessageOptions;
-export function LoongArkAttachment({
+function LoongArkAttachment({
   name,
   size,
   href,
@@ -190,7 +195,7 @@ export function LoongArkAttachment({
     </div>
   );
 }
-export function LoongArkBubble({
+function LoongArkBubble({
   side,
   children,
   ...attrs
@@ -206,7 +211,7 @@ export function LoongArkBubble({
     </div>
   );
 }
-export function LoongArkMessage({
+function LoongArkMessage({
   side,
   author,
   dateTime,
@@ -333,3 +338,10 @@ export function LoongArkMessage({
     </article>
   );
 }
+
+const lkStyledLoongArkAttachment = /*#__PURE__*/ withAutomaticStyles(LoongArkAttachment, lkAutomaticAttachmentStyles);
+export { lkStyledLoongArkAttachment as LoongArkAttachment };
+const lkStyledLoongArkBubble = /*#__PURE__*/ withAutomaticStyles(LoongArkBubble, lkAutomaticBubbleStyles);
+export { lkStyledLoongArkBubble as LoongArkBubble };
+const lkStyledLoongArkMessage = /*#__PURE__*/ withAutomaticStyles(LoongArkMessage, lkAutomaticMessageStyles);
+export { lkStyledLoongArkMessage as LoongArkMessage };

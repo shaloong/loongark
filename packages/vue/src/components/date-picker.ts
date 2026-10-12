@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticDatePickerStyles } from "@loongark/primitives/automatic-styles/date-picker";
 import { datePickerPositionerStyle } from "@loongark/primitives";
 import type { DatePickerRootEmits as NativeDatePickerRootEmits } from "@ark-ui/vue/date-picker";
 import type { DatePickerRootProps as NativeDatePickerRootProps } from "@ark-ui/vue/date-picker";
@@ -48,7 +51,7 @@ import type { DatePickerSize } from "@loongark/primitives";
 
 const datePickerSizeKey = Symbol("loongark-date-picker-size");
 
-export const LoongArkDatePickerRoot = defineComponent({
+export const LoongArkDatePickerRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerRoot",
   props: {
     size: {
@@ -207,9 +210,9 @@ export const LoongArkDatePickerRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerLabel = defineComponent({
+export const LoongArkDatePickerLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -223,9 +226,9 @@ export const LoongArkDatePickerLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerControl = defineComponent({
+export const LoongArkDatePickerControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerControl",
   setup(_, { slots, attrs }) {
     return () =>
@@ -239,9 +242,9 @@ export const LoongArkDatePickerControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerInput = defineComponent({
+export const LoongArkDatePickerInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerInput",
   props: {
     index: {
@@ -263,9 +266,9 @@ export const LoongArkDatePickerInput = defineComponent({
         "data-part": "input",
       });
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerTrigger = defineComponent({
+export const LoongArkDatePickerTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -279,9 +282,9 @@ export const LoongArkDatePickerTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerClearTrigger = defineComponent({
+export const LoongArkDatePickerClearTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerClearTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -295,9 +298,9 @@ export const LoongArkDatePickerClearTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerPositioner = defineComponent({
+export const LoongArkDatePickerPositioner = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerPositioner",
   setup(_, { slots, attrs }) {
     return () =>
@@ -315,9 +318,9 @@ export const LoongArkDatePickerPositioner = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerContent = defineComponent({
+export const LoongArkDatePickerContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerContent",
   setup(_, { slots, attrs }) {
     const size = inject(datePickerSizeKey, { value: "md" as DatePickerSize });
@@ -333,9 +336,9 @@ export const LoongArkDatePickerContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerView = defineComponent({
+export const LoongArkDatePickerView = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerView",
   props: {
     view: {
@@ -356,9 +359,9 @@ export const LoongArkDatePickerView = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerViewControl = defineComponent({
+export const LoongArkDatePickerViewControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerViewControl",
   setup(_, { slots, attrs }) {
     return () =>
@@ -372,9 +375,9 @@ export const LoongArkDatePickerViewControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerViewTrigger = defineComponent({
+export const LoongArkDatePickerViewTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerViewTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -388,9 +391,9 @@ export const LoongArkDatePickerViewTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerPrevTrigger = defineComponent({
+export const LoongArkDatePickerPrevTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerPrevTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -404,9 +407,9 @@ export const LoongArkDatePickerPrevTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerNextTrigger = defineComponent({
+export const LoongArkDatePickerNextTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerNextTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -420,9 +423,9 @@ export const LoongArkDatePickerNextTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerMonthSelect = defineComponent({
+export const LoongArkDatePickerMonthSelect = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerMonthSelect",
   setup(_, { slots, attrs }) {
     return () =>
@@ -436,9 +439,9 @@ export const LoongArkDatePickerMonthSelect = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerYearSelect = defineComponent({
+export const LoongArkDatePickerYearSelect = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerYearSelect",
   setup(_, { slots, attrs }) {
     return () =>
@@ -452,9 +455,9 @@ export const LoongArkDatePickerYearSelect = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerRangeText = defineComponent({
+export const LoongArkDatePickerRangeText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerRangeText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -468,9 +471,9 @@ export const LoongArkDatePickerRangeText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerPresetTrigger = defineComponent({
+export const LoongArkDatePickerPresetTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerPresetTrigger",
   props: {
     value: {
@@ -492,9 +495,9 @@ export const LoongArkDatePickerPresetTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerTable = defineComponent({
+export const LoongArkDatePickerTable = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerTable",
   props: {
     columns: {
@@ -518,9 +521,9 @@ export const LoongArkDatePickerTable = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerTableHead = defineComponent({
+export const LoongArkDatePickerTableHead = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerTableHead",
   setup(_, { slots, attrs }) {
     return () =>
@@ -534,9 +537,9 @@ export const LoongArkDatePickerTableHead = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerTableBody = defineComponent({
+export const LoongArkDatePickerTableBody = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerTableBody",
   setup(_, { slots, attrs }) {
     return () =>
@@ -550,9 +553,9 @@ export const LoongArkDatePickerTableBody = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerTableRow = defineComponent({
+export const LoongArkDatePickerTableRow = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerTableRow",
   setup(_, { slots, attrs }) {
     return () =>
@@ -566,9 +569,9 @@ export const LoongArkDatePickerTableRow = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerTableHeader = defineComponent({
+export const LoongArkDatePickerTableHeader = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerTableHeader",
   setup(_, { slots, attrs }) {
     return () =>
@@ -582,9 +585,9 @@ export const LoongArkDatePickerTableHeader = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerTableCell = defineComponent({
+export const LoongArkDatePickerTableCell = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerTableCell",
   props: {
     value: {
@@ -617,9 +620,9 @@ export const LoongArkDatePickerTableCell = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);
 
-export const LoongArkDatePickerTableCellTrigger = defineComponent({
+export const LoongArkDatePickerTableCellTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkDatePickerTableCellTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -633,4 +636,4 @@ export const LoongArkDatePickerTableCellTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticDatePickerStyles);

@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTextareaStyles } from "@loongark/primitives/automatic-styles/textarea";
+
 
 import {
   createElement,
@@ -17,7 +20,7 @@ import {
 } from "@loongark/kit";
 export type LoongArkTextareaProps =
   TextareaHTMLAttributes<HTMLTextAreaElement> & TextareaAutosizeOptions;
-export const LoongArkTextarea = forwardRef<
+export const LoongArkTextarea = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLTextAreaElement,
   LoongArkTextareaProps
 >(({ autoSize = false, minRows, maxRows, ...props }, ref) => {
@@ -46,5 +49,5 @@ export const LoongArkTextarea = forwardRef<
     "data-autosize": autoSize ? "true" : undefined,
     rows: autoSize ? textareaRows({ minRows, maxRows }).min : props.rows,
   });
-});
+}), lkAutomaticTextareaStyles);
 LoongArkTextarea.displayName = "LoongArkTextarea";

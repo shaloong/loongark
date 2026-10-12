@@ -1,5 +1,7 @@
 # 迁移说明
 
+- 默认 Provider、Vue 插件与 Svelte theme store 改为随组件入口自动加载样式；常规组件调用无需修改。自定义原始 DOM 如果依赖未导入组件的共享规则，应显式声明样式；可将 `@loongark/kit/bootstrap` 的 `bootstrapKit` 传给 Provider 的 `styleBootstrap` 保留完整规则。Core 的显式选择行为不变。
+
 以下说明对应当前 develop 的待发布变更；以最终发布的 CHANGELOG 为准。仓库清单0.1.0不等于已经发布 npm。
 
 - 四端新增119个组件族子路径与 `/provider`、`/collection`，采用 kebab-case（如 `/date-picker`、`/rich-text-editor`）。根入口和 `/editors` 保持兼容；子路径只暴露对应族部件和类型。Provider 自动加载共享主题 CSS，基础页面不会因此加载表格、图表、问卷或编辑器运行时。

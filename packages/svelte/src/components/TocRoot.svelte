@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticTocStyles } from "@loongark/primitives/automatic-styles/toc";
+  registerAutomaticStyles(lkAutomaticTocStyles);
+
   import { Toc, type TocRootProps } from "@ark-ui/svelte/toc";
   import { useToc } from "./use-toc.svelte";
   let {

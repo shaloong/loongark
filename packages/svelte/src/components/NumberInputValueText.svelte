@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticNumberInputStyles } from "@loongark/primitives/automatic-styles/number-input";
+  registerAutomaticStyles(lkAutomaticNumberInputStyles);
+
   import { NumberInput } from "@ark-ui/svelte/number-input";
   import type { NumberInputSize } from "@loongark/primitives";
 

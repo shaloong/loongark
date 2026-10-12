@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticFilterDividerStyles } from "@loongark/primitives/automatic-styles/filter-divider";
+  registerAutomaticStyles(lkAutomaticFilterDividerStyles);
+
 </script>
 
 <span

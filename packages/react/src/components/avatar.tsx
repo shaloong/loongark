@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticAvatarStyles } from "@loongark/primitives/automatic-styles/avatar";
+
 
 /**
  * Avatar component - React wrapper.
@@ -29,7 +32,7 @@ export interface LoongArkAvatarFallbackProps
   children?: ReactNode;
 }
 
-export const LoongArkAvatarRoot = forwardRef<
+export const LoongArkAvatarRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkAvatarRootProps
 >(({ children, size = "md", ...props }, ref) => {
@@ -44,11 +47,11 @@ export const LoongArkAvatarRoot = forwardRef<
       {children}
     </Avatar.Root>
   );
-});
+}), lkAutomaticAvatarStyles);
 
 LoongArkAvatarRoot.displayName = "LoongArkAvatarRoot";
 
-export const LoongArkAvatarImage = forwardRef<
+export const LoongArkAvatarImage = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLImageElement,
   LoongArkAvatarImageProps
 >(({ children, ...props }, ref) => {
@@ -62,11 +65,11 @@ export const LoongArkAvatarImage = forwardRef<
       {children}
     </Avatar.Image>
   );
-});
+}), lkAutomaticAvatarStyles);
 
 LoongArkAvatarImage.displayName = "LoongArkAvatarImage";
 
-export const LoongArkAvatarFallback = forwardRef<
+export const LoongArkAvatarFallback = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   LoongArkAvatarFallbackProps
 >(({ children, ...props }, ref) => {
@@ -80,6 +83,6 @@ export const LoongArkAvatarFallback = forwardRef<
       {children}
     </Avatar.Fallback>
   );
-});
+}), lkAutomaticAvatarStyles);
 
 LoongArkAvatarFallback.displayName = "LoongArkAvatarFallback";

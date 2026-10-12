@@ -1,4 +1,8 @@
 <script lang="ts" generics="T extends object">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticListboxStyles } from "@loongark/primitives/automatic-styles/listbox";
+  registerAutomaticStyles(lkAutomaticListboxStyles);
+
   import type { ListboxRootProps } from "@ark-ui/svelte/listbox";
   import { Listbox } from "@ark-ui/svelte/listbox";
   import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";

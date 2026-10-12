@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticEditableStyles } from "@loongark/primitives/automatic-styles/editable";
 /**
  * Editable component - Solid wrapper.
  * Uses Ark UI Editable with data attributes for styling.
@@ -27,7 +30,7 @@ export interface LoongArkEditableRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkEditableRoot: Component<LoongArkEditableRootProps> = (
+export const LoongArkEditableRoot: Component<LoongArkEditableRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(
@@ -58,7 +61,7 @@ export const LoongArkEditableRoot: Component<LoongArkEditableRootProps> = (
       {local.children}
     </ArkEditable.Root>
   );
-};
+}, lkAutomaticEditableStyles);
 
 export interface LoongArkEditableLabelProps extends Omit<
   ArkEditableLabelProps,
@@ -67,7 +70,7 @@ export interface LoongArkEditableLabelProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkEditableLabel: Component<LoongArkEditableLabelProps> = (
+export const LoongArkEditableLabel: Component<LoongArkEditableLabelProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -76,7 +79,7 @@ export const LoongArkEditableLabel: Component<LoongArkEditableLabelProps> = (
       {local.children}
     </ArkEditable.Label>
   );
-};
+}, lkAutomaticEditableStyles);
 
 export interface LoongArkEditableAreaProps extends Omit<
   ArkEditableAreaProps,
@@ -85,7 +88,7 @@ export interface LoongArkEditableAreaProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkEditableArea: Component<LoongArkEditableAreaProps> = (
+export const LoongArkEditableArea: Component<LoongArkEditableAreaProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -94,7 +97,7 @@ export const LoongArkEditableArea: Component<LoongArkEditableAreaProps> = (
       {local.children}
     </ArkEditable.Area>
   );
-};
+}, lkAutomaticEditableStyles);
 
 export interface LoongArkEditableControlProps extends Omit<
   ArkEditableControlProps,
@@ -106,7 +109,7 @@ export interface LoongArkEditableControlProps extends Omit<
 
 export const LoongArkEditableControl: Component<
   LoongArkEditableControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps({ state: "default" as EditableState }, props);
   const [local, others] = splitProps(merged, ["children", "state"]);
   return (
@@ -119,7 +122,7 @@ export const LoongArkEditableControl: Component<
       {local.children}
     </ArkEditable.Control>
   );
-};
+}, lkAutomaticEditableStyles);
 
 export interface LoongArkEditableInputProps extends Omit<
   ArkEditableInputProps,
@@ -128,7 +131,7 @@ export interface LoongArkEditableInputProps extends Omit<
   state?: EditableState;
 }
 
-export const LoongArkEditableInput: Component<LoongArkEditableInputProps> = (
+export const LoongArkEditableInput: Component<LoongArkEditableInputProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps({ state: "default" as EditableState }, props);
@@ -141,7 +144,7 @@ export const LoongArkEditableInput: Component<LoongArkEditableInputProps> = (
       data-state={local.state !== "default" ? local.state : undefined}
     />
   );
-};
+}, lkAutomaticEditableStyles);
 
 export interface LoongArkEditablePreviewProps extends Omit<
   ArkEditablePreviewProps,
@@ -152,14 +155,14 @@ export interface LoongArkEditablePreviewProps extends Omit<
 
 export const LoongArkEditablePreview: Component<
   LoongArkEditablePreviewProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkEditable.Preview {...others} data-scope="editable" data-part="preview">
       {local.children}
     </ArkEditable.Preview>
   );
-};
+}, lkAutomaticEditableStyles);
 
 export interface LoongArkEditableEditTriggerProps extends Omit<
   ArkEditableEditTriggerProps,
@@ -170,7 +173,7 @@ export interface LoongArkEditableEditTriggerProps extends Omit<
 
 export const LoongArkEditableEditTrigger: Component<
   LoongArkEditableEditTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkEditable.EditTrigger
@@ -181,7 +184,7 @@ export const LoongArkEditableEditTrigger: Component<
       {local.children}
     </ArkEditable.EditTrigger>
   );
-};
+}, lkAutomaticEditableStyles);
 
 export interface LoongArkEditableSubmitTriggerProps extends Omit<
   ArkEditableSubmitTriggerProps,
@@ -192,7 +195,7 @@ export interface LoongArkEditableSubmitTriggerProps extends Omit<
 
 export const LoongArkEditableSubmitTrigger: Component<
   LoongArkEditableSubmitTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkEditable.SubmitTrigger
@@ -203,7 +206,7 @@ export const LoongArkEditableSubmitTrigger: Component<
       {local.children}
     </ArkEditable.SubmitTrigger>
   );
-};
+}, lkAutomaticEditableStyles);
 
 export interface LoongArkEditableCancelTriggerProps extends Omit<
   ArkEditableCancelTriggerProps,
@@ -214,7 +217,7 @@ export interface LoongArkEditableCancelTriggerProps extends Omit<
 
 export const LoongArkEditableCancelTrigger: Component<
   LoongArkEditableCancelTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkEditable.CancelTrigger
@@ -225,4 +228,4 @@ export const LoongArkEditableCancelTrigger: Component<
       {local.children}
     </ArkEditable.CancelTrigger>
   );
-};
+}, lkAutomaticEditableStyles);

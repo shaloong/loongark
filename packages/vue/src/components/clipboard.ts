@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticClipboardStyles } from "@loongark/primitives/automatic-styles/clipboard";
 import { renderPart } from "../render-part";
 /**
  * Clipboard component - Vue wrapper.
@@ -12,7 +15,7 @@ import {
 import { Clipboard as ArkClipboard } from "@ark-ui/vue/clipboard";
 import type { ClipboardSize } from "@loongark/primitives";
 
-export const LoongArkClipboardRoot = defineComponent({
+export const LoongArkClipboardRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkClipboardRoot",
   props: {
     size: {
@@ -39,9 +42,9 @@ export const LoongArkClipboardRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticClipboardStyles);
 
-export const LoongArkClipboardLabel = defineComponent({
+export const LoongArkClipboardLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkClipboardLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -55,9 +58,9 @@ export const LoongArkClipboardLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticClipboardStyles);
 
-export const LoongArkClipboardControl = defineComponent({
+export const LoongArkClipboardControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkClipboardControl",
   setup(_, { slots, attrs }) {
     return () =>
@@ -71,9 +74,9 @@ export const LoongArkClipboardControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticClipboardStyles);
 
-export const LoongArkClipboardInput = defineComponent({
+export const LoongArkClipboardInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkClipboardInput",
   setup(_, { attrs }) {
     return () =>
@@ -83,9 +86,9 @@ export const LoongArkClipboardInput = defineComponent({
         "data-part": "input",
       });
   },
-});
+}), lkAutomaticClipboardStyles);
 
-export const LoongArkClipboardTrigger = defineComponent({
+export const LoongArkClipboardTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkClipboardTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -99,9 +102,9 @@ export const LoongArkClipboardTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticClipboardStyles);
 
-export const LoongArkClipboardIndicator = defineComponent({
+export const LoongArkClipboardIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkClipboardIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -115,9 +118,9 @@ export const LoongArkClipboardIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticClipboardStyles);
 
-export const LoongArkClipboardValueText = defineComponent({
+export const LoongArkClipboardValueText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkClipboardValueText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -131,4 +134,4 @@ export const LoongArkClipboardValueText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticClipboardStyles);

@@ -1,9 +1,12 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTooltipStyles } from "@loongark/primitives/automatic-styles/tooltip";
 import { renderPart } from "../render-part";
 import { h, defineComponent } from "vue";
 import { Tooltip as ArkTooltip } from "@ark-ui/vue/tooltip";
 import { LoongArkPortal as ArkPortal } from "./portal";
 
-export const LoongArkTooltipRoot = defineComponent({
+export const LoongArkTooltipRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTooltipRoot",
   setup(_, { slots, attrs }) {
     return () =>
@@ -17,9 +20,9 @@ export const LoongArkTooltipRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipTrigger = defineComponent({
+export const LoongArkTooltipTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTooltipTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -34,9 +37,9 @@ export const LoongArkTooltipTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipPositioner = defineComponent({
+export const LoongArkTooltipPositioner = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTooltipPositioner",
   setup(_, { slots, attrs }) {
     return () =>
@@ -57,9 +60,9 @@ export const LoongArkTooltipPositioner = defineComponent({
         },
       );
   },
-});
+}), lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipContent = defineComponent({
+export const LoongArkTooltipContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTooltipContent",
   setup(_, { slots, attrs }) {
     return () =>
@@ -74,9 +77,9 @@ export const LoongArkTooltipContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipArrow = defineComponent({
+export const LoongArkTooltipArrow = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTooltipArrow",
   setup(_, { slots, attrs }) {
     return () =>
@@ -90,9 +93,9 @@ export const LoongArkTooltipArrow = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipArrowTip = defineComponent({
+export const LoongArkTooltipArrowTip = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTooltipArrowTip",
   setup(_, { slots, attrs }) {
     return () =>
@@ -106,4 +109,4 @@ export const LoongArkTooltipArrowTip = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTooltipStyles);

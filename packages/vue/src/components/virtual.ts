@@ -1,3 +1,7 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticVirtualGridStyles } from "@loongark/primitives/automatic-styles/virtual-grid";
+import { styles as lkAutomaticVirtualMasonryStyles } from "@loongark/primitives/automatic-styles/virtual-masonry";
 import {
   defineComponent,
   h,
@@ -31,7 +35,7 @@ const common = {
   label: String,
   dir: String as PropType<"ltr" | "rtl">,
 };
-export const LoongArkVirtualGrid = defineComponent({
+export const LoongArkVirtualGrid = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkVirtualGrid",
   props: {
     ...common,
@@ -138,8 +142,8 @@ export const LoongArkVirtualGrid = defineComponent({
       );
     };
   },
-});
-export const LoongArkVirtualMasonry = defineComponent({
+}), lkAutomaticVirtualGridStyles);
+export const LoongArkVirtualMasonry = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkVirtualMasonry",
   props: {
     ...common,
@@ -210,4 +214,4 @@ export const LoongArkVirtualMasonry = defineComponent({
       );
     };
   },
-});
+}), lkAutomaticVirtualMasonryStyles);

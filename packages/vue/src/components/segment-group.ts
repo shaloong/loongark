@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSegmentGroupStyles } from "@loongark/primitives/automatic-styles/segment-group";
 import type { SegmentGroupRootProps } from "@ark-ui/vue/segment-group";
 import { renderPart } from "../render-part";
 /**
@@ -15,7 +18,7 @@ export interface SegmentGroupValueChangeDetails {
   value: string | null;
 }
 
-export const LoongArkSegmentGroupRoot = defineComponent({
+export const LoongArkSegmentGroupRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSegmentGroupRoot",
   inheritAttrs: false,
   emits: ["valueChange", "update:value", "update:modelValue"],
@@ -76,9 +79,9 @@ export const LoongArkSegmentGroupRoot = defineComponent({
       );
     };
   },
-});
+}), lkAutomaticSegmentGroupStyles);
 
-export const LoongArkSegmentGroupItem = defineComponent({
+export const LoongArkSegmentGroupItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSegmentGroupItem",
   props: {
     value: {
@@ -104,4 +107,4 @@ export const LoongArkSegmentGroupItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSegmentGroupStyles);

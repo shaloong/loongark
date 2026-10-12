@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticMenuStyles } from "@loongark/primitives/automatic-styles/menu";
 import { recoverClosedMenuFocus } from "@loongark/kit";
 import { useForwardExpose } from "@ark-ui/vue/utils";
 import type { MenuContextTriggerProps } from "@ark-ui/vue/menu";
@@ -43,7 +46,7 @@ import type { MenuSize } from "@loongark/primitives";
 
 const menuSizeKey = Symbol("loongark-menu-size");
 
-export const LoongArkMenuRoot = defineComponent({
+export const LoongArkMenuRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuRoot",
   props: {
     size: {
@@ -142,9 +145,9 @@ export const LoongArkMenuRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuTrigger = defineComponent({
+export const LoongArkMenuTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -159,7 +162,7 @@ export const LoongArkMenuTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
 export const createMenuContextTrigger = (defaultAsChild = true) =>
   defineComponent(
@@ -199,9 +202,9 @@ export const createMenuContextTrigger = (defaultAsChild = true) =>
     },
   );
 
-export const LoongArkMenuContextTrigger = createMenuContextTrigger();
+export const LoongArkMenuContextTrigger = /*#__PURE__*/ withAutomaticStyles(createMenuContextTrigger(), lkAutomaticMenuStyles);
 
-export const LoongArkMenuPositioner = defineComponent({
+export const LoongArkMenuPositioner = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuPositioner",
   setup(_, { slots, attrs }) {
     return () =>
@@ -215,9 +218,9 @@ export const LoongArkMenuPositioner = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuContent = defineComponent({
+export const LoongArkMenuContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuContent",
   setup(_, { slots, attrs }) {
     const size = inject(menuSizeKey, { value: "md" as MenuSize });
@@ -233,9 +236,9 @@ export const LoongArkMenuContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuArrow = defineComponent({
+export const LoongArkMenuArrow = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuArrow",
   setup(_, { slots, attrs }) {
     return () =>
@@ -249,9 +252,9 @@ export const LoongArkMenuArrow = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuArrowTip = defineComponent({
+export const LoongArkMenuArrowTip = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuArrowTip",
   setup(_, { slots, attrs }) {
     return () =>
@@ -265,9 +268,9 @@ export const LoongArkMenuArrowTip = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuItem = defineComponent({
+export const LoongArkMenuItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuItem",
   setup(_, { slots, attrs }) {
     return () =>
@@ -281,9 +284,9 @@ export const LoongArkMenuItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuTriggerItem = defineComponent({
+export const LoongArkMenuTriggerItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuTriggerItem",
   setup(_, { slots, attrs }) {
     return () =>
@@ -297,9 +300,9 @@ export const LoongArkMenuTriggerItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuCheckboxItem = defineComponent({
+export const LoongArkMenuCheckboxItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuCheckboxItem",
   setup(_, { slots, attrs }) {
     return () =>
@@ -313,9 +316,9 @@ export const LoongArkMenuCheckboxItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuRadioItem = defineComponent({
+export const LoongArkMenuRadioItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuRadioItem",
   setup(_, { slots, attrs }) {
     return () =>
@@ -329,9 +332,9 @@ export const LoongArkMenuRadioItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuRadioItemGroup = defineComponent({
+export const LoongArkMenuRadioItemGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuRadioItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -345,9 +348,9 @@ export const LoongArkMenuRadioItemGroup = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuItemGroup = defineComponent({
+export const LoongArkMenuItemGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -361,9 +364,9 @@ export const LoongArkMenuItemGroup = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuItemGroupLabel = defineComponent({
+export const LoongArkMenuItemGroupLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuItemGroupLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -377,9 +380,9 @@ export const LoongArkMenuItemGroupLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuItemText = defineComponent({
+export const LoongArkMenuItemText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuItemText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -393,9 +396,9 @@ export const LoongArkMenuItemText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuItemIndicator = defineComponent({
+export const LoongArkMenuItemIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -409,9 +412,9 @@ export const LoongArkMenuItemIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuIndicator = defineComponent({
+export const LoongArkMenuIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -425,9 +428,9 @@ export const LoongArkMenuIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);
 
-export const LoongArkMenuSeparator = defineComponent({
+export const LoongArkMenuSeparator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMenuSeparator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -441,4 +444,4 @@ export const LoongArkMenuSeparator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticMenuStyles);

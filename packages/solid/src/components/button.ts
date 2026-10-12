@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticButtonStyles } from "@loongark/primitives/automatic-styles/button";
 import type { JSX } from "solid-js";
 import { ark } from "@ark-ui/solid";
 import type { ButtonPrimitiveProps } from "@loongark/primitives";
@@ -73,5 +76,5 @@ const buildButtonProps = (props: LoongArkButtonProps) => {
   });
 };
 
-export const LoongArkButton: Component<LoongArkButtonProps> = (props) =>
-  ark.button(buildButtonProps(props));
+export const LoongArkButton: Component<LoongArkButtonProps> = /*#__PURE__*/ withAutomaticStyles((props) =>
+  ark.button(buildButtonProps(props)), lkAutomaticButtonStyles);

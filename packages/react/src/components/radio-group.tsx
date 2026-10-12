@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticRadioGroupStyles } from "@loongark/primitives/automatic-styles/radio-group";
+
 
 import { nativeSelectionProps } from "@loongark/kit";
 import { dataProps } from "../data-props";
@@ -89,7 +92,7 @@ export interface LoongArkRadioGroupItemHiddenInputProps extends Omit<
 /**
  * Radio Group Root - 单选按钮组根容器
  */
-export const LoongArkRadioGroupRoot = forwardRef<
+export const LoongArkRadioGroupRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkRadioGroupRootProps
 >(
@@ -134,14 +137,14 @@ export const LoongArkRadioGroupRoot = forwardRef<
       children,
     );
   },
-);
+), lkAutomaticRadioGroupStyles);
 
 LoongArkRadioGroupRoot.displayName = "LoongArkRadioGroupRoot";
 
 /**
  * Radio Group Label - 单选按钮组标签
  */
-export const LoongArkRadioGroupLabel = forwardRef<
+export const LoongArkRadioGroupLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkRadioGroupLabelProps
 >(({ children, ...props }, ref) => {
@@ -155,14 +158,14 @@ export const LoongArkRadioGroupLabel = forwardRef<
     }),
     children,
   );
-});
+}), lkAutomaticRadioGroupStyles);
 
 LoongArkRadioGroupLabel.displayName = "LoongArkRadioGroupLabel";
 
 /**
  * Radio Group Item - 单选按钮项
  */
-export const LoongArkRadioGroupItem = forwardRef<
+export const LoongArkRadioGroupItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkRadioGroupItemProps
 >(({ children, value, disabled, invalid, ...props }, ref) => {
@@ -179,14 +182,14 @@ export const LoongArkRadioGroupItem = forwardRef<
     }),
     children,
   );
-});
+}), lkAutomaticRadioGroupStyles);
 
 LoongArkRadioGroupItem.displayName = "LoongArkRadioGroupItem";
 
 /**
  * Radio Group Item Control - 单选按钮控件（圆圈）
  */
-export const LoongArkRadioGroupItemControl = forwardRef<
+export const LoongArkRadioGroupItemControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkRadioGroupItemControlProps
 >(({ children, className, ...props }, ref) => {
@@ -201,14 +204,14 @@ export const LoongArkRadioGroupItemControl = forwardRef<
     }),
     children,
   );
-});
+}), lkAutomaticRadioGroupStyles);
 
 LoongArkRadioGroupItemControl.displayName = "LoongArkRadioGroupItemControl";
 
 /**
  * Radio Group Item Text - 单选按钮文本
  */
-export const LoongArkRadioGroupItemText = forwardRef<
+export const LoongArkRadioGroupItemText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   LoongArkRadioGroupItemTextProps
 >(({ children, className, ...props }, ref) => {
@@ -223,14 +226,14 @@ export const LoongArkRadioGroupItemText = forwardRef<
     }),
     children,
   );
-});
+}), lkAutomaticRadioGroupStyles);
 
 LoongArkRadioGroupItemText.displayName = "LoongArkRadioGroupItemText";
 
 /**
  * Radio Group Indicator - 单选按钮选中指示器（内部圆点）
  */
-export const LoongArkRadioGroupIndicator = forwardRef<
+export const LoongArkRadioGroupIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkRadioGroupIndicatorProps
 >(({ children, className, ...props }, ref) => {
@@ -245,14 +248,14 @@ export const LoongArkRadioGroupIndicator = forwardRef<
     }),
     children,
   );
-});
+}), lkAutomaticRadioGroupStyles);
 
 LoongArkRadioGroupIndicator.displayName = "LoongArkRadioGroupIndicator";
 
 /**
  * Radio Group Item Hidden Input - 隐藏的原生 radio input
  */
-export const LoongArkRadioGroupItemHiddenInput = forwardRef<
+export const LoongArkRadioGroupItemHiddenInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkRadioGroupItemHiddenInputProps
 >(({ className, ...props }, ref) => {
@@ -269,7 +272,7 @@ export const LoongArkRadioGroupItemHiddenInput = forwardRef<
       disabled: item.disabled || !!props.disabled,
     }),
   );
-});
+}), lkAutomaticRadioGroupStyles);
 
 LoongArkRadioGroupItemHiddenInput.displayName =
   "LoongArkRadioGroupItemHiddenInput";
@@ -282,7 +285,7 @@ export const LoongArkRadioGroup: {
   ItemText: typeof LoongArkRadioGroupItemText;
   Indicator: typeof LoongArkRadioGroupIndicator;
   ItemHiddenInput: typeof LoongArkRadioGroupItemHiddenInput;
-} = {
+} = /*#__PURE__*/ withAutomaticStyles({
   Root: LoongArkRadioGroupRoot,
   Label: LoongArkRadioGroupLabel,
   Item: LoongArkRadioGroupItem,
@@ -290,4 +293,4 @@ export const LoongArkRadioGroup: {
   ItemText: LoongArkRadioGroupItemText,
   Indicator: LoongArkRadioGroupIndicator,
   ItemHiddenInput: LoongArkRadioGroupItemHiddenInput,
-};
+}, lkAutomaticRadioGroupStyles);

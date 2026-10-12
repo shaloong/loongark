@@ -1,4 +1,8 @@
 <script lang="ts" generics="T extends object">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticComboboxStyles } from "@loongark/primitives/automatic-styles/combobox";
+  registerAutomaticStyles(lkAutomaticComboboxStyles);
+
   import type { ComboboxRootProps } from "@ark-ui/svelte/combobox";
   import { Combobox } from "@ark-ui/svelte/combobox";
   import type { ComboboxSize } from "@loongark/primitives";

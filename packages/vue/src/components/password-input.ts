@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPasswordInputStyles } from "@loongark/primitives/automatic-styles/password-input";
 import { useFieldContext } from "@ark-ui/vue/field";
 import { usePasswordInputContext } from "@ark-ui/vue/password-input";
 import {
@@ -21,7 +24,7 @@ export interface PasswordVisibilityChangeDetails {
   visible: boolean;
 }
 
-export const LoongArkPasswordInputRoot = defineComponent({
+export const LoongArkPasswordInputRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPasswordInputRoot",
   props: {
     size: {
@@ -106,9 +109,9 @@ export const LoongArkPasswordInputRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPasswordInputStyles);
 
-export const LoongArkPasswordInputLabel = defineComponent({
+export const LoongArkPasswordInputLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPasswordInputLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -122,9 +125,9 @@ export const LoongArkPasswordInputLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPasswordInputStyles);
 
-export const LoongArkPasswordInputControl = defineComponent({
+export const LoongArkPasswordInputControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPasswordInputControl",
   props: {
     size: {
@@ -159,9 +162,9 @@ export const LoongArkPasswordInputControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPasswordInputStyles);
 
-export const LoongArkPasswordInputInput = defineComponent({
+export const LoongArkPasswordInputInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPasswordInputInput",
   inheritAttrs: false,
   props: {
@@ -210,9 +213,9 @@ export const LoongArkPasswordInputInput = defineComponent({
         }),
       });
   },
-});
+}), lkAutomaticPasswordInputStyles);
 
-export const LoongArkPasswordInputIndicator = defineComponent({
+export const LoongArkPasswordInputIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPasswordInputIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -226,9 +229,9 @@ export const LoongArkPasswordInputIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPasswordInputStyles);
 
-export const LoongArkPasswordInputVisibilityTrigger = defineComponent({
+export const LoongArkPasswordInputVisibilityTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPasswordInputVisibilityTrigger",
   props: {
     disabled: {
@@ -253,4 +256,4 @@ export const LoongArkPasswordInputVisibilityTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPasswordInputStyles);

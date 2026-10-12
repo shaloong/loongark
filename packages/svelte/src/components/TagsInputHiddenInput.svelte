@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+  registerAutomaticStyles(lkAutomaticTagsInputStyles);
+
   import { onMount } from "svelte";
   import { mountNativeSelection } from "@loongark/kit";
   import { useTagsInputContext } from "@ark-ui/svelte/tags-input";

@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticButtonStyles } from "@loongark/primitives/automatic-styles/button";
+  registerAutomaticStyles(lkAutomaticButtonStyles);
+
   import type { ButtonPrimitiveProps } from "@loongark/primitives";
 
   export let variant: NonNullable<ButtonPrimitiveProps["variant"]> = "solid";

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCheckboxStyles } from "@loongark/primitives/automatic-styles/checkbox";
 import { useFieldContext } from "@ark-ui/vue/field";
 import { nativeSelectionFieldDescription } from "@loongark/kit";
 import type { CheckboxHiddenInputProps } from "@ark-ui/vue/checkbox";
@@ -24,7 +27,7 @@ import {
 import type { CheckboxSize } from "@loongark/primitives";
 
 // ========== Root ==========
-export const LoongArkCheckboxRoot = defineComponent({
+export const LoongArkCheckboxRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCheckboxRoot",
   props: {
     size: {
@@ -86,10 +89,10 @@ export const LoongArkCheckboxRoot = defineComponent({
         slots.default ? { default: slots.default } : undefined,
       );
   },
-});
+}), lkAutomaticCheckboxStyles);
 
 // ========== Control ==========
-export const LoongArkCheckboxControl = defineComponent({
+export const LoongArkCheckboxControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCheckboxControl",
   props: {
     size: {
@@ -109,10 +112,10 @@ export const LoongArkCheckboxControl = defineComponent({
         slots.default ? { default: slots.default } : undefined,
       );
   },
-});
+}), lkAutomaticCheckboxStyles);
 
 // ========== Label ==========
-export const LoongArkCheckboxLabel = defineComponent({
+export const LoongArkCheckboxLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCheckboxLabel",
   setup(props, { slots }) {
     return () =>
@@ -125,10 +128,10 @@ export const LoongArkCheckboxLabel = defineComponent({
         slots.default ? { default: slots.default } : undefined,
       );
   },
-});
+}), lkAutomaticCheckboxStyles);
 
 // ========== Indicator ==========
-export const LoongArkCheckboxIndicator = defineComponent({
+export const LoongArkCheckboxIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCheckboxIndicator",
   props: {
     indeterminate: {
@@ -159,11 +162,11 @@ export const LoongArkCheckboxIndicator = defineComponent({
         },
       );
   },
-});
+}), lkAutomaticCheckboxStyles);
 
 // ========== HiddenInput ==========
 export const LoongArkCheckboxHiddenInput =
-  defineComponent<CheckboxHiddenInputProps>(
+  /*#__PURE__*/ withAutomaticStyles(defineComponent<CheckboxHiddenInputProps>(
     (props, { attrs, slots }) => {
       const field = useFieldContext();
       const api = useCheckboxContext();
@@ -197,4 +200,4 @@ export const LoongArkCheckboxHiddenInput =
       props: ["asChild"],
       inheritAttrs: false,
     },
-  );
+  ), lkAutomaticCheckboxStyles);

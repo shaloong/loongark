@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticAccordionStyles } from "@loongark/primitives/automatic-styles/accordion";
 import type { AccordionRootProps as NativeAccordionRootProps } from "@ark-ui/vue/accordion";
 import { renderPart } from "../render-part";
 /**
@@ -16,7 +19,7 @@ export interface AccordionFocusChangeDetails {
   value: string | null;
 }
 
-export const LoongArkAccordionRoot = defineComponent({
+export const LoongArkAccordionRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkAccordionRoot",
   props: {
     size: {
@@ -78,9 +81,9 @@ export const LoongArkAccordionRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticAccordionStyles);
 
-export const LoongArkAccordionItem = defineComponent({
+export const LoongArkAccordionItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkAccordionItem",
   props: {
     value: {
@@ -106,9 +109,9 @@ export const LoongArkAccordionItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticAccordionStyles);
 
-export const LoongArkAccordionItemTrigger = defineComponent({
+export const LoongArkAccordionItemTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkAccordionItemTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -122,9 +125,9 @@ export const LoongArkAccordionItemTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticAccordionStyles);
 
-export const LoongArkAccordionItemContent = defineComponent({
+export const LoongArkAccordionItemContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkAccordionItemContent",
   setup(_, { slots, attrs }) {
     return () =>
@@ -138,9 +141,9 @@ export const LoongArkAccordionItemContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticAccordionStyles);
 
-export const LoongArkAccordionItemIndicator = defineComponent({
+export const LoongArkAccordionItemIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkAccordionItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -154,4 +157,4 @@ export const LoongArkAccordionItemIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticAccordionStyles);

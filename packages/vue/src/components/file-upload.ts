@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticFileUploadStyles } from "@loongark/primitives/automatic-styles/file-upload";
 import type { FileUploadRootProps as NativeFileUploadRootProps } from "@ark-ui/vue/file-upload";
 import { renderPart } from "../render-part";
 /**
@@ -17,7 +20,7 @@ export interface FileUploadChangeDetails {
   acceptedFiles: File[];
 }
 
-export const LoongArkFileUploadRoot = defineComponent({
+export const LoongArkFileUploadRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadRoot",
   props: {
     size: {
@@ -89,9 +92,9 @@ export const LoongArkFileUploadRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadLabel = defineComponent({
+export const LoongArkFileUploadLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -105,9 +108,9 @@ export const LoongArkFileUploadLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadDropzone = defineComponent({
+export const LoongArkFileUploadDropzone = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadDropzone",
   setup(_, { slots, attrs }) {
     return () =>
@@ -121,9 +124,9 @@ export const LoongArkFileUploadDropzone = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadTrigger = defineComponent({
+export const LoongArkFileUploadTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -137,9 +140,9 @@ export const LoongArkFileUploadTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadHiddenInput = defineComponent({
+export const LoongArkFileUploadHiddenInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadHiddenInput",
   setup(_, { attrs }) {
     return () =>
@@ -149,9 +152,9 @@ export const LoongArkFileUploadHiddenInput = defineComponent({
         "data-part": "hidden-input",
       });
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadItemGroup = defineComponent({
+export const LoongArkFileUploadItemGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -165,9 +168,9 @@ export const LoongArkFileUploadItemGroup = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadItem = defineComponent({
+export const LoongArkFileUploadItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadItem",
   props: {
     file: {
@@ -187,9 +190,9 @@ export const LoongArkFileUploadItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadItemPreview = defineComponent({
+export const LoongArkFileUploadItemPreview = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadItemPreview",
   setup(_, { slots, attrs }) {
     return () =>
@@ -203,9 +206,9 @@ export const LoongArkFileUploadItemPreview = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadItemPreviewImage = defineComponent({
+export const LoongArkFileUploadItemPreviewImage = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadItemPreviewImage",
   setup(_, { attrs }) {
     return () =>
@@ -215,9 +218,9 @@ export const LoongArkFileUploadItemPreviewImage = defineComponent({
         "data-part": "item-preview-image",
       });
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadItemName = defineComponent({
+export const LoongArkFileUploadItemName = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadItemName",
   setup(_, { slots, attrs }) {
     return () =>
@@ -231,9 +234,9 @@ export const LoongArkFileUploadItemName = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadItemSizeText = defineComponent({
+export const LoongArkFileUploadItemSizeText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadItemSizeText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -247,9 +250,9 @@ export const LoongArkFileUploadItemSizeText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadItemDeleteTrigger = defineComponent({
+export const LoongArkFileUploadItemDeleteTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadItemDeleteTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -263,9 +266,9 @@ export const LoongArkFileUploadItemDeleteTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);
 
-export const LoongArkFileUploadClearTrigger = defineComponent({
+export const LoongArkFileUploadClearTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFileUploadClearTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -279,4 +282,4 @@ export const LoongArkFileUploadClearTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticFileUploadStyles);

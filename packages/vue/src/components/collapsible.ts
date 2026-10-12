@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCollapsibleStyles } from "@loongark/primitives/automatic-styles/collapsible";
 import type { CollapsibleRootProps as NativeCollapsibleRootProps } from "@ark-ui/vue/collapsible";
 import { renderPart } from "../render-part";
 /**
@@ -12,7 +15,7 @@ export interface CollapsibleOpenChangeDetails {
   open: boolean;
 }
 
-export const LoongArkCollapsibleRoot = defineComponent({
+export const LoongArkCollapsibleRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCollapsibleRoot",
   props: {
     size: {
@@ -74,9 +77,9 @@ export const LoongArkCollapsibleRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCollapsibleStyles);
 
-export const LoongArkCollapsibleTrigger = defineComponent({
+export const LoongArkCollapsibleTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCollapsibleTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -90,9 +93,9 @@ export const LoongArkCollapsibleTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCollapsibleStyles);
 
-export const LoongArkCollapsibleContent = defineComponent({
+export const LoongArkCollapsibleContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCollapsibleContent",
   setup(_, { slots, attrs }) {
     return () =>
@@ -106,9 +109,9 @@ export const LoongArkCollapsibleContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCollapsibleStyles);
 
-export const LoongArkCollapsibleIndicator = defineComponent({
+export const LoongArkCollapsibleIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCollapsibleIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -122,4 +125,4 @@ export const LoongArkCollapsibleIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCollapsibleStyles);

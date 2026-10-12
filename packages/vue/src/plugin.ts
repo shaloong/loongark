@@ -1,6 +1,6 @@
 import { App, Plugin } from "vue";
 import { createLoongArkTheme } from "@loongark/theme";
-import { bootstrapKit } from "@loongark/kit/bootstrap";
+import { bootstrapKitAutomatic } from "@loongark/kit/automatic-bootstrap";
 
 export interface VuePluginOptions {
   mode?: "light" | "dark" | "high-contrast";
@@ -19,7 +19,7 @@ export const createLoongArkVuePlugin = (
 
   return {
     install(app: App) {
-      bootstrapKit(theme);
+      bootstrapKitAutomatic(theme);
       theme.mount();
       app.provide("loongark-theme", theme);
       if (app.onUnmount) app.onUnmount(() => theme.unmount());

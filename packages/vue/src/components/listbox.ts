@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticListboxStyles } from "@loongark/primitives/automatic-styles/listbox";
 import type { CollectionItem } from "@ark-ui/vue/collection";
 import type { ListboxRootProps as NativeListboxRootProps } from "@ark-ui/vue/listbox";
 import type { ListboxItemProps as NativeListboxItemProps } from "@ark-ui/vue/listbox";
@@ -10,7 +13,7 @@ import { defineComponent, h, type PropType } from "vue";
 import { Listbox as ArkListbox } from "@ark-ui/vue/listbox";
 import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
 
-export const LoongArkListboxRoot = defineComponent({
+export const LoongArkListboxRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkListboxRoot",
   props: {
     size: {
@@ -66,9 +69,9 @@ export const LoongArkListboxRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticListboxStyles);
 
-export const LoongArkListboxLabel = defineComponent({
+export const LoongArkListboxLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkListboxLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -82,9 +85,9 @@ export const LoongArkListboxLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticListboxStyles);
 
-export const LoongArkListboxList = defineComponent({
+export const LoongArkListboxList = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkListboxList",
   setup(_, { slots, attrs }) {
     return () =>
@@ -98,9 +101,9 @@ export const LoongArkListboxList = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticListboxStyles);
 
-export const LoongArkListboxItemGroup = defineComponent({
+export const LoongArkListboxItemGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkListboxItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -114,9 +117,9 @@ export const LoongArkListboxItemGroup = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticListboxStyles);
 
-export const LoongArkListboxItemGroupLabel = defineComponent({
+export const LoongArkListboxItemGroupLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkListboxItemGroupLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -130,9 +133,9 @@ export const LoongArkListboxItemGroupLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticListboxStyles);
 
-export const LoongArkListboxItem = defineComponent({
+export const LoongArkListboxItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkListboxItem",
   props: {
     item: {
@@ -156,9 +159,9 @@ export const LoongArkListboxItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticListboxStyles);
 
-export const LoongArkListboxItemText = defineComponent({
+export const LoongArkListboxItemText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkListboxItemText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -172,9 +175,9 @@ export const LoongArkListboxItemText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticListboxStyles);
 
-export const LoongArkListboxItemIndicator = defineComponent({
+export const LoongArkListboxItemIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkListboxItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -188,4 +191,4 @@ export const LoongArkListboxItemIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticListboxStyles);

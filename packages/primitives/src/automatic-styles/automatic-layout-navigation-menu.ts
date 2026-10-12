@@ -1,0 +1,7 @@
+// 由 scripts/generate-automatic-styles.mjs 生成；规则来源为 shared-styles/layout.ts。
+import { createPrimitive } from "../core";
+export const style = /*#__PURE__*/ createPrimitive(
+  { name: "automatic-layout-navigation-menu", tokens: [], defaults: {} },
+  (theme) => theme.mountStyles("automatic-layout-navigation-menu", "\n@keyframes lk-pulse { 50% { opacity:.5; } }\n@keyframes lk-spin { to { transform:rotate(360deg); } }\n[data-scope=navigation-menu] [data-part=list], [data-scope=sidebar] [data-part=menu] { list-style:none; margin:0; padding:0; display:flex; gap:var(--lk-space-component-xs); }\n[data-scope=navigation-menu] [data-part=link], [data-scope=sidebar] [data-part=menu-button] { display:flex; align-items:center; gap:var(--lk-space-component-sm); min-height:var(--lk-control-height-md); padding:var(--lk-space-component-sm) var(--lk-space-component-compact); border:0; border-radius:var(--lk-radius-md); color:var(--lk-color-semantic-foreground); text-decoration:none; font:inherit; background:transparent; }\n[data-scope=navigation-menu] [data-part=link]:hover, [data-scope=sidebar] [data-part=menu-button]:hover { background:var(--lk-color-semantic-accent); }\n@keyframes lk-sheet-in { from { opacity:0; transform:translateX(100%); } to { opacity:1; transform:translateX(0); } }\n@keyframes lk-sheet-out { to { opacity:0; transform:translateX(100%); visibility:hidden; } }"),
+  undefined,
+);

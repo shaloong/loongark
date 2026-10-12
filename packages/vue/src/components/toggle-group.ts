@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticToggleGroupStyles } from "@loongark/primitives/automatic-styles/toggle-group";
 import type { ToggleGroupRootProps as NativeToggleGroupRootProps } from "@ark-ui/vue/toggle-group";
 import { renderPart } from "../render-part";
 /**
@@ -15,7 +18,7 @@ export interface ToggleGroupValueChangeDetails {
   value: string[];
 }
 
-export const LoongArkToggleGroupRoot = defineComponent({
+export const LoongArkToggleGroupRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkToggleGroupRoot",
   props: {
     size: {
@@ -80,9 +83,9 @@ export const LoongArkToggleGroupRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticToggleGroupStyles);
 
-export const LoongArkToggleGroupItem = defineComponent({
+export const LoongArkToggleGroupItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkToggleGroupItem",
   props: {
     value: {
@@ -108,4 +111,4 @@ export const LoongArkToggleGroupItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticToggleGroupStyles);

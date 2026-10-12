@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticSkeletonStyles } from "@loongark/primitives/automatic-styles/skeleton";
+  registerAutomaticStyles(lkAutomaticSkeletonStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "div";
   export let variant: LayoutOptions["variant"] = "default";

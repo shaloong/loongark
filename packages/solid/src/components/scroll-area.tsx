@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticScrollAreaStyles } from "@loongark/primitives/automatic-styles/scroll-area";
 /**
  * Scroll Area component - Solid wrapper.
  * Uses Ark UI Scroll Area with data attributes for styling.
@@ -22,7 +25,7 @@ export interface LoongArkScrollAreaRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkScrollAreaRoot: Component<LoongArkScrollAreaRootProps> = (
+export const LoongArkScrollAreaRoot: Component<LoongArkScrollAreaRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps({ size: "md" as ScrollAreaSize }, props);
@@ -38,7 +41,7 @@ export const LoongArkScrollAreaRoot: Component<LoongArkScrollAreaRootProps> = (
       {local.children}
     </ArkScrollArea.Root>
   );
-};
+}, lkAutomaticScrollAreaStyles);
 
 export interface LoongArkScrollAreaViewportProps extends Omit<
   ArkScrollAreaViewportProps,
@@ -49,7 +52,7 @@ export interface LoongArkScrollAreaViewportProps extends Omit<
 
 export const LoongArkScrollAreaViewport: Component<
   LoongArkScrollAreaViewportProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkScrollArea.Viewport
@@ -61,7 +64,7 @@ export const LoongArkScrollAreaViewport: Component<
       {local.children}
     </ArkScrollArea.Viewport>
   );
-};
+}, lkAutomaticScrollAreaStyles);
 
 export interface LoongArkScrollAreaContentProps extends Omit<
   ArkScrollAreaContentProps,
@@ -72,7 +75,7 @@ export interface LoongArkScrollAreaContentProps extends Omit<
 
 export const LoongArkScrollAreaContent: Component<
   LoongArkScrollAreaContentProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkScrollArea.Content
@@ -83,7 +86,7 @@ export const LoongArkScrollAreaContent: Component<
       {local.children}
     </ArkScrollArea.Content>
   );
-};
+}, lkAutomaticScrollAreaStyles);
 
 export interface LoongArkScrollAreaScrollbarProps extends Omit<
   ArkScrollAreaScrollbarProps,
@@ -94,7 +97,7 @@ export interface LoongArkScrollAreaScrollbarProps extends Omit<
 
 export const LoongArkScrollAreaScrollbar: Component<
   LoongArkScrollAreaScrollbarProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkScrollArea.Scrollbar
@@ -105,7 +108,7 @@ export const LoongArkScrollAreaScrollbar: Component<
       {local.children}
     </ArkScrollArea.Scrollbar>
   );
-};
+}, lkAutomaticScrollAreaStyles);
 
 export interface LoongArkScrollAreaThumbProps extends Omit<
   ArkScrollAreaThumbProps,
@@ -116,14 +119,14 @@ export interface LoongArkScrollAreaThumbProps extends Omit<
 
 export const LoongArkScrollAreaThumb: Component<
   LoongArkScrollAreaThumbProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkScrollArea.Thumb {...others} data-scope="scroll-area" data-part="thumb">
       {local.children}
     </ArkScrollArea.Thumb>
   );
-};
+}, lkAutomaticScrollAreaStyles);
 
 export interface LoongArkScrollAreaCornerProps extends Omit<
   ArkScrollAreaCornerProps,
@@ -134,7 +137,7 @@ export interface LoongArkScrollAreaCornerProps extends Omit<
 
 export const LoongArkScrollAreaCorner: Component<
   LoongArkScrollAreaCornerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkScrollArea.Corner
@@ -145,4 +148,4 @@ export const LoongArkScrollAreaCorner: Component<
       {local.children}
     </ArkScrollArea.Corner>
   );
-};
+}, lkAutomaticScrollAreaStyles);

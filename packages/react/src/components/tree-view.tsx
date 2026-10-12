@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTreeViewStyles } from "@loongark/primitives/automatic-styles/tree-view";
+
 
 /**
  * Tree View component - React wrapper.
@@ -57,7 +60,7 @@ export interface LoongArkTreeViewRootProps<T = object> extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkTreeViewRoot = forwardRef<
+export const LoongArkTreeViewRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkTreeViewRootProps
 >(({ size = "md", children, ...props }, ref) => {
@@ -75,11 +78,11 @@ export const LoongArkTreeViewRoot = forwardRef<
 }) as (<T>(
   props: LoongArkTreeViewRootProps<T> &
     import("react").RefAttributes<HTMLDivElement>,
-) => import("react").ReactElement | null) & { displayName?: string };
+) => import("react").ReactElement | null) & { displayName?: string }, lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewRoot.displayName = "LoongArkTreeViewRoot";
 
-export const LoongArkTreeViewLabel = forwardRef<
+export const LoongArkTreeViewLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLHeadingElement,
   ArkTreeViewLabelProps
 >((props, ref) => {
@@ -91,11 +94,11 @@ export const LoongArkTreeViewLabel = forwardRef<
       data-part="label"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewLabel.displayName = "LoongArkTreeViewLabel";
 
-export const LoongArkTreeViewTree = forwardRef<
+export const LoongArkTreeViewTree = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkTreeViewTreeProps
 >((props, ref) => {
@@ -107,11 +110,11 @@ export const LoongArkTreeViewTree = forwardRef<
       data-part="tree"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewTree.displayName = "LoongArkTreeViewTree";
 
-export const LoongArkTreeViewItem = forwardRef<
+export const LoongArkTreeViewItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkTreeViewItemProps
 >((props, ref) => {
@@ -123,11 +126,11 @@ export const LoongArkTreeViewItem = forwardRef<
       data-part="item"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewItem.displayName = "LoongArkTreeViewItem";
 
-export const LoongArkTreeViewItemIndicator = forwardRef<
+export const LoongArkTreeViewItemIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkTreeViewItemIndicatorProps
 >((props, ref) => {
@@ -139,11 +142,11 @@ export const LoongArkTreeViewItemIndicator = forwardRef<
       data-part="item-indicator"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewItemIndicator.displayName = "LoongArkTreeViewItemIndicator";
 
-export const LoongArkTreeViewItemText = forwardRef<
+export const LoongArkTreeViewItemText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   ArkTreeViewItemTextProps
 >((props, ref) => {
@@ -155,11 +158,11 @@ export const LoongArkTreeViewItemText = forwardRef<
       data-part="item-text"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewItemText.displayName = "LoongArkTreeViewItemText";
 
-export const LoongArkTreeViewBranch = forwardRef<
+export const LoongArkTreeViewBranch = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkTreeViewBranchProps
 >((props, ref) => {
@@ -171,11 +174,11 @@ export const LoongArkTreeViewBranch = forwardRef<
       data-part="branch"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewBranch.displayName = "LoongArkTreeViewBranch";
 
-export const LoongArkTreeViewBranchContent = forwardRef<
+export const LoongArkTreeViewBranchContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkTreeViewBranchContentProps
 >((props, ref) => {
@@ -187,11 +190,11 @@ export const LoongArkTreeViewBranchContent = forwardRef<
       data-part="branch-content"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewBranchContent.displayName = "LoongArkTreeViewBranchContent";
 
-export const LoongArkTreeViewBranchControl = forwardRef<
+export const LoongArkTreeViewBranchControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkTreeViewBranchControlProps
 >((props, ref) => {
@@ -203,11 +206,11 @@ export const LoongArkTreeViewBranchControl = forwardRef<
       data-part="branch-control"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewBranchControl.displayName = "LoongArkTreeViewBranchControl";
 
-export const LoongArkTreeViewBranchTrigger = forwardRef<
+export const LoongArkTreeViewBranchTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkTreeViewBranchTriggerProps
 >((props, ref) => {
@@ -219,11 +222,11 @@ export const LoongArkTreeViewBranchTrigger = forwardRef<
       data-part="branch-trigger"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewBranchTrigger.displayName = "LoongArkTreeViewBranchTrigger";
 
-export const LoongArkTreeViewBranchIndicator = forwardRef<
+export const LoongArkTreeViewBranchIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkTreeViewBranchIndicatorProps
 >((props, ref) => {
@@ -235,11 +238,11 @@ export const LoongArkTreeViewBranchIndicator = forwardRef<
       data-part="branch-indicator"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewBranchIndicator.displayName = "LoongArkTreeViewBranchIndicator";
 
-export const LoongArkTreeViewBranchText = forwardRef<
+export const LoongArkTreeViewBranchText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   ArkTreeViewBranchTextProps
 >((props, ref) => {
@@ -251,11 +254,11 @@ export const LoongArkTreeViewBranchText = forwardRef<
       data-part="branch-text"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewBranchText.displayName = "LoongArkTreeViewBranchText";
 
-export const LoongArkTreeViewBranchIndentGuide = forwardRef<
+export const LoongArkTreeViewBranchIndentGuide = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkTreeViewBranchIndentGuideProps
 >((props, ref) => {
@@ -267,12 +270,12 @@ export const LoongArkTreeViewBranchIndentGuide = forwardRef<
       data-part="branch-indent-guide"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewBranchIndentGuide.displayName =
   "LoongArkTreeViewBranchIndentGuide";
 
-export const LoongArkTreeViewNodeCheckbox = forwardRef<
+export const LoongArkTreeViewNodeCheckbox = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   ArkTreeViewNodeCheckboxProps
 >((props, ref) => {
@@ -284,11 +287,11 @@ export const LoongArkTreeViewNodeCheckbox = forwardRef<
       data-part="node-checkbox"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewNodeCheckbox.displayName = "LoongArkTreeViewNodeCheckbox";
 
-export const LoongArkTreeViewNodeCheckboxIndicator = forwardRef<
+export const LoongArkTreeViewNodeCheckboxIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   ArkTreeViewNodeCheckboxIndicatorProps
 >((props, ref) => {
@@ -299,12 +302,12 @@ export const LoongArkTreeViewNodeCheckboxIndicator = forwardRef<
       data-part="node-checkbox-indicator"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewNodeCheckboxIndicator.displayName =
   "LoongArkTreeViewNodeCheckboxIndicator";
 
-export const LoongArkTreeViewNodeRenameInput = forwardRef<
+export const LoongArkTreeViewNodeRenameInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   ArkTreeViewNodeRenameInputProps
 >((props, ref) => {
@@ -316,6 +319,6 @@ export const LoongArkTreeViewNodeRenameInput = forwardRef<
       data-part="node-rename-input"
     />
   );
-});
+}), lkAutomaticTreeViewStyles);
 
 LoongArkTreeViewNodeRenameInput.displayName = "LoongArkTreeViewNodeRenameInput";

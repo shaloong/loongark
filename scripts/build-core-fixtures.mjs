@@ -1,3 +1,4 @@
+import { publishedWorkspacePlugin } from "./published-workspace-plugin.mjs";
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { build } from "vite";
@@ -69,7 +70,7 @@ h(Button,{onClick:()=>mode.value=mode.value==='light'?'dark':mode.value==='dark'
     root,
     base: `/core-${framework}/`,
     logLevel: "error",
-    plugins: [
+    plugins: [await publishedWorkspacePlugin(),
       ...(framework === "react"
         ? [react()]
         : framework === "solid"

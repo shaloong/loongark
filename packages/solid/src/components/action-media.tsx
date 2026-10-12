@@ -1,3 +1,10 @@
+
+import { styles as lkAutomaticFloatingActionButtonStyles } from "@loongark/primitives/automatic-styles/floating-action-button";
+import { styles as lkAutomaticSpeedDialStyles } from "@loongark/primitives/automatic-styles/speed-dial";
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticImageListStyles } from "@loongark/primitives/automatic-styles/image-list";
+import { styles as lkAutomaticMasonryStyles } from "@loongark/primitives/automatic-styles/masonry";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
@@ -46,14 +53,14 @@ const make = (part: MediaPart) => (props: LoongArkMediaLayoutProps) => {
     />
   );
 };
-export const LoongArkImageList = make("ImageList");
-export const LoongArkImageListItem = make("ImageListItem");
-export const LoongArkImageListCaption = make("ImageListCaption");
-export const LoongArkMasonry = make("Masonry");
-export const LoongArkMasonryItem = make("MasonryItem");
+export const LoongArkImageList = /*#__PURE__*/ withAutomaticStyles(make("ImageList"), lkAutomaticImageListStyles);
+export const LoongArkImageListItem = /*#__PURE__*/ withAutomaticStyles(make("ImageListItem"), lkAutomaticImageListStyles);
+export const LoongArkImageListCaption = /*#__PURE__*/ withAutomaticStyles(make("ImageListCaption"), lkAutomaticImageListStyles);
+export const LoongArkMasonry = /*#__PURE__*/ withAutomaticStyles(make("Masonry"), lkAutomaticMasonryStyles);
+export const LoongArkMasonryItem = /*#__PURE__*/ withAutomaticStyles(make("MasonryItem"), lkAutomaticMasonryStyles);
 export type LoongArkFloatingActionButtonProps =
   JSX.ButtonHTMLAttributes<HTMLButtonElement> & FloatingActionButtonOptions;
-export function LoongArkFloatingActionButton(
+function LoongArkFloatingActionButton(
   props: LoongArkFloatingActionButtonProps,
 ) {
   const [local, rest] = splitProps(props, ["size", "variant", "extended"]);
@@ -64,7 +71,7 @@ export type LoongArkSpeedDialProps = Omit<
   "onSelect"
 > &
   SpeedDialOptions;
-export function LoongArkSpeedDial(props: LoongArkSpeedDialProps) {
+function LoongArkSpeedDial(props: LoongArkSpeedDialProps) {
   const [local, rest] = splitProps(props, [
       "label",
       "actions",
@@ -161,3 +168,8 @@ export function LoongArkSpeedDial(props: LoongArkSpeedDialProps) {
     </div>
   );
 }
+
+const lkStyledLoongArkFloatingActionButton = /*#__PURE__*/ withAutomaticStyles(LoongArkFloatingActionButton, lkAutomaticFloatingActionButtonStyles);
+export { lkStyledLoongArkFloatingActionButton as LoongArkFloatingActionButton };
+const lkStyledLoongArkSpeedDial = /*#__PURE__*/ withAutomaticStyles(LoongArkSpeedDial, lkAutomaticSpeedDialStyles);
+export { lkStyledLoongArkSpeedDial as LoongArkSpeedDial };

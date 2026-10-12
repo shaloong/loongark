@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTreeViewStyles } from "@loongark/primitives/automatic-styles/tree-view";
 /**
  * Tree View component - Solid wrapper.
  * Uses Ark UI Tree View with data attributes for styling.
@@ -31,7 +34,7 @@ export interface LoongArkTreeViewRootProps<
   children?: JSX.Element;
 }
 
-export const LoongArkTreeViewRoot = <T extends object>(
+export const LoongArkTreeViewRoot = /*#__PURE__*/ withAutomaticStyles(<T extends object>(
   props: LoongArkTreeViewRootProps<T>,
 ): JSX.Element => {
   const merged = mergeProps({ size: "md" as TreeViewSize }, props);
@@ -47,7 +50,7 @@ export const LoongArkTreeViewRoot = <T extends object>(
       {local.children}
     </ArkTreeView.Root>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewLabelProps extends Omit<
   ArkTreeViewLabelProps,
@@ -56,7 +59,7 @@ export interface LoongArkTreeViewLabelProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkTreeViewLabel: Component<LoongArkTreeViewLabelProps> = (
+export const LoongArkTreeViewLabel: Component<LoongArkTreeViewLabelProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -65,7 +68,7 @@ export const LoongArkTreeViewLabel: Component<LoongArkTreeViewLabelProps> = (
       {local.children}
     </ArkTreeView.Label>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewTreeProps extends Omit<
   ArkTreeViewTreeProps,
@@ -74,7 +77,7 @@ export interface LoongArkTreeViewTreeProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkTreeViewTree: Component<LoongArkTreeViewTreeProps> = (
+export const LoongArkTreeViewTree: Component<LoongArkTreeViewTreeProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -83,7 +86,7 @@ export const LoongArkTreeViewTree: Component<LoongArkTreeViewTreeProps> = (
       {local.children}
     </ArkTreeView.Tree>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewItemProps extends Omit<
   ArkTreeViewItemProps,
@@ -92,7 +95,7 @@ export interface LoongArkTreeViewItemProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkTreeViewItem: Component<LoongArkTreeViewItemProps> = (
+export const LoongArkTreeViewItem: Component<LoongArkTreeViewItemProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -101,7 +104,7 @@ export const LoongArkTreeViewItem: Component<LoongArkTreeViewItemProps> = (
       {local.children}
     </ArkTreeView.Item>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewItemIndicatorProps extends Omit<
   ArkTreeViewItemIndicatorProps,
@@ -112,7 +115,7 @@ export interface LoongArkTreeViewItemIndicatorProps extends Omit<
 
 export const LoongArkTreeViewItemIndicator: Component<
   LoongArkTreeViewItemIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.ItemIndicator
@@ -123,7 +126,7 @@ export const LoongArkTreeViewItemIndicator: Component<
       {local.children}
     </ArkTreeView.ItemIndicator>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewItemTextProps extends Omit<
   ArkTreeViewItemTextProps,
@@ -134,7 +137,7 @@ export interface LoongArkTreeViewItemTextProps extends Omit<
 
 export const LoongArkTreeViewItemText: Component<
   LoongArkTreeViewItemTextProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.ItemText
@@ -145,7 +148,7 @@ export const LoongArkTreeViewItemText: Component<
       {local.children}
     </ArkTreeView.ItemText>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewBranchProps extends Omit<
   ArkTreeViewBranchProps,
@@ -154,7 +157,7 @@ export interface LoongArkTreeViewBranchProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkTreeViewBranch: Component<LoongArkTreeViewBranchProps> = (
+export const LoongArkTreeViewBranch: Component<LoongArkTreeViewBranchProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -163,7 +166,7 @@ export const LoongArkTreeViewBranch: Component<LoongArkTreeViewBranchProps> = (
       {local.children}
     </ArkTreeView.Branch>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewBranchContentProps extends Omit<
   ArkTreeViewBranchContentProps,
@@ -174,7 +177,7 @@ export interface LoongArkTreeViewBranchContentProps extends Omit<
 
 export const LoongArkTreeViewBranchContent: Component<
   LoongArkTreeViewBranchContentProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.BranchContent
@@ -185,7 +188,7 @@ export const LoongArkTreeViewBranchContent: Component<
       {local.children}
     </ArkTreeView.BranchContent>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewBranchControlProps extends Omit<
   ArkTreeViewBranchControlProps,
@@ -196,7 +199,7 @@ export interface LoongArkTreeViewBranchControlProps extends Omit<
 
 export const LoongArkTreeViewBranchControl: Component<
   LoongArkTreeViewBranchControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.BranchControl
@@ -207,7 +210,7 @@ export const LoongArkTreeViewBranchControl: Component<
       {local.children}
     </ArkTreeView.BranchControl>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewBranchTriggerProps extends Omit<
   ArkTreeViewBranchTriggerProps,
@@ -218,7 +221,7 @@ export interface LoongArkTreeViewBranchTriggerProps extends Omit<
 
 export const LoongArkTreeViewBranchTrigger: Component<
   LoongArkTreeViewBranchTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.BranchTrigger
@@ -229,7 +232,7 @@ export const LoongArkTreeViewBranchTrigger: Component<
       {local.children}
     </ArkTreeView.BranchTrigger>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewBranchIndicatorProps extends Omit<
   ArkTreeViewBranchIndicatorProps,
@@ -240,7 +243,7 @@ export interface LoongArkTreeViewBranchIndicatorProps extends Omit<
 
 export const LoongArkTreeViewBranchIndicator: Component<
   LoongArkTreeViewBranchIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.BranchIndicator
@@ -251,7 +254,7 @@ export const LoongArkTreeViewBranchIndicator: Component<
       {local.children}
     </ArkTreeView.BranchIndicator>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewBranchTextProps extends Omit<
   ArkTreeViewBranchTextProps,
@@ -262,7 +265,7 @@ export interface LoongArkTreeViewBranchTextProps extends Omit<
 
 export const LoongArkTreeViewBranchText: Component<
   LoongArkTreeViewBranchTextProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.BranchText
@@ -273,7 +276,7 @@ export const LoongArkTreeViewBranchText: Component<
       {local.children}
     </ArkTreeView.BranchText>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewBranchIndentGuideProps extends Omit<
   ArkTreeViewBranchIndentGuideProps,
@@ -284,7 +287,7 @@ export interface LoongArkTreeViewBranchIndentGuideProps extends Omit<
 
 export const LoongArkTreeViewBranchIndentGuide: Component<
   LoongArkTreeViewBranchIndentGuideProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.BranchIndentGuide
@@ -295,7 +298,7 @@ export const LoongArkTreeViewBranchIndentGuide: Component<
       {local.children}
     </ArkTreeView.BranchIndentGuide>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewNodeCheckboxProps extends Omit<
   ArkTreeViewNodeCheckboxProps,
@@ -306,7 +309,7 @@ export interface LoongArkTreeViewNodeCheckboxProps extends Omit<
 
 export const LoongArkTreeViewNodeCheckbox: Component<
   LoongArkTreeViewNodeCheckboxProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.NodeCheckbox
@@ -317,7 +320,7 @@ export const LoongArkTreeViewNodeCheckbox: Component<
       {local.children}
     </ArkTreeView.NodeCheckbox>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewNodeCheckboxIndicatorProps extends Omit<
   ArkTreeViewNodeCheckboxIndicatorProps,
@@ -328,7 +331,7 @@ export interface LoongArkTreeViewNodeCheckboxIndicatorProps extends Omit<
 
 export const LoongArkTreeViewNodeCheckboxIndicator: Component<
   LoongArkTreeViewNodeCheckboxIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkTreeView.NodeCheckboxIndicator
@@ -339,7 +342,7 @@ export const LoongArkTreeViewNodeCheckboxIndicator: Component<
       {local.children}
     </ArkTreeView.NodeCheckboxIndicator>
   );
-};
+}, lkAutomaticTreeViewStyles);
 
 export interface LoongArkTreeViewNodeRenameInputProps extends Omit<
   ArkTreeViewNodeRenameInputProps,
@@ -348,7 +351,7 @@ export interface LoongArkTreeViewNodeRenameInputProps extends Omit<
 
 export const LoongArkTreeViewNodeRenameInput: Component<
   LoongArkTreeViewNodeRenameInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkTreeView.NodeRenameInput
       {...props}
@@ -356,4 +359,4 @@ export const LoongArkTreeViewNodeRenameInput: Component<
       data-part="node-rename-input"
     />
   );
-};
+}, lkAutomaticTreeViewStyles);

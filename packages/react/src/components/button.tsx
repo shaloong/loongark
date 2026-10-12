@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticButtonStyles } from "@loongark/primitives/automatic-styles/button";
+
 
 import { dataProps } from "../data-props";
 import { ark } from "@ark-ui/react/factory";
@@ -18,7 +21,7 @@ export interface LoongArkButtonProps
   disabled?: boolean;
 }
 
-export const LoongArkButton = forwardRef<
+export const LoongArkButton = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkButtonProps
 >(
@@ -56,6 +59,6 @@ export const LoongArkButton = forwardRef<
       children,
     );
   },
-);
+), lkAutomaticButtonStyles);
 
 LoongArkButton.displayName = "LoongArkButton";

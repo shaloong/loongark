@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticGridStyles } from "@loongark/primitives/automatic-styles/grid";
+  registerAutomaticStyles(lkAutomaticGridStyles);
+
   import {
     layoutAttributes,
     layoutStyles,

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticNumberInputStyles } from "@loongark/primitives/automatic-styles/number-input";
 import { useFieldContext } from "@ark-ui/vue/field";
 import { useNumberInputContext } from "@ark-ui/vue/number-input";
 import {
@@ -35,7 +38,7 @@ export interface NumberInputValueInvalidDetails {
   reason?: string;
 }
 
-export const LoongArkNumberInputRoot = defineComponent({
+export const LoongArkNumberInputRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkNumberInputRoot",
   props: {
     size: {
@@ -163,9 +166,9 @@ export const LoongArkNumberInputRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticNumberInputStyles);
 
-export const LoongArkNumberInputLabel = defineComponent({
+export const LoongArkNumberInputLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkNumberInputLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -179,9 +182,9 @@ export const LoongArkNumberInputLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticNumberInputStyles);
 
-export const LoongArkNumberInputControl = defineComponent({
+export const LoongArkNumberInputControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkNumberInputControl",
   props: {
     size: {
@@ -216,9 +219,9 @@ export const LoongArkNumberInputControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticNumberInputStyles);
 
-export const LoongArkNumberInputInput = defineComponent({
+export const LoongArkNumberInputInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkNumberInputInput",
   inheritAttrs: false,
   props: {
@@ -267,9 +270,9 @@ export const LoongArkNumberInputInput = defineComponent({
         }),
       });
   },
-});
+}), lkAutomaticNumberInputStyles);
 
-export const LoongArkNumberInputIncrementTrigger = defineComponent({
+export const LoongArkNumberInputIncrementTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkNumberInputIncrementTrigger",
   props: {
     size: {
@@ -309,9 +312,9 @@ export const LoongArkNumberInputIncrementTrigger = defineComponent({
         },
       );
   },
-});
+}), lkAutomaticNumberInputStyles);
 
-export const LoongArkNumberInputDecrementTrigger = defineComponent({
+export const LoongArkNumberInputDecrementTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkNumberInputDecrementTrigger",
   props: {
     size: {
@@ -351,9 +354,9 @@ export const LoongArkNumberInputDecrementTrigger = defineComponent({
         },
       );
   },
-});
+}), lkAutomaticNumberInputStyles);
 
-export const LoongArkNumberInputValueText = defineComponent({
+export const LoongArkNumberInputValueText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkNumberInputValueText",
   props: {
     size: {
@@ -375,9 +378,9 @@ export const LoongArkNumberInputValueText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticNumberInputStyles);
 
-export const LoongArkNumberInputScrubber = defineComponent({
+export const LoongArkNumberInputScrubber = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkNumberInputScrubber",
   setup(_, { slots, attrs }) {
     return () =>
@@ -391,4 +394,4 @@ export const LoongArkNumberInputScrubber = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticNumberInputStyles);

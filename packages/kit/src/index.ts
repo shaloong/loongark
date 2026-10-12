@@ -1,4 +1,5 @@
-export { bootstrapKit, kitRegistry, registerKitComponent, type KitComponentRegistration } from "./bootstrap";
+export { bootstrapKit } from "./bootstrap";
+export { kitRegistry, registerKitComponent, type KitComponentRegistration } from "./component-registry";
 export * from "./questionnaire";
 export * from "./message-scroller";
 export * from "./conversation";

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPopoverStyles } from "@loongark/primitives/automatic-styles/popover";
 import { renderPart } from "../render-part";
 /**
  * Popover 组件 - Vue 封装
@@ -6,7 +9,7 @@ import { renderPart } from "../render-part";
 import { h, defineComponent } from "vue";
 import { Popover as ArkPopover } from "@ark-ui/vue/popover";
 
-export const LoongArkPopoverRoot = defineComponent({
+export const LoongArkPopoverRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPopoverRoot",
   setup(_, { slots, attrs }) {
     return () =>
@@ -20,9 +23,9 @@ export const LoongArkPopoverRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverTrigger = defineComponent({
+export const LoongArkPopoverTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPopoverTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -37,9 +40,9 @@ export const LoongArkPopoverTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverPositioner = defineComponent({
+export const LoongArkPopoverPositioner = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPopoverPositioner",
   setup(_, { slots, attrs }) {
     return () =>
@@ -53,9 +56,9 @@ export const LoongArkPopoverPositioner = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverContent = defineComponent({
+export const LoongArkPopoverContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPopoverContent",
   props: {
     showArrow: { type: Boolean, default: false },
@@ -73,9 +76,9 @@ export const LoongArkPopoverContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverArrow = defineComponent({
+export const LoongArkPopoverArrow = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPopoverArrow",
   setup(_, { slots, attrs }) {
     return () =>
@@ -89,9 +92,9 @@ export const LoongArkPopoverArrow = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverTitle = defineComponent({
+export const LoongArkPopoverTitle = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPopoverTitle",
   setup(_, { slots, attrs }) {
     return () =>
@@ -105,9 +108,9 @@ export const LoongArkPopoverTitle = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverDescription = defineComponent({
+export const LoongArkPopoverDescription = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPopoverDescription",
   setup(_, { slots, attrs }) {
     return () =>
@@ -121,9 +124,9 @@ export const LoongArkPopoverDescription = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverCloseTrigger = defineComponent({
+export const LoongArkPopoverCloseTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPopoverCloseTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -137,4 +140,4 @@ export const LoongArkPopoverCloseTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticPopoverStyles);

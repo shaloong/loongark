@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticBadgeStyles } from "@loongark/primitives/automatic-styles/badge";
+  registerAutomaticStyles(lkAutomaticBadgeStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "span";
   export let variant: LayoutOptions["variant"] = "default";

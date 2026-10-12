@@ -11,9 +11,11 @@
 
 ### 组件与维护
 
+- 默认四端 Provider、Vue 插件及 Svelte theme store 自动随组件入口裁剪样式，支持根入口、子路径、动态导入、共享所有权及原有注册覆盖；将 Kit 共享 CSS 移到 Primitives，保留完整样式兼容入口与显式 Core。
+
 - CI 复用同一提交的浏览器生产者 Artifact，保留日常关键交互与原生 Safari，完整示例、Story 审计和外部消费演练保留为完整验收；避免 develop → main 重复运行，增加 Node22.12 与当前26的构建和四端 SSR 兼容检查。
 
-- 四端新增 `provider-core` 与显式 Primitives 样式入口，复用完整 Provider 的主题生命周期、级联顺序、焦点、动效和 CSP；基础页面可裁剪共享 CSS，默认完整 Provider 保持原用法。增加真实生产包体、四端 SSR、三主题、共享所有权与卸载回归。
+- 四端新增 `provider-core` 与显式 Primitives 样式入口，复用 Provider 的主题生命周期、级联顺序、焦点、动效和 CSP；基础页面可显式选择共享 CSS，保留现有 Provider 调用方式。增加真实生产包体、四端 SSR、三主题、共享所有权与卸载回归。
 
 - 共享 Theme 和四端 Provider 支持可选样式 `nonce`，在 DOM 插入前配置变量、Primitives 与 Kit style；增加浏览器实际 CSP 响应头的允许/拒绝、主题更新与四端交互回归，说明 SSR、内联属性和第三方引擎的独立边界。
 

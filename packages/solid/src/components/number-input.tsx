@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticNumberInputStyles } from "@loongark/primitives/automatic-styles/number-input";
 import { useFieldContext } from "@ark-ui/solid/field";
 import { useNumberInputContext } from "@ark-ui/solid/number-input";
 import {
@@ -36,7 +39,7 @@ export interface LoongArkNumberInputRootProps extends Omit<
 
 export const LoongArkNumberInputRoot: Component<
   LoongArkNumberInputRootProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     {
       size: "md" as NumberInputSize,
@@ -72,7 +75,7 @@ export const LoongArkNumberInputRoot: Component<
       {local.children}
     </ArkNumberInput.Root>
   );
-};
+}, lkAutomaticNumberInputStyles);
 
 export interface LoongArkNumberInputLabelProps extends Omit<
   ArkNumberInputLabelProps,
@@ -83,7 +86,7 @@ export interface LoongArkNumberInputLabelProps extends Omit<
 
 export const LoongArkNumberInputLabel: Component<
   LoongArkNumberInputLabelProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
 
   return (
@@ -95,7 +98,7 @@ export const LoongArkNumberInputLabel: Component<
       {local.children}
     </ArkNumberInput.Label>
   );
-};
+}, lkAutomaticNumberInputStyles);
 
 export interface LoongArkNumberInputControlProps extends Omit<
   ArkNumberInputControlProps,
@@ -109,7 +112,7 @@ export interface LoongArkNumberInputControlProps extends Omit<
 
 export const LoongArkNumberInputControl: Component<
   LoongArkNumberInputControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     {
       size: "md" as NumberInputSize,
@@ -139,7 +142,7 @@ export const LoongArkNumberInputControl: Component<
       {local.children}
     </ArkNumberInput.Control>
   );
-};
+}, lkAutomaticNumberInputStyles);
 
 export interface LoongArkNumberInputInputProps extends Omit<
   ArkNumberInputInputProps,
@@ -153,7 +156,7 @@ export interface LoongArkNumberInputInputProps extends Omit<
 
 export const LoongArkNumberInputInput: Component<
   LoongArkNumberInputInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const field = useFieldContext();
   const api = useNumberInputContext();
   const merged = mergeProps(
@@ -203,7 +206,7 @@ export const LoongArkNumberInputInput: Component<
       data-state={local.state !== "default" ? local.state : undefined}
     />
   );
-};
+}, lkAutomaticNumberInputStyles);
 
 export interface LoongArkNumberInputIncrementTriggerProps extends Omit<
   ArkNumberInputIncrementTriggerProps,
@@ -217,7 +220,7 @@ export interface LoongArkNumberInputIncrementTriggerProps extends Omit<
 
 export const LoongArkNumberInputIncrementTrigger: Component<
   LoongArkNumberInputIncrementTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     {
       size: "md" as NumberInputSize,
@@ -248,7 +251,7 @@ export const LoongArkNumberInputIncrementTrigger: Component<
       {local.children ?? <LoongArkIcon icon={controlIcons.plus} size="sm" />}
     </ArkNumberInput.IncrementTrigger>
   );
-};
+}, lkAutomaticNumberInputStyles);
 
 export interface LoongArkNumberInputDecrementTriggerProps extends Omit<
   ArkNumberInputDecrementTriggerProps,
@@ -262,7 +265,7 @@ export interface LoongArkNumberInputDecrementTriggerProps extends Omit<
 
 export const LoongArkNumberInputDecrementTrigger: Component<
   LoongArkNumberInputDecrementTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     {
       size: "md" as NumberInputSize,
@@ -293,7 +296,7 @@ export const LoongArkNumberInputDecrementTrigger: Component<
       {local.children ?? <LoongArkIcon icon={controlIcons.minus} size="sm" />}
     </ArkNumberInput.DecrementTrigger>
   );
-};
+}, lkAutomaticNumberInputStyles);
 
 export interface LoongArkNumberInputValueTextProps extends Omit<
   ArkNumberInputValueTextProps,
@@ -305,7 +308,7 @@ export interface LoongArkNumberInputValueTextProps extends Omit<
 
 export const LoongArkNumberInputValueText: Component<
   LoongArkNumberInputValueTextProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps({ size: "md" as NumberInputSize }, props);
   const [local, others] = splitProps(merged, ["children", "size"]);
 
@@ -319,7 +322,7 @@ export const LoongArkNumberInputValueText: Component<
       {local.children}
     </ArkNumberInput.ValueText>
   );
-};
+}, lkAutomaticNumberInputStyles);
 
 export interface LoongArkNumberInputScrubberProps extends Omit<
   ArkNumberInputScrubberProps,
@@ -330,7 +333,7 @@ export interface LoongArkNumberInputScrubberProps extends Omit<
 
 export const LoongArkNumberInputScrubber: Component<
   LoongArkNumberInputScrubberProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
 
   return (
@@ -342,4 +345,4 @@ export const LoongArkNumberInputScrubber: Component<
       {local.children}
     </ArkNumberInput.Scrubber>
   );
-};
+}, lkAutomaticNumberInputStyles);

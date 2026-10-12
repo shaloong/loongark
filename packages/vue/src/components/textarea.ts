@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTextareaStyles } from "@loongark/primitives/automatic-styles/textarea";
 import {
   defineComponent,
   h,
@@ -12,7 +15,7 @@ import {
   mountTextareaAutosize,
   textareaRows,
 } from "@loongark/kit";
-export const LoongArkTextarea = defineComponent({
+export const LoongArkTextarea = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTextarea",
   inheritAttrs: false,
   props: {
@@ -62,4 +65,4 @@ export const LoongArkTextarea = defineComponent({
         },
       });
   },
-});
+}), lkAutomaticTextareaStyles);

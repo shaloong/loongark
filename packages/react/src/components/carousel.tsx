@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCarouselStyles } from "@loongark/primitives/automatic-styles/carousel";
+
 
 /**
  * Carousel component - React wrapper.
@@ -41,7 +44,7 @@ export interface LoongArkCarouselRootProps
   children?: ReactNode;
 }
 
-export const LoongArkCarouselRoot = forwardRef<
+export const LoongArkCarouselRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkCarouselRootProps
 >(({ size = "md", children, ...props }, ref) => {
@@ -56,11 +59,11 @@ export const LoongArkCarouselRoot = forwardRef<
       {children}
     </Carousel.Root>
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselRoot.displayName = "LoongArkCarouselRoot";
 
-export const LoongArkCarouselItemGroup = forwardRef<
+export const LoongArkCarouselItemGroup = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkCarouselItemGroupProps
 >((props, ref) => {
@@ -72,11 +75,11 @@ export const LoongArkCarouselItemGroup = forwardRef<
       data-part="item-group"
     />
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselItemGroup.displayName = "LoongArkCarouselItemGroup";
 
-export const LoongArkCarouselItem = forwardRef<
+export const LoongArkCarouselItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkCarouselItemProps
 >((props, ref) => {
@@ -88,11 +91,11 @@ export const LoongArkCarouselItem = forwardRef<
       data-part="item"
     />
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselItem.displayName = "LoongArkCarouselItem";
 
-export const LoongArkCarouselControl = forwardRef<
+export const LoongArkCarouselControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkCarouselControlProps
 >((props, ref) => {
@@ -104,11 +107,11 @@ export const LoongArkCarouselControl = forwardRef<
       data-part="control"
     />
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselControl.displayName = "LoongArkCarouselControl";
 
-export const LoongArkCarouselNextTrigger = forwardRef<
+export const LoongArkCarouselNextTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkCarouselNextTriggerProps
 >((props, ref) => {
@@ -120,11 +123,11 @@ export const LoongArkCarouselNextTrigger = forwardRef<
       data-part="next-trigger"
     />
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselNextTrigger.displayName = "LoongArkCarouselNextTrigger";
 
-export const LoongArkCarouselPrevTrigger = forwardRef<
+export const LoongArkCarouselPrevTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkCarouselPrevTriggerProps
 >((props, ref) => {
@@ -136,11 +139,11 @@ export const LoongArkCarouselPrevTrigger = forwardRef<
       data-part="prev-trigger"
     />
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselPrevTrigger.displayName = "LoongArkCarouselPrevTrigger";
 
-export const LoongArkCarouselIndicatorGroup = forwardRef<
+export const LoongArkCarouselIndicatorGroup = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkCarouselIndicatorGroupProps
 >((props, ref) => {
@@ -152,11 +155,11 @@ export const LoongArkCarouselIndicatorGroup = forwardRef<
       data-part="indicator-group"
     />
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselIndicatorGroup.displayName = "LoongArkCarouselIndicatorGroup";
 
-export const LoongArkCarouselIndicator = forwardRef<
+export const LoongArkCarouselIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkCarouselIndicatorProps
 >((props, ref) => {
@@ -168,11 +171,11 @@ export const LoongArkCarouselIndicator = forwardRef<
       data-part="indicator"
     />
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselIndicator.displayName = "LoongArkCarouselIndicator";
 
-export const LoongArkCarouselAutoplayTrigger = forwardRef<
+export const LoongArkCarouselAutoplayTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkCarouselAutoplayTriggerProps
 >((props, ref) => {
@@ -184,11 +187,11 @@ export const LoongArkCarouselAutoplayTrigger = forwardRef<
       data-part="autoplay-trigger"
     />
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselAutoplayTrigger.displayName = "LoongArkCarouselAutoplayTrigger";
 
-export const LoongArkCarouselProgressText = forwardRef<
+export const LoongArkCarouselProgressText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   ArkCarouselProgressTextProps
 >((props, ref) => {
@@ -200,11 +203,11 @@ export const LoongArkCarouselProgressText = forwardRef<
       data-part="progress-text"
     />
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselProgressText.displayName = "LoongArkCarouselProgressText";
 
-export const LoongArkCarouselAutoplayIndicator = forwardRef<
+export const LoongArkCarouselAutoplayIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkCarouselAutoplayIndicatorProps
 >((props, ref) => {
@@ -216,7 +219,7 @@ export const LoongArkCarouselAutoplayIndicator = forwardRef<
       data-part="autoplay-indicator"
     />
   );
-});
+}), lkAutomaticCarouselStyles);
 
 LoongArkCarouselAutoplayIndicator.displayName =
   "LoongArkCarouselAutoplayIndicator";

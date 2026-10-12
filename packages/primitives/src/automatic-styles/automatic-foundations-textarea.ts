@@ -1,0 +1,7 @@
+// 由 scripts/generate-automatic-styles.mjs 生成；规则来源为 shared-styles/foundations.ts。
+import { createPrimitive } from "../core";
+export const style = /*#__PURE__*/ createPrimitive(
+  { name: "automatic-foundations-textarea", tokens: [], defaults: {} },
+  (theme) => theme.mountStyles("automatic-foundations-textarea", "\n[data-scope=textarea] { display:block; width:100%; min-width:0; min-height:calc(var(--lk-control-height-md) * 3); padding:var(--lk-space-component-sm) var(--lk-space-component-compact); border:var(--lk-control-borderwidth) solid var(--lk-color-semantic-input); border-radius:var(--lk-radius-md); font:inherit; font-size:var(--lk-typography-fontsize-md); line-height:1.5; color:var(--lk-color-semantic-foreground); background:var(--lk-color-semantic-background); resize:vertical; box-shadow:var(--lk-shadow-sm); transition:border-color var(--lk-motion-duration-fast) var(--lk-motion-easing-standard),box-shadow var(--lk-motion-duration-fast) var(--lk-motion-easing-standard); }\n[data-scope=textarea]::placeholder { color:var(--lk-color-semantic-mutedforeground); opacity:1; }\n[data-scope=textarea]:focus-visible { outline:var(--lk-control-focuswidth) solid var(--lk-color-semantic-ring); outline-offset:var(--lk-control-focuswidth); }\n[data-scope=textarea]:disabled { opacity:.5; cursor:not-allowed; }\n[data-scope=textarea][readonly] { background:var(--lk-color-semantic-muted); }\n[data-scope=textarea][aria-invalid=true] { border-color:var(--lk-color-semantic-destructive); outline-color:var(--lk-color-semantic-destructive); }"),
+  undefined,
+);

@@ -29,7 +29,11 @@ nonce 不授权 style 属性、第三方编辑器或调用方自建的 style。�
 
 ### 按需样式
 
-默认 `LoongArkProvider` 自动加载完整 Primitives 与 Kit 样式，适合高级组合。基础页面可从 `@loongark/<framework>/provider-core` 引入 `LoongArkProviderCore`，只加载通用语义、焦点和动效，再显式选择实际使用的 Primitives。以下示例中的 `react` 可替换为 `vue`、`solid` 或 `svelte`：
+默认 `LoongArkProvider` 随实际组件入口自动加载 Primitives 样式及 HTML 组合的必要依赖，根入口命名导入和组件子路径均可使用。动态导入会在组件首次渲染前同步补齐样式，固定级联顺序，多个 Provider 共享规则并在最后一个所有者卸载后释放；Vue 插件和 Svelte theme store 使用同一自动启动器。
+
+自动裁剪依赖生产构建消除未使用模块与组件初始化声明。导入并使用完整根命名空间会保留更多组件；Node 直接执行根入口也不会像生产打包器一样裁剪模块。自定义 DOM 只有 `data-scope` 属性不会自动声明样式，需提供自己的样式，或显式使用 `@loongark/kit/bootstrap` 的 `bootstrapKit` 作为 `styleBootstrap` 保留原完整样式行为。已有 Primitives 注册覆盖与 Kit 注册扩展继续生效。
+
+需要完全控制规则集合时，可从 `@loongark/<framework>/provider-core` 引入 `LoongArkProviderCore`，只加载通用语义、焦点和动效，再显式选择实际使用的 Primitives。以下示例中的 `react` 可替换为 `vue`、`solid` 或 `svelte`：
 
 应用需显式安装 `@loongark/<framework>` 与 `@loongark/primitives`；pnpm 不保证应用可以直接导入传递依赖。
 
@@ -44,9 +48,9 @@ const styleBootstrap = createPrimitiveStyleBootstrap([buttonPrimitive]);
 
 React/Solid 使用 `<LoongArkProviderCore styleBootstrap={styleBootstrap}>`；Vue 模板使用 `:style-bootstrap="styleBootstrap"`，render 函数传入 `{ styleBootstrap }`；Svelte 使用 `<LoongArkProviderCore {styleBootstrap}>`。四端完整代码见 `examples/<framework>/CoreProviderExample`。动态更新启动器会替换作用域主题，重复选择去重并保持默认注册顺序。
 
-Core 不会自动补齐未选择的组件样式。Kit 的高级组合与自定义注册可继续使用完整 Provider，或提供应用自己的 `styleBootstrap(theme)`；不要只覆盖完整 Provider 的启动器就假定其静态依赖已经裁剪。Core 不自动引入完整 Kit 注册表。
+Core 不会自动补齐未选择的组件样式。高级组合通常使用默认自动 Provider；Core 需提供应用自己的 `styleBootstrap(theme)` 补齐相应规则。Core 不订阅自动组件样式，也不自动引入完整 Kit 注册表。
 
-SSR 在每个请求中创建主题，并调用同一个启动器，再序列化 `theme.toStyleSheet()`。nonce、targetId 与主题选项仍需与客户端一致。Next.js 中选择样式的 Provider 组合放在应用的客户端模块，启动器函数不能作为服务端到客户端的 Props；服务端可以单独用纯 Primitives 启动器生成首屏 CSS。
+显式 Core 的 SSR 在每个请求中创建主题，并调用同一个启动器，再序列化 `theme.toStyleSheet()`。自动 SSR 使用 `@loongark/kit/automatic-bootstrap` 的 `bootstrapKitAutomatic`，在实际渲染之后序列化，以包含 Svelte 实例声明的样式；进程中已经导入的其他组件也可能贡献规则，不能把客户端包体测量当作所有 SSR 模式的裁剪保证。nonce、targetId 与主题选项仍需与客户端一致。Next.js 中选择样式的 Provider 组合放在应用的客户端模块，启动器函数不能作为服务端到客户端的 Props；服务端可以单独用纯 Primitives 启动器生成首屏 CSS。
 
 底层 API：
 

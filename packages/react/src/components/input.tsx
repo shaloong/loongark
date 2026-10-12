@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticInputStyles } from "@loongark/primitives/automatic-styles/input";
+
 
 import type {
   HTMLAttributes,
@@ -26,7 +29,7 @@ export interface LoongArkInputRootProps
   required?: boolean;
 }
 
-export const LoongArkInputRoot = forwardRef<
+export const LoongArkInputRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkInputRootProps
 >(
@@ -64,7 +67,7 @@ export const LoongArkInputRoot = forwardRef<
       }),
       children,
     ),
-);
+), lkAutomaticInputStyles);
 
 LoongArkInputRoot.displayName = "LoongArkInputRoot";
 
@@ -73,7 +76,7 @@ export interface LoongArkInputControlProps
     Partial<InputPrimitiveProps>,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {}
 
-export const LoongArkInputControl = forwardRef<
+export const LoongArkInputControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkInputControlProps
 >(
@@ -102,17 +105,17 @@ export const LoongArkInputControl = forwardRef<
         "data-multiline": multiline ? "true" : undefined,
       }),
     ),
-);
+), lkAutomaticInputStyles);
 
 LoongArkInputControl.displayName = "LoongArkInputControl";
-export const LoongArkInputInput = LoongArkInputControl;
+export const LoongArkInputInput = /*#__PURE__*/ withAutomaticStyles(LoongArkInputControl, lkAutomaticInputStyles);
 
 export interface LoongArkTextareaControlProps
   extends
     Partial<InputPrimitiveProps>,
     TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-export const LoongArkTextareaControl = forwardRef<
+export const LoongArkTextareaControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLTextAreaElement,
   LoongArkTextareaControlProps
 >(
@@ -141,7 +144,7 @@ export const LoongArkTextareaControl = forwardRef<
         "data-multiline": multiline ? "true" : undefined,
       }),
     ),
-);
+), lkAutomaticInputStyles);
 
 LoongArkTextareaControl.displayName = "LoongArkTextareaControl";
 
@@ -150,7 +153,7 @@ export interface LoongArkInputHelperTextProps extends HTMLAttributes<HTMLElement
   variant?: "default" | "error" | "success";
 }
 
-export const LoongArkInputHelperText = ({
+export const LoongArkInputHelperText = /*#__PURE__*/ withAutomaticStyles(({
   children,
   variant = "default",
   ...rest
@@ -164,13 +167,13 @@ export const LoongArkInputHelperText = ({
       "data-variant": variant === "default" ? undefined : variant,
     }),
     children,
-  );
+  ), lkAutomaticInputStyles);
 
 export interface LoongArkInputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   children?: ReactNode;
 }
 
-export const LoongArkInputLabel = ({
+export const LoongArkInputLabel = /*#__PURE__*/ withAutomaticStyles(({
   children,
   ...rest
 }: LoongArkInputLabelProps) =>
@@ -182,9 +185,9 @@ export const LoongArkInputLabel = ({
       "data-part": "label",
     }),
     children,
-  );
+  ), lkAutomaticInputStyles);
 
-export const LoongArkInputErrorText = ({
+export const LoongArkInputErrorText = /*#__PURE__*/ withAutomaticStyles(({
   children,
   ...rest
 }: Omit<LoongArkInputHelperTextProps, "variant">) =>
@@ -197,13 +200,13 @@ export const LoongArkInputErrorText = ({
       "data-variant": "error",
     }),
     children,
-  );
+  ), lkAutomaticInputStyles);
 
 export interface LoongArkInputAddonProps extends HTMLAttributes<HTMLElement> {
   children?: ReactNode;
 }
 
-export const LoongArkInputGroup = ({
+export const LoongArkInputGroup = /*#__PURE__*/ withAutomaticStyles(({
   children,
   ...rest
 }: LoongArkInputAddonProps) =>
@@ -211,9 +214,9 @@ export const LoongArkInputGroup = ({
     ark.div,
     dataProps({ ...rest, "data-scope": "input", "data-part": "group" }),
     children,
-  );
+  ), lkAutomaticInputStyles);
 
-export const LoongArkInputPrefix = ({
+export const LoongArkInputPrefix = /*#__PURE__*/ withAutomaticStyles(({
   children,
   ...rest
 }: LoongArkInputAddonProps) =>
@@ -225,7 +228,7 @@ export const LoongArkInputPrefix = ({
       "data-part": "prefix",
     }),
     children,
-  );
+  ), lkAutomaticInputStyles);
 
 export interface LoongArkInputSuffixProps extends LoongArkInputAddonProps {
   disabled?: boolean;
@@ -233,7 +236,7 @@ export interface LoongArkInputSuffixProps extends LoongArkInputAddonProps {
   onClick?: () => void;
 }
 
-export const LoongArkInputSuffix = ({
+export const LoongArkInputSuffix = /*#__PURE__*/ withAutomaticStyles(({
   children,
   action,
   onClick,
@@ -260,4 +263,4 @@ export const LoongArkInputSuffix = ({
     }),
     children,
   );
-};
+}, lkAutomaticInputStyles);

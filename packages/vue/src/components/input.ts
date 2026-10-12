@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticInputStyles } from "@loongark/primitives/automatic-styles/input";
 import { renderPart } from "../render-part";
 import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
@@ -28,7 +31,7 @@ const boolProp = (defaultValue = false) => ({
   default: defaultValue,
 });
 
-export const LoongArkInputRoot = defineComponent({
+export const LoongArkInputRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkInputRoot",
   props: {
     size: sizeProp,
@@ -56,9 +59,9 @@ export const LoongArkInputRoot = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticInputStyles);
 
-export const LoongArkInputControl = defineComponent({
+export const LoongArkInputControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkInputControl",
   emits: ["update:modelValue"],
   inheritAttrs: false,
@@ -91,11 +94,11 @@ export const LoongArkInputControl = defineComponent({
         "data-multiline": boolAttr(props.multiline),
       });
   },
-});
+}), lkAutomaticInputStyles);
 
-export const LoongArkInputInput = LoongArkInputControl;
+export const LoongArkInputInput = /*#__PURE__*/ withAutomaticStyles(LoongArkInputControl, lkAutomaticInputStyles);
 
-export const LoongArkInputGroup = defineComponent({
+export const LoongArkInputGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkInputGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -105,9 +108,9 @@ export const LoongArkInputGroup = defineComponent({
         slots.default?.(),
       );
   },
-});
+}), lkAutomaticInputStyles);
 
-export const LoongArkTextareaControl = defineComponent({
+export const LoongArkTextareaControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTextareaControl",
   emits: ["update:modelValue"],
   inheritAttrs: false,
@@ -140,9 +143,9 @@ export const LoongArkTextareaControl = defineComponent({
         "data-multiline": boolAttr(props.multiline),
       });
   },
-});
+}), lkAutomaticInputStyles);
 
-export const LoongArkInputHelperText = defineComponent({
+export const LoongArkInputHelperText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkInputHelperText",
   props: {
     variant: {
@@ -164,9 +167,9 @@ export const LoongArkInputHelperText = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticInputStyles);
 
-export const LoongArkInputErrorText = defineComponent({
+export const LoongArkInputErrorText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkInputErrorText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -181,9 +184,9 @@ export const LoongArkInputErrorText = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticInputStyles);
 
-export const LoongArkInputLabel = defineComponent({
+export const LoongArkInputLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkInputLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -197,9 +200,9 @@ export const LoongArkInputLabel = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticInputStyles);
 
-export const LoongArkInputPrefix = defineComponent({
+export const LoongArkInputPrefix = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkInputPrefix",
   setup(_, { slots, attrs }) {
     return () =>
@@ -213,9 +216,9 @@ export const LoongArkInputPrefix = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticInputStyles);
 
-export const LoongArkInputSuffix = defineComponent({
+export const LoongArkInputSuffix = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkInputSuffix",
   inheritAttrs: false,
   props: {
@@ -246,4 +249,4 @@ export const LoongArkInputSuffix = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticInputStyles);

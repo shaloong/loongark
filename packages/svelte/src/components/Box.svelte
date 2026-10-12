@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticBoxStyles } from "@loongark/primitives/automatic-styles/box";
+  registerAutomaticStyles(lkAutomaticBoxStyles);
+
   import {
     layoutAttributes,
     layoutStyles,

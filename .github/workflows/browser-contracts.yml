@@ -150,6 +150,7 @@ jobs:
           name: browser-captures-${{ matrix.browser }}-react
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*react*.png
+            .artifacts/automatic-styles/${{ matrix.browser }}/**/*react*.png
             .artifacts/advanced-completion/*react*.png
             .artifacts/date-paste/*react*.png
             .artifacts/gap-completion/*react*.png
@@ -167,6 +168,7 @@ jobs:
           name: browser-captures-${{ matrix.browser }}-vue
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*vue*.png
+            .artifacts/automatic-styles/${{ matrix.browser }}/**/*vue*.png
             .artifacts/advanced-completion/*vue*.png
             .artifacts/date-paste/*vue*.png
             .artifacts/gap-completion/*vue*.png
@@ -184,6 +186,7 @@ jobs:
           name: browser-captures-${{ matrix.browser }}-solid
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*solid*.png
+            .artifacts/automatic-styles/${{ matrix.browser }}/**/*solid*.png
             .artifacts/advanced-completion/*solid*.png
             .artifacts/date-paste/*solid*.png
             .artifacts/gap-completion/*solid*.png
@@ -201,6 +204,7 @@ jobs:
           name: browser-captures-${{ matrix.browser }}-svelte
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*svelte*.png
+            .artifacts/automatic-styles/${{ matrix.browser }}/**/*svelte*.png
             .artifacts/advanced-completion/*svelte*.png
             .artifacts/date-paste/*svelte*.png
             .artifacts/gap-completion/*svelte*.png

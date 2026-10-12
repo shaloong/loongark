@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticFileUploadStyles } from "@loongark/primitives/automatic-styles/file-upload";
 /**
  * File Upload component - Solid wrapper.
  * Uses Ark UI File Upload with data attributes for styling.
@@ -30,7 +33,7 @@ export interface LoongArkFileUploadRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkFileUploadRoot: Component<LoongArkFileUploadRootProps> = (
+export const LoongArkFileUploadRoot: Component<LoongArkFileUploadRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(
@@ -51,7 +54,7 @@ export const LoongArkFileUploadRoot: Component<LoongArkFileUploadRootProps> = (
       {local.children}
     </ArkFileUpload.Root>
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadLabelProps extends Omit<
   ArkFileUploadLabelProps,
@@ -62,14 +65,14 @@ export interface LoongArkFileUploadLabelProps extends Omit<
 
 export const LoongArkFileUploadLabel: Component<
   LoongArkFileUploadLabelProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkFileUpload.Label {...others} data-scope="file-upload" data-part="label">
       {local.children}
     </ArkFileUpload.Label>
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadDropzoneProps extends Omit<
   ArkFileUploadDropzoneProps,
@@ -80,7 +83,7 @@ export interface LoongArkFileUploadDropzoneProps extends Omit<
 
 export const LoongArkFileUploadDropzone: Component<
   LoongArkFileUploadDropzoneProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkFileUpload.Dropzone
@@ -91,7 +94,7 @@ export const LoongArkFileUploadDropzone: Component<
       {local.children}
     </ArkFileUpload.Dropzone>
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadTriggerProps extends Omit<
   ArkFileUploadTriggerProps,
@@ -102,7 +105,7 @@ export interface LoongArkFileUploadTriggerProps extends Omit<
 
 export const LoongArkFileUploadTrigger: Component<
   LoongArkFileUploadTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkFileUpload.Trigger
@@ -113,7 +116,7 @@ export const LoongArkFileUploadTrigger: Component<
       {local.children}
     </ArkFileUpload.Trigger>
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadHiddenInputProps extends Omit<
   ArkFileUploadHiddenInputProps,
@@ -122,7 +125,7 @@ export interface LoongArkFileUploadHiddenInputProps extends Omit<
 
 export const LoongArkFileUploadHiddenInput: Component<
   LoongArkFileUploadHiddenInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkFileUpload.HiddenInput
       {...props}
@@ -130,7 +133,7 @@ export const LoongArkFileUploadHiddenInput: Component<
       data-part="hidden-input"
     />
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadItemGroupProps extends Omit<
   ArkFileUploadItemGroupProps,
@@ -141,7 +144,7 @@ export interface LoongArkFileUploadItemGroupProps extends Omit<
 
 export const LoongArkFileUploadItemGroup: Component<
   LoongArkFileUploadItemGroupProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkFileUpload.ItemGroup
@@ -152,7 +155,7 @@ export const LoongArkFileUploadItemGroup: Component<
       {local.children}
     </ArkFileUpload.ItemGroup>
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadItemProps extends Omit<
   ArkFileUploadItemProps,
@@ -161,7 +164,7 @@ export interface LoongArkFileUploadItemProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkFileUploadItem: Component<LoongArkFileUploadItemProps> = (
+export const LoongArkFileUploadItem: Component<LoongArkFileUploadItemProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -170,7 +173,7 @@ export const LoongArkFileUploadItem: Component<LoongArkFileUploadItemProps> = (
       {local.children}
     </ArkFileUpload.Item>
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadItemPreviewProps extends Omit<
   ArkFileUploadItemPreviewProps,
@@ -181,7 +184,7 @@ export interface LoongArkFileUploadItemPreviewProps extends Omit<
 
 export const LoongArkFileUploadItemPreview: Component<
   LoongArkFileUploadItemPreviewProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkFileUpload.ItemPreview
@@ -192,7 +195,7 @@ export const LoongArkFileUploadItemPreview: Component<
       {local.children}
     </ArkFileUpload.ItemPreview>
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadItemPreviewImageProps extends Omit<
   ArkFileUploadItemPreviewImageProps,
@@ -201,7 +204,7 @@ export interface LoongArkFileUploadItemPreviewImageProps extends Omit<
 
 export const LoongArkFileUploadItemPreviewImage: Component<
   LoongArkFileUploadItemPreviewImageProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkFileUpload.ItemPreviewImage
       {...props}
@@ -209,7 +212,7 @@ export const LoongArkFileUploadItemPreviewImage: Component<
       data-part="item-preview-image"
     />
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadItemNameProps extends Omit<
   ArkFileUploadItemNameProps,
@@ -220,7 +223,7 @@ export interface LoongArkFileUploadItemNameProps extends Omit<
 
 export const LoongArkFileUploadItemName: Component<
   LoongArkFileUploadItemNameProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkFileUpload.ItemName
@@ -231,7 +234,7 @@ export const LoongArkFileUploadItemName: Component<
       {local.children}
     </ArkFileUpload.ItemName>
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadItemSizeTextProps extends Omit<
   ArkFileUploadItemSizeTextProps,
@@ -242,7 +245,7 @@ export interface LoongArkFileUploadItemSizeTextProps extends Omit<
 
 export const LoongArkFileUploadItemSizeText: Component<
   LoongArkFileUploadItemSizeTextProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkFileUpload.ItemSizeText
@@ -253,7 +256,7 @@ export const LoongArkFileUploadItemSizeText: Component<
       {local.children}
     </ArkFileUpload.ItemSizeText>
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadItemDeleteTriggerProps extends Omit<
   ArkFileUploadItemDeleteTriggerProps,
@@ -264,7 +267,7 @@ export interface LoongArkFileUploadItemDeleteTriggerProps extends Omit<
 
 export const LoongArkFileUploadItemDeleteTrigger: Component<
   LoongArkFileUploadItemDeleteTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkFileUpload.ItemDeleteTrigger
@@ -275,7 +278,7 @@ export const LoongArkFileUploadItemDeleteTrigger: Component<
       {local.children}
     </ArkFileUpload.ItemDeleteTrigger>
   );
-};
+}, lkAutomaticFileUploadStyles);
 
 export interface LoongArkFileUploadClearTriggerProps extends Omit<
   ArkFileUploadClearTriggerProps,
@@ -286,7 +289,7 @@ export interface LoongArkFileUploadClearTriggerProps extends Omit<
 
 export const LoongArkFileUploadClearTrigger: Component<
   LoongArkFileUploadClearTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkFileUpload.ClearTrigger
@@ -297,4 +300,4 @@ export const LoongArkFileUploadClearTrigger: Component<
       {local.children}
     </ArkFileUpload.ClearTrigger>
   );
-};
+}, lkAutomaticFileUploadStyles);

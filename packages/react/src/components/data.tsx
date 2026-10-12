@@ -1,4 +1,8 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticChartStyles } from "@loongark/primitives/automatic-styles/chart";
+import { styles as lkAutomaticDataTableStyles } from "@loongark/primitives/automatic-styles/data-table";
+
 
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
@@ -67,7 +71,7 @@ import React, {
   useMemo,
 } from "react";
 export type LoongArkDataTableProps = DataTableProps;
-export const LoongArkChart = (props: ChartOptions) => {
+export const LoongArkChart = /*#__PURE__*/ withAutomaticStyles((props: ChartOptions) => {
   const element = useRef<HTMLDivElement>(null);
   const [measuredWidth, setMeasuredWidth] = useState(0),
     [internal, setInternal] = useState<readonly string[] | undefined>(() =>
@@ -124,13 +128,13 @@ export const LoongArkChart = (props: ChartOptions) => {
       dangerouslySetInnerHTML={{ __html: renderChartMarkup(options) }}
     />
   );
-};
+}, lkAutomaticChartStyles);
 /** HTML内容不变时保留原生控件节点，避免窗口重算覆盖焦点与指针捕获。 */
 function DataTableMarkup({ html, part }: { html: string; part?: string }) {
   const content = useMemo(() => ({ __html: html }), [html]);
   return <span data-part={part} dangerouslySetInnerHTML={content} />;
 }
-export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
+export const LoongArkDataTable = /*#__PURE__*/ withAutomaticStyles((props: LoongArkDataTableProps) => {
   const [internalCellRange, setCellRange] = useState<
     DataTableProps["cellRange"]
   >(() => copyDataTableCellRange(props.defaultCellRange) ?? null);
@@ -1131,4 +1135,4 @@ export const LoongArkDataTable = (props: LoongArkDataTableProps) => {
       </footer>
     </section>
   );
-};
+}, lkAutomaticDataTableStyles);

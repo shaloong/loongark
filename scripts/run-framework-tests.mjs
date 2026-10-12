@@ -1,6 +1,6 @@
 import { spawn } from "node:child_process";
 const critical = new Set([
-  "browser-environment", "framework-consumers", "theme-csp", "provider-core",
+  "automatic-styles", "browser-environment", "framework-consumers", "theme-csp", "provider-core",
   "picker-overlays", "color-picker-contrast", "date-time", "drawer-viewport-focus",
   "data-table-complex-editors", "data-table-range", "editor-timing",
   "code-editor-native-history", "chart-interaction", "questionnaire-custom",
@@ -19,6 +19,7 @@ const child = spawn(
     "tests/framework-consumers.spec.ts",
     "tests/theme-csp.spec.ts",
     "tests/provider-core.spec.ts",
+    "tests/automatic-styles.spec.ts",
     "tests/framework-examples.spec.ts",
     "tests/basic-examples.spec.ts",
     "tests/date-input-paste.spec.ts",

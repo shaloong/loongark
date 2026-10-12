@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticAvatarGroupStyles } from "@loongark/primitives/automatic-styles/avatar-group";
+  registerAutomaticStyles(lkAutomaticAvatarGroupStyles);
+
   import {
     layoutAttributes,
     layoutStyles,

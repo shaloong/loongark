@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPasswordInputStyles } from "@loongark/primitives/automatic-styles/password-input";
 import { useFieldContext } from "@ark-ui/solid/field";
 import { usePasswordInputContext } from "@ark-ui/solid/password-input";
 import {
@@ -36,7 +39,7 @@ export interface LoongArkPasswordInputRootProps extends Omit<
 
 export const LoongArkPasswordInputRoot: Component<
   LoongArkPasswordInputRootProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     {
       size: "md" as PasswordInputSize,
@@ -72,7 +75,7 @@ export const LoongArkPasswordInputRoot: Component<
       {local.children}
     </ArkPasswordInput.Root>
   );
-};
+}, lkAutomaticPasswordInputStyles);
 
 export interface LoongArkPasswordInputLabelProps extends Omit<
   ArkPasswordInputLabelProps,
@@ -83,7 +86,7 @@ export interface LoongArkPasswordInputLabelProps extends Omit<
 
 export const LoongArkPasswordInputLabel: Component<
   LoongArkPasswordInputLabelProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkPasswordInput.Label
@@ -94,7 +97,7 @@ export const LoongArkPasswordInputLabel: Component<
       {local.children}
     </ArkPasswordInput.Label>
   );
-};
+}, lkAutomaticPasswordInputStyles);
 
 export interface LoongArkPasswordInputControlProps extends Omit<
   ArkPasswordInputControlProps,
@@ -108,7 +111,7 @@ export interface LoongArkPasswordInputControlProps extends Omit<
 
 export const LoongArkPasswordInputControl: Component<
   LoongArkPasswordInputControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     {
       size: "md" as PasswordInputSize,
@@ -138,7 +141,7 @@ export const LoongArkPasswordInputControl: Component<
       {local.children}
     </ArkPasswordInput.Control>
   );
-};
+}, lkAutomaticPasswordInputStyles);
 
 export interface LoongArkPasswordInputInputProps extends Omit<
   ArkPasswordInputInputProps,
@@ -152,7 +155,7 @@ export interface LoongArkPasswordInputInputProps extends Omit<
 
 export const LoongArkPasswordInputInput: Component<
   LoongArkPasswordInputInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const field = useFieldContext();
   const api = usePasswordInputContext();
   const merged = mergeProps(
@@ -202,7 +205,7 @@ export const LoongArkPasswordInputInput: Component<
       data-state={local.state !== "default" ? local.state : undefined}
     />
   );
-};
+}, lkAutomaticPasswordInputStyles);
 
 export interface LoongArkPasswordInputIndicatorProps extends Omit<
   ArkPasswordInputIndicatorProps,
@@ -213,7 +216,7 @@ export interface LoongArkPasswordInputIndicatorProps extends Omit<
 
 export const LoongArkPasswordInputIndicator: Component<
   LoongArkPasswordInputIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkPasswordInput.Indicator
@@ -224,7 +227,7 @@ export const LoongArkPasswordInputIndicator: Component<
       {local.children}
     </ArkPasswordInput.Indicator>
   );
-};
+}, lkAutomaticPasswordInputStyles);
 
 export interface LoongArkPasswordInputVisibilityTriggerProps extends Omit<
   ArkPasswordInputVisibilityTriggerProps,
@@ -236,7 +239,7 @@ export interface LoongArkPasswordInputVisibilityTriggerProps extends Omit<
 
 export const LoongArkPasswordInputVisibilityTrigger: Component<
   LoongArkPasswordInputVisibilityTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children", "disabled"]);
   return (
     <ArkPasswordInput.VisibilityTrigger
@@ -252,4 +255,4 @@ export const LoongArkPasswordInputVisibilityTrigger: Component<
       {local.children}
     </ArkPasswordInput.VisibilityTrigger>
   );
-};
+}, lkAutomaticPasswordInputStyles);

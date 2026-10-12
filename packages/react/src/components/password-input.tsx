@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPasswordInputStyles } from "@loongark/primitives/automatic-styles/password-input";
+
 
 import { useFieldContext } from "@ark-ui/react/field";
 import { usePasswordInputContext } from "@ark-ui/react/password-input";
@@ -88,7 +91,7 @@ export interface LoongArkPasswordInputVisibilityTriggerProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkPasswordInputRoot = forwardRef<
+export const LoongArkPasswordInputRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkPasswordInputRootProps
 >(
@@ -118,11 +121,11 @@ export const LoongArkPasswordInputRoot = forwardRef<
       </PasswordInput.Root>
     );
   },
-);
+), lkAutomaticPasswordInputStyles);
 
 LoongArkPasswordInputRoot.displayName = "LoongArkPasswordInputRoot";
 
-export const LoongArkPasswordInputLabel = forwardRef<
+export const LoongArkPasswordInputLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkPasswordInputLabelProps
 >(({ children, ...props }, ref) => {
@@ -136,11 +139,11 @@ export const LoongArkPasswordInputLabel = forwardRef<
       {children}
     </PasswordInput.Label>
   );
-});
+}), lkAutomaticPasswordInputStyles);
 
 LoongArkPasswordInputLabel.displayName = "LoongArkPasswordInputLabel";
 
-export const LoongArkPasswordInputControl = forwardRef<
+export const LoongArkPasswordInputControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkPasswordInputControlProps
 >(({ children, size = "md", state = "default", disabled, ...props }, ref) => {
@@ -159,11 +162,11 @@ export const LoongArkPasswordInputControl = forwardRef<
       {children}
     </PasswordInput.Control>
   );
-});
+}), lkAutomaticPasswordInputStyles);
 
 LoongArkPasswordInputControl.displayName = "LoongArkPasswordInputControl";
 
-export const LoongArkPasswordInputInput = forwardRef<
+export const LoongArkPasswordInputInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkPasswordInputInputProps
 >(({ size = "md", state = "default", disabled, readOnly, ...props }, ref) => {
@@ -191,11 +194,11 @@ export const LoongArkPasswordInputInput = forwardRef<
       data-state={state !== "default" ? state : undefined}
     />
   );
-});
+}), lkAutomaticPasswordInputStyles);
 
 LoongArkPasswordInputInput.displayName = "LoongArkPasswordInputInput";
 
-export const LoongArkPasswordInputIndicator = forwardRef<
+export const LoongArkPasswordInputIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   LoongArkPasswordInputIndicatorProps
 >(({ children, ...props }, ref) => {
@@ -209,11 +212,11 @@ export const LoongArkPasswordInputIndicator = forwardRef<
       {children}
     </PasswordInput.Indicator>
   );
-});
+}), lkAutomaticPasswordInputStyles);
 
 LoongArkPasswordInputIndicator.displayName = "LoongArkPasswordInputIndicator";
 
-export const LoongArkPasswordInputVisibilityTrigger = forwardRef<
+export const LoongArkPasswordInputVisibilityTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkPasswordInputVisibilityTriggerProps
 >(({ children, disabled, ...props }, ref) => {
@@ -231,7 +234,7 @@ export const LoongArkPasswordInputVisibilityTrigger = forwardRef<
       {children}
     </PasswordInput.VisibilityTrigger>
   );
-});
+}), lkAutomaticPasswordInputStyles);
 
 LoongArkPasswordInputVisibilityTrigger.displayName =
   "LoongArkPasswordInputVisibilityTrigger";

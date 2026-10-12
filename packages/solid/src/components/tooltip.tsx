@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTooltipStyles } from "@loongark/primitives/automatic-styles/tooltip";
 import { createMemo, JSX } from "solid-js";
 import {
   Tooltip as ArkTooltip,
@@ -11,13 +14,13 @@ import {
 
 import { LoongArkPortal } from "./portal";
 
-export const LoongArkTooltipRoot = (
+export const LoongArkTooltipRoot = /*#__PURE__*/ withAutomaticStyles((
   props: ArkTooltipRootProps,
 ): JSX.Element => (
   <ArkTooltip.Root {...props} data-scope="tooltip" data-part="root" />
-);
+), lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipTrigger = (
+export const LoongArkTooltipTrigger = /*#__PURE__*/ withAutomaticStyles((
   props: ArkTooltipTriggerProps,
 ): JSX.Element => {
   const merged = createMemo(() => ({ ...props }));
@@ -28,9 +31,9 @@ export const LoongArkTooltipTrigger = (
       data-part="trigger"
     />
   );
-};
+}, lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipPositioner = (
+export const LoongArkTooltipPositioner = /*#__PURE__*/ withAutomaticStyles((
   props: ArkTooltipPositionerProps & { children?: JSX.Element },
 ): JSX.Element => {
   return (
@@ -42,9 +45,9 @@ export const LoongArkTooltipPositioner = (
       />
     </LoongArkPortal>
   );
-};
+}, lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipContent = (
+export const LoongArkTooltipContent = /*#__PURE__*/ withAutomaticStyles((
   props: ArkTooltipContentProps & { interactive?: boolean },
 ): JSX.Element => {
   const interactive = props.interactive ? "true" : undefined;
@@ -56,16 +59,16 @@ export const LoongArkTooltipContent = (
       data-interactive={interactive}
     />
   );
-};
+}, lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipArrow = (
+export const LoongArkTooltipArrow = /*#__PURE__*/ withAutomaticStyles((
   props: ArkTooltipArrowProps,
 ): JSX.Element => (
   <ArkTooltip.Arrow {...props} data-scope="tooltip" data-part="arrow" />
-);
+), lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipArrowTip = (
+export const LoongArkTooltipArrowTip = /*#__PURE__*/ withAutomaticStyles((
   props: ArkTooltipArrowTipProps,
 ): JSX.Element => (
   <ArkTooltip.ArrowTip {...props} data-scope="tooltip" data-part="arrow-tip" />
-);
+), lkAutomaticTooltipStyles);

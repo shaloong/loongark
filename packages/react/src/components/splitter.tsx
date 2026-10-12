@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSplitterStyles } from "@loongark/primitives/automatic-styles/splitter";
+
 
 /**
  * Splitter component - React wrapper.
@@ -26,7 +29,7 @@ export interface LoongArkSplitterRootProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkSplitterRoot = forwardRef<
+export const LoongArkSplitterRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkSplitterRootProps
 >(({ size = "md", children, ...props }, ref) => {
@@ -41,11 +44,11 @@ export const LoongArkSplitterRoot = forwardRef<
       {children}
     </Splitter.Root>
   );
-});
+}), lkAutomaticSplitterStyles);
 
 LoongArkSplitterRoot.displayName = "LoongArkSplitterRoot";
 
-export const LoongArkSplitterPanel = forwardRef<
+export const LoongArkSplitterPanel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkSplitterPanelProps
 >((props, ref) => {
@@ -57,11 +60,11 @@ export const LoongArkSplitterPanel = forwardRef<
       data-part="panel"
     />
   );
-});
+}), lkAutomaticSplitterStyles);
 
 LoongArkSplitterPanel.displayName = "LoongArkSplitterPanel";
 
-export const LoongArkSplitterResizeTrigger = forwardRef<
+export const LoongArkSplitterResizeTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkSplitterResizeTriggerProps
 >((props, ref) => {
@@ -74,11 +77,11 @@ export const LoongArkSplitterResizeTrigger = forwardRef<
       data-part="resize-trigger"
     />
   );
-});
+}), lkAutomaticSplitterStyles);
 
 LoongArkSplitterResizeTrigger.displayName = "LoongArkSplitterResizeTrigger";
 
-export const LoongArkSplitterResizeTriggerIndicator = forwardRef<
+export const LoongArkSplitterResizeTriggerIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkSplitterResizeTriggerIndicatorProps
 >((props, ref) => {
@@ -90,7 +93,7 @@ export const LoongArkSplitterResizeTriggerIndicator = forwardRef<
       data-part="resize-trigger-indicator"
     />
   );
-});
+}), lkAutomaticSplitterStyles);
 
 LoongArkSplitterResizeTriggerIndicator.displayName =
   "LoongArkSplitterResizeTriggerIndicator";

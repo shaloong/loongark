@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticDrawerStyles } from "@loongark/primitives/automatic-styles/drawer";
+  registerAutomaticStyles(lkAutomaticDrawerStyles);
+
   import { Drawer } from "@ark-ui/svelte/drawer";
   import type { ComponentProps } from "svelte";
   const componentId = $props.id();

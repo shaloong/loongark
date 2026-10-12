@@ -1,0 +1,7 @@
+// 由 scripts/generate-automatic-styles.mjs 生成；规则来源为 shared-styles/layout.ts。
+import { createPrimitive } from "../core";
+export const style = /*#__PURE__*/ createPrimitive(
+  { name: "automatic-layout-table", tokens: [], defaults: {} },
+  (theme) => theme.mountStyles("automatic-layout-table", "\n@keyframes lk-pulse { 50% { opacity:.5; } }\n@keyframes lk-spin { to { transform:rotate(360deg); } }\n[data-scope=table][data-part=root] { width:100%; overflow:auto; }\n[data-scope=table][data-part=table] { width:100%; border-collapse:collapse; font-size:var(--lk-typography-fontsize-md); }\n[data-scope=table] [data-part=row] { border-bottom:var(--lk-control-borderwidth) solid var(--lk-color-semantic-border); }\n[data-scope=table] [data-part=row]:hover { background:var(--lk-color-semantic-muted); }\n[data-scope=table] [data-part=head] { text-align:left; height:var(--lk-control-height-lg); padding:0 var(--lk-space-component-sm); font-weight:600; color:var(--lk-color-semantic-foreground); white-space:nowrap; }\n[data-scope=table] [data-part=cell] { padding:var(--lk-space-component-sm); vertical-align:middle; }\n[data-scope=table] [data-part=caption] { margin-top:var(--lk-space-component-md); caption-side:bottom; color:var(--lk-color-semantic-mutedforeground); }\n@keyframes lk-sheet-in { from { opacity:0; transform:translateX(100%); } to { opacity:1; transform:translateX(0); } }\n@keyframes lk-sheet-out { to { opacity:0; transform:translateX(100%); visibility:hidden; } }"),
+  undefined,
+);

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCollapsibleStyles } from "@loongark/primitives/automatic-styles/collapsible";
 /**
  * Collapsible component - Solid wrapper.
  * Based on Ark UI Collapsible.
@@ -22,7 +25,7 @@ export interface LoongArkCollapsibleRootProps extends Omit<
 
 export const LoongArkCollapsibleRoot: Component<
   LoongArkCollapsibleRootProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps({ size: "md" as CollapsibleSize }, props);
 
   return (
@@ -35,11 +38,11 @@ export const LoongArkCollapsibleRoot: Component<
       {props.children}
     </ArkCollapsible.Root>
   );
-};
+}, lkAutomaticCollapsibleStyles);
 
 export const LoongArkCollapsibleTrigger: Component<
   ArkCollapsibleTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCollapsible.Trigger
       {...props}
@@ -49,11 +52,11 @@ export const LoongArkCollapsibleTrigger: Component<
       {props.children}
     </ArkCollapsible.Trigger>
   );
-};
+}, lkAutomaticCollapsibleStyles);
 
 export const LoongArkCollapsibleContent: Component<
   ArkCollapsibleContentProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCollapsible.Content
       {...props}
@@ -63,11 +66,11 @@ export const LoongArkCollapsibleContent: Component<
       {props.children}
     </ArkCollapsible.Content>
   );
-};
+}, lkAutomaticCollapsibleStyles);
 
 export const LoongArkCollapsibleIndicator: Component<
   ArkCollapsibleIndicatorProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCollapsible.Indicator
       {...props}
@@ -77,4 +80,4 @@ export const LoongArkCollapsibleIndicator: Component<
       {props.children}
     </ArkCollapsible.Indicator>
   );
-};
+}, lkAutomaticCollapsibleStyles);

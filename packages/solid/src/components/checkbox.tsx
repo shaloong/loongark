@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCheckboxStyles } from "@loongark/primitives/automatic-styles/checkbox";
 import { useFieldContext } from "@ark-ui/solid/field";
 import { nativeSelectionFieldDescription } from "@loongark/kit";
 import { controlIcons } from "@loongark/kit";
@@ -34,7 +37,7 @@ export interface LoongArkCheckboxIndicatorProps {
 
 // ========== 组件实现 ==========
 
-export const LoongArkCheckboxRoot: Component<LoongArkCheckboxRootProps> = (
+export const LoongArkCheckboxRoot: Component<LoongArkCheckboxRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps({ size: "md" as CheckboxSize }, props);
@@ -48,11 +51,11 @@ export const LoongArkCheckboxRoot: Component<LoongArkCheckboxRootProps> = (
       data-size={local.size}
     />
   );
-};
+}, lkAutomaticCheckboxStyles);
 
 export const LoongArkCheckboxControl: Component<
   LoongArkCheckboxControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps({ size: "md" as CheckboxSize }, props);
   const [local, others] = splitProps(merged, ["size"]);
 
@@ -64,17 +67,17 @@ export const LoongArkCheckboxControl: Component<
       data-size={local.size}
     />
   );
-};
+}, lkAutomaticCheckboxStyles);
 
-export const LoongArkCheckboxLabel: Component<LoongArkCheckboxLabelProps> = (
+export const LoongArkCheckboxLabel: Component<LoongArkCheckboxLabelProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   return <Checkbox.Label {...props} data-scope="checkbox" data-part="label" />;
-};
+}, lkAutomaticCheckboxStyles);
 
 export const LoongArkCheckboxIndicator: Component<
   LoongArkCheckboxIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <Checkbox.Indicator {...props} data-scope="checkbox" data-part="indicator">
       {props.children ?? (
@@ -85,11 +88,11 @@ export const LoongArkCheckboxIndicator: Component<
       )}
     </Checkbox.Indicator>
   );
-};
+}, lkAutomaticCheckboxStyles);
 
 export const LoongArkCheckboxHiddenInput: Component<
   CheckboxHiddenInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const field = useFieldContext();
   const api = useCheckboxContext();
   const ref = nativeSelectionRef(
@@ -112,4 +115,4 @@ export const LoongArkCheckboxHiddenInput: Component<
       data-part="hidden-input"
     />
   );
-};
+}, lkAutomaticCheckboxStyles);

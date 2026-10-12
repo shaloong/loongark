@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticToggleStyles } from "@loongark/primitives/automatic-styles/toggle";
 /**
  * Toggle component - Solid wrapper.
  * Based on Ark UI Toggle.
@@ -18,7 +21,7 @@ export interface LoongArkToggleRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkToggleRoot: Component<LoongArkToggleRootProps> = (
+export const LoongArkToggleRoot: Component<LoongArkToggleRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps({ size: "md" as ToggleSize }, props);
@@ -33,14 +36,14 @@ export const LoongArkToggleRoot: Component<LoongArkToggleRootProps> = (
       {props.children}
     </ArkToggle.Root>
   );
-};
+}, lkAutomaticToggleStyles);
 
 export const LoongArkToggleIndicator: Component<
   ArkToggleIndicatorProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkToggle.Indicator {...props} data-scope="toggle" data-part="indicator">
       {props.children}
     </ArkToggle.Indicator>
   );
-};
+}, lkAutomaticToggleStyles);

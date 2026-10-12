@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticIconStyles } from "@loongark/primitives/automatic-styles/icon";
 import { For, splitProps, type JSX } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { iconAttributes, iconStyles, type IconOptions } from "@loongark/kit";
@@ -6,7 +9,7 @@ export type LoongArkIconProps = Omit<
   "children" | "innerHTML"
 > &
   IconOptions;
-export function LoongArkIcon(props: LoongArkIconProps) {
+function LoongArkIcon(props: LoongArkIconProps) {
   const [local, attrs] = splitProps(props, [
     "icon",
     "size",
@@ -40,3 +43,6 @@ export function LoongArkIcon(props: LoongArkIconProps) {
     </svg>
   );
 }
+
+const lkStyledLoongArkIcon = /*#__PURE__*/ withAutomaticStyles(LoongArkIcon, lkAutomaticIconStyles);
+export { lkStyledLoongArkIcon as LoongArkIcon };

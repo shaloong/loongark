@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticSeparatorStyles } from "@loongark/primitives/automatic-styles/separator";
+  registerAutomaticStyles(lkAutomaticSeparatorStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "hr";
   export let variant: LayoutOptions["variant"] = "default";

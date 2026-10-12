@@ -1,0 +1,13 @@
+import type {} from '../../../automaticStyleProbe';
+import {LoongArkProvider as Provider,LoongArkButton as Button,LoongArkBox as Box,LoongArkNativeSelect as NativeSelect,LoongArkToolbar as Toolbar} from '@loongark/vue';
+import {bootstrapKitAutomatic} from '@loongark/kit/automatic-bootstrap';
+const explicit=new URLSearchParams(location.search).has('explicit');
+const styleBootstrap=explicit?bootstrapKitAutomatic:undefined;
+const nonce=new URLSearchParams(location.search).get('nonce')??undefined;
+const target=document.getElementById('app');if(!target)throw Error('缺少自动样式挂载节点');
+import {createApp,h,ref,shallowRef,onMounted} from 'vue';
+type DialogModule=typeof import('@loongark/vue/dialog');
+createApp({setup(){const mode=ref<'light'|'dark'|'high-contrast'>('light');const first=ref(true),second=ref(true),dialog=shallowRef<DialogModule>();
+onMounted(()=>{window.loongarkAutomaticStyles={ready:true,loadDialog:async()=>{dialog.value=await import('@loongark/vue/dialog');},changeTheme:()=>{mode.value=mode.value==='light'?'dark':mode.value==='dark'?'high-contrast':'light';},removeFirst:()=>{first.value=false;},removeAll:()=>{first.value=false;second.value=false;},loadAfterUnmount:async()=>{await import('@loongark/vue/input');}};});
+const body=(owner:string)=>{const d=dialog.value;return h(Provider,{mode:mode.value,targetId:'automatic-'+owner,nonce,styleBootstrap},()=>h('section',{'data-owner':owner},[h(Box,{padding:'md'},()=>[h(Button,{},()=> 'Automatic button'),h(NativeSelect,{'aria-label':'Automatic selection'},()=>[h('option','One'),h('option','Two')]),h(Toolbar,{'aria-label':'Automatic toolbar'},()=>h(Button,{},()=> 'Toolbar action'))]),d&&h(d.LoongArkDialogRoot,{},()=>[h(d.LoongArkDialogTrigger,{},()=> 'Late dialog'),h(d.LoongArkDialogPortal,{},()=>[h(d.LoongArkDialogOverlay),h(d.LoongArkDialogPositioner,{},()=>h(d.LoongArkDialogContent,{},()=>[h(d.LoongArkDialogTitle,{},()=> 'Late dialog title'),h(d.LoongArkDialogDescription,{},()=> 'Automatically loaded styles.'),h(d.LoongArkDialogCloseTrigger,{},()=> 'Close')]))])])]));};
+return ()=>h('main',[first.value&&body('a'),second.value&&body('b')]);}}).mount(target);

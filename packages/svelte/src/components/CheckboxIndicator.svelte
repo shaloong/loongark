@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticCheckboxStyles } from "@loongark/primitives/automatic-styles/checkbox";
+  registerAutomaticStyles(lkAutomaticCheckboxStyles);
+
   import { controlIcons } from "@loongark/kit";
   import Icon from "./Icon.svelte";
   import { CheckboxIndicator } from "@ark-ui/svelte/checkbox";

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTransferListStyles } from "@loongark/primitives/automatic-styles/transfer-list";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import { createSignal, For, Show, splitProps, type JSX } from "solid-js";
@@ -19,7 +22,7 @@ export type LoongArkTransferListProps = Omit<
   "onChange"
 > &
   TransferListOptions;
-export function LoongArkTransferList(props: LoongArkTransferListProps) {
+function LoongArkTransferList(props: LoongArkTransferListProps) {
   const [local, attrs] = splitProps(props, [
     "items",
     "value",
@@ -184,3 +187,6 @@ export function LoongArkTransferList(props: LoongArkTransferListProps) {
     </div>
   );
 }
+
+const lkStyledLoongArkTransferList = /*#__PURE__*/ withAutomaticStyles(LoongArkTransferList, lkAutomaticTransferListStyles);
+export { lkStyledLoongArkTransferList as LoongArkTransferList };

@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticRatingGroupStyles } from "@loongark/primitives/automatic-styles/rating-group";
+  registerAutomaticStyles(lkAutomaticRatingGroupStyles);
+
   import {
     RatingGroup,
     type RatingGroupRootProps,

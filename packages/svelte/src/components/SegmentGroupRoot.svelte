@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticSegmentGroupStyles } from "@loongark/primitives/automatic-styles/segment-group";
+  registerAutomaticStyles(lkAutomaticSegmentGroupStyles);
+
   import {
     SegmentGroup,
     type SegmentGroupRootProps,

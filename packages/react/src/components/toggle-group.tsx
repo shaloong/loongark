@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticToggleGroupStyles } from "@loongark/primitives/automatic-styles/toggle-group";
+
 
 /**
  * Toggle Group component - React wrapper.
@@ -24,7 +27,7 @@ export interface LoongArkToggleGroupItemProps
   children?: ReactNode;
 }
 
-export const LoongArkToggleGroupRoot = forwardRef<
+export const LoongArkToggleGroupRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkToggleGroupRootProps
 >(({ children, size = "md", orientation = "horizontal", ...props }, ref) => {
@@ -40,11 +43,11 @@ export const LoongArkToggleGroupRoot = forwardRef<
       {children}
     </ToggleGroup.Root>
   );
-});
+}), lkAutomaticToggleGroupStyles);
 
 LoongArkToggleGroupRoot.displayName = "LoongArkToggleGroupRoot";
 
-export const LoongArkToggleGroupItem = forwardRef<
+export const LoongArkToggleGroupItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkToggleGroupItemProps
 >(({ children, ...props }, ref) => {
@@ -58,6 +61,6 @@ export const LoongArkToggleGroupItem = forwardRef<
       {children}
     </ToggleGroup.Item>
   );
-});
+}), lkAutomaticToggleGroupStyles);
 
 LoongArkToggleGroupItem.displayName = "LoongArkToggleGroupItem";

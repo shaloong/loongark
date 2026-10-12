@@ -13,6 +13,10 @@
     "./bootstrap": {
       "types": "./dist/bootstrap.d.ts",
       "import": "./dist/bootstrap.js"
+    },
+    "./automatic-bootstrap": {
+      "types": "./dist/automatic-bootstrap.d.ts",
+      "import": "./dist/automatic-bootstrap.js"
     }
   },
   "files": [
@@ -58,7 +62,5 @@
     "build": "tsc -p tsconfig.json && node ../../scripts/fix-dist-imports.mjs dist"
   },
   "license": "MIT",
-  "sideEffects": [
-    "./dist/bootstrap.js"
-  ]
+  "sideEffects": false
 }

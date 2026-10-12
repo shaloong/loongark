@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticIconStyles } from "@loongark/primitives/automatic-styles/icon";
 import { defineComponent, h, type PropType, type SVGAttributes } from "vue";
 import {
   iconAttributes,
@@ -6,7 +9,7 @@ import {
   type IconNode,
 } from "@loongark/kit";
 export type LoongArkIconProps = Omit<SVGAttributes, "innerHTML"> & IconOptions;
-export const LoongArkIcon = defineComponent({
+export const LoongArkIcon = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkIcon",
   inheritAttrs: false,
   props: {
@@ -49,4 +52,4 @@ export const LoongArkIcon = defineComponent({
         ),
       );
   },
-});
+}), lkAutomaticIconStyles);

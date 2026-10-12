@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticComboboxStyles } from "@loongark/primitives/automatic-styles/combobox";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 /**
@@ -39,7 +42,7 @@ export interface LoongArkComboboxRootProps<
   children?: JSX.Element;
 }
 
-export const LoongArkComboboxRoot = <T extends object>(
+export const LoongArkComboboxRoot = /*#__PURE__*/ withAutomaticStyles(<T extends object>(
   props: LoongArkComboboxRootProps<T>,
 ): JSX.Element => {
   const merged = mergeProps({ size: "md" as ComboboxSize }, props);
@@ -56,39 +59,39 @@ export const LoongArkComboboxRoot = <T extends object>(
       </ArkCombobox.Root>
     </ComboboxContext.Provider>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxLabel: Component<
   ArkComboboxLabelProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.Label {...props} data-scope="combobox" data-part="label">
       {props.children}
     </ArkCombobox.Label>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxControl: Component<
   ArkComboboxControlProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.Control {...props} data-scope="combobox" data-part="control">
       {props.children}
     </ArkCombobox.Control>
   );
-};
+}, lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxInput: Component<ArkComboboxInputProps> = (
+export const LoongArkComboboxInput: Component<ArkComboboxInputProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   return (
     <ArkCombobox.Input {...props} data-scope="combobox" data-part="input" />
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxTrigger: Component<
   ArkComboboxTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.Trigger {...props} data-scope="combobox" data-part="trigger">
       {props.children ?? (
@@ -96,11 +99,11 @@ export const LoongArkComboboxTrigger: Component<
       )}
     </ArkCombobox.Trigger>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxClearTrigger: Component<
   ArkComboboxClearTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.ClearTrigger
       {...props}
@@ -110,11 +113,11 @@ export const LoongArkComboboxClearTrigger: Component<
       {props.children}
     </ArkCombobox.ClearTrigger>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxPositioner: Component<
   ArkComboboxPositionerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.Positioner
       {...props}
@@ -124,11 +127,11 @@ export const LoongArkComboboxPositioner: Component<
       {props.children}
     </ArkCombobox.Positioner>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxContent: Component<
   ArkComboboxContentProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const { size } = useContext(ComboboxContext);
   return (
     <ArkCombobox.Content
@@ -140,21 +143,21 @@ export const LoongArkComboboxContent: Component<
       {props.children}
     </ArkCombobox.Content>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxList: Component<
   ArkComboboxListProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.List {...props} data-scope="combobox" data-part="list">
       {props.children}
     </ArkCombobox.List>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxItemGroup: Component<
   ArkComboboxItemGroupProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.ItemGroup
       {...props}
@@ -164,11 +167,11 @@ export const LoongArkComboboxItemGroup: Component<
       {props.children}
     </ArkCombobox.ItemGroup>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxItemGroupLabel: Component<
   ArkComboboxItemGroupLabelProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.ItemGroupLabel
       {...props}
@@ -178,21 +181,21 @@ export const LoongArkComboboxItemGroupLabel: Component<
       {props.children}
     </ArkCombobox.ItemGroupLabel>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxItem: Component<
   ArkComboboxItemProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.Item {...props} data-scope="combobox" data-part="item">
       {props.children}
     </ArkCombobox.Item>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxItemText: Component<
   ArkComboboxItemTextProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.ItemText
       {...props}
@@ -202,11 +205,11 @@ export const LoongArkComboboxItemText: Component<
       {props.children}
     </ArkCombobox.ItemText>
   );
-};
+}, lkAutomaticComboboxStyles);
 
 export const LoongArkComboboxItemIndicator: Component<
   ArkComboboxItemIndicatorProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkCombobox.ItemIndicator
       {...props}
@@ -216,4 +219,4 @@ export const LoongArkComboboxItemIndicator: Component<
       {props.children ?? <LoongArkIcon icon={controlIcons.check} size="sm" />}
     </ArkCombobox.ItemIndicator>
   );
-};
+}, lkAutomaticComboboxStyles);

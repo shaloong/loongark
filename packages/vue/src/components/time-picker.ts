@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTimePickerStyles } from "@loongark/primitives/automatic-styles/time-picker";
 import { defineComponent, h, ref, useId, type PropType } from "vue";
 import {
   parseTime,
@@ -22,7 +25,7 @@ const part = (name: string) => ({
   "data-scope": "time-picker",
   "data-part": name,
 });
-export const LoongArkTimePicker = defineComponent({
+export const LoongArkTimePicker = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTimePicker",
   inheritAttrs: false,
   props: {
@@ -205,4 +208,4 @@ export const LoongArkTimePicker = defineComponent({
       ]);
     };
   },
-});
+}), lkAutomaticTimePickerStyles);

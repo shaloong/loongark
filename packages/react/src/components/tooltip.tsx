@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTooltipStyles } from "@loongark/primitives/automatic-styles/tooltip";
+
 
 /**
  * Tooltip 组件 - React 封装
@@ -29,11 +32,11 @@ export interface LoongArkTooltipRootProps extends Omit<
   "asChild"
 > {}
 
-export const LoongArkTooltipRoot = (props: LoongArkTooltipRootProps) => {
+export const LoongArkTooltipRoot = /*#__PURE__*/ withAutomaticStyles((props: LoongArkTooltipRootProps) => {
   return <ArkTooltip.Root {...props} data-scope="tooltip" data-part="root" />;
-};
+}, lkAutomaticTooltipStyles);
 
-export const LoongArkTooltipTrigger = forwardRef<
+export const LoongArkTooltipTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkTooltipTriggerProps
 >(({ asChild = true, children, ...rest }, ref) => {
@@ -48,10 +51,10 @@ export const LoongArkTooltipTrigger = forwardRef<
       {children}
     </ArkTooltip.Trigger>
   );
-});
+}), lkAutomaticTooltipStyles);
 LoongArkTooltipTrigger.displayName = "LoongArkTooltipTrigger";
 
-export const LoongArkTooltipPositioner = forwardRef<
+export const LoongArkTooltipPositioner = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkTooltipPositionerProps, "asChild">
 >((props, ref) => {
@@ -65,10 +68,10 @@ export const LoongArkTooltipPositioner = forwardRef<
       />
     </SafePortal>
   );
-});
+}), lkAutomaticTooltipStyles);
 LoongArkTooltipPositioner.displayName = "LoongArkTooltipPositioner";
 
-export const LoongArkTooltipContent = forwardRef<
+export const LoongArkTooltipContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkTooltipContentProps, "asChild"> & { interactive?: boolean }
 >(({ children, interactive, ...rest }, ref) => {
@@ -83,10 +86,10 @@ export const LoongArkTooltipContent = forwardRef<
       {children}
     </ArkTooltip.Content>
   );
-});
+}), lkAutomaticTooltipStyles);
 LoongArkTooltipContent.displayName = "LoongArkTooltipContent";
 
-export const LoongArkTooltipArrow = forwardRef<
+export const LoongArkTooltipArrow = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkTooltipArrowProps, "asChild">
 >((props, ref) => {
@@ -98,10 +101,10 @@ export const LoongArkTooltipArrow = forwardRef<
       data-part="arrow"
     />
   );
-});
+}), lkAutomaticTooltipStyles);
 LoongArkTooltipArrow.displayName = "LoongArkTooltipArrow";
 
-export const LoongArkTooltipArrowTip = forwardRef<
+export const LoongArkTooltipArrowTip = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkTooltipArrowTipProps, "asChild">
 >((props, ref) => {
@@ -113,5 +116,5 @@ export const LoongArkTooltipArrowTip = forwardRef<
       data-part="arrow-tip"
     />
   );
-});
+}), lkAutomaticTooltipStyles);
 LoongArkTooltipArrowTip.displayName = "LoongArkTooltipArrowTip";

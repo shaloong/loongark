@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticJsonTreeViewStyles } from "@loongark/primitives/automatic-styles/json-tree-view";
 import { computed, defineComponent, h, toValue } from "vue";
 import {
   JsonTreeView,
@@ -41,7 +44,7 @@ export type LoongArkJsonTreeViewRootProps = Omit<
   JsonTreeViewRootProps,
   "data"
 > & { data: unknown };
-export const LoongArkJsonTreeViewRoot = defineComponent(
+export const LoongArkJsonTreeViewRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent(
   (props: LoongArkJsonTreeViewRootProps, { attrs, slots, emit }) => {
     const tree = useJsonTreeView(
       computed(() => ({ ...attrs, ...props })),
@@ -107,4 +110,4 @@ export const LoongArkJsonTreeViewRoot = defineComponent(
       "translations",
     ],
   },
-);
+), lkAutomaticJsonTreeViewStyles);

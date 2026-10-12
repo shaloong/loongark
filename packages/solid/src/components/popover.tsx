@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPopoverStyles } from "@loongark/primitives/automatic-styles/popover";
 /**
  * Popover 组件 - Solid 封装
  * 基于 Ark UI Popover，透传 data-scope/data-part 并默认 asChild 避免嵌套
@@ -15,26 +18,26 @@ import {
   type PopoverDescriptionProps as ArkPopoverDescriptionProps,
 } from "@ark-ui/solid/popover";
 
-export const LoongArkPopoverRoot = (props: ArkPopoverRootProps) => (
+export const LoongArkPopoverRoot = /*#__PURE__*/ withAutomaticStyles((props: ArkPopoverRootProps) => (
   <ArkPopover.Root {...props} data-scope="popover" data-part="root" />
-);
+), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverTrigger = (props: ArkPopoverTriggerProps) => {
+export const LoongArkPopoverTrigger = /*#__PURE__*/ withAutomaticStyles((props: ArkPopoverTriggerProps) => {
   const merged = mergeProps({}, props);
   return (
     <ArkPopover.Trigger {...merged} data-scope="popover" data-part="trigger" />
   );
-};
+}, lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverPositioner = (props: ArkPopoverPositionerProps) => (
+export const LoongArkPopoverPositioner = /*#__PURE__*/ withAutomaticStyles((props: ArkPopoverPositionerProps) => (
   <ArkPopover.Positioner
     {...props}
     data-scope="popover"
     data-part="positioner"
   />
-);
+), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverContent = (
+export const LoongArkPopoverContent = /*#__PURE__*/ withAutomaticStyles((
   props: ArkPopoverContentProps & { showArrow?: boolean },
 ) => (
   <ArkPopover.Content
@@ -43,17 +46,17 @@ export const LoongArkPopoverContent = (
     data-part="content"
     data-arrow={props.showArrow ? "true" : undefined}
   />
-);
+), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverArrow = (props: ArkPopoverArrowProps) => (
+export const LoongArkPopoverArrow = /*#__PURE__*/ withAutomaticStyles((props: ArkPopoverArrowProps) => (
   <ArkPopover.Arrow {...props} data-scope="popover" data-part="arrow" />
-);
+), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverTitle = (props: ArkPopoverTitleProps) => (
+export const LoongArkPopoverTitle = /*#__PURE__*/ withAutomaticStyles((props: ArkPopoverTitleProps) => (
   <ArkPopover.Title {...props} data-scope="popover" data-part="title" />
-);
+), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverDescription = (
+export const LoongArkPopoverDescription = /*#__PURE__*/ withAutomaticStyles((
   props: ArkPopoverDescriptionProps,
 ) => (
   <ArkPopover.Description
@@ -61,9 +64,9 @@ export const LoongArkPopoverDescription = (
     data-scope="popover"
     data-part="description"
   />
-);
+), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverCloseTrigger = (
+export const LoongArkPopoverCloseTrigger = /*#__PURE__*/ withAutomaticStyles((
   props: ArkPopoverCloseTriggerProps,
 ) => (
   <ArkPopover.CloseTrigger
@@ -71,4 +74,4 @@ export const LoongArkPopoverCloseTrigger = (
     data-scope="popover"
     data-part="close-trigger"
   />
-);
+), lkAutomaticPopoverStyles);

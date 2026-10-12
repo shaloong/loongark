@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticAlertStyles } from "@loongark/primitives/automatic-styles/alert";
+  registerAutomaticStyles(lkAutomaticAlertStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "div";
   export let variant: LayoutOptions["variant"] = "default";

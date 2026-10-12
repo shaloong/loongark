@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+
 
 /**
  * Tags Input component - React wrapper.
@@ -123,7 +126,7 @@ export interface LoongArkTagsInputHiddenInputProps extends Omit<
   "asChild" | "size"
 > {}
 
-export const LoongArkTagsInputRoot = forwardRef<
+export const LoongArkTagsInputRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkTagsInputRootProps
 >(
@@ -146,11 +149,11 @@ export const LoongArkTagsInputRoot = forwardRef<
       </TagsInput.Root>
     );
   },
-);
+), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputRoot.displayName = "LoongArkTagsInputRoot";
 
-export const LoongArkTagsInputLabel = forwardRef<
+export const LoongArkTagsInputLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkTagsInputLabelProps
 >(({ children, ...props }, ref) => {
@@ -164,11 +167,11 @@ export const LoongArkTagsInputLabel = forwardRef<
       {children}
     </TagsInput.Label>
   );
-});
+}), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputLabel.displayName = "LoongArkTagsInputLabel";
 
-export const LoongArkTagsInputControl = forwardRef<
+export const LoongArkTagsInputControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkTagsInputControlProps
 >(({ children, size = "md", state = "default", disabled, ...props }, ref) => {
@@ -185,11 +188,11 @@ export const LoongArkTagsInputControl = forwardRef<
       {children}
     </TagsInput.Control>
   );
-});
+}), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputControl.displayName = "LoongArkTagsInputControl";
 
-export const LoongArkTagsInputInput = forwardRef<
+export const LoongArkTagsInputInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkTagsInputInputProps
 >(({ size = "md", state = "default", disabled, readOnly, ...props }, ref) => {
@@ -216,11 +219,11 @@ export const LoongArkTagsInputInput = forwardRef<
       data-readonly={isReadOnly ? "true" : undefined}
     />
   );
-});
+}), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputInput.displayName = "LoongArkTagsInputInput";
 
-export const LoongArkTagsInputItem = forwardRef<
+export const LoongArkTagsInputItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkTagsInputItemProps
 >(({ children, ...props }, ref) => {
@@ -234,11 +237,11 @@ export const LoongArkTagsInputItem = forwardRef<
       {children}
     </TagsInput.Item>
   );
-});
+}), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputItem.displayName = "LoongArkTagsInputItem";
 
-export const LoongArkTagsInputItemPreview = forwardRef<
+export const LoongArkTagsInputItemPreview = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkTagsInputItemPreviewProps
 >(({ children, ...props }, ref) => {
@@ -252,11 +255,11 @@ export const LoongArkTagsInputItemPreview = forwardRef<
       {children}
     </TagsInput.ItemPreview>
   );
-});
+}), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputItemPreview.displayName = "LoongArkTagsInputItemPreview";
 
-export const LoongArkTagsInputItemText = forwardRef<
+export const LoongArkTagsInputItemText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   LoongArkTagsInputItemTextProps
 >(({ children, ...props }, ref) => {
@@ -270,11 +273,11 @@ export const LoongArkTagsInputItemText = forwardRef<
       {children}
     </TagsInput.ItemText>
   );
-});
+}), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputItemText.displayName = "LoongArkTagsInputItemText";
 
-export const LoongArkTagsInputItemInput = forwardRef<
+export const LoongArkTagsInputItemInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkTagsInputItemInputProps
 >((props, ref) => {
@@ -286,11 +289,11 @@ export const LoongArkTagsInputItemInput = forwardRef<
       data-part="item-input"
     />
   );
-});
+}), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputItemInput.displayName = "LoongArkTagsInputItemInput";
 
-export const LoongArkTagsInputItemDeleteTrigger = forwardRef<
+export const LoongArkTagsInputItemDeleteTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkTagsInputItemDeleteTriggerProps
 >(({ children, ...props }, ref) => {
@@ -304,12 +307,12 @@ export const LoongArkTagsInputItemDeleteTrigger = forwardRef<
       {children}
     </TagsInput.ItemDeleteTrigger>
   );
-});
+}), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputItemDeleteTrigger.displayName =
   "LoongArkTagsInputItemDeleteTrigger";
 
-export const LoongArkTagsInputClearTrigger = forwardRef<
+export const LoongArkTagsInputClearTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkTagsInputClearTriggerProps
 >(({ children, ...props }, ref) => {
@@ -323,11 +326,11 @@ export const LoongArkTagsInputClearTrigger = forwardRef<
       {children}
     </TagsInput.ClearTrigger>
   );
-});
+}), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputClearTrigger.displayName = "LoongArkTagsInputClearTrigger";
 
-export const LoongArkTagsInputHiddenInput = forwardRef<
+export const LoongArkTagsInputHiddenInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkTagsInputHiddenInputProps
 >((props, ref) => {
@@ -340,6 +343,6 @@ export const LoongArkTagsInputHiddenInput = forwardRef<
       data-part="hidden-input"
     />
   );
-});
+}), lkAutomaticTagsInputStyles);
 
 LoongArkTagsInputHiddenInput.displayName = "LoongArkTagsInputHiddenInput";

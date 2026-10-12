@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticListboxStyles } from "@loongark/primitives/automatic-styles/listbox";
 /**
  * Listbox component - Solid wrapper.
  * Uses Ark UI Listbox with data attributes for styling.
@@ -24,7 +27,7 @@ export interface LoongArkListboxRootProps<
   children?: JSX.Element;
 }
 
-export const LoongArkListboxRoot = <T extends object>(
+export const LoongArkListboxRoot = /*#__PURE__*/ withAutomaticStyles(<T extends object>(
   props: LoongArkListboxRootProps<T>,
 ): JSX.Element => {
   const merged = mergeProps(
@@ -47,31 +50,31 @@ export const LoongArkListboxRoot = <T extends object>(
       {props.children}
     </ArkListbox.Root>
   );
-};
+}, lkAutomaticListboxStyles);
 
 export const LoongArkListboxLabel: Component<
   ArkListboxLabelProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkListbox.Label {...props} data-scope="listbox" data-part="label">
       {props.children}
     </ArkListbox.Label>
   );
-};
+}, lkAutomaticListboxStyles);
 
 export const LoongArkListboxList: Component<
   ArkListboxListProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkListbox.Content {...props} data-scope="listbox" data-part="list">
       {props.children}
     </ArkListbox.Content>
   );
-};
+}, lkAutomaticListboxStyles);
 
 export const LoongArkListboxItemGroup: Component<
   ArkListboxItemGroupProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkListbox.ItemGroup
       {...props}
@@ -81,11 +84,11 @@ export const LoongArkListboxItemGroup: Component<
       {props.children}
     </ArkListbox.ItemGroup>
   );
-};
+}, lkAutomaticListboxStyles);
 
 export const LoongArkListboxItemGroupLabel: Component<
   ArkListboxItemGroupLabelProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkListbox.ItemGroupLabel
       {...props}
@@ -95,31 +98,31 @@ export const LoongArkListboxItemGroupLabel: Component<
       {props.children}
     </ArkListbox.ItemGroupLabel>
   );
-};
+}, lkAutomaticListboxStyles);
 
 export const LoongArkListboxItem: Component<
   ArkListboxItemProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkListbox.Item {...props} data-scope="listbox" data-part="item">
       {props.children}
     </ArkListbox.Item>
   );
-};
+}, lkAutomaticListboxStyles);
 
 export const LoongArkListboxItemText: Component<
   ArkListboxItemTextProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkListbox.ItemText {...props} data-scope="listbox" data-part="item-text">
       {props.children}
     </ArkListbox.ItemText>
   );
-};
+}, lkAutomaticListboxStyles);
 
 export const LoongArkListboxItemIndicator: Component<
   ArkListboxItemIndicatorProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkListbox.ItemIndicator
       {...props}
@@ -129,4 +132,4 @@ export const LoongArkListboxItemIndicator: Component<
       {props.children}
     </ArkListbox.ItemIndicator>
   );
-};
+}, lkAutomaticListboxStyles);

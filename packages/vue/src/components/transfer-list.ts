@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTransferListStyles } from "@loongark/primitives/automatic-styles/transfer-list";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import { defineComponent, h, ref, type PropType } from "vue";
@@ -15,7 +18,7 @@ const part = (name: string) => ({
   "data-scope": "transfer-list",
   "data-part": name,
 });
-export const LoongArkTransferList = defineComponent({
+export const LoongArkTransferList = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTransferList",
   inheritAttrs: false,
   props: {
@@ -197,4 +200,4 @@ export const LoongArkTransferList = defineComponent({
         ),
       ]);
   },
-});
+}), lkAutomaticTransferListStyles);

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticScrollAreaStyles } from "@loongark/primitives/automatic-styles/scroll-area";
 import { renderPart } from "../render-part";
 /**
  * Scroll Area component - Vue wrapper.
@@ -7,7 +10,7 @@ import { defineComponent, h, type PropType } from "vue";
 import { ScrollArea as ArkScrollArea } from "@ark-ui/vue/scroll-area";
 import type { ScrollAreaSize } from "@loongark/primitives";
 
-export const LoongArkScrollAreaRoot = defineComponent({
+export const LoongArkScrollAreaRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkScrollAreaRoot",
   props: {
     size: {
@@ -29,9 +32,9 @@ export const LoongArkScrollAreaRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticScrollAreaStyles);
 
-export const LoongArkScrollAreaViewport = defineComponent({
+export const LoongArkScrollAreaViewport = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkScrollAreaViewport",
   setup(_, { slots, attrs }) {
     return () =>
@@ -46,9 +49,9 @@ export const LoongArkScrollAreaViewport = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticScrollAreaStyles);
 
-export const LoongArkScrollAreaContent = defineComponent({
+export const LoongArkScrollAreaContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkScrollAreaContent",
   setup(_, { slots, attrs }) {
     return () =>
@@ -62,9 +65,9 @@ export const LoongArkScrollAreaContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticScrollAreaStyles);
 
-export const LoongArkScrollAreaScrollbar = defineComponent({
+export const LoongArkScrollAreaScrollbar = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkScrollAreaScrollbar",
   setup(_, { slots, attrs }) {
     return () =>
@@ -78,9 +81,9 @@ export const LoongArkScrollAreaScrollbar = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticScrollAreaStyles);
 
-export const LoongArkScrollAreaThumb = defineComponent({
+export const LoongArkScrollAreaThumb = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkScrollAreaThumb",
   setup(_, { slots, attrs }) {
     return () =>
@@ -94,9 +97,9 @@ export const LoongArkScrollAreaThumb = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticScrollAreaStyles);
 
-export const LoongArkScrollAreaCorner = defineComponent({
+export const LoongArkScrollAreaCorner = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkScrollAreaCorner",
   setup(_, { slots, attrs }) {
     return () =>
@@ -110,4 +113,4 @@ export const LoongArkScrollAreaCorner = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticScrollAreaStyles);

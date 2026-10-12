@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTocStyles } from "@loongark/primitives/automatic-styles/toc";
 import {
   Toc,
   useTocContext,
@@ -7,14 +10,14 @@ import {
 import { tocNavId, tocControlKeys } from "@loongark/kit";
 import { splitProps } from "solid-js";
 import { useToc } from "./use-toc";
-export const LoongArkTocRoot = (props: TocRootProps) => {
+export const LoongArkTocRoot = /*#__PURE__*/ withAutomaticStyles((props: TocRootProps) => {
   const [controls, dom] = splitProps(props, tocControlKeys);
   const toc = useToc(controls);
   return <Toc.RootProvider value={toc} {...dom} />;
-};
-export const LoongArkTocNav = (props: TocNavProps) => {
+}, lkAutomaticTocStyles);
+export const LoongArkTocNav = /*#__PURE__*/ withAutomaticStyles((props: TocNavProps) => {
   const toc = useTocContext();
   return (
     <Toc.Nav {...props} id={props.id ?? tocNavId(toc().getRootProps().id)} />
   );
-};
+}, lkAutomaticTocStyles);

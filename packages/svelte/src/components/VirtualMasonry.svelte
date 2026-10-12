@@ -10,6 +10,10 @@
 </script>
 
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticVirtualMasonryStyles } from "@loongark/primitives/automatic-styles/virtual-masonry";
+  registerAutomaticStyles(lkAutomaticVirtualMasonryStyles);
+
   import { onMount, untrack } from "svelte";
   import { createVirtualMasonry, mountVirtualMasonry } from "@loongark/kit";
   let {

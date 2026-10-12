@@ -1,3 +1,4 @@
+import { publishedWorkspacePlugin } from "./published-workspace-plugin.mjs";
 import assert from "node:assert/strict";
 import { mkdir, writeFile, cp, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -21,7 +22,7 @@ assert.ok(Buffer.byteLength(coreCSS)<Buffer.byteLength(css)/4,'Core Button CSS �
 const coreStyles={bytes:Buffer.byteLength(coreCSS),gzip:gzipSync(coreCSS).length,brotli:brotliCompressSync(coreCSS).length};
 const report = { coreStyles, node: process.version, mode: "production", sharedStyles: { bytes: Buffer.byteLength(css), gzip: gzipSync(css).length, brotli: brotliCompressSync(css).length }, measurements: [] };
 for (const framework of ["react", "vue", "solid", "svelte"]) {
-  for (const scenario of ["button", "button-subpath", "provider-button", "core-provider-button", "table", "editor", "deferred-editor"]) {
+  for (const scenario of ["button", "button-subpath", "provider-button", "root-provider-button", "core-provider-button", "table", "editor", "deferred-editor"]) {
     const root = resolve(destination, `${framework}-${scenario}`);
     await mkdir(root, { recursive: true });
     const exported =
@@ -36,8 +37,8 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
         : scenario === 'button-subpath' ? `import {LoongArkButton} from '@loongark/${framework}/button'; window.component=LoongArkButton;`
         : scenario === 'provider-button' ? `import {LoongArkProvider} from '@loongark/${framework}/provider'; import {LoongArkButton} from '@loongark/${framework}/button'; window.components=[LoongArkProvider,LoongArkButton];`
         : `import {${exported}} from '@loongark/${framework}'; window.component=${exported};`;
-    if (scenario === 'provider-button' || scenario === 'core-provider-button') {
-      const imports = (scenario==='core-provider-button'?`import {LoongArkProviderCore as LoongArkProvider} from '@loongark/${framework}/provider-core';import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';import {buttonPrimitive} from '@loongark/primitives/button';const styleBootstrap=createPrimitiveStyleBootstrap([buttonPrimitive]);`:`import {LoongArkProvider} from '@loongark/${framework}/provider';`)+`import {LoongArkButton} from '@loongark/${framework}/button';`;
+    if (['provider-button','root-provider-button','core-provider-button'].includes(scenario)) {
+      const imports = (scenario==='core-provider-button'?`import {LoongArkProviderCore as LoongArkProvider} from '@loongark/${framework}/provider-core';import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';import {buttonPrimitive} from '@loongark/primitives/button';const styleBootstrap=createPrimitiveStyleBootstrap([buttonPrimitive]);`:`import {LoongArkProvider} from '@loongark/${framework}${scenario==='root-provider-button'?'':'/provider'}';`)+`import {LoongArkButton} from '@loongark/${framework}${scenario==='root-provider-button'?'':'/button'}';`;
       const props=scenario==='core-provider-button'?'styleBootstrap':'undefined';
       if (framework === 'react') entry = `import {createElement as h} from 'react';import {createRoot} from 'react-dom/client';${imports}createRoot(document.getElementById('app')).render(h(LoongArkProvider,{styleBootstrap:${props}},h(LoongArkButton,{},'Save')));`;
       if (framework === 'vue') entry = `import {createApp,h} from 'vue';${imports}createApp({render:()=>h(LoongArkProvider,{styleBootstrap:${props}},()=>h(LoongArkButton,{},()=> 'Save'))}).mount('#app');`;
@@ -59,7 +60,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       base: "./",
       mode: "production",
       logLevel: "error",
-      plugins: [
+      plugins: [await publishedWorkspacePlugin(),
         ...(framework === "svelte" ? [svelte()] : []),
         {
           name: "published-workspace-entry",
@@ -161,7 +162,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
         measurement.allEditorModules.length > 0,
         "编辑器能力必须保留在真实产物中",
       );
-    if (['button','button-subpath','provider-button','core-provider-button'].includes(scenario)) assert.deepEqual(measurement.initialAdvancedRuntimeModules, [], `${framework}/${scenario} 包含无关高级运行时`);
+    if (['button','button-subpath','provider-button','root-provider-button','core-provider-button'].includes(scenario)) assert.deepEqual(measurement.initialAdvancedRuntimeModules, [], `${framework}/${scenario} 包含无关高级运行时`);
     report.measurements.push(measurement);
     if (scenario === "deferred-editor")
       await cp(
@@ -180,7 +181,9 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
 for(const framework of ["react","vue","solid","svelte"]) {
  const full=report.measurements.find(m=>m.framework===framework&&m.scenario==="provider-button");
  const core=report.measurements.find(m=>m.framework===framework&&m.scenario==="core-provider-button");
- assert.ok(core.initial.gzip<full.initial.gzip*.9,`${framework} Core 应减少实际生产首包`);
+ const root=report.measurements.find(m=>m.framework===framework&&m.scenario==="root-provider-button");
+ assert.ok(full.initial.gzip<=core.initial.gzip+6000,`${framework} 默认自动启动器不应重新包含完整 CSS`);
+ assert.ok(root.initial.gzip<=full.initial.gzip+1000,`${framework} 根入口应与子路径一样裁剪样式`);
 }
 await writeFile(
   resolve(destination, "report.json"),

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticInputStyles } from "@loongark/primitives/automatic-styles/input";
 import { dataProps } from "../data-props";
 import type { JSX } from "solid-js";
 import { Field, useFieldContext } from "@ark-ui/solid/field";
@@ -72,39 +75,39 @@ const buildControlProps = <P extends BaseInput>(
 
 export const LoongArkInputRoot: Component<
   BaseInput & import("@ark-ui/solid/field").FieldRootProps
-> = (props) =>
+> = /*#__PURE__*/ withAutomaticStyles((props) =>
   Field.Root(
     mergeProps(buildControlProps("root", props), {
       get "data-disabled"() {
         return boolAttr(props.disabled);
       },
     }),
-  );
+  ), lkAutomaticInputStyles);
 
 export const LoongArkInputControl: Component<
   BaseInput & Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "size">
-> = (props) => Field.Input(buildControlProps("control", props));
+> = /*#__PURE__*/ withAutomaticStyles((props) => Field.Input(buildControlProps("control", props)), lkAutomaticInputStyles);
 
-export const LoongArkInputInput = LoongArkInputControl;
+export const LoongArkInputInput = /*#__PURE__*/ withAutomaticStyles(LoongArkInputControl, lkAutomaticInputStyles);
 
 export const LoongArkInputGroup: Component<
   BaseInput & JSX.HTMLAttributes<HTMLDivElement>
-> = (props) =>
-  ark.div(mergeProps(props, { "data-scope": "input", "data-part": "group" }));
+> = /*#__PURE__*/ withAutomaticStyles((props) =>
+  ark.div(mergeProps(props, { "data-scope": "input", "data-part": "group" })), lkAutomaticInputStyles);
 
 export const LoongArkTextareaControl: Component<
   BaseInput & JSX.TextareaHTMLAttributes<HTMLTextAreaElement>
-> = (props) =>
+> = /*#__PURE__*/ withAutomaticStyles((props) =>
   Field.Textarea(
     buildControlProps("control", mergeProps(props, { multiline: true })),
-  );
+  ), lkAutomaticInputStyles);
 
 interface HelperProps extends Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
   variant?: "default" | "error" | "success";
   children?: JSX.Element;
 }
 
-export const LoongArkInputHelperText: Component<HelperProps> = (props) => {
+export const LoongArkInputHelperText: Component<HelperProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const { variant = "default", children, ...rest } = props;
   return (props.variant === "error" ? Field.ErrorText : Field.HelperText)(
     dataProps({
@@ -115,9 +118,9 @@ export const LoongArkInputHelperText: Component<HelperProps> = (props) => {
       "data-variant": variant === "default" ? undefined : variant,
     }),
   );
-};
+}, lkAutomaticInputStyles);
 
-export const LoongArkInputErrorText: Component<Omit<HelperProps, "variant">> = (
+export const LoongArkInputErrorText: Component<Omit<HelperProps, "variant">> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) =>
   Field.ErrorText(
@@ -126,17 +129,17 @@ export const LoongArkInputErrorText: Component<Omit<HelperProps, "variant">> = (
       "data-part": "helper-text",
       "data-variant": "error",
     }),
-  );
+  ), lkAutomaticInputStyles);
 
 export const LoongArkInputLabel: Component<
   Omit<JSX.HTMLAttributes<HTMLElement>, "ref">
-> = (props) =>
+> = /*#__PURE__*/ withAutomaticStyles((props) =>
   Field.Label(
     mergeProps(props, {
       "data-scope": "input",
       "data-part": "label",
     }),
-  );
+  ), lkAutomaticInputStyles);
 
 interface InputAddonProps extends Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
   children?: JSX.Element;
@@ -147,16 +150,16 @@ interface InputSuffixProps extends InputAddonProps {
   action?: "clear" | "button" | "none" | "text";
 }
 
-export const LoongArkInputPrefix: Component<InputAddonProps> = (props) =>
+export const LoongArkInputPrefix: Component<InputAddonProps> = /*#__PURE__*/ withAutomaticStyles((props) =>
   ark.span(
     dataProps({
       ...props,
       "data-scope": "input",
       "data-part": "prefix",
     }),
-  );
+  ), lkAutomaticInputStyles);
 
-export const LoongArkInputSuffix: Component<InputSuffixProps> = (props) => {
+export const LoongArkInputSuffix: Component<InputSuffixProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const field = useFieldContext();
   const [local, rest] = splitProps(props, ["action", "disabled"]);
   const isAction = () =>
@@ -185,4 +188,4 @@ export const LoongArkInputSuffix: Component<InputSuffixProps> = (props) => {
       },
     }),
   );
-};
+}, lkAutomaticInputStyles);

@@ -4,7 +4,7 @@
 
 [在线 Storybook](https://shaloong.github.io/loongark/) · [使用文档](docs/README.md) · [组件目录](docs/component-coverage.md) · [参与开发](CONTRIBUTING.md) · [安全说明](SECURITY.md)
 
-基础页面可使用 `provider-core` 与显式 Primitives 样式，减少共享 CSS；默认 Provider 保持完整接入。按需用法、SSR 与 CSP 边界见 [主题指南](docs/theme-system.md#按需样式)。
+默认 Provider 随实际组件入口自动加载样式，命名导入与子路径均可在生产构建中裁剪；`provider-core` 保留显式选择样式的控制。按需用法、SSR 与 CSP 边界见 [主题指南](docs/theme-system.md#按需样式)。
 
 ## 提供什么
 

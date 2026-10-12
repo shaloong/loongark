@@ -10,25 +10,8 @@ import { messageScrollerCSS } from "./message-scroller-styles";
 import { conversationCSS } from "./conversation-styles";
 
 
-export interface KitComponentRegistration {
-  name: string;
-  mount(theme: LoongArkTheme): void;
-}
-
-export const kitRegistry: KitComponentRegistration[] = [];
-
-export const registerKitComponent = (component: KitComponentRegistration) => {
-  const existingIndex = kitRegistry.findIndex(
-    (registered) => registered.name === component.name,
-  );
-
-  if (existingIndex >= 0) {
-    kitRegistry[existingIndex] = component;
-    return;
-  }
-
-  kitRegistry.push(component);
-};
+import { kitRegistry, registerKitComponent } from "./component-registry";
+export { kitRegistry, registerKitComponent, type KitComponentRegistration } from "./component-registry";
 
 export const bootstrapKit = (theme: LoongArkTheme) => {
   primitiveRegistry.forEach((primitive) => primitive.apply(theme));

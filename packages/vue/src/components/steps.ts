@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticStepsStyles } from "@loongark/primitives/automatic-styles/steps";
 import { renderPart } from "../render-part";
 /**
  * Steps component - Vue wrapper.
@@ -11,7 +14,7 @@ export interface StepsChangeDetails {
   step: number;
 }
 
-export const LoongArkStepsRoot = defineComponent({
+export const LoongArkStepsRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsRoot",
   inheritAttrs: false,
   emits: ["stepChange", "update:step", "stepComplete", "stepInvalid"],
@@ -63,9 +66,9 @@ export const LoongArkStepsRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);
 
-export const LoongArkStepsList = defineComponent({
+export const LoongArkStepsList = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsList",
   setup(_, { slots, attrs }) {
     return () =>
@@ -79,9 +82,9 @@ export const LoongArkStepsList = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);
 
-export const LoongArkStepsItem = defineComponent({
+export const LoongArkStepsItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsItem",
   props: {
     index: {
@@ -104,9 +107,9 @@ export const LoongArkStepsItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);
 
-export const LoongArkStepsIndicator = defineComponent({
+export const LoongArkStepsIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -120,9 +123,9 @@ export const LoongArkStepsIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);
 
-export const LoongArkStepsSeparator = defineComponent({
+export const LoongArkStepsSeparator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsSeparator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -136,9 +139,9 @@ export const LoongArkStepsSeparator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);
 
-export const LoongArkStepsTrigger = defineComponent({
+export const LoongArkStepsTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -152,9 +155,9 @@ export const LoongArkStepsTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);
 
-export const LoongArkStepsContent = defineComponent({
+export const LoongArkStepsContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsContent",
   setup(_, { slots, attrs }) {
     return () =>
@@ -168,9 +171,9 @@ export const LoongArkStepsContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);
 
-export const LoongArkStepsCompletedContent = defineComponent({
+export const LoongArkStepsCompletedContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsCompletedContent",
   setup(_, { slots, attrs }) {
     return () =>
@@ -184,9 +187,9 @@ export const LoongArkStepsCompletedContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);
 
-export const LoongArkStepsProgress = defineComponent({
+export const LoongArkStepsProgress = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsProgress",
   setup(_, { slots, attrs }) {
     return () =>
@@ -200,9 +203,9 @@ export const LoongArkStepsProgress = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);
 
-export const LoongArkStepsNextTrigger = defineComponent({
+export const LoongArkStepsNextTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsNextTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -216,9 +219,9 @@ export const LoongArkStepsNextTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);
 
-export const LoongArkStepsPrevTrigger = defineComponent({
+export const LoongArkStepsPrevTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkStepsPrevTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -232,4 +235,4 @@ export const LoongArkStepsPrevTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticStepsStyles);

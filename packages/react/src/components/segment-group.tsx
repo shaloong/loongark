@@ -1,4 +1,7 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSegmentGroupStyles } from "@loongark/primitives/automatic-styles/segment-group";
+
 
 /**
  * Segment Group component - React wrapper.
@@ -27,7 +30,7 @@ export interface LoongArkSegmentGroupItemProps
   children?: ReactNode;
 }
 
-export const LoongArkSegmentGroupRoot = forwardRef<
+export const LoongArkSegmentGroupRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkSegmentGroupRootProps
 >(({ children, size = "md", orientation = "horizontal", ...props }, ref) => {
@@ -43,11 +46,11 @@ export const LoongArkSegmentGroupRoot = forwardRef<
       {children}
     </SegmentGroup.Root>
   );
-});
+}), lkAutomaticSegmentGroupStyles);
 
 LoongArkSegmentGroupRoot.displayName = "LoongArkSegmentGroupRoot";
 
-export const LoongArkSegmentGroupItem = forwardRef<
+export const LoongArkSegmentGroupItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkSegmentGroupItemProps
 >(({ children, ...props }, ref) => {
@@ -61,6 +64,6 @@ export const LoongArkSegmentGroupItem = forwardRef<
       {children}
     </SegmentGroup.Item>
   );
-});
+}), lkAutomaticSegmentGroupStyles);
 
 LoongArkSegmentGroupItem.displayName = "LoongArkSegmentGroupItem";

@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticJsonTreeViewStyles } from "@loongark/primitives/automatic-styles/json-tree-view";
+  registerAutomaticStyles(lkAutomaticJsonTreeViewStyles);
+
   import {
     JsonTreeView,
     type JsonTreeViewRootProps,

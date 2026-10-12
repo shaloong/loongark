@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticClipboardStyles } from "@loongark/primitives/automatic-styles/clipboard";
 /**
  * Clipboard component - Solid wrapper.
  * Uses Ark UI Clipboard with data attributes for styling.
@@ -24,7 +27,7 @@ export interface LoongArkClipboardRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkClipboardRoot: Component<LoongArkClipboardRootProps> = (
+export const LoongArkClipboardRoot: Component<LoongArkClipboardRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(
@@ -46,7 +49,7 @@ export const LoongArkClipboardRoot: Component<LoongArkClipboardRootProps> = (
       {local.children}
     </ArkClipboard.Root>
   );
-};
+}, lkAutomaticClipboardStyles);
 
 export interface LoongArkClipboardLabelProps extends Omit<
   ArkClipboardLabelProps,
@@ -55,7 +58,7 @@ export interface LoongArkClipboardLabelProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkClipboardLabel: Component<LoongArkClipboardLabelProps> = (
+export const LoongArkClipboardLabel: Component<LoongArkClipboardLabelProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -64,7 +67,7 @@ export const LoongArkClipboardLabel: Component<LoongArkClipboardLabelProps> = (
       {local.children}
     </ArkClipboard.Label>
   );
-};
+}, lkAutomaticClipboardStyles);
 
 export interface LoongArkClipboardControlProps extends Omit<
   ArkClipboardControlProps,
@@ -75,7 +78,7 @@ export interface LoongArkClipboardControlProps extends Omit<
 
 export const LoongArkClipboardControl: Component<
   LoongArkClipboardControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkClipboard.Control
@@ -86,20 +89,20 @@ export const LoongArkClipboardControl: Component<
       {local.children}
     </ArkClipboard.Control>
   );
-};
+}, lkAutomaticClipboardStyles);
 
 export interface LoongArkClipboardInputProps extends Omit<
   ArkClipboardInputProps,
   "asChild"
 > {}
 
-export const LoongArkClipboardInput: Component<LoongArkClipboardInputProps> = (
+export const LoongArkClipboardInput: Component<LoongArkClipboardInputProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   return (
     <ArkClipboard.Input {...props} data-scope="clipboard" data-part="input" />
   );
-};
+}, lkAutomaticClipboardStyles);
 
 export interface LoongArkClipboardTriggerProps extends Omit<
   ArkClipboardTriggerProps,
@@ -110,7 +113,7 @@ export interface LoongArkClipboardTriggerProps extends Omit<
 
 export const LoongArkClipboardTrigger: Component<
   LoongArkClipboardTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkClipboard.Trigger
@@ -121,7 +124,7 @@ export const LoongArkClipboardTrigger: Component<
       {local.children}
     </ArkClipboard.Trigger>
   );
-};
+}, lkAutomaticClipboardStyles);
 
 export interface LoongArkClipboardIndicatorProps extends Omit<
   ArkClipboardIndicatorProps,
@@ -132,7 +135,7 @@ export interface LoongArkClipboardIndicatorProps extends Omit<
 
 export const LoongArkClipboardIndicator: Component<
   LoongArkClipboardIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkClipboard.Indicator
@@ -143,7 +146,7 @@ export const LoongArkClipboardIndicator: Component<
       {local.children}
     </ArkClipboard.Indicator>
   );
-};
+}, lkAutomaticClipboardStyles);
 
 export interface LoongArkClipboardValueTextProps extends Omit<
   ArkClipboardValueTextProps,
@@ -154,7 +157,7 @@ export interface LoongArkClipboardValueTextProps extends Omit<
 
 export const LoongArkClipboardValueText: Component<
   LoongArkClipboardValueTextProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkClipboard.ValueText
@@ -165,4 +168,4 @@ export const LoongArkClipboardValueText: Component<
       {local.children}
     </ArkClipboard.ValueText>
   );
-};
+}, lkAutomaticClipboardStyles);
