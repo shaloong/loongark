@@ -1,0 +1,13 @@
+import {LoongArkProviderCore as Provider} from '@loongark/vue/provider-core';
+import {LoongArkButton as Button} from '@loongark/vue/button';
+import {LoongArkDialogRoot as DialogRoot,LoongArkDialogTrigger as DialogTrigger,LoongArkDialogPortal as DialogPortal,LoongArkDialogOverlay as DialogOverlay,LoongArkDialogPositioner as DialogPositioner,LoongArkDialogContent as DialogContent,LoongArkDialogTitle as DialogTitle,LoongArkDialogDescription as DialogDescription,LoongArkDialogCloseTrigger as DialogCloseTrigger} from '@loongark/vue/dialog';
+import {LoongArkInputRoot as InputRoot,LoongArkInputControl as InputControl,LoongArkInputLabel as InputLabel} from '@loongark/vue/input';import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';
+import {buttonPrimitive} from '@loongark/primitives/button';
+import {dialogPrimitive} from '@loongark/primitives/dialog';
+import {inputPrimitive} from '@loongark/primitives/input';
+const buttonStyles=createPrimitiveStyleBootstrap([buttonPrimitive]);
+const initialStyles=createPrimitiveStyleBootstrap([buttonPrimitive,dialogPrimitive]);
+const extraStyles=createPrimitiveStyleBootstrap([inputPrimitive,dialogPrimitive,buttonPrimitive]);
+const nonce=new URLSearchParams(location.search).get('nonce')??undefined;
+const target=document.getElementById('app');if(!target)throw Error('缺少 Core 挂载节点');import {createApp,defineComponent,h,ref} from 'vue';const App=defineComponent({setup(){const mode=ref<'light'|'dark'|'high-contrast'>('light'),extra=ref(false),shown=ref(true),second=ref(false);return()=>h('div',{},[h('button',{onClick:()=>shown.value=!shown.value},'Toggle provider'),h('button',{onClick:()=>second.value=!second.value},'Toggle survivor'),second.value&&h(Provider,{nonce,mode:'dark',styleBootstrap:buttonStyles},{default:()=>h(Button,{},()=> 'Survivor')}),shown.value&&h(Provider,{mode:mode.value,nonce,styleBootstrap:extra.value?extraStyles:initialStyles},{default:()=>h('section',{style:{padding:'24px',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}},[
+h(Button,{onClick:()=>mode.value=mode.value==='light'?'dark':mode.value==='dark'?'high-contrast':'light'},()=> 'Theme'),h(Button,{onClick:()=>extra.value=!extra.value},()=> 'Change styles'),h(Button,{},()=> 'Core button'),h(InputRoot,{},()=>[h(InputLabel,{},()=> 'Email'),h(InputControl,{'data-testid':'core-input'})]),h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()=>[h(DialogOverlay),h(DialogPositioner,{},()=>h(DialogContent,{},()=>[h(DialogTitle,{},()=> 'Core dialog'),h(DialogDescription,{},()=> 'Shared theme and selected styles.'),h(DialogCloseTrigger,{},()=> 'Close')]))])])])})]);}});createApp(App).mount('#app');

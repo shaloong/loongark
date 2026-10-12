@@ -848,3 +848,5 @@ export type { VirtualMasonryProps } from "./components/VirtualMasonry.svelte";
 
 export { parseLocalizedDate, parseDateTime, parseZonedDateTime } from "@loongark/kit";
 export type { LocalizedDateOptions } from "@loongark/kit";
+
+export { LoongArkProviderCore, type LoongArkProviderCoreProps } from "./provider-core";

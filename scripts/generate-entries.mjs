@@ -8,6 +8,7 @@ const normalize = value => value.replace(/[^a-z0-9]/gi, '').toLowerCase();
 const slug = value => value.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/\s+/g, '-').toLowerCase();
 const owner = name => coverage.families.filter(family => normalize(name).replace(/^loongark/, '').replace(/^use/, '').startsWith(normalize(family))).sort((a,b) => normalize(b).length - normalize(a).length)[0];
 function groupFor(name) {
+  if (['LoongArkProviderCore','LoongArkProviderCoreProps'].includes(name)) return 'provider-core';
   if (['LoongArkProvider','LoongArkProviderProps','useLoongArkTheme','createThemeStore','ThemeStoreOptions','createLoongArkVuePlugin','VuePluginOptions'].includes(name)) return 'provider';
   if (/Command/.test(name)) return 'command';
   if (/Collection|^createAsync|^useAsyncList$|^(?:Use|use)?ListSelection/.test(name)) return 'collection';
@@ -61,7 +62,7 @@ for (const framework of ['react','vue','solid','svelte']) {
   }
   const exports = await exportsOf(resolve(`packages/${framework}/src/index.ts`));
   const groups = new Map(coverage.families.map(family => [slug(family), []]));
-  for (const name of ['provider','collection','portal','toolbar','locale','environment']) groups.set(name, []);
+  for (const name of ['provider','provider-core','collection','portal','toolbar','locale','environment']) groups.set(name, []);
   for (const [name,entry] of exports) {
     const group = groupFor(name);
     if (!group) continue;

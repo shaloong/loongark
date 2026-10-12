@@ -2,6 +2,16 @@
   "extends": "./tsconfig.playwright.json",
   "compilerOptions": {
     "paths": {
+      "@loongark/react/*": ["./packages/react/dist/entries/*.d.ts"],
+      "@loongark/react/editors": ["./packages/react/dist/components/editors.d.ts"],
+      "@loongark/vue/*": ["./packages/vue/dist/entries/*.d.ts"],
+      "@loongark/vue/editors": ["./packages/vue/dist/components/editors.d.ts"],
+      "@loongark/solid/*": ["./packages/solid/dist/entries/*.d.ts"],
+      "@loongark/solid/editors": ["./packages/solid/dist/components/editors.d.ts"],
+      "@loongark/svelte/*": ["./packages/svelte/dist/entries/*.d.ts"],
+      "@loongark/svelte/editors": ["./packages/svelte/dist/components/editors.d.ts"],
+      "@loongark/primitives/*": ["./packages/primitives/dist/*.d.ts"],
+      "@loongark/primitives/pin-input": ["./packages/primitives/dist/pinInput.d.ts"],
       "@loongark/tokens": ["./packages/tokens/dist/index.d.ts"],
       "@loongark/theme": ["./packages/theme/dist/index.d.ts"],
       "@loongark/primitives": ["./packages/primitives/dist/index.d.ts"],

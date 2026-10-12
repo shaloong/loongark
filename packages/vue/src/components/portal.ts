@@ -1,6 +1,6 @@
 import { renderPart } from "../render-part";
 import { defineComponent, h, Teleport } from "vue";
-import { useOptionalTheme } from "../provider";
+import { useOptionalTheme } from "../provider-core";
 export const LoongArkPortal = defineComponent({
   name: "LoongArkPortal",
   props: { disabled: { type: Boolean, default: false } },

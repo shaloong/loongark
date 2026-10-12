@@ -738,6 +738,12 @@
       "node": "./dist/server/entries/provider.js",
       "import": "./dist/entries/provider.js"
     },
+    "./provider-core": {
+      "types": "./dist/entries/provider-core.d.ts",
+      "browser": "./dist/entries/provider-core.js",
+      "node": "./dist/server/entries/provider-core.js",
+      "import": "./dist/entries/provider-core.js"
+    },
     "./collection": {
       "types": "./dist/entries/collection.d.ts",
       "browser": "./dist/entries/collection.js",

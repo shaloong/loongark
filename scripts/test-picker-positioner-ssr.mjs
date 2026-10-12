@@ -75,7 +75,7 @@ await build({
   plugins: [svelte()],
   resolve: {
     alias: {
-      "@loongark/kit/bootstrap": resolve("packages/kit/dist/bootstrap.js"),
+      "@loongark/primitives/styles": resolve("packages/primitives/dist/styles.js"), "@loongark/kit/bootstrap": resolve("packages/kit/dist/bootstrap.js"),
       ...alias,
     },
     dedupe: ["svelte"],

@@ -1,0 +1,15 @@
+import {LoongArkProviderCore as Provider} from '@loongark/solid/provider-core';
+import {LoongArkButton as Button} from '@loongark/solid/button';
+import {LoongArkDialogRoot as DialogRoot,LoongArkDialogTrigger as DialogTrigger,LoongArkDialogPortal as DialogPortal,LoongArkDialogOverlay as DialogOverlay,LoongArkDialogPositioner as DialogPositioner,LoongArkDialogContent as DialogContent,LoongArkDialogTitle as DialogTitle,LoongArkDialogDescription as DialogDescription,LoongArkDialogCloseTrigger as DialogCloseTrigger} from '@loongark/solid/dialog';
+import {LoongArkInputRoot as InputRoot,LoongArkInputControl as InputControl,LoongArkInputLabel as InputLabel} from '@loongark/solid/input';import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';
+import {buttonPrimitive} from '@loongark/primitives/button';
+import {dialogPrimitive} from '@loongark/primitives/dialog';
+import {inputPrimitive} from '@loongark/primitives/input';
+const buttonStyles=createPrimitiveStyleBootstrap([buttonPrimitive]);
+const initialStyles=createPrimitiveStyleBootstrap([buttonPrimitive,dialogPrimitive]);
+const extraStyles=createPrimitiveStyleBootstrap([inputPrimitive,dialogPrimitive,buttonPrimitive]);
+const nonce=new URLSearchParams(location.search).get('nonce')??undefined;
+const target=document.getElementById('app');if(!target)throw Error('缺少 Core 挂载节点');import {createSignal,Show} from 'solid-js';import {render} from 'solid-js/web';function App(){const [mode,setMode]=createSignal<'light'|'dark'|'high-contrast'>('light');const [extra,setExtra]=createSignal(false);const [shown,setShown]=createSignal(true);const [second,setSecond]=createSignal(false);return <><button onClick={()=>setShown(!shown())}>Toggle provider</button><button onClick={()=>setSecond(!second())}>Toggle survivor</button><Show when={second()}><Provider nonce={nonce} mode="dark" styleBootstrap={buttonStyles}><Button>Survivor</Button></Provider></Show><Show when={shown()}><Provider mode={mode()} nonce={nonce} styleBootstrap={extra()?extraStyles:initialStyles}><section style={{padding:'24px',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}}><Button onClick={()=>setMode(mode()==='light'?'dark':mode()==='dark'?'high-contrast':'light')}>Theme</Button>
+<Button onClick={()=>setExtra(!extra())}>Change styles</Button><Button>Core button</Button>
+<InputRoot><InputLabel>Email</InputLabel><InputControl data-testid="core-input" /></InputRoot>
+<DialogRoot><DialogTrigger>Open dialog</DialogTrigger><DialogPortal><DialogOverlay/><DialogPositioner><DialogContent><DialogTitle>Core dialog</DialogTitle><DialogDescription>Shared theme and selected styles.</DialogDescription><DialogCloseTrigger>Close</DialogCloseTrigger></DialogContent></DialogPositioner></DialogPortal></DialogRoot></section></Provider></Show></>;}render(()=><App/>,target);

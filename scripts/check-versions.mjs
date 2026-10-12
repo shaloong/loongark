@@ -1,12 +1,14 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, writeFile, mkdir } from "node:fs/promises";
-import { tmpdir } from "node:os";
+import { mkdtemp, readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { chromium } from "@playwright/test";
 
 // 临时消费项目先生成自身锁文件，再冻结安装；不修改或放宽仓库锁文件。
-const root = await mkdtemp(resolve(tmpdir(), "loongark-minimum-"));
+const consumers = resolve(".artifacts/releases/consumers");
+await mkdir(consumers, { recursive: true });
+const root = await mkdtemp(resolve(consumers, "loongark-minimum-"));
+try {
 const packs = JSON.parse(
   await readFile(".artifacts/releases/packages/report.json", "utf8"),
 );
@@ -195,3 +197,7 @@ console.log(
   "最低 peer 版本真实打包消费、四端 SSR 和浏览器点击通过。",
   versions,
 );
+
+} finally {
+  await rm(root, { recursive: true, force: true });
+}

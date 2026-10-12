@@ -3,10 +3,10 @@ import {
   copyFile,
   mkdir,
   mkdtemp,
+  rm,
   readFile,
   writeFile,
 } from "node:fs/promises";
-import { tmpdir } from "node:os";
 import { basename, resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { runRscCommand } from "./run-rsc-command.mjs";
@@ -18,7 +18,10 @@ import AxeBuilder from "@axe-core/playwright";
 // 用实际发布包验证 RSC，不能用 alias、模拟 React 或开发服务器代替生产构建。
 const artifacts = resolve(".artifacts/releases/react-rsc");
 await mkdir(artifacts, { recursive: true });
-const root = await mkdtemp(resolve(tmpdir(), "loongark-react-rsc-"));
+const consumers = resolve(".artifacts/releases/consumers");
+await mkdir(consumers, { recursive: true });
+const root = await mkdtemp(resolve(consumers, "loongark-react-rsc-"));
+try {
 await mkdir(resolve(root, "packages"));
 const reports = JSON.parse(
   await readFile(".artifacts/releases/packages/report.json", "utf8"),
@@ -93,6 +96,16 @@ import Interactive from '${prefix}interactive';import Styles from '${prefix}styl
 export default function Page(){const date=parseLocalizedDate('12/10/2026',{locale:'en-GB'});if(!date)throw Error('服务端日期解析失败');return <><Styles id="${id}"/><LoongArkProvider targetId="${id}" mode="dark"><main style={{background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)',minHeight:'100dvh'}}><p>{date.toString()}</p><LoongArkButton>服务端导入按钮</LoongArkButton><Interactive/></main></LoongArkProvider></>;}`,
   );
 }
+// 按需启动器留在客户端组合内，服务端独立序列化相同 CSS。
+await mkdir(resolve(root, "app/core"), { recursive: true });
+await writeFile(resolve(root, "app/core/interactive.js"), `'use client';
+import {LoongArkProviderCore} from '@loongark/react/provider-core';
+import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';
+import {buttonPrimitive} from '@loongark/primitives/button';
+import Interactive from '../interactive';
+const styleBootstrap=createPrimitiveStyleBootstrap([buttonPrimitive]);
+export default function Core({date,children}){return <LoongArkProviderCore targetId="rsc-core" mode="dark" styleBootstrap={styleBootstrap}><main style={{background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)',minHeight:'100dvh'}}><p>{date}</p>{children}<Interactive/></main></LoongArkProviderCore>;}`);
+await writeFile(resolve(root, "app/core/page.js"), `import Core from './interactive';import {LoongArkButton} from '@loongark/react/button';import {parseLocalizedDate} from '@loongark/react/date-picker';import {createLoongArkTheme} from '@loongark/theme';import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';import {buttonPrimitive} from '@loongark/primitives/button';export default function Page(){const date=parseLocalizedDate('12/10/2026',{locale:'en-GB'});if(!date)throw Error('Core 服务端日期解析失败');const theme=createLoongArkTheme({targetId:'rsc-core',mode:'dark'});createPrimitiveStyleBootstrap([buttonPrimitive])(theme);const css=theme.toStyleSheet();if(css.includes('[data-scope=editor]')||css.length>60000)throw Error('Core SSR 未裁剪样式');return <><style dangerouslySetInnerHTML={{__html:css}}/><Core date={date.toString()}><LoongArkButton>服务端导入按钮</LoongArkButton></Core></>;}`);
 const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1" };
 let installRetries = 0;
 async function run(args, name) {
@@ -162,7 +175,7 @@ try {
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(message.text());
   });
-  for (const route of ["/", "/subpaths"]) {
+  for (const route of ["/", "/subpaths", "/core"]) {
     const html = await (await fetch(url + route)).text();
     assert.ok(
       html.includes("服务端导入按钮") && html.includes("2026-10-12"),
@@ -194,12 +207,13 @@ try {
       .analyze();
     assert.deepEqual(violations, [], "RSC 深色页面必须保留可读表面和语义");
     await page.screenshot({
-      path: resolve(artifacts, route === "/" ? "root.png" : "subpaths.png"),
+      path: resolve(artifacts, route === "/" ? "root.png" : route === "/core" ? "core.png" : "subpaths.png"),
     });
     results.push({
       route,
       serverComponents: true,
       serverDateParser: true,
+      coreStyles: route === "/core",
       hydratedClicks: 2,
     });
   }
@@ -209,7 +223,7 @@ try {
     JSON.stringify({ next, react, installRetries, results }, null, 2),
   );
   console.log(
-    `Next.js ${next} 实际 tarball：根入口/按需入口服务端导入、SSR 样式、纯工具与水合交互通过`,
+    `Next.js ${next} 实际 tarball：根入口/按需入口服务端导入、Core 样式选择、SSR 样式、纯工具与水合交互通过`,
   );
 } finally {
   await browser?.close();
@@ -218,4 +232,9 @@ try {
     await once(server, "exit");
   }
   await writeFile(resolve(artifacts, "server.log"), serverLog);
+}
+
+} finally {
+  // 消费项目仅用于隔离验收；日志、截图和报告已经保存在外部 Artifact 目录。
+  await rm(root, { recursive: true, force: true });
 }

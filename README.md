@@ -4,6 +4,8 @@
 
 [在线 Storybook](https://shaloong.github.io/loongark/) · [使用文档](docs/README.md) · [组件目录](docs/component-coverage.md) · [参与开发](CONTRIBUTING.md) · [安全说明](SECURITY.md)
 
+基础页面可使用 `provider-core` 与显式 Primitives 样式，减少共享 CSS；默认 Provider 保持完整接入。按需用法、SSR 与 CSP 边界见 [主题指南](docs/theme-system.md#按需样式)。
+
 ## 提供什么
 
 - 常用组件：布局、按钮、输入、选择、导航、反馈、弹层、日期与表单组合。

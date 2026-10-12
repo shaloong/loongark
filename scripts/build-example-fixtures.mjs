@@ -1,4 +1,4 @@
-import { mkdir, readdir, writeFile } from "node:fs/promises";
+import { mkdir, readdir, writeFile, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { build } from "vite";
 import react from "@vitejs/plugin-react";
@@ -21,6 +21,15 @@ const alias = Object.fromEntries(
     resolve("packages", name, "dist/index.js"),
   ]),
 );
+// 子路径直达当前发布入口，避免根 alias 把 /styles 等解析成 index.js/styles。
+const subpaths={};
+for(const name of ['react','vue','solid','svelte','primitives','kit','theme','tokens']) {
+  const pkg=JSON.parse(await readFile(`packages/${name}/package.json`,'utf8'));
+  for(const [key,entry] of Object.entries(pkg.exports)) {
+    if(!key.startsWith('./')||key==='./package.json')continue;
+    subpaths['@loongark/'+name+key.slice(1)]=resolve('packages',name,entry.browser??entry.import);
+  }
+}
 const surface =
   'style="padding:24px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)"';
 for (const framework of ["react", "vue", "solid", "svelte"]) {
@@ -68,7 +77,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
     root: folder,
     base: `/examples-${framework}/`,
     resolve: {
-      alias: { "@loongark/kit/bootstrap": resolve("packages/kit/dist/bootstrap.js"), ...alias },
+      alias: { ...subpaths, ...alias },
       dedupe: ["react", "react-dom", "vue", "solid-js", "svelte"],
     },
     plugins:

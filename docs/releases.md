@@ -65,7 +65,7 @@ SSR 分别记录5个新进程的冷导入；每进程预热5次、每场景30次
 
 准备正式发布时：
 
-`pnpm check:release` 成功后运行 `pnpm check:rsc`，用实际 tarball 在 Next.js 16.4.0 / 当前 React 上生产构建根入口及按需入口，验证服务端命名组件导入、纯日期工具、SSR 样式和水合后的鼠标/键盘交互。该专项已接入 Release readiness，日志、截图和报告保留在 `.artifacts/releases/react-rsc/`；不等于承诺所有 Next.js 版本、编译器或宿主配置。
+`pnpm check:release` 成功后运行 `pnpm check:rsc`，用实际 tarball 在 Next.js 16.4.0 / 当前 React 上生产构建根入口及按需入口，验证服务端命名组件导入、纯日期工具、SSR 样式和水合后的鼠标/键盘交互；另测 Core 客户端组合与服务端显式样式选择，避免把启动器函数跨 RSC 边界传递。该专项已接入 Release readiness，日志、截图和报告保留在 `.artifacts/releases/react-rsc/`；不等于承诺所有 Next.js 版本、编译器或宿主配置。
 
 1. 在 develop 同步9个包版本、锁文件、CHANGELOG 和迁移说明，按 CONTRIBUTING 顺序验证，再执行性能/打包/最低版本专项。
 2. 创建 develop → main PR，说明最终行为、版本、验证范围和迁移事项；审阅并合并，保留提交历史。

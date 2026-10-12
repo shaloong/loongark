@@ -148,7 +148,7 @@ h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()
     root: folder,
     base: `/${framework}/`,
     resolve: {
-      alias: { "@loongark/kit/bootstrap": resolve("packages/kit/dist/bootstrap.js"), ...alias },
+      alias: { "@loongark/primitives/styles": resolve("packages/primitives/dist/styles.js"), "@loongark/kit/bootstrap": resolve("packages/kit/dist/bootstrap.js"), ...alias },
       dedupe: ["react", "react-dom", "solid-js", "svelte", "vue"],
     },
     plugins:
@@ -246,3 +246,5 @@ await build({
   },
 });
 console.log("二维网格/瀑布流共享发布模块浏览器消费构建通过");
+
+await import('./build-core-fixtures.mjs');

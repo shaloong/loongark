@@ -494,6 +494,10 @@
       "types": "./dist/entries/provider.d.ts",
       "import": "./dist/entries/provider.js"
     },
+    "./provider-core": {
+      "types": "./dist/entries/provider-core.d.ts",
+      "import": "./dist/entries/provider-core.js"
+    },
     "./collection": {
       "types": "./dist/entries/collection.d.ts",
       "import": "./dist/entries/collection.js"

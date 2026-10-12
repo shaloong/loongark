@@ -72,6 +72,10 @@
       ],
       "@loongark/svelte/editors": [
         "./packages/svelte/src/components/editors"
+      ],
+      "@loongark/primitives/pin-input": ["./packages/primitives/src/pinInput.ts"],
+      "@loongark/primitives/*": [
+        "./packages/primitives/src/*"
       ]
     }
   }

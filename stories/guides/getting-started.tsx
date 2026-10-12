@@ -1,6 +1,13 @@
+/// <reference types="vite/client" />
 import React, { useState } from "react";
 import { Source } from "@storybook/addon-docs/blocks";
 import { LoongArkButton, LoongArkProvider } from "@loongark/react";
+
+import coreReact from "../../examples/react/CoreProviderExample.tsx?raw";
+import coreVue from "../../examples/vue/CoreProviderExample.ts?raw";
+import coreSolid from "../../examples/solid/CoreProviderExample.tsx?raw";
+import coreSvelte from "../../examples/svelte/CoreProviderExample.svelte?raw";
+const coreExamples = { react: coreReact, vue: coreVue, solid: coreSolid, svelte: coreSvelte };
 
 const examples = {
   react: `// App.tsx（React 18+）
@@ -63,6 +70,9 @@ export function GettingStarted() {
     <p>根入口支持具名导入与 ESM tree shaking；逐组件路径便于明确依赖。复合组件的 Root、Trigger、Content 等部件在同一个组件路径，不是每个部件一个路径。每个组件的 Docs 页提供其对应路径和四端示例。</p>
     <Source dark={mode === "dark"} code={`import { LoongArkProvider, LoongArkButton } from "@loongark/${framework}";\n// 同样支持：\nimport { LoongArkProvider } from "@loongark/${framework}/provider";\nimport { LoongArkButton } from "@loongark/${framework}/button";`} language="typescript" />
     <p>mode 默认 light，可选 dark、high-contrast；brand 默认中性，vi 启用 Shaloong 品牌强调。Provider 只保留一份共享样式，组件代码仍按需裁剪。系统主题由应用读取 prefers-color-scheme 后传入 mode；motionPreference 默认 auto，遵循减弱动效偏好。嵌套 Provider 可设置局部主题。</p>
+    <h2>按需样式</h2>
+    <p>基础页面可使用 provider-core，显式选择实际部件样式；默认 Provider 保持完整样式。额外安装 @loongark/primitives，不依赖应用对传递包的隐式访问。Kit 高级组合继续使用完整 Provider，或提供自己的样式启动器。React RSC 的启动器函数留在客户端模块，服务端另生成相同首屏 CSS。</p>
+    <Source dark={mode === "dark"} code={coreExamples[framework]} language={framework === "svelte" ? "html" : "tsx"} />
     <h2>SSR 首屏与浮层</h2>
     <p>Provider 使用稳定的作用域 ID；Solid 的 node 条件自动选择服务端实现，Svelte 由宿主编译。服务端首屏 CSS 需要按请求创建主题并序列化，不要跨请求共享状态。将下面 CSS 放在 HTML head 的 style 元素中，Provider 使用相同 targetId 与主题选项；HTML 输出交给框架或模板的可信样式插入接口。React 内置 use client 边界，Next.js 服务端页面可直接导入 Provider 和命名组件；hooks、事件处理器、Ark 集合工厂及客户端命名空间组合仍放在应用客户端模块。跨边界 Props 需可序列化，RSC 仍需正确输出 SSR 样式。</p>
     <Source dark={mode === "dark"} code={`import { createLoongArkTheme } from "@loongark/theme";\nimport { bootstrapKit } from "@loongark/kit/bootstrap";\nconst theme = createLoongArkTheme({ targetId: "app-theme", mode: "light" });\nbootstrapKit(theme);\nconst css = theme.toStyleSheet();\n// 对应根组件：<LoongArkProvider targetId="app-theme" mode="light">…</LoongArkProvider>`} language="typescript" />

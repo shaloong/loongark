@@ -27,6 +27,27 @@ Provider 的作用域容器使用 `display: contents`，保留宿主布局；它
 
 nonce 不授权 style 属性、第三方编辑器或调用方自建的 style。应用需分别配置 `style-src-attr`；CodeMirror 扩展可通过 `EditorView.cspNonce.of(nonce)` 配置其引擎样式，其他插件按自身契约处理。这不是对所有严格 CSP 策略的兼容承诺。
 
+### 按需样式
+
+默认 `LoongArkProvider` 自动加载完整 Primitives 与 Kit 样式，适合高级组合。基础页面可从 `@loongark/<framework>/provider-core` 引入 `LoongArkProviderCore`，只加载通用语义、焦点和动效，再显式选择实际使用的 Primitives。以下示例中的 `react` 可替换为 `vue`、`solid` 或 `svelte`：
+
+应用需显式安装 `@loongark/<framework>` 与 `@loongark/primitives`；pnpm 不保证应用可以直接导入传递依赖。
+
+```ts
+import { LoongArkProviderCore } from "@loongark/react/provider-core";
+import { createPrimitiveStyleBootstrap } from "@loongark/primitives/styles";
+import { buttonPrimitive } from "@loongark/primitives/button";
+
+// 在模块作用域创建，保持引用稳定；所有用到的部件样式都需选择。
+const styleBootstrap = createPrimitiveStyleBootstrap([buttonPrimitive]);
+```
+
+React/Solid 使用 `<LoongArkProviderCore styleBootstrap={styleBootstrap}>`；Vue 模板使用 `:style-bootstrap="styleBootstrap"`，render 函数传入 `{ styleBootstrap }`；Svelte 使用 `<LoongArkProviderCore {styleBootstrap}>`。四端完整代码见 `examples/<framework>/CoreProviderExample`。动态更新启动器会替换作用域主题，重复选择去重并保持默认注册顺序。
+
+Core 不会自动补齐未选择的组件样式。Kit 的高级组合与自定义注册可继续使用完整 Provider，或提供应用自己的 `styleBootstrap(theme)`；不要只覆盖完整 Provider 的启动器就假定其静态依赖已经裁剪。Core 不自动引入完整 Kit 注册表。
+
+SSR 在每个请求中创建主题，并调用同一个启动器，再序列化 `theme.toStyleSheet()`。nonce、targetId 与主题选项仍需与客户端一致。Next.js 中选择样式的 Provider 组合放在应用的客户端模块，启动器函数不能作为服务端到客户端的 Props；服务端可以单独用纯 Primitives 启动器生成首屏 CSS。
+
 底层 API：
 
 ```ts
