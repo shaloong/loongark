@@ -19,6 +19,8 @@ export interface CreateThemeOptions {
   overrides?: TokenOverrides;
   targetId?: string;
   motionPreference?: "auto" | "force";
+  /** 当前文档 CSP 允许的样式 nonce；由宿主按请求生成。 */
+  nonce?: string;
 }
 export interface LoongArkTheme {
   readonly id: string;
@@ -58,6 +60,7 @@ export const mountStyleSheet = (
   css: string,
   host?: StyleHost,
   owner = "external",
+  nonce?: string,
 ): (() => void) => {
   const target = host ?? globalThis.document;
   if (!target) return () => {};
@@ -69,6 +72,7 @@ export const mountStyleSheet = (
   if (!entry) {
     const element = hostDocument(target).createElement("style");
     element.id = key;
+    if (nonce !== undefined) element.nonce = nonce;
     (isDocument(target) ? target.head : target).appendChild(element);
     entry = { element, owners: new Set() };
     styles.set(key, entry);
@@ -132,6 +136,7 @@ class ThemeRuntime implements LoongArkTheme {
   private tokenState: TokenRegistry;
   private readonly motion: "auto" | "force";
   private readonly scopedOnServer: boolean;
+  private readonly nonce?: string;
   private host?: StyleHost;
   private scope?: HTMLElement;
   private target?: ThemeTarget;
@@ -144,6 +149,7 @@ class ThemeRuntime implements LoongArkTheme {
     motion: string | null;
   };
   constructor(options: CreateThemeOptions = {}) {
+    this.nonce = options.nonce;
     this.scopedOnServer = Boolean(options.targetId);
     this.id = (options.targetId ?? `loongark-theme-${++sequence}`).replace(
       /[^a-zA-Z0-9_-]/g,
@@ -249,7 +255,7 @@ class ThemeRuntime implements LoongArkTheme {
     this.releases.get(this.id)?.();
     this.releases.set(
       this.id,
-      mountStyleSheet(this.id, this.toCSS(), this.host, this.id),
+      mountStyleSheet(this.id, this.toCSS(), this.host, this.id, this.nonce),
     );
   }
   mountStyles(
@@ -262,7 +268,10 @@ class ThemeRuntime implements LoongArkTheme {
     if (!this.host) return;
     const id = `loongark-${layer}-${key.replace(/-(light|dark|high-contrast)$/, "")}`;
     this.releases.get(id)?.();
-    this.releases.set(id, mountStyleSheet(id, css, this.host, this.id));
+    this.releases.set(
+      id,
+      mountStyleSheet(id, css, this.host, this.id, this.nonce),
+    );
   }
   getPortalContainer(): HTMLElement | undefined {
     const host = this.host ?? globalThis.document;

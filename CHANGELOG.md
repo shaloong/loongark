@@ -11,6 +11,8 @@
 
 ### 组件与维护
 
+- 共享 Theme 和四端 Provider 支持可选样式 `nonce`，在 DOM 插入前配置变量、Primitives 与 Kit style；增加浏览器实际 CSP 响应头的允许/拒绝、主题更新与四端交互回归，说明 SSR、内联属性和第三方引擎的独立边界。
+
 - React 运行时模块保留 `use client` 边界，支持 Next.js App Router 服务端页面直接导入根入口及按需命名组件；增加真实 tarball 生产构建、SSR 样式与水合交互回归，纯日期工具仍可在服务端使用。
 
 - Playwright 类型检查新增源码覆盖守卫，拒绝被配置静默排除的测试文件，覆盖入口导入的辅助模块及独立 Svelte 编译单元；补充 main 保护所需集成权限与保存后的核实步骤。

@@ -27,6 +27,7 @@ export const LoongArkProvider = defineComponent<CreateThemeOptions>({
     accent: { type: String as PropType<string | undefined> },
     overrides: { type: Object as PropType<CreateThemeOptions["overrides"]> },
     targetId: String,
+    nonce: String,
     motionPreference: {
       type: String as PropType<CreateThemeOptions["motionPreference"]>,
       default: "auto",
@@ -47,6 +48,7 @@ export const LoongArkProvider = defineComponent<CreateThemeOptions>({
         overrides: props.overrides,
         targetId: props.targetId ?? scopeId,
         motionPreference: props.motionPreference,
+        nonce: props.nonce,
       });
       theme.value = instance;
       if (scope.value) {

@@ -22,6 +22,7 @@ export const LoongArkProvider: ParentComponent<LoongArkProviderProps> = (
       overrides: props.overrides,
       targetId: props.targetId ?? scopeId,
       motionPreference: props.motionPreference,
+      nonce: props.nonce,
     }),
   );
   createEffect(() => {

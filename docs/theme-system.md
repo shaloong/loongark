@@ -17,11 +17,15 @@ brand: neutral 为默认，brand: vi 或 shaloong 为品牌预设；VI 按钮的
 
 ## 使用方式
 
-React/Vue/Solid 使用 LoongArkProvider；Svelte 使用同名组件。四端均支持 mode、brand、accent、overrides、targetId、motionPreference，并为 SSR 使用稳定的作用域标识。Provider 选项变化会更新作用域主题，销毁时释放样式和浮层容器。
+React/Vue/Solid 使用 LoongArkProvider；Svelte 使用同名组件。四端均支持 mode、brand、accent、overrides、targetId、motionPreference、nonce，并为 SSR 使用稳定的作用域标识。Provider 选项变化会更新作用域主题，销毁时释放样式和浮层容器。
 
 每个主题拥有变量样式和 Portal 容器；组件 CSS 按宿主共享并计数释放。多个主题或嵌套 Provider 可以并存。浮层应使用 LoongArkPortal 或对应的 LoongArkDialogPortal/SheetPortal，保留所在主题的变量。Ark 原生 Portal 若直接传送到 body，可能失去局部主题。
 
 Provider 的作用域容器使用 `display: contents`，保留宿主布局；它不会绘制应用页面背景。应用需在实际页面容器同时设置 `background: var(--lk-color-semantic-background)` 与 `color: var(--lk-color-semantic-foreground)`，特别是深色主题。只继承深色文字色、仍使用浏览器白色背景会造成低对比。
+
+四端 Provider 和 `createLoongArkTheme` 支持可选 `nonce`，用于库生成的变量、Primitives 和 Kit 样式表。宿主按 HTTP 请求生成随机 nonce，在 CSP 的 `style-src-elem` 中允许该值，并向同一文档的所有 Provider 传入同一个值；nonce 在 style 插入 DOM 前设置，主题更新继续保留。SSR 输出的 style 标签也由宿主设置相同 nonce，CSS 字符串本身不包含该属性。
+
+nonce 不授权 style 属性、第三方编辑器或调用方自建的 style。应用需分别配置 `style-src-attr`；CodeMirror 扩展可通过 `EditorView.cspNonce.of(nonce)` 配置其引擎样式，其他插件按自身契约处理。这不是对所有严格 CSP 策略的兼容承诺。
 
 底层 API：
 

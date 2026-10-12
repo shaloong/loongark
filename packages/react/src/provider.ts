@@ -38,6 +38,7 @@ export const LoongArkProvider: FC<LoongArkProviderProps> = ({
   overrides,
   targetId,
   motionPreference,
+  nonce,
 }) => {
   const scopeId = useId();
   const theme = useMemo(() => {
@@ -48,9 +49,19 @@ export const LoongArkProvider: FC<LoongArkProviderProps> = ({
       overrides,
       targetId: targetId ?? scopeId,
       motionPreference,
+      nonce,
     });
     return instance;
-  }, [mode, brand, accent, overrides, targetId, scopeId, motionPreference]);
+  }, [
+    mode,
+    brand,
+    accent,
+    overrides,
+    targetId,
+    scopeId,
+    motionPreference,
+    nonce,
+  ]);
   const scope = useRef<HTMLDivElement | null>(null);
 
   useThemeEffect(() => {

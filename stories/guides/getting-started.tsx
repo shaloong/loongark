@@ -66,7 +66,7 @@ export function GettingStarted() {
     <h2>SSR 首屏与浮层</h2>
     <p>Provider 使用稳定的作用域 ID；Solid 的 node 条件自动选择服务端实现，Svelte 由宿主编译。服务端首屏 CSS 需要按请求创建主题并序列化，不要跨请求共享状态。将下面 CSS 放在 HTML head 的 style 元素中，Provider 使用相同 targetId 与主题选项；HTML 输出交给框架或模板的可信样式插入接口。React 内置 use client 边界，Next.js 服务端页面可直接导入 Provider 和命名组件；hooks、事件处理器、Ark 集合工厂及客户端命名空间组合仍放在应用客户端模块。跨边界 Props 需可序列化，RSC 仍需正确输出 SSR 样式。</p>
     <Source dark={mode === "dark"} code={`import { createLoongArkTheme } from "@loongark/theme";\nimport { bootstrapKit } from "@loongark/kit/bootstrap";\nconst theme = createLoongArkTheme({ targetId: "app-theme", mode: "light" });\nbootstrapKit(theme);\nconst css = theme.toStyleSheet();\n// 对应根组件：<LoongArkProvider targetId="app-theme" mode="light">…</LoongArkProvider>`} language="typescript" />
-    <p>Dialog 等浮层使用 LoongArkPortal 或对应组件的 Portal，保留局部主题。原生 Ark Portal 传送到 body 时可能失去作用域变量。严格 CSP 的 nonce 接入尚无统一契约，请验证应用策略。</p>
+    <p>Dialog 等浮层使用 LoongArkPortal 或对应组件的 Portal，保留局部主题。原生 Ark Portal 传送到 body 时可能失去作用域变量。四端 Provider 支持 nonce；与 SSR style 标签使用宿主每次请求生成的同一值。它只授权库生成的样式表，内联属性与第三方编辑器需单独配置 CSP。</p>
     <h2>编辑器与常见问题</h2>
     <Source dark={mode === "dark"} code={`const editors = await import("@loongark/${framework}/editors");\n// 在路由或客户端交互触发后渲染 editors.LoongArkCodeEditor。`} language="typescript" />
     <p>复杂编辑器在客户端挂载引擎；/editors 可延迟加载两个编辑器。不要在模块初始化时操作 DOM。样式缺失先检查 Provider；浮层颜色异常检查 Portal；SSR 水合检查 targetId 和首屏选项一致。Button 默认 type="button"；提交表单时显式设置 type="submit"。</p>

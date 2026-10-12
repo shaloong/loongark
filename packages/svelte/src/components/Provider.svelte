@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { setContext, onDestroy, type Snippet } from "svelte";
+  import { setContext, onDestroy, untrack, type Snippet } from "svelte";
   import { writable } from "svelte/store";
   import {
     createLoongArkTheme,
@@ -14,17 +14,22 @@
     overrides,
     targetId,
     motionPreference = "auto",
+    nonce,
     children,
   }: CreateThemeOptions & { children?: Snippet } = $props();
   let scope = $state<HTMLDivElement>();
-  const initialTheme = createLoongArkTheme({
-    mode,
-    brand,
-    accent,
-    overrides,
-    targetId: targetId ?? scopeId,
-    motionPreference,
-  });
+  // SSR 初值只取一次；后续 props 更新由下面的 effect 管理和清理。
+  const initialTheme = untrack(() =>
+    createLoongArkTheme({
+      mode,
+      brand,
+      accent,
+      overrides,
+      targetId: targetId ?? scopeId,
+      motionPreference,
+      nonce,
+    }),
+  );
   let theme = $state(initialTheme);
   const store = writable(initialTheme);
   setContext("loongark-theme", store);
@@ -37,6 +42,7 @@
       overrides,
       targetId: targetId ?? scopeId,
       motionPreference,
+      nonce,
     });
     theme = next;
     next.mount(scope);

@@ -47,9 +47,20 @@ for (const framework of ["react", "vue", "solid", "svelte"])
     await expect
       .poll(() => submit.evaluate((el) => getComputedStyle(el).backgroundColor))
       .not.toBe(before);
-    await page
-      .getByRole("button", { name: "Open dialog", exact: true })
-      .click();
+    const dialogTrigger = page.getByRole("button", {
+      name: "Open dialog",
+      exact: true,
+    });
+    const triggerBox = await dialogTrigger.boundingBox();
+    const viewport = page.viewportSize();
+    if (!triggerBox || !viewport) throw new Error("缺少触发器或测试视口");
+    if (triggerBox.y + triggerBox.height > viewport.height) {
+      // 长消费页先通过真实滚轮到达触发器，随后仍使用正常指针点击。
+      await page.mouse.move(viewport.width / 2, viewport.height / 2);
+      await page.mouse.wheel(0, triggerBox.y - viewport.height / 2);
+      await expect(dialogTrigger).toBeInViewport({ ratio: 1 });
+    }
+    await dialogTrigger.click();
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
     const color = await dialog.evaluate((el) => getComputedStyle(el).color);
