@@ -4,17 +4,21 @@ on:
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened, edited, ready_for_review]
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
 
 permissions:
   contents: read
 
 jobs:
   source:
-    name: Main PR source
+    # 保护只要求可信 main 定义的检查；PR 内定义仅作首次接入预览。
+    name: ${{ github.event_name == 'pull_request_target' && 'Main PR source' || 'Main PR source preview' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      # 不检出或执行 PR 的代码，只核对 GitHub 提供的分支与仓库信息。
+      # 不检出或执行 PR 的代码，不写消息，只核对 GitHub 提供的元数据。
       - name: Require same-repository develop
         env:
           HEAD_REF: ${{ github.head_ref }}
