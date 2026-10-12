@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useId, useRef, type HTMLAttributes } from "react";
 import {
   parseTime,

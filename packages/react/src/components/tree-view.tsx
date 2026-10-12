@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Tree View component - React wrapper.
  * Uses Ark UI Tree View with data attributes for styling.

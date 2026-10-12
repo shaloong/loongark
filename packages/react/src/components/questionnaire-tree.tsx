@@ -1,3 +1,5 @@
+"use client";
+
 import { createElement, type ReactNode } from "react";
 import type {
   QuestionnaireCustomContext,

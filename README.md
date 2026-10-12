@@ -85,6 +85,8 @@ export function App() {
 
 框架包提供 SSR 入口，编辑器在客户端挂载时创建引擎。SSR 首屏样式由每次请求独立创建的主题生成，作用域 ID 与渲染树一致；具体接入见 [主题系统](docs/theme-system.md)。不要跨请求共享含用户数据的主题或组件状态。
 
+React 运行时模块内置 `use client` 边界，Next.js App Router 服务端页面可直接导入命名组件。hooks、事件处理器、Ark 集合工厂及客户端命名空间组合仍放在应用客户端模块；跨边界 Props 遵循宿主序列化要求。
+
 代码与富文本编辑器可通过 `import('@loongark/<framework>/editors')` 延迟加载。富文本使用受支持的结构化 JSON，内建链接协议校验和 HTML 转义；它不是通用 HTML sanitizer。插件、nodeViews、自定义渲染器与任意 DOM Props 属于可信应用代码。
 
 数据获取、身份认证、授权、上传、存储和业务校验由应用服务实现。本库用于浏览器及服务端渲染，不是服务后端的权限或输入验证框架。禁用按钮、隐藏字段和客户端校验不能替代服务端授权。

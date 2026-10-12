@@ -1,3 +1,5 @@
+"use client";
+
 import { dataProps } from "../data-props";
 import { ark } from "@ark-ui/react/factory";
 import type { ButtonPrimitiveProps } from "@loongark/primitives";

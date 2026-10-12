@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Carousel component - React wrapper.
  * Uses Ark UI Carousel with data attributes for styling.

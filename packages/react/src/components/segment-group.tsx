@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Segment Group component - React wrapper.
  * 使用 Ark UI SegmentGroup，保留单选语义和隐藏表单输入。

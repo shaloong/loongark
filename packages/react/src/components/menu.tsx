@@ -1,3 +1,5 @@
+"use client";
+
 import { ark } from "@ark-ui/react/factory";
 import { mergeProps as mergeMenuProps } from "@zag-js/react";
 import { contextMenuPointerHandler, recoverClosedMenuFocus } from "@loongark/kit";

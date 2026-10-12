@@ -1,3 +1,5 @@
+"use client";
+
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import type {

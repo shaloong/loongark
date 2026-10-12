@@ -31,6 +31,7 @@
     "measure:ssr": "node scripts/measure-ssr.mjs",
     "check:release": "node scripts/check-release.mjs",
     "check:versions": "node scripts/check-versions.mjs",
+    "check:rsc": "node scripts/test-react-server-components.mjs",
     "check:security": "node scripts/check-security.mjs && node scripts/test-static-server-security.mjs",
     "generate:entries": "node scripts/generate-entries.mjs",
     "check:playwright": "node scripts/test-playwright-type-coverage.mjs && node scripts/check-playwright-types.mjs"

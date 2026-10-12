@@ -1,3 +1,5 @@
+"use client";
+
 import { createElement, forwardRef, type SVGProps } from "react";
 import {
   iconAttributes,

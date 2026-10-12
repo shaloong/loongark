@@ -64,7 +64,7 @@ export function GettingStarted() {
     <Source dark={mode === "dark"} code={`import { LoongArkProvider, LoongArkButton } from "@loongark/${framework}";\n// 同样支持：\nimport { LoongArkProvider } from "@loongark/${framework}/provider";\nimport { LoongArkButton } from "@loongark/${framework}/button";`} language="typescript" />
     <p>mode 默认 light，可选 dark、high-contrast；brand 默认中性，vi 启用 Shaloong 品牌强调。Provider 只保留一份共享样式，组件代码仍按需裁剪。系统主题由应用读取 prefers-color-scheme 后传入 mode；motionPreference 默认 auto，遵循减弱动效偏好。嵌套 Provider 可设置局部主题。</p>
     <h2>SSR 首屏与浮层</h2>
-    <p>Provider 使用稳定的作用域 ID；Solid 的 node 条件自动选择服务端实现，Svelte 由宿主编译。服务端首屏 CSS 需要按请求创建主题并序列化，不要跨请求共享状态。将下面 CSS 放在 HTML head 的 style 元素中，Provider 使用相同 targetId 与主题选项；HTML 输出交给框架或模板的可信样式插入接口。React Server Components 场景把 Provider 和交互组件放在 use client 边界中；这与普通 SSR 渲染是不同的接入方式。</p>
+    <p>Provider 使用稳定的作用域 ID；Solid 的 node 条件自动选择服务端实现，Svelte 由宿主编译。服务端首屏 CSS 需要按请求创建主题并序列化，不要跨请求共享状态。将下面 CSS 放在 HTML head 的 style 元素中，Provider 使用相同 targetId 与主题选项；HTML 输出交给框架或模板的可信样式插入接口。React 内置 use client 边界，Next.js 服务端页面可直接导入 Provider 和命名组件；hooks、事件处理器、Ark 集合工厂及客户端命名空间组合仍放在应用客户端模块。跨边界 Props 需可序列化，RSC 仍需正确输出 SSR 样式。</p>
     <Source dark={mode === "dark"} code={`import { createLoongArkTheme } from "@loongark/theme";\nimport { bootstrapKit } from "@loongark/kit/bootstrap";\nconst theme = createLoongArkTheme({ targetId: "app-theme", mode: "light" });\nbootstrapKit(theme);\nconst css = theme.toStyleSheet();\n// 对应根组件：<LoongArkProvider targetId="app-theme" mode="light">…</LoongArkProvider>`} language="typescript" />
     <p>Dialog 等浮层使用 LoongArkPortal 或对应组件的 Portal，保留局部主题。原生 Ark Portal 传送到 body 时可能失去作用域变量。严格 CSP 的 nonce 接入尚无统一契约，请验证应用策略。</p>
     <h2>编辑器与常见问题</h2>

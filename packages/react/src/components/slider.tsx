@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Slider component - React wrapper
  * Based on Ark UI Slider with data-scope/data-part bindings

@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Color Picker component - React wrapper.
  * Uses Ark UI Color Picker with data attributes for styling.

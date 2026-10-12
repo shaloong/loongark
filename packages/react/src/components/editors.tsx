@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useId, useRef, useState, useEffect } from "react";
 import {
   renderCodeEditorMarkup,

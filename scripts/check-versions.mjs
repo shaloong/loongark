@@ -40,6 +40,7 @@ await writeFile(
       name: "loongark-minimum-consumer",
       private: true,
       type: "module",
+      packageManager: JSON.parse(await readFile("package.json", "utf8")).packageManager,
       dependencies: {
         ...packed,
         ...versions,

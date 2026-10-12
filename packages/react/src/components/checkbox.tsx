@@ -1,3 +1,5 @@
+"use client";
+
 import { useFieldContext } from "@ark-ui/react/field";
 import { nativeSelectionFieldDescription } from "@loongark/kit";
 import { controlIcons } from "@loongark/kit";

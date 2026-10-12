@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Listbox component - React wrapper.
  * Uses Ark UI Listbox with data attributes for styling.

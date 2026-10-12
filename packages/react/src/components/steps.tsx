@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Steps component - React wrapper.
  * Uses Ark UI Steps with data attributes for styling.

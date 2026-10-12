@@ -1,3 +1,5 @@
+"use client";
+
 import { nativeSelectionProps } from "@loongark/kit";
 import { dataProps } from "../data-props";
 import { useNativeSelection } from "../native-selection";

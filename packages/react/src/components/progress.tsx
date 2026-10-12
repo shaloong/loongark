@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Progress component - React wrapper.
  * Uses Ark UI Progress with data attributes for styling.

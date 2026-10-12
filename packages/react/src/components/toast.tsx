@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Toast component - React wrapper
  * Based on Ark UI Toast, injects data-scope/data-part.

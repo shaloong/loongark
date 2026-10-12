@@ -21,6 +21,8 @@ React/Vue/Solid 使用 LoongArkProvider；Svelte 使用同名组件。四端均�
 
 每个主题拥有变量样式和 Portal 容器；组件 CSS 按宿主共享并计数释放。多个主题或嵌套 Provider 可以并存。浮层应使用 LoongArkPortal 或对应的 LoongArkDialogPortal/SheetPortal，保留所在主题的变量。Ark 原生 Portal 若直接传送到 body，可能失去局部主题。
 
+Provider 的作用域容器使用 `display: contents`，保留宿主布局；它不会绘制应用页面背景。应用需在实际页面容器同时设置 `background: var(--lk-color-semantic-background)` 与 `color: var(--lk-color-semantic-foreground)`，特别是深色主题。只继承深色文字色、仍使用浏览器白色背景会造成低对比。
+
 底层 API：
 
 ```ts
@@ -43,6 +45,8 @@ mount 支持 Document、HTMLElement、ShadowRoot；CSS 变量随作用域注入�
 没有 DOM 时创建主题并调用 bootstrapKit，然后将 theme.toStyleSheet() 放入服务端 HTML 的 style 标签，首屏即可获得 Token 和组件样式；snapshot() 返回 CLI 的 CSS/JSON 产物。多个独立主题应使用对应作用域的样式与稳定 targetId，避免使用全局 :root 互相覆盖。
 
 motionPreference 默认为 auto，遵循 prefers-reduced-motion；force 供明确需要动效的场景使用。焦点环、invalid、disabled 状态不依赖动画表达。
+
+React 的 Provider、命名组件及 hooks 所在运行时模块内置 `use client` 边界。Next.js App Router 的服务端页面可直接导入 `LoongArkProvider`、`LoongArkButton` 等命名组件，根入口与按需子路径均支持。需要 hooks、事件处理器、Ark 集合工厂或访问 `LoongArkDialog.Root` 等客户端命名空间对象时，将应用模块标为 `use client`；不要从服务端向客户端传递函数、集合实例或主题实例。`parseLocalizedDate` 等共享纯工具仍可在服务端调用。RSC 不代替首屏 CSS 的按请求生成与作用域匹配。
 
 ## 表单与浮层
 

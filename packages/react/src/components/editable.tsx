@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Editable component - React wrapper.
  * Uses Ark UI Editable with data attributes for styling.

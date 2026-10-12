@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Rating Group component - React wrapper.
  * Uses Ark UI Rating Group with data attributes for styling.

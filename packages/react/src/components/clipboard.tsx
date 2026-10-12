@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Clipboard component - React wrapper.
  * Uses Ark UI Clipboard with data attributes for styling.

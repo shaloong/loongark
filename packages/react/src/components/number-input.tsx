@@ -1,3 +1,5 @@
+"use client";
+
 import { useFieldContext } from "@ark-ui/react/field";
 import { useNumberInputContext } from "@ark-ui/react/number-input";
 import {

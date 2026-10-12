@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Tags Input component - React wrapper.
  * Uses Ark UI Tags Input with data attributes for styling.

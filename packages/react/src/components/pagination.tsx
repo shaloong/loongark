@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Pagination component - React wrapper.
  * Uses Ark UI Pagination with data attributes for styling.

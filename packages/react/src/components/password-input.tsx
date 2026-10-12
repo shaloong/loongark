@@ -1,3 +1,5 @@
+"use client";
+
 import { useFieldContext } from "@ark-ui/react/field";
 import { usePasswordInputContext } from "@ark-ui/react/password-input";
 import {

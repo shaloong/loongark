@@ -1,3 +1,5 @@
+"use client";
+
 import { createMenuContextTrigger } from "./menu";
 import { DialogAction, DialogCancel } from "./dialog-actions";
 import { dataProps } from "../data-props";

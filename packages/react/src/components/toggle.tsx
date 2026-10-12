@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Toggle component - React wrapper.
  * Injects data-scope/data-part and size mapping.

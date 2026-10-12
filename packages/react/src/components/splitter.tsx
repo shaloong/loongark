@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Splitter component - React wrapper.
  * Uses Ark UI Splitter with data attributes for styling.

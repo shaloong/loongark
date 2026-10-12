@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import {
   createVirtualGrid,

@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Tabs 组件 - React 封装
  * 基于 Ark UI Tabs，注入 data-scope/data-part 与 size/orientation 映射

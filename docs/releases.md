@@ -3,7 +3,7 @@
 main 是默认分支和稳定版本，develop 是开发分支。Pages 只部署 main；develop 的 Storybook 作为14天的 Actions 预览 Artifact。手动触发也执行相同分支限制。合并 main、创建版本标签、发布 npm 是独立动作，必须有明确发布指令。
 
 
-包提供 ESM 与 node/browser 条件入口，不提供独立 CommonJS 构建；CommonJS 应用使用动态 `import()`。React Server Components 的客户端边界由应用划分，Provider 和带 hooks 的交互组件放在客户端模块。
+包提供 ESM 与 node/browser 条件入口，不提供独立 CommonJS 构建；CommonJS 应用使用动态 `import()`。React 运行时模块包含 `use client` 边界，Server Component 可以直接导入 Provider 与命名组件。使用 hooks、事件处理器、Ark 集合工厂或复合命名空间对象的应用代码仍应放在客户端模块；跨边界 Props 必须满足宿主的序列化要求。
 
 ## main 分支保护
 
@@ -60,6 +60,8 @@ SSR 分别记录5个新进程的冷导入；每进程预热5次、每场景30次
 `pnpm check:release` 对9个实际 tgz 检查：统一 SemVer、MIT/LICENSE、工作区依赖替换、每个条件导出与类型路径、排除过程文件。`pnpm check:versions` 在独立临时目录消费这些 tgz，解析全部公开子路径声明，并使用实际最低编译器/运行时验证子路径 Provider/Button 的浏览器与 SSR，并单独审计消费项目依赖，确认安全结果没有依赖工作区的传递覆盖。演练不发布、不创建标签、不修改 main。
 
 准备正式发布时：
+
+`pnpm check:release` 成功后运行 `pnpm check:rsc`，用实际 tarball 在 Next.js 16.4.0 / 当前 React 上生产构建根入口及按需入口，验证服务端命名组件导入、纯日期工具、SSR 样式和水合后的鼠标/键盘交互。该专项已接入 Release readiness，日志、截图和报告保留在 `.artifacts/releases/react-rsc/`；不等于承诺所有 Next.js 版本、编译器或宿主配置。
 
 1. 在 develop 同步9个包版本、锁文件、CHANGELOG 和迁移说明，按 CONTRIBUTING 顺序验证，再执行性能/打包/最低版本专项。
 2. 创建 develop → main PR，说明最终行为、版本、验证范围和迁移事项；审阅并合并，保留提交历史。

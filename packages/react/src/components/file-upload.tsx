@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * File Upload component - React wrapper.
  * Uses Ark UI File Upload with data attributes for styling.

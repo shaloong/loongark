@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Hover Card component - React wrapper.
  * Uses Ark UI Hover Card with data attributes for styling.

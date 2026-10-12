@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Popover 组件 - React 封装
  * 基于 Ark UI Popover，注入 data-scope/data-part 并默认启用 asChild 避免嵌套

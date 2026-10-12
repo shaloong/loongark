@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Accordion component - React wrapper.
  * Injects data-scope/data-part and size/orientation mapping.

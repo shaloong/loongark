@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Scroll Area component - React wrapper.
  * Uses Ark UI Scroll Area with data attributes for styling.
