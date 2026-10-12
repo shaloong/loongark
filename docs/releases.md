@@ -15,7 +15,7 @@ main 仅接受同仓库 develop 的 PR，禁止直接推送、强推、删除和
 
 | 项目 | 声明最低版本 | 当前完整回归版本 | 最低版本专项范围 |
 | --- | --- | --- | --- |
-| 开发/构建 Node.js | 22.12（工具下限） | 24.19.0；统一开发使用 .nvmrc 的24 | Node22 尚未实测 |
+| 开发/构建 Node.js | 22.12 | .nvmrc 的24；兼容验证22.12、22.23、24.21与26.11 | 冻结安装、生产构建、完整测试源码类型、共享契约和四端 SSR；不代表每个 Node 版本都完成浏览器专项 |
 | pnpm | 10.x | 10.14.0 | 仓库冻结锁文件；临时最低版本消费项目先生成自己的锁文件再冻结安装 |
 | React / react-dom | 18.0.0 | 19.3.0 | 真实发布 tarball 消费构建、Provider/Button SSR 和点击 |
 | Vue | 3.5.43 | 3.5.43 | 同上 |
@@ -59,9 +59,9 @@ SSR 分别记录5个新进程的冷导入；每进程预热5次、每场景30次
 
 `pnpm check:release` 成功后运行 `pnpm check:rsc`，用实际 tarball 在 Next.js 16.4.0 / 当前 React 上生产构建根入口及按需入口，验证服务端命名组件导入、纯日期工具、SSR 样式和水合后的鼠标/键盘交互；另测 Core 客户端组合与服务端显式样式选择，避免把启动器函数跨 RSC 边界传递。该专项已接入 Release readiness，日志、截图和报告保留在 `.artifacts/releases/react-rsc/`；不等于承诺所有 Next.js 版本、编译器或宿主配置。
 
-1. 在 develop 同步9个包版本、锁文件、CHANGELOG 和迁移说明，按 CONTRIBUTING 顺序验证，再执行性能/打包/最低版本专项。
+1. 在 develop 同步9个包版本、锁文件、CHANGELOG 和迁移说明，按 CONTRIBUTING 顺序验证，再执行性能/打包/最低版本专项。对最终候选提交手动运行 Browser contracts 与 Release readiness 的 `full=true` 完整验收；日常快速 CI 不能代替该步骤。
 2. 创建 develop → main PR，说明最终行为、版本、验证范围和迁移事项；审阅并合并，保留提交历史。
-3. main 的 Pages 和 Browser contracts 必须完成，人工审阅实际截图和验收摘要。Pages 环境如有分支保护，只允许 main。
+3. 候选提交的完整 Browser contracts 与 main 的 Pages 必须完成，人工审阅实际截图和验收摘要。Pages 环境如有分支保护，只允许 main。
 4. 在 main 手动运行 `Release readiness`，核对输入版本与所有包版本一致；保存 tgz 和验证 Artifact。配置 npm 组织的发布权限/Trusted Publishing，首次发布前核对包名所有权。
 5. 在 main 对已验证的同一提交创建 `v<version>` 标签，再按依赖顺序发布 tokens → theme → primitives → kit → 四端 → cli：`npm publish <已验收.tgz> --access public --provenance`。发布需要 npm 对应权限和 provenance 环境；本仓库的准备工作流不会自动发布 npm。
 6. 从 registry 安装发布版本，检查条件导出、类型和最低版本消费；更新 GitHub Release 与变更日志。版本已发布后不可覆盖，问题使用补丁版本修正。

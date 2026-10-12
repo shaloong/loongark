@@ -42,6 +42,14 @@ pnpm visual:test
 
 安全变更包含 `pnpm audit` 和 `pnpm check:security`，后者使用成功构建后的产物，已纳入 contracts。依赖审计的联网失败不能当作零漏洞。框架版本更新后复验真实 SSR、最低 peer 和打包消费，见 [发布指南](docs/releases.md)。
 
+## CI 验证范围
+
+日常 develop push 与面向 develop 的 PR 执行三引擎四端关键交互、原生 Safari、发布声明及快速发布检查。同仓库 develop → main PR 使用同一提交已有的检查；合入 main 后仅重新构建并验收 Pages，不重复整套浏览器回归。新提交取消同分支旧任务。
+
+Browser contracts 的生产者只构建一次，三引擎与 Safari 消费同一次运行、同一提交的已验证 Artifact；构建失败时消费检查失败，不消费旧 dist。日常 `--suite=critical` 覆盖消费、CSP、Provider、选择器、日期、表格、编辑器、图表、问卷、虚拟化与焦点；本地未指定范围仍运行完整四端测试。
+
+完整四端示例、Story 审计、最低版本及 Next.js tarball 消费通过每周任务或手动工作流 `full=true` 执行，正式发布前必须对候选提交运行完整 Browser contracts 和 Release readiness。快速检查通过不代表完整验收通过。Node compatibility 单独覆盖 Node22.12 与当前26的构建、类型、共享契约及四端 SSR，日常完整验证使用 .nvmrc 的24。
+
 ## 多浏览器与视觉
 
 ```sh
