@@ -7,17 +7,9 @@ main 是默认分支和稳定版本，develop 是开发分支。Pages 只部署 
 
 ## main 分支保护
 
-在 GitHub Settings → Rules → Rulesets 创建分支规则，名称可用 `main-protection`，目标为 main，状态设为 Active，不添加 bypass 角色。启用 Require a pull request before merging、Block force pushes 和 Restrict deletions。再启用 Require status checks to pass，并要求分支保持最新。
+main 仅接受同仓库 develop 的 PR，禁止直接推送、强推、删除和绕过保护。合并前分支需保持最新，并通过 `Main PR source`、`verify`、`Four frameworks / chromium`、`Four frameworks / firefox`、`Four frameworks / webkit` 和 `Native Safari / macOS`。
 
-必需检查包括 `Main PR source`、`verify`、`Four frameworks / chromium`、`Four frameworks / firefox`、`Four frameworks / webkit` 和 `Native Safari / macOS`。`Main PR source` 校验来源必须为本仓库 develop；仅要求 PR 并不能限制来源分支。新检查需先在 PR 上实际运行，才能在设置列表中选择。
-
-来源检查使用 `pull_request_target`，从可信 main 读取工作流，不检出或执行 PR 代码；普通 `pull_request` 的 `Main PR source preview` 只供首次接入观察，不能代替必需检查。初次启用时，先人工审阅并通过同仓库 develop → main PR 将该工作流纳入 main，再触发一次 PR 的可信检查；尚未进入 main 时不能声称来源限制已生效，也不能靠放宽或绕过保护完成后续合并。
-
-已具备 Administration 写权限的管理员可使用可复用配置：`gh api --method PUT repos/shaloong/loongark/branches/main/protection --input .github/main-branch-protection.json`。它要求六项 GitHub Actions 检查、分支保持最新、PR（不额外要求审批数）、管理员同样受限，禁止强推与删除，PR 绕过名单为空。应用前按上段完成可信工作流接入，应用后读取保护详情及有效 Rulesets，核实没有其他规则提供绕过；不应把命令存在视为配置已成功。
-
-API 配置还要求当前凭据拥有仓库 Administration 写权限；仓库元数据返回 `permissions.admin=true` 仅表示账号权限，不代表 GitHub App 集成具备该权限。若创建 Ruleset 返回 `403 Resource not accessible by integration`，应由管理员使用网页完成以上设置，或为受信任的集成授予 Administration 写权限后重试。保存后重新读取 main 的分支状态及有效规则，确认规则为 Active、目标为 `refs/heads/main`、bypass 列表为空且六项检查完整；API 无权读取时不能宣称保护已启用。必需检查的预期来源选择 GitHub Actions。
-
-上述规则需有仓库管理权限才能在 GitHub 启用，提交工作流不等于保护已生效。所有维护从 develop 发起，包括 Dependabot 配置；Dependabot 仅读取默认分支的配置，停用配置合入 main 后才生效。安全告警与安全更新 PR 在 Settings → Security → Advanced Security 中独立控制；需要完全停止机器人 PR 时禁用 Dependabot security updates，仍可保留 Dependabot alerts。
+`Main PR source` 校验 PR 来源，使用 `pull_request_target` 从 main 读取可信工作流，不检出或执行 PR 代码。`Main PR source preview` 是开发预览检查，不能代替必需的来源检查。
 
 ## 支持与实测矩阵
 
