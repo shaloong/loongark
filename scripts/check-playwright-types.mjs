@@ -1,8 +1,13 @@
 import { spawnSync } from "node:child_process";
+import {
+  assertPlaywrightTypeCoverage,
+  playwrightConfigs,
+} from "./playwright-type-coverage.mjs";
+
+console.log(`${assertPlaywrightTypeCoverage()} 个测试与共享源码已纳入类型检查`);
 
 // 每个框架独立解析 JSX 与发布声明；任一检查失败立即停止。
-for (const framework of ["", ".react", ".vue", ".solid", ".svelte"]) {
-  const config = `tsconfig.playwright${framework}.json`;
+for (const config of playwrightConfigs) {
   const result = spawnSync(
     process.execPath,
     ["node_modules/typescript/bin/tsc", "-p", config],

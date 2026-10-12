@@ -33,7 +33,7 @@
     "check:versions": "node scripts/check-versions.mjs",
     "check:security": "node scripts/check-security.mjs && node scripts/test-static-server-security.mjs",
     "generate:entries": "node scripts/generate-entries.mjs",
-    "check:playwright": "node scripts/check-playwright-types.mjs"
+    "check:playwright": "node scripts/test-playwright-type-coverage.mjs && node scripts/check-playwright-types.mjs"
   },
   "devDependencies": {
     "@ark-ui/react": "^5.39.3",

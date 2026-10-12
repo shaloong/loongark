@@ -11,6 +11,8 @@ main 是默认分支和稳定版本，develop 是开发分支。Pages 只部署 
 
 必需检查包括 `Main PR source`、`verify`、`Four frameworks / chromium`、`Four frameworks / firefox`、`Four frameworks / webkit` 和 `Native Safari / macOS`。`Main PR source` 校验来源必须为本仓库 develop；仅要求 PR 并不能限制来源分支。新检查需先在 PR 上实际运行，才能在设置列表中选择。
 
+API 配置还要求当前凭据拥有仓库 Administration 写权限；仓库元数据返回 `permissions.admin=true` 仅表示账号权限，不代表 GitHub App 集成具备该权限。若创建 Ruleset 返回 `403 Resource not accessible by integration`，应由管理员使用网页完成以上设置，或为受信任的集成授予 Administration 写权限后重试。保存后重新读取 main 的分支状态及有效规则，确认规则为 Active、目标为 `refs/heads/main`、bypass 列表为空且六项检查完整；API 无权读取时不能宣称保护已启用。必需检查的预期来源选择 GitHub Actions。
+
 上述规则需有仓库管理权限才能在 GitHub 启用，提交工作流不等于保护已生效。所有维护从 develop 发起，包括 Dependabot 配置；Dependabot 仅读取默认分支的配置，停用配置合入 main 后才生效。安全告警与安全更新 PR 在 Settings → Security → Advanced Security 中独立控制；需要完全停止机器人 PR 时禁用 Dependabot security updates，仍可保留 Dependabot alerts。
 
 ## 支持与实测矩阵

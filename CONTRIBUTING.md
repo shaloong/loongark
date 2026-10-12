@@ -34,6 +34,8 @@ pnpm visual:test
 
 `check:playwright` 完整检查浏览器测试、辅助模块与四端消费入口；React/Solid 分别使用自身 JSX 配置，Svelte 另经 svelte-check 检查真实组件。该检查消费刚构建的发布声明，已纳入 CI。
 
+类型覆盖守卫核对 `tests/`、`examples/shared/` 与 `playwright.config.ts` 的实际编译单元，包括入口导入的辅助模块。新增 TS、TSX、MTS、CTS 或 Svelte 测试源码必须纳入相应框架配置；被 `include/exclude` 漏掉的文件会阻断检查，不能只凭现有配置通过宣称全量通过。
+
 全 Story 的 Axe、设计质量与组件 cursor 检查分为八个互不重叠的批次，保留完整 Story 覆盖与原有断言；检查结果按主题和批次保存，避免数百次导航共用一个测试时间预算。
 
 必须先成功构建生产者，再消费 dist 与 Story 索引；构建失败立即停止，不读取旧产物。多个 Playwright 命令共用结果目录，不能同时运行。默认本地使用 Chromium，需先 `pnpm exec playwright install --with-deps chromium`；如指定系统 Chromium，设置 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` 并记录实际版本。
