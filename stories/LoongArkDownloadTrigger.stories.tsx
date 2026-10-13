@@ -13,12 +13,9 @@ export const Basic: StoryObj = {
       fileName="component-notes.txt"
       mimeType="text/plain"
       data="LoongArk component notes"
-      data-scope="button"
-      data-part="root"
-      data-size="md"
-      data-variant="outline"
+      asChild
     >
-      Download notes
+      <L.LoongArkButton variant="outline">Download notes</L.LoongArkButton>
     </L.LoongArkDownloadTrigger>
   ),
 };

@@ -238,6 +238,7 @@ jobs:
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*.json
             .artifacts/browser-audits/${{ matrix.browser }}/regressions/
+            .artifacts/download-trigger/${{ matrix.browser }}/
             .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-chart--*.png
             .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-datatable--*.png
             .artifacts/browser-audits/${{ matrix.browser }}/after/**/components-questionnaire--*.png

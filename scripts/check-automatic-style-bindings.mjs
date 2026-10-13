@@ -5,6 +5,8 @@ const root=resolve(process.argv.find(arg=>arg.startsWith('--root='))?.slice(7)??
 const scopes=JSON.parse(await readFile(resolve(root,'packages/primitives/src/automatic-style-scopes.json'),'utf8'));
 const normalize=name=>name.toLowerCase().replace(/[^a-z0-9]/g,'');
 const owner=name=>name==='LoongArkTextareaControl'||name==='TextareaControl'?'input':scopes.filter(scope=>normalize(name.replace(/^LoongArk/,'')).startsWith(normalize(scope))).sort((a,b)=>normalize(b).length-normalize(a).length)[0];
+// Ark 的节点上下文 Provider 不渲染 DOM，不拥有组件样式。
+const withoutDOM=new Set(['LoongArkTreeViewNodeProvider']);
 const compatible=(expected,actual)=>actual===expected||(expected==='toolbar'&&actual==='app-bar');
 const modules=new Map();
 async function moduleInfo(file){
@@ -52,6 +54,8 @@ const active=new Set(),checked=new Set();
 async function validate(file,name,scope){
  const key=file+'|'+name+'|'+scope;
  if(checked.has(key))return;
+ // 通用 Portal 只负责传送 children，不渲染组件所属 DOM。
+ if(file.endsWith('/components/Portal.svelte')){checked.add(key);return;}
  if(file.endsWith('.svelte')){
   const source=await readFile(file,'utf8');
   const match=[...source.matchAll(/import \{ styles as (\w+) \} from "@loongark\/primitives\/automatic-styles\/([^";]+)";/g)].find(m=>compatible(scope,m[2]));
@@ -79,7 +83,17 @@ for(const framework of ['react','vue','solid','svelte'])
   if(!/\.tsx?$/.test(file)||file.endsWith('.d.ts'))continue;
   const path=resolve(root,`packages/${framework}/src/components/${file}`),data=await moduleInfo(path);
   for(const name of data.exports.keys()){
-   const scope=owner(name);if(!name.startsWith('LoongArk')||!scope)continue;
+   const scope=owner(name);if(!name.startsWith('LoongArk')||!scope||withoutDOM.has(name))continue;
+   await validate(path,name,scope);count++;
+  }
+ }
+// 公开入口可能把未带 LoongArk 前缀的实现转发为公共组件。
+for(const framework of ['react','vue','solid','svelte'])
+ for(const file of await readdir(resolve(root,`packages/${framework}/src/entries`))){
+  if(!file.endsWith('.ts'))continue;
+  const path=resolve(root,`packages/${framework}/src/entries/${file}`),data=await moduleInfo(path);
+  for(const name of data.exports.keys()){
+   const scope=owner(name);if(!name.startsWith('LoongArk')||!scope||withoutDOM.has(name))continue;
    await validate(path,name,scope);count++;
   }
  }

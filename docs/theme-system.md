@@ -31,7 +31,7 @@ nonce 不授权 style 属性、第三方编辑器或调用方自建的 style。�
 
 ### 按需样式
 
-默认 `LoongArkProvider` 随实际组件入口自动加载 Primitives 样式及 HTML 组合的必要依赖，根入口命名导入和组件子路径均可使用。动态导入会在组件首次渲染前同步补齐样式，固定级联顺序，多个 Provider 共享规则并在最后一个所有者卸载后释放；Vue 插件和 Svelte theme store 使用同一自动启动器。
+默认 `LoongArkProvider` 随实际组件入口自动加载 Primitives 样式及 HTML 组合的必要依赖，根入口命名导入和组件子路径均可使用；公开别名与 Svelte 的 Dialog、PinInput、Switch 组合 namespace 同样声明其组件样式。动态导入会在组件首次渲染前同步补齐样式，固定级联顺序，多个 Provider 共享规则并在最后一个所有者卸载后释放；Vue 插件和 Svelte theme store 使用同一自动启动器。
 
 自动裁剪依赖生产构建消除未使用模块与组件初始化声明。导入并使用完整根命名空间会保留更多组件；Node 直接执行根入口也不会像生产打包器一样裁剪模块。自定义 DOM 只有 `data-scope` 属性不会自动声明样式，需提供自己的样式，或显式使用 `@loongark/kit/bootstrap` 的 `bootstrapKit` 作为 `styleBootstrap` 保留原完整样式行为。已有 Primitives 注册覆盖与 Kit 注册扩展继续生效。
 
