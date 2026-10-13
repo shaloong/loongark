@@ -1,9 +1,11 @@
+import { publishedWorkspacePlugin } from "./published-workspace-plugin.mjs";
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { build } from "vite";
 import react from "@vitejs/plugin-react";
 import solid from "vite-plugin-solid";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+const workspacePlugin = await publishedWorkspacePlugin();
 const root = resolve("tests/consumers");
 await mkdir(root, { recursive: true });
 await mkdir(resolve("tests/consumer-dist"), { recursive: true });
@@ -71,7 +73,7 @@ const body = `<InputRoot state="invalid"><InputLabel>Email</InputLabel><InputCon
 <SelectRoot collection={collection}><SelectLabel>Plan</SelectLabel><SelectControl><SelectTrigger data-testid="select"><SelectValueText placeholder="Choose a plan"/></SelectTrigger></SelectControl><Portal><SelectPositioner><SelectContent>{plans.map(item=><SelectItem item={item}><SelectItemText>{item.label}</SelectItemText></SelectItem>)}</SelectContent></SelectPositioner></Portal><SelectHiddenSelect/></SelectRoot>
 <DataTable data={rows} columns={columns} pageSize={2}/><Chart data={rows} series={[{key:'amount'}]} labelKey="name" title="Revenue"/>
 <SheetRoot><SheetTrigger>Open sheet</SheetTrigger><SheetPortal><SheetOverlay/><SheetPositioner><SheetContent><SheetTitle>Edit profile</SheetTitle><SheetDescription>Update your settings.</SheetDescription><SheetAction>Save changes</SheetAction></SheetContent></SheetPositioner></SheetPortal></SheetRoot>`;
-const dataCode = `const plans=[{label:'Free',value:'free'},{label:'Pro',value:'pro'}];const collection=createListCollection({items:plans});const rows=[{id:'a',name:'Alpha',amount:20},{id:'b',name:'Beta',amount:10},{id:'c',name:'Gamma',amount:35}];const columns=[{key:'name',label:'Name'},{key:'amount',label:'Revenue'}];`;
+const dataCode = `const nonce=new URLSearchParams(location.search).get('nonce')??undefined;const plans=[{label:'Free',value:'free'},{label:'Pro',value:'pro'}];const collection=createListCollection({items:plans});const rows=[{id:'a',name:'Alpha',amount:20},{id:'b',name:'Beta',amount:10},{id:'c',name:'Gamma',amount:35}];const columns=[{key:'name',label:'Name'},{key:'amount',label:'Revenue'}];`;
 for (const framework of ["react", "vue", "solid", "svelte"]) {
   const folder = resolve(root, framework);
   await mkdir(folder, { recursive: true });
@@ -83,11 +85,11 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
   );
   let source;
   if (framework === "react")
-    source = `import React, { useState } from 'react'; import { createRoot } from 'react-dom/client'; import { ${imports} } from '@loongark/react'; function App() { const [email,setEmail]=useState(''); const [mode,setMode]=useState<'light'|'dark'>('light'); return <Provider mode={mode}><section style={{padding:24,display:'grid',gap:16,minHeight:'100dvh',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}}>${body}</section></Provider>; } createRoot(document.getElementById('app')!).render(<App/>);`;
+    source = `import React, { useState } from 'react'; import { createRoot } from 'react-dom/client'; import { ${imports} } from '@loongark/react'; function App() { const [email,setEmail]=useState(''); const [mode,setMode]=useState<'light'|'dark'>('light'); return <Provider nonce={nonce} mode={mode}><section style={{padding:24,display:'grid',gap:16,minHeight:'100dvh',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}}>${body}</section></Provider>; } createRoot(document.getElementById('app')!).render(<App/>);`;
   if (framework === "solid")
-    source = `import { createSignal } from 'solid-js'; import { render } from 'solid-js/web'; import { ${imports} } from '@loongark/solid'; function App() { const [email,setEmail]=createSignal(''); const [mode,setMode]=createSignal<'light'|'dark'>('light'); return <Provider mode={mode()}><section style={{padding:'24px',display:'grid',gap:'16px','min-height':'100dvh',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}}>${body.replaceAll("value={email}", "value={email()}").replaceAll("disabled={!email}", "disabled={!email()}").replaceAll("mode ===", "mode() ===")}</section></Provider>; } render(()=><App/>,document.getElementById('app')!);`;
+    source = `import { createSignal } from 'solid-js'; import { render } from 'solid-js/web'; import { ${imports} } from '@loongark/solid'; function App() { const [email,setEmail]=createSignal(''); const [mode,setMode]=createSignal<'light'|'dark'>('light'); return <Provider nonce={nonce} mode={mode()}><section style={{padding:'24px',display:'grid',gap:'16px','min-height':'100dvh',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}}>${body.replaceAll("value={email}", "value={email()}").replaceAll("disabled={!email}", "disabled={!email()}").replaceAll("mode ===", "mode() ===")}</section></Provider>; } render(()=><App/>,document.getElementById('app')!);`;
   if (framework === "vue")
-    source = `import { createApp, defineComponent, h, ref } from 'vue'; import { ${imports} } from '@loongark/vue'; const App=defineComponent({setup(){const email=ref(''), mode=ref<'light'|'dark'>('light'); return ()=>h(Provider,{mode:mode.value},{default:()=>h('section',{style:{padding:'24px',display:'grid',gap:'16px','min-height':'100dvh',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}},[
+    source = `import { createApp, defineComponent, h, ref } from 'vue'; import { ${imports} } from '@loongark/vue'; const App=defineComponent({setup(){const email=ref(''), mode=ref<'light'|'dark'>('light'); return ()=>h(Provider,{nonce,mode:mode.value},{default:()=>h('section',{style:{padding:'24px',display:'grid',gap:'16px','min-height':'100dvh',background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}},[
 h(InputRoot,{state:'invalid'},{default:()=>[h(InputLabel,{},()=> 'Email'),h(InputControl,{'data-testid':'email',modelValue:email.value,'onUpdate:modelValue':(v:string)=>email.value=v}),h(InputErrorText,{},()=> 'Enter a valid email')]}),
 h(Button,{'data-testid':'busy-cancel','aria-busy':'true'},()=> 'Cancel background work'),
 h(Button,{'data-testid':'busy-false','aria-busy':'false'},()=> 'Ready action'),
@@ -97,7 +99,7 @@ h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()
   if (framework === "svelte") {
     await writeFile(
       resolve(folder, "App.svelte"),
-      `<script lang="ts">import UndefinedSelections from "./UndefinedSelections.svelte";import BoundNumberInput from "./BoundNumberInput.svelte";import { ${imports}, LoongArkQuestionnaire as Questionnaire, type QuestionnaireValue } from '@loongark/svelte'; let email=''; let mode:'light'|'dark'='light';let freshNote:QuestionnaireValue|undefined;</script><Provider {mode}><section style="padding:24px;display:grid;gap:16px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)">${body.replace("value={email} onInput={(e) => setEmail(e.currentTarget.value)}", "bind:value={email}").replace('onClick={() => setMode(mode === "light" ? "dark" : "light")}', 'onclick={() => mode = mode === "light" ? "dark" : "light"}')}<Questionnaire label="Fresh feedback" questions={[{id:'note',label:'Fresh note',type:'text'}]} bind:value={freshNote}/><output aria-label="Bound fresh note">{freshNote?.note ?? ''}</output><UndefinedSelections /><BoundNumberInput /></section></Provider>`,
+      `<script lang="ts">import UndefinedSelections from "./UndefinedSelections.svelte";import BoundNumberInput from "./BoundNumberInput.svelte";import { ${imports}, LoongArkQuestionnaire as Questionnaire, type QuestionnaireValue } from '@loongark/svelte'; let email=''; let mode:'light'|'dark'='light';let freshNote:QuestionnaireValue|undefined;</script><Provider {mode} {nonce}><section style="padding:24px;display:grid;gap:16px;min-height:100dvh;background:var(--lk-color-semantic-background);color:var(--lk-color-semantic-foreground)">${body.replace("value={email} onInput={(e) => setEmail(e.currentTarget.value)}", "bind:value={email}").replace('onClick={() => setMode(mode === "light" ? "dark" : "light")}', 'onclick={() => mode = mode === "light" ? "dark" : "light"}')}<Questionnaire label="Fresh feedback" questions={[{id:'note',label:'Fresh note',type:'text'}]} bind:value={freshNote}/><output aria-label="Bound fresh note">{freshNote?.note ?? ''}</output><UndefinedSelections /><BoundNumberInput /></section></Provider>`,
     );
     source = `import { mount } from 'svelte'; import App from './App.svelte'; mount(App,{target:document.getElementById('app')!});`;
   }
@@ -131,34 +133,14 @@ h(DialogRoot,{},()=>[h(DialogTrigger,{},()=> 'Open dialog'),h(DialogPortal,{},()
     ),
     source,
   );
-  const alias = Object.fromEntries(
-    [
-      "react",
-      "vue",
-      "solid",
-      "svelte",
-      "theme",
-      "primitives",
-      "kit",
-      "tokens",
-    ].map((p) => ["@loongark/" + p, resolve("packages", p, "dist/index.js")]),
-  );
   await build({
     configFile: false,
     root: folder,
     base: `/${framework}/`,
     resolve: {
-      alias,
       dedupe: ["react", "react-dom", "solid-js", "svelte", "vue"],
     },
-    plugins:
-      framework === "react"
-        ? [react()]
-        : framework === "solid"
-          ? [solid()]
-          : framework === "svelte"
-            ? [svelte()]
-            : [],
+    plugins: [workspacePlugin, ...(framework === "react" ? [react()] : framework === "solid" ? [solid()] : framework === "svelte" ? [svelte()] : [])],
     logLevel: "error",
     build: {
       outDir: resolve("tests/consumer-dist", framework),
@@ -214,9 +196,7 @@ await build({
 await build({
   configFile: false,
   logLevel: "error",
-  resolve: {
-    alias: { "@loongark/kit": resolve("packages/kit/dist/index.js") },
-  },
+  plugins: [workspacePlugin],
   build: {
     outDir: resolve("tests/consumer-dist"),
     emptyOutDir: false,
@@ -232,9 +212,7 @@ console.log("横向列窗口共享发布模块浏览器消费构建通过");
 await build({
   configFile: false,
   logLevel: "error",
-  resolve: {
-    alias: { "@loongark/kit": resolve("packages/kit/dist/index.js") },
-  },
+  plugins: [workspacePlugin],
   build: {
     outDir: resolve("tests/consumer-dist"),
     emptyOutDir: false,
@@ -246,3 +224,7 @@ await build({
   },
 });
 console.log("二维网格/瀑布流共享发布模块浏览器消费构建通过");
+
+await import('./build-core-fixtures.mjs');
+
+await import("./build-automatic-style-fixtures.mjs");

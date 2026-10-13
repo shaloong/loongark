@@ -1,3 +1,4 @@
+import { publishedWorkspacePlugin } from "./published-workspace-plugin.mjs";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -178,6 +179,7 @@ if (process.argv[2] === "--worker") {
   process.exit(0);
 }
 
+const workspacePlugin = await publishedWorkspacePlugin("node");
 await mkdir(folder, { recursive: true });
 for (const kind of cases) {
   const root = resolve(folder, kind);
@@ -199,18 +201,17 @@ for (const kind of cases) {
       {
         name: "shared-runtime",
         enforce: "pre",
-        resolveId(id) {
-          if (/^@loongark\/(kit|theme|primitives|tokens)$/.test(id))
-            return {
-              id: resolve(`packages/${id.split("/")[1]}/dist/index.js`),
-              external: true,
-            };
+        async resolveId(id) {
+          if (!/^@loongark\/(kit|theme|primitives|tokens)(\/.+)?$/.test(id)) return;
+          const entry = await workspacePlugin.resolveId(id);
+          if (!entry) throw Error(`未公开共享入口：${id}`);
+          return { ...entry, external: true };
         },
       },
+      workspacePlugin,
       svelte(),
     ],
     resolve: {
-      alias: { "@loongark/svelte": resolve("packages/svelte/dist/index.js") },
       dedupe: ["svelte"],
     },
     ssr: { noExternal: ["@loongark/svelte", "@ark-ui/svelte"] },

@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticRatingGroupStyles } from "@loongark/primitives/automatic-styles/rating-group";
+
+
 /**
  * Rating Group component - React wrapper.
  * Uses Ark UI Rating Group with data attributes for styling.
@@ -33,7 +38,7 @@ export interface LoongArkRatingGroupRootProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkRatingGroupRoot = forwardRef<
+export const LoongArkRatingGroupRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkRatingGroupRootProps
 >(({ size = "md", disabled = false, children, ...props }, ref) => {
@@ -86,11 +91,11 @@ export const LoongArkRatingGroupRoot = forwardRef<
       {children}
     </RatingGroup.RootProvider>
   );
-});
+}), lkAutomaticRatingGroupStyles);
 
 LoongArkRatingGroupRoot.displayName = "LoongArkRatingGroupRoot";
 
-export const LoongArkRatingGroupLabel = forwardRef<
+export const LoongArkRatingGroupLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   ArkRatingGroupLabelProps
 >((props, ref) => {
@@ -102,11 +107,11 @@ export const LoongArkRatingGroupLabel = forwardRef<
       data-part="label"
     />
   );
-});
+}), lkAutomaticRatingGroupStyles);
 
 LoongArkRatingGroupLabel.displayName = "LoongArkRatingGroupLabel";
 
-export const LoongArkRatingGroupControl = forwardRef<
+export const LoongArkRatingGroupControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkRatingGroupControlProps
 >((props, ref) => {
@@ -118,11 +123,11 @@ export const LoongArkRatingGroupControl = forwardRef<
       data-part="control"
     />
   );
-});
+}), lkAutomaticRatingGroupStyles);
 
 LoongArkRatingGroupControl.displayName = "LoongArkRatingGroupControl";
 
-export const LoongArkRatingGroupItem = forwardRef<
+export const LoongArkRatingGroupItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   ArkRatingGroupItemProps
 >((props, ref) => {
@@ -134,11 +139,11 @@ export const LoongArkRatingGroupItem = forwardRef<
       data-part="item"
     />
   );
-});
+}), lkAutomaticRatingGroupStyles);
 
 LoongArkRatingGroupItem.displayName = "LoongArkRatingGroupItem";
 
-export const LoongArkRatingGroupHiddenInput = forwardRef<
+export const LoongArkRatingGroupHiddenInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   ArkRatingGroupHiddenInputProps
 >((props, ref) => {
@@ -150,6 +155,6 @@ export const LoongArkRatingGroupHiddenInput = forwardRef<
       data-part="hidden-input"
     />
   );
-});
+}), lkAutomaticRatingGroupStyles);
 
 LoongArkRatingGroupHiddenInput.displayName = "LoongArkRatingGroupHiddenInput";

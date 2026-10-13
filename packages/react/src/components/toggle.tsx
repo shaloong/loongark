@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticToggleStyles } from "@loongark/primitives/automatic-styles/toggle";
+
+
 /**
  * Toggle component - React wrapper.
  * Injects data-scope/data-part and size mapping.
@@ -21,7 +26,7 @@ export interface LoongArkToggleIndicatorProps
   children?: ReactNode;
 }
 
-export const LoongArkToggleRoot = forwardRef<
+export const LoongArkToggleRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkToggleRootProps
 >(({ children, size = "md", ...props }, ref) => {
@@ -36,11 +41,11 @@ export const LoongArkToggleRoot = forwardRef<
       {children}
     </Toggle.Root>
   );
-});
+}), lkAutomaticToggleStyles);
 
 LoongArkToggleRoot.displayName = "LoongArkToggleRoot";
 
-export const LoongArkToggleIndicator = forwardRef<
+export const LoongArkToggleIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkToggleIndicatorProps
 >(({ children, ...props }, ref) => {
@@ -54,6 +59,6 @@ export const LoongArkToggleIndicator = forwardRef<
       {children}
     </Toggle.Indicator>
   );
-});
+}), lkAutomaticToggleStyles);
 
 LoongArkToggleIndicator.displayName = "LoongArkToggleIndicator";

@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCollapsibleStyles } from "@loongark/primitives/automatic-styles/collapsible";
+
+
 /**
  * Collapsible component - React wrapper.
  * Injects data-scope/data-part and size mapping.
@@ -41,7 +46,7 @@ export interface LoongArkCollapsibleIndicatorProps
   children?: ReactNode;
 }
 
-export const LoongArkCollapsibleRoot = forwardRef<
+export const LoongArkCollapsibleRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkCollapsibleRootProps
 >(({ children, size = "md", ...props }, ref) => {
@@ -56,11 +61,11 @@ export const LoongArkCollapsibleRoot = forwardRef<
       {children}
     </Collapsible.Root>
   );
-});
+}), lkAutomaticCollapsibleStyles);
 
 LoongArkCollapsibleRoot.displayName = "LoongArkCollapsibleRoot";
 
-export const LoongArkCollapsibleTrigger = forwardRef<
+export const LoongArkCollapsibleTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkCollapsibleTriggerProps
 >(({ children, ...props }, ref) => {
@@ -74,11 +79,11 @@ export const LoongArkCollapsibleTrigger = forwardRef<
       {children}
     </Collapsible.Trigger>
   );
-});
+}), lkAutomaticCollapsibleStyles);
 
 LoongArkCollapsibleTrigger.displayName = "LoongArkCollapsibleTrigger";
 
-export const LoongArkCollapsibleContent = forwardRef<
+export const LoongArkCollapsibleContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkCollapsibleContentProps
 >(({ children, ...props }, ref) => {
@@ -92,11 +97,11 @@ export const LoongArkCollapsibleContent = forwardRef<
       {children}
     </Collapsible.Content>
   );
-});
+}), lkAutomaticCollapsibleStyles);
 
 LoongArkCollapsibleContent.displayName = "LoongArkCollapsibleContent";
 
-export const LoongArkCollapsibleIndicator = forwardRef<
+export const LoongArkCollapsibleIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkCollapsibleIndicatorProps
 >(({ children, ...props }, ref) => {
@@ -110,6 +115,6 @@ export const LoongArkCollapsibleIndicator = forwardRef<
       {children}
     </Collapsible.Indicator>
   );
-});
+}), lkAutomaticCollapsibleStyles);
 
 LoongArkCollapsibleIndicator.displayName = "LoongArkCollapsibleIndicator";

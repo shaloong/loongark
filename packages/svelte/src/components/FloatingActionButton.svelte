@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticFloatingActionButtonStyles } from "@loongark/primitives/automatic-styles/floating-action-button";
+  registerAutomaticStyles(lkAutomaticFloatingActionButtonStyles);
+
   import {
     fabAttributes,
     type FloatingActionButtonOptions,

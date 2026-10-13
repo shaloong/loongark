@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSliderStyles } from "@loongark/primitives/automatic-styles/slider";
+
+
 /**
  * Slider component - React wrapper
  * Based on Ark UI Slider with data-scope/data-part bindings
@@ -96,7 +101,7 @@ export interface LoongArkSliderHiddenInputProps extends Omit<
   "asChild"
 > {}
 
-export const LoongArkSliderRoot = forwardRef<
+export const LoongArkSliderRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkSliderRootProps
 >(({ size = "md", orientation = "horizontal", ...props }, ref) => {
@@ -111,11 +116,11 @@ export const LoongArkSliderRoot = forwardRef<
       data-orientation={orientation}
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderRoot.displayName = "LoongArkSliderRoot";
 
-export const LoongArkSliderLabel = forwardRef<
+export const LoongArkSliderLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkSliderLabelProps
 >((props, ref) => {
@@ -127,11 +132,11 @@ export const LoongArkSliderLabel = forwardRef<
       data-part="label"
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderLabel.displayName = "LoongArkSliderLabel";
 
-export const LoongArkSliderValueText = forwardRef<
+export const LoongArkSliderValueText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkSliderValueTextProps
 >((props, ref) => {
@@ -143,11 +148,11 @@ export const LoongArkSliderValueText = forwardRef<
       data-part="value-text"
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderValueText.displayName = "LoongArkSliderValueText";
 
-export const LoongArkSliderControl = forwardRef<
+export const LoongArkSliderControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkSliderControlProps
 >((props, ref) => {
@@ -159,11 +164,11 @@ export const LoongArkSliderControl = forwardRef<
       data-part="control"
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderControl.displayName = "LoongArkSliderControl";
 
-export const LoongArkSliderTrack = forwardRef<
+export const LoongArkSliderTrack = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkSliderTrackProps
 >((props, ref) => {
@@ -175,11 +180,11 @@ export const LoongArkSliderTrack = forwardRef<
       data-part="track"
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderTrack.displayName = "LoongArkSliderTrack";
 
-export const LoongArkSliderRange = forwardRef<
+export const LoongArkSliderRange = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkSliderRangeProps
 >((props, ref) => {
@@ -191,11 +196,11 @@ export const LoongArkSliderRange = forwardRef<
       data-part="range"
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderRange.displayName = "LoongArkSliderRange";
 
-export const LoongArkSliderThumb = forwardRef<
+export const LoongArkSliderThumb = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkSliderThumbProps
 >((props, ref) => {
@@ -207,11 +212,11 @@ export const LoongArkSliderThumb = forwardRef<
       data-part="thumb"
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderThumb.displayName = "LoongArkSliderThumb";
 
-export const LoongArkSliderMarkerGroup = forwardRef<
+export const LoongArkSliderMarkerGroup = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkSliderMarkerGroupProps
 >((props, ref) => {
@@ -223,11 +228,11 @@ export const LoongArkSliderMarkerGroup = forwardRef<
       data-part="marker-group"
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderMarkerGroup.displayName = "LoongArkSliderMarkerGroup";
 
-export const LoongArkSliderMarker = forwardRef<
+export const LoongArkSliderMarker = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   LoongArkSliderMarkerProps
 >((props, ref) => {
@@ -239,11 +244,11 @@ export const LoongArkSliderMarker = forwardRef<
       data-part="marker"
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderMarker.displayName = "LoongArkSliderMarker";
 
-export const LoongArkSliderDraggingIndicator = forwardRef<
+export const LoongArkSliderDraggingIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   LoongArkSliderDraggingIndicatorProps
 >((props, ref) => {
@@ -255,11 +260,11 @@ export const LoongArkSliderDraggingIndicator = forwardRef<
       data-part="dragging-indicator"
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderDraggingIndicator.displayName = "LoongArkSliderDraggingIndicator";
 
-export const LoongArkSliderHiddenInput = forwardRef<
+export const LoongArkSliderHiddenInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkSliderHiddenInputProps
 >((props, ref) => {
@@ -271,6 +276,6 @@ export const LoongArkSliderHiddenInput = forwardRef<
       data-part="hidden-input"
     />
   );
-});
+}), lkAutomaticSliderStyles);
 
 LoongArkSliderHiddenInput.displayName = "LoongArkSliderHiddenInput";

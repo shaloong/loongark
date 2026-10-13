@@ -1,0 +1,21 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export type { ClipboardControlProps } from "../components/clipboard.d";
+export type { ClipboardIndicatorProps } from "../components/clipboard.d";
+export type { ClipboardInputProps } from "../components/clipboard.d";
+export type { ClipboardLabelProps } from "../components/clipboard.d";
+export type { ClipboardRootProps } from "../components/clipboard.d";
+export type { ClipboardTriggerProps } from "../components/clipboard.d";
+export type { ClipboardValueTextProps } from "../components/clipboard.d";
+export { LoongArkClipboardContext } from "../components/ark-advanced";
+export { default as LoongArkClipboardControl } from "../components/ClipboardControl.svelte";
+export { default as LoongArkClipboardIndicator } from "../components/ClipboardIndicator.svelte";
+export { default as LoongArkClipboardInput } from "../components/ClipboardInput.svelte";
+export { default as LoongArkClipboardLabel } from "../components/ClipboardLabel.svelte";
+export { default as LoongArkClipboardRoot } from "../components/ClipboardRoot.svelte";
+export { LoongArkClipboardRootProvider } from "../components/ark-advanced";
+export { default as LoongArkClipboardTrigger } from "../components/ClipboardTrigger.svelte";
+export { default as LoongArkClipboardValueText } from "../components/ClipboardValueText.svelte";
+export { useClipboard } from "@ark-ui/svelte/clipboard";
+export { useClipboardContext } from "@ark-ui/svelte/clipboard";
+export type { UseClipboardProps } from "@ark-ui/svelte/clipboard";
+export type { UseClipboardReturn } from "@ark-ui/svelte/clipboard";

@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState, type ReactNode } from "react";
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticVirtualGridStyles } from "@loongark/primitives/automatic-styles/virtual-grid";
+import { styles as lkAutomaticVirtualMasonryStyles } from "@loongark/primitives/automatic-styles/virtual-masonry";
+
+
+import React, { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import {
   createVirtualGrid,
   createVirtualMasonry,
@@ -9,10 +15,12 @@ import {
   type VirtualMasonryOptions,
   type VirtualMasonryEntry,
 } from "@loongark/kit";
+// 数据与 Tab 入口在绘制前同步，不能先更新 aria 计数再等待下一帧修复键盘入口。
+const useGridLayoutEffect = typeof document === "undefined" ? useEffect : useLayoutEffect;
 export interface VirtualGridProps extends VirtualGridOptions {
   renderCell(details: VirtualGridCellDetails): ReactNode;
 }
-export function LoongArkVirtualGrid(props: VirtualGridProps) {
+function LoongArkVirtualGrid(props: VirtualGridProps) {
   const [, redraw] = useState(0),
     [model] = useState(() =>
       createVirtualGrid(props, () => redraw((value) => value + 1)),
@@ -21,7 +29,7 @@ export function LoongArkVirtualGrid(props: VirtualGridProps) {
   useEffect(() => {
     if (root.current) return mountVirtualGrid(root.current, model);
   }, [model]);
-  useEffect(
+  useGridLayoutEffect(
     () => model.sync(props),
     [
       model,
@@ -99,7 +107,7 @@ export function LoongArkVirtualGrid(props: VirtualGridProps) {
 export interface VirtualMasonryProps extends VirtualMasonryOptions {
   renderItem(details: VirtualMasonryEntry): ReactNode;
 }
-export function LoongArkVirtualMasonry(props: VirtualMasonryProps) {
+function LoongArkVirtualMasonry(props: VirtualMasonryProps) {
   const [, redraw] = useState(0),
     [model] = useState(() =>
       createVirtualMasonry(props, () => redraw((value) => value + 1)),
@@ -156,3 +164,8 @@ export function LoongArkVirtualMasonry(props: VirtualMasonryProps) {
     </div>
   );
 }
+
+const lkStyledLoongArkVirtualGrid = /*#__PURE__*/ withAutomaticStyles(LoongArkVirtualGrid, lkAutomaticVirtualGridStyles);
+export { lkStyledLoongArkVirtualGrid as LoongArkVirtualGrid };
+const lkStyledLoongArkVirtualMasonry = /*#__PURE__*/ withAutomaticStyles(LoongArkVirtualMasonry, lkAutomaticVirtualMasonryStyles);
+export { lkStyledLoongArkVirtualMasonry as LoongArkVirtualMasonry };

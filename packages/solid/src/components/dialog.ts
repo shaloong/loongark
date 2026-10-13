@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticDialogStyles } from "@loongark/primitives/automatic-styles/dialog";
 import { createComponent } from "solid-js";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
@@ -23,7 +26,7 @@ export interface LoongArkDialogOverlayProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkDialogOverlay: Component<LoongArkDialogOverlayProps> = (
+export const LoongArkDialogOverlay: Component<LoongArkDialogOverlayProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, rest] = splitProps(mergeProps({ blur: true }, props), [
@@ -44,7 +47,7 @@ export const LoongArkDialogOverlay: Component<LoongArkDialogOverlayProps> = (
       }),
     ),
   );
-};
+}, lkAutomaticDialogStyles);
 
 interface DialogContentProps
   extends
@@ -63,7 +66,7 @@ const dialogContentDefaults: Required<
   overlayBlur: true,
 };
 
-export const LoongArkDialogContent: Component<DialogContentProps> = (props) => {
+export const LoongArkDialogContent: Component<DialogContentProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, rest] = splitProps(mergeProps(dialogContentDefaults, props), [
     "children",
     "size",
@@ -95,13 +98,13 @@ export const LoongArkDialogContent: Component<DialogContentProps> = (props) => {
       }),
     ),
   );
-};
+}, lkAutomaticDialogStyles);
 
 interface DialogTextProps extends Omit<JSX.HTMLAttributes<HTMLElement>, "ref"> {
   children?: JSX.Element;
 }
 
-export const LoongArkDialogTitle: Component<DialogTextProps> = (props) => {
+export const LoongArkDialogTitle: Component<DialogTextProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, rest] = splitProps(props, ["children"]);
   return ArkDialog.Title(
     dataProps(
@@ -114,9 +117,9 @@ export const LoongArkDialogTitle: Component<DialogTextProps> = (props) => {
       }),
     ),
   );
-};
+}, lkAutomaticDialogStyles);
 
-export const LoongArkDialogDescription: Component<DialogTextProps> = (
+export const LoongArkDialogDescription: Component<DialogTextProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, rest] = splitProps(props, ["children"]);
@@ -131,9 +134,9 @@ export const LoongArkDialogDescription: Component<DialogTextProps> = (
       }),
     ),
   );
-};
+}, lkAutomaticDialogStyles);
 
-export const LoongArkDialogFooter: Component<DialogTextProps> = (props) => {
+export const LoongArkDialogFooter: Component<DialogTextProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, rest] = splitProps(props, ["children"]);
   return ark.footer(
     dataProps(
@@ -146,9 +149,9 @@ export const LoongArkDialogFooter: Component<DialogTextProps> = (props) => {
       }),
     ),
   );
-};
+}, lkAutomaticDialogStyles);
 
-export const LoongArkDialogCloseTrigger: Component<DialogTextProps> = (
+export const LoongArkDialogCloseTrigger: Component<DialogTextProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, rest] = splitProps(props, ["children"]);
@@ -167,9 +170,9 @@ export const LoongArkDialogCloseTrigger: Component<DialogTextProps> = (
       }),
     ),
   );
-};
+}, lkAutomaticDialogStyles);
 
-export const LoongArkDialog = {
+export const LoongArkDialog = /*#__PURE__*/ withAutomaticStyles({
   Root: ArkDialog.Root,
   Trigger: ArkDialog.Trigger,
   Positioner: ArkDialog.Positioner,
@@ -180,10 +183,10 @@ export const LoongArkDialog = {
   Description: LoongArkDialogDescription,
   Footer: LoongArkDialogFooter,
   CloseTrigger: LoongArkDialogCloseTrigger,
-};
+}, lkAutomaticDialogStyles);
 
-export const LoongArkDialogRoot = ArkDialog.Root;
-export const LoongArkDialogTrigger = ArkDialog.Trigger;
+export const LoongArkDialogRoot = /*#__PURE__*/ withAutomaticStyles(ArkDialog.Root, lkAutomaticDialogStyles);
+export const LoongArkDialogTrigger = /*#__PURE__*/ withAutomaticStyles(ArkDialog.Trigger, lkAutomaticDialogStyles);
 
-export const LoongArkDialogPositioner = ArkDialog.Positioner;
-export const LoongArkDialogPortal = LoongArkPortal;
+export const LoongArkDialogPositioner = /*#__PURE__*/ withAutomaticStyles(ArkDialog.Positioner, lkAutomaticDialogStyles);
+export const LoongArkDialogPortal = /*#__PURE__*/ withAutomaticStyles(LoongArkPortal, lkAutomaticDialogStyles);

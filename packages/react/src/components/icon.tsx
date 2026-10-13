@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticIconStyles } from "@loongark/primitives/automatic-styles/icon";
+
+
 import { createElement, forwardRef, type SVGProps } from "react";
 import {
   iconAttributes,
@@ -10,7 +15,7 @@ export type LoongArkIconProps = Omit<
   "children" | "dangerouslySetInnerHTML" | "size"
 > &
   IconOptions;
-export const LoongArkIcon = forwardRef<SVGSVGElement, LoongArkIconProps>(
+export const LoongArkIcon = /*#__PURE__*/ withAutomaticStyles(forwardRef<SVGSVGElement, LoongArkIconProps>(
   (
     {
       icon,
@@ -44,5 +49,5 @@ export const LoongArkIcon = forwardRef<SVGSVGElement, LoongArkIconProps>(
         }),
       ),
     ),
-);
+), lkAutomaticIconStyles);
 LoongArkIcon.displayName = "LoongArkIcon";

@@ -100,7 +100,7 @@ for (const framework of ["react", "vue", "solid", "svelte", "Story"])
         );
         await expect.poll(bounded).toBe(true);
         for (const title of await labels.locator("title").allTextContents()) expect(titles).toContain(title);
-        await style.evaluate((node) => node.remove());
+        await style.evaluate((node) => node.parentNode?.removeChild(node));
         await expect
           .poll(() =>
             labels.evaluateAll((nodes) =>

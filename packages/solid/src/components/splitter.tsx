@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSplitterStyles } from "@loongark/primitives/automatic-styles/splitter";
 /**
  * Splitter component - Solid wrapper.
  * Uses Ark UI Splitter with data attributes for styling.
@@ -20,7 +23,7 @@ export interface LoongArkSplitterRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkSplitterRoot: Component<LoongArkSplitterRootProps> = (
+export const LoongArkSplitterRoot: Component<LoongArkSplitterRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps({ size: "md" as SplitterSize }, props);
@@ -36,7 +39,7 @@ export const LoongArkSplitterRoot: Component<LoongArkSplitterRootProps> = (
       {local.children}
     </ArkSplitter.Root>
   );
-};
+}, lkAutomaticSplitterStyles);
 
 export interface LoongArkSplitterPanelProps extends Omit<
   ArkSplitterPanelProps,
@@ -45,7 +48,7 @@ export interface LoongArkSplitterPanelProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkSplitterPanel: Component<LoongArkSplitterPanelProps> = (
+export const LoongArkSplitterPanel: Component<LoongArkSplitterPanelProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -54,7 +57,7 @@ export const LoongArkSplitterPanel: Component<LoongArkSplitterPanelProps> = (
       {local.children}
     </ArkSplitter.Panel>
   );
-};
+}, lkAutomaticSplitterStyles);
 
 export interface LoongArkSplitterResizeTriggerProps extends Omit<
   ArkSplitterResizeTriggerProps,
@@ -65,7 +68,7 @@ export interface LoongArkSplitterResizeTriggerProps extends Omit<
 
 export const LoongArkSplitterResizeTrigger: Component<
   LoongArkSplitterResizeTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkSplitter.ResizeTrigger
@@ -77,7 +80,7 @@ export const LoongArkSplitterResizeTrigger: Component<
       {local.children}
     </ArkSplitter.ResizeTrigger>
   );
-};
+}, lkAutomaticSplitterStyles);
 
 export interface LoongArkSplitterResizeTriggerIndicatorProps extends Omit<
   ArkSplitterResizeTriggerIndicatorProps,
@@ -88,7 +91,7 @@ export interface LoongArkSplitterResizeTriggerIndicatorProps extends Omit<
 
 export const LoongArkSplitterResizeTriggerIndicator: Component<
   LoongArkSplitterResizeTriggerIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkSplitter.ResizeTriggerIndicator
@@ -99,4 +102,4 @@ export const LoongArkSplitterResizeTriggerIndicator: Component<
       {local.children}
     </ArkSplitter.ResizeTriggerIndicator>
   );
-};
+}, lkAutomaticSplitterStyles);

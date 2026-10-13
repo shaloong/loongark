@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTextareaStyles } from "@loongark/primitives/automatic-styles/textarea";
 import {
   splitProps,
   onMount,
@@ -13,7 +16,7 @@ import {
 } from "@loongark/kit";
 export type LoongArkTextareaProps =
   JSX.TextareaHTMLAttributes<HTMLTextAreaElement> & TextareaAutosizeOptions;
-export const LoongArkTextarea = (props: LoongArkTextareaProps) => {
+export const LoongArkTextarea = /*#__PURE__*/ withAutomaticStyles((props: LoongArkTextareaProps) => {
   const [local, rest] = splitProps(props, [
     "value",
     "children",
@@ -53,4 +56,4 @@ export const LoongArkTextarea = (props: LoongArkTextareaProps) => {
       {local.value ?? local.children}
     </textarea>
   );
-};
+}, lkAutomaticTextareaStyles);

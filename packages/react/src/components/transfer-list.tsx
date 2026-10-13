@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTransferListStyles } from "@loongark/primitives/automatic-styles/transfer-list";
+
+
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import { useState, useRef, type HTMLAttributes } from "react";
@@ -19,7 +24,7 @@ export type LoongArkTransferListProps = Omit<
   "defaultValue" | "onChange"
 > &
   TransferListOptions;
-export function LoongArkTransferList({
+function LoongArkTransferList({
   items,
   value,
   defaultValue = [],
@@ -151,3 +156,6 @@ export function LoongArkTransferList({
     </div>
   );
 }
+
+const lkStyledLoongArkTransferList = /*#__PURE__*/ withAutomaticStyles(LoongArkTransferList, lkAutomaticTransferListStyles);
+export { lkStyledLoongArkTransferList as LoongArkTransferList };

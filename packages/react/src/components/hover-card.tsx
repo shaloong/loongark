@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticHoverCardStyles } from "@loongark/primitives/automatic-styles/hover-card";
+
+
 /**
  * Hover Card component - React wrapper.
  * Uses Ark UI Hover Card with data attributes for styling.
@@ -34,7 +39,7 @@ export interface LoongArkHoverCardRootProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkHoverCardRoot = forwardRef<
+export const LoongArkHoverCardRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkHoverCardRootProps
 >(({ size = "md", children, ...props }, ref) => {
@@ -48,11 +53,11 @@ export const LoongArkHoverCardRoot = forwardRef<
       {children}
     </HoverCard.Root>
   );
-});
+}), lkAutomaticHoverCardStyles);
 
 LoongArkHoverCardRoot.displayName = "LoongArkHoverCardRoot";
 
-export const LoongArkHoverCardTrigger = forwardRef<
+export const LoongArkHoverCardTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkHoverCardTriggerProps
 >((props, ref) => {
@@ -64,11 +69,11 @@ export const LoongArkHoverCardTrigger = forwardRef<
       data-part="trigger"
     />
   );
-});
+}), lkAutomaticHoverCardStyles);
 
 LoongArkHoverCardTrigger.displayName = "LoongArkHoverCardTrigger";
 
-export const LoongArkHoverCardPositioner = forwardRef<
+export const LoongArkHoverCardPositioner = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkHoverCardPositionerProps, "asChild">
 >((props, ref) => {
@@ -82,11 +87,11 @@ export const LoongArkHoverCardPositioner = forwardRef<
       />
     </SafePortal>
   );
-});
+}), lkAutomaticHoverCardStyles);
 
 LoongArkHoverCardPositioner.displayName = "LoongArkHoverCardPositioner";
 
-export const LoongArkHoverCardContent = forwardRef<
+export const LoongArkHoverCardContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkHoverCardContentProps, "asChild">
 >((props, ref) => {
@@ -98,11 +103,11 @@ export const LoongArkHoverCardContent = forwardRef<
       data-part="content"
     />
   );
-});
+}), lkAutomaticHoverCardStyles);
 
 LoongArkHoverCardContent.displayName = "LoongArkHoverCardContent";
 
-export const LoongArkHoverCardArrow = forwardRef<
+export const LoongArkHoverCardArrow = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkHoverCardArrowProps, "asChild">
 >((props, ref) => {
@@ -114,11 +119,11 @@ export const LoongArkHoverCardArrow = forwardRef<
       data-part="arrow"
     />
   );
-});
+}), lkAutomaticHoverCardStyles);
 
 LoongArkHoverCardArrow.displayName = "LoongArkHoverCardArrow";
 
-export const LoongArkHoverCardArrowTip = forwardRef<
+export const LoongArkHoverCardArrowTip = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkHoverCardArrowTipProps, "asChild">
 >((props, ref) => {
@@ -130,6 +135,6 @@ export const LoongArkHoverCardArrowTip = forwardRef<
       data-part="arrow-tip"
     />
   );
-});
+}), lkAutomaticHoverCardStyles);
 
 LoongArkHoverCardArrowTip.displayName = "LoongArkHoverCardArrowTip";

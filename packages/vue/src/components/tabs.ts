@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTabsStyles } from "@loongark/primitives/automatic-styles/tabs";
 import { renderPart } from "../render-part";
 /**
  * Tabs 组件 - Vue 实现
@@ -11,7 +14,7 @@ export interface TabsValueChangeDetails {
   value: string;
 }
 
-export const LoongArkTabsRoot = defineComponent({
+export const LoongArkTabsRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTabsRoot",
   props: {
     size: {
@@ -80,9 +83,9 @@ export const LoongArkTabsRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTabsStyles);
 
-export const LoongArkTabsList = defineComponent({
+export const LoongArkTabsList = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTabsList",
   setup(_, { slots, attrs }) {
     return () =>
@@ -96,9 +99,9 @@ export const LoongArkTabsList = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTabsStyles);
 
-export const LoongArkTabsTrigger = defineComponent({
+export const LoongArkTabsTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTabsTrigger",
   props: {
     value: {
@@ -124,9 +127,9 @@ export const LoongArkTabsTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTabsStyles);
 
-export const LoongArkTabsContent = defineComponent({
+export const LoongArkTabsContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTabsContent",
   props: {
     value: {
@@ -147,9 +150,9 @@ export const LoongArkTabsContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTabsStyles);
 
-export const LoongArkTabsIndicator = defineComponent({
+export const LoongArkTabsIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTabsIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -163,4 +166,4 @@ export const LoongArkTabsIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTabsStyles);

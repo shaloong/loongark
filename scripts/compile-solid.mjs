@@ -8,7 +8,7 @@ const compile = async (directory) => {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) {
-      if (["ssr", "source"].includes(entry.name)) continue;
+      if (["ssr", "server", "source"].includes(entry.name)) continue;
       await compile(path);
     } else if (entry.name.endsWith(".jsx")) {
       const result = await transformAsync(await readFile(path, "utf8"), {

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCarouselStyles } from "@loongark/primitives/automatic-styles/carousel";
 /**
  * Carousel component - Solid wrapper.
  * Uses Ark UI Carousel with data attributes for styling.
@@ -27,7 +30,7 @@ export interface LoongArkCarouselRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkCarouselRoot: Component<LoongArkCarouselRootProps> = (
+export const LoongArkCarouselRoot: Component<LoongArkCarouselRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps({ size: "md" as CarouselSize }, props);
@@ -43,7 +46,7 @@ export const LoongArkCarouselRoot: Component<LoongArkCarouselRootProps> = (
       {local.children}
     </ArkCarousel.Root>
   );
-};
+}, lkAutomaticCarouselStyles);
 
 export interface LoongArkCarouselItemGroupProps extends Omit<
   ArkCarouselItemGroupProps,
@@ -54,7 +57,7 @@ export interface LoongArkCarouselItemGroupProps extends Omit<
 
 export const LoongArkCarouselItemGroup: Component<
   LoongArkCarouselItemGroupProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkCarousel.ItemGroup
@@ -65,7 +68,7 @@ export const LoongArkCarouselItemGroup: Component<
       {local.children}
     </ArkCarousel.ItemGroup>
   );
-};
+}, lkAutomaticCarouselStyles);
 
 export interface LoongArkCarouselItemProps extends Omit<
   ArkCarouselItemProps,
@@ -74,7 +77,7 @@ export interface LoongArkCarouselItemProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkCarouselItem: Component<LoongArkCarouselItemProps> = (
+export const LoongArkCarouselItem: Component<LoongArkCarouselItemProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -83,7 +86,7 @@ export const LoongArkCarouselItem: Component<LoongArkCarouselItemProps> = (
       {local.children}
     </ArkCarousel.Item>
   );
-};
+}, lkAutomaticCarouselStyles);
 
 export interface LoongArkCarouselControlProps extends Omit<
   ArkCarouselControlProps,
@@ -94,14 +97,14 @@ export interface LoongArkCarouselControlProps extends Omit<
 
 export const LoongArkCarouselControl: Component<
   LoongArkCarouselControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkCarousel.Control {...others} data-scope="carousel" data-part="control">
       {local.children}
     </ArkCarousel.Control>
   );
-};
+}, lkAutomaticCarouselStyles);
 
 export interface LoongArkCarouselNextTriggerProps extends Omit<
   ArkCarouselNextTriggerProps,
@@ -112,7 +115,7 @@ export interface LoongArkCarouselNextTriggerProps extends Omit<
 
 export const LoongArkCarouselNextTrigger: Component<
   LoongArkCarouselNextTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkCarousel.NextTrigger
@@ -123,7 +126,7 @@ export const LoongArkCarouselNextTrigger: Component<
       {local.children}
     </ArkCarousel.NextTrigger>
   );
-};
+}, lkAutomaticCarouselStyles);
 
 export interface LoongArkCarouselPrevTriggerProps extends Omit<
   ArkCarouselPrevTriggerProps,
@@ -134,7 +137,7 @@ export interface LoongArkCarouselPrevTriggerProps extends Omit<
 
 export const LoongArkCarouselPrevTrigger: Component<
   LoongArkCarouselPrevTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkCarousel.PrevTrigger
@@ -145,7 +148,7 @@ export const LoongArkCarouselPrevTrigger: Component<
       {local.children}
     </ArkCarousel.PrevTrigger>
   );
-};
+}, lkAutomaticCarouselStyles);
 
 export interface LoongArkCarouselIndicatorGroupProps extends Omit<
   ArkCarouselIndicatorGroupProps,
@@ -156,7 +159,7 @@ export interface LoongArkCarouselIndicatorGroupProps extends Omit<
 
 export const LoongArkCarouselIndicatorGroup: Component<
   LoongArkCarouselIndicatorGroupProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkCarousel.IndicatorGroup
@@ -167,7 +170,7 @@ export const LoongArkCarouselIndicatorGroup: Component<
       {local.children}
     </ArkCarousel.IndicatorGroup>
   );
-};
+}, lkAutomaticCarouselStyles);
 
 export interface LoongArkCarouselIndicatorProps extends Omit<
   ArkCarouselIndicatorProps,
@@ -178,7 +181,7 @@ export interface LoongArkCarouselIndicatorProps extends Omit<
 
 export const LoongArkCarouselIndicator: Component<
   LoongArkCarouselIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkCarousel.Indicator
@@ -189,7 +192,7 @@ export const LoongArkCarouselIndicator: Component<
       {local.children}
     </ArkCarousel.Indicator>
   );
-};
+}, lkAutomaticCarouselStyles);
 
 export interface LoongArkCarouselAutoplayTriggerProps extends Omit<
   ArkCarouselAutoplayTriggerProps,
@@ -200,7 +203,7 @@ export interface LoongArkCarouselAutoplayTriggerProps extends Omit<
 
 export const LoongArkCarouselAutoplayTrigger: Component<
   LoongArkCarouselAutoplayTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkCarousel.AutoplayTrigger
@@ -211,7 +214,7 @@ export const LoongArkCarouselAutoplayTrigger: Component<
       {local.children}
     </ArkCarousel.AutoplayTrigger>
   );
-};
+}, lkAutomaticCarouselStyles);
 
 export interface LoongArkCarouselProgressTextProps extends Omit<
   ArkCarouselProgressTextProps,
@@ -222,7 +225,7 @@ export interface LoongArkCarouselProgressTextProps extends Omit<
 
 export const LoongArkCarouselProgressText: Component<
   LoongArkCarouselProgressTextProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkCarousel.ProgressText
@@ -233,7 +236,7 @@ export const LoongArkCarouselProgressText: Component<
       {local.children}
     </ArkCarousel.ProgressText>
   );
-};
+}, lkAutomaticCarouselStyles);
 
 export interface LoongArkCarouselAutoplayIndicatorProps extends Omit<
   ArkCarouselAutoplayIndicatorProps,
@@ -244,7 +247,7 @@ export interface LoongArkCarouselAutoplayIndicatorProps extends Omit<
 
 export const LoongArkCarouselAutoplayIndicator: Component<
   LoongArkCarouselAutoplayIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkCarousel.AutoplayIndicator
@@ -255,4 +258,4 @@ export const LoongArkCarouselAutoplayIndicator: Component<
       {local.children}
     </ArkCarousel.AutoplayIndicator>
   );
-};
+}, lkAutomaticCarouselStyles);

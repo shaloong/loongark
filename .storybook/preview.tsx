@@ -67,6 +67,7 @@ const preview: Preview = {
   },
 
   parameters: {
+    options: { storySort: { order: ["Guides", "Components", "*"] } },
     docs: { page: ReferenceDocs, container: ReferenceDocsContainer },
     layout: "fullscreen",
     actions: { argTypesRegex: "^on[A-Z].*" },

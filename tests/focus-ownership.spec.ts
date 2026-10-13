@@ -223,7 +223,11 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       // 外部受控收起可以不改变当前焦点；结构层应把隐藏后代交还可见祖先。
       await page
         .getByRole("button", { name: "Collapse all", exact: true })
-        .evaluate((node) => node.click());
+        .evaluate((node) => {
+          if (!(node instanceof HTMLButtonElement))
+            throw new Error("收起操作必须是原生按钮");
+          node.click();
+        });
       const ancestor = page.getByRole("button", {
         name: "Expand atlas",
         exact: true,

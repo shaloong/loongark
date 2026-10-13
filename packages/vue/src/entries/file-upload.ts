@@ -1,0 +1,22 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export type { FileUploadChangeDetails } from "../components/file-upload";
+export { FileUploadContext } from "@ark-ui/vue/file-upload";
+export { LoongArkFileUploadClearTrigger } from "../components/file-upload";
+export { LoongArkFileUploadContext } from "../components/ark-advanced";
+export { LoongArkFileUploadDropzone } from "../components/file-upload";
+export { LoongArkFileUploadHiddenInput } from "../components/file-upload";
+export { LoongArkFileUploadItem } from "../components/file-upload";
+export { LoongArkFileUploadItemDeleteTrigger } from "../components/file-upload";
+export { LoongArkFileUploadItemGroup } from "../components/file-upload";
+export { LoongArkFileUploadItemName } from "../components/file-upload";
+export { LoongArkFileUploadItemPreview } from "../components/file-upload";
+export { LoongArkFileUploadItemPreviewImage } from "../components/file-upload";
+export { LoongArkFileUploadItemSizeText } from "../components/file-upload";
+export { LoongArkFileUploadLabel } from "../components/file-upload";
+export { LoongArkFileUploadRoot } from "../components/file-upload";
+export { LoongArkFileUploadRootProvider } from "../components/ark-advanced";
+export { LoongArkFileUploadTrigger } from "../components/file-upload";
+export { useFileUpload } from "@ark-ui/vue/file-upload";
+export { useFileUploadContext } from "@ark-ui/vue/file-upload";
+export type { UseFileUploadProps } from "@ark-ui/vue/file-upload";
+export type { UseFileUploadReturn } from "@ark-ui/vue/file-upload";

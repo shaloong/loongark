@@ -10,7 +10,28 @@ import {
   formatTime,
   timeStep,
   textareaRows,
+  nativeSelectionFieldDescription,
 } from "../packages/kit/dist/index.js";
+
+// Ark 新旧 Field 契约都必须保留调用方提示、已挂载错误和去重后的 ID。
+const legacyField = {
+  ariaDescribedby: "helper",
+  getInputProps: () => ({ "aria-errormessage": "error" }),
+};
+assert.equal(nativeSelectionFieldDescription("own helper", legacyField, true), "own helper error");
+assert.equal(nativeSelectionFieldDescription("own", legacyField, false), "own helper");
+const describedField = {
+  ariaDescribedby: "helper error",
+  ids: { errorText: "error" },
+  getInputProps: () => ({ "aria-describedby": "error helper" }),
+};
+assert.equal(nativeSelectionFieldDescription("own helper", describedField, "true"), "own helper error");
+assert.equal(nativeSelectionFieldDescription("own helper", describedField, false), "own helper");
+assert.equal(nativeSelectionFieldDescription("error own", describedField, false), "error own helper");
+assert.equal(nativeSelectionFieldDescription("own", undefined, true), "own");
+assert.equal(nativeSelectionFieldDescription("own", {
+  getInputProps: () => ({ "aria-describedby": null }),
+}, false), "own");
 const items = [
   { value: "a", label: "Alpha" },
   { value: "b", label: "Beta" },

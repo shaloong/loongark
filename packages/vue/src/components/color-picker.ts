@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticColorPickerStyles } from "@loongark/primitives/automatic-styles/color-picker";
 import { renderPart } from "../render-part";
 /**
  * Color Picker component - Vue wrapper.
@@ -12,7 +15,7 @@ import {
 import { ColorPicker as ArkColorPicker } from "@ark-ui/vue/color-picker";
 import type { ColorPickerSize } from "@loongark/primitives";
 
-export const LoongArkColorPickerRoot = defineComponent({
+export const LoongArkColorPickerRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerRoot",
   props: {
     size: {
@@ -34,9 +37,9 @@ export const LoongArkColorPickerRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerLabel = defineComponent({
+export const LoongArkColorPickerLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -50,9 +53,9 @@ export const LoongArkColorPickerLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerControl = defineComponent({
+export const LoongArkColorPickerControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerControl",
   setup(_, { slots, attrs }) {
     return () =>
@@ -66,9 +69,9 @@ export const LoongArkColorPickerControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerTrigger = defineComponent({
+export const LoongArkColorPickerTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -82,9 +85,9 @@ export const LoongArkColorPickerTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerPositioner = defineComponent({
+export const LoongArkColorPickerPositioner = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerPositioner",
   setup(_, { slots, attrs }) {
     return () =>
@@ -98,9 +101,9 @@ export const LoongArkColorPickerPositioner = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerContent = defineComponent({
+export const LoongArkColorPickerContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerContent",
   setup(_, { slots, attrs }) {
     return () =>
@@ -114,9 +117,9 @@ export const LoongArkColorPickerContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerView = defineComponent({
+export const LoongArkColorPickerView = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerView",
   setup(_, { slots, attrs }) {
     return () =>
@@ -130,9 +133,9 @@ export const LoongArkColorPickerView = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerArea = defineComponent({
+export const LoongArkColorPickerArea = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerArea",
   setup(_, { slots, attrs }) {
     return () =>
@@ -146,9 +149,9 @@ export const LoongArkColorPickerArea = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerAreaBackground = defineComponent({
+export const LoongArkColorPickerAreaBackground = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerAreaBackground",
   setup(_, { slots, attrs }) {
     return () =>
@@ -162,9 +165,9 @@ export const LoongArkColorPickerAreaBackground = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerAreaThumb = defineComponent({
+export const LoongArkColorPickerAreaThumb = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerAreaThumb",
   setup(_, { slots, attrs }) {
     return () =>
@@ -178,9 +181,9 @@ export const LoongArkColorPickerAreaThumb = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerChannelSlider = defineComponent({
+export const LoongArkColorPickerChannelSlider = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerChannelSlider",
   setup(_, { slots, attrs }) {
     return () =>
@@ -194,9 +197,9 @@ export const LoongArkColorPickerChannelSlider = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerChannelSliderLabel = defineComponent({
+export const LoongArkColorPickerChannelSliderLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerChannelSliderLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -210,9 +213,9 @@ export const LoongArkColorPickerChannelSliderLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerChannelSliderTrack = defineComponent({
+export const LoongArkColorPickerChannelSliderTrack = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerChannelSliderTrack",
   setup(_, { slots, attrs }) {
     return () =>
@@ -226,9 +229,9 @@ export const LoongArkColorPickerChannelSliderTrack = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerChannelSliderThumb = defineComponent({
+export const LoongArkColorPickerChannelSliderThumb = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerChannelSliderThumb",
   setup(_, { slots, attrs }) {
     return () =>
@@ -242,9 +245,9 @@ export const LoongArkColorPickerChannelSliderThumb = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerChannelSliderValueText = defineComponent({
+export const LoongArkColorPickerChannelSliderValueText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerChannelSliderValueText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -258,9 +261,9 @@ export const LoongArkColorPickerChannelSliderValueText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerChannelInput = defineComponent({
+export const LoongArkColorPickerChannelInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerChannelInput",
   setup(_, { attrs }) {
     return () =>
@@ -270,9 +273,9 @@ export const LoongArkColorPickerChannelInput = defineComponent({
         "data-part": "channel-input",
       });
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerSwatchGroup = defineComponent({
+export const LoongArkColorPickerSwatchGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerSwatchGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -286,9 +289,9 @@ export const LoongArkColorPickerSwatchGroup = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerSwatchTrigger = defineComponent({
+export const LoongArkColorPickerSwatchTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerSwatchTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -302,9 +305,9 @@ export const LoongArkColorPickerSwatchTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerSwatchIndicator = defineComponent({
+export const LoongArkColorPickerSwatchIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerSwatchIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -318,9 +321,9 @@ export const LoongArkColorPickerSwatchIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerSwatch = defineComponent({
+export const LoongArkColorPickerSwatch = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerSwatch",
   setup(_, { slots, attrs }) {
     return () =>
@@ -334,9 +337,9 @@ export const LoongArkColorPickerSwatch = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerTransparencyGrid = defineComponent({
+export const LoongArkColorPickerTransparencyGrid = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerTransparencyGrid",
   setup(_, { slots, attrs }) {
     return () =>
@@ -350,9 +353,9 @@ export const LoongArkColorPickerTransparencyGrid = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerValueText = defineComponent({
+export const LoongArkColorPickerValueText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerValueText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -366,9 +369,9 @@ export const LoongArkColorPickerValueText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerValueSwatch = defineComponent({
+export const LoongArkColorPickerValueSwatch = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerValueSwatch",
   setup(_, { slots, attrs }) {
     return () =>
@@ -382,9 +385,9 @@ export const LoongArkColorPickerValueSwatch = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerEyeDropperTrigger = defineComponent({
+export const LoongArkColorPickerEyeDropperTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerEyeDropperTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -398,9 +401,9 @@ export const LoongArkColorPickerEyeDropperTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerFormatTrigger = defineComponent({
+export const LoongArkColorPickerFormatTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerFormatTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -414,9 +417,9 @@ export const LoongArkColorPickerFormatTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerFormatSelect = defineComponent({
+export const LoongArkColorPickerFormatSelect = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerFormatSelect",
   setup(_, { slots, attrs }) {
     return () =>
@@ -430,9 +433,9 @@ export const LoongArkColorPickerFormatSelect = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticColorPickerStyles);
 
-export const LoongArkColorPickerHiddenInput = defineComponent({
+export const LoongArkColorPickerHiddenInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerHiddenInput",
   setup(_, { attrs }) {
     return () =>
@@ -442,4 +445,4 @@ export const LoongArkColorPickerHiddenInput = defineComponent({
         "data-part": "hidden-input",
       });
   },
-});
+}), lkAutomaticColorPickerStyles);

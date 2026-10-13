@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { runNativeColorPicker } from "./native-safari-color-picker.mjs";
 import { runNativeFieldSelection } from "./native-safari-field-selection.mjs";
 import { runNativeSelection } from "./native-safari-selection.mjs";
 import { runNativeEditable } from "./native-safari-editable.mjs";
@@ -65,6 +66,7 @@ export async function runNativeAdvanced(h, framework, mode) {
   await runNativeCompoundField(h, framework, mode);
   await runNativeInputAdornments(h, framework, mode);
   await runNativeEditable(h, framework, mode);
+  await runNativeColorPicker(h, framework, mode);
   await navigate(framework, "DateTimeExample", mode);
   const localized = '[data-scope="input"][data-part="control"]',
     current = 'output[aria-label="Current appointment"]';

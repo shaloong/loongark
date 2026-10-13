@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticTextareaStyles } from "@loongark/primitives/automatic-styles/textarea";
+  registerAutomaticStyles(lkAutomaticTextareaStyles);
+
   import { onMount, tick } from "svelte";
   import {
     layoutAttributes,

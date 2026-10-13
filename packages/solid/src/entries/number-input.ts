@@ -1,0 +1,23 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkNumberInputContext } from "../components/ark-advanced";
+export { LoongArkNumberInputControl } from "../components/number-input";
+export type { LoongArkNumberInputControlProps } from "../components/number-input";
+export { LoongArkNumberInputDecrementTrigger } from "../components/number-input";
+export type { LoongArkNumberInputDecrementTriggerProps } from "../components/number-input";
+export { LoongArkNumberInputIncrementTrigger } from "../components/number-input";
+export type { LoongArkNumberInputIncrementTriggerProps } from "../components/number-input";
+export { LoongArkNumberInputInput } from "../components/number-input";
+export type { LoongArkNumberInputInputProps } from "../components/number-input";
+export { LoongArkNumberInputLabel } from "../components/number-input";
+export type { LoongArkNumberInputLabelProps } from "../components/number-input";
+export { LoongArkNumberInputRoot } from "../components/number-input";
+export type { LoongArkNumberInputRootProps } from "../components/number-input";
+export { LoongArkNumberInputRootProvider } from "../components/ark-advanced";
+export { LoongArkNumberInputScrubber } from "../components/number-input";
+export type { LoongArkNumberInputScrubberProps } from "../components/number-input";
+export { LoongArkNumberInputValueText } from "../components/number-input";
+export type { LoongArkNumberInputValueTextProps } from "../components/number-input";
+export { useNumberInput } from "@ark-ui/solid/number-input";
+export { useNumberInputContext } from "@ark-ui/solid/number-input";
+export type { UseNumberInputProps } from "@ark-ui/solid/number-input";
+export type { UseNumberInputReturn } from "@ark-ui/solid/number-input";

@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPopoverStyles } from "@loongark/primitives/automatic-styles/popover";
+
+
 /**
  * Popover 组件 - React 封装
  * 基于 Ark UI Popover，注入 data-scope/data-part 并默认启用 asChild 避免嵌套
@@ -28,11 +33,11 @@ type ArkContentProps = ArkPopoverContentProps & { children?: ReactNode };
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
   createElement(ArkPortal, null, children);
 
-export const LoongArkPopoverRoot = (props: LoongArkPopoverRootProps) => (
+export const LoongArkPopoverRoot = /*#__PURE__*/ withAutomaticStyles((props: LoongArkPopoverRootProps) => (
   <ArkPopover.Root {...props} data-scope="popover" data-part="root" />
-);
+), lkAutomaticPopoverStyles);
 
-export const LoongArkPopoverTrigger = forwardRef<
+export const LoongArkPopoverTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkTriggerProps
 >(({ asChild = true, children, ...rest }, ref) => (
@@ -45,10 +50,10 @@ export const LoongArkPopoverTrigger = forwardRef<
   >
     {children}
   </ArkPopover.Trigger>
-));
+)), lkAutomaticPopoverStyles);
 LoongArkPopoverTrigger.displayName = "LoongArkPopoverTrigger";
 
-export const LoongArkPopoverPositioner = forwardRef<
+export const LoongArkPopoverPositioner = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkPopoverPositionerProps, "asChild">
 >((props, ref) => (
@@ -60,10 +65,10 @@ export const LoongArkPopoverPositioner = forwardRef<
       data-part="positioner"
     />
   </SafePortal>
-));
+)), lkAutomaticPopoverStyles);
 LoongArkPopoverPositioner.displayName = "LoongArkPopoverPositioner";
 
-export const LoongArkPopoverContent = forwardRef<
+export const LoongArkPopoverContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkPopoverContentProps, "asChild"> & { showArrow?: boolean }
 >(({ showArrow, ...props }, ref) => {
@@ -76,10 +81,10 @@ export const LoongArkPopoverContent = forwardRef<
       data-arrow={showArrow ? "true" : undefined}
     />
   );
-});
+}), lkAutomaticPopoverStyles);
 LoongArkPopoverContent.displayName = "LoongArkPopoverContent";
 
-export const LoongArkPopoverArrow = forwardRef<
+export const LoongArkPopoverArrow = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkPopoverArrowProps, "asChild">
 >((props, ref) => (
@@ -89,10 +94,10 @@ export const LoongArkPopoverArrow = forwardRef<
     data-scope="popover"
     data-part="arrow"
   />
-));
+)), lkAutomaticPopoverStyles);
 LoongArkPopoverArrow.displayName = "LoongArkPopoverArrow";
 
-export const LoongArkPopoverTitle = forwardRef<
+export const LoongArkPopoverTitle = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkPopoverTitleProps, "asChild">
 >((props, ref) => (
@@ -102,10 +107,10 @@ export const LoongArkPopoverTitle = forwardRef<
     data-scope="popover"
     data-part="title"
   />
-));
+)), lkAutomaticPopoverStyles);
 LoongArkPopoverTitle.displayName = "LoongArkPopoverTitle";
 
-export const LoongArkPopoverDescription = forwardRef<
+export const LoongArkPopoverDescription = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLParagraphElement,
   Omit<ArkPopoverDescriptionProps, "asChild">
 >((props, ref) => (
@@ -115,10 +120,10 @@ export const LoongArkPopoverDescription = forwardRef<
     data-scope="popover"
     data-part="description"
   />
-));
+)), lkAutomaticPopoverStyles);
 LoongArkPopoverDescription.displayName = "LoongArkPopoverDescription";
 
-export const LoongArkPopoverCloseTrigger = forwardRef<
+export const LoongArkPopoverCloseTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   Omit<ArkPopoverCloseTriggerProps, "asChild">
 >((props, ref) => (
@@ -128,5 +133,5 @@ export const LoongArkPopoverCloseTrigger = forwardRef<
     data-scope="popover"
     data-part="close-trigger"
   />
-));
+)), lkAutomaticPopoverStyles);
 LoongArkPopoverCloseTrigger.displayName = "LoongArkPopoverCloseTrigger";

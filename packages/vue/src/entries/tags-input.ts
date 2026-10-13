@@ -1,0 +1,22 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkTagsInputClearTrigger } from "../components/tags-input";
+export { LoongArkTagsInputContext } from "../components/ark-advanced";
+export { LoongArkTagsInputControl } from "../components/tags-input";
+export { LoongArkTagsInputHiddenInput } from "../components/tags-input";
+export { LoongArkTagsInputInput } from "../components/tags-input";
+export { LoongArkTagsInputItem } from "../components/tags-input";
+export { LoongArkTagsInputItemContext } from "../components/ark-advanced";
+export { LoongArkTagsInputItemDeleteTrigger } from "../components/tags-input";
+export { LoongArkTagsInputItemInput } from "../components/tags-input";
+export { LoongArkTagsInputItemPreview } from "../components/tags-input";
+export { LoongArkTagsInputItemText } from "../components/tags-input";
+export { LoongArkTagsInputLabel } from "../components/tags-input";
+export { LoongArkTagsInputRoot } from "../components/tags-input";
+export { LoongArkTagsInputRootProvider } from "../components/ark-advanced";
+export type { TagsInputInputValueChangeDetails } from "../components/tags-input";
+export type { TagsInputValueChangeDetails } from "../components/tags-input";
+export { useTagsInput } from "@ark-ui/vue/tags-input";
+export { useTagsInputContext } from "@ark-ui/vue/tags-input";
+export { useTagsInputItemContext } from "@ark-ui/vue/tags-input";
+export type { UseTagsInputProps } from "@ark-ui/vue/tags-input";
+export type { UseTagsInputReturn } from "@ark-ui/vue/tags-input";

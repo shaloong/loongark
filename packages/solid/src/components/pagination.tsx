@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPaginationStyles } from "@loongark/primitives/automatic-styles/pagination";
 /**
  * Pagination component - Solid wrapper.
  * Uses Ark UI Pagination with data attributes for styling.
@@ -25,7 +28,7 @@ export interface LoongArkPaginationRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkPaginationRoot: Component<LoongArkPaginationRootProps> = (
+export const LoongArkPaginationRoot: Component<LoongArkPaginationRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(
@@ -47,31 +50,31 @@ export const LoongArkPaginationRoot: Component<LoongArkPaginationRootProps> = (
       {props.children}
     </ArkPagination.Root>
   );
-};
+}, lkAutomaticPaginationStyles);
 
 export const LoongArkPaginationList: Component<
   JSX.HTMLAttributes<HTMLDivElement>
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <div {...props} data-scope="pagination" data-part="list">
       {props.children}
     </div>
   );
-};
+}, lkAutomaticPaginationStyles);
 
 export const LoongArkPaginationItem: Component<
   ArkPaginationItemProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkPagination.Item {...props} data-scope="pagination" data-part="item">
       {props.children}
     </ArkPagination.Item>
   );
-};
+}, lkAutomaticPaginationStyles);
 
 export const LoongArkPaginationPrevTrigger: Component<
   ArkPaginationPrevTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkPagination.PrevTrigger
       {...props}
@@ -81,11 +84,11 @@ export const LoongArkPaginationPrevTrigger: Component<
       {props.children}
     </ArkPagination.PrevTrigger>
   );
-};
+}, lkAutomaticPaginationStyles);
 
 export const LoongArkPaginationNextTrigger: Component<
   ArkPaginationNextTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkPagination.NextTrigger
       {...props}
@@ -95,11 +98,11 @@ export const LoongArkPaginationNextTrigger: Component<
       {props.children}
     </ArkPagination.NextTrigger>
   );
-};
+}, lkAutomaticPaginationStyles);
 
 export const LoongArkPaginationEllipsis: Component<
   ArkPaginationEllipsisProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkPagination.Ellipsis
       {...props}
@@ -109,4 +112,4 @@ export const LoongArkPaginationEllipsis: Component<
       {props.children}
     </ArkPagination.Ellipsis>
   );
-};
+}, lkAutomaticPaginationStyles);

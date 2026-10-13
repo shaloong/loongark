@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticColorPickerStyles } from "@loongark/primitives/automatic-styles/color-picker";
+
+
 /**
  * Color Picker component - React wrapper.
  * Uses Ark UI Color Picker with data attributes for styling.
@@ -101,7 +106,7 @@ export interface LoongArkColorPickerRootProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkColorPickerRoot = forwardRef<
+export const LoongArkColorPickerRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkColorPickerRootProps
 >(({ size = "md", children, ...props }, ref) => {
@@ -116,11 +121,11 @@ export const LoongArkColorPickerRoot = forwardRef<
       {children}
     </ColorPicker.Root>
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerRoot.displayName = "LoongArkColorPickerRoot";
 
-export const LoongArkColorPickerLabel = forwardRef<
+export const LoongArkColorPickerLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   ArkColorPickerLabelProps
 >((props, ref) => {
@@ -132,11 +137,11 @@ export const LoongArkColorPickerLabel = forwardRef<
       data-part="label"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerLabel.displayName = "LoongArkColorPickerLabel";
 
-export const LoongArkColorPickerControl = forwardRef<
+export const LoongArkColorPickerControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerControlProps
 >((props, ref) => {
@@ -148,11 +153,11 @@ export const LoongArkColorPickerControl = forwardRef<
       data-part="control"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerControl.displayName = "LoongArkColorPickerControl";
 
-export const LoongArkColorPickerTrigger = forwardRef<
+export const LoongArkColorPickerTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkColorPickerTriggerProps
 >((props, ref) => {
@@ -164,11 +169,11 @@ export const LoongArkColorPickerTrigger = forwardRef<
       data-part="trigger"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerTrigger.displayName = "LoongArkColorPickerTrigger";
 
-export const LoongArkColorPickerPositioner = forwardRef<
+export const LoongArkColorPickerPositioner = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkColorPickerPositionerProps, "asChild">
 >((props, ref) => {
@@ -182,11 +187,11 @@ export const LoongArkColorPickerPositioner = forwardRef<
       />
     </SafePortal>
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerPositioner.displayName = "LoongArkColorPickerPositioner";
 
-export const LoongArkColorPickerContent = forwardRef<
+export const LoongArkColorPickerContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   Omit<ArkColorPickerContentProps, "asChild">
 >((props, ref) => {
@@ -198,11 +203,11 @@ export const LoongArkColorPickerContent = forwardRef<
       data-part="content"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerContent.displayName = "LoongArkColorPickerContent";
 
-export const LoongArkColorPickerView = forwardRef<
+export const LoongArkColorPickerView = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerViewProps
 >((props, ref) => {
@@ -214,11 +219,11 @@ export const LoongArkColorPickerView = forwardRef<
       data-part="view"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerView.displayName = "LoongArkColorPickerView";
 
-export const LoongArkColorPickerArea = forwardRef<
+export const LoongArkColorPickerArea = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerAreaProps
 >((props, ref) => {
@@ -230,11 +235,11 @@ export const LoongArkColorPickerArea = forwardRef<
       data-part="area"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerArea.displayName = "LoongArkColorPickerArea";
 
-export const LoongArkColorPickerAreaBackground = forwardRef<
+export const LoongArkColorPickerAreaBackground = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerAreaBackgroundProps
 >((props, ref) => {
@@ -246,12 +251,12 @@ export const LoongArkColorPickerAreaBackground = forwardRef<
       data-part="area-background"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerAreaBackground.displayName =
   "LoongArkColorPickerAreaBackground";
 
-export const LoongArkColorPickerAreaThumb = forwardRef<
+export const LoongArkColorPickerAreaThumb = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerAreaThumbProps
 >((props, ref) => {
@@ -263,11 +268,11 @@ export const LoongArkColorPickerAreaThumb = forwardRef<
       data-part="area-thumb"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerAreaThumb.displayName = "LoongArkColorPickerAreaThumb";
 
-export const LoongArkColorPickerChannelSlider = forwardRef<
+export const LoongArkColorPickerChannelSlider = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerChannelSliderProps
 >((props, ref) => {
@@ -279,12 +284,12 @@ export const LoongArkColorPickerChannelSlider = forwardRef<
       data-part="channel-slider"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerChannelSlider.displayName =
   "LoongArkColorPickerChannelSlider";
 
-export const LoongArkColorPickerChannelSliderLabel = forwardRef<
+export const LoongArkColorPickerChannelSliderLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   ArkColorPickerChannelSliderLabelProps
 >((props, ref) => {
@@ -296,12 +301,12 @@ export const LoongArkColorPickerChannelSliderLabel = forwardRef<
       data-part="channel-slider-label"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerChannelSliderLabel.displayName =
   "LoongArkColorPickerChannelSliderLabel";
 
-export const LoongArkColorPickerChannelSliderTrack = forwardRef<
+export const LoongArkColorPickerChannelSliderTrack = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerChannelSliderTrackProps
 >((props, ref) => {
@@ -313,12 +318,12 @@ export const LoongArkColorPickerChannelSliderTrack = forwardRef<
       data-part="channel-slider-track"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerChannelSliderTrack.displayName =
   "LoongArkColorPickerChannelSliderTrack";
 
-export const LoongArkColorPickerChannelSliderThumb = forwardRef<
+export const LoongArkColorPickerChannelSliderThumb = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerChannelSliderThumbProps
 >((props, ref) => {
@@ -330,12 +335,12 @@ export const LoongArkColorPickerChannelSliderThumb = forwardRef<
       data-part="channel-slider-thumb"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerChannelSliderThumb.displayName =
   "LoongArkColorPickerChannelSliderThumb";
 
-export const LoongArkColorPickerChannelSliderValueText = forwardRef<
+export const LoongArkColorPickerChannelSliderValueText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   ArkColorPickerChannelSliderValueTextProps
 >((props, ref) => {
@@ -347,12 +352,12 @@ export const LoongArkColorPickerChannelSliderValueText = forwardRef<
       data-part="channel-slider-value-text"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerChannelSliderValueText.displayName =
   "LoongArkColorPickerChannelSliderValueText";
 
-export const LoongArkColorPickerChannelInput = forwardRef<
+export const LoongArkColorPickerChannelInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   ArkColorPickerChannelInputProps
 >((props, ref) => {
@@ -364,11 +369,11 @@ export const LoongArkColorPickerChannelInput = forwardRef<
       data-part="channel-input"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerChannelInput.displayName = "LoongArkColorPickerChannelInput";
 
-export const LoongArkColorPickerSwatchGroup = forwardRef<
+export const LoongArkColorPickerSwatchGroup = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerSwatchGroupProps
 >((props, ref) => {
@@ -380,11 +385,11 @@ export const LoongArkColorPickerSwatchGroup = forwardRef<
       data-part="swatch-group"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerSwatchGroup.displayName = "LoongArkColorPickerSwatchGroup";
 
-export const LoongArkColorPickerSwatchTrigger = forwardRef<
+export const LoongArkColorPickerSwatchTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkColorPickerSwatchTriggerProps
 >((props, ref) => {
@@ -396,12 +401,12 @@ export const LoongArkColorPickerSwatchTrigger = forwardRef<
       data-part="swatch-trigger"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerSwatchTrigger.displayName =
   "LoongArkColorPickerSwatchTrigger";
 
-export const LoongArkColorPickerSwatchIndicator = forwardRef<
+export const LoongArkColorPickerSwatchIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerSwatchIndicatorProps
 >((props, ref) => {
@@ -413,12 +418,12 @@ export const LoongArkColorPickerSwatchIndicator = forwardRef<
       data-part="swatch-indicator"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerSwatchIndicator.displayName =
   "LoongArkColorPickerSwatchIndicator";
 
-export const LoongArkColorPickerSwatch = forwardRef<
+export const LoongArkColorPickerSwatch = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerSwatchProps
 >((props, ref) => {
@@ -430,11 +435,11 @@ export const LoongArkColorPickerSwatch = forwardRef<
       data-part="swatch"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerSwatch.displayName = "LoongArkColorPickerSwatch";
 
-export const LoongArkColorPickerTransparencyGrid = forwardRef<
+export const LoongArkColorPickerTransparencyGrid = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerTransparencyGridProps
 >((props, ref) => {
@@ -446,12 +451,12 @@ export const LoongArkColorPickerTransparencyGrid = forwardRef<
       data-part="transparency-grid"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerTransparencyGrid.displayName =
   "LoongArkColorPickerTransparencyGrid";
 
-export const LoongArkColorPickerValueText = forwardRef<
+export const LoongArkColorPickerValueText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerValueTextProps
 >((props, ref) => {
@@ -463,11 +468,11 @@ export const LoongArkColorPickerValueText = forwardRef<
       data-part="value-text"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerValueText.displayName = "LoongArkColorPickerValueText";
 
-export const LoongArkColorPickerValueSwatch = forwardRef<
+export const LoongArkColorPickerValueSwatch = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkColorPickerValueSwatchProps
 >((props, ref) => {
@@ -479,11 +484,11 @@ export const LoongArkColorPickerValueSwatch = forwardRef<
       data-part="value-swatch"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerValueSwatch.displayName = "LoongArkColorPickerValueSwatch";
 
-export const LoongArkColorPickerEyeDropperTrigger = forwardRef<
+export const LoongArkColorPickerEyeDropperTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkColorPickerEyeDropperTriggerProps
 >((props, ref) => {
@@ -495,12 +500,12 @@ export const LoongArkColorPickerEyeDropperTrigger = forwardRef<
       data-part="eye-dropper-trigger"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerEyeDropperTrigger.displayName =
   "LoongArkColorPickerEyeDropperTrigger";
 
-export const LoongArkColorPickerFormatTrigger = forwardRef<
+export const LoongArkColorPickerFormatTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkColorPickerFormatTriggerProps
 >((props, ref) => {
@@ -512,12 +517,12 @@ export const LoongArkColorPickerFormatTrigger = forwardRef<
       data-part="format-trigger"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerFormatTrigger.displayName =
   "LoongArkColorPickerFormatTrigger";
 
-export const LoongArkColorPickerFormatSelect = forwardRef<
+export const LoongArkColorPickerFormatSelect = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSelectElement,
   ArkColorPickerFormatSelectProps
 >((props, ref) => {
@@ -529,11 +534,11 @@ export const LoongArkColorPickerFormatSelect = forwardRef<
       data-part="format-select"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerFormatSelect.displayName = "LoongArkColorPickerFormatSelect";
 
-export const LoongArkColorPickerHiddenInput = forwardRef<
+export const LoongArkColorPickerHiddenInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   ArkColorPickerHiddenInputProps
 >((props, ref) => {
@@ -545,6 +550,6 @@ export const LoongArkColorPickerHiddenInput = forwardRef<
       data-part="hidden-input"
     />
   );
-});
+}), lkAutomaticColorPickerStyles);
 
 LoongArkColorPickerHiddenInput.displayName = "LoongArkColorPickerHiddenInput";

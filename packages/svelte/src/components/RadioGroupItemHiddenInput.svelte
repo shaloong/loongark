@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticRadioGroupStyles } from "@loongark/primitives/automatic-styles/radio-group";
+  registerAutomaticStyles(lkAutomaticRadioGroupStyles);
+
   import { onMount } from "svelte";
   import { mountNativeSelection } from "@loongark/kit";
   import {

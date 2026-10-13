@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticImageListStyles } from "@loongark/primitives/automatic-styles/image-list";
+  registerAutomaticStyles(lkAutomaticImageListStyles);
+
   import {
     mediaAttributes,
     mediaStyles,

@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTocStyles } from "@loongark/primitives/automatic-styles/toc";
+
+
 import { createElement, forwardRef } from "react";
 import {
   Toc,
@@ -9,7 +14,7 @@ import {
 import { tocNavId } from "@loongark/kit";
 import { mergeProps } from "@zag-js/react";
 import { useToc } from "./use-toc";
-export const LoongArkTocRootProvider = forwardRef<
+export const LoongArkTocRootProvider = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   TocRootProviderProps
 >((props, ref) =>
@@ -18,8 +23,8 @@ export const LoongArkTocRootProvider = forwardRef<
     value: props.value,
     ref,
   }),
-);
-export const LoongArkTocRoot = forwardRef<HTMLDivElement, TocRootProps>(
+), lkAutomaticTocStyles);
+export const LoongArkTocRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLDivElement, TocRootProps>(
   (props, ref) => {
     const {
       activeIds,
@@ -50,8 +55,8 @@ export const LoongArkTocRoot = forwardRef<HTMLDivElement, TocRootProps>(
     });
     return createElement(LoongArkTocRootProvider, { ...dom, value: toc, ref });
   },
-);
-export const LoongArkTocNav = forwardRef<HTMLElement, TocNavProps>(
+), lkAutomaticTocStyles);
+export const LoongArkTocNav = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLElement, TocNavProps>(
   (props, ref) => {
     const toc = useTocContext();
     return createElement(Toc.Nav, {
@@ -60,4 +65,4 @@ export const LoongArkTocNav = forwardRef<HTMLElement, TocNavProps>(
       ref,
     });
   },
-);
+), lkAutomaticTocStyles);

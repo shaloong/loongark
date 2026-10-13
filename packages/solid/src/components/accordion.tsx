@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticAccordionStyles } from "@loongark/primitives/automatic-styles/accordion";
 /**
  * Accordion component - Solid wrapper.
  * Based on Ark UI Accordion.
@@ -22,7 +25,7 @@ export interface LoongArkAccordionRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkAccordionRoot: Component<LoongArkAccordionRootProps> = (
+export const LoongArkAccordionRoot: Component<LoongArkAccordionRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(
@@ -45,21 +48,21 @@ export const LoongArkAccordionRoot: Component<LoongArkAccordionRootProps> = (
       {props.children}
     </ArkAccordion.Root>
   );
-};
+}, lkAutomaticAccordionStyles);
 
 export const LoongArkAccordionItem: Component<
   ArkAccordionItemProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkAccordion.Item {...props} data-scope="accordion" data-part="item">
       {props.children}
     </ArkAccordion.Item>
   );
-};
+}, lkAutomaticAccordionStyles);
 
 export const LoongArkAccordionItemTrigger: Component<
   ArkAccordionItemTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkAccordion.ItemTrigger
       {...props}
@@ -69,11 +72,11 @@ export const LoongArkAccordionItemTrigger: Component<
       {props.children}
     </ArkAccordion.ItemTrigger>
   );
-};
+}, lkAutomaticAccordionStyles);
 
 export const LoongArkAccordionItemContent: Component<
   ArkAccordionItemContentProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkAccordion.ItemContent
       {...props}
@@ -83,11 +86,11 @@ export const LoongArkAccordionItemContent: Component<
       {props.children}
     </ArkAccordion.ItemContent>
   );
-};
+}, lkAutomaticAccordionStyles);
 
 export const LoongArkAccordionItemIndicator: Component<
   ArkAccordionItemIndicatorProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkAccordion.ItemIndicator
       {...props}
@@ -97,4 +100,4 @@ export const LoongArkAccordionItemIndicator: Component<
       {props.children}
     </ArkAccordion.ItemIndicator>
   );
-};
+}, lkAutomaticAccordionStyles);

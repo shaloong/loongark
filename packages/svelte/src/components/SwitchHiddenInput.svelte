@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticSwitchStyles } from "@loongark/primitives/automatic-styles/switch";
+  registerAutomaticStyles(lkAutomaticSwitchStyles);
+
   import { onMount } from "svelte";
   import { useFieldContext } from "@ark-ui/svelte/field";
   import {

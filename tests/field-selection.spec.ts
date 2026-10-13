@@ -161,8 +161,13 @@ for (const framework of ["Story", "react", "vue", "solid", "svelte"])
           fullPage: true,
         });
         await button("Override Field state").click();
-        for (const input of [checkbox, toggle, tags])
+        for (const input of [checkbox, toggle, tags]) {
           await expect(input).not.toHaveAttribute("aria-invalid", "true");
+          await expect.poll(() => input.evaluate((node) =>
+            (node.getAttribute("aria-describedby") ?? "").split(/\s+/)
+              .some(id => id.endsWith("error-text")),
+          )).toBe(false);
+        }
         await button("Override Field state").click();
         await button("Invalid").click();
         await descriptions(false);

@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticTableStyles } from "@loongark/primitives/automatic-styles/table";
+  registerAutomaticStyles(lkAutomaticTableStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "th";
   export let variant: LayoutOptions["variant"] = "default";

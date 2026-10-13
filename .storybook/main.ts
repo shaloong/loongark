@@ -40,10 +40,22 @@ const config: StorybookConfig = {
     // Pages 项目站点位于 /loongark/；相对资源路径也支持本地根路径预览。
     config.base = "./";
     config.resolve = config.resolve ?? {};
-    config.resolve.alias = {
-      ...(config.resolve.alias ?? {}),
-      ...workspaceAlias,
-    };
+    const inheritedAliases = Array.isArray(config.resolve.alias)
+      ? config.resolve.alias
+      : Object.entries(config.resolve.alias ?? {}).map(([find, replacement]) => ({ find, replacement }));
+    config.resolve.alias = [
+      ...["react", "vue", "solid", "svelte"].map(framework => ({
+        find: new RegExp(`^@loongark/${framework}/editors$`),
+        replacement: resolve(__dirname, `../packages/${framework}/src/components/editors`),
+      })),
+      ...["react", "vue", "solid", "svelte"].map(framework => ({
+        find: new RegExp(`^@loongark/${framework}/(.+)$`),
+        replacement: resolve(__dirname, `../packages/${framework}/src/entries/$1`),
+      })),
+      { find: "@loongark/kit/bootstrap", replacement: resolve(__dirname, "../packages/kit/src/bootstrap.ts") },
+      ...Object.entries(workspaceAlias).map(([find, replacement]) => ({ find, replacement })),
+      ...inheritedAliases,
+    ];
     config.resolve.extensions = [".ts", ".tsx", ".js", ".jsx", ".json"];
     return config;
   },

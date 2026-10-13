@@ -11,7 +11,9 @@ const coverage = JSON.parse(
 const config = ts.readConfigFile("tsconfig.json", ts.sys.readFile).config;
 const { options } = ts.parseJsonConfigFileContent(config, ts.sys, root);
 options.jsx = ts.JsxEmit.ReactJSX;
-const program = ts.createProgram(["packages/react/src/index.ts"], options);
+const slug = value => value.replace(/([a-z0-9])([A-Z])/g, "$1-$2").replace(/\s+/g, "-").toLowerCase();
+const entryFiles = coverage.families.map(family => `packages/react/src/entries/${slug(family)}.ts`);
+const program = ts.createProgram(["packages/react/src/index.ts", ...entryFiles], options);
 const checker = program.getTypeChecker();
 const module = program.getSourceFile("packages/react/src/index.ts");
 const exports = checker.getExportsOfModule(checker.getSymbolAtLocation(module));
@@ -145,13 +147,9 @@ await mkdir(output, { recursive: true });
 const summary = [];
 for (const family of coverage.families) {
   const key = normalize(family);
-  const symbols = exports.filter((symbol) => {
-    const name = normalize(symbol.name).replace(/^loongark/, "");
-    const owner = coverage.families
-      .filter((entry) => name.startsWith(normalize(entry)))
-      .sort((a, b) => normalize(b).length - normalize(a).length)[0];
-    return owner === family;
-  });
+  const entry = program.getSourceFile(`packages/react/src/entries/${slug(family)}.ts`);
+  const names = new Set(checker.getExportsOfModule(checker.getSymbolAtLocation(entry)).map(symbol => symbol.name));
+  const symbols = exports.filter(symbol => names.has(symbol.name));
   const apis = symbols.map((symbol) => api(symbol)).filter(Boolean);
   for (const symbol of symbols.filter(
     (entry) => normalize(entry.name) === `loongark${key}`,
@@ -197,7 +195,7 @@ for (const family of coverage.families) {
   const examples = variants[0].examples;
   await writeFile(
     resolve(output, `${key}.json`),
-    JSON.stringify({ family, branch, apis, examples, variants }) + "\n",
+    JSON.stringify({ family, subpath: family.replace(/([a-z0-9])([A-Z])/g, "$1-$2").replace(/\s+/g, "-").toLowerCase(), branch, apis, examples, variants }) + "\n",
   );
   summary.push({
     family,

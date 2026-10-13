@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticAvatarStyles } from "@loongark/primitives/automatic-styles/avatar";
 /**
  * Avatar component - Solid wrapper.
  * Based on Ark UI Avatar.
@@ -19,7 +22,7 @@ export interface LoongArkAvatarRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkAvatarRoot: Component<LoongArkAvatarRootProps> = (
+export const LoongArkAvatarRoot: Component<LoongArkAvatarRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps({ size: "md" as AvatarSize }, props);
@@ -34,18 +37,18 @@ export const LoongArkAvatarRoot: Component<LoongArkAvatarRootProps> = (
       {props.children}
     </ArkAvatar.Root>
   );
-};
+}, lkAutomaticAvatarStyles);
 
-export const LoongArkAvatarImage: Component<ArkAvatarImageProps> = (props) => {
+export const LoongArkAvatarImage: Component<ArkAvatarImageProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return <ArkAvatar.Image {...props} data-scope="avatar" data-part="image" />;
-};
+}, lkAutomaticAvatarStyles);
 
 export const LoongArkAvatarFallback: Component<
   ArkAvatarFallbackProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkAvatar.Fallback {...props} data-scope="avatar" data-part="fallback">
       {props.children}
     </ArkAvatar.Fallback>
   );
-};
+}, lkAutomaticAvatarStyles);

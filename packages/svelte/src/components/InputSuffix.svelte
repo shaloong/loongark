@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticInputStyles } from "@loongark/primitives/automatic-styles/input";
+  registerAutomaticStyles(lkAutomaticInputStyles);
+
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import { useFieldContext } from "@ark-ui/svelte/field";

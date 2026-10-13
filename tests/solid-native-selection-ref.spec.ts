@@ -1,3 +1,4 @@
+import type {} from "./consumers/solid/NativeSelectionRefs";
 import { expect, test } from "@playwright/test";
 import { build } from "vite";
 import solid from "vite-plugin-solid";
@@ -11,12 +12,10 @@ test.beforeAll(async () => {
     configFile: false,
     logLevel: "silent",
     resolve: {
-      alias: Object.fromEntries(
-        ["solid", "kit", "theme", "primitives", "tokens"].map((p) => [
-          "@loongark/" + p,
-          resolve("packages", p, "dist/index.js"),
-        ]),
-      ),
+      alias: ["solid", "kit", "theme", "primitives", "tokens"].map((name) => ({
+        find: new RegExp(`^@loongark/${name}$`),
+        replacement: resolve("packages", name, "dist/index.js"),
+      })),
       dedupe: ["solid-js"],
     },
     plugins: [
@@ -26,7 +25,7 @@ test.beforeAll(async () => {
         resolveId: (id) => (id === entry ? "\0" + entry : undefined),
         load: (id) =>
           id === "\0" + entry
-            ? `import * as fixture from ${JSON.stringify(resolve("tests/consumers/solid/NativeSelectionRefs.tsx"))};window.fixture=fixture;fixture.mountNativeRefs();`
+            ? `import * as fixture from ${JSON.stringify(resolve("tests/consumers/solid/NativeSelectionRefs.tsx"))};window.solidSelectionRefs=fixture;fixture.mountNativeRefs();`
             : undefined,
       },
     ],
@@ -51,13 +50,7 @@ test("Solid 原生选择 ref 转发、受控拒绝与卸载重挂保持同一契
   await page.setContent("<main></main>");
   await page.addScriptTag({ content: code });
   const refs = () =>
-    page.evaluate(() =>
-      (
-        window as unknown as {
-          fixture: typeof import("./consumers/solid/NativeSelectionRefs");
-        }
-      ).fixture.nativeRefs(),
-    );
+    page.evaluate(() => window.solidSelectionRefs.nativeRefs());
   const expected = [
     { name: "checkbox", connected: true, value: "on" },
     { name: "switch", connected: true, value: "on" },
@@ -75,7 +68,11 @@ test("Solid 原生选择 ref 转发、受控拒绝与卸载重挂保持同一契
   await expect
     .poll(() =>
       form.evaluate((n) =>
-        Object.fromEntries(new FormData(n as HTMLFormElement)),
+        (() => {
+          if (!(n instanceof HTMLFormElement))
+            throw new Error("缺少原生选择表单");
+          return Object.fromEntries(new FormData(n));
+        })(),
       ),
     )
     .toEqual({
@@ -84,23 +81,11 @@ test("Solid 原生选择 ref 转发、受控拒绝与卸载重挂保持同一契
       density: "compact",
       frameworks: "Solid",
     });
-  await page.evaluate(() =>
-    (
-      window as unknown as {
-        fixture: typeof import("./consumers/solid/NativeSelectionRefs");
-      }
-    ).fixture.unmountNativeRefs(),
-  );
+  await page.evaluate(() => window.solidSelectionRefs.unmountNativeRefs());
   await expect
     .poll(refs)
     .toEqual(expected.map((n) => ({ ...n, connected: false })));
-  await page.evaluate(() =>
-    (
-      window as unknown as {
-        fixture: typeof import("./consumers/solid/NativeSelectionRefs");
-      }
-    ).fixture.mountNativeRefs(),
-  );
+  await page.evaluate(() => window.solidSelectionRefs.mountNativeRefs());
   await expect.poll(refs).toEqual(expected);
   await expect(form.getByRole("checkbox", { name: "Agreement" })).toBeChecked();
   expect(errors).toEqual([]);

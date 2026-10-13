@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticHoverCardStyles } from "@loongark/primitives/automatic-styles/hover-card";
 import { renderPart } from "../render-part";
 /**
  * Hover Card component - Vue wrapper.
@@ -7,7 +10,7 @@ import { defineComponent, h, type PropType } from "vue";
 import { HoverCard as ArkHoverCard } from "@ark-ui/vue/hover-card";
 import type { HoverCardSize } from "@loongark/primitives";
 
-export const LoongArkHoverCardRoot = defineComponent({
+export const LoongArkHoverCardRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkHoverCardRoot",
   props: {
     size: {
@@ -29,9 +32,9 @@ export const LoongArkHoverCardRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticHoverCardStyles);
 
-export const LoongArkHoverCardTrigger = defineComponent({
+export const LoongArkHoverCardTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkHoverCardTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -45,9 +48,9 @@ export const LoongArkHoverCardTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticHoverCardStyles);
 
-export const LoongArkHoverCardPositioner = defineComponent({
+export const LoongArkHoverCardPositioner = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkHoverCardPositioner",
   setup(_, { slots, attrs }) {
     return () =>
@@ -61,9 +64,9 @@ export const LoongArkHoverCardPositioner = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticHoverCardStyles);
 
-export const LoongArkHoverCardContent = defineComponent({
+export const LoongArkHoverCardContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkHoverCardContent",
   setup(_, { slots, attrs }) {
     return () =>
@@ -77,9 +80,9 @@ export const LoongArkHoverCardContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticHoverCardStyles);
 
-export const LoongArkHoverCardArrow = defineComponent({
+export const LoongArkHoverCardArrow = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkHoverCardArrow",
   setup(_, { slots, attrs }) {
     return () =>
@@ -93,9 +96,9 @@ export const LoongArkHoverCardArrow = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticHoverCardStyles);
 
-export const LoongArkHoverCardArrowTip = defineComponent({
+export const LoongArkHoverCardArrowTip = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkHoverCardArrowTip",
   setup(_, { slots, attrs }) {
     return () =>
@@ -109,4 +112,4 @@ export const LoongArkHoverCardArrowTip = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticHoverCardStyles);

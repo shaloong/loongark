@@ -1,3 +1,8 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticFilterBarStyles } from "@loongark/primitives/automatic-styles/filter-bar";
+import { styles as lkAutomaticFilterChipStyles } from "@loongark/primitives/automatic-styles/filter-chip";
+import { styles as lkAutomaticFilterDividerStyles } from "@loongark/primitives/automatic-styles/filter-divider";
 import { renderPart } from "../render-part";
 import { defineComponent, h } from "vue";
 import type { PropType } from "vue";
@@ -5,7 +10,7 @@ import { ark } from "@ark-ui/vue";
 
 const boolAttr = (value: boolean | undefined) => (value ? "true" : undefined);
 
-export const LoongArkFilterBar = defineComponent({
+export const LoongArkFilterBar = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFilterBar",
   props: {
     dense: {
@@ -31,7 +36,7 @@ export const LoongArkFilterBar = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticFilterBarStyles);
 
 const createSection = (name: string, part: string) =>
   defineComponent({
@@ -50,20 +55,20 @@ const createSection = (name: string, part: string) =>
     },
   });
 
-export const LoongArkFilterBarSearch = createSection(
+export const LoongArkFilterBarSearch = /*#__PURE__*/ withAutomaticStyles(createSection(
   "LoongArkFilterBarSearch",
   "search",
-);
-export const LoongArkFilterBarFilters = createSection(
+), lkAutomaticFilterBarStyles);
+export const LoongArkFilterBarFilters = /*#__PURE__*/ withAutomaticStyles(createSection(
   "LoongArkFilterBarFilters",
   "filters",
-);
-export const LoongArkFilterBarActions = createSection(
+), lkAutomaticFilterBarStyles);
+export const LoongArkFilterBarActions = /*#__PURE__*/ withAutomaticStyles(createSection(
   "LoongArkFilterBarActions",
   "actions",
-);
+), lkAutomaticFilterBarStyles);
 
-export const LoongArkFilterDivider = defineComponent({
+export const LoongArkFilterDivider = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFilterDivider",
   setup(_, { attrs }) {
     return () =>
@@ -75,9 +80,9 @@ export const LoongArkFilterDivider = defineComponent({
         "data-part": "divider",
       });
   },
-});
+}), lkAutomaticFilterDividerStyles);
 
-export const LoongArkFilterChip = defineComponent({
+export const LoongArkFilterChip = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFilterChip",
   props: {
     active: {
@@ -104,4 +109,4 @@ export const LoongArkFilterChip = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticFilterChipStyles);

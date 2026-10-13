@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticSidebarStyles } from "@loongark/primitives/automatic-styles/sidebar";
+  registerAutomaticStyles(lkAutomaticSidebarStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "ul";
   export let variant: LayoutOptions["variant"] = "default";

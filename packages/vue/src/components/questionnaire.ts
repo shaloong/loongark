@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticQuestionnaireStyles } from "@loongark/primitives/automatic-styles/questionnaire";
 import {
   defineComponent,
   h,
@@ -42,7 +45,7 @@ const part = (name: string) => ({
   "data-scope": "questionnaire",
   "data-part": name,
 });
-export const LoongArkQuestionnaire = defineComponent({
+export const LoongArkQuestionnaire = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkQuestionnaire",
   inheritAttrs: false,
   props: {
@@ -440,4 +443,4 @@ export const LoongArkQuestionnaire = defineComponent({
       );
     };
   },
-});
+}), lkAutomaticQuestionnaireStyles);

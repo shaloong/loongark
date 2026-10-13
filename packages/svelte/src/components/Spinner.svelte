@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticSpinnerStyles } from "@loongark/primitives/automatic-styles/spinner";
+  registerAutomaticStyles(lkAutomaticSpinnerStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "span";
   export let variant: LayoutOptions["variant"] = "default";

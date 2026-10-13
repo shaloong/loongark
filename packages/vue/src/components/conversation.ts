@@ -1,3 +1,8 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticAttachmentStyles } from "@loongark/primitives/automatic-styles/attachment";
+import { styles as lkAutomaticBubbleStyles } from "@loongark/primitives/automatic-styles/bubble";
+import { styles as lkAutomaticMessageStyles } from "@loongark/primitives/automatic-styles/message";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
@@ -55,7 +60,7 @@ function useConversationActions(
     },
   };
 }
-export const LoongArkAttachment = defineComponent({
+export const LoongArkAttachment = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkAttachment",
   inheritAttrs: false,
   props: {
@@ -217,8 +222,8 @@ export const LoongArkAttachment = defineComponent({
       );
     };
   },
-});
-export const LoongArkBubble = defineComponent({
+}), lkAutomaticAttachmentStyles);
+export const LoongArkBubble = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkBubble",
   inheritAttrs: false,
   props: { side: String as PropType<BubbleOptions["side"]> },
@@ -234,8 +239,8 @@ export const LoongArkBubble = defineComponent({
         slots.default?.(),
       );
   },
-});
-export const LoongArkMessage = defineComponent({
+}), lkAutomaticBubbleStyles);
+export const LoongArkMessage = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMessage",
   inheritAttrs: false,
   props: {
@@ -345,4 +350,4 @@ export const LoongArkMessage = defineComponent({
         ],
       );
   },
-});
+}), lkAutomaticMessageStyles);

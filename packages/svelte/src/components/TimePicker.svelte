@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticTimePickerStyles } from "@loongark/primitives/automatic-styles/time-picker";
+  registerAutomaticStyles(lkAutomaticTimePickerStyles);
+
   import { untrack } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import {

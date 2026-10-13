@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticNumberInputStyles } from "@loongark/primitives/automatic-styles/number-input";
+
+
 import { useFieldContext } from "@ark-ui/react/field";
 import { useNumberInputContext } from "@ark-ui/react/number-input";
 import {
@@ -82,7 +87,7 @@ export interface LoongArkNumberInputScrubberProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkNumberInputRoot = forwardRef<
+export const LoongArkNumberInputRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkNumberInputRootProps
 >(
@@ -112,11 +117,11 @@ export const LoongArkNumberInputRoot = forwardRef<
       </ArkNumberInput.Root>
     );
   },
-);
+), lkAutomaticNumberInputStyles);
 
 LoongArkNumberInputRoot.displayName = "LoongArkNumberInputRoot";
 
-export const LoongArkNumberInputLabel = forwardRef<
+export const LoongArkNumberInputLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkNumberInputLabelProps
 >((props, ref) => {
@@ -128,11 +133,11 @@ export const LoongArkNumberInputLabel = forwardRef<
       data-part="label"
     />
   );
-});
+}), lkAutomaticNumberInputStyles);
 
 LoongArkNumberInputLabel.displayName = "LoongArkNumberInputLabel";
 
-export const LoongArkNumberInputControl = forwardRef<
+export const LoongArkNumberInputControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkNumberInputControlProps
 >(({ children, size = "md", state = "default", disabled, ...props }, ref) => {
@@ -151,11 +156,11 @@ export const LoongArkNumberInputControl = forwardRef<
       {children}
     </ArkNumberInput.Control>
   );
-});
+}), lkAutomaticNumberInputStyles);
 
 LoongArkNumberInputControl.displayName = "LoongArkNumberInputControl";
 
-export const LoongArkNumberInputInput = forwardRef<
+export const LoongArkNumberInputInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkNumberInputInputProps
 >(({ size = "md", state = "default", disabled, readOnly, ...props }, ref) => {
@@ -183,11 +188,11 @@ export const LoongArkNumberInputInput = forwardRef<
       data-state={state !== "default" ? state : undefined}
     />
   );
-});
+}), lkAutomaticNumberInputStyles);
 
 LoongArkNumberInputInput.displayName = "LoongArkNumberInputInput";
 
-export const LoongArkNumberInputIncrementTrigger = forwardRef<
+export const LoongArkNumberInputIncrementTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkNumberInputIncrementTriggerProps
 >(({ children, size = "md", state = "default", disabled, ...props }, ref) => {
@@ -207,12 +212,12 @@ export const LoongArkNumberInputIncrementTrigger = forwardRef<
       {children ?? <LoongArkIcon icon={controlIcons.plus} size="sm" />}
     </ArkNumberInput.IncrementTrigger>
   );
-});
+}), lkAutomaticNumberInputStyles);
 
 LoongArkNumberInputIncrementTrigger.displayName =
   "LoongArkNumberInputIncrementTrigger";
 
-export const LoongArkNumberInputDecrementTrigger = forwardRef<
+export const LoongArkNumberInputDecrementTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkNumberInputDecrementTriggerProps
 >(({ children, size = "md", state = "default", disabled, ...props }, ref) => {
@@ -232,12 +237,12 @@ export const LoongArkNumberInputDecrementTrigger = forwardRef<
       {children ?? <LoongArkIcon icon={controlIcons.minus} size="sm" />}
     </ArkNumberInput.DecrementTrigger>
   );
-});
+}), lkAutomaticNumberInputStyles);
 
 LoongArkNumberInputDecrementTrigger.displayName =
   "LoongArkNumberInputDecrementTrigger";
 
-export const LoongArkNumberInputValueText = forwardRef<
+export const LoongArkNumberInputValueText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   LoongArkNumberInputValueTextProps
 >(({ children, size = "md", ...props }, ref) => {
@@ -252,11 +257,11 @@ export const LoongArkNumberInputValueText = forwardRef<
       {children}
     </ArkNumberInput.ValueText>
   );
-});
+}), lkAutomaticNumberInputStyles);
 
 LoongArkNumberInputValueText.displayName = "LoongArkNumberInputValueText";
 
-export const LoongArkNumberInputScrubber = forwardRef<
+export const LoongArkNumberInputScrubber = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkNumberInputScrubberProps
 >(({ children, ...props }, ref) => {
@@ -270,7 +275,7 @@ export const LoongArkNumberInputScrubber = forwardRef<
       {children}
     </ArkNumberInput.Scrubber>
   );
-});
+}), lkAutomaticNumberInputStyles);
 
 LoongArkNumberInputScrubber.displayName = "LoongArkNumberInputScrubber";
 

@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticCardStyles } from "@loongark/primitives/automatic-styles/card";
+  registerAutomaticStyles(lkAutomaticCardStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "article";
   export let variant: LayoutOptions["variant"] = "default";

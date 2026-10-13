@@ -9,7 +9,15 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./bootstrap": {
+      "types": "./dist/bootstrap.d.ts",
+      "import": "./dist/bootstrap.js"
+    },
+    "./automatic-bootstrap": {
+      "types": "./dist/automatic-bootstrap.d.ts",
+      "import": "./dist/automatic-bootstrap.js"
+    }
   },
   "files": [
     "dist",
@@ -19,8 +27,8 @@
   "dependencies": {
     "@loongark/primitives": "workspace:*",
     "@loongark/theme": "workspace:*",
-    "@zag-js/json-tree-utils": "1.43.3",
-    "@zag-js/toc": "1.43.3",
+    "@zag-js/json-tree-utils": "1.45.0",
+    "@zag-js/toc": "1.45.0",
     "lucide": "1.52.0",
     "@codemirror/state": "6.7.6",
     "@codemirror/view": "6.43.13",
@@ -46,7 +54,7 @@
     "prosemirror-inputrules": "1.5.1",
     "prosemirror-tables": "1.8.5",
     "@lezer/highlight": "1.2.5",
-    "@zag-js/rating-group": "1.43.3",
+    "@zag-js/rating-group": "1.45.0",
     "@internationalized/date": "3.12.4",
     "@loongark/tokens": "workspace:*"
   },
@@ -54,7 +62,5 @@
     "build": "tsc -p tsconfig.json && node ../../scripts/fix-dist-imports.mjs dist"
   },
   "license": "MIT",
-  "sideEffects": [
-    "./dist/index.js"
-  ]
+  "sideEffects": false
 }

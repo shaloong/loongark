@@ -82,10 +82,11 @@ const assertPackageExports = async () => {
 
 const assertNoLocalConflictFiles = async () => {
   const paths = await walk(root);
+  // 多段 kebab-case 是合法组件路径；只识别明确的冲突与补丁副本。
   const conflictFiles = paths
     .map((path) => relative(root, path))
     .filter((path) =>
-      /(^|[\\/])[^\\/]+-[A-Za-z0-9]+-[A-Za-z0-9]+\.tsx?$/.test(path),
+      /(?:conflicted copy|冲突副本|\.orig$|\.rej$)/i.test(path),
     );
 
   for (const path of conflictFiles) {

@@ -23,6 +23,15 @@ export async function checkDataTableRange(page: Page) {
     }, text);
   };
   await expect(grid).toBeVisible();
+  const viewport = page.locator(
+    '[data-scope="data-table"] [data-scope="table"][data-part="root"]',
+  );
+  await expect(viewport).toHaveCSS("overflow-x", "auto");
+  expect(
+    await viewport.evaluate((node) => node.getBoundingClientRect().right),
+  ).toBeLessThanOrEqual(
+    await page.evaluate(() => innerWidth),
+  );
   await expect(grid.locator('td[tabindex="0"]')).toHaveCount(1);
   const textWidth = await cell(1, "name")
     .locator('[data-part="cell-range-text"]')

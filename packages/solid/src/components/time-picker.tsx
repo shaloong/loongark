@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTimePickerStyles } from "@loongark/primitives/automatic-styles/time-picker";
 import {
   createSignal,
   createUniqueId,
@@ -33,7 +36,7 @@ export type LoongArkTimePickerProps = Omit<
   "onChange"
 > &
   TimePickerOptions;
-export function LoongArkTimePicker(props: LoongArkTimePickerProps) {
+function LoongArkTimePicker(props: LoongArkTimePickerProps) {
   const [local, attrs] = splitProps(props, [
     "value",
     "defaultValue",
@@ -192,3 +195,6 @@ export function LoongArkTimePicker(props: LoongArkTimePickerProps) {
     </div>
   );
 }
+
+const lkStyledLoongArkTimePicker = /*#__PURE__*/ withAutomaticStyles(LoongArkTimePicker, lkAutomaticTimePickerStyles);
+export { lkStyledLoongArkTimePicker as LoongArkTimePicker };

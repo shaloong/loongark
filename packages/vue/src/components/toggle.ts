@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticToggleStyles } from "@loongark/primitives/automatic-styles/toggle";
 import { renderPart } from "../render-part";
 /**
  * Toggle component - Vue wrapper.
@@ -7,7 +10,7 @@ import { defineComponent, h, type PropType } from "vue";
 import { Toggle as ArkToggle } from "@ark-ui/vue/toggle";
 import type { ToggleSize } from "@loongark/primitives";
 
-export const LoongArkToggleRoot = defineComponent({
+export const LoongArkToggleRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkToggleRoot",
   props: {
     size: {
@@ -44,9 +47,9 @@ export const LoongArkToggleRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticToggleStyles);
 
-export const LoongArkToggleIndicator = defineComponent({
+export const LoongArkToggleIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkToggleIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -60,4 +63,4 @@ export const LoongArkToggleIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticToggleStyles);

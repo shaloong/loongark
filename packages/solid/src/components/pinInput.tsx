@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPinInputStyles } from "@loongark/primitives/automatic-styles/pin-input";
 import { PinInput } from "@ark-ui/solid/pin-input";
 import type { PinInputPrimitiveProps } from "@loongark/primitives";
 import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
@@ -27,7 +30,7 @@ export interface LoongArkPinInputRootProps {
   autoCapitalize?: JSX.HTMLAutocapitalize;
 }
 
-export const LoongArkPinInputRoot: Component<LoongArkPinInputRootProps> = (
+export const LoongArkPinInputRoot: Component<LoongArkPinInputRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(
@@ -58,7 +61,7 @@ export const LoongArkPinInputRoot: Component<LoongArkPinInputRootProps> = (
       {local.children}
     </PinInput.Root>
   );
-};
+}, lkAutomaticPinInputStyles);
 
 export interface LoongArkPinInputControlProps {
   children?: JSX.Element;
@@ -67,7 +70,7 @@ export interface LoongArkPinInputControlProps {
 
 export const LoongArkPinInputControl: Component<
   LoongArkPinInputControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps({ size: "md" as PinInputSize }, props);
   const [local, others] = splitProps(merged, ["children", "size"]);
 
@@ -81,7 +84,7 @@ export const LoongArkPinInputControl: Component<
       {local.children}
     </PinInput.Control>
   );
-};
+}, lkAutomaticPinInputStyles);
 
 export interface LoongArkPinInputInputProps {
   size?: PinInputSize;
@@ -90,7 +93,7 @@ export interface LoongArkPinInputInputProps {
   autoCapitalize?: boolean;
 }
 
-export const LoongArkPinInputInput: Component<LoongArkPinInputInputProps> = (
+export const LoongArkPinInputInput: Component<LoongArkPinInputInputProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(
@@ -119,13 +122,13 @@ export const LoongArkPinInputInput: Component<LoongArkPinInputInputProps> = (
       data-capitalize={local.autoCapitalize ? "true" : undefined}
     />
   );
-};
+}, lkAutomaticPinInputStyles);
 
 export interface LoongArkPinInputLabelProps {
   children?: JSX.Element;
 }
 
-export const LoongArkPinInputLabel: Component<LoongArkPinInputLabelProps> = (
+export const LoongArkPinInputLabel: Component<LoongArkPinInputLabelProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -135,14 +138,14 @@ export const LoongArkPinInputLabel: Component<LoongArkPinInputLabelProps> = (
       {local.children}
     </PinInput.Label>
   );
-};
+}, lkAutomaticPinInputStyles);
 
-export const LoongArkPinInputHiddenInput = PinInput.HiddenInput;
+export const LoongArkPinInputHiddenInput = /*#__PURE__*/ withAutomaticStyles(PinInput.HiddenInput, lkAutomaticPinInputStyles);
 
-export const LoongArkPinInput = {
+export const LoongArkPinInput = /*#__PURE__*/ withAutomaticStyles({
   Root: LoongArkPinInputRoot,
   Control: LoongArkPinInputControl,
   Input: LoongArkPinInputInput,
   Label: LoongArkPinInputLabel,
   HiddenInput: LoongArkPinInputHiddenInput,
-};
+}, lkAutomaticPinInputStyles);

@@ -2,7 +2,7 @@
 
 React、Vue、Solid、Svelte 提供以下 119 个组件族。目录覆盖不表示每一种业务组合都受到支持；类型、交互示例与限制见 [Storybook](https://shaloong.github.io/loongark/) 和 [能力概览](capabilities.md)。
 
-机器清单 [component-coverage.json](component-coverage.json) 由检查脚本与实际 Story 索引核对；公开值入口由 [api-parity.json](api-parity.json) 核对。
+机器清单 [component-coverage.json](component-coverage.json) 由检查脚本与实际 Story 索引核对；公开值入口由 [api-parity.json](api-parity.json) 核对。每个组件族均有 kebab-case 子路径（如 `/button`、`/date-picker`），复合部件共用该路径；另外提供 `/provider`、`/collection` 与 `/editors`。根入口继续可用，生成脚本与发布演练核对四端入口和声明。
 
 | 组件族 | React | Vue | Solid | Svelte |
 | --- | --- | --- | --- | --- |

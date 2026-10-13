@@ -1,13 +1,30 @@
 import { spawn } from "node:child_process";
+const critical = new Set([
+  "automatic-styles", "browser-environment", "framework-consumers", "theme-csp", "provider-core",
+  "picker-overlays", "color-picker-contrast", "date-time", "drawer-viewport-focus",
+  "data-table-complex-editors", "data-table-range", "editor-timing",
+  "code-editor-native-history", "chart-interaction", "questionnaire-custom",
+  "questionnaire-group-focus", "virtual-grid-keyboard", "async-collection",
+  "compound-field-native", "selection-focus-timing", "focus-ownership",
+]);
+const args = process.argv.slice(2);
+const suiteArg = args.find((arg) => arg.startsWith("--suite="));
+const suite = suiteArg?.slice("--suite=".length) ?? "full";
+if (!["critical", "full"].includes(suite)) throw Error(`未知验收范围：${suite}`);
 const child = spawn(
   process.execPath,
   [
     "scripts/run-playwright.mjs",
     "tests/browser-environment.spec.ts",
     "tests/framework-consumers.spec.ts",
+    "tests/theme-csp.spec.ts",
+    "tests/provider-core.spec.ts",
+    "tests/automatic-styles.spec.ts",
     "tests/framework-examples.spec.ts",
     "tests/basic-examples.spec.ts",
     "tests/date-input-paste.spec.ts",
+    "tests/picker-overlays.spec.ts",
+    "tests/color-picker-contrast.spec.ts",
     "tests/date-time.spec.ts",
     "tests/drawer-directions.spec.ts",
     "tests/drawer-action-input.spec.ts",
@@ -64,10 +81,10 @@ const child = spawn(
     "tests/async-collection.spec.ts",
     `--project=${process.env.BROWSER_PROJECT ?? "chromium"}`,
     "--workers=2",
-  ],
+  ].filter((arg) => suite === "full" || !arg.startsWith("tests/") || critical.has(arg.slice(6, -8))).concat(args.filter((arg) => arg !== suiteArg)),
   {
     stdio: "inherit",
-    env: { ...process.env, STATIC_DIR: "tests/consumer-dist", PORT: "6007" },
+    env: { ...process.env, STATIC_DIR: "tests/consumer-dist", PORT: process.env.PORT ?? "6007" },
     windowsHide: true,
   },
 );

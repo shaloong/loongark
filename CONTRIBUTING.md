@@ -6,6 +6,8 @@
 
 main 是默认及稳定分支；所有日常开发进入 develop。已有检出先检查并保留工作区改动，再同步 develop；不 reset、强推或改写共享历史。提交采用 Conventional Commits，例如 `fix(questionnaire): escape nested type attributes`。只有明确发布任务才通过 develop → main PR 更新稳定分支，合并不等于发布 npm。
 
+main 仅接受同仓库 develop 的 PR，包含配置维护。`.github/workflows/main-pr-source.yml` 检查来源；必需检查及分支约定见 [发布指南](docs/releases.md#main-分支保护)。
+
 ## 代码与示例
 
 共享样式位于 Primitives，共享模型与通用行为位于 Kit；四端适配负责渲染、绑定与生命周期。使用真实框架/Ark 类型，不添加本地类型桩或用强制转换掩盖错误。外观复用 Token 和 Lucide 图标，保留原生表单、标签、键盘与焦点行为，支持减弱动效。
@@ -18,6 +20,7 @@ main 是默认及稳定分支；所有日常开发进入 develop。已有检出�
 
 ```sh
 pnpm verify
+pnpm check:playwright
 pnpm check:contracts
 pnpm check:storybook
 pnpm storybook:build
@@ -29,9 +32,23 @@ pnpm test:e2e
 pnpm visual:test
 ```
 
+`check:playwright` 完整检查浏览器测试、辅助模块与四端消费入口；React/Solid 分别使用自身 JSX 配置，Svelte 另经 svelte-check 检查真实组件。该检查消费刚构建的发布声明，已纳入 CI。
+
+类型覆盖守卫核对 `tests/`、`examples/shared/` 与 `playwright.config.ts` 的实际编译单元，包括入口导入的辅助模块。新增 TS、TSX、MTS、CTS 或 Svelte 测试源码必须纳入相应框架配置；被 `include/exclude` 漏掉的文件会阻断检查，不能只凭现有配置通过宣称全量通过。
+
+全 Story 的 Axe、设计质量与组件 cursor 检查分为八个互不重叠的批次，保留完整 Story 覆盖与原有断言；检查结果按主题和批次保存，避免数百次导航共用一个测试时间预算。
+
 必须先成功构建生产者，再消费 dist 与 Story 索引；构建失败立即停止，不读取旧产物。多个 Playwright 命令共用结果目录，不能同时运行。默认本地使用 Chromium，需先 `pnpm exec playwright install --with-deps chromium`；如指定系统 Chromium，设置 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` 并记录实际版本。
 
 安全变更包含 `pnpm audit` 和 `pnpm check:security`，后者使用成功构建后的产物，已纳入 contracts。依赖审计的联网失败不能当作零漏洞。框架版本更新后复验真实 SSR、最低 peer 和打包消费，见 [发布指南](docs/releases.md)。
+
+## CI 验证范围
+
+日常 develop push 与面向 develop 的 PR 执行三引擎四端关键交互、原生 Safari、发布声明及快速发布检查。同仓库 develop → main PR 使用同一提交已有的检查；合入 main 后仅重新构建并验收 Pages，不重复整套浏览器回归。新提交取消同分支旧任务。
+
+Browser contracts 的生产者只构建一次，三引擎与 Safari 消费同一次运行、同一提交的已验证 Artifact；构建失败时消费检查失败，不消费旧 dist。日常 `--suite=critical` 覆盖消费、CSP、Provider、选择器、日期、表格、编辑器、图表、问卷、虚拟化与焦点；本地未指定范围仍运行完整四端测试。
+
+完整四端示例、Story 审计、最低版本及 Next.js tarball 消费通过每周任务或手动工作流 `full=true` 执行，正式发布前必须对候选提交运行完整 Browser contracts 和 Release readiness。快速检查通过不代表完整验收通过。Node compatibility 单独覆盖 Node22.12 与当前26的构建、类型、共享契约及四端 SSR，日常完整验证使用 .nvmrc 的24。
 
 ## 多浏览器与视觉
 

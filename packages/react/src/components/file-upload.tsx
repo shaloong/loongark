@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticFileUploadStyles } from "@loongark/primitives/automatic-styles/file-upload";
+
+
 /**
  * File Upload component - React wrapper.
  * Uses Ark UI File Upload with data attributes for styling.
@@ -131,7 +136,7 @@ export interface LoongArkFileUploadClearTriggerProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkFileUploadRoot = forwardRef<
+export const LoongArkFileUploadRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkFileUploadRootProps
 >(({ children, size = "md", disabled = false, ...props }, ref) => {
@@ -148,11 +153,11 @@ export const LoongArkFileUploadRoot = forwardRef<
       {children}
     </FileUpload.Root>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadRoot.displayName = "LoongArkFileUploadRoot";
 
-export const LoongArkFileUploadLabel = forwardRef<
+export const LoongArkFileUploadLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkFileUploadLabelProps
 >(({ children, ...props }, ref) => {
@@ -166,11 +171,11 @@ export const LoongArkFileUploadLabel = forwardRef<
       {children}
     </FileUpload.Label>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadLabel.displayName = "LoongArkFileUploadLabel";
 
-export const LoongArkFileUploadDropzone = forwardRef<
+export const LoongArkFileUploadDropzone = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkFileUploadDropzoneProps
 >(({ children, ...props }, ref) => {
@@ -184,11 +189,11 @@ export const LoongArkFileUploadDropzone = forwardRef<
       {children}
     </FileUpload.Dropzone>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadDropzone.displayName = "LoongArkFileUploadDropzone";
 
-export const LoongArkFileUploadTrigger = forwardRef<
+export const LoongArkFileUploadTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkFileUploadTriggerProps
 >(({ children, ...props }, ref) => {
@@ -202,11 +207,11 @@ export const LoongArkFileUploadTrigger = forwardRef<
       {children}
     </FileUpload.Trigger>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadTrigger.displayName = "LoongArkFileUploadTrigger";
 
-export const LoongArkFileUploadHiddenInput = forwardRef<
+export const LoongArkFileUploadHiddenInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkFileUploadHiddenInputProps
 >((props, ref) => {
@@ -218,11 +223,11 @@ export const LoongArkFileUploadHiddenInput = forwardRef<
       data-part="hidden-input"
     />
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadHiddenInput.displayName = "LoongArkFileUploadHiddenInput";
 
-export const LoongArkFileUploadItemGroup = forwardRef<
+export const LoongArkFileUploadItemGroup = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLUListElement,
   LoongArkFileUploadItemGroupProps
 >(({ children, ...props }, ref) => {
@@ -236,11 +241,11 @@ export const LoongArkFileUploadItemGroup = forwardRef<
       {children}
     </FileUpload.ItemGroup>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadItemGroup.displayName = "LoongArkFileUploadItemGroup";
 
-export const LoongArkFileUploadItem = forwardRef<
+export const LoongArkFileUploadItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLIElement,
   LoongArkFileUploadItemProps
 >(({ children, ...props }, ref) => {
@@ -254,11 +259,11 @@ export const LoongArkFileUploadItem = forwardRef<
       {children}
     </FileUpload.Item>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadItem.displayName = "LoongArkFileUploadItem";
 
-export const LoongArkFileUploadItemPreview = forwardRef<
+export const LoongArkFileUploadItemPreview = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLImageElement,
   LoongArkFileUploadItemPreviewProps
 >(({ children, ...props }, ref) => {
@@ -272,11 +277,11 @@ export const LoongArkFileUploadItemPreview = forwardRef<
       {children}
     </FileUpload.ItemPreview>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadItemPreview.displayName = "LoongArkFileUploadItemPreview";
 
-export const LoongArkFileUploadItemPreviewImage = forwardRef<
+export const LoongArkFileUploadItemPreviewImage = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLImageElement,
   LoongArkFileUploadItemPreviewImageProps
 >((props, ref) => {
@@ -288,12 +293,12 @@ export const LoongArkFileUploadItemPreviewImage = forwardRef<
       data-part="item-preview-image"
     />
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadItemPreviewImage.displayName =
   "LoongArkFileUploadItemPreviewImage";
 
-export const LoongArkFileUploadItemName = forwardRef<
+export const LoongArkFileUploadItemName = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkFileUploadItemNameProps
 >(({ children, ...props }, ref) => {
@@ -307,11 +312,11 @@ export const LoongArkFileUploadItemName = forwardRef<
       {children}
     </FileUpload.ItemName>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadItemName.displayName = "LoongArkFileUploadItemName";
 
-export const LoongArkFileUploadItemSizeText = forwardRef<
+export const LoongArkFileUploadItemSizeText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkFileUploadItemSizeTextProps
 >(({ children, ...props }, ref) => {
@@ -325,11 +330,11 @@ export const LoongArkFileUploadItemSizeText = forwardRef<
       {children}
     </FileUpload.ItemSizeText>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadItemSizeText.displayName = "LoongArkFileUploadItemSizeText";
 
-export const LoongArkFileUploadItemDeleteTrigger = forwardRef<
+export const LoongArkFileUploadItemDeleteTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkFileUploadItemDeleteTriggerProps
 >(({ children, ...props }, ref) => {
@@ -343,12 +348,12 @@ export const LoongArkFileUploadItemDeleteTrigger = forwardRef<
       {children}
     </FileUpload.ItemDeleteTrigger>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadItemDeleteTrigger.displayName =
   "LoongArkFileUploadItemDeleteTrigger";
 
-export const LoongArkFileUploadClearTrigger = forwardRef<
+export const LoongArkFileUploadClearTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkFileUploadClearTriggerProps
 >(({ children, ...props }, ref) => {
@@ -362,6 +367,6 @@ export const LoongArkFileUploadClearTrigger = forwardRef<
       {children}
     </FileUpload.ClearTrigger>
   );
-});
+}), lkAutomaticFileUploadStyles);
 
 LoongArkFileUploadClearTrigger.displayName = "LoongArkFileUploadClearTrigger";

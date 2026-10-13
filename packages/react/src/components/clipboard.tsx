@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticClipboardStyles } from "@loongark/primitives/automatic-styles/clipboard";
+
+
 /**
  * Clipboard component - React wrapper.
  * Uses Ark UI Clipboard with data attributes for styling.
@@ -32,7 +37,7 @@ export interface LoongArkClipboardRootProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkClipboardRoot = forwardRef<
+export const LoongArkClipboardRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkClipboardRootProps
 >(({ size = "md", disabled = false, children, ...props }, ref) => {
@@ -48,11 +53,11 @@ export const LoongArkClipboardRoot = forwardRef<
       {children}
     </Clipboard.Root>
   );
-});
+}), lkAutomaticClipboardStyles);
 
 LoongArkClipboardRoot.displayName = "LoongArkClipboardRoot";
 
-export const LoongArkClipboardLabel = forwardRef<
+export const LoongArkClipboardLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   ArkClipboardLabelProps
 >((props, ref) => {
@@ -64,11 +69,11 @@ export const LoongArkClipboardLabel = forwardRef<
       data-part="label"
     />
   );
-});
+}), lkAutomaticClipboardStyles);
 
 LoongArkClipboardLabel.displayName = "LoongArkClipboardLabel";
 
-export const LoongArkClipboardControl = forwardRef<
+export const LoongArkClipboardControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkClipboardControlProps
 >((props, ref) => {
@@ -80,11 +85,11 @@ export const LoongArkClipboardControl = forwardRef<
       data-part="control"
     />
   );
-});
+}), lkAutomaticClipboardStyles);
 
 LoongArkClipboardControl.displayName = "LoongArkClipboardControl";
 
-export const LoongArkClipboardInput = forwardRef<
+export const LoongArkClipboardInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   ArkClipboardInputProps
 >((props, ref) => {
@@ -96,11 +101,11 @@ export const LoongArkClipboardInput = forwardRef<
       data-part="input"
     />
   );
-});
+}), lkAutomaticClipboardStyles);
 
 LoongArkClipboardInput.displayName = "LoongArkClipboardInput";
 
-export const LoongArkClipboardTrigger = forwardRef<
+export const LoongArkClipboardTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkClipboardTriggerProps
 >((props, ref) => {
@@ -112,11 +117,11 @@ export const LoongArkClipboardTrigger = forwardRef<
       data-part="trigger"
     />
   );
-});
+}), lkAutomaticClipboardStyles);
 
 LoongArkClipboardTrigger.displayName = "LoongArkClipboardTrigger";
 
-export const LoongArkClipboardIndicator = forwardRef<
+export const LoongArkClipboardIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkClipboardIndicatorProps
 >((props, ref) => {
@@ -128,11 +133,11 @@ export const LoongArkClipboardIndicator = forwardRef<
       data-part="indicator"
     />
   );
-});
+}), lkAutomaticClipboardStyles);
 
 LoongArkClipboardIndicator.displayName = "LoongArkClipboardIndicator";
 
-export const LoongArkClipboardValueText = forwardRef<
+export const LoongArkClipboardValueText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkClipboardValueTextProps
 >((props, ref) => {
@@ -144,6 +149,6 @@ export const LoongArkClipboardValueText = forwardRef<
       data-part="value-text"
     />
   );
-});
+}), lkAutomaticClipboardStyles);
 
 LoongArkClipboardValueText.displayName = "LoongArkClipboardValueText";

@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticCodeEditorStyles } from "@loongark/primitives/automatic-styles/code-editor";
+  registerAutomaticStyles(lkAutomaticCodeEditorStyles);
+
   import { onMount, onDestroy, untrack } from "svelte";
   import { renderCodeEditorMarkup, mountCodeEditor, type CodeEditorProps } from "@loongark/kit";
   let { value = $bindable<CodeEditorProps["value"]>(undefined), onValueChange, ...rest }: CodeEditorProps = $props();

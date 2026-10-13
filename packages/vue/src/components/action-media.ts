@@ -1,3 +1,9 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticFloatingActionButtonStyles } from "@loongark/primitives/automatic-styles/floating-action-button";
+import { styles as lkAutomaticImageListStyles } from "@loongark/primitives/automatic-styles/image-list";
+import { styles as lkAutomaticMasonryStyles } from "@loongark/primitives/automatic-styles/masonry";
+import { styles as lkAutomaticSpeedDialStyles } from "@loongark/primitives/automatic-styles/speed-dial";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
@@ -46,12 +52,12 @@ const make = (part: MediaPart) =>
         );
     },
   });
-export const LoongArkImageList = make("ImageList");
-export const LoongArkImageListItem = make("ImageListItem");
-export const LoongArkImageListCaption = make("ImageListCaption");
-export const LoongArkMasonry = make("Masonry");
-export const LoongArkMasonryItem = make("MasonryItem");
-export const LoongArkFloatingActionButton = defineComponent({
+export const LoongArkImageList = /*#__PURE__*/ withAutomaticStyles(make("ImageList"), lkAutomaticImageListStyles);
+export const LoongArkImageListItem = /*#__PURE__*/ withAutomaticStyles(make("ImageListItem"), lkAutomaticImageListStyles);
+export const LoongArkImageListCaption = /*#__PURE__*/ withAutomaticStyles(make("ImageListCaption"), lkAutomaticImageListStyles);
+export const LoongArkMasonry = /*#__PURE__*/ withAutomaticStyles(make("Masonry"), lkAutomaticMasonryStyles);
+export const LoongArkMasonryItem = /*#__PURE__*/ withAutomaticStyles(make("MasonryItem"), lkAutomaticMasonryStyles);
+export const LoongArkFloatingActionButton = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkFloatingActionButton",
   inheritAttrs: false,
   props: {
@@ -67,8 +73,8 @@ export const LoongArkFloatingActionButton = defineComponent({
         slots.default?.(),
       );
   },
-});
-export const LoongArkSpeedDial = defineComponent({
+}), lkAutomaticFloatingActionButtonStyles);
+export const LoongArkSpeedDial = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSpeedDial",
   inheritAttrs: false,
   props: {
@@ -197,4 +203,4 @@ export const LoongArkSpeedDial = defineComponent({
         ],
       );
   },
-});
+}), lkAutomaticSpeedDialStyles);

@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSplitterStyles } from "@loongark/primitives/automatic-styles/splitter";
 import { renderPart } from "../render-part";
 /**
  * Splitter component - Vue wrapper.
@@ -7,7 +10,7 @@ import { defineComponent, h, type PropType } from "vue";
 import { Splitter as ArkSplitter } from "@ark-ui/vue/splitter";
 import type { SplitterSize } from "@loongark/primitives";
 
-export const LoongArkSplitterRoot = defineComponent({
+export const LoongArkSplitterRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSplitterRoot",
   props: {
     size: {
@@ -29,9 +32,9 @@ export const LoongArkSplitterRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSplitterStyles);
 
-export const LoongArkSplitterPanel = defineComponent({
+export const LoongArkSplitterPanel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSplitterPanel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -45,9 +48,9 @@ export const LoongArkSplitterPanel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSplitterStyles);
 
-export const LoongArkSplitterResizeTrigger = defineComponent({
+export const LoongArkSplitterResizeTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSplitterResizeTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -62,9 +65,9 @@ export const LoongArkSplitterResizeTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSplitterStyles);
 
-export const LoongArkSplitterResizeTriggerIndicator = defineComponent({
+export const LoongArkSplitterResizeTriggerIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSplitterResizeTriggerIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -78,4 +81,4 @@ export const LoongArkSplitterResizeTriggerIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSplitterStyles);

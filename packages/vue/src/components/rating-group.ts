@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticRatingGroupStyles } from "@loongark/primitives/automatic-styles/rating-group";
 import { renderPart } from "../render-part";
 /**
  * Rating Group component - Vue wrapper.
@@ -15,7 +18,7 @@ import { useRatingGroup } from "./use-rating";
 import type { UseRatingGroupProps } from "@ark-ui/vue/rating-group";
 import type { RatingGroupSize } from "@loongark/primitives";
 
-export const LoongArkRatingGroupRoot = defineComponent({
+export const LoongArkRatingGroupRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRatingGroupRoot",
   inheritAttrs: false,
   props: {
@@ -83,9 +86,9 @@ export const LoongArkRatingGroupRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticRatingGroupStyles);
 
-export const LoongArkRatingGroupLabel = defineComponent({
+export const LoongArkRatingGroupLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRatingGroupLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -99,9 +102,9 @@ export const LoongArkRatingGroupLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticRatingGroupStyles);
 
-export const LoongArkRatingGroupControl = defineComponent({
+export const LoongArkRatingGroupControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRatingGroupControl",
   setup(_, { slots, attrs }) {
     return () =>
@@ -115,9 +118,9 @@ export const LoongArkRatingGroupControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticRatingGroupStyles);
 
-export const LoongArkRatingGroupItem = defineComponent({
+export const LoongArkRatingGroupItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRatingGroupItem",
   setup(_, { slots, attrs }) {
     return () =>
@@ -131,9 +134,9 @@ export const LoongArkRatingGroupItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticRatingGroupStyles);
 
-export const LoongArkRatingGroupHiddenInput = defineComponent({
+export const LoongArkRatingGroupHiddenInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRatingGroupHiddenInput",
   setup(_, { attrs }) {
     return () =>
@@ -143,4 +146,4 @@ export const LoongArkRatingGroupHiddenInput = defineComponent({
         "data-part": "hidden-input",
       });
   },
-});
+}), lkAutomaticRatingGroupStyles);

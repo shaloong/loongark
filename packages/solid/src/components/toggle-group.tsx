@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticToggleGroupStyles } from "@loongark/primitives/automatic-styles/toggle-group";
 /**
  * Toggle Group component - Solid wrapper.
  * Based on Ark UI Toggle Group.
@@ -24,7 +27,7 @@ export interface LoongArkToggleGroupRootProps extends Omit<
 
 export const LoongArkToggleGroupRoot: Component<
   LoongArkToggleGroupRootProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     {
       size: "md" as ToggleGroupSize,
@@ -44,14 +47,14 @@ export const LoongArkToggleGroupRoot: Component<
       {props.children}
     </ArkToggleGroup.Root>
   );
-};
+}, lkAutomaticToggleGroupStyles);
 
 export const LoongArkToggleGroupItem: Component<
   ArkToggleGroupItemProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkToggleGroup.Item {...props} data-scope="toggle-group" data-part="item">
       {props.children}
     </ArkToggleGroup.Item>
   );
-};
+}, lkAutomaticToggleGroupStyles);

@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticNumberInputStyles } from "@loongark/primitives/automatic-styles/number-input";
+  registerAutomaticStyles(lkAutomaticNumberInputStyles);
+
   import { useFieldContext } from "@ark-ui/svelte/field";
   import {
     NumberInput,

@@ -1,12 +1,21 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "paths": { "@loongark/react": ["packages/react/dist/index.d.ts"] },
+    "paths": {
+      "@loongark/react": [
+        "../packages/react/dist/index.d.ts"
+      ]
+    },
     "noEmit": true,
     "declaration": false,
     "jsx": "react-jsx",
-    "types": ["node"],
-    "typeRoots": ["../node_modules/@types"]
+    "types": [
+      "node",
+      "vite/client"
+    ]
   },
-  "include": ["*.ts", "*.tsx"]
+  "include": [
+    "*.ts",
+    "*.tsx"
+  ]
 }

@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticTypographyStyles } from "@loongark/primitives/automatic-styles/typography";
+  registerAutomaticStyles(lkAutomaticTypographyStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "p";
   export let variant: LayoutOptions["variant"] = "default";

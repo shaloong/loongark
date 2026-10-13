@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticMenuStyles } from "@loongark/primitives/automatic-styles/menu";
 import { ark } from "@ark-ui/solid/factory";
 import { mergeProps as mergeMenuProps } from "@zag-js/solid";
 import { contextMenuPointerHandler, recoverClosedMenuFocus } from "@loongark/kit";
@@ -46,7 +49,7 @@ export interface LoongArkMenuRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkMenuRoot: Component<LoongArkMenuRootProps> = (props) => {
+export const LoongArkMenuRoot: Component<LoongArkMenuRootProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps({ size: "md" as MenuSize }, props);
   return (
     <MenuContext.Provider value={{ size: merged.size }}>
@@ -60,22 +63,22 @@ export const LoongArkMenuRoot: Component<LoongArkMenuRootProps> = (props) => {
       </ArkMenu.Root>
     </MenuContext.Provider>
   );
-};
+}, lkAutomaticMenuStyles);
 
 export const LoongArkMenuTrigger: Component<
   ArkMenuTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps({}, props);
   return (
     <ArkMenu.Trigger {...merged} data-scope="menu" data-part="trigger">
       {props.children}
     </ArkMenu.Trigger>
   );
-};
+}, lkAutomaticMenuStyles);
 
 export const LoongArkMenuContextTrigger: Component<
   ArkMenuContextTriggerProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const menu = useMenuContext();
   const merged = () => {
     const native = menu().getContextTriggerProps();
@@ -107,19 +110,19 @@ export const LoongArkMenuContextTrigger: Component<
       {props.children}
     </ark.button>
   );
-};
+}, lkAutomaticMenuStyles);
 
 export const LoongArkMenuPositioner: Component<
   ArkMenuPositionerProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.Positioner {...props} data-scope="menu" data-part="positioner">
     {props.children}
   </ArkMenu.Positioner>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuContent: Component<
   ArkMenuContentProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const { size } = useContext(MenuContext);
   return (
     <ArkMenu.Content
@@ -133,67 +136,67 @@ export const LoongArkMenuContent: Component<
       {props.children}
     </ArkMenu.Content>
   );
-};
+}, lkAutomaticMenuStyles);
 
-export const LoongArkMenuArrow: Component<ArkMenuArrowProps> = (props) => (
+export const LoongArkMenuArrow: Component<ArkMenuArrowProps> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.Arrow {...props} data-scope="menu" data-part="arrow" />
-);
+), lkAutomaticMenuStyles);
 
-export const LoongArkMenuArrowTip: Component<ArkMenuArrowTipProps> = (
+export const LoongArkMenuArrowTip: Component<ArkMenuArrowTipProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
-) => <ArkMenu.ArrowTip {...props} data-scope="menu" data-part="arrow-tip" />;
+) => <ArkMenu.ArrowTip {...props} data-scope="menu" data-part="arrow-tip" />, lkAutomaticMenuStyles);
 
 export const LoongArkMenuItem: Component<
   ArkMenuItemProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.Item {...props} data-scope="menu" data-part="item">
     {props.children}
   </ArkMenu.Item>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuTriggerItem: Component<
   ArkMenuTriggerItemProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.TriggerItem {...props} data-scope="menu" data-part="trigger-item">
     {props.children}
   </ArkMenu.TriggerItem>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuCheckboxItem: Component<
   ArkMenuCheckboxItemProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.CheckboxItem {...props} data-scope="menu" data-part="item">
     {props.children}
   </ArkMenu.CheckboxItem>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuRadioItem: Component<
   ArkMenuRadioItemProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.RadioItem {...props} data-scope="menu" data-part="item">
     {props.children}
   </ArkMenu.RadioItem>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuRadioItemGroup: Component<
   ArkMenuRadioItemGroupProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.RadioItemGroup {...props} data-scope="menu" data-part="item-group">
     {props.children}
   </ArkMenu.RadioItemGroup>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuItemGroup: Component<
   ArkMenuItemGroupProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.ItemGroup {...props} data-scope="menu" data-part="item-group">
     {props.children}
   </ArkMenu.ItemGroup>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuItemGroupLabel: Component<
   ArkMenuItemGroupLabelProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.ItemGroupLabel
     {...props}
     data-scope="menu"
@@ -201,19 +204,19 @@ export const LoongArkMenuItemGroupLabel: Component<
   >
     {props.children}
   </ArkMenu.ItemGroupLabel>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuItemText: Component<
   ArkMenuItemTextProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.ItemText {...props} data-scope="menu" data-part="item-text">
     {props.children}
   </ArkMenu.ItemText>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuItemIndicator: Component<
   ArkMenuItemIndicatorProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.ItemIndicator
     {...props}
     data-scope="menu"
@@ -221,20 +224,20 @@ export const LoongArkMenuItemIndicator: Component<
   >
     {props.children}
   </ArkMenu.ItemIndicator>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuIndicator: Component<
   ArkMenuIndicatorProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.Indicator {...props} data-scope="menu" data-part="indicator">
     {props.children}
   </ArkMenu.Indicator>
-);
+), lkAutomaticMenuStyles);
 
 export const LoongArkMenuSeparator: Component<
   ArkMenuSeparatorProps & { children?: JSX.Element }
-> = (props) => (
+> = /*#__PURE__*/ withAutomaticStyles((props) => (
   <ArkMenu.Separator {...props} data-scope="menu" data-part="separator">
     {props.children}
   </ArkMenu.Separator>
-);
+), lkAutomaticMenuStyles);

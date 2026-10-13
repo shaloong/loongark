@@ -1,13 +1,11 @@
 import { expect, test } from "@playwright/test";
+import type { StoryIndex } from "storybook/internal/types";
 import { readFileSync, mkdirSync } from "node:fs";
 
-const index = process.env.STATIC_DIR ? { entries: {} } : JSON.parse(readFileSync("storybook-static/index.json", "utf8"));
-const entries = Object.values(index.entries) as Array<{
-  type: string;
-  title: string;
-  name: string;
-  id: string;
-}>;
+const index: Pick<StoryIndex, "entries"> = process.env.STATIC_DIR
+  ? { entries: {} }
+  : JSON.parse(readFileSync("storybook-static/index.json", "utf8"));
+const entries = Object.values(index.entries);
 const families = [
   ...new Set(
     entries
@@ -18,57 +16,64 @@ const families = [
       .map((entry) => entry.title),
   ),
 ];
+const batchCount = 8;
 for (const mode of ["light", "dark"])
   for (const width of [1280, 375])
-    test(`全组件启用态 cursor ${mode} ${width}`, async ({ page }) => {
-      test.skip(!!process.env.STATIC_DIR, "Storybook 族目录");
-      test.setTimeout(240000);
-      await page.setViewportSize({ width, height: 1000 });
-      for (const family of families) {
-        const stories = entries.filter(
-          (entry) => entry.type === "story" && entry.title === family,
-        );
-        const story =
-          stories.find((entry) => entry.name === "Basic") ?? stories[0];
-        await page.goto(`/iframe.html?id=${story.id}&globals=mode:${mode}`);
-        await expect(page.locator(".loongark-story-surface")).toBeVisible();
-        const failures = await page.evaluate(() =>
-          Array.from(
-            document.querySelectorAll<HTMLElement>(
-              'input:not([type="hidden"]),textarea,select,button,[role="checkbox"],[role="radio"],[role="combobox"]',
-            ),
-          ).flatMap((element) => {
-            const rectangle = element.getBoundingClientRect();
-            if (
-              !rectangle.width ||
-              !rectangle.height ||
-              getComputedStyle(element).visibility === "hidden" ||
-              element.closest(
-                '[hidden],[data-disabled=""],[data-disabled="true"],[aria-disabled="true"]',
-              ) ||
-              element.matches(":disabled")
-            )
-              return [];
-            return getComputedStyle(element).cursor === "not-allowed"
-              ? [
-                  {
-                    tag: element.tagName,
-                    scope: element.dataset.scope,
-                    part: element.dataset.part,
-                    label:
-                      element.getAttribute("aria-label") ||
-                      element.textContent?.slice(0, 60),
-                  },
-                ]
-              : [];
-          }),
-        );
-        expect(
-          failures,
-          `${family} ${mode} ${width} 的启用控件不得显示禁止指针`,
-        ).toEqual([]);
-      }
-    });
+    for (let batch = 0; batch < batchCount; batch++) {
+      test(`全组件启用态 cursor ${mode} ${width} ${batch + 1}/${batchCount}`, async ({
+        page,
+      }) => {
+        test.skip(!!process.env.STATIC_DIR, "Storybook 族目录");
+        test.setTimeout(240000);
+        await page.setViewportSize({ width, height: 1000 });
+        for (const family of families.filter(
+          (_, index) => index % batchCount === batch,
+        )) {
+          const stories = entries.filter(
+            (entry) => entry.type === "story" && entry.title === family,
+          );
+          const story =
+            stories.find((entry) => entry.name === "Basic") ?? stories[0];
+          await page.goto(`/iframe.html?id=${story.id}&globals=mode:${mode}`);
+          await expect(page.locator(".loongark-story-surface")).toBeVisible();
+          const failures = await page.evaluate(() =>
+            Array.from(
+              document.querySelectorAll<HTMLElement>(
+                'input:not([type="hidden"]),textarea,select,button,[role="checkbox"],[role="radio"],[role="combobox"]',
+              ),
+            ).flatMap((element) => {
+              const rectangle = element.getBoundingClientRect();
+              if (
+                !rectangle.width ||
+                !rectangle.height ||
+                getComputedStyle(element).visibility === "hidden" ||
+                element.closest(
+                  '[hidden],[data-disabled=""],[data-disabled="true"],[aria-disabled="true"]',
+                ) ||
+                element.matches(":disabled")
+              )
+                return [];
+              return getComputedStyle(element).cursor === "not-allowed"
+                ? [
+                    {
+                      tag: element.tagName,
+                      scope: element.dataset.scope,
+                      part: element.dataset.part,
+                      label:
+                        element.getAttribute("aria-label") ||
+                        element.textContent?.slice(0, 60),
+                    },
+                  ]
+                : [];
+            }),
+          );
+          expect(
+            failures,
+            `${family} ${mode} ${width} 的启用控件不得显示禁止指针`,
+          ).toEqual([]);
+        }
+      });
+    }
 
 for (const mode of ["light", "dark"])
   test(`Password false 与 Checkbox hover ${mode}`, async ({ page }, info) => {
@@ -136,6 +141,12 @@ for (const framework of ["react", "vue", "solid", "svelte"])
           await expect(
             page.locator(`[data-core-family="${name}"]`),
           ).toBeVisible();
+          if (name === "Menubar") {
+            await expect(page.getByRole("menubar")).toHaveCSS("display", "flex");
+            await expect(
+              page.getByRole("menubar").getByRole("menuitem", { name: "文件", exact: true }),
+            ).toBeVisible();
+          }
           expect(
             await page.evaluate(
               () => document.documentElement.scrollWidth - window.innerWidth,

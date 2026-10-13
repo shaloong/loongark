@@ -1,4 +1,8 @@
 ﻿<script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticHoverCardStyles } from "@loongark/primitives/automatic-styles/hover-card";
+  registerAutomaticStyles(lkAutomaticHoverCardStyles);
+
   import { HoverCard } from "@ark-ui/svelte/hover-card";
   import type { HoverCardRootProps } from "@ark-ui/svelte/hover-card";
   import type { HoverCardSize } from "@loongark/primitives";

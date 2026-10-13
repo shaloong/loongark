@@ -88,7 +88,9 @@ export const DatePickerExample = defineComponent({
         h(Calendar.Label, {}, () => "选择日期"),
         h(Calendar.Control, {}, () => [
           h(Calendar.Input),
-          h(Calendar.Trigger, { "aria-label": "打开日历" }),
+          h(Calendar.Trigger, { "aria-label": "打开日历" }, () =>
+            h(L.LoongArkIcon, { icon: controlIcons.chevronDown, size: "sm" }),
+          ),
         ]),
         h(L.LoongArkPortal, {}, () => h(Calendar.Positioner, {}, content)),
       ]);

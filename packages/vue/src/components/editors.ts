@@ -1,3 +1,7 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCodeEditorStyles } from "@loongark/primitives/automatic-styles/code-editor";
+import { styles as lkAutomaticRichTextEditorStyles } from "@loongark/primitives/automatic-styles/rich-text-editor";
 import {
   defineComponent,
   h,
@@ -65,7 +69,7 @@ function useEditor<P extends EditorFormOptions>(
       innerHTML: markup,
     });
 }
-export const LoongArkCodeEditor = /* @__PURE__ */ defineComponent({
+export const LoongArkCodeEditor = /* @__PURE__ */ /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCodeEditor",
   inheritAttrs: false,
   props: {
@@ -105,8 +109,8 @@ export const LoongArkCodeEditor = /* @__PURE__ */ defineComponent({
       attrs,
     );
   },
-});
-export const LoongArkRichTextEditor = /* @__PURE__ */ defineComponent({
+}), lkAutomaticCodeEditorStyles);
+export const LoongArkRichTextEditor = /* @__PURE__ */ /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRichTextEditor",
   inheritAttrs: false,
   props: {
@@ -143,4 +147,4 @@ export const LoongArkRichTextEditor = /* @__PURE__ */ defineComponent({
       attrs,
     );
   },
-});
+}), lkAutomaticRichTextEditorStyles);

@@ -1,0 +1,26 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { default as LoongArkSelectClearTrigger } from "../components/SelectClearTrigger.svelte";
+export { default as LoongArkSelectContent } from "../components/SelectContent.svelte";
+export { LoongArkSelectContext } from "../components/ark-advanced";
+export { default as LoongArkSelectControl } from "../components/SelectControl.svelte";
+export { default as LoongArkSelectHiddenSelect } from "../components/SelectHiddenSelect.svelte";
+export { default as LoongArkSelectIndicator } from "../components/SelectIndicator.svelte";
+export { default as LoongArkSelectItem } from "../components/SelectItem.svelte";
+export { LoongArkSelectItemContext } from "../components/ark-advanced";
+export { default as LoongArkSelectItemGroup } from "../components/SelectItemGroup.svelte";
+export { default as LoongArkSelectItemGroupLabel } from "../components/SelectItemGroupLabel.svelte";
+export { default as LoongArkSelectItemIndicator } from "../components/SelectItemIndicator.svelte";
+export { default as LoongArkSelectItemText } from "../components/SelectItemText.svelte";
+export { default as LoongArkSelectLabel } from "../components/SelectLabel.svelte";
+export { default as LoongArkSelectList } from "../components/SelectList.svelte";
+export { default as LoongArkSelectPositioner } from "../components/SelectPositioner.svelte";
+export { default as LoongArkSelectRoot } from "../components/SelectRoot.svelte";
+export { LoongArkSelectRootProvider } from "../components/ark-advanced";
+export { default as LoongArkSelectTrigger } from "../components/SelectTrigger.svelte";
+export { default as LoongArkSelectValueText } from "../components/SelectValueText.svelte";
+export type { SelectRootProps } from "../components/select.d";
+export { useSelect } from "@ark-ui/svelte/select";
+export { useSelectContext } from "@ark-ui/svelte/select";
+export { useSelectItemContext } from "@ark-ui/svelte/select";
+export type { UseSelectProps } from "@ark-ui/svelte/select";
+export type { UseSelectReturn } from "@ark-ui/svelte/select";

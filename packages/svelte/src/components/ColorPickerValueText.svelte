@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticColorPickerStyles } from "@loongark/primitives/automatic-styles/color-picker";
+  registerAutomaticStyles(lkAutomaticColorPickerStyles);
+
   import type { ComponentProps } from "svelte";
   import { ColorPicker } from "@ark-ui/svelte/color-picker";
   let { children, ...props }: ComponentProps<typeof ColorPicker.ValueText> =

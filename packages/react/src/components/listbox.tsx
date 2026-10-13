@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticListboxStyles } from "@loongark/primitives/automatic-styles/listbox";
+
+
 /**
  * Listbox component - React wrapper.
  * Uses Ark UI Listbox with data attributes for styling.
@@ -83,7 +88,7 @@ export interface LoongArkListboxItemIndicatorProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkListboxRoot = forwardRef<
+export const LoongArkListboxRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkListboxRootProps
 >(({ children, size = "md", orientation = "vertical", ...props }, ref) => {
@@ -103,11 +108,11 @@ export const LoongArkListboxRoot = forwardRef<
 }) as (<T>(
   props: LoongArkListboxRootProps<T> &
     import("react").RefAttributes<HTMLDivElement>,
-) => import("react").ReactElement | null) & { displayName?: string };
+) => import("react").ReactElement | null) & { displayName?: string }, lkAutomaticListboxStyles);
 
 LoongArkListboxRoot.displayName = "LoongArkListboxRoot";
 
-export const LoongArkListboxLabel = forwardRef<
+export const LoongArkListboxLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkListboxLabelProps
 >(({ children, ...props }, ref) => {
@@ -116,11 +121,11 @@ export const LoongArkListboxLabel = forwardRef<
       {children}
     </Listbox.Label>
   );
-});
+}), lkAutomaticListboxStyles);
 
 LoongArkListboxLabel.displayName = "LoongArkListboxLabel";
 
-export const LoongArkListboxList = forwardRef<
+export const LoongArkListboxList = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkListboxListProps
 >(({ children, ...props }, ref) => {
@@ -129,11 +134,11 @@ export const LoongArkListboxList = forwardRef<
       {children}
     </Listbox.Content>
   );
-});
+}), lkAutomaticListboxStyles);
 
 LoongArkListboxList.displayName = "LoongArkListboxList";
 
-export const LoongArkListboxItemGroup = forwardRef<
+export const LoongArkListboxItemGroup = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkListboxItemGroupProps
 >(({ children, ...props }, ref) => {
@@ -147,11 +152,11 @@ export const LoongArkListboxItemGroup = forwardRef<
       {children}
     </Listbox.ItemGroup>
   );
-});
+}), lkAutomaticListboxStyles);
 
 LoongArkListboxItemGroup.displayName = "LoongArkListboxItemGroup";
 
-export const LoongArkListboxItemGroupLabel = forwardRef<
+export const LoongArkListboxItemGroupLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkListboxItemGroupLabelProps
 >(({ children, ...props }, ref) => {
@@ -165,11 +170,11 @@ export const LoongArkListboxItemGroupLabel = forwardRef<
       {children}
     </Listbox.ItemGroupLabel>
   );
-});
+}), lkAutomaticListboxStyles);
 
 LoongArkListboxItemGroupLabel.displayName = "LoongArkListboxItemGroupLabel";
 
-export const LoongArkListboxItem = forwardRef<
+export const LoongArkListboxItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkListboxItemProps
 >(({ children, ...props }, ref) => {
@@ -178,11 +183,11 @@ export const LoongArkListboxItem = forwardRef<
       {children}
     </Listbox.Item>
   );
-});
+}), lkAutomaticListboxStyles);
 
 LoongArkListboxItem.displayName = "LoongArkListboxItem";
 
-export const LoongArkListboxItemText = forwardRef<
+export const LoongArkListboxItemText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkListboxItemTextProps
 >(({ children, ...props }, ref) => {
@@ -196,11 +201,11 @@ export const LoongArkListboxItemText = forwardRef<
       {children}
     </Listbox.ItemText>
   );
-});
+}), lkAutomaticListboxStyles);
 
 LoongArkListboxItemText.displayName = "LoongArkListboxItemText";
 
-export const LoongArkListboxItemIndicator = forwardRef<
+export const LoongArkListboxItemIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkListboxItemIndicatorProps
 >(({ children, ...props }, ref) => {
@@ -214,6 +219,6 @@ export const LoongArkListboxItemIndicator = forwardRef<
       {children}
     </Listbox.ItemIndicator>
   );
-});
+}), lkAutomaticListboxStyles);
 
 LoongArkListboxItemIndicator.displayName = "LoongArkListboxItemIndicator";

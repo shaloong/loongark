@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSegmentGroupStyles } from "@loongark/primitives/automatic-styles/segment-group";
 /**
  * Segment Group component - Solid wrapper.
  * 使用 Ark UI SegmentGroup，保留单选语义和隐藏表单输入。
@@ -24,7 +27,7 @@ export interface LoongArkSegmentGroupRootProps extends Omit<
 
 export const LoongArkSegmentGroupRoot: Component<
   LoongArkSegmentGroupRootProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     {
       size: "md" as SegmentGroupSize,
@@ -44,14 +47,14 @@ export const LoongArkSegmentGroupRoot: Component<
       {props.children}
     </ArkSegmentGroup.Root>
   );
-};
+}, lkAutomaticSegmentGroupStyles);
 
 export const LoongArkSegmentGroupItem: Component<
   ArkSegmentGroupItemProps & { children?: JSX.Element }
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkSegmentGroup.Item {...props} data-scope="segment-group" data-part="item">
       {props.children}
     </ArkSegmentGroup.Item>
   );
-};
+}, lkAutomaticSegmentGroupStyles);

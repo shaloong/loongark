@@ -2,11 +2,17 @@ name: Release readiness
 
 on:
   push:
-    branches: [develop, main]
+    branches: [develop]
   pull_request:
-    branches: [develop, main]
+    branches: [develop]
+  schedule:
+    - cron: '47 2 * * 1'
   workflow_dispatch:
     inputs:
+      full:
+        description: '包含最低版本与 Next.js tarball 消费、完整参考示例；正式发布前运行'
+        type: boolean
+        default: true
       version:
         description: '可选：检查9个包与目标版本一致；不执行发布'
         required: false
@@ -16,7 +22,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: release-readiness-${{ github.ref }}
+  group: release-readiness-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -30,13 +36,14 @@ jobs:
       - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
           version: 10.14.0
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm audit --audit-level=low
       - run: pnpm verify
+      - run: pnpm check:playwright
       - run: pnpm check:contracts
       - run: pnpm check:storybook
       - run: pnpm storybook:build
@@ -55,9 +62,17 @@ jobs:
           EXPECTED_RELEASE_VERSION: ${{ inputs.version }}
         run: node --input-type=module -e 'import fs from "node:fs";const reports=JSON.parse(fs.readFileSync(".artifacts/releases/packages/report.json"));if(reports.some(r=>r.version!==process.env.EXPECTED_RELEASE_VERSION))throw Error("Requested version mismatch");'
       - run: pnpm check:versions
+        if: github.event_name == 'schedule' || inputs.full == true
+      - run: pnpm check:rsc
+        if: github.event_name == 'schedule' || inputs.full == true
       - run: node scripts/check-reference.mjs
-      - run: node scripts/run-playwright.mjs reference-docs.spec.ts interaction-styles.spec.ts --project=chromium --workers=2
-      - run: node scripts/run-playwright.mjs performance-contracts.spec.ts interaction-styles.spec.ts reference-examples.spec.ts --project=chromium --workers=1
+      - run: node scripts/run-playwright.mjs reference-docs.spec.ts getting-started.spec.ts interaction-styles.spec.ts --project=chromium --workers=2
+      - run: node scripts/run-playwright.mjs performance-contracts.spec.ts interaction-styles.spec.ts --project=chromium --workers=1
+        env:
+          STATIC_DIR: tests/consumer-dist
+      - name: Complete reference examples
+        if: github.event_name == 'schedule' || inputs.full == true
+        run: node scripts/run-playwright.mjs reference-examples.spec.ts --project=chromium --workers=1
         env:
           STATIC_DIR: tests/consumer-dist
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -68,9 +83,11 @@ jobs:
             .artifacts/performance/
             .artifacts/interaction-styles/
             .artifacts/reference-docs/
+            .artifacts/getting-started/
             .artifacts/reference-examples/
             .artifacts/releases/packages/
             .artifacts/releases/minimum/report.json
             .artifacts/releases/minimum/dependencies.json
+            .artifacts/releases/react-rsc/
           retention-days: 14
           if-no-files-found: ignore

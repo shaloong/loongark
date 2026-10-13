@@ -1,3 +1,8 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticFilterBarStyles } from "@loongark/primitives/automatic-styles/filter-bar";
+import { styles as lkAutomaticFilterChipStyles } from "@loongark/primitives/automatic-styles/filter-chip";
+import { styles as lkAutomaticFilterDividerStyles } from "@loongark/primitives/automatic-styles/filter-divider";
 import { type Component, type JSX, splitProps, mergeProps } from "solid-js";
 import { boolAttr } from "../utils";
 
@@ -7,7 +12,7 @@ export interface LoongArkFilterBarProps extends JSX.HTMLAttributes<HTMLDivElemen
   children?: JSX.Element;
 }
 
-export const LoongArkFilterBar: Component<LoongArkFilterBarProps> = (props) => {
+export const LoongArkFilterBar: Component<LoongArkFilterBarProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, rest] = splitProps(
     mergeProps({ align: "start" as const }, props),
     ["dense", "align", "children"],
@@ -24,7 +29,7 @@ export const LoongArkFilterBar: Component<LoongArkFilterBarProps> = (props) => {
       {local.children}
     </div>
   );
-};
+}, lkAutomaticFilterBarStyles);
 
 export type LoongArkFilterSectionProps = JSX.HTMLAttributes<HTMLDivElement>;
 
@@ -43,13 +48,13 @@ const createFilterSection = (
   return Section;
 };
 
-export const LoongArkFilterBarSearch = createFilterSection("search");
-export const LoongArkFilterBarFilters = createFilterSection("filters");
-export const LoongArkFilterBarActions = createFilterSection("actions");
+export const LoongArkFilterBarSearch = /*#__PURE__*/ withAutomaticStyles(createFilterSection("search"), lkAutomaticFilterBarStyles);
+export const LoongArkFilterBarFilters = /*#__PURE__*/ withAutomaticStyles(createFilterSection("filters"), lkAutomaticFilterBarStyles);
+export const LoongArkFilterBarActions = /*#__PURE__*/ withAutomaticStyles(createFilterSection("actions"), lkAutomaticFilterBarStyles);
 
 export const LoongArkFilterDivider: Component<
   Omit<JSX.HTMLAttributes<HTMLSpanElement>, "children">
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <span
       {...props}
@@ -59,7 +64,7 @@ export const LoongArkFilterDivider: Component<
       data-part="divider"
     />
   );
-};
+}, lkAutomaticFilterDividerStyles);
 
 export interface LoongArkFilterChipProps extends JSX.HTMLAttributes<HTMLButtonElement> {
   active?: boolean;
@@ -67,7 +72,7 @@ export interface LoongArkFilterChipProps extends JSX.HTMLAttributes<HTMLButtonEl
   children?: JSX.Element;
 }
 
-export const LoongArkFilterChip: Component<LoongArkFilterChipProps> = (
+export const LoongArkFilterChip: Component<LoongArkFilterChipProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, rest] = splitProps(
@@ -87,4 +92,4 @@ export const LoongArkFilterChip: Component<LoongArkFilterChipProps> = (
       {local.children}
     </button>
   );
-};
+}, lkAutomaticFilterChipStyles);

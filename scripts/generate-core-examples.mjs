@@ -1,6 +1,7 @@
 import { formatExample } from "./format-example.mjs";
 import ts from "typescript";
 import { readFile, writeFile } from "node:fs/promises";
+const check = process.argv.includes("--check");
 
 // 这些静态组合用同一部件树生成四端调用代码；交互仍由真实组件的状态机负责。
 // 不生成动态组件映射或绕过框架类型检查的 Props。
@@ -141,12 +142,11 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       .replaceAll('"min-width":', "minWidth:");
   if (framework === "solid" || framework === "svelte")
     source = source.replaceAll(" asChild={false}", "");
-  await writeFile(
-    `examples/${framework}/CoreComponentsExample.${framework === "svelte" ? "svelte" : framework === "vue" ? "ts" : "tsx"}`,
-    await formatExample(
-      `examples/${framework}/CoreComponentsExample.${framework === "svelte" ? "svelte" : framework === "vue" ? "ts" : "tsx"}`,
-      source,
-    ),
-  );
+  const path = `examples/${framework}/CoreComponentsExample.${framework === "svelte" ? "svelte" : framework === "vue" ? "ts" : "tsx"}`;
+  const expected = await formatExample(path, source);
+  if (check) {
+    if (await readFile(path, "utf8") !== expected)
+      throw Error(`${path} 未同步共享配方；请运行 node scripts/generate-core-examples.mjs`);
+  } else await writeFile(path, expected);
 }
-console.log(`已生成 ${families.length} 组真实四端静态组合示例。`);
+console.log(`已${check ? "检查" : "生成"} ${families.length} 组真实四端静态组合示例。`);

@@ -1,7 +1,4 @@
-import type { SvelteComponent } from "svelte";
-import type { CreateThemeOptions } from "@loongark/theme";
-export default class Provider extends SvelteComponent<
-  CreateThemeOptions,
-  Record<string, never>,
-  { default: Record<string, never> }
-> {}
+import type { Component } from "svelte";
+import type { LoongArkProviderCoreProps } from "../provider-core";
+declare const Provider: Component<LoongArkProviderCoreProps>;
+export default Provider;

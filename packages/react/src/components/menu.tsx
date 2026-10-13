@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticMenuStyles } from "@loongark/primitives/automatic-styles/menu";
+
+
 import { ark } from "@ark-ui/react/factory";
 import { mergeProps as mergeMenuProps } from "@zag-js/react";
 import { contextMenuPointerHandler, recoverClosedMenuFocus } from "@loongark/kit";
@@ -50,7 +55,7 @@ export interface LoongArkMenuRootProps extends Omit<
   size?: MenuSize;
 }
 
-export const LoongArkMenuRoot = (props: LoongArkMenuRootProps) => {
+export const LoongArkMenuRoot = /*#__PURE__*/ withAutomaticStyles((props: LoongArkMenuRootProps) => {
   const { size = "md", ...rest } = props;
   return (
     <MenuContext.Provider value={{ size }}>
@@ -62,11 +67,11 @@ export const LoongArkMenuRoot = (props: LoongArkMenuRootProps) => {
       />
     </MenuContext.Provider>
   );
-};
+}, lkAutomaticMenuStyles);
 
 type TriggerProps = ArkMenuTriggerProps & { children?: ReactNode };
 
-export const LoongArkMenuTrigger = forwardRef<HTMLButtonElement, TriggerProps>(
+export const LoongArkMenuTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLButtonElement, TriggerProps>(
   ({ asChild = true, children, ...rest }, ref) => (
     <ArkMenu.Trigger
       {...rest}
@@ -78,7 +83,7 @@ export const LoongArkMenuTrigger = forwardRef<HTMLButtonElement, TriggerProps>(
       {children}
     </ArkMenu.Trigger>
   ),
-);
+), lkAutomaticMenuStyles);
 LoongArkMenuTrigger.displayName = "LoongArkMenuTrigger";
 
 type ContextTriggerProps = ArkMenuContextTriggerProps & {
@@ -113,10 +118,10 @@ export const createMenuContextTrigger = (defaultAsChild = true) =>
       );
     },
   );
-export const LoongArkMenuContextTrigger = createMenuContextTrigger();
+export const LoongArkMenuContextTrigger = /*#__PURE__*/ withAutomaticStyles(createMenuContextTrigger(), lkAutomaticMenuStyles);
 LoongArkMenuContextTrigger.displayName = "LoongArkMenuContextTrigger";
 
-export const LoongArkMenuPositioner = forwardRef<
+export const LoongArkMenuPositioner = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuPositionerProps
 >((props, ref) => (
@@ -128,10 +133,10 @@ export const LoongArkMenuPositioner = forwardRef<
       data-part="positioner"
     />
   </SafePortal>
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuPositioner.displayName = "LoongArkMenuPositioner";
 
-export const LoongArkMenuContent = forwardRef<
+export const LoongArkMenuContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuContentProps
 >((props, ref) => {
@@ -149,17 +154,17 @@ export const LoongArkMenuContent = forwardRef<
       data-size={size}
     />
   );
-});
+}), lkAutomaticMenuStyles);
 LoongArkMenuContent.displayName = "LoongArkMenuContent";
 
-export const LoongArkMenuArrow = forwardRef<HTMLDivElement, ArkMenuArrowProps>(
+export const LoongArkMenuArrow = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLDivElement, ArkMenuArrowProps>(
   (props, ref) => (
     <ArkMenu.Arrow {...props} ref={ref} data-scope="menu" data-part="arrow" />
   ),
-);
+), lkAutomaticMenuStyles);
 LoongArkMenuArrow.displayName = "LoongArkMenuArrow";
 
-export const LoongArkMenuArrowTip = forwardRef<
+export const LoongArkMenuArrowTip = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuArrowTipProps
 >((props, ref) => (
@@ -169,17 +174,17 @@ export const LoongArkMenuArrowTip = forwardRef<
     data-scope="menu"
     data-part="arrow-tip"
   />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuArrowTip.displayName = "LoongArkMenuArrowTip";
 
-export const LoongArkMenuItem = forwardRef<HTMLDivElement, ArkMenuItemProps>(
+export const LoongArkMenuItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLDivElement, ArkMenuItemProps>(
   (props, ref) => (
     <ArkMenu.Item {...props} ref={ref} data-scope="menu" data-part="item" />
   ),
-);
+), lkAutomaticMenuStyles);
 LoongArkMenuItem.displayName = "LoongArkMenuItem";
 
-export const LoongArkMenuTriggerItem = forwardRef<
+export const LoongArkMenuTriggerItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuTriggerItemProps
 >((props, ref) => (
@@ -189,10 +194,10 @@ export const LoongArkMenuTriggerItem = forwardRef<
     data-scope="menu"
     data-part="trigger-item"
   />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuTriggerItem.displayName = "LoongArkMenuTriggerItem";
 
-export const LoongArkMenuCheckboxItem = forwardRef<
+export const LoongArkMenuCheckboxItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuCheckboxItemProps
 >((props, ref) => (
@@ -202,18 +207,18 @@ export const LoongArkMenuCheckboxItem = forwardRef<
     data-scope="menu"
     data-part="item"
   />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuCheckboxItem.displayName = "LoongArkMenuCheckboxItem";
 
-export const LoongArkMenuRadioItem = forwardRef<
+export const LoongArkMenuRadioItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuRadioItemProps
 >((props, ref) => (
   <ArkMenu.RadioItem {...props} ref={ref} data-scope="menu" data-part="item" />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuRadioItem.displayName = "LoongArkMenuRadioItem";
 
-export const LoongArkMenuRadioItemGroup = forwardRef<
+export const LoongArkMenuRadioItemGroup = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuRadioItemGroupProps
 >((props, ref) => (
@@ -223,10 +228,10 @@ export const LoongArkMenuRadioItemGroup = forwardRef<
     data-scope="menu"
     data-part="item-group"
   />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuRadioItemGroup.displayName = "LoongArkMenuRadioItemGroup";
 
-export const LoongArkMenuItemGroup = forwardRef<
+export const LoongArkMenuItemGroup = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuItemGroupProps
 >((props, ref) => (
@@ -236,10 +241,10 @@ export const LoongArkMenuItemGroup = forwardRef<
     data-scope="menu"
     data-part="item-group"
   />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuItemGroup.displayName = "LoongArkMenuItemGroup";
 
-export const LoongArkMenuItemGroupLabel = forwardRef<
+export const LoongArkMenuItemGroupLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuItemGroupLabelProps
 >((props, ref) => (
@@ -249,10 +254,10 @@ export const LoongArkMenuItemGroupLabel = forwardRef<
     data-scope="menu"
     data-part="item-group-label"
   />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuItemGroupLabel.displayName = "LoongArkMenuItemGroupLabel";
 
-export const LoongArkMenuItemText = forwardRef<
+export const LoongArkMenuItemText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuItemTextProps
 >((props, ref) => (
@@ -262,10 +267,10 @@ export const LoongArkMenuItemText = forwardRef<
     data-scope="menu"
     data-part="item-text"
   />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuItemText.displayName = "LoongArkMenuItemText";
 
-export const LoongArkMenuItemIndicator = forwardRef<
+export const LoongArkMenuItemIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuItemIndicatorProps
 >((props, ref) => (
@@ -275,10 +280,10 @@ export const LoongArkMenuItemIndicator = forwardRef<
     data-scope="menu"
     data-part="item-indicator"
   />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuItemIndicator.displayName = "LoongArkMenuItemIndicator";
 
-export const LoongArkMenuIndicator = forwardRef<
+export const LoongArkMenuIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkMenuIndicatorProps
 >((props, ref) => (
@@ -288,10 +293,10 @@ export const LoongArkMenuIndicator = forwardRef<
     data-scope="menu"
     data-part="indicator"
   />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuIndicator.displayName = "LoongArkMenuIndicator";
 
-export const LoongArkMenuSeparator = forwardRef<
+export const LoongArkMenuSeparator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLHRElement,
   ArkMenuSeparatorProps
 >((props, ref) => (
@@ -301,5 +306,5 @@ export const LoongArkMenuSeparator = forwardRef<
     data-scope="menu"
     data-part="separator"
   />
-));
+)), lkAutomaticMenuStyles);
 LoongArkMenuSeparator.displayName = "LoongArkMenuSeparator";

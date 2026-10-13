@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCarouselStyles } from "@loongark/primitives/automatic-styles/carousel";
 import { renderPart } from "../render-part";
 /**
  * Carousel component - Vue wrapper.
@@ -7,7 +10,7 @@ import { defineComponent, h, type PropType } from "vue";
 import { Carousel as ArkCarousel } from "@ark-ui/vue/carousel";
 import type { CarouselSize } from "@loongark/primitives";
 
-export const LoongArkCarouselRoot = defineComponent({
+export const LoongArkCarouselRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselRoot",
   props: {
     size: {
@@ -29,9 +32,9 @@ export const LoongArkCarouselRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);
 
-export const LoongArkCarouselItemGroup = defineComponent({
+export const LoongArkCarouselItemGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -45,9 +48,9 @@ export const LoongArkCarouselItemGroup = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);
 
-export const LoongArkCarouselItem = defineComponent({
+export const LoongArkCarouselItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselItem",
   setup(_, { slots, attrs }) {
     return () =>
@@ -61,9 +64,9 @@ export const LoongArkCarouselItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);
 
-export const LoongArkCarouselControl = defineComponent({
+export const LoongArkCarouselControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselControl",
   setup(_, { slots, attrs }) {
     return () =>
@@ -77,9 +80,9 @@ export const LoongArkCarouselControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);
 
-export const LoongArkCarouselNextTrigger = defineComponent({
+export const LoongArkCarouselNextTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselNextTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -93,9 +96,9 @@ export const LoongArkCarouselNextTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);
 
-export const LoongArkCarouselPrevTrigger = defineComponent({
+export const LoongArkCarouselPrevTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselPrevTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -109,9 +112,9 @@ export const LoongArkCarouselPrevTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);
 
-export const LoongArkCarouselIndicatorGroup = defineComponent({
+export const LoongArkCarouselIndicatorGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselIndicatorGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -125,9 +128,9 @@ export const LoongArkCarouselIndicatorGroup = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);
 
-export const LoongArkCarouselIndicator = defineComponent({
+export const LoongArkCarouselIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -141,9 +144,9 @@ export const LoongArkCarouselIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);
 
-export const LoongArkCarouselAutoplayTrigger = defineComponent({
+export const LoongArkCarouselAutoplayTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselAutoplayTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -157,9 +160,9 @@ export const LoongArkCarouselAutoplayTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);
 
-export const LoongArkCarouselProgressText = defineComponent({
+export const LoongArkCarouselProgressText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselProgressText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -173,9 +176,9 @@ export const LoongArkCarouselProgressText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);
 
-export const LoongArkCarouselAutoplayIndicator = defineComponent({
+export const LoongArkCarouselAutoplayIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselAutoplayIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -189,4 +192,4 @@ export const LoongArkCarouselAutoplayIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticCarouselStyles);

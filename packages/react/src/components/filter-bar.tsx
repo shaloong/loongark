@@ -1,3 +1,10 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticFilterBarStyles } from "@loongark/primitives/automatic-styles/filter-bar";
+import { styles as lkAutomaticFilterChipStyles } from "@loongark/primitives/automatic-styles/filter-chip";
+import { styles as lkAutomaticFilterDividerStyles } from "@loongark/primitives/automatic-styles/filter-divider";
+
+
 import type {
   HTMLAttributes,
   InputHTMLAttributes,
@@ -13,7 +20,7 @@ export interface LoongArkFilterBarProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-export const LoongArkFilterBar = forwardRef<
+export const LoongArkFilterBar = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkFilterBarProps
 >(({ dense, align = "start", ...rest }, ref) => {
@@ -27,7 +34,7 @@ export const LoongArkFilterBar = forwardRef<
       data-align={align === "center" ? "center" : undefined}
     />
   );
-});
+}), lkAutomaticFilterBarStyles);
 
 LoongArkFilterBar.displayName = "LoongArkFilterBar";
 
@@ -35,40 +42,40 @@ export interface LoongArkFilterSectionProps extends HTMLAttributes<HTMLDivElemen
   children?: ReactNode;
 }
 
-export const LoongArkFilterBarSearch = forwardRef<
+export const LoongArkFilterBarSearch = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkFilterSectionProps
 >(({ children, ...rest }, ref) => (
   <ark.div {...rest} ref={ref} data-scope="filter-bar" data-part="search">
     {children}
   </ark.div>
-));
+)), lkAutomaticFilterBarStyles);
 
 LoongArkFilterBarSearch.displayName = "LoongArkFilterBarSearch";
 
-export const LoongArkFilterBarFilters = forwardRef<
+export const LoongArkFilterBarFilters = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkFilterSectionProps
 >(({ children, ...rest }, ref) => (
   <ark.div {...rest} ref={ref} data-scope="filter-bar" data-part="filters">
     {children}
   </ark.div>
-));
+)), lkAutomaticFilterBarStyles);
 
 LoongArkFilterBarFilters.displayName = "LoongArkFilterBarFilters";
 
-export const LoongArkFilterBarActions = forwardRef<
+export const LoongArkFilterBarActions = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkFilterSectionProps
 >(({ children, ...rest }, ref) => (
   <ark.div {...rest} ref={ref} data-scope="filter-bar" data-part="actions">
     {children}
   </ark.div>
-));
+)), lkAutomaticFilterBarStyles);
 
 LoongArkFilterBarActions.displayName = "LoongArkFilterBarActions";
 
-export const LoongArkFilterDivider = forwardRef<
+export const LoongArkFilterDivider = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   React.ComponentPropsWithoutRef<"span">
 >((props, ref) => (
@@ -80,7 +87,7 @@ export const LoongArkFilterDivider = forwardRef<
     data-scope="filter-bar"
     data-part="divider"
   />
-));
+)), lkAutomaticFilterDividerStyles);
 
 LoongArkFilterDivider.displayName = "LoongArkFilterDivider";
 
@@ -90,7 +97,7 @@ export interface LoongArkFilterChipProps extends ButtonHTMLAttributes<HTMLButton
   type?: "button" | "submit" | "reset";
 }
 
-export const LoongArkFilterChip = forwardRef<
+export const LoongArkFilterChip = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkFilterChipProps
 >(({ active = false, type = "button", ...rest }, ref) => (
@@ -103,6 +110,6 @@ export const LoongArkFilterChip = forwardRef<
     data-active={active ? "true" : undefined}
     aria-pressed={active ? "true" : "false"}
   />
-));
+)), lkAutomaticFilterChipStyles);
 
 LoongArkFilterChip.displayName = "LoongArkFilterChip";

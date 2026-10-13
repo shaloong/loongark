@@ -1,0 +1,28 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { SelectClearTrigger as LoongArkSelectClearTrigger } from "../components/select";
+export { SelectContent as LoongArkSelectContent } from "../components/select";
+export { LoongArkSelectContext } from "../components/ark-advanced";
+export { SelectControl as LoongArkSelectControl } from "../components/select";
+export { SelectHiddenSelect as LoongArkSelectHiddenSelect } from "../components/select";
+export { SelectIndicator as LoongArkSelectIndicator } from "../components/select";
+export { SelectItem as LoongArkSelectItem } from "../components/select";
+export { LoongArkSelectItemContext } from "../components/ark-advanced";
+export { SelectItemGroup as LoongArkSelectItemGroup } from "../components/select";
+export { SelectItemGroupLabel as LoongArkSelectItemGroupLabel } from "../components/select";
+export { SelectItemIndicator as LoongArkSelectItemIndicator } from "../components/select";
+export { SelectItemText as LoongArkSelectItemText } from "../components/select";
+export { SelectLabel as LoongArkSelectLabel } from "../components/select";
+export { SelectList as LoongArkSelectList } from "../components/select";
+export { SelectPositioner as LoongArkSelectPositioner } from "../components/select";
+export { SelectRoot as LoongArkSelectRoot } from "../components/select";
+export type { SelectRootProps as LoongArkSelectRootProps } from "../components/select";
+export { LoongArkSelectRootProvider } from "../components/ark-advanced";
+export { SelectTrigger as LoongArkSelectTrigger } from "../components/select";
+export { SelectValueText as LoongArkSelectValueText } from "../components/select";
+export type { SelectRootProps } from "../components/select";
+export type { SelectSize } from "@loongark/primitives";
+export { useSelect } from "@ark-ui/react/select";
+export { useSelectContext } from "@ark-ui/react/select";
+export { useSelectItemContext } from "@ark-ui/react/select";
+export type { UseSelectProps } from "@ark-ui/react/select";
+export type { UseSelectReturn } from "@ark-ui/react/select";

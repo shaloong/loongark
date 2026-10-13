@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
 import { useFieldContext } from "@ark-ui/vue/field";
 import { nativeSelectionFieldDescription } from "@loongark/kit";
 import type { TagsInputHiddenInputProps } from "@ark-ui/vue/tags-input";
@@ -26,7 +29,7 @@ export interface TagsInputInputValueChangeDetails {
   inputValue: string;
 }
 
-export const LoongArkTagsInputRoot = defineComponent({
+export const LoongArkTagsInputRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTagsInputRoot",
   props: {
     size: {
@@ -111,9 +114,9 @@ export const LoongArkTagsInputRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTagsInputStyles);
 
-export const LoongArkTagsInputLabel = defineComponent({
+export const LoongArkTagsInputLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTagsInputLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -127,9 +130,9 @@ export const LoongArkTagsInputLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTagsInputStyles);
 
-export const LoongArkTagsInputControl = defineComponent({
+export const LoongArkTagsInputControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTagsInputControl",
   props: {
     size: {
@@ -161,9 +164,9 @@ export const LoongArkTagsInputControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTagsInputStyles);
 
-export const LoongArkTagsInputInput = defineComponent({
+export const LoongArkTagsInputInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTagsInputInput",
   props: {
     size: {
@@ -212,9 +215,9 @@ export const LoongArkTagsInputInput = defineComponent({
       });
     };
   },
-});
+}), lkAutomaticTagsInputStyles);
 
-export const LoongArkTagsInputItem = defineComponent({
+export const LoongArkTagsInputItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTagsInputItem",
   props: {
     value: {
@@ -241,9 +244,9 @@ export const LoongArkTagsInputItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTagsInputStyles);
 
-export const LoongArkTagsInputItemPreview = defineComponent({
+export const LoongArkTagsInputItemPreview = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTagsInputItemPreview",
   setup(_, { slots, attrs }) {
     return () =>
@@ -257,9 +260,9 @@ export const LoongArkTagsInputItemPreview = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTagsInputStyles);
 
-export const LoongArkTagsInputItemText = defineComponent({
+export const LoongArkTagsInputItemText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTagsInputItemText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -273,9 +276,9 @@ export const LoongArkTagsInputItemText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTagsInputStyles);
 
-export const LoongArkTagsInputItemInput = defineComponent({
+export const LoongArkTagsInputItemInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTagsInputItemInput",
   setup(_, { attrs }) {
     return () =>
@@ -285,9 +288,9 @@ export const LoongArkTagsInputItemInput = defineComponent({
         "data-part": "item-input",
       });
   },
-});
+}), lkAutomaticTagsInputStyles);
 
-export const LoongArkTagsInputItemDeleteTrigger = defineComponent({
+export const LoongArkTagsInputItemDeleteTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTagsInputItemDeleteTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -301,9 +304,9 @@ export const LoongArkTagsInputItemDeleteTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTagsInputStyles);
 
-export const LoongArkTagsInputClearTrigger = defineComponent({
+export const LoongArkTagsInputClearTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTagsInputClearTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -317,10 +320,10 @@ export const LoongArkTagsInputClearTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticTagsInputStyles);
 
 export const LoongArkTagsInputHiddenInput =
-  defineComponent<TagsInputHiddenInputProps>(
+  /*#__PURE__*/ withAutomaticStyles(defineComponent<TagsInputHiddenInputProps>(
     (props, { attrs, slots }) => {
       const api = useTagsInputContext();
 
@@ -345,4 +348,4 @@ export const LoongArkTagsInputHiddenInput =
       props: ["asChild"],
       inheritAttrs: false,
     },
-  );
+  ), lkAutomaticTagsInputStyles);

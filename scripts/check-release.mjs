@@ -54,7 +54,7 @@ for (const packageName of (await readdir("packages")).sort()) {
   );
   assert.ok(
     ![...files.keys()].some((path) =>
-      /(?:node_modules|\.artifacts|storybook-static|test-results|\.tsbuildinfo|\/src\/)/.test(
+      /(?:node_modules|\.artifacts|storybook-static|test-results|\.tsbuildinfo|\/src\/|\/dist\/ssr\/)/.test(
         path,
       ),
     ),

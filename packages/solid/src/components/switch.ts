@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSwitchStyles } from "@loongark/primitives/automatic-styles/switch";
 import { useFieldContext } from "@ark-ui/solid/field";
 import { nativeSelectionFieldDescription } from "@loongark/kit";
 import { nativeSelectionRef } from "../native-selection";
@@ -35,7 +38,7 @@ const defaults: Required<Pick<LoongArkSwitchProps, "size">> = {
   size: "md",
 };
 
-export const LoongArkSwitchRoot: Component<LoongArkSwitchProps> = (props) => {
+export const LoongArkSwitchRoot: Component<LoongArkSwitchProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(defaults, props);
   const [local, rest] = splitProps(merged, ["size"]);
   return ArkSwitch.Root(
@@ -50,9 +53,9 @@ export const LoongArkSwitchRoot: Component<LoongArkSwitchProps> = (props) => {
       },
     }),
   );
-};
+}, lkAutomaticSwitchStyles);
 
-export const LoongArkSwitchControl: Component<LoongArkSwitchProps> = (
+export const LoongArkSwitchControl: Component<LoongArkSwitchProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(defaults, props);
@@ -72,11 +75,11 @@ export const LoongArkSwitchControl: Component<LoongArkSwitchProps> = (
       },
     }),
   );
-};
+}, lkAutomaticSwitchStyles);
 
 export const LoongArkSwitchThumb: Component<
   Partial<SwitchPrimitiveProps> & Omit<JSX.HTMLAttributes<HTMLElement>, "ref">
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps({ size: "md" as SwitchSize }, props);
   const [local, rest] = splitProps(merged, ["size"]);
   return ArkSwitch.Thumb(
@@ -88,12 +91,12 @@ export const LoongArkSwitchThumb: Component<
       },
     }),
   );
-};
+}, lkAutomaticSwitchStyles);
 
 export const LoongArkSwitchLabel: Component<{
   disabled?: boolean;
   children?: JSX.Element;
-}> = (props) => {
+}> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps({ disabled: false }, props);
   const [local, rest] = splitProps(merged, ["disabled"]);
   return ArkSwitch.Label(
@@ -105,9 +108,9 @@ export const LoongArkSwitchLabel: Component<{
       },
     }),
   );
-};
+}, lkAutomaticSwitchStyles);
 
-export const LoongArkSwitchHiddenInput: Component<SwitchHiddenInputProps> = (
+export const LoongArkSwitchHiddenInput: Component<SwitchHiddenInputProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const field = useFieldContext();
@@ -125,11 +128,11 @@ export const LoongArkSwitchHiddenInput: Component<SwitchHiddenInputProps> = (
       },
     }),
   );
-};
-export const LoongArkSwitch = {
+}, lkAutomaticSwitchStyles);
+export const LoongArkSwitch = /*#__PURE__*/ withAutomaticStyles({
   Root: LoongArkSwitchRoot,
   Control: LoongArkSwitchControl,
   Thumb: LoongArkSwitchThumb,
   Label: LoongArkSwitchLabel,
   HiddenInput: LoongArkSwitchHiddenInput,
-};
+}, lkAutomaticSwitchStyles);

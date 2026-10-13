@@ -1,0 +1,25 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { default as LoongArkProgressCircle } from "../components/ProgressCircle.svelte";
+export { default as LoongArkProgressCircleRange } from "../components/ProgressCircleRange.svelte";
+export { default as LoongArkProgressCircleTrack } from "../components/ProgressCircleTrack.svelte";
+export { LoongArkProgressContext } from "../components/ark-advanced";
+export { default as LoongArkProgressLabel } from "../components/ProgressLabel.svelte";
+export { default as LoongArkProgressRange } from "../components/ProgressRange.svelte";
+export { default as LoongArkProgressRoot } from "../components/ProgressRoot.svelte";
+export { LoongArkProgressRootProvider } from "../components/ark-advanced";
+export { default as LoongArkProgressTrack } from "../components/ProgressTrack.svelte";
+export { default as LoongArkProgressValueText } from "../components/ProgressValueText.svelte";
+export { default as LoongArkProgressView } from "../components/ProgressView.svelte";
+export type { ProgressCircleProps } from "../components/progress.d";
+export type { ProgressCircleRangeProps } from "../components/progress.d";
+export type { ProgressCircleTrackProps } from "../components/progress.d";
+export type { ProgressLabelProps } from "../components/progress.d";
+export type { ProgressRangeProps } from "../components/progress.d";
+export type { ProgressRootProps } from "../components/progress.d";
+export type { ProgressTrackProps } from "../components/progress.d";
+export type { ProgressValueTextProps } from "../components/progress.d";
+export type { ProgressViewProps } from "../components/progress.d";
+export { useProgress } from "@ark-ui/svelte/progress";
+export { useProgressContext } from "@ark-ui/svelte/progress";
+export type { UseProgressProps } from "@ark-ui/svelte/progress";
+export type { UseProgressReturn } from "@ark-ui/svelte/progress";

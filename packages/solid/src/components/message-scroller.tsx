@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticMessageScrollerStyles } from "@loongark/primitives/automatic-styles/message-scroller";
 import {
   onCleanup,
   createSignal,
@@ -21,7 +24,7 @@ export type LoongArkMessageScrollerProps = JSX.HTMLAttributes<HTMLDivElement> &
   MessageScrollerOptions & {
     renderItem?: (details: VirtualRenderDetails) => JSX.Element;
   };
-export function LoongArkMessageScroller(props: LoongArkMessageScrollerProps) {
+function LoongArkMessageScroller(props: LoongArkMessageScrollerProps) {
   const [p, attrs] = splitProps(props, [
     "label",
     "jumpLabel",
@@ -131,3 +134,6 @@ export function LoongArkMessageScroller(props: LoongArkMessageScrollerProps) {
     </div>
   );
 }
+
+const lkStyledLoongArkMessageScroller = /*#__PURE__*/ withAutomaticStyles(LoongArkMessageScroller, lkAutomaticMessageScrollerStyles);
+export { lkStyledLoongArkMessageScroller as LoongArkMessageScroller };

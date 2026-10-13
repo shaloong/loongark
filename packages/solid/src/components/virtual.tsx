@@ -1,6 +1,11 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticVirtualGridStyles } from "@loongark/primitives/automatic-styles/virtual-grid";
+import { styles as lkAutomaticVirtualMasonryStyles } from "@loongark/primitives/automatic-styles/virtual-masonry";
 import {
   createSignal,
   createEffect,
+  createRenderEffect,
   createMemo,
   onMount,
   onCleanup,
@@ -21,7 +26,7 @@ import {
 export interface VirtualGridProps extends VirtualGridOptions {
   renderCell(details: VirtualGridCellDetails): JSX.Element;
 }
-export function LoongArkVirtualGrid(props: VirtualGridProps) {
+function LoongArkVirtualGrid(props: VirtualGridProps) {
   const [revision, redraw] = createSignal(0),
     model = untrack(() =>
       createVirtualGrid(props, () => redraw((value) => value + 1)),
@@ -39,7 +44,7 @@ export function LoongArkVirtualGrid(props: VirtualGridProps) {
     return model.cursor;
   });
   let root!: HTMLDivElement;
-  createEffect(() => model.sync({ ...props }));
+  createRenderEffect(() => model.sync({ ...props }));
   onMount(() => {
     const stop = mountVirtualGrid(root, model);
     onCleanup(stop);
@@ -127,7 +132,7 @@ export function LoongArkVirtualGrid(props: VirtualGridProps) {
 export interface VirtualMasonryProps extends VirtualMasonryOptions {
   renderItem(details: VirtualMasonryEntry): JSX.Element;
 }
-export function LoongArkVirtualMasonry(props: VirtualMasonryProps) {
+function LoongArkVirtualMasonry(props: VirtualMasonryProps) {
   const [revision, redraw] = createSignal(0),
     model = untrack(() =>
       createVirtualMasonry(props, () => redraw((value) => value + 1)),
@@ -183,3 +188,8 @@ export function LoongArkVirtualMasonry(props: VirtualMasonryProps) {
     </div>
   );
 }
+
+const lkStyledLoongArkVirtualGrid = /*#__PURE__*/ withAutomaticStyles(LoongArkVirtualGrid, lkAutomaticVirtualGridStyles);
+export { lkStyledLoongArkVirtualGrid as LoongArkVirtualGrid };
+const lkStyledLoongArkVirtualMasonry = /*#__PURE__*/ withAutomaticStyles(LoongArkVirtualMasonry, lkAutomaticVirtualMasonryStyles);
+export { lkStyledLoongArkVirtualMasonry as LoongArkVirtualMasonry };

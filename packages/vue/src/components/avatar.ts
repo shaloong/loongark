@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticAvatarStyles } from "@loongark/primitives/automatic-styles/avatar";
 import { renderPart } from "../render-part";
 /**
  * Avatar component - Vue wrapper.
@@ -7,7 +10,7 @@ import { defineComponent, h, type PropType } from "vue";
 import { Avatar as ArkAvatar } from "@ark-ui/vue/avatar";
 import type { AvatarSize } from "@loongark/primitives";
 
-export const LoongArkAvatarRoot = defineComponent({
+export const LoongArkAvatarRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkAvatarRoot",
   props: {
     size: {
@@ -29,9 +32,9 @@ export const LoongArkAvatarRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticAvatarStyles);
 
-export const LoongArkAvatarImage = defineComponent({
+export const LoongArkAvatarImage = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkAvatarImage",
   setup(_, { slots, attrs }) {
     return () =>
@@ -45,9 +48,9 @@ export const LoongArkAvatarImage = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticAvatarStyles);
 
-export const LoongArkAvatarFallback = defineComponent({
+export const LoongArkAvatarFallback = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkAvatarFallback",
   setup(_, { slots, attrs }) {
     return () =>
@@ -61,4 +64,4 @@ export const LoongArkAvatarFallback = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticAvatarStyles);

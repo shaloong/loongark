@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticBreadcrumbStyles } from "@loongark/primitives/automatic-styles/breadcrumb";
+  registerAutomaticStyles(lkAutomaticBreadcrumbStyles);
+
   import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
   export let as = "a";
   export let variant: LayoutOptions["variant"] = "default";

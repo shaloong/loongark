@@ -289,25 +289,27 @@ for (const mode of ["light", "dark"] as const) {
 
 test("日期范围浮层在桌面与手机尺寸间重新定位", async ({ page }) => {
   for (const mode of ["light", "dark"]) {
-    await page.setViewportSize({ width: 900, height: 650 });
-    await page.goto(
-      `/iframe.html?id=components-date-picker--range&viewMode=story&globals=mode:${mode}`,
-    );
-    await expect(
-      page.locator(`[data-scope="date-picker"][data-part="content"]`),
-    ).toBeVisible();
-    for (const width of [375, 900, 375]) {
-      await page.setViewportSize({ width, height: 812 });
-      await expect
-        .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
-        .toBeLessThanOrEqual(width + 1);
-      await expect
-        .poll(() =>
-          page
-            .locator(`[data-scope="date-picker"][data-part="content"]`)
-            .evaluate((el) => el.getBoundingClientRect().right),
-        )
-        .toBeLessThanOrEqual(width + 1);
+    for (const story of ["basic", "range"]) {
+      await page.setViewportSize({ width: 900, height: 650 });
+      await page.goto(
+        `/iframe.html?id=components-date-picker--${story}&viewMode=story&globals=mode:${mode}`,
+      );
+      await expect(
+        page.locator(`[data-scope="date-picker"][data-part="content"]`),
+      ).toBeVisible();
+      for (const width of [375, 900, 320, 900, 375]) {
+        await page.setViewportSize({ width, height: 812 });
+        await expect
+          .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
+          .toBeLessThanOrEqual(width + 1);
+        await expect
+          .poll(() =>
+            page
+              .locator(`[data-scope="date-picker"][data-part="content"]`)
+              .evaluate((el) => el.getBoundingClientRect().right),
+          )
+          .toBeLessThanOrEqual(width + 1);
+      }
     }
   }
 });

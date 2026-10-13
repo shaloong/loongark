@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSwitchStyles } from "@loongark/primitives/automatic-styles/switch";
+
+
 import { useFieldContext } from "@ark-ui/react/field";
 import { nativeSelectionFieldDescription } from "@loongark/kit";
 import type {
@@ -39,7 +44,7 @@ export interface LoongArkSwitchProps
   onCheckedChange?: ArkSwitchRootProps["onCheckedChange"];
 }
 
-export const LoongArkSwitchRoot = forwardRef<
+export const LoongArkSwitchRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkSwitchProps
 >(({ children, size = "md", disabled, onCheckedChange, ...rest }, ref) =>
@@ -59,11 +64,11 @@ export const LoongArkSwitchRoot = forwardRef<
     ),
     children,
   ),
-);
+), lkAutomaticSwitchStyles);
 
 LoongArkSwitchRoot.displayName = "LoongArkSwitchRoot";
 
-export const LoongArkSwitchControl = forwardRef<
+export const LoongArkSwitchControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkSwitchProps
 >(({ size = "md", disabled, ...rest }, ref) =>
@@ -79,11 +84,11 @@ export const LoongArkSwitchControl = forwardRef<
       "data-disabled": disabled ? "true" : undefined,
     }),
   ),
-);
+), lkAutomaticSwitchStyles);
 
 LoongArkSwitchControl.displayName = "LoongArkSwitchControl";
 
-export const LoongArkSwitchThumb = forwardRef<
+export const LoongArkSwitchThumb = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   Partial<SwitchPrimitiveProps>
 >(({ size = "md", ...rest }, ref) =>
@@ -97,11 +102,11 @@ export const LoongArkSwitchThumb = forwardRef<
       "data-size": size,
     }),
   ),
-);
+), lkAutomaticSwitchStyles);
 
 LoongArkSwitchThumb.displayName = "LoongArkSwitchThumb";
 
-export const LoongArkSwitchLabel = ({
+export const LoongArkSwitchLabel = /*#__PURE__*/ withAutomaticStyles(({
   children,
   disabled,
   ...rest
@@ -118,9 +123,9 @@ export const LoongArkSwitchLabel = ({
       "data-disabled": disabled ? "true" : undefined,
     }),
     children,
-  );
+  ), lkAutomaticSwitchStyles);
 
-export const LoongArkSwitchHiddenInput = forwardRef<
+export const LoongArkSwitchHiddenInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   SwitchHiddenInputProps
 >((props, ref) => {
@@ -136,13 +141,13 @@ export const LoongArkSwitchHiddenInput = forwardRef<
       api.getHiddenInputProps()["aria-invalid"],
     ),
   });
-});
+}), lkAutomaticSwitchStyles);
 LoongArkSwitchHiddenInput.displayName = "LoongArkSwitchHiddenInput";
 
-export const LoongArkSwitch = {
+export const LoongArkSwitch = /*#__PURE__*/ withAutomaticStyles({
   Root: LoongArkSwitchRoot,
   Control: LoongArkSwitchControl,
   Thumb: LoongArkSwitchThumb,
   Label: LoongArkSwitchLabel,
   HiddenInput: LoongArkSwitchHiddenInput,
-};
+}, lkAutomaticSwitchStyles);

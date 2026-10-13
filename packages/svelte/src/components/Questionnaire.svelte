@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticQuestionnaireStyles } from "@loongark/primitives/automatic-styles/questionnaire";
+  registerAutomaticStyles(lkAutomaticQuestionnaireStyles);
+
   import { tick, untrack, onDestroy, onMount } from "svelte";
   import type { HTMLFormAttributes } from "svelte/elements";
   import {

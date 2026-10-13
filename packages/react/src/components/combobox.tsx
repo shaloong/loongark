@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticComboboxStyles } from "@loongark/primitives/automatic-styles/combobox";
+
+
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 /**
@@ -45,7 +50,7 @@ export interface LoongArkComboboxRootProps<T = object> extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkComboboxRoot = forwardRef<
+export const LoongArkComboboxRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkComboboxRootProps
 >(({ size = "md", children, ...props }, ref) => {
@@ -65,11 +70,11 @@ export const LoongArkComboboxRoot = forwardRef<
 }) as (<T>(
   props: LoongArkComboboxRootProps<T> &
     import("react").RefAttributes<HTMLDivElement>,
-) => import("react").ReactElement | null) & { displayName?: string };
+) => import("react").ReactElement | null) & { displayName?: string }, lkAutomaticComboboxStyles);
 
 LoongArkComboboxRoot.displayName = "LoongArkComboboxRoot";
 
-export const LoongArkComboboxLabel = forwardRef<
+export const LoongArkComboboxLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   ArkComboboxLabelProps
 >((props, ref) => {
@@ -81,11 +86,11 @@ export const LoongArkComboboxLabel = forwardRef<
       data-part="label"
     />
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxLabel.displayName = "LoongArkComboboxLabel";
 
-export const LoongArkComboboxControl = forwardRef<
+export const LoongArkComboboxControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkComboboxControlProps
 >((props, ref) => {
@@ -97,11 +102,11 @@ export const LoongArkComboboxControl = forwardRef<
       data-part="control"
     />
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxControl.displayName = "LoongArkComboboxControl";
 
-export const LoongArkComboboxInput = forwardRef<
+export const LoongArkComboboxInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   ArkComboboxInputProps
 >((props, ref) => {
@@ -113,11 +118,11 @@ export const LoongArkComboboxInput = forwardRef<
       data-part="input"
     />
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxInput.displayName = "LoongArkComboboxInput";
 
-export const LoongArkComboboxTrigger = forwardRef<
+export const LoongArkComboboxTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkComboboxTriggerProps
 >((props, ref) => {
@@ -133,11 +138,11 @@ export const LoongArkComboboxTrigger = forwardRef<
       )}
     </ArkCombobox.Trigger>
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxTrigger.displayName = "LoongArkComboboxTrigger";
 
-export const LoongArkComboboxClearTrigger = forwardRef<
+export const LoongArkComboboxClearTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkComboboxClearTriggerProps
 >((props, ref) => {
@@ -149,11 +154,11 @@ export const LoongArkComboboxClearTrigger = forwardRef<
       data-part="clear-trigger"
     />
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxClearTrigger.displayName = "LoongArkComboboxClearTrigger";
 
-export const LoongArkComboboxPositioner = forwardRef<
+export const LoongArkComboboxPositioner = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkComboboxPositionerProps
 >((props, ref) => {
@@ -167,11 +172,11 @@ export const LoongArkComboboxPositioner = forwardRef<
       />
     </SafePortal>
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxPositioner.displayName = "LoongArkComboboxPositioner";
 
-export const LoongArkComboboxContent = forwardRef<
+export const LoongArkComboboxContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkComboboxContentProps
 >((props, ref) => {
@@ -185,11 +190,11 @@ export const LoongArkComboboxContent = forwardRef<
       data-size={size}
     />
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxContent.displayName = "LoongArkComboboxContent";
 
-export const LoongArkComboboxList = forwardRef<
+export const LoongArkComboboxList = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkComboboxListProps
 >((props, ref) => {
@@ -201,11 +206,11 @@ export const LoongArkComboboxList = forwardRef<
       data-part="list"
     />
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxList.displayName = "LoongArkComboboxList";
 
-export const LoongArkComboboxItemGroup = forwardRef<
+export const LoongArkComboboxItemGroup = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkComboboxItemGroupProps
 >((props, ref) => {
@@ -217,11 +222,11 @@ export const LoongArkComboboxItemGroup = forwardRef<
       data-part="item-group"
     />
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxItemGroup.displayName = "LoongArkComboboxItemGroup";
 
-export const LoongArkComboboxItemGroupLabel = forwardRef<
+export const LoongArkComboboxItemGroupLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkComboboxItemGroupLabelProps
 >((props, ref) => {
@@ -233,11 +238,11 @@ export const LoongArkComboboxItemGroupLabel = forwardRef<
       data-part="item-group-label"
     />
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxItemGroupLabel.displayName = "LoongArkComboboxItemGroupLabel";
 
-export const LoongArkComboboxItem = forwardRef<
+export const LoongArkComboboxItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkComboboxItemProps
 >((props, ref) => {
@@ -249,11 +254,11 @@ export const LoongArkComboboxItem = forwardRef<
       data-part="item"
     />
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxItem.displayName = "LoongArkComboboxItem";
 
-export const LoongArkComboboxItemText = forwardRef<
+export const LoongArkComboboxItemText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkComboboxItemTextProps
 >((props, ref) => {
@@ -265,11 +270,11 @@ export const LoongArkComboboxItemText = forwardRef<
       data-part="item-text"
     />
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxItemText.displayName = "LoongArkComboboxItemText";
 
-export const LoongArkComboboxItemIndicator = forwardRef<
+export const LoongArkComboboxItemIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkComboboxItemIndicatorProps
 >(({ children, ...props }, ref) => {
@@ -283,6 +288,6 @@ export const LoongArkComboboxItemIndicator = forwardRef<
       {children || <LoongArkIcon icon={controlIcons.check} size="sm" />}
     </ArkCombobox.ItemIndicator>
   );
-});
+}), lkAutomaticComboboxStyles);
 
 LoongArkComboboxItemIndicator.displayName = "LoongArkComboboxItemIndicator";

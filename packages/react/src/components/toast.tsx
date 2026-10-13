@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticToastStyles } from "@loongark/primitives/automatic-styles/toast";
+
+
 /**
  * Toast component - React wrapper
  * Based on Ark UI Toast, injects data-scope/data-part.
@@ -21,7 +26,7 @@ import {
   type ToastStatus,
 } from "@ark-ui/react/toast";
 
-export const LoongArkToaster = forwardRef<HTMLDivElement, ArkToasterProps>(
+export const LoongArkToaster = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLDivElement, ArkToasterProps>(
   (props, ref) => (
     <ArkToaster
       {...props}
@@ -30,10 +35,10 @@ export const LoongArkToaster = forwardRef<HTMLDivElement, ArkToasterProps>(
       data-part="group"
     />
   )
-);
+), lkAutomaticToastStyles);
 LoongArkToaster.displayName = "LoongArkToaster";
 
-export const LoongArkToastRoot = forwardRef<HTMLDivElement, ArkToastRootProps>(
+export const LoongArkToastRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLDivElement, ArkToastRootProps>(
   (props, ref) => (
     <ArkToast.Root
       {...props}
@@ -42,10 +47,10 @@ export const LoongArkToastRoot = forwardRef<HTMLDivElement, ArkToastRootProps>(
       data-part="root"
     />
   )
-);
+), lkAutomaticToastStyles);
 LoongArkToastRoot.displayName = "LoongArkToastRoot";
 
-export const LoongArkToastTitle = forwardRef<HTMLDivElement, ArkToastTitleProps>(
+export const LoongArkToastTitle = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLDivElement, ArkToastTitleProps>(
   (props, ref) => (
     <ArkToast.Title
       {...props}
@@ -54,10 +59,10 @@ export const LoongArkToastTitle = forwardRef<HTMLDivElement, ArkToastTitleProps>
       data-part="title"
     />
   )
-);
+), lkAutomaticToastStyles);
 LoongArkToastTitle.displayName = "LoongArkToastTitle";
 
-export const LoongArkToastDescription = forwardRef<
+export const LoongArkToastDescription = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkToastDescriptionProps
 >((props, ref) => (
@@ -67,10 +72,10 @@ export const LoongArkToastDescription = forwardRef<
     data-scope="toast"
     data-part="description"
   />
-));
+)), lkAutomaticToastStyles);
 LoongArkToastDescription.displayName = "LoongArkToastDescription";
 
-export const LoongArkToastActionTrigger = forwardRef<
+export const LoongArkToastActionTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkToastActionTriggerProps
 >((props, ref) => (
@@ -80,10 +85,10 @@ export const LoongArkToastActionTrigger = forwardRef<
     data-scope="toast"
     data-part="action-trigger"
   />
-));
+)), lkAutomaticToastStyles);
 LoongArkToastActionTrigger.displayName = "LoongArkToastActionTrigger";
 
-export const LoongArkToastCloseTrigger = forwardRef<
+export const LoongArkToastCloseTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkToastCloseTriggerProps
 >((props, ref) => (
@@ -93,7 +98,7 @@ export const LoongArkToastCloseTrigger = forwardRef<
     data-scope="toast"
     data-part="close-trigger"
   />
-));
+)), lkAutomaticToastStyles);
 LoongArkToastCloseTrigger.displayName = "LoongArkToastCloseTrigger";
 
 export { createToaster };

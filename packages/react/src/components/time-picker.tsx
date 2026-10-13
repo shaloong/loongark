@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTimePickerStyles } from "@loongark/primitives/automatic-styles/time-picker";
+
+
 import { useState, useId, useRef, type HTMLAttributes } from "react";
 import {
   parseTime,
@@ -26,7 +31,7 @@ export type LoongArkTimePickerProps = Omit<
   "defaultValue" | "onChange"
 > &
   TimePickerOptions;
-export function LoongArkTimePicker({
+function LoongArkTimePicker({
   value,
   defaultValue = "",
   name,
@@ -177,3 +182,6 @@ export function LoongArkTimePicker({
     </div>
   );
 }
+
+const lkStyledLoongArkTimePicker = /*#__PURE__*/ withAutomaticStyles(LoongArkTimePicker, lkAutomaticTimePickerStyles);
+export { lkStyledLoongArkTimePicker as LoongArkTimePicker };

@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticMessageScrollerStyles } from "@loongark/primitives/automatic-styles/message-scroller";
+
+
 import React, {
   useEffect,
   useLayoutEffect,
@@ -19,7 +24,7 @@ export type LoongArkMessageScrollerProps = HTMLAttributes<HTMLDivElement> &
   MessageScrollerOptions & {
     renderItem?: (details: VirtualRenderDetails) => ReactNode;
   };
-export function LoongArkMessageScroller({
+function LoongArkMessageScroller({
   label = "Messages",
   jumpLabel = "Jump to latest",
   onAtBottomChange,
@@ -122,3 +127,6 @@ export function LoongArkMessageScroller({
     </div>
   );
 }
+
+const lkStyledLoongArkMessageScroller = /*#__PURE__*/ withAutomaticStyles(LoongArkMessageScroller, lkAutomaticMessageScrollerStyles);
+export { lkStyledLoongArkMessageScroller as LoongArkMessageScroller };

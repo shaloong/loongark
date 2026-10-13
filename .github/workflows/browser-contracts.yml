@@ -2,26 +2,71 @@ name: Browser contracts
 
 on:
   push:
-    branches: [develop, main]
+    branches: [develop]
   pull_request:
-    branches: [develop, main]
+    branches: [develop]
+  schedule:
+    - cron: '17 2 * * 1'
   workflow_dispatch:
+    inputs:
+      full:
+        description: '完整四端示例与 Story 验收；正式发布前运行'
+        type: boolean
+        default: true
 
 permissions:
   contents: read
 
 concurrency:
-  group: "browser-contracts-${{ github.ref }}${{ contains(github.event.head_commit.message, 'CI-Scope: safari') && '-safari' || '' }}"
-  # 常规开发保留完整验收；已确认失败的批次可由带明确修复标记的提交替代。
-  cancel-in-progress: "${{ contains(github.event.head_commit.message, 'CI-Supersedes: failed') }}"
+  # 同仓库 develop 的 main PR 使用该提交已有的 push 检查，避免重复验收。
+  group: browser-contracts-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
+  build:
+    name: Build browser fixtures
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm verify
+      - run: pnpm check:playwright
+      - run: pnpm check:contracts
+      - run: pnpm storybook:build
+      - run: pnpm check:coverage
+      - run: pnpm check:publication
+      - run: pnpm check:svelte
+      - run: node scripts/build-framework-fixtures.mjs
+      - run: node scripts/build-example-fixtures.mjs
+      - name: Package verified fixtures
+        run: |
+          mkdir -p .artifacts
+          node --input-type=module -e 'import fs from "node:fs";fs.writeFileSync(".artifacts/browser-fixtures.json",JSON.stringify({commit:process.env.GITHUB_SHA}));'
+          tar -czf .artifacts/browser-fixtures.tar.gz packages/*/dist tests/consumer-dist storybook-static
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: verified-browser-fixtures
+          path: |
+            .artifacts/browser-fixtures.tar.gz
+            .artifacts/browser-fixtures.json
+          retention-days: 1
+          if-no-files-found: error
+
   engines:
-    # Safari runner/偏好配置的独立复验保留已运行的 Linux 矩阵；产品批次仍运行全部引擎。
-    if: "${{ !contains(github.event.head_commit.message, 'CI-Scope: safari') }}"
+    needs: build
+    if: always()
     name: Four frameworks / ${{ matrix.browser }}
     runs-on: ubuntu-24.04
-    # WebKit 实测四端51.1分钟，之前完整 Story 33.8分钟，另需安装/构建与证据上传。
     timeout-minutes: 120
     strategy:
       fail-fast: false
@@ -32,39 +77,30 @@ jobs:
       BROWSER_PROJECT: ${{ matrix.browser }}
       DESIGN_AUDIT_DIR: .artifacts/browser-audits/${{ matrix.browser }}
     steps:
+      - name: Require successful producer build
+        run: test "${{ needs.build.result }}" = success
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
           version: 10.14.0
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm verify
-      - run: pnpm check:contracts
-      - run: pnpm storybook:build
-      - run: pnpm check:coverage
-      - run: pnpm check:publication
-      - run: pnpm check:svelte
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: verified-browser-fixtures
+          path: .artifacts
+      - name: Verify fixture source and extract
+        run: |
+          node --input-type=module -e 'import fs from "node:fs";if(JSON.parse(fs.readFileSync(".artifacts/browser-fixtures.json")).commit!==process.env.GITHUB_SHA)throw Error("Fixture source mismatch");'
+          tar -xzf .artifacts/browser-fixtures.tar.gz
       - run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
-      - run: node scripts/build-framework-fixtures.mjs
-      - run: node scripts/build-example-fixtures.mjs
-      # 独立用法先验证真实触发器与原生控件，失败时无需等待完整回归。
-      - name: Component basic examples
-        run: node scripts/run-playwright.mjs tests/basic-examples.spec.ts --project=${{ matrix.browser }} --workers=2
-        env:
-          STATIC_DIR: tests/consumer-dist
-          PORT: "6007"
-      # 先捕获已知WebKit宽度失败，避免完整四端运行后才取得诊断；断言保持原样。
-      - if: matrix.browser == 'webkit'
-        run: node scripts/run-playwright.mjs tests/chart-interaction.spec.ts tests/framework-consumers.spec.ts --project=webkit --workers=2 --grep='375|发布消费'
-        env:
-          STATIC_DIR: tests/consumer-dist
-          PORT: "6007"
-      - run: node scripts/run-framework-tests.mjs
+      - name: Four-framework regression
+        run: node scripts/run-framework-tests.mjs --suite=${{ (github.event_name == 'schedule' || inputs.full == true) && 'full' || 'critical' }}
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
@@ -114,6 +150,7 @@ jobs:
           name: browser-captures-${{ matrix.browser }}-react
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*react*.png
+            .artifacts/automatic-styles/${{ matrix.browser }}/**/*react*.png
             .artifacts/advanced-completion/*react*.png
             .artifacts/date-paste/*react*.png
             .artifacts/gap-completion/*react*.png
@@ -131,6 +168,7 @@ jobs:
           name: browser-captures-${{ matrix.browser }}-vue
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*vue*.png
+            .artifacts/automatic-styles/${{ matrix.browser }}/**/*vue*.png
             .artifacts/advanced-completion/*vue*.png
             .artifacts/date-paste/*vue*.png
             .artifacts/gap-completion/*vue*.png
@@ -148,6 +186,7 @@ jobs:
           name: browser-captures-${{ matrix.browser }}-solid
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*solid*.png
+            .artifacts/automatic-styles/${{ matrix.browser }}/**/*solid*.png
             .artifacts/advanced-completion/*solid*.png
             .artifacts/date-paste/*solid*.png
             .artifacts/gap-completion/*solid*.png
@@ -165,6 +204,7 @@ jobs:
           name: browser-captures-${{ matrix.browser }}-svelte
           path: |
             .artifacts/browser-audits/${{ matrix.browser }}/**/*svelte*.png
+            .artifacts/automatic-styles/${{ matrix.browser }}/**/*svelte*.png
             .artifacts/advanced-completion/*svelte*.png
             .artifacts/date-paste/*svelte*.png
             .artifacts/gap-completion/*svelte*.png
@@ -185,6 +225,7 @@ jobs:
           if-no-files-found: ignore
 
       - id: stories
+        if: github.event_name == 'schedule' || inputs.full == true
         run: node scripts/run-playwright.mjs --project=${{ matrix.browser }} --workers=2
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always() && steps.stories.outcome != 'skipped'
@@ -225,29 +266,33 @@ jobs:
           if-no-files-found: ignore
 
   safari:
+    needs: build
+    if: always()
     name: Native Safari / macOS
     runs-on: macos-15
     timeout-minutes: 60
     steps:
+      - name: Require successful producer build
+        run: test "${{ needs.build.result }}" = success
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
           version: 10.14.0
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm verify
-      - run: pnpm check:contracts
-      - run: pnpm storybook:build
-      - run: pnpm check:coverage
-      - run: pnpm check:publication
-      - run: pnpm check:svelte
-      - run: node scripts/build-framework-fixtures.mjs
-      - run: node scripts/build-example-fixtures.mjs
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: verified-browser-fixtures
+          path: .artifacts
+      - name: Verify fixture source and extract
+        run: |
+          node --input-type=module -e 'import fs from "node:fs";if(JSON.parse(fs.readFileSync(".artifacts/browser-fixtures.json")).commit!==process.env.GITHUB_SHA)throw Error("Fixture source mismatch");'
+          tar -xzf .artifacts/browser-fixtures.tar.gz
       # 只配置本次临时 macOS runner；先用无组件的原生控件严格预检，再验收组件。
       - name: Enable native Safari keyboard navigation
         run: |

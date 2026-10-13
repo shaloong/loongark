@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticStepsStyles } from "@loongark/primitives/automatic-styles/steps";
 /**
  * Steps component - Solid wrapper.
  * Uses Ark UI Steps with data attributes for styling.
@@ -28,7 +31,7 @@ export interface LoongArkStepsRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkStepsRoot: Component<LoongArkStepsRootProps> = (props) => {
+export const LoongArkStepsRoot: Component<LoongArkStepsRootProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps(
     { size: "md" as StepsSize, orientation: "horizontal" as StepsOrientation },
     props,
@@ -51,7 +54,7 @@ export const LoongArkStepsRoot: Component<LoongArkStepsRootProps> = (props) => {
       {local.children}
     </ArkSteps.Root>
   );
-};
+}, lkAutomaticStepsStyles);
 
 export interface LoongArkStepsListProps extends Omit<
   ArkStepsListProps,
@@ -60,14 +63,14 @@ export interface LoongArkStepsListProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkStepsList: Component<LoongArkStepsListProps> = (props) => {
+export const LoongArkStepsList: Component<LoongArkStepsListProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkSteps.List {...others} data-scope="steps" data-part="list">
       {local.children}
     </ArkSteps.List>
   );
-};
+}, lkAutomaticStepsStyles);
 
 export interface LoongArkStepsItemProps extends Omit<
   ArkStepsItemProps,
@@ -76,7 +79,7 @@ export interface LoongArkStepsItemProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkStepsItem: Component<LoongArkStepsItemProps> = (props) => {
+export const LoongArkStepsItem: Component<LoongArkStepsItemProps> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkSteps.Item
@@ -90,7 +93,7 @@ export const LoongArkStepsItem: Component<LoongArkStepsItemProps> = (props) => {
       {local.children}
     </ArkSteps.Item>
   );
-};
+}, lkAutomaticStepsStyles);
 
 export interface LoongArkStepsIndicatorProps extends Omit<
   ArkStepsIndicatorProps,
@@ -99,7 +102,7 @@ export interface LoongArkStepsIndicatorProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkStepsIndicator: Component<LoongArkStepsIndicatorProps> = (
+export const LoongArkStepsIndicator: Component<LoongArkStepsIndicatorProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -108,7 +111,7 @@ export const LoongArkStepsIndicator: Component<LoongArkStepsIndicatorProps> = (
       {local.children}
     </ArkSteps.Indicator>
   );
-};
+}, lkAutomaticStepsStyles);
 
 export interface LoongArkStepsSeparatorProps extends Omit<
   ArkStepsSeparatorProps,
@@ -117,7 +120,7 @@ export interface LoongArkStepsSeparatorProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkStepsSeparator: Component<LoongArkStepsSeparatorProps> = (
+export const LoongArkStepsSeparator: Component<LoongArkStepsSeparatorProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -126,7 +129,7 @@ export const LoongArkStepsSeparator: Component<LoongArkStepsSeparatorProps> = (
       {local.children}
     </ArkSteps.Separator>
   );
-};
+}, lkAutomaticStepsStyles);
 
 export interface LoongArkStepsTriggerProps extends Omit<
   ArkStepsTriggerProps,
@@ -135,7 +138,7 @@ export interface LoongArkStepsTriggerProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkStepsTrigger: Component<LoongArkStepsTriggerProps> = (
+export const LoongArkStepsTrigger: Component<LoongArkStepsTriggerProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -144,7 +147,7 @@ export const LoongArkStepsTrigger: Component<LoongArkStepsTriggerProps> = (
       {local.children}
     </ArkSteps.Trigger>
   );
-};
+}, lkAutomaticStepsStyles);
 
 export interface LoongArkStepsContentProps extends Omit<
   ArkStepsContentProps,
@@ -153,7 +156,7 @@ export interface LoongArkStepsContentProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkStepsContent: Component<LoongArkStepsContentProps> = (
+export const LoongArkStepsContent: Component<LoongArkStepsContentProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -162,7 +165,7 @@ export const LoongArkStepsContent: Component<LoongArkStepsContentProps> = (
       {local.children}
     </ArkSteps.Content>
   );
-};
+}, lkAutomaticStepsStyles);
 
 export interface LoongArkStepsCompletedContentProps extends Omit<
   ArkStepsCompletedContentProps,
@@ -173,7 +176,7 @@ export interface LoongArkStepsCompletedContentProps extends Omit<
 
 export const LoongArkStepsCompletedContent: Component<
   LoongArkStepsCompletedContentProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkSteps.CompletedContent
@@ -184,7 +187,7 @@ export const LoongArkStepsCompletedContent: Component<
       {local.children}
     </ArkSteps.CompletedContent>
   );
-};
+}, lkAutomaticStepsStyles);
 
 export interface LoongArkStepsProgressProps extends Omit<
   ArkStepsProgressProps,
@@ -193,7 +196,7 @@ export interface LoongArkStepsProgressProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkStepsProgress: Component<LoongArkStepsProgressProps> = (
+export const LoongArkStepsProgress: Component<LoongArkStepsProgressProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -202,7 +205,7 @@ export const LoongArkStepsProgress: Component<LoongArkStepsProgressProps> = (
       {local.children}
     </ArkSteps.Progress>
   );
-};
+}, lkAutomaticStepsStyles);
 
 export interface LoongArkStepsNextTriggerProps extends Omit<
   ArkStepsNextTriggerProps,
@@ -213,7 +216,7 @@ export interface LoongArkStepsNextTriggerProps extends Omit<
 
 export const LoongArkStepsNextTrigger: Component<
   LoongArkStepsNextTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkSteps.NextTrigger
@@ -224,7 +227,7 @@ export const LoongArkStepsNextTrigger: Component<
       {local.children}
     </ArkSteps.NextTrigger>
   );
-};
+}, lkAutomaticStepsStyles);
 
 export interface LoongArkStepsPrevTriggerProps extends Omit<
   ArkStepsPrevTriggerProps,
@@ -235,7 +238,7 @@ export interface LoongArkStepsPrevTriggerProps extends Omit<
 
 export const LoongArkStepsPrevTrigger: Component<
   LoongArkStepsPrevTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkSteps.PrevTrigger
@@ -246,4 +249,4 @@ export const LoongArkStepsPrevTrigger: Component<
       {local.children}
     </ArkSteps.PrevTrigger>
   );
-};
+}, lkAutomaticStepsStyles);

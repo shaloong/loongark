@@ -1,3 +1,5 @@
+"use client";
+
 import { useId, useRef } from "react";
 import { useMachine, normalizeProps } from "@zag-js/react";
 import { useEnvironmentContext } from "@ark-ui/react/environment";

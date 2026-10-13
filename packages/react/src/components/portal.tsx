@@ -1,3 +1,5 @@
+"use client";
+
 import { dataProps } from "../data-props";
 import { Portal as ArkPortal } from "@ark-ui/react/portal";
 import { createElement } from "react";

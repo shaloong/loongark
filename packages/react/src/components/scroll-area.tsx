@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticScrollAreaStyles } from "@loongark/primitives/automatic-styles/scroll-area";
+
+
 /**
  * Scroll Area component - React wrapper.
  * Uses Ark UI Scroll Area with data attributes for styling.
@@ -32,7 +37,7 @@ export interface LoongArkScrollAreaRootProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkScrollAreaRoot = forwardRef<
+export const LoongArkScrollAreaRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkScrollAreaRootProps
 >(({ size = "md", children, ...props }, ref) => {
@@ -47,11 +52,11 @@ export const LoongArkScrollAreaRoot = forwardRef<
       {children}
     </ScrollArea.Root>
   );
-});
+}), lkAutomaticScrollAreaStyles);
 
 LoongArkScrollAreaRoot.displayName = "LoongArkScrollAreaRoot";
 
-export const LoongArkScrollAreaViewport = forwardRef<
+export const LoongArkScrollAreaViewport = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkScrollAreaViewportProps
 >((props, ref) => {
@@ -64,11 +69,11 @@ export const LoongArkScrollAreaViewport = forwardRef<
       data-part="viewport"
     />
   );
-});
+}), lkAutomaticScrollAreaStyles);
 
 LoongArkScrollAreaViewport.displayName = "LoongArkScrollAreaViewport";
 
-export const LoongArkScrollAreaContent = forwardRef<
+export const LoongArkScrollAreaContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkScrollAreaContentProps
 >((props, ref) => {
@@ -80,11 +85,11 @@ export const LoongArkScrollAreaContent = forwardRef<
       data-part="content"
     />
   );
-});
+}), lkAutomaticScrollAreaStyles);
 
 LoongArkScrollAreaContent.displayName = "LoongArkScrollAreaContent";
 
-export const LoongArkScrollAreaScrollbar = forwardRef<
+export const LoongArkScrollAreaScrollbar = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkScrollAreaScrollbarProps
 >((props, ref) => {
@@ -96,11 +101,11 @@ export const LoongArkScrollAreaScrollbar = forwardRef<
       data-part="scrollbar"
     />
   );
-});
+}), lkAutomaticScrollAreaStyles);
 
 LoongArkScrollAreaScrollbar.displayName = "LoongArkScrollAreaScrollbar";
 
-export const LoongArkScrollAreaThumb = forwardRef<
+export const LoongArkScrollAreaThumb = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkScrollAreaThumbProps
 >((props, ref) => {
@@ -112,11 +117,11 @@ export const LoongArkScrollAreaThumb = forwardRef<
       data-part="thumb"
     />
   );
-});
+}), lkAutomaticScrollAreaStyles);
 
 LoongArkScrollAreaThumb.displayName = "LoongArkScrollAreaThumb";
 
-export const LoongArkScrollAreaCorner = forwardRef<
+export const LoongArkScrollAreaCorner = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkScrollAreaCornerProps
 >((props, ref) => {
@@ -128,6 +133,6 @@ export const LoongArkScrollAreaCorner = forwardRef<
       data-part="corner"
     />
   );
-});
+}), lkAutomaticScrollAreaStyles);
 
 LoongArkScrollAreaCorner.displayName = "LoongArkScrollAreaCorner";

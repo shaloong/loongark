@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticChipStyles } from "@loongark/primitives/automatic-styles/chip";
+  registerAutomaticStyles(lkAutomaticChipStyles);
+
   import {
     layoutAttributes,
     layoutStyles,

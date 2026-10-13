@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPinInputStyles } from "@loongark/primitives/automatic-styles/pin-input";
+
+
 import type {
   HTMLAttributes,
   InputHTMLAttributes,
@@ -33,7 +38,7 @@ export interface LoongArkPinInputRootProps
   autoCapitalize?: string;
 }
 
-export const LoongArkPinInputRoot = forwardRef<
+export const LoongArkPinInputRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkPinInputRootProps
 >(
@@ -64,7 +69,7 @@ export const LoongArkPinInputRoot = forwardRef<
       }),
       children,
     ),
-);
+), lkAutomaticPinInputStyles);
 
 LoongArkPinInputRoot.displayName = "LoongArkPinInputRoot";
 
@@ -72,7 +77,7 @@ export interface LoongArkPinInputControlProps extends Partial<PinInputPrimitiveP
   children?: ReactNode;
 }
 
-export const LoongArkPinInputControl = forwardRef<
+export const LoongArkPinInputControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkPinInputControlProps
 >(({ children, size = "md", ...rest }, ref) =>
@@ -87,7 +92,7 @@ export const LoongArkPinInputControl = forwardRef<
     }),
     children,
   ),
-);
+), lkAutomaticPinInputStyles);
 
 LoongArkPinInputControl.displayName = "LoongArkPinInputControl";
 
@@ -96,7 +101,7 @@ export interface LoongArkPinInputInputProps extends Partial<PinInputPrimitivePro
   autoCapitalize?: boolean;
 }
 
-export const LoongArkPinInputInput = forwardRef<
+export const LoongArkPinInputInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkPinInputInputProps
 >(
@@ -118,7 +123,7 @@ export const LoongArkPinInputInput = forwardRef<
         "data-state": state !== "default" ? state : undefined,
       }),
     ),
-);
+), lkAutomaticPinInputStyles);
 
 LoongArkPinInputInput.displayName = "LoongArkPinInputInput";
 
@@ -126,7 +131,7 @@ export interface LoongArkPinInputLabelProps extends HTMLAttributes<HTMLElement> 
   children?: ReactNode;
 }
 
-export const LoongArkPinInputLabel = ({
+export const LoongArkPinInputLabel = /*#__PURE__*/ withAutomaticStyles(({
   children,
   ...rest
 }: LoongArkPinInputLabelProps) =>
@@ -138,11 +143,11 @@ export const LoongArkPinInputLabel = ({
       "data-part": "label",
     }),
     children,
-  );
+  ), lkAutomaticPinInputStyles);
 
 export const LoongArkPinInputHiddenInput: React.ComponentType<
   React.ComponentPropsWithoutRef<typeof PinInput.HiddenInput>
-> = PinInput.HiddenInput;
+> = /*#__PURE__*/ withAutomaticStyles(PinInput.HiddenInput, lkAutomaticPinInputStyles);
 
 export const LoongArkPinInput: {
   Root: typeof LoongArkPinInputRoot;
@@ -150,10 +155,10 @@ export const LoongArkPinInput: {
   Input: typeof LoongArkPinInputInput;
   Label: typeof LoongArkPinInputLabel;
   HiddenInput: typeof LoongArkPinInputHiddenInput;
-} = {
+} = /*#__PURE__*/ withAutomaticStyles({
   Root: LoongArkPinInputRoot,
   Control: LoongArkPinInputControl,
   Input: LoongArkPinInputInput,
   Label: LoongArkPinInputLabel,
   HiddenInput: LoongArkPinInputHiddenInput,
-};
+}, lkAutomaticPinInputStyles);

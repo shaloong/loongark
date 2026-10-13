@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticProgressStyles } from "@loongark/primitives/automatic-styles/progress";
 /**
  * Progress component - Solid wrapper.
  * Uses Ark UI Progress with data attributes for styling.
@@ -26,7 +29,7 @@ export interface LoongArkProgressRootProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkProgressRoot: Component<LoongArkProgressRootProps> = (
+export const LoongArkProgressRoot: Component<LoongArkProgressRootProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const merged = mergeProps(
@@ -54,7 +57,7 @@ export const LoongArkProgressRoot: Component<LoongArkProgressRootProps> = (
       {local.children}
     </ArkProgress.Root>
   );
-};
+}, lkAutomaticProgressStyles);
 
 export interface LoongArkProgressLabelProps extends Omit<
   ArkProgressLabelProps,
@@ -63,7 +66,7 @@ export interface LoongArkProgressLabelProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkProgressLabel: Component<LoongArkProgressLabelProps> = (
+export const LoongArkProgressLabel: Component<LoongArkProgressLabelProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -72,7 +75,7 @@ export const LoongArkProgressLabel: Component<LoongArkProgressLabelProps> = (
       {local.children}
     </ArkProgress.Label>
   );
-};
+}, lkAutomaticProgressStyles);
 
 export interface LoongArkProgressTrackProps extends Omit<
   ArkProgressTrackProps,
@@ -81,7 +84,7 @@ export interface LoongArkProgressTrackProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkProgressTrack: Component<LoongArkProgressTrackProps> = (
+export const LoongArkProgressTrack: Component<LoongArkProgressTrackProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -90,7 +93,7 @@ export const LoongArkProgressTrack: Component<LoongArkProgressTrackProps> = (
       {local.children}
     </ArkProgress.Track>
   );
-};
+}, lkAutomaticProgressStyles);
 
 export interface LoongArkProgressRangeProps extends Omit<
   ArkProgressRangeProps,
@@ -99,7 +102,7 @@ export interface LoongArkProgressRangeProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkProgressRange: Component<LoongArkProgressRangeProps> = (
+export const LoongArkProgressRange: Component<LoongArkProgressRangeProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -108,7 +111,7 @@ export const LoongArkProgressRange: Component<LoongArkProgressRangeProps> = (
       {local.children}
     </ArkProgress.Range>
   );
-};
+}, lkAutomaticProgressStyles);
 
 export interface LoongArkProgressValueTextProps extends Omit<
   ArkProgressValueTextProps,
@@ -119,7 +122,7 @@ export interface LoongArkProgressValueTextProps extends Omit<
 
 export const LoongArkProgressValueText: Component<
   LoongArkProgressValueTextProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkProgress.ValueText
@@ -130,7 +133,7 @@ export const LoongArkProgressValueText: Component<
       {local.children}
     </ArkProgress.ValueText>
   );
-};
+}, lkAutomaticProgressStyles);
 
 export interface LoongArkProgressViewProps extends Omit<
   ArkProgressViewProps,
@@ -139,7 +142,7 @@ export interface LoongArkProgressViewProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkProgressView: Component<LoongArkProgressViewProps> = (
+export const LoongArkProgressView: Component<LoongArkProgressViewProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -148,7 +151,7 @@ export const LoongArkProgressView: Component<LoongArkProgressViewProps> = (
       {local.children}
     </ArkProgress.View>
   );
-};
+}, lkAutomaticProgressStyles);
 
 export interface LoongArkProgressCircleProps extends Omit<
   ArkProgressCircleProps,
@@ -157,7 +160,7 @@ export interface LoongArkProgressCircleProps extends Omit<
   children?: JSX.Element;
 }
 
-export const LoongArkProgressCircle: Component<LoongArkProgressCircleProps> = (
+export const LoongArkProgressCircle: Component<LoongArkProgressCircleProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -166,7 +169,7 @@ export const LoongArkProgressCircle: Component<LoongArkProgressCircleProps> = (
       {local.children}
     </ArkProgress.Circle>
   );
-};
+}, lkAutomaticProgressStyles);
 
 export interface LoongArkProgressCircleTrackProps extends Omit<
   ArkProgressCircleTrackProps,
@@ -177,7 +180,7 @@ export interface LoongArkProgressCircleTrackProps extends Omit<
 
 export const LoongArkProgressCircleTrack: Component<
   LoongArkProgressCircleTrackProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkProgress.CircleTrack
@@ -188,7 +191,7 @@ export const LoongArkProgressCircleTrack: Component<
       {local.children}
     </ArkProgress.CircleTrack>
   );
-};
+}, lkAutomaticProgressStyles);
 
 export interface LoongArkProgressCircleRangeProps extends Omit<
   ArkProgressCircleRangeProps,
@@ -199,7 +202,7 @@ export interface LoongArkProgressCircleRangeProps extends Omit<
 
 export const LoongArkProgressCircleRange: Component<
   LoongArkProgressCircleRangeProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkProgress.CircleRange
@@ -210,4 +213,4 @@ export const LoongArkProgressCircleRange: Component<
       {local.children}
     </ArkProgress.CircleRange>
   );
-};
+}, lkAutomaticProgressStyles);

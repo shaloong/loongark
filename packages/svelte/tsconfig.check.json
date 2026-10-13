@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "rootDir": "../..",
     "composite": false,
     "noEmit": true,
     "types": ["svelte"],

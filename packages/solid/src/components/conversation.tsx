@@ -1,3 +1,8 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticAttachmentStyles } from "@loongark/primitives/automatic-styles/attachment";
+import { styles as lkAutomaticBubbleStyles } from "@loongark/primitives/automatic-styles/bubble";
+import { styles as lkAutomaticMessageStyles } from "@loongark/primitives/automatic-styles/message";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import {
@@ -28,7 +33,7 @@ export type LoongArkBubbleProps = JSX.HTMLAttributes<HTMLDivElement> &
   BubbleOptions;
 export type LoongArkMessageProps = JSX.HTMLAttributes<HTMLElement> &
   MessageOptions;
-export function LoongArkAttachment(props: LoongArkAttachmentProps) {
+function LoongArkAttachment(props: LoongArkAttachmentProps) {
   const [local, attrs] = splitProps(props, [
     "name",
     "size",
@@ -203,7 +208,7 @@ export function LoongArkAttachment(props: LoongArkAttachmentProps) {
     </div>
   );
 }
-export function LoongArkBubble(props: LoongArkBubbleProps) {
+function LoongArkBubble(props: LoongArkBubbleProps) {
   const [local, attrs] = splitProps(props, ["side", "children"]);
   return (
     <div
@@ -216,7 +221,7 @@ export function LoongArkBubble(props: LoongArkBubbleProps) {
     </div>
   );
 }
-export function LoongArkMessage(props: LoongArkMessageProps) {
+function LoongArkMessage(props: LoongArkMessageProps) {
   const [local, attrs] = splitProps(props, [
     "side",
     "author",
@@ -354,3 +359,10 @@ export function LoongArkMessage(props: LoongArkMessageProps) {
     </article>
   );
 }
+
+const lkStyledLoongArkAttachment = /*#__PURE__*/ withAutomaticStyles(LoongArkAttachment, lkAutomaticAttachmentStyles);
+export { lkStyledLoongArkAttachment as LoongArkAttachment };
+const lkStyledLoongArkBubble = /*#__PURE__*/ withAutomaticStyles(LoongArkBubble, lkAutomaticBubbleStyles);
+export { lkStyledLoongArkBubble as LoongArkBubble };
+const lkStyledLoongArkMessage = /*#__PURE__*/ withAutomaticStyles(LoongArkMessage, lkAutomaticMessageStyles);
+export { lkStyledLoongArkMessage as LoongArkMessage };

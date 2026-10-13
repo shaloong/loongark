@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticToastStyles } from "@loongark/primitives/automatic-styles/toast";
 import { renderPart } from "../render-part";
 /**
  * Toast component - Vue wrapper
@@ -10,7 +13,7 @@ import {
   createToaster,
 } from "@ark-ui/vue/toast";
 
-export const LoongArkToaster = defineComponent({
+export const LoongArkToaster = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkToaster",
   setup(_, { slots, attrs }) {
     return () =>
@@ -24,9 +27,9 @@ export const LoongArkToaster = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticToastStyles);
 
-export const LoongArkToastRoot = defineComponent({
+export const LoongArkToastRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkToastRoot",
   setup(_, { slots, attrs }) {
     return () =>
@@ -40,9 +43,9 @@ export const LoongArkToastRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticToastStyles);
 
-export const LoongArkToastTitle = defineComponent({
+export const LoongArkToastTitle = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkToastTitle",
   setup(_, { slots, attrs }) {
     return () =>
@@ -56,9 +59,9 @@ export const LoongArkToastTitle = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticToastStyles);
 
-export const LoongArkToastDescription = defineComponent({
+export const LoongArkToastDescription = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkToastDescription",
   setup(_, { slots, attrs }) {
     return () =>
@@ -72,9 +75,9 @@ export const LoongArkToastDescription = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticToastStyles);
 
-export const LoongArkToastActionTrigger = defineComponent({
+export const LoongArkToastActionTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkToastActionTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -88,9 +91,9 @@ export const LoongArkToastActionTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticToastStyles);
 
-export const LoongArkToastCloseTrigger = defineComponent({
+export const LoongArkToastCloseTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkToastCloseTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -104,6 +107,6 @@ export const LoongArkToastCloseTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticToastStyles);
 
 export { createToaster };

@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticToolbarStyles } from "@loongark/primitives/automatic-styles/toolbar";
+  registerAutomaticStyles(lkAutomaticToolbarStyles);
   import {
     layoutAttributes,
     layoutStyles,

@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticSpeedDialStyles } from "@loongark/primitives/automatic-styles/speed-dial";
+  registerAutomaticStyles(lkAutomaticSpeedDialStyles);
+
   import { controlIcons } from "@loongark/kit";
   import Icon from "./Icon.svelte";
   import { onMount, untrack } from "svelte";

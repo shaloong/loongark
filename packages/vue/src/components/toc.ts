@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticTocStyles } from "@loongark/primitives/automatic-styles/toc";
 import { defineComponent, computed } from "vue";
 import {
   Toc,
@@ -8,7 +11,7 @@ import {
 import { tocNavId, tocControlKeys } from "@loongark/kit";
 import { useToc } from "./use-toc";
 import { renderPart } from "../render-part";
-export const LoongArkTocRoot = defineComponent<TocRootProps>({
+export const LoongArkTocRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent<TocRootProps>({
   inheritAttrs: false,
   props: tocControlKeys,
   setup(props, context) {
@@ -20,8 +23,8 @@ export const LoongArkTocRoot = defineComponent<TocRootProps>({
         context.slots,
       );
   },
-});
-export const LoongArkTocNav = defineComponent<TocNavProps>({
+}), lkAutomaticTocStyles);
+export const LoongArkTocNav = /*#__PURE__*/ withAutomaticStyles(defineComponent<TocNavProps>({
   inheritAttrs: false,
   setup(_, context) {
     const toc = useTocContext();
@@ -35,4 +38,4 @@ export const LoongArkTocNav = defineComponent<TocNavProps>({
         context.slots,
       );
   },
-});
+}), lkAutomaticTocStyles);

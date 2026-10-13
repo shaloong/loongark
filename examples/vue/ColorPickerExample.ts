@@ -24,7 +24,7 @@ import {
 } from "@loongark/vue";
 import type { ColorPickerSize } from "@loongark/primitives";
 
-const swatches = ["#0EA5E9", "#8B5CF6", "#F97316", "#10B981"];
+const swatches = ["#006EFF", "#0A3565", "#5AC8FA", "#F58220"];
 
 export const ColorPickerExample = defineComponent({
   name: "ColorPickerExample",

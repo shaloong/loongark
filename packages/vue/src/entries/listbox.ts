@@ -1,0 +1,20 @@
+// 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
+export { LoongArkListboxContext } from "../components/ark-advanced";
+export { LoongArkListboxEmpty } from "../components/ark-advanced";
+export { LoongArkListboxInput } from "../components/ark-advanced";
+export { LoongArkListboxItem } from "../components/listbox";
+export { LoongArkListboxItemContext } from "../components/ark-advanced";
+export { LoongArkListboxItemGroup } from "../components/listbox";
+export { LoongArkListboxItemGroupLabel } from "../components/listbox";
+export { LoongArkListboxItemIndicator } from "../components/listbox";
+export { LoongArkListboxItemText } from "../components/listbox";
+export { LoongArkListboxLabel } from "../components/listbox";
+export { LoongArkListboxList } from "../components/listbox";
+export { LoongArkListboxRoot } from "../components/listbox";
+export { LoongArkListboxRootProvider } from "../components/ark-advanced";
+export { LoongArkListboxValueText } from "../components/ark-advanced";
+export { useListbox } from "@ark-ui/vue/listbox";
+export { useListboxContext } from "@ark-ui/vue/listbox";
+export { useListboxItemContext } from "@ark-ui/vue/listbox";
+export type { UseListboxProps } from "@ark-ui/vue/listbox";
+export type { UseListboxReturn } from "@ark-ui/vue/listbox";

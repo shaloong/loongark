@@ -1,0 +1,7 @@
+// 由 scripts/generate-automatic-styles.mjs 生成；规则来源为 shared-styles/layout.ts。
+import { createPrimitive } from "../core";
+export const style = /*#__PURE__*/ createPrimitive(
+  { name: "automatic-layout-button-group", tokens: [], defaults: {} },
+  (theme) => theme.mountStyles("automatic-layout-button-group", "\n[data-scope=button-group] { display:inline-flex; align-items:center; }\n[data-scope=button-group][data-orientation=vertical] { flex-direction:column; }\n[data-scope=button-group]:not([data-orientation=vertical]) > :not(:first-child) { margin-inline-start:calc(-1 * var(--lk-control-borderwidth)); border-start-start-radius:0; border-end-start-radius:0; }\n[data-scope=button-group]:not([data-orientation=vertical]) > :not(:last-child) { border-start-end-radius:0; border-end-end-radius:0; }\n[data-scope=button-group][data-orientation=vertical] > * { width:100%; }\n[data-scope=button-group][data-orientation=vertical] > :not(:first-child) { margin-block-start:calc(-1 * var(--lk-control-borderwidth)); border-start-start-radius:0; border-start-end-radius:0; }\n[data-scope=button-group][data-orientation=vertical] > :not(:last-child) { border-end-start-radius:0; border-end-end-radius:0; }\n@keyframes lk-pulse { 50% { opacity:.5; } }\n@keyframes lk-spin { to { transform:rotate(360deg); } }\n@keyframes lk-sheet-in { from { opacity:0; transform:translateX(100%); } to { opacity:1; transform:translateX(0); } }\n@keyframes lk-sheet-out { to { opacity:0; transform:translateX(100%); visibility:hidden; } }"),
+  undefined,
+);

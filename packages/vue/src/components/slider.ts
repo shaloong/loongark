@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSliderStyles } from "@loongark/primitives/automatic-styles/slider";
 import type { SliderRootProps as NativeSliderRootProps } from "@ark-ui/vue/slider";
 import { renderPart } from "../render-part";
 /**
@@ -22,7 +25,7 @@ export interface SliderFocusChangeDetails {
   value: number[];
 }
 
-export const LoongArkSliderRoot = defineComponent({
+export const LoongArkSliderRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderRoot",
   props: {
     size: {
@@ -115,9 +118,9 @@ export const LoongArkSliderRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSliderStyles);
 
-export const LoongArkSliderLabel = defineComponent({
+export const LoongArkSliderLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -131,9 +134,9 @@ export const LoongArkSliderLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSliderStyles);
 
-export const LoongArkSliderValueText = defineComponent({
+export const LoongArkSliderValueText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderValueText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -147,9 +150,9 @@ export const LoongArkSliderValueText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSliderStyles);
 
-export const LoongArkSliderControl = defineComponent({
+export const LoongArkSliderControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderControl",
   setup(_, { slots, attrs }) {
     return () =>
@@ -163,9 +166,9 @@ export const LoongArkSliderControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSliderStyles);
 
-export const LoongArkSliderTrack = defineComponent({
+export const LoongArkSliderTrack = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderTrack",
   setup(_, { slots, attrs }) {
     return () =>
@@ -179,9 +182,9 @@ export const LoongArkSliderTrack = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSliderStyles);
 
-export const LoongArkSliderRange = defineComponent({
+export const LoongArkSliderRange = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderRange",
   setup(_, { slots, attrs }) {
     return () =>
@@ -195,9 +198,9 @@ export const LoongArkSliderRange = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSliderStyles);
 
-export const LoongArkSliderThumb = defineComponent({
+export const LoongArkSliderThumb = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderThumb",
   props: {
     index: {
@@ -222,9 +225,9 @@ export const LoongArkSliderThumb = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSliderStyles);
 
-export const LoongArkSliderMarkerGroup = defineComponent({
+export const LoongArkSliderMarkerGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderMarkerGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -238,9 +241,9 @@ export const LoongArkSliderMarkerGroup = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSliderStyles);
 
-export const LoongArkSliderMarker = defineComponent({
+export const LoongArkSliderMarker = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderMarker",
   props: {
     value: {
@@ -261,9 +264,9 @@ export const LoongArkSliderMarker = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSliderStyles);
 
-export const LoongArkSliderDraggingIndicator = defineComponent({
+export const LoongArkSliderDraggingIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderDraggingIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -277,9 +280,9 @@ export const LoongArkSliderDraggingIndicator = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSliderStyles);
 
-export const LoongArkSliderHiddenInput = defineComponent({
+export const LoongArkSliderHiddenInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSliderHiddenInput",
   setup(_, { attrs }) {
     return () =>
@@ -289,4 +292,4 @@ export const LoongArkSliderHiddenInput = defineComponent({
         "data-part": "hidden-input",
       });
   },
-});
+}), lkAutomaticSliderStyles);

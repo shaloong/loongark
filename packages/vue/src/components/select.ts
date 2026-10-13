@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSelectStyles } from "@loongark/primitives/automatic-styles/select";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import type { CollectionItem } from "@ark-ui/vue/collection";
@@ -38,7 +41,7 @@ const selectSizeKey = Symbol("loongark-select-size");
 /**
  * Select Root 组件
  */
-export const LoongArkSelectRoot = defineComponent({
+export const LoongArkSelectRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectRoot",
   props: {
     size: {
@@ -164,12 +167,12 @@ export const LoongArkSelectRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select Label 组件
  */
-export const LoongArkSelectLabel = defineComponent({
+export const LoongArkSelectLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -183,12 +186,12 @@ export const LoongArkSelectLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select Control 组件
  */
-export const LoongArkSelectControl = defineComponent({
+export const LoongArkSelectControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectControl",
   setup(_, { slots, attrs }) {
     return () =>
@@ -202,12 +205,12 @@ export const LoongArkSelectControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select Trigger 组件
  */
-export const LoongArkSelectTrigger = defineComponent({
+export const LoongArkSelectTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -221,12 +224,12 @@ export const LoongArkSelectTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select ValueText 组件
  */
-export const LoongArkSelectValueText = defineComponent({
+export const LoongArkSelectValueText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectValueText",
   props: {
     placeholder: {
@@ -246,12 +249,12 @@ export const LoongArkSelectValueText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select Indicator 组件
  */
-export const LoongArkSelectIndicator = defineComponent({
+export const LoongArkSelectIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -271,12 +274,12 @@ export const LoongArkSelectIndicator = defineComponent({
         },
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select ClearTrigger 组件
  */
-export const LoongArkSelectClearTrigger = defineComponent({
+export const LoongArkSelectClearTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectClearTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -290,12 +293,12 @@ export const LoongArkSelectClearTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select Positioner 组件
  */
-export const LoongArkSelectPositioner = defineComponent({
+export const LoongArkSelectPositioner = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectPositioner",
   setup(_, { slots, attrs }) {
     return () =>
@@ -309,12 +312,12 @@ export const LoongArkSelectPositioner = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select Content 组件
  */
-export const LoongArkSelectContent = defineComponent({
+export const LoongArkSelectContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectContent",
   setup(_, { slots, attrs }) {
     const size = inject(selectSizeKey, { value: "md" as SelectSize });
@@ -330,12 +333,12 @@ export const LoongArkSelectContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select List 组件
  */
-export const LoongArkSelectList = defineComponent({
+export const LoongArkSelectList = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectList",
   setup(_, { slots, attrs }) {
     return () =>
@@ -349,12 +352,12 @@ export const LoongArkSelectList = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select ItemGroup 组件
  */
-export const LoongArkSelectItemGroup = defineComponent({
+export const LoongArkSelectItemGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -368,12 +371,12 @@ export const LoongArkSelectItemGroup = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select ItemGroupLabel 组件
  */
-export const LoongArkSelectItemGroupLabel = defineComponent({
+export const LoongArkSelectItemGroupLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectItemGroupLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -387,12 +390,12 @@ export const LoongArkSelectItemGroupLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select Item 组件
  */
-export const LoongArkSelectItem = defineComponent({
+export const LoongArkSelectItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectItem",
   props: {
     item: {
@@ -417,12 +420,12 @@ export const LoongArkSelectItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select ItemText 组件
  */
-export const LoongArkSelectItemText = defineComponent({
+export const LoongArkSelectItemText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectItemText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -436,12 +439,12 @@ export const LoongArkSelectItemText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select ItemIndicator 组件
  */
-export const LoongArkSelectItemIndicator = defineComponent({
+export const LoongArkSelectItemIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -459,12 +462,12 @@ export const LoongArkSelectItemIndicator = defineComponent({
         },
       );
   },
-});
+}), lkAutomaticSelectStyles);
 
 /**
  * Select HiddenSelect 组件
  */
-export const LoongArkSelectHiddenSelect = defineComponent({
+export const LoongArkSelectHiddenSelect = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSelectHiddenSelect",
   setup(_, { attrs }) {
     const select = useSelectContext();
@@ -487,4 +490,4 @@ export const LoongArkSelectHiddenSelect = defineComponent({
         "data-part": "hidden-select",
       });
   },
-});
+}), lkAutomaticSelectStyles);

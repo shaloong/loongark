@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticColorPickerStyles } from "@loongark/primitives/automatic-styles/color-picker";
 /**
  * Color Picker component - Solid wrapper.
  * Uses Ark UI Color Picker with data attributes for styling.
@@ -45,7 +48,7 @@ export interface LoongArkColorPickerRootProps extends Omit<
 
 export const LoongArkColorPickerRoot: Component<
   LoongArkColorPickerRootProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const merged = mergeProps({ size: "md" as ColorPickerSize }, props);
   const [local, others] = splitProps(merged, ["children", "size"]);
 
@@ -59,7 +62,7 @@ export const LoongArkColorPickerRoot: Component<
       {local.children}
     </ArkColorPicker.Root>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerLabelProps extends Omit<
   ArkColorPickerLabelProps,
@@ -70,7 +73,7 @@ export interface LoongArkColorPickerLabelProps extends Omit<
 
 export const LoongArkColorPickerLabel: Component<
   LoongArkColorPickerLabelProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.Label
@@ -81,7 +84,7 @@ export const LoongArkColorPickerLabel: Component<
       {local.children}
     </ArkColorPicker.Label>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerControlProps extends Omit<
   ArkColorPickerControlProps,
@@ -92,7 +95,7 @@ export interface LoongArkColorPickerControlProps extends Omit<
 
 export const LoongArkColorPickerControl: Component<
   LoongArkColorPickerControlProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.Control
@@ -103,7 +106,7 @@ export const LoongArkColorPickerControl: Component<
       {local.children}
     </ArkColorPicker.Control>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerTriggerProps extends Omit<
   ArkColorPickerTriggerProps,
@@ -114,7 +117,7 @@ export interface LoongArkColorPickerTriggerProps extends Omit<
 
 export const LoongArkColorPickerTrigger: Component<
   LoongArkColorPickerTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.Trigger
@@ -125,7 +128,7 @@ export const LoongArkColorPickerTrigger: Component<
       {local.children}
     </ArkColorPicker.Trigger>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerPositionerProps extends Omit<
   ArkColorPickerPositionerProps,
@@ -136,7 +139,7 @@ export interface LoongArkColorPickerPositionerProps extends Omit<
 
 export const LoongArkColorPickerPositioner: Component<
   LoongArkColorPickerPositionerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.Positioner
@@ -147,7 +150,7 @@ export const LoongArkColorPickerPositioner: Component<
       {local.children}
     </ArkColorPicker.Positioner>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerContentProps extends Omit<
   ArkColorPickerContentProps,
@@ -158,7 +161,7 @@ export interface LoongArkColorPickerContentProps extends Omit<
 
 export const LoongArkColorPickerContent: Component<
   LoongArkColorPickerContentProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.Content
@@ -169,7 +172,7 @@ export const LoongArkColorPickerContent: Component<
       {local.children}
     </ArkColorPicker.Content>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerViewProps extends Omit<
   ArkColorPickerViewProps,
@@ -180,14 +183,14 @@ export interface LoongArkColorPickerViewProps extends Omit<
 
 export const LoongArkColorPickerView: Component<
   LoongArkColorPickerViewProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.View {...others} data-scope="color-picker" data-part="view">
       {local.children}
     </ArkColorPicker.View>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerAreaProps extends Omit<
   ArkColorPickerAreaProps,
@@ -198,14 +201,14 @@ export interface LoongArkColorPickerAreaProps extends Omit<
 
 export const LoongArkColorPickerArea: Component<
   LoongArkColorPickerAreaProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.Area {...others} data-scope="color-picker" data-part="area">
       {local.children}
     </ArkColorPicker.Area>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerAreaBackgroundProps extends Omit<
   ArkColorPickerAreaBackgroundProps,
@@ -216,7 +219,7 @@ export interface LoongArkColorPickerAreaBackgroundProps extends Omit<
 
 export const LoongArkColorPickerAreaBackground: Component<
   LoongArkColorPickerAreaBackgroundProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.AreaBackground
@@ -227,7 +230,7 @@ export const LoongArkColorPickerAreaBackground: Component<
       {local.children}
     </ArkColorPicker.AreaBackground>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerAreaThumbProps extends Omit<
   ArkColorPickerAreaThumbProps,
@@ -238,7 +241,7 @@ export interface LoongArkColorPickerAreaThumbProps extends Omit<
 
 export const LoongArkColorPickerAreaThumb: Component<
   LoongArkColorPickerAreaThumbProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.AreaThumb
@@ -249,7 +252,7 @@ export const LoongArkColorPickerAreaThumb: Component<
       {local.children}
     </ArkColorPicker.AreaThumb>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerChannelSliderProps extends Omit<
   ArkColorPickerChannelSliderProps,
@@ -260,7 +263,7 @@ export interface LoongArkColorPickerChannelSliderProps extends Omit<
 
 export const LoongArkColorPickerChannelSlider: Component<
   LoongArkColorPickerChannelSliderProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.ChannelSlider
@@ -271,7 +274,7 @@ export const LoongArkColorPickerChannelSlider: Component<
       {local.children}
     </ArkColorPicker.ChannelSlider>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerChannelSliderLabelProps extends Omit<
   ArkColorPickerChannelSliderLabelProps,
@@ -282,7 +285,7 @@ export interface LoongArkColorPickerChannelSliderLabelProps extends Omit<
 
 export const LoongArkColorPickerChannelSliderLabel: Component<
   LoongArkColorPickerChannelSliderLabelProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.ChannelSliderLabel
@@ -293,7 +296,7 @@ export const LoongArkColorPickerChannelSliderLabel: Component<
       {local.children}
     </ArkColorPicker.ChannelSliderLabel>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerChannelSliderTrackProps extends Omit<
   ArkColorPickerChannelSliderTrackProps,
@@ -304,7 +307,7 @@ export interface LoongArkColorPickerChannelSliderTrackProps extends Omit<
 
 export const LoongArkColorPickerChannelSliderTrack: Component<
   LoongArkColorPickerChannelSliderTrackProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.ChannelSliderTrack
@@ -315,7 +318,7 @@ export const LoongArkColorPickerChannelSliderTrack: Component<
       {local.children}
     </ArkColorPicker.ChannelSliderTrack>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerChannelSliderThumbProps extends Omit<
   ArkColorPickerChannelSliderThumbProps,
@@ -326,7 +329,7 @@ export interface LoongArkColorPickerChannelSliderThumbProps extends Omit<
 
 export const LoongArkColorPickerChannelSliderThumb: Component<
   LoongArkColorPickerChannelSliderThumbProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.ChannelSliderThumb
@@ -337,7 +340,7 @@ export const LoongArkColorPickerChannelSliderThumb: Component<
       {local.children}
     </ArkColorPicker.ChannelSliderThumb>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerChannelSliderValueTextProps extends Omit<
   ArkColorPickerChannelSliderValueTextProps,
@@ -348,7 +351,7 @@ export interface LoongArkColorPickerChannelSliderValueTextProps extends Omit<
 
 export const LoongArkColorPickerChannelSliderValueText: Component<
   LoongArkColorPickerChannelSliderValueTextProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.ChannelSliderValueText
@@ -359,7 +362,7 @@ export const LoongArkColorPickerChannelSliderValueText: Component<
       {local.children}
     </ArkColorPicker.ChannelSliderValueText>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerChannelInputProps extends Omit<
   ArkColorPickerChannelInputProps,
@@ -368,7 +371,7 @@ export interface LoongArkColorPickerChannelInputProps extends Omit<
 
 export const LoongArkColorPickerChannelInput: Component<
   LoongArkColorPickerChannelInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkColorPicker.ChannelInput
       {...props}
@@ -376,7 +379,7 @@ export const LoongArkColorPickerChannelInput: Component<
       data-part="channel-input"
     />
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerSwatchGroupProps extends Omit<
   ArkColorPickerSwatchGroupProps,
@@ -387,7 +390,7 @@ export interface LoongArkColorPickerSwatchGroupProps extends Omit<
 
 export const LoongArkColorPickerSwatchGroup: Component<
   LoongArkColorPickerSwatchGroupProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.SwatchGroup
@@ -398,7 +401,7 @@ export const LoongArkColorPickerSwatchGroup: Component<
       {local.children}
     </ArkColorPicker.SwatchGroup>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerSwatchTriggerProps extends Omit<
   ArkColorPickerSwatchTriggerProps,
@@ -409,7 +412,7 @@ export interface LoongArkColorPickerSwatchTriggerProps extends Omit<
 
 export const LoongArkColorPickerSwatchTrigger: Component<
   LoongArkColorPickerSwatchTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.SwatchTrigger
@@ -420,7 +423,7 @@ export const LoongArkColorPickerSwatchTrigger: Component<
       {local.children}
     </ArkColorPicker.SwatchTrigger>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerSwatchIndicatorProps extends Omit<
   ArkColorPickerSwatchIndicatorProps,
@@ -431,7 +434,7 @@ export interface LoongArkColorPickerSwatchIndicatorProps extends Omit<
 
 export const LoongArkColorPickerSwatchIndicator: Component<
   LoongArkColorPickerSwatchIndicatorProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.SwatchIndicator
@@ -442,7 +445,7 @@ export const LoongArkColorPickerSwatchIndicator: Component<
       {local.children}
     </ArkColorPicker.SwatchIndicator>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerSwatchProps extends Omit<
   ArkColorPickerSwatchProps,
@@ -453,7 +456,7 @@ export interface LoongArkColorPickerSwatchProps extends Omit<
 
 export const LoongArkColorPickerSwatch: Component<
   LoongArkColorPickerSwatchProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.Swatch
@@ -464,7 +467,7 @@ export const LoongArkColorPickerSwatch: Component<
       {local.children}
     </ArkColorPicker.Swatch>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerTransparencyGridProps extends Omit<
   ArkColorPickerTransparencyGridProps,
@@ -475,7 +478,7 @@ export interface LoongArkColorPickerTransparencyGridProps extends Omit<
 
 export const LoongArkColorPickerTransparencyGrid: Component<
   LoongArkColorPickerTransparencyGridProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.TransparencyGrid
@@ -486,7 +489,7 @@ export const LoongArkColorPickerTransparencyGrid: Component<
       {local.children}
     </ArkColorPicker.TransparencyGrid>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerValueTextProps extends Omit<
   ArkColorPickerValueTextProps,
@@ -497,7 +500,7 @@ export interface LoongArkColorPickerValueTextProps extends Omit<
 
 export const LoongArkColorPickerValueText: Component<
   LoongArkColorPickerValueTextProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.ValueText
@@ -508,7 +511,7 @@ export const LoongArkColorPickerValueText: Component<
       {local.children}
     </ArkColorPicker.ValueText>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerValueSwatchProps extends Omit<
   ArkColorPickerValueSwatchProps,
@@ -519,7 +522,7 @@ export interface LoongArkColorPickerValueSwatchProps extends Omit<
 
 export const LoongArkColorPickerValueSwatch: Component<
   LoongArkColorPickerValueSwatchProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.ValueSwatch
@@ -530,7 +533,7 @@ export const LoongArkColorPickerValueSwatch: Component<
       {local.children}
     </ArkColorPicker.ValueSwatch>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerEyeDropperTriggerProps extends Omit<
   ArkColorPickerEyeDropperTriggerProps,
@@ -541,7 +544,7 @@ export interface LoongArkColorPickerEyeDropperTriggerProps extends Omit<
 
 export const LoongArkColorPickerEyeDropperTrigger: Component<
   LoongArkColorPickerEyeDropperTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.EyeDropperTrigger
@@ -552,7 +555,7 @@ export const LoongArkColorPickerEyeDropperTrigger: Component<
       {local.children}
     </ArkColorPicker.EyeDropperTrigger>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerFormatTriggerProps extends Omit<
   ArkColorPickerFormatTriggerProps,
@@ -563,7 +566,7 @@ export interface LoongArkColorPickerFormatTriggerProps extends Omit<
 
 export const LoongArkColorPickerFormatTrigger: Component<
   LoongArkColorPickerFormatTriggerProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.FormatTrigger
@@ -574,7 +577,7 @@ export const LoongArkColorPickerFormatTrigger: Component<
       {local.children}
     </ArkColorPicker.FormatTrigger>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerFormatSelectProps extends Omit<
   ArkColorPickerFormatSelectProps,
@@ -585,7 +588,7 @@ export interface LoongArkColorPickerFormatSelectProps extends Omit<
 
 export const LoongArkColorPickerFormatSelect: Component<
   LoongArkColorPickerFormatSelectProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <ArkColorPicker.FormatSelect
@@ -596,7 +599,7 @@ export const LoongArkColorPickerFormatSelect: Component<
       {local.children}
     </ArkColorPicker.FormatSelect>
   );
-};
+}, lkAutomaticColorPickerStyles);
 
 export interface LoongArkColorPickerHiddenInputProps extends Omit<
   ArkColorPickerHiddenInputProps,
@@ -605,7 +608,7 @@ export interface LoongArkColorPickerHiddenInputProps extends Omit<
 
 export const LoongArkColorPickerHiddenInput: Component<
   LoongArkColorPickerHiddenInputProps
-> = (props) => {
+> = /*#__PURE__*/ withAutomaticStyles((props) => {
   return (
     <ArkColorPicker.HiddenInput
       {...props}
@@ -613,4 +616,4 @@ export const LoongArkColorPickerHiddenInput: Component<
       data-part="hidden-input"
     />
   );
-};
+}, lkAutomaticColorPickerStyles);

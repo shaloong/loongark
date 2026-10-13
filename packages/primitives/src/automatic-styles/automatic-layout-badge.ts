@@ -1,0 +1,7 @@
+// 由 scripts/generate-automatic-styles.mjs 生成；规则来源为 shared-styles/layout.ts。
+import { createPrimitive } from "../core";
+export const style = /*#__PURE__*/ createPrimitive(
+  { name: "automatic-layout-badge", tokens: [], defaults: {} },
+  (theme) => theme.mountStyles("automatic-layout-badge", "\n[data-scope=badge] { display:inline-flex; align-items:center; gap:var(--lk-space-component-xs); border:var(--lk-control-borderwidth) solid transparent; border-radius:var(--lk-radius-pill); padding:var(--lk-control-focuswidth) var(--lk-space-component-sm); font-size:var(--lk-typography-fontsize-xs); font-weight:600; line-height:var(--lk-space-component-md); background:var(--lk-color-semantic-primary); color:var(--lk-color-semantic-primaryforeground); white-space:nowrap; }\n[data-scope=badge][data-variant=secondary] { background:var(--lk-color-semantic-secondary); color:var(--lk-color-semantic-secondaryforeground); }\n[data-scope=badge][data-variant=destructive] { background:var(--lk-color-semantic-destructive); color:var(--lk-color-semantic-destructiveforeground); }\n[data-scope=badge][data-variant=outline] { border-color:var(--lk-color-semantic-border); color:var(--lk-color-semantic-foreground); background:transparent; }\n@keyframes lk-pulse { 50% { opacity:.5; } }\n@keyframes lk-spin { to { transform:rotate(360deg); } }\n@keyframes lk-sheet-in { from { opacity:0; transform:translateX(100%); } to { opacity:1; transform:translateX(0); } }\n@keyframes lk-sheet-out { to { opacity:0; transform:translateX(100%); visibility:hidden; } }"),
+  undefined,
+);

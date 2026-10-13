@@ -1,0 +1,1 @@
+import {mount} from 'svelte';import App from './App.svelte';const target=document.getElementById('app');if(!target)throw Error('缺少挂载节点');mount(App,{target});

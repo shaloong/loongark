@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticPinInputStyles } from "@loongark/primitives/automatic-styles/pin-input";
 import { renderPart } from "../render-part";
 import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
@@ -22,7 +25,7 @@ const boolProp = (defaultValue: boolean | undefined = false) => ({
   default: defaultValue,
 });
 
-export const LoongArkPinInputRoot = defineComponent({
+export const LoongArkPinInputRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPinInputRoot",
   props: {
     size: sizeProp,
@@ -76,9 +79,9 @@ export const LoongArkPinInputRoot = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticPinInputStyles);
 
-export const LoongArkPinInputControl = defineComponent({
+export const LoongArkPinInputControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPinInputControl",
   props: {
     size: sizeProp,
@@ -96,9 +99,9 @@ export const LoongArkPinInputControl = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticPinInputStyles);
 
-export const LoongArkPinInputInput = defineComponent({
+export const LoongArkPinInputInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPinInputInput",
   props: {
     size: sizeProp,
@@ -120,9 +123,9 @@ export const LoongArkPinInputInput = defineComponent({
         "data-state": props.state !== "default" ? props.state : undefined,
       });
   },
-});
+}), lkAutomaticPinInputStyles);
 
-export const LoongArkPinInputLabel = defineComponent({
+export const LoongArkPinInputLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPinInputLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -136,10 +139,10 @@ export const LoongArkPinInputLabel = defineComponent({
         slots.default ? slots.default() : undefined,
       );
   },
-});
+}), lkAutomaticPinInputStyles);
 
 export const LoongArkPinInputHiddenInput: typeof ArkPinInput.HiddenInput =
-  ArkPinInput.HiddenInput;
+  /*#__PURE__*/ withAutomaticStyles(ArkPinInput.HiddenInput, lkAutomaticPinInputStyles);
 
 export const LoongArkPinInput: {
   Root: typeof LoongArkPinInputRoot;
@@ -147,10 +150,10 @@ export const LoongArkPinInput: {
   Input: typeof LoongArkPinInputInput;
   Label: typeof LoongArkPinInputLabel;
   HiddenInput: typeof LoongArkPinInputHiddenInput;
-} = {
+} = /*#__PURE__*/ withAutomaticStyles({
   Root: LoongArkPinInputRoot,
   Control: LoongArkPinInputControl,
   Input: LoongArkPinInputInput,
   Label: LoongArkPinInputLabel,
   HiddenInput: LoongArkPinInputHiddenInput,
-};
+}, lkAutomaticPinInputStyles);

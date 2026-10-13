@@ -1,3 +1,5 @@
+"use client";
+
 import { createElement, forwardRef, type ComponentPropsWithoutRef } from "react";
 import { Drawer } from "@ark-ui/react/drawer";
 import { mergeProps } from "@zag-js/react";

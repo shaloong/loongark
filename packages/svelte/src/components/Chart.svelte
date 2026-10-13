@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticChartStyles } from "@loongark/primitives/automatic-styles/chart";
+  registerAutomaticStyles(lkAutomaticChartStyles);
+
   import {
     renderChartMarkup,
     mountChartControls,

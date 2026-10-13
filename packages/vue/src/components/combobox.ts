@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticComboboxStyles } from "@loongark/primitives/automatic-styles/combobox";
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
 import type { CollectionItem } from "@ark-ui/vue/collection";
@@ -37,7 +40,7 @@ import type { ComboboxSize } from "@loongark/primitives";
 
 const comboboxSizeKey = Symbol("loongark-combobox-size");
 
-export const LoongArkComboboxRoot = defineComponent({
+export const LoongArkComboboxRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxRoot",
   props: {
     size: {
@@ -170,9 +173,9 @@ export const LoongArkComboboxRoot = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxLabel = defineComponent({
+export const LoongArkComboboxLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -186,9 +189,9 @@ export const LoongArkComboboxLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxControl = defineComponent({
+export const LoongArkComboboxControl = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxControl",
   setup(_, { slots, attrs }) {
     return () =>
@@ -202,9 +205,9 @@ export const LoongArkComboboxControl = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxInput = defineComponent({
+export const LoongArkComboboxInput = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxInput",
   setup(_, { attrs }) {
     return () =>
@@ -214,9 +217,9 @@ export const LoongArkComboboxInput = defineComponent({
         "data-part": "input",
       });
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxTrigger = defineComponent({
+export const LoongArkComboboxTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -236,9 +239,9 @@ export const LoongArkComboboxTrigger = defineComponent({
         },
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxClearTrigger = defineComponent({
+export const LoongArkComboboxClearTrigger = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxClearTrigger",
   setup(_, { slots, attrs }) {
     return () =>
@@ -252,9 +255,9 @@ export const LoongArkComboboxClearTrigger = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxPositioner = defineComponent({
+export const LoongArkComboboxPositioner = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxPositioner",
   setup(_, { slots, attrs }) {
     return () =>
@@ -268,9 +271,9 @@ export const LoongArkComboboxPositioner = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxContent = defineComponent({
+export const LoongArkComboboxContent = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxContent",
   setup(_, { slots, attrs }) {
     const size = inject(comboboxSizeKey, { value: "md" as ComboboxSize });
@@ -286,9 +289,9 @@ export const LoongArkComboboxContent = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxList = defineComponent({
+export const LoongArkComboboxList = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxList",
   setup(_, { slots, attrs }) {
     return () =>
@@ -302,9 +305,9 @@ export const LoongArkComboboxList = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxItemGroup = defineComponent({
+export const LoongArkComboboxItemGroup = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxItemGroup",
   setup(_, { slots, attrs }) {
     return () =>
@@ -318,9 +321,9 @@ export const LoongArkComboboxItemGroup = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxItemGroupLabel = defineComponent({
+export const LoongArkComboboxItemGroupLabel = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxItemGroupLabel",
   setup(_, { slots, attrs }) {
     return () =>
@@ -334,9 +337,9 @@ export const LoongArkComboboxItemGroupLabel = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxItem = defineComponent({
+export const LoongArkComboboxItem = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxItem",
   props: {
     item: {
@@ -366,9 +369,9 @@ export const LoongArkComboboxItem = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxItemText = defineComponent({
+export const LoongArkComboboxItemText = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxItemText",
   setup(_, { slots, attrs }) {
     return () =>
@@ -382,9 +385,9 @@ export const LoongArkComboboxItemText = defineComponent({
         slots,
       );
   },
-});
+}), lkAutomaticComboboxStyles);
 
-export const LoongArkComboboxItemIndicator = defineComponent({
+export const LoongArkComboboxItemIndicator = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkComboboxItemIndicator",
   setup(_, { slots, attrs }) {
     return () =>
@@ -402,4 +405,4 @@ export const LoongArkComboboxItemIndicator = defineComponent({
         },
       );
   },
-});
+}), lkAutomaticComboboxStyles);

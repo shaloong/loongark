@@ -19,6 +19,8 @@ export interface CreateThemeOptions {
   overrides?: TokenOverrides;
   targetId?: string;
   motionPreference?: "auto" | "force";
+  /** 当前文档 CSP 允许的样式 nonce；由宿主按请求生成。 */
+  nonce?: string;
 }
 export interface LoongArkTheme {
   readonly id: string;
@@ -29,6 +31,10 @@ export interface LoongArkTheme {
   mount(target?: ThemeTarget): void;
   toStyleSheet(): string;
   mountStyles(key: string, css: string, layer?: "primitive" | "kit"): void;
+  /** 为按需或迟到的样式保留固定级联顺序。 */
+  setStyleOrder(keys: readonly string[]): void;
+  /** 注册当前挂载周期的清理；不会保留已卸载的主题。 */
+  onUnmount(cleanup: () => void): void;
   getPortalContainer(): HTMLElement | undefined;
   unmount(): void;
   snapshot(): ReturnType<typeof buildTokenArtifacts>;
@@ -53,11 +59,25 @@ const sharedStyles = new WeakMap<
   StyleHost,
   Map<string, { element: HTMLStyleElement; owners: Set<string> }>
 >();
+const sharedStyleOrder = new Map<string, number>();
+const normalizeStyleKey = (key: string) =>
+  key.replace(/-(light|dark|high-contrast)$/, "").toLowerCase();
+const placeStyle = (element: HTMLStyleElement, target: StyleHost) => {
+  const container = isDocument(target) ? target.head : target;
+  const order = sharedStyleOrder.get(normalizeStyleKey(element.id));
+  const next = order === undefined ? undefined :
+    Array.from(container.children).find((other) =>
+      other !== element &&
+      (sharedStyleOrder.get(normalizeStyleKey(other.id)) ?? -1) > order,
+    );
+  container.insertBefore(element, next ?? null);
+};
 export const mountStyleSheet = (
   key: string,
   css: string,
   host?: StyleHost,
   owner = "external",
+  nonce?: string,
 ): (() => void) => {
   const target = host ?? globalThis.document;
   if (!target) return () => {};
@@ -69,7 +89,8 @@ export const mountStyleSheet = (
   if (!entry) {
     const element = hostDocument(target).createElement("style");
     element.id = key;
-    (isDocument(target) ? target.head : target).appendChild(element);
+    if (nonce !== undefined) element.nonce = nonce;
+    placeStyle(element, target);
     entry = { element, owners: new Set() };
     styles.set(key, entry);
   }
@@ -132,18 +153,22 @@ class ThemeRuntime implements LoongArkTheme {
   private tokenState: TokenRegistry;
   private readonly motion: "auto" | "force";
   private readonly scopedOnServer: boolean;
+  private readonly nonce?: string;
   private host?: StyleHost;
   private scope?: HTMLElement;
   private target?: ThemeTarget;
   private portal?: HTMLElement;
   private releases = new Map<string, () => void>();
   private styleSheets = new Map<string, string>();
+  private styleOrder = new Map<string, number>();
+  private unmountCleanups = new Set<() => void>();
   private previousAttributes?: {
     theme: string | null;
     mode: string | null;
     motion: string | null;
   };
   constructor(options: CreateThemeOptions = {}) {
+    this.nonce = options.nonce;
     this.scopedOnServer = Boolean(options.targetId);
     this.id = (options.targetId ?? `loongark-theme-${++sequence}`).replace(
       /[^a-zA-Z0-9_-]/g,
@@ -207,7 +232,25 @@ class ThemeRuntime implements LoongArkTheme {
     return `${this.selector()} {\n${tokensToCssVariables(this.tokens)}\ncolor-scheme: ${this.mode === "dark" ? "dark" : "light"};\ncolor: var(--lk-color-semantic-foreground);\nbackground-color: var(--lk-color-semantic-background);\nfont-family: var(--lk-typography-fontfamily-body);\n}`;
   }
   toStyleSheet(): string {
-    return [this.toCSS(), ...this.styleSheets.values()].join("\n");
+    const styles = [...this.styleSheets].sort(([a], [b]) =>
+      (this.styleOrder.get(normalizeStyleKey(a)) ?? this.styleOrder.size) -
+      (this.styleOrder.get(normalizeStyleKey(b)) ?? this.styleOrder.size),
+    );
+    return [this.toCSS(), ...styles.map(([, css]) => css)].join("\n");
+  }
+  setStyleOrder(keys: readonly string[]): void {
+    this.styleOrder = new Map(keys.map((key, index) => [normalizeStyleKey(key), index]));
+    for (const [key, order] of this.styleOrder)
+      sharedStyleOrder.set(`loongark-${key}`, order);
+    if (this.host) {
+      const styles = sharedStyles.get(this.host);
+      for (const entry of styles?.values() ?? [])
+        if (sharedStyleOrder.has(normalizeStyleKey(entry.element.id)))
+          placeStyle(entry.element, this.host);
+    }
+  }
+  onUnmount(cleanup: () => void): void {
+    this.unmountCleanups.add(cleanup);
   }
   mount(target: ThemeTarget = globalThis.document): void {
     if (!target) return;
@@ -249,7 +292,7 @@ class ThemeRuntime implements LoongArkTheme {
     this.releases.get(this.id)?.();
     this.releases.set(
       this.id,
-      mountStyleSheet(this.id, this.toCSS(), this.host, this.id),
+      mountStyleSheet(this.id, this.toCSS(), this.host, this.id, this.nonce),
     );
   }
   mountStyles(
@@ -262,7 +305,10 @@ class ThemeRuntime implements LoongArkTheme {
     if (!this.host) return;
     const id = `loongark-${layer}-${key.replace(/-(light|dark|high-contrast)$/, "")}`;
     this.releases.get(id)?.();
-    this.releases.set(id, mountStyleSheet(id, css, this.host, this.id));
+    this.releases.set(
+      id,
+      mountStyleSheet(id, css, this.host, this.id, this.nonce),
+    );
   }
   getPortalContainer(): HTMLElement | undefined {
     const host = this.host ?? globalThis.document;
@@ -284,6 +330,8 @@ class ThemeRuntime implements LoongArkTheme {
     return buildTokenArtifacts(this.tokens);
   }
   unmount(): void {
+    for (const cleanup of this.unmountCleanups) cleanup();
+    this.unmountCleanups.clear();
     for (const release of this.releases.values()) release();
     this.releases.clear();
     this.portal?.remove();

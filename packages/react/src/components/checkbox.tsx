@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticCheckboxStyles } from "@loongark/primitives/automatic-styles/checkbox";
+
+
 import { useFieldContext } from "@ark-ui/react/field";
 import { nativeSelectionFieldDescription } from "@loongark/kit";
 import { controlIcons } from "@loongark/kit";
@@ -44,7 +49,7 @@ export interface LoongArkCheckboxHiddenInputProps extends Omit<
 
 // ========== 组件实现 ==========
 
-export const LoongArkCheckboxRoot = forwardRef<
+export const LoongArkCheckboxRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkCheckboxRootProps
 >(({ size = "md", ...props }, ref) => {
@@ -57,11 +62,11 @@ export const LoongArkCheckboxRoot = forwardRef<
       data-size={size}
     />
   );
-});
+}), lkAutomaticCheckboxStyles);
 
 LoongArkCheckboxRoot.displayName = "LoongArkCheckboxRoot";
 
-export const LoongArkCheckboxControl = forwardRef<
+export const LoongArkCheckboxControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkCheckboxControlProps
 >(({ size = "md", ...props }, ref) => {
@@ -74,11 +79,11 @@ export const LoongArkCheckboxControl = forwardRef<
       data-size={size}
     />
   );
-});
+}), lkAutomaticCheckboxStyles);
 
 LoongArkCheckboxControl.displayName = "LoongArkCheckboxControl";
 
-export const LoongArkCheckboxLabel = forwardRef<
+export const LoongArkCheckboxLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   LoongArkCheckboxLabelProps
 >((props, ref) => {
@@ -90,11 +95,11 @@ export const LoongArkCheckboxLabel = forwardRef<
       data-part="label"
     />
   );
-});
+}), lkAutomaticCheckboxStyles);
 
 LoongArkCheckboxLabel.displayName = "LoongArkCheckboxLabel";
 
-export const LoongArkCheckboxIndicator = forwardRef<
+export const LoongArkCheckboxIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkCheckboxIndicatorProps
 >(({ children, ...props }, ref) => {
@@ -113,11 +118,11 @@ export const LoongArkCheckboxIndicator = forwardRef<
       )}
     </Checkbox.Indicator>
   );
-});
+}), lkAutomaticCheckboxStyles);
 
 LoongArkCheckboxIndicator.displayName = "LoongArkCheckboxIndicator";
 
-export const LoongArkCheckboxHiddenInput = forwardRef<
+export const LoongArkCheckboxHiddenInput = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLInputElement,
   LoongArkCheckboxHiddenInputProps
 >((props, ref) => {
@@ -137,6 +142,6 @@ export const LoongArkCheckboxHiddenInput = forwardRef<
       data-part="hidden-input"
     />
   );
-});
+}), lkAutomaticCheckboxStyles);
 
 LoongArkCheckboxHiddenInput.displayName = "LoongArkCheckboxHiddenInput";

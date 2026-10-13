@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticStepsStyles } from "@loongark/primitives/automatic-styles/steps";
+
+
 /**
  * Steps component - React wrapper.
  * Uses Ark UI Steps with data attributes for styling.
@@ -104,7 +109,7 @@ export interface LoongArkStepsPrevTriggerProps extends Omit<
   children?: ReactNode;
 }
 
-export const LoongArkStepsRoot = forwardRef<
+export const LoongArkStepsRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkStepsRootProps
 >(({ children, size = "md", orientation = "horizontal", ...props }, ref) => {
@@ -121,11 +126,11 @@ export const LoongArkStepsRoot = forwardRef<
       {children}
     </Steps.Root>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsRoot.displayName = "LoongArkStepsRoot";
 
-export const LoongArkStepsList = forwardRef<
+export const LoongArkStepsList = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkStepsListProps
 >(({ children, ...props }, ref) => {
@@ -134,11 +139,11 @@ export const LoongArkStepsList = forwardRef<
       {children}
     </Steps.List>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsList.displayName = "LoongArkStepsList";
 
-export const LoongArkStepsItem = forwardRef<
+export const LoongArkStepsItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkStepsItemProps
 >(({ children, ...props }, ref) => {
@@ -155,11 +160,11 @@ export const LoongArkStepsItem = forwardRef<
       {children}
     </Steps.Item>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsItem.displayName = "LoongArkStepsItem";
 
-export const LoongArkStepsIndicator = forwardRef<
+export const LoongArkStepsIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkStepsIndicatorProps
 >(({ children, ...props }, ref) => {
@@ -173,11 +178,11 @@ export const LoongArkStepsIndicator = forwardRef<
       {children}
     </Steps.Indicator>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsIndicator.displayName = "LoongArkStepsIndicator";
 
-export const LoongArkStepsSeparator = forwardRef<
+export const LoongArkStepsSeparator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkStepsSeparatorProps
 >(({ children, ...props }, ref) => {
@@ -191,11 +196,11 @@ export const LoongArkStepsSeparator = forwardRef<
       {children}
     </Steps.Separator>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsSeparator.displayName = "LoongArkStepsSeparator";
 
-export const LoongArkStepsTrigger = forwardRef<
+export const LoongArkStepsTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkStepsTriggerProps
 >(({ children, ...props }, ref) => {
@@ -204,11 +209,11 @@ export const LoongArkStepsTrigger = forwardRef<
       {children}
     </Steps.Trigger>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsTrigger.displayName = "LoongArkStepsTrigger";
 
-export const LoongArkStepsContent = forwardRef<
+export const LoongArkStepsContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkStepsContentProps
 >(({ children, ...props }, ref) => {
@@ -217,11 +222,11 @@ export const LoongArkStepsContent = forwardRef<
       {children}
     </Steps.Content>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsContent.displayName = "LoongArkStepsContent";
 
-export const LoongArkStepsCompletedContent = forwardRef<
+export const LoongArkStepsCompletedContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkStepsCompletedContentProps
 >(({ children, ...props }, ref) => {
@@ -235,11 +240,11 @@ export const LoongArkStepsCompletedContent = forwardRef<
       {children}
     </Steps.CompletedContent>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsCompletedContent.displayName = "LoongArkStepsCompletedContent";
 
-export const LoongArkStepsProgress = forwardRef<
+export const LoongArkStepsProgress = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkStepsProgressProps
 >(({ children, ...props }, ref) => {
@@ -253,11 +258,11 @@ export const LoongArkStepsProgress = forwardRef<
       {children}
     </Steps.Progress>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsProgress.displayName = "LoongArkStepsProgress";
 
-export const LoongArkStepsNextTrigger = forwardRef<
+export const LoongArkStepsNextTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkStepsNextTriggerProps
 >(({ children, ...props }, ref) => {
@@ -271,11 +276,11 @@ export const LoongArkStepsNextTrigger = forwardRef<
       {children}
     </Steps.NextTrigger>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsNextTrigger.displayName = "LoongArkStepsNextTrigger";
 
-export const LoongArkStepsPrevTrigger = forwardRef<
+export const LoongArkStepsPrevTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   LoongArkStepsPrevTriggerProps
 >(({ children, ...props }, ref) => {
@@ -289,6 +294,6 @@ export const LoongArkStepsPrevTrigger = forwardRef<
       {children}
     </Steps.PrevTrigger>
   );
-});
+}), lkAutomaticStepsStyles);
 
 LoongArkStepsPrevTrigger.displayName = "LoongArkStepsPrevTrigger";

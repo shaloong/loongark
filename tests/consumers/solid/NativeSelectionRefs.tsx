@@ -81,3 +81,14 @@ export function mountNativeRefs() {
     document.querySelector("main")!,
   );
 }
+
+// 浏览器注入的真实模块契约同时供 Playwright 与消费入口检查。
+declare global {
+  interface Window {
+    solidSelectionRefs: {
+      nativeRefs: typeof nativeRefs;
+      mountNativeRefs: typeof mountNativeRefs;
+      unmountNativeRefs: typeof unmountNativeRefs;
+    };
+  }
+}

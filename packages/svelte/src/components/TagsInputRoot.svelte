@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
+  import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+  registerAutomaticStyles(lkAutomaticTagsInputStyles);
+
   import { nativeSelectionProps } from "@loongark/kit";
   import {
     TagsInput,

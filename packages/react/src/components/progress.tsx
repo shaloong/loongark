@@ -1,3 +1,8 @@
+"use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticProgressStyles } from "@loongark/primitives/automatic-styles/progress";
+
+
 /**
  * Progress component - React wrapper.
  * Uses Ark UI Progress with data attributes for styling.
@@ -64,7 +69,7 @@ export interface LoongArkProgressCircleRangeProps
   children?: ReactNode;
 }
 
-export const LoongArkProgressRoot = forwardRef<
+export const LoongArkProgressRoot = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkProgressRootProps
 >(({ children, size = "md", orientation = "horizontal", ...props }, ref) => {
@@ -81,11 +86,11 @@ export const LoongArkProgressRoot = forwardRef<
       {children}
     </Progress.Root>
   );
-});
+}), lkAutomaticProgressStyles);
 
 LoongArkProgressRoot.displayName = "LoongArkProgressRoot";
 
-export const LoongArkProgressLabel = forwardRef<
+export const LoongArkProgressLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLLabelElement,
   LoongArkProgressLabelProps
 >(({ children, ...props }, ref) => {
@@ -99,11 +104,11 @@ export const LoongArkProgressLabel = forwardRef<
       {children}
     </Progress.Label>
   );
-});
+}), lkAutomaticProgressStyles);
 
 LoongArkProgressLabel.displayName = "LoongArkProgressLabel";
 
-export const LoongArkProgressTrack = forwardRef<
+export const LoongArkProgressTrack = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkProgressTrackProps
 >(({ children, ...props }, ref) => {
@@ -117,11 +122,11 @@ export const LoongArkProgressTrack = forwardRef<
       {children}
     </Progress.Track>
   );
-});
+}), lkAutomaticProgressStyles);
 
 LoongArkProgressTrack.displayName = "LoongArkProgressTrack";
 
-export const LoongArkProgressRange = forwardRef<
+export const LoongArkProgressRange = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkProgressRangeProps
 >(({ children, ...props }, ref) => {
@@ -135,11 +140,11 @@ export const LoongArkProgressRange = forwardRef<
       {children}
     </Progress.Range>
   );
-});
+}), lkAutomaticProgressStyles);
 
 LoongArkProgressRange.displayName = "LoongArkProgressRange";
 
-export const LoongArkProgressValueText = forwardRef<
+export const LoongArkProgressValueText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   LoongArkProgressValueTextProps
 >(({ children, ...props }, ref) => {
@@ -153,11 +158,11 @@ export const LoongArkProgressValueText = forwardRef<
       {children}
     </Progress.ValueText>
   );
-});
+}), lkAutomaticProgressStyles);
 
 LoongArkProgressValueText.displayName = "LoongArkProgressValueText";
 
-export const LoongArkProgressView = forwardRef<
+export const LoongArkProgressView = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   LoongArkProgressViewProps
 >(({ children, ...props }, ref) => {
@@ -171,11 +176,11 @@ export const LoongArkProgressView = forwardRef<
       {children}
     </Progress.View>
   );
-});
+}), lkAutomaticProgressStyles);
 
 LoongArkProgressView.displayName = "LoongArkProgressView";
 
-export const LoongArkProgressCircle = forwardRef<
+export const LoongArkProgressCircle = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   SVGSVGElement,
   LoongArkProgressCircleProps
 >(({ children, ...props }, ref) => {
@@ -189,11 +194,11 @@ export const LoongArkProgressCircle = forwardRef<
       {children}
     </Progress.Circle>
   );
-});
+}), lkAutomaticProgressStyles);
 
 LoongArkProgressCircle.displayName = "LoongArkProgressCircle";
 
-export const LoongArkProgressCircleTrack = forwardRef<
+export const LoongArkProgressCircleTrack = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   SVGCircleElement,
   LoongArkProgressCircleTrackProps
 >(({ children, ...props }, ref) => {
@@ -207,11 +212,11 @@ export const LoongArkProgressCircleTrack = forwardRef<
       {children}
     </Progress.CircleTrack>
   );
-});
+}), lkAutomaticProgressStyles);
 
 LoongArkProgressCircleTrack.displayName = "LoongArkProgressCircleTrack";
 
-export const LoongArkProgressCircleRange = forwardRef<
+export const LoongArkProgressCircleRange = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   SVGCircleElement,
   LoongArkProgressCircleRangeProps
 >(({ children, ...props }, ref) => {
@@ -225,6 +230,6 @@ export const LoongArkProgressCircleRange = forwardRef<
       {children}
     </Progress.CircleRange>
   );
-});
+}), lkAutomaticProgressStyles);
 
 LoongArkProgressCircleRange.displayName = "LoongArkProgressCircleRange";

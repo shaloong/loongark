@@ -10,12 +10,19 @@ export interface PrimitiveContract<TProps> {
 export interface PrimitiveRegistration<TProps> {
   contract: PrimitiveContract<TProps>;
   apply(theme: LoongArkTheme): void;
+  /** 拆分规则对应的原注册名，用于保留调用方覆盖。 */
+  sourceContract?: string;
 }
 
 export const createPrimitive = <TProps>(
   contract: PrimitiveContract<TProps>,
   apply: (theme: LoongArkTheme) => void,
-): PrimitiveRegistration<TProps> => ({ contract, apply });
+  sourceContract?: string,
+): PrimitiveRegistration<TProps> => ({
+  contract,
+  apply,
+  ...(sourceContract ? { sourceContract } : {}),
+});
 
 export const registry: PrimitiveRegistration<unknown>[] = [];
 

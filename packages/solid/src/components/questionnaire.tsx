@@ -1,3 +1,6 @@
+
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticQuestionnaireStyles } from "@loongark/primitives/automatic-styles/questionnaire";
 import {
   createSignal,
   createMemo,
@@ -43,7 +46,7 @@ export type LoongArkQuestionnaireProps = Omit<
   "onSubmit" | "defaultValue"
 > &
   QuestionnaireOptions & { renderers?: LoongArkQuestionnaireRenderers };
-export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
+function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
   const [p, attrs] = splitProps(props, [
     "label",
     "questions",
@@ -398,3 +401,6 @@ export function LoongArkQuestionnaire(props: LoongArkQuestionnaireProps) {
     </form>
   );
 }
+
+const lkStyledLoongArkQuestionnaire = /*#__PURE__*/ withAutomaticStyles(LoongArkQuestionnaire, lkAutomaticQuestionnaireStyles);
+export { lkStyledLoongArkQuestionnaire as LoongArkQuestionnaire };
