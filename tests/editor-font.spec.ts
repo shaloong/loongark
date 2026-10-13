@@ -9,7 +9,7 @@ for (const framework of ["react", "vue", "solid", "svelte"])
         `/examples-${framework}/?example=CodeEditorExample&mode=${mode}`,
       );
       await page
-        .locator("#loongark-primitive-editor")
+        .locator("#loongark-primitive-neutral-system")
         .waitFor({ state: "attached" });
       await expect(
         page.locator('[data-scope="editor"][data-kind="code"]'),

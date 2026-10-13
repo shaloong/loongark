@@ -9,7 +9,7 @@ for (const mode of ["light", "dark"])
         `/iframe.html?id=components-field--basic&globals=mode:${mode}`,
       );
       await page
-        .locator("#loongark-primitive-extended")
+        .locator("#loongark-primitive-neutral-system")
         .waitFor({ state: "attached" });
       const label = page.locator("[data-scope=field][data-part=label]");
       await expect(label).toBeVisible();
@@ -42,7 +42,7 @@ for (const mode of ["light", "dark"])
         `/iframe.html?id=components-angleslider--basic&globals=mode:${mode}`,
       );
       await page
-        .locator("#loongark-primitive-extended")
+        .locator("#loongark-primitive-neutral-system")
         .waitFor({ state: "attached" });
       const thumb = page.getByRole("slider", { name: "Rotation" });
       const control = page.locator(

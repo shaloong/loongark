@@ -1,3 +1,7 @@
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as dialogStyles } from "@loongark/primitives/automatic-styles/dialog";
+import { styles as pinInputStyles } from "@loongark/primitives/automatic-styles/pin-input";
+import { styles as switchStyles } from "@loongark/primitives/automatic-styles/switch";
 import LoongArkDialogRootComponent from "./components/DialogRoot.svelte";
 import LoongArkDialogPositionerComponent from "./components/DialogPositioner.svelte";
 import LoongArkDialogPortalComponent from "./components/Portal.svelte";
@@ -18,7 +22,7 @@ import LoongArkSwitchHiddenInputComponent from "./components/SwitchHiddenInput.s
 import LoongArkSwitchControlComponent from "./components/SwitchControl.svelte";
 import LoongArkSwitchThumbComponent from "./components/SwitchThumb.svelte";
 import LoongArkSwitchLabelComponent from "./components/SwitchLabel.svelte";
-export const LoongArkDialog = {
+export const LoongArkDialog = /*#__PURE__*/ withAutomaticStyles({
   Portal: LoongArkDialogPortalComponent,
   Positioner: LoongArkDialogPositionerComponent,
   Root: LoongArkDialogRootComponent,
@@ -29,20 +33,20 @@ export const LoongArkDialog = {
   Description: LoongArkDialogDescriptionComponent,
   Footer: LoongArkDialogFooterComponent,
   CloseTrigger: LoongArkDialogCloseTriggerComponent,
-};
+}, dialogStyles);
 
-export const LoongArkPinInput = {
+export const LoongArkPinInput = /*#__PURE__*/ withAutomaticStyles({
   Root: LoongArkPinInputRootComponent,
   Control: LoongArkPinInputControlComponent,
   Input: LoongArkPinInputInputComponent,
   Label: LoongArkPinInputLabelComponent,
   HiddenInput: LoongArkPinInputHiddenInputComponent,
-};
+}, pinInputStyles);
 
-export const LoongArkSwitch = {
+export const LoongArkSwitch = /*#__PURE__*/ withAutomaticStyles({
   HiddenInput: LoongArkSwitchHiddenInputComponent,
   Root: LoongArkSwitchRootComponent,
   Control: LoongArkSwitchControlComponent,
   Thumb: LoongArkSwitchThumbComponent,
   Label: LoongArkSwitchLabelComponent,
-};
+}, switchStyles);

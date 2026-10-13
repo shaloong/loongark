@@ -23,13 +23,15 @@ React/Vue/Solid 使用 LoongArkProvider；Svelte 使用同名组件。四端均�
 
 Provider 的作用域容器使用 `display: contents`，保留宿主布局；它不会绘制应用页面背景。应用需在实际页面容器同时设置 `background: var(--lk-color-semantic-background)` 与 `color: var(--lk-color-semantic-foreground)`，特别是深色主题。只继承深色文字色、仍使用浏览器白色背景会造成低对比。
 
+### 严格 CSP 与 nonce
+
 四端 Provider 和 `createLoongArkTheme` 支持可选 `nonce`，用于库生成的变量、Primitives 和 Kit 样式表。宿主按 HTTP 请求生成随机 nonce，在 CSP 的 `style-src-elem` 中允许该值，并向同一文档的所有 Provider 传入同一个值；nonce 在 style 插入 DOM 前设置，主题更新继续保留。SSR 输出的 style 标签也由宿主设置相同 nonce，CSS 字符串本身不包含该属性。
 
 nonce 不授权 style 属性、第三方编辑器或调用方自建的 style。应用需分别配置 `style-src-attr`；CodeMirror 扩展可通过 `EditorView.cspNonce.of(nonce)` 配置其引擎样式，其他插件按自身契约处理。这不是对所有严格 CSP 策略的兼容承诺。
 
 ### 按需样式
 
-默认 `LoongArkProvider` 随实际组件入口自动加载 Primitives 样式及 HTML 组合的必要依赖，根入口命名导入和组件子路径均可使用。动态导入会在组件首次渲染前同步补齐样式，固定级联顺序，多个 Provider 共享规则并在最后一个所有者卸载后释放；Vue 插件和 Svelte theme store 使用同一自动启动器。
+默认 `LoongArkProvider` 随实际组件入口自动加载 Primitives 样式及 HTML 组合的必要依赖，根入口命名导入和组件子路径均可使用；公开别名与 Svelte 的 Dialog、PinInput、Switch 组合 namespace 同样声明其组件样式。动态导入会在组件首次渲染前同步补齐样式，固定级联顺序，多个 Provider 共享规则并在最后一个所有者卸载后释放；Vue 插件和 Svelte theme store 使用同一自动启动器。
 
 自动裁剪依赖生产构建消除未使用模块与组件初始化声明。导入并使用完整根命名空间会保留更多组件；Node 直接执行根入口也不会像生产打包器一样裁剪模块。自定义 DOM 只有 `data-scope` 属性不会自动声明样式，需提供自己的样式，或显式使用 `@loongark/kit/bootstrap` 的 `bootstrapKit` 作为 `styleBootstrap` 保留原完整样式行为。已有 Primitives 注册覆盖与 Kit 注册扩展继续生效。
 

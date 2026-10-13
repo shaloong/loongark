@@ -1,4 +1,6 @@
 "use client";
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticSelectStyles } from "@loongark/primitives/automatic-styles/select";
 
 import { controlIcons } from "@loongark/kit";
 import { LoongArkIcon } from "./icon";
@@ -55,7 +57,7 @@ export interface SelectRootProps<T = object> extends Omit<
 /**
  * Select Root 组件
  */
-export function SelectRoot<T = object>(props: SelectRootProps<T>) {
+export const SelectRoot = /*#__PURE__*/ withAutomaticStyles(Object.assign(function SelectRoot<T = object>(props: SelectRootProps<T>) {
   const { size = "md", ...rest } = props;
 
   return (
@@ -68,14 +70,12 @@ export function SelectRoot<T = object>(props: SelectRootProps<T>) {
       />
     </SelectContext.Provider>
   );
-}
-
-SelectRoot.displayName = "LoongArkSelectRoot";
+}, { displayName: "LoongArkSelectRoot" }), lkAutomaticSelectStyles);
 
 /**
  * Select Label 组件
  */
-export const SelectLabel = forwardRef<HTMLLabelElement, ArkSelectLabelProps>(
+export const SelectLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLLabelElement, ArkSelectLabelProps>(
   (props, ref) => {
     return (
       <ArkSelect.Label
@@ -86,14 +86,14 @@ export const SelectLabel = forwardRef<HTMLLabelElement, ArkSelectLabelProps>(
       />
     );
   },
-);
+), lkAutomaticSelectStyles);
 
 SelectLabel.displayName = "LoongArkSelectLabel";
 
 /**
  * Select Control 组件
  */
-export const SelectControl = forwardRef<HTMLDivElement, ArkSelectControlProps>(
+export const SelectControl = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLDivElement, ArkSelectControlProps>(
   (props, ref) => {
     return (
       <ArkSelect.Control
@@ -104,14 +104,14 @@ export const SelectControl = forwardRef<HTMLDivElement, ArkSelectControlProps>(
       />
     );
   },
-);
+), lkAutomaticSelectStyles);
 
 SelectControl.displayName = "LoongArkSelectControl";
 
 /**
  * Select Trigger 组件
  */
-export const SelectTrigger = forwardRef<
+export const SelectTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkSelectTriggerProps
 >((props, ref) => {
@@ -123,14 +123,14 @@ export const SelectTrigger = forwardRef<
       data-part="trigger"
     />
   );
-});
+}), lkAutomaticSelectStyles);
 
 SelectTrigger.displayName = "LoongArkSelectTrigger";
 
 /**
  * Select ValueText 组件
  */
-export const SelectValueText = forwardRef<
+export const SelectValueText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSpanElement,
   ArkSelectValueTextProps
 >((props, ref) => {
@@ -142,14 +142,14 @@ export const SelectValueText = forwardRef<
       data-part="value-text"
     />
   );
-});
+}), lkAutomaticSelectStyles);
 
 SelectValueText.displayName = "LoongArkSelectValueText";
 
 /**
  * Select Indicator 组件
  */
-export const SelectIndicator = forwardRef<
+export const SelectIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkSelectIndicatorProps
 >((props, ref) => {
@@ -165,14 +165,14 @@ export const SelectIndicator = forwardRef<
       )}
     </ArkSelect.Indicator>
   );
-});
+}), lkAutomaticSelectStyles);
 
 SelectIndicator.displayName = "LoongArkSelectIndicator";
 
 /**
  * Select ClearTrigger 组件
  */
-export const SelectClearTrigger = forwardRef<
+export const SelectClearTrigger = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLButtonElement,
   ArkSelectClearTriggerProps
 >((props, ref) => {
@@ -184,14 +184,14 @@ export const SelectClearTrigger = forwardRef<
       data-part="clear-trigger"
     />
   );
-});
+}), lkAutomaticSelectStyles);
 
 SelectClearTrigger.displayName = "LoongArkSelectClearTrigger";
 
 /**
  * Select Positioner 组件
  */
-export const SelectPositioner = forwardRef<
+export const SelectPositioner = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkSelectPositionerProps
 >((props, ref) => {
@@ -205,14 +205,14 @@ export const SelectPositioner = forwardRef<
       />
     </SafePortal>
   );
-});
+}), lkAutomaticSelectStyles);
 
 SelectPositioner.displayName = "LoongArkSelectPositioner";
 
 /**
  * Select Content 组件
  */
-export const SelectContent = forwardRef<HTMLDivElement, ArkSelectContentProps>(
+export const SelectContent = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLDivElement, ArkSelectContentProps>(
   (props, ref) => {
     const { size } = useContext(SelectContext);
     return (
@@ -225,14 +225,14 @@ export const SelectContent = forwardRef<HTMLDivElement, ArkSelectContentProps>(
       />
     );
   },
-);
+), lkAutomaticSelectStyles);
 
 SelectContent.displayName = "LoongArkSelectContent";
 
 /**
  * Select List 组件
  */
-export const SelectList = forwardRef<HTMLDivElement, ArkSelectListProps>(
+export const SelectList = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLDivElement, ArkSelectListProps>(
   (props, ref) => {
     return (
       <ArkSelect.List
@@ -243,14 +243,14 @@ export const SelectList = forwardRef<HTMLDivElement, ArkSelectListProps>(
       />
     );
   },
-);
+), lkAutomaticSelectStyles);
 
 SelectList.displayName = "LoongArkSelectList";
 
 /**
  * Select ItemGroup 组件
  */
-export const SelectItemGroup = forwardRef<
+export const SelectItemGroup = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkSelectItemGroupProps
 >((props, ref) => {
@@ -262,14 +262,14 @@ export const SelectItemGroup = forwardRef<
       data-part="item-group"
     />
   );
-});
+}), lkAutomaticSelectStyles);
 
 SelectItemGroup.displayName = "LoongArkSelectItemGroup";
 
 /**
  * Select ItemGroupLabel 组件
  */
-export const SelectItemGroupLabel = forwardRef<
+export const SelectItemGroupLabel = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkSelectItemGroupLabelProps
 >((props, ref) => {
@@ -281,14 +281,14 @@ export const SelectItemGroupLabel = forwardRef<
       data-part="item-group-label"
     />
   );
-});
+}), lkAutomaticSelectStyles);
 
 SelectItemGroupLabel.displayName = "LoongArkSelectItemGroupLabel";
 
 /**
  * Select Item 组件
  */
-export const SelectItem = forwardRef<HTMLDivElement, ArkSelectItemProps>(
+export const SelectItem = /*#__PURE__*/ withAutomaticStyles(forwardRef<HTMLDivElement, ArkSelectItemProps>(
   (props, ref) => {
     return (
       <ArkSelect.Item
@@ -299,14 +299,14 @@ export const SelectItem = forwardRef<HTMLDivElement, ArkSelectItemProps>(
       />
     );
   },
-);
+), lkAutomaticSelectStyles);
 
 SelectItem.displayName = "LoongArkSelectItem";
 
 /**
  * Select ItemText 组件
  */
-export const SelectItemText = forwardRef<
+export const SelectItemText = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkSelectItemTextProps
 >((props, ref) => {
@@ -318,14 +318,14 @@ export const SelectItemText = forwardRef<
       data-part="item-text"
     />
   );
-});
+}), lkAutomaticSelectStyles);
 
 SelectItemText.displayName = "LoongArkSelectItemText";
 
 /**
  * Select ItemIndicator 组件
  */
-export const SelectItemIndicator = forwardRef<
+export const SelectItemIndicator = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLDivElement,
   ArkSelectItemIndicatorProps
 >(({ children, ...props }, ref) => {
@@ -339,14 +339,14 @@ export const SelectItemIndicator = forwardRef<
       {children || <LoongArkIcon icon={controlIcons.check} size="sm" />}
     </ArkSelect.ItemIndicator>
   );
-});
+}), lkAutomaticSelectStyles);
 
 SelectItemIndicator.displayName = "LoongArkSelectItemIndicator";
 
 /**
  * Select HiddenSelect 组件 (用于表单提交)
  */
-export const SelectHiddenSelect = forwardRef<
+export const SelectHiddenSelect = /*#__PURE__*/ withAutomaticStyles(forwardRef<
   HTMLSelectElement,
   ArkSelectHiddenSelectProps
 >((props, ref) => {
@@ -358,6 +358,6 @@ export const SelectHiddenSelect = forwardRef<
       data-part="hidden-select"
     />
   );
-});
+}), lkAutomaticSelectStyles);
 
 SelectHiddenSelect.displayName = "LoongArkSelectHiddenSelect";

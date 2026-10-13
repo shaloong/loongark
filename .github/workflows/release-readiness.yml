@@ -72,7 +72,7 @@ jobs:
           STATIC_DIR: tests/consumer-dist
       - name: Complete reference examples
         if: github.event_name == 'schedule' || inputs.full == true
-        run: node scripts/run-playwright.mjs reference-examples.spec.ts --project=chromium --workers=1
+        run: node scripts/run-playwright.mjs reference-examples.spec.ts --project=chromium --workers=1 --trace=retain-on-failure
         env:
           STATIC_DIR: tests/consumer-dist
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -89,5 +89,6 @@ jobs:
             .artifacts/releases/minimum/report.json
             .artifacts/releases/minimum/dependencies.json
             .artifacts/releases/react-rsc/
+            test-results/
           retention-days: 14
           if-no-files-found: ignore

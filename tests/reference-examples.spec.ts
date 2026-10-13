@@ -96,7 +96,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
           animations: "disabled",
         });
         await checkSemantics();
-        await page.getByRole("button", { name: "关闭", exact: true }).click();
+        await page.getByRole("button", { name: "关闭", exact: true }).click({ timeout: 5000 });
         await expect(page.getByRole("alertdialog")).toBeHidden();
         await expect(trigger).toBeFocused();
         await trigger.click();

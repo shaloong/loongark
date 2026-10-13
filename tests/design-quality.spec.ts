@@ -49,7 +49,7 @@ for (const mode of ["light", "dark"] as const) {
           `/iframe.html?id=${story.id}&viewMode=story&globals=mode:${mode}`,
         );
         await page
-          .locator("#loongark-primitive-button")
+          .locator("#loongark-primitive-neutral-system")
           .waitFor({ state: "attached" });
         await page.locator(".loongark-story-surface").waitFor();
         const firstFamily =

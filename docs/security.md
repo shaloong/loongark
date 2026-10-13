@@ -12,7 +12,9 @@ SSR 每个请求独立创建主题和状态。不要把用户提交的配置当�
 
 应用插件、CodeMirror extensions、ProseMirror nodeViews、自定义问卷 renderer、IconNode 与手动传入的 HTML/DOM Props 是可信代码契约，不是处理远端任意脚本的沙箱。Frame 用于布局/样式隔离，不是运行不可信 HTML 的安全沙箱；外部 iframe 的 sandbox、allow 和来源限制由应用明确配置。普通链接、图片和 iframe 等原生地址由应用按业务来源约束；富文本链接的协议白名单也不等于域名白名单。
 
-合并后的 Token 与基础对象隔离，避免跨主题及 SSR 请求互相污染。主题 Token 校验属性名、有限数字、深度/循环和 CSS/HTML 结构分隔符，防止特殊键及闭合 style 标签逃逸。Token 仍是可信样式配置，不应接收任意用户 CSS；原始 `mountStyles`/`mountStyleSheet` API 接受可信 CSS，不是 CSS sanitizer。严格 CSP 应由应用配置，当前动态样式 API 没有统一的 nonce 接入契约，部署前需验证站点策略兼容性。
+合并后的 Token 与基础对象隔离，避免跨主题及 SSR 请求互相污染。主题 Token 校验属性名、有限数字、深度/循环和 CSS/HTML 结构分隔符，防止特殊键及闭合 style 标签逃逸。Token 仍是可信样式配置，不应接收任意用户 CSS；原始 `mountStyles`/`mountStyleSheet` API 接受可信 CSS，不是 CSS sanitizer。
+
+严格 CSP 由应用配置。四端 Provider 与 `createLoongArkTheme` 支持 `nonce`，在库生成的变量、Primitives 与 Kit style 标签插入 DOM 前设置；SSR 的 style 标签由宿主附加同一请求的 nonce。该契约不授权内联 style 属性或第三方编辑器样式，部署前仍需验证站点策略，具体接入见 [主题与 CSP](theme-system.md#严格-csp-与-nonce)。
 
 ## 依赖与发布
 

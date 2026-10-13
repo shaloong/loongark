@@ -1,4 +1,7 @@
 import { test, expect } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
+import { readFile } from "node:fs/promises";
+import type { StoryIndex } from "storybook/internal/types";
 
 for (let batch = 0; batch < 4; batch += 1) {
   test(`全部组件故事无运行错误、按钮嵌套和横向异常 ${batch + 1}/4`, async ({
@@ -6,9 +9,7 @@ for (let batch = 0; batch < 4; batch += 1) {
     request,
   }) => {
     test.setTimeout(240_000);
-    const index = (await (await request.get("/index.json")).json()) as {
-      entries: Record<string, { id: string; type: string; title: string }>;
-    };
+    const index: StoryIndex = await (await request.get("/index.json")).json();
     const stories = Object.values(index.entries).filter(
       (entry) => entry.type === "story",
     );
@@ -34,7 +35,7 @@ for (let batch = 0; batch < 4; batch += 1) {
         expect.soft(error?.trim(), story.id).toBe("");
         if (error?.trim()) return;
         await page
-          .locator("#loongark-primitive-button")
+          .locator("#loongark-primitive-neutral-system")
           .waitFor({ state: "attached" });
         expect
           .soft(
@@ -64,3 +65,24 @@ test("无效输入有标签和错误语义", async ({ page }) => {
   const id = await input.getAttribute("id");
   await expect(page.locator(`label[for='${id}']`)).toBeVisible();
 });
+
+for (const mode of ["light", "dark", "high-contrast"]) {
+  test(`DownloadTrigger 真实按钮样式与下载 ${mode}`, async ({ page }, info) => {
+    test.skip(!!process.env.STATIC_DIR, "Story 的下载组合验收");
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto(`/iframe.html?id=components-downloadtrigger--basic&globals=mode:${mode}`);
+    const button = page.getByRole("button", { name: "Download notes", exact: true });
+    await expect(button).toBeVisible();
+    await expect(button).toHaveCSS("border-style", "solid");
+    expect(await page.locator("button button").count()).toBe(0);
+    expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations).toEqual([]);
+    await page.screenshot({ path: `.artifacts/download-trigger/${info.project.name}/${mode}.png` });
+    const pending = page.waitForEvent("download");
+    await button.click();
+    const download = await pending;
+    expect(download.suggestedFilename()).toBe("component-notes.txt");
+    const path = `.artifacts/download-trigger/${info.project.name}/${mode}.txt`;
+    await download.saveAs(path);
+    expect(await readFile(path, "utf8")).toBe("LoongArk component notes");
+  });
+}
