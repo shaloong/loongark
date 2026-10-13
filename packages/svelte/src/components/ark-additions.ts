@@ -1,22 +1,26 @@
+import { withAutomaticStyles } from "@loongark/primitives/automatic";
+import { styles as lkAutomaticImageCropperStyles } from "@loongark/primitives/automatic-styles/image-cropper";
+import { styles as lkAutomaticJsonTreeViewStyles } from "@loongark/primitives/automatic-styles/json-tree-view";
+
 // 保留 Ark 原生类型、状态机与生命周期；外观统一由 Primitives 提供。
 import { ImageCropper } from "@ark-ui/svelte/image-cropper";
-export const LoongArkImageCropper: typeof ImageCropper = ImageCropper;
+export const LoongArkImageCropper: typeof ImageCropper = /*#__PURE__*/ withAutomaticStyles(ImageCropper, lkAutomaticImageCropperStyles);
 export const LoongArkImageCropperContext: typeof ImageCropper.Context =
-  ImageCropper.Context;
+  /*#__PURE__*/ withAutomaticStyles(ImageCropper.Context, lkAutomaticImageCropperStyles);
 export const LoongArkImageCropperGrid: typeof ImageCropper.Grid =
-  ImageCropper.Grid;
+  /*#__PURE__*/ withAutomaticStyles(ImageCropper.Grid, lkAutomaticImageCropperStyles);
 export const LoongArkImageCropperHandle: typeof ImageCropper.Handle =
-  ImageCropper.Handle;
+  /*#__PURE__*/ withAutomaticStyles(ImageCropper.Handle, lkAutomaticImageCropperStyles);
 export const LoongArkImageCropperImage: typeof ImageCropper.Image =
-  ImageCropper.Image;
+  /*#__PURE__*/ withAutomaticStyles(ImageCropper.Image, lkAutomaticImageCropperStyles);
 export const LoongArkImageCropperRoot: typeof ImageCropper.Root =
-  ImageCropper.Root;
+  /*#__PURE__*/ withAutomaticStyles(ImageCropper.Root, lkAutomaticImageCropperStyles);
 export const LoongArkImageCropperRootProvider: typeof ImageCropper.RootProvider =
-  ImageCropper.RootProvider;
+  /*#__PURE__*/ withAutomaticStyles(ImageCropper.RootProvider, lkAutomaticImageCropperStyles);
 export const LoongArkImageCropperSelection: typeof ImageCropper.Selection =
-  ImageCropper.Selection;
+  /*#__PURE__*/ withAutomaticStyles(ImageCropper.Selection, lkAutomaticImageCropperStyles);
 export const LoongArkImageCropperViewport: typeof ImageCropper.Viewport =
-  ImageCropper.Viewport;
+  /*#__PURE__*/ withAutomaticStyles(ImageCropper.Viewport, lkAutomaticImageCropperStyles);
 import { JsonTreeView } from "@ark-ui/svelte/json-tree-view";
 import LoongArkJsonTreeViewRoot from "./JsonTreeViewRoot.svelte";
 import LoongArkJsonTreeViewTree from "./JsonTreeViewTree.svelte";
@@ -27,14 +31,14 @@ export const LoongArkJsonTreeView: Omit<
 > & {
   Root: typeof LoongArkJsonTreeViewRoot;
   Tree: typeof LoongArkJsonTreeViewTree;
-} = {
+} = /*#__PURE__*/ withAutomaticStyles({
   ...JsonTreeView,
   Root: LoongArkJsonTreeViewRoot,
   Tree: LoongArkJsonTreeViewTree,
-};
+}, lkAutomaticJsonTreeViewStyles);
 
 export const LoongArkJsonTreeViewRootProvider: typeof JsonTreeView.RootProvider =
-  JsonTreeView.RootProvider;
+  /*#__PURE__*/ withAutomaticStyles(JsonTreeView.RootProvider, lkAutomaticJsonTreeViewStyles);
 
 import { Format } from "@ark-ui/svelte/format";
 export const LoongArkFormat: typeof Format = Format;
