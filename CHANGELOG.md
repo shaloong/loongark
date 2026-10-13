@@ -11,6 +11,8 @@
 
 ### 组件与维护
 
+- 自动样式保留 Menubar 等组合别名自身的布局规则，并显式加载 DataTable 内部 Table 滚动容器样式，修复菜单栏布局缺失与 Svelte 表格窄屏溢出；同步四端基础组合配方，恢复 React/Vue 的原生菜单触发按钮，lint 检查生成示例与配方一致。
+
 - 默认四端 Provider、Vue 插件及 Svelte theme store 自动随组件入口裁剪样式，支持根入口、子路径、动态导入、共享所有权及原有注册覆盖；将 Kit 共享 CSS 移到 Primitives，保留完整样式兼容入口与显式 Core。
 
 - CI 复用同一提交的浏览器生产者 Artifact，保留日常关键交互与原生 Safari，完整示例、Story 审计和外部消费演练保留为完整验收；避免 develop → main 重复运行，增加 Node22.12 与当前26的构建和四端 SSR 兼容检查。

@@ -41,4 +41,16 @@ registerKitComponent({name:'app-kit',mount:theme=>theme.mountStyles('app-kit','.
 const custom=createLoongArkTheme({targetId:'custom'});bootstrapKitAutomatic(custom);
 for(const marker of ['app-button-override','app-field-override','app-extension','app-kit'])assert.ok(custom.toStyleSheet().includes(marker),`保留已有扩展：${marker}`);
 assert.ok(!custom.toStyleSheet().includes('--lk-button-height:'),'注册覆盖不会重新加载默认 Button');
+// 只消费组合组件的公开样式入口，不能依赖其他示例偶然注册底层规则。
+for(const [scope,selectors] of [
+ ['menubar',['[data-scope=menubar]','[data-scope="menu"]']],
+ ['data-table',['[data-scope=data-table]','[data-scope=table][data-part=root]']],
+]) {
+ const {styles}=await import(`../packages/primitives/dist/automatic-styles/${scope}.js`);
+ for(const mode of ['light','dark','high-contrast']) {
+  const theme=createLoongArkTheme({mode,targetId:`composition-${scope}`});
+  createPrimitiveStyleBootstrap(styles)(theme);
+  for(const selector of selectors) assert.ok(theme.toStyleSheet().includes(selector),`${scope} ${mode} 保留内部部件 ${selector}`);
+ }
+}
 console.log('默认自动样式：真实组件引用、三主题精确规则、成本、重复/迟到入口、监听解绑与 Primitives/Kit 扩展通过。');

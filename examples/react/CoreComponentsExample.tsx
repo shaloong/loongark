@@ -66,7 +66,7 @@ export function CoreComponentsExample() {
                 <L.LoongArkAccordionItemIndicator />
               </L.LoongArkAccordionItemTrigger>
               <L.LoongArkAccordionItemContent>
-                通过 main 发布正式组件展示。
+                这里是展开后的详细设置。
               </L.LoongArkAccordionItemContent>
             </L.LoongArkAccordionItem>
           </L.LoongArkAccordionRoot>
@@ -278,7 +278,9 @@ export function CoreComponentsExample() {
         <div style={{ minWidth: 0 }} data-core-family="Menubar">
           <L.LoongArkMenubar>
             <L.LoongArkMenuRoot>
-              <L.LoongArkMenuTrigger>文件</L.LoongArkMenuTrigger>
+              <L.LoongArkMenuTrigger asChild={false}>
+                文件
+              </L.LoongArkMenuTrigger>
               <L.LoongArkMenuPositioner>
                 <L.LoongArkMenuContent>
                   <L.LoongArkMenuItem value="new">新建</L.LoongArkMenuItem>
@@ -341,7 +343,7 @@ export function CoreComponentsExample() {
                 <L.LoongArkPopoverDescription>
                   浮层继承当前主题。
                 </L.LoongArkPopoverDescription>
-                <L.LoongArkPopoverCloseTrigger>
+                <L.LoongArkPopoverCloseTrigger aria-label="关闭">
                   关闭
                 </L.LoongArkPopoverCloseTrigger>
               </L.LoongArkPopoverContent>

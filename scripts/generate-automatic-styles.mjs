@@ -96,7 +96,7 @@ for(const name of order){
 }
 // HTML 组合部件的依赖不一定出现为框架子组件，需显式保留它们的样式。
 const dependencies={
- 'data-table':['checkbox','input','native-select','button','icon','textarea'],
+ 'data-table':['table','checkbox','input','native-select','button','icon','textarea'],
  questionnaire:['button','input','textarea','native-select','checkbox','radio-group','icon'],
  editor:['button','input','native-select','icon'],
  chart:['icon'],
@@ -109,7 +109,8 @@ const aliases={
 };
 catalog.set('filter-bar',[{module:'../shared-styles/filter-bar',name:'filterBarPrimitive'}]);
 for(const [alias,targets] of Object.entries(aliases)){
- const entries=targets.flatMap(target=>catalog.get(target)??[]);
+ // 组合别名保留自身外壳规则，再补齐底层 Ark 部件；不能用别名覆盖已有作用域。
+ const entries=[...(catalog.get(alias)??[]),...targets.flatMap(target=>catalog.get(target)??[])];
  catalog.set(alias,entries);
 }
 const dependenciesFor=scope=>{

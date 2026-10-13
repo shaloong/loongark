@@ -1,6 +1,6 @@
+// 本文件由 scripts/generate-core-examples.mjs 生成，并参与真实四端编译与浏览器验收。
 import type { AngleSliderHiddenInputProps } from "@ark-ui/vue/angle-slider";
 import type { PinInputHiddenInputProps } from "@ark-ui/vue/pin-input";
-// 本文件由 scripts/generate-core-examples.mjs 生成，并参与真实四端编译与浏览器验收。
 import {
   defineComponent,
   h,
@@ -112,11 +112,7 @@ export const CoreComponentsExample = defineComponent({
                               h(
                                 L.LoongArkAccordionItemContent,
                                 {},
-                                {
-                                  default: () => [
-                                    "通过 main 发布正式组件展示。",
-                                  ],
-                                },
+                                { default: () => ["这里是展开后的详细设置。"] },
                               ),
                             ],
                           },
@@ -761,7 +757,7 @@ export const CoreComponentsExample = defineComponent({
                             default: () => [
                               h(
                                 L.LoongArkMenuTrigger,
-                                {},
+                                { asChild: false },
                                 { default: () => ["文件"] },
                               ),
                               h(
@@ -965,7 +961,7 @@ export const CoreComponentsExample = defineComponent({
                                     ),
                                     h(
                                       L.LoongArkPopoverCloseTrigger,
-                                      {},
+                                      { "aria-label": "关闭" },
                                       { default: () => ["关闭"] },
                                     ),
                                   ],

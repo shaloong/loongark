@@ -63,7 +63,7 @@
             >部署设置<L.LoongArkAccordionItemIndicator
             /></L.LoongArkAccordionItemTrigger
           ><L.LoongArkAccordionItemContent
-            >通过 main 发布正式组件展示。</L.LoongArkAccordionItemContent
+            >这里是展开后的详细设置。</L.LoongArkAccordionItemContent
           ></L.LoongArkAccordionItem
         ></L.LoongArkAccordionRoot
       >
@@ -328,7 +328,8 @@
             ><L.LoongArkPopoverTitle>详情</L.LoongArkPopoverTitle
             ><L.LoongArkPopoverDescription
               >浮层继承当前主题。</L.LoongArkPopoverDescription
-            ><L.LoongArkPopoverCloseTrigger>关闭</L.LoongArkPopoverCloseTrigger
+            ><L.LoongArkPopoverCloseTrigger aria-label="关闭"
+              >关闭</L.LoongArkPopoverCloseTrigger
             ></L.LoongArkPopoverContent
           ></L.LoongArkPopoverPositioner
         ></L.LoongArkPopoverRoot

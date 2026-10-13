@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "pnpm -r run build",
-    "lint": "node scripts/generate-entries.mjs --check && node scripts/generate-automatic-styles.mjs --check && node scripts/check-automatic-style-bindings.mjs && node ./scripts/verify-workspace.mjs && node ./scripts/check-audit-hygiene.mjs && node ./scripts/check-licenses.mjs && node scripts/check-doc-links.mjs",
+    "lint": "node scripts/generate-entries.mjs --check && node scripts/generate-core-examples.mjs --check && node scripts/generate-automatic-styles.mjs --check && node scripts/check-automatic-style-bindings.mjs && node ./scripts/verify-workspace.mjs && node ./scripts/check-audit-hygiene.mjs && node ./scripts/check-licenses.mjs && node scripts/check-doc-links.mjs",
     "clean": "node ./scripts/clean.mjs",
     "tsc": "pnpm exec tsc -b",
     "verify": "pnpm run lint && pnpm run tsc && pnpm run build",

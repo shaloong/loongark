@@ -141,6 +141,12 @@ for (const framework of ["react", "vue", "solid", "svelte"])
           await expect(
             page.locator(`[data-core-family="${name}"]`),
           ).toBeVisible();
+          if (name === "Menubar") {
+            await expect(page.getByRole("menubar")).toHaveCSS("display", "flex");
+            await expect(
+              page.getByRole("menubar").getByRole("menuitem", { name: "文件", exact: true }),
+            ).toBeVisible();
+          }
           expect(
             await page.evaluate(
               () => document.documentElement.scrollWidth - window.innerWidth,
