@@ -1,0 +1,119 @@
+name: Publish npm
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '已验收且已创建标签的正式版本，如 0.1.0'
+        required: true
+        type: string
+      readiness_run:
+        description: '同一标签提交在 main 上完整通过的 Release readiness run ID'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: read
+  id-token: write
+
+concurrency:
+  group: npm-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: npm-publish
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+      - name: Require verified stable release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.version }}
+          READINESS_RUN: ${{ inputs.readiness_run }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {execFileSync} from 'node:child_process';
+          import {appendFileSync} from 'node:fs';
+          const {RELEASE_VERSION:version,READINESS_RUN:run,REPOSITORY:repo}=process.env;
+          assert.match(version,/^\d+\.\d+\.\d+$/);
+          assert.match(run,/^\d+$/);
+          const api=path=>JSON.parse(execFileSync('gh',['api',`repos/${repo}/${path}`],{encoding:'utf8'}));
+          const sha=execFileSync('git',['rev-parse',`refs/tags/v${version}^{commit}`],{encoding:'utf8'}).trim();
+          execFileSync('git',['merge-base','--is-ancestor',sha,'origin/main']);
+          const release=JSON.parse(execFileSync('gh',['release','view',`v${version}`,'--repo',repo,'--json','tagName,isDraft'],{encoding:'utf8'}));
+          assert.equal(release.tagName,`v${version}`);
+          assert.equal(release.isDraft,true,'正式公开前必须保留Release草稿');
+          const verified=api(`actions/runs/${run}`);
+          assert.equal(verified.path,'.github/workflows/release-readiness.yml');
+          assert.equal(verified.head_branch,'main');
+          assert.equal(verified.head_sha,sha);
+          assert.equal(verified.event,'workflow_dispatch');
+          assert.equal(verified.conclusion,'success');
+          const jobs=api(`actions/runs/${run}/jobs?per_page=100`).jobs;
+          const steps=jobs.flatMap(job=>job.steps);
+          for(const name of ['Check requested version','Run pnpm check:versions','Run pnpm check:rsc','Complete reference examples'])
+            assert.ok(steps.some(step=>step.name===name && step.conclusion==='success'),`缺少完整验收：${name}`);
+          execFileSync('git',['checkout','--detach',sha]);
+          appendFileSync(process.env.GITHUB_ENV,`RELEASE_VERSION=${version}\n`);
+          NODE
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: release-readiness-evidence
+          run-id: ${{ inputs.readiness_run }}
+          github-token: ${{ github.token }}
+          path: .artifacts/verified-release
+      - name: Publish verified tarballs in dependency order
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,readdirSync} from 'node:fs';
+          import {join,basename} from 'node:path';
+          import {execFileSync} from 'node:child_process';
+          function find(dir){return readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?find(join(dir,entry.name)):[join(dir,entry.name)]);}
+          const files=find('.artifacts/verified-release');
+          const reports=files.filter(file=>file.endsWith('/packages/report.json'));
+          assert.equal(reports.length,1,'必须恰有一份已验收包清单');
+          const report=JSON.parse(readFileSync(reports[0],'utf8'));
+          const order=['tokens','theme','primitives','kit','react','vue','solid','svelte','cli'];
+          assert.equal(report.length,order.length);
+          const targets=order.map(name=>{
+            const entries=report.filter(entry=>entry.name===`@loongark/${name}`);
+            assert.equal(entries.length,1);
+            assert.equal(entries[0].version,process.env.RELEASE_VERSION);
+            const tarballs=files.filter(file=>basename(file)===basename(entries[0].tarball));
+            assert.equal(tarballs.length,1);
+            return tarballs[0];
+          });
+          for(const tarball of targets)execFileSync('npm',['publish',tarball,'--access','public','--provenance'],{stdio:'inherit'});
+          NODE
+      - name: Attach original tarballs to release draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          node --input-type=module <<'NODE'
+          import {readdirSync,readFileSync,writeFileSync} from 'node:fs';
+          import {join,basename} from 'node:path';
+          import {createHash} from 'node:crypto';
+          import {execFileSync} from 'node:child_process';
+          function find(dir){return readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?find(join(dir,entry.name)):[join(dir,entry.name)]);}
+          const tarballs=find('.artifacts/verified-release').filter(file=>file.endsWith('.tgz'));
+          const sums='.artifacts/verified-release/SHA256SUMS';
+          writeFileSync(sums,tarballs.map(file=>`${createHash('sha256').update(readFileSync(file)).digest('hex')}  ${basename(file)}`).join('\n')+'\n');
+          execFileSync('gh',['release','upload',`v${process.env.RELEASE_VERSION}`,...tarballs,sums,'--repo',process.env.REPOSITORY],{stdio:'inherit'});
+          NODE
