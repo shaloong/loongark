@@ -1,6 +1,8 @@
 # 变更日志
 
-## Unreleased（当前包清单 0.1.0）
+## 0.1.0
+
+首次发布版本：包含 React、Vue、Solid、Svelte 四端适配，以及共享 Token、主题、Primitives、Kit 和 CLI。支持版本与验收边界见 [发布指南](docs/releases.md)，接入注意事项见 [迁移说明](docs/migration.md)。
 
 ### 按需接入
 
