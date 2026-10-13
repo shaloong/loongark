@@ -13,7 +13,7 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write
   actions: read
   id-token: write
 
@@ -53,6 +53,9 @@ jobs:
           const api=path=>JSON.parse(execFileSync('gh',['api',`repos/${repo}/${path}`],{encoding:'utf8'}));
           const sha=execFileSync('git',['rev-parse',`refs/tags/v${version}^{commit}`],{encoding:'utf8'}).trim();
           execFileSync('git',['merge-base','--is-ancestor',sha,'origin/main']);
+          const release=JSON.parse(execFileSync('gh',['release','view',`v${version}`,'--repo',repo,'--json','tagName,isDraft'],{encoding:'utf8'}));
+          assert.equal(release.tagName,`v${version}`);
+          assert.equal(release.isDraft,true,'正式公开前必须保留Release草稿');
           const verified=api(`actions/runs/${run}`);
           assert.equal(verified.path,'.github/workflows/release-readiness.yml');
           assert.equal(verified.head_branch,'main');
@@ -97,4 +100,20 @@ jobs:
             return tarballs[0];
           });
           for(const tarball of targets)execFileSync('npm',['publish',tarball,'--access','public','--provenance'],{stdio:'inherit'});
+          NODE
+      - name: Attach original tarballs to release draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          node --input-type=module <<'NODE'
+          import {readdirSync,readFileSync,writeFileSync} from 'node:fs';
+          import {join,basename} from 'node:path';
+          import {createHash} from 'node:crypto';
+          import {execFileSync} from 'node:child_process';
+          function find(dir){return readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?find(join(dir,entry.name)):[join(dir,entry.name)]);}
+          const tarballs=find('.artifacts/verified-release').filter(file=>file.endsWith('.tgz'));
+          const sums='.artifacts/verified-release/SHA256SUMS';
+          writeFileSync(sums,tarballs.map(file=>`${createHash('sha256').update(readFileSync(file)).digest('hex')}  ${basename(file)}`).join('\n')+'\n');
+          execFileSync('gh',['release','upload',`v${process.env.RELEASE_VERSION}`,...tarballs,sums,'--repo',process.env.REPOSITORY],{stdio:'inherit'});
           NODE
