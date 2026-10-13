@@ -55,7 +55,7 @@ async function validate(file,name,scope){
  const key=file+'|'+name+'|'+scope;
  if(checked.has(key))return;
  // 通用 Portal 只负责传送 children，不渲染组件所属 DOM。
- if(file.endsWith('/components/Portal.svelte')){checked.add(key);return;}
+ if(/[\\/]components[\\/]Portal\.svelte$/.test(file)){checked.add(key);return;}
  if(file.endsWith('.svelte')){
   const source=await readFile(file,'utf8');
   const match=[...source.matchAll(/import \{ styles as (\w+) \} from "@loongark\/primitives\/automatic-styles\/([^";]+)";/g)].find(m=>compatible(scope,m[2]));
