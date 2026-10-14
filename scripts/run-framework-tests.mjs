@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
 const critical = new Set([
   "automatic-styles", "tour-overlays", "browser-environment", "framework-consumers", "theme-csp", "provider-core",
   "picker-overlays", "color-picker-contrast", "date-time", "drawer-viewport-focus",
-  "data-table-complex-editors", "data-table-range", "editor-timing",
+  "data-table-complex-editors", "data-table-advanced", "data-table-range", "editor-timing",
   "code-editor-native-history", "chart-interaction", "questionnaire-custom",
   "questionnaire-group-focus", "virtual-grid-keyboard", "async-collection",
   "compound-field-native", "selection-focus-timing", "focus-ownership",
@@ -32,6 +32,7 @@ const child = spawn(
     "tests/drawer-viewport-focus.spec.ts",
     "tests/image-cropper-platform.spec.ts",
     "tests/data-table-complex-editors.spec.ts",
+    "tests/data-table-advanced.spec.ts",
     "tests/data-table-batch.spec.ts",
     "tests/data-table-query.spec.ts",
     "tests/data-table-columns.spec.ts",
