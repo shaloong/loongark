@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticMessageScrollerStyles } from "@loongark/primitives/automatic-styles/message-scroller";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticMessageScrollerStyles } from "@shaloong/loongark-primitives/automatic-styles/message-scroller";
 import {
   defineComponent,
   h,
@@ -19,7 +19,7 @@ import {
   messageVirtualOptions,
   virtualViewportHeight,
   type MessageScrollerOptions,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export const LoongArkMessageScroller = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkMessageScroller",
   inheritAttrs: false,

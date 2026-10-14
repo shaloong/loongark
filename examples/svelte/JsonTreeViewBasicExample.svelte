@@ -2,7 +2,7 @@
   import {
     LoongArkJsonTreeViewRoot,
     LoongArkJsonTreeViewTree,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkJsonTreeViewRoot

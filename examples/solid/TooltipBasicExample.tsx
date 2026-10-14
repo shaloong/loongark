@@ -5,7 +5,7 @@ import {
   LoongArkTooltipTrigger,
   LoongArkTooltipPositioner,
   LoongArkTooltipContent,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function TooltipBasicExample() {
   return (
     <LoongArkTooltipRoot>

@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkMessage, LoongArkBubble } from "@loongark/solid";
+import { LoongArkMessage, LoongArkBubble } from "@shaloong/loongark-solid";
 export function MessageBasicExample() {
   return (
     <LoongArkMessage

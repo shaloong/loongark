@@ -5,7 +5,7 @@
     LoongArkAccordionItemTrigger,
     LoongArkAccordionItemIndicator,
     LoongArkAccordionItemContent,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkAccordionRoot collapsible>

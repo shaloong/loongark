@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkAppBar, LoongArkToolbar, LoongArkLink } from "@loongark/solid";
+import { LoongArkAppBar, LoongArkToolbar, LoongArkLink } from "@shaloong/loongark-solid";
 export function AppBarBasicExample() {
   return (
     <LoongArkAppBar>

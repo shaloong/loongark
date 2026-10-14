@@ -799,37 +799,37 @@ export * from "./components/ark-next";
 export * from "./components/drawer";
 export * from "./components/ark-controls";
 
-export type { Question, QuestionRow, QuestionGroupInstance, QuestionnaireCustomContext, QuestionnaireCustomControl, QuestionAnswer, QuestionOption, QuestionnaireOptions, QuestionnaireValue } from "@loongark/kit";
+export type { Question, QuestionRow, QuestionGroupInstance, QuestionnaireCustomContext, QuestionnaireCustomControl, QuestionAnswer, QuestionOption, QuestionnaireOptions, QuestionnaireValue } from "@shaloong/loongark-kit";
 
-export type { DataTableState, DataTableLabels, DataTableSummary, DataRow, DataColumn, DataSort, DataFilter, DataFilterOperator, DataColumnFilter } from "@loongark/kit";
+export type { DataTableState, DataTableLabels, DataTableSummary, DataRow, DataColumn, DataSort, DataFilter, DataFilterOperator, DataColumnFilter } from "@shaloong/loongark-kit";
 
-export type { ChartOptions, ChartSeries, ChartLabels, ChartAxis } from "@loongark/kit";
+export type { ChartOptions, ChartSeries, ChartLabels, ChartAxis } from "@shaloong/loongark-kit";
 
-export type {AttachmentOptions,MessageOptions,ConversationAction,ConversationActionContext,ConversationActionHandler,ConversationActionLabels,ConversationActionState} from "@loongark/kit";
+export type {AttachmentOptions,MessageOptions,ConversationAction,ConversationActionContext,ConversationActionHandler,ConversationActionLabels,ConversationActionState} from "@shaloong/loongark-kit";
 
 export {default as LoongArkIcon} from "./components/Icon.svelte";
 export type {LoongArkIconProps} from "./components/Icon.svelte";
-export type {IconOptions, IconNode} from "@loongark/kit";
+export type {IconOptions, IconNode} from "@shaloong/loongark-kit";
 
-export type { VirtualizationOptions, VirtualRenderDetails } from "@loongark/kit";
+export type { VirtualizationOptions, VirtualRenderDetails } from "@shaloong/loongark-kit";
 
-export type {ChartRange} from "@loongark/kit";
+export type {ChartRange} from "@shaloong/loongark-kit";
 
-export { createAsyncCollectionLoader } from "@loongark/kit";
-export type { AsyncCollectionSort, AsyncCollectionRequest, AsyncCollectionLoadDetails, AsyncCollectionPage, AsyncCollectionLoaderOptions } from "@loongark/kit";
+export { createAsyncCollectionLoader } from "@shaloong/loongark-kit";
+export type { AsyncCollectionSort, AsyncCollectionRequest, AsyncCollectionLoadDetails, AsyncCollectionPage, AsyncCollectionLoaderOptions } from "@shaloong/loongark-kit";
 
-export type { DataColumnGeometry, DataTableColumnLabels, DataTableColumnOptions } from "@loongark/kit";
+export type { DataColumnGeometry, DataTableColumnLabels, DataTableColumnOptions } from "@shaloong/loongark-kit";
 
 export { default as LoongArkCodeEditor } from "./components/CodeEditor.svelte";
 export { default as LoongArkRichTextEditor } from "./components/RichTextEditor.svelte";
-export type { CodeEditorProps, CodeEditorLabels, CodeEditorLanguage, CodeEditorLanguageLoader, CodeEditorHandle, RichTextEditorProps, RichTextEditorHandle, RichTextDocument, RichTextMark, RichTextAttribute, RichTextAction } from "@loongark/kit";
+export type { CodeEditorProps, CodeEditorLabels, CodeEditorLanguage, CodeEditorLanguageLoader, CodeEditorHandle, RichTextEditorProps, RichTextEditorHandle, RichTextDocument, RichTextMark, RichTextAttribute, RichTextAction } from "@shaloong/loongark-kit";
 
-export { exportImageCropper } from "@loongark/kit";
-export type { ImageCropperExportModel, ImageCropperExportOptions } from "@loongark/kit";
+export { exportImageCropper } from "@shaloong/loongark-kit";
+export type { ImageCropperExportModel, ImageCropperExportOptions } from "@shaloong/loongark-kit";
 
 export type { LoongArkQuestionnaireRenderers } from "./components/questionnaire-custom.types";
 
-export type { ColumnVirtualizationOptions } from "@loongark/kit";
+export type { ColumnVirtualizationOptions } from "@shaloong/loongark-kit";
 
 export { default as LoongArkVirtualGrid } from "./components/VirtualGrid.svelte";
 
@@ -840,13 +840,13 @@ export type {
   VirtualGridCellDetails,
   VirtualMasonryOptions,
   VirtualMasonryEntry,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 
 export type { VirtualGridProps } from "./components/VirtualGrid.svelte";
 
 export type { VirtualMasonryProps } from "./components/VirtualMasonry.svelte";
 
-export { parseLocalizedDate, parseDateTime, parseZonedDateTime } from "@loongark/kit";
-export type { LocalizedDateOptions } from "@loongark/kit";
+export { parseLocalizedDate, parseDateTime, parseZonedDateTime } from "@shaloong/loongark-kit";
+export type { LocalizedDateOptions } from "@shaloong/loongark-kit";
 
 export { LoongArkProviderCore, type LoongArkProviderCoreProps } from "./provider-core";

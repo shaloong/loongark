@@ -1,5 +1,5 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/vue";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-vue";
 import { defineComponent, h, type PropType } from "vue";
 import {
   LoongArkTreeViewRoot,
@@ -17,8 +17,8 @@ import {
   LoongArkTreeViewBranchIndentGuide,
   LoongArkTreeViewNodeProvider,
   createTreeCollection,
-} from "@loongark/vue";
-import type { TreeViewSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { TreeViewSize } from "@shaloong/loongark-primitives";
 
 interface WorkspaceNode {
   id: string;

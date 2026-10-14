@@ -1,10 +1,10 @@
-<script lang="ts">import {LoongArkProviderCore as Provider} from '@loongark/svelte/provider-core';
-import {LoongArkButton as Button} from '@loongark/svelte/button';
-import {LoongArkDialogRoot as DialogRoot,LoongArkDialogTrigger as DialogTrigger,LoongArkDialogPortal as DialogPortal,LoongArkDialogOverlay as DialogOverlay,LoongArkDialogPositioner as DialogPositioner,LoongArkDialogContent as DialogContent,LoongArkDialogTitle as DialogTitle,LoongArkDialogDescription as DialogDescription,LoongArkDialogCloseTrigger as DialogCloseTrigger} from '@loongark/svelte/dialog';
-import {LoongArkInputRoot as InputRoot,LoongArkInputControl as InputControl,LoongArkInputLabel as InputLabel} from '@loongark/svelte/input';import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';
-import {buttonPrimitive} from '@loongark/primitives/button';
-import {dialogPrimitive} from '@loongark/primitives/dialog';
-import {inputPrimitive} from '@loongark/primitives/input';
+<script lang="ts">import {LoongArkProviderCore as Provider} from '@shaloong/loongark-svelte/provider-core';
+import {LoongArkButton as Button} from '@shaloong/loongark-svelte/button';
+import {LoongArkDialogRoot as DialogRoot,LoongArkDialogTrigger as DialogTrigger,LoongArkDialogPortal as DialogPortal,LoongArkDialogOverlay as DialogOverlay,LoongArkDialogPositioner as DialogPositioner,LoongArkDialogContent as DialogContent,LoongArkDialogTitle as DialogTitle,LoongArkDialogDescription as DialogDescription,LoongArkDialogCloseTrigger as DialogCloseTrigger} from '@shaloong/loongark-svelte/dialog';
+import {LoongArkInputRoot as InputRoot,LoongArkInputControl as InputControl,LoongArkInputLabel as InputLabel} from '@shaloong/loongark-svelte/input';import {createPrimitiveStyleBootstrap} from '@shaloong/loongark-primitives/styles';
+import {buttonPrimitive} from '@shaloong/loongark-primitives/button';
+import {dialogPrimitive} from '@shaloong/loongark-primitives/dialog';
+import {inputPrimitive} from '@shaloong/loongark-primitives/input';
 const buttonStyles=createPrimitiveStyleBootstrap([buttonPrimitive]);
 const initialStyles=createPrimitiveStyleBootstrap([buttonPrimitive,dialogPrimitive]);
 const extraStyles=createPrimitiveStyleBootstrap([inputPrimitive,dialogPrimitive,buttonPrimitive]);

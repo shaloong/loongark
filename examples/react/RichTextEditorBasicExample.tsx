@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkRichTextEditor } from "@loongark/react";
+import { LoongArkRichTextEditor } from "@shaloong/loongark-react";
 export function RichTextEditorBasicExample() {
   return (
     <LoongArkRichTextEditor

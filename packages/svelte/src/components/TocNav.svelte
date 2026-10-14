@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTocStyles } from "@loongark/primitives/automatic-styles/toc";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTocStyles } from "@shaloong/loongark-primitives/automatic-styles/toc";
   registerAutomaticStyles(lkAutomaticTocStyles);
 
   import { Ark } from "@ark-ui/svelte/factory";
@@ -9,7 +9,7 @@
     type TocNavProps,
     type UseTocProps,
   } from "@ark-ui/svelte/toc";
-  import { tocNavId } from "@loongark/kit";
+  import { tocNavId } from "@shaloong/loongark-kit";
   type Props = Omit<TocNavProps, keyof UseTocProps> & { id?: string };
   let {
     ref = $bindable(null),

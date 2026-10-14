@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkAvatarRoot, LoongArkAvatarFallback } from "@loongark/solid";
+import { LoongArkAvatarRoot, LoongArkAvatarFallback } from "@shaloong/loongark-solid";
 export function AvatarBasicExample() {
   return (
     <LoongArkAvatarRoot>

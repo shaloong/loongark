@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkVirtualMasonry } from "@loongark/svelte";
+  import { LoongArkVirtualMasonry } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkVirtualMasonry

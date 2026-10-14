@@ -4,7 +4,7 @@ import {
   LoongArkBottomNavigation,
   LoongArkBottomNavigationItem,
   LoongArkBottomNavigationLabel,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function BottomNavigationBasicExample() {
   return (
     <LoongArkBottomNavigation aria-label="主导航">

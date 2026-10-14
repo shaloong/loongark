@@ -1,5 +1,5 @@
-import { createLoongArkTheme } from "@loongark/theme";
-import { bootstrapKit } from "@loongark/kit";
+import { createLoongArkTheme } from "@shaloong/loongark-theme";
+import { bootstrapKit } from "@shaloong/loongark-kit";
 
 export const checkThemeLifecycle = () => {
   const a = document.createElement("section"),

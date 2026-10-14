@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSegmentGroupStyles } from "@loongark/primitives/automatic-styles/segment-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSegmentGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/segment-group";
 import type { SegmentGroupRootProps } from "@ark-ui/vue/segment-group";
 import { renderPart } from "../render-part";
 /**
@@ -12,7 +12,7 @@ import { SegmentGroup as ArkSegmentGroup } from "@ark-ui/vue/segment-group";
 import type {
   SegmentGroupOrientation,
   SegmentGroupSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface SegmentGroupValueChangeDetails {
   value: string | null;

@@ -4,7 +4,7 @@ import {
   LoongArkSegmentGroupItem,
   LoongArkSegmentGroupItemHiddenInput,
   LoongArkSegmentGroupItemText,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function SegmentGroupBasicExample() {
   return (
     <LoongArkSegmentGroupRoot

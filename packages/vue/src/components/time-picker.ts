@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTimePickerStyles } from "@loongark/primitives/automatic-styles/time-picker";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTimePickerStyles } from "@shaloong/loongark-primitives/automatic-styles/time-picker";
 import { defineComponent, h, ref, useId, type PropType } from "vue";
 import {
   parseTime,
@@ -11,7 +11,7 @@ import {
   validTime,
   formatTime,
   type TimePickerOptions,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 import {
   LoongArkPopoverRoot,
   LoongArkPopoverTrigger,

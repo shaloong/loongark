@@ -9,7 +9,7 @@ import {
   LoongArkEditableEditTrigger,
   LoongArkEditableSubmitTrigger,
   LoongArkEditableCancelTrigger,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const EditableBasicExample = defineComponent({
   setup() {
     return () => {

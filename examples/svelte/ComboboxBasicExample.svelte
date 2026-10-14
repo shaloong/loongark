@@ -11,7 +11,7 @@
     LoongArkComboboxList,
     LoongArkComboboxItem,
     LoongArkComboboxItemText,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   let query = $state("");
   const options = [
     { value: "beijing", label: "北京" },

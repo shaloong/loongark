@@ -5,7 +5,7 @@ import {
   LoongArkCheckboxIndicator,
   LoongArkCheckboxLabel,
   LoongArkCheckboxHiddenInput,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const CheckboxBasicExample = defineComponent({
   setup() {
     return () => {

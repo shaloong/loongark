@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkAppBar, LoongArkToolbar, LoongArkLink } from "@loongark/react";
+import { LoongArkAppBar, LoongArkToolbar, LoongArkLink } from "@shaloong/loongark-react";
 export function AppBarBasicExample() {
   return (
     <LoongArkAppBar>

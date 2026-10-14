@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticRichTextEditorStyles } from "@loongark/primitives/automatic-styles/rich-text-editor";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticRichTextEditorStyles } from "@shaloong/loongark-primitives/automatic-styles/rich-text-editor";
   registerAutomaticStyles(lkAutomaticRichTextEditorStyles);
 
   import { onMount, onDestroy, untrack } from "svelte";
-  import { renderRichTextEditorMarkup, mountRichTextEditor, type RichTextEditorProps } from "@loongark/kit";
+  import { renderRichTextEditorMarkup, mountRichTextEditor, type RichTextEditorProps } from "@shaloong/loongark-kit";
   let { value = $bindable<RichTextEditorProps["value"]>(undefined), onValueChange, ...rest }: RichTextEditorProps = $props();
   const uid = $props.id();
   const options = (): RichTextEditorProps => ({ ...rest, value, onValueChange(next) {

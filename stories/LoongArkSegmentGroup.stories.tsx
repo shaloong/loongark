@@ -5,7 +5,7 @@ import {
   LoongArkSegmentGroupItem,
   LoongArkSegmentGroupItemHiddenInput,
   LoongArkSegmentGroupItemText,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/Segment Group",

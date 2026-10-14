@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkAspectRatio, LoongArkPaper } from "@loongark/solid";
+import { LoongArkAspectRatio, LoongArkPaper } from "@shaloong/loongark-solid";
 export function AspectRatioBasicExample() {
   return (
     <LoongArkAspectRatio ratio={16 / 9}>

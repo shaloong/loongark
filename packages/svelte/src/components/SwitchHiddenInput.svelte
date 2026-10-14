@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticSwitchStyles } from "@loongark/primitives/automatic-styles/switch";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticSwitchStyles } from "@shaloong/loongark-primitives/automatic-styles/switch";
   registerAutomaticStyles(lkAutomaticSwitchStyles);
 
   import { onMount } from "svelte";
@@ -8,7 +8,7 @@
   import {
     mountNativeSelection,
     nativeSelectionFieldDescription,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   import {
     Switch,
     useSwitchContext,

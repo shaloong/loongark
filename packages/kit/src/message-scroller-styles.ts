@@ -1,1 +1,1 @@
-export * from "@loongark/primitives/shared-styles/message-scroller-styles";
+export * from "@shaloong/loongark-primitives/shared-styles/message-scroller-styles";

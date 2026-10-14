@@ -5,7 +5,7 @@ import {
   LoongArkSwitchControl,
   LoongArkSwitchThumb,
   LoongArkSwitchLabel,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 
 export const SwitchExample = defineComponent({
   name: "SwitchExample",

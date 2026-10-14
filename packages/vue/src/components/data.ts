@@ -1,8 +1,8 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticChartStyles } from "@loongark/primitives/automatic-styles/chart";
-import { styles as lkAutomaticDataTableStyles } from "@loongark/primitives/automatic-styles/data-table";
-import { controlIcons } from "@loongark/kit";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticChartStyles } from "@shaloong/loongark-primitives/automatic-styles/chart";
+import { styles as lkAutomaticDataTableStyles } from "@shaloong/loongark-primitives/automatic-styles/data-table";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import {
   dataTableView,
@@ -61,7 +61,7 @@ import {
   setDataSelectionMixed,
   restoreDataSelection,
   type ChartOptions,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 import {
   defineComponent,
   Fragment,

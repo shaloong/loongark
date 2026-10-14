@@ -6,8 +6,8 @@ import {
   LoongArkHoverCardContent,
   LoongArkHoverCardArrow,
   LoongArkHoverCardArrowTip,
-} from "@loongark/vue";
-import type { HoverCardSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { HoverCardSize } from "@shaloong/loongark-primitives";
 
 export const HoverCardExample = defineComponent({
   name: "HoverCardExample",

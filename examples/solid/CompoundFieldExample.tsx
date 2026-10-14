@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal, createMemo, createUniqueId } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import {
   createCompoundFieldDemo,
   compoundFieldControls,

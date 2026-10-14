@@ -21,8 +21,8 @@ import {
   LoongArkColorPickerValueText,
   LoongArkColorPickerValueSwatch,
   parseColor,
-} from "@loongark/vue";
-import type { ColorPickerSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { ColorPickerSize } from "@shaloong/loongark-primitives";
 
 const swatches = ["#006EFF", "#0A3565", "#5AC8FA", "#F58220"];
 

@@ -5,7 +5,7 @@ import {
   LoongArkProgressTrack,
   LoongArkProgressRange,
   LoongArkProgressValueText,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function ProgressBasicExample() {
   return (
     <LoongArkProgressRoot value={60}>

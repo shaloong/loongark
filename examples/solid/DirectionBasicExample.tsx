@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkDirection, LoongArkNativeSelect } from "@loongark/solid";
+import { LoongArkDirection, LoongArkNativeSelect } from "@shaloong/loongark-solid";
 export function DirectionBasicExample() {
   return (
     <LoongArkDirection dir="rtl">

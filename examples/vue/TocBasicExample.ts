@@ -6,7 +6,7 @@ import {
   LoongArkTocList,
   LoongArkTocItem,
   LoongArkTocLink,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const TocBasicExample = defineComponent({
   setup() {
     return () => {

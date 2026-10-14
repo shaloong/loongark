@@ -4,8 +4,8 @@
     LoongArkSplitterPanel,
     LoongArkSplitterResizeTrigger,
     LoongArkSplitterResizeTriggerIndicator,
-  } from "@loongark/svelte";
-  import type { SplitterSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { SplitterSize } from "@shaloong/loongark-primitives";
 
   export let size: SplitterSize = "md";
   export let orientation: "horizontal" | "vertical" = "horizontal";

@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkFloatingActionButton } from "@loongark/react";
+import { LoongArkFloatingActionButton } from "@shaloong/loongark-react";
 export function FloatingActionButtonBasicExample() {
   return (
     <LoongArkFloatingActionButton extended>

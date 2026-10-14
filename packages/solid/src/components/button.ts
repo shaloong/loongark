@@ -1,9 +1,9 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticButtonStyles } from "@loongark/primitives/automatic-styles/button";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticButtonStyles } from "@shaloong/loongark-primitives/automatic-styles/button";
 import type { JSX } from "solid-js";
 import { ark } from "@ark-ui/solid";
-import type { ButtonPrimitiveProps } from "@loongark/primitives";
+import type { ButtonPrimitiveProps } from "@shaloong/loongark-primitives";
 import { mergeProps, splitProps } from "solid-js";
 import type { Component } from "solid-js";
 import { boolAttr } from "../utils";

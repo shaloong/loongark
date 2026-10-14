@@ -5,11 +5,11 @@ import {
   LoongArkSegmentGroupItem,
   LoongArkSegmentGroupItemHiddenInput,
   LoongArkSegmentGroupItemText,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 import type {
   SegmentGroupOrientation,
   SegmentGroupSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface SegmentGroupExampleProps {
   size?: SegmentGroupSize;

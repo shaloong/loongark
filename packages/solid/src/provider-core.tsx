@@ -5,11 +5,11 @@ import {
   onCleanup,
   type ParentComponent,
 } from "solid-js";
-import { createLoongArkTheme, type CreateThemeOptions } from "@loongark/theme";
+import { createLoongArkTheme, type CreateThemeOptions } from "@shaloong/loongark-theme";
 import {
   bootstrapPrimitiveBase,
   type StyleBootstrap,
-} from "@loongark/primitives/styles";
+} from "@shaloong/loongark-primitives/styles";
 import { ThemeContext } from "./theme-context";
 export interface LoongArkProviderCoreProps extends CreateThemeOptions {
   styleBootstrap?: StyleBootstrap;

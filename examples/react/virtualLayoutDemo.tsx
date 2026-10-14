@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { createVirtualLayoutDemo } from "../shared/virtualLayoutDemo";
 import {
   groupsDisclosureCSS,

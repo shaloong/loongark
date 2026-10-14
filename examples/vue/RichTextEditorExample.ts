@@ -3,7 +3,7 @@ import {
   groupsDisclosureIcon,
 } from "../shared/questionnaireGroupsDemo";
 import { defineComponent, h, ref } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import { createRichTextEditorDemo } from "../shared/editorDemo";
 export const RichTextEditorExample = defineComponent({
   setup() {

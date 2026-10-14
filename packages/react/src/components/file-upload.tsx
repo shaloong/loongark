@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticFileUploadStyles } from "@loongark/primitives/automatic-styles/file-upload";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticFileUploadStyles } from "@shaloong/loongark-primitives/automatic-styles/file-upload";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticFileUploadStyles } from "@loongark/primitives/auto
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { FileUpload } from "@ark-ui/react/file-upload";
-import type { FileUploadSize } from "@loongark/primitives";
+import type { FileUploadSize } from "@shaloong/loongark-primitives";
 
 type ArkFileUploadRootProps = ComponentPropsWithoutRef<typeof FileUpload.Root>;
 type ArkFileUploadLabelProps = ComponentPropsWithoutRef<

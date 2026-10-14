@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticEmptyStyles } from "@loongark/primitives/automatic-styles/empty";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticEmptyStyles } from "@shaloong/loongark-primitives/automatic-styles/empty";
   registerAutomaticStyles(lkAutomaticEmptyStyles);
 
-  import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
+  import { layoutAttributes, type LayoutOptions } from "@shaloong/loongark-kit";
   export let as = "p";
   export let variant: LayoutOptions["variant"] = "default";
   export let size: LayoutOptions["size"] = "md";

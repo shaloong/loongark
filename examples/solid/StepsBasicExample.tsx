@@ -11,7 +11,7 @@ import {
   LoongArkStepsCompletedContent,
   LoongArkStepsPrevTrigger,
   LoongArkStepsNextTrigger,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function StepsBasicExample() {
   return (
     <LoongArkStepsRoot count={2}>

@@ -7,7 +7,7 @@ import {
   tokensForMode,
   tokensToCssVariables,
   viPalette,
-} from "@loongark/tokens";
+} from "@shaloong/loongark-tokens";
 
 export type ThemeMode = "light" | "dark" | "high-contrast";
 export type StyleHost = Document | ShadowRoot;

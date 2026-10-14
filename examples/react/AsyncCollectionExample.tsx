@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { createAsyncCollectionDemo, type CollectionDemoItem } from "../shared/asyncCollectionDemo";
 function CollectionView({onDispose}: {onDispose: () => void}) {
  const [,redraw] = useState(0), [demo] = useState(() => createAsyncCollectionDemo(() => redraw(v=>v+1)));

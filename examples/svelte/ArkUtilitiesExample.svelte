@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   let present = $state(true),
     trapped = $state(false),
     frameVisible = $state(true);

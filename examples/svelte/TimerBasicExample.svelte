@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkTimer } from "@loongark/svelte";
+  import { LoongArkTimer } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkTimer.Root countdown startMs={60000}>

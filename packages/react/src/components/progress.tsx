@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticProgressStyles } from "@loongark/primitives/automatic-styles/progress";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticProgressStyles } from "@shaloong/loongark-primitives/automatic-styles/progress";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticProgressStyles } from "@loongark/primitives/automa
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Progress } from "@ark-ui/react/progress";
-import type { ProgressOrientation, ProgressSize } from "@loongark/primitives";
+import type { ProgressOrientation, ProgressSize } from "@shaloong/loongark-primitives";
 
 type ArkProgressRootProps = ComponentPropsWithoutRef<typeof Progress.Root>;
 type ArkProgressLabelProps = ComponentPropsWithoutRef<typeof Progress.Label>;

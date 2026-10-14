@@ -7,7 +7,7 @@ import {
   LoongArkTableHead,
   LoongArkTableBody,
   LoongArkTableCell,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function TableBasicExample() {
   return (
     <LoongArkTable>

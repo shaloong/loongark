@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { TagsInput } from "@ark-ui/svelte/tags-input";
 import type { TagsInputRootProps } from "@ark-ui/svelte/tags-input";
-import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
 
 export default class LoongArkTagsInputRoot extends SvelteComponent<
   Omit<

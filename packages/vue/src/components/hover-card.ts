@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticHoverCardStyles } from "@loongark/primitives/automatic-styles/hover-card";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticHoverCardStyles } from "@shaloong/loongark-primitives/automatic-styles/hover-card";
 import { renderPart } from "../render-part";
 /**
  * Hover Card component - Vue wrapper.
@@ -8,7 +8,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, type PropType } from "vue";
 import { HoverCard as ArkHoverCard } from "@ark-ui/vue/hover-card";
-import type { HoverCardSize } from "@loongark/primitives";
+import type { HoverCardSize } from "@shaloong/loongark-primitives";
 
 export const LoongArkHoverCardRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkHoverCardRoot",

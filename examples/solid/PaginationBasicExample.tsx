@@ -5,7 +5,7 @@ import {
   LoongArkPaginationPrevTrigger,
   LoongArkPaginationItem,
   LoongArkPaginationNextTrigger,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function PaginationBasicExample() {
   return (
     <LoongArkPaginationRoot count={50} pageSize={10}>

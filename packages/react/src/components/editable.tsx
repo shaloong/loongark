@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticEditableStyles } from "@loongark/primitives/automatic-styles/editable";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticEditableStyles } from "@shaloong/loongark-primitives/automatic-styles/editable";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticEditableStyles } from "@loongark/primitives/automa
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Editable } from "@ark-ui/react/editable";
-import type { EditableSize, EditableState } from "@loongark/primitives";
+import type { EditableSize, EditableState } from "@shaloong/loongark-primitives";
 
 type ArkEditableRootProps = ComponentPropsWithoutRef<typeof Editable.Root>;
 type ArkEditableLabelProps = ComponentPropsWithoutRef<typeof Editable.Label>;

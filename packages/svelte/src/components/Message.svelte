@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticMessageStyles } from "@loongark/primitives/automatic-styles/message";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticMessageStyles } from "@shaloong/loongark-primitives/automatic-styles/message";
   registerAutomaticStyles(lkAutomaticMessageStyles);
 
   import type { HTMLAttributes } from "svelte/elements";
@@ -13,7 +13,7 @@
     type ConversationActionHandler,
     messageStatus,
     type MessageOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   let {
     side = "incoming",
     author,

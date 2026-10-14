@@ -1,4 +1,4 @@
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { useCallback } from "react";
 import {
   drawerDirections,

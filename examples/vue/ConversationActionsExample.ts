@@ -1,6 +1,6 @@
 import { defineComponent, h, ref, onBeforeUnmount } from "vue";
-import * as L from "@loongark/vue";
-import type { ConversationActionContext, MessageOptions } from "@loongark/kit";
+import * as L from "@shaloong/loongark-vue";
+import type { ConversationActionContext, MessageOptions } from "@shaloong/loongark-kit";
 import {
   conversationNote,
   waitForConversationAction,

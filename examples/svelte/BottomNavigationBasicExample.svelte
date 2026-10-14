@@ -3,7 +3,7 @@
     LoongArkBottomNavigation,
     LoongArkBottomNavigationItem,
     LoongArkBottomNavigationLabel,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkBottomNavigation aria-label="主导航">

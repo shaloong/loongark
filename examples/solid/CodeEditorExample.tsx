@@ -4,7 +4,7 @@ import {
   groupsDisclosureCSS,
   groupsDisclosureIcon,
 } from "../shared/questionnaireGroupsDemo";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { createCodeEditorDemo } from "../shared/editorDemo";
 export function CodeEditorExample() {
   const [version, redraw] = createSignal(0);

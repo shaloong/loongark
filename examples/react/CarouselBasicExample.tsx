@@ -6,7 +6,7 @@ import {
   LoongArkCarouselControl,
   LoongArkCarouselPrevTrigger,
   LoongArkCarouselNextTrigger,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function CarouselBasicExample() {
   return (
     <LoongArkCarouselRoot slideCount={2}>

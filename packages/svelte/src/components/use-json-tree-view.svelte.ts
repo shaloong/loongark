@@ -8,7 +8,7 @@ import {
   expandedJsonBranches,
   jsonCollectionOptions,
   splitJsonTreeProps,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export function useJsonTreeView(
   props: UseJsonTreeViewProps | (() => UseJsonTreeViewProps),
 ): UseJsonTreeViewReturn {

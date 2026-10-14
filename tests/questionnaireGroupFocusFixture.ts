@@ -45,7 +45,7 @@ export async function setupQuestionGroupFocusFixture(
     },
     true,
   );
-  const state: import("@loongark/kit").QuestionnaireCustomState = {
+  const state: import("@shaloong/loongark-kit").QuestionnaireCustomState = {
     question: {
       id: "people",
       label: "People",

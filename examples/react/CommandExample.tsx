@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 const rows = [
   { id: "overview", name: "组件概览" },
   { id: "api", name: "API 参考" },

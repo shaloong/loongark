@@ -5,7 +5,7 @@ import {
   LoongArkProgressTrack,
   LoongArkProgressRange,
   LoongArkProgressValueText,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const ProgressBasicExample = defineComponent({
   setup() {
     return () => {

@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkButtonGroup, LoongArkButton } from "@loongark/solid";
+import { LoongArkButtonGroup, LoongArkButton } from "@shaloong/loongark-solid";
 export function ButtonGroupBasicExample() {
   return (
     <LoongArkButtonGroup>

@@ -4,7 +4,7 @@ import {
   LoongArkAvatarRoot,
   LoongArkAvatarFallback,
   LoongArkAvatarGroupOverflow,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const AvatarGroupBasicExample = defineComponent({
   setup() {
     return () => {

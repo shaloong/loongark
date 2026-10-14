@@ -6,8 +6,8 @@
     LoongArkScrollAreaScrollbar,
     LoongArkScrollAreaThumb,
     LoongArkScrollAreaCorner,
-  } from "@loongark/svelte";
-  import type { ScrollAreaSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { ScrollAreaSize } from "@shaloong/loongark-primitives";
 
   export let size: ScrollAreaSize = "md";
 

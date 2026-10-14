@@ -1,5 +1,5 @@
 import { defineComponent, h, ref, onBeforeUnmount } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import {
   remoteColumns,
   initialRemoteState,

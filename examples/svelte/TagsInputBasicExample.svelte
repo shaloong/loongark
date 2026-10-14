@@ -10,8 +10,8 @@
     LoongArkIcon,
     LoongArkTagsInputInput,
     LoongArkTagsInputHiddenInput,
-  } from "@loongark/svelte";
-  import { controlIcons } from "@loongark/kit";
+  } from "@shaloong/loongark-svelte";
+  import { controlIcons } from "@shaloong/loongark-kit";
   let tags = $state(["React", "Vue"]);
 </script>
 

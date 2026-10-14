@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createTourFocusDemo } from "../shared/tourFocusDemo";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 export function TourExample() {
   const [focus] = useState(createTourFocusDemo);
   useEffect(() => () => focus.dispose(), [focus]);

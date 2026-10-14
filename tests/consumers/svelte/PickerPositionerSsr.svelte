@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkDatePickerRoot as Root, LoongArkDatePickerPositioner as Positioner } from "@loongark/svelte";
+  import { LoongArkDatePickerRoot as Root, LoongArkDatePickerPositioner as Positioner } from "@shaloong/loongark-svelte";
   const fail = () => { throw Error("SSR must not emit open changes"); };
 </script>
 

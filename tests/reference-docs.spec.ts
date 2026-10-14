@@ -24,14 +24,14 @@ for (const mode of ["light", "dark", "high-contrast"])
       await expect(vue).toBeFocused();
       await expect(vue).toHaveAttribute("aria-selected", "true");
       await expect(reference.getByRole("tabpanel")).toContainText(
-        "@loongark/vue",
+        "@shaloong/loongark-vue",
       );
       await page.keyboard.press("End");
       await expect(
         reference.getByRole("tab", { name: "Svelte", exact: true }),
       ).toBeFocused();
       await expect(reference.getByRole("tabpanel")).toContainText(
-        "@loongark/svelte",
+        "@shaloong/loongark-svelte",
       );
       await reference
         .getByLabel("组件部件", { exact: true })
@@ -75,7 +75,7 @@ for (const mode of ["light", "dark", "high-contrast"])
         .first()
         .locator("summary")
         .click();
-      await expect(data.getByRole("tabpanel")).toContainText("@loongark/solid");
+      await expect(data.getByRole("tabpanel")).toContainText("@shaloong/loongark-solid");
       await expect(
         data.getByRole("tabpanel").locator("details").first(),
       ).toBeVisible();

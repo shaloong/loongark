@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkClientOnly } from "@loongark/solid";
+import { LoongArkClientOnly } from "@shaloong/loongark-solid";
 export function ClientOnlyBasicExample() {
   return (
     <LoongArkClientOnly>

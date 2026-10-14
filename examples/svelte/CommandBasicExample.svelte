@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createCommandCollection, LoongArkCommand } from "@loongark/svelte";
+  import { createCommandCollection, LoongArkCommand } from "@shaloong/loongark-svelte";
   let query = $state("");
   const options = [
     { value: "beijing", label: "北京" },

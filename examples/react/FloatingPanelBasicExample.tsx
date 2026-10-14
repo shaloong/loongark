@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkFloatingPanel } from "@loongark/react";
+import { LoongArkFloatingPanel } from "@shaloong/loongark-react";
 export function FloatingPanelBasicExample() {
   return (
     <LoongArkFloatingPanel.Root>

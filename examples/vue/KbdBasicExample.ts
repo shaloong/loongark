@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkKbdGroup, LoongArkKbd } from "@loongark/vue";
+import { LoongArkKbdGroup, LoongArkKbd } from "@shaloong/loongark-vue";
 export const KbdBasicExample = defineComponent({
   setup() {
     return () => {

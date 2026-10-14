@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 const meta = {
   title: "Components/TimePicker",
   parameters: { layout: "fullscreen" },

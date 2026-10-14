@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkContainer } from "@loongark/vue";
+import { LoongArkContainer } from "@shaloong/loongark-vue";
 export const ContainerBasicExample = defineComponent({
   setup() {
     return () => {

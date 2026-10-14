@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkTransferList } from "@loongark/react";
+import { LoongArkTransferList } from "@shaloong/loongark-react";
 export function TransferListBasicExample() {
   return (
     <LoongArkTransferList

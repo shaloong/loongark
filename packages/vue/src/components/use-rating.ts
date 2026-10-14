@@ -15,7 +15,7 @@ import {
   ratingGroupMachine,
   connectRatingGroup,
   definedRatingGroupProps,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export const useRatingGroup = (
   props: MaybeRef<UseRatingGroupProps> = {},
   emits?: Parameters<typeof nativeUseRatingGroup>[1],

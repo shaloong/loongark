@@ -33,16 +33,16 @@ nonce 不授权 style 属性、第三方编辑器或调用方自建的 style。�
 
 默认 `LoongArkProvider` 随实际组件入口自动加载 Primitives 样式及 HTML 组合的必要依赖，根入口命名导入和组件子路径均可使用；公开别名与 Svelte 的 Dialog、PinInput、Switch 组合 namespace 同样声明其组件样式。动态导入会在组件首次渲染前同步补齐样式，固定级联顺序，多个 Provider 共享规则并在最后一个所有者卸载后释放；Vue 插件和 Svelte theme store 使用同一自动启动器。
 
-自动裁剪依赖生产构建消除未使用模块与组件初始化声明。导入并使用完整根命名空间会保留更多组件；Node 直接执行根入口也不会像生产打包器一样裁剪模块。自定义 DOM 只有 `data-scope` 属性不会自动声明样式，需提供自己的样式，或显式使用 `@loongark/kit/bootstrap` 的 `bootstrapKit` 作为 `styleBootstrap` 保留原完整样式行为。已有 Primitives 注册覆盖与 Kit 注册扩展继续生效。
+自动裁剪依赖生产构建消除未使用模块与组件初始化声明。导入并使用完整根命名空间会保留更多组件；Node 直接执行根入口也不会像生产打包器一样裁剪模块。自定义 DOM 只有 `data-scope` 属性不会自动声明样式，需提供自己的样式，或显式使用 `@shaloong/loongark-kit/bootstrap` 的 `bootstrapKit` 作为 `styleBootstrap` 保留原完整样式行为。已有 Primitives 注册覆盖与 Kit 注册扩展继续生效。
 
-需要完全控制规则集合时，可从 `@loongark/<framework>/provider-core` 引入 `LoongArkProviderCore`，只加载通用语义、焦点和动效，再显式选择实际使用的 Primitives。以下示例中的 `react` 可替换为 `vue`、`solid` 或 `svelte`：
+需要完全控制规则集合时，可从 `@shaloong/loongark-<framework>/provider-core` 引入 `LoongArkProviderCore`，只加载通用语义、焦点和动效，再显式选择实际使用的 Primitives。以下示例中的 `react` 可替换为 `vue`、`solid` 或 `svelte`：
 
-应用需显式安装 `@loongark/<framework>` 与 `@loongark/primitives`；pnpm 不保证应用可以直接导入传递依赖。
+应用需显式安装 `@shaloong/loongark-<framework>` 与 `@shaloong/loongark-primitives`；pnpm 不保证应用可以直接导入传递依赖。
 
 ```ts
-import { LoongArkProviderCore } from "@loongark/react/provider-core";
-import { createPrimitiveStyleBootstrap } from "@loongark/primitives/styles";
-import { buttonPrimitive } from "@loongark/primitives/button";
+import { LoongArkProviderCore } from "@shaloong/loongark-react/provider-core";
+import { createPrimitiveStyleBootstrap } from "@shaloong/loongark-primitives/styles";
+import { buttonPrimitive } from "@shaloong/loongark-primitives/button";
 
 // 在模块作用域创建，保持引用稳定；所有用到的部件样式都需选择。
 const styleBootstrap = createPrimitiveStyleBootstrap([buttonPrimitive]);
@@ -52,13 +52,13 @@ React/Solid 使用 `<LoongArkProviderCore styleBootstrap={styleBootstrap}>`；Vu
 
 Core 不会自动补齐未选择的组件样式。高级组合通常使用默认自动 Provider；Core 需提供应用自己的 `styleBootstrap(theme)` 补齐相应规则。Core 不订阅自动组件样式，也不自动引入完整 Kit 注册表。
 
-显式 Core 的 SSR 在每个请求中创建主题，并调用同一个启动器，再序列化 `theme.toStyleSheet()`。自动 SSR 使用 `@loongark/kit/automatic-bootstrap` 的 `bootstrapKitAutomatic`，在实际渲染之后序列化，以包含 Svelte 实例声明的样式；进程中已经导入的其他组件也可能贡献规则，不能把客户端包体测量当作所有 SSR 模式的裁剪保证。nonce、targetId 与主题选项仍需与客户端一致。Next.js 中选择样式的 Provider 组合放在应用的客户端模块，启动器函数不能作为服务端到客户端的 Props；服务端可以单独用纯 Primitives 启动器生成首屏 CSS。
+显式 Core 的 SSR 在每个请求中创建主题，并调用同一个启动器，再序列化 `theme.toStyleSheet()`。自动 SSR 使用 `@shaloong/loongark-kit/automatic-bootstrap` 的 `bootstrapKitAutomatic`，在实际渲染之后序列化，以包含 Svelte 实例声明的样式；进程中已经导入的其他组件也可能贡献规则，不能把客户端包体测量当作所有 SSR 模式的裁剪保证。nonce、targetId 与主题选项仍需与客户端一致。Next.js 中选择样式的 Provider 组合放在应用的客户端模块，启动器函数不能作为服务端到客户端的 Props；服务端可以单独用纯 Primitives 启动器生成首屏 CSS。
 
 底层 API：
 
 ```ts
-import { createLoongArkTheme } from "@loongark/theme";
-import { bootstrapKit } from "@loongark/kit/bootstrap";
+import { createLoongArkTheme } from "@shaloong/loongark-theme";
+import { bootstrapKit } from "@shaloong/loongark-kit/bootstrap";
 const theme = createLoongArkTheme({ mode: "dark" });
 theme.mount(document.querySelector<HTMLElement>("#app")!);
 bootstrapKit(theme);

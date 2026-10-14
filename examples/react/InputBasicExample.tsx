@@ -4,7 +4,7 @@ import {
   LoongArkInputLabel,
   LoongArkInputControl,
   LoongArkInputHelperText,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function InputBasicExample() {
   return (
     <LoongArkInputRoot>

@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkFrame } from "@loongark/vue";
+import { LoongArkFrame } from "@shaloong/loongark-vue";
 export const FrameBasicExample = defineComponent({
   setup() {
     return () => {

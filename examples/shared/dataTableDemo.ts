@@ -1,4 +1,4 @@
-import type { DataRow, DataColumn } from "@loongark/kit";
+import type { DataRow, DataColumn } from "@shaloong/loongark-kit";
 export const projectRows: readonly DataRow[] = [
   {
     id: "a",

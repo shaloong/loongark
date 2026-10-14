@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkButtonGroup, LoongArkButton } from "@loongark/react";
+import { LoongArkButtonGroup, LoongArkButton } from "@shaloong/loongark-react";
 export function ButtonGroupBasicExample() {
   return (
     <LoongArkButtonGroup>

@@ -7,7 +7,7 @@ import {
   LoongArkHoverCardContent,
   LoongArkHoverCardArrow,
   LoongArkHoverCardArrowTip,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/HoverCard",

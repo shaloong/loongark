@@ -8,8 +8,8 @@
     LoongArkCarouselNextTrigger,
     LoongArkCarouselIndicatorGroup,
     LoongArkCarouselIndicator,
-  } from "@loongark/svelte";
-  import type { CarouselSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { CarouselSize } from "@shaloong/loongark-primitives";
 
   export let size: CarouselSize = "md";
 

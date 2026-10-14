@@ -1,17 +1,17 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticCheckboxStyles } from "@loongark/primitives/automatic-styles/checkbox";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticCheckboxStyles } from "@shaloong/loongark-primitives/automatic-styles/checkbox";
 
 
 import { useFieldContext } from "@ark-ui/react/field";
-import { nativeSelectionFieldDescription } from "@loongark/kit";
-import { controlIcons } from "@loongark/kit";
+import { nativeSelectionFieldDescription } from "@shaloong/loongark-kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import React, { forwardRef } from "react";
 import { useNativeSelection } from "../native-selection";
 import { useCheckboxContext } from "@ark-ui/react/checkbox";
 import { Checkbox } from "@ark-ui/react/checkbox";
-import type { CheckboxSize } from "@loongark/primitives";
+import type { CheckboxSize } from "@shaloong/loongark-primitives";
 import type {
   CheckboxRootProps as RootProps,
   CheckboxControlProps as ControlProps,

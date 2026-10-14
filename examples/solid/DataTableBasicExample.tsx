@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkDataTable } from "@loongark/solid";
+import { LoongArkDataTable } from "@shaloong/loongark-solid";
 export function DataTableBasicExample() {
   return (
     <LoongArkDataTable

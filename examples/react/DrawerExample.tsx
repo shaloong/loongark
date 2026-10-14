@@ -1,4 +1,4 @@
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 function DrawerPanel() {
   const drawer = L.useDrawer({
     snapPoints: ["220px", "440px"],

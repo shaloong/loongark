@@ -4,7 +4,7 @@ import {
   LoongArkTabsList,
   LoongArkTabsTrigger,
   LoongArkTabsContent,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const TabsBasicExample = defineComponent({
   setup() {
     return () => {

@@ -10,7 +10,7 @@ import {
   LoongArkStepsCompletedContent,
   LoongArkStepsPrevTrigger,
   LoongArkStepsNextTrigger,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const StepsBasicExample = defineComponent({
   setup() {
     return () => {

@@ -5,7 +5,7 @@ import {
   resolveDynamicComponent,
   type VNodeProps,
 } from "vue";
-import { LoongArkFieldset, LoongArkField } from "@loongark/vue";
+import { LoongArkFieldset, LoongArkField } from "@shaloong/loongark-vue";
 import type { FieldInputProps } from "@ark-ui/vue/field";
 export const FieldsetBasicExample = defineComponent({
   setup() {

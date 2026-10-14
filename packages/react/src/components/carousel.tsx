@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticCarouselStyles } from "@loongark/primitives/automatic-styles/carousel";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticCarouselStyles } from "@shaloong/loongark-primitives/automatic-styles/carousel";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticCarouselStyles } from "@loongark/primitives/automa
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Carousel } from "@ark-ui/react/carousel";
-import type { CarouselSize } from "@loongark/primitives";
+import type { CarouselSize } from "@shaloong/loongark-primitives";
 
 type ArkCarouselRootProps = ComponentPropsWithoutRef<typeof Carousel.Root>;
 type ArkCarouselItemGroupProps = ComponentPropsWithoutRef<typeof Carousel.ItemGroup>;

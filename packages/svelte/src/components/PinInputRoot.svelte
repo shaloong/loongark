@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticPinInputStyles } from "@loongark/primitives/automatic-styles/pin-input";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticPinInputStyles } from "@shaloong/loongark-primitives/automatic-styles/pin-input";
   registerAutomaticStyles(lkAutomaticPinInputStyles);
 
   import { PinInput } from "@ark-ui/svelte/pin-input";
-  import type { PinInputPrimitiveProps } from "@loongark/primitives";
+  import type { PinInputPrimitiveProps } from "@shaloong/loongark-primitives";
 
   export let size: NonNullable<PinInputPrimitiveProps["size"]> = "md";
   export let state: NonNullable<PinInputPrimitiveProps["state"]> = "default";

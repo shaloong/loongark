@@ -1,8 +1,8 @@
 /** @jsxImportSource solid-js */
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/solid";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-solid";
 
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { createSignal } from "solid-js";
 import { quickActions, mediaDemoItems } from "../shared/mediaDemo";
 export function ActionMediaExample() {

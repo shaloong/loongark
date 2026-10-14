@@ -36,7 +36,7 @@ test("horizontal initial command survives a pre-paint RTL scroll event", async (
       createDataTableColumnWindow,
       dataTableView,
       mountDataTableColumnWindow,
-    }: typeof import("@loongark/kit") = await import(path);
+    }: typeof import("@shaloong/loongark-kit") = await import(path);
     const columns = Array.from({ length: 80 }, (_, index) => ({
       key: `c${index}`,
       label: `Column ${index}`,

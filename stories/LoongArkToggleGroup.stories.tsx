@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   LoongArkToggleGroupRoot,
   LoongArkToggleGroupItem,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/Toggle Group",

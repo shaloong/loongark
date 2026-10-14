@@ -6,7 +6,7 @@
     LoongArkImageCropperSelection,
     LoongArkImageCropperHandle,
     LoongArkImageCropperGrid,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkImageCropperRoot aspectRatio={1}>

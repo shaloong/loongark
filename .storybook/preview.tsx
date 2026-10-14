@@ -1,7 +1,7 @@
 import React from "react";
 
 import type { Preview } from "@storybook/react";
-import { LoongArkProvider } from "@loongark/react";
+import { LoongArkProvider } from "@shaloong/loongark-react";
 import "./preview.css";
 import { ReferenceDocs, ReferenceDocsContainer } from "./reference";
 

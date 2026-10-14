@@ -8,8 +8,8 @@ import {
   LoongArkToastActionTrigger,
   LoongArkToastCloseTrigger,
   createToaster,
-} from "@loongark/react";
-import { LoongArkButton } from "@loongark/react";
+} from "@shaloong/loongark-react";
+import { LoongArkButton } from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/Toast",

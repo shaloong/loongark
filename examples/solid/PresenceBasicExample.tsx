@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal, createMemo } from "solid-js";
-import { LoongArkButton, LoongArkPresence } from "@loongark/solid";
+import { LoongArkButton, LoongArkPresence } from "@shaloong/loongark-solid";
 export function PresenceBasicExample() {
   const [visible, setVisible] = createSignal(false);
   return (

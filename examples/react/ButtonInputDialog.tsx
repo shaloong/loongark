@@ -15,7 +15,7 @@ import {
   LoongArkDialogDescription,
   LoongArkDialogFooter,
   LoongArkDialogCloseTrigger,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 import { defaultScenario, scenarioTestIds } from "../shared/demoScenario";
 
 export const ButtonInputDialogExample = () => {

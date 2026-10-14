@@ -8,7 +8,7 @@ import {
   LoongArkListboxItem,
   LoongArkListboxItemText,
   LoongArkListboxItemIndicator,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function ListboxBasicExample() {
   const collection = createListCollection({
     items: [

@@ -7,7 +7,7 @@
     LoongArkListboxItem,
     LoongArkListboxItemText,
     LoongArkListboxItemIndicator,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   const collection = createListCollection({
     items: [
       { value: "beijing", label: "北京" },

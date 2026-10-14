@@ -195,7 +195,7 @@ for (const [family, value] of Object.entries(recipes)) {
       parsed.statements[0].declarationList.declarations[0].initializer;
     let source;
     const icon = jsx.includes("controlIcons")
-      ? 'import {controlIcons} from "@loongark/kit";'
+      ? 'import {controlIcons} from "@shaloong/loongark-kit";'
       : "";
     if (framework === "react" || framework === "solid") {
       let declarations = state
@@ -218,7 +218,7 @@ for (const [family, value] of Object.entries(recipes)) {
         for (const v of vars)
           jsx = jsx.replace(new RegExp(`\\b${v}\\b(?!\\s*=)`, "g"), `${v}()`);
       }
-      source = `${framework === "solid" ? "/** @jsxImportSource solid-js */" : ""}\nimport ${framework === "react" ? 'React, {useState} from "react"' : '{createSignal,createMemo} from "solid-js"'};\nimport * as L from "@loongark/${framework}";${icon}\nexport function ${name}(){${declarations}${setup}${derived}return (${jsx});}`;
+      source = `${framework === "solid" ? "/** @jsxImportSource solid-js */" : ""}\nimport ${framework === "react" ? 'React, {useState} from "react"' : '{createSignal,createMemo} from "solid-js"'};\nimport * as L from "@shaloong/loongark-${framework}";${icon}\nexport function ${name}(){${declarations}${setup}${derived}return (${jsx});}`;
     } else if (framework === "vue") {
       const imports = [
         ...new Set(
@@ -231,7 +231,7 @@ for (const [family, value] of Object.entries(recipes)) {
             ),
         ),
       ].join("\n");
-      source = `import {defineComponent,h,createVNode,resolveDynamicComponent,ref,type VNodeProps} from "vue";import * as L from "@loongark/vue";${icon}${imports}\nexport const ${name}=defineComponent({setup(){${state.map(([key, initial]) => `const ${key}=ref(${initial});`).join("")}${setup}return ()=>{${derived}return ${vueNode(node, parsed)}};}});`;
+      source = `import {defineComponent,h,createVNode,resolveDynamicComponent,ref,type VNodeProps} from "vue";import * as L from "@shaloong/loongark-vue";${icon}${imports}\nexport const ${name}=defineComponent({setup(){${state.map(([key, initial]) => `const ${key}=ref(${initial});`).join("")}${setup}return ()=>{${derived}return ${vueNode(node, parsed)}};}});`;
     } else {
       if (derived) {
         const variables = [...derived.matchAll(/const (\w+)=([^;]+);/g)];
@@ -239,11 +239,11 @@ for (const [family, value] of Object.entries(recipes)) {
           .map((m) => `const ${m[1]}=$derived(${m[2]});`)
           .join("");
       }
-      source = `<script lang="ts">import * as L from "@loongark/svelte";${icon}${state.map(([key, initial]) => `let ${key}=$state(${initial});`).join("")}${setup}${derived}</script>${svelteNode(node, parsed)}`;
+      source = `<script lang="ts">import * as L from "@shaloong/loongark-svelte";${icon}${state.map(([key, initial]) => `let ${key}=$state(${initial});`).join("")}${setup}${derived}</script>${svelteNode(node, parsed)}`;
     }
     const path = `examples/${framework}/${name}.${framework === "svelte" ? "svelte" : framework === "vue" ? "ts" : "tsx"}`;
     const used=[...new Set([...source.matchAll(/\bL\.(\w+)/g)].map(match=>match[1]))];
-    source=source.replace(/import \* as L from "@loongark\/(react|vue|solid|svelte)";/, `import {${used.join(",")}} from "@loongark/${framework}";`).replace(/\bL\./g, "");
+    source=source.replace(/import \* as L from "@shaloong\/loongark-(react|vue|solid|svelte)";/, `import {${used.join(",")}} from "@shaloong/loongark-${framework}";`).replace(/\bL\./g, "");
     if (!state.length) source=source.replace('React, {useState}', 'React').replace('{createSignal,createMemo}', '{}');
     if (framework==='solid' && !state.length && !derived) source=source.replace('import {} from "solid-js";', '');
     if(framework==='vue') source=source.replace(/import \{([^}]+)\} from "vue";/, (_,imports)=>`import {${imports.split(',').filter(name=>{const key=name.trim().replace(/^type /,'');return (source.match(new RegExp(`\\b${key}\\b`,'g'))??[]).length>1}).join(',')}} from "vue";`);

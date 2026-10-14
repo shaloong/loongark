@@ -14,7 +14,7 @@ import {
   LoongArkSelectItemText,
   LoongArkSelectItemIndicator,
   LoongArkSelectHiddenSelect,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function SelectBasicExample() {
   const collection = createListCollection({
     items: [

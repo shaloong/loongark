@@ -6,11 +6,11 @@ import {
   LoongArkPasswordInputInput,
   LoongArkPasswordInputIndicator,
   LoongArkPasswordInputVisibilityTrigger,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 import type {
   PasswordInputSize,
   PasswordInputState,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 interface PasswordInputExampleProps {
   size?: PasswordInputSize;

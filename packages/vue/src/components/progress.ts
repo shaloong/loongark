@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticProgressStyles } from "@loongark/primitives/automatic-styles/progress";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticProgressStyles } from "@shaloong/loongark-primitives/automatic-styles/progress";
 import type { ProgressRootProps as NativeProgressRootProps } from "@ark-ui/vue/progress";
 import { renderPart } from "../render-part";
 /**
@@ -9,7 +9,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, type PropType } from "vue";
 import { Progress as ArkProgress } from "@ark-ui/vue/progress";
-import type { ProgressOrientation, ProgressSize } from "@loongark/primitives";
+import type { ProgressOrientation, ProgressSize } from "@shaloong/loongark-primitives";
 
 export interface ProgressValueChangeDetails {
   value: number;

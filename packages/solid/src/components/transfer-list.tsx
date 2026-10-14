@@ -1,7 +1,7 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTransferListStyles } from "@loongark/primitives/automatic-styles/transfer-list";
-import { controlIcons } from "@loongark/kit";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTransferListStyles } from "@shaloong/loongark-primitives/automatic-styles/transfer-list";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import { createSignal, For, Show, splitProps, type JSX } from "solid-js";
 import {
@@ -12,7 +12,7 @@ import {
   focusTransferredItem,
   type TransferListOptions,
   type TransferItem,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 const part = (name: string) => ({
   "data-scope": "transfer-list",
   "data-part": name,

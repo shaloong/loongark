@@ -1,6 +1,6 @@
 import { withArkExamplePage } from "./arkStory";
 import type { Meta, StoryObj } from "@storybook/react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 const meta = {
   title: "Components/ClientOnly",
   tags: ["autodocs"],

@@ -11,14 +11,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 execFileSync(process.execPath, [resolve(__dirname, "../scripts/generate-reference.mjs")], { cwd: resolve(__dirname, ".."), stdio: "inherit" });
 
 const workspaceAlias: Record<string, string> = {
-  "@loongark/tokens": resolve(__dirname, "../packages/tokens/src"),
-  "@loongark/theme": resolve(__dirname, "../packages/theme/src"),
-  "@loongark/primitives": resolve(__dirname, "../packages/primitives/src"),
-  "@loongark/kit": resolve(__dirname, "../packages/kit/src"),
-  "@loongark/react": resolve(__dirname, "../packages/react/src"),
-  "@loongark/vue": resolve(__dirname, "../packages/vue/src"),
-  "@loongark/svelte": resolve(__dirname, "../packages/svelte/src"),
-  "@loongark/solid": resolve(__dirname, "../packages/solid/src"),
+  "@shaloong/loongark-tokens": resolve(__dirname, "../packages/tokens/src"),
+  "@shaloong/loongark-theme": resolve(__dirname, "../packages/theme/src"),
+  "@shaloong/loongark-primitives": resolve(__dirname, "../packages/primitives/src"),
+  "@shaloong/loongark-kit": resolve(__dirname, "../packages/kit/src"),
+  "@shaloong/loongark-react": resolve(__dirname, "../packages/react/src"),
+  "@shaloong/loongark-vue": resolve(__dirname, "../packages/vue/src"),
+  "@shaloong/loongark-svelte": resolve(__dirname, "../packages/svelte/src"),
+  "@shaloong/loongark-solid": resolve(__dirname, "../packages/solid/src"),
   "@examples": resolve(__dirname, "../examples"),
 };
 
@@ -45,14 +45,14 @@ const config: StorybookConfig = {
       : Object.entries(config.resolve.alias ?? {}).map(([find, replacement]) => ({ find, replacement }));
     config.resolve.alias = [
       ...["react", "vue", "solid", "svelte"].map(framework => ({
-        find: new RegExp(`^@loongark/${framework}/editors$`),
+        find: new RegExp(`^@shaloong/loongark-${framework}/editors$`),
         replacement: resolve(__dirname, `../packages/${framework}/src/components/editors`),
       })),
       ...["react", "vue", "solid", "svelte"].map(framework => ({
-        find: new RegExp(`^@loongark/${framework}/(.+)$`),
+        find: new RegExp(`^@shaloong/loongark-${framework}/(.+)$`),
         replacement: resolve(__dirname, `../packages/${framework}/src/entries/$1`),
       })),
-      { find: "@loongark/kit/bootstrap", replacement: resolve(__dirname, "../packages/kit/src/bootstrap.ts") },
+      { find: "@shaloong/loongark-kit/bootstrap", replacement: resolve(__dirname, "../packages/kit/src/bootstrap.ts") },
       ...Object.entries(workspaceAlias).map(([find, replacement]) => ({ find, replacement })),
       ...inheritedAliases,
     ];

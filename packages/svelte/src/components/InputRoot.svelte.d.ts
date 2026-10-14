@@ -1,6 +1,6 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Field } from "@ark-ui/svelte/field";
-import type { InputPrimitiveProps } from "@loongark/primitives";
+import type { InputPrimitiveProps } from "@shaloong/loongark-primitives";
 
 export default class LoongArkInputRoot extends SvelteComponent<
   Omit<

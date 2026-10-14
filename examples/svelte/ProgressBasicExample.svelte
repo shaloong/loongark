@@ -5,7 +5,7 @@
     LoongArkProgressTrack,
     LoongArkProgressRange,
     LoongArkProgressValueText,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkProgressRoot value={60}>

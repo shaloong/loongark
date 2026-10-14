@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkFloatingPanel } from "@loongark/svelte";
+  import { LoongArkFloatingPanel } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkFloatingPanel.Root>

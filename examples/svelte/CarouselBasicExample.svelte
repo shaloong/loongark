@@ -6,7 +6,7 @@
     LoongArkCarouselControl,
     LoongArkCarouselPrevTrigger,
     LoongArkCarouselNextTrigger,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkCarouselRoot slideCount={2}>

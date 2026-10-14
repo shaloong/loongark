@@ -4,7 +4,7 @@ import type { PaginationRootProps } from "@ark-ui/svelte/pagination";
 import type {
   PaginationOrientation,
   PaginationSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export default class LoongArkPaginationRoot extends SvelteComponent<
   Omit<

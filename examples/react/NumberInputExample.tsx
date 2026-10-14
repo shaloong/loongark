@@ -8,8 +8,8 @@ import {
   LoongArkNumberInputDecrementTrigger,
   LoongArkNumberInputValueText,
   LoongArkNumberInputScrubber,
-} from "@loongark/react";
-import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
+} from "@shaloong/loongark-react";
+import type { NumberInputSize, NumberInputState } from "@shaloong/loongark-primitives";
 
 export interface NumberInputExampleProps {
   size?: NumberInputSize;

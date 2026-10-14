@@ -9,8 +9,8 @@
     LoongArkEditableEditTrigger,
     LoongArkEditableSubmitTrigger,
     LoongArkEditableCancelTrigger,
-  } from "@loongark/svelte";
-  import type { EditableSize, EditableState } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { EditableSize, EditableState } from "@shaloong/loongark-primitives";
 
   export let size: EditableSize = "md";
   export let state: EditableState = "default";

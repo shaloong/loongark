@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticSegmentGroupStyles } from "@loongark/primitives/automatic-styles/segment-group";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticSegmentGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/segment-group";
   registerAutomaticStyles(lkAutomaticSegmentGroupStyles);
 
   import {
     SegmentGroup,
     type SegmentGroupRootProps,
   } from "@ark-ui/svelte/segment-group";
-  import type { SegmentGroupSize } from "@loongark/primitives";
+  import type { SegmentGroupSize } from "@shaloong/loongark-primitives";
   interface Props extends SegmentGroupRootProps {
     size?: SegmentGroupSize;
   }

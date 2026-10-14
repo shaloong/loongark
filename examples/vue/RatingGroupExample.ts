@@ -1,5 +1,5 @@
-import { LoongArkIcon } from "@loongark/vue";
-import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@shaloong/loongark-vue";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { defineComponent, h, ref, type PropType } from "vue";
 import {
   LoongArkRatingGroupRoot,
@@ -7,8 +7,8 @@ import {
   LoongArkRatingGroupControl,
   LoongArkRatingGroupItem,
   LoongArkRatingGroupHiddenInput,
-} from "@loongark/vue";
-import type { RatingGroupSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { RatingGroupSize } from "@shaloong/loongark-primitives";
 
 export const RatingGroupExample = defineComponent({
   name: "RatingGroupExample",

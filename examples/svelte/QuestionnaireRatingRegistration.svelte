@@ -1,6 +1,6 @@
 <script lang="ts">
   import { untrack } from "svelte";
-  import type { QuestionnaireCustomContext } from "@loongark/kit";
+  import type { QuestionnaireCustomContext } from "@shaloong/loongark-kit";
   let {
     context,
     element,

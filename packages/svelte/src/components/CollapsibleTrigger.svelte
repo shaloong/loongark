@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticCollapsibleStyles } from "@loongark/primitives/automatic-styles/collapsible";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticCollapsibleStyles } from "@shaloong/loongark-primitives/automatic-styles/collapsible";
   registerAutomaticStyles(lkAutomaticCollapsibleStyles);
 
   import { Collapsible } from "@ark-ui/svelte/collapsible";

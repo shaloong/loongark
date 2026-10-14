@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkFloatingPanel } from "@loongark/solid";
+import { LoongArkFloatingPanel } from "@shaloong/loongark-solid";
 export function FloatingPanelBasicExample() {
   return (
     <LoongArkFloatingPanel.Root>

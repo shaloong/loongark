@@ -7,8 +7,8 @@ import {
   LoongArkClipboardTrigger,
   LoongArkClipboardIndicator,
   LoongArkClipboardValueText,
-} from "@loongark/vue";
-import type { ClipboardSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { ClipboardSize } from "@shaloong/loongark-primitives";
 
 export const ClipboardExample = defineComponent({
   name: "ClipboardExample",

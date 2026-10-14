@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkGrid } from "@loongark/solid";
+import { LoongArkGrid } from "@shaloong/loongark-solid";
 export function GridBasicExample() {
   return (
     <LoongArkGrid columns={2} gap="md">

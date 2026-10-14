@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticKbdStyles } from "@loongark/primitives/automatic-styles/kbd";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticKbdStyles } from "@shaloong/loongark-primitives/automatic-styles/kbd";
   registerAutomaticStyles(lkAutomaticKbdStyles);
 
-  import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
+  import { layoutAttributes, type LayoutOptions } from "@shaloong/loongark-kit";
   export let as = "span";
   export let variant: LayoutOptions["variant"] = "default";
   export let size: LayoutOptions["size"] = "md";

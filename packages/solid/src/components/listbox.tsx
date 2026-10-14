@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticListboxStyles } from "@loongark/primitives/automatic-styles/listbox";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticListboxStyles } from "@shaloong/loongark-primitives/automatic-styles/listbox";
 /**
  * Listbox component - Solid wrapper.
  * Uses Ark UI Listbox with data attributes for styling.
@@ -17,7 +17,7 @@ import {
   type ListboxItemTextProps as ArkListboxItemTextProps,
   type ListboxItemIndicatorProps as ArkListboxItemIndicatorProps,
 } from "@ark-ui/solid/listbox";
-import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
+import type { ListboxOrientation, ListboxSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkListboxRootProps<
   T extends object = object,

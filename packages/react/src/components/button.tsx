@@ -1,11 +1,11 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticButtonStyles } from "@loongark/primitives/automatic-styles/button";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticButtonStyles } from "@shaloong/loongark-primitives/automatic-styles/button";
 
 
 import { dataProps } from "../data-props";
 import { ark } from "@ark-ui/react/factory";
-import type { ButtonPrimitiveProps } from "@loongark/primitives";
+import type { ButtonPrimitiveProps } from "@shaloong/loongark-primitives";
 import { createElement, forwardRef } from "react";
 import type { ReactNode, ButtonHTMLAttributes } from "react";
 

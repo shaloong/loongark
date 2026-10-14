@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkDrawer } from "@loongark/svelte";
+  import { LoongArkDrawer } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkDrawer.Root>

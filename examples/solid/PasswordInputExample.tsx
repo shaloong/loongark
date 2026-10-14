@@ -7,11 +7,11 @@ import {
   LoongArkPasswordInputInput,
   LoongArkPasswordInputIndicator,
   LoongArkPasswordInputVisibilityTrigger,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 import type {
   PasswordInputSize,
   PasswordInputState,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface PasswordInputExampleProps {
   size?: PasswordInputSize;

@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal, createMemo } from "solid-js";
-import { LoongArkButton, LoongArkFocusTrap } from "@loongark/solid";
+import { LoongArkButton, LoongArkFocusTrap } from "@shaloong/loongark-solid";
 export function FocusTrapBasicExample() {
   const [active, setActive] = createSignal(false);
   return (

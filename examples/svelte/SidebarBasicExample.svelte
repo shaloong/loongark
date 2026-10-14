@@ -6,7 +6,7 @@
     LoongArkSidebarMenu,
     LoongArkSidebarMenuItem,
     LoongArkSidebarMenuButton,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkSidebar>

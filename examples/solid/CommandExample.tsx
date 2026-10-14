@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal, createMemo } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 const rows = [
   { id: "overview", name: "组件概览" },
   { id: "api", name: "API 参考" },

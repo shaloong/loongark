@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSliderStyles } from "@loongark/primitives/automatic-styles/slider";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSliderStyles } from "@shaloong/loongark-primitives/automatic-styles/slider";
 /**
  * Slider component - Solid wrapper
  * Based on Ark UI Slider
@@ -20,7 +20,7 @@ import {
   type SliderDraggingIndicatorProps as ArkSliderDraggingIndicatorProps,
   type SliderHiddenInputProps as ArkSliderHiddenInputProps,
 } from "@ark-ui/solid/slider";
-import type { SliderOrientation, SliderSize } from "@loongark/primitives";
+import type { SliderOrientation, SliderSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkSliderRootProps extends Omit<
   ArkSliderRootProps,

@@ -4,7 +4,7 @@
     LoongArkChart,
     LoongArkButton,
     LoongArkTypography,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   import { createChartInteractionDemo } from "../shared/chartInteractionDemo";
   let version = $state(0);
   const demo = createChartInteractionDemo(() => version++);

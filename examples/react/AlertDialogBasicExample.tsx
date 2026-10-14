@@ -9,7 +9,7 @@ import {
   LoongArkDialogTitle,
   LoongArkDialogDescription,
   LoongArkDialogCloseTrigger,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function AlertDialogBasicExample() {
   return (
     <LoongArkAlertDialogRoot>

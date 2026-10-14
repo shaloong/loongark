@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticRadioGroupStyles } from "@loongark/primitives/automatic-styles/radio-group";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticRadioGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/radio-group";
   registerAutomaticStyles(lkAutomaticRadioGroupStyles);
 
-  import { nativeSelectionProps } from "@loongark/kit";
+  import { nativeSelectionProps } from "@shaloong/loongark-kit";
   import {
     RadioGroup,
     useRadioGroup,
@@ -12,7 +12,7 @@
   import type {
     RadioGroupSize,
     RadioGroupOrientation,
-  } from "@loongark/primitives";
+  } from "@shaloong/loongark-primitives";
   let {
     children,
     ref = $bindable(null),

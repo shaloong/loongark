@@ -1,4 +1,4 @@
-import { TokenTree } from "@loongark/tokens";
+import { TokenTree } from "@shaloong/loongark-tokens";
 
 /**
  * 将值转换为 TokenTree，带类型检查和调试日志

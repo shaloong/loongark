@@ -1,5 +1,5 @@
 // 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
-export type { AvatarSize } from "@loongark/primitives";
+export type { AvatarSize } from "@shaloong/loongark-primitives";
 export { LoongArkAvatarContext } from "../components/ark-advanced";
 export { LoongArkAvatarFallback } from "../components/avatar";
 export type { LoongArkAvatarFallbackProps } from "../components/avatar";

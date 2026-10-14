@@ -33,12 +33,12 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
           : "LoongArkCodeEditor";
     let entry =
       scenario === "deferred-editor"
-        ? `import {LoongArkButton} from '@loongark/${framework}'; window.component=LoongArkButton; window.loadEditor=()=>import('@loongark/${framework}/editors');`
-        : scenario === 'button-subpath' ? `import {LoongArkButton} from '@loongark/${framework}/button'; window.component=LoongArkButton;`
-        : scenario === 'provider-button' ? `import {LoongArkProvider} from '@loongark/${framework}/provider'; import {LoongArkButton} from '@loongark/${framework}/button'; window.components=[LoongArkProvider,LoongArkButton];`
-        : `import {${exported}} from '@loongark/${framework}'; window.component=${exported};`;
+        ? `import {LoongArkButton} from '@shaloong/loongark-${framework}'; window.component=LoongArkButton; window.loadEditor=()=>import('@shaloong/loongark-${framework}/editors');`
+        : scenario === 'button-subpath' ? `import {LoongArkButton} from '@shaloong/loongark-${framework}/button'; window.component=LoongArkButton;`
+        : scenario === 'provider-button' ? `import {LoongArkProvider} from '@shaloong/loongark-${framework}/provider'; import {LoongArkButton} from '@shaloong/loongark-${framework}/button'; window.components=[LoongArkProvider,LoongArkButton];`
+        : `import {${exported}} from '@shaloong/loongark-${framework}'; window.component=${exported};`;
     if (['provider-button','root-provider-button','core-provider-button'].includes(scenario)) {
-      const imports = (scenario==='core-provider-button'?`import {LoongArkProviderCore as LoongArkProvider} from '@loongark/${framework}/provider-core';import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';import {buttonPrimitive} from '@loongark/primitives/button';const styleBootstrap=createPrimitiveStyleBootstrap([buttonPrimitive]);`:`import {LoongArkProvider} from '@loongark/${framework}${scenario==='root-provider-button'?'':'/provider'}';`)+`import {LoongArkButton} from '@loongark/${framework}${scenario==='root-provider-button'?'':'/button'}';`;
+      const imports = (scenario==='core-provider-button'?`import {LoongArkProviderCore as LoongArkProvider} from '@shaloong/loongark-${framework}/provider-core';import {createPrimitiveStyleBootstrap} from '@shaloong/loongark-primitives/styles';import {buttonPrimitive} from '@shaloong/loongark-primitives/button';const styleBootstrap=createPrimitiveStyleBootstrap([buttonPrimitive]);`:`import {LoongArkProvider} from '@shaloong/loongark-${framework}${scenario==='root-provider-button'?'':'/provider'}';`)+`import {LoongArkButton} from '@shaloong/loongark-${framework}${scenario==='root-provider-button'?'':'/button'}';`;
       const props=scenario==='core-provider-button'?'styleBootstrap':'undefined';
       if (framework === 'react') entry = `import {createElement as h} from 'react';import {createRoot} from 'react-dom/client';${imports}createRoot(document.getElementById('app')).render(h(LoongArkProvider,{styleBootstrap:${props}},h(LoongArkButton,{},'Save')));`;
       if (framework === 'vue') entry = `import {createApp,h} from 'vue';${imports}createApp({render:()=>h(LoongArkProvider,{styleBootstrap:${props}},()=>h(LoongArkButton,{},()=> 'Save'))}).mount('#app');`;
@@ -65,7 +65,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
         {
           name: "published-workspace-entry",
           resolveId(id) {
-            const match = /^@loongark\/(react|vue|solid|svelte|kit|primitives|theme|tokens)(\/.+)?$/.exec(id);
+            const match = /^@shaloong\/loongark-(react|vue|solid|svelte|kit|primitives|theme|tokens)(\/.+)?$/.exec(id);
             if (!match) return null;
             const manifest = manifests[match[1]];
             let entry = manifest.exports[match[2] ? '.' + match[2] : '.'];

@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkTimer } from "@loongark/solid";
+import { LoongArkTimer } from "@shaloong/loongark-solid";
 export function TimerBasicExample() {
   return (
     <LoongArkTimer.Root countdown startMs={60000}>

@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkChart } from "@loongark/solid";
+import { LoongArkChart } from "@shaloong/loongark-solid";
 export function ChartBasicExample() {
   return (
     <LoongArkChart

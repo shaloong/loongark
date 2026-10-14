@@ -5,11 +5,11 @@ import {
   LoongArkPaginationItem,
   LoongArkPaginationPrevTrigger,
   LoongArkPaginationNextTrigger,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import type {
   PaginationOrientation,
   PaginationSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export const PaginationExample = defineComponent({
   name: "PaginationExample",

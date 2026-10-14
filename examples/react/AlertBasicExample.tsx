@@ -3,7 +3,7 @@ import {
   LoongArkAlert,
   LoongArkAlertTitle,
   LoongArkAlertDescription,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function AlertBasicExample() {
   return (
     <LoongArkAlert>

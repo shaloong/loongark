@@ -5,7 +5,7 @@ import {
   LoongArkPasswordInputControl,
   LoongArkPasswordInputInput,
   LoongArkPasswordInputVisibilityTrigger,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function PasswordInputBasicExample() {
   return (
     <LoongArkPasswordInputRoot>

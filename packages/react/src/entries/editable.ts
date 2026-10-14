@@ -1,6 +1,6 @@
 // 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
-export type { EditableSize } from "@loongark/primitives";
-export type { EditableState } from "@loongark/primitives";
+export type { EditableSize } from "@shaloong/loongark-primitives";
+export type { EditableState } from "@shaloong/loongark-primitives";
 export { LoongArkEditableArea } from "../components/editable";
 export { LoongArkEditableCancelTrigger } from "../components/editable";
 export { LoongArkEditableContext } from "../components/ark-advanced";

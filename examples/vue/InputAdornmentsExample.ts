@@ -1,6 +1,6 @@
 import { defineComponent, h, ref } from "vue";
-import * as L from "@loongark/vue";
-import { controlIcons } from "@loongark/kit";
+import * as L from "@shaloong/loongark-vue";
+import { controlIcons } from "@shaloong/loongark-kit";
 import {
   createInputAdornmentDemo,
   adornmentControls,

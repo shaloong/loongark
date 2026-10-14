@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { createQuestionnaireRankingDemo } from "../shared/questionnaireRankingDemo";
 export function QuestionnaireRankingExample() {
   const [revision, redraw] = createSignal(0),

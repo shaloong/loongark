@@ -2,7 +2,7 @@ import { useMachine, normalizeProps } from "@zag-js/svelte";
 import { useEnvironmentContext } from "@ark-ui/svelte/environment";
 import { useLocaleContext } from "@ark-ui/svelte/locale";
 import type { UseTocProps, UseTocReturn } from "@ark-ui/svelte/toc";
-import { createTocMachine, connectToc, definedTocProps } from "@loongark/kit";
+import { createTocMachine, connectToc, definedTocProps } from "@shaloong/loongark-kit";
 export const useToc = (
   props?: UseTocProps | (() => UseTocProps),
 ): UseTocReturn => {

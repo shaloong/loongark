@@ -5,7 +5,7 @@ import {
   LoongArkInputLabel,
   LoongArkInputControl,
   LoongArkInputHelperText,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function InputBasicExample() {
   return (
     <LoongArkInputRoot>

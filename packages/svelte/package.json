@@ -1,6 +1,6 @@
 {
-  "name": "@loongark/svelte",
-  "version": "0.1.0",
+  "name": "@shaloong/loongark-svelte",
+  "version": "0.1.1",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -525,9 +525,9 @@
   ],
   "dependencies": {
     "@ark-ui/svelte": "^5.24.3",
-    "@loongark/kit": "workspace:*",
-    "@loongark/primitives": "workspace:*",
-    "@loongark/theme": "workspace:*",
+    "@shaloong/loongark-kit": "workspace:*",
+    "@shaloong/loongark-primitives": "workspace:*",
+    "@shaloong/loongark-theme": "workspace:*",
     "@zag-js/svelte": "1.45.0"
   },
   "peerDependencies": {

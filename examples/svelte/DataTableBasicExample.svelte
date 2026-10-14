@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkDataTable } from "@loongark/svelte";
+  import { LoongArkDataTable } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkDataTable

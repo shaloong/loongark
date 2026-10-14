@@ -8,7 +8,7 @@ import {
   LoongArkInputControl,
   LoongArkFilterBarActions,
   LoongArkButton,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function FilterBarBasicExample() {
   return (
     <LoongArkFilterBar>

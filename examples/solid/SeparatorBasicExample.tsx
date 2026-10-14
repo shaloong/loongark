@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkStack, LoongArkSeparator } from "@loongark/solid";
+import { LoongArkStack, LoongArkSeparator } from "@shaloong/loongark-solid";
 export function SeparatorBasicExample() {
   return (
     <LoongArkStack>

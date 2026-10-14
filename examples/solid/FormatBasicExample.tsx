@@ -4,7 +4,7 @@ import {
   LoongArkLocaleProvider,
   LoongArkFormatByte,
   LoongArkFormatNumber,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function FormatBasicExample() {
   return (
     <LoongArkLocaleProvider locale="zh-CN">

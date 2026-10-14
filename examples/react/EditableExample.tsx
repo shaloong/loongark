@@ -9,8 +9,8 @@ import {
   LoongArkEditableEditTrigger,
   LoongArkEditableSubmitTrigger,
   LoongArkEditableCancelTrigger,
-} from "@loongark/react";
-import type { EditableSize, EditableState } from "@loongark/primitives";
+} from "@shaloong/loongark-react";
+import type { EditableSize, EditableState } from "@shaloong/loongark-primitives";
 
 interface EditableExampleProps {
   size?: EditableSize;

@@ -10,7 +10,7 @@ import {
   LoongArkInputSuffix,
   LoongArkInputHelperText,
   LoongArkDialog,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 import { defaultScenario, scenarioTestIds } from "../shared/demoScenario";
 
 export const ButtonInputDialogExample: Component = () => {

@@ -1,11 +1,11 @@
 <script lang="ts" generics="T extends object">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticListboxStyles } from "@loongark/primitives/automatic-styles/listbox";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticListboxStyles } from "@shaloong/loongark-primitives/automatic-styles/listbox";
   registerAutomaticStyles(lkAutomaticListboxStyles);
 
   import type { ListboxRootProps } from "@ark-ui/svelte/listbox";
   import { Listbox } from "@ark-ui/svelte/listbox";
-  import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
+  import type { ListboxOrientation, ListboxSize } from "@shaloong/loongark-primitives";
 
   export let size: ListboxSize = "md";
   export let orientation: ListboxOrientation = "vertical";

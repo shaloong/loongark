@@ -5,7 +5,7 @@ import {
   LoongArkCheckboxIndicator,
   LoongArkCheckboxLabel,
   LoongArkCheckboxHiddenInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function CheckboxBasicExample() {
   return (
     <LoongArkCheckboxRoot name="terms">

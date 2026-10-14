@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTreeViewStyles } from "@loongark/primitives/automatic-styles/tree-view";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTreeViewStyles } from "@shaloong/loongark-primitives/automatic-styles/tree-view";
 /**
  * Tree View component - Solid wrapper.
  * Uses Ark UI Tree View with data attributes for styling.
@@ -25,7 +25,7 @@ import {
   type TreeViewNodeCheckboxIndicatorProps as ArkTreeViewNodeCheckboxIndicatorProps,
   type TreeViewNodeRenameInputProps as ArkTreeViewNodeRenameInputProps,
 } from "@ark-ui/solid/tree-view";
-import type { TreeViewSize } from "@loongark/primitives";
+import type { TreeViewSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkTreeViewRootProps<
   T extends object = object,

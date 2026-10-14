@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkLabel, LoongArkTextarea } from "@loongark/react";
+import { LoongArkLabel, LoongArkTextarea } from "@shaloong/loongark-react";
 export function TextareaBasicExample() {
   return (
     <div>

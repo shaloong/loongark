@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkChip, LoongArkChipLabel } from "@loongark/react";
+import { LoongArkChip, LoongArkChipLabel } from "@shaloong/loongark-react";
 export function ChipBasicExample() {
   return (
     <LoongArkChip>

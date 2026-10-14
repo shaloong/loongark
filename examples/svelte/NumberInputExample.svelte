@@ -8,8 +8,8 @@
     LoongArkNumberInputDecrementTrigger,
     LoongArkNumberInputValueText,
     LoongArkNumberInputScrubber,
-  } from "@loongark/svelte";
-  import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { NumberInputSize, NumberInputState } from "@shaloong/loongark-primitives";
 
   export let size: NumberInputSize = "md";
   export let state: NumberInputState = "default";

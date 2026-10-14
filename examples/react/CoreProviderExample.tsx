@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { LoongArkProviderCore } from "@loongark/react/provider-core";
-import { LoongArkButton } from "@loongark/react/button";
-import { createPrimitiveStyleBootstrap } from "@loongark/primitives/styles";
-import { buttonPrimitive } from "@loongark/primitives/button";
+import { LoongArkProviderCore } from "@shaloong/loongark-react/provider-core";
+import { LoongArkButton } from "@shaloong/loongark-react/button";
+import { createPrimitiveStyleBootstrap } from "@shaloong/loongark-primitives/styles";
+import { buttonPrimitive } from "@shaloong/loongark-primitives/button";
 const styleBootstrap = createPrimitiveStyleBootstrap([buttonPrimitive]);
 export function CoreProviderExample() {
   const [mode, setMode] = useState<"light" | "dark">("light");

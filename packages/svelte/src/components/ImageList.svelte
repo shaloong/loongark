@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticImageListStyles } from "@loongark/primitives/automatic-styles/image-list";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticImageListStyles } from "@shaloong/loongark-primitives/automatic-styles/image-list";
   registerAutomaticStyles(lkAutomaticImageListStyles);
 
   import {
     mediaAttributes,
     mediaStyles,
     type MediaLayoutOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export let columns: number | undefined = undefined;
   export let gap: MediaLayoutOptions["gap"] = undefined;
   export let columnSpan: number | undefined = undefined;

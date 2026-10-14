@@ -9,7 +9,7 @@
     LoongArkSheetTitle,
     LoongArkSheetDescription,
     LoongArkSheetAction,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkSheetRoot>

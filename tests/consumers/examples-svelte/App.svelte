@@ -1,4 +1,4 @@
-<script lang="ts">import {LoongArkProvider as Provider} from '@loongark/svelte'; import E0 from '../../../examples/svelte/AccordionBasicExample.svelte';
+<script lang="ts">import {LoongArkProvider as Provider} from '@shaloong/loongark-svelte'; import E0 from '../../../examples/svelte/AccordionBasicExample.svelte';
 import E1 from '../../../examples/svelte/ActionMediaExample.svelte';
 import E2 from '../../../examples/svelte/AdvancedSelectionExample.svelte';
 import E3 from '../../../examples/svelte/AlertBasicExample.svelte';

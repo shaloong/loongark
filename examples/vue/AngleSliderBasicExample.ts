@@ -5,7 +5,7 @@ import {
   resolveDynamicComponent,
   type VNodeProps,
 } from "vue";
-import { LoongArkAngleSlider } from "@loongark/vue";
+import { LoongArkAngleSlider } from "@shaloong/loongark-vue";
 import type { AngleSliderHiddenInputProps } from "@ark-ui/vue/angle-slider";
 export const AngleSliderBasicExample = defineComponent({
   setup() {

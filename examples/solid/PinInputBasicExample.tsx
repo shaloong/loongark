@@ -6,7 +6,7 @@ import {
   LoongArkPinInputControl,
   LoongArkPinInputInput,
   LoongArkPinInputHiddenInput,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function PinInputBasicExample() {
   return (
     <LoongArkPinInputRoot>

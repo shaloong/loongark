@@ -1,4 +1,4 @@
-import { mountStyleSheet, StyleHost } from "@loongark/theme";
+import { mountStyleSheet, StyleHost } from "@shaloong/loongark-theme";
 export const mountPrimitiveStyles = (
   key: string,
   css: string,

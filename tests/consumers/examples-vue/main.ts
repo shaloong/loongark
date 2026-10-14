@@ -1,4 +1,4 @@
-import {createApp,h} from 'vue'; import {LoongArkProvider as Provider} from '@loongark/vue'; import {AccordionBasicExample as E0} from '../../../examples/vue/AccordionBasicExample.ts';
+import {createApp,h} from 'vue'; import {LoongArkProvider as Provider} from '@shaloong/loongark-vue'; import {AccordionBasicExample as E0} from '../../../examples/vue/AccordionBasicExample.ts';
 import {ActionMediaExample as E1} from '../../../examples/vue/ActionMediaExample.ts';
 import {AdvancedSelectionExample as E2} from '../../../examples/vue/AdvancedSelectionExample.ts';
 import {AlertBasicExample as E3} from '../../../examples/vue/AlertBasicExample.ts';

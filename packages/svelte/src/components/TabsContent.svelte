@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTabsStyles } from "@loongark/primitives/automatic-styles/tabs";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTabsStyles } from "@shaloong/loongark-primitives/automatic-styles/tabs";
   registerAutomaticStyles(lkAutomaticTabsStyles);
 
   import { Tabs } from "@ark-ui/svelte/tabs";

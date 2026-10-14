@@ -3,4 +3,4 @@ export {
   mountVirtualGrid,
   createVirtualMasonry,
   mountVirtualMasonry,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";

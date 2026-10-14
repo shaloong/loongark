@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkVirtualGrid } from "@loongark/solid";
+import { LoongArkVirtualGrid } from "@shaloong/loongark-solid";
 export function VirtualGridBasicExample() {
   return (
     <LoongArkVirtualGrid

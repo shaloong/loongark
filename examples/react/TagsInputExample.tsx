@@ -1,5 +1,5 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/react";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-react";
 import React from "react";
 import {
   LoongArkTagsInputRoot,
@@ -12,8 +12,8 @@ import {
   LoongArkTagsInputItemDeleteTrigger,
   LoongArkTagsInputClearTrigger,
   LoongArkTagsInputHiddenInput,
-} from "@loongark/react";
-import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+} from "@shaloong/loongark-react";
+import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
 
 interface TagsInputExampleProps {
   size?: TagsInputSize;

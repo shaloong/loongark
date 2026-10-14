@@ -10,8 +10,8 @@
     LoongArkStepsCompletedContent,
     LoongArkStepsNextTrigger,
     LoongArkStepsPrevTrigger,
-  } from "@loongark/svelte";
-  import type { StepsOrientation, StepsSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { StepsOrientation, StepsSize } from "@shaloong/loongark-primitives";
 
   export let size: StepsSize = "md";
   export let orientation: StepsOrientation = "horizontal";

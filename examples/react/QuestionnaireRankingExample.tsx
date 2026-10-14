@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { createQuestionnaireRankingDemo } from "../shared/questionnaireRankingDemo";
 export function QuestionnaireRankingExample() {
   const [, redraw] = useState(0),

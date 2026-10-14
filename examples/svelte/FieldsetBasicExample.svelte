@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkFieldset, LoongArkField } from "@loongark/svelte";
+  import { LoongArkFieldset, LoongArkField } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkFieldset.Root>

@@ -8,8 +8,8 @@ import {
   LoongArkCarouselNextTrigger,
   LoongArkCarouselIndicatorGroup,
   LoongArkCarouselIndicator,
-} from "@loongark/vue";
-import type { CarouselSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { CarouselSize } from "@shaloong/loongark-primitives";
 
 const slides = [
   { title: "Aurora", description: "Soft gradients in motion." },

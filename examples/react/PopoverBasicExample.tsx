@@ -7,7 +7,7 @@ import {
   LoongArkPopoverTitle,
   LoongArkPopoverDescription,
   LoongArkPopoverCloseTrigger,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function PopoverBasicExample() {
   return (
     <LoongArkPopoverRoot>

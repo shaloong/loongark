@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkMasonry } from "@loongark/react";
+import { LoongArkMasonry } from "@shaloong/loongark-react";
 export function MasonryBasicExample() {
   return (
     <LoongArkMasonry columns={2}>

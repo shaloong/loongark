@@ -3,7 +3,7 @@ import {
   LoongArkLocaleProvider,
   LoongArkFormatByte,
   LoongArkFormatNumber,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function FormatBasicExample() {
   return (
     <LoongArkLocaleProvider locale="zh-CN">

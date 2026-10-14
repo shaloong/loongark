@@ -1,6 +1,6 @@
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import type { LoongArkTheme } from "@loongark/theme";
-import { DEFAULT_TOKENS, TokenTree } from "@loongark/tokens";
+import type { LoongArkTheme } from "@shaloong/loongark-theme";
+import { DEFAULT_TOKENS, TokenTree } from "@shaloong/loongark-tokens";
 import { asTokenTree, toStringToken } from "./tokenUtils";
 
 // Checkbox 尺寸定义

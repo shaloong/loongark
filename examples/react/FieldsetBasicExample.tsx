@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkFieldset, LoongArkField } from "@loongark/react";
+import { LoongArkFieldset, LoongArkField } from "@shaloong/loongark-react";
 export function FieldsetBasicExample() {
   return (
     <LoongArkFieldset.Root>

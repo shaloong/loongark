@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticClipboardStyles } from "@loongark/primitives/automatic-styles/clipboard";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticClipboardStyles } from "@shaloong/loongark-primitives/automatic-styles/clipboard";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticClipboardStyles } from "@loongark/primitives/autom
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Clipboard } from "@ark-ui/react/clipboard";
-import type { ClipboardSize } from "@loongark/primitives";
+import type { ClipboardSize } from "@shaloong/loongark-primitives";
 
 type ArkClipboardRootProps = ComponentPropsWithoutRef<typeof Clipboard.Root>;
 type ArkClipboardLabelProps = ComponentPropsWithoutRef<typeof Clipboard.Label>;

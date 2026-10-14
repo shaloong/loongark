@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkStack } from "@loongark/svelte";
+  import { LoongArkStack } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkStack orientation="horizontal" gap="md">

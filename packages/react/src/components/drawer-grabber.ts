@@ -3,7 +3,7 @@
 import { createElement, forwardRef, type ComponentPropsWithoutRef } from "react";
 import { Drawer } from "@ark-ui/react/drawer";
 import { mergeProps } from "@zag-js/react";
-import { preventDrawerGrabberSelection } from "@loongark/kit";
+import { preventDrawerGrabberSelection } from "@shaloong/loongark-kit";
 
 export const DrawerGrabber = forwardRef<
   HTMLDivElement,

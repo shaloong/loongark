@@ -1,9 +1,9 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticDialogStyles } from "@loongark/primitives/automatic-styles/dialog";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticDialogStyles } from "@shaloong/loongark-primitives/automatic-styles/dialog";
 
 
-import { controlIcons } from "@loongark/kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import type {
   HTMLAttributes,
@@ -15,7 +15,7 @@ import { dataProps } from "../data-props";
 import { Dialog as ArkDialog } from "@ark-ui/react/dialog";
 import { Portal as ArkPortal } from "./portal";
 import { ark } from "@ark-ui/react";
-import type { DialogPrimitiveProps } from "@loongark/primitives";
+import type { DialogPrimitiveProps } from "@shaloong/loongark-primitives";
 import { createElement, forwardRef } from "react";
 import type { ReactNode } from "react";
 

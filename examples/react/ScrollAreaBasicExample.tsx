@@ -5,7 +5,7 @@ import {
   LoongArkScrollAreaContent,
   LoongArkScrollAreaScrollbar,
   LoongArkScrollAreaThumb,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function ScrollAreaBasicExample() {
   return (
     <LoongArkScrollAreaRoot>

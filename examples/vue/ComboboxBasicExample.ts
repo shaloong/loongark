@@ -18,7 +18,7 @@ import {
   LoongArkComboboxList,
   LoongArkComboboxItem,
   LoongArkComboboxItemText,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import type { ComboboxRootProps } from "@ark-ui/vue/combobox";
 import type { ComboboxItemProps } from "@ark-ui/vue/combobox";
 export const ComboboxBasicExample = defineComponent({

@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticBoxStyles } from "@loongark/primitives/automatic-styles/box";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticBoxStyles } from "@shaloong/loongark-primitives/automatic-styles/box";
   registerAutomaticStyles(lkAutomaticBoxStyles);
 
   import {
     layoutAttributes,
     layoutStyles,
     type LayoutOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export let as = "div";
   export let variant: LayoutOptions["variant"] = "default";
   export let size: LayoutOptions["size"] = "md";

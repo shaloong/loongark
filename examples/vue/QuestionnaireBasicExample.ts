@@ -1,5 +1,5 @@
 import { defineComponent, h, ref } from "vue";
-import { LoongArkQuestionnaire } from "@loongark/vue";
+import { LoongArkQuestionnaire } from "@shaloong/loongark-vue";
 export const QuestionnaireBasicExample = defineComponent({
   setup() {
     const completed = ref(false);

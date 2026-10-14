@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { controlIcons } from "@loongark/kit";
-  import { LoongArkIcon } from "@loongark/svelte";
+  import { controlIcons } from "@shaloong/loongark-kit";
+  import { LoongArkIcon } from "@shaloong/loongark-svelte";
 
   import {
     LoongArkTagsInputRoot,
@@ -13,8 +13,8 @@
     LoongArkTagsInputItemDeleteTrigger,
     LoongArkTagsInputClearTrigger,
     LoongArkTagsInputHiddenInput,
-  } from "@loongark/svelte";
-  import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
 
   export let size: TagsInputSize = "md";
   export let state: TagsInputState = "default";

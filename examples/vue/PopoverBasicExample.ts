@@ -7,7 +7,7 @@ import {
   LoongArkPopoverTitle,
   LoongArkPopoverDescription,
   LoongArkPopoverCloseTrigger,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const PopoverBasicExample = defineComponent({
   setup() {
     return () => {

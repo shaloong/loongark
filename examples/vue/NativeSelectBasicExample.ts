@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkNativeSelect } from "@loongark/vue";
+import { LoongArkNativeSelect } from "@shaloong/loongark-vue";
 export const NativeSelectBasicExample = defineComponent({
   setup() {
     return () => {

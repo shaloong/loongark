@@ -1,4 +1,4 @@
-import type { LoongArkTheme } from "@loongark/theme";
+import type { LoongArkTheme } from "@shaloong/loongark-theme";
 import type { PrimitiveRegistration } from "./core";
 import { neutralSystem } from "./neutral-system";
 import { primitiveStyleOrder } from "./style-order";

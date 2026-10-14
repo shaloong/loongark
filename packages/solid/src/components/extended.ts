@@ -1,14 +1,14 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticAngleSliderStyles } from "@loongark/primitives/automatic-styles/angle-slider";
-import { styles as lkAutomaticFieldStyles } from "@loongark/primitives/automatic-styles/field";
-import { styles as lkAutomaticFieldsetStyles } from "@loongark/primitives/automatic-styles/fieldset";
-import { styles as lkAutomaticFloatingPanelStyles } from "@loongark/primitives/automatic-styles/floating-panel";
-import { styles as lkAutomaticMarqueeStyles } from "@loongark/primitives/automatic-styles/marquee";
-import { styles as lkAutomaticQrCodeStyles } from "@loongark/primitives/automatic-styles/qr-code";
-import { styles as lkAutomaticSignaturePadStyles } from "@loongark/primitives/automatic-styles/signature-pad";
-import { styles as lkAutomaticTimerStyles } from "@loongark/primitives/automatic-styles/timer";
-import { styles as lkAutomaticTourStyles } from "@loongark/primitives/automatic-styles/tour";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticAngleSliderStyles } from "@shaloong/loongark-primitives/automatic-styles/angle-slider";
+import { styles as lkAutomaticFieldStyles } from "@shaloong/loongark-primitives/automatic-styles/field";
+import { styles as lkAutomaticFieldsetStyles } from "@shaloong/loongark-primitives/automatic-styles/fieldset";
+import { styles as lkAutomaticFloatingPanelStyles } from "@shaloong/loongark-primitives/automatic-styles/floating-panel";
+import { styles as lkAutomaticMarqueeStyles } from "@shaloong/loongark-primitives/automatic-styles/marquee";
+import { styles as lkAutomaticQrCodeStyles } from "@shaloong/loongark-primitives/automatic-styles/qr-code";
+import { styles as lkAutomaticSignaturePadStyles } from "@shaloong/loongark-primitives/automatic-styles/signature-pad";
+import { styles as lkAutomaticTimerStyles } from "@shaloong/loongark-primitives/automatic-styles/timer";
+import { styles as lkAutomaticTourStyles } from "@shaloong/loongark-primitives/automatic-styles/tour";
 // Ark 是四端交互与无障碍的唯一行为来源，外观由共享 Primitive 管理。
 import { Field } from "@ark-ui/solid/field";
 export const LoongArkField: typeof Field = /*#__PURE__*/ withAutomaticStyles(Field, lkAutomaticFieldStyles);

@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkCodeEditor } from "@loongark/solid";
+import { LoongArkCodeEditor } from "@shaloong/loongark-solid";
 export function CodeEditorBasicExample() {
   return (
     <LoongArkCodeEditor

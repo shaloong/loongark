@@ -3,7 +3,7 @@ import {
   LoongArkDataTable,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
 export const DataTableEditExample = defineComponent({
   props: { complex: Boolean, batch: Boolean },

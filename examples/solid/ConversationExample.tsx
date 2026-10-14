@@ -1,7 +1,7 @@
 /** @jsxImportSource solid-js */
 import { createSignal, For } from "solid-js";
-import type { QuestionnaireValue } from "@loongark/kit";
-import * as L from "@loongark/solid";
+import type { QuestionnaireValue } from "@shaloong/loongark-kit";
+import * as L from "@shaloong/loongark-solid";
 import { feedbackQuestions } from "../shared/conversationDemo";
 export function ConversationExample() {
   const [failed, setFailed] = createSignal(true),

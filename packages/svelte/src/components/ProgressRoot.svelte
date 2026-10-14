@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticProgressStyles } from "@loongark/primitives/automatic-styles/progress";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticProgressStyles } from "@shaloong/loongark-primitives/automatic-styles/progress";
   registerAutomaticStyles(lkAutomaticProgressStyles);
 
   import { Progress } from "@ark-ui/svelte/progress";
   import type { ProgressRootProps } from "@ark-ui/svelte/progress";
-  import type { ProgressOrientation, ProgressSize } from "@loongark/primitives";
+  import type { ProgressOrientation, ProgressSize } from "@shaloong/loongark-primitives";
 
   export let size: ProgressSize = "md";
   export let orientation: ProgressOrientation = "horizontal";

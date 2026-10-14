@@ -10,7 +10,7 @@ import {
   LoongArkProgressCircle,
   LoongArkProgressCircleTrack,
   LoongArkProgressCircleRange,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/Progress",

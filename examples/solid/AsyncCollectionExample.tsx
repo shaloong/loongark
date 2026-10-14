@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal, onCleanup } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { createAsyncCollectionDemo, type CollectionDemoItem } from "../shared/asyncCollectionDemo";
 function CollectionView({onDispose}: {onDispose: () => void}) {
  const [revision,redraw] = createSignal(0), demo = createAsyncCollectionDemo(() => redraw(v=>v+1));

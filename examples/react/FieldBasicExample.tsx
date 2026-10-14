@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkField } from "@loongark/react";
+import { LoongArkField } from "@shaloong/loongark-react";
 export function FieldBasicExample() {
   return (
     <LoongArkField.Root required>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkButton, LoongArkPresence } from "@loongark/svelte";
+  import { LoongArkButton, LoongArkPresence } from "@shaloong/loongark-svelte";
   let visible = $state(false);
 </script>
 

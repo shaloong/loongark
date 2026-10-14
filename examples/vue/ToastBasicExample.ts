@@ -1,5 +1,5 @@
 import { defineComponent, h, type VNodeChild } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 export const ToastBasicExample = defineComponent({
   setup() {
     const toaster = L.createToaster<VNodeChild>({ placement: "bottom-end" });

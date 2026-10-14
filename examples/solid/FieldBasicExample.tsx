@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkField } from "@loongark/solid";
+import { LoongArkField } from "@shaloong/loongark-solid";
 export function FieldBasicExample() {
   return (
     <LoongArkField.Root required>

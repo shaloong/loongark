@@ -1,11 +1,11 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticAttachmentStyles } from "@loongark/primitives/automatic-styles/attachment";
-import { styles as lkAutomaticBubbleStyles } from "@loongark/primitives/automatic-styles/bubble";
-import { styles as lkAutomaticMessageStyles } from "@loongark/primitives/automatic-styles/message";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticAttachmentStyles } from "@shaloong/loongark-primitives/automatic-styles/attachment";
+import { styles as lkAutomaticBubbleStyles } from "@shaloong/loongark-primitives/automatic-styles/bubble";
+import { styles as lkAutomaticMessageStyles } from "@shaloong/loongark-primitives/automatic-styles/message";
 
 
-import { controlIcons } from "@loongark/kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import { useRef, type HTMLAttributes } from "react";
 import {
@@ -17,7 +17,7 @@ import {
   type BubbleOptions,
   type MessageOptions,
   type ConversationActionHandler,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 import { useConversationActions } from "./conversation-actions";
 export type LoongArkAttachmentProps = HTMLAttributes<HTMLDivElement> &
   AttachmentOptions;

@@ -8,7 +8,7 @@ import {
   LoongArkTreeViewNodeProvider,
   LoongArkTreeViewItem,
   LoongArkTreeViewItemText,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function TreeViewBasicExample() {
   interface FileNode {
     id: string;

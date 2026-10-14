@@ -6,7 +6,7 @@
     LoongArkEmptyDescription,
     LoongArkEmptyContent,
     LoongArkButton,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkEmpty>

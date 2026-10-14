@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkRichTextEditor } from "@loongark/vue";
+import { LoongArkRichTextEditor } from "@shaloong/loongark-vue";
 export const RichTextEditorBasicExample = defineComponent({
   setup() {
     return () => {

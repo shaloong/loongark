@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { complexQuestions, createQuestionnaireTypesDemo } from "../shared/questionnaireTypesDemo";
 export function QuestionnaireTypesExample() {
   const [, redraw] = useState(0), [demo] = useState(() => createQuestionnaireTypesDemo(() => redraw(v => v + 1)));

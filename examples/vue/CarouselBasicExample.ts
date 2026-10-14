@@ -6,7 +6,7 @@ import {
   LoongArkCarouselControl,
   LoongArkCarouselPrevTrigger,
   LoongArkCarouselNextTrigger,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const CarouselBasicExample = defineComponent({
   setup() {
     return () => {

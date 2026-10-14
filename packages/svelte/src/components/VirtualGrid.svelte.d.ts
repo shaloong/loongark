@@ -1,5 +1,5 @@
 import type { SvelteComponent, Snippet } from "svelte";
-import type { VirtualGridOptions, VirtualGridCellDetails } from "@loongark/kit";
+import type { VirtualGridOptions, VirtualGridCellDetails } from "@shaloong/loongark-kit";
 export interface VirtualGridProps extends VirtualGridOptions {
   renderCell: Snippet<[VirtualGridCellDetails]>;
 }

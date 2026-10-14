@@ -1,4 +1,4 @@
-import type { SelectSize } from "@loongark/primitives";
+import type { SelectSize } from "@shaloong/loongark-primitives";
 import type {
   SelectRootProps as NativeRootProps,
   SelectItemProps as NativeItemProps,

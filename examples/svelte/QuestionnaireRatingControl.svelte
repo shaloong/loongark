@@ -1,6 +1,6 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
-  import { controlIcons, type QuestionnaireCustomContext } from "@loongark/kit";
+  import * as L from "@shaloong/loongark-svelte";
+  import { controlIcons, type QuestionnaireCustomContext } from "@shaloong/loongark-kit";
   import Registration from "./QuestionnaireRatingRegistration.svelte";
   let {
     context,

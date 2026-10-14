@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticDrawerStyles } from "@loongark/primitives/automatic-styles/drawer";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticDrawerStyles } from "@shaloong/loongark-primitives/automatic-styles/drawer";
   registerAutomaticStyles(lkAutomaticDrawerStyles);
 
   import { Drawer, type DrawerRootProviderProps } from "@ark-ui/svelte/drawer";

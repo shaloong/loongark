@@ -3,7 +3,7 @@
     groupsDisclosureCSS,
     groupsDisclosureIcon,
   } from "../shared/questionnaireGroupsDemo";
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import { createRangeDemo } from "../shared/dataTableRangeDemo";
   let version = $state(0);
   // 卸载中的 Abort 回调先结束本轮销毁，再通知父示例刷新计数。

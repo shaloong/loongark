@@ -1,7 +1,7 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticDialogStyles } from "@loongark/primitives/automatic-styles/dialog";
-import { controlIcons } from "@loongark/kit";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticDialogStyles } from "@shaloong/loongark-primitives/automatic-styles/dialog";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import { renderPart } from "../render-part";
 import { LoongArkPortal } from "./portal";
@@ -9,7 +9,7 @@ import { defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import { Dialog as ArkDialog } from "@ark-ui/vue/dialog";
 import { ark } from "@ark-ui/vue";
-import type { DialogPrimitiveProps } from "@loongark/primitives";
+import type { DialogPrimitiveProps } from "@shaloong/loongark-primitives";
 
 export type DialogSize = NonNullable<DialogPrimitiveProps["size"]>;
 export type DialogPlacement = NonNullable<DialogPrimitiveProps["placement"]>;

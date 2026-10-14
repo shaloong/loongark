@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticPasswordInputStyles } from "@loongark/primitives/automatic-styles/password-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticPasswordInputStyles } from "@shaloong/loongark-primitives/automatic-styles/password-input";
 
 
 import { useFieldContext } from "@ark-ui/react/field";
@@ -8,7 +8,7 @@ import { usePasswordInputContext } from "@ark-ui/react/password-input";
 import {
   nativeSelectionProps,
   nativeSelectionFieldDescription,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 /**
  * Password Input component - React wrapper.
  * Uses Ark UI Password Input with data attributes for styling.
@@ -19,7 +19,7 @@ import { PasswordInput } from "@ark-ui/react/password-input";
 import type {
   PasswordInputSize,
   PasswordInputState,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 type ArkPasswordInputRootProps = ComponentPropsWithoutRef<
   typeof PasswordInput.Root

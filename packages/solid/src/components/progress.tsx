@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticProgressStyles } from "@loongark/primitives/automatic-styles/progress";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticProgressStyles } from "@shaloong/loongark-primitives/automatic-styles/progress";
 /**
  * Progress component - Solid wrapper.
  * Uses Ark UI Progress with data attributes for styling.
@@ -18,7 +18,7 @@ import {
   type ProgressCircleTrackProps as ArkProgressCircleTrackProps,
   type ProgressCircleRangeProps as ArkProgressCircleRangeProps,
 } from "@ark-ui/solid/progress";
-import type { ProgressOrientation, ProgressSize } from "@loongark/primitives";
+import type { ProgressOrientation, ProgressSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkProgressRootProps extends Omit<
   ArkProgressRootProps,

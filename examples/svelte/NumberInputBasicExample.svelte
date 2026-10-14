@@ -6,7 +6,7 @@
     LoongArkNumberInputInput,
     LoongArkNumberInputIncrementTrigger,
     LoongArkNumberInputDecrementTrigger,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkNumberInputRoot defaultValue="1" min={0} max={10}>

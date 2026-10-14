@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticEditableStyles } from "@loongark/primitives/automatic-styles/editable";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticEditableStyles } from "@shaloong/loongark-primitives/automatic-styles/editable";
 import { renderPart } from "../render-part";
 /**
  * Editable component - Vue wrapper.
@@ -13,7 +13,7 @@ import {
   type PropType,
 } from "vue";
 import { Editable as ArkEditable } from "@ark-ui/vue/editable";
-import type { EditableSize, EditableState } from "@loongark/primitives";
+import type { EditableSize, EditableState } from "@shaloong/loongark-primitives";
 
 export const LoongArkEditableRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkEditableRoot",

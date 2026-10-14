@@ -12,7 +12,7 @@
     LoongArkColorPickerAreaBackground,
     LoongArkColorPickerAreaThumb,
     LoongArkColorPickerChannelInput,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkColorPickerRoot defaultValue={parseColor("#006EFF")}>

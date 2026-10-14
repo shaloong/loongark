@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkLabel } from "@loongark/react";
+import { LoongArkLabel } from "@shaloong/loongark-react";
 export function LabelBasicExample() {
   return (
     <div>

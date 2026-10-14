@@ -1,11 +1,11 @@
 <script lang="ts" generics="T extends object">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticSelectStyles } from "@loongark/primitives/automatic-styles/select";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticSelectStyles } from "@shaloong/loongark-primitives/automatic-styles/select";
   registerAutomaticStyles(lkAutomaticSelectStyles);
 
   import type { SelectRootProps } from "@ark-ui/svelte/select";
   import { Select } from "@ark-ui/svelte/select";
-  import type { SelectSize } from "@loongark/primitives";
+  import type { SelectSize } from "@shaloong/loongark-primitives";
   import { createSelectSizeContext } from "./selectContext";
 
   export let size: SelectSize = "md";

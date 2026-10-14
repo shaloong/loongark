@@ -1,7 +1,7 @@
 /** @jsxImportSource solid-js */
 import { onCleanup } from "solid-js";
 import { createTourFocusDemo } from "../shared/tourFocusDemo";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 export function TourExample() {
   const focus = createTourFocusDemo();
   onCleanup(focus.dispose);

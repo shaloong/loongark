@@ -9,7 +9,7 @@ import {
   LoongArkDialogTitle,
   LoongArkDialogDescription,
   LoongArkDialogCloseTrigger,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const AlertDialogBasicExample = defineComponent({
   setup() {
     return () => {

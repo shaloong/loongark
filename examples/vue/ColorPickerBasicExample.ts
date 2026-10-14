@@ -12,7 +12,7 @@ import {
   LoongArkColorPickerAreaBackground,
   LoongArkColorPickerAreaThumb,
   LoongArkColorPickerChannelInput,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const ColorPickerBasicExample = defineComponent({
   setup() {
     return () => {

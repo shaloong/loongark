@@ -6,7 +6,7 @@ import {
   LoongArkMenuPositioner,
   LoongArkMenuContent,
   LoongArkMenuItem,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const MenubarBasicExample = defineComponent({
   setup() {
     return () => {

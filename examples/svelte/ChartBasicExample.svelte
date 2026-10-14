@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkChart } from "@loongark/svelte";
+  import { LoongArkChart } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkChart

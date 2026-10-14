@@ -2,7 +2,7 @@ import React from "react";
 import {
   LoongArkToggleGroupRoot,
   LoongArkToggleGroupItem,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function ToggleGroupBasicExample() {
   return (
     <LoongArkToggleGroupRoot>

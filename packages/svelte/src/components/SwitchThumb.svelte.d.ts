@@ -1,6 +1,6 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Switch } from "@ark-ui/svelte/switch";
-import type { SwitchPrimitiveProps } from "@loongark/primitives";
+import type { SwitchPrimitiveProps } from "@shaloong/loongark-primitives";
 
 export default class LoongArkSwitchThumb extends SvelteComponent<
   Omit<ComponentProps<typeof Switch.Thumb>, "children" | "size"> & {

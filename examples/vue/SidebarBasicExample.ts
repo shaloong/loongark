@@ -6,7 +6,7 @@ import {
   LoongArkSidebarMenu,
   LoongArkSidebarMenuItem,
   LoongArkSidebarMenuButton,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const SidebarBasicExample = defineComponent({
   setup() {
     return () => {

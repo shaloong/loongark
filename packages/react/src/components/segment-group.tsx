@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSegmentGroupStyles } from "@loongark/primitives/automatic-styles/segment-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSegmentGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/segment-group";
 
 
 /**
@@ -13,7 +13,7 @@ import { SegmentGroup } from "@ark-ui/react/segment-group";
 import type {
   SegmentGroupOrientation,
   SegmentGroupSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 type ArkSegmentGroupRootProps = ComponentPropsWithoutRef<typeof SegmentGroup.Root>;
 type ArkSegmentGroupItemProps = ComponentPropsWithoutRef<typeof SegmentGroup.Item>;

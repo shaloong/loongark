@@ -6,7 +6,7 @@ import {
   LoongArkImageCropperSelection,
   LoongArkImageCropperHandle,
   LoongArkImageCropperGrid,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function ImageCropperBasicExample() {
   return (
     <LoongArkImageCropperRoot aspectRatio={1}>

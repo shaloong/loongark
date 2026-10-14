@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Collapsible } from "@ark-ui/svelte/collapsible";
 import type { CollapsibleRootProps } from "@ark-ui/svelte/collapsible";
-import type { CollapsibleSize } from "@loongark/primitives";
+import type { CollapsibleSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkCollapsibleRoot extends SvelteComponent<
   Omit<

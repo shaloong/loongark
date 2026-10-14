@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import type { SelectRootProps } from "@ark-ui/svelte/select";
 import { Select } from "@ark-ui/svelte/select";
-import type { SelectSize } from "@loongark/primitives";
+import type { SelectSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkSelectRoot<
   T extends object = object,

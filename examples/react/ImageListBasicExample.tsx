@@ -3,7 +3,7 @@ import {
   LoongArkImageList,
   LoongArkImageListItem,
   LoongArkImageListCaption,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function ImageListBasicExample() {
   return (
     <LoongArkImageList columns={2}>

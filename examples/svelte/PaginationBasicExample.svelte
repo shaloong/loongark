@@ -4,7 +4,7 @@
     LoongArkPaginationPrevTrigger,
     LoongArkPaginationItem,
     LoongArkPaginationNextTrigger,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkPaginationRoot count={50} pageSize={10}>

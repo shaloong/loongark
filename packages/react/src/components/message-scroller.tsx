@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticMessageScrollerStyles } from "@loongark/primitives/automatic-styles/message-scroller";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticMessageScrollerStyles } from "@shaloong/loongark-primitives/automatic-styles/message-scroller";
 
 
 import React, {
@@ -19,7 +19,7 @@ import {
   virtualViewportHeight,
   type VirtualRenderDetails,
   type MessageScrollerOptions,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export type LoongArkMessageScrollerProps = HTMLAttributes<HTMLDivElement> &
   MessageScrollerOptions & {
     renderItem?: (details: VirtualRenderDetails) => ReactNode;

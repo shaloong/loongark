@@ -1,6 +1,6 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
-  import type { DateInputDateValue } from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
+  import type { DateInputDateValue } from "@shaloong/loongark-svelte";
   let value = $state<DateInputDateValue[]>([L.parseDate("2026-10-03")]),
     disabled = $state(false),
     submitted = $state("Not submitted");

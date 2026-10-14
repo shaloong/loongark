@@ -8,8 +8,8 @@ import {
   nextTick,
   type PropType,
 } from "vue";
-import * as L from "@loongark/vue";
-import { controlIcons, type QuestionnaireCustomContext } from "@loongark/kit";
+import * as L from "@shaloong/loongark-vue";
+import { controlIcons, type QuestionnaireCustomContext } from "@shaloong/loongark-kit";
 const Registration = defineComponent({
   props: {
     context: {

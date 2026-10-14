@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticHoverCardStyles } from "@loongark/primitives/automatic-styles/hover-card";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticHoverCardStyles } from "@shaloong/loongark-primitives/automatic-styles/hover-card";
 /**
  * Hover Card component - Solid wrapper.
  * Uses Ark UI Hover Card with data attributes for styling.
@@ -15,7 +15,7 @@ import {
   type HoverCardArrowProps as ArkHoverCardArrowProps,
   type HoverCardArrowTipProps as ArkHoverCardArrowTipProps,
 } from "@ark-ui/solid/hover-card";
-import type { HoverCardSize } from "@loongark/primitives";
+import type { HoverCardSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkHoverCardRootProps extends Omit<
   ArkHoverCardRootProps,

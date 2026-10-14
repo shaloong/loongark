@@ -3,7 +3,7 @@
     LoongArkCollapsibleRoot,
     LoongArkCollapsibleTrigger,
     LoongArkCollapsibleContent,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkCollapsibleRoot>

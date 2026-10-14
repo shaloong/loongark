@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkContextMenu } from "@loongark/vue";
+import { LoongArkContextMenu } from "@shaloong/loongark-vue";
 export const ContextMenuBasicExample = defineComponent({
   setup() {
     return () => {

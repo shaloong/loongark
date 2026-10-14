@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkAppBar, LoongArkToolbar, LoongArkLink } from "@loongark/vue";
+import { LoongArkAppBar, LoongArkToolbar, LoongArkLink } from "@shaloong/loongark-vue";
 export const AppBarBasicExample = defineComponent({
   setup() {
     return () => {

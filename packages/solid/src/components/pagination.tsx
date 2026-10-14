@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticPaginationStyles } from "@loongark/primitives/automatic-styles/pagination";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticPaginationStyles } from "@shaloong/loongark-primitives/automatic-styles/pagination";
 /**
  * Pagination component - Solid wrapper.
  * Uses Ark UI Pagination with data attributes for styling.
@@ -17,7 +17,7 @@ import {
 import type {
   PaginationOrientation,
   PaginationSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface LoongArkPaginationRootProps extends Omit<
   ArkPaginationRootProps,

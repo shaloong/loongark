@@ -2,8 +2,8 @@
  * Tabs Primitive - 标签页样式
  * 基于 Ark UI Tabs 数据标记
  */
-import { LoongArkTheme } from "@loongark/theme";
-import { TokenTree } from "@loongark/tokens";
+import { LoongArkTheme } from "@shaloong/loongark-theme";
+import { TokenTree } from "@shaloong/loongark-tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 

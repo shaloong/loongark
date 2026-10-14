@@ -3,7 +3,7 @@
     LoongArkList,
     LoongArkListItem,
     LoongArkListItemText,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkList>

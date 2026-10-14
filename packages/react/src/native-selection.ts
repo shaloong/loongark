@@ -6,7 +6,7 @@ import {
   useRef,
   type ForwardedRef,
 } from "react";
-import { mountNativeSelection } from "@loongark/kit";
+import { mountNativeSelection } from "@shaloong/loongark-kit";
 type State = {
   getRootProps?: () => { "aria-readonly"?: unknown };
   checked?: boolean;

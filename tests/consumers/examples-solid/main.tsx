@@ -1,4 +1,4 @@
-import {render} from 'solid-js/web'; import {LoongArkProvider as Provider} from '@loongark/solid'; import {AccordionBasicExample as E0} from '../../../examples/solid/AccordionBasicExample.tsx';
+import {render} from 'solid-js/web'; import {LoongArkProvider as Provider} from '@shaloong/loongark-solid'; import {AccordionBasicExample as E0} from '../../../examples/solid/AccordionBasicExample.tsx';
 import {ActionMediaExample as E1} from '../../../examples/solid/ActionMediaExample.tsx';
 import {AdvancedSelectionExample as E2} from '../../../examples/solid/AdvancedSelectionExample.tsx';
 import {AlertBasicExample as E3} from '../../../examples/solid/AlertBasicExample.tsx';

@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticBottomNavigationStyles } from "@loongark/primitives/automatic-styles/bottom-navigation";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticBottomNavigationStyles } from "@shaloong/loongark-primitives/automatic-styles/bottom-navigation";
   registerAutomaticStyles(lkAutomaticBottomNavigationStyles);
 
   import {
     layoutAttributes,
     layoutStyles,
     type LayoutOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export let as = "nav";
   export let variant: LayoutOptions["variant"] = "default";
   export let size: LayoutOptions["size"] = "md";

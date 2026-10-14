@@ -4,7 +4,7 @@ import {
   LoongArkInputLabel,
   LoongArkInputControl,
   LoongArkInputHelperText,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const InputBasicExample = defineComponent({
   setup() {
     return () => {

@@ -1,7 +1,7 @@
 import { DataTableComplexEditorsExample } from "../examples/react/DataTableComplexEditorsExample";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 const rows = [
   { id: "a", name: "Alpha", amount: 20 },
   { id: "b", name: "Beta", amount: 10 },

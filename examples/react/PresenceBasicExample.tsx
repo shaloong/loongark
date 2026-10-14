@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LoongArkButton, LoongArkPresence } from "@loongark/react";
+import { LoongArkButton, LoongArkPresence } from "@shaloong/loongark-react";
 export function PresenceBasicExample() {
   const [visible, setVisible] = useState(false);
   return (

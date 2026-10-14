@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkTypography } from "@loongark/react";
+import { LoongArkTypography } from "@shaloong/loongark-react";
 export function TypographyBasicExample() {
   return (
     <div>

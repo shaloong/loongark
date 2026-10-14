@@ -19,9 +19,9 @@ for (const width of [1280, 375]) for (const mode of ["light", "dark"]) {
     }).toBe(false);
     for (const framework of ['react','vue','solid','svelte']) {
       await guide.getByRole('group',{name:'选择框架'}).getByRole('button',{name:framework,exact:true}).click();
-      await expect(guide).toContainText(`pnpm add @loongark/${framework}`);
-      await expect(guide).toContainText(`@loongark/${framework}/button`);
-      await expect(guide).toContainText(`@loongark/${framework}/provider`);
+      await expect(guide).toContainText(`pnpm add @shaloong/loongark-${framework}`);
+      await expect(guide).toContainText(`@shaloong/loongark-${framework}/button`);
+      await expect(guide).toContainText(`@shaloong/loongark-${framework}/provider`);
     }
     const demo=guide.getByRole('button',{name:'接入示例'});
     await demo.focus(); await page.keyboard.press('Enter');

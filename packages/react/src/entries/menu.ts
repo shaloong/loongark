@@ -21,7 +21,7 @@ export { LoongArkMenuRootProvider } from "../components/ark-advanced";
 export { LoongArkMenuSeparator } from "../components/menu";
 export { LoongArkMenuTrigger } from "../components/menu";
 export { LoongArkMenuTriggerItem } from "../components/menu";
-export type { MenuSize } from "@loongark/primitives";
+export type { MenuSize } from "@shaloong/loongark-primitives";
 export { useMenu } from "@ark-ui/react/menu";
 export { useMenuContext } from "@ark-ui/react/menu";
 export { useMenuItemContext } from "@ark-ui/react/menu";

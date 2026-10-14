@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSplitterStyles } from "@loongark/primitives/automatic-styles/splitter";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSplitterStyles } from "@shaloong/loongark-primitives/automatic-styles/splitter";
 import { renderPart } from "../render-part";
 /**
  * Splitter component - Vue wrapper.
@@ -8,7 +8,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, type PropType } from "vue";
 import { Splitter as ArkSplitter } from "@ark-ui/vue/splitter";
-import type { SplitterSize } from "@loongark/primitives";
+import type { SplitterSize } from "@shaloong/loongark-primitives";
 
 export const LoongArkSplitterRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkSplitterRoot",

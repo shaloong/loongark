@@ -4,7 +4,7 @@
     LoongArkHoverCardTrigger,
     LoongArkHoverCardPositioner,
     LoongArkHoverCardContent,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkHoverCardRoot>

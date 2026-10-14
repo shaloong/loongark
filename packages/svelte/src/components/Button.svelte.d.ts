@@ -1,5 +1,5 @@
 import type { SvelteComponent } from "svelte";
-import type { ButtonPrimitiveProps } from "@loongark/primitives";
+import type { ButtonPrimitiveProps } from "@shaloong/loongark-primitives";
 import type { HTMLButtonAttributes } from "svelte/elements";
 
 export default class Button extends SvelteComponent<

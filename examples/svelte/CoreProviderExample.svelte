@@ -1,8 +1,8 @@
 <script lang="ts">
-import {LoongArkProviderCore} from '@loongark/svelte/provider-core';
-import {LoongArkButton} from '@loongark/svelte/button';
-import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';
-import {buttonPrimitive} from '@loongark/primitives/button';
+import {LoongArkProviderCore} from '@shaloong/loongark-svelte/provider-core';
+import {LoongArkButton} from '@shaloong/loongark-svelte/button';
+import {createPrimitiveStyleBootstrap} from '@shaloong/loongark-primitives/styles';
+import {buttonPrimitive} from '@shaloong/loongark-primitives/button';
 const styleBootstrap=createPrimitiveStyleBootstrap([buttonPrimitive]);
 let mode:'light'|'dark'=$state('light');
 </script>

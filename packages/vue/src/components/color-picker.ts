@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticColorPickerStyles } from "@loongark/primitives/automatic-styles/color-picker";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticColorPickerStyles } from "@shaloong/loongark-primitives/automatic-styles/color-picker";
 import { renderPart } from "../render-part";
 /**
  * Color Picker component - Vue wrapper.
@@ -13,7 +13,7 @@ import {
   type PropType,
 } from "vue";
 import { ColorPicker as ArkColorPicker } from "@ark-ui/vue/color-picker";
-import type { ColorPickerSize } from "@loongark/primitives";
+import type { ColorPickerSize } from "@shaloong/loongark-primitives";
 
 export const LoongArkColorPickerRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkColorPickerRoot",

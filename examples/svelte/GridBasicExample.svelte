@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkGrid } from "@loongark/svelte";
+  import { LoongArkGrid } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkGrid columns={2} gap="md">

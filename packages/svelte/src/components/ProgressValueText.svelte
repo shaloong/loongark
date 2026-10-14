@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticProgressStyles } from "@loongark/primitives/automatic-styles/progress";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticProgressStyles } from "@shaloong/loongark-primitives/automatic-styles/progress";
   registerAutomaticStyles(lkAutomaticProgressStyles);
 
   import type { ComponentProps } from "svelte";

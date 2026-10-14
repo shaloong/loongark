@@ -3,7 +3,7 @@ import {
   LoongArkCollapsibleRoot,
   LoongArkCollapsibleTrigger,
   LoongArkCollapsibleContent,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function CollapsibleBasicExample() {
   return (
     <LoongArkCollapsibleRoot>

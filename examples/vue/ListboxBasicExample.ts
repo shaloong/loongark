@@ -13,7 +13,7 @@ import {
   LoongArkListboxItem,
   LoongArkListboxItemText,
   LoongArkListboxItemIndicator,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import type { ListboxRootProps } from "@ark-ui/vue/listbox";
 import type { ListboxItemProps } from "@ark-ui/vue/listbox";
 export const ListboxBasicExample = defineComponent({

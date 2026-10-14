@@ -4,7 +4,7 @@
     LoongArkNavigationMenuList,
     LoongArkNavigationMenuItem,
     LoongArkNavigationMenuLink,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkNavigationMenu>

@@ -20,7 +20,7 @@ export { LoongArkTreeViewRoot } from "../components/tree-view";
 export type { LoongArkTreeViewRootProps } from "../components/tree-view";
 export { LoongArkTreeViewRootProvider } from "../components/ark-advanced";
 export { LoongArkTreeViewTree } from "../components/tree-view";
-export type { TreeViewSize } from "@loongark/primitives";
+export type { TreeViewSize } from "@shaloong/loongark-primitives";
 export { useTreeView } from "@ark-ui/react/tree-view";
 export { useTreeViewContext } from "@ark-ui/react/tree-view";
 export { useTreeViewNodeContext } from "@ark-ui/react/tree-view";

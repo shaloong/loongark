@@ -1,7 +1,7 @@
 /** @jsxImportSource solid-js */
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
-import { createListCollection } from "@loongark/solid";
+import { createListCollection } from "@shaloong/loongark-solid";
 import {
   LoongArkListboxRoot,
   LoongArkListboxLabel,
@@ -9,8 +9,8 @@ import {
   LoongArkListboxItem,
   LoongArkListboxItemText,
   LoongArkListboxItemIndicator,
-} from "@loongark/solid";
-import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { ListboxOrientation, ListboxSize } from "@shaloong/loongark-primitives";
 
 export interface ListboxExampleProps {
   size?: ListboxSize;

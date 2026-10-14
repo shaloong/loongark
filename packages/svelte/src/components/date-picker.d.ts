@@ -6,7 +6,7 @@ import type {
   DatePickerTableCellProps as ArkDatePickerTableCellProps,
   DatePickerPresetTriggerProps as ArkDatePickerPresetTriggerProps,
 } from "@ark-ui/svelte/date-picker";
-import type { DatePickerSize } from "@loongark/primitives";
+import type { DatePickerSize } from "@shaloong/loongark-primitives";
 
 export interface DatePickerRootProps extends ArkDatePickerRootProps {
   size?: DatePickerSize;

@@ -3,7 +3,7 @@ import {
   LoongArkImageList,
   LoongArkImageListItem,
   LoongArkImageListCaption,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const ImageListBasicExample = defineComponent({
   setup() {
     return () => {

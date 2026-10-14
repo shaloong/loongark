@@ -4,7 +4,7 @@ import {
   LoongArkTooltipTrigger,
   LoongArkTooltipPositioner,
   LoongArkTooltipContent,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const TooltipBasicExample = defineComponent({
   setup() {
     return () => {

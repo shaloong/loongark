@@ -4,7 +4,7 @@ import {
   LoongArkChart,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 import { createChartTypesDemo, chartTypeModes } from "../shared/chartTypesDemo";
 export const ChartTypesExample = () => {
   const [version, redraw] = createSignal(0);

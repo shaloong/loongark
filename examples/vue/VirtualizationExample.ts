@@ -6,7 +6,7 @@ import {
   LoongArkBubble,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import { createVirtualizationDemo } from "../shared/virtualizationDemo";
 export const VirtualizationExample = defineComponent({
   props: {

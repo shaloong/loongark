@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkFloatingActionButton } from "@loongark/vue";
+import { LoongArkFloatingActionButton } from "@shaloong/loongark-vue";
 export const FloatingActionButtonBasicExample = defineComponent({
   setup() {
     return () => {

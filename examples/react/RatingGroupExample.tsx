@@ -1,5 +1,5 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/react";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-react";
 import React from "react";
 
 import {
@@ -8,7 +8,7 @@ import {
   LoongArkRatingGroupControl,
   LoongArkRatingGroupItem,
   LoongArkRatingGroupHiddenInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 interface RatingGroupDemoProps {
   size?: "sm" | "md" | "lg";

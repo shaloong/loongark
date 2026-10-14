@@ -1,5 +1,5 @@
-import { LoongArkTheme } from "@loongark/theme";
-import { TokenTree } from "@loongark/tokens";
+import { LoongArkTheme } from "@shaloong/loongark-theme";
+import { TokenTree } from "@shaloong/loongark-tokens";
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
 import { asTokenTree, toNumberToken, toStringToken } from "./tokenUtils";
 

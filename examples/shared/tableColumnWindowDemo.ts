@@ -3,7 +3,7 @@ import type {
   DataColumn,
   DataRow,
   DataTableProps,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 const initialColumns: readonly DataColumn[] = Array.from(
   { length: 80 },
   (_, index) => ({

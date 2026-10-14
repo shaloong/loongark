@@ -1,6 +1,6 @@
 // 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
-export type { ListboxOrientation } from "@loongark/primitives";
-export type { ListboxSize } from "@loongark/primitives";
+export type { ListboxOrientation } from "@shaloong/loongark-primitives";
+export type { ListboxSize } from "@shaloong/loongark-primitives";
 export { LoongArkListboxContext } from "../components/ark-advanced";
 export { LoongArkListboxEmpty } from "../components/ark-advanced";
 export { LoongArkListboxInput } from "../components/ark-advanced";

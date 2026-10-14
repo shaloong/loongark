@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticStepsStyles } from "@loongark/primitives/automatic-styles/steps";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticStepsStyles } from "@shaloong/loongark-primitives/automatic-styles/steps";
 /**
  * Steps component - Solid wrapper.
  * Uses Ark UI Steps with data attributes for styling.
@@ -20,7 +20,7 @@ import {
   type StepsNextTriggerProps as ArkStepsNextTriggerProps,
   type StepsPrevTriggerProps as ArkStepsPrevTriggerProps,
 } from "@ark-ui/solid/steps";
-import type { StepsOrientation, StepsSize } from "@loongark/primitives";
+import type { StepsOrientation, StepsSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkStepsRootProps extends Omit<
   ArkStepsRootProps,

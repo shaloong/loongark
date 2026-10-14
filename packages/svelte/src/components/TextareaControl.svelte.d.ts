@@ -1,5 +1,5 @@
 import type { SvelteComponent } from "svelte";
-import type { InputPrimitiveProps } from "@loongark/primitives";
+import type { InputPrimitiveProps } from "@shaloong/loongark-primitives";
 
 export default class TextareaControl extends SvelteComponent<{
   size?: NonNullable<InputPrimitiveProps["size"]>;

@@ -4,8 +4,8 @@ import {
   LoongArkAvatarRoot,
   LoongArkAvatarImage,
   LoongArkAvatarFallback,
-} from "@loongark/solid";
-import type { AvatarSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { AvatarSize } from "@shaloong/loongark-primitives";
 
 const DEFAULT_AVATAR_SRC =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><rect width='80' height='80' fill='%23D6E4FF'/><circle cx='40' cy='30' r='18' fill='%233A5BCC'/><rect x='16' y='52' width='48' height='18' rx='9' fill='%233A5BCC'/></svg>";

@@ -1,4 +1,4 @@
-import type { Question } from "@loongark/kit";
+import type { Question } from "@shaloong/loongark-kit";
 export const feedbackQuestions: readonly Question[] = [
   {
     id: "role",

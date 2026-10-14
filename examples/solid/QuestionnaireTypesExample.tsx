@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { complexQuestions, createQuestionnaireTypesDemo } from "../shared/questionnaireTypesDemo";
 export function QuestionnaireTypesExample() {
   const [revision, redraw] = createSignal(0), demo = createQuestionnaireTypesDemo(() => redraw(v => v + 1));

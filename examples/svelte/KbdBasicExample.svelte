@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkKbdGroup, LoongArkKbd } from "@loongark/svelte";
+  import { LoongArkKbdGroup, LoongArkKbd } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkKbdGroup>

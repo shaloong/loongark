@@ -1,6 +1,6 @@
 import { defineComponent, h, ref } from "vue";
-import type { QuestionnaireValue } from "@loongark/kit";
-import * as L from "@loongark/vue";
+import type { QuestionnaireValue } from "@shaloong/loongark-kit";
+import * as L from "@shaloong/loongark-vue";
 import { feedbackQuestions } from "../shared/conversationDemo";
 export const ConversationExample = defineComponent({
   setup() {

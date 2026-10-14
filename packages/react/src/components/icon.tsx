@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticIconStyles } from "@loongark/primitives/automatic-styles/icon";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticIconStyles } from "@shaloong/loongark-primitives/automatic-styles/icon";
 
 
 import { createElement, forwardRef, type SVGProps } from "react";
@@ -9,7 +9,7 @@ import {
   iconStyles,
   reactSvgAttributes,
   type IconOptions,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export type LoongArkIconProps = Omit<
   SVGProps<SVGSVGElement>,
   "children" | "dangerouslySetInnerHTML" | "size"

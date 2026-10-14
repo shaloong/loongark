@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkButton } from "@loongark/svelte";
+  import { LoongArkButton } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkButton type="submit">保存</LoongArkButton>

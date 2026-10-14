@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkStack, LoongArkSeparator } from "@loongark/react";
+import { LoongArkStack, LoongArkSeparator } from "@shaloong/loongark-react";
 export function SeparatorBasicExample() {
   return (
     <LoongArkStack>

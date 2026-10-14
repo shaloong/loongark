@@ -7,7 +7,7 @@ import {
   LoongArkItemDescription,
   LoongArkItemActions,
   LoongArkButton,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function ItemBasicExample() {
   return (
     <LoongArkItem>

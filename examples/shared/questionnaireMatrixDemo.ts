@@ -1,4 +1,4 @@
-import type { Question, QuestionnaireValue } from "@loongark/kit";
+import type { Question, QuestionnaireValue } from "@shaloong/loongark-kit";
 export const matrixQuestions: readonly Question[] = [
   {
     id: "review",

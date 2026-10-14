@@ -7,7 +7,7 @@ import type {
   RichTextEditorProps,
   RichTextDocument,
   CodeEditorLanguageLoader,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export const initialCode =
   'function greet(name: string) {\n  return `Hello, ${name}!`;\n}\n\nconsole.log(greet("LoongArk"));';
 export const initialRich: RichTextDocument = {

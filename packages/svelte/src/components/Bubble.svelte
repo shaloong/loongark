@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticBubbleStyles } from "@loongark/primitives/automatic-styles/bubble";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticBubbleStyles } from "@shaloong/loongark-primitives/automatic-styles/bubble";
   registerAutomaticStyles(lkAutomaticBubbleStyles);
 
   import type { HTMLAttributes } from "svelte/elements";
   import type { Snippet } from "svelte";
-  import type { BubbleOptions } from "@loongark/kit";
+  import type { BubbleOptions } from "@shaloong/loongark-kit";
   let {
     side = "incoming",
     children,

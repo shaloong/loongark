@@ -6,8 +6,8 @@ import {
   resolveDynamicComponent,
   ref,
 } from "vue";
-import * as L from "@loongark/vue";
-import type { DateInputDateValue, DateInputSegmentProps } from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
+import type { DateInputDateValue, DateInputSegmentProps } from "@shaloong/loongark-vue";
 import { createDateTimeDemo } from "../shared/dateTimeDemo";
 export const DateTimeExample = defineComponent({
   setup() {

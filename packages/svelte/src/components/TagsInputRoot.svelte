@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTagsInputStyles } from "@shaloong/loongark-primitives/automatic-styles/tags-input";
   registerAutomaticStyles(lkAutomaticTagsInputStyles);
 
-  import { nativeSelectionProps } from "@loongark/kit";
+  import { nativeSelectionProps } from "@shaloong/loongark-kit";
   import {
     TagsInput,
     useTagsInput,
     type TagsInputRootProps,
   } from "@ark-ui/svelte/tags-input";
-  import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+  import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
   let {
     children,
     ref = $bindable(null),

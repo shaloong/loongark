@@ -4,7 +4,7 @@ import {
   LoongArkImageList,
   LoongArkImageListItem,
   LoongArkImageListCaption,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function ImageListBasicExample() {
   return (
     <LoongArkImageList columns={2}>

@@ -17,19 +17,19 @@ develop 当前包含 119 个组件族、335 个 Story 和 779 个框架示例（
 
 ## 接入
 
-按应用框架选择 `@loongark/react`、`@loongark/vue`、`@loongark/solid` 或 `@loongark/svelte`。对应框架必须满足包声明的 peer 版本；当前安全版本要求见 [支持矩阵](docs/releases.md)。仓库包版本不代表已经发布到 npm，正式接入前请核对 registry 中的发布版本；仓库开发与打包验证使用 pnpm workspace。
+按应用框架选择 `@shaloong/loongark-react`、`@shaloong/loongark-vue`、`@shaloong/loongark-solid` 或 `@shaloong/loongark-svelte`。对应框架必须满足包声明的 peer 版本；当前安全版本要求见 [支持矩阵](docs/releases.md)。仓库包版本不代表已经发布到 npm，正式接入前请核对 registry 中的发布版本；仓库开发与打包验证使用 pnpm workspace。
 
 在应用根挂载对应包的 `LoongArkProvider`。客户端 Provider 管理作用域主题、样式和生命周期，无需额外 CSS 导入。四端支持根入口具名导入，也支持 `/provider`、`/button`、`/date-picker`、`/data-table` 等逐组件子路径；复合部件共用组件族入口。Storybook 的 Guides/Getting Started提供安装、四端最小应用、主题与 SSR 接入。
 
 ```ts
-import { LoongArkProvider } from "@loongark/react/provider";
-import { LoongArkButton, type LoongArkButtonProps } from "@loongark/react/button";
+import { LoongArkProvider } from "@shaloong/loongark-react/provider";
+import { LoongArkButton, type LoongArkButtonProps } from "@shaloong/loongark-react/button";
 ```
 
 ### React
 
 ```tsx
-import { LoongArkProvider, LoongArkButton } from '@loongark/react';
+import { LoongArkProvider, LoongArkButton } from '@shaloong/loongark-react';
 
 export function App() {
   return (
@@ -44,7 +44,7 @@ export function App() {
 
 ```vue
 <script setup lang="ts">
-import { LoongArkProvider, LoongArkButton } from '@loongark/vue';
+import { LoongArkProvider, LoongArkButton } from '@shaloong/loongark-vue';
 const save = () => console.log('保存');
 </script>
 
@@ -58,7 +58,7 @@ const save = () => console.log('保存');
 ### Solid
 
 ```tsx
-import { LoongArkProvider, LoongArkButton } from '@loongark/solid';
+import { LoongArkProvider, LoongArkButton } from '@shaloong/loongark-solid';
 
 export function App() {
   return (
@@ -73,7 +73,7 @@ export function App() {
 
 ```svelte
 <script lang="ts">
-  import { LoongArkProvider, LoongArkButton } from '@loongark/svelte';
+  import { LoongArkProvider, LoongArkButton } from '@shaloong/loongark-svelte';
 </script>
 
 <LoongArkProvider mode="light">
@@ -89,7 +89,7 @@ export function App() {
 
 React 运行时模块内置 `use client` 边界，Next.js App Router 服务端页面可直接导入命名组件。hooks、事件处理器、Ark 集合工厂及客户端命名空间组合仍放在应用客户端模块；跨边界 Props 遵循宿主序列化要求。
 
-代码与富文本编辑器可通过 `import('@loongark/<framework>/editors')` 延迟加载。富文本使用受支持的结构化 JSON，内建链接协议校验和 HTML 转义；它不是通用 HTML sanitizer。插件、nodeViews、自定义渲染器与任意 DOM Props 属于可信应用代码。
+代码与富文本编辑器可通过 `import('@shaloong/loongark-<framework>/editors')` 延迟加载。富文本使用受支持的结构化 JSON，内建链接协议校验和 HTML 转义；它不是通用 HTML sanitizer。插件、nodeViews、自定义渲染器与任意 DOM Props 属于可信应用代码。
 
 数据获取、身份认证、授权、上传、存储和业务校验由应用服务实现。本库用于浏览器及服务端渲染，不是服务后端的权限或输入验证框架。禁用按钮、隐藏字段和客户端校验不能替代服务端授权。
 

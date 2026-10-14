@@ -1,4 +1,4 @@
-import type { Question, QuestionnaireValue } from "@loongark/kit";
+import type { Question, QuestionnaireValue } from "@shaloong/loongark-kit";
 export const complexQuestions: readonly Question[] = [
   { id: "quantity", label: "Quantity", description: "Choose between 0 and 10, in steps of 0.5.", type: "number", required: true, min: 0, max: 10, step: 0.5 },
   { id: "date", label: "Review date", description: "A calendar date in 2026.", type: "date", required: true, min: "2026-01-01", max: "2026-12-31" },

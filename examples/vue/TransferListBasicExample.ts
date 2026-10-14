@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkTransferList } from "@loongark/vue";
+import { LoongArkTransferList } from "@shaloong/loongark-vue";
 export const TransferListBasicExample = defineComponent({
   setup() {
     return () => {

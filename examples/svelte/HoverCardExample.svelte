@@ -6,8 +6,8 @@
     LoongArkHoverCardContent,
     LoongArkHoverCardArrow,
     LoongArkHoverCardArrowTip,
-  } from "@loongark/svelte";
-  import type { HoverCardSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { HoverCardSize } from "@shaloong/loongark-primitives";
 
   export let size: HoverCardSize = "md";
 </script>

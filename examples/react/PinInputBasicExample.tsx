@@ -5,7 +5,7 @@ import {
   LoongArkPinInputControl,
   LoongArkPinInputInput,
   LoongArkPinInputHiddenInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function PinInputBasicExample() {
   return (
     <LoongArkPinInputRoot>

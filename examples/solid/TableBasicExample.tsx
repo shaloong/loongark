@@ -8,7 +8,7 @@ import {
   LoongArkTableHead,
   LoongArkTableBody,
   LoongArkTableCell,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function TableBasicExample() {
   return (
     <LoongArkTable>

@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTabsStyles } from "@loongark/primitives/automatic-styles/tabs";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTabsStyles } from "@shaloong/loongark-primitives/automatic-styles/tabs";
 import { renderPart } from "../render-part";
 /**
  * Tabs 组件 - Vue 实现
@@ -8,7 +8,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, type PropType } from "vue";
 import { Tabs as ArkTabs } from "@ark-ui/vue/tabs";
-import type { TabsOrientation, TabsSize } from "@loongark/primitives";
+import type { TabsOrientation, TabsSize } from "@shaloong/loongark-primitives";
 
 export interface TabsValueChangeDetails {
   value: string;

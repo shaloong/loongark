@@ -1,9 +1,9 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticIconStyles } from "@loongark/primitives/automatic-styles/icon";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticIconStyles } from "@shaloong/loongark-primitives/automatic-styles/icon";
 import { For, splitProps, type JSX } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import { iconAttributes, iconStyles, type IconOptions } from "@loongark/kit";
+import { iconAttributes, iconStyles, type IconOptions } from "@shaloong/loongark-kit";
 export type LoongArkIconProps = Omit<
   JSX.SvgSVGAttributes<SVGSVGElement>,
   "children" | "innerHTML"

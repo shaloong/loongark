@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { NumberInput } from "@ark-ui/svelte/number-input";
 import type { NumberInputRootProps } from "@ark-ui/svelte/number-input";
-import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
+import type { NumberInputSize, NumberInputState } from "@shaloong/loongark-primitives";
 
 export default class LoongArkNumberInputRoot extends SvelteComponent<
   Omit<

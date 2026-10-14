@@ -2,7 +2,7 @@ import React from "react";
 import {
   LoongArkJsonTreeViewRoot,
   LoongArkJsonTreeViewTree,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function JsonTreeViewBasicExample() {
   return (
     <LoongArkJsonTreeViewRoot

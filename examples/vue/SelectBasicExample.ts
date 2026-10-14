@@ -20,7 +20,7 @@ import {
   LoongArkSelectItemText,
   LoongArkSelectItemIndicator,
   LoongArkSelectHiddenSelect,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import type { SelectRootProps } from "@ark-ui/vue/select";
 import type { SelectItemProps } from "@ark-ui/vue/select";
 import type { SelectHiddenSelectProps } from "@ark-ui/vue/select";

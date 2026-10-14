@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticJsonTreeViewStyles } from "@loongark/primitives/automatic-styles/json-tree-view";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticJsonTreeViewStyles } from "@shaloong/loongark-primitives/automatic-styles/json-tree-view";
   registerAutomaticStyles(lkAutomaticJsonTreeViewStyles);
 
   import {
@@ -8,7 +8,7 @@
     type JsonTreeViewTreeProps,
   } from "@ark-ui/svelte/json-tree-view";
   import { tick, untrack } from "svelte";
-  import { captureReplacementFocus } from "@loongark/kit";
+  import { captureReplacementFocus } from "@shaloong/loongark-kit";
   import { useEnvironmentContext } from "@ark-ui/svelte/environment";
   import { useTreeViewContext } from "@ark-ui/svelte/tree-view";
   let props: JsonTreeViewTreeProps = $props();

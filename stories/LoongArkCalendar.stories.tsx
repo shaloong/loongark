@@ -1,8 +1,8 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/react";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { LoongArkCalendar as Calendar, parseDate } from "@loongark/react";
+import { LoongArkCalendar as Calendar, parseDate } from "@shaloong/loongark-react";
 const meta = {
   title: "Components/Calendar",
   parameters: { layout: "fullscreen" },

@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Steps } from "@ark-ui/svelte/steps";
 import type { StepsRootProps } from "@ark-ui/svelte/steps";
-import type { StepsOrientation, StepsSize } from "@loongark/primitives";
+import type { StepsOrientation, StepsSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkStepsRoot extends SvelteComponent<
   Omit<

@@ -8,7 +8,7 @@ export { LoongArkRatingGroupLabel } from "../components/rating-group";
 export { LoongArkRatingGroupRoot } from "../components/rating-group";
 export type { LoongArkRatingGroupRootProps } from "../components/rating-group";
 export { LoongArkRatingGroupRootProvider } from "../components/ark-advanced";
-export type { RatingGroupSize } from "@loongark/primitives";
+export type { RatingGroupSize } from "@shaloong/loongark-primitives";
 export { useRatingGroup } from "../components/use-rating";
 export { useRatingGroupContext } from "@ark-ui/react/rating-group";
 export { useRatingGroupItemContext } from "@ark-ui/react/rating-group";

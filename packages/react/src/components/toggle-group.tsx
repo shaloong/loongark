@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticToggleGroupStyles } from "@loongark/primitives/automatic-styles/toggle-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticToggleGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/toggle-group";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticToggleGroupStyles } from "@loongark/primitives/aut
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { ToggleGroup } from "@ark-ui/react/toggle-group";
-import type { ToggleGroupOrientation, ToggleGroupSize } from "@loongark/primitives";
+import type { ToggleGroupOrientation, ToggleGroupSize } from "@shaloong/loongark-primitives";
 
 type ArkToggleGroupRootProps = ComponentPropsWithoutRef<typeof ToggleGroup.Root>;
 type ArkToggleGroupItemProps = ComponentPropsWithoutRef<typeof ToggleGroup.Item>;

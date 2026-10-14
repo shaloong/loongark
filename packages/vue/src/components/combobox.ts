@@ -1,7 +1,7 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticComboboxStyles } from "@loongark/primitives/automatic-styles/combobox";
-import { controlIcons } from "@loongark/kit";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticComboboxStyles } from "@shaloong/loongark-primitives/automatic-styles/combobox";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import type { CollectionItem } from "@ark-ui/vue/collection";
 import type { ComboboxRootProps as NativeComboboxRootProps } from "@ark-ui/vue/combobox";
@@ -36,7 +36,7 @@ import {
   ComboboxItemText as ArkComboboxItemText,
   ComboboxItemIndicator as ArkComboboxItemIndicator,
 } from "@ark-ui/vue/combobox";
-import type { ComboboxSize } from "@loongark/primitives";
+import type { ComboboxSize } from "@shaloong/loongark-primitives";
 
 const comboboxSizeKey = Symbol("loongark-combobox-size");
 

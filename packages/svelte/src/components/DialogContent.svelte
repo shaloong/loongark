@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticDialogStyles } from "@loongark/primitives/automatic-styles/dialog";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticDialogStyles } from "@shaloong/loongark-primitives/automatic-styles/dialog";
   registerAutomaticStyles(lkAutomaticDialogStyles);
 
   import { Dialog } from "@ark-ui/svelte/dialog";
-  import type { DialogPrimitiveProps } from "@loongark/primitives";
+  import type { DialogPrimitiveProps } from "@shaloong/loongark-primitives";
 
   export let size: NonNullable<DialogPrimitiveProps["size"]> = "md";
   export let motion: NonNullable<DialogPrimitiveProps["motion"]> = "scale";

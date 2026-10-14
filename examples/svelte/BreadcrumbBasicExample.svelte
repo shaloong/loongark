@@ -6,7 +6,7 @@
     LoongArkBreadcrumbLink,
     LoongArkBreadcrumbSeparator,
     LoongArkBreadcrumbPage,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkBreadcrumb>

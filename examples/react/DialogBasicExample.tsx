@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkDialog } from "@loongark/react";
+import { LoongArkDialog } from "@shaloong/loongark-react";
 export function DialogBasicExample() {
   return (
     <LoongArkDialog.Root>

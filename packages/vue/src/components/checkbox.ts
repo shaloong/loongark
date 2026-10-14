@@ -1,12 +1,12 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticCheckboxStyles } from "@loongark/primitives/automatic-styles/checkbox";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticCheckboxStyles } from "@shaloong/loongark-primitives/automatic-styles/checkbox";
 import { useFieldContext } from "@ark-ui/vue/field";
-import { nativeSelectionFieldDescription } from "@loongark/kit";
+import { nativeSelectionFieldDescription } from "@shaloong/loongark-kit";
 import type { CheckboxHiddenInputProps } from "@ark-ui/vue/checkbox";
 import { nativeSelectionRef } from "../native-selection";
 import { useCheckboxContext } from "@ark-ui/vue/checkbox";
-import { controlIcons } from "@loongark/kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import { renderPart } from "../render-part";
 import {
@@ -24,7 +24,7 @@ import {
   type CheckboxCheckedState as CheckedState,
   type CheckboxCheckedChangeDetails as CheckedChangeDetails,
 } from "@ark-ui/vue/checkbox";
-import type { CheckboxSize } from "@loongark/primitives";
+import type { CheckboxSize } from "@shaloong/loongark-primitives";
 
 // ========== Root ==========
 export const LoongArkCheckboxRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({

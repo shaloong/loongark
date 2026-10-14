@@ -4,7 +4,7 @@ import {
   LoongArkNavigationMenuList,
   LoongArkNavigationMenuItem,
   LoongArkNavigationMenuLink,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function NavigationMenuBasicExample() {
   return (
     <LoongArkNavigationMenu>

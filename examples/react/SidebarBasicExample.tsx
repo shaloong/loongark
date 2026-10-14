@@ -6,7 +6,7 @@ import {
   LoongArkSidebarMenu,
   LoongArkSidebarMenuItem,
   LoongArkSidebarMenuButton,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function SidebarBasicExample() {
   return (
     <LoongArkSidebar>

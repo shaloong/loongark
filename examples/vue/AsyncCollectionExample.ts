@@ -1,5 +1,5 @@
 import {defineComponent,h,ref,onBeforeUnmount, type PropType} from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import {createAsyncCollectionDemo,type CollectionDemoItem} from "../shared/asyncCollectionDemo";
 const CollectionView=defineComponent({props:{onDispose:{type:Function as PropType<()=>void>,required:true}},setup(p){
  const revision=ref(0),demo=createAsyncCollectionDemo(()=>revision.value++),list=L.useAsyncList<CollectionDemoItem,number>({load:demo.loader.load,onSuccess:demo.loader.onSuccess,autoReload:false});

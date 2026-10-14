@@ -43,7 +43,7 @@ for (const rtl of [false, true])
           mountVirtualGrid,
           createVirtualMasonry,
           mountVirtualMasonry,
-        }: typeof import("@loongark/kit") = await import(path);
+        }: typeof import("@shaloong/loongark-kit") = await import(path);
         const makeRoot = (total: number, width: number) => {
           const root = document.createElement("div"),
             canvas = document.createElement("div");
@@ -155,7 +155,7 @@ test("virtual native renderer parts keep their own layout and focus", async ({
       mountVirtualGrid,
       createVirtualMasonry,
       mountVirtualMasonry,
-    }: typeof import("@loongark/kit") = await import(path);
+    }: typeof import("@shaloong/loongark-kit") = await import(path);
     const root = document.createElement("div");
     root.dataset.scope = "virtual-grid";
     root.dataset.testid = "nested-grid-host";

@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticQuestionnaireStyles } from "@loongark/primitives/automatic-styles/questionnaire";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticQuestionnaireStyles } from "@shaloong/loongark-primitives/automatic-styles/questionnaire";
 
 
 import {
@@ -33,7 +33,7 @@ import {
   restoreQuestionAnswers,
   type QuestionnaireValue,
   type QuestionnaireOptions,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 import {
   QuestionnaireTree,
   type LoongArkQuestionnaireRenderers,

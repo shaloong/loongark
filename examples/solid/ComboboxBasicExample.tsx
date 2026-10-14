@@ -12,7 +12,7 @@ import {
   LoongArkComboboxList,
   LoongArkComboboxItem,
   LoongArkComboboxItemText,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function ComboboxBasicExample() {
   const [query, setQuery] = createSignal("");
   const options = [

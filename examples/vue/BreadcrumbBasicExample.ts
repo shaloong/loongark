@@ -6,7 +6,7 @@ import {
   LoongArkBreadcrumbLink,
   LoongArkBreadcrumbSeparator,
   LoongArkBreadcrumbPage,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const BreadcrumbBasicExample = defineComponent({
   setup() {
     return () => {

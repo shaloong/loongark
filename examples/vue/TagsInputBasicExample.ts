@@ -10,8 +10,8 @@ import {
   LoongArkIcon,
   LoongArkTagsInputInput,
   LoongArkTagsInputHiddenInput,
-} from "@loongark/vue";
-import { controlIcons } from "@loongark/kit";
+} from "@shaloong/loongark-vue";
+import { controlIcons } from "@shaloong/loongark-kit";
 export const TagsInputBasicExample = defineComponent({
   setup() {
     const tags = ref(["React", "Vue"]);

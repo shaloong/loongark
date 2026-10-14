@@ -1,5 +1,5 @@
 import React from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 export function DateInputBasicExample() {
   return (
     <L.LoongArkDateInputRoot

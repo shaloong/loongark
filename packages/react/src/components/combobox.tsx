@@ -1,9 +1,9 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticComboboxStyles } from "@loongark/primitives/automatic-styles/combobox";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticComboboxStyles } from "@shaloong/loongark-primitives/automatic-styles/combobox";
 
 
-import { controlIcons } from "@loongark/kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 /**
  * Combobox component - React wrapper.
@@ -35,7 +35,7 @@ import {
   type ComboboxItemIndicatorProps as ArkComboboxItemIndicatorProps,
 } from "@ark-ui/react/combobox";
 import { Portal as ArkPortal } from "./portal";
-import type { ComboboxSize } from "@loongark/primitives";
+import type { ComboboxSize } from "@shaloong/loongark-primitives";
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>
   createElement(ArkPortal, null, children);

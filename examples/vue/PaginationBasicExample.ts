@@ -4,7 +4,7 @@ import {
   LoongArkPaginationPrevTrigger,
   LoongArkPaginationItem,
   LoongArkPaginationNextTrigger,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const PaginationBasicExample = defineComponent({
   setup() {
     return () => {

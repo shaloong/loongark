@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkLabel, LoongArkTextarea } from "@loongark/vue";
+import { LoongArkLabel, LoongArkTextarea } from "@shaloong/loongark-vue";
 export const TextareaBasicExample = defineComponent({
   setup() {
     return () => {

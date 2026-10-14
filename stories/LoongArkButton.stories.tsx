@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { LoongArkButton } from "@loongark/react";
+import { LoongArkButton } from "@shaloong/loongark-react";
 
 const meta: Meta<typeof LoongArkButton> = {
   title: "Components/Button",

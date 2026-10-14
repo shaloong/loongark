@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkStack, LoongArkSkeleton } from "@loongark/vue";
+import { LoongArkStack, LoongArkSkeleton } from "@shaloong/loongark-vue";
 export const SkeletonBasicExample = defineComponent({
   setup() {
     return () => {

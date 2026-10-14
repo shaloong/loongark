@@ -3,7 +3,7 @@ import {
   LoongArkList,
   LoongArkListItem,
   LoongArkListItemText,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function ListBasicExample() {
   return (
     <LoongArkList>

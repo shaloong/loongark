@@ -3,7 +3,7 @@ import {
   LoongArkBottomNavigation,
   LoongArkBottomNavigationItem,
   LoongArkBottomNavigationLabel,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function BottomNavigationBasicExample() {
   return (
     <LoongArkBottomNavigation aria-label="主导航">

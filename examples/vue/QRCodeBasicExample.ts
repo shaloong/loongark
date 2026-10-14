@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkQrCode } from "@loongark/vue";
+import { LoongArkQrCode } from "@shaloong/loongark-vue";
 export const QRCodeBasicExample = defineComponent({
   setup() {
     return () => {

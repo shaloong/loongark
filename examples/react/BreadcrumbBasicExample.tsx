@@ -6,7 +6,7 @@ import {
   LoongArkBreadcrumbLink,
   LoongArkBreadcrumbSeparator,
   LoongArkBreadcrumbPage,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function BreadcrumbBasicExample() {
   return (
     <LoongArkBreadcrumb>

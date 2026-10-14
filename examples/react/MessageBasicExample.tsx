@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkMessage, LoongArkBubble } from "@loongark/react";
+import { LoongArkMessage, LoongArkBubble } from "@shaloong/loongark-react";
 export function MessageBasicExample() {
   return (
     <LoongArkMessage

@@ -5,7 +5,7 @@ import {
   LoongArkSegmentGroupItem,
   LoongArkSegmentGroupItemHiddenInput,
   LoongArkSegmentGroupItemText,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function SegmentGroupBasicExample() {
   return (
     <LoongArkSegmentGroupRoot

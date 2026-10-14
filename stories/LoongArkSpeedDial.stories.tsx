@@ -1,4 +1,4 @@
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { quickActions } from "../examples/shared/mediaDemo";
 export default { title: "Components/SpeedDial" };
 export const Basic = {

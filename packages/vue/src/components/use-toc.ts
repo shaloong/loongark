@@ -10,7 +10,7 @@ import type {
   UseTocProps,
   UseTocReturn,
 } from "@ark-ui/vue/toc";
-import { createTocMachine, connectToc, definedTocProps } from "@loongark/kit";
+import { createTocMachine, connectToc, definedTocProps } from "@shaloong/loongark-kit";
 export const useToc = (
   props: MaybeRef<UseTocProps>,
   emits?: Parameters<typeof nativeUseToc>[1],

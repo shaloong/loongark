@@ -6,7 +6,7 @@
     LoongArkClipboardInput,
     LoongArkClipboardTrigger,
     LoongArkClipboardIndicator,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkClipboardRoot value="https://example.com">

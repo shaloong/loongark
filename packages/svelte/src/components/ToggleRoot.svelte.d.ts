@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Toggle } from "@ark-ui/svelte/toggle";
 import type { ToggleRootProps } from "@ark-ui/svelte/toggle";
-import type { ToggleSize } from "@loongark/primitives";
+import type { ToggleSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkToggleRoot extends SvelteComponent<
   Omit<

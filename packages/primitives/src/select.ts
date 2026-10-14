@@ -3,8 +3,8 @@
  * 支持单选和多选模式
  */
 
-import { type LoongArkTheme } from "@loongark/theme";
-import { TokenTree } from "@loongark/tokens";
+import { type LoongArkTheme } from "@shaloong/loongark-theme";
+import { TokenTree } from "@shaloong/loongark-tokens";
 import {
   createPrimitive,
   type PrimitiveContract,

@@ -2,9 +2,9 @@ import {
   groupsDisclosureCSS,
   groupsDisclosureIcon,
 } from "../shared/questionnaireGroupsDemo";
-import { controlIcons } from "@loongark/kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { defineComponent, h, ref, type VNode } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import {
   createSelectionControlsDemo,
   selectionOptions,

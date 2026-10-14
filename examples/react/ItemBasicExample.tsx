@@ -6,7 +6,7 @@ import {
   LoongArkItemDescription,
   LoongArkItemActions,
   LoongArkButton,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function ItemBasicExample() {
   return (
     <LoongArkItem>

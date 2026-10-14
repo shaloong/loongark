@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkMessage, LoongArkBubble } from "@loongark/svelte";
+  import { LoongArkMessage, LoongArkBubble } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkMessage

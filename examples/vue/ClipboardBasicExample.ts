@@ -6,7 +6,7 @@ import {
   LoongArkClipboardInput,
   LoongArkClipboardTrigger,
   LoongArkClipboardIndicator,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const ClipboardBasicExample = defineComponent({
   setup() {
     return () => {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkContextMenu } from "@loongark/svelte";
+  import { LoongArkContextMenu } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkContextMenu.Root>

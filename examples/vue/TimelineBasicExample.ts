@@ -7,7 +7,7 @@ import {
   LoongArkTimelineTitle,
   LoongArkTimelineDescription,
   LoongArkTimelineTime,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const TimelineBasicExample = defineComponent({
   setup() {
     return () => {

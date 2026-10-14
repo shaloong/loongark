@@ -7,7 +7,7 @@ import {
   LoongArkListboxItem,
   LoongArkListboxItemText,
   LoongArkListboxItemIndicator,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function ListboxBasicExample() {
   const collection = createListCollection({
     items: [

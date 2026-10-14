@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import { cropSource } from "../shared/arkAdditionsDemo";
   const id = $props.id();
   const cropper = L.useImageCropper(() => ({ id, aspectRatio: 1, maxZoom: 3 }));

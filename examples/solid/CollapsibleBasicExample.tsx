@@ -4,7 +4,7 @@ import {
   LoongArkCollapsibleRoot,
   LoongArkCollapsibleTrigger,
   LoongArkCollapsibleContent,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function CollapsibleBasicExample() {
   return (
     <LoongArkCollapsibleRoot>

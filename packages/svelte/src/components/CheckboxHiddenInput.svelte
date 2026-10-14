@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticCheckboxStyles } from "@loongark/primitives/automatic-styles/checkbox";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticCheckboxStyles } from "@shaloong/loongark-primitives/automatic-styles/checkbox";
   registerAutomaticStyles(lkAutomaticCheckboxStyles);
 
   import { onMount } from "svelte";
@@ -8,7 +8,7 @@
   import {
     mountNativeSelection,
     nativeSelectionFieldDescription,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   import {
     Checkbox,
     useCheckboxContext,

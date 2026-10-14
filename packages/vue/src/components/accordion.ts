@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticAccordionStyles } from "@loongark/primitives/automatic-styles/accordion";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticAccordionStyles } from "@shaloong/loongark-primitives/automatic-styles/accordion";
 import type { AccordionRootProps as NativeAccordionRootProps } from "@ark-ui/vue/accordion";
 import { renderPart } from "../render-part";
 /**
@@ -9,7 +9,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, type PropType } from "vue";
 import { Accordion as ArkAccordion } from "@ark-ui/vue/accordion";
-import type { AccordionOrientation, AccordionSize } from "@loongark/primitives";
+import type { AccordionOrientation, AccordionSize } from "@shaloong/loongark-primitives";
 
 export interface AccordionValueChangeDetails {
   value: string[];

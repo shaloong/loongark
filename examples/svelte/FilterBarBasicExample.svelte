@@ -7,7 +7,7 @@
     LoongArkInputControl,
     LoongArkFilterBarActions,
     LoongArkButton,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkFilterBar>

@@ -1,4 +1,4 @@
-import type { ChartOptions, DataRow } from "@loongark/kit";
+import type { ChartOptions, DataRow } from "@shaloong/loongark-kit";
 export const chartTypeModes = [
   { value: "area", label: "Area" },
   { value: "stacked-area", label: "Stacked area" },

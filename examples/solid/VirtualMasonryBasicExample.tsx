@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkVirtualMasonry } from "@loongark/solid";
+import { LoongArkVirtualMasonry } from "@shaloong/loongark-solid";
 export function VirtualMasonryBasicExample() {
   return (
     <LoongArkVirtualMasonry

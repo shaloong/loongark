@@ -8,7 +8,7 @@ import {
   LoongArkSliderRange,
   LoongArkSliderThumb,
   LoongArkSliderValueText,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function SliderBasicExample() {
   return (
     <LoongArkSliderRoot defaultValue={[50]}>

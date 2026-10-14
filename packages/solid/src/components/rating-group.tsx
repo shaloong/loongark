@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticRatingGroupStyles } from "@loongark/primitives/automatic-styles/rating-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticRatingGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/rating-group";
 /**
  * Rating Group component - Solid wrapper.
  * Uses Ark UI Rating Group with data attributes for styling.
@@ -15,7 +15,7 @@ import {
   type RatingGroupHiddenInputProps as ArkRatingGroupHiddenInputProps,
 } from "@ark-ui/solid/rating-group";
 import { useRatingGroup } from "./use-rating";
-import type { RatingGroupSize } from "@loongark/primitives";
+import type { RatingGroupSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkRatingGroupRootProps extends Omit<
   ArkRatingGroupRootProps,

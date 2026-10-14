@@ -2,11 +2,11 @@
 
 内置图标统一采用 Lucide，默认24单位画布、2单位圆角描边与 currentColor，尺寸使用已有 `control.icon` Token。Phosphor 的多字重/双色更适合需要多种图标表现的产品；本库优先一致的线条控件。图标颜色继承当前文字和主题，不引入新调色板。
 
-`@loongark/kit` 直接依赖 `lucide@1.52.0`，仅按名字导入有限的内置节点，不调用 DOM 工厂 `createIcons`，不公开整库字符串注册表。四端 `LoongArkIcon` 接受原生 `IconNode` 并负责 SVG 渲染、Props 更新和引用；业务可按名字从 `lucide` 导入其他图标，无需四份框架图标依赖。Vite 能裁剪未使用节点；Node SSR 的包加载与浏览器按需打包不是同一件事。
+`@shaloong/loongark-kit` 直接依赖 `lucide@1.52.0`，仅按名字导入有限的内置节点，不调用 DOM 工厂 `createIcons`，不公开整库字符串注册表。四端 `LoongArkIcon` 接受原生 `IconNode` 并负责 SVG 渲染、Props 更新和引用；业务可按名字从 `lucide` 导入其他图标，无需四份框架图标依赖。Vite 能裁剪未使用节点；Node SSR 的包加载与浏览器按需打包不是同一件事。
 
 ```tsx
 import { Search } from 'lucide'
-import { LoongArkIcon, LoongArkButton } from '@loongark/react'
+import { LoongArkIcon, LoongArkButton } from '@shaloong/loongark-react'
 
 <LoongArkButton aria-label="搜索" size="icon" variant="outline">
   <LoongArkIcon icon={Search} />

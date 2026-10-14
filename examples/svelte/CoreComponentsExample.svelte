@@ -1,6 +1,6 @@
 <script lang="ts">
   // 本文件由 scripts/generate-core-examples.mjs 生成，并参与真实四端编译与浏览器验收。
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   let family = $state("NativeSelect");
   const families = [
     "Accordion",

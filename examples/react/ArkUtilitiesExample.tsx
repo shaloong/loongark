@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 export function ArkUtilitiesExample() {
   const [present, setPresent] = useState(true),
     [trapped, setTrapped] = useState(false),

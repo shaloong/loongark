@@ -4,8 +4,8 @@
   import {
     createLoongArkTheme,
     type CreateThemeOptions,
-  } from "@loongark/theme";
-  import { bootstrapPrimitiveBase, type StyleBootstrap } from "@loongark/primitives/styles";
+  } from "@shaloong/loongark-theme";
+  import { bootstrapPrimitiveBase, type StyleBootstrap } from "@shaloong/loongark-primitives/styles";
   const scopeId = $props.id();
   let {
     mode = "light",

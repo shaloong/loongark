@@ -1,7 +1,7 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticDatePickerStyles } from "@loongark/primitives/automatic-styles/date-picker";
-import { datePickerPositionerStyle } from "@loongark/primitives";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticDatePickerStyles } from "@shaloong/loongark-primitives/automatic-styles/date-picker";
+import { datePickerPositionerStyle } from "@shaloong/loongark-primitives";
 import type { DatePickerRootEmits as NativeDatePickerRootEmits } from "@ark-ui/vue/date-picker";
 import type { DatePickerRootProps as NativeDatePickerRootProps } from "@ark-ui/vue/date-picker";
 import type { DatePickerPresetTriggerProps as NativeDatePickerPresetTriggerProps } from "@ark-ui/vue/date-picker";
@@ -47,7 +47,7 @@ import {
   DatePickerTableCell as ArkDatePickerTableCell,
   DatePickerTableCellTrigger as ArkDatePickerTableCellTrigger,
 } from "@ark-ui/vue/date-picker";
-import type { DatePickerSize } from "@loongark/primitives";
+import type { DatePickerSize } from "@shaloong/loongark-primitives";
 
 const datePickerSizeKey = Symbol("loongark-date-picker-size");
 

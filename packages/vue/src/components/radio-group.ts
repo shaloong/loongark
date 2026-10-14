@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticRadioGroupStyles } from "@loongark/primitives/automatic-styles/radio-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticRadioGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/radio-group";
 import type { RadioGroupItemHiddenInputProps } from "@ark-ui/vue/radio-group";
 import { nativeSelectionRef } from "../native-selection";
 import {
@@ -14,7 +14,7 @@ import type { PropType } from "vue";
 import type {
   RadioGroupSize,
   RadioGroupOrientation,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 // ============ 类型定义 ============
 

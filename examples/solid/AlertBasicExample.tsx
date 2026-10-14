@@ -4,7 +4,7 @@ import {
   LoongArkAlert,
   LoongArkAlertTitle,
   LoongArkAlertDescription,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function AlertBasicExample() {
   return (
     <LoongArkAlert>

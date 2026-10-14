@@ -2,7 +2,7 @@ import {
   parseLocalizedDate,
   parseDateTime,
   parseZonedDateTime,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export type DemoDateValue =
   | NonNullable<ReturnType<typeof parseLocalizedDate>>
   | ReturnType<typeof parseDateTime>

@@ -5,7 +5,7 @@ import {
   LoongArkSplitterPanel,
   LoongArkSplitterResizeTrigger,
   LoongArkSplitterResizeTriggerIndicator,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 interface SplitterDemoProps {
   size?: "sm" | "md" | "lg";

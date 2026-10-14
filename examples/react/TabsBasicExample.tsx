@@ -4,7 +4,7 @@ import {
   LoongArkTabsList,
   LoongArkTabsTrigger,
   LoongArkTabsContent,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function TabsBasicExample() {
   return (
     <LoongArkTabsRoot defaultValue="overview">

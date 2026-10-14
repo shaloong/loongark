@@ -1,6 +1,6 @@
 import { getContext, setContext } from "svelte";
 import { writable, type Writable } from "svelte/store";
-import type { ComboboxSize } from "@loongark/primitives";
+import type { ComboboxSize } from "@shaloong/loongark-primitives";
 
 const comboboxContextKey = Symbol("loongark-combobox-size");
 

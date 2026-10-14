@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkClientOnly } from "@loongark/svelte";
+  import { LoongArkClientOnly } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkClientOnly>

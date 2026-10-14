@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticListboxStyles } from "@loongark/primitives/automatic-styles/listbox";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticListboxStyles } from "@shaloong/loongark-primitives/automatic-styles/listbox";
 import type { CollectionItem } from "@ark-ui/vue/collection";
 import type { ListboxRootProps as NativeListboxRootProps } from "@ark-ui/vue/listbox";
 import type { ListboxItemProps as NativeListboxItemProps } from "@ark-ui/vue/listbox";
@@ -11,7 +11,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, type PropType } from "vue";
 import { Listbox as ArkListbox } from "@ark-ui/vue/listbox";
-import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
+import type { ListboxOrientation, ListboxSize } from "@shaloong/loongark-primitives";
 
 export const LoongArkListboxRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkListboxRoot",

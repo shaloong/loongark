@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkStack, LoongArkSpinner } from "@loongark/solid";
+import { LoongArkStack, LoongArkSpinner } from "@shaloong/loongark-solid";
 export function SpinnerBasicExample() {
   return (
     <LoongArkStack orientation="horizontal">

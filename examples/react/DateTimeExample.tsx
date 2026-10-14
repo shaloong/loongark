@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { createDateTimeDemo } from "../shared/dateTimeDemo";
 export function DateTimeExample() {
   const [, redraw] = useState(0);

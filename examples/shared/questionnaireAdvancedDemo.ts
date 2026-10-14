@@ -1,4 +1,4 @@
-import type { Question, QuestionnaireValue } from "@loongark/kit";
+import type { Question, QuestionnaireValue } from "@shaloong/loongark-kit";
 export const workspaceQuestions: readonly Question[] = [
   {
     id: "account",

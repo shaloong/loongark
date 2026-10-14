@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Tabs } from "@ark-ui/svelte/tabs";
 import type { TabsRootProps } from "@ark-ui/svelte/tabs";
-import type { TabsOrientation, TabsSize } from "@loongark/primitives";
+import type { TabsOrientation, TabsSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkTabsRoot extends SvelteComponent<
   Omit<

@@ -4,7 +4,7 @@ import {
   LoongArkAvatarRoot,
   LoongArkAvatarFallback,
   LoongArkAvatarGroupOverflow,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function AvatarGroupBasicExample() {
   return (
     <LoongArkAvatarGroup aria-label="项目成员">

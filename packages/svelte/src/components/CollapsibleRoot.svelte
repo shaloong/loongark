@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticCollapsibleStyles } from "@loongark/primitives/automatic-styles/collapsible";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticCollapsibleStyles } from "@shaloong/loongark-primitives/automatic-styles/collapsible";
   registerAutomaticStyles(lkAutomaticCollapsibleStyles);
 
   import { Collapsible } from "@ark-ui/svelte/collapsible";
   import type { CollapsibleRootProps } from "@ark-ui/svelte/collapsible";
-  import type { CollapsibleSize } from "@loongark/primitives";
+  import type { CollapsibleSize } from "@shaloong/loongark-primitives";
 
   export let size: CollapsibleSize = "md";
   export let open: CollapsibleRootProps["open"] = undefined;

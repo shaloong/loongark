@@ -1,5 +1,5 @@
 import { defineComponent, h, ref } from "vue";
-import { LoongArkButton, LoongArkFocusTrap } from "@loongark/vue";
+import { LoongArkButton, LoongArkFocusTrap } from "@shaloong/loongark-vue";
 export const FocusTrapBasicExample = defineComponent({
   setup() {
     const active = ref(false);

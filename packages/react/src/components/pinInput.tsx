@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticPinInputStyles } from "@loongark/primitives/automatic-styles/pin-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticPinInputStyles } from "@shaloong/loongark-primitives/automatic-styles/pin-input";
 
 
 import type {
@@ -11,7 +11,7 @@ import type {
 } from "react";
 import { dataProps } from "../data-props";
 import { PinInput } from "@ark-ui/react/pin-input";
-import type { PinInputPrimitiveProps } from "@loongark/primitives";
+import type { PinInputPrimitiveProps } from "@shaloong/loongark-primitives";
 import { createElement, forwardRef } from "react";
 import type { ReactNode } from "react";
 

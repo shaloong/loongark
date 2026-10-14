@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 const DrawerPanel = defineComponent({
   setup() {
     const drawer = L.useDrawer({

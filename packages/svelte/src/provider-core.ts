@@ -1,6 +1,6 @@
 import type { Snippet } from "svelte";
-import type { CreateThemeOptions } from "@loongark/theme";
-import type { StyleBootstrap } from "@loongark/primitives/styles";
+import type { CreateThemeOptions } from "@shaloong/loongark-theme";
+import type { StyleBootstrap } from "@shaloong/loongark-primitives/styles";
 export interface LoongArkProviderCoreProps extends CreateThemeOptions {
   children?: Snippet;
   styleBootstrap?: StyleBootstrap;

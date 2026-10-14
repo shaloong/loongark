@@ -5,7 +5,7 @@ import {
   LoongArkFileUploadDropzone,
   LoongArkFileUploadTrigger,
   LoongArkFileUploadHiddenInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function FileUploadBasicExample() {
   return (
     <LoongArkFileUploadRoot maxFiles={1}>

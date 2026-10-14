@@ -1,4 +1,4 @@
-import type { LoongArkTheme } from "@loongark/theme";
+import type { LoongArkTheme } from "@shaloong/loongark-theme";
 
 export interface KitComponentRegistration {
   name: string;

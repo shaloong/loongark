@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticToggleGroupStyles } from "@loongark/primitives/automatic-styles/toggle-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticToggleGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/toggle-group";
 /**
  * Toggle Group component - Solid wrapper.
  * Based on Ark UI Toggle Group.
@@ -14,7 +14,7 @@ import {
 import type {
   ToggleGroupOrientation,
   ToggleGroupSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface LoongArkToggleGroupRootProps extends Omit<
   ArkToggleGroupRootProps,

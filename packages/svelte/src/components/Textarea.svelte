@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTextareaStyles } from "@loongark/primitives/automatic-styles/textarea";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTextareaStyles } from "@shaloong/loongark-primitives/automatic-styles/textarea";
   registerAutomaticStyles(lkAutomaticTextareaStyles);
 
   import { onMount, tick } from "svelte";
@@ -8,7 +8,7 @@
     layoutAttributes,
     mountTextareaAutosize,
     textareaRows,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export let value: string | undefined = undefined;
   export let autoSize = false;
   export let minRows: number | undefined = undefined;

@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkLink } from "@loongark/vue";
+import { LoongArkLink } from "@shaloong/loongark-vue";
 export const LinkBasicExample = defineComponent({
   setup() {
     return () => {

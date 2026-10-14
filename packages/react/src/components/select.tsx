@@ -1,8 +1,8 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSelectStyles } from "@loongark/primitives/automatic-styles/select";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSelectStyles } from "@shaloong/loongark-primitives/automatic-styles/select";
 
-import { controlIcons } from "@loongark/kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 /**
  * Select 组件 - React 实现
@@ -36,7 +36,7 @@ import {
   type SelectItemIndicatorProps as ArkSelectItemIndicatorProps,
   type SelectHiddenSelectProps as ArkSelectHiddenSelectProps,
 } from "@ark-ui/react/select";
-import type { SelectSize } from "@loongark/primitives";
+import type { SelectSize } from "@shaloong/loongark-primitives";
 import { Portal as ArkPortal } from "./portal";
 
 const SafePortal: FC<{ children?: ReactNode }> = ({ children }) =>

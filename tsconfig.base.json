@@ -16,65 +16,65 @@
     ],
     "types": [],
     "paths": {
-      "@loongark/tokens": [
+      "@shaloong/loongark-tokens": [
         "./packages/tokens/src"
       ],
-      "@loongark/theme": [
+      "@shaloong/loongark-theme": [
         "./packages/theme/src"
       ],
-      "@loongark/primitives": [
+      "@shaloong/loongark-primitives": [
         "./packages/primitives/src"
       ],
-      "@loongark/kit": [
+      "@shaloong/loongark-kit": [
         "./packages/kit/src"
       ],
-      "@loongark/vue": [
+      "@shaloong/loongark-vue": [
         "./packages/vue/src"
       ],
-      "@loongark/react": [
+      "@shaloong/loongark-react": [
         "./packages/react/src"
       ],
-      "@loongark/svelte": [
+      "@shaloong/loongark-svelte": [
         "./packages/svelte/src"
       ],
-      "@loongark/solid": [
+      "@shaloong/loongark-solid": [
         "./packages/solid/src"
       ],
-      "@loongark/cli": [
+      "@shaloong/loongark-cli": [
         "./packages/cli/src"
       ],
       "@examples": [
         "./examples"
       ],
-      "@loongark/kit/bootstrap": [
+      "@shaloong/loongark-kit/bootstrap": [
         "./packages/kit/src/bootstrap.ts"
       ],
-      "@loongark/react/*": [
+      "@shaloong/loongark-react/*": [
         "./packages/react/src/entries/*"
       ],
-      "@loongark/vue/*": [
+      "@shaloong/loongark-vue/*": [
         "./packages/vue/src/entries/*"
       ],
-      "@loongark/solid/*": [
+      "@shaloong/loongark-solid/*": [
         "./packages/solid/src/entries/*"
       ],
-      "@loongark/svelte/*": [
+      "@shaloong/loongark-svelte/*": [
         "./packages/svelte/src/entries/*"
       ],
-      "@loongark/react/editors": [
+      "@shaloong/loongark-react/editors": [
         "./packages/react/src/components/editors"
       ],
-      "@loongark/vue/editors": [
+      "@shaloong/loongark-vue/editors": [
         "./packages/vue/src/components/editors"
       ],
-      "@loongark/solid/editors": [
+      "@shaloong/loongark-solid/editors": [
         "./packages/solid/src/components/editors"
       ],
-      "@loongark/svelte/editors": [
+      "@shaloong/loongark-svelte/editors": [
         "./packages/svelte/src/components/editors"
       ],
-      "@loongark/primitives/pin-input": ["./packages/primitives/src/pinInput.ts"],
-      "@loongark/primitives/*": [
+      "@shaloong/loongark-primitives/pin-input": ["./packages/primitives/src/pinInput.ts"],
+      "@shaloong/loongark-primitives/*": [
         "./packages/primitives/src/*"
       ]
     }

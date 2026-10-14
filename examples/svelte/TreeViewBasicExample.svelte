@@ -7,7 +7,7 @@
     LoongArkTreeViewNodeProvider,
     LoongArkTreeViewItem,
     LoongArkTreeViewItemText,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   interface FileNode {
     id: string;
     name: string;

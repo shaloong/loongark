@@ -1,5 +1,5 @@
 import { createContext, useContext, type Accessor } from "solid-js";
-import type { LoongArkTheme } from "@loongark/theme";
+import type { LoongArkTheme } from "@shaloong/loongark-theme";
 export const ThemeContext = createContext<
   Accessor<LoongArkTheme> | undefined
 >();

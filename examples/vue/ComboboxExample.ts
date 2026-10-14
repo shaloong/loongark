@@ -1,5 +1,5 @@
 import { defineComponent, h, ref, computed, type PropType } from "vue";
-import { createListCollection } from "@loongark/vue";
+import { createListCollection } from "@shaloong/loongark-vue";
 import {
   LoongArkComboboxRoot,
   LoongArkComboboxLabel,
@@ -13,8 +13,8 @@ import {
   LoongArkComboboxItem,
   LoongArkComboboxItemText,
   LoongArkComboboxItemIndicator,
-} from "@loongark/vue";
-import type { ComboboxSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { ComboboxSize } from "@shaloong/loongark-primitives";
 
 const options: Array<{ label: string; value: string }> = [
   { label: "Beijing", value: "beijing" },

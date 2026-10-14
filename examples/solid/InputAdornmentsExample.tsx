@@ -1,7 +1,7 @@
 /** @jsxImportSource solid-js */
 import { createSignal, createMemo } from "solid-js";
-import * as L from "@loongark/solid";
-import { controlIcons } from "@loongark/kit";
+import * as L from "@shaloong/loongark-solid";
+import { controlIcons } from "@shaloong/loongark-kit";
 import {
   createInputAdornmentDemo,
   adornmentControls,

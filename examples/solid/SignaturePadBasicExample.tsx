@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkSignaturePad } from "@loongark/solid";
+import { LoongArkSignaturePad } from "@shaloong/loongark-solid";
 export function SignaturePadBasicExample() {
   return (
     <LoongArkSignaturePad.Root>

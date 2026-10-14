@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticIconStyles } from "@loongark/primitives/automatic-styles/icon";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticIconStyles } from "@shaloong/loongark-primitives/automatic-styles/icon";
   registerAutomaticStyles(lkAutomaticIconStyles);
 
   import type { SVGAttributes } from "svelte/elements";
-  import { iconAttributes, iconStyles, type IconOptions } from "@loongark/kit";
+  import { iconAttributes, iconStyles, type IconOptions } from "@shaloong/loongark-kit";
   let {
     icon,
     size,

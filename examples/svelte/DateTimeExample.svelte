@@ -1,6 +1,6 @@
 <script lang="ts">
   import { untrack } from "svelte";
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import { createDateTimeDemo } from "../shared/dateTimeDemo";
   let revision = $state(0);
   const demo = createDateTimeDemo(() => untrack(() => revision++));

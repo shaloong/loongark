@@ -11,10 +11,10 @@
 ## 安装与兼容性
 
 ```sh
-pnpm add @loongark/react@X.Y.Z
+pnpm add @shaloong/loongark-react@X.Y.Z
 ```
 
-其他框架使用 `@loongark/vue`、`@loongark/solid` 或 `@loongark/svelte` 的同一版本。说明本次最低版本变化、破坏性变更及迁移方式；无破坏性变更时简要注明。
+其他框架使用 `@shaloong/loongark-vue`、`@shaloong/loongark-solid` 或 `@shaloong/loongark-svelte` 的同一版本。说明本次最低版本变化、破坏性变更及迁移方式；无破坏性变更时简要注明。
 
 ## 文档与完整变更
 

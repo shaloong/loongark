@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 export function DateInputExample() {
   const [value, setValue] = useState([L.parseDate("2026-10-03")]);
   const [disabled, setDisabled] = useState(false),

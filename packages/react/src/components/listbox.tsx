@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticListboxStyles } from "@loongark/primitives/automatic-styles/listbox";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticListboxStyles } from "@shaloong/loongark-primitives/automatic-styles/listbox";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticListboxStyles } from "@loongark/primitives/automat
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Listbox } from "@ark-ui/react/listbox";
-import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
+import type { ListboxOrientation, ListboxSize } from "@shaloong/loongark-primitives";
 
 type ArkListboxRootProps<T = object> =
   import("@ark-ui/react/listbox").ListboxRootProps<T>;

@@ -3,7 +3,7 @@ import { useMachine, normalizeProps } from "@zag-js/solid";
 import { useEnvironmentContext } from "@ark-ui/solid/environment";
 import { useLocaleContext } from "@ark-ui/solid/locale";
 import type { UseTocProps, UseTocReturn } from "@ark-ui/solid/toc";
-import { createTocMachine, connectToc, definedTocProps } from "@loongark/kit";
+import { createTocMachine, connectToc, definedTocProps } from "@shaloong/loongark-kit";
 export const useToc = (props?: UseTocProps): UseTocReturn => {
   const id = createUniqueId(),
     env = useEnvironmentContext(),

@@ -3,7 +3,7 @@
 import {
   LoongArkToggleGroupRoot,
   LoongArkToggleGroupItem,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function ToggleGroupBasicExample() {
   return (
     <LoongArkToggleGroupRoot>

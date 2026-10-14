@@ -9,8 +9,8 @@ import {
   LoongArkProgressCircle,
   LoongArkProgressCircleTrack,
   LoongArkProgressCircleRange,
-} from "@loongark/vue";
-import type { ProgressOrientation, ProgressSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { ProgressOrientation, ProgressSize } from "@shaloong/loongark-primitives";
 
 export const ProgressExample = defineComponent({
   name: "ProgressExample",

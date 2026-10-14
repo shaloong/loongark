@@ -5,7 +5,7 @@
     LoongArkScrollAreaContent,
     LoongArkScrollAreaScrollbar,
     LoongArkScrollAreaThumb,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkScrollAreaRoot>

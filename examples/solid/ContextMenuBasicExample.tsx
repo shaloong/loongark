@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkContextMenu } from "@loongark/solid";
+import { LoongArkContextMenu } from "@shaloong/loongark-solid";
 export function ContextMenuBasicExample() {
   return (
     <LoongArkContextMenu.Root>

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { QuestionnaireValue } from "@loongark/kit";
-  import * as L from "@loongark/svelte";
+  import type { QuestionnaireValue } from "@shaloong/loongark-kit";
+  import * as L from "@shaloong/loongark-svelte";
   import { feedbackQuestions } from "../shared/conversationDemo";
   let failed = $state(true),
     removed = $state(false),

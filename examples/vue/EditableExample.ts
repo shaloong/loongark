@@ -9,8 +9,8 @@ import {
   LoongArkEditableEditTrigger,
   LoongArkEditableSubmitTrigger,
   LoongArkEditableCancelTrigger,
-} from "@loongark/vue";
-import type { EditableSize, EditableState } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { EditableSize, EditableState } from "@shaloong/loongark-primitives";
 
 export const EditableExample = defineComponent({
   name: "EditableExample",

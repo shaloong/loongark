@@ -1,5 +1,5 @@
 /** @jsxImportSource solid-js */
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { onCleanup, onMount, type ParentProps } from "solid-js";
 import {
   drawerDirections,

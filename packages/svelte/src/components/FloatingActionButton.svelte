@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticFloatingActionButtonStyles } from "@loongark/primitives/automatic-styles/floating-action-button";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticFloatingActionButtonStyles } from "@shaloong/loongark-primitives/automatic-styles/floating-action-button";
   registerAutomaticStyles(lkAutomaticFloatingActionButtonStyles);
 
   import {
     fabAttributes,
     type FloatingActionButtonOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export let size: FloatingActionButtonOptions["size"] = "md";
   export let variant: FloatingActionButtonOptions["variant"] = "primary";
   export let extended = false;

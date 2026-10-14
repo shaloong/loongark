@@ -5,11 +5,11 @@
     LoongArkSegmentGroupItem,
     LoongArkSegmentGroupItemHiddenInput,
     LoongArkSegmentGroupItemText,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   import type {
     SegmentGroupOrientation,
     SegmentGroupSize,
-  } from "@loongark/primitives";
+  } from "@shaloong/loongark-primitives";
 
   export let size: SegmentGroupSize = "md";
   export let orientation: SegmentGroupOrientation = "horizontal";

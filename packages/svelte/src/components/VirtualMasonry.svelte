@@ -3,19 +3,19 @@
   import type {
     VirtualMasonryOptions,
     VirtualMasonryEntry,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export interface VirtualMasonryProps extends VirtualMasonryOptions {
     renderItem: Snippet<[VirtualMasonryEntry]>;
   }
 </script>
 
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticVirtualMasonryStyles } from "@loongark/primitives/automatic-styles/virtual-masonry";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticVirtualMasonryStyles } from "@shaloong/loongark-primitives/automatic-styles/virtual-masonry";
   registerAutomaticStyles(lkAutomaticVirtualMasonryStyles);
 
   import { onMount, untrack } from "svelte";
-  import { createVirtualMasonry, mountVirtualMasonry } from "@loongark/kit";
+  import { createVirtualMasonry, mountVirtualMasonry } from "@shaloong/loongark-kit";
   let {
     renderItem,
     ...rest

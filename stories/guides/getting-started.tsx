@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 import React, { useState } from "react";
 import { Source } from "@storybook/addon-docs/blocks";
-import { LoongArkButton, LoongArkProvider } from "@loongark/react";
+import { LoongArkButton, LoongArkProvider } from "@shaloong/loongark-react";
 
 import coreReact from "../../examples/react/CoreProviderExample.tsx?raw";
 import coreVue from "../../examples/vue/CoreProviderExample.ts?raw";
@@ -12,8 +12,8 @@ const coreExamples = { react: coreReact, vue: coreVue, solid: coreSolid, svelte:
 const examples = {
   react: `// App.tsx（React 18+）
 import { useState } from "react";
-import { LoongArkProvider } from "@loongark/react/provider";
-import { LoongArkButton } from "@loongark/react/button";
+import { LoongArkProvider } from "@shaloong/loongark-react/provider";
+import { LoongArkButton } from "@shaloong/loongark-react/button";
 export default function App() {
   const [count, setCount] = useState(0);
   return <LoongArkProvider mode="light">
@@ -22,8 +22,8 @@ export default function App() {
 }`,
   vue: `// App.ts（Vue 3.5.43+；也可在 .vue 中使用相同组件）
 import { defineComponent, h, ref } from "vue";
-import { LoongArkProvider } from "@loongark/vue/provider";
-import { LoongArkButton } from "@loongark/vue/button";
+import { LoongArkProvider } from "@shaloong/loongark-vue/provider";
+import { LoongArkButton } from "@shaloong/loongark-vue/button";
 export default defineComponent({ setup() {
   const count = ref(0);
   return () => h(LoongArkProvider, { mode: "light" }, () =>
@@ -31,8 +31,8 @@ export default defineComponent({ setup() {
 }});`,
   solid: `// App.tsx（Solid 1.9.17+；应用使用 vite-plugin-solid）
 import { createSignal } from "solid-js";
-import { LoongArkProvider } from "@loongark/solid/provider";
-import { LoongArkButton } from "@loongark/solid/button";
+import { LoongArkProvider } from "@shaloong/loongark-solid/provider";
+import { LoongArkButton } from "@shaloong/loongark-solid/button";
 export default function App() {
   const [count, setCount] = createSignal(0);
   return <LoongArkProvider mode="light">
@@ -41,8 +41,8 @@ export default function App() {
 }`,
   svelte: `<!-- App.svelte（Svelte 5.57.2+；应用使用 SvelteKit 或官方 Vite 插件） -->
 <script lang="ts">
-  import { LoongArkProvider } from "@loongark/svelte/provider";
-  import { LoongArkButton } from "@loongark/svelte/button";
+  import { LoongArkProvider } from "@shaloong/loongark-svelte/provider";
+  import { LoongArkButton } from "@shaloong/loongark-svelte/button";
   let count = $state(0);
 </script>
 <LoongArkProvider mode="light">
@@ -62,23 +62,23 @@ export function GettingStarted() {
     </div>
     <div role="group" aria-label="预览主题" style={{display:"flex", flexWrap:"wrap", gap:8, marginTop:12}}>{(["light", "dark", "high-contrast"] as const).map(value => <LoongArkButton key={value} variant={mode === value ? "solid" : "outline"} aria-pressed={mode === value} onClick={() => setMode(value)}>{value}</LoongArkButton>)}</div>
     <h2>安装与最小应用</h2>
-    <Source dark={mode === "dark"} code={`pnpm add @loongark/${framework}`} language="bash" />
+    <Source dark={mode === "dark"} code={`pnpm add @shaloong/loongark-${framework}`} language="bash" />
     <p>宿主项目需安装对应框架。React 应用还需 react-dom；Solid、Svelte 使用对应的编译插件。LoongArk 的共享包由框架包自动安装。</p>
     <Source dark={mode === "dark"} code={examples[framework]} language={framework === "svelte" ? "html" : "tsx"} />
     <LoongArkButton aria-label="接入示例" onClick={() => setCount(value => value + 1)}>已点击 {count} 次</LoongArkButton>
     <h2>引入方式与主题</h2>
     <p>根入口支持具名导入与 ESM tree shaking；逐组件路径便于明确依赖。复合组件的 Root、Trigger、Content 等部件在同一个组件路径，不是每个部件一个路径。每个组件的 Docs 页提供其对应路径和四端示例。</p>
-    <Source dark={mode === "dark"} code={`import { LoongArkProvider, LoongArkButton } from "@loongark/${framework}";\n// 同样支持：\nimport { LoongArkProvider } from "@loongark/${framework}/provider";\nimport { LoongArkButton } from "@loongark/${framework}/button";`} language="typescript" />
+    <Source dark={mode === "dark"} code={`import { LoongArkProvider, LoongArkButton } from "@shaloong/loongark-${framework}";\n// 同样支持：\nimport { LoongArkProvider } from "@shaloong/loongark-${framework}/provider";\nimport { LoongArkButton } from "@shaloong/loongark-${framework}/button";`} language="typescript" />
     <p>mode 默认 light，可选 dark、high-contrast；brand 默认中性，vi 启用 Shaloong 品牌强调。Provider 只保留一份共享样式，组件代码仍按需裁剪。系统主题由应用读取 prefers-color-scheme 后传入 mode；motionPreference 默认 auto，遵循减弱动效偏好。嵌套 Provider 可设置局部主题。</p>
     <h2>按需样式</h2>
-    <p>基础页面可使用 provider-core，显式选择实际部件样式；默认 Provider 保持完整样式。额外安装 @loongark/primitives，不依赖应用对传递包的隐式访问。Kit 高级组合继续使用完整 Provider，或提供自己的样式启动器。React RSC 的启动器函数留在客户端模块，服务端另生成相同首屏 CSS。</p>
+    <p>基础页面可使用 provider-core，显式选择实际部件样式；默认 Provider 保持完整样式。额外安装 @shaloong/loongark-primitives，不依赖应用对传递包的隐式访问。Kit 高级组合继续使用完整 Provider，或提供自己的样式启动器。React RSC 的启动器函数留在客户端模块，服务端另生成相同首屏 CSS。</p>
     <Source dark={mode === "dark"} code={coreExamples[framework]} language={framework === "svelte" ? "html" : "tsx"} />
     <h2>SSR 首屏与浮层</h2>
     <p>Provider 使用稳定的作用域 ID；Solid 的 node 条件自动选择服务端实现，Svelte 由宿主编译。服务端首屏 CSS 需要按请求创建主题并序列化，不要跨请求共享状态。将下面 CSS 放在 HTML head 的 style 元素中，Provider 使用相同 targetId 与主题选项；HTML 输出交给框架或模板的可信样式插入接口。React 内置 use client 边界，Next.js 服务端页面可直接导入 Provider 和命名组件；hooks、事件处理器、Ark 集合工厂及客户端命名空间组合仍放在应用客户端模块。跨边界 Props 需可序列化，RSC 仍需正确输出 SSR 样式。</p>
-    <Source dark={mode === "dark"} code={`import { createLoongArkTheme } from "@loongark/theme";\nimport { bootstrapKit } from "@loongark/kit/bootstrap";\nconst theme = createLoongArkTheme({ targetId: "app-theme", mode: "light" });\nbootstrapKit(theme);\nconst css = theme.toStyleSheet();\n// 对应根组件：<LoongArkProvider targetId="app-theme" mode="light">…</LoongArkProvider>`} language="typescript" />
+    <Source dark={mode === "dark"} code={`import { createLoongArkTheme } from "@shaloong/loongark-theme";\nimport { bootstrapKit } from "@shaloong/loongark-kit/bootstrap";\nconst theme = createLoongArkTheme({ targetId: "app-theme", mode: "light" });\nbootstrapKit(theme);\nconst css = theme.toStyleSheet();\n// 对应根组件：<LoongArkProvider targetId="app-theme" mode="light">…</LoongArkProvider>`} language="typescript" />
     <p>Dialog 等浮层使用 LoongArkPortal 或对应组件的 Portal，保留局部主题。原生 Ark Portal 传送到 body 时可能失去作用域变量。四端 Provider 支持 nonce；与 SSR style 标签使用宿主每次请求生成的同一值。它只授权库生成的样式表，内联属性与第三方编辑器需单独配置 CSP。</p>
     <h2>编辑器与常见问题</h2>
-    <Source dark={mode === "dark"} code={`const editors = await import("@loongark/${framework}/editors");\n// 在路由或客户端交互触发后渲染 editors.LoongArkCodeEditor。`} language="typescript" />
+    <Source dark={mode === "dark"} code={`const editors = await import("@shaloong/loongark-${framework}/editors");\n// 在路由或客户端交互触发后渲染 editors.LoongArkCodeEditor。`} language="typescript" />
     <p>复杂编辑器在客户端挂载引擎；/editors 可延迟加载两个编辑器。不要在模块初始化时操作 DOM。样式缺失先检查 Provider；浮层颜色异常检查 Portal；SSR 水合检查 targetId 和首屏选项一致。Button 默认 type="button"；提交表单时显式设置 type="submit"。</p>
   </div></LoongArkProvider>;
 }

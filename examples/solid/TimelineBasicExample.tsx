@@ -8,7 +8,7 @@ import {
   LoongArkTimelineTitle,
   LoongArkTimelineDescription,
   LoongArkTimelineTime,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function TimelineBasicExample() {
   return (
     <LoongArkTimeline>

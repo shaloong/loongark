@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticRatingGroupStyles } from "@loongark/primitives/automatic-styles/rating-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticRatingGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/rating-group";
 import { renderPart } from "../render-part";
 /**
  * Rating Group component - Vue wrapper.
@@ -16,7 +16,7 @@ import {
 import { RatingGroup as ArkRatingGroup } from "@ark-ui/vue/rating-group";
 import { useRatingGroup } from "./use-rating";
 import type { UseRatingGroupProps } from "@ark-ui/vue/rating-group";
-import type { RatingGroupSize } from "@loongark/primitives";
+import type { RatingGroupSize } from "@shaloong/loongark-primitives";
 
 export const LoongArkRatingGroupRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkRatingGroupRoot",

@@ -7,8 +7,8 @@
     LoongArkClipboardTrigger,
     LoongArkClipboardIndicator,
     LoongArkClipboardValueText,
-  } from "@loongark/svelte";
-  import type { ClipboardSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { ClipboardSize } from "@shaloong/loongark-primitives";
 
   export let size: ClipboardSize = "md";
   export let disabled = false;

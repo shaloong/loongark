@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkVirtualGrid } from "@loongark/svelte";
+  import { LoongArkVirtualGrid } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkVirtualGrid

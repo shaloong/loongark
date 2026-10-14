@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticNumberInputStyles } from "@loongark/primitives/automatic-styles/number-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticNumberInputStyles } from "@shaloong/loongark-primitives/automatic-styles/number-input";
 
 
 import { useFieldContext } from "@ark-ui/react/field";
@@ -8,8 +8,8 @@ import { useNumberInputContext } from "@ark-ui/react/number-input";
 import {
   nativeSelectionProps,
   nativeSelectionFieldDescription,
-} from "@loongark/kit";
-import { controlIcons } from "@loongark/kit";
+} from "@shaloong/loongark-kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 /**
  * Number Input component - React wrapper.
@@ -31,7 +31,7 @@ import type {
   NumberInputPrimitiveProps,
   NumberInputSize,
   NumberInputState,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface LoongArkNumberInputRootProps
   extends

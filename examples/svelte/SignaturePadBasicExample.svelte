@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkSignaturePad } from "@loongark/svelte";
+  import { LoongArkSignaturePad } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkSignaturePad.Root>

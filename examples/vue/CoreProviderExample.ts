@@ -1,8 +1,8 @@
 import { defineComponent, h, ref } from "vue";
-import { LoongArkProviderCore } from "@loongark/vue/provider-core";
-import { LoongArkButton } from "@loongark/vue/button";
-import { createPrimitiveStyleBootstrap } from "@loongark/primitives/styles";
-import { buttonPrimitive } from "@loongark/primitives/button";
+import { LoongArkProviderCore } from "@shaloong/loongark-vue/provider-core";
+import { LoongArkButton } from "@shaloong/loongark-vue/button";
+import { createPrimitiveStyleBootstrap } from "@shaloong/loongark-primitives/styles";
+import { buttonPrimitive } from "@shaloong/loongark-primitives/button";
 const styleBootstrap = createPrimitiveStyleBootstrap([buttonPrimitive]);
 export const CoreProviderExample = defineComponent({
   setup() {

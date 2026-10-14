@@ -5,7 +5,7 @@ import {
   LoongArkRatingGroupControl,
   LoongArkRatingGroupItem,
   LoongArkRatingGroupHiddenInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function RatingGroupBasicExample() {
   return (
     <LoongArkRatingGroupRoot count={5} defaultValue={3}>

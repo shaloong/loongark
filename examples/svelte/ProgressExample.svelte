@@ -9,8 +9,8 @@
     LoongArkProgressCircle,
     LoongArkProgressCircleTrack,
     LoongArkProgressCircleRange,
-  } from "@loongark/svelte";
-  import type { ProgressOrientation, ProgressSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { ProgressOrientation, ProgressSize } from "@shaloong/loongark-primitives";
 
   export let size: ProgressSize = "md";
   export let orientation: ProgressOrientation = "horizontal";

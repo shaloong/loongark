@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import type { ListboxRootProps } from "@ark-ui/svelte/listbox";
 import { Listbox } from "@ark-ui/svelte/listbox";
-import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
+import type { ListboxOrientation, ListboxSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkListboxRoot<
   T extends object = object,

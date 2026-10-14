@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticScrollAreaStyles } from "@loongark/primitives/automatic-styles/scroll-area";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticScrollAreaStyles } from "@shaloong/loongark-primitives/automatic-styles/scroll-area";
 import { renderPart } from "../render-part";
 /**
  * Scroll Area component - Vue wrapper.
@@ -8,7 +8,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, type PropType } from "vue";
 import { ScrollArea as ArkScrollArea } from "@ark-ui/vue/scroll-area";
-import type { ScrollAreaSize } from "@loongark/primitives";
+import type { ScrollAreaSize } from "@shaloong/loongark-primitives";
 
 export const LoongArkScrollAreaRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkScrollAreaRoot",

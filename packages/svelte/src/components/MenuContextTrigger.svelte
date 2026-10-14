@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticMenuStyles } from "@loongark/primitives/automatic-styles/menu";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticMenuStyles } from "@shaloong/loongark-primitives/automatic-styles/menu";
   registerAutomaticStyles(lkAutomaticMenuStyles);
 
   import {
@@ -9,7 +9,7 @@
   } from "@ark-ui/svelte/menu";
   import { Ark } from "@ark-ui/svelte/factory";
   import { mergeProps } from "@zag-js/svelte";
-  import { contextMenuPointerHandler } from "@loongark/kit";
+  import { contextMenuPointerHandler } from "@shaloong/loongark-kit";
 
   let { ref = $bindable(null), ...props }: MenuContextTriggerProps = $props();
   const menu = useMenuContext();

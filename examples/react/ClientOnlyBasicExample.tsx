@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkClientOnly } from "@loongark/react";
+import { LoongArkClientOnly } from "@shaloong/loongark-react";
 export function ClientOnlyBasicExample() {
   return (
     <LoongArkClientOnly>

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTextareaStyles } from "@loongark/primitives/automatic-styles/input";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTextareaStyles } from "@shaloong/loongark-primitives/automatic-styles/input";
   registerAutomaticStyles(lkAutomaticTextareaStyles);
 
   import InputInput from "./InputInput.svelte";
-  import type { InputPrimitiveProps } from "@loongark/primitives";
+  import type { InputPrimitiveProps } from "@shaloong/loongark-primitives";
 
   export let size: NonNullable<InputPrimitiveProps["size"]> = "md";
   export let state: NonNullable<InputPrimitiveProps["state"]> = "default";

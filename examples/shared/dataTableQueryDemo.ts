@@ -1,4 +1,4 @@
-import type { DataColumn, DataRow, DataTableState } from "@loongark/kit";
+import type { DataColumn, DataRow, DataTableState } from "@shaloong/loongark-kit";
 export const queryColumns: readonly DataColumn[] = [
   { key: "name", label: "Project", filter: { type: "text" } },
   {

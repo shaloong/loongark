@@ -1,6 +1,6 @@
 import { getContext, setContext } from "svelte";
 import { writable, type Writable } from "svelte/store";
-import type { SelectSize } from "@loongark/primitives";
+import type { SelectSize } from "@shaloong/loongark-primitives";
 
 const selectContextKey = Symbol("loongark-select-size");
 

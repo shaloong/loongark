@@ -1,6 +1,6 @@
 import { getContext, setContext } from "svelte";
 import { writable, type Writable } from "svelte/store";
-import type { MenuSize } from "@loongark/primitives";
+import type { MenuSize } from "@shaloong/loongark-primitives";
 
 const menuContextKey = Symbol("loongark-menu-size");
 

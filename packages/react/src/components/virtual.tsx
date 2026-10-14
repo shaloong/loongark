@@ -1,7 +1,7 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticVirtualGridStyles } from "@loongark/primitives/automatic-styles/virtual-grid";
-import { styles as lkAutomaticVirtualMasonryStyles } from "@loongark/primitives/automatic-styles/virtual-masonry";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticVirtualGridStyles } from "@shaloong/loongark-primitives/automatic-styles/virtual-grid";
+import { styles as lkAutomaticVirtualMasonryStyles } from "@shaloong/loongark-primitives/automatic-styles/virtual-masonry";
 
 
 import React, { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
@@ -14,7 +14,7 @@ import {
   type VirtualGridCellDetails,
   type VirtualMasonryOptions,
   type VirtualMasonryEntry,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 // 数据与 Tab 入口在绘制前同步，不能先更新 aria 计数再等待下一帧修复键盘入口。
 const useGridLayoutEffect = typeof document === "undefined" ? useEffect : useLayoutEffect;
 export interface VirtualGridProps extends VirtualGridOptions {

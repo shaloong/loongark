@@ -2,7 +2,7 @@ import { defineComponent, h } from "vue";
 import {
   LoongArkJsonTreeViewRoot,
   LoongArkJsonTreeViewTree,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const JsonTreeViewBasicExample = defineComponent({
   setup() {
     return () => {

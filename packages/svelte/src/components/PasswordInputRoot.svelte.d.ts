@@ -4,7 +4,7 @@ import type { PasswordInputRootProps } from "@ark-ui/svelte/password-input";
 import type {
   PasswordInputSize,
   PasswordInputState,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export default class LoongArkPasswordInputRoot extends SvelteComponent<
   Omit<

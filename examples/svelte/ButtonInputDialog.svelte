@@ -10,7 +10,7 @@
     LoongArkInputSuffix,
     LoongArkInputHelperText,
     LoongArkDialog,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   import { defaultScenario, scenarioTestIds } from "../shared/demoScenario";
   let email = "";
 </script>

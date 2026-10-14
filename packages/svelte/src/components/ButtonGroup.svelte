@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticButtonGroupStyles } from "@loongark/primitives/automatic-styles/button-group";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticButtonGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/button-group";
   registerAutomaticStyles(lkAutomaticButtonGroupStyles);
 
-  import { layoutAttributes, type LayoutOptions } from "@loongark/kit";
+  import { layoutAttributes, type LayoutOptions } from "@shaloong/loongark-kit";
   export let as = "div";
   export let variant: LayoutOptions["variant"] = "default";
   export let size: LayoutOptions["size"] = "md";

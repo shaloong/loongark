@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkTimer } from "@loongark/vue";
+import { LoongArkTimer } from "@shaloong/loongark-vue";
 export const TimerBasicExample = defineComponent({
   setup() {
     return () => {

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticFilterDividerStyles } from "@loongark/primitives/automatic-styles/filter-divider";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticFilterDividerStyles } from "@shaloong/loongark-primitives/automatic-styles/filter-divider";
   registerAutomaticStyles(lkAutomaticFilterDividerStyles);
 
 </script>

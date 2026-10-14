@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import type { ComboboxRootProps } from "@ark-ui/svelte/combobox";
 import { Combobox } from "@ark-ui/svelte/combobox";
-import type { ComboboxSize } from "@loongark/primitives";
+import type { ComboboxSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkComboboxRoot<
   T extends object = object,

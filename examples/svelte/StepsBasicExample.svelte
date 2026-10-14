@@ -10,7 +10,7 @@
     LoongArkStepsCompletedContent,
     LoongArkStepsPrevTrigger,
     LoongArkStepsNextTrigger,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkStepsRoot count={2}>

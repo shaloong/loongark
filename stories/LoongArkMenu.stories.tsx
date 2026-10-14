@@ -14,8 +14,8 @@ import {
   LoongArkMenuItemIndicator,
   LoongArkMenuItemGroupLabel,
   LoongArkMenuItemGroup,
-} from "@loongark/react";
-import { LoongArkButton } from "@loongark/react";
+} from "@shaloong/loongark-react";
+import { LoongArkButton } from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/Menu",

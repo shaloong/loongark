@@ -1,5 +1,5 @@
-import * as L from "@loongark/react";
-import { controlIcons } from "@loongark/kit";
+import * as L from "@shaloong/loongark-react";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { IconExample } from "../examples/react/IconExample";
 export default {
   title: "Components/Icon",

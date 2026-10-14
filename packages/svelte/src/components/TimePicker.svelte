@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTimePickerStyles } from "@loongark/primitives/automatic-styles/time-picker";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTimePickerStyles } from "@shaloong/loongark-primitives/automatic-styles/time-picker";
   registerAutomaticStyles(lkAutomaticTimePickerStyles);
 
   import { untrack } from "svelte";
@@ -14,7 +14,7 @@
     validTime,
     formatTime,
     type TimePickerOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   import Root from "./PopoverRoot.svelte";
   import Trigger from "./PopoverTrigger.svelte";
   import Positioner from "./PopoverPositioner.svelte";

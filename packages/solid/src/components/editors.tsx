@@ -1,7 +1,7 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticCodeEditorStyles } from "@loongark/primitives/automatic-styles/code-editor";
-import { styles as lkAutomaticRichTextEditorStyles } from "@loongark/primitives/automatic-styles/rich-text-editor";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticCodeEditorStyles } from "@shaloong/loongark-primitives/automatic-styles/code-editor";
+import { styles as lkAutomaticRichTextEditorStyles } from "@shaloong/loongark-primitives/automatic-styles/rich-text-editor";
 import {
   createUniqueId,
   createEffect,
@@ -17,7 +17,7 @@ import {
   type CodeEditorProps,
   type RichTextEditorProps,
   type EditorFormOptions,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 function makeEditor<P extends EditorFormOptions>(
   kind: "code" | "rich",
   render: (props: P, id: string) => string,

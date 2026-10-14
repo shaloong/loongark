@@ -5,11 +5,11 @@
     LoongArkPaginationItem,
     LoongArkPaginationPrevTrigger,
     LoongArkPaginationNextTrigger,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   import type {
     PaginationOrientation,
     PaginationSize,
-  } from "@loongark/primitives";
+  } from "@shaloong/loongark-primitives";
 
   export let size: PaginationSize = "md";
   export let orientation: PaginationOrientation = "horizontal";

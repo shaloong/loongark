@@ -1,9 +1,9 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import type {
     VirtualGridCellDetails,
     VirtualMasonryEntry,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   import { createVirtualLayoutDemo } from "../shared/virtualLayoutDemo";
   import {
     groupsDisclosureCSS,

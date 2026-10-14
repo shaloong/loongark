@@ -1,5 +1,5 @@
 import { defineComponent, h, ref } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import { createStructureDemo } from "../shared/dataTableStructureDemo";
 export const DataTableStructureExample = defineComponent({
   setup() {

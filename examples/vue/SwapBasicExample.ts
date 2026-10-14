@@ -3,7 +3,7 @@ import {
   LoongArkButton,
   LoongArkSwapRoot,
   LoongArkSwapIndicator,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const SwapBasicExample = defineComponent({
   setup() {
     const expanded = ref(false);

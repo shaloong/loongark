@@ -1,9 +1,9 @@
 /** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
-import { LoongArkProviderCore } from "@loongark/solid/provider-core";
-import { LoongArkButton } from "@loongark/solid/button";
-import { createPrimitiveStyleBootstrap } from "@loongark/primitives/styles";
-import { buttonPrimitive } from "@loongark/primitives/button";
+import { LoongArkProviderCore } from "@shaloong/loongark-solid/provider-core";
+import { LoongArkButton } from "@shaloong/loongark-solid/button";
+import { createPrimitiveStyleBootstrap } from "@shaloong/loongark-primitives/styles";
+import { buttonPrimitive } from "@shaloong/loongark-primitives/button";
 const styleBootstrap = createPrimitiveStyleBootstrap([buttonPrimitive]);
 export function CoreProviderExample() {
   const [mode, setMode] = createSignal<"light" | "dark">("light");

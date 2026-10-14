@@ -4,7 +4,7 @@ import {
   LoongArkSplitterPanel,
   LoongArkSplitterResizeTrigger,
   LoongArkSplitterResizeTriggerIndicator,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function SplitterBasicExample() {
   return (
     <LoongArkSplitterRoot

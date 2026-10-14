@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkAspectRatio, LoongArkPaper } from "@loongark/react";
+import { LoongArkAspectRatio, LoongArkPaper } from "@shaloong/loongark-react";
 export function AspectRatioBasicExample() {
   return (
     <LoongArkAspectRatio ratio={16 / 9}>

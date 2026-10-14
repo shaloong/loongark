@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticPaginationStyles } from "@loongark/primitives/automatic-styles/pagination";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticPaginationStyles } from "@shaloong/loongark-primitives/automatic-styles/pagination";
   registerAutomaticStyles(lkAutomaticPaginationStyles);
 
   import { Pagination } from "@ark-ui/svelte/pagination";
@@ -8,7 +8,7 @@
   import type {
     PaginationOrientation,
     PaginationSize,
-  } from "@loongark/primitives";
+  } from "@shaloong/loongark-primitives";
 
   export let size: PaginationSize = "md";
   export let orientation: PaginationOrientation = "horizontal";

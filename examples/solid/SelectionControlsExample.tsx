@@ -4,8 +4,8 @@ import {
   groupsDisclosureIcon,
 } from "../shared/questionnaireGroupsDemo";
 import { createSignal, For, type JSX } from "solid-js";
-import { controlIcons } from "@loongark/kit";
-import * as L from "@loongark/solid";
+import { controlIcons } from "@shaloong/loongark-kit";
+import * as L from "@shaloong/loongark-solid";
 import {
   createSelectionControlsDemo,
   selectionOptions,

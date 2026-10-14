@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticDatePickerStyles } from "@loongark/primitives/automatic-styles/date-picker";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticDatePickerStyles } from "@shaloong/loongark-primitives/automatic-styles/date-picker";
 /**
  * Date Picker component - Solid wrapper.
  * Injects data-scope/data-part and size mapping.
@@ -42,7 +42,7 @@ import {
 import {
   datePickerPositionerStyle,
   type DatePickerSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 const DatePickerContext = createContext<{ size: DatePickerSize }>({
   size: "md",

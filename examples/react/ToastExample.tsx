@@ -9,7 +9,7 @@ import {
   LoongArkToastActionTrigger,
   LoongArkToastCloseTrigger,
   createToaster,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 type ToastVariant = "info" | "success" | "warning" | "error";
 

@@ -5,7 +5,7 @@
     LoongArkFileUploadDropzone,
     LoongArkFileUploadTrigger,
     LoongArkFileUploadHiddenInput,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkFileUploadRoot maxFiles={1}>

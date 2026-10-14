@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkQrCode } from "@loongark/solid";
+import { LoongArkQrCode } from "@shaloong/loongark-solid";
 export function QRCodeBasicExample() {
   return (
     <LoongArkQrCode.Root value="https://shaloong.github.io/loongark/">

@@ -1,7 +1,7 @@
 import {defineComponent, computed, type PropType} from "vue";
 import {useLocaleContext,DEFAULT_LOCALE} from "@ark-ui/vue/locale";
-import { formatNumberValue } from "@loongark/kit";
-export type { NumberFormatProps as LoongArkFormatNumberProps } from "@loongark/kit";
+import { formatNumberValue } from "@shaloong/loongark-kit";
+export type { NumberFormatProps as LoongArkFormatNumberProps } from "@shaloong/loongark-kit";
 /** Ark Vue 的构建未声明全部 Intl 属性，在此补齐真实格式化参数。 */
 export const LoongArkFormatNumber=defineComponent({name:"LoongArkFormatNumber",props:{
  value:{type:Number,required:true},

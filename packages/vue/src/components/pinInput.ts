@@ -1,11 +1,11 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticPinInputStyles } from "@loongark/primitives/automatic-styles/pin-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticPinInputStyles } from "@shaloong/loongark-primitives/automatic-styles/pin-input";
 import { renderPart } from "../render-part";
 import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import { PinInput as ArkPinInput } from "@ark-ui/vue/pin-input";
-import type { PinInputPrimitiveProps } from "@loongark/primitives";
+import type { PinInputPrimitiveProps } from "@shaloong/loongark-primitives";
 
 export type PinInputSize = NonNullable<PinInputPrimitiveProps["size"]>;
 export type PinInputState = NonNullable<PinInputPrimitiveProps["state"]>;

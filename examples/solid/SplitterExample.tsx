@@ -5,8 +5,8 @@ import {
   LoongArkSplitterPanel,
   LoongArkSplitterResizeTrigger,
   LoongArkSplitterResizeTriggerIndicator,
-} from "@loongark/solid";
-import type { SplitterSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { SplitterSize } from "@shaloong/loongark-primitives";
 
 interface SplitterExampleProps {
   size?: SplitterSize;

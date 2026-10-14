@@ -1,4 +1,4 @@
-import type { ChartOptions, ChartRange, DataRow } from "@loongark/kit";
+import type { ChartOptions, ChartRange, DataRow } from "@shaloong/loongark-kit";
 const initial = (): readonly DataRow[] =>
   Array.from({ length: 12 }, (_, index) => ({
     id: `sample-${index}`,

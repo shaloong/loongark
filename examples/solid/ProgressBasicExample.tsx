@@ -6,7 +6,7 @@ import {
   LoongArkProgressTrack,
   LoongArkProgressRange,
   LoongArkProgressValueText,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function ProgressBasicExample() {
   return (
     <LoongArkProgressRoot value={60}>

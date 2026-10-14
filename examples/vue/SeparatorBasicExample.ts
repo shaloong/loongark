@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkStack, LoongArkSeparator } from "@loongark/vue";
+import { LoongArkStack, LoongArkSeparator } from "@shaloong/loongark-vue";
 export const SeparatorBasicExample = defineComponent({
   setup() {
     return () => {

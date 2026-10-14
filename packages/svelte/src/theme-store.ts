@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
-import { createLoongArkTheme } from "@loongark/theme";
-import { bootstrapKitAutomatic } from "@loongark/kit/automatic-bootstrap";
+import { createLoongArkTheme } from "@shaloong/loongark-theme";
+import { bootstrapKitAutomatic } from "@shaloong/loongark-kit/automatic-bootstrap";
 export interface ThemeStoreOptions {
   mode?: "light" | "dark" | "high-contrast";
   brand?: string;

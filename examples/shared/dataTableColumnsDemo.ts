@@ -1,4 +1,4 @@
-import type { DataColumn, DataRow } from "@loongark/kit";
+import type { DataColumn, DataRow } from "@shaloong/loongark-kit";
 export const columnLayoutColumns: readonly DataColumn[] = [
   { key: "name", label: "Project", minWidth: 120, maxWidth: 480 },
   { key: "owner", label: "Owner", minWidth: 96, maxWidth: 320 },

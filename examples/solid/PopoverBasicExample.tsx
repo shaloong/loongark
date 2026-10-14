@@ -8,7 +8,7 @@ import {
   LoongArkPopoverTitle,
   LoongArkPopoverDescription,
   LoongArkPopoverCloseTrigger,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function PopoverBasicExample() {
   return (
     <LoongArkPopoverRoot>

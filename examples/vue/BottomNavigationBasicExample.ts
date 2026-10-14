@@ -3,7 +3,7 @@ import {
   LoongArkBottomNavigation,
   LoongArkBottomNavigationItem,
   LoongArkBottomNavigationLabel,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const BottomNavigationBasicExample = defineComponent({
   setup() {
     return () => {

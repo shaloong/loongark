@@ -7,7 +7,7 @@ import {
   LoongArkTimelineTitle,
   LoongArkTimelineDescription,
   LoongArkTimelineTime,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function TimelineBasicExample() {
   return (
     <LoongArkTimeline>

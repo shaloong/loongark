@@ -10,8 +10,8 @@ import {
   LoongArkStepsCompletedContent,
   LoongArkStepsNextTrigger,
   LoongArkStepsPrevTrigger,
-} from "@loongark/vue";
-import type { StepsOrientation, StepsSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { StepsOrientation, StepsSize } from "@shaloong/loongark-primitives";
 
 const steps = [
   { title: "Account", description: "Create your profile" },

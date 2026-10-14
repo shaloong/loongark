@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticAttachmentStyles } from "@loongark/primitives/automatic-styles/attachment";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticAttachmentStyles } from "@shaloong/loongark-primitives/automatic-styles/attachment";
   registerAutomaticStyles(lkAutomaticAttachmentStyles);
 
-  import { controlIcons } from "@loongark/kit";
+  import { controlIcons } from "@shaloong/loongark-kit";
   import Icon from "./Icon.svelte";
   import { onDestroy } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
@@ -14,7 +14,7 @@
     type ConversationActionHandler,
     attachmentView,
     type AttachmentOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   let {
     name,
     size,

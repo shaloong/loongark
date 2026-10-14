@@ -23,8 +23,8 @@ import {
   LoongArkColorPickerSwatch,
   LoongArkColorPickerValueText,
   LoongArkColorPickerValueSwatch,
-} from "@loongark/solid";
-import type { ColorPickerSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { ColorPickerSize } from "@shaloong/loongark-primitives";
 
 interface ColorPickerExampleProps {
   size?: ColorPickerSize;

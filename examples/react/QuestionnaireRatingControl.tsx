@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import * as L from "@loongark/react";
-import { controlIcons, type QuestionnaireCustomContext } from "@loongark/kit";
+import * as L from "@shaloong/loongark-react";
+import { controlIcons, type QuestionnaireCustomContext } from "@shaloong/loongark-kit";
 function Registration({
   context,
   element,

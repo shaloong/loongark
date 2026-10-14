@@ -1,4 +1,4 @@
-import type { DataColumn, DataRow } from "@loongark/kit";
+import type { DataColumn, DataRow } from "@shaloong/loongark-kit";
 export const frozenColumns: readonly DataColumn[] = [
   { key: "name", label: "Project" },
   { key: "owner", label: "Owner" },

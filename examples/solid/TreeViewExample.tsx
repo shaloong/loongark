@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/solid";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-solid";
 import type { Component } from "solid-js";
 import {
   createTreeCollection,
@@ -18,8 +18,8 @@ import {
   LoongArkTreeViewBranchIndicator,
   LoongArkTreeViewBranchText,
   LoongArkTreeViewBranchIndentGuide,
-} from "@loongark/solid";
-import type { TreeViewSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { TreeViewSize } from "@shaloong/loongark-primitives";
 
 interface Node {
   id: string;

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticButtonStyles } from "@loongark/primitives/automatic-styles/button";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticButtonStyles } from "@shaloong/loongark-primitives/automatic-styles/button";
   registerAutomaticStyles(lkAutomaticButtonStyles);
 
-  import type { ButtonPrimitiveProps } from "@loongark/primitives";
+  import type { ButtonPrimitiveProps } from "@shaloong/loongark-primitives";
 
   export let variant: NonNullable<ButtonPrimitiveProps["variant"]> = "solid";
   export let size: NonNullable<ButtonPrimitiveProps["size"]> = "md";

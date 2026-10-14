@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkDownloadTrigger } from "@loongark/solid";
+import { LoongArkDownloadTrigger } from "@shaloong/loongark-solid";
 export function DownloadTriggerBasicExample() {
   return (
     <LoongArkDownloadTrigger

@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticCollapsibleStyles } from "@loongark/primitives/automatic-styles/collapsible";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticCollapsibleStyles } from "@shaloong/loongark-primitives/automatic-styles/collapsible";
 /**
  * Collapsible component - Solid wrapper.
  * Based on Ark UI Collapsible.
@@ -13,7 +13,7 @@ import {
   type CollapsibleContentProps as ArkCollapsibleContentProps,
   type CollapsibleIndicatorProps as ArkCollapsibleIndicatorProps,
 } from "@ark-ui/solid/collapsible";
-import type { CollapsibleSize } from "@loongark/primitives";
+import type { CollapsibleSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkCollapsibleRootProps extends Omit<
   ArkCollapsibleRootProps,

@@ -4,7 +4,7 @@
     LoongArkSplitterPanel,
     LoongArkSplitterResizeTrigger,
     LoongArkSplitterResizeTriggerIndicator,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkSplitterRoot

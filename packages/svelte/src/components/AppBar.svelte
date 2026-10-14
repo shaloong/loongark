@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticAppBarStyles } from "@loongark/primitives/automatic-styles/app-bar";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticAppBarStyles } from "@shaloong/loongark-primitives/automatic-styles/app-bar";
   registerAutomaticStyles(lkAutomaticAppBarStyles);
 
   import {
     layoutAttributes,
     layoutStyles,
     type LayoutOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export let as = "header";
   export let variant: LayoutOptions["variant"] = "default";
   export let size: LayoutOptions["size"] = "md";

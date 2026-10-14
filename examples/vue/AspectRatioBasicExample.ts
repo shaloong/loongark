@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkAspectRatio, LoongArkPaper } from "@loongark/vue";
+import { LoongArkAspectRatio, LoongArkPaper } from "@shaloong/loongark-vue";
 export const AspectRatioBasicExample = defineComponent({
   setup() {
     return () => {

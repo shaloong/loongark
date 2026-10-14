@@ -5,7 +5,7 @@ import {
   LoongArkNavigationMenuList,
   LoongArkNavigationMenuItem,
   LoongArkNavigationMenuLink,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function NavigationMenuBasicExample() {
   return (
     <LoongArkNavigationMenu>

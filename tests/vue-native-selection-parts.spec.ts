@@ -11,7 +11,7 @@ test.beforeAll(async () => {
     logLevel: "silent",
     resolve: {
       alias: ["vue", "kit", "theme", "primitives", "tokens"].map(name => ({
-        find: new RegExp(`^@loongark/${name}$`),
+        find: new RegExp(`^@shaloong/loongark-${name}$`),
         replacement: resolve("packages", name, "dist/index.js"),
       })),
       dedupe: ["vue"],

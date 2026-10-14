@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticAccordionStyles } from "@loongark/primitives/automatic-styles/accordion";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticAccordionStyles } from "@shaloong/loongark-primitives/automatic-styles/accordion";
 /**
  * Accordion component - Solid wrapper.
  * Based on Ark UI Accordion.
@@ -14,7 +14,7 @@ import {
   type AccordionItemContentProps as ArkAccordionItemContentProps,
   type AccordionItemIndicatorProps as ArkAccordionItemIndicatorProps,
 } from "@ark-ui/solid/accordion";
-import type { AccordionOrientation, AccordionSize } from "@loongark/primitives";
+import type { AccordionOrientation, AccordionSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkAccordionRootProps extends Omit<
   ArkAccordionRootProps,

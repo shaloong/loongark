@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import {
   createMessageScrollerDemo,
   messageScrollerInitialState,

@@ -6,7 +6,7 @@ import {
   LoongArkTocList,
   LoongArkTocItem,
   LoongArkTocLink,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function TocBasicExample() {
   return (
     <div>

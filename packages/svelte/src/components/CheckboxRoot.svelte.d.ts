@@ -1,6 +1,6 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { CheckboxRoot } from "@ark-ui/svelte/checkbox";
-import type { CheckboxSize } from "@loongark/primitives";
+import type { CheckboxSize } from "@shaloong/loongark-primitives";
 type CheckedState = boolean | "indeterminate";
 export interface CheckboxRootProps {
   size?: CheckboxSize;

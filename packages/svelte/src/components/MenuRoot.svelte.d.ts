@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Menu } from "@ark-ui/svelte/menu";
 import type { MenuRootProps } from "@ark-ui/svelte/menu";
-import type { MenuSize } from "@loongark/primitives";
+import type { MenuSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkMenuRoot extends SvelteComponent<
   Omit<

@@ -6,8 +6,8 @@ import {
   LoongArkHoverCardContent,
   LoongArkHoverCardArrow,
   LoongArkHoverCardArrowTip,
-} from "@loongark/react";
-import type { HoverCardSize } from "@loongark/primitives";
+} from "@shaloong/loongark-react";
+import type { HoverCardSize } from "@shaloong/loongark-primitives";
 
 interface HoverCardExampleProps {
   size?: HoverCardSize;

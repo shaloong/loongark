@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticClipboardStyles } from "@loongark/primitives/automatic-styles/clipboard";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticClipboardStyles } from "@shaloong/loongark-primitives/automatic-styles/clipboard";
 import { renderPart } from "../render-part";
 /**
  * Clipboard component - Vue wrapper.
@@ -13,7 +13,7 @@ import {
   type PropType,
 } from "vue";
 import { Clipboard as ArkClipboard } from "@ark-ui/vue/clipboard";
-import type { ClipboardSize } from "@loongark/primitives";
+import type { ClipboardSize } from "@shaloong/loongark-primitives";
 
 export const LoongArkClipboardRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkClipboardRoot",

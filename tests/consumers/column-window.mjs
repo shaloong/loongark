@@ -2,4 +2,4 @@ export {
   createDataTableColumnWindow,
   dataTableView,
   mountDataTableColumnWindow,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";

@@ -4,7 +4,7 @@ import {
   groupsDisclosureCSS,
   groupsDisclosureIcon,
 } from "../shared/questionnaireGroupsDemo";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { createRangeDemo } from "../shared/dataTableRangeDemo";
 export function DataTableRangeExample() {
   const [version, redraw] = createSignal(0),

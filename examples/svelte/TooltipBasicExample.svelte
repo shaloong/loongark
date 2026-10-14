@@ -4,7 +4,7 @@
     LoongArkTooltipTrigger,
     LoongArkTooltipPositioner,
     LoongArkTooltipContent,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkTooltipRoot>

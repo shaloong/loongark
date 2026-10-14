@@ -7,7 +7,7 @@ import {
   LoongArkEmptyDescription,
   LoongArkEmptyContent,
   LoongArkButton,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function EmptyBasicExample() {
   return (
     <LoongArkEmpty>

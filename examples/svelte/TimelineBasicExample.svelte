@@ -7,7 +7,7 @@
     LoongArkTimelineTitle,
     LoongArkTimelineDescription,
     LoongArkTimelineTime,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkTimeline>

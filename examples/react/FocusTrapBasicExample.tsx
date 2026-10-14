@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LoongArkButton, LoongArkFocusTrap } from "@loongark/react";
+import { LoongArkButton, LoongArkFocusTrap } from "@shaloong/loongark-react";
 export function FocusTrapBasicExample() {
   const [active, setActive] = useState(false);
   return (

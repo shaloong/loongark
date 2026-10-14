@@ -7,7 +7,7 @@ import {
   LoongArkNumberInputInput,
   LoongArkNumberInputIncrementTrigger,
   LoongArkNumberInputDecrementTrigger,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function NumberInputBasicExample() {
   return (
     <LoongArkNumberInputRoot defaultValue="1" min={0} max={10}>

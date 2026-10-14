@@ -1,5 +1,5 @@
 import { defineComponent, h, type PropType } from "vue";
-import { FileUploadContext } from "@loongark/vue";
+import { FileUploadContext } from "@shaloong/loongark-vue";
 import {
   LoongArkFileUploadRoot,
   LoongArkFileUploadLabel,
@@ -14,8 +14,8 @@ import {
   LoongArkFileUploadItemSizeText,
   LoongArkFileUploadItemDeleteTrigger,
   LoongArkFileUploadClearTrigger,
-} from "@loongark/vue";
-import type { FileUploadSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { FileUploadSize } from "@shaloong/loongark-primitives";
 
 export const FileUploadExample = defineComponent({
   name: "FileUploadExample",

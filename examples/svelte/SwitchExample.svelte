@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { LoongArkSwitch } from "@loongark/svelte";
+  import { LoongArkSwitch } from "@shaloong/loongark-svelte";
   export let size: "sm" | "md" | "lg" = "md";
   export let disabled = false;
   export let label = "通知提醒";

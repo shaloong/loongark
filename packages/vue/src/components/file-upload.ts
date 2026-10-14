@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticFileUploadStyles } from "@loongark/primitives/automatic-styles/file-upload";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticFileUploadStyles } from "@shaloong/loongark-primitives/automatic-styles/file-upload";
 import type { FileUploadRootProps as NativeFileUploadRootProps } from "@ark-ui/vue/file-upload";
 import { renderPart } from "../render-part";
 /**
@@ -14,7 +14,7 @@ import {
   type PropType,
 } from "vue";
 import { FileUpload as ArkFileUpload } from "@ark-ui/vue/file-upload";
-import type { FileUploadSize } from "@loongark/primitives";
+import type { FileUploadSize } from "@shaloong/loongark-primitives";
 
 export interface FileUploadChangeDetails {
   acceptedFiles: File[];

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { LoongArkPinInput } from "@loongark/react";
+import { LoongArkPinInput } from "@shaloong/loongark-react";
 
 const meta = {
   title: "Components/PinInput",

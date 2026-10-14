@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import {
     remoteColumns,
     initialRemoteState,

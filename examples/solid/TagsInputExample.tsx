@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/solid";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-solid";
 
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
@@ -15,8 +15,8 @@ import {
   LoongArkTagsInputItemDeleteTrigger,
   LoongArkTagsInputClearTrigger,
   LoongArkTagsInputHiddenInput,
-} from "@loongark/solid";
-import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
 
 export interface TagsInputExampleProps {
   size?: TagsInputSize;

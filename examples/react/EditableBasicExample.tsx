@@ -9,7 +9,7 @@ import {
   LoongArkEditableEditTrigger,
   LoongArkEditableSubmitTrigger,
   LoongArkEditableCancelTrigger,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function EditableBasicExample() {
   return (
     <LoongArkEditableRoot defaultValue="项目名称">

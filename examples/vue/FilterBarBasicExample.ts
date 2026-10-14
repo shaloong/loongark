@@ -7,7 +7,7 @@ import {
   LoongArkInputControl,
   LoongArkFilterBarActions,
   LoongArkButton,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const FilterBarBasicExample = defineComponent({
   setup() {
     return () => {

@@ -1,5 +1,5 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/react";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
@@ -13,7 +13,7 @@ import {
   LoongArkTagsInputItemDeleteTrigger,
   LoongArkTagsInputClearTrigger,
   LoongArkTagsInputHiddenInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/TagsInput",

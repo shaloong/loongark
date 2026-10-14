@@ -1,7 +1,7 @@
 import type {
   VirtualGridCellDetails,
   VirtualMasonryEntry,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 const sequence = (prefix: string, count: number) =>
   Array.from({ length: count }, (_, index) => `${prefix}${index}`);
 export function createVirtualLayoutDemo(changed: () => void) {

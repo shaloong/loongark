@@ -2,7 +2,7 @@ import { defineComponent, h } from "vue";
 import {
   LoongArkToggleGroupRoot,
   LoongArkToggleGroupItem,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const ToggleGroupBasicExample = defineComponent({
   setup() {
     return () => {

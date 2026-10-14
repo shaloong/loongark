@@ -1,15 +1,15 @@
 # 迁移说明
 
-- 默认 Provider、Vue 插件与 Svelte theme store 改为随组件入口自动加载样式；常规组件调用无需修改。自定义原始 DOM 如果依赖未导入组件的共享规则，应显式声明样式；可将 `@loongark/kit/bootstrap` 的 `bootstrapKit` 传给 Provider 的 `styleBootstrap` 保留完整规则。Core 的显式选择行为不变。
+- 默认 Provider、Vue 插件与 Svelte theme store 改为随组件入口自动加载样式；常规组件调用无需修改。自定义原始 DOM 如果依赖未导入组件的共享规则，应显式声明样式；可将 `@shaloong/loongark-kit/bootstrap` 的 `bootstrapKit` 传给 Provider 的 `styleBootstrap` 保留完整规则。Core 的显式选择行为不变。
 
-以下说明对应首个0.1.0版本的接入与兼容性要求；具体变更见 [CHANGELOG](../CHANGELOG.md#010)。仓库版本清单与发布演练不代表 npm 已发布，安装时以 registry 中实际可用的版本为准。
+以下说明对应首个0.1.1版本的接入与兼容性要求；具体变更见 [CHANGELOG](../CHANGELOG.md#011)。仓库版本清单与发布演练不代表 npm 已发布，安装时以 registry 中实际可用的版本为准。
 
 - 四端新增119个组件族子路径与 `/provider`、`/collection`，采用 kebab-case（如 `/date-picker`、`/rich-text-editor`）。根入口和 `/editors` 保持兼容；子路径只暴露对应族部件和类型。Provider 自动加载共享主题 CSS，基础页面不会因此加载表格、图表、问卷或编辑器运行时。
 - Ark 与直接 Zag 依赖联动升级至匹配版本，避免混用 Machine/Service 类型。Field 的错误关联支持新的 aria-describedby 契约与旧的 aria-errormessage；应用不要假设错误提示只能通过后一属性关联。
 - 安全升级后，Vue 最低3.5.43、Solid 最低1.9.17、Svelte 最低5.57.2。Svelte 应同时更新编译器与运行时，不能忽略 peer 警告。消费项目需刷新并审计自己的锁文件，根仓库 overrides 不会传递给下游。
 - Token 不再接受特殊原型键、非法属性名、非有限数值、循环/过深结构和 CSS/HTML 结构分隔符。复杂自定义 CSS 使用可信样式 API，不能通过 Token 注入新规则。
 - 问卷拒绝不支持的运行时题型和非法文本长度，题组深度限32；富文本累计标记限10000。来自服务端的数据需在应用边界校验并处理异常。
-- 可以使用 `@loongark/react/editors`、`@loongark/vue/editors`、`@loongark/solid/editors`、`@loongark/svelte/editors` 做路由级延迟加载；根组件入口及同步挂载函数保持兼容。Solid 的 node 条件会选择 SSR 文件，Svelte 入口需由应用编译。
+- 可以使用 `@shaloong/loongark-react/editors`、`@shaloong/loongark-vue/editors`、`@shaloong/loongark-solid/editors`、`@shaloong/loongark-svelte/editors` 做路由级延迟加载；根组件入口及同步挂载函数保持兼容。Solid 的 node 条件会选择 SSR 文件，Svelte 入口需由应用编译。
 - 默认 Checkbox 选中 hover 改为语义中性色，修正了不存在的 `solidHover` Token 回退到蓝色的问题。显式品牌视觉应通过正式 Token 覆盖，避免依赖旧回退色。
 - `data-disabled="false"` 不再显示禁止 cursor；真正禁用保持禁止指针。应用自己的自定义控件应使用原生 disabled、空/true 的 data-disabled 或 aria-disabled=true 表达实际禁用。
 - NativeSelect 的单选箭头统一为 Lucide，右侧（RTL 左侧）保留 Token 留白；multiple 不绘制单选箭头，forced-colors 恢复系统绘制。Solid/React 的原生事件目标与 Svelte 的原生属性/绑定声明补齐；无需将现有选择组件迁移到自定义 Select。

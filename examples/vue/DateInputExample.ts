@@ -7,8 +7,8 @@ import {
   ref,
   shallowRef,
 } from "vue";
-import * as L from "@loongark/vue";
-import type { DateInputDateValue, DateInputSegmentProps } from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
+import type { DateInputDateValue, DateInputSegmentProps } from "@shaloong/loongark-vue";
 export const DateInputExample = defineComponent({
   setup() {
     const value = shallowRef<DateInputDateValue[]>([L.parseDate("2026-10-03")]),

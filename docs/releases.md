@@ -47,7 +47,7 @@ Windows 在当前 shell 中设置 `STATIC_DIR`，不要直接复制 POSIX 环境
 
 包体探针使用真实 dist 的 Vite production 应用构建，以 UTF-8 字节、逐块 gzip/Brotli 统计入口静态依赖与全部异步块；四端各测根入口 Button、子路径 Button、实际挂载 Provider + Button 的最小应用、Core Provider + 显式 Button 样式、DataTable、CodeEditor 和延迟编辑器。组件探针保留模块导出，最小应用同时包含宿主渲染器；不把不同测量范围混作组件自身成本。共享 CSS 序列化另记字节与压缩成本。Button（含 Provider）首包禁止保留表格、图表、问卷运行时；Button/Table/延迟编辑器首包禁止保留 CodeMirror/ProseMirror 运行时代码；浏览器再核对首次请求编辑器块与重复加载缓存。
 
-四端均可 `import('@loongark/<framework>/editors')` 延迟路由加载。根入口与直接 Kit 同步挂载 API 不变，语言扩展仍单独异步加载。页面在模块加载完成之前应显示应用自己的 loading/error 状态；模块下载不等于编辑器已经完成挂载。默认 Provider 随实际组件入口自动补齐视觉规则，根入口与子路径的基础应用均验证 CSS 裁剪；Core 保留显式选择控制，完整 `bootstrapKit` 作为兼容入口仍保留全部规则，见主题指南。
+四端均可 `import('@shaloong/loongark-<framework>/editors')` 延迟路由加载。根入口与直接 Kit 同步挂载 API 不变，语言扩展仍单独异步加载。页面在模块加载完成之前应显示应用自己的 loading/error 状态；模块下载不等于编辑器已经完成挂载。默认 Provider 随实际组件入口自动补齐视觉规则，根入口与子路径的基础应用均验证 CSS 裁剪；Core 保留显式选择控制，完整 `bootstrapKit` 作为兼容入口仍保留全部规则，见主题指南。
 
 SSR 分别记录5个新进程的冷导入；每进程预热5次、每场景30次渲染，包含 Provider。10,000行数据在计时前构造；另测共享主题样式的生成与序列化。Svelte 使用真实 SSR 编译，Solid 使用 node 产物。浏览器记录120帧双向滚动、DOM 上限及20次重复卸载挂载，核对卸载 Observer 与编辑器销毁计数。RAF包含探针开销，不设依赖硬件的毫秒硬门槛；完整堆泄漏分析不是本探针的结论。
 

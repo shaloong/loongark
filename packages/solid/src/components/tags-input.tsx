@@ -1,8 +1,8 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTagsInputStyles } from "@shaloong/loongark-primitives/automatic-styles/tags-input";
 import { useFieldContext } from "@ark-ui/solid/field";
-import { nativeSelectionFieldDescription } from "@loongark/kit";
+import { nativeSelectionFieldDescription } from "@shaloong/loongark-kit";
 /**
  * Tags Input component - Solid wrapper.
  * Uses Ark UI Tags Input with data attributes for styling.
@@ -24,7 +24,7 @@ import {
 } from "@ark-ui/solid/tags-input";
 import { nativeSelectionRef } from "../native-selection";
 import { useTagsInputContext } from "@ark-ui/solid/tags-input";
-import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
 
 export interface LoongArkTagsInputRootProps extends Omit<
   ArkTagsInputRootProps,

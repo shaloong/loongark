@@ -1,12 +1,12 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticPasswordInputStyles } from "@loongark/primitives/automatic-styles/password-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticPasswordInputStyles } from "@shaloong/loongark-primitives/automatic-styles/password-input";
 import { useFieldContext } from "@ark-ui/solid/field";
 import { usePasswordInputContext } from "@ark-ui/solid/password-input";
 import {
   nativeSelectionProps,
   nativeSelectionFieldDescription,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 /**
  * Password Input component - Solid wrapper.
  * Uses Ark UI Password Input with data attributes for styling.
@@ -24,7 +24,7 @@ import {
 import type {
   PasswordInputSize,
   PasswordInputState,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface LoongArkPasswordInputRootProps extends Omit<
   ArkPasswordInputRootProps,

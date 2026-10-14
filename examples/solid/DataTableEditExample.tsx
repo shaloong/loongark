@@ -4,7 +4,7 @@ import {
   LoongArkDataTable,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
 export const DataTableEditExample = (
   props: { complex?: boolean; batch?: boolean } = {},

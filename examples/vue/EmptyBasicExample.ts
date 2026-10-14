@@ -6,7 +6,7 @@ import {
   LoongArkEmptyDescription,
   LoongArkEmptyContent,
   LoongArkButton,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const EmptyBasicExample = defineComponent({
   setup() {
     return () => {
