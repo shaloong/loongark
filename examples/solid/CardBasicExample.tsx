@@ -6,7 +6,7 @@ import {
   LoongArkCardTitle,
   LoongArkCardDescription,
   LoongArkCardContent,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function CardBasicExample() {
   return (
     <LoongArkCard>

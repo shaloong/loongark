@@ -126,4 +126,4 @@ export const layoutAttributes = (
       : {}),
   };
 };
-export { layoutCSS } from "@loongark/primitives/shared-styles/layout";
+export { layoutCSS } from "@shaloong/loongark-primitives/shared-styles/layout";

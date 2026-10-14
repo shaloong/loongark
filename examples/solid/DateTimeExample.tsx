@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal, createMemo, For, Show } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { createDateTimeDemo } from "../shared/dateTimeDemo";
 export function DateTimeExample() {
   const [revision, redraw] = createSignal(0);

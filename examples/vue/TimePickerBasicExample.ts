@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkTimePicker } from "@loongark/vue";
+import { LoongArkTimePicker } from "@shaloong/loongark-vue";
 export const TimePickerBasicExample = defineComponent({
   setup() {
     return () => {

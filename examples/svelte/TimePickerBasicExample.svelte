@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkTimePicker } from "@loongark/svelte";
+  import { LoongArkTimePicker } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkTimePicker

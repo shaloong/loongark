@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkLabel, LoongArkTextarea } from "@loongark/solid";
+import { LoongArkLabel, LoongArkTextarea } from "@shaloong/loongark-solid";
 export function TextareaBasicExample() {
   return (
     <div>

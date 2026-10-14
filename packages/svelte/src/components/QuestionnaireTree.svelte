@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticQuestionnaireStyles } from "@loongark/primitives/automatic-styles/questionnaire";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticQuestionnaireStyles } from "@shaloong/loongark-primitives/automatic-styles/questionnaire";
   registerAutomaticStyles(lkAutomaticQuestionnaireStyles);
 
   import type { LoongArkQuestionnaireRenderers } from "./questionnaire-custom.types";
-  import type { QuestionnaireRenderNode } from "@loongark/kit";
+  import type { QuestionnaireRenderNode } from "@shaloong/loongark-kit";
   let {
     node,
     renderers,

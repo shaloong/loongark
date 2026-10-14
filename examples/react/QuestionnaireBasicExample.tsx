@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LoongArkQuestionnaire } from "@loongark/react";
+import { LoongArkQuestionnaire } from "@shaloong/loongark-react";
 export function QuestionnaireBasicExample() {
   const [completed, setCompleted] = useState(false);
   return (

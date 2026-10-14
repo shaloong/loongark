@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkNativeSelect } from "@loongark/solid";
+import { LoongArkNativeSelect } from "@shaloong/loongark-solid";
 export function NativeSelectBasicExample() {
   return (
     <LoongArkNativeSelect name="plan" aria-label="方案">

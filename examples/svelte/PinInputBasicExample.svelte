@@ -5,7 +5,7 @@
     LoongArkPinInputControl,
     LoongArkPinInputInput,
     LoongArkPinInputHiddenInput,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkPinInputRoot>

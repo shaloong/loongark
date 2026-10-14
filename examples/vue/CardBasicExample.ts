@@ -5,7 +5,7 @@ import {
   LoongArkCardTitle,
   LoongArkCardDescription,
   LoongArkCardContent,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const CardBasicExample = defineComponent({
   setup() {
     return () => {

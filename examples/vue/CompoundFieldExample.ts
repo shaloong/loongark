@@ -1,5 +1,5 @@
 import { defineComponent, h, ref, useId } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import {
   createCompoundFieldDemo,
   compoundFieldControls,

@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkTimePicker } from "@loongark/solid";
+import { LoongArkTimePicker } from "@shaloong/loongark-solid";
 export function TimePickerBasicExample() {
   return (
     <LoongArkTimePicker

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkNativeSelect } from "@loongark/svelte";
+  import { LoongArkNativeSelect } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkNativeSelect name="plan" aria-label="方案">

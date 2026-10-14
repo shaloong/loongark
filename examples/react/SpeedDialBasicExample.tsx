@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkSpeedDial } from "@loongark/react";
+import { LoongArkSpeedDial } from "@shaloong/loongark-react";
 export function SpeedDialBasicExample() {
   return (
     <LoongArkSpeedDial

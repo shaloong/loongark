@@ -5,7 +5,7 @@ import {
   LoongArkRatingGroupControl,
   LoongArkRatingGroupItem,
   LoongArkRatingGroupHiddenInput,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const RatingGroupBasicExample = defineComponent({
   setup() {
     return () => {

@@ -1,15 +1,15 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticDialogStyles } from "@loongark/primitives/automatic-styles/dialog";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticDialogStyles } from "@shaloong/loongark-primitives/automatic-styles/dialog";
 import { createComponent } from "solid-js";
-import { controlIcons } from "@loongark/kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import { dataProps } from "../data-props";
 import type { JSX } from "solid-js";
 import { LoongArkPortal } from "./portal";
 import { Dialog as ArkDialog } from "@ark-ui/solid/dialog";
 import { ark } from "@ark-ui/solid";
-import type { DialogPrimitiveProps } from "@loongark/primitives";
+import type { DialogPrimitiveProps } from "@shaloong/loongark-primitives";
 import type { Component } from "solid-js";
 import { mergeProps, splitProps } from "solid-js";
 import { boolAttr } from "../utils";

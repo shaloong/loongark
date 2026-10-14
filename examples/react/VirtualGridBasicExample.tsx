@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkVirtualGrid } from "@loongark/react";
+import { LoongArkVirtualGrid } from "@shaloong/loongark-react";
 export function VirtualGridBasicExample() {
   return (
     <LoongArkVirtualGrid

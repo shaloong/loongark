@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { documentItems, documentSections } from "../shared/arkNextDemo";
 export function TocExample() {
   const scroll = useRef<HTMLElement>(null),

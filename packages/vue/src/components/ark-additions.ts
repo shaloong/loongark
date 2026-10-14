@@ -1,7 +1,7 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticImageCropperStyles } from "@loongark/primitives/automatic-styles/image-cropper";
-import { styles as lkAutomaticJsonTreeViewStyles } from "@loongark/primitives/automatic-styles/json-tree-view";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticImageCropperStyles } from "@shaloong/loongark-primitives/automatic-styles/image-cropper";
+import { styles as lkAutomaticJsonTreeViewStyles } from "@shaloong/loongark-primitives/automatic-styles/json-tree-view";
 // 保留 Ark 原生类型、状态机与生命周期；外观统一由 Primitives 提供。
 import { ImageCropper } from "@ark-ui/vue/image-cropper";
 export const LoongArkImageCropper: typeof ImageCropper = /*#__PURE__*/ withAutomaticStyles(ImageCropper, lkAutomaticImageCropperStyles);

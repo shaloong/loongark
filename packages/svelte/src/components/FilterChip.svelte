@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticFilterChipStyles } from "@loongark/primitives/automatic-styles/filter-chip";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticFilterChipStyles } from "@shaloong/loongark-primitives/automatic-styles/filter-chip";
   registerAutomaticStyles(lkAutomaticFilterChipStyles);
 
   export let active: boolean = false;

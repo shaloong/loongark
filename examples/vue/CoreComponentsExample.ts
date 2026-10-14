@@ -8,7 +8,7 @@ import {
   resolveDynamicComponent,
   ref,
 } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 export const CoreComponentsExample = defineComponent({
   setup() {
     const family = ref("NativeSelect");

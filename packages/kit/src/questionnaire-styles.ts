@@ -1,1 +1,1 @@
-export * from "@loongark/primitives/shared-styles/questionnaire-styles";
+export * from "@shaloong/loongark-primitives/shared-styles/questionnaire-styles";

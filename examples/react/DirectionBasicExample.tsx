@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkDirection, LoongArkNativeSelect } from "@loongark/react";
+import { LoongArkDirection, LoongArkNativeSelect } from "@shaloong/loongark-react";
 export function DirectionBasicExample() {
   return (
     <LoongArkDirection dir="rtl">

@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticScrollAreaStyles } from "@loongark/primitives/automatic-styles/scroll-area";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticScrollAreaStyles } from "@shaloong/loongark-primitives/automatic-styles/scroll-area";
 /**
  * Scroll Area component - Solid wrapper.
  * Uses Ark UI Scroll Area with data attributes for styling.
@@ -15,7 +15,7 @@ import {
   type ScrollAreaThumbProps as ArkScrollAreaThumbProps,
   type ScrollAreaCornerProps as ArkScrollAreaCornerProps,
 } from "@ark-ui/solid/scroll-area";
-import type { ScrollAreaSize } from "@loongark/primitives";
+import type { ScrollAreaSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkScrollAreaRootProps extends Omit<
   ArkScrollAreaRootProps,

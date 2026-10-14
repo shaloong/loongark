@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticColorPickerStyles } from "@loongark/primitives/automatic-styles/color-picker";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticColorPickerStyles } from "@shaloong/loongark-primitives/automatic-styles/color-picker";
 
 
 /**
@@ -11,7 +11,7 @@ import React, { forwardRef, createElement } from "react";
 import type { ComponentPropsWithoutRef, FC, ReactNode } from "react";
 import { ColorPicker } from "@ark-ui/react/color-picker";
 import { Portal as ArkPortal } from "./portal";
-import type { ColorPickerSize } from "@loongark/primitives";
+import type { ColorPickerSize } from "@shaloong/loongark-primitives";
 
 type ArkColorPickerRootProps = ComponentPropsWithoutRef<
   typeof ColorPicker.Root

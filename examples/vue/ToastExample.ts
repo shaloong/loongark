@@ -8,7 +8,7 @@ import {
   LoongArkToastActionTrigger,
   LoongArkToastCloseTrigger,
   createToaster,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 
 type ToastVariant = "info" | "success" | "warning" | "error";
 

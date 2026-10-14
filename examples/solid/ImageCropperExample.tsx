@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { cropSource } from "../shared/arkAdditionsDemo";
 export function ImageCropperExample() {
   const cropper = L.useImageCropper(() => ({ aspectRatio: 1, maxZoom: 3 }));

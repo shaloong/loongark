@@ -11,7 +11,7 @@ import {
   LoongArkComboboxList,
   LoongArkComboboxItem,
   LoongArkComboboxItemText,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function ComboboxBasicExample() {
   const [query, setQuery] = useState("");
   const options = [

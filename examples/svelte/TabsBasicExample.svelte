@@ -4,7 +4,7 @@
     LoongArkTabsList,
     LoongArkTabsTrigger,
     LoongArkTabsContent,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkTabsRoot defaultValue="overview">

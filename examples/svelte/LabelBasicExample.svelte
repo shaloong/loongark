@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkLabel } from "@loongark/svelte";
+  import { LoongArkLabel } from "@shaloong/loongark-svelte";
 </script>
 
 <div>

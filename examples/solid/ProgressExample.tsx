@@ -10,8 +10,8 @@ import {
   LoongArkProgressCircle,
   LoongArkProgressCircleTrack,
   LoongArkProgressCircleRange,
-} from "@loongark/solid";
-import type { ProgressOrientation, ProgressSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { ProgressOrientation, ProgressSize } from "@shaloong/loongark-primitives";
 
 export interface ProgressExampleProps {
   size?: ProgressSize;

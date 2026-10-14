@@ -15,8 +15,8 @@ import {
   LoongArkFileUploadItemSizeText,
   LoongArkFileUploadItemDeleteTrigger,
   LoongArkFileUploadClearTrigger,
-} from "@loongark/solid";
-import type { FileUploadSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { FileUploadSize } from "@shaloong/loongark-primitives";
 
 export interface FileUploadExampleProps {
   size?: FileUploadSize;

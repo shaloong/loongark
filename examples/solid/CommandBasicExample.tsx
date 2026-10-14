@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal, createMemo } from "solid-js";
-import { createCommandCollection, LoongArkCommand } from "@loongark/solid";
+import { createCommandCollection, LoongArkCommand } from "@shaloong/loongark-solid";
 export function CommandBasicExample() {
   const [query, setQuery] = createSignal("");
   const options = [

@@ -1,5 +1,5 @@
 import { defineComponent, h, ref, watch, type PropType } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import {
   drawerDirections,
   drawerDirectionsCSS,

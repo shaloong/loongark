@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticDataTableStyles } from "@loongark/primitives/automatic-styles/data-table";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticDataTableStyles } from "@shaloong/loongark-primitives/automatic-styles/data-table";
   registerAutomaticStyles(lkAutomaticDataTableStyles);
 
-  import { controlIcons } from "@loongark/kit";
+  import { controlIcons } from "@shaloong/loongark-kit";
   import Icon from "./Icon.svelte";
   import { afterUpdate, tick, onMount, onDestroy } from "svelte";
   import {
@@ -59,7 +59,7 @@
     type DataSort,
     type DataRow,
     type DataColumn,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export let data: readonly DataRow[];
   export let columns: readonly DataColumn[];
   export let pageSize = 10;

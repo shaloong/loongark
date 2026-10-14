@@ -1,6 +1,6 @@
 // 本文件由 scripts/generate-core-examples.mjs 生成，并参与真实四端编译与浏览器验收。
 import React, { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 export function CoreComponentsExample() {
   const [family, setFamily] = useState("NativeSelect");
   return (

@@ -9,8 +9,8 @@ import {
   LoongArkCarouselNextTrigger,
   LoongArkCarouselIndicatorGroup,
   LoongArkCarouselIndicator,
-} from "@loongark/solid";
-import type { CarouselSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { CarouselSize } from "@shaloong/loongark-primitives";
 
 interface CarouselExampleProps {
   size?: CarouselSize;

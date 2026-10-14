@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticDatePickerStyles } from "@loongark/primitives/automatic-styles/date-picker";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticDatePickerStyles } from "@shaloong/loongark-primitives/automatic-styles/date-picker";
   registerAutomaticStyles(lkAutomaticDatePickerStyles);
 
   import { DatePicker } from "@ark-ui/svelte/date-picker";
   import type { DatePickerRootProps } from "@ark-ui/svelte/date-picker";
-  import type { DatePickerSize } from "@loongark/primitives";
+  import type { DatePickerSize } from "@shaloong/loongark-primitives";
   import { createDatePickerSizeContext } from "./datePickerContext";
 
   export let size: DatePickerSize = "md";

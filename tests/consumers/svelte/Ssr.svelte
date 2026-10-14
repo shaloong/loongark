@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { controlIcons } from "@loongark/kit";
-  import * as L from "@loongark/svelte";
+  import { controlIcons } from "@shaloong/loongark-kit";
+  import * as L from "@shaloong/loongark-svelte";
   import DrawerDirectionsExample from "../../../examples/svelte/DrawerDirectionsExample.svelte";
   const id = $props.id();
   const advancedSelect = L.useSelect(() => ({
@@ -43,7 +43,7 @@
     LoongArkTextarea,
     LoongArkChipRemoveTrigger,
     LoongArkBottomNavigationItem,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   const conditionalQuestions: readonly L.Question[] = [
     {
       id: "hiddenSSR",
@@ -466,7 +466,7 @@
 
 <LoongArkQuestionnaire label="SSR repeated survey" questions={[{id:"contactsSSR",label:"Contacts",type:"group",questions:[{id:"name",label:"Name",type:"text",validateAsync:()=>{throw Error("SSR must not validate");}},{id:"hidden",label:"Hidden",type:"text",when:()=>false}]}]} defaultValue={{contactsSSR:[{id:"stable",value:{name:"Group <safe>",hidden:"must-not-render-hidden"}}]}} onValueChange={()=>{throw Error("SSR must not emit");}} />
 
-{#snippet customWidget(context:import("@loongark/kit").QuestionnaireCustomContext)}<L.LoongArkButton id={context.controlId} aria-labelledby={context.labelId}>SSR custom &lt;safe&gt; {context.answer}</L.LoongArkButton>{/snippet}
+{#snippet customWidget(context:import("@shaloong/loongark-kit").QuestionnaireCustomContext)}<L.LoongArkButton id={context.controlId} aria-labelledby={context.labelId}>SSR custom &lt;safe&gt; {context.answer}</L.LoongArkButton>{/snippet}
 <LoongArkQuestionnaire label="SSR custom" questions={[{id:"score",label:"Score",type:"custom",customKind:"widget",validateAsync:()=>{throw Error("SSR must not validate custom");}}]} defaultValue={{score:"3"}} renderers={{widget:customWidget}} onValueChange={()=>{throw Error("SSR must not emit custom");}}/>
 <LoongArkQuestionnaire label="SSR nested custom" questions={[{id:"customPeople",label:"People",type:"group",questions:[{id:"score",label:"Score",type:"custom",customKind:"widget"},{id:"ordinary",label:"Ordinary",type:"text"},{id:"hiddenCustom",label:"Hidden",type:"custom",customKind:"missing",when:()=>false}]}]} defaultValue={{customPeople:[{id:"stable",value:{score:"4",ordinary:"SSR ordinary <safe>",hiddenCustom:"hidden-custom-answer"}}]}} renderers={{widget:customWidget}} onValueChange={()=>{throw Error("SSR must not emit custom");}}/>
 

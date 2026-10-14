@@ -5,7 +5,7 @@
     LoongArkCardTitle,
     LoongArkCardDescription,
     LoongArkCardContent,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkCard>

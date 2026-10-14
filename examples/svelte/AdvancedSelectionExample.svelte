@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { controlIcons } from "@loongark/kit";
-  import { LoongArkIcon } from "@loongark/svelte";
+  import { controlIcons } from "@shaloong/loongark-kit";
+  import { LoongArkIcon } from "@shaloong/loongark-svelte";
 
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   const id = $props.id();
   const choices = [
       { label: "React", value: "react" },

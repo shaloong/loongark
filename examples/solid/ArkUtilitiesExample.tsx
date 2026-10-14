@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 export function ArkUtilitiesExample() {
   const [present, setPresent] = createSignal(true),
     [trapped, setTrapped] = createSignal(false),

@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkBubble } from "@loongark/vue";
+import { LoongArkBubble } from "@shaloong/loongark-vue";
 export const BubbleBasicExample = defineComponent({
   setup() {
     return () => {

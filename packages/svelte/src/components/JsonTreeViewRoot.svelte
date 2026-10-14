@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticJsonTreeViewStyles } from "@loongark/primitives/automatic-styles/json-tree-view";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticJsonTreeViewStyles } from "@shaloong/loongark-primitives/automatic-styles/json-tree-view";
   registerAutomaticStyles(lkAutomaticJsonTreeViewStyles);
 
   import {
@@ -8,7 +8,7 @@
     type JsonTreeViewRootProps,
   } from "@ark-ui/svelte/json-tree-view";
   import { useEnvironmentContext } from "@ark-ui/svelte/environment";
-  import { jsonRootAttributes } from "@loongark/kit";
+  import { jsonRootAttributes } from "@shaloong/loongark-kit";
   import { useJsonTreeView } from "./use-json-tree-view.svelte.js";
   let {
     children,

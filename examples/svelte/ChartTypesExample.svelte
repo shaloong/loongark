@@ -3,7 +3,7 @@
     LoongArkChart,
     LoongArkButton,
     LoongArkTypography,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   import {
     createChartTypesDemo,
     chartTypeModes,

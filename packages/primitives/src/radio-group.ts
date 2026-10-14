@@ -1,6 +1,6 @@
 import { createPrimitive, registerPrimitive, PrimitiveContract } from "./core";
-import type { LoongArkTheme } from "@loongark/theme";
-import { TokenTree } from "@loongark/tokens";
+import type { LoongArkTheme } from "@shaloong/loongark-theme";
+import { TokenTree } from "@shaloong/loongark-tokens";
 import { asTokenTree, toStringToken } from "./tokenUtils";
 
 // Radio Group 尺寸类型

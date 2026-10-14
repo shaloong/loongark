@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticSpeedDialStyles } from "@loongark/primitives/automatic-styles/speed-dial";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticSpeedDialStyles } from "@shaloong/loongark-primitives/automatic-styles/speed-dial";
   registerAutomaticStyles(lkAutomaticSpeedDialStyles);
 
-  import { controlIcons } from "@loongark/kit";
+  import { controlIcons } from "@shaloong/loongark-kit";
   import Icon from "./Icon.svelte";
   import { onMount, untrack } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
@@ -12,7 +12,7 @@
     speedDialActions,
     mountSpeedDial,
     type SpeedDialOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   let {
     label,
     actions,

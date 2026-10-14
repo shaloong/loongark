@@ -1,9 +1,9 @@
 /** @jsxImportSource solid-js */
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/solid";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-solid";
 
 import { createSignal } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 const choices = [
   { label: "React", value: "react" },
   { label: "Vue", value: "vue" },

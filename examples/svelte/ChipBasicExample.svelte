@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkChip, LoongArkChipLabel } from "@loongark/svelte";
+  import { LoongArkChip, LoongArkChipLabel } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkChip>

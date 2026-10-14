@@ -2,7 +2,7 @@ import { CompoundFieldExample } from "../examples/react/CompoundFieldExample";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { FieldSelectionExample } from "../examples/react/FieldSelectionExample";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 const meta = {
   title: "Components/Field",
   parameters: { layout: "fullscreen" },

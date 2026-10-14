@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkToggleRoot } from "@loongark/svelte";
+  import { LoongArkToggleRoot } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkToggleRoot aria-label="加粗">加粗</LoongArkToggleRoot>

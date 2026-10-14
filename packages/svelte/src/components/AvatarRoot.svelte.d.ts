@@ -1,6 +1,6 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Avatar } from "@ark-ui/svelte/avatar";
-import type { AvatarSize } from "@loongark/primitives";
+import type { AvatarSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkAvatarRoot extends SvelteComponent<
   Omit<ComponentProps<typeof Avatar.Root>, "children" | "size"> & {

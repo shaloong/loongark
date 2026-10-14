@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkTransferList } from "@loongark/solid";
+import { LoongArkTransferList } from "@shaloong/loongark-solid";
 export function TransferListBasicExample() {
   return (
     <LoongArkTransferList

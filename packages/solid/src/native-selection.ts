@@ -1,5 +1,5 @@
 import { onCleanup, onMount } from "solid-js";
-import { mountNativeSelection } from "@loongark/kit";
+import { mountNativeSelection } from "@shaloong/loongark-kit";
 export function nativeSelectionRef(
   read: Parameters<typeof mountNativeSelection>[1],
   forwarded?: HTMLInputElement | ((input: HTMLInputElement) => void),

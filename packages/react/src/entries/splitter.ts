@@ -6,7 +6,7 @@ export { LoongArkSplitterResizeTriggerIndicator } from "../components/splitter";
 export { LoongArkSplitterRoot } from "../components/splitter";
 export type { LoongArkSplitterRootProps } from "../components/splitter";
 export { LoongArkSplitterRootProvider } from "../components/ark-advanced";
-export type { SplitterSize } from "@loongark/primitives";
+export type { SplitterSize } from "@shaloong/loongark-primitives";
 export { useSplitter } from "@ark-ui/react/splitter";
 export { useSplitterContext } from "@ark-ui/react/splitter";
 export type { UseSplitterProps } from "@ark-ui/react/splitter";

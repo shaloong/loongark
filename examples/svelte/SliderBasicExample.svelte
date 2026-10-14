@@ -7,7 +7,7 @@
     LoongArkSliderRange,
     LoongArkSliderThumb,
     LoongArkSliderValueText,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkSliderRoot defaultValue={[50]}>

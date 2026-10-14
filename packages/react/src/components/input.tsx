@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticInputStyles } from "@loongark/primitives/automatic-styles/input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticInputStyles } from "@shaloong/loongark-primitives/automatic-styles/input";
 
 
 import type {
@@ -12,9 +12,9 @@ import type {
 } from "react";
 import { dataProps } from "../data-props";
 import { Field, useFieldContext } from "@ark-ui/react/field";
-import { inputSuffixDisabled } from "@loongark/kit";
+import { inputSuffixDisabled } from "@shaloong/loongark-kit";
 import { ark } from "@ark-ui/react";
-import type { InputPrimitiveProps } from "@loongark/primitives";
+import type { InputPrimitiveProps } from "@shaloong/loongark-primitives";
 import { createElement, forwardRef } from "react";
 import type { ReactNode } from "react";
 

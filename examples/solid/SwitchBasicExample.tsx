@@ -6,7 +6,7 @@ import {
   LoongArkSwitchControl,
   LoongArkSwitchThumb,
   LoongArkSwitchHiddenInput,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function SwitchBasicExample() {
   return (
     <LoongArkSwitchRoot name="notifications">

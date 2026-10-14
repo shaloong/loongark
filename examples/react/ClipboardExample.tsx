@@ -7,8 +7,8 @@ import {
   LoongArkClipboardTrigger,
   LoongArkClipboardIndicator,
   LoongArkClipboardValueText,
-} from "@loongark/react";
-import type { ClipboardSize } from "@loongark/primitives";
+} from "@shaloong/loongark-react";
+import type { ClipboardSize } from "@shaloong/loongark-primitives";
 
 interface ClipboardExampleProps {
   size?: ClipboardSize;

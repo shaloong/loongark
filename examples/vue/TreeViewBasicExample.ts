@@ -13,7 +13,7 @@ import {
   LoongArkTreeViewNodeProvider,
   LoongArkTreeViewItem,
   LoongArkTreeViewItemText,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import type { TreeViewRootProps } from "@ark-ui/vue/tree-view";
 import type { TreeViewNodeProviderProps } from "@ark-ui/vue/tree-view";
 export const TreeViewBasicExample = defineComponent({

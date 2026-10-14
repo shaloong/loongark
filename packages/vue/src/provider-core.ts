@@ -13,11 +13,11 @@ import {
   createLoongArkTheme,
   type LoongArkTheme,
   type CreateThemeOptions,
-} from "@loongark/theme";
+} from "@shaloong/loongark-theme";
 import {
   bootstrapPrimitiveBase,
   type StyleBootstrap,
-} from "@loongark/primitives/styles";
+} from "@shaloong/loongark-primitives/styles";
 export const themeKey = "loongark-theme-scope";
 export interface LoongArkProviderCoreProps extends CreateThemeOptions {
   styleBootstrap?: StyleBootstrap;

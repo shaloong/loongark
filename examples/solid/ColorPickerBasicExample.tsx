@@ -13,7 +13,7 @@ import {
   LoongArkColorPickerAreaBackground,
   LoongArkColorPickerAreaThumb,
   LoongArkColorPickerChannelInput,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function ColorPickerBasicExample() {
   return (
     <LoongArkColorPickerRoot defaultValue={parseColor("#006EFF")}>

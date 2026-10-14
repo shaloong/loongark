@@ -1,7 +1,7 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticComboboxStyles } from "@loongark/primitives/automatic-styles/combobox";
-import { controlIcons } from "@loongark/kit";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticComboboxStyles } from "@shaloong/loongark-primitives/automatic-styles/combobox";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 /**
  * Combobox component - Solid wrapper.
@@ -31,7 +31,7 @@ import {
   type ComboboxItemTextProps as ArkComboboxItemTextProps,
   type ComboboxItemIndicatorProps as ArkComboboxItemIndicatorProps,
 } from "@ark-ui/solid/combobox";
-import type { ComboboxSize } from "@loongark/primitives";
+import type { ComboboxSize } from "@shaloong/loongark-primitives";
 
 const ComboboxContext = createContext<{ size: ComboboxSize }>({ size: "md" });
 

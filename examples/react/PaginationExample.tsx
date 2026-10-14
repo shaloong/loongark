@@ -7,7 +7,7 @@ import {
   LoongArkPaginationPrevTrigger,
   LoongArkPaginationNextTrigger,
   LoongArkPaginationEllipsis,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 interface PaginationDemoProps {
   size?: "sm" | "md" | "lg";

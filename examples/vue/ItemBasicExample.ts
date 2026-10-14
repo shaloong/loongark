@@ -6,7 +6,7 @@ import {
   LoongArkItemDescription,
   LoongArkItemActions,
   LoongArkButton,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const ItemBasicExample = defineComponent({
   setup() {
     return () => {

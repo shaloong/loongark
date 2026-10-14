@@ -1,5 +1,5 @@
 /** @jsxImportSource solid-js */
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 function DrawerPanel() {
   const drawer = L.useDrawer({
     snapPoints: ["220px", "440px"],

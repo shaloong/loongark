@@ -6,7 +6,7 @@ import {
   LoongArkMenuPositioner,
   LoongArkMenuContent,
   LoongArkMenuItem,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function MenuBasicExample() {
   return (
     <LoongArkMenuRoot>

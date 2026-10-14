@@ -1,13 +1,13 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticAlertDialogStyles } from "@loongark/primitives/automatic-styles/alert-dialog";
-import { styles as lkAutomaticCalendarStyles } from "@loongark/primitives/automatic-styles/calendar";
-import { styles as lkAutomaticCommandStyles } from "@loongark/primitives/automatic-styles/command";
-import { styles as lkAutomaticContextMenuStyles } from "@loongark/primitives/automatic-styles/context-menu";
-import { styles as lkAutomaticMenubarStyles } from "@loongark/primitives/automatic-styles/menubar";
-import { styles as lkAutomaticNavigationMenuStyles } from "@loongark/primitives/automatic-styles/navigation-menu";
-import { styles as lkAutomaticSheetStyles } from "@loongark/primitives/automatic-styles/sheet";
-import { styles as lkAutomaticSidebarStyles } from "@loongark/primitives/automatic-styles/sidebar";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticAlertDialogStyles } from "@shaloong/loongark-primitives/automatic-styles/alert-dialog";
+import { styles as lkAutomaticCalendarStyles } from "@shaloong/loongark-primitives/automatic-styles/calendar";
+import { styles as lkAutomaticCommandStyles } from "@shaloong/loongark-primitives/automatic-styles/command";
+import { styles as lkAutomaticContextMenuStyles } from "@shaloong/loongark-primitives/automatic-styles/context-menu";
+import { styles as lkAutomaticMenubarStyles } from "@shaloong/loongark-primitives/automatic-styles/menubar";
+import { styles as lkAutomaticNavigationMenuStyles } from "@shaloong/loongark-primitives/automatic-styles/navigation-menu";
+import { styles as lkAutomaticSheetStyles } from "@shaloong/loongark-primitives/automatic-styles/sheet";
+import { styles as lkAutomaticSidebarStyles } from "@shaloong/loongark-primitives/automatic-styles/sidebar";
 import { createMenuContextTrigger } from "./menu";
 import { DialogAction, DialogCancel } from "./dialog-actions";
 import { Dialog } from "@ark-ui/vue/dialog";

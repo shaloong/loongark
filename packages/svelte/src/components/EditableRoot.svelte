@@ -1,11 +1,11 @@
 ﻿<script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticEditableStyles } from "@loongark/primitives/automatic-styles/editable";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticEditableStyles } from "@shaloong/loongark-primitives/automatic-styles/editable";
   registerAutomaticStyles(lkAutomaticEditableStyles);
 
   import { Editable } from "@ark-ui/svelte/editable";
   import type { EditableRootProps } from "@ark-ui/svelte/editable";
-  import type { EditableSize, EditableState } from "@loongark/primitives";
+  import type { EditableSize, EditableState } from "@shaloong/loongark-primitives";
 
   export let size: EditableSize = "md";
   export let state: EditableState = "default";

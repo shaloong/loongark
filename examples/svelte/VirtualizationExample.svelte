@@ -6,7 +6,7 @@
     LoongArkBubble,
     LoongArkButton,
     LoongArkTypography,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   import { createVirtualizationDemo } from "../shared/virtualizationDemo";
   let { mode = "both" }: { mode?: "table" | "messages" | "both" } = $props();
   let version = $state(0);

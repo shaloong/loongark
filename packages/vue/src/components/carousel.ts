@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticCarouselStyles } from "@loongark/primitives/automatic-styles/carousel";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticCarouselStyles } from "@shaloong/loongark-primitives/automatic-styles/carousel";
 import { renderPart } from "../render-part";
 /**
  * Carousel component - Vue wrapper.
@@ -8,7 +8,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, type PropType } from "vue";
 import { Carousel as ArkCarousel } from "@ark-ui/vue/carousel";
-import type { CarouselSize } from "@loongark/primitives";
+import type { CarouselSize } from "@shaloong/loongark-primitives";
 
 export const LoongArkCarouselRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkCarouselRoot",

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkAspectRatio, LoongArkPaper } from "@loongark/svelte";
+  import { LoongArkAspectRatio, LoongArkPaper } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkAspectRatio ratio={16 / 9}>

@@ -12,8 +12,8 @@ import {
   LoongArkStepsCompletedContent,
   LoongArkStepsNextTrigger,
   LoongArkStepsPrevTrigger,
-} from "@loongark/solid";
-import type { StepsOrientation, StepsSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { StepsOrientation, StepsSize } from "@shaloong/loongark-primitives";
 
 export interface StepsExampleProps {
   size?: StepsSize;

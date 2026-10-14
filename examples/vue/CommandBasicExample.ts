@@ -6,7 +6,7 @@ import {
   ref,
   type VNodeProps,
 } from "vue";
-import { createCommandCollection, LoongArkCommand } from "@loongark/vue";
+import { createCommandCollection, LoongArkCommand } from "@shaloong/loongark-vue";
 import type { ComboboxInputProps } from "@ark-ui/vue/combobox";
 export const CommandBasicExample = defineComponent({
   setup() {

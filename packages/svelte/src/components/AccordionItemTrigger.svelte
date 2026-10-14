@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticAccordionStyles } from "@loongark/primitives/automatic-styles/accordion";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticAccordionStyles } from "@shaloong/loongark-primitives/automatic-styles/accordion";
   registerAutomaticStyles(lkAutomaticAccordionStyles);
 
   import { Accordion } from "@ark-ui/svelte/accordion";

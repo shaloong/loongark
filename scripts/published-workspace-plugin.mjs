@@ -14,7 +14,7 @@ export async function publishedWorkspacePlugin(condition='browser'){
   return {id,moduleSideEffects};
  };
  return {name:'actual-published-workspace',async resolveId(id,importer){
-  const match=/^@loongark\/([^/]+)(\/.+)?$/.exec(id);
+  const match=/^@shaloong\/loongark-([^/]+)(\/.+)?$/.exec(id);
   if(match){
    const pkg=packages.find(p=>p.name===match[1]);if(!pkg)return;
    const entry=pkg.manifest.exports[match[2]?'.'+match[2]:'.'];

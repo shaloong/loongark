@@ -2,7 +2,7 @@ import {
   createDataTableView,
   type DataRow,
   type DataTableState,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export const remoteColumns = [
   { key: "name", label: "Project" },
   { key: "owner", label: "Owner", sortable: false },

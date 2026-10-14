@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTreeViewStyles } from "@loongark/primitives/automatic-styles/tree-view";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTreeViewStyles } from "@shaloong/loongark-primitives/automatic-styles/tree-view";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticTreeViewStyles } from "@loongark/primitives/automa
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { TreeView } from "@ark-ui/react/tree-view";
-import type { TreeViewSize } from "@loongark/primitives";
+import type { TreeViewSize } from "@shaloong/loongark-primitives";
 
 type ArkTreeViewRootProps<T = object> =
   import("@ark-ui/react/tree-view").TreeViewRootProps<T>;

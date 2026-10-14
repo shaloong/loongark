@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticToggleStyles } from "@loongark/primitives/automatic-styles/toggle";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticToggleStyles } from "@shaloong/loongark-primitives/automatic-styles/toggle";
 /**
  * Toggle component - Solid wrapper.
  * Based on Ark UI Toggle.
@@ -11,7 +11,7 @@ import {
   type ToggleRootProps as ArkToggleRootProps,
   type ToggleIndicatorProps as ArkToggleIndicatorProps,
 } from "@ark-ui/solid/toggle";
-import type { ToggleSize } from "@loongark/primitives";
+import type { ToggleSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkToggleRootProps extends Omit<
   ArkToggleRootProps,

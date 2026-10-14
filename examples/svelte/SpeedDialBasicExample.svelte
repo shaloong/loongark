@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkSpeedDial } from "@loongark/svelte";
+  import { LoongArkSpeedDial } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkSpeedDial

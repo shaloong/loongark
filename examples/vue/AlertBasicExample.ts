@@ -3,7 +3,7 @@ import {
   LoongArkAlert,
   LoongArkAlertTitle,
   LoongArkAlertDescription,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const AlertBasicExample = defineComponent({
   setup() {
     return () => {

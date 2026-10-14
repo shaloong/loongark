@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkBadge } from "@loongark/vue";
+import { LoongArkBadge } from "@shaloong/loongark-vue";
 export const BadgeBasicExample = defineComponent({
   setup() {
     return () => {

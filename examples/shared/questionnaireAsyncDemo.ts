@@ -1,4 +1,4 @@
-import type { Question, QuestionnaireValue } from "@loongark/kit";
+import type { Question, QuestionnaireValue } from "@shaloong/loongark-kit";
 /** 演示请求由调用方实现；组件不依赖服务地址或账户规则。 */
 export function createQuestionnaireAsyncDemo(
   notify: (aborted: number) => void,

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkMarquee, LoongArkBadge } from "@loongark/svelte";
+  import { LoongArkMarquee, LoongArkBadge } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkMarquee.Root>

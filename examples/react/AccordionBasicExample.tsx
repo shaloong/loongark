@@ -5,7 +5,7 @@ import {
   LoongArkAccordionItemTrigger,
   LoongArkAccordionItemIndicator,
   LoongArkAccordionItemContent,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function AccordionBasicExample() {
   return (
     <LoongArkAccordionRoot collapsible>

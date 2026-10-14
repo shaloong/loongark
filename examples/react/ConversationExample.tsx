@@ -1,6 +1,6 @@
 import { useState } from "react";
-import type { QuestionnaireValue } from "@loongark/kit";
-import * as L from "@loongark/react";
+import type { QuestionnaireValue } from "@shaloong/loongark-kit";
+import * as L from "@shaloong/loongark-react";
 import { feedbackQuestions } from "../shared/conversationDemo";
 export function ConversationExample() {
   const [failed, setFailed] = useState(true),

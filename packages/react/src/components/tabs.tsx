@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTabsStyles } from "@loongark/primitives/automatic-styles/tabs";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTabsStyles } from "@shaloong/loongark-primitives/automatic-styles/tabs";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticTabsStyles } from "@loongark/primitives/automatic-
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Tabs } from "@ark-ui/react/tabs";
-import type { TabsOrientation, TabsSize } from "@loongark/primitives";
+import type { TabsOrientation, TabsSize } from "@shaloong/loongark-primitives";
 
 type ArkTabsRootProps = ComponentPropsWithoutRef<typeof Tabs.Root>;
 type ArkTabsListProps = ComponentPropsWithoutRef<typeof Tabs.List>;

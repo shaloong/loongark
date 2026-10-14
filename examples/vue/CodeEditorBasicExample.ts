@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkCodeEditor } from "@loongark/vue";
+import { LoongArkCodeEditor } from "@shaloong/loongark-vue";
 export const CodeEditorBasicExample = defineComponent({
   setup() {
     return () => {

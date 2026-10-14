@@ -1,5 +1,5 @@
-import { LoongArkTheme } from "@loongark/theme";
-import { registry as primitiveRegistry } from "@loongark/primitives";
+import { LoongArkTheme } from "@shaloong/loongark-theme";
+import { registry as primitiveRegistry } from "@shaloong/loongark-primitives";
 import { filterBarKitComponent } from "./components/filterBar";
 import { layoutCSS } from "./layout";
 import { selectionInputsCSS } from "./selection-styles";

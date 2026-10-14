@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkGrid } from "@loongark/react";
+import { LoongArkGrid } from "@shaloong/loongark-react";
 export function GridBasicExample() {
   return (
     <LoongArkGrid columns={2} gap="md">

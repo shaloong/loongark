@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkHighlight } from "@loongark/vue";
+import { LoongArkHighlight } from "@shaloong/loongark-vue";
 export const HighlightBasicExample = defineComponent({
   setup() {
     return () => {

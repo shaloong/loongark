@@ -1,7 +1,7 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/vue";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-vue";
 import { defineComponent, h, ref, type Component } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 export const FoundationsExample = defineComponent({
   setup() {
     const notes = ref(""),

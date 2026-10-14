@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Carousel } from "@ark-ui/svelte/carousel";
 import type { CarouselRootProps } from "@ark-ui/svelte/carousel";
-import type { CarouselSize } from "@loongark/primitives";
+import type { CarouselSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkCarouselRoot extends SvelteComponent<
   Omit<

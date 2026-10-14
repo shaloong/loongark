@@ -6,7 +6,7 @@
     LoongArkMenuPositioner,
     LoongArkMenuContent,
     LoongArkMenuItem,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkMenubar>

@@ -4,7 +4,7 @@ import {
   groupsDisclosureCSS,
   groupsDisclosureIcon,
 } from "../shared/questionnaireGroupsDemo";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { createRichTextEditorDemo } from "../shared/editorDemo";
 export function RichTextEditorExample() {
   const [version, redraw] = createSignal(0);

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkTransferList } from "@loongark/svelte";
+  import { LoongArkTransferList } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkTransferList

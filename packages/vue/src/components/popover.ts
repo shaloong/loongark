@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticPopoverStyles } from "@loongark/primitives/automatic-styles/popover";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticPopoverStyles } from "@shaloong/loongark-primitives/automatic-styles/popover";
 import { renderPart } from "../render-part";
 /**
  * Popover 组件 - Vue 封装

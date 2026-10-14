@@ -4,7 +4,7 @@ import {
   LoongArkTooltipTrigger,
   LoongArkTooltipPositioner,
   LoongArkTooltipContent,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function TooltipBasicExample() {
   return (
     <LoongArkTooltipRoot>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkDialog } from "@loongark/svelte";
+  import { LoongArkDialog } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkDialog.Root>

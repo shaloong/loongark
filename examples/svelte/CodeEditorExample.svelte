@@ -3,7 +3,7 @@
     groupsDisclosureCSS,
     groupsDisclosureIcon,
   } from "../shared/questionnaireGroupsDemo";
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import { createCodeEditorDemo } from "../shared/editorDemo";
   let version = $state(0);
   const demo = createCodeEditorDemo(() => queueMicrotask(() => version++));

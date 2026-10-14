@@ -1,10 +1,10 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticButtonStyles } from "@loongark/primitives/automatic-styles/button";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticButtonStyles } from "@shaloong/loongark-primitives/automatic-styles/button";
 import { renderPart } from "../render-part";
 import { defineComponent, h } from "vue";
 import { ark } from "@ark-ui/vue";
-import type { ButtonPrimitiveProps } from "@loongark/primitives";
+import type { ButtonPrimitiveProps } from "@shaloong/loongark-primitives";
 import type { PropType } from "vue";
 
 export type ButtonVariant = NonNullable<ButtonPrimitiveProps["variant"]>;

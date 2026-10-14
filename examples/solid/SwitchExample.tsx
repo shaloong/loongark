@@ -6,7 +6,7 @@ import {
   LoongArkSwitchControl,
   LoongArkSwitchThumb,
   LoongArkSwitchLabel,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 
 export interface SwitchExampleProps {
   size?: "sm" | "md" | "lg";

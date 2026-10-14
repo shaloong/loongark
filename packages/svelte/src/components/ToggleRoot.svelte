@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticToggleStyles } from "@loongark/primitives/automatic-styles/toggle";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticToggleStyles } from "@shaloong/loongark-primitives/automatic-styles/toggle";
   registerAutomaticStyles(lkAutomaticToggleStyles);
 
   import { Toggle } from "@ark-ui/svelte/toggle";
   import type { ToggleRootProps } from "@ark-ui/svelte/toggle";
-  import type { ToggleSize } from "@loongark/primitives";
+  import type { ToggleSize } from "@shaloong/loongark-primitives";
 
   export let size: ToggleSize = "md";
   export let pressed: ToggleRootProps["pressed"] = undefined;

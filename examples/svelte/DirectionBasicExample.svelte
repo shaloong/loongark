@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkDirection, LoongArkNativeSelect } from "@loongark/svelte";
+  import { LoongArkDirection, LoongArkNativeSelect } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkDirection dir="rtl">

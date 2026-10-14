@@ -9,8 +9,8 @@ import {
   LoongArkProgressCircle,
   LoongArkProgressCircleTrack,
   LoongArkProgressCircleRange,
-} from "@loongark/react";
-import type { ProgressOrientation, ProgressSize } from "@loongark/primitives";
+} from "@shaloong/loongark-react";
+import type { ProgressOrientation, ProgressSize } from "@shaloong/loongark-primitives";
 
 interface ProgressExampleProps {
   size?: ProgressSize;

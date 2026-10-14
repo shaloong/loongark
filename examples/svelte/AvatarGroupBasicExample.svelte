@@ -4,7 +4,7 @@
     LoongArkAvatarRoot,
     LoongArkAvatarFallback,
     LoongArkAvatarGroupOverflow,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkAvatarGroup aria-label="项目成员">

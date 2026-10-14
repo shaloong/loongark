@@ -11,7 +11,7 @@ import {
   LoongArkStepsCompletedContent,
   LoongArkStepsNextTrigger,
   LoongArkStepsPrevTrigger,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/Steps",

@@ -3,7 +3,7 @@ import type {
   DataRow,
   DataTableProps,
   DataTableCellRange,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 const columns: readonly DataColumn[] = [
   {
     key: "name",

@@ -1,5 +1,5 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/vue";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-vue";
 import { defineComponent, h, ref, type PropType } from "vue";
 import {
   LoongArkTagsInputRoot,
@@ -12,8 +12,8 @@ import {
   LoongArkTagsInputItemDeleteTrigger,
   LoongArkTagsInputClearTrigger,
   LoongArkTagsInputHiddenInput,
-} from "@loongark/vue";
-import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
 
 export const TagsInputExample = defineComponent({
   name: "TagsInputExample",

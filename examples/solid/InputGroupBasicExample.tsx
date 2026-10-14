@@ -6,7 +6,7 @@ import {
   LoongArkInputGroup,
   LoongArkInputPrefix,
   LoongArkInputControl,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function InputGroupBasicExample() {
   return (
     <LoongArkInputRoot>

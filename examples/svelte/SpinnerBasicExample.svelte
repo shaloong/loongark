@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkStack, LoongArkSpinner } from "@loongark/svelte";
+  import { LoongArkStack, LoongArkSpinner } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkStack orientation="horizontal">

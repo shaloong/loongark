@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTocStyles } from "@loongark/primitives/automatic-styles/toc";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTocStyles } from "@shaloong/loongark-primitives/automatic-styles/toc";
 
 
 import { createElement, forwardRef } from "react";
@@ -11,7 +11,7 @@ import {
   type TocNavProps,
   type TocRootProviderProps,
 } from "@ark-ui/react/toc";
-import { tocNavId } from "@loongark/kit";
+import { tocNavId } from "@shaloong/loongark-kit";
 import { mergeProps } from "@zag-js/react";
 import { useToc } from "./use-toc";
 export const LoongArkTocRootProvider = /*#__PURE__*/ withAutomaticStyles(forwardRef<

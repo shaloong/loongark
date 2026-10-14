@@ -7,7 +7,7 @@
     LoongArkPopoverTitle,
     LoongArkPopoverDescription,
     LoongArkPopoverCloseTrigger,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkPopoverRoot>

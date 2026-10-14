@@ -1,5 +1,5 @@
-import { LoongArkTheme } from "@loongark/theme";
-import type { TokenPath } from "@loongark/tokens";
+import { LoongArkTheme } from "@shaloong/loongark-theme";
+import type { TokenPath } from "@shaloong/loongark-tokens";
 
 export interface PrimitiveContract<TProps> {
   name: string;

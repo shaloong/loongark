@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkDataTable } from "@loongark/vue";
+import { LoongArkDataTable } from "@shaloong/loongark-vue";
 export const DataTableBasicExample = defineComponent({
   setup() {
     return () => {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkAvatarRoot, LoongArkAvatarFallback } from "@loongark/svelte";
+  import { LoongArkAvatarRoot, LoongArkAvatarFallback } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkAvatarRoot>

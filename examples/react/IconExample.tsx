@@ -1,6 +1,6 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
-import { controlIcons } from "@loongark/kit";
+import * as L from "@shaloong/loongark-react";
+import { controlIcons } from "@shaloong/loongark-kit";
 const row = {
   display: "flex",
   alignItems: "center",

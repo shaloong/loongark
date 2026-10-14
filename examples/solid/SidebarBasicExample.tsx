@@ -7,7 +7,7 @@ import {
   LoongArkSidebarMenu,
   LoongArkSidebarMenuItem,
   LoongArkSidebarMenuButton,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function SidebarBasicExample() {
   return (
     <LoongArkSidebar>

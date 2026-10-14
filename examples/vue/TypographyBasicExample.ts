@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkTypography } from "@loongark/vue";
+import { LoongArkTypography } from "@shaloong/loongark-vue";
 export const TypographyBasicExample = defineComponent({
   setup() {
     return () => {

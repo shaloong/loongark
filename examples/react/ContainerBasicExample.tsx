@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkContainer } from "@loongark/react";
+import { LoongArkContainer } from "@shaloong/loongark-react";
 export function ContainerBasicExample() {
   return (
     <LoongArkContainer>

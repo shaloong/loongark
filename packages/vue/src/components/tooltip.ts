@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTooltipStyles } from "@loongark/primitives/automatic-styles/tooltip";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTooltipStyles } from "@shaloong/loongark-primitives/automatic-styles/tooltip";
 import { renderPart } from "../render-part";
 import { h, defineComponent } from "vue";
 import { Tooltip as ArkTooltip } from "@ark-ui/vue/tooltip";

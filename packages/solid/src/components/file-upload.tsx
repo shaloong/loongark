@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticFileUploadStyles } from "@loongark/primitives/automatic-styles/file-upload";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticFileUploadStyles } from "@shaloong/loongark-primitives/automatic-styles/file-upload";
 /**
  * File Upload component - Solid wrapper.
  * Uses Ark UI File Upload with data attributes for styling.
@@ -22,7 +22,7 @@ import {
   type FileUploadItemDeleteTriggerProps as ArkFileUploadItemDeleteTriggerProps,
   type FileUploadClearTriggerProps as ArkFileUploadClearTriggerProps,
 } from "@ark-ui/solid/file-upload";
-import type { FileUploadSize } from "@loongark/primitives";
+import type { FileUploadSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkFileUploadRootProps extends Omit<
   ArkFileUploadRootProps,

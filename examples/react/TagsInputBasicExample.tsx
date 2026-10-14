@@ -10,8 +10,8 @@ import {
   LoongArkIcon,
   LoongArkTagsInputInput,
   LoongArkTagsInputHiddenInput,
-} from "@loongark/react";
-import { controlIcons } from "@loongark/kit";
+} from "@shaloong/loongark-react";
+import { controlIcons } from "@shaloong/loongark-kit";
 export function TagsInputBasicExample() {
   const [tags, setTags] = useState(["React", "Vue"]);
   return (

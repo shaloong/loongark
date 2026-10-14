@@ -10,7 +10,7 @@ import {
   LoongArkSheetTitle,
   LoongArkSheetDescription,
   LoongArkSheetAction,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function SheetBasicExample() {
   return (
     <LoongArkSheetRoot>

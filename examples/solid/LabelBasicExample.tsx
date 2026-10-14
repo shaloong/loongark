@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkLabel } from "@loongark/solid";
+import { LoongArkLabel } from "@shaloong/loongark-solid";
 export function LabelBasicExample() {
   return (
     <div>

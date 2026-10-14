@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkStack, LoongArkSkeleton } from "@loongark/svelte";
+  import { LoongArkStack, LoongArkSkeleton } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkStack>

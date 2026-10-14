@@ -1,8 +1,8 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticDateInputStyles } from "@loongark/primitives/automatic-styles/date-input";
-import { styles as lkAutomaticSwapStyles } from "@loongark/primitives/automatic-styles/swap";
-import { styles as lkAutomaticTocStyles } from "@loongark/primitives/automatic-styles/toc";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticDateInputStyles } from "@shaloong/loongark-primitives/automatic-styles/date-input";
+import { styles as lkAutomaticSwapStyles } from "@shaloong/loongark-primitives/automatic-styles/swap";
+import { styles as lkAutomaticTocStyles } from "@shaloong/loongark-primitives/automatic-styles/toc";
 // 原生高级能力；共享外观由 Primitives 注册。
 import { DateInput } from "@ark-ui/vue/date-input";
 export const LoongArkDateInput: typeof DateInput = /*#__PURE__*/ withAutomaticStyles(DateInput, lkAutomaticDateInputStyles);

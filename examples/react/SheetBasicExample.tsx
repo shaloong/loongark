@@ -9,7 +9,7 @@ import {
   LoongArkSheetTitle,
   LoongArkSheetDescription,
   LoongArkSheetAction,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function SheetBasicExample() {
   return (
     <LoongArkSheetRoot>

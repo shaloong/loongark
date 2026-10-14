@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkAngleSlider } from "@loongark/svelte";
+  import { LoongArkAngleSlider } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkAngleSlider.Root defaultValue={45}>

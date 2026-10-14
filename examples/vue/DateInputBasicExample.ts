@@ -1,6 +1,6 @@
 import { defineComponent, h, createVNode, resolveDynamicComponent } from "vue";
 import type { DateInputSegmentProps } from "@ark-ui/vue/date-input";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 export const DateInputBasicExample = defineComponent({
   setup() {
     return () =>

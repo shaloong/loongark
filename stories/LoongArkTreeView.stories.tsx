@@ -1,5 +1,5 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/react";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-react";
 import React from "react";
 import { TreeView, createTreeCollection } from "@ark-ui/react/tree-view";
 import type { Meta, StoryObj } from "@storybook/react";
@@ -20,7 +20,7 @@ import {
   LoongArkTreeViewNodeCheckbox,
   LoongArkTreeViewNodeCheckboxIndicator,
   LoongArkTreeViewNodeRenameInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/TreeView",

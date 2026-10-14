@@ -9,7 +9,7 @@
     LoongArkDialogTitle,
     LoongArkDialogDescription,
     LoongArkDialogCloseTrigger,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkAlertDialogRoot>

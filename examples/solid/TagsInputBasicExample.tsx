@@ -11,8 +11,8 @@ import {
   LoongArkIcon,
   LoongArkTagsInputInput,
   LoongArkTagsInputHiddenInput,
-} from "@loongark/solid";
-import { controlIcons } from "@loongark/kit";
+} from "@shaloong/loongark-solid";
+import { controlIcons } from "@shaloong/loongark-kit";
 export function TagsInputBasicExample() {
   const [tags, setTags] = createSignal(["React", "Vue"]);
   return (

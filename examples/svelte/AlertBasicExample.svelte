@@ -3,7 +3,7 @@
     LoongArkAlert,
     LoongArkAlertTitle,
     LoongArkAlertDescription,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkAlert>

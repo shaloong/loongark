@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkMasonry } from "@loongark/vue";
+import { LoongArkMasonry } from "@shaloong/loongark-vue";
 export const MasonryBasicExample = defineComponent({
   setup() {
     return () => {

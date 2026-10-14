@@ -93,7 +93,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       (framework === "react"
         ? `import React, {useState} from "react";`
         : `import {createSignal} from "solid-js";`) +
-      `\nimport * as L from "@loongark/${framework}";\nexport function CoreComponentsExample() {\n`;
+      `\nimport * as L from "@shaloong/loongark-${framework}";\nexport function CoreComponentsExample() {\n`;
     source +=
       framework === "react"
         ? `const [family,setFamily]=useState("NativeSelect");\n`
@@ -110,7 +110,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
   } else if (framework === "vue") {
     source =
       header +
-      `import type {AngleSliderHiddenInputProps} from "@ark-ui/vue/angle-slider";\nimport type {PinInputHiddenInputProps} from "@ark-ui/vue/pin-input";\nimport {defineComponent,h,createVNode,resolveDynamicComponent,ref} from "vue";\nimport * as L from "@loongark/vue";\nexport const CoreComponentsExample=defineComponent({setup(){const family=ref("NativeSelect");return ()=>h("section",{style:{display:"grid",gap:"var(--lk-space-component-lg)","max-width":"40rem","min-width":0,width:"100%"}},[h("label",{style:{display:"grid",gap:"var(--lk-control-fieldgap)"}},["组件示例",h(L.LoongArkNativeSelect,{"aria-label":"组件示例",value:family.value,onChange:(event:Event)=>{if(event.target instanceof HTMLSelectElement)family.value=event.target.value;}},${JSON.stringify(families)}.map(name=>h("option",{},name)))]),`;
+      `import type {AngleSliderHiddenInputProps} from "@ark-ui/vue/angle-slider";\nimport type {PinInputHiddenInputProps} from "@ark-ui/vue/pin-input";\nimport {defineComponent,h,createVNode,resolveDynamicComponent,ref} from "vue";\nimport * as L from "@shaloong/loongark-vue";\nexport const CoreComponentsExample=defineComponent({setup(){const family=ref("NativeSelect");return ()=>h("section",{style:{display:"grid",gap:"var(--lk-space-component-lg)","max-width":"40rem","min-width":0,width:"100%"}},[h("label",{style:{display:"grid",gap:"var(--lk-control-fieldgap)"}},["组件示例",h(L.LoongArkNativeSelect,{"aria-label":"组件示例",value:family.value,onChange:(event:Event)=>{if(event.target instanceof HTMLSelectElement)family.value=event.target.value;}},${JSON.stringify(families)}.map(name=>h("option",{},name)))]),`;
     source +=
       families
         .map((family) => {
@@ -127,7 +127,7 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
         })
         .join(",\n") + `]);}});\n`;
   } else {
-    source = `<script lang="ts">\n${header}import * as L from "@loongark/svelte";\nlet family=$state("NativeSelect");\nconst families=${JSON.stringify(families)};\n</script>\n<section style="display:grid;gap:var(--lk-space-component-lg);max-width:40rem;min-width:0;width:100%"><label style="display:grid;gap:var(--lk-control-fieldgap)">组件示例<L.LoongArkNativeSelect aria-label="组件示例" value={family} onchange={(event)=>family=event.currentTarget.value}>{#each families as name}<option>{name}</option>{/each}</L.LoongArkNativeSelect></label>\n`;
+    source = `<script lang="ts">\n${header}import * as L from "@shaloong/loongark-svelte";\nlet family=$state("NativeSelect");\nconst families=${JSON.stringify(families)};\n</script>\n<section style="display:grid;gap:var(--lk-space-component-lg);max-width:40rem;min-width:0;width:100%"><label style="display:grid;gap:var(--lk-control-fieldgap)">组件示例<L.LoongArkNativeSelect aria-label="组件示例" value={family} onchange={(event)=>family=event.currentTarget.value}>{#each families as name}<option>{name}</option>{/each}</L.LoongArkNativeSelect></label>\n`;
     source +=
       families
         .map(

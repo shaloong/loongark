@@ -4,7 +4,7 @@
     LoongArkSegmentGroupItem,
     LoongArkSegmentGroupItemHiddenInput,
     LoongArkSegmentGroupItemText,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkSegmentGroupRoot aria-label="视图" name="view" defaultValue="overview">

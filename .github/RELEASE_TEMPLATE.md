@@ -1,5 +1,3 @@
-<!-- 标题固定为 vX.Y.Z。使用中文，保留公共 API 原文。只保留本次实际涉及的栏目与条目；不把内部 CI 整改写成产品功能。 -->
-
 本版本的主要变化与适用场景。
 
 ## 重点更新
@@ -13,10 +11,10 @@
 ## 安装与兼容性
 
 ```sh
-pnpm add @loongark/react@X.Y.Z
+pnpm add @shaloong/loongark-react@X.Y.Z
 ```
 
-其他框架使用 `@loongark/vue`、`@loongark/solid` 或 `@loongark/svelte` 的同一版本。说明本次最低版本变化、破坏性变更及迁移方式；无破坏性变更时简要注明。
+其他框架使用 `@shaloong/loongark-vue`、`@shaloong/loongark-solid` 或 `@shaloong/loongark-svelte` 的同一版本。说明本次最低版本变化、破坏性变更及迁移方式；无破坏性变更时简要注明。
 
 ## 文档与完整变更
 

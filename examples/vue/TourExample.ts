@@ -1,6 +1,6 @@
 import { defineComponent, h, onBeforeUnmount } from "vue";
 import { createTourFocusDemo } from "../shared/tourFocusDemo";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 export const TourExample = defineComponent({
   setup() {
     const focus = createTourFocusDemo();

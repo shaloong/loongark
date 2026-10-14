@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   let agreement = $state<boolean | "indeterminate" | undefined>();
   let notifications = $state<boolean | undefined>();
   let density = $state<string | undefined>();

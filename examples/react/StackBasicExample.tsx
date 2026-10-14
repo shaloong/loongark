@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkStack } from "@loongark/react";
+import { LoongArkStack } from "@shaloong/loongark-react";
 export function StackBasicExample() {
   return (
     <LoongArkStack orientation="horizontal" gap="md">

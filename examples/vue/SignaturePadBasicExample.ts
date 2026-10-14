@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkSignaturePad } from "@loongark/vue";
+import { LoongArkSignaturePad } from "@shaloong/loongark-vue";
 export const SignaturePadBasicExample = defineComponent({
   setup() {
     return () => {

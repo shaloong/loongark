@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { RichTextEditorExample } from "../examples/react/RichTextEditorExample";
 import { initialCode, initialRich } from "../examples/shared/editorDemo";
 import { withArkExamplePage } from "./arkStory";

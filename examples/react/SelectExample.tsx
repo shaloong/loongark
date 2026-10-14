@@ -15,7 +15,7 @@ import {
   LoongArkSelectItemIndicator,
   LoongArkSelectHiddenSelect,
   type SelectSize,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 interface SelectExampleProps {
   size?: SelectSize;

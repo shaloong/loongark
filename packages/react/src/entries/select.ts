@@ -20,7 +20,7 @@ export { LoongArkSelectRootProvider } from "../components/ark-advanced";
 export { SelectTrigger as LoongArkSelectTrigger } from "../components/select";
 export { SelectValueText as LoongArkSelectValueText } from "../components/select";
 export type { SelectRootProps } from "../components/select";
-export type { SelectSize } from "@loongark/primitives";
+export type { SelectSize } from "@shaloong/loongark-primitives";
 export { useSelect } from "@ark-ui/react/select";
 export { useSelectContext } from "@ark-ui/react/select";
 export { useSelectItemContext } from "@ark-ui/react/select";

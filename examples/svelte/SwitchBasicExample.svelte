@@ -5,7 +5,7 @@
     LoongArkSwitchControl,
     LoongArkSwitchThumb,
     LoongArkSwitchHiddenInput,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkSwitchRoot name="notifications">

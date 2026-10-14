@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import { createStructureDemo } from "../shared/dataTableStructureDemo";
   let version = $state(0);
   const demo = createStructureDemo(() => version++);

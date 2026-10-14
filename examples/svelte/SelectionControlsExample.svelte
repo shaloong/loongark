@@ -5,8 +5,8 @@
   } from "../shared/questionnaireGroupsDemo";
   import type { Snippet } from "svelte";
   let { field = false }: { field?: boolean } = $props();
-  import { controlIcons } from "@loongark/kit";
-  import * as L from "@loongark/svelte";
+  import { controlIcons } from "@shaloong/loongark-kit";
+  import * as L from "@shaloong/loongark-svelte";
   import {
     createSelectionControlsDemo,
     selectionOptions,

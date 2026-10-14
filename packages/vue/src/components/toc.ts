@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTocStyles } from "@loongark/primitives/automatic-styles/toc";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTocStyles } from "@shaloong/loongark-primitives/automatic-styles/toc";
 import { defineComponent, computed } from "vue";
 import {
   Toc,
@@ -8,7 +8,7 @@ import {
   type TocRootProps,
   type TocNavProps,
 } from "@ark-ui/vue/toc";
-import { tocNavId, tocControlKeys } from "@loongark/kit";
+import { tocNavId, tocControlKeys } from "@shaloong/loongark-kit";
 import { useToc } from "./use-toc";
 import { renderPart } from "../render-part";
 export const LoongArkTocRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent<TocRootProps>({

@@ -3,7 +3,7 @@ import {
   LoongArkChart,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 import { createChartTypesDemo, chartTypeModes } from "../shared/chartTypesDemo";
 export const ChartTypesExample = () => {
   const [, redraw] = useState(0);

@@ -7,8 +7,8 @@ import {
   LoongArkListboxItem,
   LoongArkListboxItemText,
   LoongArkListboxItemIndicator,
-} from "@loongark/react";
-import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
+} from "@shaloong/loongark-react";
+import type { ListboxOrientation, ListboxSize } from "@shaloong/loongark-primitives";
 
 export interface ListboxExampleProps {
   size?: ListboxSize;

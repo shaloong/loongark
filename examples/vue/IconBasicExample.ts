@@ -1,6 +1,6 @@
 import { defineComponent, h } from "vue";
-import { LoongArkIcon } from "@loongark/vue";
-import { controlIcons } from "@loongark/kit";
+import { LoongArkIcon } from "@shaloong/loongark-vue";
+import { controlIcons } from "@shaloong/loongark-kit";
 export const IconBasicExample = defineComponent({
   setup() {
     return () => {

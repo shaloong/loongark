@@ -34,6 +34,11 @@ for (const packageName of (await readdir("packages")).sort()) {
   const manifest = JSON.parse(
     await readFile(`packages/${packageName}/package.json`, "utf8"),
   );
+  assert.equal(
+    manifest.name,
+    `@shaloong/loongark-${packageName}`,
+    `${packageName} 的发布包名必须使用 @shaloong/loongark-*`,
+  );
   assert.match(manifest.version, /^\d+\.\d+\.\d+(?:-[\w.-]+)?$/);
   execFileSync(
     "pnpm",
@@ -67,7 +72,7 @@ for (const packageName of (await readdir("packages")).sort()) {
       !version.startsWith("workspace:"),
       `${dependency} 未替换工作区版本`,
     );
-    if (dependency.startsWith("@loongark/"))
+    if (dependency.startsWith("@shaloong/loongark-"))
       assert.equal(
         version,
         manifest.version,

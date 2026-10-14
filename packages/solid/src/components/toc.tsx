@@ -1,13 +1,13 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTocStyles } from "@loongark/primitives/automatic-styles/toc";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTocStyles } from "@shaloong/loongark-primitives/automatic-styles/toc";
 import {
   Toc,
   useTocContext,
   type TocRootProps,
   type TocNavProps,
 } from "@ark-ui/solid/toc";
-import { tocNavId, tocControlKeys } from "@loongark/kit";
+import { tocNavId, tocControlKeys } from "@shaloong/loongark-kit";
 import { splitProps } from "solid-js";
 import { useToc } from "./use-toc";
 export const LoongArkTocRoot = /*#__PURE__*/ withAutomaticStyles((props: TocRootProps) => {

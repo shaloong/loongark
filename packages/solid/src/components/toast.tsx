@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticToastStyles } from "@loongark/primitives/automatic-styles/toast";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticToastStyles } from "@shaloong/loongark-primitives/automatic-styles/toast";
 /**
  * Toast component - Solid wrapper
  * Based on Ark UI Toast, injects data-scope/data-part.

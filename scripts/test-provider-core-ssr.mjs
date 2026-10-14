@@ -33,7 +33,7 @@ const folder = resolve(".artifacts/core-provider/ssr");
 await mkdir(folder, { recursive: true });
 await writeFile(
   resolve(folder, "App.svelte"),
-  `<script>import {LoongArkProviderCore as Provider} from '@loongark/svelte/provider-core';import {LoongArkButton as Button} from '@loongark/svelte/button';import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';import {buttonPrimitive} from '@loongark/primitives/button';const styleBootstrap=createPrimitiveStyleBootstrap([buttonPrimitive]);</script><Provider {styleBootstrap} targetId="core-ssr" mode="dark"><Button>Core SSR</Button></Provider>`,
+  `<script>import {LoongArkProviderCore as Provider} from '@shaloong/loongark-svelte/provider-core';import {LoongArkButton as Button} from '@shaloong/loongark-svelte/button';import {createPrimitiveStyleBootstrap} from '@shaloong/loongark-primitives/styles';import {buttonPrimitive} from '@shaloong/loongark-primitives/button';const styleBootstrap=createPrimitiveStyleBootstrap([buttonPrimitive]);</script><Provider {styleBootstrap} targetId="core-ssr" mode="dark"><Button>Core SSR</Button></Provider>`,
 );
 await build({
   configFile: false,
@@ -43,7 +43,7 @@ await build({
     {
       name: "core-ssr-entries",
       async resolveId(id) {
-        const m = /^@loongark\/(svelte|primitives|theme|tokens)(\/.+)?$/.exec(
+        const m = /^@shaloong\/loongark-(svelte|primitives|theme|tokens)(\/.+)?$/.exec(
           id,
         );
         if (!m) return null;

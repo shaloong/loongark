@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticHoverCardStyles } from "@loongark/primitives/automatic-styles/hover-card";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticHoverCardStyles } from "@shaloong/loongark-primitives/automatic-styles/hover-card";
 
 
 /**
@@ -11,7 +11,7 @@ import React, { forwardRef, createElement } from "react";
 import type { ComponentPropsWithoutRef, FC, ReactNode } from "react";
 import { HoverCard } from "@ark-ui/react/hover-card";
 import { Portal as ArkPortal } from "./portal";
-import type { HoverCardSize } from "@loongark/primitives";
+import type { HoverCardSize } from "@shaloong/loongark-primitives";
 
 type ArkHoverCardRootProps = ComponentPropsWithoutRef<typeof HoverCard.Root>;
 type ArkHoverCardTriggerProps = ComponentPropsWithoutRef<

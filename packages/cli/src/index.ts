@@ -2,12 +2,12 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve, join } from "node:path";
 import process from "node:process";
-import { buildTokenArtifacts } from "@loongark/tokens";
+import { buildTokenArtifacts } from "@shaloong/loongark-tokens";
 import {
   createLoongArkTheme,
   type CreateThemeOptions,
   type ThemeMode,
-} from "@loongark/theme";
+} from "@shaloong/loongark-theme";
 
 type Format = "css" | "json";
 

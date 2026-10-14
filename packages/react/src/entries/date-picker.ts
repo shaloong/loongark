@@ -1,5 +1,5 @@
 // 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
-export type { LocalizedDateOptions } from "@loongark/kit";
+export type { LocalizedDateOptions } from "@shaloong/loongark-kit";
 export { LoongArkDatePickerClearTrigger } from "../components/date-picker";
 export { LoongArkDatePickerContent } from "../components/date-picker";
 export { LoongArkDatePickerContext } from "../components/ark-advanced";
@@ -31,9 +31,9 @@ export { LoongArkDatePickerWeekNumberCell } from "../components/ark-advanced";
 export { LoongArkDatePickerWeekNumberHeaderCell } from "../components/ark-advanced";
 export { LoongArkDatePickerYearSelect } from "../components/date-picker";
 export { parseDate } from "@ark-ui/react/date-picker";
-export { parseDateTime } from "@loongark/kit";
-export { parseLocalizedDate } from "@loongark/kit";
-export { parseZonedDateTime } from "@loongark/kit";
+export { parseDateTime } from "@shaloong/loongark-kit";
+export { parseLocalizedDate } from "@shaloong/loongark-kit";
+export { parseZonedDateTime } from "@shaloong/loongark-kit";
 export { useDatePicker } from "@ark-ui/react/date-picker";
 export { useDatePickerContext } from "@ark-ui/react/date-picker";
 export type { UseDatePickerProps } from "@ark-ui/react/date-picker";

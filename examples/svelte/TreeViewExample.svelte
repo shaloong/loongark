@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { controlIcons } from "@loongark/kit";
-  import { LoongArkIcon } from "@loongark/svelte";
+  import { controlIcons } from "@shaloong/loongark-kit";
+  import { LoongArkIcon } from "@shaloong/loongark-svelte";
   import {
     LoongArkTreeViewRoot,
     LoongArkTreeViewLabel,
@@ -17,8 +17,8 @@
     LoongArkTreeViewBranchIndentGuide,
     LoongArkTreeViewNodeProvider,
     createTreeCollection,
-  } from "@loongark/svelte";
-  import type { TreeViewSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { TreeViewSize } from "@shaloong/loongark-primitives";
 
   export let size: TreeViewSize = "md";
   const nodes = [

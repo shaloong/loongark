@@ -6,7 +6,7 @@ import {
   LoongArkEmptyDescription,
   LoongArkEmptyContent,
   LoongArkButton,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function EmptyBasicExample() {
   return (
     <LoongArkEmpty>

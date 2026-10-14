@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticListStyles } from "@loongark/primitives/automatic-styles/list";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticListStyles } from "@shaloong/loongark-primitives/automatic-styles/list";
   registerAutomaticStyles(lkAutomaticListStyles);
 
   import {
     layoutAttributes,
     layoutStyles,
     type LayoutOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export let as = "a";
   export let variant: LayoutOptions["variant"] = "default";
   export let size: LayoutOptions["size"] = "md";

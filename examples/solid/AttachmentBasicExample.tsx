@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkAttachment } from "@loongark/solid";
+import { LoongArkAttachment } from "@shaloong/loongark-solid";
 export function AttachmentBasicExample() {
   return (
     <LoongArkAttachment

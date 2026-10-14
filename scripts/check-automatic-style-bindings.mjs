@@ -19,7 +19,7 @@ async function moduleInfo(file){
   if(ts.isImportDeclaration(node)&&ts.isStringLiteral(node.moduleSpecifier)&&node.importClause?.namedBindings&&ts.isNamedImports(node.importClause.namedBindings)){
    for(const binding of node.importClause.namedBindings.elements){
     data.imports.set(binding.name.text,{module:node.moduleSpecifier.text,name:(binding.propertyName??binding.name).text});
-    const scope=node.moduleSpecifier.text.split('@loongark/primitives/automatic-styles/')[1];
+    const scope=node.moduleSpecifier.text.split('@shaloong/loongark-primitives/automatic-styles/')[1];
     if(scope)data.styles.set(binding.name.text,scope);
    }
   }
@@ -58,7 +58,7 @@ async function validate(file,name,scope){
  if(/[\\/]components[\\/]Portal\.svelte$/.test(file)){checked.add(key);return;}
  if(file.endsWith('.svelte')){
   const source=await readFile(file,'utf8');
-  const match=[...source.matchAll(/import \{ styles as (\w+) \} from "@loongark\/primitives\/automatic-styles\/([^";]+)";/g)].find(m=>compatible(scope,m[2]));
+  const match=[...source.matchAll(/import \{ styles as (\w+) \} from "@shaloong\/loongark-primitives\/automatic-styles\/([^";]+)";/g)].find(m=>compatible(scope,m[2]));
   if(!match||!source.includes(`registerAutomaticStyles(${match[1]});`))throw Error(`Svelte 组件缺少正确样式声明：${file} → ${scope}`);
   checked.add(key);return;
  }

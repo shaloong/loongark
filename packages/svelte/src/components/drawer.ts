@@ -1,5 +1,5 @@
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticDrawerStyles } from "@loongark/primitives/automatic-styles/drawer";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticDrawerStyles } from "@shaloong/loongark-primitives/automatic-styles/drawer";
 
 import DrawerGrabber from "./DrawerGrabber.svelte";
 import DrawerRoot from "./DrawerRoot.svelte";

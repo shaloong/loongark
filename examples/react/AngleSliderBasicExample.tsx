@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkAngleSlider } from "@loongark/react";
+import { LoongArkAngleSlider } from "@shaloong/loongark-react";
 export function AngleSliderBasicExample() {
   return (
     <LoongArkAngleSlider.Root defaultValue={45}>

@@ -12,7 +12,7 @@ import {
   LoongArkInputControl,
   LoongArkInputHelperText,
   LoongArkButton,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 import {
   filterBarScenario,
   filterBarTestIds,

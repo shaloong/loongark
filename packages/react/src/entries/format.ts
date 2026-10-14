@@ -2,6 +2,6 @@
 export { LoongArkFormat } from "../components/ark-additions";
 export { LoongArkFormatByte } from "../components/ark-additions";
 export { LoongArkFormatNumber } from "../components/ark-additions";
-export type { NumberFormatProps as LoongArkFormatNumberProps } from "@loongark/kit";
+export type { NumberFormatProps as LoongArkFormatNumberProps } from "@shaloong/loongark-kit";
 export { LoongArkFormatRelativeTime } from "../components/ark-additions";
 export { LoongArkFormatTime } from "../components/ark-additions";

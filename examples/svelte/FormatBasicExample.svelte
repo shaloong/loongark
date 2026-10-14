@@ -3,7 +3,7 @@
     LoongArkLocaleProvider,
     LoongArkFormatByte,
     LoongArkFormatNumber,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkLocaleProvider locale="zh-CN">

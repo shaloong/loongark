@@ -1,8 +1,8 @@
 // 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
-export { exportImageCropper } from "@loongark/kit";
+export { exportImageCropper } from "@shaloong/loongark-kit";
 export type { ImageCropperCropChangeDetails } from "@ark-ui/solid/image-cropper";
-export type { ImageCropperExportModel } from "@loongark/kit";
-export type { ImageCropperExportOptions } from "@loongark/kit";
+export type { ImageCropperExportModel } from "@shaloong/loongark-kit";
+export type { ImageCropperExportOptions } from "@shaloong/loongark-kit";
 export type { ImageCropperFlipChangeDetails } from "@ark-ui/solid/image-cropper";
 export type { ImageCropperRootProps } from "@ark-ui/solid/image-cropper";
 export type { ImageCropperRotationChangeDetails } from "@ark-ui/solid/image-cropper";

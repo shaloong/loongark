@@ -1,8 +1,8 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticFilterBarStyles } from "@loongark/primitives/automatic-styles/filter-bar";
-import { styles as lkAutomaticFilterChipStyles } from "@loongark/primitives/automatic-styles/filter-chip";
-import { styles as lkAutomaticFilterDividerStyles } from "@loongark/primitives/automatic-styles/filter-divider";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticFilterBarStyles } from "@shaloong/loongark-primitives/automatic-styles/filter-bar";
+import { styles as lkAutomaticFilterChipStyles } from "@shaloong/loongark-primitives/automatic-styles/filter-chip";
+import { styles as lkAutomaticFilterDividerStyles } from "@shaloong/loongark-primitives/automatic-styles/filter-divider";
 import { type Component, type JSX, splitProps, mergeProps } from "solid-js";
 import { boolAttr } from "../utils";
 

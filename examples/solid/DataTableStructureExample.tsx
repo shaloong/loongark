@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { createStructureDemo } from "../shared/dataTableStructureDemo";
 export function DataTableStructureExample() {
   const [version, redraw] = createSignal(0);

@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal, onCleanup } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import {
   remoteColumns,
   initialRemoteState,

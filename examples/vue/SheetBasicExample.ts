@@ -9,7 +9,7 @@ import {
   LoongArkSheetTitle,
   LoongArkSheetDescription,
   LoongArkSheetAction,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const SheetBasicExample = defineComponent({
   setup() {
     return () => {

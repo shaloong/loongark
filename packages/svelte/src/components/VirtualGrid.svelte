@@ -3,19 +3,19 @@
   import type {
     VirtualGridOptions,
     VirtualGridCellDetails,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export interface VirtualGridProps extends VirtualGridOptions {
     renderCell: Snippet<[VirtualGridCellDetails]>;
   }
 </script>
 
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticVirtualGridStyles } from "@loongark/primitives/automatic-styles/virtual-grid";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticVirtualGridStyles } from "@shaloong/loongark-primitives/automatic-styles/virtual-grid";
   registerAutomaticStyles(lkAutomaticVirtualGridStyles);
 
   import { onMount, untrack } from "svelte";
-  import { createVirtualGrid, mountVirtualGrid } from "@loongark/kit";
+  import { createVirtualGrid, mountVirtualGrid } from "@shaloong/loongark-kit";
   let {
     renderCell,
     ...rest

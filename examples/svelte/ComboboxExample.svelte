@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createListCollection } from "@loongark/svelte";
+  import { createListCollection } from "@shaloong/loongark-svelte";
   import {
     LoongArkComboboxRoot,
     LoongArkComboboxLabel,
@@ -13,8 +13,8 @@
     LoongArkComboboxItem,
     LoongArkComboboxItemText,
     LoongArkComboboxItemIndicator,
-  } from "@loongark/svelte";
-  import type { ComboboxSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { ComboboxSize } from "@shaloong/loongark-primitives";
 
   export let size: ComboboxSize = "md";
   export let disabled: boolean = false;

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTooltipStyles } from "@loongark/primitives/automatic-styles/tooltip";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTooltipStyles } from "@shaloong/loongark-primitives/automatic-styles/tooltip";
   registerAutomaticStyles(lkAutomaticTooltipStyles);
 
   import { Tooltip } from "@ark-ui/svelte/tooltip";

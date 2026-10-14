@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTagsInputStyles } from "@shaloong/loongark-primitives/automatic-styles/tags-input";
 
 
 /**
@@ -11,13 +11,13 @@ import { useFieldContext } from "@ark-ui/react/field";
 import {
   nativeSelectionProps,
   nativeSelectionFieldDescription,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { useNativeSelection } from "../native-selection";
 import { useTagsInputContext } from "@ark-ui/react/tags-input";
 import { TagsInput } from "@ark-ui/react/tags-input";
-import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
 
 type ArkTagsInputRootProps = ComponentPropsWithoutRef<typeof TagsInput.Root>;
 type ArkTagsInputLabelProps = ComponentPropsWithoutRef<typeof TagsInput.Label>;

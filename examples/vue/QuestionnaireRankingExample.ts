@@ -1,5 +1,5 @@
 import { defineComponent, h, ref } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import { createQuestionnaireRankingDemo } from "../shared/questionnaireRankingDemo";
 export const QuestionnaireRankingExample = defineComponent({
   setup() {

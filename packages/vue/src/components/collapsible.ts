@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticCollapsibleStyles } from "@loongark/primitives/automatic-styles/collapsible";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticCollapsibleStyles } from "@shaloong/loongark-primitives/automatic-styles/collapsible";
 import type { CollapsibleRootProps as NativeCollapsibleRootProps } from "@ark-ui/vue/collapsible";
 import { renderPart } from "../render-part";
 /**
@@ -9,7 +9,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, type PropType } from "vue";
 import { Collapsible as ArkCollapsible } from "@ark-ui/vue/collapsible";
-import type { CollapsibleSize } from "@loongark/primitives";
+import type { CollapsibleSize } from "@shaloong/loongark-primitives";
 
 export interface CollapsibleOpenChangeDetails {
   open: boolean;

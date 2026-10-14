@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticToggleStyles } from "@loongark/primitives/automatic-styles/toggle";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticToggleStyles } from "@shaloong/loongark-primitives/automatic-styles/toggle";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticToggleStyles } from "@loongark/primitives/automati
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Toggle } from "@ark-ui/react/toggle";
-import type { ToggleSize } from "@loongark/primitives";
+import type { ToggleSize } from "@shaloong/loongark-primitives";
 
 type ArkToggleRootProps = ComponentPropsWithoutRef<typeof Toggle.Root>;
 type ArkToggleIndicatorProps = ComponentPropsWithoutRef<typeof Toggle.Indicator>;

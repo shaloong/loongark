@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkVirtualGrid } from "@loongark/vue";
+import { LoongArkVirtualGrid } from "@shaloong/loongark-vue";
 export const VirtualGridBasicExample = defineComponent({
   setup() {
     return () => {

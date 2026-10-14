@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkQrCode } from "@loongark/react";
+import { LoongArkQrCode } from "@shaloong/loongark-react";
 export function QRCodeBasicExample() {
   return (
     <LoongArkQrCode.Root value="https://shaloong.github.io/loongark/">

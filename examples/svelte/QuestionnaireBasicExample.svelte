@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkQuestionnaire } from "@loongark/svelte";
+  import { LoongArkQuestionnaire } from "@shaloong/loongark-svelte";
   let completed = $state(false);
 </script>
 

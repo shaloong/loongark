@@ -8,7 +8,7 @@ export { LoongArkScrollAreaRootProvider } from "../components/ark-advanced";
 export { LoongArkScrollAreaScrollbar } from "../components/scroll-area";
 export { LoongArkScrollAreaThumb } from "../components/scroll-area";
 export { LoongArkScrollAreaViewport } from "../components/scroll-area";
-export type { ScrollAreaSize } from "@loongark/primitives";
+export type { ScrollAreaSize } from "@shaloong/loongark-primitives";
 export { useScrollArea } from "@ark-ui/react/scroll-area";
 export { useScrollAreaContext } from "@ark-ui/react/scroll-area";
 export type { UseScrollAreaProps } from "@ark-ui/react/scroll-area";

@@ -5,7 +5,7 @@ import {
   LoongArkCardTitle,
   LoongArkCardDescription,
   LoongArkCardContent,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function CardBasicExample() {
   return (
     <LoongArkCard>

@@ -1,13 +1,13 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSelectStyles } from "@loongark/primitives/automatic-styles/select";
-import { controlIcons } from "@loongark/kit";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSelectStyles } from "@shaloong/loongark-primitives/automatic-styles/select";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import type { CollectionItem } from "@ark-ui/vue/collection";
 import type { SelectRootProps as NativeSelectRootProps } from "@ark-ui/vue/select";
 import type { SelectItemProps as NativeSelectItemProps } from "@ark-ui/vue/select";
 import { renderPart } from "../render-part";
-import { syncNativeSelectOptions } from "@loongark/kit";
+import { syncNativeSelectOptions } from "@shaloong/loongark-kit";
 import { shallowRef, watchPostEffect, type VNode } from "vue";
 import { useSelectContext } from "@ark-ui/vue/select";
 /**
@@ -34,7 +34,7 @@ import {
   SelectItemIndicator as ArkSelectItemIndicator,
   SelectHiddenSelect as ArkSelectHiddenSelect,
 } from "@ark-ui/vue/select";
-import type { SelectSize } from "@loongark/primitives";
+import type { SelectSize } from "@shaloong/loongark-primitives";
 
 const selectSizeKey = Symbol("loongark-select-size");
 

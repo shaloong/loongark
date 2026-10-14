@@ -3,7 +3,7 @@
     LoongArkDataTable,
     LoongArkButton,
     LoongArkTypography,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
   export let complex = false;
   export let batch = false;

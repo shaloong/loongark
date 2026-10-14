@@ -1,13 +1,13 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticNumberInputStyles } from "@loongark/primitives/automatic-styles/number-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticNumberInputStyles } from "@shaloong/loongark-primitives/automatic-styles/number-input";
 import { useFieldContext } from "@ark-ui/vue/field";
 import { useNumberInputContext } from "@ark-ui/vue/number-input";
 import {
   nativeSelectionProps,
   nativeSelectionFieldDescription,
-} from "@loongark/kit";
-import { controlIcons } from "@loongark/kit";
+} from "@shaloong/loongark-kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import type { NumberInputRootProps as NativeNumberInputRootProps } from "@ark-ui/vue/number-input";
 import { renderPart } from "../render-part";
@@ -22,7 +22,7 @@ import {
   type PropType,
 } from "vue";
 import { NumberInput as ArkNumberInput } from "@ark-ui/vue/number-input";
-import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
+import type { NumberInputSize, NumberInputState } from "@shaloong/loongark-primitives";
 
 export interface NumberInputValueChangeDetails {
   value: string;

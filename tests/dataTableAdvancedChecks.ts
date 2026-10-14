@@ -48,21 +48,37 @@ export async function checkDataTableAdvanced(page: Page) {
   await ready();
   await expect(table.getByText("Gamma", { exact: true })).toBeVisible();
   await expect(root.locator("footer")).toContainText("1 rows");
-  await page
-    .getByRole("button", { name: "Refresh with error", exact: true })
-    .click();
-  await expect(root).toHaveAttribute("aria-busy", "true");
-  await expect(filter).toBeDisabled();
-  await expect(
-    table.getByRole("button", { name: "Revenue", exact: true }),
-  ).toBeDisabled();
-  await expect(
-    table.getByRole("checkbox", { name: "Select c", exact: true }),
-  ).toBeDisabled();
+  const requestTime = new Date();
+  await page.clock.install({ time: requestTime });
+  await page.clock.pauseAt(new Date(requestTime.getTime() + 60_000));
+  try {
+    await page
+      .getByRole("button", { name: "Refresh with error", exact: true })
+      .click();
+    await expect(root).toHaveAttribute("aria-busy", "true");
+    await expect(filter).toBeDisabled();
+    await expect(
+      table.getByRole("button", { name: "Revenue", exact: true }),
+    ).toBeDisabled();
+    await expect(
+      table.getByRole("checkbox", { name: "Select c", exact: true }),
+    ).toBeDisabled();
+    await page.clock.runFor(200);
+  } finally {
+    await page.clock.resume();
+    await page.clock.setSystemTime(new Date());
+  }
   await expect(root.getByRole("alert")).toContainText(
     "Could not load projects.",
   );
   await ready();
+  await expect(filter).toBeEnabled();
+  await expect(
+    table.getByRole("button", { name: "Revenue", exact: true }),
+  ).toBeEnabled();
+  await expect(
+    table.getByRole("checkbox", { name: "Select c", exact: true }),
+  ).toBeEnabled();
   await root.getByRole("button", { name: "Retry", exact: true }).focus();
   await page.keyboard.press("Enter");
   await ready();

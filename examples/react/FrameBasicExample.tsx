@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkFrame } from "@loongark/react";
+import { LoongArkFrame } from "@shaloong/loongark-react";
 export function FrameBasicExample() {
   return (
     <LoongArkFrame title="独立预览">

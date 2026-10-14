@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkContainer } from "@loongark/solid";
+import { LoongArkContainer } from "@shaloong/loongark-solid";
 export function ContainerBasicExample() {
   return (
     <LoongArkContainer>

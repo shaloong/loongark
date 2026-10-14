@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import type {
     ConversationActionContext,
     MessageOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   import {
     conversationNote,
     waitForConversationAction,

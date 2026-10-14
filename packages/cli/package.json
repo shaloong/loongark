@@ -1,5 +1,5 @@
 {
-  "name": "@loongark/cli",
+  "name": "@shaloong/loongark-cli",
   "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,8 +19,8 @@
     "package.json"
   ],
   "dependencies": {
-    "@loongark/tokens": "workspace:*",
-    "@loongark/theme": "workspace:*"
+    "@shaloong/loongark-tokens": "workspace:*",
+    "@shaloong/loongark-theme": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^24.19.2"

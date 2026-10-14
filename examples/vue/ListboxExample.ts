@@ -1,5 +1,5 @@
 import { defineComponent, h, ref, type PropType } from "vue";
-import { createListCollection } from "@loongark/vue";
+import { createListCollection } from "@shaloong/loongark-vue";
 import {
   LoongArkListboxRoot,
   LoongArkListboxLabel,
@@ -7,8 +7,8 @@ import {
   LoongArkListboxItem,
   LoongArkListboxItemText,
   LoongArkListboxItemIndicator,
-} from "@loongark/vue";
-import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { ListboxOrientation, ListboxSize } from "@shaloong/loongark-primitives";
 
 const options = [
   { label: "Beijing", value: "beijing" },

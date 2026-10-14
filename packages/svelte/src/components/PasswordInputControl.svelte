@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticPasswordInputStyles } from "@loongark/primitives/automatic-styles/password-input";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticPasswordInputStyles } from "@shaloong/loongark-primitives/automatic-styles/password-input";
   registerAutomaticStyles(lkAutomaticPasswordInputStyles);
 
-  import { nativeSelectionProps } from "@loongark/kit";
+  import { nativeSelectionProps } from "@shaloong/loongark-kit";
   import { PasswordInput } from "@ark-ui/svelte/password-input";
   import type {
     PasswordInputSize,
     PasswordInputState,
-  } from "@loongark/primitives";
+  } from "@shaloong/loongark-primitives";
 
   export let size: PasswordInputSize = "md";
   export let state: PasswordInputState = "default";

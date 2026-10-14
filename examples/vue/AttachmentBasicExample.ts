@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkAttachment } from "@loongark/vue";
+import { LoongArkAttachment } from "@shaloong/loongark-vue";
 export const AttachmentBasicExample = defineComponent({
   setup() {
     return () => {

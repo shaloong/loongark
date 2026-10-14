@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { TourExample } from "../examples/react/TourExample";
 function TourDemo() {
   const tour = L.useTour({

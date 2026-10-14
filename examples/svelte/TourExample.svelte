@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
   import { createTourFocusDemo } from "../shared/tourFocusDemo";
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   const focus = createTourFocusDemo();
   onDestroy(focus.dispose);
   const tour = L.useTour({

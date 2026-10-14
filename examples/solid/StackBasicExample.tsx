@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkStack } from "@loongark/solid";
+import { LoongArkStack } from "@shaloong/loongark-solid";
 export function StackBasicExample() {
   return (
     <LoongArkStack orientation="horizontal" gap="md">

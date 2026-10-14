@@ -2,9 +2,9 @@ import {
   groupsDisclosureCSS,
   groupsDisclosureIcon,
 } from "../shared/questionnaireGroupsDemo";
-import { controlIcons } from "@loongark/kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import React from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import {
   createSelectionControlsDemo,
   selectionOptions,

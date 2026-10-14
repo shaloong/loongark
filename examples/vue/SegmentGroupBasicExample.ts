@@ -10,7 +10,7 @@ import {
   LoongArkSegmentGroupItem,
   LoongArkSegmentGroupItemHiddenInput,
   LoongArkSegmentGroupItemText,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import type { SegmentGroupItemProps } from "@ark-ui/vue/segment-group";
 import type { SegmentGroupItemHiddenInputProps } from "@ark-ui/vue/segment-group";
 export const SegmentGroupBasicExample = defineComponent({

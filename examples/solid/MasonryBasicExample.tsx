@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkMasonry } from "@loongark/solid";
+import { LoongArkMasonry } from "@shaloong/loongark-solid";
 export function MasonryBasicExample() {
   return (
     <LoongArkMasonry columns={2}>

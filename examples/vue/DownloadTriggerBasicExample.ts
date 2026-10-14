@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkDownloadTrigger } from "@loongark/vue";
+import { LoongArkDownloadTrigger } from "@shaloong/loongark-vue";
 export const DownloadTriggerBasicExample = defineComponent({
   setup() {
     return () => {

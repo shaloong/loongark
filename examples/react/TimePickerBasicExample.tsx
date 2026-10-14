@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkTimePicker } from "@loongark/react";
+import { LoongArkTimePicker } from "@shaloong/loongark-react";
 export function TimePickerBasicExample() {
   return (
     <LoongArkTimePicker

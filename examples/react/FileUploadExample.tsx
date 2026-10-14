@@ -14,8 +14,8 @@ import {
   LoongArkFileUploadItemSizeText,
   LoongArkFileUploadItemDeleteTrigger,
   LoongArkFileUploadClearTrigger,
-} from "@loongark/react";
-import type { FileUploadSize } from "@loongark/primitives";
+} from "@shaloong/loongark-react";
+import type { FileUploadSize } from "@shaloong/loongark-primitives";
 
 interface FileUploadExampleProps {
   size?: FileUploadSize;

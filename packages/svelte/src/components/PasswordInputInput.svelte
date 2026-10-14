@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticPasswordInputStyles } from "@loongark/primitives/automatic-styles/password-input";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticPasswordInputStyles } from "@shaloong/loongark-primitives/automatic-styles/password-input";
   registerAutomaticStyles(lkAutomaticPasswordInputStyles);
 
   import { useFieldContext } from "@ark-ui/svelte/field";
@@ -9,11 +9,11 @@
     usePasswordInputContext,
     type PasswordInputInputProps,
   } from "@ark-ui/svelte/password-input";
-  import { nativeSelectionFieldDescription } from "@loongark/kit";
+  import { nativeSelectionFieldDescription } from "@shaloong/loongark-kit";
   import type {
     PasswordInputSize,
     PasswordInputState,
-  } from "@loongark/primitives";
+  } from "@shaloong/loongark-primitives";
   let {
     size = "md",
     state = "default",

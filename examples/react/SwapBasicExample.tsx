@@ -3,7 +3,7 @@ import {
   LoongArkButton,
   LoongArkSwapRoot,
   LoongArkSwapIndicator,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function SwapBasicExample() {
   const [expanded, setExpanded] = useState(false);
   return (

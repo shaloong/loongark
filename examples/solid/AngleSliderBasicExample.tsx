@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkAngleSlider } from "@loongark/solid";
+import { LoongArkAngleSlider } from "@shaloong/loongark-solid";
 export function AngleSliderBasicExample() {
   return (
     <LoongArkAngleSlider.Root defaultValue={45}>

@@ -1,6 +1,6 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/react";
-import * as L from "@loongark/react";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-react";
+import * as L from "@shaloong/loongark-react";
 import { useState } from "react";
 import { quickActions, mediaDemoItems } from "../shared/mediaDemo";
 export function ActionMediaExample() {

@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkRichTextEditor } from "@loongark/solid";
+import { LoongArkRichTextEditor } from "@shaloong/loongark-solid";
 export function RichTextEditorBasicExample() {
   return (
     <LoongArkRichTextEditor

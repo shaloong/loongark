@@ -6,7 +6,7 @@ import {
   LoongArkImageCropperSelection,
   LoongArkImageCropperHandle,
   LoongArkImageCropperGrid,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const ImageCropperBasicExample = defineComponent({
   setup() {
     return () => {

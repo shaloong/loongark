@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkChart } from "@loongark/react";
+import { LoongArkChart } from "@shaloong/loongark-react";
 export function ChartBasicExample() {
   return (
     <LoongArkChart

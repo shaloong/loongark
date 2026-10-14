@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   let value = $state<string | undefined>(undefined),
     ref = $state<HTMLInputElement | null>(null),
     mounted = $state(true),

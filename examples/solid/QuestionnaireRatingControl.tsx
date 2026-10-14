@@ -1,7 +1,7 @@
 /** @jsxImportSource solid-js */
 import { onMount, onCleanup } from "solid-js";
-import * as L from "@loongark/solid";
-import { controlIcons, type QuestionnaireCustomContext } from "@loongark/kit";
+import * as L from "@shaloong/loongark-solid";
+import { controlIcons, type QuestionnaireCustomContext } from "@shaloong/loongark-kit";
 function Registration(props: {
   context: QuestionnaireCustomContext;
   element: () => HTMLElement;

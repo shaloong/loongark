@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticChartStyles } from "@loongark/primitives/automatic-styles/chart";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticChartStyles } from "@shaloong/loongark-primitives/automatic-styles/chart";
   registerAutomaticStyles(lkAutomaticChartStyles);
 
   import {
@@ -8,7 +8,7 @@
     mountChartControls,
     observeChartWidth,
     type ChartOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   import { onMount } from "svelte";
   let element: HTMLDivElement;
   let measuredWidth = 0;

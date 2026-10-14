@@ -15,7 +15,7 @@ import {
   LoongArkFileUploadItemSizeText,
   LoongArkFileUploadItemDeleteTrigger,
   LoongArkFileUploadClearTrigger,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/FileUpload",

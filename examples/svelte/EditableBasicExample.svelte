@@ -9,7 +9,7 @@
     LoongArkEditableEditTrigger,
     LoongArkEditableSubmitTrigger,
     LoongArkEditableCancelTrigger,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkEditableRoot defaultValue="项目名称">

@@ -21,8 +21,8 @@
     LoongArkColorPickerSwatch,
     LoongArkColorPickerValueText,
     LoongArkColorPickerValueSwatch,
-  } from "@loongark/svelte";
-  import type { ColorPickerSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { ColorPickerSize } from "@shaloong/loongark-primitives";
 
   export let size: ColorPickerSize = "md";
 

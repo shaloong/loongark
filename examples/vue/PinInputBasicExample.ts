@@ -11,7 +11,7 @@ import {
   LoongArkPinInputControl,
   LoongArkPinInputInput,
   LoongArkPinInputHiddenInput,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import type { PinInputHiddenInputProps } from "@ark-ui/vue/pin-input";
 export const PinInputBasicExample = defineComponent({
   setup() {

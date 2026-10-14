@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticCarouselStyles } from "@loongark/primitives/automatic-styles/carousel";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticCarouselStyles } from "@shaloong/loongark-primitives/automatic-styles/carousel";
 /**
  * Carousel component - Solid wrapper.
  * Uses Ark UI Carousel with data attributes for styling.
@@ -20,7 +20,7 @@ import {
   type CarouselProgressTextProps as ArkCarouselProgressTextProps,
   type CarouselAutoplayIndicatorProps as ArkCarouselAutoplayIndicatorProps,
 } from "@ark-ui/solid/carousel";
-import type { CarouselSize } from "@loongark/primitives";
+import type { CarouselSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkCarouselRootProps extends Omit<
   ArkCarouselRootProps,

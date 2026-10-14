@@ -1,4 +1,4 @@
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { mediaDemoItems } from "../examples/shared/mediaDemo";
 export default { title: "Components/Masonry" };
 export const Basic = {

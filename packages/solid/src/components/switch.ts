@@ -1,8 +1,8 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSwitchStyles } from "@loongark/primitives/automatic-styles/switch";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSwitchStyles } from "@shaloong/loongark-primitives/automatic-styles/switch";
 import { useFieldContext } from "@ark-ui/solid/field";
-import { nativeSelectionFieldDescription } from "@loongark/kit";
+import { nativeSelectionFieldDescription } from "@shaloong/loongark-kit";
 import { nativeSelectionRef } from "../native-selection";
 import {
   useSwitchContext,
@@ -11,7 +11,7 @@ import {
 import type { JSX } from "solid-js";
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { ark } from "@ark-ui/solid";
-import type { SwitchPrimitiveProps } from "@loongark/primitives";
+import type { SwitchPrimitiveProps } from "@shaloong/loongark-primitives";
 import { mergeProps, splitProps, type Component } from "solid-js";
 import { boolAttr } from "../utils";
 

@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkMessage, LoongArkBubble } from "@loongark/vue";
+import { LoongArkMessage, LoongArkBubble } from "@shaloong/loongark-vue";
 export const MessageBasicExample = defineComponent({
   setup() {
     return () => {

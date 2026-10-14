@@ -7,11 +7,11 @@ import {
   LoongArkPaginationItem,
   LoongArkPaginationPrevTrigger,
   LoongArkPaginationNextTrigger,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 import type {
   PaginationOrientation,
   PaginationSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface PaginationExampleProps {
   size?: PaginationSize;

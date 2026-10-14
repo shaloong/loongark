@@ -4,7 +4,7 @@ import {
   LoongArkHoverCardTrigger,
   LoongArkHoverCardPositioner,
   LoongArkHoverCardContent,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function HoverCardBasicExample() {
   return (
     <LoongArkHoverCardRoot>

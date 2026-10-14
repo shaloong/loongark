@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTabsStyles } from "@loongark/primitives/automatic-styles/tabs";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTabsStyles } from "@shaloong/loongark-primitives/automatic-styles/tabs";
 /**
  * Tabs 组件 - Solid 实现
  * 基于 Ark UI Tabs 的标签页
@@ -14,7 +14,7 @@ import {
   type TabContentProps as ArkTabContentProps,
   type TabIndicatorProps as ArkTabIndicatorProps,
 } from "@ark-ui/solid/tabs";
-import type { TabsOrientation, TabsSize } from "@loongark/primitives";
+import type { TabsOrientation, TabsSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkTabsRootProps extends Omit<
   ArkTabsRootProps,

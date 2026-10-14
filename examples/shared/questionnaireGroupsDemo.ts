@@ -1,9 +1,9 @@
-import { controlIcons } from "@loongark/kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import type {
   Question,
   QuestionAnswer,
   QuestionnaireValue,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 const initial = (): QuestionnaireValue => ({
   contacts: [
     {

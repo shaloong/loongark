@@ -5,7 +5,7 @@ import {
   LoongArkFileUploadDropzone,
   LoongArkFileUploadTrigger,
   LoongArkFileUploadHiddenInput,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const FileUploadBasicExample = defineComponent({
   setup() {
     return () => {

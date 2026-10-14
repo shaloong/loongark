@@ -1,9 +1,9 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticMenuStyles } from "@loongark/primitives/automatic-styles/menu";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticMenuStyles } from "@shaloong/loongark-primitives/automatic-styles/menu";
 import { ark } from "@ark-ui/solid/factory";
 import { mergeProps as mergeMenuProps } from "@zag-js/solid";
-import { contextMenuPointerHandler, recoverClosedMenuFocus } from "@loongark/kit";
+import { contextMenuPointerHandler, recoverClosedMenuFocus } from "@shaloong/loongark-kit";
 /**
  * Menu component - Solid wrapper
  * Based on Ark UI Menu, injects data-scope/data-part attributes.
@@ -37,7 +37,7 @@ import {
   type MenuIndicatorProps as ArkMenuIndicatorProps,
   type MenuSeparatorProps as ArkMenuSeparatorProps,
 } from "@ark-ui/solid/menu";
-import type { MenuSize } from "@loongark/primitives";
+import type { MenuSize } from "@shaloong/loongark-primitives";
 
 const MenuContext = createContext<{ size: MenuSize }>({ size: "md" });
 

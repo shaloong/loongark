@@ -1,7 +1,7 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/vue";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-vue";
 import { defineComponent, h, ref } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import { quickActions, mediaDemoItems } from "../shared/mediaDemo";
 export const ActionMediaExample = defineComponent({
   setup() {

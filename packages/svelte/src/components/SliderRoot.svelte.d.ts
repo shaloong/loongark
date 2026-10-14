@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Slider } from "@ark-ui/svelte/slider";
 import type { SliderRootProps } from "@ark-ui/svelte/slider";
-import type { SliderOrientation, SliderSize } from "@loongark/primitives";
+import type { SliderOrientation, SliderSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkSliderRoot extends SvelteComponent<
   Omit<

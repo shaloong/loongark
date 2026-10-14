@@ -1,6 +1,6 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { PinInput } from "@ark-ui/svelte/pin-input";
-import type { PinInputPrimitiveProps } from "@loongark/primitives";
+import type { PinInputPrimitiveProps } from "@shaloong/loongark-primitives";
 
 export default class LoongArkPinInputInput extends SvelteComponent<
   Omit<

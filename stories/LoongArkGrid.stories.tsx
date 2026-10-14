@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 function Demo() {
   return (
     <L.LoongArkGrid columns={3} gap="md">

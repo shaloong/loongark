@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 const items = [
     { value: "design", label: "Design" },
     { value: "docs", label: "Documentation" },

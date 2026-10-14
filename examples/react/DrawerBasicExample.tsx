@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkDrawer } from "@loongark/react";
+import { LoongArkDrawer } from "@shaloong/loongark-react";
 export function DrawerBasicExample() {
   return (
     <LoongArkDrawer.Root>

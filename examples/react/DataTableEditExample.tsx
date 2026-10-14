@@ -3,7 +3,7 @@ import {
   LoongArkDataTable,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 import { createDataTableEditDemo } from "../shared/dataTableEditDemo";
 export const DataTableEditExample = ({
   complex = false,

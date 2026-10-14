@@ -1,5 +1,5 @@
 /** @jsxImportSource solid-js */
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 
 export function ToastBasicExample() {
   const toaster = L.createToaster({ placement: "bottom-end" });

@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkTypography } from "@loongark/solid";
+import { LoongArkTypography } from "@shaloong/loongark-solid";
 export function TypographyBasicExample() {
   return (
     <div>

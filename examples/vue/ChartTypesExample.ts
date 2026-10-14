@@ -3,7 +3,7 @@ import {
   LoongArkChart,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import { createChartTypesDemo, chartTypeModes } from "../shared/chartTypesDemo";
 export const ChartTypesExample = defineComponent({
   setup() {

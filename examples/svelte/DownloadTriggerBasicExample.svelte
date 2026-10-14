@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkDownloadTrigger } from "@loongark/svelte";
+  import { LoongArkDownloadTrigger } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkDownloadTrigger

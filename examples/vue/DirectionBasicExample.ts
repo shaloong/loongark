@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkDirection, LoongArkNativeSelect } from "@loongark/vue";
+import { LoongArkDirection, LoongArkNativeSelect } from "@shaloong/loongark-vue";
 export const DirectionBasicExample = defineComponent({
   setup() {
     return () => {

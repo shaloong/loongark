@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkPaper } from "@loongark/vue";
+import { LoongArkPaper } from "@shaloong/loongark-vue";
 export const PaperBasicExample = defineComponent({
   setup() {
     return () => {

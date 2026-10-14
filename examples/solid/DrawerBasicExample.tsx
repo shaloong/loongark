@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkDrawer } from "@loongark/solid";
+import { LoongArkDrawer } from "@shaloong/loongark-solid";
 export function DrawerBasicExample() {
   return (
     <LoongArkDrawer.Root>

@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkSpeedDial } from "@loongark/vue";
+import { LoongArkSpeedDial } from "@shaloong/loongark-vue";
 export const SpeedDialBasicExample = defineComponent({
   setup() {
     return () => {

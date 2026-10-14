@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { controlIcons } from "@loongark/kit";
-  import { LoongArkIcon } from "@loongark/svelte";
+  import { controlIcons } from "@shaloong/loongark-kit";
+  import { LoongArkIcon } from "@shaloong/loongark-svelte";
 
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import { quickActions, mediaDemoItems } from "../shared/mediaDemo";
   let selected = "None",
     submitted = 0,

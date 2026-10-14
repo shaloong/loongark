@@ -1,8 +1,8 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticPinInputStyles } from "@loongark/primitives/automatic-styles/pin-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticPinInputStyles } from "@shaloong/loongark-primitives/automatic-styles/pin-input";
 import { PinInput } from "@ark-ui/solid/pin-input";
-import type { PinInputPrimitiveProps } from "@loongark/primitives";
+import type { PinInputPrimitiveProps } from "@shaloong/loongark-primitives";
 import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 
 export type PinInputSize = NonNullable<PinInputPrimitiveProps["size"]>;

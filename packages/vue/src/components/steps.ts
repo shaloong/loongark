@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticStepsStyles } from "@loongark/primitives/automatic-styles/steps";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticStepsStyles } from "@shaloong/loongark-primitives/automatic-styles/steps";
 import { renderPart } from "../render-part";
 /**
  * Steps component - Vue wrapper.
@@ -8,7 +8,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, computed, type PropType } from "vue";
 import { Steps as ArkSteps, useSteps } from "@ark-ui/vue/steps";
-import type { StepsOrientation, StepsSize } from "@loongark/primitives";
+import type { StepsOrientation, StepsSize } from "@shaloong/loongark-primitives";
 
 export interface StepsChangeDetails {
   step: number;

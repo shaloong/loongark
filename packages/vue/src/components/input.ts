@@ -1,13 +1,13 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticInputStyles } from "@loongark/primitives/automatic-styles/input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticInputStyles } from "@shaloong/loongark-primitives/automatic-styles/input";
 import { renderPart } from "../render-part";
 import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import { Field, useFieldContext } from "@ark-ui/vue/field";
-import { inputSuffixDisabled } from "@loongark/kit";
+import { inputSuffixDisabled } from "@shaloong/loongark-kit";
 import { ark } from "@ark-ui/vue";
-import type { InputPrimitiveProps } from "@loongark/primitives";
+import type { InputPrimitiveProps } from "@shaloong/loongark-primitives";
 
 export type InputSize = NonNullable<InputPrimitiveProps["size"]>;
 export type InputState = NonNullable<InputPrimitiveProps["state"]>;

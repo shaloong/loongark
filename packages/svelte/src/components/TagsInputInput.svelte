@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTagsInputStyles } from "@shaloong/loongark-primitives/automatic-styles/tags-input";
   registerAutomaticStyles(lkAutomaticTagsInputStyles);
 
   import { useFieldContext } from "@ark-ui/svelte/field";
-  import { nativeSelectionFieldDescription } from "@loongark/kit";
+  import { nativeSelectionFieldDescription } from "@shaloong/loongark-kit";
   import {
     TagsInput,
     useTagsInputContext,
     type TagsInputInputProps,
   } from "@ark-ui/svelte/tags-input";
-  import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+  import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
   let {
     size = "md",
     state = "default",

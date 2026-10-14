@@ -5,7 +5,7 @@
     LoongArkInputGroup,
     LoongArkInputPrefix,
     LoongArkInputControl,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkInputRoot>

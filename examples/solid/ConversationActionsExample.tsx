@@ -1,7 +1,7 @@
 /** @jsxImportSource solid-js */
 import { createSignal, onCleanup } from "solid-js";
-import * as L from "@loongark/solid";
-import type { ConversationActionContext, MessageOptions } from "@loongark/kit";
+import * as L from "@shaloong/loongark-solid";
+import type { ConversationActionContext, MessageOptions } from "@shaloong/loongark-kit";
 import {
   conversationNote,
   waitForConversationAction,

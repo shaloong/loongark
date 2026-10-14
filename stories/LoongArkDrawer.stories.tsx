@@ -3,7 +3,7 @@ import React from "react";
 import { DrawerExample } from "../examples/react/DrawerExample";
 import { withArkExamplePage } from "./arkStory";
 import type { Meta, StoryObj } from "@storybook/react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 function OverlayDemo({ kind }: { kind: "sheet" | "drawer" }) {
   const C = kind === "sheet" ? L.LoongArkSheet : L.LoongArkDrawer;
   return (

@@ -9,7 +9,7 @@
     type Snippet,
   } from "svelte";
   import type { Readable } from "svelte/store";
-  import type { LoongArkTheme } from "@loongark/theme";
+  import type { LoongArkTheme } from "@shaloong/loongark-theme";
   let {
     disabled = false,
     container,

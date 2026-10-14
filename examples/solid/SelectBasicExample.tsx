@@ -15,7 +15,7 @@ import {
   LoongArkSelectItemText,
   LoongArkSelectItemIndicator,
   LoongArkSelectHiddenSelect,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function SelectBasicExample() {
   const collection = createListCollection({
     items: [

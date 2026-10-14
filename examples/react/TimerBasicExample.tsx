@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkTimer } from "@loongark/react";
+import { LoongArkTimer } from "@shaloong/loongark-react";
 export function TimerBasicExample() {
   return (
     <LoongArkTimer.Root countdown startMs={60000}>

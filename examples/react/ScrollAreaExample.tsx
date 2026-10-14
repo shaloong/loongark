@@ -6,8 +6,8 @@ import {
   LoongArkScrollAreaScrollbar,
   LoongArkScrollAreaThumb,
   LoongArkScrollAreaCorner,
-} from "@loongark/react";
-import type { ScrollAreaSize } from "@loongark/primitives";
+} from "@shaloong/loongark-react";
+import type { ScrollAreaSize } from "@shaloong/loongark-primitives";
 
 interface ScrollAreaExampleProps {
   size?: ScrollAreaSize;

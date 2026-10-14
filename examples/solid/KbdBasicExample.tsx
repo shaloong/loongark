@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkKbdGroup, LoongArkKbd } from "@loongark/solid";
+import { LoongArkKbdGroup, LoongArkKbd } from "@shaloong/loongark-solid";
 export function KbdBasicExample() {
   return (
     <LoongArkKbdGroup>

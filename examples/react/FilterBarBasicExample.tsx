@@ -7,7 +7,7 @@ import {
   LoongArkInputControl,
   LoongArkFilterBarActions,
   LoongArkButton,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function FilterBarBasicExample() {
   return (
     <LoongArkFilterBar>

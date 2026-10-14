@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkToggleRoot } from "@loongark/vue";
+import { LoongArkToggleRoot } from "@shaloong/loongark-vue";
 export const ToggleBasicExample = defineComponent({
   setup() {
     return () => {

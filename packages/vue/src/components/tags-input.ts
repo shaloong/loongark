@@ -1,8 +1,8 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTagsInputStyles } from "@shaloong/loongark-primitives/automatic-styles/tags-input";
 import { useFieldContext } from "@ark-ui/vue/field";
-import { nativeSelectionFieldDescription } from "@loongark/kit";
+import { nativeSelectionFieldDescription } from "@shaloong/loongark-kit";
 import type { TagsInputHiddenInputProps } from "@ark-ui/vue/tags-input";
 import { nativeSelectionRef } from "../native-selection";
 import { useTagsInputContext } from "@ark-ui/vue/tags-input";
@@ -19,7 +19,7 @@ import {
   type PropType,
 } from "vue";
 import { TagsInput as ArkTagsInput } from "@ark-ui/vue/tags-input";
-import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
 
 export interface TagsInputValueChangeDetails {
   value: string[];

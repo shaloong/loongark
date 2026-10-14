@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticJsonTreeViewStyles } from "@loongark/primitives/automatic-styles/json-tree-view";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticJsonTreeViewStyles } from "@shaloong/loongark-primitives/automatic-styles/json-tree-view";
 import { computed, defineComponent, h, toValue } from "vue";
 import {
   JsonTreeView,
@@ -13,7 +13,7 @@ import {
   expandedJsonBranches,
   jsonCollectionOptions,
   splitJsonTreeProps,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 /** Ark npm 版的 splitProps 在 setup 拍快照；每次计算重新分割以同步数据和格式选项。 */
 export function useJsonTreeView(
   props: import("vue").MaybeRef<UseJsonTreeViewProps>,

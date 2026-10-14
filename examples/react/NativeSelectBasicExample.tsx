@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkNativeSelect } from "@loongark/react";
+import { LoongArkNativeSelect } from "@shaloong/loongark-react";
 export function NativeSelectBasicExample() {
   return (
     <LoongArkNativeSelect name="plan" aria-label="方案">

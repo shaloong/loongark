@@ -1,7 +1,7 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTransferListStyles } from "@loongark/primitives/automatic-styles/transfer-list";
-import { controlIcons } from "@loongark/kit";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTransferListStyles } from "@shaloong/loongark-primitives/automatic-styles/transfer-list";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import { defineComponent, h, ref, type PropType } from "vue";
 import {
@@ -13,7 +13,7 @@ import {
   type TransferListOptions,
   type TransferItem,
   type TransferChangeDetails,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 const part = (name: string) => ({
   "data-scope": "transfer-list",
   "data-part": name,

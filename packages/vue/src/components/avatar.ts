@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticAvatarStyles } from "@loongark/primitives/automatic-styles/avatar";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticAvatarStyles } from "@shaloong/loongark-primitives/automatic-styles/avatar";
 import { renderPart } from "../render-part";
 /**
  * Avatar component - Vue wrapper.
@@ -8,7 +8,7 @@ import { renderPart } from "../render-part";
  */
 import { defineComponent, h, type PropType } from "vue";
 import { Avatar as ArkAvatar } from "@ark-ui/vue/avatar";
-import type { AvatarSize } from "@loongark/primitives";
+import type { AvatarSize } from "@shaloong/loongark-primitives";
 
 export const LoongArkAvatarRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkAvatarRoot",

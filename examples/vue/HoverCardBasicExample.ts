@@ -4,7 +4,7 @@ import {
   LoongArkHoverCardTrigger,
   LoongArkHoverCardPositioner,
   LoongArkHoverCardContent,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const HoverCardBasicExample = defineComponent({
   setup() {
     return () => {

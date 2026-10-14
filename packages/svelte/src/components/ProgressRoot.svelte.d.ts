@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Progress } from "@ark-ui/svelte/progress";
 import type { ProgressRootProps } from "@ark-ui/svelte/progress";
-import type { ProgressOrientation, ProgressSize } from "@loongark/primitives";
+import type { ProgressOrientation, ProgressSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkProgressRoot extends SvelteComponent<
   Omit<

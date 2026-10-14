@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticEditableStyles } from "@loongark/primitives/automatic-styles/editable";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticEditableStyles } from "@shaloong/loongark-primitives/automatic-styles/editable";
 /**
  * Editable component - Solid wrapper.
  * Uses Ark UI Editable with data attributes for styling.
@@ -18,7 +18,7 @@ import {
   type EditableSubmitTriggerProps as ArkEditableSubmitTriggerProps,
   type EditableCancelTriggerProps as ArkEditableCancelTriggerProps,
 } from "@ark-ui/solid/editable";
-import type { EditableSize, EditableState } from "@loongark/primitives";
+import type { EditableSize, EditableState } from "@shaloong/loongark-primitives";
 
 export interface LoongArkEditableRootProps extends Omit<
   ArkEditableRootProps,

@@ -3,7 +3,7 @@
     LoongArkAppBar,
     LoongArkToolbar,
     LoongArkLink,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkAppBar>

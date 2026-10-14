@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkStack, LoongArkSpinner } from "@loongark/react";
+import { LoongArkStack, LoongArkSpinner } from "@shaloong/loongark-react";
 export function SpinnerBasicExample() {
   return (
     <LoongArkStack orientation="horizontal">

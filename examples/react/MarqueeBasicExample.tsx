@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkMarquee, LoongArkBadge } from "@loongark/react";
+import { LoongArkMarquee, LoongArkBadge } from "@shaloong/loongark-react";
 export function MarqueeBasicExample() {
   return (
     <LoongArkMarquee.Root>

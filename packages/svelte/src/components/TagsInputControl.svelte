@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTagsInputStyles } from "@shaloong/loongark-primitives/automatic-styles/tags-input";
   registerAutomaticStyles(lkAutomaticTagsInputStyles);
 
   import { TagsInput } from "@ark-ui/svelte/tags-input";
-  import type { TagsInputSize, TagsInputState } from "@loongark/primitives";
+  import type { TagsInputSize, TagsInputState } from "@shaloong/loongark-primitives";
 
   export let size: TagsInputSize = "md";
   export let state: TagsInputState = "default";

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkQrCode } from "@loongark/svelte";
+  import { LoongArkQrCode } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkQrCode.Root value="https://shaloong.github.io/loongark/">

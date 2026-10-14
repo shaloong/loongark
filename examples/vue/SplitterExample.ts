@@ -4,8 +4,8 @@ import {
   LoongArkSplitterPanel,
   LoongArkSplitterResizeTrigger,
   LoongArkSplitterResizeTriggerIndicator,
-} from "@loongark/vue";
-import type { SplitterSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { SplitterSize } from "@shaloong/loongark-primitives";
 
 export const SplitterExample = defineComponent({
   name: "SplitterExample",

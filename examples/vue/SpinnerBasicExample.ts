@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkStack, LoongArkSpinner } from "@loongark/vue";
+import { LoongArkStack, LoongArkSpinner } from "@shaloong/loongark-vue";
 export const SpinnerBasicExample = defineComponent({
   setup() {
     return () => {

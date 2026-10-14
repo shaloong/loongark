@@ -15,11 +15,11 @@ import {
   createLoongArkTheme,
   LoongArkTheme,
   type CreateThemeOptions,
-} from "@loongark/theme";
+} from "@shaloong/loongark-theme";
 import {
   bootstrapPrimitiveBase,
   type StyleBootstrap,
-} from "@loongark/primitives/styles";
+} from "@shaloong/loongark-primitives/styles";
 
 import { ThemeContext } from "./theme-context";
 const useThemeEffect =

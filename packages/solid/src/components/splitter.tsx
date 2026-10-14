@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSplitterStyles } from "@loongark/primitives/automatic-styles/splitter";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSplitterStyles } from "@shaloong/loongark-primitives/automatic-styles/splitter";
 /**
  * Splitter component - Solid wrapper.
  * Uses Ark UI Splitter with data attributes for styling.
@@ -13,7 +13,7 @@ import {
   type SplitterResizeTriggerProps as ArkSplitterResizeTriggerProps,
   type SplitterResizeTriggerIndicatorProps as ArkSplitterResizeTriggerIndicatorProps,
 } from "@ark-ui/solid/splitter";
-import type { SplitterSize } from "@loongark/primitives";
+import type { SplitterSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkSplitterRootProps extends Omit<
   ArkSplitterRootProps,

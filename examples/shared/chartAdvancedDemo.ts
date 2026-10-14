@@ -1,4 +1,4 @@
-import type { ChartSeries, DataRow } from "@loongark/kit";
+import type { ChartSeries, DataRow } from "@shaloong/loongark-kit";
 export const insightSeries: readonly ChartSeries[] = [
   { key: "revenue", label: "Revenue" },
   { key: "costs", label: "Operating costs" },

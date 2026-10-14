@@ -1,7 +1,7 @@
-import * as ReactApi from "@loongark/react";
-import * as SolidApi from "@loongark/solid";
-import * as VueApi from "@loongark/vue";
-import * as SvelteApi from "@loongark/svelte";
+import * as ReactApi from "@shaloong/loongark-react";
+import * as SolidApi from "@shaloong/loongark-solid";
+import * as VueApi from "@shaloong/loongark-vue";
+import * as SvelteApi from "@shaloong/loongark-svelte";
 
 type FrameworkSpecificKeys = "LoongArkProvider";
 type ComponentKeys<T> = Exclude<

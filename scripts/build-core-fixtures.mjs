@@ -6,10 +6,10 @@ import react from "@vitejs/plugin-react";
 import solid from "vite-plugin-solid";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 
-const styles = `import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';
-import {buttonPrimitive} from '@loongark/primitives/button';
-import {dialogPrimitive} from '@loongark/primitives/dialog';
-import {inputPrimitive} from '@loongark/primitives/input';
+const styles = `import {createPrimitiveStyleBootstrap} from '@shaloong/loongark-primitives/styles';
+import {buttonPrimitive} from '@shaloong/loongark-primitives/button';
+import {dialogPrimitive} from '@shaloong/loongark-primitives/dialog';
+import {inputPrimitive} from '@shaloong/loongark-primitives/input';
 const buttonStyles=createPrimitiveStyleBootstrap([buttonPrimitive]);
 const initialStyles=createPrimitiveStyleBootstrap([buttonPrimitive,dialogPrimitive]);
 const extraStyles=createPrimitiveStyleBootstrap([inputPrimitive,dialogPrimitive,buttonPrimitive]);
@@ -39,10 +39,10 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       (framework === "svelte" || framework === "vue" ? "ts" : "tsx") +
       '"></script></body></html>',
   );
-  const imports = `import {LoongArkProviderCore as Provider} from '@loongark/${framework}/provider-core';
-import {LoongArkButton as Button} from '@loongark/${framework}/button';
-import {${names.map((n) => "LoongArkDialog" + n + " as Dialog" + n).join(",")}} from '@loongark/${framework}/dialog';
-import {LoongArkInputRoot as InputRoot,LoongArkInputControl as InputControl,LoongArkInputLabel as InputLabel} from '@loongark/${framework}/input';`;
+  const imports = `import {LoongArkProviderCore as Provider} from '@shaloong/loongark-${framework}/provider-core';
+import {LoongArkButton as Button} from '@shaloong/loongark-${framework}/button';
+import {${names.map((n) => "LoongArkDialog" + n + " as Dialog" + n).join(",")}} from '@shaloong/loongark-${framework}/dialog';
+import {LoongArkInputRoot as InputRoot,LoongArkInputControl as InputControl,LoongArkInputLabel as InputLabel} from '@shaloong/loongark-${framework}/input';`;
   let source;
   if (framework === "react")
     source = `${imports}${styles}import {useState} from 'react';import {createRoot} from 'react-dom/client';function App(){const [mode,setMode]=useState<'light'|'dark'|'high-contrast'>('light');const [extra,setExtra]=useState(false);const [shown,setShown]=useState(true);const [second,setSecond]=useState(false);return <><button onClick={()=>setShown(!shown)}>Toggle provider</button><button onClick={()=>setSecond(!second)}>Toggle survivor</button>{second&&<Provider nonce={nonce} mode="dark" styleBootstrap={buttonStyles}><Button>Survivor</Button></Provider>}{shown&&<Provider mode={mode} nonce={nonce} styleBootstrap={extra?extraStyles:initialStyles}><section style={{padding:24,background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)'}}>${body}</section></Provider>}</>;}createRoot(target).render(<App/>);`;
@@ -82,7 +82,7 @@ h(Button,{onClick:()=>mode.value=mode.value==='light'?'dark':mode.value==='dark'
         name: "public-core-entries",
         async resolveId(id) {
           const m =
-            /^@loongark\/(react|vue|solid|svelte|kit|primitives|theme|tokens)(\/.+)?$/.exec(
+            /^@shaloong\/loongark-(react|vue|solid|svelte|kit|primitives|theme|tokens)(\/.+)?$/.exec(
               id,
             );
           if (!m) return null;

@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticScrollAreaStyles } from "@loongark/primitives/automatic-styles/scroll-area";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticScrollAreaStyles } from "@shaloong/loongark-primitives/automatic-styles/scroll-area";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticScrollAreaStyles } from "@loongark/primitives/auto
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { ScrollArea } from "@ark-ui/react/scroll-area";
-import type { ScrollAreaSize } from "@loongark/primitives";
+import type { ScrollAreaSize } from "@shaloong/loongark-primitives";
 
 type ArkScrollAreaRootProps = ComponentPropsWithoutRef<typeof ScrollArea.Root>;
 type ArkScrollAreaViewportProps = ComponentPropsWithoutRef<

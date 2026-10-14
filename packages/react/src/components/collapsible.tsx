@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticCollapsibleStyles } from "@loongark/primitives/automatic-styles/collapsible";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticCollapsibleStyles } from "@shaloong/loongark-primitives/automatic-styles/collapsible";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticCollapsibleStyles } from "@loongark/primitives/aut
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Collapsible } from "@ark-ui/react/collapsible";
-import type { CollapsibleSize } from "@loongark/primitives";
+import type { CollapsibleSize } from "@shaloong/loongark-primitives";
 
 type ArkCollapsibleRootProps = ComponentPropsWithoutRef<
   typeof Collapsible.Root

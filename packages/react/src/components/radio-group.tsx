@@ -1,9 +1,9 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticRadioGroupStyles } from "@loongark/primitives/automatic-styles/radio-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticRadioGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/radio-group";
 
 
-import { nativeSelectionProps } from "@loongark/kit";
+import { nativeSelectionProps } from "@shaloong/loongark-kit";
 import { dataProps } from "../data-props";
 import { useNativeSelection } from "../native-selection";
 import {
@@ -16,7 +16,7 @@ import type { ComponentPropsWithoutRef } from "react";
 import type {
   RadioGroupSize,
   RadioGroupOrientation,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 // ============ 类型定义 ============
 

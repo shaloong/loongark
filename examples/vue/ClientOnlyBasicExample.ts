@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkClientOnly } from "@loongark/vue";
+import { LoongArkClientOnly } from "@shaloong/loongark-vue";
 export const ClientOnlyBasicExample = defineComponent({
   setup() {
     return () => {

@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticPopoverStyles } from "@loongark/primitives/automatic-styles/popover";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticPopoverStyles } from "@shaloong/loongark-primitives/automatic-styles/popover";
 /**
  * Popover 组件 - Solid 封装
  * 基于 Ark UI Popover，透传 data-scope/data-part 并默认 asChild 避免嵌套

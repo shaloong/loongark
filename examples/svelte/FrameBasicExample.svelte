@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkFrame } from "@loongark/svelte";
+  import { LoongArkFrame } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkFrame title="独立预览">

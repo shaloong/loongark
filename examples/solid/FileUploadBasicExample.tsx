@@ -6,7 +6,7 @@ import {
   LoongArkFileUploadDropzone,
   LoongArkFileUploadTrigger,
   LoongArkFileUploadHiddenInput,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function FileUploadBasicExample() {
   return (
     <LoongArkFileUploadRoot maxFiles={1}>

@@ -1,7 +1,7 @@
 /** @jsxImportSource solid-js */
 // 本文件由 scripts/generate-core-examples.mjs 生成，并参与真实四端编译与浏览器验收。
 import { createSignal } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 export function CoreComponentsExample() {
   const [family, setFamily] = createSignal("NativeSelect");
   return (

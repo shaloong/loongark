@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 export default { title: "Components/MessageScroller" };
 function Conversation() {
   const [messages, setMessages] = useState(

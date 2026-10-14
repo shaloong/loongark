@@ -10,7 +10,7 @@ import {
   LoongArkStepsCompletedContent,
   LoongArkStepsPrevTrigger,
   LoongArkStepsNextTrigger,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function StepsBasicExample() {
   return (
     <LoongArkStepsRoot count={2}>

@@ -6,7 +6,7 @@ import {
   LoongArkPasswordInputControl,
   LoongArkPasswordInputInput,
   LoongArkPasswordInputVisibilityTrigger,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function PasswordInputBasicExample() {
   return (
     <LoongArkPasswordInputRoot>

@@ -4,7 +4,7 @@ import type { ToggleGroupRootProps } from "@ark-ui/svelte/toggle-group";
 import type {
   ToggleGroupOrientation,
   ToggleGroupSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export default class LoongArkToggleGroupRoot extends SvelteComponent<
   Omit<

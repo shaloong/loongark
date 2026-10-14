@@ -7,7 +7,7 @@ import {
   LoongArkBubble,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 import { createVirtualizationDemo } from "../shared/virtualizationDemo";
 export const VirtualizationExample = (
   props: { mode?: "table" | "messages" | "both" } = {},

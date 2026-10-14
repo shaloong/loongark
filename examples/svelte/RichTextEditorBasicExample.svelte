@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkRichTextEditor } from "@loongark/svelte";
+  import { LoongArkRichTextEditor } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkRichTextEditor

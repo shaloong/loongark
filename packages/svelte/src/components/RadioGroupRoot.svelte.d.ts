@@ -3,7 +3,7 @@ import { RadioGroup } from "@ark-ui/svelte/radio-group";
 import type {
   RadioGroupSize,
   RadioGroupOrientation,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export default class LoongArkRadioGroupRoot extends SvelteComponent<
   Omit<

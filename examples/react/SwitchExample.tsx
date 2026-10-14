@@ -5,7 +5,7 @@ import {
   LoongArkSwitchControl,
   LoongArkSwitchThumb,
   LoongArkSwitchLabel,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 export interface SwitchExampleProps {
   size?: "sm" | "md" | "lg";

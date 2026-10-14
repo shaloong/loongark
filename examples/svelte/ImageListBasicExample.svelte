@@ -3,7 +3,7 @@
     LoongArkImageList,
     LoongArkImageListItem,
     LoongArkImageListCaption,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkImageList columns={2}>

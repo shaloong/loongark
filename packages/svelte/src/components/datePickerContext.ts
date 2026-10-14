@@ -1,6 +1,6 @@
 import { getContext, setContext } from "svelte";
 import { writable, type Writable } from "svelte/store";
-import type { DatePickerSize } from "@loongark/primitives";
+import type { DatePickerSize } from "@shaloong/loongark-primitives";
 
 const datePickerContextKey = Symbol("loongark-date-picker-size");
 

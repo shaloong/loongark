@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkFrame } from "@loongark/solid";
+import { LoongArkFrame } from "@shaloong/loongark-solid";
 export function FrameBasicExample() {
   return (
     <LoongArkFrame title="独立预览">

@@ -1,10 +1,10 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticFloatingActionButtonStyles } from "@loongark/primitives/automatic-styles/floating-action-button";
-import { styles as lkAutomaticImageListStyles } from "@loongark/primitives/automatic-styles/image-list";
-import { styles as lkAutomaticMasonryStyles } from "@loongark/primitives/automatic-styles/masonry";
-import { styles as lkAutomaticSpeedDialStyles } from "@loongark/primitives/automatic-styles/speed-dial";
-import { controlIcons } from "@loongark/kit";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticFloatingActionButtonStyles } from "@shaloong/loongark-primitives/automatic-styles/floating-action-button";
+import { styles as lkAutomaticImageListStyles } from "@shaloong/loongark-primitives/automatic-styles/image-list";
+import { styles as lkAutomaticMasonryStyles } from "@shaloong/loongark-primitives/automatic-styles/masonry";
+import { styles as lkAutomaticSpeedDialStyles } from "@shaloong/loongark-primitives/automatic-styles/speed-dial";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 import {
   defineComponent,
@@ -26,7 +26,7 @@ import {
   type MediaLayoutOptions,
   type FloatingActionButtonOptions,
   type SpeedDialOptions,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 const make = (part: MediaPart) =>
   defineComponent({
     name: "LoongArk" + part,

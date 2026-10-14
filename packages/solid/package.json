@@ -1,5 +1,5 @@
 {
-  "name": "@loongark/solid",
+  "name": "@shaloong/loongark-solid",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
@@ -782,9 +782,9 @@
   ],
   "dependencies": {
     "@ark-ui/solid": "^5.39.3",
-    "@loongark/kit": "workspace:*",
-    "@loongark/primitives": "workspace:*",
-    "@loongark/theme": "workspace:*",
+    "@shaloong/loongark-kit": "workspace:*",
+    "@shaloong/loongark-primitives": "workspace:*",
+    "@shaloong/loongark-theme": "workspace:*",
     "@zag-js/solid": "1.45.0"
   },
   "peerDependencies": {

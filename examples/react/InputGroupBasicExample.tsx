@@ -5,7 +5,7 @@ import {
   LoongArkInputGroup,
   LoongArkInputPrefix,
   LoongArkInputControl,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function InputGroupBasicExample() {
   return (
     <LoongArkInputRoot>

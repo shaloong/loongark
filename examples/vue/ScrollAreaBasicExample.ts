@@ -5,7 +5,7 @@ import {
   LoongArkScrollAreaContent,
   LoongArkScrollAreaScrollbar,
   LoongArkScrollAreaThumb,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const ScrollAreaBasicExample = defineComponent({
   setup() {
     return () => {

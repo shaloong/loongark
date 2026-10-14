@@ -5,7 +5,7 @@ import {
   LoongArkAccordionItemTrigger,
   LoongArkAccordionItemIndicator,
   LoongArkAccordionItemContent,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const AccordionBasicExample = defineComponent({
   setup() {
     return () => {

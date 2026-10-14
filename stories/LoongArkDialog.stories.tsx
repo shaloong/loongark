@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { LoongArkButton, LoongArkDialog } from "@loongark/react";
+import { LoongArkButton, LoongArkDialog } from "@shaloong/loongark-react";
 
 type DialogStoryProps = {
   size: "sm" | "md" | "lg";

@@ -10,7 +10,7 @@ import {
   LoongArkToastActionTrigger,
   LoongArkToastCloseTrigger,
   createToaster,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 
 type ToastVariant = "info" | "success" | "warning" | "error";
 

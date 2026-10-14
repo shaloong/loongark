@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { documentItems, documentSections } from "../shared/arkNextDemo";
 export function TocExample() {
   let scroll: HTMLElement | undefined;

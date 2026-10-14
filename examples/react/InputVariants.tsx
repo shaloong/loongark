@@ -1,5 +1,5 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/react";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-react";
 import { useState } from "react";
 import {
   LoongArkInputRoot,
@@ -10,7 +10,7 @@ import {
   LoongArkInputSuffix,
   LoongArkInputHelperText,
   LoongArkPinInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 export function InputVariantsExample() {
   const [email, setEmail] = useState("");

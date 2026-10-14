@@ -6,7 +6,7 @@
     LoongArkRadioGroupItemControl,
     LoongArkRadioGroupItemText,
     LoongArkRadioGroupItemHiddenInput,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkRadioGroupRoot name="plan" defaultValue="basic">

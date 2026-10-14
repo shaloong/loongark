@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { DatePicker } from "@ark-ui/svelte/date-picker";
 import type { DatePickerRootProps } from "@ark-ui/svelte/date-picker";
-import type { DatePickerSize } from "@loongark/primitives";
+import type { DatePickerSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkDatePickerRoot extends SvelteComponent<
   Omit<

@@ -14,7 +14,7 @@ import {
   LoongArkComboboxItemText,
   LoongArkComboboxItemIndicator,
   type ComboboxSize,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 interface ComboboxExampleProps {
   size?: ComboboxSize;

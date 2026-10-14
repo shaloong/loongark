@@ -4,7 +4,7 @@ import {
   LoongArkChart,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 import { createChartInteractionDemo } from "../shared/chartInteractionDemo";
 export const ChartInteractionExample = () => {
   const [version, redraw] = createSignal(0),

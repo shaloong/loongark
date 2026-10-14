@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticMessageScrollerStyles } from "@loongark/primitives/automatic-styles/message-scroller";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticMessageScrollerStyles } from "@shaloong/loongark-primitives/automatic-styles/message-scroller";
   registerAutomaticStyles(lkAutomaticMessageScrollerStyles);
 
   import { onMount, type Snippet } from "svelte";
@@ -13,7 +13,7 @@
     virtualViewportHeight,
     type MessageScrollerOptions,
     type VirtualRenderDetails,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   let {
     label = "Messages",
     jumpLabel = "Jump to latest",

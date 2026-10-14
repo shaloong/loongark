@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkStack, LoongArkSkeleton } from "@loongark/react";
+import { LoongArkStack, LoongArkSkeleton } from "@shaloong/loongark-react";
 export function SkeletonBasicExample() {
   return (
     <LoongArkStack>

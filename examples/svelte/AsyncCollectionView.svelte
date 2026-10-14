@@ -1,6 +1,6 @@
 <script lang="ts">
  import {onDestroy} from "svelte";
- import * as L from "@loongark/svelte";
+ import * as L from "@shaloong/loongark-svelte";
  import {createAsyncCollectionDemo,type CollectionDemoItem} from "../shared/asyncCollectionDemo";
  let {onDispose}: {onDispose:()=>void} = $props();
  let revision=$state(0);const demo=createAsyncCollectionDemo(()=>revision++),list=L.useAsyncList<CollectionDemoItem,number>(()=>({load:demo.loader.load,onSuccess:demo.loader.onSuccess,autoReload:false}));

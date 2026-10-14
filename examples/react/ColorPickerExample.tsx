@@ -23,7 +23,7 @@ import {
   LoongArkColorPickerSwatch,
   LoongArkColorPickerValueText,
   LoongArkColorPickerValueSwatch,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const swatches = ["#006EFF", "#0A3565", "#5AC8FA", "#F58220"];
 

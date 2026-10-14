@@ -1,6 +1,6 @@
 ﻿<script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticScrollAreaStyles } from "@loongark/primitives/automatic-styles/scroll-area";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticScrollAreaStyles } from "@shaloong/loongark-primitives/automatic-styles/scroll-area";
   registerAutomaticStyles(lkAutomaticScrollAreaStyles);
 
   import { ScrollArea } from "@ark-ui/svelte/scroll-area";

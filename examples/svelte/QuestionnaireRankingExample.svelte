@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import { createQuestionnaireRankingDemo } from "../shared/questionnaireRankingDemo";
   let revision = $state(0);
   const demo = createQuestionnaireRankingDemo(() => revision++);

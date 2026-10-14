@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkMarquee, LoongArkBadge } from "@loongark/solid";
+import { LoongArkMarquee, LoongArkBadge } from "@shaloong/loongark-solid";
 export function MarqueeBasicExample() {
   return (
     <LoongArkMarquee.Root>

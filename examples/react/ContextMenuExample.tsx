@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { contextMenuDemoCSS } from "../shared/contextMenuDemo";
 export function ContextMenuExample() {
   const [selection, setSelection] = useState("No action selected");

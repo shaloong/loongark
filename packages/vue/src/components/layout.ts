@@ -1,38 +1,38 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticAlertStyles } from "@loongark/primitives/automatic-styles/alert";
-import { styles as lkAutomaticAppBarStyles } from "@loongark/primitives/automatic-styles/app-bar";
-import { styles as lkAutomaticAspectRatioStyles } from "@loongark/primitives/automatic-styles/aspect-ratio";
-import { styles as lkAutomaticAvatarGroupStyles } from "@loongark/primitives/automatic-styles/avatar-group";
-import { styles as lkAutomaticBadgeStyles } from "@loongark/primitives/automatic-styles/badge";
-import { styles as lkAutomaticBottomNavigationStyles } from "@loongark/primitives/automatic-styles/bottom-navigation";
-import { styles as lkAutomaticBoxStyles } from "@loongark/primitives/automatic-styles/box";
-import { styles as lkAutomaticBreadcrumbStyles } from "@loongark/primitives/automatic-styles/breadcrumb";
-import { styles as lkAutomaticButtonGroupStyles } from "@loongark/primitives/automatic-styles/button-group";
-import { styles as lkAutomaticCardStyles } from "@loongark/primitives/automatic-styles/card";
-import { styles as lkAutomaticChipStyles } from "@loongark/primitives/automatic-styles/chip";
-import { styles as lkAutomaticContainerStyles } from "@loongark/primitives/automatic-styles/container";
-import { styles as lkAutomaticEmptyStyles } from "@loongark/primitives/automatic-styles/empty";
-import { styles as lkAutomaticGridStyles } from "@loongark/primitives/automatic-styles/grid";
-import { styles as lkAutomaticItemStyles } from "@loongark/primitives/automatic-styles/item";
-import { styles as lkAutomaticKbdStyles } from "@loongark/primitives/automatic-styles/kbd";
-import { styles as lkAutomaticLabelStyles } from "@loongark/primitives/automatic-styles/label";
-import { styles as lkAutomaticLinkStyles } from "@loongark/primitives/automatic-styles/link";
-import { styles as lkAutomaticListStyles } from "@loongark/primitives/automatic-styles/list";
-import { styles as lkAutomaticMenubarStyles } from "@loongark/primitives/automatic-styles/menubar";
-import { styles as lkAutomaticNativeSelectStyles } from "@loongark/primitives/automatic-styles/native-select";
-import { styles as lkAutomaticNavigationMenuStyles } from "@loongark/primitives/automatic-styles/navigation-menu";
-import { styles as lkAutomaticPaperStyles } from "@loongark/primitives/automatic-styles/paper";
-import { styles as lkAutomaticSeparatorStyles } from "@loongark/primitives/automatic-styles/separator";
-import { styles as lkAutomaticSidebarStyles } from "@loongark/primitives/automatic-styles/sidebar";
-import { styles as lkAutomaticSkeletonStyles } from "@loongark/primitives/automatic-styles/skeleton";
-import { styles as lkAutomaticSpinnerStyles } from "@loongark/primitives/automatic-styles/spinner";
-import { styles as lkAutomaticStackStyles } from "@loongark/primitives/automatic-styles/stack";
-import { styles as lkAutomaticTableStyles } from "@loongark/primitives/automatic-styles/table";
-import { styles as lkAutomaticTimelineStyles } from "@loongark/primitives/automatic-styles/timeline";
-import { styles as lkAutomaticTypographyStyles } from "@loongark/primitives/automatic-styles/typography";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticAlertStyles } from "@shaloong/loongark-primitives/automatic-styles/alert";
+import { styles as lkAutomaticAppBarStyles } from "@shaloong/loongark-primitives/automatic-styles/app-bar";
+import { styles as lkAutomaticAspectRatioStyles } from "@shaloong/loongark-primitives/automatic-styles/aspect-ratio";
+import { styles as lkAutomaticAvatarGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/avatar-group";
+import { styles as lkAutomaticBadgeStyles } from "@shaloong/loongark-primitives/automatic-styles/badge";
+import { styles as lkAutomaticBottomNavigationStyles } from "@shaloong/loongark-primitives/automatic-styles/bottom-navigation";
+import { styles as lkAutomaticBoxStyles } from "@shaloong/loongark-primitives/automatic-styles/box";
+import { styles as lkAutomaticBreadcrumbStyles } from "@shaloong/loongark-primitives/automatic-styles/breadcrumb";
+import { styles as lkAutomaticButtonGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/button-group";
+import { styles as lkAutomaticCardStyles } from "@shaloong/loongark-primitives/automatic-styles/card";
+import { styles as lkAutomaticChipStyles } from "@shaloong/loongark-primitives/automatic-styles/chip";
+import { styles as lkAutomaticContainerStyles } from "@shaloong/loongark-primitives/automatic-styles/container";
+import { styles as lkAutomaticEmptyStyles } from "@shaloong/loongark-primitives/automatic-styles/empty";
+import { styles as lkAutomaticGridStyles } from "@shaloong/loongark-primitives/automatic-styles/grid";
+import { styles as lkAutomaticItemStyles } from "@shaloong/loongark-primitives/automatic-styles/item";
+import { styles as lkAutomaticKbdStyles } from "@shaloong/loongark-primitives/automatic-styles/kbd";
+import { styles as lkAutomaticLabelStyles } from "@shaloong/loongark-primitives/automatic-styles/label";
+import { styles as lkAutomaticLinkStyles } from "@shaloong/loongark-primitives/automatic-styles/link";
+import { styles as lkAutomaticListStyles } from "@shaloong/loongark-primitives/automatic-styles/list";
+import { styles as lkAutomaticMenubarStyles } from "@shaloong/loongark-primitives/automatic-styles/menubar";
+import { styles as lkAutomaticNativeSelectStyles } from "@shaloong/loongark-primitives/automatic-styles/native-select";
+import { styles as lkAutomaticNavigationMenuStyles } from "@shaloong/loongark-primitives/automatic-styles/navigation-menu";
+import { styles as lkAutomaticPaperStyles } from "@shaloong/loongark-primitives/automatic-styles/paper";
+import { styles as lkAutomaticSeparatorStyles } from "@shaloong/loongark-primitives/automatic-styles/separator";
+import { styles as lkAutomaticSidebarStyles } from "@shaloong/loongark-primitives/automatic-styles/sidebar";
+import { styles as lkAutomaticSkeletonStyles } from "@shaloong/loongark-primitives/automatic-styles/skeleton";
+import { styles as lkAutomaticSpinnerStyles } from "@shaloong/loongark-primitives/automatic-styles/spinner";
+import { styles as lkAutomaticStackStyles } from "@shaloong/loongark-primitives/automatic-styles/stack";
+import { styles as lkAutomaticTableStyles } from "@shaloong/loongark-primitives/automatic-styles/table";
+import { styles as lkAutomaticTimelineStyles } from "@shaloong/loongark-primitives/automatic-styles/timeline";
+import { styles as lkAutomaticTypographyStyles } from "@shaloong/loongark-primitives/automatic-styles/typography";
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import { mountMenubar } from "@loongark/kit";
+import { mountMenubar } from "@shaloong/loongark-kit";
 import { defineComponent, h, type PropType } from "vue";
 import {
   layoutParts,
@@ -40,7 +40,7 @@ import {
   layoutStyles,
   type LayoutPart,
   type LayoutOptions,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 const make = (part: LayoutPart) =>
   defineComponent({
     name: "LoongArk" + part,

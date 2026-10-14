@@ -46,7 +46,7 @@ test("选择控件卸载后不再读取只读状态，新的按键允许同步�
   );
   await page.evaluate(() => {
     const w = window as unknown as {
-      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
       disposeSelection(): void;
       reads: number;
     };
@@ -85,7 +85,7 @@ test("拒绝点击与原生 reset 后表单值保持调用方已接受状态，�
   await fixture(page);
   await page.evaluate(() => {
     const w = window as unknown as {
-      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
       changes: number;
     };
     w.changes = 0;
@@ -130,7 +130,7 @@ test("回调后读取最新状态，支持延迟接受而不复活旧值", async
     const input = document.getElementById("agreement") as HTMLInputElement;
     let checked = true;
     const w = window as unknown as {
-      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
     };
     w.mountNativeSelection(input, () => ({ checked }));
     input.addEventListener("change", () =>
@@ -154,7 +154,7 @@ test("卸载取消等待中的同步，重复清理不重写分离节点", async
     const input = document.getElementById("agreement") as HTMLInputElement;
     let reads = 0;
     const w = window as unknown as {
-      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
     };
     const dispose = w.mountNativeSelection(input, () => {
       reads++;
@@ -177,7 +177,7 @@ test("只读单选保留焦点和原生提交值，方向键不修改选择", as
   await fixture(page);
   await page.evaluate(() => {
     const w = window as unknown as {
-      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
     };
     for (const input of Array.from(
       document.querySelectorAll<HTMLInputElement>("input[type=radio]"),
@@ -212,7 +212,7 @@ test("外部关联隐藏字段 reset 保留已接受的序列化值，不重新�
     input.setAttribute("form", "prefs");
     document.body.append(input);
     const w = window as unknown as {
-      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
     };
     w.mountNativeSelection(input, () => ({ formValue: "React | Vue" }));
     input.value = "Rejected serialization";
@@ -240,7 +240,7 @@ test("拒绝父单选变更不改写嵌套题组或其他表单的选择", async
       '<form><label>Other spacious<input type="radio" name="otherDensity" value="spacious" checked></label></form>',
     );
     const w = window as unknown as {
-      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
     };
     w.mountNativeSelection(
       document.getElementById("spacious") as HTMLInputElement,
@@ -271,7 +271,7 @@ test("混合复选状态在拒绝交互和 reset 后保留语义，接受后提�
   await page.evaluate(() => {
     const input = document.getElementById("agreement") as HTMLInputElement;
     const w = window as unknown as {
-      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
       acceptMixed(): void;
     };
     let accepted = { checked: false, indeterminate: true };
@@ -315,7 +315,7 @@ test("隐藏标签原生无效事件尊重调用方取消与卸载，不抢走�
     const hidden = document.getElementById("tags") as HTMLInputElement;
     const outside = document.getElementById("outside") as HTMLButtonElement;
     const w = window as unknown as {
-      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
       disposeTags: () => void;
     };
     hidden.addEventListener("invalid", (event) => event.preventDefault(), {
@@ -355,7 +355,7 @@ for (const position of ["before", "after"])
       ) as HTMLInputElement;
       (
         window as unknown as {
-          mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+          mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
         }
       ).mountNativeSelection(hidden, () => ({ formValue: hidden.value }));
     });
@@ -385,7 +385,7 @@ test("标签无效事件不解除待运行 Tab 保护，首个错误仍保留焦
     ) as HTMLInputElement;
     (
       window as unknown as {
-        mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+        mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
       }
     ).mountNativeSelection(hidden, () => ({ formValue: hidden.value }));
     document.getElementById("visible-tags")!.focus();
@@ -416,7 +416,7 @@ test("首错约束在恢复帧前改变时，标签不覆盖新的首个错误",
     ) as HTMLInputElement;
     (
       window as unknown as {
-        mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+        mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
       }
     ).mountNativeSelection(hidden, () => ({ formValue: hidden.value }));
     hidden.reportValidity();
@@ -443,7 +443,7 @@ test("文本输入提交后保留最新已接受的格式值，拒绝编辑与�
   await page.evaluate(() => {
     const input = document.querySelector("input")!;
     const w = window as unknown as {
-      mountNativeSelection: typeof import("@loongark/kit").mountNativeSelection;
+      mountNativeSelection: typeof import("@shaloong/loongark-kit").mountNativeSelection;
       disposeText(): void;
       events: number;
     };

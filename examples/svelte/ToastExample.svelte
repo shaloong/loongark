@@ -9,7 +9,7 @@
     LoongArkToastCloseTrigger,
     createToaster,
     LoongArkProvider,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 
   type ToastVariant = "info" | "success" | "warning" | "error";
 

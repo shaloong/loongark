@@ -6,7 +6,7 @@ import {
   LoongArkClipboardInput,
   LoongArkClipboardTrigger,
   LoongArkClipboardIndicator,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function ClipboardBasicExample() {
   return (
     <LoongArkClipboardRoot value="https://example.com">

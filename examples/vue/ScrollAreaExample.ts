@@ -6,8 +6,8 @@ import {
   LoongArkScrollAreaScrollbar,
   LoongArkScrollAreaThumb,
   LoongArkScrollAreaCorner,
-} from "@loongark/vue";
-import type { ScrollAreaSize } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { ScrollAreaSize } from "@shaloong/loongark-primitives";
 
 const items = Array.from({ length: 12 }, (_, index) =>
   `Release note ${index + 1}`

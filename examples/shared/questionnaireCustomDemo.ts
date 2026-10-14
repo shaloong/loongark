@@ -2,7 +2,7 @@ import type {
   Question,
   QuestionnaireCustomContext,
   QuestionnaireValue,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 const initial = (): QuestionnaireValue => ({
   rating: "3",
   people: [

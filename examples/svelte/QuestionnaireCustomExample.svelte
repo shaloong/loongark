@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import { createQuestionnaireCustomDemo } from "../shared/questionnaireCustomDemo";
   import {
     groupsDisclosureCSS,
     groupsDisclosureIcon,
   } from "../shared/questionnaireGroupsDemo";
-  import type { QuestionnaireCustomContext } from "@loongark/kit";
+  import type { QuestionnaireCustomContext } from "@shaloong/loongark-kit";
   import Rating from "./QuestionnaireRatingControl.svelte";
   let revision = $state(0);
   const demo = createQuestionnaireCustomDemo(() => revision++);

@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkChip, LoongArkChipLabel } from "@loongark/vue";
+import { LoongArkChip, LoongArkChipLabel } from "@shaloong/loongark-vue";
 export const ChipBasicExample = defineComponent({
   setup() {
     return () => {

@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkLabel } from "@loongark/vue";
+import { LoongArkLabel } from "@shaloong/loongark-vue";
 export const LabelBasicExample = defineComponent({
   setup() {
     return () => {

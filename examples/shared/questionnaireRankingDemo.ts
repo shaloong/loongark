@@ -1,4 +1,4 @@
-import type { Question, QuestionnaireValue } from "@loongark/kit";
+import type { Question, QuestionnaireValue } from "@shaloong/loongark-kit";
 import { createQuestionnaireTypesDemo } from "./questionnaireTypesDemo";
 export const rankingQuestions: readonly Question[] = [
   {

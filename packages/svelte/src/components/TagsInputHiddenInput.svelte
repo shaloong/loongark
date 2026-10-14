@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTagsInputStyles } from "@loongark/primitives/automatic-styles/tags-input";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTagsInputStyles } from "@shaloong/loongark-primitives/automatic-styles/tags-input";
   registerAutomaticStyles(lkAutomaticTagsInputStyles);
 
   import { onMount } from "svelte";
-  import { mountNativeSelection } from "@loongark/kit";
+  import { mountNativeSelection } from "@shaloong/loongark-kit";
   import { useTagsInputContext } from "@ark-ui/svelte/tags-input";
   export let ref: HTMLInputElement | null = null;
   const api = useTagsInputContext();

@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSliderStyles } from "@loongark/primitives/automatic-styles/slider";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSliderStyles } from "@shaloong/loongark-primitives/automatic-styles/slider";
 import type { SliderRootProps as NativeSliderRootProps } from "@ark-ui/vue/slider";
 import { renderPart } from "../render-part";
 /**
@@ -14,7 +14,7 @@ import {
   type PropType,
 } from "vue";
 import { Slider as ArkSlider } from "@ark-ui/vue/slider";
-import type { SliderOrientation, SliderSize } from "@loongark/primitives";
+import type { SliderOrientation, SliderSize } from "@shaloong/loongark-primitives";
 
 export interface SliderValueChangeDetails {
   value: number[];

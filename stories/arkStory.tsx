@@ -1,5 +1,5 @@
 import type { Decorator } from "@storybook/react";
-import { LoongArkTypography } from "@loongark/react";
+import { LoongArkTypography } from "@shaloong/loongark-react";
 /** 独立预览是完整页面，提供标题和主内容地标；组件本身不强加页面结构。 */
 export const withArkExamplePage: Decorator = (Story, context) => (
   <main

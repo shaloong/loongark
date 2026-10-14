@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkDrawer } from "@loongark/vue";
+import { LoongArkDrawer } from "@shaloong/loongark-vue";
 export const DrawerBasicExample = defineComponent({
   setup() {
     return () => {

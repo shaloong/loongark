@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkStack } from "@loongark/vue";
+import { LoongArkStack } from "@shaloong/loongark-vue";
 export const StackBasicExample = defineComponent({
   setup() {
     return () => {

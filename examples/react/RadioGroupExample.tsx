@@ -7,11 +7,11 @@ import {
   LoongArkRadioGroupItemText,
   LoongArkRadioGroupIndicator,
   LoongArkRadioGroupItemHiddenInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 import type {
   RadioGroupSize,
   RadioGroupOrientation,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface RadioGroupExampleProps {
   size?: RadioGroupSize;

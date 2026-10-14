@@ -4,7 +4,7 @@ import {
   LoongArkButton,
   LoongArkSwapRoot,
   LoongArkSwapIndicator,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function SwapBasicExample() {
   const [expanded, setExpanded] = createSignal(false);
   return (

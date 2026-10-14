@@ -6,7 +6,7 @@ import {
   LoongArkScrollAreaContent,
   LoongArkScrollAreaScrollbar,
   LoongArkScrollAreaThumb,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function ScrollAreaBasicExample() {
   return (
     <LoongArkScrollAreaRoot>

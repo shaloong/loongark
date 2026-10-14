@@ -4,7 +4,7 @@ import {
   LoongArkNavigationMenuList,
   LoongArkNavigationMenuItem,
   LoongArkNavigationMenuLink,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const NavigationMenuBasicExample = defineComponent({
   setup() {
     return () => {

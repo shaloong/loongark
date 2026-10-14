@@ -4,6 +4,6 @@ export { LoongArkToggleIndicator } from "../components/toggle";
 export type { LoongArkToggleIndicatorProps } from "../components/toggle";
 export { LoongArkToggleRoot } from "../components/toggle";
 export type { LoongArkToggleRootProps } from "../components/toggle";
-export type { ToggleSize } from "@loongark/primitives";
+export type { ToggleSize } from "@shaloong/loongark-primitives";
 export { useToggle } from "@ark-ui/react/toggle";
 export { useToggleContext } from "@ark-ui/react/toggle";

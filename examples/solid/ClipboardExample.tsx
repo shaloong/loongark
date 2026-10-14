@@ -9,8 +9,8 @@ import {
   LoongArkClipboardTrigger,
   LoongArkClipboardIndicator,
   LoongArkClipboardValueText,
-} from "@loongark/solid";
-import type { ClipboardSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { ClipboardSize } from "@shaloong/loongark-primitives";
 
 interface ClipboardExampleProps {
   size?: ClipboardSize;

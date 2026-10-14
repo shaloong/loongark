@@ -6,8 +6,8 @@ import {
   LoongArkPasswordInputInput,
   LoongArkPasswordInputIndicator,
   LoongArkPasswordInputVisibilityTrigger,
-} from "@loongark/vue";
-import type { PasswordInputSize, PasswordInputState } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { PasswordInputSize, PasswordInputState } from "@shaloong/loongark-primitives";
 
 export const PasswordInputExample = defineComponent({
   name: "PasswordInputExample",

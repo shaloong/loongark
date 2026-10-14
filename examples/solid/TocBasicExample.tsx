@@ -7,7 +7,7 @@ import {
   LoongArkTocList,
   LoongArkTocItem,
   LoongArkTocLink,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function TocBasicExample() {
   return (
     <div>

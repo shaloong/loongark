@@ -4,7 +4,7 @@ import {
   type DataRow,
   type DataTableProps,
   type DataTableState,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export const structureColumns: readonly DataColumn[] = [
   {
     key: "name",

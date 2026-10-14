@@ -67,4 +67,4 @@ export const layoutStyles = (
       }
     : {}),
 });
-export { foundationCSS } from "@loongark/primitives/shared-styles/foundations";
+export { foundationCSS } from "@shaloong/loongark-primitives/shared-styles/foundations";

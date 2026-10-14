@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticSliderStyles } from "@loongark/primitives/automatic-styles/slider";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticSliderStyles } from "@shaloong/loongark-primitives/automatic-styles/slider";
   registerAutomaticStyles(lkAutomaticSliderStyles);
 
   import { Slider } from "@ark-ui/svelte/slider";
   import type { SliderRootProps } from "@ark-ui/svelte/slider";
-  import type { SliderOrientation, SliderSize } from "@loongark/primitives";
+  import type { SliderOrientation, SliderSize } from "@shaloong/loongark-primitives";
 
   export let size: SliderSize = "md";
   export let orientation: SliderOrientation = "horizontal";

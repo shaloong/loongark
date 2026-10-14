@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkContextMenu } from "@loongark/react";
+import { LoongArkContextMenu } from "@shaloong/loongark-react";
 export function ContextMenuBasicExample() {
   return (
     <LoongArkContextMenu.Root>

@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticDrawerStyles } from "@loongark/primitives/automatic-styles/drawer";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticDrawerStyles } from "@shaloong/loongark-primitives/automatic-styles/drawer";
 import { DrawerGrabber } from "./drawer-grabber";
 import { DrawerRoot, DrawerRootProvider } from "./drawer-roots";
 import { Drawer } from "@ark-ui/solid/drawer";

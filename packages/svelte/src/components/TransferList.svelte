@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticTransferListStyles } from "@loongark/primitives/automatic-styles/transfer-list";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticTransferListStyles } from "@shaloong/loongark-primitives/automatic-styles/transfer-list";
   registerAutomaticStyles(lkAutomaticTransferListStyles);
 
-  import { controlIcons } from "@loongark/kit";
+  import { controlIcons } from "@shaloong/loongark-kit";
   import Icon from "./Icon.svelte";
   import {
     transferView,
@@ -13,7 +13,7 @@
     focusTransferredItem,
     type TransferItem,
     type TransferListOptions,
-  } from "@loongark/kit";
+  } from "@shaloong/loongark-kit";
   export let items: readonly TransferItem[] = [];
   export let value: readonly string[] | undefined = undefined;
   export let defaultValue: readonly string[] = [];

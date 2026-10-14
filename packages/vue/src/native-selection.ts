@@ -1,5 +1,5 @@
 import { onMounted, onBeforeUnmount } from "vue";
-import { mountNativeSelection } from "@loongark/kit";
+import { mountNativeSelection } from "@shaloong/loongark-kit";
 export function nativeSelectionRef(
   read: Parameters<typeof mountNativeSelection>[1],
 ) {

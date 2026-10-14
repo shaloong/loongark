@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal, createMemo } from "solid-js";
-import { LoongArkQuestionnaire } from "@loongark/solid";
+import { LoongArkQuestionnaire } from "@shaloong/loongark-solid";
 export function QuestionnaireBasicExample() {
   const [completed, setCompleted] = createSignal(false);
   return (

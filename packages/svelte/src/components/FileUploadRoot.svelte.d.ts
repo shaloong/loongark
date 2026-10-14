@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { FileUpload } from "@ark-ui/svelte/file-upload";
 import type { FileUploadRootProps } from "@ark-ui/svelte/file-upload";
-import type { FileUploadSize } from "@loongark/primitives";
+import type { FileUploadSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkFileUploadRoot extends SvelteComponent<
   Omit<

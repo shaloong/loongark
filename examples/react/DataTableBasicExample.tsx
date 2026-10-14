@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkDataTable } from "@loongark/react";
+import { LoongArkDataTable } from "@shaloong/loongark-react";
 export function DataTableBasicExample() {
   return (
     <LoongArkDataTable

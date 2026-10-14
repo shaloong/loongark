@@ -1,5 +1,5 @@
 // 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
-export type { FileUploadSize } from "@loongark/primitives";
+export type { FileUploadSize } from "@shaloong/loongark-primitives";
 export { LoongArkFileUploadClearTrigger } from "../components/file-upload";
 export type { LoongArkFileUploadClearTriggerProps } from "../components/file-upload";
 export { LoongArkFileUploadContext } from "../components/ark-advanced";

@@ -5,7 +5,7 @@
     LoongArkRatingGroupControl,
     LoongArkRatingGroupItem,
     LoongArkRatingGroupHiddenInput,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkRatingGroupRoot count={5} defaultValue={3}>

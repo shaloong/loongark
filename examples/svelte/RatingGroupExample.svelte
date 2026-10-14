@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { LoongArkIcon } from "@loongark/svelte";
-  import { controlIcons } from "@loongark/kit";
+  import { LoongArkIcon } from "@shaloong/loongark-svelte";
+  import { controlIcons } from "@shaloong/loongark-kit";
   import {
     LoongArkRatingGroupRoot,
     LoongArkRatingGroupLabel,
     LoongArkRatingGroupControl,
     LoongArkRatingGroupItem,
     LoongArkRatingGroupHiddenInput,
-  } from "@loongark/svelte";
-  import type { RatingGroupSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { RatingGroupSize } from "@shaloong/loongark-primitives";
 
   export let size: RatingGroupSize = "md";
   export let disabled = false;

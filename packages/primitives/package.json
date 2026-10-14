@@ -1,5 +1,5 @@
 {
-  "name": "@loongark/primitives",
+  "name": "@shaloong/loongark-primitives",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
@@ -972,8 +972,8 @@
     "package.json"
   ],
   "dependencies": {
-    "@loongark/theme": "workspace:*",
-    "@loongark/tokens": "workspace:*"
+    "@shaloong/loongark-theme": "workspace:*",
+    "@shaloong/loongark-tokens": "workspace:*"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json && node ../../scripts/fix-dist-imports.mjs dist"

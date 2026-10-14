@@ -1,4 +1,4 @@
-import { createAsyncCollectionLoader, type AsyncCollectionLoadDetails } from "@loongark/kit";
+import { createAsyncCollectionLoader, type AsyncCollectionLoadDetails } from "@shaloong/loongark-kit";
 export interface CollectionDemoItem { id: string; label: string; }
 export function createAsyncCollectionDemo(notify: () => void) {
   let fail = false, cycle = false, aborted = 0, requests = 0, disposed = false, pageRequest = false;

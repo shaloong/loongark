@@ -3,7 +3,7 @@ import {
   LoongArkChart,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import { createChartInteractionDemo } from "../shared/chartInteractionDemo";
 export const ChartInteractionExample = defineComponent({
   setup() {

@@ -1,8 +1,8 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/react";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { LoongArkToggleRoot, LoongArkToggleIndicator } from "@loongark/react";
+import { LoongArkToggleRoot, LoongArkToggleIndicator } from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/Toggle",

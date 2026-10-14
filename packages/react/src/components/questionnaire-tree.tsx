@@ -4,7 +4,7 @@ import { createElement, type ReactNode } from "react";
 import type {
   QuestionnaireCustomContext,
   QuestionnaireRenderNode,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export type LoongArkQuestionnaireRenderers = Readonly<
   Record<string, (context: QuestionnaireCustomContext) => ReactNode>
 >;

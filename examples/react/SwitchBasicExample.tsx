@@ -5,7 +5,7 @@ import {
   LoongArkSwitchControl,
   LoongArkSwitchThumb,
   LoongArkSwitchHiddenInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function SwitchBasicExample() {
   return (
     <LoongArkSwitchRoot name="notifications">

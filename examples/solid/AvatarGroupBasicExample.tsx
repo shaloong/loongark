@@ -5,7 +5,7 @@ import {
   LoongArkAvatarRoot,
   LoongArkAvatarFallback,
   LoongArkAvatarGroupOverflow,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function AvatarGroupBasicExample() {
   return (
     <LoongArkAvatarGroup aria-label="项目成员">

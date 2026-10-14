@@ -1,8 +1,8 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSwitchStyles } from "@loongark/primitives/automatic-styles/switch";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSwitchStyles } from "@shaloong/loongark-primitives/automatic-styles/switch";
 import { useFieldContext } from "@ark-ui/vue/field";
-import { nativeSelectionFieldDescription } from "@loongark/kit";
+import { nativeSelectionFieldDescription } from "@shaloong/loongark-kit";
 import type { SwitchHiddenInputProps } from "@ark-ui/vue/switch";
 import { nativeSelectionRef } from "../native-selection";
 import { useSwitchContext } from "@ark-ui/vue/switch";
@@ -11,7 +11,7 @@ import { resolveDynamicComponent, defineComponent, h } from "vue";
 import type { PropType } from "vue";
 import { Switch as ArkSwitch } from "@ark-ui/vue/switch";
 import { ark } from "@ark-ui/vue";
-import type { SwitchPrimitiveProps } from "@loongark/primitives";
+import type { SwitchPrimitiveProps } from "@shaloong/loongark-primitives";
 
 export type SwitchSize = NonNullable<SwitchPrimitiveProps["size"]>;
 

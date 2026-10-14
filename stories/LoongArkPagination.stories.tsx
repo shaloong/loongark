@@ -7,7 +7,7 @@ import {
   LoongArkPaginationPrevTrigger,
   LoongArkPaginationNextTrigger,
   LoongArkPaginationEllipsis,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const meta: Meta = {
   title: "Components/Pagination",

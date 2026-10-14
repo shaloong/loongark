@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkFloatingPanel } from "@loongark/vue";
+import { LoongArkFloatingPanel } from "@shaloong/loongark-vue";
 export const FloatingPanelBasicExample = defineComponent({
   setup() {
     return () => {

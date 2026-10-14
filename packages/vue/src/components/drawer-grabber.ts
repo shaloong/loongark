@@ -1,7 +1,7 @@
 import { defineComponent, mergeProps } from "vue";
 import { Drawer } from "@ark-ui/vue/drawer";
 import { useForwardExpose } from "@ark-ui/vue/utils";
-import { preventDrawerGrabberSelection } from "@loongark/kit";
+import { preventDrawerGrabberSelection } from "@shaloong/loongark-kit";
 import { renderPart } from "../render-part";
 
 export const DrawerGrabber = defineComponent<Drawer.GrabberProps>({

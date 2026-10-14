@@ -11,8 +11,8 @@ import {
   LoongArkEditableEditTrigger,
   LoongArkEditableSubmitTrigger,
   LoongArkEditableCancelTrigger,
-} from "@loongark/solid";
-import type { EditableSize, EditableState } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { EditableSize, EditableState } from "@shaloong/loongark-primitives";
 
 interface EditableExampleProps {
   size?: EditableSize;

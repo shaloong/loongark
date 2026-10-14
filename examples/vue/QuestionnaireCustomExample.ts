@@ -1,5 +1,5 @@
 import { defineComponent, h, ref, computed, onBeforeUnmount } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import { createQuestionnaireCustomDemo } from "../shared/questionnaireCustomDemo";
 import {
   groupsDisclosureCSS,

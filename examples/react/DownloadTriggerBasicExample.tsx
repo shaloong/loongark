@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkDownloadTrigger } from "@loongark/react";
+import { LoongArkDownloadTrigger } from "@shaloong/loongark-react";
 export function DownloadTriggerBasicExample() {
   return (
     <LoongArkDownloadTrigger

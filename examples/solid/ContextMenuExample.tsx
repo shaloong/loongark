@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 import { contextMenuDemoCSS } from "../shared/contextMenuDemo";
 export function ContextMenuExample() {
   const [selection, setSelection] = createSignal("No action selected");

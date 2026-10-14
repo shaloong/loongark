@@ -5,7 +5,7 @@ import type {
   HTMLButtonAttributes,
   HTMLTimeAttributes,
 } from "svelte/elements";
-import type { LayoutOptions } from "@loongark/kit";
+import type { LayoutOptions } from "@shaloong/loongark-kit";
 export default class ListItemLink extends SvelteComponent<
   HTMLAnchorAttributes & LayoutOptions & { as?: string }
 > {}

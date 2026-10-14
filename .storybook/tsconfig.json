@@ -2,7 +2,7 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "paths": {
-      "@loongark/react": [
+      "@shaloong/loongark-react": [
         "../packages/react/dist/index.d.ts"
       ]
     },

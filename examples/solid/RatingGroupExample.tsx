@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/solid";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-solid";
 
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
@@ -10,8 +10,8 @@ import {
   LoongArkRatingGroupControl,
   LoongArkRatingGroupItem,
   LoongArkRatingGroupHiddenInput,
-} from "@loongark/solid";
-import type { RatingGroupSize } from "@loongark/primitives";
+} from "@shaloong/loongark-solid";
+import type { RatingGroupSize } from "@shaloong/loongark-primitives";
 
 interface RatingGroupExampleProps {
   size?: RatingGroupSize;

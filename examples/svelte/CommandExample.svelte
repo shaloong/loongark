@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   const rows = [
     { id: "overview", name: "组件概览" },
     { id: "api", name: "API 参考" },

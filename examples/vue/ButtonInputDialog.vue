@@ -9,7 +9,7 @@ import {
   LoongArkInputPrefix,
   LoongArkInputSuffix,
   LoongArkDialog,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import { defaultScenario, scenarioTestIds } from "../shared/demoScenario";
 
 const email = ref("");

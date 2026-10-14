@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticCodeEditorStyles } from "@loongark/primitives/automatic-styles/code-editor";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticCodeEditorStyles } from "@shaloong/loongark-primitives/automatic-styles/code-editor";
   registerAutomaticStyles(lkAutomaticCodeEditorStyles);
 
   import { onMount, onDestroy, untrack } from "svelte";
-  import { renderCodeEditorMarkup, mountCodeEditor, type CodeEditorProps } from "@loongark/kit";
+  import { renderCodeEditorMarkup, mountCodeEditor, type CodeEditorProps } from "@shaloong/loongark-kit";
   let { value = $bindable<CodeEditorProps["value"]>(undefined), onValueChange, ...rest }: CodeEditorProps = $props();
   const uid = $props.id();
   const options = (): CodeEditorProps => ({ ...rest, value, onValueChange(next, selection) {

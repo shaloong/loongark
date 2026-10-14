@@ -9,7 +9,7 @@ await build({
   configFile: false,
   plugins: [await publishedWorkspacePlugin("node"), svelte()],
   resolve: { dedupe: ["svelte"] },
-  ssr: { noExternal: ["@loongark/svelte", "@ark-ui/svelte"] },
+  ssr: { noExternal: ["@shaloong/loongark-svelte", "@ark-ui/svelte"] },
   build: {
     ssr: "tests/consumers/svelte/Ssr.svelte",
     outDir: "tests/consumer-dist/svelte-ssr",

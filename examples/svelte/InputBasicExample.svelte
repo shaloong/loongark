@@ -4,7 +4,7 @@
     LoongArkInputLabel,
     LoongArkInputControl,
     LoongArkInputHelperText,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkInputRoot>

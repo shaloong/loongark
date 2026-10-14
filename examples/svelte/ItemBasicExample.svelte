@@ -6,7 +6,7 @@
     LoongArkItemDescription,
     LoongArkItemActions,
     LoongArkButton,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkItem>

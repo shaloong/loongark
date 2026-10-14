@@ -1,5 +1,5 @@
 import { complexEditableColumns } from "./dataTableEditDemo";
-import type { DataRow, DataTableProps } from "@loongark/kit";
+import type { DataRow, DataTableProps } from "@shaloong/loongark-kit";
 export interface VirtualDemoMessage {
   key: string;
   author: string;

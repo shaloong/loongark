@@ -5,7 +5,7 @@
     LoongArkPasswordInputControl,
     LoongArkPasswordInputInput,
     LoongArkPasswordInputVisibilityTrigger,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkPasswordInputRoot>

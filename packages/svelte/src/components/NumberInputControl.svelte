@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticNumberInputStyles } from "@loongark/primitives/automatic-styles/number-input";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticNumberInputStyles } from "@shaloong/loongark-primitives/automatic-styles/number-input";
   registerAutomaticStyles(lkAutomaticNumberInputStyles);
 
-  import { nativeSelectionProps } from "@loongark/kit";
+  import { nativeSelectionProps } from "@shaloong/loongark-kit";
   import { NumberInput } from "@ark-ui/svelte/number-input";
-  import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
+  import type { NumberInputSize, NumberInputState } from "@shaloong/loongark-primitives";
 
   export let size: NumberInputSize = "md";
   export let state: NumberInputState = "default";

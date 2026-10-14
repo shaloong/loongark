@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticAvatarStyles } from "@loongark/primitives/automatic-styles/avatar";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticAvatarStyles } from "@shaloong/loongark-primitives/automatic-styles/avatar";
 /**
  * Avatar component - Solid wrapper.
  * Based on Ark UI Avatar.
@@ -12,7 +12,7 @@ import {
   type AvatarImageProps as ArkAvatarImageProps,
   type AvatarFallbackProps as ArkAvatarFallbackProps,
 } from "@ark-ui/solid/avatar";
-import type { AvatarSize } from "@loongark/primitives";
+import type { AvatarSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkAvatarRootProps extends Omit<
   ArkAvatarRootProps,

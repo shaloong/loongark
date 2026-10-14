@@ -1,4 +1,4 @@
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 export default { title: "Components/Bubble" };
 export const Basic = {
   render: () => (

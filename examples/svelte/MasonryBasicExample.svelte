@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkMasonry } from "@loongark/svelte";
+  import { LoongArkMasonry } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkMasonry columns={2}>

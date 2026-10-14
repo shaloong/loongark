@@ -11,7 +11,7 @@ import {
   LoongArkCarouselIndicator,
   LoongArkCarouselAutoplayTrigger,
   LoongArkCarouselAutoplayIndicator,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 
 const slides = ["Aurora", "Nebula", "Orbit"];
 

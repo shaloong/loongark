@@ -13,11 +13,11 @@ import {
   LoongArkSegmentGroupItem,
   LoongArkSegmentGroupItemHiddenInput,
   LoongArkSegmentGroupItemText,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 import type {
   SegmentGroupOrientation,
   SegmentGroupSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 const options = [
   { label: "Overview", value: "overview" },

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { cropSource } from "../shared/arkAdditionsDemo";
 export function ImageCropperExample() {
   const cropper = L.useImageCropper({ aspectRatio: 1, maxZoom: 3 });

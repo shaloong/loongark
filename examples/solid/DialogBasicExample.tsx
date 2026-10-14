@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkDialog } from "@loongark/solid";
+import { LoongArkDialog } from "@shaloong/loongark-solid";
 export function DialogBasicExample() {
   return (
     <LoongArkDialog.Root>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkButtonGroup, LoongArkButton } from "@loongark/svelte";
+  import { LoongArkButtonGroup, LoongArkButton } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkButtonGroup>

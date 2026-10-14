@@ -114,7 +114,7 @@ test("custom imperative control restores rejected state and retires callbacks", 
     const modulePath = "/questionnaire-custom.js";
     const {
       createQuestionnaireCustomRegistry,
-    }: typeof import("@loongark/kit") = await import(modulePath);
+    }: typeof import("@shaloong/loongark-kit") = await import(modulePath);
     const root = document.createElement("form");
     const input = document.createElement("input");
     input.setAttribute("aria-label", "Third-party answer");
@@ -132,7 +132,7 @@ test("custom imperative control restores rejected state and retires callbacks", 
     let changes = 0,
       reject = false,
       disposed = 0;
-    const state: import("@loongark/kit").QuestionnaireCustomState = {
+    const state: import("@shaloong/loongark-kit").QuestionnaireCustomState = {
       question: {
         id: "answer",
         label: "Answer",
@@ -149,7 +149,7 @@ test("custom imperative control restores rejected state and retires callbacks", 
     };
     const registry = createQuestionnaireCustomRegistry(
       () => state,
-      (next: import("@loongark/kit").QuestionnaireValue) => {
+      (next: import("@shaloong/loongark-kit").QuestionnaireValue) => {
         changes++;
         if (!reject) state.value = next;
         output.textContent = String(state.value.answer);
@@ -160,7 +160,7 @@ test("custom imperative control restores rejected state and retires callbacks", 
     const unmount = registry.mount(root);
     context.registerControl({
       element: input,
-      restore: (answer: import("@loongark/kit").QuestionAnswer) => {
+      restore: (answer: import("@shaloong/loongark-kit").QuestionAnswer) => {
         input.value = typeof answer === "string" ? answer : "";
         context.onAnswerChange("Restore must not emit");
       },
@@ -272,14 +272,14 @@ test("custom remount invalidates captured callbacks and stale cleanup", async ({
     const modulePath = "/questionnaire-custom.js";
     const {
       createQuestionnaireCustomRegistry,
-    }: typeof import("@loongark/kit") = await import(modulePath);
+    }: typeof import("@shaloong/loongark-kit") = await import(modulePath);
     const root = document.createElement("form"),
       input = document.createElement("input");
     root.append(input);
     document.body.append(root);
     let changes = 0,
       disposed = 0;
-    const state: import("@loongark/kit").QuestionnaireCustomState = {
+    const state: import("@shaloong/loongark-kit").QuestionnaireCustomState = {
       question: {
         id: "answer",
         label: "Answer",
@@ -306,7 +306,7 @@ test("custom remount invalidates captured callbacks and stale cleanup", async ({
     const firstCleanup = registry.mount(root);
     const control = () => ({
       element: input,
-      restore: (answer: import("@loongark/kit").QuestionAnswer) => {
+      restore: (answer: import("@shaloong/loongark-kit").QuestionAnswer) => {
         input.value = String(answer);
         context.onAnswerChange("Restore must not emit");
       },

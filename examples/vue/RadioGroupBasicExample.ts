@@ -6,7 +6,7 @@ import {
   LoongArkRadioGroupItemControl,
   LoongArkRadioGroupItemText,
   LoongArkRadioGroupItemHiddenInput,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const RadioGroupBasicExample = defineComponent({
   setup() {
     return () => {

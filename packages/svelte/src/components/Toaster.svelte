@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticToastStyles } from "@loongark/primitives/automatic-styles/toast";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticToastStyles } from "@shaloong/loongark-primitives/automatic-styles/toast";
   registerAutomaticStyles(lkAutomaticToastStyles);
 
   import type { ToasterProps } from "@ark-ui/svelte/toast";

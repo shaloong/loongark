@@ -4,7 +4,7 @@ import {
   LoongArkMessageScroller,
   LoongArkMessage,
   LoongArkBubble,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function MessageScrollerBasicExample() {
   return (
     <LoongArkMessageScroller label="聊天记录" jumpLabel="跳到最新消息">

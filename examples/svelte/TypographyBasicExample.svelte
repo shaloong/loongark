@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkTypography } from "@loongark/svelte";
+  import { LoongArkTypography } from "@shaloong/loongark-svelte";
 </script>
 
 <div>

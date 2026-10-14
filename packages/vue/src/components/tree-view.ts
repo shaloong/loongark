@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticTreeViewStyles } from "@loongark/primitives/automatic-styles/tree-view";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticTreeViewStyles } from "@shaloong/loongark-primitives/automatic-styles/tree-view";
 import { renderPart } from "../render-part";
 /**
  * Tree View component - Vue wrapper.
@@ -13,7 +13,7 @@ import {
   type PropType,
 } from "vue";
 import { TreeView as ArkTreeView } from "@ark-ui/vue/tree-view";
-import type { TreeViewSize } from "@loongark/primitives";
+import type { TreeViewSize } from "@shaloong/loongark-primitives";
 
 export const LoongArkTreeViewRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkTreeViewRoot",

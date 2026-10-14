@@ -5,7 +5,7 @@ import {
   LoongArkInputGroup,
   LoongArkInputPrefix,
   LoongArkInputControl,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const InputGroupBasicExample = defineComponent({
   setup() {
     return () => {

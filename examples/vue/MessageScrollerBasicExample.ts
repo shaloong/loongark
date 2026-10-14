@@ -3,7 +3,7 @@ import {
   LoongArkMessageScroller,
   LoongArkMessage,
   LoongArkBubble,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const MessageScrollerBasicExample = defineComponent({
   setup() {
     return () => {

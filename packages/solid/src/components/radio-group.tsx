@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticRadioGroupStyles } from "@loongark/primitives/automatic-styles/radio-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticRadioGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/radio-group";
 import { nativeSelectionRef } from "../native-selection";
 import {
   useRadioGroupContext,
@@ -13,7 +13,7 @@ import type {
   RadioGroupPrimitiveProps,
   RadioGroupSize,
   RadioGroupOrientation,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 import { mergeProps, type Component, type JSX } from "solid-js";
 
 // ============ 类型定义 ============

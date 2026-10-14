@@ -29,7 +29,7 @@ const reports = JSON.parse(
 const dependencies = {};
 for (const entry of reports.filter((entry) =>
   ["tokens", "theme", "primitives", "kit", "react"].some(
-    (name) => entry.name === `@loongark/${name}`,
+    (name) => entry.name === `@shaloong/loongark-${name}`,
   ),
 )) {
   const name = basename(entry.tarball);
@@ -72,21 +72,21 @@ await writeFile(
 );
 await writeFile(
   resolve(root, "app/styles.js"),
-  `import {createLoongArkTheme} from '@loongark/theme';
-import {bootstrapKit} from '@loongark/kit/bootstrap';
+  `import {createLoongArkTheme} from '@shaloong/loongark-theme';
+import {bootstrapKit} from '@shaloong/loongark-kit/bootstrap';
 export default function Styles({id}) {const theme=createLoongArkTheme({targetId:id,mode:'dark'});bootstrapKit(theme);return <style dangerouslySetInnerHTML={{__html:theme.toStyleSheet()}}/>;}`,
 );
 await writeFile(
   resolve(root, "app/interactive.js"),
   `'use client';
 import {useState} from 'react';
-import {LoongArkButton,createListCollection} from '@loongark/react';
+import {LoongArkButton,createListCollection} from '@shaloong/loongark-react';
 export default function Interactive(){const [count,setCount]=useState(0);const collection=createListCollection({items:['客户端集合']});return <><p>{collection.items[0]}</p><LoongArkButton onClick={()=>setCount(value=>value+1)}>计数按钮</LoongArkButton><output aria-label="点击次数">{count}</output></>;}`,
 );
 for (const subpath of [false, true]) {
   const imports = subpath
-    ? `import {LoongArkProvider} from '@loongark/react/provider';import {LoongArkButton} from '@loongark/react/button';import {parseLocalizedDate} from '@loongark/react/date-picker';`
-    : `import {LoongArkProvider,LoongArkButton,parseLocalizedDate} from '@loongark/react';`;
+    ? `import {LoongArkProvider} from '@shaloong/loongark-react/provider';import {LoongArkButton} from '@shaloong/loongark-react/button';import {parseLocalizedDate} from '@shaloong/loongark-react/date-picker';`
+    : `import {LoongArkProvider,LoongArkButton,parseLocalizedDate} from '@shaloong/loongark-react';`;
   const prefix = subpath ? "../" : "./";
   const id = subpath ? "rsc-subpaths" : "rsc-root";
   await writeFile(
@@ -99,13 +99,13 @@ export default function Page(){const date=parseLocalizedDate('12/10/2026',{local
 // 按需启动器留在客户端组合内，服务端独立序列化相同 CSS。
 await mkdir(resolve(root, "app/core"), { recursive: true });
 await writeFile(resolve(root, "app/core/interactive.js"), `'use client';
-import {LoongArkProviderCore} from '@loongark/react/provider-core';
-import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';
-import {buttonPrimitive} from '@loongark/primitives/button';
+import {LoongArkProviderCore} from '@shaloong/loongark-react/provider-core';
+import {createPrimitiveStyleBootstrap} from '@shaloong/loongark-primitives/styles';
+import {buttonPrimitive} from '@shaloong/loongark-primitives/button';
 import Interactive from '../interactive';
 const styleBootstrap=createPrimitiveStyleBootstrap([buttonPrimitive]);
 export default function Core({date,children}){return <LoongArkProviderCore targetId="rsc-core" mode="dark" styleBootstrap={styleBootstrap}><main style={{background:'var(--lk-color-semantic-background)',color:'var(--lk-color-semantic-foreground)',minHeight:'100dvh'}}><p>{date}</p>{children}<Interactive/></main></LoongArkProviderCore>;}`);
-await writeFile(resolve(root, "app/core/page.js"), `import Core from './interactive';import {LoongArkButton} from '@loongark/react/button';import {parseLocalizedDate} from '@loongark/react/date-picker';import {createLoongArkTheme} from '@loongark/theme';import {createPrimitiveStyleBootstrap} from '@loongark/primitives/styles';import {buttonPrimitive} from '@loongark/primitives/button';export default function Page(){const date=parseLocalizedDate('12/10/2026',{locale:'en-GB'});if(!date)throw Error('Core 服务端日期解析失败');const theme=createLoongArkTheme({targetId:'rsc-core',mode:'dark'});createPrimitiveStyleBootstrap([buttonPrimitive])(theme);const css=theme.toStyleSheet();if(css.includes('[data-scope=editor]')||css.length>60000)throw Error('Core SSR 未裁剪样式');return <><style dangerouslySetInnerHTML={{__html:css}}/><Core date={date.toString()}><LoongArkButton>服务端导入按钮</LoongArkButton></Core></>;}`);
+await writeFile(resolve(root, "app/core/page.js"), `import Core from './interactive';import {LoongArkButton} from '@shaloong/loongark-react/button';import {parseLocalizedDate} from '@shaloong/loongark-react/date-picker';import {createLoongArkTheme} from '@shaloong/loongark-theme';import {createPrimitiveStyleBootstrap} from '@shaloong/loongark-primitives/styles';import {buttonPrimitive} from '@shaloong/loongark-primitives/button';export default function Page(){const date=parseLocalizedDate('12/10/2026',{locale:'en-GB'});if(!date)throw Error('Core 服务端日期解析失败');const theme=createLoongArkTheme({targetId:'rsc-core',mode:'dark'});createPrimitiveStyleBootstrap([buttonPrimitive])(theme);const css=theme.toStyleSheet();if(css.includes('[data-scope=editor]')||css.length>60000)throw Error('Core SSR 未裁剪样式');return <><style dangerouslySetInnerHTML={{__html:css}}/><Core date={date.toString()}><LoongArkButton>服务端导入按钮</LoongArkButton></Core></>;}`);
 const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1" };
 let installRetries = 0;
 async function run(args, name) {

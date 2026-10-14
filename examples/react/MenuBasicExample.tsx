@@ -5,7 +5,7 @@ import {
   LoongArkMenuPositioner,
   LoongArkMenuContent,
   LoongArkMenuItem,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function MenuBasicExample() {
   return (
     <LoongArkMenuRoot>

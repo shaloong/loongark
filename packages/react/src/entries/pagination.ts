@@ -15,8 +15,8 @@ export type { LoongArkPaginationPrevTriggerProps } from "../components/paginatio
 export { LoongArkPaginationRoot } from "../components/pagination";
 export type { LoongArkPaginationRootProps } from "../components/pagination";
 export { LoongArkPaginationRootProvider } from "../components/ark-advanced";
-export type { PaginationOrientation } from "@loongark/primitives";
-export type { PaginationSize } from "@loongark/primitives";
+export type { PaginationOrientation } from "@shaloong/loongark-primitives";
+export type { PaginationSize } from "@shaloong/loongark-primitives";
 export { usePagination } from "@ark-ui/react/pagination";
 export { usePaginationContext } from "@ark-ui/react/pagination";
 export type { UsePaginationProps } from "@ark-ui/react/pagination";

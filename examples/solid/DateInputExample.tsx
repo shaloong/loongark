@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 import { createSignal } from "solid-js";
-import * as L from "@loongark/solid";
+import * as L from "@shaloong/loongark-solid";
 export function DateInputExample() {
   const [value, setValue] = createSignal([L.parseDate("2026-10-03")]);
   const [disabled, setDisabled] = createSignal(false),

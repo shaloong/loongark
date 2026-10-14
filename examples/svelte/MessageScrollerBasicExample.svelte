@@ -3,7 +3,7 @@
     LoongArkMessageScroller,
     LoongArkMessage,
     LoongArkBubble,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkMessageScroller label="聊天记录" jumpLabel="跳到最新消息">

@@ -5,7 +5,7 @@
     LoongArkCheckboxIndicator,
     LoongArkCheckboxLabel,
     LoongArkCheckboxHiddenInput,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkCheckboxRoot name="terms">

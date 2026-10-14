@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticNumberInputStyles } from "@loongark/primitives/automatic-styles/number-input";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticNumberInputStyles } from "@shaloong/loongark-primitives/automatic-styles/number-input";
   registerAutomaticStyles(lkAutomaticNumberInputStyles);
 
   import { useFieldContext } from "@ark-ui/svelte/field";
@@ -12,8 +12,8 @@
   import {
     nativeSelectionFieldDescription,
     mountNativeSelection,
-  } from "@loongark/kit";
-  import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
+  } from "@shaloong/loongark-kit";
+  import type { NumberInputSize, NumberInputState } from "@shaloong/loongark-primitives";
   let {
     size = "md",
     state = "default",

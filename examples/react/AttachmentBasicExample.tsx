@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkAttachment } from "@loongark/react";
+import { LoongArkAttachment } from "@shaloong/loongark-react";
 export function AttachmentBasicExample() {
   return (
     <LoongArkAttachment

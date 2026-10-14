@@ -13,8 +13,8 @@
     LoongArkFileUploadItemSizeText,
     LoongArkFileUploadItemDeleteTrigger,
     LoongArkFileUploadClearTrigger,
-  } from "@loongark/svelte";
-  import type { FileUploadSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { FileUploadSize } from "@shaloong/loongark-primitives";
 
   export let size: FileUploadSize = "md";
   export let disabled = false;

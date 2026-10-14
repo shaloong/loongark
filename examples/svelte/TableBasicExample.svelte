@@ -7,7 +7,7 @@
     LoongArkTableHead,
     LoongArkTableBody,
     LoongArkTableCell,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkTable>

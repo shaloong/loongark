@@ -1,14 +1,14 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticNumberInputStyles } from "@loongark/primitives/automatic-styles/number-input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticNumberInputStyles } from "@shaloong/loongark-primitives/automatic-styles/number-input";
 import { useFieldContext } from "@ark-ui/solid/field";
 import { useNumberInputContext } from "@ark-ui/solid/number-input";
 import {
   nativeSelectionProps,
   nativeSelectionFieldDescription,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 /** @jsxImportSource solid-js */
-import { controlIcons } from "@loongark/kit";
+import { controlIcons } from "@shaloong/loongark-kit";
 import { LoongArkIcon } from "./icon";
 /**
  * Number Input component - Solid wrapper.
@@ -26,7 +26,7 @@ import {
   type NumberInputValueTextProps as ArkNumberInputValueTextProps,
   type NumberInputScrubberProps as ArkNumberInputScrubberProps,
 } from "@ark-ui/solid/number-input";
-import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
+import type { NumberInputSize, NumberInputState } from "@shaloong/loongark-primitives";
 
 export interface LoongArkNumberInputRootProps extends Omit<
   ArkNumberInputRootProps,

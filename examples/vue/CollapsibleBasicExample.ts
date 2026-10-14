@@ -3,7 +3,7 @@ import {
   LoongArkCollapsibleRoot,
   LoongArkCollapsibleTrigger,
   LoongArkCollapsibleContent,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const CollapsibleBasicExample = defineComponent({
   setup() {
     return () => {

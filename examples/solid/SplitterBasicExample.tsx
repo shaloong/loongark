@@ -5,7 +5,7 @@ import {
   LoongArkSplitterPanel,
   LoongArkSplitterResizeTrigger,
   LoongArkSplitterResizeTriggerIndicator,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function SplitterBasicExample() {
   return (
     <LoongArkSplitterRoot

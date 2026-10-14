@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticPaginationStyles } from "@loongark/primitives/automatic-styles/pagination";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticPaginationStyles } from "@shaloong/loongark-primitives/automatic-styles/pagination";
 
 
 /**
@@ -13,7 +13,7 @@ import { Pagination } from "@ark-ui/react/pagination";
 import type {
   PaginationOrientation,
   PaginationSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 type ArkPaginationRootProps = ComponentPropsWithoutRef<typeof Pagination.Root>;
 type ArkPaginationItemProps = ComponentPropsWithoutRef<typeof Pagination.Item>;

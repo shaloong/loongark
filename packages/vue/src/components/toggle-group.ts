@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticToggleGroupStyles } from "@loongark/primitives/automatic-styles/toggle-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticToggleGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/toggle-group";
 import type { ToggleGroupRootProps as NativeToggleGroupRootProps } from "@ark-ui/vue/toggle-group";
 import { renderPart } from "../render-part";
 /**
@@ -12,7 +12,7 @@ import { ToggleGroup as ArkToggleGroup } from "@ark-ui/vue/toggle-group";
 import type {
   ToggleGroupOrientation,
   ToggleGroupSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface ToggleGroupValueChangeDetails {
   value: string[];

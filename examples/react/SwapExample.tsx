@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 export function SwapExample() {
   const [expanded, setExpanded] = useState(false),
     [mounted, setMounted] = useState(true);

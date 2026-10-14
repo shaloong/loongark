@@ -1,5 +1,5 @@
 import { defineComponent, h, ref } from "vue";
-import { LoongArkButton, LoongArkPresence } from "@loongark/vue";
+import { LoongArkButton, LoongArkPresence } from "@shaloong/loongark-vue";
 export const PresenceBasicExample = defineComponent({
   setup() {
     const visible = ref(false);

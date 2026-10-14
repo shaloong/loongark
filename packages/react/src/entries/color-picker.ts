@@ -1,5 +1,5 @@
 // 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
-export type { ColorPickerSize } from "@loongark/primitives";
+export type { ColorPickerSize } from "@shaloong/loongark-primitives";
 export { LoongArkColorPickerArea } from "../components/color-picker";
 export { LoongArkColorPickerAreaBackground } from "../components/color-picker";
 export { LoongArkColorPickerAreaThumb } from "../components/color-picker";

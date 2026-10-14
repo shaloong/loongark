@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkAvatarRoot, LoongArkAvatarFallback } from "@loongark/react";
+import { LoongArkAvatarRoot, LoongArkAvatarFallback } from "@shaloong/loongark-react";
 export function AvatarBasicExample() {
   return (
     <LoongArkAvatarRoot>

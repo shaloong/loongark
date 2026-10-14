@@ -9,7 +9,7 @@ import {
   DocsContainer,
   type DocsContainerProps,
 } from "@storybook/addon-docs/blocks";
-import { LoongArkProvider, LoongArkNativeSelect } from "@loongark/react";
+import { LoongArkProvider, LoongArkNativeSelect } from "@shaloong/loongark-react";
 import { ThemeProvider, convert, themes } from "storybook/theming";
 
 const frameworks = ["react", "vue", "solid", "svelte"] as const;
@@ -119,7 +119,7 @@ export function ReferenceDocs() {
         <main className="loongark-reference" data-reference-family={family}>
           <Title />
           <Description />
-          {reference && <Source dark={mode === "dark"} code={`import { ${api?.name.split(".")[0] ?? reference.apis[0]?.name.split(".")[0] ?? "LoongArk" + reference.family.replace(/ /g, "")} } from "@loongark/${framework}/${reference.subpath}";`} language="typescript" />}
+          {reference && <Source dark={mode === "dark"} code={`import { ${api?.name.split(".")[0] ?? reference.apis[0]?.name.split(".")[0] ?? "LoongArk" + reference.family.replace(/ /g, "")} } from "@shaloong/loongark-${framework}/${reference.subpath}";`} language="typescript" />}
           <Primary />
           <div
             className="loongark-reference-controls"

@@ -1,6 +1,6 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Dialog } from "@ark-ui/svelte/dialog";
-import type { DialogPrimitiveProps } from "@loongark/primitives";
+import type { DialogPrimitiveProps } from "@shaloong/loongark-primitives";
 
 export default class LoongArkDialogContent extends SvelteComponent<
   Omit<

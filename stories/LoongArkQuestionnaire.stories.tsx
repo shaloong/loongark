@@ -1,6 +1,6 @@
 import type { StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { feedbackQuestions } from "../examples/shared/conversationDemo";
 export default { title: "Components/Questionnaire" };
 function Survey() {

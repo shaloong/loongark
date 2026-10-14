@@ -191,7 +191,7 @@ for (const kind of cases) {
       : `<L.${componentName(kind)} {...props} />`;
   await writeFile(
     resolve(root, "App.svelte"),
-    `<script>import * as L from '@loongark/svelte';const props=${JSON.stringify(props)};</script><L.LoongArkProvider>${markup}</L.LoongArkProvider>`,
+    `<script>import * as L from '@shaloong/loongark-svelte';const props=${JSON.stringify(props)};</script><L.LoongArkProvider>${markup}</L.LoongArkProvider>`,
   );
   await build({
     configFile: false,
@@ -202,7 +202,7 @@ for (const kind of cases) {
         name: "shared-runtime",
         enforce: "pre",
         async resolveId(id) {
-          if (!/^@loongark\/(kit|theme|primitives|tokens)(\/.+)?$/.test(id)) return;
+          if (!/^@shaloong\/loongark-(kit|theme|primitives|tokens)(\/.+)?$/.test(id)) return;
           const entry = await workspacePlugin.resolveId(id);
           if (!entry) throw Error(`未公开共享入口：${id}`);
           return { ...entry, external: true };
@@ -214,7 +214,7 @@ for (const kind of cases) {
     resolve: {
       dedupe: ["svelte"],
     },
-    ssr: { noExternal: ["@loongark/svelte", "@ark-ui/svelte"] },
+    ssr: { noExternal: ["@shaloong/loongark-svelte", "@ark-ui/svelte"] },
     build: {
       ssr: resolve(root, "App.svelte"),
       outDir: "dist",

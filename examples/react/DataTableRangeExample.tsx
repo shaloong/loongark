@@ -3,7 +3,7 @@ import {
   groupsDisclosureCSS,
   groupsDisclosureIcon,
 } from "../shared/questionnaireGroupsDemo";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { createRangeDemo } from "../shared/dataTableRangeDemo";
 export function DataTableRangeExample() {
   const [, redraw] = useState(0);

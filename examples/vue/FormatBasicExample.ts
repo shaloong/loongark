@@ -3,7 +3,7 @@ import {
   LoongArkLocaleProvider,
   LoongArkFormatByte,
   LoongArkFormatNumber,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const FormatBasicExample = defineComponent({
   setup() {
     return () => {

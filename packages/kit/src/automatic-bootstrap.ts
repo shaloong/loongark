@@ -1,5 +1,5 @@
-import type { LoongArkTheme } from "@loongark/theme";
-import { bootstrapAutomaticStyles } from "@loongark/primitives/automatic-provider";
+import type { LoongArkTheme } from "@shaloong/loongark-theme";
+import { bootstrapAutomaticStyles } from "@shaloong/loongark-primitives/automatic-provider";
 import { kitRegistry } from "./component-registry";
 
 /** 默认入口仅启动实际组件样式，同时保留调用方的 Kit 注册扩展。 */

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as L from "@loongark/svelte";
+  import * as L from "@shaloong/loongark-svelte";
   import { documentItems, documentSections } from "../shared/arkNextDemo";
   let scroll = $state<HTMLElement | null>(null),
     mounted = $state(true),

@@ -1,7 +1,7 @@
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as dialogStyles } from "@loongark/primitives/automatic-styles/dialog";
-import { styles as pinInputStyles } from "@loongark/primitives/automatic-styles/pin-input";
-import { styles as switchStyles } from "@loongark/primitives/automatic-styles/switch";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as dialogStyles } from "@shaloong/loongark-primitives/automatic-styles/dialog";
+import { styles as pinInputStyles } from "@shaloong/loongark-primitives/automatic-styles/pin-input";
+import { styles as switchStyles } from "@shaloong/loongark-primitives/automatic-styles/switch";
 import LoongArkDialogRootComponent from "./components/DialogRoot.svelte";
 import LoongArkDialogPositionerComponent from "./components/DialogPositioner.svelte";
 import LoongArkDialogPortalComponent from "./components/Portal.svelte";

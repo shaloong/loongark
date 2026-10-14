@@ -1,6 +1,6 @@
 ﻿<script lang="ts">
-  import { registerAutomaticStyles } from "@loongark/primitives/automatic";
-  import { styles as lkAutomaticSplitterStyles } from "@loongark/primitives/automatic-styles/splitter";
+  import { registerAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+  import { styles as lkAutomaticSplitterStyles } from "@shaloong/loongark-primitives/automatic-styles/splitter";
   registerAutomaticStyles(lkAutomaticSplitterStyles);
 
   import { Splitter } from "@ark-ui/svelte/splitter";

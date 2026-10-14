@@ -6,7 +6,7 @@ import {
   LoongArkNumberInputInput,
   LoongArkNumberInputIncrementTrigger,
   LoongArkNumberInputDecrementTrigger,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const NumberInputBasicExample = defineComponent({
   setup() {
     return () => {

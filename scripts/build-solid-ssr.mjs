@@ -47,7 +47,7 @@ await build({
       external: (id) =>
         id === "solid-js" ||
         id.startsWith("solid-js/") ||
-        id.startsWith("@loongark/"),
+        id.startsWith("@shaloong/loongark-"),
       output: { entryFileNames: "[name].js" },
     },
   },

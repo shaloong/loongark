@@ -6,7 +6,7 @@ import {
   LoongArkRadioGroupItemControl,
   LoongArkRadioGroupItemText,
   LoongArkRadioGroupItemHiddenInput,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 export function RadioGroupBasicExample() {
   return (
     <LoongArkRadioGroupRoot name="plan" defaultValue="basic">

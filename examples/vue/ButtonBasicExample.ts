@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkButton } from "@loongark/vue";
+import { LoongArkButton } from "@shaloong/loongark-vue";
 export const ButtonBasicExample = defineComponent({
   setup() {
     return () => {

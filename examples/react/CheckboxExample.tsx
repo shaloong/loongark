@@ -5,8 +5,8 @@ import {
   LoongArkCheckboxLabel,
   LoongArkCheckboxIndicator,
   LoongArkCheckboxHiddenInput,
-} from "@loongark/react";
-import type { CheckboxSize } from "@loongark/primitives";
+} from "@shaloong/loongark-react";
+import type { CheckboxSize } from "@shaloong/loongark-primitives";
 
 export interface CheckboxExampleProps {
   size?: CheckboxSize;

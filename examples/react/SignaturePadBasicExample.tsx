@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkSignaturePad } from "@loongark/react";
+import { LoongArkSignaturePad } from "@shaloong/loongark-react";
 export function SignaturePadBasicExample() {
   return (
     <LoongArkSignaturePad.Root>

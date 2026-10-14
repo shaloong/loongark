@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import { createQuestionnaireCustomDemo } from "../shared/questionnaireCustomDemo";
 import {
   groupsDisclosureCSS,

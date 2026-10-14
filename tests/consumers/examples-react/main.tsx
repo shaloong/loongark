@@ -1,4 +1,4 @@
-import React, {StrictMode,Fragment} from 'react'; import {createRoot} from 'react-dom/client'; import {LoongArkProvider as Provider} from '@loongark/react'; import {AccordionBasicExample as E0} from '../../../examples/react/AccordionBasicExample.tsx';
+import React, {StrictMode,Fragment} from 'react'; import {createRoot} from 'react-dom/client'; import {LoongArkProvider as Provider} from '@shaloong/loongark-react'; import {AccordionBasicExample as E0} from '../../../examples/react/AccordionBasicExample.tsx';
 import {ActionMediaExample as E1} from '../../../examples/react/ActionMediaExample.tsx';
 import {AdvancedSelectionExample as E2} from '../../../examples/react/AdvancedSelectionExample.tsx';
 import {AlertBasicExample as E3} from '../../../examples/react/AlertBasicExample.tsx';

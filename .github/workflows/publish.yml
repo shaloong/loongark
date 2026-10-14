@@ -92,7 +92,7 @@ jobs:
           const order=['tokens','theme','primitives','kit','react','vue','solid','svelte','cli'];
           assert.equal(report.length,order.length);
           const targets=order.map(name=>{
-            const entries=report.filter(entry=>entry.name===`@loongark/${name}`);
+            const entries=report.filter(entry=>entry.name===`@shaloong/loongark-${name}`);
             assert.equal(entries.length,1);
             assert.equal(entries[0].version,process.env.RELEASE_VERSION);
             const tarballs=files.filter(file=>basename(file)===basename(entries[0].tarball));

@@ -1,5 +1,5 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/react";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-react";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
@@ -26,7 +26,7 @@ import {
   LoongArkDatePickerTableCell,
   LoongArkDatePickerTableCellTrigger,
   LoongArkDatePickerRangeText,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 import { useDatePickerContext, parseDate } from "@ark-ui/react/date-picker";
 
 const meta: Meta = {

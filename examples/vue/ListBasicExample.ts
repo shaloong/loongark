@@ -3,7 +3,7 @@ import {
   LoongArkList,
   LoongArkListItem,
   LoongArkListItemText,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const ListBasicExample = defineComponent({
   setup() {
     return () => {

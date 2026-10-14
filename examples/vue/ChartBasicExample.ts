@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkChart } from "@loongark/vue";
+import { LoongArkChart } from "@shaloong/loongark-vue";
 export const ChartBasicExample = defineComponent({
   setup() {
     return () => {

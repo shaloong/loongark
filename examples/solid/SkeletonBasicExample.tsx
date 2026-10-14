@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkStack, LoongArkSkeleton } from "@loongark/solid";
+import { LoongArkStack, LoongArkSkeleton } from "@shaloong/loongark-solid";
 export function SkeletonBasicExample() {
   return (
     <LoongArkStack>

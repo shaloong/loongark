@@ -1,4 +1,4 @@
-import type { ConversationActionContext } from "@loongark/kit";
+import type { ConversationActionContext } from "@shaloong/loongark-kit";
 export const conversationNote =
   "The launch checklist is ready. Please review the final files before sharing.";
 /** 模拟业务延迟，示例并不提供上传/消息服务。 */

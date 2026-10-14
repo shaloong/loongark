@@ -10,7 +10,7 @@ import {
   LoongArkDialogTitle,
   LoongArkDialogDescription,
   LoongArkDialogCloseTrigger,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function AlertDialogBasicExample() {
   return (
     <LoongArkAlertDialogRoot>

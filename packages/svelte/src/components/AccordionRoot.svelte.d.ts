@@ -1,7 +1,7 @@
 import { SvelteComponent, type ComponentProps } from "svelte";
 import { Accordion } from "@ark-ui/svelte/accordion";
 import type { AccordionRootProps } from "@ark-ui/svelte/accordion";
-import type { AccordionOrientation, AccordionSize } from "@loongark/primitives";
+import type { AccordionOrientation, AccordionSize } from "@shaloong/loongark-primitives";
 
 export default class LoongArkAccordionRoot extends SvelteComponent<
   Omit<

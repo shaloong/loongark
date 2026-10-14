@@ -1,5 +1,5 @@
 import { defineComponent, h, ref } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import { complexQuestions, createQuestionnaireTypesDemo } from "../shared/questionnaireTypesDemo";
 export const QuestionnaireTypesExample = defineComponent({setup() {
  const revision = ref(0), demo = createQuestionnaireTypesDemo(() => revision.value++);

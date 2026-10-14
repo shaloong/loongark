@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createListCollection } from "@loongark/svelte";
+  import { createListCollection } from "@shaloong/loongark-svelte";
   import {
     LoongArkListboxRoot,
     LoongArkListboxLabel,
@@ -7,8 +7,8 @@
     LoongArkListboxItem,
     LoongArkListboxItemText,
     LoongArkListboxItemIndicator,
-  } from "@loongark/svelte";
-  import type { ListboxOrientation, ListboxSize } from "@loongark/primitives";
+  } from "@shaloong/loongark-svelte";
+  import type { ListboxOrientation, ListboxSize } from "@shaloong/loongark-primitives";
 
   export let size: ListboxSize = "md";
   export let orientation: ListboxOrientation = "vertical";

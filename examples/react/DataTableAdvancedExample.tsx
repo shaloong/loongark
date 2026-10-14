@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 import {
   remoteColumns,
   initialRemoteState,

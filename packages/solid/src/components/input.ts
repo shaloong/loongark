@@ -1,12 +1,12 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticInputStyles } from "@loongark/primitives/automatic-styles/input";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticInputStyles } from "@shaloong/loongark-primitives/automatic-styles/input";
 import { dataProps } from "../data-props";
 import type { JSX } from "solid-js";
 import { Field, useFieldContext } from "@ark-ui/solid/field";
-import { inputSuffixDisabled } from "@loongark/kit";
+import { inputSuffixDisabled } from "@shaloong/loongark-kit";
 import { ark } from "@ark-ui/solid";
-import type { InputPrimitiveProps } from "@loongark/primitives";
+import type { InputPrimitiveProps } from "@shaloong/loongark-primitives";
 import { mergeProps, splitProps, createComponent } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";

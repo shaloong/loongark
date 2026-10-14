@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSplitterStyles } from "@loongark/primitives/automatic-styles/splitter";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSplitterStyles } from "@shaloong/loongark-primitives/automatic-styles/splitter";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticSplitterStyles } from "@loongark/primitives/automa
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Splitter } from "@ark-ui/react/splitter";
-import type { SplitterSize } from "@loongark/primitives";
+import type { SplitterSize } from "@shaloong/loongark-primitives";
 
 type ArkSplitterRootProps = ComponentPropsWithoutRef<typeof Splitter.Root>;
 type ArkSplitterPanelProps = ComponentPropsWithoutRef<typeof Splitter.Panel>;

@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkButtonGroup, LoongArkButton } from "@loongark/vue";
+import { LoongArkButtonGroup, LoongArkButton } from "@shaloong/loongark-vue";
 export const ButtonGroupBasicExample = defineComponent({
   setup() {
     return () => {

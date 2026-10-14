@@ -7,7 +7,7 @@ import {
   LoongArkImageCropperSelection,
   LoongArkImageCropperHandle,
   LoongArkImageCropperGrid,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function ImageCropperBasicExample() {
   return (
     <LoongArkImageCropperRoot aspectRatio={1}>

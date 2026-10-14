@@ -1,7 +1,7 @@
-import { controlIcons } from "@loongark/kit";
-import { LoongArkIcon } from "@loongark/react";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { LoongArkIcon } from "@shaloong/loongark-react";
 import React from "react";
-import * as L from "@loongark/react";
+import * as L from "@shaloong/loongark-react";
 export function FoundationsExample() {
   const [notes, setNotes] = React.useState("");
   const [chip, setChip] = React.useState(true);

@@ -2,7 +2,7 @@
   import {
     LoongArkToggleGroupRoot,
     LoongArkToggleGroupItem,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkToggleGroupRoot>

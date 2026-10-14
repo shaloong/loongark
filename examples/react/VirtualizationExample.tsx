@@ -6,7 +6,7 @@ import {
   LoongArkBubble,
   LoongArkButton,
   LoongArkTypography,
-} from "@loongark/react";
+} from "@shaloong/loongark-react";
 import { createVirtualizationDemo } from "../shared/virtualizationDemo";
 export const VirtualizationExample = ({
   mode = "both",

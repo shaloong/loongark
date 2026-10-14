@@ -5,7 +5,7 @@ import { useMachine, normalizeProps } from "@zag-js/react";
 import { useEnvironmentContext } from "@ark-ui/react/environment";
 import { useLocaleContext } from "@ark-ui/react/locale";
 import type { UseTocProps, UseTocReturn } from "@ark-ui/react/toc";
-import { createTocMachine, connectToc, definedTocProps } from "@loongark/kit";
+import { createTocMachine, connectToc, definedTocProps } from "@shaloong/loongark-kit";
 export const useToc = (props: UseTocProps): UseTocReturn => {
   const id = useId(),
     env = useEnvironmentContext(),

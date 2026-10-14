@@ -3,7 +3,7 @@
     LoongArkButton,
     LoongArkSwapRoot,
     LoongArkSwapIndicator,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
   let expanded = $state(false);
 </script>
 

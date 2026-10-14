@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticAvatarStyles } from "@loongark/primitives/automatic-styles/avatar";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticAvatarStyles } from "@shaloong/loongark-primitives/automatic-styles/avatar";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticAvatarStyles } from "@loongark/primitives/automati
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Avatar } from "@ark-ui/react/avatar";
-import type { AvatarSize } from "@loongark/primitives";
+import type { AvatarSize } from "@shaloong/loongark-primitives";
 
 type ArkAvatarRootProps = ComponentPropsWithoutRef<typeof Avatar.Root>;
 type ArkAvatarImageProps = ComponentPropsWithoutRef<typeof Avatar.Image>;

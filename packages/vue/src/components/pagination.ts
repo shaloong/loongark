@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticPaginationStyles } from "@loongark/primitives/automatic-styles/pagination";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticPaginationStyles } from "@shaloong/loongark-primitives/automatic-styles/pagination";
 import { renderPart } from "../render-part";
 /**
  * Pagination component - Vue wrapper.
@@ -11,7 +11,7 @@ import { Pagination as ArkPagination } from "@ark-ui/vue/pagination";
 import type {
   PaginationOrientation,
   PaginationSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export const LoongArkPaginationRoot = /*#__PURE__*/ withAutomaticStyles(defineComponent({
   name: "LoongArkPaginationRoot",

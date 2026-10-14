@@ -5,7 +5,7 @@ import {
   LoongArkTabsList,
   LoongArkTabsTrigger,
   LoongArkTabsContent,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 export function TabsBasicExample() {
   return (
     <LoongArkTabsRoot defaultValue="overview">

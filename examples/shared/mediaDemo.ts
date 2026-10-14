@@ -1,5 +1,5 @@
-import { controlIcons } from "@loongark/kit";
-import { viPalette } from "@loongark/tokens";
+import { controlIcons } from "@shaloong/loongark-kit";
+import { viPalette } from "@shaloong/loongark-tokens";
 export const quickActions = [
   { value: "note", label: "New note", icon: controlIcons.plus },
   { value: "share", label: "Share workspace", icon: controlIcons.externalLink },

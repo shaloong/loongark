@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkCodeEditor } from "@loongark/react";
+import { LoongArkCodeEditor } from "@shaloong/loongark-react";
 export function CodeEditorBasicExample() {
   return (
     <LoongArkCodeEditor

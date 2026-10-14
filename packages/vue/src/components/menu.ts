@@ -1,11 +1,11 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticMenuStyles } from "@loongark/primitives/automatic-styles/menu";
-import { recoverClosedMenuFocus } from "@loongark/kit";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticMenuStyles } from "@shaloong/loongark-primitives/automatic-styles/menu";
+import { recoverClosedMenuFocus } from "@shaloong/loongark-kit";
 import { useForwardExpose } from "@ark-ui/vue/utils";
 import type { MenuContextTriggerProps } from "@ark-ui/vue/menu";
 import { ark } from "@ark-ui/vue/factory";
-import { contextMenuPointerHandler } from "@loongark/kit";
+import { contextMenuPointerHandler } from "@shaloong/loongark-kit";
 import type { MenuRootEmits as NativeMenuRootEmits } from "@ark-ui/vue/menu";
 import type { MenuRootProps as NativeMenuRootProps } from "@ark-ui/vue/menu";
 import { renderPart } from "../render-part";
@@ -42,7 +42,7 @@ import {
   MenuIndicator as ArkMenuIndicator,
   MenuSeparator as ArkMenuSeparator,
 } from "@ark-ui/vue/menu";
-import type { MenuSize } from "@loongark/primitives";
+import type { MenuSize } from "@shaloong/loongark-primitives";
 
 const menuSizeKey = Symbol("loongark-menu-size");
 

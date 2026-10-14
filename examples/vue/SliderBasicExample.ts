@@ -7,7 +7,7 @@ import {
   LoongArkSliderRange,
   LoongArkSliderThumb,
   LoongArkSliderValueText,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const SliderBasicExample = defineComponent({
   setup() {
     return () => {

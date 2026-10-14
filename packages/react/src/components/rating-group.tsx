@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticRatingGroupStyles } from "@loongark/primitives/automatic-styles/rating-group";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticRatingGroupStyles } from "@shaloong/loongark-primitives/automatic-styles/rating-group";
 
 
 /**
@@ -11,7 +11,7 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { RatingGroup } from "@ark-ui/react/rating-group";
 import { useRatingGroup } from "./use-rating";
-import type { RatingGroupSize } from "@loongark/primitives";
+import type { RatingGroupSize } from "@shaloong/loongark-primitives";
 
 type ArkRatingGroupRootProps = ComponentPropsWithoutRef<
   typeof RatingGroup.Root

@@ -1,17 +1,17 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticSwitchStyles } from "@loongark/primitives/automatic-styles/switch";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticSwitchStyles } from "@shaloong/loongark-primitives/automatic-styles/switch";
 
 
 import { useFieldContext } from "@ark-ui/react/field";
-import { nativeSelectionFieldDescription } from "@loongark/kit";
+import { nativeSelectionFieldDescription } from "@shaloong/loongark-kit";
 import type {
   HTMLAttributes,
   InputHTMLAttributes,
   TextareaHTMLAttributes,
   ButtonHTMLAttributes,
 } from "react";
-import { nativeSelectionProps } from "@loongark/kit";
+import { nativeSelectionProps } from "@shaloong/loongark-kit";
 import { dataProps } from "../data-props";
 import { useNativeSelection } from "../native-selection";
 import {
@@ -19,7 +19,7 @@ import {
   type SwitchHiddenInputProps,
 } from "@ark-ui/react/switch";
 import { Switch as ArkSwitch } from "@ark-ui/react/switch";
-import type { SwitchPrimitiveProps } from "@loongark/primitives";
+import type { SwitchPrimitiveProps } from "@shaloong/loongark-primitives";
 import { forwardRef, createElement } from "react";
 import type { ReactNode } from "react";
 

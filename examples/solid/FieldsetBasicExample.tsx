@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkFieldset, LoongArkField } from "@loongark/solid";
+import { LoongArkFieldset, LoongArkField } from "@shaloong/loongark-solid";
 export function FieldsetBasicExample() {
   return (
     <LoongArkFieldset.Root>

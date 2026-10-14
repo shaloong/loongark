@@ -2,8 +2,8 @@
  * Combobox Primitive - searchable input + list styles.
  * Matches Ark UI Combobox data attributes.
  */
-import { type LoongArkTheme } from "@loongark/theme";
-import { TokenTree } from "@loongark/tokens";
+import { type LoongArkTheme } from "@shaloong/loongark-theme";
+import { TokenTree } from "@shaloong/loongark-tokens";
 import {
   createPrimitive,
   type PrimitiveContract,

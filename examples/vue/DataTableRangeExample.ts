@@ -3,7 +3,7 @@ import {
   groupsDisclosureIcon,
 } from "../shared/questionnaireGroupsDemo";
 import { defineComponent, h, ref } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import { createRangeDemo } from "../shared/dataTableRangeDemo";
 export const DataTableRangeExample = defineComponent({
   setup() {

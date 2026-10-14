@@ -1,6 +1,6 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticClipboardStyles } from "@loongark/primitives/automatic-styles/clipboard";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticClipboardStyles } from "@shaloong/loongark-primitives/automatic-styles/clipboard";
 /**
  * Clipboard component - Solid wrapper.
  * Uses Ark UI Clipboard with data attributes for styling.
@@ -16,7 +16,7 @@ import {
   type ClipboardIndicatorProps as ArkClipboardIndicatorProps,
   type ClipboardValueTextProps as ArkClipboardValueTextProps,
 } from "@ark-ui/solid/clipboard";
-import type { ClipboardSize } from "@loongark/primitives";
+import type { ClipboardSize } from "@shaloong/loongark-primitives";
 
 export interface LoongArkClipboardRootProps extends Omit<
   ArkClipboardRootProps,

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkCodeEditor } from "@loongark/svelte";
+  import { LoongArkCodeEditor } from "@shaloong/loongark-svelte";
 </script>
 
 <LoongArkCodeEditor

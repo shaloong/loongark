@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LoongArkButton, LoongArkFocusTrap } from "@loongark/svelte";
+  import { LoongArkButton, LoongArkFocusTrap } from "@shaloong/loongark-svelte";
   let active = $state(false);
 </script>
 

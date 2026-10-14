@@ -7,11 +7,11 @@ import {
   LoongArkSegmentGroupItem,
   LoongArkSegmentGroupItemHiddenInput,
   LoongArkSegmentGroupItemText,
-} from "@loongark/solid";
+} from "@shaloong/loongark-solid";
 import type {
   SegmentGroupOrientation,
   SegmentGroupSize,
-} from "@loongark/primitives";
+} from "@shaloong/loongark-primitives";
 
 export interface SegmentGroupExampleProps {
   size?: SegmentGroupSize;

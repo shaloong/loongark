@@ -1,5 +1,5 @@
 import { defineComponent, h } from "vue";
-import { LoongArkDialog } from "@loongark/vue";
+import { LoongArkDialog } from "@shaloong/loongark-vue";
 export const DialogBasicExample = defineComponent({
   setup() {
     return () => {

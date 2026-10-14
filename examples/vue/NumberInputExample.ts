@@ -8,8 +8,8 @@ import {
   LoongArkNumberInputDecrementTrigger,
   LoongArkNumberInputValueText,
   LoongArkNumberInputScrubber,
-} from "@loongark/vue";
-import type { NumberInputSize, NumberInputState } from "@loongark/primitives";
+} from "@shaloong/loongark-vue";
+import type { NumberInputSize, NumberInputState } from "@shaloong/loongark-primitives";
 
 export const NumberInputExample = defineComponent({
   name: "NumberInputExample",

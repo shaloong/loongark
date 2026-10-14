@@ -13,8 +13,8 @@ export type { LoongArkPasswordInputRootProps } from "../components/password-inpu
 export { LoongArkPasswordInputRootProvider } from "../components/ark-advanced";
 export { LoongArkPasswordInputVisibilityTrigger } from "../components/password-input";
 export type { LoongArkPasswordInputVisibilityTriggerProps } from "../components/password-input";
-export type { PasswordInputSize } from "@loongark/primitives";
-export type { PasswordInputState } from "@loongark/primitives";
+export type { PasswordInputSize } from "@shaloong/loongark-primitives";
+export type { PasswordInputState } from "@shaloong/loongark-primitives";
 export { usePasswordInput } from "@ark-ui/react/password-input";
 export { usePasswordInputContext } from "@ark-ui/react/password-input";
 export type { UsePasswordInputProps } from "@ark-ui/react/password-input";

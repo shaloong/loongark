@@ -3,7 +3,7 @@ import { Dynamic } from "solid-js/web";
 import type {
   QuestionnaireCustomContext,
   QuestionnaireRenderNode,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export type LoongArkQuestionnaireRenderers = Readonly<
   Record<string, (context: QuestionnaireCustomContext) => JSX.Element>
 >;

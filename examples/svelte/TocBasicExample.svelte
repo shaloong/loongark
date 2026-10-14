@@ -6,7 +6,7 @@
     LoongArkTocList,
     LoongArkTocItem,
     LoongArkTocLink,
-  } from "@loongark/svelte";
+  } from "@shaloong/loongark-svelte";
 </script>
 
 <div>

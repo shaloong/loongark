@@ -1,5 +1,5 @@
 import React from "react";
-import { LoongArkVirtualMasonry } from "@loongark/react";
+import { LoongArkVirtualMasonry } from "@shaloong/loongark-react";
 export function VirtualMasonryBasicExample() {
   return (
     <LoongArkVirtualMasonry

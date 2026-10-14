@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import { LoongArkSpeedDial } from "@loongark/solid";
+import { LoongArkSpeedDial } from "@shaloong/loongark-solid";
 export function SpeedDialBasicExample() {
   return (
     <LoongArkSpeedDial

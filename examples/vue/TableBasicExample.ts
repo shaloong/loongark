@@ -7,7 +7,7 @@ import {
   LoongArkTableHead,
   LoongArkTableBody,
   LoongArkTableCell,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const TableBasicExample = defineComponent({
   setup() {
     return () => {

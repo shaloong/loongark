@@ -1,6 +1,6 @@
 "use client";
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticAccordionStyles } from "@loongark/primitives/automatic-styles/accordion";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticAccordionStyles } from "@shaloong/loongark-primitives/automatic-styles/accordion";
 
 
 /**
@@ -10,7 +10,7 @@ import { styles as lkAutomaticAccordionStyles } from "@loongark/primitives/autom
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { Accordion } from "@ark-ui/react/accordion";
-import type { AccordionOrientation, AccordionSize } from "@loongark/primitives";
+import type { AccordionOrientation, AccordionSize } from "@shaloong/loongark-primitives";
 
 type ArkAccordionRootProps = ComponentPropsWithoutRef<typeof Accordion.Root>;
 type ArkAccordionItemProps = ComponentPropsWithoutRef<typeof Accordion.Item>;

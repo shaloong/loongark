@@ -1,4 +1,4 @@
-import type { DataColumn, DataRow, DataTableProps } from "@loongark/kit";
+import type { DataColumn, DataRow, DataTableProps } from "@shaloong/loongark-kit";
 export const editableColumns: readonly DataColumn[] = [
   {
     key: "name",

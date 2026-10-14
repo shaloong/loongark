@@ -5,7 +5,7 @@ import {
   LoongArkPasswordInputControl,
   LoongArkPasswordInputInput,
   LoongArkPasswordInputVisibilityTrigger,
-} from "@loongark/vue";
+} from "@shaloong/loongark-vue";
 export const PasswordInputBasicExample = defineComponent({
   setup() {
     return () => {

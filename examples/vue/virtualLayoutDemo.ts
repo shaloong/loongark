@@ -1,5 +1,5 @@
 import { defineComponent, h, ref, type PropType } from "vue";
-import * as L from "@loongark/vue";
+import * as L from "@shaloong/loongark-vue";
 import { createVirtualLayoutDemo } from "../shared/virtualLayoutDemo";
 import {
   groupsDisclosureCSS,

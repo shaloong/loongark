@@ -1,5 +1,5 @@
 // 由 scripts/generate-entries.mjs 生成；只导出本组件族的公开能力。
-export type { HoverCardSize } from "@loongark/primitives";
+export type { HoverCardSize } from "@shaloong/loongark-primitives";
 export { LoongArkHoverCardArrow } from "../components/hover-card";
 export { LoongArkHoverCardArrowTip } from "../components/hover-card";
 export { LoongArkHoverCardContent } from "../components/hover-card";

@@ -1,7 +1,7 @@
 
-import { withAutomaticStyles } from "@loongark/primitives/automatic";
-import { styles as lkAutomaticVirtualGridStyles } from "@loongark/primitives/automatic-styles/virtual-grid";
-import { styles as lkAutomaticVirtualMasonryStyles } from "@loongark/primitives/automatic-styles/virtual-masonry";
+import { withAutomaticStyles } from "@shaloong/loongark-primitives/automatic";
+import { styles as lkAutomaticVirtualGridStyles } from "@shaloong/loongark-primitives/automatic-styles/virtual-grid";
+import { styles as lkAutomaticVirtualMasonryStyles } from "@shaloong/loongark-primitives/automatic-styles/virtual-masonry";
 import {
   defineComponent,
   h,
@@ -21,7 +21,7 @@ import {
   type VirtualGridCellDetails,
   type VirtualMasonryOptions,
   type VirtualMasonryEntry,
-} from "@loongark/kit";
+} from "@shaloong/loongark-kit";
 export interface VirtualGridProps extends VirtualGridOptions {
   renderCell(details: VirtualGridCellDetails): VNodeChild;
 }

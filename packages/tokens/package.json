@@ -1,5 +1,5 @@
 {
-  "name": "@loongark/tokens",
+  "name": "@shaloong/loongark-tokens",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",

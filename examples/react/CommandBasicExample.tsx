@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createCommandCollection, LoongArkCommand } from "@loongark/react";
+import { createCommandCollection, LoongArkCommand } from "@shaloong/loongark-react";
 export function CommandBasicExample() {
   const [query, setQuery] = useState("");
   const options = [
