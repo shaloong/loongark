@@ -1,5 +1,81 @@
 import { expect, test } from "@playwright/test";
 
+for (const framework of ["react", "vue", "solid", "svelte"])
+  test(`rich toolbar pointer across paint ${framework}`, async ({ page }) => {
+    test.skip(!process.env.STATIC_DIR, "四端消费构建后运行");
+    await page.setViewportSize({ width: 1280, height: 1200 });
+    await page.goto(`/examples-${framework}/?example=RichTextEditorExample&mode=dark`);
+    const root = page.locator('[data-scope="editor"][data-kind="rich"]');
+    await expect(root).toHaveAttribute("data-mounted", "true");
+    await page.locator("details summary").filter({ hasText: "More controls" }).click();
+    await page.getByRole("button", { name: "Insert table through handle", exact: true }).click();
+    await expect(root.locator("table")).toHaveCount(1);
+    await root.locator('[data-part="table-tools"] summary').click();
+    const remove = root.getByRole("button", { name: "Delete table", exact: true });
+    await expect(remove).toBeEnabled();
+    const cell = await root.locator("td").last().boundingBox();
+    const label = await remove.locator("span").boundingBox();
+    expect(cell).not.toBeNull();
+    expect(label).not.toBeNull();
+    if (!cell || !label) throw new Error("表格与工具栏必须有可见边界");
+    await remove.evaluate(button => {
+      button.addEventListener("click", event => {
+        button.setAttribute("data-test-trusted-click", String(event.isTrusted));
+      }, { once: true, capture: true });
+    });
+    await page.clock.install();
+    await page.clock.pauseAt(new Date(Date.now() + 1000));
+    try {
+      await page.mouse.click(cell.x + cell.width / 2, cell.y + cell.height / 2);
+      await page.mouse.move(label.x + label.width / 2, label.y + label.height / 2);
+      await page.mouse.down();
+      await page.clock.runFor(40);
+      await page.mouse.up();
+      await expect(remove).toHaveAttribute("data-test-trusted-click", "true");
+      await expect(root.locator("table")).toHaveCount(0);
+    } finally {
+      await page.clock.resume();
+    }
+  });
+
+for (const framework of ["react", "vue", "solid", "svelte"])
+  test(`rich link pointer across paint ${framework}`, async ({ page }) => {
+    test.skip(!process.env.STATIC_DIR, "四端消费构建后运行");
+    await page.setViewportSize({ width: 1280, height: 1200 });
+    await page.goto(`/examples-${framework}/?example=RichTextEditorExample&mode=dark`);
+    const root = page.locator('[data-scope="editor"][data-kind="rich"]');
+    await expect(root).toHaveAttribute("data-mounted", "true");
+    const input = root.getByRole("textbox", { name: "Document", exact: true });
+    await input.click();
+    await input.press("ControlOrMeta+a");
+    await root.getByRole("button", { name: "Link", exact: true }).click();
+    await root.getByRole("textbox", { name: "Link URL", exact: true }).fill("https://shaloong.com/docs");
+    const apply = root.getByRole("button", { name: "Apply link", exact: true, includeHidden: true });
+    await expect(apply).toBeVisible();
+    await apply.evaluate(button => {
+      button.addEventListener("click", event => {
+        button.setAttribute("data-test-trusted-click", String(event.isTrusted));
+      }, { once: true, capture: true });
+    });
+    await page.clock.install();
+    await page.clock.pauseAt(new Date(Date.now() + 1000));
+    try {
+      await input.focus();
+      await input.press("ArrowRight");
+      const box = await apply.boundingBox();
+      if (!box) throw new Error("链接操作必须有可见边界");
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      await page.mouse.down();
+      await page.clock.runFor(40);
+      await page.mouse.up();
+      await expect(apply).toHaveAttribute("data-test-trusted-click", "true");
+      await expect(root.locator('[data-part="link-editor"]')).toBeHidden();
+      await expect(input.locator("a").first()).toHaveAttribute("href", "https://shaloong.com/docs");
+    } finally {
+      await page.clock.resume();
+    }
+  });
+
 test("rich React input survives a delayed render commit", async ({ page }) => {
   test.skip(!process.env.STATIC_DIR, "四端消费构建后运行");
   await page.addInitScript(() => {
