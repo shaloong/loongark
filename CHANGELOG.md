@@ -13,6 +13,8 @@
 
 ### 组件与维护
 
+- 修复 React 富文本编辑器在渲染提交延迟时把已接受的输入回滚的问题，保留受控拒绝、输入规则与外部文档替换行为。
+
 - 修复 React Select 公开别名和 Svelte Dialog/PinInput/Switch 组合入口遗漏的自动样式；样式绑定守卫覆盖四端公开转发入口，Story 验收使用通用主题就绪标记；下载 Story 使用真实 Button 组合，保留自动样式和深色对比。
 
 - 补齐 Svelte TypeScript 导出与 Ark namespace 的自动样式声明，修复 Tour 遮罩拦截关闭按钮等未挂载样式的组合入口；样式守卫检查四端 TS 与 Svelte 转发叶子，日常回归覆盖四端 Tour 的三主题、窄屏、真实指针关闭与焦点恢复。

@@ -1,4 +1,52 @@
 import { expect, test } from "@playwright/test";
+
+test("rich React input survives a delayed render commit", async ({ page }) => {
+  test.skip(!process.env.STATIC_DIR, "四端消费构建后运行");
+  await page.addInitScript(() => {
+    const NativeMessageChannel = MessageChannel;
+    window.MessageChannel = class extends NativeMessageChannel {
+      constructor() {
+        super();
+        const port = this.port1;
+        Object.defineProperty(port, "onmessage", {
+          set(handler: (event: MessageEvent) => void) {
+            port.addEventListener("message", event => setTimeout(() => handler(event), 150));
+            port.start();
+          },
+        });
+      }
+    };
+  });
+  await page.goto("/examples-react/?example=RichTextEditorExample&mode=dark");
+  const root = page.locator('[data-scope="editor"][data-kind="rich"]');
+  const input = root.getByRole("textbox", { name: "Document", exact: true });
+  await expect(root).toHaveAttribute("data-mounted", "true");
+  await page.locator("details summary").filter({ hasText: "More controls" }).click();
+  await page.getByRole("button", { name: "Clear required value", exact: true }).click();
+  await expect(input).toHaveText("");
+  await input.focus();
+  await page.clock.install();
+  await page.clock.pauseAt(new Date(Date.now() + 1000));
+  try {
+    await input.press("-");
+    await page.clock.runFor(40);
+    await expect(input).toHaveText("-");
+    await input.press("Space");
+    await page.clock.runFor(40);
+    await expect(input.locator("ul li")).toHaveCount(1);
+  } finally {
+    await page.clock.resume();
+  }
+  await page.getByRole("button", { name: "Reject updates", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Accept updates", exact: true })).toBeVisible();
+  await input.focus();
+  await input.pressSequentially("rejected");
+  await expect(input).toHaveText("");
+  await expect(input.locator("ul li")).toHaveCount(1);
+  await page.getByRole("button", { name: "Set external value", exact: true }).click();
+  await expect(input).toHaveText("External structured document");
+});
+
 for (const framework of ["react", "vue", "solid", "svelte"])
   for (const mode of ["light", "dark"])
     for (const width of [1280, 375])

@@ -5,6 +5,7 @@ import { styles as lkAutomaticRichTextEditorStyles } from "@shaloong/loongark-pr
 
 
 import React, { useId, useRef, useState, useEffect } from "react";
+import { flushSync } from "react-dom";
 import {
   renderCodeEditorMarkup,
   mountCodeEditor,
@@ -19,6 +20,7 @@ function makeEditor<P extends EditorFormOptions>(
   kind: "code" | "rich",
   render: (props: P, id: string) => string,
   mount: (root: HTMLElement, get: () => P) => { sync(): void; destroy(): void },
+  prepare: (props: P) => P = props => props,
 ) {
   return function Editor(props: P) {
     const uid = useId(),
@@ -30,7 +32,7 @@ function makeEditor<P extends EditorFormOptions>(
     const [markup] = useState(() => ({ __html: render(props, id) }));
     useEffect(() => {
       if (!root.current) return;
-      const current = mount(root.current, () => latest.current);
+      const current = mount(root.current, () => prepare(latest.current));
       controller.current = current;
       return () => {
         controller.current = undefined;
@@ -59,4 +61,14 @@ export const LoongArkRichTextEditor = /* @__PURE__ */ /*#__PURE__*/ withAutomati
   "rich",
   renderRichTextEditorMarkup,
   mountRichTextEditor,
+  props => {
+    const onValueChange = props.onValueChange;
+    // 原生引擎的回调在 React 事件系统外；先提交受控值，避免下一帧将输入回滚。
+    return {
+      ...props,
+      onValueChange: onValueChange
+        ? value => flushSync(() => onValueChange(value))
+        : undefined,
+    };
+  },
 ), lkAutomaticRichTextEditorStyles);
