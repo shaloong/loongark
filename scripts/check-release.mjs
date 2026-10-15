@@ -7,6 +7,17 @@ import { gunzipSync } from "node:zlib";
 const folder = resolve(".artifacts/releases/packages");
 await mkdir(folder, { recursive: true });
 const report = [];
+function checkRepository(manifest, packageName) {
+  assert.deepEqual(
+    manifest.repository,
+    {
+      type: "git",
+      url: "git+https://github.com/shaloong/loongark.git",
+      directory: `packages/${packageName}`,
+    },
+    `${manifest.name} 的 repository 必须指向当前仓库及包目录，以通过 npm provenance 校验`,
+  );
+}
 function tarFiles(buffer) {
   const files = new Map();
   for (let offset = 0; offset + 512 <= buffer.length;) {
@@ -40,6 +51,7 @@ for (const packageName of (await readdir("packages")).sort()) {
     `${packageName} 的发布包名必须使用 @shaloong/loongark-*`,
   );
   assert.match(manifest.version, /^\d+\.\d+\.\d+(?:-[\w.-]+)?$/);
+  checkRepository(manifest, packageName);
   execFileSync(
     "pnpm",
     ["--dir", `packages/${packageName}`, "pack", "--pack-destination", folder],
@@ -52,6 +64,7 @@ for (const packageName of (await readdir("packages")).sort()) {
   const compressed = await readFile(tarball);
   const files = tarFiles(gunzipSync(compressed));
   const packed = JSON.parse(files.get("package/package.json").toString());
+  checkRepository(packed, packageName);
   assert.equal(packed.license, "MIT");
   assert.ok(
     files.get("package/LICENSE")?.length,

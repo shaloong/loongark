@@ -28,7 +28,32 @@ try {
       "错误包名必须在生成任何 tarball 前停止",
     );
   }
-  console.log("发布包名回归通过：错误 scope 与缺失产品前缀均在打包前拒绝。");
+  const repository = {
+    type: "git",
+    url: "git+https://github.com/shaloong/loongark.git",
+    directory: "packages/cli",
+  };
+  for (const invalid of [
+    undefined,
+    repository.url,
+    { ...repository, url: "git+https://github.com/other/loongark.git" },
+    { ...repository, directory: "packages/react" },
+  ]) {
+    await writeFile(
+      resolve(root, "packages/cli/package.json"),
+      JSON.stringify({ name: "@shaloong/loongark-cli", version: "1.0.0", repository: invalid }),
+    );
+    const result = spawnSync(
+      process.execPath,
+      [fileURLToPath(new URL("./check-release.mjs", import.meta.url))],
+      { cwd: root, encoding: "utf8", timeout: 10000 },
+    );
+    assert.equal(result.error, undefined);
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /repository 必须指向当前仓库及包目录/);
+    assert.deepEqual(await readdir(resolve(root, ".artifacts/releases/packages")), []);
+  }
+  console.log("发布元数据回归通过：错误包名及缺失或错误的 provenance 仓库信息均在打包前拒绝。");
 } finally {
   await rm(root, { recursive: true, force: true });
 }
