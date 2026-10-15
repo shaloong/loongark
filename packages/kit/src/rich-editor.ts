@@ -144,6 +144,10 @@ export interface RichTextEditorProps extends EditorFormOptions {
     documentChanged?: string;
   };
 }
+function syncText(node: Element | null, value: string) {
+  if (node && node.textContent !== value) node.textContent = value;
+}
+
 const names: Record<RichTextAction, string> = {
   bold: "Bold",
   italic: "Italic",
@@ -745,10 +749,10 @@ export function mountRichTextEditor(
             : commands[action]
               ? !commands[action]!(view.state)
               : false);
-      button.setAttribute("aria-label", label(props, action));
-      button.title = label(props, action);
-      const text = button.querySelector("span");
-      if (text) text.textContent = label(props, action);
+      const actionLabel = label(props, action);
+      button.setAttribute("aria-label", actionLabel);
+      button.title = actionLabel;
+      syncText(button.querySelector("span"), actionLabel);
       const mark =
         action === "bold"
           ? schema.marks.strong
@@ -780,22 +784,19 @@ export function mountRichTextEditor(
         );
     }
     const hint = root.querySelector<HTMLElement>('[data-part="keyboard-hint"]');
-    if (hint)
-      hint.textContent =
-        props.labels?.keyboardHint ??
-        "Use Ctrl/⌘ B or I for formatting; Ctrl/⌘ Z to undo.";
+    syncText(hint, props.labels?.keyboardHint ??
+      "Use Ctrl/⌘ B or I for formatting; Ctrl/⌘ Z to undo.");
     const tableTools = root.querySelector<HTMLElement>(
       '[data-part="table-tools-label"]',
     );
-    if (tableTools)
-      tableTools.textContent = props.labels?.tableTools ?? "Table options";
+    syncText(tableTools, props.labels?.tableTools ?? "Table options");
     root
       .querySelector('[data-part="table-toolbar"]')
       ?.setAttribute("aria-label", props.labels?.tableTools ?? "Table options");
     const legend = linkEditor.querySelector("legend");
-    if (legend) legend.textContent = label(props, "link");
+    syncText(legend, label(props, "link"));
     const urlLabel = linkEditor.querySelector("label");
-    if (urlLabel) urlLabel.textContent = props.labels?.linkUrl ?? "Link URL";
+    syncText(urlLabel, props.labels?.linkUrl ?? "Link URL");
     for (const [key, value] of [
       ["apply", props.labels?.applyLink ?? "Apply link"],
       ["remove", props.labels?.removeLink ?? "Remove link"],
@@ -804,7 +805,7 @@ export function mountRichTextEditor(
       const button = linkEditor.querySelector<HTMLButtonElement>(
         `[data-link="${key}"]`,
       );
-      if (button) button.textContent = value;
+      syncText(button, value);
     }
     toolbars.forEach(syncEditorToolbar);
     if ((props.disabled || props.readOnly) && !linkEditor.hidden) {

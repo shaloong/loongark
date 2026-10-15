@@ -542,5 +542,10 @@
     "build": "tsc -p tsconfig.json && node ../../scripts/copy-assets.mjs src dist .svelte .d.ts && node ../../scripts/fix-dist-imports.mjs dist"
   },
   "license": "MIT",
-  "sideEffects": false
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaloong/loongark.git",
+    "directory": "packages/svelte"
+  }
 }

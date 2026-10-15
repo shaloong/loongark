@@ -26,6 +26,8 @@
 
 React/Solid 使用 onValueChange；Vue 同时提供 valueChange 和 update:value。Svelte 支持 bind:value；若同时提供 onValueChange，由调用方负责回写 value。SSR 不触发 onReady、变更回调或语法加载，客户端挂载后再创建引擎。
 
+React 富文本编辑器会同步提交原生引擎回调中的状态更新，避免渲染调度延迟将已接受的输入误判为拒绝。请直接在 onValueChange 中回写 value；异步保存可以另行执行，不要用 transition 或延迟回写控制当前输入。
+
 验证范围以对应提交的 CI 为准；模拟手机视口不代表真实手机，Chromium 通过也不代表 Firefox 或 Safari 已验收。
 
 

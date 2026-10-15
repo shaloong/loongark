@@ -981,5 +981,10 @@
   "license": "MIT",
   "sideEffects": [
     "./dist/*.js"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaloong/loongark.git",
+    "directory": "packages/primitives"
+  }
 }
