@@ -4,13 +4,16 @@ import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { chromium } from "@playwright/test";
 
+const source = process.env.RELEASE_SOURCE ?? "tarball";
+assert.ok(["tarball", "registry"].includes(source), "RELEASE_SOURCE 必须为 tarball 或 registry");
+const output = source === "registry" ? ".artifacts/releases/published" : ".artifacts/releases/minimum";
 // 临时消费项目先生成自身锁文件，再冻结安装；不修改或放宽仓库锁文件。
 const consumers = resolve(".artifacts/releases/consumers");
 await mkdir(consumers, { recursive: true });
 const root = await mkdtemp(resolve(consumers, "loongark-minimum-"));
 try {
 const packs = JSON.parse(
-  await readFile(".artifacts/releases/packages/report.json", "utf8"),
+  await readFile(process.env.RELEASE_PACK_REPORT ?? ".artifacts/releases/packages/report.json", "utf8"),
 );
 const versions = {
   react: "18.0.0",
@@ -33,7 +36,7 @@ const ark = Object.fromEntries(
   ),
 );
 const packed = Object.fromEntries(
-  packs.map((entry) => [entry.name, `file:${entry.tarball}`]),
+  packs.map((entry) => [entry.name, source === "registry" ? entry.version : `file:${entry.tarball}`]),
 );
 await writeFile(
   resolve(root, "package.json"),
@@ -82,9 +85,9 @@ const dependencyAudit = spawnSync("pnpm", ["audit", "--json"], {
   encoding: "utf8",
   timeout: 240000,
 });
-await mkdir(".artifacts/releases/minimum", { recursive: true });
+await mkdir(output, { recursive: true });
 await writeFile(
-  ".artifacts/releases/minimum/dependencies.json",
+  resolve(output, "dependencies.json"),
   dependencyAudit.stdout,
 );
 assert.equal(
@@ -177,16 +180,17 @@ try {
   await browser?.close();
   await new Promise((done) => server.close(done));
 }
-await mkdir(".artifacts/releases/minimum", { recursive: true });
+await mkdir(output, { recursive: true });
 await writeFile(
-  ".artifacts/releases/minimum/report.json",
+  resolve(output, "report.json"),
   JSON.stringify(
     {
+      source,
       versions,
       ark,
       dependencyAudit: dependencyMetadata,
       scope:
-        "9个真实tarball；四端全部子路径声明解析、子路径 Provider/Button 原生消费构建、SSR与点击。最低版本未执行完整高级交互矩阵。",
+        `${source === "registry" ? "9个registry精确版本" : "9个真实tarball"}；四端全部子路径声明解析、子路径 Provider/Button 原生消费构建、SSR与点击。最低版本未执行完整高级交互矩阵。`,
       ...measurements,
     },
     null,
@@ -194,7 +198,7 @@ await writeFile(
   ) + "\n",
 );
 console.log(
-  "最低 peer 版本真实打包消费、四端 SSR 和浏览器点击通过。",
+  `最低 peer 版本${source === "registry" ? "registry" : "真实打包"}消费、四端 SSR 和浏览器点击通过。`,
   versions,
 );
 

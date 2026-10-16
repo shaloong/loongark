@@ -1,5 +1,9 @@
 # 变更日志
 
+## 未发布
+
+- 发布后自动等待 registry 的精确版本、安装清单、latest 与 provenance 可见，核对原始 tarball，并从 registry 执行四端最低版本消费验收；重跑先核对已有版本内容，只发布缺失包，已有附件内容一致时保留。
+
 ## 0.1.0
 
 首次发布版本：包含 React、Vue、Solid、Svelte 四端适配，以及共享 Token、主题、Primitives、Kit 和 CLI。支持版本与验收边界见 [发布指南](docs/releases.md)，接入注意事项见 [迁移说明](docs/migration.md)。

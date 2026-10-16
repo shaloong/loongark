@@ -26,7 +26,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     environment: npm-publish
-    timeout-minutes: 15
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -78,42 +78,29 @@ jobs:
       - name: Publish verified tarballs in dependency order
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: node scripts/publish-release.mjs
+      - name: Verify registry propagation and original tarballs
+        run: node scripts/check-registry.mjs
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          version: 10.14.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Consume published versions
+        env:
+          RELEASE_SOURCE: registry
         run: |
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';
-          import {readFileSync,readdirSync} from 'node:fs';
-          import {join,basename} from 'node:path';
-          import {execFileSync} from 'node:child_process';
-          function find(dir){return readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?find(join(dir,entry.name)):[join(dir,entry.name)]);}
-          const files=find('.artifacts/verified-release');
-          const reports=files.filter(file=>file.endsWith('/packages/report.json'));
-          assert.equal(reports.length,1,'必须恰有一份已验收包清单');
-          const report=JSON.parse(readFileSync(reports[0],'utf8'));
-          const order=['tokens','theme','primitives','kit','react','vue','solid','svelte','cli'];
-          assert.equal(report.length,order.length);
-          const targets=order.map(name=>{
-            const entries=report.filter(entry=>entry.name===`@shaloong/loongark-${name}`);
-            assert.equal(entries.length,1);
-            assert.equal(entries[0].version,process.env.RELEASE_VERSION);
-            const tarballs=files.filter(file=>basename(file)===basename(entries[0].tarball));
-            assert.equal(tarballs.length,1);
-            return tarballs[0];
-          });
-          for(const tarball of targets)execFileSync('npm',['publish',tarball,'--access','public','--provenance'],{stdio:'inherit'});
-          NODE
+          export RELEASE_PACK_REPORT="$(find .artifacts/verified-release -path '*/packages/report.json' -type f)"
+          node scripts/check-versions.mjs
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: always()
+        with:
+          name: published-package-evidence
+          path: .artifacts/releases/published/
+          retention-days: 14
+          if-no-files-found: ignore
       - name: Attach original tarballs to release draft
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-        run: |
-          node --input-type=module <<'NODE'
-          import {readdirSync,readFileSync,writeFileSync} from 'node:fs';
-          import {join,basename} from 'node:path';
-          import {createHash} from 'node:crypto';
-          import {execFileSync} from 'node:child_process';
-          function find(dir){return readdirSync(dir,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?find(join(dir,entry.name)):[join(dir,entry.name)]);}
-          const tarballs=find('.artifacts/verified-release').filter(file=>file.endsWith('.tgz'));
-          const sums='.artifacts/verified-release/SHA256SUMS';
-          writeFileSync(sums,tarballs.map(file=>`${createHash('sha256').update(readFileSync(file)).digest('hex')}  ${basename(file)}`).join('\n')+'\n');
-          execFileSync('gh',['release','upload',`v${process.env.RELEASE_VERSION}`,...tarballs,sums,'--repo',process.env.REPOSITORY],{stdio:'inherit'});
-          NODE
+        run: node scripts/attach-release-assets.mjs

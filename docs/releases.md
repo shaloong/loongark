@@ -66,4 +66,8 @@ SSR 分别记录5个新进程的冷导入；每进程预热5次、每场景30次
 5. 在 main 对已验证的同一提交创建 `v<version>` 标签，再按依赖顺序发布 tokens → theme → primitives → kit → 四端 → cli：`npm publish <已验收.tgz> --access public --provenance`。发布需要 npm 对应权限和 provenance 环境；本仓库的准备工作流不会自动发布 npm。
 6. 从 registry 安装发布版本，检查条件导出、类型和最低版本消费；更新 GitHub Release 与变更日志。版本已发布后不可覆盖，问题使用补丁版本修正。
 
+`Publish npm` 在写入前核对全部目标版本：只有 registry 中不存在的版本才发布；已存在版本必须与本次验收原始 tgz 的完整性及实际下载内容一致，否则停止。发布后最多等待10分钟，确认精确版本、安装清单、latest、原始 tarball 和 provenance 均可读取，再从 registry 安装精确版本执行最低 peer、公开子路径声明、四端 SSR、生产构建及点击验收。provenance 可读取检查不替代独立的签名验证。
+
+传播超时或消费失败时保留 Release 草稿和已发布版本，使用相同 readiness run 重跑；不能重打包、覆盖或回退已发布版本。重复运行会跳过内容一致的包和 Release 附件，冲突则停止。发布后证据保存在 `published-package-evidence` Artifact，这些重型检查只在正式发布工作流执行。单独复测消费时可使用 `RELEASE_SOURCE=registry` 与 `RELEASE_PACK_REPORT` 指定已验收包清单运行 `pnpm check:versions`；默认仍消费本地 tgz。
+
 日常开发无需逐次审批；正式发布保持独立授权。正式展示在发布 PR 合入 main 后更新。
