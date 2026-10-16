@@ -7,7 +7,7 @@ import { LoongArkIcon } from "./icon";
 import { dataProps } from "../data-props";
 import type { JSX } from "solid-js";
 import { LoongArkPortal } from "./portal";
-import { Dialog as ArkDialog } from "@ark-ui/solid/dialog";
+import { Dialog as ArkDialog, type DialogCloseTriggerProps } from "@ark-ui/solid/dialog";
 import { ark } from "@ark-ui/solid";
 import type { DialogPrimitiveProps } from "@shaloong/loongark-primitives";
 import type { Component } from "solid-js";
@@ -151,7 +151,7 @@ export const LoongArkDialogFooter: Component<DialogTextProps> = /*#__PURE__*/ wi
   );
 }, lkAutomaticDialogStyles);
 
-export const LoongArkDialogCloseTrigger: Component<DialogTextProps> = /*#__PURE__*/ withAutomaticStyles((
+export const LoongArkDialogCloseTrigger: Component<DialogCloseTriggerProps> = /*#__PURE__*/ withAutomaticStyles((
   props,
 ) => {
   const [local, rest] = splitProps(props, ["children"]);

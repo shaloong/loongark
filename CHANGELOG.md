@@ -3,6 +3,7 @@
 ## 未发布
 
 - 发布后自动等待 registry 的精确版本、安装清单、latest 与 provenance 可见，核对原始 tarball，并从 registry 执行四端最低版本消费验收；重跑先核对已有版本内容，只发布缺失包，已有附件内容一致时保留。
+- 修复 Solid Dialog 关闭按钮的公开类型，保留 Ark 的原生 button 属性和引用类型。
 
 ## 0.1.0
 
