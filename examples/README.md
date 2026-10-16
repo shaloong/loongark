@@ -6,6 +6,8 @@
 - `vue/`、`solid/`、`svelte/` 提供同场景的原生绑定和生命周期示例。
 - `shared/` 复用场景数据、文案和测试标识。
 
+`TicketWorkflowExample` 提供四端工单工作台组合，包含筛选、表格选择、弹窗草稿和保存反馈；使用本地模拟保存，不包含业务后端，接入说明见 [工单组合](../docs/compositions.md)。
+
 每个组件族的 Docs 默认展示独立基础用法，使用 `reference-examples.json` 显式指定四端对应文件，不通过组件名字符串匹配组合示例。`*BasicExample` 只包含本组件所需的部件、数据与交互；Calendar、Date Picker 和 Tour 复用已有独立示例。复杂组合通过明确命名的高级用法入口查看。
 
 静态部件与简单状态配方集中在 `scripts/basic-example-recipes.json`，运行 `node scripts/generate-basic-examples.mjs` 更新四端文件；Toast 和 DateInput 的框架原生上下文用法直接维护对应文件。生成代码也参与真实类型、消费构建和浏览器验证，不以生成成功替代运行验证。

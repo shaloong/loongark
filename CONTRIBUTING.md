@@ -50,6 +50,8 @@ Browser contracts 的生产者只构建一次，三引擎与 Safari 消费同一
 
 完整四端示例、Story 审计、最低版本及 Next.js tarball 消费通过每周任务或手动工作流 `full=true` 执行，正式发布前必须对候选提交运行完整 Browser contracts 和 Release readiness。快速检查通过不代表完整验收通过。Node compatibility 单独覆盖 Node22.12 与当前26的构建、类型、共享契约及四端 SSR，日常完整验证使用 .nvmrc 的24。
 
+工单组合的日常关键回归运行四端深色375px视口的完整操作链；`full` 与本地默认验收扩展到浅深色、1280px/375px矩阵。发布后的 registry 传播和真实安装只在 `Publish npm` 执行，避免每次 develop 提交重复运行外部消费项目。
+
 ## 多浏览器与视觉
 
 ```sh

@@ -152,6 +152,7 @@ jobs:
             .artifacts/browser-audits/${{ matrix.browser }}/**/*react*.png
             .artifacts/automatic-styles/${{ matrix.browser }}/**/*react*.png
             .artifacts/tour-overlays/${{ matrix.browser }}/**/*react*.png
+            .artifacts/ticket-workflow/${{ matrix.browser }}/react-*.png
             .artifacts/advanced-completion/*react*.png
             .artifacts/date-paste/*react*.png
             .artifacts/gap-completion/*react*.png
@@ -171,6 +172,7 @@ jobs:
             .artifacts/browser-audits/${{ matrix.browser }}/**/*vue*.png
             .artifacts/automatic-styles/${{ matrix.browser }}/**/*vue*.png
             .artifacts/tour-overlays/${{ matrix.browser }}/**/*vue*.png
+            .artifacts/ticket-workflow/${{ matrix.browser }}/vue-*.png
             .artifacts/advanced-completion/*vue*.png
             .artifacts/date-paste/*vue*.png
             .artifacts/gap-completion/*vue*.png
@@ -190,6 +192,7 @@ jobs:
             .artifacts/browser-audits/${{ matrix.browser }}/**/*solid*.png
             .artifacts/automatic-styles/${{ matrix.browser }}/**/*solid*.png
             .artifacts/tour-overlays/${{ matrix.browser }}/**/*solid*.png
+            .artifacts/ticket-workflow/${{ matrix.browser }}/solid-*.png
             .artifacts/advanced-completion/*solid*.png
             .artifacts/date-paste/*solid*.png
             .artifacts/gap-completion/*solid*.png
@@ -209,6 +212,7 @@ jobs:
             .artifacts/browser-audits/${{ matrix.browser }}/**/*svelte*.png
             .artifacts/automatic-styles/${{ matrix.browser }}/**/*svelte*.png
             .artifacts/tour-overlays/${{ matrix.browser }}/**/*svelte*.png
+            .artifacts/ticket-workflow/${{ matrix.browser }}/svelte-*.png
             .artifacts/advanced-completion/*svelte*.png
             .artifacts/date-paste/*svelte*.png
             .artifacts/gap-completion/*svelte*.png
@@ -236,6 +240,7 @@ jobs:
         with:
           name: story-evidence-${{ matrix.browser }}
           path: |
+            .artifacts/ticket-workflow/${{ matrix.browser }}/Story-*.png
             .artifacts/browser-audits/${{ matrix.browser }}/**/*.json
             .artifacts/browser-audits/${{ matrix.browser }}/regressions/
             .artifacts/download-trigger/${{ matrix.browser }}/

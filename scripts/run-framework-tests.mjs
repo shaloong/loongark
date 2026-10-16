@@ -1,5 +1,6 @@
 import { spawn } from "node:child_process";
 const critical = new Set([
+  "ticket-workflow",
   "automatic-styles", "tour-overlays", "browser-environment", "framework-consumers", "theme-csp", "provider-core",
   "picker-overlays", "color-picker-contrast", "date-time", "drawer-viewport-focus",
   "data-table-complex-editors", "data-table-advanced", "data-table-range", "editor-timing",
@@ -15,6 +16,7 @@ const child = spawn(
   process.execPath,
   [
     "scripts/run-playwright.mjs",
+    "tests/ticket-workflow.spec.ts",
     "tests/browser-environment.spec.ts",
     "tests/framework-consumers.spec.ts",
     "tests/theme-csp.spec.ts",
@@ -86,7 +88,7 @@ const child = spawn(
   ].filter((arg) => suite === "full" || !arg.startsWith("tests/") || critical.has(arg.slice(6, -8))).concat(args.filter((arg) => arg !== suiteArg)),
   {
     stdio: "inherit",
-    env: { ...process.env, STATIC_DIR: "tests/consumer-dist", PORT: process.env.PORT ?? "6007" },
+    env: { ...process.env, FRAMEWORK_TEST_SUITE: suite, STATIC_DIR: "tests/consumer-dist", PORT: process.env.PORT ?? "6007" },
     windowsHide: true,
   },
 );

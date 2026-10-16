@@ -13,6 +13,7 @@
 
 ## 组件与组合
 
+- [工单工作台组合](compositions.md)
 - [表格](data-table.md) / [编辑器](editors.md) / [图表](chart.md)
 - [问卷](questionnaire.md) / [消息与附件](conversation.md)
 - [虚拟布局](virtual-layout.md) / [异步集合](async-collection.md)

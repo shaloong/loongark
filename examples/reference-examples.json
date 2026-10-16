@@ -163,6 +163,10 @@
       {
         "file": "DataTableComplexEditorsExample",
         "label": "单元格编辑器"
+      },
+      {
+        "file": "TicketWorkflowExample",
+        "label": "工单筛选与弹窗编辑"
       }
     ]
   },
