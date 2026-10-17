@@ -108,6 +108,7 @@ export function createTicketWorkflow(
       });
       return;
     }
+    if (state.open) return;
     const row = state.rows.find((row) => row.id === state.selectedIds[0]);
     if (state.selectedIds.length === 1 && row)
       update({ open: true, draft: { ...row }, errors: {}, failure: "" });
@@ -120,7 +121,9 @@ export function createTicketWorkflow(
       return visibleRows();
     },
     activate() {
+      if (!disposed) return;
       disposed = false;
+      if (state.pending) update({ pending: false });
     },
     setQuery: (query: string) => update({ query, selectedIds: [] }),
     setStatus: (status: string) => update({ status, selectedIds: [] }),
@@ -160,9 +163,37 @@ export function createTicketWorkflow(
       const fail = state.failNext;
       update({ pending: true, failNext: false });
       try {
-        if (fail) await localSave(draft, controller.signal);
-        else await saveTicket(draft, controller.signal);
-        if (disposed || active !== controller || controller.signal.aborted)
+        const outcome = await new Promise<"saved" | "aborted">(
+          (resolve, reject) => {
+            const finish = (result: "saved" | "aborted") => {
+              controller.signal.removeEventListener("abort", cancel);
+              resolve(result);
+            };
+            const cancel = () => finish("aborted");
+            controller.signal.addEventListener("abort", cancel, { once: true });
+            Promise.resolve()
+              .then(() => {
+                if (controller.signal.aborted) return;
+                return fail
+                  ? localSave(draft, controller.signal)
+                  : saveTicket(draft, controller.signal);
+              })
+              .then(
+                () => finish(controller.signal.aborted ? "aborted" : "saved"),
+                (error) => {
+                  controller.signal.removeEventListener("abort", cancel);
+                  reject(error);
+                },
+              );
+            if (controller.signal.aborted) cancel();
+          },
+        );
+        if (
+          outcome === "aborted" ||
+          disposed ||
+          active !== controller ||
+          controller.signal.aborted
+        )
           return "aborted";
         if (fail) throw Error("模拟服务暂不可用");
         active = undefined;

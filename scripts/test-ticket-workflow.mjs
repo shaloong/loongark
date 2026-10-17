@@ -116,6 +116,7 @@ test("卸载会取消请求且不再通知；React effect 重新激活后仍可�
   );
   open(demo);
   const saved = demo.submit();
+  await Promise.resolve();
   demo.dispose();
   const count = changes;
   complete();
@@ -128,4 +129,84 @@ test("卸载会取消请求且不再通知；React effect 重新激活后仍可�
   demo.setDraft("title", "严格模式后的编辑");
   assert.equal(demo.state.draft.title, "严格模式后的编辑");
   demo.dispose();
+});
+
+test("重复打开不重置未保存的草稿", () => {
+  const demo = createTicketWorkflow(() => {});
+  open(demo);
+  demo.setDraft("title", "保留未保存草稿");
+  demo.setOpen(true);
+  assert.equal(demo.state.draft.title, "保留未保存草稿");
+  demo.dispose();
+});
+
+test("清理后恢复的草稿解除保存状态，旧请求不能覆盖重试结果", async () => {
+  let rejectSave;
+  let calls = 0;
+  const demo = createTicketWorkflow(
+    () => {},
+    () => {
+      calls++;
+      return calls === 1
+        ? new Promise((_resolve, reject) => {
+            rejectSave = reject;
+          })
+        : Promise.resolve();
+    },
+  );
+  open(demo);
+  demo.setDraft("title", "保留未保存草稿");
+  const first = demo.submit();
+  await Promise.resolve();
+  demo.dispose();
+  demo.activate();
+  assert.equal(demo.state.pending, false);
+  assert.equal(demo.state.draft.title, "保留未保存草稿");
+  assert.equal(
+    await Promise.race([
+      first,
+      new Promise((resolve) => setTimeout(() => resolve("still-pending"), 25)),
+    ]),
+    "aborted",
+  );
+  demo.setDraft("title", "恢复后成功保存");
+  assert.equal(await demo.submit(), "saved");
+  rejectSave(Error("旧服务迟到拒绝"));
+  await Promise.resolve();
+  assert.equal(demo.state.rows[0].title, "恢复后成功保存");
+  demo.dispose();
+});
+
+test("取消不依赖后端实现 AbortSignal", async () => {
+  const demo = createTicketWorkflow(
+    () => {},
+    () => new Promise(() => {}),
+  );
+  open(demo);
+  const saved = demo.submit();
+  await Promise.resolve();
+  demo.setOpen(false);
+  assert.equal(
+    await Promise.race([
+      saved,
+      new Promise((resolve) => setTimeout(() => resolve("still-pending"), 25)),
+    ]),
+    "aborted",
+  );
+  assert.equal(demo.state.pending, false);
+  demo.dispose();
+});
+
+test("重复激活不能解除正在保存的互斥状态", async () => {
+  const demo = createTicketWorkflow(
+    () => {},
+    () => new Promise(() => {}),
+  );
+  open(demo);
+  const pending = demo.submit();
+  demo.activate();
+  assert.equal(demo.state.pending, true);
+  assert.equal(await demo.submit(), undefined);
+  demo.dispose();
+  assert.equal(await pending, "aborted");
 });
