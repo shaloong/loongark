@@ -73,7 +73,11 @@ test("传播窗口内的 404、503 和旧 latest 只重试读取，不发布", a
     if (path.endsWith("/latest") && reads === 3)
       return json({ ...pkg(entry), version: "0.0.0-stage" });
   });
-  const result = await waitForPublication([entry], { ...clock(), fetchImpl });
+  const result = await waitForPublication([entry], {
+    ...clock(),
+    maxWaitMs: 4,
+    fetchImpl,
+  });
   assert.equal(reads, 4);
   assert.equal(result[0].integrity, entry.integrity);
 });
@@ -242,13 +246,11 @@ test("清单按依赖排序，只接受唯一版本和唯一原始产物", async
   const root = await mkdtemp(resolve(parent, "manifest-"));
   try {
     await mkdir(resolve(root, "packages"));
-    const report = packageOrder
-      .toReversed()
-      .map((suffix) => ({
-        name: `@shaloong/loongark-${suffix}`,
-        version: "0.1.1",
-        tarball: `/original/shaloong-loongark-${suffix}-0.1.1.tgz`,
-      }));
+    const report = packageOrder.toReversed().map((suffix) => ({
+      name: `@shaloong/loongark-${suffix}`,
+      version: "0.1.1",
+      tarball: `/original/shaloong-loongark-${suffix}-0.1.1.tgz`,
+    }));
     for (const entry of report)
       await writeFile(
         resolve(root, "packages", entry.tarball.split("/").at(-1)),
@@ -272,4 +274,43 @@ test("清单按依赖排序，只接受唯一版本和唯一原始产物", async
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test("总预算耗尽后不能为后续包再发请求", async () => {
+  let time = 0;
+  let reads = 0;
+  await assert.rejects(
+    waitForPublication([target("tokens"), target("react")], {
+      ...clock(),
+      maxWaitMs: 30,
+      now: () => time,
+      fetchImpl: async () => {
+        reads++;
+        time += 40;
+        return pending(404);
+      },
+    }),
+    /验收超时/,
+  );
+  assert.equal(reads, 1);
+});
+
+test("响应头成功后响应体超时也属于可重试的读取失败", async () => {
+  const entry = target("react");
+  let reads = 0;
+  const fetchImpl = registry(entry, (path) => {
+    if (path.endsWith("/0.1.1") && ++reads === 1)
+      return new Response(
+        new ReadableStream({
+          start(controller) {
+            controller.error(
+              new DOMException("body timed out", "TimeoutError"),
+            );
+          },
+        }),
+      );
+  });
+  const result = await waitForPublication([entry], { ...clock(), fetchImpl });
+  assert.equal(result.length, 1);
+  assert.equal(reads, 2);
 });

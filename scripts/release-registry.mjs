@@ -33,7 +33,11 @@ export async function loadRelease(directory, version) {
     ).flat();
   }
   const files = await walk(directory);
-  const reports = files.filter((file) => basename(file) === "report.json" && basename(dirname(file)) === "packages");
+  const reports = files.filter(
+    (file) =>
+      basename(file) === "report.json" &&
+      basename(dirname(file)) === "packages",
+  );
   assert.equal(reports.length, 1, "必须恰有一份已验收包清单");
   const report = JSON.parse(await readFile(reports[0], "utf8"));
   assert.equal(report.length, packageOrder.length);
@@ -62,14 +66,16 @@ export async function loadRelease(directory, version) {
 
 class Pending extends Error {}
 
-function client(registry, timeoutMs, fetchImpl) {
+function client(registry, timeoutMs, fetchImpl, remainingMs = () => Infinity) {
   const origin = new URL(registry);
   assert.equal(origin.protocol, "https:", "registry 必须使用 HTTPS");
   const request = async (url) => {
+    const budget = Math.min(timeoutMs, remainingMs());
+    if (budget <= 0) throw new Pending("registry 等待预算已耗尽");
     let response;
     try {
       response = await fetchImpl(url, {
-        signal: AbortSignal.timeout(timeoutMs),
+        signal: AbortSignal.timeout(Math.ceil(budget)),
         headers: { "cache-control": "no-cache" },
       });
     } catch (error) {
@@ -84,7 +90,27 @@ function client(registry, timeoutMs, fetchImpl) {
       throw new Pending(`registry HTTP ${response.status}`);
     }
     assert.ok(response.ok, `registry HTTP ${response.status}：${url}`);
-    return response;
+    const read = async (body) => {
+      if (remainingMs() <= 0) {
+        throw new Pending("registry 等待预算已耗尽");
+      }
+      try {
+        return await body();
+      } catch (error) {
+        if (
+          error.name === "AbortError" ||
+          error.name === "TimeoutError" ||
+          error instanceof TypeError
+        ) {
+          throw new Pending(`registry 响应体未读完：${error.message}`);
+        }
+        throw error;
+      }
+    };
+    return {
+      json: () => read(() => response.json()),
+      arrayBuffer: () => read(() => response.arrayBuffer()),
+    };
   };
   const metadata = async (target, selector = target.version) => {
     const response = await request(
@@ -191,8 +217,13 @@ export async function waitForPublication(
     onProgress = console.log,
   } = {},
 ) {
-  const { metadata, request } = client(registry, timeoutMs, fetchImpl);
   const deadline = now() + maxWaitMs;
+  const { metadata, request } = client(
+    registry,
+    timeoutMs,
+    fetchImpl,
+    () => deadline - now(),
+  );
   const verified = new Map();
   const pending = new Map();
   do {
