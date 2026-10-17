@@ -88,6 +88,8 @@ export interface DataTableProps
   pageSize?: number;
   rowKey?: string;
   label?: string;
+  /** 仅控制内置搜索框的渲染；受控 query、排序和筛选继续生效。默认 true。 */
+  showSearch?: boolean;
   labels?: Partial<Omit<DataTableLabels, "filterOperators">> & {
     filterOperators?: Partial<DataTableLabels["filterOperators"]>;
   };

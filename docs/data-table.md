@@ -14,6 +14,8 @@ Vue 支持 `v-model:selectedIds` 和 `selectionChange`；React、Solid、Svelte 
 
 `label` 命名原生 table 和可聚焦的滚动区域，默认 Data table。长单元格保持完整内容，通过键盘或指针在局部横向滚动，不撑宽页面。
 
+`showSearch` 默认 `true`，设置为 `false` 只移除内置搜索框，受控 `state.query`、排序、列筛选与分页继续生效。适合应用已有搜索工具栏的场景；切换显示不会清空查询。四端 DataTableSearchExample 和 CustomSearch Story 演示外部查询与内置输入的双向同步。
+
 `labels` 为局部文本覆盖对象：`filter/filterPlaceholder/selectPage/empty/previous/next` 是文本，`selectRow(id)` 提供行选择名称，`summary({total,selected,page,pageCount})` 提供页脚摘要。缺省或 undefined 的字段回退到共享默认值。标签与可见操作同步，不只替换 aria-label。
 
 ## 四端示例与证据

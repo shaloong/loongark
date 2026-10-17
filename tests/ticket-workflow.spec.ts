@@ -35,6 +35,7 @@ for (const framework of ["Story", "react", "vue", "solid", "svelte"])
         exact: true,
       });
       await expect(trigger).toBeDisabled();
+      await expect(page.getByRole("textbox", { name: "Filter rows", exact: true })).toHaveCount(0);
       await search.fill("不存在");
       await expect(
         page.getByText("找到 0 条工单", { exact: true }),

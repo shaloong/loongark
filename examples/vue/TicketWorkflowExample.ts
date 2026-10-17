@@ -100,6 +100,7 @@ export const TicketWorkflowExample = defineComponent({
             `找到 ${demo.visibleRows.length} 条工单`,
           ),
           h(L.LoongArkDataTable, {
+          showSearch: false,
             label: "工单列表",
             data: demo.visibleRows,
             columns: ticketColumns,

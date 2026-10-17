@@ -65,6 +65,7 @@
   export let pageSize = 10;
   export let rowKey = "id";
   export let label = "Data table";
+  export let showSearch = true;
   export let labels: DataTableProps["labels"] = undefined;
   export let selectedIds: readonly string[] | undefined = undefined;
   export let defaultSelectedIds: readonly string[] = [];
@@ -404,20 +405,22 @@
   aria-busy={loading || undefined}
   {...$$restProps}
 >
-  <input
-    aria-label={text.filter}
-    placeholder={text.filterPlaceholder}
-    value={current.query}
-    disabled={loading}
-    on:input={(e) => {
-      const input = e.currentTarget;
-      changeState({ query: input.value, page: 1 });
-      if (state !== undefined)
-        tick().then(() => {
-          if (input.isConnected) input.value = current.query;
-        });
-    }}
-  />
+  {#if showSearch}
+    <input
+      aria-label={text.filter}
+      placeholder={text.filterPlaceholder}
+      value={current.query}
+      disabled={loading}
+      on:input={(e) => {
+        const input = e.currentTarget;
+        changeState({ query: input.value, page: 1 });
+        if (state !== undefined)
+          tick().then(() => {
+            if (input.isConnected) input.value = current.query;
+          });
+      }}
+    />
+  {/if}
   {#if view.columns.some((column) => column.filter)}
     <div data-part="column-filters">
       {#each view.columns.filter((column) => column.filter) as column, index (column.key)}

@@ -81,5 +81,6 @@ for (const framework of ["react", "vue", "solid", "svelte"]) {
       `${framework} SSR 缺少 ${text}`,
     );
   assert.doesNotMatch(html, /保存中…/);
+  assert.doesNotMatch(html, /aria-label="Filter rows"/);
   console.log(`${framework} 工单组合真实发布入口 SSR 通过`);
 }

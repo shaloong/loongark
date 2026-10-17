@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16",
+  "updatedAt": "2026-10-17",
   "sources": [
     "https://ui.shadcn.com/docs/components",
     "https://mui.com/material-ui/all-components/",
@@ -206,7 +206,8 @@
     "Four-framework component-family subpaths and Props types, conditional Solid SSR, isolated Provider bootstrap, verified production import boundaries and Storybook onboarding",
     "ColorPicker 四端双色选中轮廓、独立键盘焦点、完整边缘绘制与高对比主题/系统强制颜色回归",
     "四端 provider-core 复用主题生命周期；显式 Primitives 样式选择、级联顺序、CSP、三主题、焦点与共享样式所有权回归",
-    "四端工单组合：搜索与状态筛选、表格选择、弹窗草稿、字段错误关联、异步保存重试、取消与卸载清理、通知和关闭后焦点恢复"
+    "四端工单组合：搜索与状态筛选、表格选择、弹窗草稿、字段错误关联、异步保存重试、取消与卸载清理、通知和关闭后焦点恢复",
+    "DataTable 可选内置搜索、保留受控查询与排序，以及四端自定义搜索工具栏示例"
   ],
   "publicSubpaths": {
     "componentFamilies": 119,

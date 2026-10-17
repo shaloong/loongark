@@ -7,3 +7,13 @@ export const Basic = {
     </main>
   ),
 };
+
+import { DataTableSearchExample } from "../examples/react/DataTableSearchExample";
+export const CustomSearch = {
+  render: () => (
+    <main>
+      <h1>自定义搜索工具栏</h1>
+      <DataTableSearchExample />
+    </main>
+  ),
+};

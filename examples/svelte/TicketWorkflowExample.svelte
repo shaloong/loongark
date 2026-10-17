@@ -56,6 +56,7 @@
   </L.LoongArkStack>
   <output aria-live="polite">找到 {demo.visibleRows.length} 条工单</output>
   <L.LoongArkDataTable
+        showSearch={false}
     label="工单列表"
     data={demo.visibleRows}
     columns={ticketColumns}

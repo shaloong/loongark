@@ -1,6 +1,6 @@
 import { spawn } from "node:child_process";
 const critical = new Set([
-  "ticket-workflow",
+  "ticket-workflow", "data-table-search",
   "automatic-styles", "tour-overlays", "browser-environment", "framework-consumers", "theme-csp", "provider-core",
   "picker-overlays", "color-picker-contrast", "date-time", "drawer-viewport-focus",
   "data-table-complex-editors", "data-table-advanced", "data-table-range", "editor-timing",
@@ -17,6 +17,7 @@ const child = spawn(
   [
     "scripts/run-playwright.mjs",
     "tests/ticket-workflow.spec.ts",
+    "tests/data-table-search.spec.ts",
     "tests/browser-environment.spec.ts",
     "tests/framework-consumers.spec.ts",
     "tests/theme-csp.spec.ts",

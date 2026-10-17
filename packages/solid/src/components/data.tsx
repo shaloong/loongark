@@ -474,20 +474,22 @@ export const LoongArkDataTable = /*#__PURE__*/ withAutomaticStyles((props: Loong
       data-part="root"
       aria-busy={props.loading || undefined}
     >
-      <input
-        aria-label={labels().filter}
-        placeholder={labels().filterPlaceholder}
-        value={current().query}
-        disabled={props.loading}
-        onInput={(e) => {
-          const input = e.currentTarget;
-          changeState({ query: input.value, page: 1 });
-          if (props.state !== undefined)
-            queueMicrotask(() => {
-              if (input.isConnected) input.value = current().query;
-            });
-        }}
-      />
+      {props.showSearch !== false && (
+        <input
+          aria-label={labels().filter}
+          placeholder={labels().filterPlaceholder}
+          value={current().query}
+          disabled={props.loading}
+          onInput={(e) => {
+            const input = e.currentTarget;
+            changeState({ query: input.value, page: 1 });
+            if (props.state !== undefined)
+              queueMicrotask(() => {
+                if (input.isConnected) input.value = current().query;
+              });
+          }}
+        />
+      )}
       {view().columns.some((column) => column.filter) && (
         <div data-part="column-filters">
           <For each={view().columns.filter((column) => column.filter)}>

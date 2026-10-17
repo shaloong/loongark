@@ -167,6 +167,10 @@
       {
         "file": "TicketWorkflowExample",
         "label": "工单筛选与弹窗编辑"
+      },
+      {
+        "file": "DataTableSearchExample",
+        "label": "自定义搜索工具栏"
       }
     ]
   },

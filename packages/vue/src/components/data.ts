@@ -186,6 +186,7 @@ export const LoongArkDataTable = /*#__PURE__*/ withAutomaticStyles(defineCompone
     pageSize: { type: Number, default: 10 },
     rowKey: { type: String, default: "id" },
     label: { type: String, default: "Data table" },
+    showSearch: { type: Boolean, default: true },
     labels: Object as PropType<DataTableProps["labels"]>,
     selectedIds: Array as PropType<readonly string[]>,
     defaultSelectedIds: Array as PropType<readonly string[]>,
@@ -630,22 +631,24 @@ export const LoongArkDataTable = /*#__PURE__*/ withAutomaticStyles(defineCompone
           "aria-busy": props.loading || undefined,
         },
         [
-          h("input", {
-            "aria-label": labels.filter,
-            placeholder: labels.filterPlaceholder,
-            value: current().query,
-            disabled: props.loading,
-            onInput: (e: Event) => {
-              if (e.currentTarget instanceof HTMLInputElement) {
-                const input = e.currentTarget;
-                changeState({ query: input.value, page: 1 });
-                if (props.state !== undefined)
-                  nextTick(() => {
-                    if (input.isConnected) input.value = current().query;
-                  });
-              }
-            },
-          }),
+          props.showSearch
+            ? h("input", {
+                "aria-label": labels.filter,
+                placeholder: labels.filterPlaceholder,
+                value: current().query,
+                disabled: props.loading,
+                onInput: (e: Event) => {
+                  if (e.currentTarget instanceof HTMLInputElement) {
+                    const input = e.currentTarget;
+                    changeState({ query: input.value, page: 1 });
+                    if (props.state !== undefined)
+                      nextTick(() => {
+                        if (input.isConnected) input.value = current().query;
+                      });
+                  }
+                },
+              })
+            : null,
           model.columns.some((column) => column.filter)
             ? h(
                 "div",
